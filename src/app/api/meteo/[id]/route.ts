@@ -11,13 +11,13 @@ export const revalidate = 10800  // 3h
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   if (!KEY) {
     return NextResponse.json({ error: 'AEMET_API_KEY no configurada' }, { status: 500 })
   }
 
-  const { id } = params
+  const { id } = await params
 
   try {
     // Paso 1 — AEMET devuelve una meta-URL con los datos reales
