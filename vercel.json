@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run sync:playas && npm run sync:calidad && next build",
+  "buildCommand": "next build",
   "outputDirectory": ".next",
   "framework": "nextjs",
 
