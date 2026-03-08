@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import type { PlayaCard } from '@/types'
+import type { Playa as PlayaCard } from '@/types'
 
 export default function MapaInteractivo({ playas }: { playas: PlayaCard[] }) {
   const mapRef  = useRef<HTMLDivElement>(null)
