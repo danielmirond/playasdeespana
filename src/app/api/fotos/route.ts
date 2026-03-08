@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
   if (!slug) return NextResponse.json({ fotos: [] })
 
-  const fotos = await getFotos({ slug, nombre, municipio, comunidad, lat, lon, n })
+  const fotos = await getFotos(nombre, municipio, lat, lon)
   return NextResponse.json({ fotos }, {
     headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' },
   })
