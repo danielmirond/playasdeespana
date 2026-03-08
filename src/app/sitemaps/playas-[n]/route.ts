@@ -1,4 +1,3 @@
-// src/app/sitemaps/playas-[n].xml/route.ts
 import { NextResponse, NextRequest } from 'next/server'
 import { getPlayas } from '@/lib/playas'
 
@@ -11,7 +10,7 @@ export async function GET(
   { params }: { params: Promise<{ n: string }> }
 ) {
   const { n: nStr } = await params
-  const n = parseInt(nStr, 10)
+  const n = parseInt(nStr.replace('.xml', ''), 10)
   if (!n || n < 1) return new NextResponse('Not found', { status: 404 })
 
   const playas = await getPlayas()
@@ -19,7 +18,6 @@ export async function GET(
   if (!slice.length) return new NextResponse('Not found', { status: 404 })
 
   const today = new Date().toISOString().split('T')[0]
-
   const urls = slice.map(p => `  <url>
     <loc>${BASE}/playas/${p.slug}</loc>
     <lastmod>${today}</lastmod>
