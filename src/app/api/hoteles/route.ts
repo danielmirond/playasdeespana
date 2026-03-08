@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   if (!lat || !lon) return NextResponse.json({ hoteles: [] })
 
-  const hoteles = await getHoteles({ lat, lon, radio, n })
+  const hoteles = await getHoteles(lat, lon)
 
   return NextResponse.json({ hoteles }, {
     headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' },
