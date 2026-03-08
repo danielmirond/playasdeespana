@@ -52,7 +52,7 @@ export default function MapaInteractivo({ playas }: { playas: PlayaCard[] }) {
       })
 
       playas.forEach(p => {
-        const marker = L.marker([p.lat, p.lon], { icon: p.bandera_azul ? iconAzul : icon })
+        const marker = L.marker([p.lat, p.lng], { icon: p.bandera_azul ? iconAzul : icon })
           .addTo(map)
           .bindPopup(`
             <div style="font-family:system-ui,sans-serif;min-width:160px">
