@@ -1,16 +1,13 @@
-import { NextResponse, NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getPlayas } from '@/lib/playas'
 
 export const revalidate = 86400
 const BASE  = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playasdeespana.es'
 const CHUNK = 1000
 
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: Promise<{ n: string }> }
-) {
-  const { n: nStr } = await params
-  const n = parseInt(nStr.replace('.xml', ''), 10)
+export async function GET(_req: Request, context: any) {
+  const { n: nStr } = await context.params
+  const n = parseInt(nStr, 10)
   if (!n || n < 1) return new NextResponse('Not found', { status: 404 })
 
   const playas = await getPlayas()
@@ -18,7 +15,7 @@ export async function GET(
   if (!slice.length) return new NextResponse('Not found', { status: 404 })
 
   const today = new Date().toISOString().split('T')[0]
-  const urls = slice.map(p => `  <url>
+  const urls = slice.map((p: any) => `  <url>
     <loc>${BASE}/playas/${p.slug}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>hourly</changefreq>
