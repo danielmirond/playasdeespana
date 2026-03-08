@@ -8,9 +8,10 @@ const CHUNK = 1000
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: Promise<{ 'n.xml': string }> }
+  { params }: { params: Promise<{ n: string }> }
 ) {
-  const raw = await params; const raw = await params; const n   = parseInt(raw?.replace('.xml', ''), 10)
+  const { n: nStr } = await params
+  const n = parseInt(nStr, 10)
   if (!n || n < 1) return new NextResponse('Not found', { status: 404 })
 
   const playas = await getPlayas()
