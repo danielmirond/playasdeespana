@@ -52,13 +52,13 @@ export default function MapaInteractivo({ playas }: { playas: PlayaCard[] }) {
       })
 
       playas.forEach(p => {
-        const marker = L.marker([p.lat, p.lng], { icon: p.bandera_azul ? iconAzul : icon })
+        const marker = L.marker([p.lat, p.lng], { icon: p.bandera ? iconAzul : icon })
           .addTo(map)
           .bindPopup(`
             <div style="font-family:system-ui,sans-serif;min-width:160px">
               <div style="font-weight:600;font-size:.85rem;margin-bottom:.2rem">${p.nombre}</div>
               <div style="font-size:.72rem;color:#7a8c7c;margin-bottom:.4rem">${p.municipio} · ${p.provincia}</div>
-              ${p.bandera_azul ? '<div style="font-size:.65rem;color:#3a8c5c;font-weight:500">🏖 Bandera Azul</div>' : ''}
+              ${p.bandera ? '<div style="font-size:.65rem;color:#3a8c5c;font-weight:500">🏖 Bandera Azul</div>' : ''}
               <a href="/playas/${p.slug}" style="display:inline-block;margin-top:.4rem;font-size:.72rem;color:#2e7bb4;text-decoration:none">Ver condiciones →</a>
             </div>
           `, { maxWidth: 200 })
