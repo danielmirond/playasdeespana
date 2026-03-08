@@ -1,0 +1,88 @@
+/* src/app/comunidades/comunidades.module.css */
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 5rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 900; letter-spacing: -.025em;
+  color: var(--ink); line-height: 1; margin-bottom: .4rem;
+}
+.sub { font-size: .8rem; color: var(--muted); }
+
+/* Grid de cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: .75rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: box-shadow .15s;
+}
+.card:hover { box-shadow: 0 6px 24px rgba(176,104,32,.1); }
+
+/* Cabecera comunidad */
+.cardHead {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .9rem 1rem;
+  border-bottom: 1px solid var(--line);
+  transition: background .15s;
+}
+.cardHead:hover { background: rgba(255,255,255,.6); }
+
+.icono { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+.cardHeadInfo { flex: 1; min-width: 0; }
+.nombre {
+  font-family: var(--font-serif);
+  font-size: 1rem; font-weight: 700;
+  color: var(--ink); display: block; line-height: 1.2;
+}
+.count { font-size: .65rem; color: var(--muted); }
+.arrow {
+  color: var(--muted); flex-shrink: 0;
+  transition: all .15s;
+}
+.cardHead:hover .arrow { color: var(--accent); transform: translateX(2px); }
+
+/* Lista de provincias */
+.provs {
+  display: flex; flex-direction: column;
+}
+.prov {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .45rem 1rem .45rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+  font-size: .78rem; color: var(--ink);
+  transition: background .12s;
+  gap: .5rem;
+}
+.prov:last-child { border-bottom: none; }
+.prov:hover { background: rgba(176,104,32,.05); color: var(--accent); }
+.provNombre { flex: 1; }
+.provCount {
+  font-size: .65rem; color: var(--muted);
+  background: var(--metric-bg);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: .1rem .45rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .main { padding: 1.25rem .85rem 4rem; }
+  .grid { grid-template-columns: 1fr; }
+}

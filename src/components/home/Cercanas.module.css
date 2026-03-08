@@ -1,0 +1,113 @@
+/* src/components/home/Cercanas.module.css */
+
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem 2.5rem;
+}
+
+.hd {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: .85rem; padding-bottom: .55rem;
+  border-bottom: 1px solid var(--line);
+}
+.hdTitle {
+  font-size: .68rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
+}
+.hdRefresh {
+  font-size: .72rem; color: var(--accent); font-weight: 500;
+  background: none; border: none; cursor: pointer;
+}
+.hdRefresh:hover { text-decoration: underline; }
+
+/* CTA estado inicial */
+.cta {
+  display: flex; flex-direction: column; align-items: center;
+  gap: .75rem; padding: 2rem 1rem;
+  background: var(--card-bg); border: 1.5px solid var(--line);
+  border-radius: 16px; text-align: center;
+}
+.ctaTxt  { font-size: .85rem; color: var(--muted); }
+.ctaHint { font-size: .68rem; color: var(--muted); opacity: .6; }
+.ctaBtn {
+  display: flex; align-items: center; gap: .5rem;
+  background: var(--accent); color: white;
+  padding: .6rem 1.4rem; border-radius: 12px;
+  font-size: .82rem; font-weight: 600;
+  border: none; cursor: pointer;
+  transition: opacity .15s;
+}
+.ctaBtn:hover { opacity: .85; }
+
+/* Spinner */
+.spinner {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Grid de cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+}
+
+.card {
+  display: block;
+  background: var(--card-bg);
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: .75rem .85rem;
+  transition: all .15s;
+}
+.card:hover {
+  border-color: rgba(176,104,32,.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(176,104,32,.08);
+}
+
+.cardTop {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; gap: .5rem;
+  margin-bottom: .55rem;
+}
+.nombre {
+  font-size: .85rem; font-weight: 600; color: var(--ink);
+  line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 140px;
+}
+.lugar { font-size: .62rem; color: var(--muted); margin-top: .1rem; }
+.dist  {
+  font-family: var(--font-serif);
+  font-size: .95rem; font-weight: 700;
+  color: var(--accent); flex-shrink: 0;
+  line-height: 1;
+}
+
+.cardBot {
+  display: flex; align-items: center; gap: .4rem; flex-wrap: wrap;
+}
+.pill {
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding: .15rem .5rem; border-radius: 100px;
+  font-size: .6rem; font-weight: 600;
+}
+.pillDot { width: 5px; height: 5px; border-radius: 50%; }
+.dato { font-size: .68rem; color: var(--muted); }
+.cargando { font-size: .65rem; color: var(--muted); opacity: .6; }
+
+@media (max-width: 700px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .section { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+@media (max-width: 420px) {
+  .grid { grid-template-columns: 1fr; }
+  .nombre { max-width: 200px; }
+}

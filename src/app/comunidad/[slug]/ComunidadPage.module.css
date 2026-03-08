@@ -1,0 +1,105 @@
+/* src/app/comunidad/[slug]/ComunidadPage.module.css */
+
+.hero {
+  background: linear-gradient(160deg, var(--bg) 0%, color-mix(in srgb, var(--accent) 8%, var(--bg)) 100%);
+  border-bottom: 1.5px solid var(--line);
+  padding: 3rem 1.5rem 2.5rem;
+}
+.heroInner { max-width: 960px; margin: 0 auto; }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: .4rem;
+  font-size: .72rem; color: var(--muted); margin-bottom: 1rem;
+}
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.titulo {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 900; letter-spacing: -.03em;
+  color: var(--ink); margin: 0 0 .3rem;
+}
+.subtitulo { font-size: .9rem; color: var(--muted); margin: 0 0 1.5rem; }
+
+.stats { display: flex; gap: 2rem; }
+.stat { text-align: center; }
+.statV {
+  font-family: var(--font-serif); font-size: 1.8rem; font-weight: 900;
+  color: var(--accent); display: block; line-height: 1;
+}
+.statL { font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+/* ── WRAP ── */
+.wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+
+/* ── MAPA ── */
+.mapaCard {
+  background: var(--card-bg); border: 1.5px solid var(--line);
+  border-radius: 20px; overflow: hidden; margin-bottom: 2rem;
+}
+.mapaHead {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 1.25rem .75rem;
+}
+.mapaTitle { font-family: var(--font-serif); font-size: 1rem; font-weight: 700; color: var(--ink); }
+.mapaSrc   { font-size: .62rem; color: var(--muted); }
+.mapaEmbed { height: 380px; }
+.mapaLinks {
+  display: flex; flex-wrap: wrap; gap: .4rem;
+  padding: .75rem 1.25rem; border-top: 1px solid var(--line);
+}
+.mapaPin {
+  font-size: .72rem; padding: .25rem .6rem;
+  background: var(--metric-bg); border: 1px solid var(--line);
+  border-radius: 100px; text-decoration: none; color: var(--ink);
+  display: flex; align-items: center; gap: .3rem;
+  transition: border-color .15s;
+}
+.mapaPin:hover { border-color: var(--accent); }
+
+/* ── PROVINCIA ── */
+.provinciaSection { margin-bottom: 2.5rem; }
+.provinciaHead { margin-bottom: .85rem; }
+.provinciaLink { text-decoration: none; display: flex; align-items: baseline; gap: .75rem; }
+.provinciaTitulo {
+  font-family: var(--font-serif); font-size: 1.3rem; font-weight: 800;
+  color: var(--ink); margin: 0;
+}
+.provinciaCount { font-size: .75rem; color: var(--accent); font-weight: 600; }
+.provinciaLink:hover .provinciaTitulo { color: var(--accent); }
+
+/* ── GRID PLAYAS ── */
+.playasGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: .75rem;
+}
+.playaCard {
+  background: var(--card-bg); border: 1.5px solid var(--line);
+  border-radius: 16px; padding: .85rem; text-decoration: none;
+  transition: border-color .15s, transform .15s;
+  display: flex; flex-direction: column; gap: .35rem;
+}
+.playaCard:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.pcEstado {
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .2rem .55rem; border-radius: 100px; border: 1.5px solid;
+  align-self: flex-start;
+}
+.pcDot   { width: 6px; height: 6px; border-radius: 50%; }
+.pcLabel { font-size: .6rem; font-weight: 700; letter-spacing: .05em; }
+
+.pcNombre { font-size: .88rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.pcMeta   { font-size: .7rem; color: var(--muted); }
+.pcData   { display: flex; gap: .6rem; font-size: .68rem; color: var(--muted); }
+.pcServicios { display: flex; gap: .2rem; font-size: .8rem; margin-top: .15rem; }
+.pcSrv   { opacity: .7; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .stats { gap: 1.2rem; }
+  .playasGrid { grid-template-columns: 1fr 1fr; }
+  .mapaEmbed { height: 260px; }
+}

@@ -1,0 +1,18 @@
+/* src/app/mapa/MapaPage.module.css */
+.hero {
+  background: var(--bg);
+  border-bottom: 1.5px solid var(--line);
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+.heroInner { max-width: 1200px; margin: 0 auto; }
+.titulo {
+  font-family: var(--font-serif);
+  font-size: 1.6rem; font-weight: 900;
+  letter-spacing: -.03em; color: var(--ink); margin: 0 0 .2rem;
+}
+.subtitulo { font-size: .8rem; color: var(--muted); margin: 0; }
+.mapaWrap {
+  max-width: 1200px; margin: 0 auto;
+  border: 1.5px solid var(--line); border-radius: 0 0 20px 20px;
+  overflow: hidden;
+}

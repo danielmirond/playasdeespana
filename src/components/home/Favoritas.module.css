@@ -1,0 +1,97 @@
+/* src/components/home/Favoritas.module.css */
+
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem 2.5rem;
+}
+
+.hd {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: .85rem; padding-bottom: .55rem;
+  border-bottom: 1px solid var(--line);
+}
+.hdTitle {
+  font-size: .68rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
+}
+.hdCount { font-size: .7rem; color: var(--muted); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+}
+
+.card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all .15s;
+}
+.card:hover {
+  border-color: rgba(176,104,32,.35);
+  box-shadow: 0 6px 20px rgba(176,104,32,.08);
+}
+
+.cardLink {
+  display: block;
+  padding: .75rem .85rem .75rem .85rem;
+}
+
+.cardTop {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; gap: .5rem;
+  margin-bottom: .4rem;
+}
+.nombre {
+  font-size: .85rem; font-weight: 600; color: var(--ink);
+  line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 130px;
+}
+.lugar { font-size: .62rem; color: var(--muted); margin-top: .1rem; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding: .15rem .5rem; border-radius: 100px;
+  font-size: .6rem; font-weight: 600; flex-shrink: 0;
+}
+.pillDot { width: 5px; height: 5px; border-radius: 50%; }
+
+.datos { display: flex; gap: .6rem; }
+.dato  { font-size: .68rem; color: var(--muted); }
+
+/* Botón quitar */
+.btnQuitar {
+  position: absolute; top: .5rem; right: .5rem;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(0,0,0,.06); border: none;
+  font-size: .6rem; color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .15s;
+  line-height: 1;
+}
+.btnQuitar:hover { background: rgba(239,68,68,.12); color: #ef4444; }
+
+/* BtnFavorita — reutilizable en ficha */
+.btnFav {
+  font-size: 1.1rem; color: var(--muted);
+  background: none; border: none; cursor: pointer;
+  transition: all .15s; line-height: 1;
+  padding: .2rem .35rem; border-radius: 8px;
+}
+.btnFav:hover   { color: #ef4444; background: rgba(239,68,68,.08); }
+.btnFavOn       { color: #ef4444; }
+
+@media (max-width: 700px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .section { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+@media (max-width: 420px) {
+  .grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "playasdeespana",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "sync:playas": "node scripts/sync-playas.js",
+    "sync:calidad": "node scripts/sync-calidad-agua.js"
+  },
+  "dependencies": {
+    "next": "^16.1.6",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  }
+}

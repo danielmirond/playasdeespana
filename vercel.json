@@ -1,0 +1,25 @@
+{
+  "buildCommand": "npm run sync:playas && npm run sync:calidad && next build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+
+  "crons": [
+    {
+      "path": "/api/cron/sync-playas",
+      "schedule": "0 4 * * 1"
+    }
+  ],
+
+  "env": {
+    "NEXT_PUBLIC_BASE_URL": "https://playasdeespana.es"
+  },
+
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://playasdeespana.es" }
+      ]
+    }
+  ]
+}
