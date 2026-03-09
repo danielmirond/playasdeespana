@@ -106,7 +106,7 @@ export default async function Destacadas({ playas, titulo = 'Playas destacadas',
     <section className={styles.section}>
       <div className={styles.hd}>
         <span className={styles.hdTitle}>{titulo}</span>
-        <Link href="/mapa" className={styles.hdAction}>Ver mapa →</Link>
+        <Link href="/mapa" className={styles.hdAction}>{locale === 'en' ? 'View map →' : 'Ver mapa →'}</Link>
       </div>
 
       <div className={styles.grid}>
@@ -127,7 +127,7 @@ export default async function Destacadas({ playas, titulo = 'Playas destacadas',
                 <div className={styles.visIlu}><IluCard estado={m.estado}/></div>
                 <div className={styles.estadoPill} style={{ background: e.bg, color: e.text }}>
                   <span className={styles.dot} style={{ background: e.dot }}/>
-                  {e.label}
+                  {locale === 'en' ? e.labelEn : e.label}
                 </div>
                 <div className={styles.temp}>{m.agua}°</div>
               </div>
@@ -137,11 +137,11 @@ export default async function Destacadas({ playas, titulo = 'Playas destacadas',
                 <div className={styles.datos}>
                   <div className={styles.dato}>
                     <span className={styles.datoV}>{m.olas}m</span>
-                    <span className={styles.datoL}>🌊 Olas</span>
+                    <span className={styles.datoL}>🌊 {locale === 'en' ? 'Waves' : 'Olas'}</span>
                   </div>
                   <div className={styles.dato}>
                     <span className={styles.datoV}>{m.viento}km/h</span>
-                    <span className={styles.datoL}>💨 Viento</span>
+                    <span className={styles.datoL}>💨 {locale === 'en' ? 'Wind' : 'Viento'}</span>
                   </div>
                   <div className={styles.dato}>
                     <span className={styles.datoV}>UV {m.uv}</span>
@@ -150,8 +150,8 @@ export default async function Destacadas({ playas, titulo = 'Playas destacadas',
                 </div>
                 <div className={styles.foot}>
                   <div className={styles.badges}>
-                    {p.bandera    && <span className={styles.badge}>🏖 Bandera Azul</span>}
-                    {p.socorrismo && <span className={styles.badge}>🏊 Socorrismo</span>}
+                    {p.bandera    && <span className={styles.badge}>{locale === 'en' ? '🏖 Blue Flag' : '🏖 Bandera Azul'}</span>}
+                    {p.socorrismo && <span className={styles.badge}>{locale === 'en' ? '🏊 Lifeguard' : '🏊 Socorrismo'}</span>}
                     {p.accesible  && <span className={`${styles.badge} ${styles.badgeVerde}`}>♿ PMR</span>}
                   </div>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={styles.arrow}>
