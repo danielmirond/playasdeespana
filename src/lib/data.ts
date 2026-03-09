@@ -43,7 +43,7 @@ export async function getComunidades(): Promise<ComunidadSummary[]> {
   const all = getAllPlayas()
   const map: Record<string, { total: number; azul: number; lat: number; lon: number }> = {}
   all.forEach(p => {
-    if (!map[p.comunidad]) map[p.comunidad] = { total: 0, azul: 0, lat: p.lat, lon: p.lon }
+    if (!map[p.comunidad]) map[p.comunidad] = { total: 0, azul: 0, lat: p.lat, lon: p.lng }
     map[p.comunidad].total++
     if (p.bandera) map[p.comunidad].azul++
   })
@@ -60,7 +60,7 @@ function toCard(p: Playa): Playa {
     provincia: p.provincia,
     comunidad: p.comunidad,
     lat: p.lat,
-    lon: p.lon,
+    lon: p.lng,
     bandera_azul: p.bandera,
     calidad_agua: p.calidad_agua,
   }
