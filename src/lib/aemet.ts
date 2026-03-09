@@ -23,7 +23,7 @@ async function aemetFetch(path: string) {
 }
 
 // Predicción específica para playa (temperatura agua, estado mar, oleaje)
-export async function getMeteoPlaya(idAemet: string): Promise<MeteoPlaya | null> {
+export async function getMeteoPlaya(idAemet: string): Promise<any> {
   try {
     const data = await aemetFetch(`/prediccion/especifica/playa/${idAemet}`)
     return normalizeMeteoPlaya(data)
@@ -34,7 +34,7 @@ export async function getMeteoPlaya(idAemet: string): Promise<MeteoPlaya | null>
 }
 
 // Predicción por municipio (temperatura aire, viento, UV)
-export async function getMeteoCodMunicipio(codMun: string): Promise<Partial<MeteoPlaya> | null> {
+export async function getMeteoCodMunicipio(codMun: string): Promise<any> {
   try {
     const data = await aemetFetch(`/prediccion/especifica/municipio/diaria/${codMun}`)
     return normalizeMeteoCodMun(data)
@@ -44,7 +44,7 @@ export async function getMeteoCodMunicipio(codMun: string): Promise<Partial<Mete
   }
 }
 
-function normalizeMeteoPlaya(data: any): MeteoPlaya {
+function normalizeMeteoPlaya(data: any): any {
   const hoy = data?.[0]?.prediccion?.dia?.[0] ?? {}
   const now = new Date().toISOString()
 
@@ -68,7 +68,7 @@ function normalizeMeteoPlaya(data: any): MeteoPlaya {
   }
 }
 
-function normalizeMeteoCodMun(data: any): Partial<MeteoPlaya> {
+function normalizeMeteoCodMun(data: any): any {
   const hoy = data?.prediccion?.dia?.[0] ?? {}
   return {
     temp_aire: hoy.temperatura?.maxima ?? 0,
