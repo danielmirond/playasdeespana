@@ -21,8 +21,6 @@ export const revalidate = 3600
 
 interface Props { params: Promise<{ slug: string }> }
 
-))
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
