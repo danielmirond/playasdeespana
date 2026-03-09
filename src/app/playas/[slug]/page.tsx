@@ -32,12 +32,23 @@ return {
     description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
     openGraph: {
       title,
-      url: `/playas/${slug}`,
+      description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/playas/${slug}`,
+      siteName: 'Playas de España',
+      locale: 'es_ES',
+      type: 'website',
       images: [{
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&agua=${tempAgua}&olas=${olas}&viento=${viento}`,
         width: 1200,
         height: 630,
+        alt: `${playa.nombre} - Estado del mar hoy`,
       }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
+      images: [`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&agua=${tempAgua}&olas=${olas}&viento=${viento}`],
     },
     alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },
   }

@@ -28,7 +28,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description: `Water temperature, wave height, wind, crowds and facilities at ${playa.nombre} in ${playa.municipio}, ${playa.provincia}. Updated in real time.`,
-    openGraph: { title, url: `/en/beaches/${slug}`, locale: 'en_GB' },
+    openGraph: {
+      title,
+      url: `/en/beaches/${slug}`,
+      locale: 'en_GB',
+      images: [{
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&agua=${tempAgua}&olas=${olas}&viento=${viento}&locale=en`,
+        width: 1200,
+        height: 630,
+      }],
+    },
     alternates: {
       canonical: `/en/beaches/${slug}`,
       languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` },
