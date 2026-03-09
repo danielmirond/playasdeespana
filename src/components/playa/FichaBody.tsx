@@ -292,7 +292,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.cardBody}>
             <div className={styles.srvGrid}>
               {SERVICIOS.map(s => {
-                const on = !!(playa as Record<string,unknown>)[s.key]
+                const on = !!(playa as any)[s.key]
                 return <span key={s.key} className={`${styles.srv} ${on ? styles.srvSi : styles.srvNo}`}>{on ? '✓' : '✗'} {s.label}</span>
               })}
             </div>
