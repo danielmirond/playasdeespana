@@ -14,9 +14,22 @@ export async function GET() {
   const entries: string[] = []
 
   entries.push(`  <sitemap>
+    <loc>${BASE}/sitemaps/static-en.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>`)
+
+  entries.push(`  <sitemap>
     <loc>${BASE}/sitemaps/static.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>`)
+
+  // EN beaches sitemaps
+  for (let i = 1; i <= numChunks; i++) {
+    entries.push(`  <sitemap>
+    <loc>${BASE}/sitemaps/en-beaches/${i}</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>`)
+  }
 
   for (let i = 1; i <= numChunks; i++) {
     entries.push(`  <sitemap>
