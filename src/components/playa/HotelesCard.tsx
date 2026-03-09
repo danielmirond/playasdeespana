@@ -21,7 +21,7 @@ function RatingBadge({ rating, count }: { rating: number; count: number | null }
 export default function HotelesCard({ hoteles, nombrePlaya }: { hoteles: Hotel[]; nombrePlaya: string }) {
   if (!hoteles.length) return null
 
-  const tieneBooking = hoteles.some(h => h.source === 'booking')
+  const tieneBooking = hoteles.some(h => ( h as any).source === 'booking')
 
   return (
     <div className="section-card">
