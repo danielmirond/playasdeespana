@@ -46,7 +46,7 @@ export function BtnFavorita({ slug, nombre }: { slug: string; nombre: string }) 
 }
 
 // Bloque home de favoritas
-export default function Favoritas() {
+export default function Favoritas({ locale = 'es' }: Props) {
   const { favs, toggle } = useFavoritas()
   const [playas, setPlayas]   = useState<Playa[]>([])
   const [meteos, setMeteos]   = useState<Record<string, { agua: number; olas: number; estado: string }>>({})
