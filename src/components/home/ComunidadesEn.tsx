@@ -61,14 +61,14 @@ export default function ComunidadesEn({ comunidades }: Props) {
     <section className={styles.section}>
       <div className={styles.hd}>
         <span className={styles.hdTitle}>By region</span>
-        <Link href="/en/comunidades" className={styles.hdAction}>View all →</Link>
+        <Link href="/en/communities" className={styles.hdAction}>View all →</Link>
       </div>
       <div className={styles.grid}>
         {comunidades.map(c => {
           const [dark, light] = COLORES[c.nombre] ?? ['#b06820', '#e8a030']
           const nombreEn = NOMBRES_EN[c.nombre] ?? c.nombre
           return (
-            <Link key={c.slug} href={`/en/comunidad/${c.slug}`} className={styles.item}>
+            <Link key={c.slug} href={`/en/communities/${c.slug}`} className={styles.item}>
               <div className={styles.ilu}><IluCom dark={dark} light={light}/></div>
               <span className={styles.nombre}>{nombreEn}</span>
               <span className={styles.n}>{c.count} beaches</span>

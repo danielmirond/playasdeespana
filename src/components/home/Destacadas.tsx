@@ -91,11 +91,12 @@ function IluCard({ estado }: { estado: string }) {
 }
 
 interface Props {
+  locale?: 'es' | 'en'
   playas: Playa[]
   titulo?: string
 }
 
-export default async function Destacadas({ playas, titulo = 'Playas destacadas' }: Props) {
+export default async function Destacadas({ playas, titulo = 'Playas destacadas', locale = 'es' }: Props) {
   // Cargar meteo real para las primeras 12 en paralelo
   const meteos = await Promise.all(
     playas.slice(0, 12).map(p => fetchMeteoCard(p.lat, p.lng))
@@ -118,7 +119,7 @@ export default async function Destacadas({ playas, titulo = 'Playas destacadas' 
           return (
             <Link
               key={p.slug}
-              href={`/playas/${p.slug}`}
+              href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${p.slug}`}
               className={styles.card}
               style={{ animationDelay: `${Math.min(i, 8) * 0.04}s` }}
             >
