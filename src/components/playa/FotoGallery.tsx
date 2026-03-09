@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import type { PlayaFoto } from '@/lib/fotos'
+import type { FotoPlaya as PlayaFoto } from '@/lib/fotos'
 
 export default function FotoGallery({ fotos, nombre }: { fotos: PlayaFoto[]; nombre: string }) {
   const [active, setActive] = useState(0)
