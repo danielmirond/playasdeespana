@@ -60,7 +60,7 @@ function toCard(p: Playa): Playa {
     provincia: p.provincia,
     comunidad: p.comunidad,
     lat: p.lat,
-    lon: p.lng,
+    lng: p.lng,
     bandera_azul: p.bandera,
     calidad_agua: p.calidad_agua,
   }
