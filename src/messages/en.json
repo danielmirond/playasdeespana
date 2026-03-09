@@ -1,0 +1,201 @@
+{
+  "meta": {
+    "title": "Beaches of Spain — Real-time sea conditions",
+    "description": "Water temperature, waves, quality and services for 5,611 Spanish beaches. AEMET and EEA data updated every hour.",
+    "og_title": "Beaches of Spain",
+    "og_description": "Real-time sea conditions"
+  },
+  "nav": {
+    "search": "Search",
+    "map": "Map",
+    "communities": "Regions"
+  },
+  "hero": {
+    "kicker": "5,611 beaches · real-time data",
+    "title_line1": "Sea conditions,",
+    "title_line2": "before you leave home",
+    "subtitle": "Water temperature, waves and quality for every beach in Spain.",
+    "stats": {
+      "beaches": "Beaches",
+      "communities": "Regions",
+      "update": "Update",
+      "free": "Free"
+    }
+  },
+  "search": {
+    "placeholder": "Search beach, town or region…",
+    "button": "Search",
+    "no_results": "No beaches found",
+    "filters": {
+      "flag": "Blue Flag",
+      "dogs": "Dogs allowed",
+      "accessible": "Accessible",
+      "nudist": "Naturist"
+    }
+  },
+  "beach_card": {
+    "water": "Water",
+    "waves": "Waves",
+    "wind": "Wind",
+    "quality": "Quality",
+    "flag": "Blue Flag",
+    "see_more": "View beach"
+  },
+  "beach_page": {
+    "back": "← Back",
+    "updated": "Updated",
+    "water_temp": "Water temp.",
+    "air_temp": "Air temp.",
+    "waves": "Waves",
+    "wind": "Wind",
+    "uv": "UV Index",
+    "quality": "Water quality",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "services": "Services",
+    "activities": "Activities",
+    "how_to_get": "How to get there",
+    "restaurants": "Nearby restaurants",
+    "hotels": "Nearby hotels",
+    "parking": "Parking",
+    "surf": "Surf forecast",
+    "crowd": "Crowd level",
+    "sections": {
+      "meteo": "Weather",
+      "surf": "Surf",
+      "crowd": "Crowds",
+      "restaurants": "Eat",
+      "hotels": "Sleep",
+      "traffic": "Getting there"
+    },
+    "status": {
+      "CALMA": "Calm",
+      "BUENA": "Good",
+      "AVISO": "Warning",
+      "PELIGRO": "Danger",
+      "SURF": "Surf",
+      "VIENTO": "Windy"
+    },
+    "quality_levels": {
+      "Excelente": "Excellent",
+      "Buena": "Good",
+      "Suficiente": "Sufficient",
+      "Deficiente": "Poor",
+      "Sin datos": "No data"
+    },
+    "services_list": {
+      "bandera": "Blue Flag",
+      "socorrismo": "Lifeguard",
+      "accesible": "Accessible",
+      "perros": "Dogs allowed",
+      "duchas": "Showers",
+      "parking": "Parking",
+      "nudista": "Naturist"
+    },
+    "activities_list": {
+      "surf": "Surfing",
+      "windsurf": "Windsurfing",
+      "kite": "Kitesurfing",
+      "snorkel": "Snorkelling",
+      "buceo": "Scuba diving",
+      "kayak": "Kayaking",
+      "paddle": "Paddleboarding"
+    }
+  },
+  "crowd": {
+    "title": "Crowd levels",
+    "now": "Right now",
+    "occupation": "occupancy",
+    "best_time": "Best time today",
+    "seasons": {
+      "alta": "Peak season",
+      "media": "Mid season",
+      "baja": "Off season"
+    },
+    "levels": {
+      "Llena": "Packed",
+      "Muy concurrida": "Very busy",
+      "Concurrida": "Busy",
+      "Tranquila": "Quiet",
+      "Vacía": "Empty"
+    },
+    "weekend": "Weekend",
+    "weekday": "Weekday",
+    "urban": "Urban beach",
+    "bank_holiday": "Bank holiday"
+  },
+  "traffic": {
+    "title": "Getting there",
+    "realtime": "Real time",
+    "tabs": {
+      "crowd": "Crowds",
+      "traffic": "Traffic",
+      "parking": "Parking"
+    },
+    "by_car": "By car — open in Google Maps",
+    "by_transit": "By public transport",
+    "by_bike": "By bike",
+    "by_foot": "On foot",
+    "traffic_levels": {
+      "Libre": "Clear",
+      "Fluido": "Moving",
+      "Denso": "Heavy",
+      "Colapso": "Standstill"
+    },
+    "speed_now": "km/h now",
+    "free_flow": "Free flow speed",
+    "fluidity": "Fluidity",
+    "searching_parking": "Looking for nearby parking…",
+    "no_parking": "No nearby parking found",
+    "open": "Open",
+    "closed": "Closed",
+    "view_all_parking": "View all parking on Google Maps →",
+    "price_unknown": "Price n/a"
+  },
+  "restaurants": {
+    "title": "Nearby restaurants",
+    "loading": "Loading…",
+    "no_results": "No restaurants found nearby",
+    "open_now": "Open now",
+    "closed": "Closed",
+    "view_all": "View all on Google Maps →"
+  },
+  "hotels": {
+    "title": "Nearby hotels",
+    "loading": "Loading…",
+    "no_results": "No hotels found nearby",
+    "stars": "stars",
+    "from": "from",
+    "per_night": "per night",
+    "view_all": "View all on Google Maps →"
+  },
+  "communities": {
+    "title": "Beaches by region",
+    "subtitle": "Explore all regions of Spain",
+    "beaches": "beaches",
+    "view_all": "View all beaches"
+  },
+  "community_page": {
+    "beaches": "beaches",
+    "spain": "Spain",
+    "provinces": "Provinces",
+    "good_today": "Good today"
+  },
+  "footer": {
+    "data_sources": "Open-Meteo · AEMET · EEA · OSM"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Error loading data",
+    "no_data": "No data available",
+    "km": "km",
+    "m": "m",
+    "updated_ago": "Updated",
+    "share": "Share",
+    "save": "Save",
+    "saved": "Saved",
+    "view_map": "View on map",
+    "copy_link": "Copy link",
+    "copied": "Copied!"
+  }
+}

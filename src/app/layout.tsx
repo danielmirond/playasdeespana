@@ -33,8 +33,10 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://playasdeespana.es' },
+  alternates: { canonical: 'https://playasdeespana.es' },verification: { google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E' },
 }
+
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
