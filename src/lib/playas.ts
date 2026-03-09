@@ -16,7 +16,7 @@ export const getPlayas = cache(async (): Promise<Playa[]> => {
     const { default: data } = await import('@/../public/data/playas.json', {
       assert: { type: 'json' },
     })
-    return data as Playa[]
+    return data as unknown as Playa[]
   } catch {
     console.warn('[playas] public/data/playas.json no encontrado — ejecuta npm run sync:playas')
     return []

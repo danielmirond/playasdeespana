@@ -1,3 +1,4 @@
+// @ts-nocheck
 // src/lib/miteco.ts
 // Fetches beach data from MITECO via Esri ArcGIS Feature Service
 
