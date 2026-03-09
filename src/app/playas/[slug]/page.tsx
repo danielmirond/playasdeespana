@@ -30,7 +30,15 @@ const title = `${playa.nombre} (${playa.provincia}) ¿Cómo está hoy? | Viento,
 return {
     title,
     description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
-    openGraph: { title, url: `/playas/${slug}` },
+    openGraph: {
+      title,
+      url: `/playas/${slug}`,
+      images: [{
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&agua=${tempAgua}&olas=${olas}&viento=${viento}`,
+        width: 1200,
+        height: 630,
+      }],
+    },
     alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },
   }
 }

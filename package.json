@@ -11,6 +11,7 @@
     "sync:calidad": "node scripts/sync-calidad-agua.js"
   },
   "dependencies": {
+    "@vercel/og": "^0.11.1",
     "next": "^16.1.6",
     "react": "^18",
     "react-dom": "^18"
