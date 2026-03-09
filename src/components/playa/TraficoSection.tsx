@@ -1,4 +1,4 @@
-import { Car, Bus, Bicycle, Person, Users, ParkingSign, Star } from '@phosphor-icons/react'
+import { Car, Bus, Bicycle, Person, Users, Park, Star } from '@phosphor-icons/react'
 'use client'
 // src/components/playa/TraficoSection.tsx
 import { useEffect, useState } from 'react'
@@ -222,7 +222,7 @@ export default function TraficoSection({ playa }: Props) {
               color: tabActivo === tab ? 'var(--accent,#b06820)' : 'var(--muted,#8a7560)',
               cursor: 'pointer', textTransform: 'capitalize',
             }}>
-              {tab === 'afluencia' ? <><Users size={14}/>&nbsp;Afluencia</> : tab === 'trafico' ? <><Car size={14}/>&nbsp;Tráfico</> : <><ParkingSign size={14}/>&nbsp;Aparcamiento</>}
+              {tab === 'afluencia' ? <><Users size={14}/>&nbsp;Afluencia</> : tab === 'trafico' ? <><Car size={14}/>&nbsp;Tráfico</> : <><Park size={14}/>&nbsp;Aparcamiento</>}
             </button>
           ))}
         </div>
@@ -348,7 +348,7 @@ export default function TraficoSection({ playa }: Props) {
                      href={p.googleId ? `https://www.google.com/maps/place/?q=place_id:${p.googleId}` : `https://www.google.com/maps/search/parking+near+${playa.lat},${playa.lng}`}
                      target="_blank" rel="noopener noreferrer"
                      style={{ display: 'flex', alignItems: 'center', gap: '.75rem', padding: '.65rem .85rem', borderRadius: '10px', background: 'rgba(176,104,32,.05)', border: '1px solid var(--line,#e8dcc8)', textDecoration: 'none', color: 'inherit' }}>
-                    <ParkingSign size={22} weight='bold' color='var(--accent,#b06820)'/>
+                    <Park size={22} weight='bold' color='var(--accent,#b06820)'/>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '.4rem' }}>
                         <div style={{ fontWeight: 600, fontSize: '.8rem', color: 'var(--ink,#2a1a08)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.nombre}</div>
