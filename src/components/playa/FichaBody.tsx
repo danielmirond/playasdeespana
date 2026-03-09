@@ -9,6 +9,8 @@ import SurfSection from './SurfSection'
 import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
+import TextoSEO from './TextoSEO'
+
 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number
@@ -316,6 +318,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <DataRow k="Coordenadas" v={`${playa.lat}° N, ${playa.lng}° E`} mono/>
           </div>
         </div>
+        <TextoSEO playa={playa} />
 
       </div>
 
