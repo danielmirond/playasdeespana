@@ -48,7 +48,7 @@ return {
       card: 'summary_large_image',
       title,
       description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
-      images: [`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?playa=${encodeURIComponent(playa.nombre)}&municipio=${encodeURIComponent(playa.municipio + ' · ' + playa.provincia)}&temp_agua=${tempAgua}&oleaje=${olas}&viento=${viento}&comunidad=${encodeURIComponent(playa.comunidad)}&azul=${playa.bandera ? 'true' : 'false'}`],
+      images: [`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?playa=${encodeURIComponent(playa.nombre)}&municipio=${encodeURIComponent(playa.municipio + ' · ' + playa.provincia)}&comunidad=${encodeURIComponent(playa.comunidad)}&azul=${playa.bandera ? 'true' : 'false'}`],
     },
     alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },
   }
