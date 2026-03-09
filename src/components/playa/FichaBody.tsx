@@ -133,7 +133,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* FOTOS */}
         <div className={styles.card} id="s-fotos">
           <div className={styles.cardHead}>
-            <span className={styles.cardTitle}>{i18n.galeria}</span>
+            <h2 className={styles.cardTitle}>{i18n.galeria}</h2>
             <span className={styles.cardSrc}>{i18n.galSrc}</span>
           </div>
           <div className={styles.galeria}>
@@ -163,7 +163,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* OLEAJE + METEO */}
         <div className={styles.card} id="s-meteo">
           <div className={styles.cardHead}>
-            <span className={styles.cardTitle}>{i18n.oleaje}</span>
+            <h2 className={styles.cardTitle}>{i18n.oleaje}</h2>
             <span className={styles.cardSrc}>{i18n.oleajeSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -173,7 +173,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-            <span className={styles.cardTitle}>{i18n.luzSolar}</span>
+            <h2 className={styles.cardTitle}>{i18n.luzSolar}</h2>
             <span className={styles.cardSrc}>{i18n.luzSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -187,7 +187,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-            <span className={styles.cardTitle}>{i18n.temperatura}</span>
+            <h2 className={styles.cardTitle}>{i18n.temperatura}</h2>
             <span className={styles.cardSrc}>{i18n.tempSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -202,7 +202,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-            <span className={styles.cardTitle}>{i18n.viento}</span>
+            <h2 className={styles.cardTitle}>{i18n.viento}</h2>
           </div>
           <div className={styles.cardBody}>
             <div className={styles.vientoRow}>
@@ -221,7 +221,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* CALIDAD AGUA */}
         <div className={styles.card} id="s-calidad">
           <div className={styles.cardHead}>
-            <span className={styles.cardTitle}>{i18n.calidad}</span>
+            <h2 className={styles.cardTitle}>{i18n.calidad}</h2>
             <span className={styles.cardSrc}>{i18n.calidadSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -249,7 +249,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* CÓMO LLEGAR */}
         <div className={styles.card} id="s-comoLlegar">
           <div className={styles.cardHead}>
-            <span className={styles.cardTitle}>🚗 {locale === 'en' ? 'How to get there' : 'Cómo llegar'}</span>
+            <h2 className={styles.cardTitle}>🚗 {locale === 'en' ? 'How to get there' : 'Cómo llegar'}</h2>
           </div>
           <div className={styles.cardBody}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
@@ -283,7 +283,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* RESTAURANTES */}
         <div className={styles.card} id="s-comer">
           <div className={styles.cardHead}>
-            <span className={styles.cardTitle}>{i18n.comer}</span>
+            <h2 className={styles.cardTitle}>{i18n.comer}</h2>
             <span className={styles.cardSrc}>
               {restList ? (restList[0]?.source === 'google' ? i18n.comerSrcGoogle : i18n.comerSrcOSM) : i18n.comerSrcMock}
             </span>
@@ -326,7 +326,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* HOTELES */}
         <div className={styles.card} id="s-dormir">
           <div className={styles.cardHead}>
-            <span className={styles.cardTitle}>{i18n.dormir}</span>
+            <h2 className={styles.cardTitle}>{i18n.dormir}</h2>
             <span className={styles.cardSrc}>{hoteles && hoteles.length > 0 ? i18n.dormirSrc : i18n.dormirSrcMock}</span>
           </div>
           <div className={styles.cardBody}>
@@ -364,7 +364,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* SERVICIOS */}
         <div className={styles.card} id="s-servicios">
           <div className={styles.cardHead}>
-            <span className={styles.cardTitle}>{i18n.servicios}</span>
+            <h2 className={styles.cardTitle}>{i18n.servicios}</h2>
             <span className={styles.cardSrc}>{i18n.serviciosSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -380,7 +380,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* INFO */}
         <div className={styles.card} id="s-info">
           <div className={styles.cardHead}>
-            <span className={styles.cardTitle}>{i18n.info}</span>
+            <h2 className={styles.cardTitle}>{i18n.info}</h2>
             <span className={styles.cardSrc}>{i18n.infoSrc}</span>
           </div>
           <div className={styles.cardBody}>
