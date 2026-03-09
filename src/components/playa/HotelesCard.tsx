@@ -1,4 +1,4 @@
-import type { Hotel } from '@/lib/hoteles'
+import type { HotelReal as Hotel } from '@/lib/hoteles'
 
 function Estrellas({ n }: { n: number }) {
   return (
