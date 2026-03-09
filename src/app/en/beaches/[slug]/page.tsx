@@ -100,9 +100,9 @@ export default async function BeachPageEn({ params }: Props) {
     <>
       <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} calidad={calidad?.nivel} />
       <Nav />
-      <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} />
-      <FichaNav />
-      <FichaBody
+      <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} locale="en" />
+      <FichaNav locale="en" />
+      <FichaBody locale="en"
         playa={playa}
         meteo={meteo}
         solData={solData}

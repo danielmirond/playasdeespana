@@ -1,22 +1,24 @@
 // src/lib/estados.ts
-// Lógica centralizada para calcular el estado de baño y obtener su paleta
-
 import type { EstadoBano, DatosMeteo } from '@/types'
 
 export interface EstadoConfig {
-  label:   string
-  frase:   string
-  dot:     string
-  bg:      string
-  text:    string
-  ringBg:  string   // fondo del hero
+  label:     string
+  labelEn:   string
+  frase:     string
+  fraseEn:   string
+  dot:       string
+  bg:        string
+  text:      string
+  ringBg:    string
   ringColor: string
 }
 
 export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
   CALMA: {
     label:     'CALMA',
+    labelEn:   'CALM',
     frase:     'El mar te espera',
+    fraseEn:   'The sea is waiting for you',
     dot:       '#22c55e',
     bg:        'rgba(34,197,94,.12)',
     text:      '#2a5e2a',
@@ -25,7 +27,9 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
   },
   BUENA: {
     label:     'BUENA',
+    labelEn:   'GOOD',
     frase:     'Condiciones ideales',
+    fraseEn:   'Ideal conditions',
     dot:       '#3b82f6',
     bg:        'rgba(59,130,246,.1)',
     text:      '#1e3a7e',
@@ -34,7 +38,9 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
   },
   AVISO: {
     label:     'AVISO',
+    labelEn:   'WARNING',
     frase:     'Entra con precaución',
+    fraseEn:   'Enter with caution',
     dot:       '#f59e0b',
     bg:        'rgba(245,158,11,.12)',
     text:      '#7a4008',
@@ -43,7 +49,9 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
   },
   PELIGRO: {
     label:     'PELIGRO',
+    labelEn:   'DANGER',
     frase:     'No recomendado el baño',
+    fraseEn:   'Swimming not recommended',
     dot:       '#ef4444',
     bg:        'rgba(239,68,68,.1)',
     text:      '#7a1010',
@@ -52,7 +60,9 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
   },
   SURF: {
     label:     'SURF',
+    labelEn:   'SURF',
     frase:     'Olas para los valientes',
+    fraseEn:   'Waves for the brave',
     dot:       '#0ea5e9',
     bg:        'rgba(14,165,233,.1)',
     text:      '#0a3a5e',
@@ -61,7 +71,9 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
   },
   VIENTO: {
     label:     'VIENTO',
+    labelEn:   'WINDY',
     frase:     'Cometas y kitesurf',
+    fraseEn:   'Kites and kitesurfing',
     dot:       '#eab308',
     bg:        'rgba(234,179,8,.12)',
     text:      '#6a4a08',
@@ -70,13 +82,8 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
   },
 }
 
-/**
- * Calcula el estado de baño a partir de los datos meteorológicos.
- * Lógica simplificada basada en olas + viento.
- */
 export function calcularEstado(meteo: Pick<DatosMeteo, 'olas' | 'viento'>): EstadoBano {
   const { olas, viento } = meteo
-
   if (olas >= 2.5 || viento >= 50) return 'PELIGRO'
   if (olas >= 1.5 && viento >= 35) return 'PELIGRO'
   if (olas >= 1.5) return 'SURF'
