@@ -83,8 +83,6 @@ async function fetchTrafico(lat: number, lng: number): Promise<TraficoData | nul
 }
 
 async function fetchParkings(lat: number, lng: number): Promise<Parking[]> {
-  const key = process.env.NEXT_PUBLIC_GOOGLE_PLACES_KEY ?? process.env.GOOGLE_PLACES_KEY
-  if (!key) return []
   try {
     const url = `/api/parkings?lat=${lat}&lng=${lng}`
     const res = await fetch(url)
