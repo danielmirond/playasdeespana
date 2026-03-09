@@ -16,7 +16,8 @@ function haversine(lat1: number, lng1: number, lat2: number, lng2: number): numb
 
 type Estado = 'idle' | 'loading' | 'ok' | 'denied' | 'error'
 
-export default function Cercanas() {
+interface Props { locale?: 'es' | 'en' }
+export default function Cercanas({ locale = 'es' }: Props) {
   const [estado, setEstado]   = useState<Estado>('idle')
   const [playas, setPlayas]   = useState<PlayaConDist[]>([])
   const [meteos, setMeteos]   = useState<Record<string, { agua: number; olas: number; estado: string }>>({})
