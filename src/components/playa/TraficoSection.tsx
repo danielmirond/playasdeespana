@@ -208,7 +208,7 @@ export default function TraficoSection({ playa }: Props) {
       {/* CABECERA */}
       <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line,#e8dcc8)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)' }}>🚗 Cómo llegar</span>
+          <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)' }}>🚗 Tráfico, afluencia y donde aparcar, parking cerca</span>
           <span style={{ fontSize: '.7rem', color: 'var(--muted,#8a7560)' }}>Tiempo real</span>
         </div>
         <div style={{ display: 'flex', gap: '.35rem', marginTop: '.65rem' }}>
@@ -305,7 +305,7 @@ export default function TraficoSection({ playa }: Props) {
               </div>
             )}
 
-            <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>Cómo llegar</div>
+            <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>Tráfico, afluencia y donde aparcar, parking cerca</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={btnStyle('#b06820', '#fff')}>
                 🚗 En coche — abrir en Google Maps
