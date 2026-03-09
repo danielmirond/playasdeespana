@@ -38,7 +38,7 @@ return {
       locale: 'es_ES',
       type: 'website',
       images: [{
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?playa=${encodeURIComponent(playa.nombre)}&municipio=${encodeURIComponent(playa.municipio + ' · ' + playa.provincia)}&temp_agua=${tempAgua}&oleaje=${olas}&viento=${viento}&comunidad=${encodeURIComponent(playa.comunidad)}&azul=${playa.bandera ? 'true' : 'false'}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?playa=${encodeURIComponent(playa.nombre)}&municipio=${encodeURIComponent(playa.municipio + ' · ' + playa.provincia)}&comunidad=${encodeURIComponent(playa.comunidad)}&azul=${playa.bandera ? 'true' : 'false'}`,
         width: 1200,
         height: 630,
         alt: `${playa.nombre} - Estado del mar hoy`,
