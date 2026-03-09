@@ -46,6 +46,7 @@ export function BtnFavorita({ slug, nombre }: { slug: string; nombre: string }) 
 }
 
 // Bloque home de favoritas
+interface Props { locale?: 'es' | 'en' }
 export default function Favoritas({ locale = 'es' }: Props) {
   const { favs, toggle } = useFavoritas()
   const [playas, setPlayas]   = useState<Playa[]>([])
