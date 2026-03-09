@@ -19,7 +19,7 @@ export function getAllPlayas(): Playa[] {
 export async function getPlayasDestacadas(n = 12): Promise<Playa[]> {
   const all = getAllPlayas()
   const featured = all
-    .filter(p => p.bandera_azul && p.calidad_agua === 'Excelente')
+    .filter(p => p.bandera && (p as any).calidad_agua === "Excelente")
     .slice(0, n)
     .map(toCard)
 
@@ -45,7 +45,7 @@ export async function getComunidades(): Promise<ComunidadSummary[]> {
   all.forEach(p => {
     if (!map[p.comunidad]) map[p.comunidad] = { total: 0, azul: 0, lat: p.lat, lon: p.lon }
     map[p.comunidad].total++
-    if (p.bandera_azul) map[p.comunidad].azul++
+    if (p.bandera) map[p.comunidad].azul++
   })
   const result = Object.entries(map).map(([nombre, d]) => ({ nombre, ...d }))
   if (!result.length) return getMockComunidades()
@@ -61,7 +61,7 @@ function toCard(p: Playa): Playa {
     comunidad: p.comunidad,
     lat: p.lat,
     lon: p.lon,
-    bandera_azul: p.bandera_azul,
+    bandera_azul: p.bandera,
     calidad_agua: p.calidad_agua,
   }
 }
