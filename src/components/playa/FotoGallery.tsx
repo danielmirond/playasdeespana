@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import type { FotoPlaya as PlayaFoto } from '@/lib/fotos'
 
-export default function FotoGallery({ fotos, nombre }: { fotos: PlayaFoto[]; nombre: string }) {
+export default function FotoGallery({ fotos, nombre }: { fotos: any[]; nombre: string }) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
 
