@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import type { PlayaBase, PlayaCard } from '@/types'
+import type { Playa } from '@/types'
 
 const DATA_DIR = path.join(process.cwd(), 'public', 'data')
 
@@ -11,12 +11,12 @@ function readJSON<T>(file: string): T | null {
 }
 
 // Carga todas las playas del JSON generado por sync-playas.js
-export function getAllPlayas(): PlayaBase[] {
-  return readJSON<PlayaBase[]>('playas.json') ?? []
+export function getAllPlayas(): Playa[] {
+  return readJSON<Playa[]>('playas.json') ?? []
 }
 
 // Playas destacadas — bandera azul + calidad excelente, ordenadas por provincia conocida
-export async function getPlayasDestacadas(n = 12): Promise<PlayaCard[]> {
+export async function getPlayasDestacadas(n = 12): Promise<Playa[]> {
   const all = getAllPlayas()
   const featured = all
     .filter(p => p.bandera_azul && p.calidad_agua === 'Excelente')
@@ -29,9 +29,9 @@ export async function getPlayasDestacadas(n = 12): Promise<PlayaCard[]> {
 }
 
 // Índice comunidad → lista de playas
-export async function getPlayasPorComunidad(): Promise<Record<string, PlayaCard[]>> {
+export async function getPlayasPorComunidad(): Promise<Record<string, Playa[]>> {
   const all = getAllPlayas()
-  const map: Record<string, PlayaCard[]> = {}
+  const map: Record<string, Playa[]> = {}
   all.forEach(p => {
     if (!map[p.comunidad]) map[p.comunidad] = []
     map[p.comunidad].push(toCard(p))
@@ -52,7 +52,7 @@ export async function getComunidades(): Promise<ComunidadSummary[]> {
   return result
 }
 
-function toCard(p: PlayaBase): PlayaCard {
+function toCard(p: Playa): Playa {
   return {
     slug: p.slug,
     nombre: p.nombre,
@@ -67,7 +67,7 @@ function toCard(p: PlayaBase): PlayaCard {
 }
 
 // ── MOCKS para desarrollo (antes de ejecutar sync-playas.js) ─────────────────
-export function getMockDestacadas(n: number): PlayaCard[] {
+export function getMockDestacadas(n: number): Playa[] {
   return MOCK_PLAYAS.slice(0, n)
 }
 
@@ -79,7 +79,7 @@ export interface ComunidadSummary {
   nombre: string; total: number; azul: number; lat: number; lon: number
 }
 
-const MOCK_PLAYAS: PlayaCard[] = [
+const MOCK_PLAYAS: Playa[] = [
   { slug:'la-barceloneta-barcelona',     nombre:'La Barceloneta',    municipio:'Barcelona',     provincia:'Barcelona',     comunidad:'Cataluña',            lat:41.378, lon:2.194,  bandera_azul:false, calidad_agua:'Excelente' },
   { slug:'la-malagueta-malaga',          nombre:'La Malagueta',      municipio:'Málaga',         provincia:'Málaga',         comunidad:'Andalucía',           lat:36.718, lon:-4.407, bandera_azul:true,  calidad_agua:'Excelente' },
   { slug:'playa-de-riazor-a-coruna',     nombre:'Playa de Riazor',   municipio:'A Coruña',       provincia:'A Coruña',       comunidad:'Galicia',             lat:43.368, lon:-8.419, bandera_azul:true,  calidad_agua:'Buena'     },
