@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
+import CookieBanner from '@/components/ui/CookieBanner'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-LFHYJE8S16');
           `}
         </Script>
+            <CookieBanner locale="es" />
       </body>
     </html>
   )
