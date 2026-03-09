@@ -74,16 +74,13 @@ export default async function BeachPageEn({ params }: Props) {
   const frase     = getFrase(estadoKey, seed % 3)
 
   const meteo = {
-    agua:            tempAgua,
-    olas,
-    viento,
-    vientoRacha,
+    agua: tempAgua, olas, viento, vientoRacha,
     vientoDireccion: vientoDirRaw,
-    uv:              3 + (seed % 9),
-    tempAire:        Math.round(tempAgua + 3),
-    estado:          estadoKey,
-    amanecer:        solData?.amanecer,
-    atardecer:       solData?.atardecer,
+    uv: 3 + (seed % 9),
+    tempAire: Math.round(tempAgua + 3),
+    estado: estadoKey,
+    amanecer: solData?.amanecer,
+    atardecer: solData?.atardecer,
     periodo,
   }
 

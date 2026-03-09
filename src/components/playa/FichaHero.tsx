@@ -36,7 +36,7 @@ export default function FichaHero({ playa, meteo, estado, frase }: Props) {
       <div className={styles.bc}>
         <Link href="/">Inicio</Link>
         <span>›</span>
-        <Link href={`/comunidad/${playa.comunidad.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}`}>{playa.comunidad}</Link>
+        <Link href={`/comunidad/${playa.comunidad.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}`}>{playa.comunidad}</Link>
         <span>›</span>
         <span>{playa.nombre}</span>
       </div>
