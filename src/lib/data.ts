@@ -52,18 +52,7 @@ export async function getComunidades(): Promise<ComunidadSummary[]> {
   return result
 }
 
-function toCard(p: Playa): Playa {
-  return {
-    slug: p.slug,
-    nombre: p.nombre,
-    municipio: p.municipio,
-    provincia: p.provincia,
-    comunidad: p.comunidad,
-    lat: p.lat,
-    lng: p.lng,
-    bandera_azul: p.bandera,
-    calidad_agua: p.calidad_agua,
-  }
+function toCard(p: Playa): Playa { return p }
 }
 
 // ── MOCKS para desarrollo (antes de ejecutar sync-playas.js) ─────────────────
