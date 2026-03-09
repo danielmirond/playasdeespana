@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `/en/beaches/${slug}`,
       locale: 'en_GB',
       images: [{
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&agua=${tempAgua}&olas=${olas}&viento=${viento}&locale=en`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&locale=en`,
         width: 1200,
         height: 630,
       }],
