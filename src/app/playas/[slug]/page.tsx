@@ -26,7 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const playa = await getPlayaBySlug(slug)
   if (!playa) return {}
-const title = `${playa.nombre} (${playa.provincia}) ¿Cómo está hoy? | Viento, parking, afluencia, temperatura y tráfico en tiempo real`  return {
+const title = `${playa.nombre} (${playa.provincia}) ¿Cómo está hoy? | Viento, parking, afluencia, temperatura y tráfico en tiempo real`  
+return {
     title,
     description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
     openGraph: { title, url: `/playas/${slug}` },
