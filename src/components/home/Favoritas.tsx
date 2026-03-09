@@ -102,7 +102,7 @@ export default function Favoritas() {
     <section className={styles.section}>
       <div className={styles.hd}>
         <span className={styles.hdTitle}>♥ Mis favoritas</span>
-        <span className={styles.hdCount}>{favs.length} guardadas</span>
+        <span className={styles.hdCount}>{favs.length} {locale === 'en' ? 'saved' : 'guardadas'}</span>
       </div>
       <div className={styles.grid}>
         {playas.map(p => {

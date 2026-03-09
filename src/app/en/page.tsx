@@ -41,7 +41,7 @@ export default async function HomePageEn() {
       <main>
         <HeroEn />
         <Buscador locale="en" />
-        <ClientBlocks />
+        <ClientBlocks locale="en" />
         <Destacadas playas={destacadas} locale="en" />
         <ComunidadesEn comunidades={comunidades} />
       </main>

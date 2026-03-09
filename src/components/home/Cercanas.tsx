@@ -77,14 +77,14 @@ export default function Cercanas() {
         <span className={styles.hdTitle}>📍 Playas cercanas</span>
       </div>
       <div className={styles.cta}>
-        <p className={styles.ctaTxt}>Descubre las playas más próximas a ti ahora mismo.</p>
+        <p className={styles.ctaTxt}>{locale === 'en' ? 'Discover the nearest beaches to you right now.' : 'Descubre las playas más próximas a ti ahora mismo.'}</p>
         <button className={styles.ctaBtn} onClick={buscar}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
           </svg>
-          Usar mi ubicación
+          {locale === 'en' ? 'Use my location' : 'Usar mi ubicación'}
         </button>
-        <p className={styles.ctaHint}>Solo se usa para calcular distancias, no se guarda.</p>
+        <p className={styles.ctaHint}>{locale === 'en' ? 'Only used to calculate distances, never stored.' : 'Solo se usa para calcular distancias, no se guarda.'}</p>
       </div>
     </section>
   )
