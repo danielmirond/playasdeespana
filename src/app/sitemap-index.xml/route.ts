@@ -20,7 +20,7 @@ export async function GET() {
 
   for (let i = 1; i <= numChunks; i++) {
     entries.push(`  <sitemap>
-    <loc>${BASE}/sitemaps/playas-${i}</loc>
+    <loc>${BASE}/sitemaps/playas/${i}</loc>
     <lastmod>${today}</lastmod>
   </sitemap>`)
   }
