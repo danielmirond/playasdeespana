@@ -246,8 +246,39 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           turbidez={turbidez} meteo={meteoForecast}
         />
 
+        {/* CÓMO LLEGAR */}
+        <div className={styles.card} id="s-comoLlegar">
+          <div className={styles.cardHead}>
+            <span className={styles.cardTitle}>🚗 {locale === 'en' ? 'How to get there' : 'Cómo llegar'}</span>
+          </div>
+          <div className={styles.cardBody}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--accent,#b06820)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
+                🚗 {locale === 'en' ? 'By car — open in Google Maps' : 'En coche — abrir en Google Maps'}
+              </a>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+                🚌 {locale === 'en' ? 'By public transport' : 'En transporte público'}
+              </a>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=bicycling`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+                🚲 {locale === 'en' ? 'By bike' : 'En bicicleta'}
+              </a>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+                🚶 {locale === 'en' ? 'Walking' : 'A pie'}
+              </a>
+            </div>
+            <iframe
+              src={`https://www.google.com/maps?q=${playa.lat},${playa.lng}&z=15&output=embed`}
+              width="100%" height="300"
+              style={{ border:'none', borderRadius:'12px', marginTop:'1rem' }}
+              loading="lazy"
+            />
+          </div>
+        </div>
+
         {/* TRÁFICO */}
-        <TraficoSection playa={playa} />
+        <div id="s-trafico">
+          <TraficoSection playa={playa} />
+        </div>
 
         {/* RESTAURANTES */}
         <div className={styles.card} id="s-comer">
