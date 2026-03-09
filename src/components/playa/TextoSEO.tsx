@@ -1,11 +1,35 @@
 // src/components/playa/TextoSEO.tsx
 import type { Playa } from '@/types'
-import { generarTextoPlaya } from '@/lib/textoPlaya'
+import { generarTextoPlaya, generarTextoPlayaEn } from '@/lib/textoPlaya'
 
-interface Props { playa: Playa }
+interface Props {
+  playa:   Playa
+  locale?: 'es' | 'en'
+}
 
-export default function TextoSEO({ playa }: Props) {
-  const texto = generarTextoPlaya(playa)
+export default function TextoSEO({ playa, locale = 'es' }: Props) {
+  const texto = locale === 'en' ? generarTextoPlayaEn(playa) : generarTextoPlaya(playa)
+
+  const titulo  = locale === 'en' ? `📖 About ${playa.nombre}` : `📖 Sobre ${playa.nombre}`
+  const subtitulo = locale === 'en' ? 'Everything you need to know ↓' : 'Todo lo que necesitas saber ↓'
+
+  const tags = locale === 'en' ? [
+    playa.nombre,
+    `${playa.municipio} beach`,
+    `beaches ${playa.provincia}`,
+    playa.bandera ? 'blue flag' : null,
+    playa.actividades?.surf ? 'surf' : null,
+    `water temperature ${playa.provincia}`,
+    `sea conditions ${playa.municipio} today`,
+  ].filter(Boolean) : [
+    playa.nombre,
+    `playa ${playa.municipio}`,
+    `playas ${playa.provincia}`,
+    playa.bandera ? 'bandera azul' : null,
+    playa.actividades?.surf ? 'surf' : null,
+    `temperatura agua ${playa.provincia}`,
+    `estado mar ${playa.municipio} hoy`,
+  ].filter(Boolean)
 
   return (
     <details style={{
@@ -27,9 +51,9 @@ export default function TextoSEO({ playa }: Props) {
         justifyContent: 'space-between',
         userSelect: 'none',
       }}>
-        <span>📖 Sobre {playa.nombre}</span>
+        <span>{titulo}</span>
         <span style={{ fontSize: '.75rem', color: 'var(--muted,#8a7560)', fontWeight: 400 }}>
-          Todo lo que necesitas saber ↓
+          {subtitulo}
         </span>
       </summary>
 
@@ -53,15 +77,7 @@ export default function TextoSEO({ playa }: Props) {
           flexWrap: 'wrap',
           gap: '.35rem',
         }}>
-          {[
-            playa.nombre,
-            `playa ${playa.municipio}`,
-            `playas ${playa.provincia}`,
-            playa.bandera ? 'bandera azul' : null,
-            playa.actividades?.surf ? 'surf' : null,
-            `temperatura agua ${playa.provincia}`,
-            `estado mar ${playa.municipio} hoy`,
-          ].filter(Boolean).map((tag, i) => (
+          {tags.map((tag, i) => (
             <span key={i} style={{
               background: 'rgba(176,104,32,.08)',
               border: '1px solid var(--line,#e8dcc8)',

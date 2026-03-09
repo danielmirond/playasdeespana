@@ -123,3 +123,92 @@ export function generarTextoPlaya(playa: Playa): string {
     .replace(/\s+/g, ' ')
     .trim()
 }
+
+
+const ZONA_CLIMA_EN: Record<string, string> = {
+  'Andalucía':     'southern Spain, with very hot summers and warm water',
+  'Cataluña':      'the northeast Mediterranean, with crystal-clear waters and occasional tramontane wind',
+  'C. Valenciana': 'the Valencian Mediterranean, with over 300 sunny days a year',
+  'Baleares':      'the Balearic Islands, with turquoise coves and rocky seabeds',
+  'Canarias':      'the Canary Islands, where you can swim almost all year round',
+  'Galicia':       'the Atlantic coast of Galicia, with powerful waves and cold but spectacular water',
+  'Asturias':      'the Asturian coast, with green cliffs and Atlantic waters',
+  'Cantabria':     'the Cantabrian Sea, with wild beaches surrounded by nature',
+  'País Vasco':    'the Basque Country, where the sea and gastronomy go hand in hand',
+  'Murcia':        'the Mar Menor and the Murcian Mediterranean, with calm waters',
+}
+
+const COMPOSICION_EN: Record<string, string> = {
+  'arena':        'fine sand',
+  'arena gruesa': 'coarse golden sand',
+  'arena dorada': 'golden sand',
+  'arena blanca': 'white sand',
+  'arena negra':  'black volcanic sand',
+  'grava':        'pebbles and small stones',
+  'roca':         'rock and natural pools',
+  'mixta':        'mixed sand and gravel',
+}
+
+export function generarTextoPlayaEn(playa: Playa): string {
+  const { nombre, municipio, provincia, comunidad, slug, longitud, anchura, composicion, bandera, socorrismo, accesible, perros, duchas, parking, nudista, actividades } = playa
+  const zona  = ZONA_CLIMA_EN[comunidad] ?? `the coast of ${provincia}`
+  const arena = composicion ? (COMPOSICION_EN[composicion.toLowerCase()] ?? composicion) : 'sand'
+  const actsArr = Object.entries(actividades ?? {}).filter(([,v]) => v).map(([k]) => k)
+  const seed  = slug
+
+  const intros = [
+    `If you're planning to visit ${nombre}, you're choosing one of the most ${bandera ? 'acclaimed' : 'authentic'} beaches in ${provincia}.`,
+    `${nombre} is one of those beaches in ${provincia} that deserves a spot on your list this summer.`,
+    `When you arrive at ${nombre}, in ${municipio}, you'll understand why this beach is so popular in ${provincia}.`,
+    `Looking for a great beach in ${municipio}? ${nombre} is a safe bet in the heart of ${provincia}.`,
+  ]
+  const intro = deterministicPick(intros, seed + '1')
+
+  const fisicas: string[] = []
+  if (longitud) fisicas.push(`It stretches ${longitud} metres in length`)
+  if (anchura)  fisicas.push(`${anchura} metres wide`)
+  const fisicaStr = fisicas.length
+    ? `${fisicas.join(' and ')}, with ${arena} and waters typical of ${zona}.`
+    : `Located in ${zona}, with ${arena} and surroundings that won't disappoint.`
+
+  const servicios: string[] = []
+  if (socorrismo) servicios.push('lifeguard service')
+  if (duchas)     servicios.push('showers')
+  if (parking)    servicios.push('nearby parking')
+  if (accesible)  servicios.push('accessible facilities')
+
+  const servicioStr = servicios.length >= 2
+    ? `It has ${servicios.slice(0, -1).join(', ')} and ${servicios[servicios.length - 1]}, so you can visit with peace of mind.`
+    : servicios.length === 1
+    ? `It has ${servicios[0]} to make your visit more comfortable.`
+    : `It's a more natural beach, without major facilities — perfect if you're looking for something quieter and more unspoiled.`
+
+  let actividadStr = ''
+  if (actsArr.length > 0) {
+    const nombresActs: Record<string, string> = { surf:'surfing', windsurf:'windsurfing', kite:'kitesurfing', snorkel:'snorkelling', buceo:'scuba diving', kayak:'kayaking', paddle:'paddleboarding' }
+    const actsEn = actsArr.map(a => nombresActs[a] ?? a)
+    actividadStr = actsEn.length === 1
+      ? `If you enjoy ${actsEn[0]}, you're in the right place.`
+      : `For water sports enthusiasts, you can practise ${actsEn.slice(0, -1).join(', ')} and ${actsEn[actsEn.length - 1]} here.`
+  }
+
+  const banderaStr = bandera ? `The Blue Flag at ${nombre} is a guarantee of water quality and responsible environmental management.` : ''
+
+  let extraStr = ''
+  if (nudista) {
+    extraStr = `This is a naturist beach, so if you're looking for a free and unrestricted atmosphere, you'll find it here.`
+  } else if (perros) {
+    extraStr = `If you're bringing your dog, you're in luck — dogs are allowed at ${nombre}, which is increasingly rare on the Spanish coast.`
+  } else if (perros === false) {
+    extraStr = `Please note that dogs are not allowed on this beach, especially during the high season.`
+  }
+
+  const cierres = [
+    `Before you head out, check the real-time sea conditions on this page so there are no surprises.`,
+    `Check the water temperature, wave height and crowd levels before you go — everything is updated here in real time.`,
+    `Use this page to see current sea conditions, expected crowds and how to get there without any hassle.`,
+  ]
+  const cierre = deterministicPick(cierres, seed + '2')
+
+  return [intro, fisicaStr, servicioStr, actividadStr, banderaStr, extraStr, cierre].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim()
+}
