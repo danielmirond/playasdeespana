@@ -16,7 +16,7 @@ export default function FotoGallery({ fotos, nombre }: { fotos: PlayaFoto[]; nom
         {/* Foto principal */}
         <div
           className="fg-main"
-          style={{ background: foto.color }}
+          style={{ background: (foto as any).color }}
           onClick={() => setLightbox(true)}
         >
           <img
