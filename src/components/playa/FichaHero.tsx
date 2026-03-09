@@ -56,7 +56,7 @@ export default function FichaHero({ playa, meteo, estado, frase }: Props) {
       </div>
 
       {/* Acciones */}
-      <FichaHeroActions slug={playa.slug} nombre={playa.nombre} lat={playa.lat} lng={playa.lng} />
+      <FichaHeroActions slug={playa.slug} nombre={playa.nombre} />
 
       {/* Ilustración */}
       <div className={styles.ilu}>
