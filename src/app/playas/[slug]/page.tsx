@@ -21,7 +21,7 @@ export const revalidate = 3600
 
 interface Props { params: Promise<{ slug: string }> }
 
-export async function generateStaticParams() {
+// export async function generateStaticParams() {
   const playas = await getPlayas()
   return playas.map(p => ({ slug: p.slug }))
 }
