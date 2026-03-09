@@ -38,7 +38,7 @@ return {
       locale: 'es_ES',
       type: 'website',
       images: [{
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&agua=${tempAgua}&olas=${olas}&viento=${viento}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}`,
         width: 1200,
         height: 630,
         alt: `${playa.nombre} - Estado del mar hoy`,
@@ -48,7 +48,7 @@ return {
       card: 'summary_large_image',
       title,
       description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
-      images: [`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&agua=${tempAgua}&olas=${olas}&viento=${viento}`],
+      images: [`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}`],
     },
     alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },
   }
