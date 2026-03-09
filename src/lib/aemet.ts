@@ -1,7 +1,7 @@
 // src/lib/aemet.ts
 // Wrapper para AEMET OpenData — siempre llamar server-side (oculta API key)
 
-import type { MeteoPlaya } from '@/types'
+import type { DatosMeteo as MeteoPlaya } from '@/types'
 
 const AEMET_BASE = 'https://opendata.aemet.es/opendata/api'
 const KEY = process.env.AEMET_API_KEY ?? ''
