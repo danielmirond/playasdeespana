@@ -5,6 +5,7 @@ import type { Playa } from '@/types'
 import type { EstadoConfig } from '@/lib/estados'
 import IluEstado from './IluEstado'
 import styles from './FichaHero.module.css'
+import { Drop, Waves, Sun, Wind, Umbrella } from '@phosphor-icons/react'
 
 interface Meteo {
   agua: number; olas: number; viento: number
@@ -26,7 +27,7 @@ const t = {
     viento:        'Viento',
     indice:        'Índice',
     aire:          'Aire',
-    bandera:       '🏖 Bandera Azul',
+    bandera:       'Bandera Azul',
     socorrismo:    '🏊 Socorrismo',
     accesible:     '♿ Accesible',
     verFicha:      'Ver ficha completa',
@@ -39,7 +40,7 @@ const t = {
     viento:        'Wind',
     indice:        'Index',
     aire:          'Air',
-    bandera:       '🏖 Blue Flag',
+    bandera:       'Blue Flag',
     socorrismo:    '🏊 Lifeguard',
     accesible:     '♿ Accessible',
     verFicha:      'View full beach info',
@@ -87,12 +88,12 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }
       </div>
       <div className={styles.metrics}>
         <div className={styles.m}>
-          <span className={styles.mi}>💧</span>
+          <Drop size={15} weight='fill' color='var(--accent,#b06820)'/>
           <span className={styles.mv}>{meteo.agua}°C</span>
           <span className={styles.ml}>{i18n.agua}</span>
         </div>
         <div className={styles.m}>
-          <span className={styles.mi}>🌊</span>
+          <Waves size={15} weight='bold' color='var(--accent,#b06820)'/>
           <span className={styles.mv}>{meteo.olas}m</span>
           <span className={styles.ml}>{i18n.olas}</span>
         </div>
@@ -102,7 +103,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }
           <span className={styles.ml}>{i18n.viento}</span>
         </div>
         <div className={styles.m}>
-          <span className={styles.mi}>☀️</span>
+          <Sun size={15} weight='bold' color='var(--accent,#b06820)'/>
           <span className={styles.mv}>UV {meteo.uv}</span>
           <span className={styles.ml}>{i18n.indice}</span>
         </div>

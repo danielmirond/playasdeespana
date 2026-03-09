@@ -10,6 +10,7 @@ import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
+import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star } from '@phosphor-icons/react'
 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number
@@ -36,24 +37,24 @@ interface Props {
 
 const T = {
   es: {
-    galeria:'📷 Galería', galSrc:'Unsplash · Wikimedia', verFotos:'Ver fotos',
-    oleaje:'🌊 Oleaje · 6 horas', oleajeSrc:'Open-Meteo Marine',
-    luzSolar:'☀️ Luz solar', luzSrc:'Sunrise-Sunset API',
+    galeria:'Galería', galSrc:'Unsplash · Wikimedia', verFotos:'Ver fotos',
+    oleaje:'Oleaje · 6 horas', oleajeSrc:'Open-Meteo Marine',
+    luzSolar:'Luz solar', luzSrc:'Sunrise-Sunset API',
     amanecer:'Amanecer', horasLuz:'Horas de luz', atardecer:'Atardecer',
     temperatura:'🌡 Temperatura', tempSrc:'AEMET',
     tempAire:'Temperatura aire', tempAgua:'Temperatura agua',
     sensacion:'Sensación térmica', indiceUV:'Índice UV',
     viento:'💨 Viento', velocidad:'Velocidad', racha:'Racha máxima', direccion:'Dirección',
-    calidad:'💧 Calidad del agua', calidadSrc:'EEA · 2006/7/CE',
+    calidad:'Calidad del agua', calidadSrc:'EEA · 2006/7/CE',
     muestras:'Muestras conformes', temporada:'Temporada', clasificacion:'Clasificación',
-    comer:'🍽 Dónde comer', comerSrcGoogle:'Google Places · 800m',
+    comer:'Dónde comer', comerSrcGoogle:'Google Places · 800m',
     comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Datos de ejemplo', resenas:'reseñas',
-    dormir:'🏨 Dónde dormir', dormirSrc:'Google Places · 2km', dormirSrcMock:'Datos de ejemplo',
+    dormir:'Dónde dormir', dormirSrc:'Google Places · 2km', dormirSrcMock:'Datos de ejemplo',
     servicios:'✅ Servicios', serviciosSrc:'MITECO',
     info:'ℹ️ Información', infoSrc:'MITECO 2024',
     longitud:'Longitud', anchura:'Anchura media', composicion:'Composición', tipo:'Tipo',
     municipio:'Municipio', provincia:'Provincia', comunidad:'Comunidad', coordenadas:'Coordenadas',
-    actualizado:'Actualizado hace 1h', agua:'💧 Agua', aire:'🌡 Aire', olas:'🌊 Olas', vientoLabel:'💨 Viento',
+    actualizado:'Actualizado hace 1h', agua:'Agua', aire:'🌡 Aire', olas:'Olas', vientoLabel:'Viento',
     nowLabel:'Ahora',
     SERVICIOS:[
       { key:'socorrismo', label:'Socorrismo' }, { key:'duchas', label:'Duchas' },
@@ -71,24 +72,24 @@ const T = {
     ],
   },
   en: {
-    galeria:'📷 Gallery', galSrc:'Unsplash · Wikimedia', verFotos:'View photos',
-    oleaje:'🌊 Waves · 6 hours', oleajeSrc:'Open-Meteo Marine',
-    luzSolar:'☀️ Sunlight', luzSrc:'Sunrise-Sunset API',
+    galeria:'Gallery', galSrc:'Unsplash · Wikimedia', verFotos:'View photos',
+    oleaje:'Waves · 6 hours', oleajeSrc:'Open-Meteo Marine',
+    luzSolar:'Sunlight', luzSrc:'Sunrise-Sunset API',
     amanecer:'Sunrise', horasLuz:'Daylight hours', atardecer:'Sunset',
     temperatura:'🌡 Temperature', tempSrc:'AEMET',
     tempAire:'Air temperature', tempAgua:'Water temperature',
     sensacion:'Feels like', indiceUV:'UV index',
     viento:'💨 Wind', velocidad:'Speed', racha:'Max gust', direccion:'Direction',
-    calidad:'💧 Water quality', calidadSrc:'EEA · 2006/7/CE',
+    calidad:'Water quality', calidadSrc:'EEA · 2006/7/CE',
     muestras:'Compliant samples', temporada:'Season', clasificacion:'Classification',
-    comer:'🍽 Where to eat', comerSrcGoogle:'Google Places · 800m',
+    comer:'Where to eat', comerSrcGoogle:'Google Places · 800m',
     comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Sample data', resenas:'reviews',
-    dormir:'🏨 Where to stay', dormirSrc:'Google Places · 2km', dormirSrcMock:'Sample data',
+    dormir:'Where to stay', dormirSrc:'Google Places · 2km', dormirSrcMock:'Sample data',
     servicios:'✅ Facilities', serviciosSrc:'MITECO',
     info:'ℹ️ Information', infoSrc:'MITECO 2024',
     longitud:'Length', anchura:'Average width', composicion:'Composition', tipo:'Type',
     municipio:'Municipality', provincia:'Province', comunidad:'Region', coordenadas:'Coordinates',
-    actualizado:'Updated 1h ago', agua:'💧 Water', aire:'🌡 Air', olas:'🌊 Waves', vientoLabel:'💨 Wind',
+    actualizado:'Updated 1h ago', agua:'Water', aire:'🌡 Air', olas:'Waves', vientoLabel:'Wind',
     nowLabel:'Now',
     SERVICIOS:[
       { key:'socorrismo', label:'Lifeguard' }, { key:'duchas', label:'Showers' },
@@ -145,7 +146,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   {fotos.length > 3 && (
                     <div className={styles.gMasOverlay}><span className={styles.gMasN}>+{fotos.length - 2}</span><span className={styles.gMasL}>{i18n.verFotos}</span></div>
                   )}
-                  <div className={styles.gFuente}>{fotos[0].fuente === 'google' ? '📍 Google' : '📷 Unsplash'}</div>
+                  <div className={styles.gFuente}>{fotos[0].fuente === 'google' ? <><MapPin size={12}/> Google</> : <><Camera size={12}/> Unsplash</>}</div>
                 </div>}
               </div>
             ) : (
@@ -193,9 +194,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.cardBody}>
             <div className={styles.tempGrid}>
               <TempCell icon="🌡" val={`${meteo.tempAire}°C`}     label={i18n.tempAire}/>
-              <TempCell icon="💧" val={`${meteo.agua}°C`}         label={i18n.tempAgua}/>
+              <TempCell icon={<Drop size={14} weight="fill" />} val={`${meteo.agua}°C`}         label={i18n.tempAgua}/>
               <TempCell icon="🤔" val={`${meteo.tempAire - 2}°C`} label={i18n.sensacion}/>
-              <TempCell icon="☀️" val={`UV ${meteo.uv}`}          label={i18n.indiceUV}/>
+              <TempCell icon={<Sun size={14} weight="fill" />} val={`UV ${meteo.uv}`}          label={i18n.indiceUV}/>
             </div>
           </div>
 
@@ -249,21 +250,21 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* CÓMO LLEGAR */}
         <div className={styles.card} id="s-comoLlegar">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>🚗 {locale === 'en' ? 'How to get there' : 'Cómo llegar'}</h2>
+            <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? 'How to get there' : 'Cómo llegar'}</h2>
           </div>
           <div className={styles.cardBody}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--accent,#b06820)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
-                🚗 {locale === 'en' ? 'By car — open in Google Maps' : 'En coche — abrir en Google Maps'}
+                <Car size={18} weight='bold'/> {locale === 'en' ? 'By car — open in Google Maps' : 'En coche — abrir en Google Maps'}
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
-                🚌 {locale === 'en' ? 'By public transport' : 'En transporte público'}
+                <Bus size={18} weight='bold'/> {locale === 'en' ? 'By public transport' : 'En transporte público'}
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=bicycling`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
-                🚲 {locale === 'en' ? 'By bike' : 'En bicicleta'}
+                <Bicycle size={18} weight='bold'/> {locale === 'en' ? 'By bike' : 'En bicicleta'}
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
-                🚶 {locale === 'en' ? 'Walking' : 'A pie'}
+                <Person size={18} weight='bold'/> {locale === 'en' ? 'Walking' : 'A pie'}
               </a>
             </div>
             <iframe
@@ -294,7 +295,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 const mapsUrl = r.googleId ? `https://www.google.com/maps/place/?q=place_id:${r.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(r.nombre)}`
                 return (
                   <div key={r.id ?? r.nombre} className={styles.listItem}>
-                    <span className={styles.listEmoji}>🍽</span>
+                    <ForkKnife size={16} weight='bold' style={{color:'var(--accent,#b06820)'}}/> 
                     <div className={styles.listInfo}>
                       <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
                         <div className={styles.listNombre}>{r.nombre}</div>
@@ -339,7 +340,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 const mapsUrl = h.googleId ? `https://www.google.com/maps/place/?q=place_id:${h.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(h.nombre)}`
                 return (
                   <div key={h.id} className={styles.hotelItem}>
-                    <div className={styles.hotelFoto} style={h.foto ? { backgroundImage:`url(${h.foto})`, backgroundSize:'cover', backgroundPosition:'center' } : {}}>{!h.foto && '🏨'}</div>
+                    <div className={styles.hotelFoto} style={h.foto ? { backgroundImage:`url(${h.foto})`, backgroundSize:'cover', backgroundPosition:'center' } : {}}>{!h.foto && <Bed size={22} color='var(--muted,#8a7560)'/>}</div>
                     <div className={styles.listInfo}>
                       <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
                         <div className={styles.listNombre}>{h.nombre}</div>

@@ -1,3 +1,4 @@
+import { Drop, Waves, Sun, PersonSimpleSwim } from '@phosphor-icons/react'
 'use client'
 // src/components/playa/SurfSection.tsx
 // Sección completa de surf, buceo y actividades acuáticas
@@ -124,7 +125,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
           <div style={{ textAlign: 'right', fontSize: '.7rem', color: 'var(--muted,#8a7560)' }}>
             <div>Periodo: <strong>{periodo}s</strong></div>
             <div>💨 {viento}km/h {vientoDir}</div>
-            <div>💧 {agua}°C</div>
+            <div><Drop size={12} weight='fill'/> {agua}°C</div>
           </div>
         </div>
 
@@ -132,7 +133,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '.6rem', marginBottom: '1.25rem' }}>
           {[
             {
-              icon: '🏄', label: 'Surf',
+              icon: <PersonSimpleSwim size={18}/>, label: 'Surf',
               score: scoreSurf(olas, viento),
               color: '#0ea5e9',
               datos: `${olas}m · ${periodo}s · ${viento}km/h`,

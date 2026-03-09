@@ -1,3 +1,4 @@
+import { Car, Bus, Bicycle, Person, Users, ParkingSign, Star } from '@phosphor-icons/react'
 'use client'
 // src/components/playa/TraficoSection.tsx
 import { useEffect, useState } from 'react'
@@ -221,7 +222,7 @@ export default function TraficoSection({ playa }: Props) {
               color: tabActivo === tab ? 'var(--accent,#b06820)' : 'var(--muted,#8a7560)',
               cursor: 'pointer', textTransform: 'capitalize',
             }}>
-              {tab === 'afluencia' ? '👥 Afluencia' : tab === 'trafico' ? '🚗 Tráfico' : '🅿️ Aparcamiento'}
+              {tab === 'afluencia' ? <><Users size={14}/>&nbsp;Afluencia</> : tab === 'trafico' ? <><Car size={14}/>&nbsp;Tráfico</> : <><ParkingSign size={14}/>&nbsp;Aparcamiento</>}
             </button>
           ))}
         </div>
@@ -308,17 +309,17 @@ export default function TraficoSection({ playa }: Props) {
             <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>Tráfico, afluencia y donde aparcar, parking cerca</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={btnStyle('#b06820', '#fff')}>
-                🚗 En coche — abrir en Google Maps
+                <Car size={16} weight='bold'/> En coche — abrir en Google Maps
               </a>
               <a href={gmTransit} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(176,104,32,.1)', '#b06820', true)}>
-                🚌 En transporte público
+                <Bus size={16} weight='bold'/> En transporte público
               </a>
               <a href={gmBike} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(176,104,32,.1)', '#b06820', true)}>
-                🚲 En bicicleta
+                <Bicycle size={16} weight='bold'/> En bicicleta
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`}
                  target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(176,104,32,.1)', '#b06820', true)}>
-                🚶 A pie
+                <Person size={16} weight='bold'/> A pie
               </a>
             </div>
 
@@ -347,7 +348,7 @@ export default function TraficoSection({ playa }: Props) {
                      href={p.googleId ? `https://www.google.com/maps/place/?q=place_id:${p.googleId}` : `https://www.google.com/maps/search/parking+near+${playa.lat},${playa.lng}`}
                      target="_blank" rel="noopener noreferrer"
                      style={{ display: 'flex', alignItems: 'center', gap: '.75rem', padding: '.65rem .85rem', borderRadius: '10px', background: 'rgba(176,104,32,.05)', border: '1px solid var(--line,#e8dcc8)', textDecoration: 'none', color: 'inherit' }}>
-                    <span style={{ fontSize: '1.3rem' }}>🅿️</span>
+                    <ParkingSign size={22} weight='bold' color='var(--accent,#b06820)'/>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '.4rem' }}>
                         <div style={{ fontWeight: 600, fontSize: '.8rem', color: 'var(--ink,#2a1a08)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.nombre}</div>
@@ -362,7 +363,7 @@ export default function TraficoSection({ playa }: Props) {
                       </div>
                       <div style={{ fontSize: '.65rem', color: 'var(--muted,#8a7560)', marginTop: '.1rem' }}>
                         {p.distancia}m · {p.precio ?? 'Precio n/d'}
-                        {p.rating && <span> · ⭐{p.rating}</span>}
+                        {p.rating && <span> · <Star size={12} weight='fill' color='#f5a623'/>{p.rating}</span>}
                       </div>
                       {p.direccion && <div style={{ fontSize: '.6rem', color: 'var(--muted,#8a7560)', marginTop: '.05rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.direccion}</div>}
                     </div>
