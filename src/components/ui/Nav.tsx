@@ -10,7 +10,9 @@ export default function Nav() {
         <Link href="/comunidades" className={styles.link}>Comunidades</Link>
         <Link href="/mapa" className={styles.link}>Mapa</Link>
       </nav>
-      <div className={styles.logo}>Playas de España</div>
+      <div className={styles.logo}>
+        <img src="/logo.svg" alt="Playas de España" width={28} height={28} style={{ display:'block' }} />
+      </div>
       <div className={styles.right}>
         <Link href="/buscar" className={styles.iconBtn} aria-label="Buscar">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
