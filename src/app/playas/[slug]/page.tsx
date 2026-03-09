@@ -31,7 +31,7 @@ return {
     title,
     description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
     openGraph: { title, url: `/playas/${slug}` },
-    alternates: { canonical: `/playas/${slug}` },
+    alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },
   }
 }
 
