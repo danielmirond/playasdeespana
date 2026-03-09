@@ -1,15 +1,15 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  typescript: { ignoreBuildErrors: true },
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
-  eslint: { ignoreDuringBuilds: true },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'upload.wikimedia.org' },
       { protocol: 'https', hostname: 'webratings.eu' },
+      { protocol: 'https', hostname: 'maps.googleapis.com' },
     ],
     formats: ['image/avif', 'image/webp'],
   },
