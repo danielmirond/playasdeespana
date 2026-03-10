@@ -1,5 +1,6 @@
 'use client'
 import { Car, Bus, Bicycle, Person, Users, Park, Star } from '@phosphor-icons/react'
+import MapaLeaflet from '@/components/ui/MapaLeaflet'
 // src/components/playa/TraficoSection.tsx
 import { useEffect, useState } from 'react'
 import type { Playa } from '@/types'
@@ -325,7 +326,7 @@ export default function TraficoSection({ playa }: Props) {
 
             <div style={{ marginTop: '1rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--line,#e8dcc8)' }}>
               <iframe
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCZIlwwJKY6q0mpXLE0UYZ0nSsByi7uWpk&q=${playa.lat},${playa.lng}&zoom=14`}
+                src={``}
                 width="100%" height="200" style={{ border: 'none', display: 'block' }}
                 title={`Mapa ${playa.nombre}`} loading="lazy"
               />

@@ -10,6 +10,7 @@ import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
+import MapaLeaflet from '@/components/ui/MapaLeaflet'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star } from '@phosphor-icons/react'
 
 interface Meteo {
@@ -267,13 +268,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 <Person size={18} weight='bold'/> {locale === 'en' ? 'Walking' : 'A pie'}
               </a>
             </div>
-            <iframe
-              src={`https://www.google.com/maps?q=${playa.lat},${playa.lng}&z=15&output=embed`}
-              width="100%" height="300"
-              style={{ border:'none', borderRadius:'12px', marginTop:'1rem' }}
-              loading="lazy"
-            />
-          </div>
+            <MapaLeaflet lat={playa.lat} lng={playa.lng} nombre={playa.nombre} zoom={15} height="300px" />
+</div>
         </div>
 
         {/* TRÁFICO */}
