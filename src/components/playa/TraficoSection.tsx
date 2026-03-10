@@ -1,5 +1,6 @@
 'use client'
 import { Car, Bus, Bicycle, Person, Users, Park, Star } from '@phosphor-icons/react'
+import MapaLeaflet from '@/components/ui/MapaLeafletWrapper'
 // src/components/playa/TraficoSection.tsx
 import { useEffect, useState } from 'react'
 import type { Playa } from '@/types'
