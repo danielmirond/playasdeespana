@@ -1,3 +1,4 @@
+'use client'
 // src/components/playa/FichaBody.tsx
 import type { Playa, Restaurante } from '@/types'
 import type { FotoPlaya } from '@/lib/fotos'
