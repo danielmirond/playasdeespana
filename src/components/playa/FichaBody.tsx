@@ -10,7 +10,8 @@ import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
-import MapaLeaflet from '@/components/ui/MapaLeaflet'
+import dynamic from 'next/dynamic'
+const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeaflet'), { ssr: false })
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star } from '@phosphor-icons/react'
 
 interface Meteo {
