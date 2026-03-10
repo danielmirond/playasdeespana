@@ -195,9 +195,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.cardBody}>
             <div className={styles.tempGrid}>
               <TempCell icon="🌡" val={`${meteo.tempAire}°C`}     label={i18n.tempAire}/>
-              <TempCell icon={<Drop size={14} weight="fill" />} val={`${meteo.agua}°C`}         label={i18n.tempAgua}/>
+              <TempCell icon="💧" val={`${meteo.agua}°C`}         label={i18n.tempAgua}/>
               <TempCell icon="🤔" val={`${meteo.tempAire - 2}°C`} label={i18n.sensacion}/>
-              <TempCell icon={<Sun size={14} weight="fill" />} val={`UV ${meteo.uv}`}          label={i18n.indiceUV}/>
+              <TempCell icon="☀️" val={`UV ${meteo.uv}`}          label={i18n.indiceUV}/>
             </div>
           </div>
 
