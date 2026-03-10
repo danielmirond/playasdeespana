@@ -1,0 +1,51 @@
+'use client'
+import { useEffect, useRef } from 'react'
+
+interface Props {
+  lat: number
+  lng: number
+  nombre?: string
+  zoom?: number
+  height?: string
+}
+
+export default function MapaLeaflet({ lat, lng, nombre, zoom = 15, height = '300px' }: Props) {
+  const ref = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<any>(null)
+
+  useEffect(() => {
+    if (!ref.current || mapRef.current) return
+
+    import('leaflet').then(L => {
+      delete (L.Icon.Default.prototype as any)._getIconUrl
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      })
+
+      const map = L.map(ref.current!, { zoomControl: true, scrollWheelZoom: false }).setView([lat, lng], zoom)
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19,
+      }).addTo(map)
+
+      if (nombre) L.marker([lat, lng]).addTo(map).bindPopup(nombre).openPopup()
+
+      mapRef.current = map
+    })
+
+    return () => {
+      mapRef.current?.remove()
+      mapRef.current = null
+    }
+  }, [lat, lng, zoom, nombre])
+
+  return (
+    <>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+      <div ref={ref} style={{ width: '100%', height, borderRadius: '12px', overflow: 'hidden', marginTop: '1rem' }} />
+    </>
+  )
+}
