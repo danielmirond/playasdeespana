@@ -160,8 +160,6 @@ out body;`
 }
 
 export async function getRestaurantes(lat: number, lon: number): Promise<Restaurante[]> {
-  const results = PLACES_KEY
-    ? await getRestaurantesGoogle(lat, lon)
-    : await getRestaurantesOSM(lat, lon)
+  const results = await getRestaurantesOSM(lat, lon)
   return results.sort((a, b) => a.distancia_m - b.distancia_m)
 }

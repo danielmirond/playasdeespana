@@ -1,17 +1,7 @@
-// src/app/api/parkings/route.ts
+// src/app/api/parkings/route.ts — OpenStreetMap/Overpass (sin API key)
 import { NextRequest, NextResponse } from 'next/server'
 
 export const revalidate = 3600
-
-interface PlaceResult {
-  place_id:     string
-  name:         string
-  vicinity:     string
-  rating?:      number
-  geometry:     { location: { lat: number; lng: number } }
-  opening_hours?: { open_now: boolean }
-  price_level?: number
-}
 
 function distancia(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371000
@@ -21,10 +11,11 @@ function distancia(lat1: number, lng1: number, lat2: number, lng2: number): numb
   return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)))
 }
 
-function precioDesde(priceLevel?: number): string {
-  if (priceLevel === undefined || priceLevel === null) return 'Precio n/d'
-  const precios = ['Gratuito', '~1€/h', '~2€/h', '~3€/h', '+4€/h']
-  return precios[priceLevel] ?? 'Precio n/d'
+function inferirPrecio(tags: Record<string, string>): string {
+  const fee = tags['fee'] ?? ''
+  if (fee === 'no') return 'Gratuito'
+  if (fee === 'yes') return tags['charge'] ?? '~2€/h'
+  return 'Precio n/d'
 }
 
 export async function GET(req: NextRequest) {
@@ -36,45 +27,42 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'lat/lng requeridos' }, { status: 400 })
   }
 
-  const key = process.env.GOOGLE_PLACES_KEY
-  if (!key) {
-    return NextResponse.json([], { status: 200 })
-  }
+  const query = `[out:json][timeout:15];
+(
+  node["amenity"="parking"](around:1500,${lat},${lng});
+  way["amenity"="parking"](around:1500,${lat},${lng});
+);
+out center body;`
 
   try {
-    // Google Places Nearby Search — tipo parking
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json`
-      + `?location=${lat},${lng}`
-      + `&radius=1500`
-      + `&type=parking`
-      + `&key=${key}`
-
-    const res  = await fetch(url, { next: { revalidate: 3600 } })
+    const res = await fetch('https://overpass-api.de/api/interpreter', {
+      method: 'POST',
+      body:   query,
+      next:   { revalidate: 3600 },
+    })
     if (!res.ok) return NextResponse.json([], { status: 200 })
 
     const data = await res.json()
-    if (data.status !== 'OK' && data.status !== 'ZERO_RESULTS') {
-      console.error('[parkings] Google Places error:', data.status)
-      return NextResponse.json([], { status: 200 })
-    }
 
-    const results: PlaceResult[] = data.results ?? []
-
-    const parkings = results
+    const parkings = (data.elements ?? [])
+      .map((el: any) => {
+        const elLat = el.lat ?? el.center?.lat ?? lat
+        const elLng = el.lon ?? el.center?.lon ?? lng
+        return {
+          nombre:    el.tags?.name ?? el.tags?.['addr:street'] ?? 'Parking',
+          direccion: el.tags?.['addr:street'] ?? '',
+          distancia: distancia(lat, lng, elLat, elLng),
+          plazas:    el.tags?.capacity ? parseInt(el.tags.capacity) : null,
+          precio:    inferirPrecio(el.tags ?? {}),
+          abierto:   null,
+          rating:    null,
+          googleId:  String(el.id),
+          lat:       elLat,
+          lng:       elLng,
+        }
+      })
+      .sort((a: any, b: any) => a.distancia - b.distancia)
       .slice(0, 5)
-      .map(p => ({
-        nombre:    p.name,
-        direccion: p.vicinity,
-        distancia: distancia(lat, lng, p.geometry.location.lat, p.geometry.location.lng),
-        plazas:    null,   // Google Places no da plazas disponibles
-        precio:    precioDesde(p.price_level),
-        abierto:   p.opening_hours?.open_now ?? null,
-        rating:    p.rating ?? null,
-        googleId:  p.place_id,
-        lat:       p.geometry.location.lat,
-        lng:       p.geometry.location.lng,
-      }))
-      .sort((a, b) => a.distancia - b.distancia)
 
     return NextResponse.json(parkings)
   } catch (e) {
