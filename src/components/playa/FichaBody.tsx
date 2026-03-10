@@ -12,7 +12,7 @@ import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
 import MapaLeaflet from '@/components/ui/MapaLeafletWrapper'
-import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star } from '@phosphor-icons/react'
+import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star } from '@/components/ui/Icons'
 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number

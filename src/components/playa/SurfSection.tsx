@@ -1,5 +1,5 @@
 'use client'
-import { Drop, Waves, Sun, PersonSimpleSwim } from '@phosphor-icons/react'
+import { Drop, Waves, Sun, PersonSimpleSwim } from '@/components/ui/Icons'
 // src/components/playa/SurfSection.tsx
 // Sección completa de surf, buceo y actividades acuáticas
 
