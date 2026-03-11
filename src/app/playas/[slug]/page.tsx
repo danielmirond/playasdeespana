@@ -79,7 +79,6 @@ export default async function PlayaPage({ params }: Props) {
   const fotosData        = fotos.status === 'fulfilled' ? fotos.value : []
   const hotelesData      = hoteles.status === 'fulfilled' ? hoteles.value : []
   const escuelasData     = escuelasResult.status === 'fulfilled' ? escuelasResult.value : []
-  const escuelasData     = escuelasResult.status === 'fulfilled' ? escuelasResult.value : []
   const turbidezData      = turbidez.status === 'fulfilled' ? turbidez.value : null
   const meteoForecastData = meteoForecast.status === 'fulfilled' ? meteoForecast.value : []
   const vientoData        = vientoReal.status === 'fulfilled' ? vientoReal.value : null
