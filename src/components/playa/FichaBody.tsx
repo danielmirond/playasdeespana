@@ -11,6 +11,8 @@ import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
+import EscuelasSection from './EscuelasSection'
+import type { Escuela } from '@/lib/escuelas'
 import MapaLeaflet from '@/components/ui/MapaLeafletWrapper'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star } from '@/components/ui/Icons'
 
@@ -31,6 +33,7 @@ interface Props {
   restaurantes?:  Restaurante[]
   fotos?:         FotoPlaya[]
   hoteles?:       HotelReal[]
+  escuelas?:      Escuela[]
   turbidez?:      TurbidezData | null
   forecastSurf?:  ForecastDay[] | null
   meteoForecast?: MeteoData[]
@@ -117,7 +120,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, turbidez, forecastSurf, meteoForecast, locale = 'es' }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, locale = 'es' }: Props) {
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const horasLuz = solData?.horas_luz ?? '—'

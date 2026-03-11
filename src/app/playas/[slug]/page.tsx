@@ -10,6 +10,8 @@ import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
 import { getHoteles } from '@/lib/hoteles'
+import { getEscuelas } from '@/lib/escuelas'
+import type { Escuela } from '@/lib/escuelas'
 import type { HotelReal } from '@/lib/hoteles'
 import Nav from '@/components/ui/Nav'
 import FichaHero from '@/components/playa/FichaHero'
@@ -59,12 +61,13 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, restaurantes, fotos, hoteles, turbidez, meteoForecast, vientoReal] = await Promise.allSettled([
+  const [mareas, sol, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, vientoReal] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getRestaurantes(playa.lat, playa.lng),
     getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng),
     getHoteles(playa.lat, playa.lng),
+    getEscuelas(playa.lat, playa.lng),
     getTurbidez(playa.lat, playa.lng),
     getMeteoForecast(playa.lat, playa.lng),
     getViento(playa.lat, playa.lng),
@@ -75,6 +78,8 @@ export default async function PlayaPage({ params }: Props) {
   const restaurantesData = restaurantes.status === 'fulfilled' ? restaurantes.value : []
   const fotosData        = fotos.status === 'fulfilled' ? fotos.value : []
   const hotelesData      = hoteles.status === 'fulfilled' ? hoteles.value : []
+  const escuelasData     = escuelasResult.status === 'fulfilled' ? escuelasResult.value : []
+  const escuelasData     = escuelasResult.status === 'fulfilled' ? escuelasResult.value : []
   const turbidezData      = turbidez.status === 'fulfilled' ? turbidez.value : null
   const meteoForecastData = meteoForecast.status === 'fulfilled' ? meteoForecast.value : []
   const vientoData        = vientoReal.status === 'fulfilled' ? vientoReal.value : null
@@ -132,6 +137,8 @@ export default async function PlayaPage({ params }: Props) {
         restaurantes={restaurantesData}
         fotos={fotosData}
         hoteles={hotelesData}
+              escuelas={escuelasData}
+              escuelas={escuelasData}
         turbidez={turbidezData}
         forecastSurf={forecastSurf}
         meteoForecast={meteoForecastData}
