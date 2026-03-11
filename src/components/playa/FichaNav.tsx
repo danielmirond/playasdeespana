@@ -12,6 +12,7 @@ const SECCIONES = {
     { id: 's-trafico',     label: 'Tráfico, afluencia y donde aparcar' },
     { id: 's-comer',       label: 'Comer' },
     { id: 's-dormir',      label: 'Dormir' },
+    { id: 's-escuelas',   label: 'Escuelas acuáticas' },
     { id: 's-servicios',   label: 'Servicios' },
     { id: 's-info',        label: 'Info' },
   ],
