@@ -5,7 +5,6 @@ import type { Playa } from '@/types'
 import type { EstadoConfig } from '@/lib/estados'
 import IluEstado from './IluEstado'
 import styles from './FichaHero.module.css'
-import { Drop, Waves, Sun, Wind, Umbrella } from '@/components/ui/Icons'
 
 interface Meteo {
   agua: number; olas: number; viento: number

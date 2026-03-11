@@ -1,4 +1,5 @@
 'use client'
+import { Heart } from '@phosphor-icons/react'
 // src/components/playa/FichaHeroActions.tsx
 import { useState, useEffect } from 'react'
 

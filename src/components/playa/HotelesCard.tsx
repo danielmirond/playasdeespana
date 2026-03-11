@@ -1,3 +1,4 @@
+import { Bed } from '@phosphor-icons/react'
 import type { HotelReal as Hotel } from '@/lib/hoteles'
 
 function Estrellas({ n }: { n: number }) {

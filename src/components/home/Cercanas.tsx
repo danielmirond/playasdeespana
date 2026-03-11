@@ -1,4 +1,5 @@
 'use client'
+import { Drop, MapPin, Waves } from '@phosphor-icons/react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { Playa } from '@/types'

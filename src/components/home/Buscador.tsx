@@ -1,4 +1,5 @@
 'use client'
+import { Sun, Umbrella } from '@phosphor-icons/react'
 import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Buscador.module.css'
