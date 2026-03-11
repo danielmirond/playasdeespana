@@ -1,3 +1,4 @@
+'use client'
 // src/components/playa/FichaHero.tsx
 import Link from 'next/link'
 import FichaHeroActions from './FichaHeroActions'
