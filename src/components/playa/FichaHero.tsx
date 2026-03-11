@@ -5,6 +5,7 @@ import type { Playa } from '@/types'
 import type { EstadoConfig } from '@/lib/estados'
 import IluEstado from './IluEstado'
 import styles from './FichaHero.module.css'
+import { Drop, Waves, Sun, Wind, Thermometer, Umbrella } from '@phosphor-icons/react'
 
 interface Meteo {
   agua: number; olas: number; viento: number
