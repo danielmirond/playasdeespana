@@ -137,7 +137,6 @@ export default async function PlayaPage({ params }: Props) {
         fotos={fotosData}
         hoteles={hotelesData}
               escuelas={escuelasData}
-              escuelas={escuelasData}
         turbidez={turbidezData}
         forecastSurf={forecastSurf}
         meteoForecast={meteoForecastData}
