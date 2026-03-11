@@ -6,7 +6,7 @@ const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
 export interface FotoPlaya {
   url:    string
   thumb:  string
-  fuente: 'google' | 'unsplash'
+  fuente: 'google' | 'unsplash' | 'wikimedia'
   autor?: string
 }
 
@@ -65,10 +65,69 @@ async function getFotosUnsplash(nombre: string, municipio: string): Promise<Foto
   }
 }
 
+
+// Wikimedia Commons — búsqueda por nombre de playa
+async function getFotosWikimedia(nombre: string, municipio: string): Promise<FotoPlaya[]> {
+  try {
+    const queries = [
+      `${nombre} beach Spain`,
+      `${nombre} playa`,
+      `${municipio} beach`,
+    ]
+    for (const q of queries) {
+      const params = new URLSearchParams({
+        action:      'query',
+        generator:   'search',
+        gsrnamespace:'6',
+        gsrsearch:   `${q} filetype:bitmap`,
+        gsrlimit:    '8',
+        prop:        'imageinfo',
+        iiprop:      'url|extmetadata',
+        iiurlwidth:  '1200',
+        format:      'json',
+        origin:      '*',
+      })
+      const res = await fetch(
+        `https://commons.wikimedia.org/w/api.php?${params}`,
+        { next: { revalidate: 86400 } }
+      )
+      if (!res.ok) continue
+      const data = await res.json()
+      const pages = Object.values(data.query?.pages ?? {}) as any[]
+      const fotos = pages
+        .map((p: any) => {
+          const ii = p.imageinfo?.[0]
+          if (!ii?.thumburl) return null
+          const ext = ii.url?.split('.').pop()?.toLowerCase()
+          if (!['jpg','jpeg','png','webp'].includes(ext ?? '')) return null
+          return {
+            url:    ii.thumburl,
+            thumb:  ii.thumburl.replace(/\/\d+px-/, '/400px-'),
+            fuente: 'wikimedia' as const,
+            autor:  ii.extmetadata?.Artist?.value?.replace(/<[^>]+>/g, '') ?? undefined,
+          }
+        })
+        .filter(Boolean) as FotoPlaya[]
+
+      if (fotos.length >= 2) return fotos.slice(0, 6)
+    }
+    return []
+  } catch {
+    return []
+  }
+}
+
 export async function getFotos(nombre: string, municipio: string, lat: number, lon: number): Promise<FotoPlaya[]> {
   const google = await getFotosGoogle(nombre, lat, lon)
   if (google.length >= 3) return google
-  // Complementar con Unsplash si hay pocas de Google
+
+  // Fallback 1: Wikimedia Commons (gratuito, sin límite)
+  const wikimedia = await getFotosWikimedia(nombre, municipio)
+  if (wikimedia.length >= 2) return wikimedia.slice(0, 6)
+
+  // Fallback 2: Unsplash
   const unsplash = await getFotosUnsplash(nombre, municipio)
-  return [...google, ...unsplash].slice(0, 6)
+  if (unsplash.length > 0) return unsplash.slice(0, 6)
+
+  return wikimedia.slice(0, 6)
 }

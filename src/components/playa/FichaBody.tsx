@@ -148,7 +148,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   {fotos.length > 3 && (
                     <div className={styles.gMasOverlay}><span className={styles.gMasN}>+{fotos.length - 2}</span><span className={styles.gMasL}>{i18n.verFotos}</span></div>
                   )}
-                  <div className={styles.gFuente}>{fotos[0].fuente === 'google' ? <><MapPin size={12}/> Google</> : <><Camera size={12}/> Unsplash</>}</div>
+                  <div className={styles.gFuente}>{fotos[0].fuente === 'google' ? <><MapPin size={12}/> Google</> : fotos[0].fuente === 'wikimedia' ? <><Camera size={12}/> Wikimedia Commons</> : <><Camera size={12}/> Unsplash</>}</div>
                 </div>}
               </div>
             ) : (
