@@ -66,3 +66,33 @@
   .nav { padding: 0 1.1rem; }
   .links { display: none; }
 }
+
+.langSwitch {
+  display: flex;
+  align-items: center;
+  gap: .15rem;
+  margin-left: .5rem;
+  background: var(--card-bg2, #f5ede0);
+  border: 1.5px solid var(--line, #e8dcc8);
+  border-radius: 8px;
+  padding: .15rem;
+}
+
+.langBtn {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--muted, #8a7560);
+  padding: .2rem .45rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all .15s;
+}
+
+.langBtn:hover {
+  color: var(--ink, #2a1a08);
+}
+
+.langActive {
+  background: var(--accent, #b06820);
+  color: #fff !important;
+}
