@@ -76,7 +76,7 @@ export async function getEscuelas(lat: number, lng: number, radio = 5000): Promi
     if (!res.ok) return []
     const data = await res.json()
 
-    return (data.elements ?? [])
+    const osm_results = (data.elements ?? [])
       .filter((e: any) => e.tags?.name)
       .map((e: any): Escuela => ({
         id:         e.id,
@@ -93,7 +93,7 @@ export async function getEscuelas(lat: number, lng: number, radio = 5000): Promi
       .slice(0, 10)
 
     // Combinar con Foursquare si OSM tiene pocos
-    return osm.length > 0 ? osm : foursquare
+    return osm_results.length > 0 ? osm_results : foursquare
   } catch {
     return foursquare
   }
