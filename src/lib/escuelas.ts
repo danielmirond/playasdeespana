@@ -52,6 +52,9 @@ function distancia(lat1: number, lng1: number, lat2: number, lng2: number): numb
 }
 
 export async function getEscuelas(lat: number, lng: number, radio = 5000): Promise<Escuela[]> {
+  // Intentar Foursquare primero (mejor cobertura)
+  const foursquare = await getEscuelasFoursquare(lat, lng, radio)
+  if (foursquare.length >= 2) return foursquare
   try {
     const query = `
       [out:json][timeout:10];
@@ -88,6 +91,57 @@ export async function getEscuelas(lat: number, lng: number, radio = 5000): Promi
       .filter((e: Escuela) => e.lat && e.lng)
       .sort((a: Escuela, b: Escuela) => (a.distancia_m ?? 0) - (b.distancia_m ?? 0))
       .slice(0, 10)
+
+    // Combinar con Foursquare si OSM tiene pocos
+    return osm.length > 0 ? osm : foursquare
+  } catch {
+    return foursquare
+  }
+}
+
+// Foursquare fallback
+const FOURSQUARE_CATEGORIES = [
+  '19032', // Surf Shop / School
+  '19009', // Scuba Diving
+  '18008', // Water Sports
+  '19040', // Kiteboarding
+  '19044', // Windsurfing
+  '19025', // Kayaking
+  '19048', // Paddleboarding
+  '15057', // Yoga Studio
+]
+
+async function getEscuelasFoursquare(lat: number, lng: number, radio = 5000): Promise<Escuela[]> {
+  const key = process.env.FOURSQUARE_API_KEY
+  if (!key) return []
+  try {
+    const params = new URLSearchParams({
+      ll:           `${lat},${lng}`,
+      radius:       String(radio),
+      categories:   FOURSQUARE_CATEGORIES.join(','),
+      limit:        '10',
+      fields:       'fsq_id,name,categories,distance,website,tel,geocodes',
+    })
+    const res = await fetch(
+      `https://api.foursquare.com/v3/places/search?${params}`,
+      {
+        headers: { Authorization: key, Accept: 'application/json' },
+        next: { revalidate: 86400 },
+      }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+
+    return (data.results ?? []).map((p: any): Escuela => ({
+      id:          p.fsq_id,
+      nombre:      p.name,
+      tipo:        p.categories?.[0]?.name ?? 'Deportes acuáticos',
+      lat:         p.geocodes?.main?.latitude,
+      lng:         p.geocodes?.main?.longitude,
+      web:         p.website,
+      telefono:    p.tel,
+      distancia_m: p.distance,
+    })).filter((e: Escuela) => e.lat && e.lng)
   } catch {
     return []
   }
