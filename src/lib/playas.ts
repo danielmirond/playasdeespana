@@ -58,6 +58,37 @@ export const getComunidades = cache(async () => {
     .sort((a, b) => b.count - a.count)
 })
 
+export const getMunicipios = cache(async (minPlayas = 4) => {
+  const playas = await getPlayas()
+  const mapa = new Map<string, { count: number; provincia: string; comunidad: string }>()
+  for (const p of playas) {
+    const key = p.municipio
+    const cur = mapa.get(key)
+    mapa.set(key, {
+      count: (cur?.count ?? 0) + 1,
+      provincia: p.provincia,
+      comunidad: p.comunidad,
+    })
+  }
+  return Array.from(mapa.entries())
+    .filter(([, v]) => v.count >= minPlayas)
+    .map(([nombre, { count, provincia, comunidad }]) => ({
+      nombre,
+      slug: toSlug(nombre),
+      provincia,
+      provinciaSlug: toSlug(provincia),
+      comunidad,
+      comunidadSlug: toSlug(comunidad),
+      count,
+    }))
+    .sort((a, b) => b.count - a.count)
+})
+
+export const getPlayasByMunicipio = cache(async (municipioSlug: string): Promise<Playa[]> => {
+  const playas = await getPlayas()
+  return playas.filter(p => toSlug(p.municipio) === municipioSlug)
+})
+
 export const getProvincias = cache(async () => {
   const playas = await getPlayas()
   const mapa = new Map<string, { count: number; comunidad: string }>()

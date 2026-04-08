@@ -1,14 +1,15 @@
 // src/app/sitemaps/static.xml/route.ts
 import { NextResponse } from 'next/server'
-import { getComunidades, getProvincias } from '@/lib/playas'
+import { getComunidades, getProvincias, getMunicipios } from '@/lib/playas'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export async function GET() {
-  const [comunidades, provincias] = await Promise.all([
+  const [comunidades, provincias, municipios] = await Promise.all([
     getComunidades(),
     getProvincias(),
+    getMunicipios(),
   ])
   const today = new Date().toISOString().split('T')[0]
 
@@ -47,6 +48,16 @@ export async function GET() {
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>`)
+  }
+
+  // Municipios (solo los que tienen más de 3 playas)
+  for (const m of municipios) {
+    urls.push(`  <url>
+    <loc>${BASE}/municipio/${m.slug}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>`)
   }
 

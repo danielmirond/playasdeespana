@@ -1,43 +1,41 @@
-// src/app/provincia/[slug]/page.tsx
+// src/app/municipio/[slug]/page.tsx
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import { getPlayas, getPlayasByProvincia, getProvincias, getMunicipios } from '@/lib/playas'
+import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
-import styles from './ProvinciaPage.module.css'
+import styles from './MunicipioPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+
+export const revalidate = 3600
 
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  const provincias = await getProvincias()
-  return provincias.map(p => ({ slug: p.slug }))
+  const municipios = await getMunicipios()
+  return municipios.map(m => ({ slug: m.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const provincias = await getProvincias()
-  const p = provincias.find(x => x.slug === slug)
-  if (!p) return {}
+  const municipios = await getMunicipios()
+  const m = municipios.find(x => x.slug === slug)
+  if (!m) return {}
   return {
-    title: `Playas de ${p.nombre} — ${p.count} playas`,
-    description: `Las mejores playas de ${p.nombre}, ${p.comunidad}. Estado del mar y condiciones en tiempo real.`,
-    alternates: { canonical: `/provincia/${slug}` },
+    title: `Playas de ${m.nombre} — ${m.count} playas`,
+    description: `Todas las playas de ${m.nombre} (${m.provincia}). Estado del mar, temperatura del agua y servicios en tiempo real.`,
+    alternates: { canonical: `/municipio/${slug}` },
   }
 }
 
-export default async function ProvinciaPage({ params }: Props) {
+export default async function MunicipioPage({ params }: Props) {
   const { slug } = await params
-  const provincias = await getProvincias()
-  const provincia = provincias.find(p => p.slug === slug)
-  if (!provincia) notFound()
+  const municipios = await getMunicipios()
+  const municipio = municipios.find(m => m.slug === slug)
+  if (!municipio) notFound()
 
-  const [playas, allMunicipios] = await Promise.all([
-    getPlayasByProvincia(slug),
-    getMunicipios(),
-  ])
-  const municipios = allMunicipios.filter(m => m.provinciaSlug === slug)
+  const playas = await getPlayasByMunicipio(slug)
 
   const playasConEstado = playas.map(p => {
     const seed = p.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
@@ -48,15 +46,6 @@ export default async function ProvinciaPage({ params }: Props) {
     return { ...p, estadoKey, estado, olas, viento }
   })
 
-  const lats = playas.map(p => p.lat)
-  const lngs = playas.map(p => p.lng)
-  const minLat = Math.min(...lats)
-  const maxLat = Math.max(...lats)
-  const minLng = Math.min(...lngs)
-  const maxLng = Math.max(...lngs)
-  const padLat = Math.max((maxLat - minLat) * 0.2, 0.2)
-  const padLng = Math.max((maxLng - minLng) * 0.2, 0.3)
-
   const buenas = playasConEstado.filter(p => p.estadoKey === 'CALMA' || p.estadoKey === 'BUENA').length
   const conBandera = playas.filter(p => p.bandera).length
 
@@ -64,20 +53,21 @@ export default async function ProvinciaPage({ params }: Props) {
     <>
       <Nav />
 
-      {/* BREADCRUMB + HERO */}
       <div className={styles.hero}>
         <div className={styles.heroInner}>
           <nav className={styles.breadcrumb}>
             <Link href="/">Inicio</Link>
             <span>›</span>
-            <Link href={`/comunidad/${provincia.comunidadSlug}`}>{provincia.comunidad}</Link>
+            <Link href={`/comunidad/${municipio.comunidadSlug}`}>{municipio.comunidad}</Link>
             <span>›</span>
-            <span>{provincia.nombre}</span>
+            <Link href={`/provincia/${municipio.provinciaSlug}`}>{municipio.provincia}</Link>
+            <span>›</span>
+            <span>{municipio.nombre}</span>
           </nav>
-          <h1 className={styles.titulo}>{provincia.nombre}</h1>
-          <p className={styles.subtitulo}>{provincia.comunidad} · España</p>
+          <h1 className={styles.titulo}>Playas de {municipio.nombre}</h1>
+          <p className={styles.subtitulo}>{municipio.provincia} · {municipio.comunidad}</p>
           <div className={styles.chips}>
-            <span className={styles.chip}>🏖 {provincia.count} playas</span>
+            <span className={styles.chip}>🏖 {municipio.count} playas</span>
             <span className={styles.chip}>✅ {buenas} buenas hoy</span>
             {conBandera > 0 && <span className={styles.chip}>🏳️ {conBandera} bandera azul</span>}
           </div>
@@ -85,16 +75,14 @@ export default async function ProvinciaPage({ params }: Props) {
       </div>
 
       <div className={styles.wrap}>
-        {/* MAPA */}
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
-            <span className={styles.mapaTitle}>🗺 Mapa de playas · {provincia.nombre}</span>
+            <span className={styles.mapaTitle}>🗺 Mapa de playas · {municipio.nombre}</span>
             <span className={styles.mapaSrc}>Interactivo · {playas.length} playas</span>
           </div>
           <MapaPlayas playas={playas} height="360px" />
         </div>
 
-        {/* LISTA PLAYAS */}
         <div className={styles.listaHead}>
           <h2 className={styles.listaTitulo}>Todas las playas</h2>
           <span className={styles.listaCount}>{playas.length} resultados</span>
@@ -107,7 +95,6 @@ export default async function ProvinciaPage({ params }: Props) {
               <div className={styles.rowInfo}>
                 <div className={styles.rowNombre}>{p.nombre}</div>
                 <div className={styles.rowMeta}>
-                  {p.municipio}
                   {p.bandera    && <span className={styles.badge}>🏳️ Bandera Azul</span>}
                   {p.socorrismo && <span className={styles.badge}>🏊 Socorrismo</span>}
                   {p.accesible  && <span className={styles.badge}>♿ Accesible</span>}
@@ -126,31 +113,9 @@ export default async function ProvinciaPage({ params }: Props) {
           ))}
         </div>
 
-        {/* MUNICIPIOS CON MÁS PLAYAS */}
-        {municipios.length > 0 && (
-          <>
-            <div className={styles.listaHead} style={{ marginTop: '2.5rem' }}>
-              <h2 className={styles.listaTitulo}>Municipios con más playas</h2>
-              <span className={styles.listaCount}>{municipios.length} municipios</span>
-            </div>
-            <div className={styles.lista}>
-              {municipios.map(m => (
-                <Link key={m.slug} href={`/municipio/${m.slug}`} className={styles.row}>
-                  <div className={styles.rowInfo}>
-                    <div className={styles.rowNombre}>{m.nombre}</div>
-                    <div className={styles.rowMeta}>{m.count} playas</div>
-                  </div>
-                  <span className={styles.rowArrow}>→</span>
-                </Link>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* OTRAS PROVINCIAS DE LA COMUNIDAD */}
         <div className={styles.masLink}>
-          <Link href={`/comunidad/${provincia.comunidadSlug}`} className={styles.masBtn}>
-            ← Ver todas las playas de {provincia.comunidad}
+          <Link href={`/provincia/${municipio.provinciaSlug}`} className={styles.masBtn}>
+            ← Ver todas las playas de {municipio.provincia}
           </Link>
         </div>
       </div>

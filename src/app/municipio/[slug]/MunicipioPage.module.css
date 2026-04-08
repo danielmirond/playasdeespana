@@ -1,0 +1,105 @@
+/* src/app/municipio/[slug]/MunicipioPage.module.css */
+
+.hero {
+  background: linear-gradient(160deg, var(--bg) 0%, color-mix(in srgb, var(--accent) 6%, var(--bg)) 100%);
+  border-bottom: 1.5px solid var(--line);
+  padding: 2.5rem 1.5rem 2rem;
+}
+.heroInner { max-width: 960px; margin: 0 auto; }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: .4rem;
+  font-size: .72rem; color: var(--muted); margin-bottom: .85rem;
+}
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.titulo {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900; letter-spacing: -.03em;
+  color: var(--ink); margin: 0 0 .25rem;
+}
+.subtitulo { font-size: .85rem; color: var(--muted); margin: 0 0 1rem; }
+
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.chip {
+  font-size: .72rem; font-weight: 600;
+  background: var(--metric-bg); border: 1.5px solid var(--line);
+  padding: .25rem .7rem; border-radius: 100px; color: var(--ink);
+}
+
+.wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+
+.mapaCard {
+  background: var(--card-bg); border: 1.5px solid var(--line);
+  border-radius: 20px; overflow: hidden; margin-bottom: 2rem;
+}
+.mapaHead {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .85rem 1.25rem .75rem;
+}
+.mapaTitle { font-family: var(--font-serif); font-size: .95rem; font-weight: 700; color: var(--ink); }
+.mapaSrc   { font-size: .62rem; color: var(--muted); }
+
+.listaHead {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: .75rem;
+}
+.listaTitulo {
+  font-family: var(--font-serif); font-size: 1.2rem; font-weight: 800;
+  color: var(--ink); margin: 0;
+}
+.listaCount { font-size: .72rem; color: var(--muted); }
+
+.lista { display: flex; flex-direction: column; gap: .4rem; }
+
+.row {
+  display: flex; align-items: center; gap: .75rem;
+  background: var(--card-bg); border: 1.5px solid var(--line);
+  border-radius: 14px; padding: .7rem 1rem;
+  text-decoration: none; transition: border-color .15s, transform .1s;
+}
+.row:hover { border-color: var(--accent); transform: translateX(3px); }
+
+.rowNum {
+  font-family: var(--font-serif); font-size: .8rem; font-weight: 700;
+  color: var(--muted); width: 20px; text-align: right; flex-shrink: 0;
+}
+.rowInfo { flex: 1; min-width: 0; }
+.rowNombre { font-size: .88rem; font-weight: 700; color: var(--ink); }
+.rowMeta {
+  font-size: .68rem; color: var(--muted); margin-top: .15rem;
+  display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
+}
+.badge {
+  background: var(--metric-bg); border: 1px solid var(--line);
+  padding: .1rem .4rem; border-radius: 4px; font-size: .6rem;
+  white-space: nowrap;
+}
+.rowMeteo {
+  display: flex; gap: .5rem; font-size: .68rem; color: var(--muted);
+  flex-shrink: 0; white-space: nowrap;
+}
+.rowEstado {
+  display: flex; align-items: center; gap: .3rem;
+  padding: .2rem .55rem; border-radius: 100px; border: 1.5px solid;
+  flex-shrink: 0; font-size: .62rem; font-weight: 700; letter-spacing: .04em;
+}
+.rowDot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.rowArrow { color: var(--accent); font-size: .8rem; flex-shrink: 0; }
+
+.masLink { margin-top: 2rem; text-align: center; }
+.masBtn {
+  display: inline-block; padding: .65rem 1.5rem;
+  background: var(--metric-bg); border: 1.5px solid var(--line);
+  border-radius: 100px; text-decoration: none;
+  font-size: .8rem; font-weight: 600; color: var(--accent);
+  transition: border-color .15s;
+}
+.masBtn:hover { border-color: var(--accent); }
+
+@media (max-width: 600px) {
+  .rowMeteo { display: none; }
+  .rowEstado { font-size: .58rem; padding: .18rem .45rem; }
+}
