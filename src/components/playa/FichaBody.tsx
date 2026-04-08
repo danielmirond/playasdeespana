@@ -48,22 +48,22 @@ interface Props {
 
 const T = {
   es: {
-    galeria:'Galería', galSrc:'Wikimedia · Unsplash', verFotos:'Ver fotos',
-    oleaje:'Oleaje · 6 horas', oleajeSrc:'Open-Meteo Marine',
+    galeria:(n:string)=>`Fotos de ${n}`, galSrc:'Wikimedia · Unsplash', verFotos:'Ver fotos',
+    oleaje:(n:string)=>`Oleaje y olas en ${n} ahora`, oleajeSrc:'Open-Meteo Marine',
     luzSolar:'Luz solar', luzSrc:'Sunrise-Sunset API',
     amanecer:'Amanecer', horasLuz:'Horas de luz', atardecer:'Atardecer',
-    temperatura:'🌡 Temperatura', tempSrc:'Open-Meteo',
+    temperatura:(n:string)=>`Temperatura del agua y aire en ${n}`, tempSrc:'Open-Meteo',
     tempAire:'Temperatura aire', tempAgua:'Temperatura agua',
     sensacion:'Sensación térmica', indiceUV:'Índice UV', humedad:'Humedad',
-    viento:'💨 Viento', velocidad:'Velocidad', racha:'Racha máxima', direccion:'Dirección',
-    seguridad:'🚩 Seguridad', seguridadSrc:'Estimación Open-Meteo',
+    viento:(n:string)=>`Viento en ${n} hoy`, velocidad:'Velocidad', racha:'Racha máxima', direccion:'Dirección',
+    seguridad:(n:string)=>`Bandera y medusas en ${n}`, seguridadSrc:'Estimación Open-Meteo',
     banderaLabel:'Bandera de baño', medusasLabel:'Medusas',
-    calidad:'Calidad del agua', calidadSrc:'EEA · 2006/7/CE',
+    calidad:(n:string)=>`Calidad del agua en ${n}`, calidadSrc:'EEA · 2006/7/CE',
     muestras:'Muestras conformes', temporada:'Temporada', clasificacion:'Clasificación',
-    comer:'Dónde comer', comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Datos de ejemplo', resenas:'reseñas',
-    dormir:'Dónde dormir', dormirSrc:'OpenStreetMap · 2km', dormirSrcMock:'Datos de ejemplo',
-    servicios:'✅ Servicios', serviciosSrc:'MITECO',
-    info:'ℹ️ Información', infoSrc:'MITECO 2024',
+    comer:(n:string)=>`Restaurantes cerca de ${n}`, comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Datos de ejemplo', resenas:'reseñas',
+    dormir:(n:string)=>`Hoteles cerca de ${n}`, dormirSrc:'OpenStreetMap · 2km', dormirSrcMock:'Datos de ejemplo',
+    servicios:(n:string)=>`Servicios en ${n}`, serviciosSrc:'MITECO',
+    info:(n:string)=>`Información de ${n}`, infoSrc:'MITECO 2024',
     longitud:'Longitud', anchura:'Anchura media', composicion:'Composición', tipo:'Tipo',
     municipio:'Municipio', provincia:'Provincia', comunidad:'Comunidad', coordenadas:'Coordenadas',
     actualizado:'Actualizado', agua:'Agua', aire:'🌡 Aire', olas:'Olas', vientoLabel:'Viento',
@@ -84,22 +84,22 @@ const T = {
     ],
   },
   en: {
-    galeria:'Gallery', galSrc:'Wikimedia · Unsplash', verFotos:'View photos',
-    oleaje:'Waves · 6 hours', oleajeSrc:'Open-Meteo Marine',
+    galeria:(n:string)=>`Photos of ${n}`, galSrc:'Wikimedia · Unsplash', verFotos:'View photos',
+    oleaje:(n:string)=>`Waves at ${n} now`, oleajeSrc:'Open-Meteo Marine',
     luzSolar:'Sunlight', luzSrc:'Sunrise-Sunset API',
     amanecer:'Sunrise', horasLuz:'Daylight hours', atardecer:'Sunset',
-    temperatura:'🌡 Temperature', tempSrc:'Open-Meteo',
+    temperatura:(n:string)=>`Water and air temperature at ${n}`, tempSrc:'Open-Meteo',
     tempAire:'Air temperature', tempAgua:'Water temperature',
     sensacion:'Feels like', indiceUV:'UV index', humedad:'Humidity',
-    viento:'💨 Wind', velocidad:'Speed', racha:'Max gust', direccion:'Direction',
-    seguridad:'🚩 Safety', seguridadSrc:'Open-Meteo estimate',
+    viento:(n:string)=>`Wind at ${n} today`, velocidad:'Speed', racha:'Max gust', direccion:'Direction',
+    seguridad:(n:string)=>`Flag and jellyfish at ${n}`, seguridadSrc:'Open-Meteo estimate',
     banderaLabel:'Beach flag', medusasLabel:'Jellyfish',
-    calidad:'Water quality', calidadSrc:'EEA · 2006/7/CE',
+    calidad:(n:string)=>`Water quality at ${n}`, calidadSrc:'EEA · 2006/7/CE',
     muestras:'Compliant samples', temporada:'Season', clasificacion:'Classification',
-    comer:'Where to eat', comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Sample data', resenas:'reviews',
-    dormir:'Where to stay', dormirSrc:'OpenStreetMap · 2km', dormirSrcMock:'Sample data',
-    servicios:'✅ Facilities', serviciosSrc:'MITECO',
-    info:'ℹ️ Information', infoSrc:'MITECO 2024',
+    comer:(n:string)=>`Restaurants near ${n}`, comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Sample data', resenas:'reviews',
+    dormir:(n:string)=>`Hotels near ${n}`, dormirSrc:'OpenStreetMap · 2km', dormirSrcMock:'Sample data',
+    servicios:(n:string)=>`Facilities at ${n}`, serviciosSrc:'MITECO',
+    info:(n:string)=>`Information about ${n}`, infoSrc:'MITECO 2024',
     longitud:'Length', anchura:'Average width', composicion:'Composition', tipo:'Type',
     municipio:'Municipality', provincia:'Province', comunidad:'Region', coordenadas:'Coordinates',
     actualizado:'Updated', agua:'Water', aire:'🌡 Air', olas:'Waves', vientoLabel:'Wind',
@@ -148,7 +148,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* FOTOS */}
         <div className={styles.card} id="s-fotos">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.galeria}</h2>
+            <h2 className={styles.cardTitle}>{i18n.galeria(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{i18n.galSrc}</span>
           </div>
           <div className={styles.galeria}>
@@ -178,7 +178,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* OLEAJE + METEO */}
         <div className={styles.card} id="s-meteo">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.oleaje}</h2>
+            <h2 className={styles.cardTitle}>{i18n.oleaje(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{i18n.oleajeSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -202,7 +202,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-            <h2 className={styles.cardTitle}>{i18n.temperatura}</h2>
+            <h2 className={styles.cardTitle}>{i18n.temperatura(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{i18n.tempSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -218,7 +218,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-            <h2 className={styles.cardTitle}>{i18n.viento}</h2>
+            <h2 className={styles.cardTitle}>{i18n.viento(playa.nombre)}</h2>
           </div>
           <div className={styles.cardBody}>
             <div className={styles.vientoRow}>
@@ -238,7 +238,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {(banderaPlaya || medusas) && (
           <div className={styles.card} id="s-seguridad">
             <div className={styles.cardHead}>
-              <h2 className={styles.cardTitle}>{i18n.seguridad}</h2>
+              <h2 className={styles.cardTitle}>{i18n.seguridad(playa.nombre)}</h2>
               <span className={styles.cardSrc}>{i18n.seguridadSrc}</span>
             </div>
             <div className={styles.cardBody}>
@@ -267,7 +267,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* CALIDAD AGUA */}
         <div className={styles.card} id="s-calidad">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.calidad}</h2>
+            <h2 className={styles.cardTitle}>{i18n.calidad(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{i18n.calidadSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -295,7 +295,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* CÓMO LLEGAR */}
         <div className={styles.card} id="s-comoLlegar">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? 'How to get there' : 'Cómo llegar'}</h2>
+            <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? `How to get to ${playa.nombre}` : `Cómo llegar a ${playa.nombre}`}</h2>
           </div>
           <div className={styles.cardBody}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
@@ -324,7 +324,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* RESTAURANTES */}
         <div className={styles.card} id="s-comer">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.comer}</h2>
+            <h2 className={styles.cardTitle}>{i18n.comer(playa.nombre)}</h2>
             <span className={styles.cardSrc}>
               {restList ? i18n.comerSrcOSM : i18n.comerSrcMock}
             </span>
@@ -367,7 +367,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* HOTELES */}
         <div className={styles.card} id="s-dormir">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.dormir}</h2>
+            <h2 className={styles.cardTitle}>{i18n.dormir(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{hoteles && hoteles.length > 0 ? i18n.dormirSrc : i18n.dormirSrcMock}</span>
           </div>
           <div className={styles.cardBody}>
@@ -405,7 +405,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* SERVICIOS */}
         <div className={styles.card} id="s-servicios">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.servicios}</h2>
+            <h2 className={styles.cardTitle}>{i18n.servicios(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{i18n.serviciosSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -421,7 +421,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* INFO */}
         <div className={styles.card} id="s-info">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.info}</h2>
+            <h2 className={styles.cardTitle}>{i18n.info(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{i18n.infoSrc}</span>
           </div>
           <div className={styles.cardBody}>

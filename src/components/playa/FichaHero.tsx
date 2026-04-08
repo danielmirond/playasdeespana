@@ -72,7 +72,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }
         <span>›</span>
         <span>{playa.nombre}</span>
       </div>
-      <h1 className={styles.nombre}>{playa.nombre}</h1>
+      <h1 className={styles.nombre}>{locale === 'en' ? `${playa.nombre} Beach today — ${playa.municipio}` : `Playa de ${playa.nombre} hoy — ${playa.municipio}`}</h1>
       <div className={styles.lugar}>
         <span>{playa.municipio}</span>
         <span className={styles.dot}>·</span>
