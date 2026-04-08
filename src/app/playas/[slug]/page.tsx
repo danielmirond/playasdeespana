@@ -6,6 +6,7 @@ import { getPlayaBySlug, getPlayas } from '@/lib/playas'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez, getMeteoForecast, getViento } from '@/lib/marine'
+import { getMeteoPlaya } from '@/lib/meteo'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
@@ -61,9 +62,10 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, vientoReal] = await Promise.allSettled([
+  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, vientoReal] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
+    getMeteoPlaya(playa.lat, playa.lng),
     getRestaurantes(playa.lat, playa.lng),
     getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng),
     getHoteles(playa.lat, playa.lng),
@@ -73,36 +75,37 @@ export default async function PlayaPage({ params }: Props) {
     getViento(playa.lat, playa.lng),
   ])
 
-  const mareasData       = mareas.status === 'fulfilled' ? mareas.value : null
-  const solData          = sol.status === 'fulfilled' ? sol.value : null
-  const restaurantesData = restaurantes.status === 'fulfilled' ? restaurantes.value : []
-  const fotosData        = fotos.status === 'fulfilled' ? fotos.value : []
-  const hotelesData      = hoteles.status === 'fulfilled' ? hoteles.value : []
-  const escuelasData     = escuelasResult.status === 'fulfilled' ? escuelasResult.value : []
+  const mareasData        = mareas.status === 'fulfilled' ? mareas.value : null
+  const solData           = sol.status === 'fulfilled' ? sol.value : null
+  const meteoPlayaData    = meteoPlaya.status === 'fulfilled' ? meteoPlaya.value : null
+  const restaurantesData  = restaurantes.status === 'fulfilled' ? restaurantes.value : []
+  const fotosData         = fotos.status === 'fulfilled' ? fotos.value : []
+  const hotelesData       = hoteles.status === 'fulfilled' ? hoteles.value : []
+  const escuelasData      = escuelasResult.status === 'fulfilled' ? escuelasResult.value : []
   const turbidezData      = turbidez.status === 'fulfilled' ? turbidez.value : null
   const meteoForecastData = meteoForecast.status === 'fulfilled' ? meteoForecast.value : []
   const vientoData        = vientoReal.status === 'fulfilled' ? vientoReal.value : null
 
-  const seed     = playa.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
-  const tempAgua = mareasData?.temp_agua?.[0] ?? (18 + (seed % 10))
-  const olas     = mareasData?.oleaje_m?.[0]  ?? parseFloat(((seed % 15) / 10).toFixed(1))
-  const viento      = vientoData?.velocidad ?? (5 + (seed % 30))
-  const vientoRacha = vientoData?.racha     ?? (viento + 8)
-  const vientoDirRaw = vientoData?.direccion ?? ['N','NE','E','SE','S','SO','O','NO'][seed % 8]
+  const tempAgua = mareasData?.temp_agua?.[0] ?? meteoPlayaData?.temp_agua ?? null
+  const olas     = mareasData?.oleaje_m?.[0]  ?? 0
+  const viento      = vientoData?.velocidad ?? meteoPlayaData?.viento_kmh ?? 0
+  const vientoRacha = vientoData?.racha     ?? meteoPlayaData?.viento_racha ?? 0
+  const vientoDirRaw = vientoData?.direccion ?? meteoPlayaData?.viento_dir ?? 'N'
   const periodo  = mareasData?.wave_period?.[0] ?? 8
 
+  const seed      = playa.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
   const estadoKey = calcularEstado({ olas, viento })
   const estado    = ESTADOS[estadoKey]
   const frase     = getFrase(estadoKey, seed % 3)
 
   const meteo = {
-    agua:            tempAgua,
+    agua:            tempAgua ?? 18,
     olas,
     viento,
     vientoRacha,
     vientoDireccion: vientoDirRaw,
-    uv:              3 + (seed % 9),
-    tempAire:        Math.round(tempAgua + 3),
+    uv:              meteoPlayaData?.uv_max ?? 5,
+    tempAire:        meteoPlayaData?.temp_aire ?? (tempAgua ? Math.round(tempAgua + 3) : 22),
     estado:          estadoKey,
     amanecer:        solData?.amanecer,
     atardecer:       solData?.atardecer,

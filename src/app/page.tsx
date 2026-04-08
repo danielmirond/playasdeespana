@@ -12,7 +12,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Playas de España — Estado del mar en tiempo real',
-  description: 'Temperatura del agua, oleaje, calidad y servicios de las 5.611 playas españolas. Datos AEMET y EEA actualizados cada hora.',
+  description: 'Temperatura del agua, oleaje, calidad y servicios de las 5.611 playas españolas. Datos Open-Meteo y EEA actualizados cada hora.',
   openGraph: {
     title: 'Playas de España',
     description: 'Estado del mar en tiempo real',
@@ -55,7 +55,7 @@ export default async function HomePage() {
         <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)', fontSize: '.9rem' }}>
           Playas de España
         </span>
-        <span>Open-Meteo · AEMET · EEA · OSM</span>
+        <span>Open-Meteo · EEA · OSM</span>
       </footer>
     </>
   )

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Beaches of Spain — Real-time sea conditions",
-    "description": "Water temperature, waves, quality and services for 5,611 Spanish beaches. AEMET and EEA data updated every hour.",
+    "description": "Water temperature, waves, quality and services for 5,611 Spanish beaches. Open-Meteo and EEA data updated every hour.",
     "og_title": "Beaches of Spain",
     "og_description": "Real-time sea conditions"
   },
@@ -182,7 +182,7 @@
     "good_today": "Good today"
   },
   "footer": {
-    "data_sources": "Open-Meteo · AEMET · EEA · OSM"
+    "data_sources": "Open-Meteo · EEA · OSM"
   },
   "common": {
     "loading": "Loading…",

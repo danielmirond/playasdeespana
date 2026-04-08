@@ -1,5 +1,6 @@
 // src/lib/marine.ts
 import { cache } from 'react'
+import { gradosADireccion } from './geo'
 
 export interface MarineData {
   temp_agua:   number[]
@@ -49,11 +50,6 @@ export interface MeteoData {
   prob_lluvia: number
   nubosidad:   number
   icono:       string
-}
-
-function gradosADireccion(deg: number): string {
-  const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO']
-  return dirs[Math.round(deg / 22.5) % 16]
 }
 
 function calcEstadoSurf(olas: number, viento: number): string {
@@ -147,8 +143,7 @@ export const getMareas = cache(async (lat: number, lng: number): Promise<MarineD
       wind_dir:    [],
       forecast,
     }
-  } catch (e) {
-    console.error('[marine]', e)
+  } catch {
     return null
   }
 })

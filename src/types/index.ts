@@ -77,7 +77,7 @@ export interface Restaurante {
   lat?:        number
   lon?:        number
   googleId?:   string
-  source?:     'google' | 'osm'
+  source?:     'osm'
 }
 
 export interface Hotel {
@@ -111,5 +111,5 @@ export interface Comunidad {
 
 export interface ApiMeteoResponse        { playa: string; meteo: DatosMeteo; oleaje: OleajeHora[] }
 export interface ApiCalidadResponse      { playa: string; calidad: DatosCalidad }
-export interface ApiRestaurantesResponse { playa: string; restaurantes: Restaurante[]; fuente: 'google' | 'osm' }
-export interface ApiHotelesResponse      { playa: string; hoteles: Hotel[]; fuente: 'booking' | 'osm' }
+export interface ApiRestaurantesResponse { playa: string; restaurantes: Restaurante[]; fuente: 'osm' }
+export interface ApiHotelesResponse      { playa: string; hoteles: Hotel[]; fuente: 'osm' }

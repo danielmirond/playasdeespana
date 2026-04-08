@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'upload.wikimedia.org' },
       { protocol: 'https', hostname: 'webratings.eu' },
-      { protocol: 'https', hostname: 'maps.googleapis.com' },
+      { protocol: 'https', hostname: 'commons.wikimedia.org' },
     ],
     formats: ['image/avif', 'image/webp'],
   },

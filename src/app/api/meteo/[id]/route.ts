@@ -1,60 +1,33 @@
 // src/app/api/meteo/[id]/route.ts
-// Proxy server-side para AEMET — nunca expone la API key al cliente
+// Proxy para datos meteorológicos via Open-Meteo (sin API key)
+// Mantiene la ruta [id] para retrocompatibilidad, pero acepta ?lat=&lng= como alternativa
 
 import { NextRequest, NextResponse } from 'next/server'
-
-const AEMET_BASE = 'https://opendata.aemet.es/opendata/api'
-const KEY = process.env.AEMET_API_KEY ?? ''
+import { getMeteoPlaya } from '@/lib/meteo'
 
 export const runtime = 'nodejs'
-export const revalidate = 10800  // 3h
+export const revalidate = 3600
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!KEY) {
-    return NextResponse.json({ error: 'AEMET_API_KEY no configurada' }, { status: 500 })
+  const sp = req.nextUrl.searchParams
+  const lat = parseFloat(sp.get('lat') ?? '0')
+  const lng = parseFloat(sp.get('lng') ?? '0')
+
+  if (!lat || !lng) {
+    return NextResponse.json({ error: 'lat y lng requeridos' }, { status: 400 })
   }
 
-  const { id } = await params
-
-  try {
-    // Paso 1 — AEMET devuelve una meta-URL con los datos reales
-    const meta = await fetch(
-      `${AEMET_BASE}/prediccion/especifica/playa/${id}`,
-      { headers: { api_key: KEY } }
-    ).then(r => r.json())
-
-    if (meta.estado !== 200) {
-      return NextResponse.json({ error: meta.descripcion }, { status: 502 })
-    }
-
-    // Paso 2 — fetch a la URL real de datos
-    const data = await fetch(meta.datos).then(r => r.json())
-    const hoy = data?.[0]?.prediccion?.dia?.[0] ?? {}
-
-    const payload = {
-      temp_agua:   hoy.tempAgua ?? null,
-      oleaje_m:    parseFloat(hoy.oleajeMax) || null,
-      estado_mar:  hoy.estadoCielo?.[0]?.descripcion ?? null,
-      viento_kmh:  hoy.viento?.[0]?.velocidad ?? null,
-      viento_dir:  hoy.viento?.[0]?.direccion ?? null,
-      viento_racha:hoy.rachaMax?.[0]?.value ?? null,
-      temp_max:    hoy.temperatura?.maxima ?? null,
-      temp_min:    hoy.temperatura?.minima ?? null,
-      sensacion:   hoy.sensTermica?.maxima ?? null,
-      humedad:     hoy.humedadRelativa?.maxima ?? null,
-      uv_max:      hoy.uvMax ?? null,
-      timestamp:   new Date().toISOString(),
-    }
-
-    return NextResponse.json(payload, {
-      headers: {
-        'Cache-Control': 'public, s-maxage=10800, stale-while-revalidate=21600',
-      },
-    })
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 })
+  const data = await getMeteoPlaya(lat, lng)
+  if (!data) {
+    return NextResponse.json({ error: 'No se pudieron obtener datos meteorológicos' }, { status: 502 })
   }
+
+  return NextResponse.json(data, {
+    headers: {
+      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=7200',
+    },
+  })
 }

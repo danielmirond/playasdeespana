@@ -42,19 +42,18 @@ interface Props {
 
 const T = {
   es: {
-    galeria:'Galería', galSrc:'Unsplash · Wikimedia', verFotos:'Ver fotos',
+    galeria:'Galería', galSrc:'Wikimedia · Unsplash', verFotos:'Ver fotos',
     oleaje:'Oleaje · 6 horas', oleajeSrc:'Open-Meteo Marine',
     luzSolar:'Luz solar', luzSrc:'Sunrise-Sunset API',
     amanecer:'Amanecer', horasLuz:'Horas de luz', atardecer:'Atardecer',
-    temperatura:'🌡 Temperatura', tempSrc:'AEMET',
+    temperatura:'🌡 Temperatura', tempSrc:'Open-Meteo',
     tempAire:'Temperatura aire', tempAgua:'Temperatura agua',
     sensacion:'Sensación térmica', indiceUV:'Índice UV',
     viento:'💨 Viento', velocidad:'Velocidad', racha:'Racha máxima', direccion:'Dirección',
     calidad:'Calidad del agua', calidadSrc:'EEA · 2006/7/CE',
     muestras:'Muestras conformes', temporada:'Temporada', clasificacion:'Clasificación',
-    comer:'Dónde comer', comerSrcGoogle:'Google Places · 800m',
-    comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Datos de ejemplo', resenas:'reseñas',
-    dormir:'Dónde dormir', dormirSrc:'Google Places · 2km', dormirSrcMock:'Datos de ejemplo',
+    comer:'Dónde comer', comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Datos de ejemplo', resenas:'reseñas',
+    dormir:'Dónde dormir', dormirSrc:'OpenStreetMap · 2km', dormirSrcMock:'Datos de ejemplo',
     servicios:'✅ Servicios', serviciosSrc:'MITECO',
     info:'ℹ️ Información', infoSrc:'MITECO 2024',
     longitud:'Longitud', anchura:'Anchura media', composicion:'Composición', tipo:'Tipo',
@@ -77,19 +76,18 @@ const T = {
     ],
   },
   en: {
-    galeria:'Gallery', galSrc:'Unsplash · Wikimedia', verFotos:'View photos',
+    galeria:'Gallery', galSrc:'Wikimedia · Unsplash', verFotos:'View photos',
     oleaje:'Waves · 6 hours', oleajeSrc:'Open-Meteo Marine',
     luzSolar:'Sunlight', luzSrc:'Sunrise-Sunset API',
     amanecer:'Sunrise', horasLuz:'Daylight hours', atardecer:'Sunset',
-    temperatura:'🌡 Temperature', tempSrc:'AEMET',
+    temperatura:'🌡 Temperature', tempSrc:'Open-Meteo',
     tempAire:'Air temperature', tempAgua:'Water temperature',
     sensacion:'Feels like', indiceUV:'UV index',
     viento:'💨 Wind', velocidad:'Speed', racha:'Max gust', direccion:'Direction',
     calidad:'Water quality', calidadSrc:'EEA · 2006/7/CE',
     muestras:'Compliant samples', temporada:'Season', clasificacion:'Classification',
-    comer:'Where to eat', comerSrcGoogle:'Google Places · 800m',
-    comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Sample data', resenas:'reviews',
-    dormir:'Where to stay', dormirSrc:'Google Places · 2km', dormirSrcMock:'Sample data',
+    comer:'Where to eat', comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Sample data', resenas:'reviews',
+    dormir:'Where to stay', dormirSrc:'OpenStreetMap · 2km', dormirSrcMock:'Sample data',
     servicios:'✅ Facilities', serviciosSrc:'MITECO',
     info:'ℹ️ Information', infoSrc:'MITECO 2024',
     longitud:'Length', anchura:'Average width', composicion:'Composition', tipo:'Type',
@@ -151,7 +149,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   {fotos.length > 3 && (
                     <div className={styles.gMasOverlay}><span className={styles.gMasN}>+{fotos.length - 2}</span><span className={styles.gMasL}>{i18n.verFotos}</span></div>
                   )}
-                  <div className={styles.gFuente}>{fotos[0].fuente === 'google' ? <><MapPin size={12}/> Google</> : fotos[0].fuente === 'wikimedia' ? <><Camera size={12}/> Wikimedia Commons</> : <><Camera size={12}/> Unsplash</>}</div>
+                  <div className={styles.gFuente}>{fotos[0].fuente === 'wikimedia' ? <><Camera size={12}/> Wikimedia Commons</> : <><Camera size={12}/> Unsplash</>}</div>
                 </div>}
               </div>
             ) : (
@@ -286,7 +284,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.comer}</h2>
             <span className={styles.cardSrc}>
-              {restList ? (restList[0]?.source === 'google' ? i18n.comerSrcGoogle : i18n.comerSrcOSM) : i18n.comerSrcMock}
+              {restList ? i18n.comerSrcOSM : i18n.comerSrcMock}
             </span>
           </div>
           <div className={styles.cardBody}>

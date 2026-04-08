@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     default: 'Playas de España — Estado del mar en tiempo real',
     template: '%s · Playas de España',
   },
-  description: 'Temperatura del agua, oleaje, calidad y servicios de las 5.611 playas españolas. Datos AEMET y EEA actualizados cada hora.',
+  description: 'Temperatura del agua, oleaje, calidad y servicios de las 5.611 playas españolas. Datos Open-Meteo y EEA actualizados cada hora.',
   keywords: ['playas españa', 'estado del mar', 'temperatura agua', 'oleaje', 'calidad agua playa', 'banderas azules'],
   openGraph: {
     type: 'website',

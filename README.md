@@ -1,7 +1,7 @@
 # Playas de España
 
 Ficha de playa en tiempo real para más de 3.500 playas españolas.  
-Stack: Next.js 14 · ISR · AEMET · Open-Meteo · MITECO/Esri · EEA · Google Places / Overpass
+Stack: Next.js 16 · ISR · Open-Meteo · MITECO/Esri · EEA · Overpass/OSM
 
 ---
 
@@ -19,16 +19,13 @@ npm install
 
 ```bash
 cp .env.example .env.local
-# Editar .env.local y añadir AEMET_API_KEY mínimo
+# Editar .env.local — no se requiere ninguna API key obligatoria
 ```
-
-Conseguir API key de AEMET (gratuita, 2 minutos):
-→ https://opendata.aemet.es/centrodedescargas/altaUsuario
 
 ### 3. Sincronizar datos de playas
 
 ```bash
-# Descarga ~3.500 playas de MITECO y cruza con AEMET por coordenadas
+# Descarga ~3.500 playas de MITECO
 npm run sync:playas
 
 # Enriquece con calidad del agua EEA (opcional)
@@ -64,13 +61,12 @@ vercel --prod
 3. Añadir variables de entorno en Settings → Environment Variables
 4. Deploy automático en cada push a `main`
 
-### Variables requeridas en Vercel
+### Variables en Vercel
 
 | Variable | Obligatoria | Dónde conseguirla |
 |---|---|---|
-| `AEMET_API_KEY` | ✅ Sí | opendata.aemet.es |
-| `GOOGLE_PLACES_KEY` | ❌ No | console.cloud.google.com |
 | `NEXT_PUBLIC_BASE_URL` | ✅ Sí | Tu dominio |
+| `UNSPLASH_ACCESS_KEY` | ❌ No | unsplash.com/developers |
 | `GOOGLE_SITE_VERIFICATION` | ❌ No | Search Console |
 
 ---
@@ -102,10 +98,11 @@ BUILD TIME (una vez/semana)
 PER REQUEST (con ISR)
   /playas/[slug]  →  SSG + revalidate 1h
     ├─ Base:         playas-index.json (estático)
-    ├─ Meteo:        /api/meteo/[id]  →  AEMET (caché 3h)
+    ├─ Meteo:        Open-Meteo Forecast + Marine (caché 1h)
     ├─ Mareas:       Open-Meteo Marine (caché 1h)
     ├─ Sol:          Sunrise-Sunset API (caché 12h)
-    └─ Restaurantes: /api/restaurantes  →  Google Places / OSM (caché 24h)
+    ├─ Restaurantes: Overpass/OSM (caché 24h)
+    └─ Hoteles:      Overpass/OSM (caché 24h)
 ```
 
 ## Coste estimado en producción
@@ -113,9 +110,8 @@ PER REQUEST (con ISR)
 | Servicio | Coste |
 |---|---|
 | Vercel (free tier hasta escalar) | 0–20 €/mes |
-| Google Places (con caché 24h) | 5–15 €/mes |
-| AEMET | 0 € |
 | Open-Meteo | 0 € |
 | EEA / MITECO | 0 € |
+| Overpass/OSM | 0 € |
 | Dominio .es | ~10 €/año |
-| **Total** | **~15–35 €/mes** |
+| **Total** | **~0–20 €/mes** |
