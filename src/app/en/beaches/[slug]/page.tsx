@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const playa = await getPlayaBySlug(slug)
   if (!playa) return {}
-  const title = `${playa.nombre} (${playa.provincia}) - How is it today? | Wind, parking, crowds, temperature and traffic`
+  const title = `How is ${playa.nombre} today | Flag, conditions, wind and water temperature - Parking, hotels and where to eat nearby`
   const now = new Date().toISOString()
   return {
     title,
