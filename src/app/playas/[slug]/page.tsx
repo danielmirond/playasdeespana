@@ -7,6 +7,7 @@ import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
+import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
@@ -126,6 +127,9 @@ export default async function PlayaPage({ params }: Props) {
 
   const dateModified = meteoPlayaData?.timestamp ?? new Date().toISOString()
 
+  const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
+  const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
+
   let calidad = null
   try {
     const db = JSON.parse(readFileSync(join(process.cwd(), 'public/data/calidad-agua.json'), 'utf8'))
@@ -152,6 +156,8 @@ export default async function PlayaPage({ params }: Props) {
         forecastSurf={forecastSurf}
         meteoForecast={meteoForecastData}
         dateModified={dateModified}
+        banderaPlaya={banderaPlaya}
+        medusas={medusas}
       />
     </>
   )

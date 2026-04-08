@@ -5,6 +5,7 @@ import type { FotoPlaya } from '@/lib/fotos'
 import type { HotelReal } from '@/lib/hoteles'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
+import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
 import IluEstado from './IluEstado'
 import TraficoSection from './TraficoSection'
 import SurfSection from './SurfSection'
@@ -39,8 +40,10 @@ interface Props {
   turbidez?:      TurbidezData | null
   forecastSurf?:  ForecastDay[] | null
   meteoForecast?: MeteoForecast[]
-  dateModified?:  string
-  locale?:        'es' | 'en'
+  dateModified?:   string
+  banderaPlaya?:   BanderaPlaya
+  medusas?:        MedusasRiesgo
+  locale?:         'es' | 'en'
 }
 
 const T = {
@@ -53,6 +56,8 @@ const T = {
     tempAire:'Temperatura aire', tempAgua:'Temperatura agua',
     sensacion:'Sensación térmica', indiceUV:'Índice UV', humedad:'Humedad',
     viento:'💨 Viento', velocidad:'Velocidad', racha:'Racha máxima', direccion:'Dirección',
+    seguridad:'🚩 Seguridad', seguridadSrc:'Estimación Open-Meteo',
+    banderaLabel:'Bandera de baño', medusasLabel:'Medusas',
     calidad:'Calidad del agua', calidadSrc:'EEA · 2006/7/CE',
     muestras:'Muestras conformes', temporada:'Temporada', clasificacion:'Clasificación',
     comer:'Dónde comer', comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Datos de ejemplo', resenas:'reseñas',
@@ -87,6 +92,8 @@ const T = {
     tempAire:'Air temperature', tempAgua:'Water temperature',
     sensacion:'Feels like', indiceUV:'UV index', humedad:'Humidity',
     viento:'💨 Wind', velocidad:'Speed', racha:'Max gust', direccion:'Direction',
+    seguridad:'🚩 Safety', seguridadSrc:'Open-Meteo estimate',
+    banderaLabel:'Beach flag', medusasLabel:'Jellyfish',
     calidad:'Water quality', calidadSrc:'EEA · 2006/7/CE',
     muestras:'Compliant samples', temporada:'Season', clasificacion:'Classification',
     comer:'Where to eat', comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Sample data', resenas:'reviews',
@@ -121,7 +128,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, locale = 'es' }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, locale = 'es' }: Props) {
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const horasLuz = solData?.horas_luz ?? '—'
@@ -225,6 +232,36 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
           </div>
         </div>
+
+        {/* SEGURIDAD: BANDERA + MEDUSAS */}
+        {(banderaPlaya || medusas) && (
+          <div className={styles.card} id="s-seguridad">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{i18n.seguridad}</h2>
+              <span className={styles.cardSrc}>{i18n.seguridadSrc}</span>
+            </div>
+            <div className={styles.cardBody}>
+              {banderaPlaya && (
+                <div style={{ display:'flex', alignItems:'center', gap:'.75rem', marginBottom: medusas ? '1rem' : 0 }}>
+                  <div style={{ width:28, height:28, borderRadius:'50%', background:banderaPlaya.hex, flexShrink:0 }} aria-hidden />
+                  <div>
+                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label}</div>
+                    <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}</div>
+                  </div>
+                </div>
+              )}
+              {medusas && (
+                <div style={{ display:'flex', alignItems:'center', gap:'.75rem' }}>
+                  <div style={{ width:28, height:28, borderRadius:'50%', background:medusas.hex, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'.9rem' }} aria-hidden>🪼</div>
+                  <div>
+                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? medusas.labelEn : medusas.label}</div>
+                    <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? medusas.detalleEn : medusas.detalle}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* CALIDAD AGUA */}
         <div className={styles.card} id="s-calidad">
