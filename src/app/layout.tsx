@@ -20,7 +20,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playasdeespana.es'),
   title: {
     default: 'Playas de España — Estado del mar en tiempo real',
     template: '%s · Playas de España',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://playas-espana.com' },
+  alternates: { canonical: 'https://playasdeespana.es' },
   verification: { google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E' },
 }
 

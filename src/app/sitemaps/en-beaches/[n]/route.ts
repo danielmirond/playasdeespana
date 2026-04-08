@@ -3,7 +3,7 @@ import { getPlayas } from '@/lib/playas'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 86400
-const BASE  = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+const BASE  = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playasdeespana.es'
 const CHUNK = 1000
 
 export async function GET(_req: Request, context: any) {

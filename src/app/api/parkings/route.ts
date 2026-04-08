@@ -1,5 +1,6 @@
 // src/app/api/parkings/route.ts — OpenStreetMap/Overpass (sin API key)
 import { NextRequest, NextResponse } from 'next/server'
+import { parseCoords } from '@/lib/validation'
 
 export const revalidate = 3600
 
@@ -19,13 +20,14 @@ function inferirPrecio(tags: Record<string, string>): string {
 }
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = req.nextUrl
-  const lat = parseFloat(searchParams.get('lat') ?? '')
-  const lng = parseFloat(searchParams.get('lng') ?? '')
+  const coords = parseCoords(req.nextUrl.searchParams.get('lat'), req.nextUrl.searchParams.get('lng'))
 
-  if (isNaN(lat) || isNaN(lng)) {
-    return NextResponse.json({ error: 'lat/lng requeridos' }, { status: 400 })
+  if (!coords) {
+    return NextResponse.json({ error: 'lat/lng requeridos (coordenadas válidas)' }, { status: 400 })
   }
+
+  const lat = coords.lat
+  const lng = coords.lon
 
   const query = `[out:json][timeout:15];
 (
@@ -65,8 +67,7 @@ out center body;`
       .slice(0, 5)
 
     return NextResponse.json(parkings)
-  } catch (e) {
-    console.error('[parkings]', e)
+  } catch {
     return NextResponse.json([], { status: 200 })
   }
 }

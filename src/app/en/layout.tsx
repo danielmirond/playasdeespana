@@ -4,7 +4,7 @@ import CookieBanner from '@/components/ui/CookieBanner'
 
 export const metadata: Metadata = {
   alternates: {
-    languages: { 'es': 'https://playas-espana.com', 'en': 'https://playas-espana.com/en' },
+    languages: { 'es': 'https://playasdeespana.es', 'en': 'https://playasdeespana.es/en' },
   },
 }
 

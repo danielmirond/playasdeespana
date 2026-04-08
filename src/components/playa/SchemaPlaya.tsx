@@ -22,7 +22,7 @@ const ACTIVIDAD_LABELS: Record<string, string> = {
 }
 
 export default function SchemaPlaya({ playa, agua, olas, calidad, dateModified }: Props) {
-  const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playasdeespana.es'
   const url  = `${BASE}/playas/${playa.slug}`
 
   const actividades = Object.entries(playa.actividades ?? {})

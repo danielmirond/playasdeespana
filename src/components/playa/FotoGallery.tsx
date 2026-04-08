@@ -65,18 +65,20 @@ export default function FotoGallery({ fotos, nombre }: { fotos: any[]; nombre: s
 
       {/* Lightbox */}
       {lightbox && (
-        <div className="lightbox" onClick={() => setLightbox(false)}>
-          <button className="lb-close" onClick={() => setLightbox(false)}>✕</button>
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Galería de fotos de ${nombre}`} onClick={() => setLightbox(false)} onKeyDown={e => e.key === 'Escape' && setLightbox(false)}>
+          <button className="lb-close" onClick={() => setLightbox(false)} aria-label="Cerrar galería">✕</button>
           <div className="lb-inner" onClick={e => e.stopPropagation()}>
-            <img src={foto.url} alt={foto.alt} className="lb-img"/>
+            <img src={foto.url} alt={foto.alt || `Foto de ${nombre}`} className="lb-img"/>
             {fotos.length > 1 && (
               <>
                 <button
                   className="lb-prev"
+                  aria-label="Foto anterior"
                   onClick={() => setActive(a => (a - 1 + fotos.length) % fotos.length)}
                 >‹</button>
                 <button
                   className="lb-next"
+                  aria-label="Foto siguiente"
                   onClick={() => setActive(a => (a + 1) % fotos.length)}
                 >›</button>
               </>

@@ -34,15 +34,6 @@ export interface TurbidezData {
   color:         string
 }
 
-export interface MeteoData {
-  temp_max:    number
-  temp_min:    number
-  lluvia_mm:   number
-  prob_lluvia: number
-  nubosidad:   number
-  icono:       string
-}
-
 function calcEstadoSurf(olas: number, viento: number): string {
   if (olas >= 2.5 || viento >= 50) return 'PELIGRO'
   if (olas >= 1.5) return 'SURF'
@@ -54,29 +45,21 @@ function calcEstadoSurf(olas: number, viento: number): string {
 
 export const getMareas = cache(async (lat: number, lng: number): Promise<MarineData | null> => {
   try {
+    // Una sola llamada combinando oleaje + SST
     const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
-      + `&hourly=wave_height,wave_period,wind_wave_height`
+      + `&hourly=wave_height,wave_period,wind_wave_height,sea_surface_temperature`
       + `&daily=wave_height_max,wave_height_min,wind_speed_10m_max`
       + `&wind_speed_unit=kmh&forecast_days=7&timezone=Europe%2FMadrid`
 
-    const urlTemp = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
-      + `&hourly=sea_surface_temperature`
-      + `&forecast_days=1&timezone=Europe%2FMadrid`
+    const res = await fetch(url, { next: { revalidate: 3600 } })
+    if (!res.ok) return null
 
-    const [rMarine, rTemp] = await Promise.all([
-      fetch(url, { next: { revalidate: 3600 } }),
-      fetch(urlTemp, { next: { revalidate: 3600 } }),
-    ])
-
-    if (!rMarine.ok) return null
-
-    const marine   = await rMarine.json()
-    const tempData = rTemp.ok ? await rTemp.json() : null
+    const marine = await res.json()
 
     const ahora   = new Date().getHours()
     const oleaje  = marine.hourly?.wave_height ?? []
     const periodo = marine.hourly?.wave_period ?? []
-    const temps   = tempData?.hourly?.sea_surface_temperature ?? []
+    const temps   = marine.hourly?.sea_surface_temperature ?? []
     const tempAgua = temps[ahora] ?? temps[0] ?? null
 
     const dias      = marine.daily?.time ?? []
@@ -163,30 +146,3 @@ function estimarTurbidez(lat: number, lng: number): TurbidezData {
   return { visibilidad_m: visibilidad, turbidez, clorofila, nivel, color }
 }
 
-export const getMeteoForecast = cache(async (lat: number, lng: number): Promise<MeteoData[]> => {
-  try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}`
-      + `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,cloudcover_mean,weathercode`
-      + `&forecast_days=5&timezone=Europe%2FMadrid`
-
-    const res = await fetch(url, { next: { revalidate: 3600 } })
-    if (!res.ok) return []
-    const data = await res.json()
-
-    const ICONOS: Record<number, string> = {
-      0:'☀️', 1:'🌤', 2:'⛅', 3:'☁️',
-      45:'🌫', 48:'🌫', 51:'🌦', 53:'🌦', 55:'🌧',
-      61:'🌧', 63:'🌧', 65:'🌧', 71:'🌨', 73:'🌨', 75:'❄️',
-      80:'🌦', 81:'🌧', 82:'⛈', 95:'⛈', 96:'⛈', 99:'⛈',
-    }
-
-    return (data.daily?.time ?? []).slice(0, 5).map((_: string, i: number) => ({
-      temp_max:    Math.round(data.daily.temperature_2m_max[i] ?? 20),
-      temp_min:    Math.round(data.daily.temperature_2m_min[i] ?? 15),
-      lluvia_mm:   parseFloat((data.daily.precipitation_sum[i] ?? 0).toFixed(1)),
-      prob_lluvia: Math.round(data.daily.precipitation_probability_max[i] ?? 0),
-      nubosidad:   Math.round(data.daily.cloudcover_mean[i] ?? 0),
-      icono:       ICONOS[data.daily.weathercode[i]] ?? '🌤',
-    }))
-  } catch { return [] }
-})

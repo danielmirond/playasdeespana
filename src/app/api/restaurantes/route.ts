@@ -3,6 +3,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { haversine } from '@/lib/geo'
+import { parseCoords } from '@/lib/validation'
 
 const RADIUS = 800
 
@@ -10,14 +11,13 @@ export const runtime = 'nodejs'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
-  const lat = searchParams.get('lat')
-  const lon = searchParams.get('lon')
+  const coords = parseCoords(searchParams.get('lat'), searchParams.get('lon'))
 
-  if (!lat || !lon) {
-    return NextResponse.json({ error: 'lat y lon requeridos' }, { status: 400 })
+  if (!coords) {
+    return NextResponse.json({ error: 'lat y lon requeridos (coordenadas válidas)' }, { status: 400 })
   }
 
-  const resultados = await fromOSM(parseFloat(lat), parseFloat(lon))
+  const resultados = await fromOSM(coords.lat, coords.lon)
 
   return NextResponse.json(resultados, {
     headers: {

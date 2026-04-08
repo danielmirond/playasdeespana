@@ -3,7 +3,8 @@
 import type { Playa, Restaurante } from '@/types'
 import type { FotoPlaya } from '@/lib/fotos'
 import type { HotelReal } from '@/lib/hoteles'
-import type { ForecastDay, TurbidezData, MeteoData } from '@/lib/marine'
+import type { ForecastDay, TurbidezData } from '@/lib/marine'
+import type { MeteoForecast } from '@/lib/meteo'
 import IluEstado from './IluEstado'
 import TraficoSection from './TraficoSection'
 import SurfSection from './SurfSection'
@@ -37,7 +38,7 @@ interface Props {
   escuelas?:      Escuela[]
   turbidez?:      TurbidezData | null
   forecastSurf?:  ForecastDay[] | null
-  meteoForecast?: MeteoData[]
+  meteoForecast?: MeteoForecast[]
   locale?:        'es' | 'en'
 }
 
@@ -432,7 +433,7 @@ function CompassSVG({ dir }: { dir: string }) {
   const angles: Record<string,number> = { N:0,NE:45,E:90,SE:135,S:180,SO:225,O:270,NO:315 }
   const angle = angles[dir] ?? 0
   return (
-    <svg width="82" height="82" viewBox="0 0 82 82" style={{ flexShrink:0 }}>
+    <svg width="82" height="82" viewBox="0 0 82 82" style={{ flexShrink:0 }} role="img" aria-label={`Viento dirección ${dir}`}>
       <circle cx="41" cy="41" r="37" fill="rgba(255,255,255,.45)" stroke="rgba(180,130,60,.2)" strokeWidth="1.5"/>
       <text x="41" y="10" textAnchor="middle" fontSize="8" fill="#9a7848" fontFamily="sans-serif" fontWeight="600">N</text>
       <text x="72" y="44" textAnchor="middle" fontSize="8" fill="#9a7848" fontFamily="sans-serif">E</text>

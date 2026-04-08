@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { getComunidades, getProvincias } from '@/lib/playas'
 
 export const revalidate = 604800
-const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playasdeespana.es'
 
 export async function GET() {
   const [comunidades, provincias] = await Promise.all([

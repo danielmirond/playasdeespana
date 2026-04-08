@@ -65,14 +65,17 @@ export default function Buscador({ onSearch, onFilter, locale = 'es' }: Props) {
         <svg className={styles.icon} width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
+        <label htmlFor="beach-search" className="sr-only">{placeholder}</label>
         <input
+          id="beach-search"
           className={styles.input}
-          type="text"
+          type="search"
           value={q}
           onChange={e => setQ(e.target.value)}
           onKeyDown={handleKey}
           placeholder={placeholder}
           autoComplete="off"
+          aria-label={placeholder}
         />
         <button className={styles.btn} onClick={handleSearch}>{btnLabel}</button>
       </div>
