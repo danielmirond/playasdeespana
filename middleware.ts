@@ -28,6 +28,13 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url, { status: 301 })
   }
 
+  // Redirigir /en/municipio/[slug] → /en/towns/[slug]
+  if (pathname.startsWith('/en/municipio/')) {
+    const url = req.nextUrl.clone()
+    url.pathname = pathname.replace('/en/municipio/', '/en/towns/')
+    return NextResponse.redirect(url, { status: 301 })
+  }
+
   // No redirigir rutas ya localizadas, API, archivos estáticos
   if (
     pathname.startsWith('/en') ||
