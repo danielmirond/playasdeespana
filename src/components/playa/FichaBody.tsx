@@ -19,6 +19,7 @@ import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number
   vientoDireccion: string; uv: number; tempAire: number
+  sensacion: number; humedad: number
   amanecer?: string; atardecer?: string; estado: string; periodo?: number
 }
 interface OleajeHora { h: string; v: number }
@@ -48,7 +49,7 @@ const T = {
     amanecer:'Amanecer', horasLuz:'Horas de luz', atardecer:'Atardecer',
     temperatura:'🌡 Temperatura', tempSrc:'Open-Meteo',
     tempAire:'Temperatura aire', tempAgua:'Temperatura agua',
-    sensacion:'Sensación térmica', indiceUV:'Índice UV',
+    sensacion:'Sensación térmica', indiceUV:'Índice UV', humedad:'Humedad',
     viento:'💨 Viento', velocidad:'Velocidad', racha:'Racha máxima', direccion:'Dirección',
     calidad:'Calidad del agua', calidadSrc:'EEA · 2006/7/CE',
     muestras:'Muestras conformes', temporada:'Temporada', clasificacion:'Clasificación',
@@ -82,7 +83,7 @@ const T = {
     amanecer:'Sunrise', horasLuz:'Daylight hours', atardecer:'Sunset',
     temperatura:'🌡 Temperature', tempSrc:'Open-Meteo',
     tempAire:'Air temperature', tempAgua:'Water temperature',
-    sensacion:'Feels like', indiceUV:'UV index',
+    sensacion:'Feels like', indiceUV:'UV index', humedad:'Humidity',
     viento:'💨 Wind', velocidad:'Speed', racha:'Max gust', direccion:'Direction',
     calidad:'Water quality', calidadSrc:'EEA · 2006/7/CE',
     muestras:'Compliant samples', temporada:'Season', clasificacion:'Classification',
@@ -196,10 +197,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <div className={styles.tempGrid}>
-              <TempCell icon="🌡" val={`${meteo.tempAire}°C`}     label={i18n.tempAire}/>
-              <TempCell icon="💧" val={`${meteo.agua}°C`}         label={i18n.tempAgua}/>
-              <TempCell icon="🤔" val={`${meteo.tempAire - 2}°C`} label={i18n.sensacion}/>
-              <TempCell icon="☀️" val={`UV ${meteo.uv}`}          label={i18n.indiceUV}/>
+              <TempCell icon="🌡" val={`${meteo.tempAire}°C`}   label={i18n.tempAire}/>
+              <TempCell icon="💧" val={`${meteo.agua}°C`}       label={i18n.tempAgua}/>
+              <TempCell icon="🤔" val={`${meteo.sensacion}°C`}  label={i18n.sensacion}/>
+              <TempCell icon="☀️" val={`UV ${meteo.uv}`}        label={i18n.indiceUV}/>
+              <TempCell icon="💦" val={`${meteo.humedad}%`}     label={i18n.humedad}/>
             </div>
           </div>
 

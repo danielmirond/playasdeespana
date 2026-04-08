@@ -1,13 +1,11 @@
 // src/lib/marine.ts
 import { cache } from 'react'
-import { gradosADireccion } from './geo'
+
 
 export interface MarineData {
   temp_agua:   number[]
   oleaje_m:    number[]
   wave_period: number[]
-  wind_speed:  number[]
-  wind_dir:    number[]
   forecast:    ForecastDay[]
 }
 
@@ -36,13 +34,6 @@ export interface TurbidezData {
   color:         string
 }
 
-export interface VientoData {
-  velocidad:   number   // km/h
-  racha:       number   // km/h
-  direccion:   string   // N, NE, E...
-  grados:      number   // 0-360
-}
-
 export interface MeteoData {
   temp_max:    number
   temp_min:    number
@@ -60,32 +51,6 @@ function calcEstadoSurf(olas: number, viento: number): string {
   if (olas >= 0.4 || viento >= 15) return 'BUENA'
   return 'CALMA'
 }
-
-export const getViento = cache(async (lat: number, lng: number): Promise<VientoData | null> => {
-  try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}`
-      + `&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m`
-      + `&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`
-
-    const res = await fetch(url, { next: { revalidate: 3600 } })
-    if (!res.ok) return null
-    const data = await res.json()
-
-    const ahora     = new Date().getHours()
-    const velocidad = Math.round(data.hourly?.wind_speed_10m?.[ahora] ?? 0)
-    const racha     = Math.round(data.hourly?.wind_gusts_10m?.[ahora] ?? velocidad * 1.3)
-    const grados    = Math.round(data.hourly?.wind_direction_10m?.[ahora] ?? 0)
-
-    return {
-      velocidad,
-      racha,
-      direccion: gradosADireccion(grados),
-      grados,
-    }
-  } catch {
-    return null
-  }
-})
 
 export const getMareas = cache(async (lat: number, lng: number): Promise<MarineData | null> => {
   try {
@@ -139,8 +104,6 @@ export const getMareas = cache(async (lat: number, lng: number): Promise<MarineD
       temp_agua:   tempAgua !== null ? [tempAgua, ...temps.slice(ahora + 1, ahora + 6)] : [],
       oleaje_m:    oleaje.slice(ahora, ahora + 6).map((v: number) => parseFloat(v.toFixed(1))),
       wave_period: periodo.slice(ahora, ahora + 6),
-      wind_speed:  [],
-      wind_dir:    [],
       forecast,
     }
   } catch {

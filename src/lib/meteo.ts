@@ -1,25 +1,27 @@
 // src/lib/meteo.ts — Datos meteorológicos unificados via Open-Meteo (sin API key)
+// Proporciona: temperatura aire, sensación térmica, viento, humedad, UV
+// La temperatura del agua viene de getMareas() en marine.ts (misma API, sin duplicar)
 import { cache } from 'react'
 import { gradosADireccion } from './geo'
 
 export interface MeteoPlaya {
-  temp_agua:    number | null
-  temp_aire:    number
-  temp_max:     number
-  temp_min:     number
-  sensacion:    number
-  viento_kmh:   number
-  viento_dir:   string
+  temp_aire:      number
+  temp_max:       number
+  temp_min:       number
+  sensacion:      number
+  viento_kmh:     number
+  viento_dir:     string
   viento_dir_deg: number
-  viento_racha: number
-  humedad:      number
-  uv_max:       number | null
-  timestamp:    string
+  viento_racha:   number
+  humedad:        number
+  uv_max:         number | null
+  timestamp:      string
 }
 
 /**
- * Obtiene datos meteorológicos completos para una playa usando Open-Meteo.
- * Sustituye las antiguas llamadas a AEMET unificando en una sola fuente.
+ * Obtiene datos meteorológicos atmosféricos para una playa usando Open-Meteo.
+ * Una sola llamada HTTP — el viento, UV, humedad y sensación térmica vienen de aquí.
+ * La temperatura del agua y oleaje vienen de getMareas() (marine.ts).
  */
 export const getMeteoPlaya = cache(async (lat: number, lng: number): Promise<MeteoPlaya | null> => {
   try {
@@ -28,28 +30,14 @@ export const getMeteoPlaya = cache(async (lat: number, lng: number): Promise<Met
       + `&daily=temperature_2m_max,temperature_2m_min`
       + `&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`
 
-    const urlMarine = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
-      + `&hourly=sea_surface_temperature`
-      + `&forecast_days=1&timezone=Europe%2FMadrid`
+    const res = await fetch(url, { next: { revalidate: 3600 } })
+    if (!res.ok) return null
+    const data = await res.json()
 
-    const [resMeteo, resMarine] = await Promise.all([
-      fetch(url, { next: { revalidate: 3600 } }),
-      fetch(urlMarine, { next: { revalidate: 3600 } }),
-    ])
-
-    if (!resMeteo.ok) return null
-    const meteo = await resMeteo.json()
-    const marine = resMarine.ok ? await resMarine.json() : null
-
-    const ahora = new Date().getHours()
-    const temps = marine?.hourly?.sea_surface_temperature ?? []
-    const tempAgua = temps[ahora] ?? temps[0] ?? null
-
-    const current = meteo.current ?? {}
-    const daily = meteo.daily ?? {}
+    const current = data.current ?? {}
+    const daily = data.daily ?? {}
 
     return {
-      temp_agua:      tempAgua,
       temp_aire:      Math.round(current.temperature_2m ?? 20),
       temp_max:       Math.round(daily.temperature_2m_max?.[0] ?? current.temperature_2m ?? 20),
       temp_min:       Math.round(daily.temperature_2m_min?.[0] ?? 15),

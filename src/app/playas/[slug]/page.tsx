@@ -5,7 +5,7 @@ import { join } from 'path'
 import { getPlayaBySlug, getPlayas } from '@/lib/playas'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
-import { getMareas, getSol, getTurbidez, getMeteoForecast, getViento } from '@/lib/marine'
+import { getMareas, getSol, getTurbidez, getMeteoForecast } from '@/lib/marine'
 import { getMeteoPlaya } from '@/lib/meteo'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
@@ -62,7 +62,7 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, vientoReal] = await Promise.allSettled([
+  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -72,7 +72,6 @@ export default async function PlayaPage({ params }: Props) {
     getEscuelas(playa.lat, playa.lng),
     getTurbidez(playa.lat, playa.lng),
     getMeteoForecast(playa.lat, playa.lng),
-    getViento(playa.lat, playa.lng),
   ])
 
   const mareasData        = mareas.status === 'fulfilled' ? mareas.value : null
@@ -84,14 +83,16 @@ export default async function PlayaPage({ params }: Props) {
   const escuelasData      = escuelasResult.status === 'fulfilled' ? escuelasResult.value : []
   const turbidezData      = turbidez.status === 'fulfilled' ? turbidez.value : null
   const meteoForecastData = meteoForecast.status === 'fulfilled' ? meteoForecast.value : []
-  const vientoData        = vientoReal.status === 'fulfilled' ? vientoReal.value : null
 
-  const tempAgua = mareasData?.temp_agua?.[0] ?? meteoPlayaData?.temp_agua ?? null
+  // Datos marinos (oleaje, temperatura agua) de Open-Meteo Marine
+  const tempAgua = mareasData?.temp_agua?.[0] ?? null
   const olas     = mareasData?.oleaje_m?.[0]  ?? 0
-  const viento      = vientoData?.velocidad ?? meteoPlayaData?.viento_kmh ?? 0
-  const vientoRacha = vientoData?.racha     ?? meteoPlayaData?.viento_racha ?? 0
-  const vientoDirRaw = vientoData?.direccion ?? meteoPlayaData?.viento_dir ?? 'N'
   const periodo  = mareasData?.wave_period?.[0] ?? 8
+
+  // Datos atmosféricos (viento, UV, temp aire, sensación, humedad) de Open-Meteo Forecast
+  const viento       = meteoPlayaData?.viento_kmh   ?? 0
+  const vientoRacha  = meteoPlayaData?.viento_racha ?? 0
+  const vientoDirRaw = meteoPlayaData?.viento_dir   ?? 'N'
 
   const seed      = playa.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
   const estadoKey = calcularEstado({ olas, viento })
@@ -105,7 +106,9 @@ export default async function PlayaPage({ params }: Props) {
     vientoRacha,
     vientoDireccion: vientoDirRaw,
     uv:              meteoPlayaData?.uv_max ?? 5,
-    tempAire:        meteoPlayaData?.temp_aire ?? (tempAgua ? Math.round(tempAgua + 3) : 22),
+    tempAire:        meteoPlayaData?.temp_aire ?? 22,
+    sensacion:       meteoPlayaData?.sensacion ?? meteoPlayaData?.temp_aire ?? 20,
+    humedad:         meteoPlayaData?.humedad ?? 0,
     estado:          estadoKey,
     amanecer:        solData?.amanecer,
     atardecer:       solData?.atardecer,

@@ -2,7 +2,8 @@
 // Genera OG image dinámica 1200x630 por playa
 import { ImageResponse } from 'next/og'
 import { getPlayaBySlug } from '@/lib/playas'
-import { getViento, getMeteoForecast } from '@/lib/marine'
+import { getMareas } from '@/lib/marine'
+import { getMeteoPlaya } from '@/lib/meteo'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 
 export const runtime = 'edge'
@@ -32,23 +33,24 @@ export default async function OGImage({ params }: { params: Promise<{ slug: stri
     )
   }
 
-  // Datos meteo
-  let agua = 20, olas = 0.5, viento = 10, estadoKey = 'CALMA'
+  // Datos meteo reales de Open-Meteo
+  let agua = 20, olas = 0.5, viento = 10, tempAire = 23, estadoKey = 'CALMA'
   try {
-    const [vientoData] = await Promise.allSettled([getViento(playa.lat, playa.lng)])
-    if (vientoData.status === 'fulfilled' && vientoData.value) {
-      viento = vientoData.value.velocidad
-    }
+    const [mareasResult, meteoResult] = await Promise.allSettled([
+      getMareas(playa.lat, playa.lng),
+      getMeteoPlaya(playa.lat, playa.lng),
+    ])
+    const mareasData = mareasResult.status === 'fulfilled' ? mareasResult.value : null
+    const meteoData  = meteoResult.status === 'fulfilled' ? meteoResult.value : null
+
+    agua     = mareasData?.temp_agua?.[0] ?? 20
+    olas     = mareasData?.oleaje_m?.[0]  ?? 0.5
+    viento   = meteoData?.viento_kmh      ?? 10
+    tempAire = meteoData?.temp_aire       ?? 23
     estadoKey = calcularEstado({ olas, viento })
   } catch {}
 
-  const seed = playa.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
-  agua  = 18 + (seed % 8)
-  olas  = parseFloat(((seed % 15) / 10).toFixed(1))
-  estadoKey = calcularEstado({ olas, viento })
-
-  const estado  = ESTADO_COLORS[estadoKey] ?? ESTADO_COLORS.CALMA
-  const tempAire = agua + 3
+  const estado = ESTADO_COLORS[estadoKey] ?? ESTADO_COLORS.CALMA
 
   const servicios = [
     playa.bandera    && '🏖 Bandera Azul',
