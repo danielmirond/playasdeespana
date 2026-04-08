@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   title: en.meta.title,
   description: en.meta.description,
   alternates: {
-    canonical: 'https://playasdeespana.es/en',
-    languages: { 'es': 'https://playasdeespana.es', 'en': 'https://playasdeespana.es/en' },
+    canonical: 'https://playas-espana.com/en',
+    languages: { 'es': 'https://playas-espana.com', 'en': 'https://playas-espana.com/en' },
   },
   openGraph: {
     title: en.meta.og_title,
     description: en.meta.og_description,
-    url: 'https://playasdeespana.es/en',
+    url: 'https://playas-espana.com/en',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
   },
 }

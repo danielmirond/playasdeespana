@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playasdeespana.es'
+const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 // ── Helper para fichas de playa ───────────────────────────────────────────────
 export function buildPlayaMetadata({

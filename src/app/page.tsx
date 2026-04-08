@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Playas de España',
     description: 'Estado del mar en tiempo real',
-    url: 'https://playasdeespana.es',
+    url: 'https://playas-espana.com',
     images: [{ url: '/api/og?playa=Playas+de+España', width: 1200, height: 630 }],
   },
 }

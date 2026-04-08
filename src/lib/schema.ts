@@ -1,6 +1,6 @@
 // Generadores de JSON-LD para todas las páginas
 
-const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playasdeespana.es'
+const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 // ── WebSite — solo en home ────────────────────────────────────────────────────
 export function buildWebSiteSchema() {

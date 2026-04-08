@@ -108,7 +108,7 @@ export default async function OGImage({ params }: { params: Promise<{ slug: stri
           </div>
           <div style={{ flex: 1 }}/>
           <div style={{ fontSize: 20, color: '#9a7848', fontFamily: 'sans-serif' }}>
-            playasdeespana.es
+            playas-espana.com
           </div>
         </div>
 

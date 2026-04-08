@@ -11,14 +11,14 @@
   ],
 
   "env": {
-    "NEXT_PUBLIC_BASE_URL": "https://playasdeespana.es"
+    "NEXT_PUBLIC_BASE_URL": "https://playas-espana.com"
   },
 
   "headers": [
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "https://playasdeespana.es" }
+        { "key": "Access-Control-Allow-Origin", "value": "https://playas-espana.com" }
       ]
     }
   ]

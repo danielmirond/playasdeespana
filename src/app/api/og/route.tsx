@@ -115,7 +115,7 @@ export async function GET(req: NextRequest) {
             fontFamily: 'system-ui, sans-serif',
             letterSpacing: '0.1em', fontWeight: '300',
           }}>
-            playasdeespana.es
+            playas-espana.com
           </div>
         </div>
 

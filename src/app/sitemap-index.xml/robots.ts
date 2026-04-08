@@ -1,7 +1,7 @@
 // src/app/robots.ts
 import type { MetadataRoute } from 'next'
 
-const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playasdeespana.es'
+const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export default function robots(): MetadataRoute.Robots {
   return {
