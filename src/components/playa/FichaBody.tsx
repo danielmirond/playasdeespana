@@ -129,6 +129,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
 }
 
 export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, locale = 'es' }: Props) {
+  const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const horasLuz = solData?.horas_luz ?? '—'
@@ -428,9 +429,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             {playa.anchura     && <DataRow k={i18n.anchura}      v={`${playa.anchura} m`}/>}
             {playa.composicion && <DataRow k={i18n.composicion}  v={playa.composicion}/>}
             {playa.tipo        && <DataRow k={i18n.tipo}         v={playa.tipo}/>}
-            <DataRow k={i18n.municipio}   v={playa.municipio}/>
-            <DataRow k={i18n.provincia}   v={playa.provincia}/>
-            <DataRow k={i18n.comunidad}   v={playa.comunidad}/>
+            <DataRow k={i18n.municipio}   v={playa.municipio} href={locale === 'en' ? `/en/towns/${slug(playa.municipio)}` : `/municipio/${slug(playa.municipio)}`}/>
+            <DataRow k={i18n.provincia}   v={playa.provincia} href={locale === 'en' ? `/en/provinces/${slug(playa.provincia)}` : `/provincia/${slug(playa.provincia)}`}/>
+            <DataRow k={i18n.comunidad}   v={playa.comunidad} href={locale === 'en' ? `/en/communities/${slug(playa.comunidad)}` : `/comunidad/${slug(playa.comunidad)}`}/>
             <DataRow k={i18n.coordenadas} v={`${playa.lat}° N, ${playa.lng}° E`} mono/>
           </div>
         </div>
@@ -473,8 +474,11 @@ function TempCell({ icon, val, label }: { icon:string; val:string; label:string 
   return <div className={styles.tempCell}><span className={styles.tcIcon}>{icon}</span><div><span className={styles.tcV}>{val}</span><span className={styles.tcL}>{label}</span></div></div>
 }
 
-function DataRow({ k, v, mono }: { k:string; v:string; mono?:boolean }) {
-  return <div className={styles.dataRow}><span className={styles.drK}>{k}</span><span className={`${styles.drV} ${mono ? styles.drMono : ''}`}>{v}</span></div>
+function DataRow({ k, v, mono, href }: { k:string; v:string; mono?:boolean; href?:string }) {
+  const val = href
+    ? <a href={href} style={{ color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600 }}>{v}</a>
+    : v
+  return <div className={styles.dataRow}><span className={styles.drK}>{k}</span><span className={`${styles.drV} ${mono ? styles.drMono : ''}`}>{val}</span></div>
 }
 
 function CompassSVG({ dir }: { dir: string }) {

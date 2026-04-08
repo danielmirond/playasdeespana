@@ -35,7 +35,8 @@ export default function Nav() {
       <nav className={styles.links}>
         <Link href={isEn ? '/en' : '/'} className={styles.link}>{isEn ? 'Home' : 'Inicio'}</Link>
         <Link href={isEn ? '/en/communities' : '/comunidades'} className={styles.link}>{isEn ? 'Communities' : 'Comunidades'}</Link>
-        <Link href="/mapa" className={styles.link}>Mapa</Link>
+        <Link href={isEn ? '/en/blue-flag' : '/banderas-azules'} className={styles.link}>{isEn ? 'Blue Flag' : 'Banderas Azules'}</Link>
+        <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
       </nav>
       <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label="Playas de España — Inicio">
         <img src="/logo.svg" alt="Playas de España" width={28} height={28} style={{ display:'block' }} />

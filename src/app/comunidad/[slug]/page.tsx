@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import { getPlayas, getPlayasByComunidad, getComunidades } from '@/lib/playas'
+import { getPlayas, getPlayasByComunidad, getComunidades, getMunicipios } from '@/lib/playas'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './ComunidadPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
@@ -33,7 +33,11 @@ export default async function ComunidadPage({ params }: Props) {
   const comunidad = comunidades.find(c => c.slug === slug)
   if (!comunidad) notFound()
 
-  const playas = await getPlayasByComunidad(slug)
+  const [playas, allMunicipios] = await Promise.all([
+    getPlayasByComunidad(slug),
+    getMunicipios(),
+  ])
+  const municipios = allMunicipios.filter(m => m.comunidadSlug === slug)
 
   // Calcular estado para cada playa (seed determinista)
   const playasConEstado = playas.map(p => {
@@ -140,6 +144,27 @@ export default async function ComunidadPage({ params }: Props) {
             </div>
           )
         })}
+
+        {/* MUNICIPIOS CON MÁS PLAYAS */}
+        {municipios.length > 0 && (
+          <div style={{ marginTop: '2.5rem' }}>
+            <div className={styles.provinciaHead}>
+              <h2 className={styles.provinciaTitulo} style={{ fontSize: '1.1rem' }}>Municipios con más playas</h2>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginTop: '.75rem' }}>
+              {municipios.map(m => (
+                <Link key={m.slug} href={`/municipio/${m.slug}`} style={{
+                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                  borderRadius: '100px', padding: '.4rem .9rem', textDecoration: 'none',
+                  fontSize: '.78rem', fontWeight: 600, color: 'var(--accent)',
+                  transition: 'border-color .15s',
+                }}>
+                  {m.nombre} <span style={{ color: 'var(--muted)', fontWeight: 400 }}>({m.count})</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </>
   )

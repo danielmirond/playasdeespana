@@ -55,6 +55,11 @@ export default async function HomePage() {
         <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)', fontSize: '.9rem' }}>
           Playas de España
         </span>
+        <nav style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
+          <a href="/comunidades" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Comunidades</a>
+          <a href="/banderas-azules" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Banderas Azules</a>
+          <a href="/mapa" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Mapa</a>
+        </nav>
         <span>Open-Meteo · EEA · OSM</span>
       </footer>
     </>
