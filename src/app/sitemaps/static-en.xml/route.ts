@@ -19,6 +19,7 @@ export async function GET() {
     { url: '/en',                priority: '1.0', freq: 'daily' },
     { url: '/en/search',         priority: '0.8', freq: 'weekly' },
     { url: '/en/communities',    priority: '0.8', freq: 'weekly' },
+    { url: '/en/blue-flag',      priority: '0.8', freq: 'weekly' },
   ]
   for (const p of estaticas) {
     urls.push(`  <url>

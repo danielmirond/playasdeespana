@@ -17,10 +17,11 @@ export async function GET() {
 
   // Páginas estáticas
   const estaticas = [
-    { url: '/',            priority: '1.0', freq: 'daily' },
-    { url: '/mapa',        priority: '0.9', freq: 'daily' },
-    { url: '/buscar',      priority: '0.8', freq: 'weekly' },
-    { url: '/comunidades', priority: '0.8', freq: 'weekly' },
+    { url: '/',                priority: '1.0', freq: 'daily' },
+    { url: '/mapa',            priority: '0.9', freq: 'daily' },
+    { url: '/buscar',          priority: '0.8', freq: 'weekly' },
+    { url: '/comunidades',     priority: '0.8', freq: 'weekly' },
+    { url: '/banderas-azules', priority: '0.8', freq: 'weekly' },
   ]
   for (const p of estaticas) {
     urls.push(`  <url>
