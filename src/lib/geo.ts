@@ -12,6 +12,14 @@ export function haversine(lat1: number, lon1: number, lat2: number, lon2: number
   return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)))
 }
 
+const PREFIJOS_PLAYA = /^(playa\s+de\s+|playa\s+del\s+|playa\s+|platja\s+de\s+|platja\s+del\s+|platja\s+|praia\s+de\s+|praia\s+da\s+|praia\s+do\s+|praia\s+|cala\s+|arenal\s+de\s+|arenal\s+)/i
+
+/** Antepone "Playa de" solo si el nombre no empieza ya por playa/platja/praia/cala/arenal */
+export function nombreConPlaya(nombre: string): string {
+  if (PREFIJOS_PLAYA.test(nombre)) return nombre
+  return `Playa de ${nombre}`
+}
+
 /** Convierte grados (0-360) a dirección textual de 16 vientos */
 export function gradosADireccion(deg: number): string {
   const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO']

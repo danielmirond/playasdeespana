@@ -7,6 +7,7 @@ import type { EstadoConfig } from '@/lib/estados'
 import IluEstado from './IluEstado'
 import styles from './FichaHero.module.css'
 import { Drop, Waves, Sun, Wind, Thermometer, Umbrella } from '@phosphor-icons/react'
+import { nombreConPlaya } from '@/lib/geo'
 
 interface Meteo {
   agua: number; olas: number; viento: number
@@ -72,7 +73,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }
         <span>›</span>
         <span>{playa.nombre}</span>
       </div>
-      <h1 className={styles.nombre}>{locale === 'en' ? `${playa.nombre} Beach today — ${playa.municipio}` : `Playa de ${playa.nombre} hoy — ${playa.municipio}`}</h1>
+      <h1 className={styles.nombre}>{locale === 'en' ? `${playa.nombre} today — ${playa.municipio}` : `${nombreConPlaya(playa.nombre)} hoy — ${playa.municipio}`}</h1>
       <div className={styles.lugar}>
         <span>{playa.municipio}</span>
         <span className={styles.dot}>·</span>

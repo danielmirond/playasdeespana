@@ -9,6 +9,7 @@ import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
+import { nombreConPlaya } from '@/lib/geo'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import { getHoteles } from '@/lib/hoteles'
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const distRest = rests[0]?.distancia_m ?? 300
 
   const title = `How is ${playa.nombre} today | Flag, conditions, wind and water temperature - Parking, hotels and where to eat nearby`
-  const description = `Sea conditions at ${playa.nombre} today. ${bandera.labelEn}, water temperature ${agua}°C, waves ${olas}m, wind ${viento}km/h, ${medusas.labelEn.toLowerCase()}. Nearby parking, hotels and restaurants at ${distRest}m.`
+  const description = `Sea conditions at ${nombreConPlaya(playa.nombre)} today. ${bandera.labelEn}, water temperature ${agua}°C, waves ${olas}m, wind ${viento}km/h, ${medusas.labelEn.toLowerCase()}. Nearby parking, hotels and restaurants at ${distRest}m.`
   const now = new Date().toISOString()
 
   return {

@@ -8,6 +8,7 @@ import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
+import { nombreConPlaya } from '@/lib/geo'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
@@ -48,8 +49,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const medusas = estimarMedusas(playa.lat, playa.lng, agua, viento, meteoD?.viento_dir ?? 'N')
   const distRest = rests[0]?.distancia_m ?? 300
 
-  const title = `Cómo está ${playa.nombre} hoy | Bandera, estado, viento y temperatura del agua - Parking, hoteles y donde comer cerca`
-  const description = `Estado del mar en ${playa.nombre} hoy. ${bandera.label}, temperatura del agua ${agua}°C, olas ${olas}m, viento ${viento}km/h, ${medusas.label.toLowerCase()}. Parking cercano, hoteles y restaurantes a ${distRest}m.`
+  const np = nombreConPlaya(playa.nombre)
+  const title = `Cómo está ${np} hoy | Bandera, estado, viento y temperatura del agua - Parking, hoteles y donde comer cerca`
+  const description = `Estado del mar en ${np} hoy. ${bandera.label}, temperatura del agua ${agua}°C, olas ${olas}m, viento ${viento}km/h, ${medusas.label.toLowerCase()}. Parking cercano, hoteles y restaurantes a ${distRest}m.`
   const now = new Date().toISOString()
 
   return {
