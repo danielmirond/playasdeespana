@@ -158,7 +158,7 @@ export default async function PlayaPage({ params }: Props) {
 
   return (
     <>
-      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} calidad={calidad?.nivel} dateModified={dateModified} />
+      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} viento={meteo.viento} calidad={calidad?.nivel} banderaColor={banderaPlaya.color} banderaLabel={banderaPlaya.label} medusasLabel={medusas.label} dateModified={dateModified} />
       <Nav />
       <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} />
       <FichaNav />

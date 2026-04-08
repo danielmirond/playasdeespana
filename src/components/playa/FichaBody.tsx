@@ -436,6 +436,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         </div>
 
+        {/* FAQS */}
+        <FaqSection playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} locale={locale} />
+
         <TextoSEO playa={playa} locale={locale} />
 
       </div>
@@ -456,6 +459,69 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         </div>
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} />
       </aside>
+    </div>
+  )
+}
+
+function FaqSection({ playa, meteo, banderaPlaya, medusas, locale = 'es' }: {
+  playa: Playa; meteo: Meteo; banderaPlaya?: BanderaPlaya; medusas?: MedusasRiesgo; locale?: 'es' | 'en'
+}) {
+  const n = playa.nombre
+  const es = locale === 'es'
+
+  const faqs: { q: string; a: string }[] = [
+    {
+      q: es ? `¿Cómo está el agua en ${n} hoy?` : `How is the water at ${n} today?`,
+      a: es
+        ? `La temperatura del agua en ${n} es de ${meteo.agua}°C con olas de ${meteo.olas}m.`
+        : `Water temperature at ${n} is ${meteo.agua}°C with ${meteo.olas}m waves.`,
+    },
+    banderaPlaya ? {
+      q: es ? `¿Qué bandera tiene ${n} hoy?` : `What flag does ${n} have today?`,
+      a: es ? (banderaPlaya.label + '. ' + banderaPlaya.motivo + '.') : (banderaPlaya.labelEn + '. ' + banderaPlaya.motivoEn + '.'),
+    } : null,
+    medusas ? {
+      q: es ? `¿Hay medusas en ${n}?` : `Are there jellyfish at ${n}?`,
+      a: es ? (medusas.label + '. ' + medusas.detalle + '.') : (medusas.labelEn + '. ' + medusas.detalleEn + '.'),
+    } : null,
+    {
+      q: es ? `¿Cuánto viento hace en ${n}?` : `How windy is it at ${n}?`,
+      a: es
+        ? `El viento en ${n} es de ${meteo.viento} km/h con rachas de ${meteo.vientoRacha} km/h (dirección ${meteo.vientoDireccion}).`
+        : `Wind at ${n} is ${meteo.viento} km/h with gusts of ${meteo.vientoRacha} km/h (${meteo.vientoDireccion}).`,
+    },
+    playa.parking !== undefined ? {
+      q: es ? `¿Hay parking cerca de ${n}?` : `Is there parking near ${n}?`,
+      a: es
+        ? (playa.parking ? `Sí, hay aparcamiento próximo a ${n}.` : `${n} no dispone de parking oficial.`)
+        : (playa.parking ? `Yes, there is parking near ${n}.` : `${n} does not have official parking.`),
+    } : null,
+    playa.perros !== undefined ? {
+      q: es ? `¿Se permiten perros en ${n}?` : `Are dogs allowed at ${n}?`,
+      a: es
+        ? (playa.perros ? `Sí, ${n} permite perros.` : `No, en ${n} no se permiten perros.`)
+        : (playa.perros ? `Yes, dogs are allowed at ${n}.` : `No, dogs are not allowed at ${n}.`),
+    } : null,
+  ].filter(Boolean) as { q: string; a: string }[]
+
+  if (faqs.length === 0) return null
+
+  return (
+    <div className={styles.card} id="s-faqs">
+      <div className={styles.cardHead}>
+        <h2 className={styles.cardTitle}>{es ? `Preguntas frecuentes sobre ${n}` : `Frequently asked questions about ${n}`}</h2>
+      </div>
+      <div className={styles.cardBody}>
+        {faqs.map((faq, i) => (
+          <details key={i} style={{ borderBottom: i < faqs.length - 1 ? '1px solid var(--line,#e8dcc8)' : 'none', padding: '.65rem 0' }}>
+            <summary style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              {faq.q}
+              <span style={{ color: 'var(--muted)', fontSize: '.7rem', flexShrink: 0, marginLeft: '.5rem' }}>+</span>
+            </summary>
+            <p style={{ fontSize: '.78rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.4rem' }}>{faq.a}</p>
+          </details>
+        ))}
+      </div>
     </div>
   )
 }
