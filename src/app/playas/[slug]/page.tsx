@@ -30,14 +30,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const playa = await getPlayaBySlug(slug)
   if (!playa) return {}
+
+  // Fetch ligero para datos reales en description (cacheado, lo reutiliza el page)
+  const [mareasRes, meteoRes, restRes] = await Promise.allSettled([
+    getMareas(playa.lat, playa.lng),
+    getMeteoPlaya(playa.lat, playa.lng),
+    getRestaurantes(playa.lat, playa.lng),
+  ])
+  const mareas = mareasRes.status === 'fulfilled' ? mareasRes.value : null
+  const meteoD = meteoRes.status === 'fulfilled' ? meteoRes.value : null
+  const rests  = restRes.status === 'fulfilled' ? restRes.value : []
+
+  const agua = mareas?.temp_agua?.[0] ?? 18
+  const olas = mareas?.oleaje_m?.[0] ?? 0
+  const viento = meteoD?.viento_kmh ?? 0
+  const bandera = calcularBandera(olas, viento, meteoD?.viento_racha ?? 0)
+  const medusas = estimarMedusas(playa.lat, playa.lng, agua, viento, meteoD?.viento_dir ?? 'N')
+  const distRest = rests[0]?.distancia_m ?? 300
+
   const title = `Cómo está ${playa.nombre} hoy | Bandera, estado, viento y temperatura del agua - Parking, hoteles y donde comer cerca`
+  const description = `Estado del mar en ${playa.nombre} hoy. ${bandera.label}, temperatura del agua ${agua}°C, olas ${olas}m, viento ${viento}km/h, ${medusas.label.toLowerCase()}. Parking cercano, hoteles y restaurantes a ${distRest}m.`
   const now = new Date().toISOString()
+
   return {
     title,
-    description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
+    description,
     openGraph: {
       title,
-      description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
+      description,
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/playas/${slug}`,
       siteName: 'Playas de España',
       locale: 'es_ES',
@@ -54,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       title,
-      description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
+      description,
       images: [`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?playa=${encodeURIComponent(playa.nombre)}&municipio=${encodeURIComponent(playa.municipio + ' · ' + playa.provincia)}&comunidad=${encodeURIComponent(playa.comunidad)}&azul=${playa.bandera ? 'true' : 'false'}`],
     },
     alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },
