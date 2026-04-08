@@ -436,10 +436,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         </div>
 
+        <TextoSEO playa={playa} locale={locale} />
+
         {/* FAQS */}
         <FaqSection playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} locale={locale} />
-
-        <TextoSEO playa={playa} locale={locale} />
 
       </div>
 
