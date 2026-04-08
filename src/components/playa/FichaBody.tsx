@@ -39,6 +39,7 @@ interface Props {
   turbidez?:      TurbidezData | null
   forecastSurf?:  ForecastDay[] | null
   meteoForecast?: MeteoForecast[]
+  dateModified?:  string
   locale?:        'es' | 'en'
 }
 
@@ -60,7 +61,7 @@ const T = {
     info:'ℹ️ Información', infoSrc:'MITECO 2024',
     longitud:'Longitud', anchura:'Anchura media', composicion:'Composición', tipo:'Tipo',
     municipio:'Municipio', provincia:'Provincia', comunidad:'Comunidad', coordenadas:'Coordenadas',
-    actualizado:'Actualizado hace 1h', agua:'Agua', aire:'🌡 Aire', olas:'Olas', vientoLabel:'Viento',
+    actualizado:'Actualizado', agua:'Agua', aire:'🌡 Aire', olas:'Olas', vientoLabel:'Viento',
     nowLabel:'Ahora',
     SERVICIOS:[
       { key:'socorrismo', label:'Socorrismo' }, { key:'duchas', label:'Duchas' },
@@ -94,7 +95,7 @@ const T = {
     info:'ℹ️ Information', infoSrc:'MITECO 2024',
     longitud:'Length', anchura:'Average width', composicion:'Composition', tipo:'Type',
     municipio:'Municipality', provincia:'Province', comunidad:'Region', coordenadas:'Coordinates',
-    actualizado:'Updated 1h ago', agua:'Water', aire:'🌡 Air', olas:'Waves', vientoLabel:'Wind',
+    actualizado:'Updated', agua:'Water', aire:'🌡 Air', olas:'Waves', vientoLabel:'Wind',
     nowLabel:'Now',
     SERVICIOS:[
       { key:'socorrismo', label:'Lifeguard' }, { key:'duchas', label:'Showers' },
@@ -120,7 +121,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, locale = 'es' }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, locale = 'es' }: Props) {
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const horasLuz = solData?.horas_luz ?? '—'
@@ -407,7 +408,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.aeIlu}><IluEstado estado={meteo.estado} size="sm"/></div>
           <div className={styles.aeEstado} style={{ color: estado.dot }}>{estado.label}</div>
           <div className={styles.aeFrase}><em>{estado.frase}</em></div>
-          <div className={styles.aePill}><span className={styles.aeDot} style={{ background: estado.dot }}/>{i18n.actualizado}</div>
+          <div className={styles.aePill}><span className={styles.aeDot} style={{ background: estado.dot }}/>{i18n.actualizado} · {formatTime(dateModified, locale)}</div>
           <div className={styles.aeQs}>
             <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.agua}°C</span><span className={styles.aeQl}>{i18n.agua}</span></div>
             <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.tempAire}°C</span><span className={styles.aeQl}>{i18n.aire}</span></div>
@@ -419,6 +420,16 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
       </aside>
     </div>
   )
+}
+
+function formatTime(iso?: string, locale: string = 'es'): string {
+  if (!iso) return ''
+  try {
+    return new Date(iso).toLocaleString(locale === 'en' ? 'en-GB' : 'es-ES', {
+      day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
+      timeZone: 'Europe/Madrid',
+    })
+  } catch { return '' }
 }
 
 function TempCell({ icon, val, label }: { icon:string; val:string; label:string }) {

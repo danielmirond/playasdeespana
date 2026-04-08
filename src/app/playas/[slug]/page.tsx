@@ -147,10 +147,11 @@ export default async function PlayaPage({ params }: Props) {
         restaurantes={restaurantesData}
         fotos={fotosData}
         hoteles={hotelesData}
-              escuelas={escuelasData}
+        escuelas={escuelasData}
         turbidez={turbidezData}
         forecastSurf={forecastSurf}
         meteoForecast={meteoForecastData}
+        dateModified={dateModified}
       />
     </>
   )

@@ -135,6 +135,7 @@ export default async function BeachPageEn({ params }: Props) {
         turbidez={turbidezData}
         forecastSurf={forecastSurf}
         meteoForecast={meteoForecastData}
+        dateModified={dateModified}
       />
     </>
   )
