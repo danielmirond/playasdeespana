@@ -408,7 +408,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.aeIlu}><IluEstado estado={meteo.estado} size="sm"/></div>
           <div className={styles.aeEstado} style={{ color: estado.dot }}>{estado.label}</div>
           <div className={styles.aeFrase}><em>{estado.frase}</em></div>
-          <div className={styles.aePill}><span className={styles.aeDot} style={{ background: estado.dot }}/>{i18n.actualizado} · {formatTime(dateModified, locale)}</div>
+          <div className={styles.aePill}><span className={styles.aeDot} style={{ background: estado.dot }}/>{i18n.actualizado} · <time dateTime={dateModified}>{formatTime(dateModified, locale)}</time></div>
           <div className={styles.aeQs}>
             <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.agua}°C</span><span className={styles.aeQl}>{i18n.agua}</span></div>
             <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.tempAire}°C</span><span className={styles.aeQl}>{i18n.aire}</span></div>
