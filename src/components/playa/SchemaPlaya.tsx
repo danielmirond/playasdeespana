@@ -4,10 +4,11 @@ import type { Playa } from '@/types'
 import { generarTextoPlaya } from '@/lib/textoPlaya'
 
 interface Props {
-  playa:    Playa
-  agua:     number
-  olas:     number
-  calidad?: string
+  playa:         Playa
+  agua:          number
+  olas:          number
+  calidad?:      string
+  dateModified?: string
 }
 
 const ACTIVIDAD_LABELS: Record<string, string> = {
@@ -20,7 +21,7 @@ const ACTIVIDAD_LABELS: Record<string, string> = {
   paddle:    'Paddle surf',
 }
 
-export default function SchemaPlaya({ playa, agua, olas, calidad }: Props) {
+export default function SchemaPlaya({ playa, agua, olas, calidad, dateModified }: Props) {
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
   const url  = `${BASE}/playas/${playa.slug}`
 
@@ -137,6 +138,8 @@ export default function SchemaPlaya({ playa, agua, olas, calidad }: Props) {
     ],
     isAccessibleForFree: true,
     publicAccess:        true,
+    datePublished:       '2026-03-09',
+    ...(dateModified ? { dateModified } : {}),
   }
 
   const schemas = [beach, breadcrumb, ...(faqSchema ? [faqSchema] : [])]

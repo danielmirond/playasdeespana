@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const playa = await getPlayaBySlug(slug)
   if (!playa) return {}
   const title = `${playa.nombre} (${playa.provincia}) - How is it today? | Wind, parking, crowds, temperature and traffic`
+  const now = new Date().toISOString()
   return {
     title,
     description: `Water temperature, wave height, wind, crowds and facilities at ${playa.nombre} in ${playa.municipio}, ${playa.provincia}. Updated in real time.`,
@@ -33,6 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       url: `/en/beaches/${slug}`,
       locale: 'en_GB',
+      type: 'article',
+      publishedTime: '2026-03-09T00:00:00Z',
+      modifiedTime: now,
       images: [{
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&locale=en`,
         width: 1200,
@@ -105,6 +109,8 @@ export default async function BeachPageEn({ params }: Props) {
 
   const forecastSurf = mareasData?.forecast ?? null
 
+  const dateModified = meteoPlayaData?.timestamp ?? new Date().toISOString()
+
   let calidad = null
   try {
     const db = JSON.parse(readFileSync(join(process.cwd(), 'public/data/calidad-agua.json'), 'utf8'))
@@ -113,7 +119,7 @@ export default async function BeachPageEn({ params }: Props) {
 
   return (
     <>
-      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} calidad={calidad?.nivel} />
+      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} calidad={calidad?.nivel} dateModified={dateModified} />
       <Nav />
       <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} locale="en" />
       <FichaNav locale="en" />

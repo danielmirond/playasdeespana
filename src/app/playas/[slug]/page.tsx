@@ -29,8 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const playa = await getPlayaBySlug(slug)
   if (!playa) return {}
-const title = `${playa.nombre} (${playa.provincia}) ¿Cómo está hoy? | Viento, parking, afluencia, temperatura y tráfico en tiempo real`  
-return {
+  const title = `${playa.nombre} (${playa.provincia}) ¿Cómo está hoy? | Viento, parking, afluencia, temperatura y tráfico en tiempo real`
+  const now = new Date().toISOString()
+  return {
     title,
     description: `Estado del mar, temperatura del agua, oleaje y servicios de ${playa.nombre}. Datos en tiempo real.`,
     openGraph: {
@@ -39,7 +40,9 @@ return {
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/playas/${slug}`,
       siteName: 'Playas de España',
       locale: 'es_ES',
-      type: 'website',
+      type: 'article',
+      publishedTime: '2026-03-09T00:00:00Z',
+      modifiedTime: now,
       images: [{
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?playa=${encodeURIComponent(playa.nombre)}&municipio=${encodeURIComponent(playa.municipio + ' · ' + playa.provincia)}&comunidad=${encodeURIComponent(playa.comunidad)}&azul=${playa.bandera ? 'true' : 'false'}`,
         width: 1200,
@@ -121,6 +124,8 @@ export default async function PlayaPage({ params }: Props) {
 
   const forecastSurf = mareasData?.forecast ?? null
 
+  const dateModified = meteoPlayaData?.timestamp ?? new Date().toISOString()
+
   let calidad = null
   try {
     const db = JSON.parse(readFileSync(join(process.cwd(), 'public/data/calidad-agua.json'), 'utf8'))
@@ -129,7 +134,7 @@ export default async function PlayaPage({ params }: Props) {
 
   return (
     <>
-      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} calidad={calidad?.nivel} />
+      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} calidad={calidad?.nivel} dateModified={dateModified} />
       <Nav />
       <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} />
       <FichaNav />
