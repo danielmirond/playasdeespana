@@ -8,7 +8,7 @@ import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
-import { nombreConPlaya } from '@/lib/geo'
+import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
@@ -133,6 +133,14 @@ export default async function PlayaPage({ params }: Props) {
 
   const preloadFoto = fotosData[0]?.thumb ?? null
 
+  // Playas cercanas (server-side, sin API extra)
+  const allPlayas = await getPlayas()
+  const playasCercanas = allPlayas
+    .filter(p => p.slug !== playa.slug)
+    .map(p => ({ ...p, distKm: haversine(playa.lat, playa.lng, p.lat, p.lng) / 1000 }))
+    .sort((a, b) => a.distKm - b.distKm)
+    .slice(0, 6)
+
   return (
     <>
       {preloadFoto && <link rel="preload" as="image" href={preloadFoto} />}
@@ -157,6 +165,7 @@ export default async function PlayaPage({ params }: Props) {
         banderaPlaya={banderaPlaya}
         medusas={medusas}
         mareasLunar={mareasLunar}
+        playasCercanas={playasCercanas}
       />
     </>
   )

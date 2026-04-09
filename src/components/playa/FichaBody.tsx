@@ -48,6 +48,7 @@ interface Props {
   banderaPlaya?:   BanderaPlaya
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
+  playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean }[]
   locale?:         'es' | 'en'
 }
 
@@ -121,7 +122,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, locale = 'es' }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, playasCercanas, locale = 'es' }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
@@ -496,6 +497,24 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <DataRow k={i18n.coordenadas} v={`${playa.lat}° N, ${playa.lng}° E`} mono/>
           </div>
         </div>
+
+        {/* PLAYAS CERCANAS */}
+        {playasCercanas && playasCercanas.length > 0 && (
+          <div className={styles.card} id="s-cercanas">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{locale === 'en' ? `Beaches near ${playa.nombre}` : `Playas cerca de ${playa.nombre}`}</h2>
+            </div>
+            <div className={styles.carousel}>
+              {playasCercanas.map(pc => (
+                <a key={pc.slug} href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${pc.slug}`} className={styles.cercanaCard}>
+                  <div className={styles.cercanaNombre}>{pc.nombre}</div>
+                  <div className={styles.cercanaMeta}>{pc.municipio} · {pc.distKm < 10 ? pc.distKm.toFixed(1) : Math.round(pc.distKm)} km</div>
+                  {pc.bandera && <span className={styles.cercanaBadge}>🏖</span>}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
         <TextoSEO playa={playa} locale={locale} />
 

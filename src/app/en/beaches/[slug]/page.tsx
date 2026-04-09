@@ -3,13 +3,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { getPlayaBySlug } from '@/lib/playas'
+import { getPlayaBySlug, getPlayas } from '@/lib/playas'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
-import { nombreConPlaya } from '@/lib/geo'
+import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
@@ -124,6 +124,13 @@ export default async function BeachPageEn({ params }: Props) {
 
   const preloadFoto = fotosData[0]?.thumb ?? null
 
+  const allPlayas = await getPlayas()
+  const playasCercanas = allPlayas
+    .filter(p => p.slug !== playa.slug)
+    .map(p => ({ ...p, distKm: haversine(playa.lat, playa.lng, p.lat, p.lng) / 1000 }))
+    .sort((a, b) => a.distKm - b.distKm)
+    .slice(0, 6)
+
   return (
     <>
       {preloadFoto && <link rel="preload" as="image" href={preloadFoto} />}
@@ -147,6 +154,7 @@ export default async function BeachPageEn({ params }: Props) {
         banderaPlaya={banderaPlaya}
         medusas={medusas}
         mareasLunar={mareasLunar}
+        playasCercanas={playasCercanas}
       />
     </>
   )
