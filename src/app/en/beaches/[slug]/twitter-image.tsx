@@ -4,7 +4,7 @@ import { ImageResponse } from 'next/og'
 import { getPlayaBySlug } from '@/lib/playas'
 import { nombreConPlaya } from '@/lib/geo'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 export const size    = { width: 1200, height: 630 }
 export const alt     = 'Estado del mar en tiempo real'
 export const contentType = 'image/png'
