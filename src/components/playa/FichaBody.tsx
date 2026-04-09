@@ -22,7 +22,10 @@ const TraficoSection = dynamic(() => import('./TraficoSection'), { ssr: false })
 const SurfSection = dynamic(() => import('./SurfSection'), { ssr: false })
 const EscuelasSection = dynamic(() => import('./EscuelasSection'), { ssr: false })
 const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), { ssr: false })
-const ReportarEstado = dynamic(() => import('./ReportarEstado'), { ssr: false })
+const ReportarEstado = dynamic(() => import('./ReportarEstado'), {
+  ssr: false,
+  loading: () => <div style={{ height: 258, borderRadius: 14, border: '1.5px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
+})
 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number
