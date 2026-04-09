@@ -13,6 +13,75 @@ const nextConfig: NextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
+  async headers() {
+    return [
+      {
+        // Fichas de playa: CDN 1h, browser 5min, stale 24h
+        source: '/playas/:slug*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400' },
+        ],
+      },
+      {
+        source: '/en/beaches/:slug*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400' },
+        ],
+      },
+      {
+        // Comunidad/provincia/municipio: CDN 6h, browser 10min, stale 24h
+        source: '/comunidad/:slug*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=600, s-maxage=21600, stale-while-revalidate=86400' },
+        ],
+      },
+      {
+        source: '/provincia/:slug*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=600, s-maxage=21600, stale-while-revalidate=86400' },
+        ],
+      },
+      {
+        source: '/municipio/:slug*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=600, s-maxage=21600, stale-while-revalidate=86400' },
+        ],
+      },
+      {
+        // Páginas estáticas: CDN 24h, browser 1h, stale 7d
+        source: '/banderas-azules',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800' },
+        ],
+      },
+      {
+        source: '/comunidades',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800' },
+        ],
+      },
+      {
+        // API routes: cada una tiene su propio Cache-Control (no pisar)
+        source: '/api/meteo/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, s-maxage=3600, stale-while-revalidate=21600' },
+        ],
+      },
+      {
+        source: '/api/(restaurantes|hoteles|parkings)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, s-maxage=86400, stale-while-revalidate=172800' },
+        ],
+      },
+      {
+        // Assets estáticos: 1 año (inmutables)
+        source: '/data/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       // Provincias con acentos eliminados → slug correcto
