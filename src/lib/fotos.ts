@@ -26,7 +26,7 @@ async function getFotosWikimedia(nombre: string, municipio: string): Promise<Fot
         gsrlimit:    '8',
         prop:        'imageinfo',
         iiprop:      'url|extmetadata',
-        iiurlwidth:  '1200',
+        iiurlwidth:  '800',
         format:      'json',
         origin:      '*',
       })
@@ -45,7 +45,7 @@ async function getFotosWikimedia(nombre: string, municipio: string): Promise<Fot
           if (!['jpg','jpeg','png','webp'].includes(ext ?? '')) return null
           return {
             url:    ii.thumburl,
-            thumb:  ii.thumburl.replace(/\/\d+px-/, '/400px-'),
+            thumb:  ii.thumburl.replace(/\/\d+px-/, '/300px-'),
             fuente: 'wikimedia' as const,
             autor:  ii.extmetadata?.Artist?.value?.replace(/<[^>]+>/g, '') ?? undefined,
           }
