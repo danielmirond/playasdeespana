@@ -65,8 +65,8 @@ const T = {
     banderaLabel:'Bandera de baño', medusasLabel:'Medusas',
     calidad:(n:string)=>`Calidad del agua en ${n}`, calidadSrc:'EEA · 2006/7/CE',
     muestras:'Muestras conformes', temporada:'Temporada', clasificacion:'Clasificación',
-    comer:(n:string)=>`Restaurantes cerca de ${n}`, comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Datos de ejemplo', resenas:'reseñas',
-    dormir:(n:string)=>`Hoteles cerca de ${n}`, dormirSrc:'OpenStreetMap · 2km', dormirSrcMock:'Datos de ejemplo',
+    comer:(n:string)=>`Restaurantes cerca de ${n}`, comerSrcOSM:'OpenStreetMap · 800m', resenas:'reseñas',
+    dormir:(n:string)=>`Hoteles cerca de ${n}`, dormirSrc:'OpenStreetMap · 2km',
     servicios:(n:string)=>`Servicios en ${n}`, serviciosSrc:'MITECO',
     info:(n:string)=>`Información de ${n}`, infoSrc:'MITECO 2024',
     longitud:'Longitud', anchura:'Anchura media', composicion:'Composición', tipo:'Tipo',
@@ -77,15 +77,6 @@ const T = {
       { key:'socorrismo', label:'Socorrismo' }, { key:'duchas', label:'Duchas' },
       { key:'accesible',  label:'Accesible PMR' }, { key:'parking', label:'Parking' },
       { key:'bandera',    label:'Bandera Azul' }, { key:'perros', label:'Perros' },
-    ],
-    MOCK_REST:[
-      { nombre:'El Chiringuito', tipo:'Pescado fresco',     dist:120, precio:'€€',  rating:9.1 },
-      { nombre:'Sa Roqueta',     tipo:'Arroces · Mariscos', dist:340, precio:'€€€', rating:8.8 },
-      { nombre:'Beso Beach',     tipo:'Mediterráneo',        dist:500, precio:'€€€', rating:8.6 },
-    ],
-    MOCK_HOTELS:[
-      { nombre:'Hotel Playa',    estrellas:4, dist:500,  rating:9.2, precio:280 },
-      { nombre:'Hostal Central', estrellas:3, dist:1200, rating:8.5, precio:120 },
     ],
   },
   en: {
@@ -104,8 +95,8 @@ const T = {
     banderaLabel:'Beach flag', medusasLabel:'Jellyfish',
     calidad:(n:string)=>`Water quality at ${n}`, calidadSrc:'EEA · 2006/7/CE',
     muestras:'Compliant samples', temporada:'Season', clasificacion:'Classification',
-    comer:(n:string)=>`Restaurants near ${n}`, comerSrcOSM:'OpenStreetMap · 800m', comerSrcMock:'Sample data', resenas:'reviews',
-    dormir:(n:string)=>`Hotels near ${n}`, dormirSrc:'OpenStreetMap · 2km', dormirSrcMock:'Sample data',
+    comer:(n:string)=>`Restaurants near ${n}`, comerSrcOSM:'OpenStreetMap · 800m', resenas:'reviews',
+    dormir:(n:string)=>`Hotels near ${n}`, dormirSrc:'OpenStreetMap · 2km',
     servicios:(n:string)=>`Facilities at ${n}`, serviciosSrc:'MITECO',
     info:(n:string)=>`Information about ${n}`, infoSrc:'MITECO 2024',
     longitud:'Length', anchura:'Average width', composicion:'Composition', tipo:'Type',
@@ -116,15 +107,6 @@ const T = {
       { key:'socorrismo', label:'Lifeguard' }, { key:'duchas', label:'Showers' },
       { key:'accesible',  label:'Accessible' }, { key:'parking', label:'Parking' },
       { key:'bandera',    label:'Blue Flag' }, { key:'perros', label:'Dogs allowed' },
-    ],
-    MOCK_REST:[
-      { nombre:'Beach Bar',    tipo:'Fresh seafood',  dist:120, precio:'€€',  rating:9.1 },
-      { nombre:'Sa Roqueta',   tipo:'Rice · Seafood', dist:340, precio:'€€€', rating:8.8 },
-      { nombre:'Beso Beach',   tipo:'Mediterranean',  dist:500, precio:'€€€', rating:8.6 },
-    ],
-    MOCK_HOTELS:[
-      { nombre:'Beach Hotel',    estrellas:4, dist:500,  rating:9.2, precio:280 },
-      { nombre:'Central Hostel', estrellas:3, dist:1200, rating:8.5, precio:120 },
     ],
   },
 }
@@ -386,12 +368,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.comer(playa.nombre)}</h2>
             <span className={styles.cardSrc}>
-              {restList ? i18n.comerSrcOSM : i18n.comerSrcMock}
+              {restList ? i18n.comerSrcOSM : ''}
             </span>
           </div>
           <div className={styles.cardBody}>
             <div className={styles.list}>
-              {(restList ?? i18n.MOCK_REST.map(r => ({ ...r, distancia_m: r.dist, reseñas: 0, horario: '', googleId: null, source: 'mock' }))).slice(0, 5).map((r: any) => {
+              {restList ? restList.slice(0, 5).map((r: any) => {
                 const mapsUrl = r.googleId ? `https://www.google.com/maps/place/?q=place_id:${r.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(r.nombre)}`
                 return (
                   <div key={r.id ?? r.nombre} className={styles.listItem}>
@@ -419,24 +401,27 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     </div>
                   </div>
                 )
-              })}
+              }) : (
+                <div style={{ padding:'1rem 0', textAlign:'center' }}>
+                  <p style={{ fontSize:'.82rem', color:'var(--muted)', marginBottom:'.75rem' }}>
+                    {locale === 'en' ? 'No restaurants found nearby' : 'No se encontraron restaurantes cercanos'}
+                  </p>
+                  <a href={`https://www.google.com/maps/search/restaurantes/@${playa.lat},${playa.lng},15z`} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
+                    {locale === 'en' ? 'Search on Google Maps →' : 'Buscar en Google Maps →'}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
-
-        {/* HOTELES */}
         <div className={styles.card} id="s-dormir">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.dormir(playa.nombre)}</h2>
-            <span className={styles.cardSrc}>{hoteles && hoteles.length > 0 ? i18n.dormirSrc : i18n.dormirSrcMock}</span>
+            <span className={styles.cardSrc}>{hoteles && hoteles.length > 0 ? i18n.dormirSrc : ''}</span>
           </div>
           <div className={styles.cardBody}>
             <div className={styles.list}>
-              {(hoteles && hoteles.length > 0 ? hoteles : i18n.MOCK_HOTELS.map(h => ({
-                id: h.nombre, googleId: null, nombre: h.nombre, estrellas: h.estrellas,
-                distancia_m: h.dist, rating: h.rating, reseñas: 0, precio: `${h.precio}€`,
-                foto: null, website: null, telefono: null, source: 'mock'
-              }))).map((h: any) => {
+              {hoteles && hoteles.length > 0 ? hoteles.map((h: any) => {
                 const mapsUrl = h.googleId ? `https://www.google.com/maps/place/?q=place_id:${h.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(h.nombre)}`
                 return (
                   <div key={h.id} className={styles.hotelItem}>
@@ -457,7 +442,16 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     {h.rating > 0 && <span className={styles.rating}>{h.rating}</span>}
                   </div>
                 )
-              })}
+              }) : (
+                <div style={{ padding:'1rem 0', textAlign:'center' }}>
+                  <p style={{ fontSize:'.82rem', color:'var(--muted)', marginBottom:'.75rem' }}>
+                    {locale === 'en' ? 'No hotels found nearby' : 'No se encontraron hoteles cercanos'}
+                  </p>
+                  <a href={`https://www.google.com/maps/search/hoteles/@${playa.lat},${playa.lng},14z`} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
+                    {locale === 'en' ? 'Search on Google Maps →' : 'Buscar en Google Maps →'}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
