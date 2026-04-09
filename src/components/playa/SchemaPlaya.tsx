@@ -12,6 +12,7 @@ interface Props {
   banderaColor?: string
   banderaLabel?: string
   medusasLabel?: string
+  mareasTexto?:  string
   dateModified?: string
 }
 
@@ -25,7 +26,7 @@ const ACTIVIDAD_LABELS: Record<string, string> = {
   paddle:    'Paddle surf',
 }
 
-export default function SchemaPlaya({ playa, agua, olas, viento, calidad, banderaColor, banderaLabel, medusasLabel, dateModified }: Props) {
+export default function SchemaPlaya({ playa, agua, olas, viento, calidad, banderaColor, banderaLabel, medusasLabel, mareasTexto, dateModified }: Props) {
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
   const url  = `${BASE}/playas/${playa.slug}`
 
@@ -68,6 +69,10 @@ export default function SchemaPlaya({ playa, agua, olas, viento, calidad, bander
       q: `¿Cuál es la temperatura del agua en ${playa.nombre}?`,
       a: `La temperatura del agua en ${playa.nombre} es de ${agua}°C. ${agua >= 24 ? 'Agua cálida, perfecta para el baño.' : agua >= 20 ? 'Temperatura agradable para bañarse.' : agua >= 16 ? 'Agua fresca, se recomienda neopreno para estancias largas.' : 'Agua fría, recomendable traje de neopreno.'}`,
     },
+    mareasTexto ? {
+      q: `¿A qué hora es la pleamar en ${playa.nombre}?`,
+      a: mareasTexto,
+    } : null,
     playa.socorrismo !== undefined && {
       q: `¿Tiene socorrismo ${playa.nombre}?`,
       a: playa.socorrismo

@@ -499,7 +499,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <TextoSEO playa={playa} locale={locale} />
 
         {/* FAQS */}
-        <FaqSection playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} locale={locale} />
+        <FaqSection playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} mareasLunar={mareasLunar} locale={locale} />
 
       </div>
 
@@ -523,8 +523,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   )
 }
 
-function FaqSection({ playa, meteo, banderaPlaya, medusas, locale = 'es' }: {
-  playa: Playa; meteo: Meteo; banderaPlaya?: BanderaPlaya; medusas?: MedusasRiesgo; locale?: 'es' | 'en'
+function FaqSection({ playa, meteo, banderaPlaya, medusas, mareasLunar, locale = 'es' }: {
+  playa: Playa; meteo: Meteo; banderaPlaya?: BanderaPlaya; medusas?: MedusasRiesgo; mareasLunar?: MareasDia; locale?: 'es' | 'en'
 }) {
   const n = playa.nombre
   const es = locale === 'es'
@@ -550,6 +550,23 @@ function FaqSection({ playa, meteo, banderaPlaya, medusas, locale = 'es' }: {
         ? `El viento en ${n} es de ${meteo.viento} km/h con rachas de ${meteo.vientoRacha} km/h (dirección ${meteo.vientoDireccion}).`
         : `Wind at ${n} is ${meteo.viento} km/h with gusts of ${meteo.vientoRacha} km/h (${meteo.vientoDireccion}).`,
     },
+    mareasLunar ? {
+      q: es ? `¿A qué hora es la pleamar en ${n}?` : `What time is high tide at ${n}?`,
+      a: (() => {
+        const pleas = mareasLunar.mareas.filter(m => m.tipo === 'pleamar')
+        const tipoLabel = es
+          ? (mareasLunar.tipo === 'vivas' ? 'mareas vivas' : mareasLunar.tipo === 'muertas' ? 'mareas muertas' : 'mareas medias')
+          : (mareasLunar.tipo === 'vivas' ? 'spring tides' : mareasLunar.tipo === 'muertas' ? 'neap tides' : 'average tides')
+        if (mareasLunar.zona === 'mediterraneo') {
+          return es
+            ? `En el Mediterráneo las mareas son insignificantes (${mareasLunar.rango}m). El nivel del agua apenas varía.`
+            : `Mediterranean tides are negligible (${mareasLunar.rango}m). Water level barely changes.`
+        }
+        return es
+          ? `Hoy las pleamares en ${n} son a las ${pleas.map(p => p.hora).join(' y ')} (${pleas[0]?.altura}m). Coeficiente ${mareasLunar.coeficiente}, ${tipoLabel}.`
+          : `Today's high tides at ${n} are at ${pleas.map(p => p.hora).join(' and ')} (${pleas[0]?.altura}m). Coefficient ${mareasLunar.coeficiente}, ${tipoLabel}.`
+      })(),
+    } : null,
     playa.parking !== undefined ? {
       q: es ? `¿Hay parking cerca de ${n}?` : `Is there parking near ${n}?`,
       a: es

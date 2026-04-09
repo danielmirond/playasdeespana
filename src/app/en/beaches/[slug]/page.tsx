@@ -146,7 +146,7 @@ export default async function BeachPageEn({ params }: Props) {
 
   return (
     <>
-      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} viento={meteo.viento} calidad={calidad?.nivel} banderaColor={banderaPlaya.color} banderaLabel={banderaPlaya.labelEn} medusasLabel={medusas.labelEn} dateModified={dateModified} />
+      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} viento={meteo.viento} calidad={calidad?.nivel} banderaColor={banderaPlaya.color} banderaLabel={banderaPlaya.labelEn} medusasLabel={medusas.labelEn} mareasTexto={mareasLunar.zona === 'mediterraneo' ? `Mediterranean tides are negligible (${mareasLunar.rango}m).` : `Today's high tides at ${playa.nombre} are at ${mareasLunar.mareas.filter(m => m.tipo === 'pleamar').map(m => m.hora).join(' and ')} (${mareasLunar.rango}m). Coefficient ${mareasLunar.coeficiente}.`} dateModified={dateModified} />
       <Nav />
       <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} locale="en" />
       <FichaNav locale="en" />
