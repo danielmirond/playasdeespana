@@ -148,13 +148,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             {fotos && fotos.length > 0 ? (
               <div className={fotos.length === 1 ? styles.galeriaUna : styles.galeria}>
                 <div className={styles.gFoto} style={{ gridRow: fotos.length > 1 ? '1/3' : undefined }}>
-                  <img src={fotos[0].thumb} alt={`${playa.nombre} - foto 1`} loading="eager" fetchPriority="high" width={800} height={450} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <img src={fotos[0].url} alt={`${playa.nombre} - foto 1`} loading="eager" fetchPriority="high" />
                 </div>
                 {fotos[1] && <div className={styles.gFoto}>
-                  <img src={fotos[1].thumb} alt={`${playa.nombre} - foto 2`} loading="lazy" width={400} height={300} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <img src={fotos[1].thumb} alt={`${playa.nombre} - foto 2`} loading="lazy" />
                 </div>}
                 {fotos[2] && <div className={`${styles.gFoto} ${styles.gFotoMas}`}>
-                  <img src={fotos[2].thumb} alt={`${playa.nombre} - foto 3`} loading="lazy" width={400} height={300} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <img src={fotos[2].thumb} alt={`${playa.nombre} - foto 3`} loading="lazy" />
                   {fotos.length > 3 && (
                     <div className={styles.gMasOverlay}><span className={styles.gMasN}>+{fotos.length - 2}</span><span className={styles.gMasL}>{i18n.verFotos}</span></div>
                   )}
