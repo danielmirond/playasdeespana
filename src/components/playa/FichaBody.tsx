@@ -162,9 +162,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
           ) : (
             <div className={styles.carousel}>
-              <div className={styles.carouselSlide} style={{ background:'linear-gradient(160deg,#1a6b8a,#2a9a7a)' }}/>
-              <div className={styles.carouselSlide} style={{ background:'linear-gradient(160deg,#1a4a6e,#2a7aaa)' }}/>
-              <div className={styles.carouselSlide} style={{ background:'linear-gradient(160deg,#3a6a8a,#5a9aaa)' }}/>
+              <div className={styles.carouselSlide} style={{ background:'linear-gradient(160deg,#1a6b8a,#2a9a7a)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                <div style={{ textAlign:'center', color:'rgba(255,255,255,.7)', padding:'2rem' }}>
+                  <Camera size={32} weight="light" style={{ marginBottom:'.5rem', opacity:.6 }}/>
+                  <div style={{ fontSize:'.8rem' }}>{locale === 'en' ? 'No photos available yet' : 'Sin fotos disponibles'}</div>
+                </div>
+              </div>
             </div>
           )}
         </div>
