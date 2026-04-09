@@ -1,9 +1,8 @@
 // src/app/en/beaches/[slug]/page.tsx
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 import { getPlayaBySlug, getPlayas } from '@/lib/playas'
+import { getCalidad } from '@/lib/calidad'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
@@ -29,8 +28,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const playa = await getPlayaBySlug(slug)
   if (!playa) return {}
 
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+  const np = nombreConPlaya(playa.nombre)
   const title = `How is ${playa.nombre} today | Flag, conditions, wind and water temperature - Parking, hotels and where to eat nearby`
-  const description = `Sea conditions at ${nombreConPlaya(playa.nombre)} today. Water temperature, waves, wind, flag, jellyfish and facilities. Nearby parking, hotels and restaurants.`
+  const description = `Sea conditions at ${np} today. Water temperature, waves, wind, flag, jellyfish and facilities. Nearby parking, hotels and restaurants.`
+
+  // OG image dinámica vía /api/og con paleta por comunidad
+  const ogImage = new URL(`${BASE}/api/og`)
+  ogImage.searchParams.set('playa', np)
+  ogImage.searchParams.set('municipio', `${playa.municipio} · ${playa.provincia}`)
+  if (playa.bandera) ogImage.searchParams.set('azul', 'true')
+  ogImage.searchParams.set('comunidad', playa.comunidad)
+  const cal = await getCalidad(slug)
+  if (cal?.nivel) ogImage.searchParams.set('calidad', cal.nivel)
+
+  const ogUrl = ogImage.toString()
 
   return {
     title,
@@ -38,12 +50,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `/en/beaches/${slug}`,
+      url: `${BASE}/en/beaches/${slug}`,
+      siteName: 'Playas de España',
       locale: 'en_GB',
       type: 'article',
       publishedTime: '2026-03-09T00:00:00Z',
       modifiedTime: new Date().toISOString(),
+      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${np} — live sea conditions` }],
     },
+    twitter: { card: 'summary_large_image', title, description, images: [ogUrl] },
     alternates: {
       canonical: `/en/beaches/${slug}`,
       languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` },
@@ -56,7 +71,7 @@ export default async function BeachPageEn({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast] = await Promise.allSettled([
+  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -65,6 +80,8 @@ export default async function BeachPageEn({ params }: Props) {
     getHoteles(playa.lat, playa.lng),
     getTurbidez(playa.lat, playa.lng),
     getMeteoForecast(playa.lat, playa.lng),
+    getCalidad(slug),
+    getPlayas(),
   ])
 
   const mareasData        = mareas.status          === 'fulfilled' ? mareas.value          : null
@@ -116,15 +133,11 @@ export default async function BeachPageEn({ params }: Props) {
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
-  let calidad = null
-  try {
-    const db = JSON.parse(readFileSync(join(process.cwd(), 'public/data/calidad-agua.json'), 'utf8'))
-    calidad = db[slug] ?? null
-  } catch {}
+  const calidad = calidadResult.status === 'fulfilled' ? calidadResult.value : null
 
   const preloadFoto = fotosData[0]?.thumb ?? null
 
-  const allPlayas = await getPlayas()
+  const allPlayas = allPlayasResult.status === 'fulfilled' ? allPlayasResult.value : []
   const playasCercanas = allPlayas
     .filter(p => p.slug !== playa.slug)
     .map(p => ({ ...p, distKm: haversine(playa.lat, playa.lng, p.lat, p.lng) / 1000 }))

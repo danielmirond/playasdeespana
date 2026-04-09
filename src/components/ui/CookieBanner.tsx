@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { ShieldCheck } from '@phosphor-icons/react'
 import { useState, useEffect } from 'react'
 
@@ -20,7 +21,7 @@ export default function CookieBanner({ locale = 'es' }: Props) {
         <span style={{ flexShrink:0, display:'flex', alignItems:'center' }}><ShieldCheck size={18} weight="bold" color="var(--accent,#b06820)"/></span>
         <p style={{ margin:0, fontSize:'.82rem', lineHeight:'1.6', color:'#4a3520' }}>
           {i18n.texto}{' '}
-          <a href={locale === 'en' ? '/en/cookies' : '/cookies'} style={{ color:'#b06820', textDecoration:'underline' }}>{i18n.politica}</a>
+          <Link href={locale === 'en' ? '/en/cookies' : '/cookies'} style={{ color:'#b06820', textDecoration:'underline' }}>{i18n.politica}</Link>
         </p>
       </div>
       <div style={{ display:'flex', gap:'.5rem', justifyContent:'flex-end' }}>

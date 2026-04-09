@@ -1,5 +1,6 @@
 // src/app/page.tsx
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import Hero from '@/components/home/Hero'
 import Buscador from '@/components/home/Buscador'
@@ -56,9 +57,9 @@ export default async function HomePage() {
           Playas de España
         </span>
         <nav style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
-          <a href="/comunidades" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Comunidades</a>
-          <a href="/banderas-azules" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Banderas Azules</a>
-          <a href="/mapa" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Mapa</a>
+          <Link href="/comunidades" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Comunidades</Link>
+          <Link href="/banderas-azules" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Banderas Azules</Link>
+          <Link href="/mapa" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Mapa</Link>
         </nav>
         <span>Open-Meteo · EEA · OSM</span>
       </footer>

@@ -8,6 +8,7 @@ import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
 import type { MareasDia } from '@/lib/mareas-lunar'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import IluEstado from './IluEstado'
 import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
@@ -21,6 +22,7 @@ const TraficoSection = dynamic(() => import('./TraficoSection'), { ssr: false })
 const SurfSection = dynamic(() => import('./SurfSection'), { ssr: false })
 const EscuelasSection = dynamic(() => import('./EscuelasSection'), { ssr: false })
 const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), { ssr: false })
+const ReportarEstado = dynamic(() => import('./ReportarEstado'), { ssr: false })
 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number
@@ -506,11 +508,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
             <div className={styles.carousel}>
               {playasCercanas.map(pc => (
-                <a key={pc.slug} href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${pc.slug}`} className={styles.cercanaCard}>
+                <Link key={pc.slug} href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${pc.slug}`} className={styles.cercanaCard} prefetch={true}>
                   <div className={styles.cercanaNombre}>{pc.nombre}</div>
                   <div className={styles.cercanaMeta}>{pc.municipio} · {pc.distKm < 10 ? pc.distKm.toFixed(1) : Math.round(pc.distKm)} km</div>
                   {pc.bandera && <span className={styles.cercanaBadge}><Flag size={12} weight="fill" color="var(--accent)"/></span>}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -538,6 +540,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         </div>
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} />
+        <ReportarEstado slug={playa.slug} locale={locale} />
       </aside>
     </div>
   )
@@ -639,7 +642,7 @@ function TempCell({ icon, val, label }: { icon: React.ReactNode; val:string; lab
 
 function DataRow({ k, v, mono, href }: { k:string; v:string; mono?:boolean; href?:string }) {
   const val = href
-    ? <a href={href} style={{ color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600 }}>{v}</a>
+    ? <Link href={href} style={{ color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600 }}>{v}</Link>
     : v
   return <div className={styles.dataRow}><span className={styles.drK}>{k}</span><span className={`${styles.drV} ${mono ? styles.drMono : ''}`}>{val}</span></div>
 }
