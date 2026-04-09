@@ -6,7 +6,7 @@ import type { Playa } from '@/types'
 import type { EstadoConfig } from '@/lib/estados'
 import IluEstado from './IluEstado'
 import styles from './FichaHero.module.css'
-import { Drop, Waves, Sun, Wind, Thermometer, Umbrella } from '@phosphor-icons/react'
+import { Drop, Waves, Sun, Wind, Thermometer } from '@phosphor-icons/react'
 import { nombreConPlaya } from '@/lib/geo'
 
 interface Meteo {
@@ -30,8 +30,8 @@ const t = {
     indice:        'Índice',
     aire:          'Aire',
     bandera:       'Bandera Azul',
-    socorrismo:    '🏊 Socorrismo',
-    accesible:     '♿ Accesible',
+    socorrismo:    'Socorrismo',
+    accesible:     'Accesible',
     verFicha:      'Ver ficha completa',
     comunidadBase: (slug: string) => `/comunidad/${slug}`,
   },
@@ -43,8 +43,8 @@ const t = {
     indice:        'Index',
     aire:          'Air',
     bandera:       'Blue Flag',
-    socorrismo:    '🏊 Lifeguard',
-    accesible:     '♿ Accessible',
+    socorrismo:    'Lifeguard',
+    accesible:     'Accessible',
     verFicha:      'View full beach info',
     comunidadBase: (slug: string) => `/en/communities/${slug}`,
   },
@@ -100,7 +100,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }
           <span className={styles.ml}>{i18n.olas}</span>
         </div>
         <div className={styles.m}>
-          <span className={styles.mi}>💨</span>
+          <Wind size={15} weight='bold' color='var(--accent,#b06820)'/>
           <span className={styles.mv}>{meteo.viento}km/h</span>
           <span className={styles.ml}>{i18n.viento}</span>
         </div>
@@ -110,7 +110,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }
           <span className={styles.ml}>{i18n.indice}</span>
         </div>
         <div className={styles.m}>
-          <span className={styles.mi}>🌡</span>
+          <Thermometer size={15} weight='bold' color='var(--accent,#b06820)'/>
           <span className={styles.mv}>{meteo.tempAire}°C</span>
           <span className={styles.ml}>{i18n.aire}</span>
         </div>

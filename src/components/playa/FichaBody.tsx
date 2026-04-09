@@ -14,7 +14,7 @@ import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
 import type { Escuela } from '@/lib/escuelas'
-import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star } from '@/components/ui/Icons'
+import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Eye, ShieldCheck, Fish, SunHorizon, Flag, Gauge } from '@/components/ui/Icons'
 
 // Lazy load heavy below-fold components
 const TraficoSection = dynamic(() => import('./TraficoSection'), { ssr: false })
@@ -75,7 +75,7 @@ const T = {
     info:(n:string)=>`Información de ${n}`, infoSrc:'MITECO 2024',
     longitud:'Longitud', anchura:'Anchura media', composicion:'Composición', tipo:'Tipo',
     municipio:'Municipio', provincia:'Provincia', comunidad:'Comunidad', coordenadas:'Coordenadas',
-    actualizado:'Actualizado', agua:'Agua', aire:'🌡 Aire', olas:'Olas', vientoLabel:'Viento',
+    actualizado:'Actualizado', agua:'Agua', aire:'Aire', olas:'Olas', vientoLabel:'Viento',
     nowLabel:'Ahora',
     SERVICIOS:[
       { key:'socorrismo', label:'Socorrismo' }, { key:'duchas', label:'Duchas' },
@@ -105,7 +105,7 @@ const T = {
     info:(n:string)=>`Information about ${n}`, infoSrc:'MITECO 2024',
     longitud:'Length', anchura:'Average width', composicion:'Composition', tipo:'Type',
     municipio:'Municipality', provincia:'Province', comunidad:'Region', coordenadas:'Coordinates',
-    actualizado:'Updated', agua:'Water', aire:'🌡 Air', olas:'Waves', vientoLabel:'Wind',
+    actualizado:'Updated', agua:'Water', aire:'Air', olas:'Waves', vientoLabel:'Wind',
     nowLabel:'Now',
     SERVICIOS:[
       { key:'socorrismo', label:'Lifeguard' }, { key:'duchas', label:'Showers' },
@@ -191,9 +191,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <div className={styles.solRow}>
-              <div className={styles.sr}><span className={styles.srV}>🌅 {solData?.amanecer ?? meteo.amanecer ?? '—'}</span><span className={styles.srL}>{i18n.amanecer}</span></div>
+              <div className={styles.sr}><span className={styles.srV}><SunHorizon size={14} weight="bold" color="var(--accent)" style={{verticalAlign:'middle',marginRight:4}}/>{solData?.amanecer ?? meteo.amanecer ?? '—'}</span><span className={styles.srL}>{i18n.amanecer}</span></div>
               <div className={styles.sr}><span className={styles.srV}>{horasLuz}</span><span className={styles.srL}>{i18n.horasLuz}</span></div>
-              <div className={styles.sr}><span className={styles.srV}>🌇 {solData?.atardecer ?? meteo.atardecer ?? '—'}</span><span className={styles.srL}>{i18n.atardecer}</span></div>
+              <div className={styles.sr}><span className={styles.srV}><SunHorizon size={14} weight="bold" color="var(--muted)" style={{verticalAlign:'middle',marginRight:4}}/>{solData?.atardecer ?? meteo.atardecer ?? '—'}</span><span className={styles.srL}>{i18n.atardecer}</span></div>
             </div>
           </div>
 
@@ -257,11 +257,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <div className={styles.tempGrid}>
-              <TempCell icon="🌡" val={`${meteo.tempAire}°C`}   label={i18n.tempAire}/>
-              <TempCell icon="💧" val={`${meteo.agua}°C`}       label={i18n.tempAgua}/>
-              <TempCell icon="🤔" val={`${meteo.sensacion}°C`}  label={i18n.sensacion}/>
-              <TempCell icon="☀️" val={`UV ${meteo.uv}`}        label={i18n.indiceUV}/>
-              <TempCell icon="💦" val={`${meteo.humedad}%`}     label={i18n.humedad}/>
+              <TempCell icon={<Thermometer size={18} weight="bold" color="var(--accent)"/>} val={`${meteo.tempAire}°C`}   label={i18n.tempAire}/>
+              <TempCell icon={<Drop size={18} weight="bold" color="var(--accent)"/>} val={`${meteo.agua}°C`}       label={i18n.tempAgua}/>
+              <TempCell icon={<Thermometer size={18} weight="light" color="var(--muted)"/>} val={`${meteo.sensacion}°C`}  label={i18n.sensacion}/>
+              <TempCell icon={<Sun size={18} weight="bold" color="var(--accent)"/>} val={`UV ${meteo.uv}`}        label={i18n.indiceUV}/>
+              <TempCell icon={<Gauge size={18} weight="bold" color="var(--accent)"/>} val={`${meteo.humedad}%`}     label={i18n.humedad}/>
             </div>
           </div>
 
@@ -303,7 +303,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               )}
               {medusas && (
                 <div style={{ display:'flex', alignItems:'center', gap:'.75rem' }}>
-                  <div style={{ width:28, height:28, borderRadius:'50%', background:medusas.hex, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'.9rem' }} aria-hidden>🪼</div>
+                  <div style={{ width:28, height:28, borderRadius:'50%', background:medusas.hex, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden><Fish size={16} weight="bold" color="#fff"/></div>
                   <div>
                     <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? medusas.labelEn : medusas.label}</div>
                     <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? medusas.detalleEn : medusas.detalle}</div>
@@ -509,7 +509,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 <a key={pc.slug} href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${pc.slug}`} className={styles.cercanaCard}>
                   <div className={styles.cercanaNombre}>{pc.nombre}</div>
                   <div className={styles.cercanaMeta}>{pc.municipio} · {pc.distKm < 10 ? pc.distKm.toFixed(1) : Math.round(pc.distKm)} km</div>
-                  {pc.bandera && <span className={styles.cercanaBadge}>🏖</span>}
+                  {pc.bandera && <span className={styles.cercanaBadge}><Flag size={12} weight="fill" color="var(--accent)"/></span>}
                 </a>
               ))}
             </div>
@@ -633,7 +633,7 @@ function formatTime(iso?: string, locale: string = 'es'): string {
   } catch { return '' }
 }
 
-function TempCell({ icon, val, label }: { icon:string; val:string; label:string }) {
+function TempCell({ icon, val, label }: { icon: React.ReactNode; val:string; label:string }) {
   return <div className={styles.tempCell}><span className={styles.tcIcon}>{icon}</span><div><span className={styles.tcV}>{val}</span><span className={styles.tcL}>{label}</span></div></div>
 }
 
