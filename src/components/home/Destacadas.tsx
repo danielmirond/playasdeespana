@@ -121,7 +121,7 @@ export default async function Destacadas({ playas, titulo = 'Playas destacadas',
               key={p.slug}
               href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${p.slug}`}
               className={styles.card}
-              style={{ animationDelay: `${Math.min(i, 8) * 0.04}s` }}
+              prefetch={true}
             >
               <div className={styles.vis}>
                 <div className={styles.visIlu}><IluCard estado={m.estado}/></div>
