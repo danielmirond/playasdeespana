@@ -6,6 +6,7 @@ import type { HotelReal } from '@/lib/hoteles'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
+import type { MareasDia } from '@/lib/mareas-lunar'
 import IluEstado from './IluEstado'
 import TraficoSection from './TraficoSection'
 import SurfSection from './SurfSection'
@@ -43,6 +44,7 @@ interface Props {
   dateModified?:   string
   banderaPlaya?:   BanderaPlaya
   medusas?:        MedusasRiesgo
+  mareasLunar?:    MareasDia
   locale?:         'es' | 'en'
 }
 
@@ -51,6 +53,9 @@ const T = {
     galeria:(n:string)=>`Fotos de ${n}`, galSrc:'Wikimedia · Unsplash', verFotos:'Ver fotos',
     oleaje:(n:string)=>`Oleaje y olas en ${n} ahora`, oleajeSrc:'Open-Meteo Marine',
     luzSolar:'Luz solar', luzSrc:'Sunrise-Sunset API',
+    mareas:(n:string)=>`Mareas en ${n} hoy`, mareasSrc:'Estimación lunar',
+    pleamar:'Pleamar', bajamar:'Bajamar', coeficiente:'Coeficiente',
+    vivas:'Mareas vivas', muertas:'Mareas muertas', mediasLabel:'Mareas medias',
     amanecer:'Amanecer', horasLuz:'Horas de luz', atardecer:'Atardecer',
     temperatura:(n:string)=>`Temperatura del agua y aire en ${n}`, tempSrc:'Open-Meteo',
     tempAire:'Temperatura aire', tempAgua:'Temperatura agua',
@@ -87,6 +92,9 @@ const T = {
     galeria:(n:string)=>`Photos of ${n}`, galSrc:'Wikimedia · Unsplash', verFotos:'View photos',
     oleaje:(n:string)=>`Waves at ${n} now`, oleajeSrc:'Open-Meteo Marine',
     luzSolar:'Sunlight', luzSrc:'Sunrise-Sunset API',
+    mareas:(n:string)=>`Tides at ${n} today`, mareasSrc:'Lunar estimate',
+    pleamar:'High tide', bajamar:'Low tide', coeficiente:'Coefficient',
+    vivas:'Spring tides', muertas:'Neap tides', mediasLabel:'Average tides',
     amanecer:'Sunrise', horasLuz:'Daylight hours', atardecer:'Sunset',
     temperatura:(n:string)=>`Water and air temperature at ${n}`, tempSrc:'Open-Meteo',
     tempAire:'Air temperature', tempAgua:'Water temperature',
@@ -128,7 +136,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, locale = 'es' }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, locale = 'es' }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
@@ -198,6 +206,58 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <div className={styles.sr}><span className={styles.srV}>🌇 {solData?.atardecer ?? meteo.atardecer ?? '—'}</span><span className={styles.srL}>{i18n.atardecer}</span></div>
             </div>
           </div>
+
+          {/* MAREAS */}
+          {mareasLunar && mareasLunar.zona !== 'mediterraneo' && (
+            <>
+              <div className={styles.divider}/>
+              <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
+                <h2 className={styles.cardTitle}>{i18n.mareas(playa.nombre)}</h2>
+                <span className={styles.cardSrc}>{i18n.mareasSrc}</span>
+              </div>
+              <div className={styles.cardBody}>
+                <div style={{ display:'flex', gap:'.5rem', flexWrap:'wrap', marginBottom:'.75rem' }}>
+                  {mareasLunar.mareas.map((m, i) => (
+                    <div key={i} style={{
+                      flex:'1 1 auto', minWidth:'70px', textAlign:'center',
+                      background: m.tipo === 'pleamar' ? 'rgba(59,130,246,.08)' : 'rgba(245,158,11,.08)',
+                      border: `1.5px solid ${m.tipo === 'pleamar' ? 'rgba(59,130,246,.2)' : 'rgba(245,158,11,.2)'}`,
+                      borderRadius:'12px', padding:'.55rem .5rem',
+                    }}>
+                      <div style={{ fontSize:'.65rem', color:'var(--muted)', fontWeight:600, textTransform:'uppercase', letterSpacing:'.04em' }}>
+                        {m.tipo === 'pleamar' ? (locale === 'en' ? '▲ High' : '▲ Plea.') : (locale === 'en' ? '▼ Low' : '▼ Baja.')}
+                      </div>
+                      <div style={{ fontSize:'1.05rem', fontWeight:800, color:'var(--ink)', marginTop:'.15rem' }}>{m.hora}</div>
+                      <div style={{ fontSize:'.65rem', color:'var(--muted)' }}>{m.altura}m</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display:'flex', justifyContent:'space-between', fontSize:'.72rem', color:'var(--muted)' }}>
+                  <span>{i18n.coeficiente}: <strong style={{ color:'var(--ink)' }}>{mareasLunar.coeficiente}</strong></span>
+                  <span style={{ color: mareasLunar.tipo === 'vivas' ? '#3b82f6' : mareasLunar.tipo === 'muertas' ? '#f59e0b' : 'var(--muted)', fontWeight:600 }}>
+                    {mareasLunar.tipo === 'vivas' ? i18n.vivas : mareasLunar.tipo === 'muertas' ? i18n.muertas : i18n.mediasLabel}
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
+
+          {mareasLunar && mareasLunar.zona === 'mediterraneo' && (
+            <>
+              <div className={styles.divider}/>
+              <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
+                <h2 className={styles.cardTitle}>{i18n.mareas(playa.nombre)}</h2>
+                <span className={styles.cardSrc}>{i18n.mareasSrc}</span>
+              </div>
+              <div className={styles.cardBody}>
+                <p style={{ fontSize:'.78rem', color:'var(--muted)', lineHeight:1.5 }}>
+                  {locale === 'en'
+                    ? `The Mediterranean has negligible tidal range (${mareasLunar.rango}m). Water level remains practically constant throughout the day.`
+                    : `El Mediterráneo tiene un rango mareal insignificante (${mareasLunar.rango}m). El nivel del agua se mantiene prácticamente constante durante el día.`}
+                </p>
+              </div>
+            </>
+          )}
 
           <div className={styles.divider}/>
 

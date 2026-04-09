@@ -10,6 +10,7 @@ import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { nombreConPlaya } from '@/lib/geo'
+import { estimarMareas } from '@/lib/mareas-lunar'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import { getHoteles } from '@/lib/hoteles'
@@ -135,6 +136,7 @@ export default async function BeachPageEn({ params }: Props) {
 
   const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
+  const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
   let calidad = null
   try {
@@ -163,6 +165,7 @@ export default async function BeachPageEn({ params }: Props) {
         dateModified={dateModified}
         banderaPlaya={banderaPlaya}
         medusas={medusas}
+        mareasLunar={mareasLunar}
       />
     </>
   )
