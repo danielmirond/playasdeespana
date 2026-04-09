@@ -86,13 +86,14 @@ async function getFotosUnsplash(nombre: string, municipio: string): Promise<Foto
 }
 
 export async function getFotos(nombre: string, municipio: string, lat: number, lon: number): Promise<FotoPlaya[]> {
-  // Wikimedia Commons primero (gratuito, sin límite)
-  const wikimedia = await getFotosWikimedia(nombre, municipio)
+  // Ambas fuentes en paralelo para evitar waterfall
+  const [wikimedia, unsplash] = await Promise.all([
+    getFotosWikimedia(nombre, municipio),
+    getFotosUnsplash(nombre, municipio),
+  ])
+
+  // Prioridad Wikimedia (gratuito, sin límite)
   if (wikimedia.length >= 2) return wikimedia.slice(0, 6)
-
-  // Fallback: Unsplash
-  const unsplash = await getFotosUnsplash(nombre, municipio)
   if (unsplash.length > 0) return unsplash.slice(0, 6)
-
   return wikimedia.slice(0, 6)
 }

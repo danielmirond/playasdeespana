@@ -1,9 +1,8 @@
 // src/app/en/beaches/[slug]/page.tsx
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 import { getPlayaBySlug, getPlayas } from '@/lib/playas'
+import { getCalidad } from '@/lib/calidad'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
@@ -40,11 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   ogImage.searchParams.set('municipio', `${playa.municipio} · ${playa.provincia}`)
   if (playa.bandera) ogImage.searchParams.set('azul', 'true')
   ogImage.searchParams.set('comunidad', playa.comunidad)
-  try {
-    const db = JSON.parse(readFileSync(join(process.cwd(), 'public/data/calidad-agua.json'), 'utf8'))
-    const cal = db[slug]
-    if (cal?.nivel) ogImage.searchParams.set('calidad', cal.nivel)
-  } catch {}
+  const cal = await getCalidad(slug)
+  if (cal?.nivel) ogImage.searchParams.set('calidad', cal.nivel)
 
   const ogUrl = ogImage.toString()
 
@@ -75,7 +71,7 @@ export default async function BeachPageEn({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast] = await Promise.allSettled([
+  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -84,6 +80,8 @@ export default async function BeachPageEn({ params }: Props) {
     getHoteles(playa.lat, playa.lng),
     getTurbidez(playa.lat, playa.lng),
     getMeteoForecast(playa.lat, playa.lng),
+    getCalidad(slug),
+    getPlayas(),
   ])
 
   const mareasData        = mareas.status          === 'fulfilled' ? mareas.value          : null
@@ -135,15 +133,11 @@ export default async function BeachPageEn({ params }: Props) {
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
-  let calidad = null
-  try {
-    const db = JSON.parse(readFileSync(join(process.cwd(), 'public/data/calidad-agua.json'), 'utf8'))
-    calidad = db[slug] ?? null
-  } catch {}
+  const calidad = calidadResult.status === 'fulfilled' ? calidadResult.value : null
 
   const preloadFoto = fotosData[0]?.thumb ?? null
 
-  const allPlayas = await getPlayas()
+  const allPlayas = allPlayasResult.status === 'fulfilled' ? allPlayasResult.value : []
   const playasCercanas = allPlayas
     .filter(p => p.slug !== playa.slug)
     .map(p => ({ ...p, distKm: haversine(playa.lat, playa.lng, p.lat, p.lng) / 1000 }))
