@@ -29,8 +29,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const playa = await getPlayaBySlug(slug)
   if (!playa) return {}
 
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+  const np = nombreConPlaya(playa.nombre)
   const title = `How is ${playa.nombre} today | Flag, conditions, wind and water temperature - Parking, hotels and where to eat nearby`
-  const description = `Sea conditions at ${nombreConPlaya(playa.nombre)} today. Water temperature, waves, wind, flag, jellyfish and facilities. Nearby parking, hotels and restaurants.`
+  const description = `Sea conditions at ${np} today. Water temperature, waves, wind, flag, jellyfish and facilities. Nearby parking, hotels and restaurants.`
+
+  // OG image dinámica vía /api/og con paleta por comunidad
+  const ogImage = new URL(`${BASE}/api/og`)
+  ogImage.searchParams.set('playa', np)
+  ogImage.searchParams.set('municipio', `${playa.municipio} · ${playa.provincia}`)
+  if (playa.bandera) ogImage.searchParams.set('azul', 'true')
+  ogImage.searchParams.set('comunidad', playa.comunidad)
+  try {
+    const db = JSON.parse(readFileSync(join(process.cwd(), 'public/data/calidad-agua.json'), 'utf8'))
+    const cal = db[slug]
+    if (cal?.nivel) ogImage.searchParams.set('calidad', cal.nivel)
+  } catch {}
+
+  const ogUrl = ogImage.toString()
 
   return {
     title,
@@ -38,12 +54,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `/en/beaches/${slug}`,
+      url: `${BASE}/en/beaches/${slug}`,
+      siteName: 'Playas de España',
       locale: 'en_GB',
       type: 'article',
       publishedTime: '2026-03-09T00:00:00Z',
       modifiedTime: new Date().toISOString(),
+      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${np} — live sea conditions` }],
     },
+    twitter: { card: 'summary_large_image', title, description, images: [ogUrl] },
     alternates: {
       canonical: `/en/beaches/${slug}`,
       languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` },
