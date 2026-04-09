@@ -1,7 +1,7 @@
 // src/lib/hoteles.ts — OpenStreetMap/Overpass (sin API key)
 import { haversine } from './geo'
 
-const RADIOS = [2000, 5000, 10000] // Búsqueda progresiva: 2km → 5km → 10km
+const RADIUS_M = 10000 // Radio único amplio, ordenamos por distancia
 
 export interface HotelReal {
   id:          string
@@ -36,15 +36,15 @@ function inferirPrecio(estrellas: number): string {
   return '€'
 }
 
-async function buscarOSM(lat: number, lon: number, radio: number): Promise<HotelReal[]> {
+export async function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
   const query = `[out:json][timeout:15];
 (
-  node["tourism"="hotel"](around:${radio},${lat},${lon});
-  node["tourism"="hostel"](around:${radio},${lat},${lon});
-  node["tourism"="guest_house"](around:${radio},${lat},${lon});
-  node["tourism"="apartment"](around:${radio},${lat},${lon});
-  way["tourism"="hotel"](around:${radio},${lat},${lon});
-  way["tourism"="hostel"](around:${radio},${lat},${lon});
+  node["tourism"="hotel"](around:${RADIUS_M},${lat},${lon});
+  node["tourism"="hostel"](around:${RADIUS_M},${lat},${lon});
+  node["tourism"="guest_house"](around:${RADIUS_M},${lat},${lon});
+  node["tourism"="apartment"](around:${RADIUS_M},${lat},${lon});
+  way["tourism"="hotel"](around:${RADIUS_M},${lat},${lon});
+  way["tourism"="hostel"](around:${RADIUS_M},${lat},${lon});
 );
 out center body;`
 
@@ -78,19 +78,9 @@ out center body;`
           source:      'osm',
         }
       })
+      .sort((a: HotelReal, b: HotelReal) => a.distancia_m - b.distancia_m)
+      .slice(0, 5)
   } catch {
     return []
   }
-}
-
-export async function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
-  for (const radio of RADIOS) {
-    const results = await buscarOSM(lat, lon, radio)
-    if (results.length > 0) {
-      return results
-        .sort((a: HotelReal, b: HotelReal) => a.distancia_m - b.distancia_m)
-        .slice(0, 5)
-    }
-  }
-  return []
 }

@@ -2,7 +2,7 @@
 import type { Restaurante } from '@/types'
 import { haversine } from './geo'
 
-const RADIOS = [800, 2000, 5000] // Búsqueda progresiva: 800m → 2km → 5km
+const RADIUS_M = 5000 // Radio único amplio, ordenamos por distancia
 
 function tipoDesdeAmenity(amenity: string): string {
   if (amenity === 'bar') return 'Bar'
@@ -10,12 +10,12 @@ function tipoDesdeAmenity(amenity: string): string {
   return 'Restaurante'
 }
 
-async function buscarOSM(lat: number, lon: number, radio: number): Promise<Restaurante[]> {
+export async function getRestaurantes(lat: number, lon: number): Promise<Restaurante[]> {
   const query = `[out:json][timeout:10];
 (
-  node["amenity"="restaurant"](around:${radio},${lat},${lon});
-  node["amenity"="bar"](around:${radio},${lat},${lon});
-  node["amenity"="cafe"](around:${radio},${lat},${lon});
+  node["amenity"="restaurant"](around:${RADIUS_M},${lat},${lon});
+  node["amenity"="bar"](around:${RADIUS_M},${lat},${lon});
+  node["amenity"="cafe"](around:${RADIUS_M},${lat},${lon});
 );
 out body;`
 
@@ -46,19 +46,9 @@ out body;`
         lon:         el.lon,
         source:      'osm',
       }))
+      .sort((a: Restaurante, b: Restaurante) => a.distancia_m - b.distancia_m)
+      .slice(0, 5)
   } catch {
     return []
   }
-}
-
-export async function getRestaurantes(lat: number, lon: number): Promise<Restaurante[]> {
-  for (const radio of RADIOS) {
-    const results = await buscarOSM(lat, lon, radio)
-    if (results.length > 0) {
-      return results
-        .sort((a, b) => a.distancia_m - b.distancia_m)
-        .slice(0, 5)
-    }
-  }
-  return []
 }

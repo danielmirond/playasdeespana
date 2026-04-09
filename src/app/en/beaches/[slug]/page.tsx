@@ -29,25 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const playa = await getPlayaBySlug(slug)
   if (!playa) return {}
 
-  const [mareasRes, meteoRes, restRes] = await Promise.allSettled([
-    getMareas(playa.lat, playa.lng),
-    getMeteoPlaya(playa.lat, playa.lng),
-    getRestaurantes(playa.lat, playa.lng),
-  ])
-  const mareas = mareasRes.status === 'fulfilled' ? mareasRes.value : null
-  const meteoD = meteoRes.status === 'fulfilled' ? meteoRes.value : null
-  const rests  = restRes.status === 'fulfilled' ? restRes.value : []
-
-  const agua = mareas?.temp_agua?.[0] ?? 18
-  const olas = mareas?.oleaje_m?.[0] ?? 0
-  const viento = meteoD?.viento_kmh ?? 0
-  const bandera = calcularBandera(olas, viento, meteoD?.viento_racha ?? 0)
-  const medusas = estimarMedusas(playa.lat, playa.lng, agua, viento, meteoD?.viento_dir ?? 'N')
-  const distRest = rests[0]?.distancia_m ?? 300
-
   const title = `How is ${playa.nombre} today | Flag, conditions, wind and water temperature - Parking, hotels and where to eat nearby`
-  const description = `Sea conditions at ${nombreConPlaya(playa.nombre)} today. ${bandera.labelEn}, water temperature ${agua}°C, waves ${olas}m, wind ${viento}km/h, ${medusas.labelEn.toLowerCase()}. Nearby parking, hotels and restaurants at ${distRest}m.`
-  const now = new Date().toISOString()
+  const description = `Sea conditions at ${nombreConPlaya(playa.nombre)} today. Water temperature, waves, wind, flag, jellyfish and facilities. Nearby parking, hotels and restaurants.`
 
   return {
     title,
@@ -59,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: 'en_GB',
       type: 'article',
       publishedTime: '2026-03-09T00:00:00Z',
-      modifiedTime: now,
+      modifiedTime: new Date().toISOString(),
     },
     alternates: {
       canonical: `/en/beaches/${slug}`,
