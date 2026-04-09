@@ -148,7 +148,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             {fotos && fotos.length > 0 ? (
               <div className={fotos.length === 1 ? styles.galeriaUna : styles.galeria}>
                 <div className={styles.gFoto} style={{ gridRow: fotos.length > 1 ? '1/3' : undefined }}>
-                  <img src={fotos[0].thumb} alt={`${playa.nombre} - foto 1`} loading="eager" width={800} height={450} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <img src={fotos[0].thumb} alt={`${playa.nombre} - foto 1`} loading="eager" fetchPriority="high" width={800} height={450} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                 </div>
                 {fotos[1] && <div className={styles.gFoto}>
                   <img src={fotos[1].thumb} alt={`${playa.nombre} - foto 2`} loading="lazy" width={400} height={300} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
