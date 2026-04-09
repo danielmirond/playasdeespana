@@ -13,16 +13,6 @@ const nextConfig: NextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
-  async headers() {
-    return [
-      {
-        source: '/api/:path*',
-        headers: [
-          { key: 'Cache-Control', value: 's-maxage=10800, stale-while-revalidate=86400' },
-        ],
-      },
-    ]
-  },
   async redirects() {
     return [
       // Provincias con acentos eliminados → slug correcto

@@ -13,6 +13,6 @@ export async function GET(req: NextRequest) {
   const hoteles = await getHoteles(coords.lat, coords.lon)
 
   return NextResponse.json({ hoteles }, {
-    headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' },
+    headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=172800' },
   })
 }
