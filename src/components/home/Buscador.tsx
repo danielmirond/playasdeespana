@@ -1,5 +1,5 @@
 'use client'
-import { Sun, Umbrella } from '@phosphor-icons/react'
+import { Sun } from '@phosphor-icons/react'
 import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './Buscador.module.css'
@@ -7,21 +7,21 @@ import styles from './Buscador.module.css'
 const SUGERENCIAS = ['La Concha', 'Ses Illetes', 'Tarifa', 'Famara', 'Bolonia', 'Zurriola']
 
 const FILTROS_ES = [
-  { key: 'calma',      label: '☀️ Mar en calma' },
-  { key: 'bandera',    label: '🏖 Bandera Azul' },
-  { key: 'socorrismo', label: '🏊 Socorrismo' },
-  { key: 'accesible',  label: '♿ Accesible' },
-  { key: 'perros',     label: '🐕 Perros' },
-  { key: 'duchas',     label: '🚿 Duchas' },
+  { key: 'calma',      label: 'Mar en calma' },
+  { key: 'bandera',    label: 'Bandera Azul' },
+  { key: 'socorrismo', label: 'Socorrismo' },
+  { key: 'accesible',  label: 'Accesible' },
+  { key: 'perros',     label: 'Perros' },
+  { key: 'duchas',     label: 'Duchas' },
 ]
 
 const FILTROS_EN = [
-  { key: 'calma',      label: '☀️ Calm sea' },
-  { key: 'bandera',    label: '🏖 Blue Flag' },
-  { key: 'socorrismo', label: '🏊 Lifeguard' },
-  { key: 'accesible',  label: '♿ Accessible' },
-  { key: 'perros',     label: '🐕 Dogs allowed' },
-  { key: 'duchas',     label: '🚿 Showers' },
+  { key: 'calma',      label: 'Calm sea' },
+  { key: 'bandera',    label: 'Blue Flag' },
+  { key: 'socorrismo', label: 'Lifeguard' },
+  { key: 'accesible',  label: 'Accessible' },
+  { key: 'perros',     label: 'Dogs allowed' },
+  { key: 'duchas',     label: 'Showers' },
 ]
 
 interface Props {

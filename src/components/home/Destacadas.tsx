@@ -137,22 +137,22 @@ export default async function Destacadas({ playas, titulo = 'Playas destacadas',
                 <div className={styles.datos}>
                   <div className={styles.dato}>
                     <span className={styles.datoV}>{m.olas}m</span>
-                    <span className={styles.datoL}>🌊 {locale === 'en' ? 'Waves' : 'Olas'}</span>
+                    <span className={styles.datoL}>{locale === 'en' ? 'Waves' : 'Olas'}</span>
                   </div>
                   <div className={styles.dato}>
                     <span className={styles.datoV}>{m.viento}km/h</span>
-                    <span className={styles.datoL}>💨 {locale === 'en' ? 'Wind' : 'Viento'}</span>
+                    <span className={styles.datoL}>{locale === 'en' ? 'Wind' : 'Viento'}</span>
                   </div>
                   <div className={styles.dato}>
                     <span className={styles.datoV}>UV {m.uv}</span>
-                    <span className={styles.datoL}>☀️ UV</span>
+                    <span className={styles.datoL}>UV</span>
                   </div>
                 </div>
                 <div className={styles.foot}>
                   <div className={styles.badges}>
-                    {p.bandera    && <span className={styles.badge}>{locale === 'en' ? '🏖 Blue Flag' : '🏖 Bandera Azul'}</span>}
-                    {p.socorrismo && <span className={styles.badge}>{locale === 'en' ? '🏊 Lifeguard' : '🏊 Socorrismo'}</span>}
-                    {p.accesible  && <span className={`${styles.badge} ${styles.badgeVerde}`}>♿ PMR</span>}
+                    {p.bandera    && <span className={styles.badge}>{locale === 'en' ? 'Blue Flag' : 'Bandera Azul'}</span>}
+                    {p.socorrismo && <span className={styles.badge}>{locale === 'en' ? 'Lifeguard' : 'Socorrismo'}</span>}
+                    {p.accesible  && <span className={`${styles.badge} ${styles.badgeVerde}`}>PMR</span>}
                   </div>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={styles.arrow}>
                     <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/>
