@@ -269,7 +269,36 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
           </div>
         )}
 
+        {/* Affiliates — deportes de agua + protección solar */}
+        {(process.env.NEXT_PUBLIC_AMAZON_TAG || process.env.NEXT_PUBLIC_CIVITATIS_AFF) && (
+          <div style={{ padding: '0 1.1rem 1rem', display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
+            {process.env.NEXT_PUBLIC_AMAZON_TAG && (
+              <>
+                <AffPill href={`https://www.amazon.es/s?k=crema+solar+50+playa&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Crema solar SPF50" bg="#ff9900" />
+                <AffPill href={`https://www.amazon.es/s?k=neopreno+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Neoprenos" bg="#0ea5e9" />
+                <AffPill href={`https://www.amazon.es/s?k=tabla+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Tablas de surf" bg="#0ea5e9" />
+                <AffPill href={`https://www.amazon.es/s?k=kayak+hinchable&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Kayaks" bg="#22c55e" />
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
+  )
+}
+
+function AffPill({ href, label, bg }: { href: string; label: string; bg: string }) {
+  return (
+    <a
+      href={href} target="_blank" rel="noopener noreferrer sponsored"
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '.35rem',
+        padding: '.35rem .7rem', borderRadius: 100,
+        background: bg, color: '#fff',
+        fontSize: '.7rem', fontWeight: 600, textDecoration: 'none',
+      }}
+    >
+      {label} →
+    </a>
   )
 }

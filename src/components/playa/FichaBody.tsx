@@ -20,6 +20,10 @@ import AdSlot from '@/components/ui/AdSlot'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
 const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
+const CIVITATIS_AFF = process.env.NEXT_PUBLIC_CIVITATIS_AFF ?? ''
+const THEFORK_AFF = process.env.NEXT_PUBLIC_THEFORK_AFF ?? ''
+const RENTALCARS_AFF = process.env.NEXT_PUBLIC_RENTALCARS_AFF ?? ''
+const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
 
 // Lazy load heavy below-fold components
 const TraficoSection = dynamic(() => import('./TraficoSection'), { ssr: false })
@@ -354,6 +358,35 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           turbidez={turbidez} meteo={meteoForecast}
         />
 
+        {/* Civitatis affiliate CTA */}
+        {CIVITATIS_AFF && (
+          <div style={{
+            background: 'linear-gradient(135deg, #ff6b35, #f7931e)',
+            borderRadius: 16, padding: '1rem 1.15rem', marginBottom: '.85rem',
+            display: 'flex', alignItems: 'center', gap: '.75rem',
+          }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: '.82rem', fontWeight: 700, color: '#fff', marginBottom: 4 }}>
+                {locale === 'en' ? `Activities near ${playa.nombre}` : `Actividades cerca de ${playa.nombre}`}
+              </div>
+              <div style={{ fontSize: '.68rem', color: 'rgba(255,255,255,.85)' }}>
+                {locale === 'en' ? 'Surf lessons, kayak tours, snorkeling and more' : 'Clases de surf, kayak, snorkel y más'}
+              </div>
+            </div>
+            <a
+              href={`https://www.civitatis.com/es/${playa.municipio.toLowerCase().replace(/\s+/g,'-')}/?aid=${CIVITATIS_AFF}`}
+              target="_blank" rel="noopener noreferrer sponsored"
+              style={{
+                padding: '.55rem 1rem', background: '#fff', color: '#ff6b35',
+                borderRadius: 10, fontSize: '.78rem', fontWeight: 700,
+                textDecoration: 'none', flexShrink: 0,
+              }}
+            >
+              {locale === 'en' ? 'Explore →' : 'Ver →'}
+            </a>
+          </div>
+        )}
+
         {/* CÓMO LLEGAR */}
         <div className={styles.card} id="s-comoLlegar">
           <div className={styles.cardHead}>
@@ -373,6 +406,22 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
                 <Person size={18} weight='bold'/> {locale === 'en' ? 'Walking' : 'A pie'}
               </a>
+              {/* Rentalcars affiliate */}
+              {RENTALCARS_AFF && (
+                <a
+                  href={`https://www.rentalcars.com/search-results?latitude=${playa.lat}&longitude=${playa.lng}&affiliateCode=${RENTALCARS_AFF}`}
+                  target="_blank" rel="noopener noreferrer sponsored"
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
+                    padding: '.9rem 1.1rem', borderRadius: 12,
+                    background: '#0071c2', color: '#fff',
+                    textDecoration: 'none', fontWeight: 600, fontSize: '.9rem',
+                  }}
+                >
+                  <Car size={18} weight="bold" />
+                  {locale === 'en' ? 'Rent a car — Rentalcars.com' : 'Alquilar coche — Rentalcars.com'}
+                </a>
+              )}
             </div>
             <MapaLeaflet lat={playa.lat} lng={playa.lng} nombre={playa.nombre} zoom={15} height="300px" />
 </div>
@@ -432,6 +481,22 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 </div>
               )}
             </div>
+            {/* TheFork / ElTenedor affiliate CTA */}
+            {THEFORK_AFF && (
+              <a
+                href={`https://www.thefork.es/search?cityId=&geoSlug=&q=${encodeURIComponent(playa.municipio)}&partner=${THEFORK_AFF}`}
+                target="_blank" rel="noopener noreferrer sponsored"
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
+                  width: '100%', padding: '.65rem', marginTop: '.6rem',
+                  background: '#00665c', color: '#fff', borderRadius: 10,
+                  fontSize: '.8rem', fontWeight: 700, textDecoration: 'none',
+                }}
+              >
+                <ForkKnife size={16} weight="bold" />
+                {locale === 'en' ? `Book a table in ${playa.municipio}` : `Reservar mesa en ${playa.municipio}`}
+              </a>
+            )}
           </div>
         </div>
         <div className={styles.card} id="s-dormir">
@@ -572,6 +637,38 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         </div>
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} />
         <ReportarEstado slug={playa.slug} locale={locale} />
+        {/* Amazon affiliate — equipo de playa */}
+        {AMAZON_TAG && (
+          <div style={{
+            background: 'var(--card-bg,#faf6ef)', border: '1.5px solid var(--line,#e8dcc8)',
+            borderRadius: 14, padding: '.7rem', display: 'flex', flexDirection: 'column', gap: '.35rem',
+          }}>
+            <div style={{ fontSize: '.6rem', fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', padding: '0 .2rem' }}>
+              {locale === 'en' ? 'Beach essentials' : 'Equipo de playa'}
+            </div>
+            {[
+              { q: 'protector+solar+playa', label: locale === 'en' ? 'Sunscreen' : 'Protector solar', icon: '☀️' },
+              { q: 'gafas+snorkel', label: locale === 'en' ? 'Snorkel mask' : 'Gafas de snorkel', icon: '🤿' },
+              { q: 'tabla+paddle+surf+hinchable', label: 'Paddle surf', icon: '🏄' },
+            ].map(item => (
+              <a
+                key={item.q}
+                href={`https://www.amazon.es/s?k=${item.q}&tag=${AMAZON_TAG}`}
+                target="_blank" rel="noopener noreferrer sponsored"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '.5rem',
+                  padding: '.45rem .6rem', borderRadius: 8,
+                  border: '1px solid var(--line,#e8dcc8)', background: 'rgba(255,255,255,.5)',
+                  fontSize: '.75rem', fontWeight: 500, color: 'var(--ink)', textDecoration: 'none',
+                }}
+              >
+                <span>{item.icon}</span>
+                <span style={{ flex: 1 }}>{item.label}</span>
+                <span style={{ fontSize: '.65rem', color: 'var(--accent)', fontWeight: 600 }}>Amazon →</span>
+              </a>
+            ))}
+          </div>
+        )}
       </aside>
     </div>
   )
