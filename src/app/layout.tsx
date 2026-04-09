@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
 import CookieBanner from '@/components/ui/CookieBanner'
+import NavigationProgress from '@/components/ui/NavigationProgress'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <body>
+        <NavigationProgress />
         {children}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LFHYJE8S16"

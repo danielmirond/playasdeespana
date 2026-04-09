@@ -7,17 +7,20 @@ import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
 import type { MareasDia } from '@/lib/mareas-lunar'
+import dynamic from 'next/dynamic'
 import IluEstado from './IluEstado'
-import TraficoSection from './TraficoSection'
-import SurfSection from './SurfSection'
 import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
-import EscuelasSection from './EscuelasSection'
 import type { Escuela } from '@/lib/escuelas'
-import MapaLeaflet from '@/components/ui/MapaLeafletWrapper'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star } from '@/components/ui/Icons'
+
+// Lazy load heavy below-fold components
+const TraficoSection = dynamic(() => import('./TraficoSection'), { ssr: false })
+const SurfSection = dynamic(() => import('./SurfSection'), { ssr: false })
+const EscuelasSection = dynamic(() => import('./EscuelasSection'), { ssr: false })
+const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), { ssr: false })
 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number
