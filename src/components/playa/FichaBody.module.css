@@ -33,33 +33,35 @@
 .divider { height: 1px; background: var(--line); margin: 0 1rem; }
 
 /* ── GALERÍA ────────────────────────────────────────────────────── */
-.galeria {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 120px 120px;
-  gap: 4px; padding: 0 1rem 1rem;
-}
-.galeriaUna {
-  display: block;
+/* ── CARRUSEL FOTOS ── */
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 6px;
   padding: 0 1rem 1rem;
-  height: 220px;
+  scrollbar-width: none;
 }
-.gFoto {
-  border-radius: 10px; overflow: hidden;
-  position: relative; cursor: pointer;
-  width: 100%; height: 100%; min-height: 100px;
+.carousel::-webkit-scrollbar { display: none; }
+.carouselSlide {
+  flex: 0 0 85%;
+  scroll-snap-align: start;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16/10;
+  background: var(--line);
 }
-.gFoto img {
+.carouselSlide img {
   display: block; width: 100%; height: 100%; object-fit: cover;
 }
-.gFotoMas {}
-.gMasOverlay {
-  position: absolute; inset: 0;
-  background: rgba(42,26,8,.5); backdrop-filter: blur(3px);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+@media (min-width: 600px) {
+  .carouselSlide { flex: 0 0 60%; }
 }
-.gMasN { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; color: white; }
-.gMasL { font-size: .58rem; color: rgba(255,255,255,.6); letter-spacing: .1em; text-transform: uppercase; }
+@media (min-width: 900px) {
+  .carouselSlide { flex: 0 0 45%; }
+}
 .gFuente {
   position: absolute; bottom: 5px; left: 7px;
   font-size: .52rem; color: rgba(255,255,255,.75);

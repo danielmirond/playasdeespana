@@ -144,33 +144,29 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <h2 className={styles.cardTitle}>{i18n.galeria(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{i18n.galSrc}</span>
           </div>
-          <div className={styles.galeria}>
-            {fotos && fotos.length > 0 ? (
-              <div className={fotos.length === 1 ? styles.galeriaUna : styles.galeria}>
-                <div className={styles.gFoto} style={{ gridRow: fotos.length > 1 ? '1/3' : undefined }}>
-                  <img src={fotos[0].url} alt={`${playa.nombre} - foto 1`} loading="eager" fetchPriority="high" />
-                </div>
-                {fotos[1] && <div className={styles.gFoto}>
-                  <img src={fotos[1].thumb} alt={`${playa.nombre} - foto 2`} loading="lazy" />
-                </div>}
-                {fotos[2] && <div className={`${styles.gFoto} ${styles.gFotoMas}`}>
-                  <img src={fotos[2].thumb} alt={`${playa.nombre} - foto 3`} loading="lazy" />
-                  {fotos.length > 3 && (
-                    <div className={styles.gMasOverlay}><span className={styles.gMasN}>+{fotos.length - 2}</span><span className={styles.gMasL}>{i18n.verFotos}</span></div>
+          {fotos && fotos.length > 0 ? (
+            <div className={styles.carousel}>
+              {fotos.map((f, i) => (
+                <div key={i} className={styles.carouselSlide}>
+                  <img
+                    src={i === 0 ? f.url : f.thumb}
+                    alt={`${playa.nombre} - foto ${i + 1}`}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={i === 0 ? 'high' : undefined}
+                  />
+                  {i === 0 && (
+                    <div className={styles.gFuente}>{f.fuente === 'wikimedia' ? <><Camera size={12}/> Wikimedia Commons</> : <><Camera size={12}/> Unsplash</>}</div>
                   )}
-                  <div className={styles.gFuente}>{fotos[0].fuente === 'wikimedia' ? <><Camera size={12}/> Wikimedia Commons</> : <><Camera size={12}/> Unsplash</>}</div>
-                </div>}
-              </div>
-            ) : (
-              <>
-                <div className={styles.gFoto} style={{ background:'linear-gradient(160deg,#1a6b8a,#2a9a7a)', gridRow:'1/3' }}/>
-                <div className={styles.gFoto} style={{ background:'linear-gradient(160deg,#1a4a6e,#2a7aaa)' }}/>
-                <div className={`${styles.gFoto} ${styles.gFotoMas}`} style={{ background:'linear-gradient(160deg,#3a6a8a,#5a9aaa)' }}>
-                  <div className={styles.gMasOverlay}><span className={styles.gMasN}>+8</span><span className={styles.gMasL}>{i18n.verFotos}</span></div>
                 </div>
-              </>
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.carousel}>
+              <div className={styles.carouselSlide} style={{ background:'linear-gradient(160deg,#1a6b8a,#2a9a7a)' }}/>
+              <div className={styles.carouselSlide} style={{ background:'linear-gradient(160deg,#1a4a6e,#2a7aaa)' }}/>
+              <div className={styles.carouselSlide} style={{ background:'linear-gradient(160deg,#3a6a8a,#5a9aaa)' }}/>
+            </div>
+          )}
         </div>
 
         {/* OLEAJE + METEO */}
