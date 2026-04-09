@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-LFHYJE8S16');
           `}
         </Script>
-            <CookieBanner locale="es" />
+        <CookieBanner />
       </body>
     </html>
   )

@@ -1,16 +1,17 @@
 'use client'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ShieldCheck } from '@phosphor-icons/react'
 import { useState, useEffect } from 'react'
-
-interface Props { locale?: 'es' | 'en' }
 
 const t = {
   es: { texto: 'Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.', aceptar: 'Aceptar', rechazar: 'Solo esenciales', politica: 'Política de cookies' },
   en: { texto: 'We use cookies to analyse traffic and improve your experience.', aceptar: 'Accept', rechazar: 'Essential only', politica: 'Cookie policy' },
 }
 
-export default function CookieBanner({ locale = 'es' }: Props) {
+export default function CookieBanner() {
+  const pathname = usePathname()
+  const locale = pathname.startsWith('/en') ? 'en' : 'es'
   const [visible, setVisible] = useState(false)
   const i18n = t[locale]
   useEffect(() => { if (!localStorage.getItem('cookie_consent')) setVisible(true) }, [])

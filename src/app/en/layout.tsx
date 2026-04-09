@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
-import CookieBanner from '@/components/ui/CookieBanner'
 
 export const metadata: Metadata = {
   alternates: {
@@ -9,10 +7,5 @@ export const metadata: Metadata = {
 }
 
 export default function EnLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {children}
-      <CookieBanner locale="en" />
-    </>
-  )
+  return <>{children}</>
 }

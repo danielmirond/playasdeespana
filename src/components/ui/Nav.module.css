@@ -40,7 +40,6 @@
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
-  pointer-events: none;
 }
 
 .right { display: flex; gap: .35rem; }
