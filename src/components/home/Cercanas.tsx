@@ -29,12 +29,8 @@ export default function Cercanas({ locale = 'es' }: Props) {
     navigator.geolocation.getCurrentPosition(
       async pos => {
         const { latitude: lat, longitude: lng } = pos.coords
-        const res   = await fetch('/data/playas.json')
-        const todas: Playa[] = await res.json()
-        const cercanas = todas
-          .map(p => ({ ...p, distKm: haversine(lat, lng, p.lat, p.lng) }))
-          .sort((a, b) => a.distKm - b.distKm)
-          .slice(0, 6)
+        const res = await fetch(`/api/cercanas?lat=${lat}&lng=${lng}`)
+        const cercanas: PlayaConDist[] = await res.json()
         setPlayas(cercanas)
         setEstado('ok')
 

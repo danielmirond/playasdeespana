@@ -58,12 +58,9 @@ export default function Favoritas({ locale = 'es' }: Props) {
 
   useEffect(() => {
     if (!mounted || favs.length === 0) return
-    fetch('/data/playas.json')
+    fetch(`/api/playas-by-slug?slugs=${favs.join(',')}`)
       .then(r => r.json())
-      .then((todas: Playa[]) => {
-        const encontradas = favs
-          .map(slug => todas.find(p => p.slug === slug))
-          .filter(Boolean) as Playa[]
+      .then((encontradas: Playa[]) => {
         setPlayas(encontradas)
 
         // Meteo
