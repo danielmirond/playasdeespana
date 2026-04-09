@@ -21,6 +21,13 @@ import SchemaPlaya from '@/components/playa/SchemaPlaya'
 
 export const revalidate = 3600
 
+export async function generateStaticParams() {
+  const playas = await getPlayas()
+  return playas
+    .filter(p => p.bandera)
+    .map(p => ({ slug: p.slug }))
+}
+
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

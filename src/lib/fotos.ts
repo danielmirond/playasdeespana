@@ -1,4 +1,5 @@
 // src/lib/fotos.ts — Fotos de playas via Wikimedia Commons y Unsplash (sin Google Places)
+import { fetchWithTimeout } from './fetch-timeout'
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
 
@@ -30,7 +31,7 @@ async function getFotosWikimedia(nombre: string, municipio: string): Promise<Fot
         format:      'json',
         origin:      '*',
       })
-      const res = await fetch(
+      const res = await fetchWithTimeout(
         `https://commons.wikimedia.org/w/api.php?${params}`,
         { next: { revalidate: 86400 } }
       )
@@ -65,7 +66,7 @@ async function getFotosUnsplash(nombre: string, municipio: string): Promise<Foto
   if (!UNSPLASH_KEY) return []
   try {
     const query = encodeURIComponent(`playa ${municipio} España`)
-    const res = await fetch(
+    const res = await fetchWithTimeout(
       `https://api.unsplash.com/search/photos?query=${query}&per_page=6&orientation=landscape`,
       {
         headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` },

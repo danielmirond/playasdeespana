@@ -1,5 +1,6 @@
 // src/lib/escuelas.ts
 // Escuelas de deportes acuáticos via OpenStreetMap Overpass API
+import { fetchWithTimeout } from './fetch-timeout'
 
 export interface Escuela {
   id:        number
@@ -67,7 +68,7 @@ export async function getEscuelas(lat: number, lng: number, radio = 5000): Promi
       );
       out center;
     `
-    const res = await fetch('https://overpass-api.de/api/interpreter', {
+    const res = await fetchWithTimeout('https://overpass-api.de/api/interpreter', {
       method:  'POST',
       body:    `data=${encodeURIComponent(query)}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -122,7 +123,7 @@ async function getEscuelasFoursquare(lat: number, lng: number, radio = 5000): Pr
       limit:        '10',
       fields:       'fsq_id,name,categories,distance,website,tel,geocodes',
     })
-    const res = await fetch(
+    const res = await fetchWithTimeout(
       `https://api.foursquare.com/v3/places/search?${params}`,
       {
         headers: { Authorization: key, Accept: 'application/json' },

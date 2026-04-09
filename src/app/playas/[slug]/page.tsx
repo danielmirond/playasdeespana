@@ -24,6 +24,15 @@ import SchemaPlaya from '@/components/playa/SchemaPlaya'
 
 export const revalidate = 3600
 
+// Pre-renderiza las playas con Bandera Azul (las más visitadas) en build
+// El resto se genera on-demand con ISR y se cachea 1h
+export async function generateStaticParams() {
+  const playas = await getPlayas()
+  return playas
+    .filter(p => p.bandera)
+    .map(p => ({ slug: p.slug }))
+}
+
 interface Props { params: Promise<{ slug: string }> }
 
 

@@ -2,6 +2,7 @@
 // Una sola llamada HTTP para: current weather + daily forecast (5 días)
 import { cache } from 'react'
 import { gradosADireccion } from './geo'
+import { fetchWithTimeout } from './fetch-timeout'
 
 export interface MeteoPlaya {
   temp_aire:      number
@@ -50,7 +51,7 @@ const fetchMeteo = cache(async (lat: number, lng: number): Promise<MeteoRaw | nu
       + `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,cloudcover_mean,weathercode`
       + `&wind_speed_unit=kmh&forecast_days=5&timezone=Europe%2FMadrid`
 
-    const res = await fetch(url, { next: { revalidate: 3600 } })
+    const res = await fetchWithTimeout(url, { next: { revalidate: 3600 } })
     if (!res.ok) return null
     const data = await res.json()
 

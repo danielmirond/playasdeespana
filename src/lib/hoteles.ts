@@ -1,5 +1,6 @@
 // src/lib/hoteles.ts — OpenStreetMap/Overpass (sin API key)
 import { haversine } from './geo'
+import { fetchWithTimeout } from './fetch-timeout'
 
 const RADIUS_M = 10000 // Radio único amplio, ordenamos por distancia
 
@@ -49,7 +50,7 @@ export async function getHoteles(lat: number, lon: number): Promise<HotelReal[]>
 out center body;`
 
   try {
-    const res = await fetch('https://overpass-api.de/api/interpreter', {
+    const res = await fetchWithTimeout('https://overpass-api.de/api/interpreter', {
       method: 'POST',
       body:   query,
       next:   { revalidate: 86400 },

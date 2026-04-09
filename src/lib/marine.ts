@@ -1,5 +1,6 @@
 // src/lib/marine.ts
 import { cache } from 'react'
+import { fetchWithTimeout } from './fetch-timeout'
 
 
 export interface MarineData {
@@ -51,7 +52,7 @@ export const getMareas = cache(async (lat: number, lng: number): Promise<MarineD
       + `&daily=wave_height_max,wave_height_min,wind_speed_10m_max`
       + `&wind_speed_unit=kmh&forecast_days=7&timezone=Europe%2FMadrid`
 
-    const res = await fetch(url, { next: { revalidate: 3600 } })
+    const res = await fetchWithTimeout(url, { next: { revalidate: 3600 } })
     if (!res.ok) return null
 
     const marine = await res.json()
@@ -98,7 +99,7 @@ export const getSol = cache(async (lat: number, lng: number): Promise<SolData | 
   try {
     const hoy = new Date().toISOString().split('T')[0]
     const url = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${hoy}&formatted=0`
-    const res = await fetch(url, { next: { revalidate: 86400 } })
+    const res = await fetchWithTimeout(url, { next: { revalidate: 86400 } })
     if (!res.ok) return null
     const data = await res.json()
     if (data.status !== 'OK') return null

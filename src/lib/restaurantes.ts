@@ -1,6 +1,7 @@
 // src/lib/restaurantes.ts — Restaurantes cercanos via OpenStreetMap/Overpass (sin API key)
 import type { Restaurante } from '@/types'
 import { haversine } from './geo'
+import { fetchWithTimeout } from './fetch-timeout'
 
 const RADIUS_M = 5000 // Radio único amplio, ordenamos por distancia
 
@@ -20,7 +21,7 @@ export async function getRestaurantes(lat: number, lon: number): Promise<Restaur
 out body;`
 
   try {
-    const res = await fetch('https://overpass-api.de/api/interpreter', {
+    const res = await fetchWithTimeout('https://overpass-api.de/api/interpreter', {
       method: 'POST',
       body:   query,
       next:   { revalidate: 86400 },
