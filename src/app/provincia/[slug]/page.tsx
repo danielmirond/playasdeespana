@@ -77,9 +77,9 @@ export default async function ProvinciaPage({ params }: Props) {
           <h1 className={styles.titulo}>{provincia.nombre}</h1>
           <p className={styles.subtitulo}>{provincia.comunidad} · España</p>
           <div className={styles.chips}>
-            <span className={styles.chip}>🏖 {provincia.count} playas</span>
-            <span className={styles.chip}>✅ {buenas} buenas hoy</span>
-            {conBandera > 0 && <span className={styles.chip}>🏳️ {conBandera} bandera azul</span>}
+            <span className={styles.chip}>{provincia.count} playas</span>
+            <span className={styles.chip}>{buenas} buenas hoy</span>
+            {conBandera > 0 && <span className={styles.chip}>{conBandera} bandera azul</span>}
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@ export default async function ProvinciaPage({ params }: Props) {
         {/* MAPA */}
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
-            <span className={styles.mapaTitle}>🗺 Mapa de playas · {provincia.nombre}</span>
+            <span className={styles.mapaTitle}>Mapa de playas · {provincia.nombre}</span>
             <span className={styles.mapaSrc}>Interactivo · {playas.length} playas</span>
           </div>
           <MapaPlayas playas={playas} height="360px" />
@@ -108,14 +108,14 @@ export default async function ProvinciaPage({ params }: Props) {
                 <div className={styles.rowNombre}>{p.nombre}</div>
                 <div className={styles.rowMeta}>
                   {p.municipio}
-                  {p.bandera    && <span className={styles.badge}>🏳️ Bandera Azul</span>}
-                  {p.socorrismo && <span className={styles.badge}>🏊 Socorrismo</span>}
-                  {p.accesible  && <span className={styles.badge}>♿ Accesible</span>}
+                  {p.bandera    && <span className={styles.badge}>Bandera Azul</span>}
+                  {p.socorrismo && <span className={styles.badge}>Socorrismo</span>}
+                  {p.accesible  && <span className={styles.badge}>PMR</span>}
                 </div>
               </div>
               <div className={styles.rowMeteo}>
-                <span>🌊 {p.olas}m</span>
-                <span>💨 {p.viento}km/h</span>
+                <span>{p.olas}m</span>
+                <span>{p.viento}km/h</span>
               </div>
               <div className={styles.rowEstado} style={{ background: p.estado.bg, borderColor: p.estado.dot + '55' }}>
                 <span className={styles.rowDot} style={{ background: p.estado.dot }}/>

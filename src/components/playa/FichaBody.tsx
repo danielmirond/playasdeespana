@@ -398,8 +398,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       {r.resena && <div style={{ fontSize:'.75rem', color:'#6b5a3e', fontStyle:'italic', marginTop:'4px', lineHeight:'1.4' }}>"{r.resena}"</div>}
                       {(r.website || r.telefono) && (
                         <div style={{ display:'flex', gap:'8px', marginTop:'6px', flexWrap:'wrap' }}>
-                          {r.website && <a href={r.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.7rem', background:'#b06820', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>🌐 Web</a>}
-                          {r.telefono && <a href={`tel:${r.telefono}`} style={{ fontSize:'.7rem', background:'rgba(176,104,32,.12)', color:'#b06820', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(176,104,32,.3)' }}>📞 {r.telefono}</a>}
+                          {r.website && <a href={r.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.7rem', background:'#b06820', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
+                          {r.telefono && <a href={`tel:${r.telefono}`} style={{ fontSize:'.7rem', background:'rgba(176,104,32,.12)', color:'#b06820', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(176,104,32,.3)' }}>{r.telefono}</a>}
                         </div>
                       )}
                     </div>
@@ -439,11 +439,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                         <div className={styles.listNombre}>{h.nombre}</div>
                       </a>
                       <div className={styles.hotelStars}>{'★'.repeat(Math.min(h.estrellas,5))}{'☆'.repeat(Math.max(0,5-h.estrellas))}</div>
-                      <div className={styles.listMeta}>{h.distancia_m}m{h.rating > 0 && <span> · {h.rating} ⭐ ({h.reseñas?.toLocaleString(locale === 'en' ? 'en' : 'es')})</span>}{h.precio && <span> · {h.precio}</span>}</div>
+                      <div className={styles.listMeta}>{h.distancia_m}m{h.rating > 0 && <span> · {h.rating} <Star size={12} weight="fill" color="#f5a623" style={{verticalAlign:'middle'}}/> ({h.reseñas?.toLocaleString(locale === 'en' ? 'en' : 'es')})</span>}{h.precio && <span> · {h.precio}</span>}</div>
                       {(h.website || h.telefono) && (
                         <div style={{ display:'flex', gap:'8px', marginTop:'6px' }}>
-                          {h.website && <a href={h.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.7rem', background:'#b06820', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>🌐 Web</a>}
-                          {h.telefono && <a href={`tel:${h.telefono}`} style={{ fontSize:'.7rem', background:'rgba(176,104,32,.12)', color:'#b06820', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(176,104,32,.3)' }}>📞 {h.telefono}</a>}
+                          {h.website && <a href={h.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.7rem', background:'#b06820', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
+                          {h.telefono && <a href={`tel:${h.telefono}`} style={{ fontSize:'.7rem', background:'rgba(176,104,32,.12)', color:'#b06820', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(176,104,32,.3)' }}>{h.telefono}</a>}
                         </div>
                       )}
                     </div>
@@ -474,7 +474,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <div className={styles.srvGrid}>
               {i18n.SERVICIOS.map(s => {
                 const on = !!(playa as any)[s.key]
-                return <span key={s.key} className={`${styles.srv} ${on ? styles.srvSi : styles.srvNo}`}>{on ? '✓' : '✗'} {s.label}</span>
+                return <span key={s.key} className={`${styles.srv} ${on ? styles.srvSi : styles.srvNo}`}>{on ? 'Sí' : 'No'} · {s.label}</span>
               })}
             </div>
           </div>

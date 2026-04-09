@@ -24,11 +24,11 @@ export default async function OGImage({ params }: { params: Promise<{ slug: stri
 
   const nombre = nombreConPlaya(playa.nombre)
   const badges = [
-    playa.bandera    && '🏖 Bandera Azul',
-    playa.socorrismo && '🏊 Socorrismo',
-    playa.accesible  && '♿ Accesible',
-    playa.perros     && '🐕 Perros',
-    playa.nudista    && '🏝 Nudista',
+    playa.bandera    && 'Bandera Azul',
+    playa.socorrismo && 'Socorrismo',
+    playa.accesible  && 'Accesible',
+    playa.perros     && 'Perros',
+    playa.nudista    && 'Nudista',
   ].filter(Boolean) as string[]
 
   return new ImageResponse(

@@ -1,5 +1,6 @@
 'use client'
 // src/components/playa/FichaAsideActions.tsx
+import { CheckCircle, MapPin } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 interface Props {
@@ -48,10 +49,10 @@ export default function FichaAsideActions({ lat, lng, nombre, slug }: Props) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '4px' }}>
       <button onClick={verEnMapa} style={btn}>
-        🗺️ Ver en Google Maps
+        <MapPin size={14} weight="bold" color="currentColor"/> Ver en Google Maps
       </button>
       <button onClick={compartir} style={btn}>
-        {copied ? '✅ Enlace copiado' : '↗ Compartir playa'}
+        {copied ? <><CheckCircle size={14} weight="bold" color="currentColor"/> Enlace copiado</> : '↗ Compartir playa'}
       </button>
     </div>
   )

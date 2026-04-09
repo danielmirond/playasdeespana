@@ -42,7 +42,7 @@ export default async function BlueFlagPage() {
             <span>›</span>
             <span>Blue Flag</span>
           </nav>
-          <h1 className={styles.titulo}>🏖 Blue Flag Beaches</h1>
+          <h1 className={styles.titulo}>Blue Flag Beaches</h1>
           <p className={styles.subtitulo}>
             {azules.length} certified beaches across {grupos.length} regions
           </p>
@@ -55,7 +55,7 @@ export default async function BlueFlagPage() {
       <div className={styles.wrap}>
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
-            <span className={styles.mapaTitle}>🗺 Blue Flag beaches map</span>
+            <span className={styles.mapaTitle}>Blue Flag beaches map</span>
             <span className={styles.mapaSrc}>{azules.length} beaches</span>
           </div>
           <MapaPlayas playas={azules} height="400px" />
@@ -74,8 +74,8 @@ export default async function BlueFlagPage() {
                     <div className={styles.rowNombre}>{p.nombre}</div>
                     <div className={styles.rowMeta}>
                       {p.municipio} · {p.provincia}
-                      {p.socorrismo && <span className={styles.badge}>🏊 Lifeguard</span>}
-                      {p.accesible  && <span className={styles.badge}>♿ Accessible</span>}
+                      {p.socorrismo && <span className={styles.badge}>Lifeguard</span>}
+                      {p.accesible  && <span className={styles.badge}>Accessible</span>}
                     </div>
                   </div>
                   <span className={styles.rowArrow}>→</span>

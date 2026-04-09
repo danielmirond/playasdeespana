@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 }
 
 const ICONOS: Record<string, string> = {
-  'Andalucía': '🌞', 'Asturias': '🌿', 'Baleares': '🏝',
-  'Canarias': '🌋', 'Cantabria': '⛰', 'Cataluña': '🏛',
-  'C. Valenciana': '🍊', 'Galicia': '🌊', 'Murcia': '🌴',
-  'País Vasco': '🦑', 'Ceuta': '🏰', 'Melilla': '🌺',
+  'Andalucía': 'AND', 'Asturias': 'AST', 'Baleares': 'BAL',
+  'Canarias': 'CAN', 'Cantabria': 'CTB', 'Cataluña': 'CAT',
+  'C. Valenciana': 'VAL', 'Galicia': 'GAL', 'Murcia': 'MUR',
+  'País Vasco': 'PVA', 'Ceuta': 'CEU', 'Melilla': 'MEL',
 }
 
 export default async function ComunidadesPage() {
@@ -50,7 +50,7 @@ export default async function ComunidadesPage() {
               <div key={c.slug} className={styles.card}>
                 {/* Cabecera comunidad */}
                 <Link href={`/comunidad/${c.slug}`} className={styles.cardHead}>
-                  <span className={styles.icono}>{ICONOS[c.nombre] ?? '🏖'}</span>
+                  <span className={styles.icono}>{ICONOS[c.nombre] ?? '—'}</span>
                   <div className={styles.cardHeadInfo}>
                     <span className={styles.nombre}>{c.nombre}</span>
                     <span className={styles.count}>{c.count.toLocaleString('es')} playas</span>

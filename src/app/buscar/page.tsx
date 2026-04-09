@@ -8,12 +8,12 @@ import type { Playa } from '@/types'
 import styles from './buscar.module.css'
 
 const FILTROS = [
-  { key: 'bandera',    label: '🏖 Bandera Azul' },
-  { key: 'socorrismo', label: '🏊 Socorrismo' },
-  { key: 'accesible',  label: '♿ Accesible' },
-  { key: 'perros',     label: '🐕 Perros' },
-  { key: 'duchas',     label: '🚿 Duchas' },
-  { key: 'parking',    label: '🅿 Parking' },
+  { key: 'bandera',    label: 'Bandera Azul' },
+  { key: 'socorrismo', label: 'Socorrismo' },
+  { key: 'accesible',  label: 'Accesible' },
+  { key: 'perros',     label: 'Perros' },
+  { key: 'duchas',     label: 'Duchas' },
+  { key: 'parking',    label: 'Parking' },
 ]
 
 const COMUNIDADES = [
@@ -160,7 +160,7 @@ function BuscarContent() {
           </div>
         ) : resultados.length === 0 ? (
           <div className={styles.empty}>
-            <span className={styles.emptyIcon}>🏖</span>
+            <span className={styles.emptyIcon}>~</span>
             <p>No hay playas con esos criterios.</p>
             <button className={styles.emptyBtn} onClick={() => { setQ(''); setFiltros({}); setComunidad('') }}>
               Ver todas las playas
@@ -177,12 +177,12 @@ function BuscarContent() {
                     <div className={styles.cardComunidad}>{p.comunidad}</div>
                   </div>
                   <div className={styles.cardBadges}>
-                    {p.bandera    && <span className={styles.badge} title="Bandera Azul">🏖</span>}
-                    {p.socorrismo && <span className={styles.badge} title="Socorrismo">🏊</span>}
-                    {p.accesible  && <span className={styles.badge} title="Accesible">♿</span>}
-                    {p.perros     && <span className={styles.badge} title="Perros">🐕</span>}
-                    {p.duchas     && <span className={styles.badge} title="Duchas">🚿</span>}
-                    {p.parking    && <span className={styles.badge} title="Parking">🅿</span>}
+                    {p.bandera    && <span className={styles.badge} title="Bandera Azul">B. Azul</span>}
+                    {p.socorrismo && <span className={styles.badge} title="Socorrismo">Socorr.</span>}
+                    {p.accesible  && <span className={styles.badge} title="Accesible">PMR</span>}
+                    {p.perros     && <span className={styles.badge} title="Perros">Perros</span>}
+                    {p.duchas     && <span className={styles.badge} title="Duchas">Duchas</span>}
+                    {p.parking    && <span className={styles.badge} title="Parking">P</span>}
                   </div>
                   <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                     <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/>

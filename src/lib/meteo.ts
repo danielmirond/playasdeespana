@@ -27,10 +27,10 @@ export interface MeteoForecast {
 }
 
 const ICONOS: Record<number, string> = {
-  0:'☀️', 1:'🌤', 2:'⛅', 3:'☁️',
-  45:'🌫', 48:'🌫', 51:'🌦', 53:'🌦', 55:'🌧',
-  61:'🌧', 63:'🌧', 65:'🌧', 71:'🌨', 73:'🌨', 75:'❄️',
-  80:'🌦', 81:'🌧', 82:'⛈', 95:'⛈', 96:'⛈', 99:'⛈',
+  0:'Sol', 1:'Sol', 2:'Nubes', 3:'Nublado',
+  45:'Niebla', 48:'Niebla', 51:'Lluvia', 53:'Lluvia', 55:'Lluvia',
+  61:'Lluvia', 63:'Lluvia', 65:'Lluvia', 71:'Nieve', 73:'Nieve', 75:'Nieve',
+  80:'Lluvia', 81:'Lluvia', 82:'Tormenta', 95:'Tormenta', 96:'Tormenta', 99:'Tormenta',
 }
 
 interface MeteoRaw {
@@ -77,7 +77,7 @@ const fetchMeteo = cache(async (lat: number, lng: number): Promise<MeteoRaw | nu
       lluvia_mm:   parseFloat((d.precipitation_sum[i] ?? 0).toFixed(1)),
       prob_lluvia: Math.round(d.precipitation_probability_max[i] ?? 0),
       nubosidad:   Math.round(d.cloudcover_mean[i] ?? 0),
-      icono:       ICONOS[d.weathercode[i]] ?? '🌤',
+      icono:       ICONOS[d.weathercode[i]] ?? 'Sol',
     }))
 
     return { current, forecast }

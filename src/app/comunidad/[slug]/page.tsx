@@ -102,7 +102,7 @@ export default async function ComunidadPage({ params }: Props) {
         {/* MAPA */}
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
-            <span className={styles.mapaTitle}>🗺 Mapa de playas</span>
+            <span className={styles.mapaTitle}>Mapa de playas</span>
             <span className={styles.mapaSrc}>Interactivo · {playas.length} playas</span>
           </div>
           <MapaPlayas playas={playas} height="420px" />
@@ -129,14 +129,14 @@ export default async function ComunidadPage({ params }: Props) {
                     <div className={styles.pcNombre}>{p.nombre}</div>
                     <div className={styles.pcMeta}>{p.municipio}</div>
                     <div className={styles.pcData}>
-                      <span>🌊 {p.olas}m</span>
-                      <span>💨 {p.viento}km/h</span>
+                      <span>{p.olas}m</span>
+                      <span>{p.viento}km/h</span>
                     </div>
                     <div className={styles.pcServicios}>
-                      {p.socorrismo && <span className={styles.pcSrv} title="Socorrismo">🏊</span>}
-                      {p.bandera    && <span className={styles.pcSrv} title="Bandera Azul">🏳️</span>}
-                      {p.accesible  && <span className={styles.pcSrv} title="Accesible">♿</span>}
-                      {p.perros     && <span className={styles.pcSrv} title="Perros">🐕</span>}
+                      {p.socorrismo && <span className={styles.pcSrv} title="Socorrismo">Socorr.</span>}
+                      {p.bandera    && <span className={styles.pcSrv} title="Bandera Azul">B. Azul</span>}
+                      {p.accesible  && <span className={styles.pcSrv} title="Accesible">PMR</span>}
+                      {p.perros     && <span className={styles.pcSrv} title="Perros">Perros</span>}
                     </div>
                   </Link>
                 ))}

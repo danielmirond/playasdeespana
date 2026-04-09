@@ -43,7 +43,7 @@ export default async function BanderasAzulesPage() {
             <span>›</span>
             <span>Banderas Azules</span>
           </nav>
-          <h1 className={styles.titulo}>🏖 Playas con Bandera Azul</h1>
+          <h1 className={styles.titulo}>Playas con Bandera Azul</h1>
           <p className={styles.subtitulo}>
             {azules.length} playas certificadas en {grupos.length} comunidades autónomas
           </p>
@@ -56,7 +56,7 @@ export default async function BanderasAzulesPage() {
       <div className={styles.wrap}>
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
-            <span className={styles.mapaTitle}>🗺 Mapa de playas Bandera Azul</span>
+            <span className={styles.mapaTitle}>Mapa de playas Bandera Azul</span>
             <span className={styles.mapaSrc}>{azules.length} playas</span>
           </div>
           <MapaPlayas playas={azules} height="400px" />
@@ -75,8 +75,8 @@ export default async function BanderasAzulesPage() {
                     <div className={styles.rowNombre}>{p.nombre}</div>
                     <div className={styles.rowMeta}>
                       {p.municipio} · {p.provincia}
-                      {p.socorrismo && <span className={styles.badge}>🏊 Socorrismo</span>}
-                      {p.accesible  && <span className={styles.badge}>♿ Accesible</span>}
+                      {p.socorrismo && <span className={styles.badge}>Socorrismo</span>}
+                      {p.accesible  && <span className={styles.badge}>PMR</span>}
                     </div>
                   </div>
                   <span className={styles.rowArrow}>→</span>

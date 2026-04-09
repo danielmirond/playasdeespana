@@ -66,16 +66,16 @@ export default async function ProvincesPageEn({ params }: Props) {
           <h1 className={styles.titulo}>{provincia.nombre}</h1>
           <p className={styles.subtitulo}>{provincia.comunidad} · Spain</p>
           <div className={styles.chips}>
-            <span className={styles.chip}>🏖 {provincia.count} beaches</span>
-            <span className={styles.chip}>✅ {buenas} good today</span>
-            {conBandera > 0 && <span className={styles.chip}>🏳️ {conBandera} blue flag</span>}
+            <span className={styles.chip}>{provincia.count} beaches</span>
+            <span className={styles.chip}>{buenas} good today</span>
+            {conBandera > 0 && <span className={styles.chip}>{conBandera} blue flag</span>}
           </div>
         </div>
       </div>
       <div className={styles.wrap}>
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
-            <span className={styles.mapaTitle}>🗺 Beach map · {provincia.nombre}</span>
+            <span className={styles.mapaTitle}>Beach map · {provincia.nombre}</span>
             <span className={styles.mapaSrc}>Interactive · {playas.length} beaches</span>
           </div>
           <MapaPlayas playas={playas} height="360px" />
@@ -92,14 +92,14 @@ export default async function ProvincesPageEn({ params }: Props) {
                 <div className={styles.rowNombre}>{p.nombre}</div>
                 <div className={styles.rowMeta}>
                   {p.municipio}
-                  {p.bandera    && <span className={styles.badge}>🏳️ Blue Flag</span>}
-                  {p.socorrismo && <span className={styles.badge}>🏊 Lifeguard</span>}
-                  {p.accesible  && <span className={styles.badge}>♿ Accessible</span>}
+                  {p.bandera    && <span className={styles.badge}>Blue Flag</span>}
+                  {p.socorrismo && <span className={styles.badge}>Lifeguard</span>}
+                  {p.accesible  && <span className={styles.badge}>Accessible</span>}
                 </div>
               </div>
               <div className={styles.rowMeteo}>
-                <span>🌊 {p.olas}m</span>
-                <span>💨 {p.viento}km/h</span>
+                <span>{p.olas}m</span>
+                <span>{p.viento}km/h</span>
               </div>
               <div className={styles.rowEstado} style={{ background: p.estado.bg, borderColor: p.estado.dot + '55' }}>
                 <span className={styles.rowDot} style={{ background: p.estado.dot }}/>

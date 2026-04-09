@@ -210,7 +210,7 @@ export default function TraficoSection({ playa }: Props) {
       {/* CABECERA */}
       <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line,#e8dcc8)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)' }}>🚗 Tráfico, afluencia y donde aparcar, parking cerca</span>
+          <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)' }}><Car size={16} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:6}}/> Tráfico, afluencia y donde aparcar, parking cerca</span>
           <span style={{ fontSize: '.7rem', color: 'var(--muted,#8a7560)' }}>Tiempo real</span>
         </div>
         <div style={{ display: 'flex', gap: '.35rem', marginTop: '.65rem' }}>
@@ -303,7 +303,7 @@ export default function TraficoSection({ playa }: Props) {
                 padding: '.75rem 1rem', borderRadius: '12px',
                 background: '#22c55e12', marginBottom: '1rem', fontSize: '.8rem', color: '#166534',
               }}>
-                🟢 Sin datos de tráfico disponibles
+                <span style={{ display:'inline-block', width:8, height:8, borderRadius:'50%', background:'#22c55e', marginRight:6, verticalAlign:'middle' }}/> Sin datos de tráfico disponibles
               </div>
             )}
 

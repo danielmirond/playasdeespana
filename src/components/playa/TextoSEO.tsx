@@ -10,7 +10,7 @@ interface Props {
 export default function TextoSEO({ playa, locale = 'es' }: Props) {
   const texto = locale === 'en' ? generarTextoPlayaEn(playa) : generarTextoPlaya(playa)
 
-  const titulo  = locale === 'en' ? `📖 About ${playa.nombre}` : `📖 Sobre ${playa.nombre}`
+  const titulo  = locale === 'en' ? `About ${playa.nombre}` : `Sobre ${playa.nombre}`
   const subtitulo = locale === 'en' ? 'Everything you need to know ↓' : 'Todo lo que necesitas saber ↓'
 
   const tags = locale === 'en' ? [

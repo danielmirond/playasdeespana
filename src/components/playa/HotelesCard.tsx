@@ -44,7 +44,7 @@ export default function HotelesCard({ hoteles, nombrePlaya }: { hoteles: any[]; 
             <div className="hotel-foto" style={{ background: '#e8ede5' }}>
               {h.foto
                 ? <img src={h.foto} alt={h.nombre} loading="lazy"/>
-                : <span className="hotel-foto-icon">🏨</span>
+                : <span className="hotel-foto-icon"><Bed size={22} weight="regular" color="var(--muted,#8a7560)"/></span>
               }
             </div>
 

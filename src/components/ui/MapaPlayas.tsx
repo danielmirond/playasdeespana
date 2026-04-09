@@ -124,7 +124,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
               <div style="font-size:.7rem;color:#666;margin-bottom:.4rem">${p.municipio ?? ''}, ${p.provincia ?? ''}</div>
               <div style="display:flex;gap:.3rem;margin-bottom:.5rem;align-items:center">
                 <span style="background:${color}22;color:${color};border:1px solid ${color}44;padding:2px 7px;border-radius:100px;font-size:.6rem;font-weight:700">${estado}</span>
-                <span style="font-size:.6rem;color:#666">🌊 ${olas}m · 💨 ${viento}km/h</span>
+                <span style="font-size:.6rem;color:#666">${olas}m · ${viento}km/h</span>
               </div>
               <a href="/playas/${p.slug}" style="display:block;text-align:center;background:#b06820;color:white;padding:5px 10px;border-radius:8px;font-size:.7rem;font-weight:600;text-decoration:none">Ver playa →</a>
             </div>
@@ -171,7 +171,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             borderColor: modoRadio ? 'var(--accent,#b06820)' : 'var(--line,#e8dcc8)',
             background: modoRadio ? 'rgba(176,104,32,.1)' : 'transparent',
             color: modoRadio ? 'var(--accent,#b06820)' : 'var(--muted,#8a7560)', cursor: 'pointer',
-          }}>📍 Radio</button>
+          }}>Radio</button>
           {modoRadio && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '.3rem' }}>
               <input type="range" min={5} max={200} value={radio} onChange={e => setRadio(+e.target.value)}
@@ -190,7 +190,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             background: 'rgba(240,230,208,.8)',
           }}>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.8rem', marginBottom: '.4rem' }}>🏖</div>
+              <div style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--accent,#b06820)', marginBottom: '.4rem' }}>~</div>
               <div style={{ fontSize: '.8rem', color: 'var(--ink,#2a1a08)', fontWeight: 600 }}>Cargando playas…</div>
             </div>
           </div>

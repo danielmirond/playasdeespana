@@ -1,5 +1,5 @@
 'use client'
-import { Heart } from '@phosphor-icons/react'
+import { CheckCircle, Heart } from '@phosphor-icons/react'
 // src/components/playa/FichaHeroActions.tsx
 import { useState, useEffect } from 'react'
 
@@ -65,14 +65,14 @@ export default function FichaHeroActions({ slug, nombre }: Props) {
         background:  fav ? 'rgba(192,57,43,.08)' : 'transparent',
         borderColor: fav ? 'rgba(192,57,43,.3)' : 'rgba(138,117,96,.3)',
       }}>
-        {fav ? '❤️' : '🤍'} {fav ? 'Guardada' : 'Guardar'}
+        <Heart size={14} weight={fav ? 'fill' : 'regular'} color="currentColor"/> {fav ? 'Guardada' : 'Guardar'}
       </button>
       <button onClick={compartir} style={{
         ...base,
         color:       'var(--muted, #8a7560)',
         borderColor: 'rgba(138,117,96,.3)',
       }}>
-        {copied ? '✅ Copiado' : '↗ Compartir'}
+        {copied ? <><CheckCircle size={14} weight="bold" color="currentColor"/> Copiado</> : '↗ Compartir'}
       </button>
     </div>
   )
