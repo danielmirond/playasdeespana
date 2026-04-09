@@ -43,6 +43,42 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
+      <head>
+        {/* Preconnect — elimina RTT de DNS+TLS para APIs externas */}
+        <link rel="preconnect" href="https://api.open-meteo.com" />
+        <link rel="preconnect" href="https://marine-api.open-meteo.com" />
+        <link rel="dns-prefetch" href="https://commons.wikimedia.org" />
+        <link rel="dns-prefetch" href="https://overpass-api.de" />
+
+        {/* Speculation Rules — prefetch/prerender para navegación instant */}
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            prefetch: [{
+              where: {
+                and: [
+                  { href_matches: "/*" },
+                  { not: { href_matches: "/api/*" } },
+                  { not: { href_matches: "/mapa" } },
+                  { not: { selector_matches: "[target=_blank]" } },
+                ],
+              },
+              eagerness: "moderate",
+            }],
+            prerender: [{
+              where: {
+                or: [
+                  { href_matches: "/playas/*" },
+                  { href_matches: "/en/beaches/*" },
+                  { href_matches: "/comunidad/*" },
+                  { href_matches: "/en/communities/*" },
+                ],
+              },
+              eagerness: "moderate",
+            }],
+          })}}
+        />
+      </head>
       <body>
         <NavigationProgress />
         {children}
