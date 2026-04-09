@@ -22,6 +22,7 @@ const TraficoSection = dynamic(() => import('./TraficoSection'), { ssr: false })
 const SurfSection = dynamic(() => import('./SurfSection'), { ssr: false })
 const EscuelasSection = dynamic(() => import('./EscuelasSection'), { ssr: false })
 const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), { ssr: false })
+const ReportarEstado = dynamic(() => import('./ReportarEstado'), { ssr: false })
 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number
@@ -539,6 +540,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         </div>
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} />
+        <ReportarEstado slug={playa.slug} locale={locale} />
       </aside>
     </div>
   )
