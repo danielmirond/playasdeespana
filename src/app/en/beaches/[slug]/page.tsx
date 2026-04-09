@@ -60,11 +60,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: '2026-03-09T00:00:00Z',
       modifiedTime: now,
-      images: [{
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug}&locale=en`,
-        width: 1200,
-        height: 630,
-      }],
     },
     alternates: {
       canonical: `/en/beaches/${slug}`,

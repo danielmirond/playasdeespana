@@ -67,19 +67,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: '2026-03-09T00:00:00Z',
       modifiedTime: now,
-      images: [{
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?playa=${encodeURIComponent(playa.nombre)}&municipio=${encodeURIComponent(playa.municipio + ' · ' + playa.provincia)}&comunidad=${encodeURIComponent(playa.comunidad)}&azul=${playa.bandera ? 'true' : 'false'}`,
-        width: 1200,
-        height: 630,
-        alt: `${playa.nombre} - Estado del mar hoy`,
-      }],
     },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?playa=${encodeURIComponent(playa.nombre)}&municipio=${encodeURIComponent(playa.municipio + ' · ' + playa.provincia)}&comunidad=${encodeURIComponent(playa.comunidad)}&azul=${playa.bandera ? 'true' : 'false'}`],
-    },
+    twitter: { card: 'summary_large_image', title, description },
     alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },
   }
 }
