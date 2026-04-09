@@ -49,6 +49,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://marine-api.open-meteo.com" />
         <link rel="dns-prefetch" href="https://commons.wikimedia.org" />
         <link rel="dns-prefetch" href="https://overpass-api.de" />
+        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
+            crossOrigin="anonymous"
+          />
+        )}
 
         {/* Speculation Rules — prefetch/prerender para navegación instant */}
         <script

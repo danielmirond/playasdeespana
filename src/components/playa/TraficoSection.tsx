@@ -1,5 +1,7 @@
 'use client'
 import { Car, Bus, Bicycle, Person, Users, Park, Star } from '@/components/ui/Icons'
+
+const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
 import MapaLeaflet from '@/components/ui/MapaLeafletWrapper'
 // src/components/playa/TraficoSection.tsx
 import { useEffect, useState } from 'react'
@@ -383,6 +385,14 @@ export default function TraficoSection({ playa }: Props) {
                style={{ ...btnStyle('rgba(176,104,32,.1)', '#b06820', true), display: 'block', textAlign: 'center', marginTop: '.75rem', textDecoration: 'none' }}>
               Ver todos los aparcamientos en Google Maps →
             </a>
+            {PARCLICK_AFF && (
+              <a href={`https://www.parclick.com/search?latitude=${playa.lat}&longitude=${playa.lng}&radius=5000&ref=${PARCLICK_AFF}`}
+                 target="_blank" rel="noopener noreferrer sponsored"
+                 style={{ ...btnStyle('#00b4d8', '#fff', false), display: 'block', textAlign: 'center', marginTop: '.5rem', textDecoration: 'none', background: '#00b4d8', color: '#fff', fontWeight: 700, border: 'none' }}>
+                <Park size={14} weight='bold' style={{ verticalAlign: 'middle', marginRight: 4 }}/>
+                Reservar parking con Parclick
+              </a>
+            )}
           </div>
         )}
       </div>

@@ -16,6 +16,10 @@ import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
 import type { Escuela } from '@/lib/escuelas'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Eye, ShieldCheck, Fish, SunHorizon, Flag, Gauge } from '@/components/ui/Icons'
+import AdSlot from '@/components/ui/AdSlot'
+
+const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
+const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
 
 // Lazy load heavy below-fold components
 const TraficoSection = dynamic(() => import('./TraficoSection'), { ssr: false })
@@ -177,6 +181,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
           )}
         </div>
+
+        {/* AD — entre fotos y oleaje */}
+        <AdSlot slot="fotos-oleaje" format="horizontal" />
 
         {/* OLEAJE + METEO */}
         <div className={styles.card} id="s-meteo">
@@ -466,8 +473,29 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 </div>
               )}
             </div>
+            {/* Booking.com affiliate CTA */}
+            {BOOKING_AID && (
+              <a
+                href={`https://www.booking.com/searchresults.html?aid=${BOOKING_AID}&label=playa-${playa.slug}&latitude=${playa.lat}&longitude=${playa.lng}&radius=5&checkin=&checkout=`}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
+                  width: '100%', padding: '.7rem', marginTop: '.6rem',
+                  background: '#003580', color: '#fff', borderRadius: 10,
+                  fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
+                  transition: 'opacity .15s',
+                }}
+              >
+                <Bed size={16} weight="bold" />
+                {locale === 'en' ? `Find hotels near ${playa.nombre}` : `Buscar hoteles cerca de ${playa.nombre}`}
+              </a>
+            )}
           </div>
         </div>
+
+        {/* AD — entre hoteles y servicios */}
+        <AdSlot slot="hoteles-servicios" format="horizontal" />
 
         {/* SERVICIOS */}
         <div className={styles.card} id="s-servicios">
