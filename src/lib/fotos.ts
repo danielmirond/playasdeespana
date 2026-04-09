@@ -9,6 +9,11 @@ export interface FotoPlaya {
   autor?: string
 }
 
+/** Pasa una URL de imagen por el proxy de Next.js para servir webp/avif */
+function optimized(src: string, width: number): string {
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=75`
+}
+
 // Wikimedia Commons — búsqueda por nombre de playa
 async function getFotosWikimedia(nombre: string, municipio: string): Promise<FotoPlaya[]> {
   try {
@@ -43,9 +48,11 @@ async function getFotosWikimedia(nombre: string, municipio: string): Promise<Fot
           if (!ii?.thumburl) return null
           const ext = ii.url?.split('.').pop()?.toLowerCase()
           if (!['jpg','jpeg','png','webp'].includes(ext ?? '')) return null
+          const rawUrl   = ii.thumburl
+          const rawThumb = ii.thumburl.replace(/\/\d+px-/, '/300px-')
           return {
-            url:    ii.thumburl,
-            thumb:  ii.thumburl.replace(/\/\d+px-/, '/300px-'),
+            url:    optimized(rawUrl, 828),
+            thumb:  optimized(rawThumb, 384),
             fuente: 'wikimedia' as const,
             autor:  ii.extmetadata?.Artist?.value?.replace(/<[^>]+>/g, '') ?? undefined,
           }
@@ -75,8 +82,8 @@ async function getFotosUnsplash(nombre: string, municipio: string): Promise<Foto
     if (!res.ok) return []
     const data = await res.json()
     return (data.results ?? []).map((p: any): FotoPlaya => ({
-      url:    p.urls.regular,
-      thumb:  p.urls.small,
+      url:    optimized(p.urls.regular, 828),
+      thumb:  optimized(p.urls.small, 384),
       fuente: 'unsplash',
       autor:  p.user?.name,
     }))
