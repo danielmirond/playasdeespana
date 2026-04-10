@@ -54,7 +54,7 @@ out center body;`
       method: 'POST',
       body:   query,
       next:   { revalidate: 86400 },
-    })
+    }, 20000) // Overpass hoteles suele tardar 8-18s con radio 10km
     if (!res.ok) return []
     const data = await res.json()
 

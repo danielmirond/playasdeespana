@@ -25,7 +25,7 @@ out body;`
       method: 'POST',
       body:   query,
       next:   { revalidate: 86400 },
-    })
+    }, 15000) // Overpass suele tardar 5-15s; el default de 3s corta antes de tiempo
     if (!res.ok) return []
     const data = await res.json()
     return (data.elements ?? [])
