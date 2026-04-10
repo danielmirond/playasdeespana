@@ -1,16 +1,18 @@
 // src/lib/fotos.ts — Fotos de playas con matching preciso playa↔ubicación
 // Estrategia en cascada:
-//   1. Wikimedia Commons: geosearch por coordenadas (radio 500m) — más preciso
-//   2. Wikimedia Commons: text search con nombre + municipio entre comillas
-//   3. Unsplash: búsqueda por municipio (Unsplash no tiene playas específicas)
+//   1. Wikimedia Commons: geosearch por coordenadas (radio 800m) — más preciso
+//   2. Flickr: geosearch por coordenadas (radio 1km) con tag "beach"
+//   3. Wikimedia Commons: text search con nombre + municipio entre comillas
+//   4. Unsplash: búsqueda por municipio (Unsplash no tiene playas específicas)
 import { fetchWithTimeout } from './fetch-timeout'
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
+const FLICKR_KEY   = process.env.FLICKR_API_KEY ?? ''
 
 export interface FotoPlaya {
   url:    string
   thumb:  string
-  fuente: 'unsplash' | 'wikimedia'
+  fuente: 'unsplash' | 'wikimedia' | 'flickr'
   autor?: string
 }
 
@@ -161,11 +163,88 @@ async function getFotosUnsplash(municipio: string, provincia: string): Promise<F
   return []
 }
 
+// Flickr — geosearch por coordenadas + tag beach (Creative Commons)
+// Docs: https://www.flickr.com/services/api/flickr.photos.search.html
+async function getFotosFlickr(
+  lat: number,
+  lon: number,
+  nombre: string,
+  municipio: string
+): Promise<FotoPlaya[]> {
+  if (!FLICKR_KEY) return []
+
+  // Intentar primero búsqueda geo (muy precisa), luego fallback con texto
+  const queries = [
+    { lat, lon, radius: '1', tags: 'beach,playa', text: '' },   // 1 km
+    { lat, lon, radius: '2', tags: 'beach,playa', text: '' },   // 2 km
+    { lat: 0, lon: 0, radius: '', tags: '', text: `${nombre} ${municipio}` }, // texto
+  ]
+
+  for (const q of queries) {
+    try {
+      const params = new URLSearchParams({
+        method:          'flickr.photos.search',
+        api_key:         FLICKR_KEY,
+        format:          'json',
+        nojsoncallback:  '1',
+        content_type:    '1',   // solo fotos (no screenshots)
+        media:           'photos',
+        sort:            'relevance',
+        per_page:        '20',
+        extras:          'url_m,url_l,owner_name,geo,tags',
+        license:         '1,2,3,4,5,6,7,9,10', // todas las CC + Public Domain
+        safe_search:     '1',
+      })
+      if (q.lat && q.lon) {
+        params.set('lat', String(q.lat))
+        params.set('lon', String(q.lon))
+        params.set('radius', q.radius)
+        params.set('radius_units', 'km')
+      }
+      if (q.tags) params.set('tags', q.tags)
+      if (q.text) params.set('text', q.text)
+
+      const res = await fetchWithTimeout(
+        `https://api.flickr.com/services/rest/?${params}`,
+        { next: { revalidate: 86400 } }
+      )
+      if (!res.ok) continue
+      const data = await res.json()
+      const photos = data?.photos?.photo ?? []
+      if (photos.length === 0) continue
+
+      const fotos: FotoPlaya[] = photos
+        .filter((p: any) => p.url_l || p.url_m)
+        .map((p: any): FotoPlaya | null => {
+          const titulo = (p.title ?? '').toLowerCase()
+          // Filtrar títulos no relevantes
+          if (NEGATIVAS.test(titulo)) return null
+          const url = p.url_l ?? p.url_m
+          const thumb = p.url_m ?? p.url_l
+          if (!url) return null
+          return {
+            url,
+            thumb,
+            fuente: 'flickr' as const,
+            autor: p.ownername ?? undefined,
+          }
+        })
+        .filter(Boolean) as FotoPlaya[]
+
+      if (fotos.length >= 2) return fotos.slice(0, 6)
+    } catch {
+      continue
+    }
+  }
+  return []
+}
+
 /**
  * Obtiene fotos de una playa con máxima precisión:
- * 1. Geosearch en Wikimedia por coordenadas (500m radio) — 100% relevante geográficamente
- * 2. Text search en Wikimedia con nombre + municipio entre comillas
- * 3. Unsplash con municipio (fotos genéricas de la zona)
+ * 1. Geosearch en Wikimedia por coordenadas (800m radio) — sin API key
+ * 2. Geosearch en Flickr por coordenadas (1-2km radio) — requiere FLICKR_API_KEY
+ * 3. Text search en Wikimedia con nombre + municipio entre comillas
+ * 4. Unsplash con municipio (fotos genéricas de la zona)
  *
  * Las fuentes se consultan en paralelo para evitar waterfall.
  */
@@ -176,8 +255,9 @@ export async function getFotos(
   lon: number,
   provincia: string = ''
 ): Promise<FotoPlaya[]> {
-  const [wikiGeo, wikiText, unsplash] = await Promise.all([
+  const [wikiGeo, flickr, wikiText, unsplash] = await Promise.all([
     getFotosWikimediaGeo(lat, lon),
+    getFotosFlickr(lat, lon, nombre, municipio),
     getFotosWikimediaText(nombre, municipio),
     getFotosUnsplash(municipio, provincia),
   ])
@@ -195,8 +275,9 @@ export async function getFotos(
     }
   }
 
-  // Prioridad: geosearch (máxima precisión) > text (nombre+ciudad) > unsplash
+  // Prioridad: wikimedia geo > flickr geo > wikimedia texto > unsplash
   agregar(wikiGeo)
+  if (combinadas.length < 6) agregar(flickr)
   if (combinadas.length < 6) agregar(wikiText)
   if (combinadas.length < 6) agregar(unsplash)
 

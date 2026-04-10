@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: '**.wikimedia.org' },
+      { protocol: 'https', hostname: '**.staticflickr.com' },
       { protocol: 'https', hostname: 'webratings.eu' },
     ],
     formats: ['image/avif', 'image/webp'],
