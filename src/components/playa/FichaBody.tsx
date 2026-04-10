@@ -15,7 +15,7 @@ import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
 import type { Escuela } from '@/lib/escuelas'
-import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Eye, ShieldCheck, Fish, SunHorizon, Flag, Gauge } from '@/components/ui/Icons'
+import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
@@ -25,10 +25,10 @@ const THEFORK_AFF = process.env.NEXT_PUBLIC_THEFORK_AFF ?? ''
 const RENTALCARS_AFF = process.env.NEXT_PUBLIC_RENTALCARS_AFF ?? ''
 const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
 
-// Lazy load heavy below-fold components
-const TraficoSection = dynamic(() => import('./TraficoSection'), { ssr: false })
-const SurfSection = dynamic(() => import('./SurfSection'), { ssr: false })
-const EscuelasSection = dynamic(() => import('./EscuelasSection'), { ssr: false })
+// Lazy load below-fold components (SSR habilitado para SEO; solo Leaflet no soporta SSR)
+const TraficoSection = dynamic(() => import('./TraficoSection'))
+const SurfSection = dynamic(() => import('./SurfSection'))
+const EscuelasSection = dynamic(() => import('./EscuelasSection'))
 const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), { ssr: false })
 const ReportarEstado = dynamic(() => import('./ReportarEstado'), {
   ssr: false,

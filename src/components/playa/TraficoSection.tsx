@@ -1,5 +1,5 @@
 'use client'
-import { Car, Bus, Bicycle, Person, Users, Park, Star } from '@/components/ui/Icons'
+import { Car, Bus, Bicycle, Person, Users, Park, Star } from '@phosphor-icons/react'
 
 const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
 import MapaLeaflet from '@/components/ui/MapaLeafletWrapper'
