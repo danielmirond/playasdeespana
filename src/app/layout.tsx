@@ -40,15 +40,32 @@ export const metadata: Metadata = {
   verification: { google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E' },
 }
 
+// Critical CSS inline — renderiza antes del paint inicial
+const CRITICAL_CSS = `
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f0e6d0;--bg2:#e8dcc4;--ink:#2a1a08;--muted:#9a7848;--accent:#b06820;--accent2:#e8a030;--line:rgba(180,130,60,.18);--card-bg:rgba(255,255,255,.5);--metric-bg:rgba(255,255,255,.55);--ring:#c4904a;--calma:#22c55e;--buena:#3b82f6;--aviso:#f59e0b;--peligro:#ef4444;--surf:#0ea5e9;--viento:#eab308;--font-serif:var(--font-playfair,Georgia,serif);--font-sans:var(--font-dm-sans,system-ui,sans-serif);--r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+img{max-width:100%;height:auto;display:block}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+`
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <head>
-        {/* Preconnect — elimina RTT de DNS+TLS para APIs externas */}
+        {/* Critical CSS inline — paint inmediato sin esperar CSS externo */}
+        <style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />
+
+        {/* Preconnect/DNS prefetch — elimina RTT para APIs externas */}
         <link rel="preconnect" href="https://api.open-meteo.com" />
         <link rel="preconnect" href="https://marine-api.open-meteo.com" />
+        <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://commons.wikimedia.org" />
         <link rel="dns-prefetch" href="https://overpass-api.de" />
+
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (
           <script
             async
