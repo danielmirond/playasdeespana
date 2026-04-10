@@ -65,6 +65,16 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
         borderTop: '1px solid var(--line,#e8dcc8)',
         paddingTop: '1rem',
       }}>
+        {playa.descripcion && (
+          <p style={{ margin: '0 0 .9rem', fontStyle: 'italic', color: 'var(--muted,#8a7560)', borderLeft: '3px solid var(--accent,#b06820)', paddingLeft: '.85rem' }}>
+            {playa.descripcion}
+            {playa.nombres_alt && (
+              <span style={{ display: 'block', marginTop: '.35rem', fontSize: '.75rem', color: 'var(--muted,#8a7560)' }}>
+                {locale === 'en' ? 'Also known as' : 'También conocida como'}: {playa.nombres_alt}
+              </span>
+            )}
+          </p>
+        )}
         <p style={{ margin: 0 }}>{texto}</p>
 
         <div style={{

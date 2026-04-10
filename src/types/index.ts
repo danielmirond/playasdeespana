@@ -45,6 +45,12 @@ export interface Playa {
   autobus?:         boolean
   autobus_tipo?:    string | null
   establecimientos?: boolean
+  senalizacion?:    boolean
+  parking_tipo?:    string | null
+  parking_plazas?:  string | null
+  tipo_paseo?:      string | null
+  fachada_litoral?: string | null
+  espacio_protegido?: boolean
   puerto_deportivo?: string | null
   puerto_web?:      string | null
   puerto_dist?:     string | null

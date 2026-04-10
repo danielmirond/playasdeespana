@@ -159,6 +159,18 @@ function normalizar(f) {
     autobus:       si(p['Autobús']),
     autobus_tipo:  (p['Autobús_t'] ?? '').trim() || null,
     establecimientos: si(p.Establecim),
+    senalizacion:  si(p.Señalizac),
+
+    // Parking detallado
+    parking_tipo:     (p.Aparcami_1 ?? '').trim() || null,   // "Vigilado" / "No vigilado"
+    parking_plazas:   (p.Aparcami_2 ?? '').trim() || null,   // "Más de 100 plazas"
+
+    // Paseo marítimo detallado
+    tipo_paseo:    (p.Tipo_paseo ?? '').trim() || null,      // "Senda Litoral de Mijas"
+
+    // Orientación / fachada litoral
+    fachada_litoral: (p.Fachada_Li ?? '').trim() || null,    // "Urbana" / "Natural"
+    espacio_protegido: si(p.Espacio_pr),
 
     // Info útil
     puerto_deportivo: (p.Puerto_dep ?? '').trim() || null,
