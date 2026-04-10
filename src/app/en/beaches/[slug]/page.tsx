@@ -83,7 +83,7 @@ export default async function BeachPageEn({ params }: Props) {
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
     getRestaurantes(playa.lat, playa.lng),
-    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng),
+    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia),
     getHoteles(playa.lat, playa.lng),
     getTurbidez(playa.lat, playa.lng),
     getMeteoForecast(playa.lat, playa.lng),
