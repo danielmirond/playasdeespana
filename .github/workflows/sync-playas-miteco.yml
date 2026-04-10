@@ -1,13 +1,10 @@
 name: Sync Playas MITECO
 
-# Actualiza public/data/playas.json con el dataset oficial del MITECO
-# - Manualmente: botón "Run workflow" en GitHub → Actions
-# - Automáticamente: cada lunes a las 04:00 UTC
+# Fusiona el dataset oficial MITECO con el playas.json existente
+# Solo trigger MANUAL (cron deshabilitado hasta verificar que no rompe slugs)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 4 * * 1'  # Lunes 04:00 UTC
 
 jobs:
   sync:
