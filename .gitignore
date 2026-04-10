@@ -13,8 +13,8 @@ out/
 .env.*.local
 .env.local.save
 
-# data generada por scripts (se regenera en build/CI)
-public/data/
+# data generada por scripts (permitimos commit desde CI)
+# public/data/ se commitea desde GitHub Actions
 
 # misc
 .DS_Store
