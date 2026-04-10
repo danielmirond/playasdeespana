@@ -332,16 +332,33 @@ async function main() {
     }
   }
 
-  // 5b. Añadir MITECO huérfanas (playas oficiales que OSM no tiene).
-  //     Reservamos un slug que no colisione con ningún slug OSM ya usado.
+  // 5b. MITECO huérfanas. Las playas "huérfanas" son MITECO sin match EXCELENTE
+  //     ni BUENO, pero muchas de ellas SÍ tienen una playa OSM dentro de 500 m
+  //     que el matcher no pudo confirmar con suficiente confianza (matches
+  //     SOSPECHOSO o DUDOSO). Añadirlas todas duplicaría playas.
+  //
+  //     Por defecto NO las añadimos — enrichment puro, cambio neto = 0 playas.
+  //     Para activarlo explícitamente: MITECO_ADD_ORPHANS=1 npm run sync:playas-miteco
+  const addOrphans = process.env.MITECO_ADD_ORPHANS === '1'
   let mitecoAddedCount = 0
-  for (const m of huerfanas_miteco) {
-    const base = m._slugBase || slugify(m.nombre) || 'playa'
-    const slug = uniqueSlug(base, usedSlugs)
-    const nueva = { ...m, slug, source: 'miteco' }
-    delete nueva._slugBase
-    finalPlayas.push(limpiar(nueva))
-    mitecoAddedCount++
+  if (addOrphans) {
+    // Solo añadimos MITECO que NO aparezcan en ningún match (ni siquiera
+    // SOSPECHOSO). Eso reduce las duplicaciones al mínimo.
+    const mitecoConAlgunMatch = new Set(matches.map(m => m.miteco_slug))
+    const trueOrphans = huerfanas_miteco.filter(m => !mitecoConAlgunMatch.has(m.slug))
+    console.log(`\n[5b] Añadiendo ${trueOrphans.length} MITECO huérfanas reales`)
+    console.log(`     (se ignoran ${huerfanas_miteco.length - trueOrphans.length} que tenían match DUDOSO/SOSPECHOSO)`)
+    for (const m of trueOrphans) {
+      const base = m._slugBase || slugify(m.nombre) || 'playa'
+      const slug = uniqueSlug(base, usedSlugs)
+      const nueva = { ...m, slug, source: 'miteco' }
+      delete nueva._slugBase
+      finalPlayas.push(limpiar(nueva))
+      mitecoAddedCount++
+    }
+  } else {
+    console.log(`\n[5b] Huérfanas MITECO: ${huerfanas_miteco.length} ignoradas`)
+    console.log('     (para añadirlas: MITECO_ADD_ORPHANS=1 npm run sync:playas-miteco)')
   }
 
   console.log(`\n[6] Total final: ${finalPlayas.length} playas`)
