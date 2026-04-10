@@ -9,10 +9,12 @@ export interface Playa {
   comunidad:    string
   lat:          number
   lng:          number
-  longitud?:    number
-  anchura?:     number
-  composicion?: string
-  tipo?:        string
+  longitud?:    number | null
+  anchura?:     number | null
+  composicion?: string | null
+  tipo?:        string | null
+  descripcion?: string | null
+  nombres_alt?: string | null
   bandera?:     boolean
   socorrismo?:  boolean
   accesible?:   boolean
@@ -20,6 +22,40 @@ export interface Playa {
   duchas?:      boolean
   parking?:     boolean
   nudista?:     boolean
+  aseos?:       boolean
+  lavapies?:    boolean
+  papelera?:    boolean
+  telefonos?:   boolean
+  limpieza?:    boolean
+  oficina_turismo?: boolean
+  alquiler_sombrillas?: boolean
+  alquiler_hamacas?:    boolean
+  alquiler_nautico?:    boolean
+  zona_infantil?:  boolean
+  zona_deportiva?: boolean
+  club_nautico?:   boolean
+  grado_ocupacion?: string | null
+  grado_urbano?:    string | null
+  condiciones?:     string | null
+  paseo_maritimo?:  boolean
+  vegetacion?:      boolean
+  zona_fondeo?:     boolean
+  forma_acceso?:    string | null
+  carretera?:       string | null
+  autobus?:         boolean
+  autobus_tipo?:    string | null
+  establecimientos?: boolean
+  puerto_deportivo?: string | null
+  puerto_web?:      string | null
+  puerto_dist?:     string | null
+  hospital?:        string | null
+  hospital_direc?:  string | null
+  hospital_tel?:    string | null
+  hospital_dist?:   string | null
+  ine_municipio?:   number | null
+  web_ayuntamiento?: string | null
+  url_miteco?:      string | null
+  observaciones?:   string | null
   aemetId?:     string
   aemetDist?:   number
   actividades?: {
