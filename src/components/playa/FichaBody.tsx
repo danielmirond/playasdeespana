@@ -96,7 +96,30 @@ const T = {
       { key:'socorrismo', label:'Socorrismo' }, { key:'duchas', label:'Duchas' },
       { key:'accesible',  label:'Accesible PMR' }, { key:'parking', label:'Parking' },
       { key:'bandera',    label:'Bandera Azul' }, { key:'perros', label:'Perros' },
+      { key:'aseos',      label:'Aseos' }, { key:'lavapies', label:'Lavapiés' },
+      { key:'papelera',   label:'Papeleras' }, { key:'limpieza', label:'Limpieza' },
+      { key:'telefonos',  label:'Teléfonos' }, { key:'oficina_turismo', label:'Oficina turismo' },
+      { key:'zona_infantil',  label:'Zona infantil' },
+      { key:'zona_deportiva', label:'Zona deportiva' },
+      { key:'alquiler_sombrillas', label:'Alq. sombrillas' },
+      { key:'alquiler_hamacas',    label:'Alq. hamacas' },
+      { key:'alquiler_nautico',    label:'Alq. náutico' },
+      { key:'club_nautico',  label:'Club náutico' },
+      { key:'establecimientos', label:'Bares/restaurantes' },
+      { key:'autobus',    label:'Autobús' },
     ],
+    caracteristicas:(n:string)=>`Características de ${n}`,
+    caractsSrc:'MITECO',
+    grado_ocupacion:'Ocupación', grado_urbano:'Tipo de entorno', condiciones:'Condiciones del mar',
+    paseo_maritimo:'Paseo marítimo', vegetacion:'Vegetación', zona_fondeo:'Zona de fondeo',
+    forma_acceso:'Forma de acceso', carretera:'Carretera',
+    puerto_seccion:(n:string)=>`Puerto deportivo cerca de ${n}`,
+    puerto_dist_label:'Distancia',
+    emergencias:(n:string)=>`Emergencias en ${n}`,
+    emergenciasSrc:'Hospital más cercano',
+    hospital:'Hospital', hospital_direccion:'Dirección', hospital_telefono:'Teléfono', hospital_dist:'Distancia',
+    llamar:'Llamar', webAyuntamiento:'Web del ayuntamiento', fichaMiteco:'Ficha oficial MITECO',
+    verSitio:'Visitar web',
   },
   en: {
     galeria:(n:string)=>`Photos of ${n}`, galSrc:'Wikimedia · Flickr · Unsplash', verFotos:'View photos',
@@ -126,7 +149,30 @@ const T = {
       { key:'socorrismo', label:'Lifeguard' }, { key:'duchas', label:'Showers' },
       { key:'accesible',  label:'Accessible' }, { key:'parking', label:'Parking' },
       { key:'bandera',    label:'Blue Flag' }, { key:'perros', label:'Dogs allowed' },
+      { key:'aseos',      label:'Toilets' }, { key:'lavapies', label:'Foot washers' },
+      { key:'papelera',   label:'Bins' }, { key:'limpieza', label:'Cleaning' },
+      { key:'telefonos',  label:'Phones' }, { key:'oficina_turismo', label:'Tourist office' },
+      { key:'zona_infantil',  label:'Kids area' },
+      { key:'zona_deportiva', label:'Sports area' },
+      { key:'alquiler_sombrillas', label:'Umbrella rental' },
+      { key:'alquiler_hamacas',    label:'Sunbed rental' },
+      { key:'alquiler_nautico',    label:'Nautical rental' },
+      { key:'club_nautico',  label:'Yacht club' },
+      { key:'establecimientos', label:'Bars/restaurants' },
+      { key:'autobus',    label:'Bus service' },
     ],
+    caracteristicas:(n:string)=>`Features of ${n}`,
+    caractsSrc:'MITECO',
+    grado_ocupacion:'Occupation', grado_urbano:'Environment', condiciones:'Sea conditions',
+    paseo_maritimo:'Boardwalk', vegetacion:'Vegetation', zona_fondeo:'Anchorage area',
+    forma_acceso:'Access type', carretera:'Road',
+    puerto_seccion:(n:string)=>`Marina near ${n}`,
+    puerto_dist_label:'Distance',
+    emergencias:(n:string)=>`Emergencies at ${n}`,
+    emergenciasSrc:'Nearest hospital',
+    hospital:'Hospital', hospital_direccion:'Address', hospital_telefono:'Phone', hospital_dist:'Distance',
+    llamar:'Call', webAyuntamiento:'City Hall website', fichaMiteco:'Official MITECO record',
+    verSitio:'Visit website',
   },
 }
 
@@ -153,6 +199,20 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   return (
     <div className={styles.wrap}>
       <div className={styles.main}>
+
+        {/* DESCRIPCIÓN OFICIAL */}
+        {playa.descripcion && (
+          <div className={styles.card} id="s-descripcion" style={{ padding: '1rem 1.25rem' }}>
+            <p style={{ fontSize: '.88rem', lineHeight: 1.6, color: 'var(--ink)', margin: 0 }}>
+              {playa.descripcion}
+            </p>
+            {playa.nombres_alt && (
+              <p style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.5rem', fontStyle: 'italic' }}>
+                {locale === 'en' ? 'Also known as' : 'También conocida como'}: {playa.nombres_alt}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* FOTOS */}
         <div className={styles.card} id="s-fotos">
@@ -595,8 +655,94 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <DataRow k={i18n.provincia}   v={playa.provincia} href={locale === 'en' ? `/en/provinces/${slug(playa.provincia)}` : `/provincia/${slug(playa.provincia)}`}/>
             <DataRow k={i18n.comunidad}   v={playa.comunidad} href={locale === 'en' ? `/en/communities/${slug(playa.comunidad)}` : `/comunidad/${slug(playa.comunidad)}`}/>
             <DataRow k={i18n.coordenadas} v={`${playa.lat}° N, ${playa.lng}° E`} mono/>
+            {playa.web_ayuntamiento && (
+              <DataRow k={i18n.webAyuntamiento} v={i18n.verSitio} href={playa.web_ayuntamiento}/>
+            )}
+            {playa.url_miteco && (
+              <DataRow k={i18n.fichaMiteco} v={i18n.verSitio} href={playa.url_miteco}/>
+            )}
           </div>
         </div>
+
+        {/* CARACTERÍSTICAS */}
+        {(playa.grado_ocupacion || playa.grado_urbano || playa.condiciones || playa.paseo_maritimo || playa.forma_acceso) && (
+          <div className={styles.card} id="s-caracteristicas">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{i18n.caracteristicas(playa.nombre)}</h2>
+              <span className={styles.cardSrc}>{i18n.caractsSrc}</span>
+            </div>
+            <div className={styles.cardBody}>
+              {playa.grado_ocupacion && <DataRow k={i18n.grado_ocupacion} v={playa.grado_ocupacion}/>}
+              {playa.grado_urbano    && <DataRow k={i18n.grado_urbano} v={playa.grado_urbano}/>}
+              {playa.condiciones     && <DataRow k={i18n.condiciones} v={playa.condiciones}/>}
+              {playa.paseo_maritimo  && <DataRow k={i18n.paseo_maritimo} v={locale === 'en' ? 'Yes' : 'Sí'}/>}
+              {playa.vegetacion      && <DataRow k={i18n.vegetacion} v={locale === 'en' ? 'Yes' : 'Sí'}/>}
+              {playa.zona_fondeo     && <DataRow k={i18n.zona_fondeo} v={locale === 'en' ? 'Yes' : 'Sí'}/>}
+              {playa.forma_acceso    && <DataRow k={i18n.forma_acceso} v={playa.forma_acceso}/>}
+              {playa.carretera       && <DataRow k={i18n.carretera} v={playa.carretera}/>}
+            </div>
+          </div>
+        )}
+
+        {/* PUERTO DEPORTIVO */}
+        {playa.puerto_deportivo && (
+          <div className={styles.card} id="s-puerto">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{i18n.puerto_seccion(playa.nombre)}</h2>
+            </div>
+            <div className={styles.cardBody}>
+              <div style={{ fontSize:'.9rem', fontWeight:700, color:'var(--ink)', marginBottom:'.35rem' }}>
+                {playa.puerto_deportivo}
+              </div>
+              {playa.puerto_dist && (
+                <div style={{ fontSize:'.78rem', color:'var(--muted)', marginBottom:'.5rem' }}>
+                  {i18n.puerto_dist_label}: {playa.puerto_dist}
+                </div>
+              )}
+              {playa.puerto_web && (
+                <a href={playa.puerto_web} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
+                  {i18n.verSitio} →
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* EMERGENCIAS / HOSPITAL */}
+        {playa.hospital && (
+          <div className={styles.card} id="s-emergencias">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{i18n.emergencias(playa.nombre)}</h2>
+              <span className={styles.cardSrc}>{i18n.emergenciasSrc}</span>
+            </div>
+            <div className={styles.cardBody}>
+              <DataRow k={i18n.hospital} v={playa.hospital}/>
+              {playa.hospital_direc && <DataRow k={i18n.hospital_direccion} v={playa.hospital_direc}/>}
+              {playa.hospital_dist  && <DataRow k={i18n.hospital_dist} v={playa.hospital_dist}/>}
+              {playa.hospital_tel && (
+                <div style={{ marginTop:'.75rem', display:'flex', gap:'.5rem' }}>
+                  <a href={`tel:${playa.hospital_tel}`} style={{
+                    display:'inline-flex', alignItems:'center', gap:'.4rem',
+                    background:'#ef4444', color:'#fff',
+                    padding:'.55rem 1rem', borderRadius:'10px',
+                    textDecoration:'none', fontSize:'.82rem', fontWeight:700,
+                  }}>
+                    {i18n.llamar} {playa.hospital_tel}
+                  </a>
+                  <a href="tel:112" style={{
+                    display:'inline-flex', alignItems:'center', gap:'.4rem',
+                    background:'rgba(239,68,68,.12)', color:'#ef4444',
+                    border:'1.5px solid rgba(239,68,68,.3)',
+                    padding:'.55rem 1rem', borderRadius:'10px',
+                    textDecoration:'none', fontSize:'.82rem', fontWeight:700,
+                  }}>
+                    112
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* PLAYAS CERCANAS */}
         {playasCercanas && playasCercanas.length > 0 && (
