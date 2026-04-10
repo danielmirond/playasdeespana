@@ -9,6 +9,7 @@ import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
+import { calcularHoraIdeal } from '@/lib/hora-ideal'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
@@ -147,6 +148,13 @@ export default async function PlayaPage({ params }: Props) {
   const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
+  const horaIdeal = calcularHoraIdeal({
+    uv: meteoPlayaData?.uv_max ?? null,
+    amanecer: solData?.amanecer,
+    atardecer: solData?.atardecer,
+    mareas: mareasLunar,
+    mes: new Date().getMonth() + 1,
+  })
 
   const calidad = calidadResult.status === 'fulfilled' ? calidadResult.value : null
 
@@ -184,6 +192,7 @@ export default async function PlayaPage({ params }: Props) {
         banderaPlaya={banderaPlaya}
         medusas={medusas}
         mareasLunar={mareasLunar}
+        horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
       />
     </>

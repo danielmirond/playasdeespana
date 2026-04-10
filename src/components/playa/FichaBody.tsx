@@ -7,6 +7,7 @@ import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
 import type { MareasDia } from '@/lib/mareas-lunar'
+import type { HoraIdeal } from '@/lib/hora-ideal'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import IluEstado from './IluEstado'
@@ -61,6 +62,7 @@ interface Props {
   banderaPlaya?:   BanderaPlaya
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
+  horaIdeal?:      HoraIdeal
   playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean }[]
   locale?:         'es' | 'en'
 }
@@ -135,7 +137,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, playasCercanas, locale = 'es' }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es' }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
@@ -635,6 +637,23 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.viento}km/h</span><span className={styles.aeQl}>{i18n.vientoLabel}</span></div>
           </div>
         </div>
+        {horaIdeal && (
+          <div style={{
+            background: 'linear-gradient(160deg, rgba(245,158,11,.08), rgba(176,104,32,.06))',
+            border: '1.5px solid rgba(176,104,32,.25)',
+            borderRadius: 14, padding: '.85rem 1rem',
+          }}>
+            <div style={{ fontSize: '.65rem', fontWeight: 700, color: 'var(--accent,#b06820)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+              {locale === 'en' ? 'Best time to go' : 'Mejor hora para ir'}
+            </div>
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--ink)', margin: '.3rem 0 .2rem', fontFamily: 'var(--font-serif)' }}>
+              {horaIdeal.franja}
+            </div>
+            <div style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.4 }}>
+              {locale === 'en' ? horaIdeal.razonEn : horaIdeal.razon}
+            </div>
+          </div>
+        )}
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} />
         <ReportarEstado slug={playa.slug} locale={locale} />
         {/* Amazon affiliate — equipo de playa */}
