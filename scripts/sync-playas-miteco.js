@@ -1,22 +1,33 @@
 #!/usr/bin/env node
 // sync-playas-miteco.js
-// Genera playas.json combinado: MITECO (primario) + OSM (huérfanas)
-// Y slug-redirects.json para 301 de URLs viejas
+// Enriquece playas.json con datos oficiales MITECO (descripción, hospital,
+// puerto, servicios, etc.) SIN cambiar slugs ni perder playas OSM.
 //
-// Estrategia:
-//   1. Descarga MITECO (dataset oficial, ~3500 playas)
-//   2. Lee playas.json actual (OSM, ~5000 playas)
-//   3. Para cada OSM busca MITECO más cercana (<500m, misma provincia)
-//   4. Si hay match → MITECO gana (slug oficial), OSM se descarta pero
-//      su slug va a redirects.json
-//   5. Si no hay match → OSM se mantiene con sus datos
-//   6. Resultado: playas.json con slugs oficiales + redirects.json
+// Estrategia (enrichment-only, segura):
+//   1. Carga OSM (playas.json) — se mantiene como fuente primaria.
+//   2. Descarga MITECO (dataset oficial, ~3500 playas costeras).
+//   3. Cruza ambos usando scripts/lib/miteco-match (mutual best, skip fluvial,
+//      scoring por distancia + similitud + municipio).
+//   4. Para cada match EXCELENTE o BUENO: copia los 40+ campos MITECO a la
+//      playa OSM correspondiente. El slug OSM se preserva (cero redirects).
+//   5. Los matches DUDOSO y SOSPECHOSO se ignoran.
+//   6. Las playas OSM sin match o fluviales se dejan tal cual.
+//   7. MITECO huérfanas (MITECO sin OSM) se añaden como nuevas playas con el
+//      slug canónico generado desde nombre+municipio.
 //
 // Uso: npm run sync:playas-miteco
+//
+// Genera:
+//   - public/data/playas.json   (OSM + enrichment + MITECO huérfanas)
+//   - public/data/slug-index.json
+//
+// IMPORTANTE: no produce redirects porque ningún slug OSM cambia.
 
 const https = require('https')
 const fs    = require('fs')
 const path  = require('path')
+
+const { matchAll } = require('./lib/miteco-match')
 
 const DATA_DIR     = path.join(__dirname, '..', 'public', 'data')
 const PLAYAS_JSON  = path.join(DATA_DIR, 'playas.json')
@@ -41,14 +52,6 @@ function get(url) {
     req.on('error', rej)
     req.setTimeout(180000, () => { req.destroy(); rej(new Error('Timeout')) })
   })
-}
-
-function haversine(lat1, lon1, lat2, lon2) {
-  const R = 6371000
-  const dLat = (lat2 - lat1) * Math.PI / 180
-  const dLon = (lon2 - lon1) * Math.PI / 180
-  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
 }
 
 function slugify(str) {
@@ -191,9 +194,59 @@ function limpiar(obj) {
   return out
 }
 
+// Campos MITECO que queremos copiar sobre la playa OSM durante el
+// enriquecimiento. Todo lo que no esté aquí se deja como esté en OSM.
+const MITECO_ENRICH_FIELDS = [
+  // Físicos
+  'longitud', 'anchura', 'composicion', 'tipo', 'descripcion', 'nombres_alt',
+  // Servicios
+  'bandera', 'socorrismo', 'accesible', 'duchas', 'parking', 'nudista',
+  'aseos', 'lavapies', 'papelera', 'telefonos', 'limpieza', 'oficina_turismo',
+  // Alquileres y zonas
+  'alquiler_sombrillas', 'alquiler_hamacas', 'alquiler_nautico',
+  'zona_infantil', 'zona_deportiva', 'club_nautico',
+  // Características
+  'grado_ocupacion', 'grado_urbano', 'condiciones', 'paseo_maritimo',
+  'tipo_paseo', 'vegetacion', 'zona_fondeo', 'fachada_litoral',
+  'espacio_protegido',
+  // Acceso
+  'forma_acceso', 'carretera', 'autobus', 'autobus_tipo', 'establecimientos',
+  'parking_tipo', 'parking_plazas',
+  // Puerto
+  'puerto_deportivo', 'puerto_web', 'puerto_dist',
+  // Hospital
+  'hospital', 'hospital_direc', 'hospital_tel', 'hospital_dist',
+  // Referencias
+  'ine_municipio', 'web_ayuntamiento', 'url_miteco',
+]
+
+// Copia los campos MITECO sobre la playa OSM sin sobreescribir datos OSM
+// preexistentes salvo que el valor MITECO sea más rico. Devuelve un objeto
+// nuevo (no muta el original).
+function enriquecer(osmPlaya, mitecoPlaya) {
+  const out = { ...osmPlaya }
+  for (const k of MITECO_ENRICH_FIELDS) {
+    const v = mitecoPlaya[k]
+    if (v === null || v === undefined || v === '') continue
+    // Para booleanos: si OSM no lo tenía o era false, adoptamos el de MITECO
+    if (typeof v === 'boolean') {
+      if (!out[k]) out[k] = v
+      continue
+    }
+    // Para strings/números: solo sobreescribir si OSM no lo tenía
+    if (out[k] === undefined || out[k] === null || out[k] === '') {
+      out[k] = v
+    }
+  }
+  // Guardar trazabilidad: qué playa MITECO originó el enriquecimiento
+  out.miteco_id = mitecoPlaya.id
+  out.source = out.source === 'osm' || !out.source ? 'osm+miteco' : out.source
+  return out
+}
+
 async function main() {
   console.log('='.repeat(60))
-  console.log('sync-playas-miteco.js — MITECO + OSM con redirects 301')
+  console.log('sync-playas-miteco.js — ENRICHMENT (OSM primario + MITECO)')
   console.log('='.repeat(60))
 
   // 1. Leer playas.json actual (OSM)
@@ -221,100 +274,100 @@ async function main() {
     .filter(p => p.lat >= 27 && p.lat <= 44 && p.lng >= -19 && p.lng <= 5)
   console.log(`  ${mitecoPlayas.length} playas MITECO válidas`)
 
-  // 3. Asignar slugs a MITECO (usando nombre+municipio como base)
-  console.log('\n[3] Generando slugs MITECO...')
-  const usedSlugs = new Set()
+  // 3. Asignar identificadores únicos a cada MITECO. Necesarios para el
+  //    matcher (usa `m.slug` como clave) y también nos sirven como slug
+  //    canónico si la playa acaba siendo huérfana y hay que añadirla.
+  console.log('\n[3] Generando identificadores MITECO...')
+  const usedSlugs = new Set(osmPlayas.map(o => o.slug).filter(Boolean))
+  // Pre-cargamos con slugs OSM para evitar colisión al añadir huérfanas.
+  const mitecoSlugSeen = new Set()
   for (const m of mitecoPlayas) {
-    const base = slugify(`${m.nombre} ${m.municipio}`.trim())
-    m.slug = uniqueSlug(base, usedSlugs)
+    const base = slugify(`${m.nombre} ${m.municipio}`.trim()) || 'playa'
+    let s = base, i = 2
+    while (mitecoSlugSeen.has(s)) s = `${base}-${i++}`
+    mitecoSlugSeen.add(s)
+    m.slug = s
+    m._slugBase = base
   }
 
-  // 4. Índice espacial MITECO por provincia
-  const mitecoPorProv = {}
-  for (const m of mitecoPlayas) {
-    const prov = (m.provincia ?? '').toLowerCase()
-    if (!mitecoPorProv[prov]) mitecoPorProv[prov] = []
-    mitecoPorProv[prov].push(m)
+  // 4. Matching con el algoritmo compartido (mutual best, skip fluvial, etc.)
+  console.log('\n[4] Cruzando OSM ↔ MITECO (algoritmo v2)...')
+  const { matches, huerfanas_miteco } = matchAll(osmPlayas, mitecoPlayas)
+
+  const porCalidad = { EXCELENTE: 0, BUENO: 0, DUDOSO: 0, SOSPECHOSO: 0 }
+  for (const m of matches) porCalidad[m.calidad]++
+
+  console.log(`  Matches totales:   ${matches.length}`)
+  console.log(`    EXCELENTE: ${porCalidad.EXCELENTE}`)
+  console.log(`    BUENO:     ${porCalidad.BUENO}`)
+  console.log(`    DUDOSO:    ${porCalidad.DUDOSO}  (se ignoran)`)
+  console.log(`    SOSPECHOSO:${porCalidad.SOSPECHOSO}  (se ignoran)`)
+  console.log(`  MITECO huérfanas:  ${huerfanas_miteco.length}  (se añadirán como nuevas)`)
+
+  // Index MITECO by slug para lookup O(1)
+  const mitecoBySlug = new Map(mitecoPlayas.map(m => [m.slug, m]))
+  const osmBySlug = new Map(osmPlayas.map(o => [o.slug, o]))
+
+  // Determinar qué playas OSM reciben enriquecimiento
+  const enrichmentBySlug = new Map() // osm.slug -> miteco
+  for (const m of matches) {
+    if (m.calidad !== 'EXCELENTE' && m.calidad !== 'BUENO') continue
+    const mitecoPlaya = mitecoBySlug.get(m.miteco_slug)
+    if (!mitecoPlaya) continue
+    enrichmentBySlug.set(m.osm_slug, mitecoPlaya)
   }
+  console.log(`\n[5] Enriquecer ${enrichmentBySlug.size} playas OSM con datos MITECO`)
 
-  // 5. Cruzar OSM con MITECO para generar redirects y encontrar huérfanas
-  console.log('\n[4] Cruzando OSM ↔ MITECO (matching por <500m + provincia)...')
-  const redirects = {}       // { osmSlug: mitecoSlug }
-  const osmMatched = new Set()
-  const mitecoMatched = new Set()
-
-  for (const o of osmPlayas) {
-    if (!o.slug) continue
-    const prov = (o.provincia ?? '').toLowerCase()
-    const candidatos = mitecoPorProv[prov] ?? mitecoPlayas
-    let best = null
-    let bestDist = Infinity
-    for (const m of candidatos) {
-      if (mitecoMatched.has(m.slug)) continue // ya usada
-      const d = haversine(o.lat, o.lng, m.lat, m.lng)
-      if (d < bestDist && d < 500) {
-        bestDist = d
-        best = m
-      }
-    }
-    if (best) {
-      osmMatched.add(o.slug)
-      mitecoMatched.add(best.slug)
-      // Solo añadir redirect si el slug CAMBIA
-      if (o.slug !== best.slug) {
-        redirects[o.slug] = best.slug
-      }
-    }
-  }
-  console.log(`  OSM matched:    ${osmMatched.size} / ${osmPlayas.length}`)
-  console.log(`  OSM huérfanas:  ${osmPlayas.length - osmMatched.size}`)
-  console.log(`  Redirects 301:  ${Object.keys(redirects).length}`)
-
-  // 6. Construir playas.json final:
-  //    - MITECO (todas)
-  //    - + OSM huérfanas (las que no tienen match)
-  console.log('\n[5] Construyendo playas.json final...')
+  // 5. Construir playas.json final:
+  //    - Todas las OSM (enriquecidas las que tengan match válido)
+  //    - + MITECO huérfanas (nuevas playas que OSM no tenía)
   const finalPlayas = []
 
-  // 6a. MITECO primero (todas con sus slugs oficiales)
-  for (const m of mitecoPlayas) {
-    finalPlayas.push(limpiar(m))
-  }
-
-  // 6b. OSM huérfanas (mantienen su slug original)
-  //     Renombramos slugs que colisionen con MITECO
   for (const o of osmPlayas) {
-    if (osmMatched.has(o.slug)) continue // ya incluida vía MITECO
-    // Evitar colisión con slugs MITECO
-    let slug = o.slug
-    if (usedSlugs.has(slug)) {
-      slug = uniqueSlug(`${slug}-osm`, usedSlugs)
-      redirects[o.slug] = slug // redirect del slug viejo al nuevo
+    const mitecoPlaya = enrichmentBySlug.get(o.slug)
+    if (mitecoPlaya) {
+      finalPlayas.push(limpiar(enriquecer(o, mitecoPlaya)))
     } else {
-      usedSlugs.add(slug)
+      finalPlayas.push(limpiar(o))
     }
-    finalPlayas.push(limpiar({ ...o, slug, source: o.source ?? 'osm' }))
   }
 
-  console.log(`  Total final: ${finalPlayas.length} playas`)
-  console.log(`    MITECO: ${mitecoPlayas.length}`)
-  console.log(`    OSM huérfanas: ${finalPlayas.length - mitecoPlayas.length}`)
+  // 5b. Añadir MITECO huérfanas (playas oficiales que OSM no tiene).
+  //     Reservamos un slug que no colisione con ningún slug OSM ya usado.
+  let mitecoAddedCount = 0
+  for (const m of huerfanas_miteco) {
+    const base = m._slugBase || slugify(m.nombre) || 'playa'
+    const slug = uniqueSlug(base, usedSlugs)
+    const nueva = { ...m, slug, source: 'miteco' }
+    delete nueva._slugBase
+    finalPlayas.push(limpiar(nueva))
+    mitecoAddedCount++
+  }
 
-  // 7. Guardar
+  console.log(`\n[6] Total final: ${finalPlayas.length} playas`)
+  console.log(`    OSM mantenidas:       ${osmPlayas.length}`)
+  console.log(`    OSM enriquecidas:     ${enrichmentBySlug.size}`)
+  console.log(`    MITECO nuevas:        ${mitecoAddedCount}`)
+
+  // 6. Guardar
   fs.writeFileSync(PLAYAS_JSON, JSON.stringify(finalPlayas, null, 2))
   console.log(`\n✓ ${PLAYAS_JSON}`)
 
-  fs.writeFileSync(REDIRECTS, JSON.stringify(redirects, null, 2))
-  console.log(`✓ ${REDIRECTS} (${Object.keys(redirects).length} redirects)`)
+  // Ya no generamos slug-redirects.json porque ningún slug OSM cambia.
+  // Si existía uno antiguo, lo borramos para que Next.js deje de aplicarlo.
+  if (fs.existsSync(REDIRECTS)) {
+    fs.unlinkSync(REDIRECTS)
+    console.log(`✓ ${REDIRECTS} borrado (enrichment no requiere redirects)`)
+  }
 
   const slugIndex = {}
   for (const p of finalPlayas) slugIndex[p.slug] = p.slug
   fs.writeFileSync(SLUG_INDEX, JSON.stringify(slugIndex, null, 2))
   console.log(`✓ ${SLUG_INDEX}`)
 
-  // Stats
+  // Stats de enriquecimiento
   console.log('\n' + '='.repeat(60))
-  console.log('ENRIQUECIMIENTO MITECO')
+  console.log('COBERTURA DE CAMPOS MITECO EN FINAL')
   console.log('='.repeat(60))
   const stats = {
     descripcion:      finalPlayas.filter(p => p.descripcion).length,
