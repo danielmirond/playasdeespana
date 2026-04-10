@@ -1,0 +1,42 @@
+name: Sync Playas MITECO
+
+# Actualiza public/data/playas.json con el dataset oficial del MITECO
+# - Manualmente: botón "Run workflow" en GitHub → Actions
+# - Automáticamente: cada lunes a las 04:00 UTC
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * 1'  # Lunes 04:00 UTC
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run MITECO sync
+        run: npm run sync:playas-miteco
+
+      - name: Commit and push changes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/playas.json public/data/slug-index.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "data: sync playas.json from MITECO ArcGIS
+
+            Automated weekly sync from official dataset
+            https://hub.arcgis.com/datasets/84ddbc8cf4104a579d579f6441fcaa8a_0"
+            git push
+          fi
