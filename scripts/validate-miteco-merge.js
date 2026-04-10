@@ -5,13 +5,17 @@
 // Uso: npm run validate:miteco
 //
 // Genera:
-//   - Estadísticas de matching
-//   - Ejemplos de matches (exactos, dudosos, huérfanas)
-//   - public/data/merge-preview.json con todo el análisis
+//   - Estadísticas de matching (por calidad: excelente/bueno/dudoso/sospechoso)
+//   - Ejemplos de matches en cada categoría
+//   - public/data/merge-preview.json con el análisis completo
+//
+// Algoritmo: scripts/lib/miteco-match.js (compartido con sync-playas-miteco.js)
 
 const https = require('https')
 const fs    = require('fs')
 const path  = require('path')
+
+const { matchAll } = require('./lib/miteco-match')
 
 const DATA_DIR    = path.join(__dirname, '..', 'public', 'data')
 const PLAYAS_JSON = path.join(DATA_DIR, 'playas.json')
@@ -33,30 +37,6 @@ function get(url) {
     req.on('error', rej)
     req.setTimeout(180000, () => { req.destroy(); rej(new Error('Timeout')) })
   })
-}
-
-function haversine(lat1, lon1, lat2, lon2) {
-  const R = 6371000
-  const dLat = (lat2 - lat1) * Math.PI / 180
-  const dLon = (lon2 - lon1) * Math.PI / 180
-  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2
-  return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)))
-}
-
-// Similaridad de texto 0..1 (basada en tokens comunes)
-function similitud(a, b) {
-  const norm = s => String(s || '')
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/\b(playa|platja|praia|cala|el|la|los|las|de|del|da|do|y)\b/gi, '')
-    .replace(/[^a-z0-9 ]/g, ' ')
-    .split(/\s+/).filter(Boolean)
-  const ta = new Set(norm(a))
-  const tb = new Set(norm(b))
-  if (ta.size === 0 || tb.size === 0) return 0
-  let common = 0
-  for (const t of ta) if (tb.has(t)) common++
-  return common / Math.max(ta.size, tb.size)
 }
 
 function slugify(str) {
@@ -99,73 +79,18 @@ async function main() {
     .filter(p => p.lat >= 27 && p.lat <= 44 && p.lng >= -19 && p.lng <= 5)
   console.log(`  ${miteco.length} playas MITECO válidas`)
 
-  // Indexar MITECO por provincia
-  const mPorProv = {}
-  for (const m of miteco) {
-    const k = m.provincia.toLowerCase()
-    if (!mPorProv[k]) mPorProv[k] = []
-    mPorProv[k].push(m)
-  }
-
-  // Cruzar
-  console.log('\n[3] Haciendo matching (<500m, misma provincia)...')
-  const matches = []          // {osm, miteco, dist, similitud, calidad}
-  const huerfanas_osm = []    // OSM sin match
-  const usadas_miteco = new Set()
-
-  for (const o of osm) {
-    if (!o.slug) continue
-    const k = (o.provincia ?? '').toLowerCase()
-    const candidatos = mPorProv[k] ?? miteco
-    let best = null
-    let bestDist = Infinity
-    for (const m of candidatos) {
-      if (usadas_miteco.has(m.slug)) continue
-      const d = haversine(o.lat, o.lng, m.lat, m.lng)
-      if (d < bestDist && d < 500) {
-        bestDist = d
-        best = m
-      }
-    }
-    if (best) {
-      usadas_miteco.add(best.slug)
-      const sim = similitud(o.nombre, best.nombre)
-      // Calidad del match
-      let calidad
-      if (bestDist < 100 && sim >= 0.5) calidad = 'EXCELENTE'
-      else if (bestDist < 250 && sim >= 0.3) calidad = 'BUENO'
-      else if (bestDist < 500 && sim >= 0.2) calidad = 'DUDOSO'
-      else calidad = 'SOSPECHOSO'
-      matches.push({
-        osm_slug: o.slug,
-        osm_nombre: o.nombre,
-        osm_municipio: o.municipio,
-        miteco_slug: best.slug,
-        miteco_nombre: best.nombre,
-        miteco_municipio: best.municipio,
-        dist_m: bestDist,
-        similitud: parseFloat(sim.toFixed(2)),
-        calidad,
-        cambio_slug: o.slug !== best.slug,
-      })
-    } else {
-      huerfanas_osm.push({
-        slug: o.slug,
-        nombre: o.nombre,
-        municipio: o.municipio,
-        provincia: o.provincia,
-      })
-    }
-  }
-
-  const huerfanas_miteco = miteco.filter(m => !usadas_miteco.has(m.slug))
+  // Cruzar usando el algoritmo compartido
+  console.log('\n[3] Haciendo matching (mutual best, <500m, skip fluvial)...')
+  const { matches, huerfanas_osm, huerfanas_miteco } = matchAll(osm, miteco)
 
   // Categorías
-  const excelentes = matches.filter(m => m.calidad === 'EXCELENTE')
-  const buenas     = matches.filter(m => m.calidad === 'BUENO')
-  const dudosas    = matches.filter(m => m.calidad === 'DUDOSO')
+  const excelentes  = matches.filter(m => m.calidad === 'EXCELENTE')
+  const buenas      = matches.filter(m => m.calidad === 'BUENO')
+  const dudosas     = matches.filter(m => m.calidad === 'DUDOSO')
   const sospechosas = matches.filter(m => m.calidad === 'SOSPECHOSO')
-  const cambianSlug = matches.filter(m => m.cambio_slug)
+  const mutuas      = matches.filter(m => m.mutual)
+  const cambianSlug = matches
+    .filter(m => (m.calidad === 'EXCELENTE' || m.calidad === 'BUENO') && m.cambio_slug)
 
   // Reporte
   console.log('\n' + '='.repeat(60))
@@ -175,46 +100,46 @@ async function main() {
   console.log(`  OSM:              ${osm.length}`)
   console.log(`  MITECO:           ${miteco.length}`)
   console.log(`  Matches:          ${matches.length}  (${Math.round(matches.length / osm.length * 100)}% de OSM)`)
-  console.log(`  Huérfanas OSM:    ${huerfanas_osm.length}  (OSM sin MITECO)`)
-  console.log(`  Huérfanas MITECO: ${huerfanas_miteco.length}  (MITECO sin OSM)`)
+  console.log(`  Mutual best:      ${mutuas.length}  (${Math.round(mutuas.length / Math.max(matches.length, 1) * 100)}% son simétricos)`)
+  console.log(`  Huérfanas OSM:    ${huerfanas_osm.length}  (OSM sin MITECO utilizable)`)
+  console.log(`  Huérfanas MITECO: ${huerfanas_miteco.length}  (MITECO sin OSM utilizable)`)
   console.log(`\nCalidad de matches:`)
-  console.log(`  EXCELENTE  (<100m + nombre similar):     ${excelentes.length}`)
-  console.log(`  BUENO      (<250m + nombre similar):     ${buenas.length}`)
-  console.log(`  DUDOSO     (<500m + nombre algo parec.): ${dudosas.length}`)
-  console.log(`  SOSPECHOSO (<500m + nombre distinto):    ${sospechosas.length}`)
-  console.log(`\nRedirects 301 necesarios: ${cambianSlug.length}  (slugs que cambian)`)
+  console.log(`  EXCELENTE:   ${excelentes.length.toString().padStart(5)}  (seguros para enriquecer)`)
+  console.log(`  BUENO:       ${buenas.length.toString().padStart(5)}  (aceptables)`)
+  console.log(`  DUDOSO:      ${dudosas.length.toString().padStart(5)}  (revisar)`)
+  console.log(`  SOSPECHOSO:  ${sospechosas.length.toString().padStart(5)}  (descartar)`)
+  console.log(`\nSlugs que cambian entre EXCELENTE + BUENO: ${cambianSlug.length}`)
+  console.log('  (esta es la cota superior de redirects 301 si tomáramos MITECO como primario)')
 
   // Ejemplos
   console.log('\n' + '='.repeat(60))
   console.log('EJEMPLOS DE MATCHES')
   console.log('='.repeat(60))
 
-  console.log('\n--- 10 EXCELENTES (estos son seguros) ---')
-  excelentes.slice(0, 10).forEach(m => {
-    console.log(`  ${m.osm_slug}`)
-    console.log(`    ↳ ${m.miteco_slug}  (${m.dist_m}m, sim=${m.similitud})`)
-  })
+  const fmt = (m, label) => {
+    console.log(`  [${label}] dist=${m.dist_m}m  sim=${m.similitud}  mun=${m.municipio_match}  mutual=${m.mutual}`)
+    console.log(`    OSM:    "${m.osm_nombre}" (${m.osm_municipio}, ${m.osm_provincia})`)
+    console.log(`    MITECO: "${m.miteco_nombre}" (${m.miteco_municipio}, ${m.miteco_provincia})`)
+  }
 
-  console.log('\n--- 10 DUDOSOS (revisar manualmente) ---')
-  dudosas.slice(0, 10).forEach(m => {
-    console.log(`  OSM:    "${m.osm_nombre}" (${m.osm_municipio})`)
-    console.log(`  MITECO: "${m.miteco_nombre}" (${m.miteco_municipio})`)
-    console.log(`    ↳ ${m.dist_m}m, sim=${m.similitud}`)
-  })
+  console.log('\n--- 10 EXCELENTES ---')
+  excelentes.slice(0, 10).forEach(m => fmt(m, 'EXC'))
 
-  console.log('\n--- 10 SOSPECHOSOS (probablemente mal) ---')
-  sospechosas.slice(0, 10).forEach(m => {
-    console.log(`  OSM:    "${m.osm_nombre}" (${m.osm_municipio})`)
-    console.log(`  MITECO: "${m.miteco_nombre}" (${m.miteco_municipio})`)
-    console.log(`    ↳ ${m.dist_m}m, sim=${m.similitud}`)
-  })
+  console.log('\n--- 10 BUENOS ---')
+  buenas.slice(0, 10).forEach(m => fmt(m, 'BUE'))
 
-  console.log('\n--- 10 OSM HUÉRFANAS (sin match MITECO) ---')
+  console.log('\n--- 10 DUDOSOS ---')
+  dudosas.slice(0, 10).forEach(m => fmt(m, 'DUD'))
+
+  console.log('\n--- 10 SOSPECHOSOS ---')
+  sospechosas.slice(0, 10).forEach(m => fmt(m, 'SOS'))
+
+  console.log('\n--- 10 OSM HUÉRFANAS ---')
   huerfanas_osm.slice(0, 10).forEach(o => {
-    console.log(`  ${o.slug}  (${o.municipio}, ${o.provincia})`)
+    console.log(`  ${o.slug}  (${o.municipio}, ${o.provincia})  razón=${o.razon}`)
   })
 
-  console.log('\n--- 10 MITECO HUÉRFANAS (sin match OSM) ---')
+  console.log('\n--- 10 MITECO HUÉRFANAS ---')
   huerfanas_miteco.slice(0, 10).forEach(m => {
     console.log(`  ${m.slug}  (${m.municipio}, ${m.provincia})`)
   })
@@ -222,10 +147,12 @@ async function main() {
   // Guardar preview completo
   const preview = {
     timestamp: new Date().toISOString(),
+    algoritmo: 'v2-mutual-best-match',
     summary: {
       osm_total: osm.length,
       miteco_total: miteco.length,
       matches: matches.length,
+      mutual_best: mutuas.length,
       huerfanas_osm: huerfanas_osm.length,
       huerfanas_miteco: huerfanas_miteco.length,
       calidad: {
@@ -234,15 +161,19 @@ async function main() {
         dudosos: dudosas.length,
         sospechosos: sospechosas.length,
       },
-      redirects_necesarios: cambianSlug.length,
+      redirects_potenciales: cambianSlug.length,
     },
-    matches: matches.slice(0, 500),       // primeros 500 para revisar
-    huerfanas_osm: huerfanas_osm.slice(0, 200),
-    huerfanas_miteco: huerfanas_miteco.slice(0, 200),
+    // Primeros 500 de cada categoría para revisión manual
+    excelentes_sample: excelentes.slice(0, 500),
+    buenos_sample: buenas.slice(0, 500),
+    dudosos_sample: dudosas.slice(0, 500),
+    sospechosos_sample: sospechosas.slice(0, 500),
+    huerfanas_osm_sample: huerfanas_osm.slice(0, 200),
+    huerfanas_miteco_sample: huerfanas_miteco.slice(0, 200),
   }
   fs.writeFileSync(PREVIEW, JSON.stringify(preview, null, 2))
   console.log(`\n✓ Preview guardado en ${PREVIEW}`)
-  console.log('\nRevisa el archivo y si todo se ve bien ejecuta:')
+  console.log('\nRevisa el archivo. Si los EXCELENTE + BUENO se ven bien, ejecuta:')
   console.log('  npm run sync:playas-miteco')
 }
 
