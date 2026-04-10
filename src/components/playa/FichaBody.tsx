@@ -67,7 +67,7 @@ interface Props {
 
 const T = {
   es: {
-    galeria:(n:string)=>`Fotos de ${n}`, galSrc:'Wikimedia · Unsplash', verFotos:'Ver fotos',
+    galeria:(n:string)=>`Fotos de ${n}`, galSrc:'Wikimedia · Flickr · Unsplash', verFotos:'Ver fotos',
     oleaje:(n:string)=>`Oleaje y olas en ${n} ahora`, oleajeSrc:'Open-Meteo Marine',
     luzSolar:'Luz solar', luzSrc:'Sunrise-Sunset API',
     mareas:(n:string)=>`Mareas en ${n} hoy`, mareasSrc:'Estimación lunar',
@@ -97,7 +97,7 @@ const T = {
     ],
   },
   en: {
-    galeria:(n:string)=>`Photos of ${n}`, galSrc:'Wikimedia · Unsplash', verFotos:'View photos',
+    galeria:(n:string)=>`Photos of ${n}`, galSrc:'Wikimedia · Flickr · Unsplash', verFotos:'View photos',
     oleaje:(n:string)=>`Waves at ${n} now`, oleajeSrc:'Open-Meteo Marine',
     luzSolar:'Sunlight', luzSrc:'Sunrise-Sunset API',
     mareas:(n:string)=>`Tides at ${n} today`, mareasSrc:'Lunar estimate',
@@ -169,7 +169,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     fetchPriority={i === 0 ? 'high' : undefined}
                   />
                   {i === 0 && (
-                    <div className={styles.gFuente}>{f.fuente === 'wikimedia' ? <><Camera size={12}/> Wikimedia Commons</> : <><Camera size={12}/> Unsplash</>}</div>
+                    <div className={styles.gFuente}><Camera size={12}/> {f.fuente === 'wikimedia' ? 'Wikimedia Commons' : f.fuente === 'flickr' ? 'Flickr' : 'Unsplash'}</div>
                   )}
                 </div>
               ))}
