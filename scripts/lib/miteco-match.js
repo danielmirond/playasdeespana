@@ -204,21 +204,46 @@ function findBest(o, candidatos) {
 // M's best OSM candidate (by the same score) is also O. This prevents
 // the dense-cluster problem where two different OSM beaches in a tight
 // area both point to the same MITECO and one gets wrongly reassigned.
+//
+// Candidate lookup uses a lat/lng grid (0.01° ≈ 1 km cells) rather than
+// the province field. OSM province data is unreliable (e.g. Barcelona
+// beaches tagged as Tarragona), so filtering by province caused real
+// matches to be missed. The grid is pure geography and is immune to
+// wrong metadata.
 function matchAll(osm, miteco) {
-  // Index MITECO by province (lowercased).
-  const mPorProv = {}
+  // 0.01° ≈ 1.1 km at our latitudes. 500 m is safely inside any 3×3
+  // neighbourhood so we never miss a candidate within the radius.
+  const CELL = 100 // Math.round(lat * CELL) → integer bucket key
+  const cellKey = (lat, lng) => `${Math.round(lat * CELL)},${Math.round(lng * CELL)}`
+
+  // Index MITECO by lat/lng grid.
+  const mGrid = new Map()
   for (const m of miteco) {
-    const k = stripAccents(m.provincia || '')
-    if (!mPorProv[k]) mPorProv[k] = []
-    mPorProv[k].push(m)
+    const k = cellKey(m.lat, m.lng)
+    if (!mGrid.has(k)) mGrid.set(k, [])
+    mGrid.get(k).push(m)
   }
 
-  // Index OSM by province too (for reverse lookup).
-  const oPorProv = {}
+  // Index OSM by lat/lng grid (for reverse lookup).
+  const oGrid = new Map()
   for (const o of osm) {
-    const k = stripAccents(o.provincia || '')
-    if (!oPorProv[k]) oPorProv[k] = []
-    oPorProv[k].push(o)
+    const k = cellKey(o.lat, o.lng)
+    if (!oGrid.has(k)) oGrid.set(k, [])
+    oGrid.get(k).push(o)
+  }
+
+  // Return everything within the 3×3 cell neighbourhood of (lat, lng).
+  function nearby(grid, lat, lng) {
+    const latB = Math.round(lat * CELL)
+    const lngB = Math.round(lng * CELL)
+    const out = []
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        const bucket = grid.get(`${latB + dx},${lngB + dy}`)
+        if (bucket) out.push(...bucket)
+      }
+    }
+    return out
   }
 
   const matches = []
@@ -232,8 +257,7 @@ function matchAll(osm, miteco) {
       huerfanas_osm.push({ ...o, razon: 'fluvial' })
       continue
     }
-    const k = stripAccents(o.provincia || '')
-    const candidatos = mPorProv[k] ?? []
+    const candidatos = nearby(mGrid, o.lat, o.lng)
     const best = findBest(o, candidatos)
     if (best) osmBest.set(o.slug, { o, ...best })
     else huerfanas_osm.push({ ...o, razon: 'sin_candidatos' })
@@ -243,8 +267,7 @@ function matchAll(osm, miteco) {
   const mitecoBest = new Map() // miteco.slug -> {match (osm), score, ...}
   for (const m of miteco) {
     if (!m.slug) continue
-    const k = stripAccents(m.provincia || '')
-    const candidatos = oPorProv[k] ?? []
+    const candidatos = nearby(oGrid, m.lat, m.lng)
     let best = null
     let bestScore = -Infinity
     let bestDist = Infinity

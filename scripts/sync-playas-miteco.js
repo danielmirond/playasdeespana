@@ -220,11 +220,24 @@ const MITECO_ENRICH_FIELDS = [
   'ine_municipio', 'web_ayuntamiento', 'url_miteco',
 ]
 
+// Campos de localidad donde MITECO siempre gana, porque el dato OSM
+// es frecuentemente erróneo (playas de Barcelona etiquetadas en
+// Tarragona, etc.). MITECO es la fuente oficial del ministerio.
+const MITECO_AUTHORITATIVE_FIELDS = ['municipio', 'provincia', 'comunidad']
+
 // Copia los campos MITECO sobre la playa OSM sin sobreescribir datos OSM
 // preexistentes salvo que el valor MITECO sea más rico. Devuelve un objeto
 // nuevo (no muta el original).
 function enriquecer(osmPlaya, mitecoPlaya) {
   const out = { ...osmPlaya }
+
+  // Para la localidad (municipio/provincia/comunidad) MITECO siempre gana,
+  // porque es la fuente oficial y OSM puede estar mal etiquetado.
+  for (const k of MITECO_AUTHORITATIVE_FIELDS) {
+    const v = mitecoPlaya[k]
+    if (v !== null && v !== undefined && v !== '') out[k] = v
+  }
+
   for (const k of MITECO_ENRICH_FIELDS) {
     const v = mitecoPlaya[k]
     if (v === null || v === undefined || v === '') continue
