@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "sync:playas": "node scripts/sync-playas.js",
+    "validate:miteco": "node scripts/validate-miteco-merge.js",
     "sync:playas-miteco": "node scripts/sync-playas-miteco.js",
     "sync:calidad": "node scripts/sync-calidad-agua.js"
   },
