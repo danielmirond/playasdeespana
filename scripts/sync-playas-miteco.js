@@ -366,15 +366,53 @@ async function main() {
   console.log(`    OSM enriquecidas:     ${enrichmentBySlug.size}`)
   console.log(`    MITECO nuevas:        ${mitecoAddedCount}`)
 
-  // 6. Guardar
+  // 7. Slugs MITECO-primario para playas con Bandera Azul.
+  //    Las banderas azules son los listados oficiales: usamos el slug MITECO
+  //    canónico como URL primaria y generamos un 301 desde el slug OSM viejo.
+  //    Para el resto de playas seguimos con slug OSM (sin redirects).
+  const redirects = {}
+  const finalSlugsUsed = new Set(finalPlayas.map(p => p.slug))
+  let banderaSwitched = 0
+
+  for (const p of finalPlayas) {
+    if (!p.bandera) continue                 // solo Bandera Azul
+    if (!p.miteco_id) continue               // debe haber sido enriquecida
+    const miteco = enrichmentBySlug.get(p.slug) // lookup antes de rename
+    if (!miteco) continue
+    if (p.slug === miteco.slug) continue     // ya coincide, nada que hacer
+
+    const oldSlug = p.slug
+    // Reservamos un slug MITECO único (si colisiona añadimos sufijo)
+    let newSlug = miteco.slug
+    if (finalSlugsUsed.has(newSlug) && newSlug !== oldSlug) {
+      let i = 2
+      while (finalSlugsUsed.has(`${newSlug}-${i}`)) i++
+      newSlug = `${newSlug}-${i}`
+    }
+
+    finalSlugsUsed.delete(oldSlug)
+    finalSlugsUsed.add(newSlug)
+    p.slug = newSlug
+    redirects[oldSlug] = newSlug
+    banderaSwitched++
+  }
+
+  console.log(`\n[7] Bandera Azul → slug MITECO primario`)
+  console.log(`    Slugs cambiados: ${banderaSwitched}`)
+  console.log(`    Redirects 301:   ${Object.keys(redirects).length}`)
+
+  // 8. Guardar
   fs.writeFileSync(PLAYAS_JSON, JSON.stringify(finalPlayas, null, 2))
   console.log(`\n✓ ${PLAYAS_JSON}`)
 
-  // Ya no generamos slug-redirects.json porque ningún slug OSM cambia.
-  // Si existía uno antiguo, lo borramos para que Next.js deje de aplicarlo.
-  if (fs.existsSync(REDIRECTS)) {
+  // Escribimos slug-redirects.json solo si hay entradas. Si queda vacío,
+  // borramos el archivo para que Next.js no cargue un objeto inútil.
+  if (Object.keys(redirects).length > 0) {
+    fs.writeFileSync(REDIRECTS, JSON.stringify(redirects, null, 2))
+    console.log(`✓ ${REDIRECTS} (${Object.keys(redirects).length} redirects)`)
+  } else if (fs.existsSync(REDIRECTS)) {
     fs.unlinkSync(REDIRECTS)
-    console.log(`✓ ${REDIRECTS} borrado (enrichment no requiere redirects)`)
+    console.log(`✓ ${REDIRECTS} borrado (no hay redirects)`)
   }
 
   const slugIndex = {}
