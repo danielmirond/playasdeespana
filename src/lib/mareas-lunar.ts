@@ -122,10 +122,10 @@ export function estimarMareas(lat: number, lng: number, date?: Date): MareasDia 
   const corrLng = (lng + 3.7) * 4 / 60 // referencia: meridiano Madrid ~3.7°W
 
   const mareas: MareaHora[] = [
-    { hora: formatHora(pleamar1 + corrLng), tipo: 'pleamar', altura: parseFloat(alturaMax.toFixed(1)) },
-    { hora: formatHora(bajamar1 + corrLng), tipo: 'bajamar', altura: parseFloat(alturaMin.toFixed(1)) },
-    { hora: formatHora(pleamar2 + corrLng), tipo: 'pleamar', altura: parseFloat((alturaMax * 0.95).toFixed(1)) },
-    { hora: formatHora(bajamar2 + corrLng), tipo: 'bajamar', altura: parseFloat(alturaMin.toFixed(1)) },
+    { hora: formatHora(pleamar1 + corrLng), tipo: 'pleamar' as const, altura: parseFloat(alturaMax.toFixed(1)) },
+    { hora: formatHora(bajamar1 + corrLng), tipo: 'bajamar' as const, altura: parseFloat(alturaMin.toFixed(1)) },
+    { hora: formatHora(pleamar2 + corrLng), tipo: 'pleamar' as const, altura: parseFloat((alturaMax * 0.95).toFixed(1)) },
+    { hora: formatHora(bajamar2 + corrLng), tipo: 'bajamar' as const, altura: parseFloat(alturaMin.toFixed(1)) },
   ]
     .filter(m => {
       const [h] = m.hora.split(':').map(Number)
