@@ -81,20 +81,44 @@ function numero(v) {
   return m ? parseFloat(m[1]) : null
 }
 
+// Mapping provincia → comunidad CANÓNICA. Cubre provincias costeras + las
+// interiores con playas fluviales relevantes. El objetivo es tener un único
+// valor de comunidad por región, sin variantes bilingües ("Illes Balears"
+// vs "Islas Baleares") ni títulos oficiales largos ("Asturias, Principado
+// de"). Se usa siempre, incluso si MITECO devuelve su propio Comunidad_.
 function provinciaAComunidad(prov) {
   const map = {
+    // Costa atlántica norte
     'A Coruña': 'Galicia', 'Lugo': 'Galicia', 'Pontevedra': 'Galicia',
     'Asturias': 'Asturias', 'Cantabria': 'Cantabria',
-    'Bizkaia': 'País Vasco', 'Gipuzkoa': 'País Vasco',
-    'Girona': 'Cataluña', 'Barcelona': 'Cataluña', 'Tarragona': 'Cataluña',
+    'Bizkaia': 'País Vasco', 'Gipuzkoa': 'País Vasco', 'Vizcaya': 'País Vasco', 'Guipúzcoa': 'País Vasco', 'Álava': 'País Vasco', 'Araba': 'País Vasco',
+    // Costa mediterránea
+    'Girona': 'Cataluña', 'Barcelona': 'Cataluña', 'Tarragona': 'Cataluña', 'Lleida': 'Cataluña',
     'Castellón': 'Comunitat Valenciana', 'Valencia': 'Comunitat Valenciana', 'Alicante': 'Comunitat Valenciana',
+    'Castelló': 'Comunitat Valenciana', 'València': 'Comunitat Valenciana', 'Alacant': 'Comunitat Valenciana',
     'Murcia': 'Murcia',
-    'Almería': 'Andalucía', 'Granada': 'Andalucía', 'Málaga': 'Andalucía', 'Cádiz': 'Andalucía', 'Huelva': 'Andalucía',
+    // Andalucía (toda)
+    'Almería': 'Andalucía', 'Granada': 'Andalucía', 'Málaga': 'Andalucía',
+    'Cádiz': 'Andalucía', 'Huelva': 'Andalucía', 'Sevilla': 'Andalucía',
+    'Córdoba': 'Andalucía', 'Jaén': 'Andalucía',
+    // Archipiélagos
     'Las Palmas': 'Canarias', 'Santa Cruz de Tenerife': 'Canarias',
-    'Illes Balears': 'Islas Baleares', 'Baleares': 'Islas Baleares',
+    'Illes Balears': 'Islas Baleares', 'Baleares': 'Islas Baleares', 'Islas Baleares': 'Islas Baleares',
+    // Ciudades autónomas
     'Ceuta': 'Ceuta', 'Melilla': 'Melilla',
+    // Interior (para playas fluviales, lagos, embalses)
+    'Ávila': 'Castilla y León', 'Burgos': 'Castilla y León', 'León': 'Castilla y León',
+    'Palencia': 'Castilla y León', 'Salamanca': 'Castilla y León', 'Segovia': 'Castilla y León',
+    'Soria': 'Castilla y León', 'Valladolid': 'Castilla y León', 'Zamora': 'Castilla y León',
+    'Albacete': 'Castilla-La Mancha', 'Ciudad Real': 'Castilla-La Mancha',
+    'Cuenca': 'Castilla-La Mancha', 'Guadalajara': 'Castilla-La Mancha', 'Toledo': 'Castilla-La Mancha',
+    'Badajoz': 'Extremadura', 'Cáceres': 'Extremadura',
+    'Huesca': 'Aragón', 'Teruel': 'Aragón', 'Zaragoza': 'Aragón',
+    'La Rioja': 'La Rioja',
+    'Navarra': 'Navarra', 'Nafarroa': 'Navarra',
+    'Madrid': 'Madrid',
   }
-  return map[prov] ?? 'España'
+  return map[prov] ?? null
 }
 
 // Normaliza un feature MITECO al formato Playa
@@ -104,7 +128,10 @@ function normalizarMiteco(f) {
   const nombre    = (p.Nombre ?? '').trim()
   const municipio = (p['Término_M'] ?? p.Termino_M ?? '').trim()
   const provincia = (p.Provincia ?? '').trim()
-  const comunidad = (p['Comunidad_'] ?? '').trim() || provinciaAComunidad(provincia)
+  // Siempre derivamos la comunidad del mapping canónico, ignoramos el campo
+  // Comunidad_ de MITECO porque devuelve variantes bilingües ("Cataluña/
+  // Catalunya") que rompen el groupby de la página /comunidades.
+  const comunidad = provinciaAComunidad(provincia) || (p['Comunidad_'] ?? '').trim() || 'España'
 
   return {
     source:    'miteco',
@@ -369,7 +396,10 @@ async function main() {
       if (data) {
         o.municipio = data.municipio
         o.provincia = data.provincia
-        o.comunidad = data.comunidad || provinciaAComunidad(data.provincia)
+        // Derivamos la comunidad del mapping canónico para mantener un único
+        // valor por región. Si la provincia no está en el mapa caemos a lo
+        // que OSM tenía antes (o 'España' como último recurso).
+        o.comunidad = provinciaAComunidad(data.provincia) || data.comunidad || o.comunidad || 'España'
         if (data.ine_municipio) o.ine_municipio = data.ine_municipio
         o.source = 'osm+cartociudad'
         updated++
