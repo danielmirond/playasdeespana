@@ -27,7 +27,7 @@ const https = require('https')
 const fs    = require('fs')
 const path  = require('path')
 
-const { matchAll, esFluvial } = require('./lib/miteco-match')
+const { matchAll, esFluvial, haversine } = require('./lib/miteco-match')
 
 const DATA_DIR     = path.join(__dirname, '..', 'public', 'data')
 const PLAYAS_JSON  = path.join(DATA_DIR, 'playas.json')
@@ -79,6 +79,19 @@ function numero(v) {
   if (!v) return null
   const m = String(v).match(/(\d+(?:\.\d+)?)/)
   return m ? parseFloat(m[1]) : null
+}
+
+/**
+ * Normaliza el código INE de municipio a string de 5 dígitos con zero-pad.
+ * MITECO lo devuelve a veces como número (perdiendo el 0 inicial de
+ * Barcelona/Bizkaia/…) y CartoCiudad lo devuelve como string. Para que el
+ * lookup por INE sea fiable lo forzamos a string siempre.
+ */
+function ineNormalizado(v) {
+  if (v == null || v === '') return null
+  const digits = String(v).replace(/\D/g, '')
+  if (!digits) return null
+  return digits.padStart(5, '0')
 }
 
 // Mapping provincia → comunidad CANÓNICA. Cubre provincias costeras + las
@@ -205,7 +218,7 @@ function normalizarMiteco(f) {
     hospital_dist:   (p.Distancia1 ?? '').trim() || null,
 
     // Referencias
-    ine_municipio:    p['Código_IN'] ?? null,
+    ine_municipio:    ineNormalizado(p['Código_IN']),
     web_ayuntamiento: (p.Web_munici ?? '').trim() || null,
     url_miteco:       (p.URL_MAGRAM ?? '').trim() || null,
   }
@@ -311,6 +324,47 @@ async function main() {
   const mitecoRaw = mitecoData.features ?? []
   console.log(`  ${mitecoRaw.length} features descargadas`)
 
+  // Discovery log: volcamos todas las propiedades únicas que vienen en el
+  // dataset para detectar campos nuevos que aún no mapeamos. Así las
+  // próximas revisiones pueden ver el inventario completo sin tener que
+  // hacer consultas contra ArcGIS desde sandbox bloqueado.
+  if (mitecoRaw.length > 0) {
+    const keys = new Set()
+    for (const f of mitecoRaw.slice(0, 100)) {
+      for (const k of Object.keys(f.properties ?? {})) keys.add(k)
+    }
+    const sorted = [...keys].sort()
+    console.log(`\n[2b] Campos MITECO detectados (${sorted.length}):`)
+    console.log('     ' + sorted.join(', '))
+    // Sample vacío → aviso
+    const first = mitecoRaw[0]?.properties ?? {}
+    const mapped = new Set([
+      'Nombre', 'Nombre_alt', 'Término_M', 'Termino_M', 'Provincia', 'Comunidad_',
+      'Longitud', 'Anchura', 'Composici', 'Tipo_de_ar', 'Descripci',
+      'Bandera_az', 'Auxilio_y_', 'Acceso_dis', 'Duchas', 'Aparcamien',
+      'Nudismo', 'Aseos', 'Lavapies', 'Papelera', 'Teléfonos',
+      'Servicio_l', 'Oficina_tu', 'Alquiler_s', 'Alquiler_h', 'Alquiler_n',
+      'Zona_infan', 'Zona_depor', 'Club_naút', 'Grado_ocup', 'Grado_urba',
+      'Condicione', 'Paseo_mar', 'Tipo_paseo', 'Vegetació', 'Zona_fonde',
+      'Fachada_Li', 'Espacio_pr', 'Forma_de_a', 'Carretera_', 'Autobús',
+      'Autobús_t', 'Establecim', 'Aparcami_1', 'Aparcami_2', 'Puerto_dep',
+      'Web_puerto', 'Distancia_', 'Hospital', 'Dirección', 'Teléfono_',
+      'Distancia1', 'Código_IN', 'Web_munici', 'URL_MAGRAM', 'Identifica',
+      'OBJECTID',
+    ])
+    const unmapped = sorted.filter(k => !mapped.has(k))
+    if (unmapped.length > 0) {
+      console.log(`[2b] ⚠ Campos NO mapeados (${unmapped.length}):`)
+      console.log('     ' + unmapped.join(', '))
+      console.log(`[2b] ⚠ Sample values:`)
+      for (const k of unmapped.slice(0, 20)) {
+        const v = first[k]
+        const s = v == null ? 'null' : JSON.stringify(String(v).slice(0, 40))
+        console.log(`       ${k} = ${s}`)
+      }
+    }
+  }
+
   const mitecoPlayas = mitecoRaw
     .filter(f => f.properties?.Nombre?.trim())
     .map(normalizarMiteco)
@@ -340,10 +394,14 @@ async function main() {
   const porCalidad = { EXCELENTE: 0, BUENO: 0, DUDOSO: 0, SOSPECHOSO: 0 }
   for (const m of matches) porCalidad[m.calidad]++
 
+  // Opt-in: aceptar DUDOSO como enrichment extra. SOSPECHOSO siempre se
+  // ignora porque el matcher lo etiquetó como "probablemente otra playa".
+  const includeDudoso = process.env.MITECO_INCLUDE_DUDOSO === '1'
+
   console.log(`  Matches totales:   ${matches.length}`)
   console.log(`    EXCELENTE: ${porCalidad.EXCELENTE}`)
   console.log(`    BUENO:     ${porCalidad.BUENO}`)
-  console.log(`    DUDOSO:    ${porCalidad.DUDOSO}  (se ignoran)`)
+  console.log(`    DUDOSO:    ${porCalidad.DUDOSO}  ${includeDudoso ? '(incluidos por MITECO_INCLUDE_DUDOSO=1)' : '(se ignoran)'}`)
   console.log(`    SOSPECHOSO:${porCalidad.SOSPECHOSO}  (se ignoran)`)
   console.log(`  MITECO huérfanas:  ${huerfanas_miteco.length}  (se añadirán como nuevas)`)
 
@@ -353,11 +411,15 @@ async function main() {
 
   // Determinar qué playas OSM reciben enriquecimiento
   const enrichmentBySlug = new Map() // osm.slug -> miteco
+  const dudosoSlugs = new Set() // tracking para marcar match_quality después
   for (const m of matches) {
-    if (m.calidad !== 'EXCELENTE' && m.calidad !== 'BUENO') continue
+    const ok = m.calidad === 'EXCELENTE' || m.calidad === 'BUENO' ||
+               (includeDudoso && m.calidad === 'DUDOSO')
+    if (!ok) continue
     const mitecoPlaya = mitecoBySlug.get(m.miteco_slug)
     if (!mitecoPlaya) continue
     enrichmentBySlug.set(m.osm_slug, mitecoPlaya)
+    if (m.calidad === 'DUDOSO') dudosoSlugs.add(m.osm_slug)
   }
   console.log(`\n[5] Enriquecer ${enrichmentBySlug.size} playas OSM con datos MITECO`)
 
@@ -396,11 +458,9 @@ async function main() {
       if (data) {
         o.municipio = data.municipio
         o.provincia = data.provincia
-        // Derivamos la comunidad del mapping canónico para mantener un único
-        // valor por región. Si la provincia no está en el mapa caemos a lo
-        // que OSM tenía antes (o 'España' como último recurso).
         o.comunidad = provinciaAComunidad(data.provincia) || data.comunidad || o.comunidad || 'España'
-        if (data.ine_municipio) o.ine_municipio = data.ine_municipio
+        const ine = ineNormalizado(data.ine_municipio)
+        if (ine) o.ine_municipio = ine
         o.source = 'osm+cartociudad'
         updated++
       }
@@ -420,6 +480,53 @@ async function main() {
     console.log('\n[5c] CartoCiudad fallback omitido (MITECO_SKIP_CARTOCIUDAD=1)')
   }
 
+  // 5d. Enrichment secundario por INE municipio.
+  //     CartoCiudad le puso a muchas playas el código INE oficial. MITECO
+  //     también trae INE en cada ficha. Si una playa OSM quedó sin match
+  //     primario pero ahora tiene INE, buscamos MITECOs del mismo municipio
+  //     y nos quedamos con la más cercana en <2 km. El matcher v3 fallaba
+  //     en estos casos por nombres radicalmente distintos (gallego vs
+  //     castellano, variantes locales…) pero el par "mismo municipio +
+  //     <2 km" es prácticamente siempre la misma playa.
+  //
+  //     Esta pasada aporta cobertura sobre playas que:
+  //       - matchearon DUDOSO/SOSPECHOSO en [4]
+  //       - fueron corregidas por CartoCiudad en [5c]
+  //       - quedaron como osm+cartociudad con INE pero sin datos MITECO
+  console.log('\n[5d] Enriquecer por INE municipio (INE-based fallback)')
+  const mitecoByIne = new Map() // ine → MITECO playas del mismo municipio
+  for (const m of mitecoPlayas) {
+    const ine = m.ine_municipio
+    if (!ine) continue
+    const key = String(ine)
+    if (!mitecoByIne.has(key)) mitecoByIne.set(key, [])
+    mitecoByIne.get(key).push(m)
+  }
+  let ineEnriched = 0
+  for (const o of osmPlayas) {
+    if (enrichmentBySlug.has(o.slug)) continue   // ya enriquecida en [5]
+    if (!o.ine_municipio) continue               // sin INE no hay lookup
+    const ineKey = String(o.ine_municipio)
+    const candidatos = mitecoByIne.get(ineKey) ?? []
+    if (candidatos.length === 0) continue
+    // Cerramos la búsqueda a 2 km para no asignar dos municipios con INE
+    // igual a playas del otro lado del término (raro, pero safety net).
+    let best = null
+    let bestDist = Infinity
+    for (const m of candidatos) {
+      const d = haversine(o.lat, o.lng, m.lat, m.lng)
+      if (d < bestDist && d < 2000) {
+        bestDist = d
+        best = m
+      }
+    }
+    if (best) {
+      enrichmentBySlug.set(o.slug, best)
+      ineEnriched++
+    }
+  }
+  console.log(`[5d] Enriquecidas por INE: ${ineEnriched}`)
+
   // 5. Construir playas.json final:
   //    - Todas las OSM (enriquecidas las que tengan match válido)
   //    - + MITECO huérfanas (nuevas playas que OSM no tenía)
@@ -428,7 +535,10 @@ async function main() {
   for (const o of osmPlayas) {
     const mitecoPlaya = enrichmentBySlug.get(o.slug)
     if (mitecoPlaya) {
-      finalPlayas.push(limpiar(enriquecer(o, mitecoPlaya)))
+      const enriched = enriquecer(o, mitecoPlaya)
+      // Marcadores de confianza del match para futuros audits.
+      if (dudosoSlugs.has(o.slug)) enriched.match_quality = 'dudoso'
+      finalPlayas.push(limpiar(enriched))
     } else {
       finalPlayas.push(limpiar(o))
     }

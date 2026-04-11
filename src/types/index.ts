@@ -58,7 +58,7 @@ export interface Playa {
   hospital_direc?:  string | null
   hospital_tel?:    string | null
   hospital_dist?:   string | null
-  ine_municipio?:   number | null
+  ine_municipio?:   string | number | null
   web_ayuntamiento?: string | null
   url_miteco?:      string | null
   observaciones?:   string | null
