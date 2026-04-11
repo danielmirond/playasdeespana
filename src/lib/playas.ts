@@ -117,3 +117,50 @@ export const getProvincias = cache(async () => {
     }))
     .sort((a, b) => b.count - a.count)
 })
+
+// ────────────────────────────────────────────────────────────────────────
+// Helpers para /playas-perros. Filtro por perros:true + agrupaciones por
+// comunidad / provincia / municipio. Se usan en las páginas hijas.
+
+export const getPlayasPerros = cache(async (): Promise<Playa[]> => {
+  const playas = await getPlayas()
+  return playas.filter(p => p.perros === true)
+})
+
+export interface PerrosStats {
+  total: number
+  comunidades: Array<{ nombre: string; slug: string; count: number }>
+  provincias:  Array<{ nombre: string; slug: string; comunidad: string; comunidadSlug: string; count: number }>
+  municipios:  Array<{ nombre: string; slug: string; provincia: string; provinciaSlug: string; count: number }>
+}
+
+export const getPerrosStats = cache(async (): Promise<PerrosStats> => {
+  const playas = await getPlayasPerros()
+  const byCom = new Map<string, number>()
+  const byProv = new Map<string, { count: number; comunidad: string }>()
+  const byMun = new Map<string, { count: number; provincia: string }>()
+  for (const p of playas) {
+    byCom.set(p.comunidad, (byCom.get(p.comunidad) ?? 0) + 1)
+    const prev = byProv.get(p.provincia)
+    byProv.set(p.provincia, { count: (prev?.count ?? 0) + 1, comunidad: p.comunidad })
+    const munKey = p.municipio
+    const mprev = byMun.get(munKey)
+    byMun.set(munKey, { count: (mprev?.count ?? 0) + 1, provincia: p.provincia })
+  }
+  return {
+    total: playas.length,
+    comunidades: Array.from(byCom.entries())
+      .map(([nombre, count]) => ({ nombre, slug: toSlug(nombre), count }))
+      .sort((a, b) => b.count - a.count),
+    provincias: Array.from(byProv.entries())
+      .map(([nombre, { count, comunidad }]) => ({
+        nombre, slug: toSlug(nombre), comunidad, comunidadSlug: toSlug(comunidad), count,
+      }))
+      .sort((a, b) => b.count - a.count),
+    municipios: Array.from(byMun.entries())
+      .map(([nombre, { count, provincia }]) => ({
+        nombre, slug: toSlug(nombre), provincia, provinciaSlug: toSlug(provincia), count,
+      }))
+      .sort((a, b) => b.count - a.count),
+  }
+})

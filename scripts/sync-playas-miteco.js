@@ -94,6 +94,27 @@ function ineNormalizado(v) {
   return digits.padStart(5, '0')
 }
 
+// Normalización canónica de provincias. MITECO devuelve variantes bilingües
+// ("Castellón/Castelló", "València/Valencia", "Alicante/Alacant") que rompen
+// el groupby de las páginas /provincia y /playas-perros/provincia. Forzamos
+// la forma castellana oficial como valor único.
+function provinciaCanonica(prov) {
+  if (!prov) return prov
+  const map = {
+    'Castellón/Castelló': 'Castellón',
+    'Castelló/Castellón': 'Castellón',
+    'Castelló': 'Castellón',
+    'Valencia/València': 'Valencia',
+    'València/Valencia': 'Valencia',
+    'València': 'Valencia',
+    'Alicante/Alacant': 'Alicante',
+    'Alacant/Alicante': 'Alicante',
+    'Alacant': 'Alicante',
+    'Illes Balears': 'Baleares',
+  }
+  return map[prov] ?? prov
+}
+
 // Mapping provincia → comunidad CANÓNICA. Cubre provincias costeras + las
 // interiores con playas fluviales relevantes. El objetivo es tener un único
 // valor de comunidad por región, sin variantes bilingües ("Illes Balears"
@@ -140,7 +161,7 @@ function normalizarMiteco(f) {
   const [lng, lat] = f.geometry?.coordinates ?? [0, 0]
   const nombre    = (p.Nombre ?? '').trim()
   const municipio = (p['Término_M'] ?? p.Termino_M ?? '').trim()
-  const provincia = (p.Provincia ?? '').trim()
+  const provincia = provinciaCanonica((p.Provincia ?? '').trim())
   // Siempre derivamos la comunidad del mapping canónico, ignoramos el campo
   // Comunidad_ de MITECO porque devuelve variantes bilingües ("Cataluña/
   // Catalunya") que rompen el groupby de la página /comunidades.
@@ -457,8 +478,8 @@ async function main() {
       const data = await carto.reverseGeocode(o.lat, o.lng)
       if (data) {
         o.municipio = data.municipio
-        o.provincia = data.provincia
-        o.comunidad = provinciaAComunidad(data.provincia) || data.comunidad || o.comunidad || 'España'
+        o.provincia = provinciaCanonica(data.provincia)
+        o.comunidad = provinciaAComunidad(o.provincia) || data.comunidad || o.comunidad || 'España'
         const ine = ineNormalizado(data.ine_municipio)
         if (ine) o.ine_municipio = ine
         o.source = 'osm+cartociudad'
