@@ -442,7 +442,23 @@ async function main() {
   //    Las banderas azules son los listados oficiales: usamos el slug MITECO
   //    canónico como URL primaria y generamos un 301 desde el slug OSM viejo.
   //    Para el resto de playas seguimos con slug OSM (sin redirects).
-  const redirects = {}
+  //
+  //    Cargamos primero los redirects existentes de runs anteriores: una vez
+  //    que una blue flag se renombró (ej. montalvo → montalvo-sanxenxo) el
+  //    sync siguiente ya no detecta el cambio porque el slug actual en
+  //    playas.json ya es el MITECO. Sin esta carga los redirects históricos
+  //    desaparecerían y devolverían 404 los links indexados por Google.
+  let redirects = {}
+  if (fs.existsSync(REDIRECTS)) {
+    try {
+      redirects = JSON.parse(fs.readFileSync(REDIRECTS, 'utf8')) || {}
+      console.log(`\n[7] Cargados ${Object.keys(redirects).length} redirects históricos`)
+    } catch {
+      console.warn(`[7] ⚠ slug-redirects.json existe pero no se pudo parsear, empiezo vacío`)
+      redirects = {}
+    }
+  }
+  const historicosIniciales = Object.keys(redirects).length
   const finalSlugsUsed = new Set(finalPlayas.map(p => p.slug))
   let banderaSwitched = 0
 
@@ -469,9 +485,23 @@ async function main() {
     banderaSwitched++
   }
 
+  // Garbage collect: si un redirect histórico apunta a un slug que ya no
+  // existe en playas.json (porque la playa se eliminó del dataset), lo
+  // quitamos para no dejar 301 rotos.
+  let removedOrphans = 0
+  for (const [oldSlug, newSlug] of Object.entries(redirects)) {
+    if (!finalSlugsUsed.has(newSlug)) {
+      delete redirects[oldSlug]
+      removedOrphans++
+    }
+  }
+  const historicosFinales = Object.keys(redirects).length - banderaSwitched
+
   console.log(`\n[7] Bandera Azul → slug MITECO primario`)
-  console.log(`    Slugs cambiados: ${banderaSwitched}`)
-  console.log(`    Redirects 301:   ${Object.keys(redirects).length}`)
+  console.log(`    Históricos preservados: ${historicosFinales}`)
+  console.log(`    Renames en este run:    ${banderaSwitched}`)
+  console.log(`    Huérfanos limpiados:    ${removedOrphans}`)
+  console.log(`    Total redirects:        ${Object.keys(redirects).length}`)
 
   // 8. Guardar
   fs.writeFileSync(PLAYAS_JSON, JSON.stringify(finalPlayas, null, 2))
