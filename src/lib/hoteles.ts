@@ -1,8 +1,13 @@
-// src/lib/hoteles.ts — OpenStreetMap/Overpass (sin API key)
+// src/lib/hoteles.ts — Hoteles cercanos via OpenStreetMap/Overpass.
+//
+// Usa el helper `queryOverpass` con retry + mirrors. La query es más
+// simple que la anterior: antes incluía apartment y ways[hotel|hostel],
+// que multiplicaban el tiempo de respuesta y el tamaño del JSON sin
+// aportar demasiado. Solo nodos de tourism = hotel / hostel / guest_house.
 import { haversine } from './geo'
-import { fetchWithTimeout } from './fetch-timeout'
+import { queryOverpass } from './overpass'
 
-const RADIUS_M = 10000 // Radio único amplio, ordenamos por distancia
+const RADIUS_M = 5000
 
 export interface HotelReal {
   id:          string
@@ -38,50 +43,46 @@ function inferirPrecio(estrellas: number): string {
 }
 
 export async function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
-  const query = `[out:json][timeout:15];
+  // Query solo con nodos. Incluye ways solo para hoteles (los edificios
+  // grandes vienen como ways en OSM), con `out center` para conseguir
+  // las coordenadas centrales.
+  const query = `[out:json][timeout:8];
 (
   node["tourism"="hotel"](around:${RADIUS_M},${lat},${lon});
   node["tourism"="hostel"](around:${RADIUS_M},${lat},${lon});
   node["tourism"="guest_house"](around:${RADIUS_M},${lat},${lon});
-  node["tourism"="apartment"](around:${RADIUS_M},${lat},${lon});
   way["tourism"="hotel"](around:${RADIUS_M},${lat},${lon});
-  way["tourism"="hostel"](around:${RADIUS_M},${lat},${lon});
 );
-out center body;`
+out center body 40;`
 
-  try {
-    const res = await fetchWithTimeout('https://overpass-api.de/api/interpreter', {
-      method: 'POST',
-      body:   query,
-      next:   { revalidate: 86400 },
-    }, 20000) // Overpass hoteles suele tardar 8-18s con radio 10km
-    if (!res.ok) return []
-    const data = await res.json()
+  const elements = await queryOverpass(query, {
+    timeoutPerAttempt: 7000,
+    revalidate: 86400,
+    label: 'hoteles',
+  })
+  if (!elements) return []
 
-    return (data.elements ?? [])
-      .filter((el: any) => el.tags?.name)
-      .map((el: any): HotelReal => {
-        const elLat = el.lat ?? el.center?.lat ?? lat
-        const elLon = el.lon ?? el.center?.lon ?? lon
-        const estrellas = inferirEstrellas(el.tags ?? {})
-        return {
-          id:          String(el.id),
-          googleId:    String(el.id),
-          nombre:      el.tags.name,
-          estrellas,
-          distancia_m: Math.round(haversine(lat, lon, elLat, elLon)),
-          rating:      0,
-          reseñas:     0,
-          precio:      inferirPrecio(estrellas),
-          foto:        null,
-          website:     el.tags.website ?? el.tags['contact:website'] ?? null,
-          telefono:    el.tags.phone ?? el.tags['contact:phone'] ?? null,
-          source:      'osm',
-        }
-      })
-      .sort((a: HotelReal, b: HotelReal) => a.distancia_m - b.distancia_m)
-      .slice(0, 5)
-  } catch {
-    return []
-  }
+  return elements
+    .filter((el: any) => el.tags?.name)
+    .map((el: any): HotelReal => {
+      const elLat = el.lat ?? el.center?.lat ?? lat
+      const elLon = el.lon ?? el.center?.lon ?? lon
+      const estrellas = inferirEstrellas(el.tags ?? {})
+      return {
+        id:          String(el.id),
+        googleId:    String(el.id),
+        nombre:      el.tags.name,
+        estrellas,
+        distancia_m: Math.round(haversine(lat, lon, elLat, elLon)),
+        rating:      0,
+        reseñas:     0,
+        precio:      inferirPrecio(estrellas),
+        foto:        null,
+        website:     el.tags.website ?? el.tags['contact:website'] ?? null,
+        telefono:    el.tags.phone ?? el.tags['contact:phone'] ?? null,
+        source:      'osm',
+      }
+    })
+    .sort((a: HotelReal, b: HotelReal) => a.distancia_m - b.distancia_m)
+    .slice(0, 5)
 }

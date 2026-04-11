@@ -24,6 +24,11 @@ import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 
 export const revalidate = 3600
+// Dejamos techo de 25 s al render (Overpass para hoteles/restaurantes puede
+// tardar 5-8 s). Hobby plan cappea a 10 s, Pro hasta 60 s — la plataforma
+// elige el mínimo. Si la lookup server-side falla, FichaBody reintenta
+// desde el cliente via /api/hoteles y /api/restaurantes.
+export const maxDuration = 25
 
 // Pre-renderiza las playas con Bandera Azul (las más visitadas) en build
 // El resto se genera on-demand con ISR y se cachea 1h

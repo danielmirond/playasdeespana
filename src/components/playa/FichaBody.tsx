@@ -1,5 +1,6 @@
 'use client'
 // src/components/playa/FichaBody.tsx
+import { useEffect, useState } from 'react'
 import type { Playa, Restaurante } from '@/types'
 import type { FotoPlaya } from '@/lib/fotos'
 import type { HotelReal } from '@/lib/hoteles'
@@ -203,7 +204,53 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const pctCalidad            = calidad?.porcentaje ?? 99
   const temporadaCalidad      = calidad?.temporada ?? 2024
 
-  const restList = restaurantes && restaurantes.length > 0 ? restaurantes : null
+  // Hoteles + restaurantes: si el server no los pudo traer (Overpass lento
+  // o Vercel timeout), reintentamos client-side contra /api/*. Así la ficha
+  // renderiza rápido y los datos aparecen cuando están listos.
+  const [clientRestaurantes, setClientRestaurantes] = useState<Restaurante[]>(restaurantes ?? [])
+  const [clientHoteles, setClientHoteles]           = useState<HotelReal[]>(hoteles ?? [])
+  const [loadingCercanos, setLoadingCercanos]       = useState(false)
+
+  useEffect(() => {
+    const needsRest = !restaurantes || restaurantes.length === 0
+    const needsHot  = !hoteles || hoteles.length === 0
+    if (!needsRest && !needsHot) return
+
+    const ac = new AbortController()
+    setLoadingCercanos(true)
+
+    const url = (p: string) => `${p}?lat=${playa.lat}&lon=${playa.lng}`
+    const promises: Promise<any>[] = []
+
+    if (needsRest) {
+      promises.push(
+        fetch(url('/api/restaurantes'), { signal: ac.signal })
+          .then(r => r.ok ? r.json() : null)
+          .then(d => {
+            if (d?.restaurantes && Array.isArray(d.restaurantes)) setClientRestaurantes(d.restaurantes)
+          })
+          .catch(() => { /* silencioso, ya teníamos fallback UI */ })
+      )
+    }
+    if (needsHot) {
+      promises.push(
+        fetch(url('/api/hoteles'), { signal: ac.signal })
+          .then(r => r.ok ? r.json() : null)
+          .then(d => {
+            if (d?.hoteles && Array.isArray(d.hoteles)) setClientHoteles(d.hoteles)
+          })
+          .catch(() => { /* silencioso */ })
+      )
+    }
+
+    Promise.all(promises).finally(() => {
+      if (!ac.signal.aborted) setLoadingCercanos(false)
+    })
+    return () => ac.abort()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playa.slug])
+
+  const restList = clientRestaurantes && clientRestaurantes.length > 0 ? clientRestaurantes : null
 
   return (
     <div className={styles.wrap}>
@@ -526,7 +573,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     </div>
                   </div>
                 )
-              }) : (
+              }) : loadingCercanos ? (
+                <div role="status" aria-live="polite" style={{ padding:'1rem 0', textAlign:'center' }}>
+                  <p style={{ fontSize:'.82rem', color:'var(--muted)' }}>
+                    {locale === 'en' ? 'Loading nearby restaurants…' : 'Buscando restaurantes cercanos…'}
+                  </p>
+                </div>
+              ) : (
                 <div style={{ padding:'1rem 0', textAlign:'center' }}>
                   <p style={{ fontSize:'.82rem', color:'var(--muted)', marginBottom:'.75rem' }}>
                     {locale === 'en' ? 'No restaurants found nearby' : 'No se encontraron restaurantes cercanos'}
@@ -558,11 +611,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <div className={styles.card} id="s-dormir">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.dormir(playa.nombre)}</h2>
-            <span className={styles.cardSrc}>{hoteles && hoteles.length > 0 ? i18n.dormirSrc : ''}</span>
+            <span className={styles.cardSrc}>{clientHoteles && clientHoteles.length > 0 ? i18n.dormirSrc : ''}</span>
           </div>
           <div className={styles.cardBody}>
             <div className={styles.list}>
-              {hoteles && hoteles.length > 0 ? hoteles.map((h: any) => {
+              {clientHoteles && clientHoteles.length > 0 ? clientHoteles.map((h: any) => {
                 const mapsUrl = h.googleId ? `https://www.google.com/maps/place/?q=place_id:${h.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(h.nombre)}`
                 return (
                   <div key={h.id} className={styles.hotelItem}>
@@ -590,7 +643,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     {h.rating > 0 && <span className={styles.rating}>{h.rating}</span>}
                   </div>
                 )
-              }) : (
+              }) : loadingCercanos ? (
+                <div role="status" aria-live="polite" style={{ padding:'1rem 0', textAlign:'center' }}>
+                  <p style={{ fontSize:'.82rem', color:'var(--muted)' }}>
+                    {locale === 'en' ? 'Loading nearby hotels…' : 'Buscando hoteles cercanos…'}
+                  </p>
+                </div>
+              ) : (
                 <div style={{ padding:'1rem 0', textAlign:'center' }}>
                   <p style={{ fontSize:'.82rem', color:'var(--muted)', marginBottom:'.75rem' }}>
                     {locale === 'en' ? 'No hotels found nearby' : 'No se encontraron hoteles cercanos'}

@@ -21,6 +21,7 @@ import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 
 export const revalidate = 3600
+export const maxDuration = 25
 
 export async function generateStaticParams() {
   const playas = await getPlayas()
