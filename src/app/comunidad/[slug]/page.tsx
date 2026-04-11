@@ -74,10 +74,10 @@ export default async function ComunidadPage({ params }: Props) {
       <Nav />
       <div className={styles.hero}>
         <div className={styles.heroInner}>
-          <nav className={styles.breadcrumb}>
+          <nav className={styles.breadcrumb} aria-label="Ruta de navegación">
             <Link href="/">Inicio</Link>
-            <span>›</span>
-            <span>{comunidad.nombre}</span>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">{comunidad.nombre}</span>
           </nav>
           <h1 className={styles.titulo}>Playas de {comunidad.nombre}</h1>
           <p className={styles.subtitulo}>{comunidad.count} playas · España</p>

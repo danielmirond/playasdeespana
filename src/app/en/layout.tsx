@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import HtmlLangSetter from '@/components/ui/HtmlLangSetter'
 
 export const metadata: Metadata = {
   alternates: {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 }
 
 export default function EnLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <HtmlLangSetter lang="en" />
+      {children}
+    </>
+  )
 }

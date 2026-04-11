@@ -75,6 +75,12 @@
   cursor: pointer; transition: all .15s; white-space: nowrap;
 }
 .chip:hover { border-color: rgba(176,104,32,.4); color: var(--accent); }
+.chip:focus-visible,
+.select:focus-visible,
+.clearBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .chipOn { background: var(--accent); border-color: var(--accent); color: white; }
 .resetBtn {
   font-size: .7rem; color: var(--accent);

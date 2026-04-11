@@ -60,10 +60,10 @@ export default async function CommunitiesPageEn({ params }: Props) {
       <Nav />
       <div className={styles.hero}>
         <div className={styles.heroInner}>
-          <nav className={styles.breadcrumb}>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
             <Link href="/en">Home</Link>
-            <span>›</span>
-            <span>{comunidad.nombre}</span>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">{comunidad.nombre}</span>
           </nav>
           <h1 className={styles.titulo}>Beaches in {comunidad.nombre}</h1>
           <p className={styles.subtitulo}>{comunidad.count} beaches · Spain</p>

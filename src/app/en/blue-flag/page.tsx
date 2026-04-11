@@ -37,10 +37,10 @@ export default async function BlueFlagPage() {
 
       <div className={styles.hero}>
         <div className={styles.heroInner}>
-          <nav className={styles.breadcrumb}>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
             <Link href="/en">Home</Link>
-            <span>›</span>
-            <span>Blue Flag</span>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">Blue Flag</span>
           </nav>
           <h1 className={styles.titulo}>Blue Flag Beaches</h1>
           <p className={styles.subtitulo}>

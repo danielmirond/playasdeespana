@@ -156,13 +156,20 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
       }}>
         <span style={{ fontSize: '.6rem', color: 'var(--muted,#8a7560)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.06em' }}>Estado</span>
         {estados.map(e => (
-          <button key={e} onClick={() => setFiltro(e)} style={{
-            fontSize: '.6rem', fontWeight: 700, padding: '.2rem .55rem', borderRadius: '100px', border: '1.5px solid',
-            borderColor: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#b06820)') : 'var(--line,#e8dcc8)',
-            background: filtro === e ? ((ESTADO_COLORES[e] ?? '#b06820') + '18') : 'transparent',
-            color: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#b06820)') : 'var(--muted,#8a7560)',
-            cursor: 'pointer',
-          }}>{e}</button>
+          <button
+            key={e}
+            type="button"
+            onClick={() => setFiltro(e)}
+            aria-pressed={filtro === e ? 'true' : 'false'}
+            aria-label={e === 'TODOS' ? 'Mostrar todas las playas' : `Filtrar por estado ${e.toLowerCase()}`}
+            style={{
+              fontSize: '.6rem', fontWeight: 700, padding: '.2rem .55rem', borderRadius: '100px', border: '1.5px solid',
+              borderColor: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#b06820)') : 'var(--line,#e8dcc8)',
+              background: filtro === e ? ((ESTADO_COLORES[e] ?? '#b06820') + '18') : 'transparent',
+              color: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#b06820)') : 'var(--muted,#8a7560)',
+              cursor: 'pointer',
+            }}
+          >{e}</button>
         ))}
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '.4rem' }}>
           {loading && <span style={{ fontSize: '.6rem', color: 'var(--muted,#8a7560)' }}>Cargando…</span>}
@@ -184,18 +191,35 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
 
       <div style={{ position: 'relative' }}>
         {loading && (
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 999,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'rgba(240,230,208,.8)',
-          }}>
+          <div
+            role="status"
+            aria-live="polite"
+            style={{
+              position: 'absolute', inset: 0, zIndex: 999,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: 'rgba(240,230,208,.8)',
+            }}
+          >
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--accent,#b06820)', marginBottom: '.4rem' }}>~</div>
+              <div style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--accent,#b06820)', marginBottom: '.4rem' }} aria-hidden="true">~</div>
               <div style={{ fontSize: '.8rem', color: 'var(--ink,#2a1a08)', fontWeight: 600 }}>Cargando playas…</div>
             </div>
           </div>
         )}
-        <div ref={mapRef} style={{ height, width: '100%' }} />
+        <div
+          ref={mapRef}
+          role="application"
+          aria-label={
+            playasProp
+              ? `Mapa interactivo con ${playas.length} playas`
+              : comunidad
+                ? `Mapa interactivo de playas de ${comunidad}`
+                : provincia
+                  ? `Mapa interactivo de playas de ${provincia}`
+                  : 'Mapa interactivo de playas de España'
+          }
+          style={{ height, width: '100%' }}
+        />
       </div>
 
       <div style={{

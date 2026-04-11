@@ -100,19 +100,24 @@ function BuscarContent() {
         {/* Barra de búsqueda */}
         <div className={styles.searchRow}>
           <div className={styles.searchBox}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <label htmlFor="buscar-input" className="sr-only">
+              Buscar playas por nombre, municipio o provincia
+            </label>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <input
+              id="buscar-input"
               className={styles.searchInput}
-              type="text"
+              type="search"
               value={q}
               onChange={e => setQ(e.target.value)}
               placeholder="Nombre, municipio o provincia…"
               autoFocus
+              aria-label="Buscar playas"
             />
             {q && (
-              <button className={styles.clearBtn} onClick={() => setQ('')}>✕</button>
+              <button className={styles.clearBtn} onClick={() => setQ('')} aria-label="Borrar búsqueda">✕</button>
             )}
           </div>
         </div>
@@ -120,10 +125,15 @@ function BuscarContent() {
         {/* Filtros */}
         <div className={styles.filtrosWrap}>
           {/* Comunidad */}
+          <label htmlFor="buscar-comunidad" className="sr-only">
+            Filtrar por comunidad autónoma
+          </label>
           <select
+            id="buscar-comunidad"
             className={styles.select}
             value={comunidad}
             onChange={e => setComunidad(e.target.value)}
+            aria-label="Filtrar por comunidad autónoma"
           >
             <option value="">Todas las comunidades</option>
             {COMUNIDADES.map(c => (
@@ -132,12 +142,14 @@ function BuscarContent() {
           </select>
 
           {/* Chips */}
-          <div className={styles.chips}>
+          <div className={styles.chips} role="group" aria-label="Filtros de servicios">
             {FILTROS.map(f => (
               <button
                 key={f.key}
+                type="button"
                 className={`${styles.chip} ${filtros[f.key] ? styles.chipOn : ''}`}
                 onClick={() => toggleFiltro(f.key)}
+                aria-pressed={filtros[f.key] ? 'true' : 'false'}
               >
                 {f.label}
               </button>
@@ -168,7 +180,7 @@ function BuscarContent() {
           </div>
         ) : (
           <>
-            <div className={styles.grid}>
+            <div className={styles.grid} aria-live="polite" aria-atomic="false">
               {visible.map(p => (
                 <Link key={p.slug} href={`/playas/${p.slug}`} className={styles.card}>
                   <div className={styles.cardMain}>
@@ -177,14 +189,14 @@ function BuscarContent() {
                     <div className={styles.cardComunidad}>{p.comunidad}</div>
                   </div>
                   <div className={styles.cardBadges}>
-                    {p.bandera    && <span className={styles.badge} title="Bandera Azul">B. Azul</span>}
-                    {p.socorrismo && <span className={styles.badge} title="Socorrismo">Socorr.</span>}
-                    {p.accesible  && <span className={styles.badge} title="Accesible">PMR</span>}
-                    {p.perros     && <span className={styles.badge} title="Perros">Perros</span>}
-                    {p.duchas     && <span className={styles.badge} title="Duchas">Duchas</span>}
-                    {p.parking    && <span className={styles.badge} title="Parking">P</span>}
+                    {p.bandera    && <span className={styles.badge} aria-label="Bandera Azul">B. Azul</span>}
+                    {p.socorrismo && <span className={styles.badge} aria-label="Servicio de socorrismo">Socorr.</span>}
+                    {p.accesible  && <span className={styles.badge} aria-label="Accesible para personas con movilidad reducida">PMR</span>}
+                    {p.perros     && <span className={styles.badge} aria-label="Permitida entrada de perros">Perros</span>}
+                    {p.duchas     && <span className={styles.badge} aria-label="Con duchas">Duchas</span>}
+                    {p.parking    && <span className={styles.badge} aria-label="Con parking">P</span>}
                   </div>
-                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
                     <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/>
                   </svg>
                 </Link>
@@ -193,19 +205,23 @@ function BuscarContent() {
 
             {/* Paginación */}
             {paginas > 1 && (
-              <div className={styles.paginacion}>
+              <nav className={styles.paginacion} aria-label="Paginación de resultados">
                 <button
                   className={styles.pageBtn}
                   disabled={pagina === 1}
                   onClick={() => { setPagina(p => p - 1); window.scrollTo(0, 0) }}
+                  aria-label="Ir a la página anterior"
                 >← Anterior</button>
-                <span className={styles.pageInfo}>{pagina} / {paginas}</span>
+                <span className={styles.pageInfo} aria-current="page" aria-live="polite">
+                  Página {pagina} de {paginas}
+                </span>
                 <button
                   className={styles.pageBtn}
                   disabled={pagina === paginas}
                   onClick={() => { setPagina(p => p + 1); window.scrollTo(0, 0) }}
+                  aria-label="Ir a la página siguiente"
                 >Siguiente →</button>
-              </div>
+              </nav>
             )}
           </>
         )}

@@ -105,10 +105,10 @@ export default async function BanderasAzulesPage() {
 
       <div className={styles.hero}>
         <div className={styles.heroInner}>
-          <nav className={styles.breadcrumb}>
+          <nav className={styles.breadcrumb} aria-label="Ruta de navegación">
             <Link href="/">Inicio</Link>
-            <span>›</span>
-            <span>Banderas Azules</span>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">Banderas Azules</span>
           </nav>
           <h1 className={styles.titulo}>Playas con Bandera Azul en España</h1>
           <p className={styles.subtitulo}>

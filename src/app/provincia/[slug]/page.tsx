@@ -67,12 +67,12 @@ export default async function ProvinciaPage({ params }: Props) {
       {/* BREADCRUMB + HERO */}
       <div className={styles.hero}>
         <div className={styles.heroInner}>
-          <nav className={styles.breadcrumb}>
+          <nav className={styles.breadcrumb} aria-label="Ruta de navegación">
             <Link href="/">Inicio</Link>
-            <span>›</span>
+            <span aria-hidden="true">›</span>
             <Link href={`/comunidad/${provincia.comunidadSlug}`}>{provincia.comunidad}</Link>
-            <span>›</span>
-            <span>{provincia.nombre}</span>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">{provincia.nombre}</span>
           </nav>
           <h1 className={styles.titulo}>{provincia.nombre}</h1>
           <p className={styles.subtitulo}>{provincia.comunidad} · España</p>
