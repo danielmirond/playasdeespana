@@ -220,10 +220,13 @@ const MITECO_ENRICH_FIELDS = [
   'ine_municipio', 'web_ayuntamiento', 'url_miteco',
 ]
 
-// Campos de localidad donde MITECO siempre gana, porque el dato OSM
-// es frecuentemente erróneo (playas de Barcelona etiquetadas en
-// Tarragona, etc.). MITECO es la fuente oficial del ministerio.
-const MITECO_AUTHORITATIVE_FIELDS = ['municipio', 'provincia', 'comunidad']
+// Campos donde MITECO siempre gana cuando hay match EXCELENTE/BUENO.
+// Incluye nombre y localidad completa: MITECO es la fuente oficial del
+// ministerio y resuelve tanto el nombre canónico de la playa como la
+// provincia/municipio/comunidad, que en OSM están frecuentemente mal
+// etiquetados (p.ej. playas de Barcelona marcadas como Tarragona, o
+// nombres OSM con grafías locales no oficiales).
+const MITECO_AUTHORITATIVE_FIELDS = ['nombre', 'municipio', 'provincia', 'comunidad']
 
 // Copia los campos MITECO sobre la playa OSM sin sobreescribir datos OSM
 // preexistentes salvo que el valor MITECO sea más rico. Devuelve un objeto
