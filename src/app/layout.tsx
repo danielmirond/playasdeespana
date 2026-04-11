@@ -75,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://commons.wikimedia.org" />
         <link rel="dns-prefetch" href="https://overpass-api.de" />
+        <link rel="dns-prefetch" href="https://www.ign.es" />
 
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (
           <script

@@ -35,16 +35,27 @@ function toSlug(str: string): string {
   return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 }
 
+// IGN PNOA WMTS — ortofotos aéreas oficiales de España (actualizadas 2x/año,
+// JPEG tiles en GoogleMapsCompatible grid). No requiere API key.
+// Docs: https://www.ign.es/wmts/pnoa-ma?request=GetCapabilities&service=WMTS
+const PNOA_URL = 'https://www.ign.es/wmts/pnoa-ma?layer=OI.OrthoimageCoverage&style=default&tilematrixset=GoogleMapsCompatible&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/jpeg&TileMatrix={z}&TileCol={x}&TileRow={y}'
+const PNOA_ATTRIB = '© <a href="https://pnoa.ign.es/" target="_blank" rel="noopener">PNOA</a> — IGN España'
+
+type BaseMap = 'osm' | 'aerial'
+
 export default function MapaPlayas({ playas: playasProp, height = '500px', comunidad, provincia }: Props) {
   const mapRef     = useRef<HTMLDivElement>(null)
   const mapObj     = useRef<any>(null)
   const circleRef  = useRef<any>(null)
   const markersRef = useRef<any[]>([])
+  const osmLayerRef = useRef<any>(null)
+  const aerialLayerRef = useRef<any>(null)
   const [playas, setPlayas]           = useState<Playa[]>(playasProp ?? [])
   const [loading, setLoading]         = useState(!playasProp)
   const [filtro, setFiltro]           = useState<string>('TODOS')
   const [radio, setRadio]             = useState<number>(50)
   const [modoRadio, setModoRadio]     = useState(false)
+  const [baseMap, setBaseMap]         = useState<BaseMap>('osm')
   const [leafletReady, setLeafletReady] = useState(false)
 
   // Cargar playas si no vienen como prop
@@ -84,9 +95,15 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
     const map = L.map(mapRef.current, { zoomControl: true, preferCanvas: true }).setView([40.4, -3.7], 6)
     mapObj.current = map
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors', maxZoom: 18,
-    }).addTo(map)
+    // Dos base layers: OSM (por defecto) y PNOA ortofoto IGN. Solo una está
+    // montada en el mapa a la vez; el toggle las intercambia.
+    osmLayerRef.current = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors', maxZoom: 19,
+    })
+    aerialLayerRef.current = L.tileLayer(PNOA_URL, {
+      attribution: PNOA_ATTRIB, maxZoom: 19, minZoom: 4,
+    })
+    osmLayerRef.current.addTo(map)
 
     if (playas.length > 1) {
       const bounds = L.latLngBounds(playas.map(p => [p.lat, p.lng]))
@@ -145,6 +162,19 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
     if (!modoRadio && circleRef.current) { circleRef.current.remove(); circleRef.current = null }
   }, [modoRadio])
 
+  // Toggle base layer: solo uno montado a la vez en el mapa
+  useEffect(() => {
+    const map = mapObj.current
+    if (!map || !osmLayerRef.current || !aerialLayerRef.current) return
+    if (baseMap === 'aerial') {
+      if (map.hasLayer(osmLayerRef.current)) map.removeLayer(osmLayerRef.current)
+      if (!map.hasLayer(aerialLayerRef.current)) aerialLayerRef.current.addTo(map)
+    } else {
+      if (map.hasLayer(aerialLayerRef.current)) map.removeLayer(aerialLayerRef.current)
+      if (!map.hasLayer(osmLayerRef.current)) osmLayerRef.current.addTo(map)
+    }
+  }, [baseMap, leafletReady])
+
   const estados = ['TODOS', 'CALMA', 'BUENA', 'AVISO', 'SURF', 'VIENTO', 'PELIGRO']
 
   return (
@@ -173,11 +203,49 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
         ))}
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '.4rem' }}>
           {loading && <span style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)' }}>Cargando…</span>}
+          {/* Base map switcher: OSM ↔ Aérea (IGN PNOA) */}
+          <div
+            role="group"
+            aria-label="Cambiar tipo de mapa"
+            style={{
+              display: 'flex', alignItems: 'center',
+              border: '1.5px solid var(--line,#e8dcc8)',
+              borderRadius: '100px', padding: '2px', gap: '2px',
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setBaseMap('osm')}
+              aria-pressed={baseMap === 'osm' ? 'true' : 'false'}
+              aria-label="Mostrar mapa de calles"
+              style={{
+                fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px',
+                border: 'none',
+                background: baseMap === 'osm' ? 'var(--accent,#6b400a)' : 'transparent',
+                color: baseMap === 'osm' ? '#fff' : 'var(--muted,#5a3d12)',
+                cursor: 'pointer', minHeight: '32px',
+              }}
+            >Mapa</button>
+            <button
+              type="button"
+              onClick={() => setBaseMap('aerial')}
+              aria-pressed={baseMap === 'aerial' ? 'true' : 'false'}
+              aria-label="Mostrar ortofoto aérea del IGN"
+              style={{
+                fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px',
+                border: 'none',
+                background: baseMap === 'aerial' ? 'var(--accent,#6b400a)' : 'transparent',
+                color: baseMap === 'aerial' ? '#fff' : 'var(--muted,#5a3d12)',
+                cursor: 'pointer', minHeight: '32px',
+              }}
+            >Aérea</button>
+          </div>
           <button onClick={() => setModoRadio(r => !r)} style={{
-            fontSize:'.72rem', fontWeight: 700, padding: '.2rem .6rem', borderRadius: '100px', border: '1.5px solid',
+            fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px', border: '1.5px solid',
             borderColor: modoRadio ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
             background: modoRadio ? 'rgba(107,64,10,.1)' : 'transparent',
             color: modoRadio ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)', cursor: 'pointer',
+            minHeight: '32px',
           }}>Radio</button>
           {modoRadio && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '.3rem' }}>
