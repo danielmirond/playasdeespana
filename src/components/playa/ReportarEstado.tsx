@@ -63,8 +63,37 @@ const RATINGS: RatingDef[] = [
 ]
 
 function lsKey(slug: string, tipo: string) {
-  const d = new Date().toISOString().slice(0, 10)
-  return `rep:${slug}:${d}:${tipo}`
+  return `rep:${slug}:${tipo}`
+}
+
+// Ventana rodante de 24 h: el usuario no puede re-votar el mismo tipo
+// hasta que pasen 24 h reales desde el voto anterior, no hasta medianoche.
+const CLIENT_WINDOW_MS = 24 * 60 * 60 * 1000
+
+function leerVotoPrevio(slug: string, tipo: string): { value: number | null; fresh: boolean } {
+  if (typeof window === 'undefined') return { value: null, fresh: false }
+  const raw = localStorage.getItem(lsKey(slug, tipo))
+  if (!raw) return { value: null, fresh: false }
+  const parts = raw.split(':')
+  const ts = parseInt(parts[0] ?? '0', 10)
+  const value = parseInt(parts[1] ?? '0', 10) || null
+  if (!ts) {
+    // Formato antiguo (pre-rolling window). Lo descartamos al leer.
+    localStorage.removeItem(lsKey(slug, tipo))
+    return { value: null, fresh: false }
+  }
+  const fresh = Date.now() - ts < CLIENT_WINDOW_MS
+  if (!fresh) {
+    localStorage.removeItem(lsKey(slug, tipo))
+    return { value: null, fresh: false }
+  }
+  return { value, fresh: true }
+}
+
+function escribirVoto(slug: string, tipo: string, value?: number) {
+  if (typeof window === 'undefined') return
+  const payload = `${Date.now()}:${value ?? ''}`
+  localStorage.setItem(lsKey(slug, tipo), payload)
 }
 
 export default function ReportarEstado({ slug, locale = 'es' }: Props) {
@@ -72,11 +101,11 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
   const [enviados, setEnviados] = useState<Set<string>>(new Set())
   const [sending, setSending] = useState<string | null>(null)
 
-  // Cargar reportes del día y estado local
+  // Cargar reportes de las últimas 24 h y estado local.
   useEffect(() => {
     const ya = new Set<string>()
-    for (const b of BINARIOS) if (localStorage.getItem(lsKey(slug, b.tipo))) ya.add(b.tipo)
-    for (const r of RATINGS) if (localStorage.getItem(lsKey(slug, r.tipo))) ya.add(r.tipo)
+    for (const b of BINARIOS) if (leerVotoPrevio(slug, b.tipo).fresh) ya.add(b.tipo)
+    for (const r of RATINGS) if (leerVotoPrevio(slug, r.tipo).fresh) ya.add(r.tipo)
     setEnviados(ya)
 
     fetch(`/api/reportes?slug=${encodeURIComponent(slug)}`)
@@ -90,7 +119,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
     setSending(tipo)
 
     // Optimistic UI
-    localStorage.setItem(lsKey(slug, tipo), '1')
+    escribirVoto(slug, tipo)
     setEnviados(prev => new Set(prev).add(tipo))
     setReportes(prev => (prev ? { ...prev, [tipo]: (prev[tipo] as number) + 1, total: prev.total + 1 } : prev))
 
@@ -113,7 +142,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
     if (value < 1 || value > 5) return
     setSending(tipo)
 
-    localStorage.setItem(lsKey(slug, tipo), String(value))
+    escribirVoto(slug, tipo, value)
     setEnviados(prev => new Set(prev).add(tipo))
     setReportes(prev => {
       if (!prev) return prev
@@ -235,7 +264,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
           const sum = r.tipo === 'limpieza' ? reportes?.limpieza_sum ?? 0 : reportes?.afluencia_sum ?? 0
           const count = r.tipo === 'limpieza' ? reportes?.limpieza_count ?? 0 : reportes?.afluencia_count ?? 0
           const avg = count > 0 ? sum / count : null
-          const voted = parseInt(typeof window !== 'undefined' ? (localStorage.getItem(lsKey(slug, r.tipo)) ?? '0') : '0', 10) || 0
+          const voted = leerVotoPrevio(slug, r.tipo).value ?? 0
 
           return (
             <fieldset key={r.tipo} style={{ border: 'none', padding: 0, margin: 0 }}>
@@ -327,8 +356,8 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
           borderTop: '1px solid var(--line, #e8dcc8)',
         }}>
           {es
-            ? `${reportes.total} ${reportes.total === 1 ? 'reporte hoy' : 'reportes hoy'}`
-            : `${reportes.total} ${reportes.total === 1 ? 'report today' : 'reports today'}`}
+            ? `${reportes.total} ${reportes.total === 1 ? 'reporte' : 'reportes'} en las últimas 24 h`
+            : `${reportes.total} ${reportes.total === 1 ? 'report' : 'reports'} in the last 24 h`}
         </div>
       )}
     </div>
