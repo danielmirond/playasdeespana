@@ -55,6 +55,19 @@
   margin-bottom: 1rem; flex-wrap: wrap; justify-content: center;
 }
 .dot { opacity: .4; }
+.lugarLink {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color .15s, color .15s;
+}
+.lugarLink:hover,
+.lugarLink:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  text-decoration: none;
+}
 
 .badges {
   position: relative; z-index: 2;

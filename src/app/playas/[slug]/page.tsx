@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPlayaBySlug, getPlayas } from '@/lib/playas'
+import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getCalidad } from '@/lib/calidad'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
@@ -82,7 +82,7 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult] = await Promise.allSettled([
+  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -94,7 +94,16 @@ export default async function PlayaPage({ params }: Props) {
     getMeteoForecast(playa.lat, playa.lng),
     getCalidad(slug),
     getPlayas(),
+    getMunicipioSlugsSet(),
   ])
+
+  // Enlaces condicionales de municipio y provincia: solo enlazamos el
+  // municipio si tiene página propia (>=4 playas). La provincia siempre
+  // es enlazable si existe. Cádiz / Cádiz genera dos links distintos.
+  const municipioSlug = toSlug(playa.municipio)
+  const provinciaSlug = playa.provincia ? toSlug(playa.provincia) : undefined
+  const municipioSlugsSet = municipioSlugsResult.status === 'fulfilled' ? municipioSlugsResult.value : new Set<string>()
+  const municipioSlugProp = municipioSlugsSet.has(municipioSlug) ? municipioSlug : undefined
 
   const mareasData        = mareas.status === 'fulfilled' ? mareas.value : null
   const solData           = sol.status === 'fulfilled' ? sol.value : null
@@ -173,7 +182,14 @@ export default async function PlayaPage({ params }: Props) {
       {preloadFoto && <link rel="preload" as="image" href={preloadFoto} />}
       <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} viento={meteo.viento} calidad={calidad?.nivel} banderaColor={banderaPlaya.color} banderaLabel={banderaPlaya.label} medusasLabel={medusas.label} mareasTexto={mareasLunar.zona === 'mediterraneo' ? `En el Mediterráneo las mareas son insignificantes (${mareasLunar.rango}m).` : `Hoy las pleamares en ${playa.nombre} son a las ${mareasLunar.mareas.filter(m => m.tipo === 'pleamar').map(m => m.hora).join(' y ')} (${mareasLunar.rango}m). Coeficiente ${mareasLunar.coeficiente}.`} dateModified={dateModified} />
       <Nav />
-      <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} />
+      <FichaHero
+        playa={playa}
+        meteo={meteo}
+        estado={estado}
+        frase={frase}
+        municipioSlug={municipioSlugProp}
+        provinciaSlug={provinciaSlug}
+      />
       <FichaNav />
       <FichaBody
         playa={playa}

@@ -19,6 +19,18 @@ interface Props {
   estado:  EstadoConfig
   frase:   string
   locale?: 'es' | 'en'
+  /**
+   * Slug del municipio si la página existe (municipio con ≥4 playas).
+   * Cuando se pasa, el nombre del municipio en el hero se renderiza como
+   * enlace a `/municipio/{slug}` (o `/en/towns/{slug}`). Si es undefined
+   * se renderiza como texto plano.
+   */
+  municipioSlug?: string
+  /**
+   * Slug de la provincia. Siempre presente para playas con provincia
+   * asignada. Enlaza a `/provincia/{slug}` (o `/en/provinces/{slug}`).
+   */
+  provinciaSlug?: string
 }
 
 const t = {
@@ -50,10 +62,19 @@ const t = {
   },
 }
 
-export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }: Props) {
+export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const i18n = t[locale]
   const comunidadSlug = playa.comunidad.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const homeHref = locale === 'en' ? '/en' : '/'
+  // Solo enlazamos el municipio si la página existe (pasa minPlayas). Cuando
+  // municipioSlug coincide con provinciaSlug (p. ej. Cádiz/Cádiz) las dos
+  // <Link> siguen siendo distintas porque van a /municipio/... y /provincia/...
+  const municipioHref = municipioSlug
+    ? (locale === 'en' ? `/en/towns/${municipioSlug}` : `/municipio/${municipioSlug}`)
+    : null
+  const provinciaHref = provinciaSlug
+    ? (locale === 'en' ? `/en/provinces/${provinciaSlug}` : `/provincia/${provinciaSlug}`)
+    : null
 
   return (
     <section className={styles.hero} style={{ '--ring': estado.ringColor, background: estado.ringBg } as React.CSSProperties}>
@@ -75,9 +96,13 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }
       </div>
       <h1 className={styles.nombre}>{locale === 'en' ? `${playa.nombre} today — ${playa.municipio}` : `${nombreConPlaya(playa.nombre)} hoy — ${playa.municipio}`}</h1>
       <div className={styles.lugar}>
-        <span>{playa.municipio}</span>
-        <span className={styles.dot}>·</span>
-        <span>{playa.provincia}</span>
+        {municipioHref
+          ? <Link href={municipioHref} className={styles.lugarLink}>{playa.municipio}</Link>
+          : <span>{playa.municipio}</span>}
+        <span className={styles.dot} aria-hidden="true">·</span>
+        {provinciaHref
+          ? <Link href={provinciaHref} className={styles.lugarLink}>{playa.provincia}</Link>
+          : <span>{playa.provincia}</span>}
       </div>
       <div className={styles.badges}>
         {playa.bandera    && <span className={styles.badge}>{i18n.bandera}</span>}

@@ -2,14 +2,24 @@
 import type { Playa } from '@/types'
 import { cache } from 'react'
 
-function toSlug(str: string): string {
-  return str
+export function toSlug(str: string): string {
+  return (str ?? '')
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9-]/g, '')
 }
+
+/**
+ * Returns a Set of municipio slugs that have their own page
+ * (>= minPlayas beaches). Useful for deciding whether to render
+ * a link or plain text in the ficha.
+ */
+export const getMunicipioSlugsSet = cache(async (minPlayas = 4): Promise<Set<string>> => {
+  const municipios = await getMunicipios(minPlayas)
+  return new Set(municipios.map(m => m.slug))
+})
 
 export const getPlayas = cache(async (): Promise<Playa[]> => {
   try {
