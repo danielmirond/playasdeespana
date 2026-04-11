@@ -10,7 +10,7 @@ const COLORES: Record<string, [string, string]> = {
   'Andalucía':     ['#c44a1a', '#e88030'],
   'Galicia':       ['#1a4a6e', '#2e7bb4'],
   'Cataluña':      ['#8a2020', '#c04040'],
-  'C. Valenciana': ['#b06820', '#e8a030'],
+  'C. Valenciana': ['#6b400a', '#e8a030'],
   'Canarias':      ['#5a2a8a', '#8a50c0'],
   'Baleares':      ['#1a6a5a', '#2a9a7a'],
   'Asturias':      ['#2a5a2a', '#4a8a4a'],
@@ -44,7 +44,7 @@ export default function Comunidades({ comunidades }: Props) {
       </div>
       <div className={styles.grid}>
         {comunidades.map(c => {
-          const [dark, light] = COLORES[c.nombre] ?? ['#b06820', '#e8a030']
+          const [dark, light] = COLORES[c.nombre] ?? ['#6b400a', '#e8a030']
           return (
             <Link key={c.slug} href={`/comunidad/${c.slug}`} className={styles.item}>
               <div className={styles.ilu}><IluCom dark={dark} light={light}/></div>

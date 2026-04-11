@@ -61,7 +61,7 @@ export default function FichaHeroActions({ slug, nombre }: Props) {
     <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', margin: '4px 0 0' }}>
       <button onClick={toggleFav} style={{
         ...base,
-        color:       fav ? '#c0392b' : 'var(--muted, #8a7560)',
+        color:       fav ? '#c0392b' : 'var(--muted, #5a3d12)',
         background:  fav ? 'rgba(192,57,43,.08)' : 'transparent',
         borderColor: fav ? 'rgba(192,57,43,.3)' : 'rgba(138,117,96,.3)',
       }}>
@@ -69,7 +69,7 @@ export default function FichaHeroActions({ slug, nombre }: Props) {
       </button>
       <button onClick={compartir} style={{
         ...base,
-        color:       'var(--muted, #8a7560)',
+        color:       'var(--muted, #5a3d12)',
         borderColor: 'rgba(138,117,96,.3)',
       }}>
         {copied ? <><CheckCircle size={14} weight="bold" color="currentColor"/> Copiado</> : '↗ Compartir'}

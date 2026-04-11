@@ -33,7 +33,7 @@
   overflow: hidden;
   transition: box-shadow .15s;
 }
-.card:hover { box-shadow: 0 6px 24px rgba(176,104,32,.1); }
+.card:hover { box-shadow: 0 6px 24px rgba(107,64,10,.1); }
 
 /* Cabecera comunidad */
 .cardHead {
@@ -51,7 +51,7 @@
   font-size: 1rem; font-weight: 700;
   color: var(--ink); display: block; line-height: 1.2;
 }
-.count { font-size: .65rem; color: var(--muted); }
+.count { font-size: .72rem; color: var(--muted); }
 .arrow {
   color: var(--muted); flex-shrink: 0;
   transition: all .15s;
@@ -71,10 +71,10 @@
   gap: .5rem;
 }
 .prov:last-child { border-bottom: none; }
-.prov:hover { background: rgba(176,104,32,.05); color: var(--accent); }
+.prov:hover { background: rgba(107,64,10,.05); color: var(--accent); }
 .provNombre { flex: 1; }
 .provCount {
-  font-size: .65rem; color: var(--muted);
+  font-size: .72rem; color: var(--muted);
   background: var(--metric-bg);
   border: 1px solid var(--line);
   border-radius: 100px;

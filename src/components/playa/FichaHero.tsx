@@ -90,27 +90,27 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es' }
       </div>
       <div className={styles.metrics}>
         <div className={styles.m}>
-          <Drop size={15} weight='fill' color='var(--accent,#b06820)'/>
+          <Drop size={15} weight='fill' color='var(--accent,#6b400a)'/>
           <span className={styles.mv}>{meteo.agua}°C</span>
           <span className={styles.ml}>{i18n.agua}</span>
         </div>
         <div className={styles.m}>
-          <Waves size={15} weight='bold' color='var(--accent,#b06820)'/>
+          <Waves size={15} weight='bold' color='var(--accent,#6b400a)'/>
           <span className={styles.mv}>{meteo.olas}m</span>
           <span className={styles.ml}>{i18n.olas}</span>
         </div>
         <div className={styles.m}>
-          <Wind size={15} weight='bold' color='var(--accent,#b06820)'/>
+          <Wind size={15} weight='bold' color='var(--accent,#6b400a)'/>
           <span className={styles.mv}>{meteo.viento}km/h</span>
           <span className={styles.ml}>{i18n.viento}</span>
         </div>
         <div className={styles.m}>
-          <Sun size={15} weight='bold' color='var(--accent,#b06820)'/>
+          <Sun size={15} weight='bold' color='var(--accent,#6b400a)'/>
           <span className={styles.mv}>UV {meteo.uv}</span>
           <span className={styles.ml}>{i18n.indice}</span>
         </div>
         <div className={styles.m}>
-          <Thermometer size={15} weight='bold' color='var(--accent,#b06820)'/>
+          <Thermometer size={15} weight='bold' color='var(--accent,#6b400a)'/>
           <span className={styles.mv}>{meteo.tempAire}°C</span>
           <span className={styles.ml}>{i18n.aire}</span>
         </div>

@@ -86,11 +86,11 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
       <div style={{
         padding: '.55rem .9rem',
         borderBottom: '1px solid var(--line, #e8dcc8)',
-        fontSize: '.6rem',
+        fontSize:'.72rem',
         fontWeight: 600,
         letterSpacing: '.1em',
         textTransform: 'uppercase',
-        color: 'var(--muted, #8a7560)',
+        color: 'var(--muted, #5a3d12)',
       }}>
         {es ? '¿Qué ves en la playa?' : 'What do you see?'}
       </div>
@@ -135,7 +135,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
               </span>
               {count > 0 && (
                 <span style={{
-                  fontSize: '.62rem',
+                  fontSize:'.72rem',
                   fontWeight: 700,
                   color: o.color,
                   background: `${o.color}18`,
@@ -156,8 +156,8 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
       {reportes && reportes.total > 0 && (
         <div style={{
           padding: '.35rem .9rem .5rem',
-          fontSize: '.58rem',
-          color: 'var(--muted, #8a7560)',
+          fontSize:'.72rem',
+          color: 'var(--muted, #5a3d12)',
           textAlign: 'center',
           borderTop: '1px solid var(--line, #e8dcc8)',
         }}>

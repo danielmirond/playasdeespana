@@ -28,7 +28,7 @@
   font-size: .95rem; font-weight: 700; color: var(--ink);
   display: flex; align-items: center; gap: .35rem;
 }
-.cardSrc { font-size: .6rem; color: var(--muted); opacity: .7; }
+.cardSrc { font-size: .72rem; color: var(--muted); opacity: .7; }
 .cardBody { padding: .2rem 1rem 1rem; }
 .divider { height: 1px; background: var(--line); margin: 0 1rem; }
 
@@ -78,15 +78,15 @@
 }
 .cercanaCard:hover { border-color: var(--accent); transform: translateY(-2px); }
 .cercanaNombre { font-size: .85rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
-.cercanaMeta { font-size: .68rem; color: var(--muted); margin-top: .2rem; }
+.cercanaMeta { font-size: .74rem; color: var(--muted); margin-top: .2rem; }
 .cercanaBadge {
   position: absolute; top: .5rem; right: .6rem;
-  font-size: .7rem;
+  font-size: .75rem;
 }
 
 .gFuente {
   position: absolute; bottom: 5px; left: 7px;
-  font-size: .52rem; color: rgba(255,255,255,.75);
+  font-size: .72rem; color: rgba(255,255,255,.75);
   background: rgba(0,0,0,.35); padding: 2px 5px; border-radius: 4px;
 }
 
@@ -94,8 +94,8 @@
 .oleajeWrap { display: flex; align-items: flex-end; gap: 6px; height: 80px; padding: .6rem 0 .2rem; margin-top: 1rem; }
 .ocCol { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .ocBar { width: 100%; border-radius: 5px; min-height: 6px; }
-.ocVal  { font-size: .58rem; color: var(--muted); }
-.ocTime { font-size: .55rem; color: var(--muted); }
+.ocVal  { font-size: .72rem; color: var(--muted); }
+.ocTime { font-size: .72rem; color: var(--muted); }
 
 /* ── SOL ────────────────────────────────────────────────────────── */
 .solRow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .35rem; }
@@ -108,7 +108,7 @@
   color: var(--ink); display: block; line-height: 1;
 }
 .srL {
-  font-size: .55rem; color: var(--muted);
+  font-size: .72rem; color: var(--muted);
   text-transform: uppercase; letter-spacing: .05em;
   display: block; margin-top: .2rem;
 }
@@ -122,7 +122,7 @@
 }
 .tcIcon { font-size: 1.1rem; flex-shrink: 0; }
 .tcV { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; display: block; line-height: 1; color: var(--ink); }
-.tcL { font-size: .58rem; color: var(--muted); }
+.tcL { font-size: .72rem; color: var(--muted); }
 
 /* ── VIENTO ─────────────────────────────────────────────────────── */
 .vientoRow { display: flex; align-items: center; gap: 1rem; }
@@ -147,7 +147,7 @@
 .dataRow:last-child { border: none; }
 .drK { color: var(--muted); flex-shrink: 0; }
 .drV { font-weight: 500; color: var(--ink); text-align: right; word-break: break-word; }
-.drMono { font-family: monospace; font-size: .7rem; }
+.drMono { font-family: monospace; font-size: .75rem; }
 
 /* ── LISTAS ─────────────────────────────────────────────────────── */
 .list { display: flex; flex-direction: column; gap: .4rem; }
@@ -162,9 +162,9 @@
   font-size: .85rem; font-weight: 600;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.listMeta { font-size: .68rem; color: var(--muted); margin-top: .1rem; line-height: 1.4; }
+.listMeta { font-size: .74rem; color: var(--muted); margin-top: .1rem; line-height: 1.4; }
 .rating {
-  font-size: .68rem; font-weight: 700; flex-shrink: 0;
+  font-size: .74rem; font-weight: 700; flex-shrink: 0;
   background: var(--accent); color: white;
   padding: .15rem .4rem; border-radius: 6px;
 }
@@ -180,13 +180,13 @@
   background: var(--line); flex-shrink: 0;
   display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
 }
-.hotelStars { font-size: .6rem; color: var(--accent2); }
+.hotelStars { font-size: .72rem; color: var(--accent2); }
 
 /* ── SERVICIOS ──────────────────────────────────────────────────── */
 .srvGrid { display: flex; flex-wrap: wrap; gap: .3rem; }
 .srv {
   display: flex; align-items: center; gap: .25rem;
-  font-size: .7rem; padding: .25rem .6rem;
+  font-size: .75rem; padding: .25rem .6rem;
   border-radius: 100px; border: 1.5px solid;
 }
 .srvSi { border-color: rgba(56,142,60,.3); background: rgba(56,142,60,.08); color: #2a5e2a; }
@@ -203,12 +203,12 @@
   display: flex; flex-direction: column; align-items: center;
   text-align: center; gap: .12rem; position: relative;
 }
-.actSi { background: rgba(176,104,32,.07); border-color: rgba(176,104,32,.35); }
+.actSi { background: rgba(107,64,10,.07); border-color: rgba(107,64,10,.35); }
 .actNo { background: transparent; opacity: .5; }
 .actIcon  { font-size: 1.3rem; line-height: 1; }
-.actLabel { font-size: .68rem; font-weight: 700; color: var(--ink); }
-.actDesc  { font-size: .58rem; color: var(--muted); line-height: 1.3; }
-.actBadge { position: absolute; top: 4px; right: 5px; font-size: .52rem; font-weight: 700; color: #2a5e2a; }
+.actLabel { font-size: .74rem; font-weight: 700; color: var(--ink); }
+.actDesc  { font-size: .72rem; color: var(--muted); line-height: 1.3; }
+.actBadge { position: absolute; top: 4px; right: 5px; font-size: .72rem; font-weight: 700; color: #2a5e2a; }
 .actSurfDetail {
   background: rgba(26,74,110,.06); border: 1.5px solid rgba(26,74,110,.15);
   border-radius: 10px; padding: .65rem; margin-top: .2rem;
@@ -217,7 +217,7 @@
 .asdGrid { display: grid; grid-template-columns: repeat(4,1fr); gap: .25rem; }
 .asdCell { text-align: center; }
 .asdV { font-family: var(--font-serif); font-size: .9rem; font-weight: 700; color: var(--ink); display: block; }
-.asdL { font-size: .55rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.asdL { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
 
 /* ── ASIDE ──────────────────────────────────────────────────────── */
 .aside { display: flex; flex-direction: column; gap: .65rem; position: sticky; top: 108px; }
@@ -241,7 +241,7 @@
 .aePill {
   display: inline-flex; align-items: center; gap: .3rem;
   padding: .25rem .65rem; border-radius: 100px; margin-bottom: .75rem;
-  font-size: .62rem; font-weight: 600;
+  font-size: .72rem; font-weight: 600;
   background: var(--metric-bg); border: 1.5px solid var(--line); color: var(--muted);
 }
 .aeDot { width: 6px; height: 6px; border-radius: 50%; animation: blink 2s infinite; }
@@ -253,7 +253,7 @@
 }
 .aeQ  { background: var(--metric-bg); padding: .55rem .35rem; text-align: center; }
 .aeQv { font-family: var(--font-serif); font-size: .95rem; font-weight: 700; color: var(--ink); display: block; line-height: 1; }
-.aeQl { font-size: .52rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; display: block; margin-top: .12rem; }
+.aeQl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; display: block; margin-top: .12rem; }
 
 .asideBox {
   background: var(--card-bg);
@@ -261,7 +261,7 @@
 }
 .abHead {
   padding: .55rem .9rem; border-bottom: 1px solid var(--line);
-  font-size: .6rem; font-weight: 600;
+  font-size: .72rem; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
 }
 .abBody { padding: .75rem .9rem; }
@@ -274,13 +274,13 @@
 }
 .mapaPin { font-size: 1.6rem; animation: pinBounce 2.5s ease-in-out infinite; }
 @keyframes pinBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
-.mapaTxt { font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.mapaTxt { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
 
 .shareRow { display: flex; gap: .35rem; }
 .shareBtn {
   flex: 1; padding: .45rem .35rem; border-radius: 8px;
   border: 1.5px solid var(--line); background: var(--metric-bg);
-  font-size: .68rem; color: var(--muted); font-weight: 500;
+  font-size: .74rem; color: var(--muted); font-weight: 500;
   font-family: var(--font-sans); cursor: pointer;
 }
 
@@ -339,14 +339,14 @@
   /* Sol */
   .solRow { gap: .25rem; }
   .srV { font-size: .72rem; }
-  .srL { font-size: .5rem; }
+  .srL { font-size: .72rem; }
 
   /* Temperatura */
   .tempGrid { gap: .3rem; }
   .tempCell { padding: .5rem .6rem; gap: .4rem; }
   .tcIcon { font-size: 1rem; }
   .tcV { font-size: .95rem; }
-  .tcL { font-size: .52rem; }
+  .tcL { font-size: .72rem; }
 
   /* Viento */
   .vientoRow { gap: .65rem; }
@@ -354,30 +354,30 @@
   .vtK, .vtV { font-size: .72rem; padding: .3rem 0; }
 
   /* Oleaje */
-  .ocVal  { font-size: .52rem; }
-  .ocTime { font-size: .5rem; }
+  .ocVal  { font-size: .72rem; }
+  .ocTime { font-size: .72rem; }
 
   /* Actividades legacy */
   .actGrid { grid-template-columns: 1fr 1fr; gap: .35rem; }
   .asdGrid { grid-template-columns: repeat(2,1fr); }
   .actIcon { font-size: 1.15rem; }
-  .actLabel { font-size: .65rem; }
-  .actDesc  { font-size: .55rem; }
+  .actLabel { font-size: .72rem; }
+  .actDesc  { font-size: .72rem; }
 
   /* Listas restaurantes/hoteles */
   .listItem { padding: .55rem .6rem; gap: .5rem; }
   .listNombre { font-size: .8rem; }
-  .listMeta { font-size: .64rem; }
+  .listMeta { font-size: .72rem; }
   .hotelFoto { width: 38px; height: 38px; }
 
   /* Servicios */
   .srvGrid { gap: .25rem; }
-  .srv { font-size: .64rem; padding: .2rem .45rem; }
+  .srv { font-size: .72rem; padding: .2rem .45rem; }
 
   /* Info */
   .dataRow { font-size: .72rem; }
-  .drV { font-size: .7rem; }
-  .drMono { font-size: .64rem; }
+  .drV { font-size: .75rem; }
+  .drMono { font-size: .72rem; }
 }
 
 @media (max-width: 380px) {
@@ -389,5 +389,5 @@
   .galeriaUna { padding: 0 .75rem .75rem; height: 140px; }
   .aeQv { font-size: .82rem; }
   .aeQl { font-size: .45rem; }
-  .srV { font-size: .65rem; }
+  .srV { font-size: .72rem; }
 }

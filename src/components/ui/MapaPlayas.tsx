@@ -98,7 +98,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
       if (circleRef.current) circleRef.current.remove()
       circleRef.current = L.circle([e.latlng.lat, e.latlng.lng], {
         radius: (map as any)._radioKm * 1000,
-        color: '#b06820', fillColor: '#b06820', fillOpacity: 0.08,
+        color: '#6b400a', fillColor: '#6b400a', fillOpacity: 0.08,
         weight: 2, dashArray: '6 4'
       }).addTo(map)
     })
@@ -109,7 +109,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
       const items = f === 'TODOS' ? playas : playas.filter(p => calcEstado(p) === f)
       items.forEach(p => {
         const estado = calcEstado(p)
-        const color  = ESTADO_COLORES[estado] ?? '#9a7848'
+        const color  = ESTADO_COLORES[estado] ?? '#5a3d12'
         const seed   = p.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
         const olas   = parseFloat(((seed % 15) / 10).toFixed(1))
         const viento = 5 + (seed % 30)
@@ -121,12 +121,12 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
           .bindPopup(`
             <div style="font-family:system-ui;min-width:160px">
               <div style="font-weight:700;font-size:.88rem;margin-bottom:.2rem">${p.nombre}</div>
-              <div style="font-size:.7rem;color:#666;margin-bottom:.4rem">${p.municipio ?? ''}, ${p.provincia ?? ''}</div>
+              <div style="font-size: .75rem;color:#666;margin-bottom:.4rem">${p.municipio ?? ''}, ${p.provincia ?? ''}</div>
               <div style="display:flex;gap:.3rem;margin-bottom:.5rem;align-items:center">
-                <span style="background:${color}22;color:${color};border:1px solid ${color}44;padding:2px 7px;border-radius:100px;font-size:.6rem;font-weight:700">${estado}</span>
-                <span style="font-size:.6rem;color:#666">${olas}m · ${viento}km/h</span>
+                <span style="background:${color}22;color:${color};border:1px solid ${color}44;padding:2px 7px;border-radius:100px;font-size: .72rem;font-weight:700">${estado}</span>
+                <span style="font-size: .72rem;color:#666">${olas}m · ${viento}km/h</span>
               </div>
-              <a href="/playas/${p.slug}" style="display:block;text-align:center;background:#b06820;color:white;padding:5px 10px;border-radius:8px;font-size:.7rem;font-weight:600;text-decoration:none">Ver playa →</a>
+              <a href="/playas/${p.slug}" style="display:block;text-align:center;background:#6b400a;color:white;padding:5px 10px;border-radius:8px;font-size: .75rem;font-weight:600;text-decoration:none">Ver playa →</a>
             </div>
           `, { maxWidth: 220 })
           .addTo(map)
@@ -154,7 +154,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
         padding: '.6rem 1rem', background: 'var(--card-bg,#faf6ef)',
         borderBottom: '1px solid var(--line,#e8dcc8)',
       }}>
-        <span style={{ fontSize: '.6rem', color: 'var(--muted,#8a7560)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.06em' }}>Estado</span>
+        <span style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.06em' }}>Estado</span>
         {estados.map(e => (
           <button
             key={e}
@@ -163,27 +163,27 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-pressed={filtro === e ? 'true' : 'false'}
             aria-label={e === 'TODOS' ? 'Mostrar todas las playas' : `Filtrar por estado ${e.toLowerCase()}`}
             style={{
-              fontSize: '.6rem', fontWeight: 700, padding: '.2rem .55rem', borderRadius: '100px', border: '1.5px solid',
-              borderColor: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#b06820)') : 'var(--line,#e8dcc8)',
-              background: filtro === e ? ((ESTADO_COLORES[e] ?? '#b06820') + '18') : 'transparent',
-              color: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#b06820)') : 'var(--muted,#8a7560)',
+              fontSize:'.72rem', fontWeight: 700, padding: '.2rem .55rem', borderRadius: '100px', border: '1.5px solid',
+              borderColor: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#6b400a)') : 'var(--line,#e8dcc8)',
+              background: filtro === e ? ((ESTADO_COLORES[e] ?? '#6b400a') + '18') : 'transparent',
+              color: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#6b400a)') : 'var(--muted,#5a3d12)',
               cursor: 'pointer',
             }}
           >{e}</button>
         ))}
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '.4rem' }}>
-          {loading && <span style={{ fontSize: '.6rem', color: 'var(--muted,#8a7560)' }}>Cargando…</span>}
+          {loading && <span style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)' }}>Cargando…</span>}
           <button onClick={() => setModoRadio(r => !r)} style={{
-            fontSize: '.6rem', fontWeight: 700, padding: '.2rem .6rem', borderRadius: '100px', border: '1.5px solid',
-            borderColor: modoRadio ? 'var(--accent,#b06820)' : 'var(--line,#e8dcc8)',
-            background: modoRadio ? 'rgba(176,104,32,.1)' : 'transparent',
-            color: modoRadio ? 'var(--accent,#b06820)' : 'var(--muted,#8a7560)', cursor: 'pointer',
+            fontSize:'.72rem', fontWeight: 700, padding: '.2rem .6rem', borderRadius: '100px', border: '1.5px solid',
+            borderColor: modoRadio ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
+            background: modoRadio ? 'rgba(107,64,10,.1)' : 'transparent',
+            color: modoRadio ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)', cursor: 'pointer',
           }}>Radio</button>
           {modoRadio && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '.3rem' }}>
               <input type="range" min={5} max={200} value={radio} onChange={e => setRadio(+e.target.value)}
-                style={{ width: '70px', accentColor: 'var(--accent,#b06820)' }} />
-              <span style={{ fontSize: '.6rem', color: 'var(--muted,#8a7560)', minWidth: '30px' }}>{radio}km</span>
+                style={{ width: '70px', accentColor: 'var(--accent,#6b400a)' }} />
+              <span style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', minWidth: '30px' }}>{radio}km</span>
             </div>
           )}
         </div>
@@ -201,7 +201,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--accent,#b06820)', marginBottom: '.4rem' }} aria-hidden="true">~</div>
+              <div style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--accent,#6b400a)', marginBottom: '.4rem' }} aria-hidden="true">~</div>
               <div style={{ fontSize: '.8rem', color: 'var(--ink,#2a1a08)', fontWeight: 600 }}>Cargando playas…</div>
             </div>
           </div>
@@ -225,7 +225,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
       <div style={{
         display: 'flex', gap: '.6rem', flexWrap: 'wrap', padding: '.4rem 1rem',
         background: 'var(--card-bg,#faf6ef)', borderTop: '1px solid var(--line,#e8dcc8)',
-        fontSize: '.58rem', color: 'var(--muted,#8a7560)',
+        fontSize:'.72rem', color: 'var(--muted,#5a3d12)',
       }}>
         {Object.entries(ESTADO_COLORES).map(([e, c]) => (
           <span key={e} style={{ display: 'flex', alignItems: 'center', gap: '.2rem' }}>
@@ -234,7 +234,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
           </span>
         ))}
         <span style={{ marginLeft: 'auto' }}>{playas.length.toLocaleString('es')} playas</span>
-        {modoRadio && <span style={{ color: 'var(--accent,#b06820)' }}>· Clic en el mapa para ver radio</span>}
+        {modoRadio && <span style={{ color: 'var(--accent,#6b400a)' }}>· Clic en el mapa para ver radio</span>}
       </div>
     </div>
   )

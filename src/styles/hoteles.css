@@ -54,14 +54,14 @@
   margin-bottom: .1rem;
 }
 .hotel-stars {
-  font-size: .6rem;
+  font-size: .72rem;
   color: var(--sand);
   letter-spacing: .05em;
   display: block;
   margin-bottom: .15rem;
 }
 .hotel-dir {
-  font-size: .68rem;
+  font-size: .74rem;
   color: var(--sub);
   white-space: nowrap;
   overflow: hidden;
@@ -74,14 +74,14 @@
   gap: .4rem;
 }
 .hotel-dist {
-  font-size: .68rem;
+  font-size: .74rem;
   color: var(--sub);
   background: var(--line);
   padding: .1rem .4rem;
   border-radius: 100px;
 }
 .hotel-rating {
-  font-size: .68rem;
+  font-size: .74rem;
   font-weight: 600;
   color: white;
   padding: .15rem .45rem;
@@ -92,7 +92,7 @@
 }
 .hotel-rating-count {
   font-weight: 300;
-  font-size: .6rem;
+  font-size: .72rem;
   opacity: .85;
 }
 
@@ -103,14 +103,14 @@
   flex-shrink: 0;
   gap: .05rem;
 }
-.hp-desde { font-size: .6rem; color: var(--sub); }
+.hp-desde { font-size: .72rem; color: var(--sub); }
 .hp-num   { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); line-height: 1; }
-.hp-noche { font-size: .6rem; color: var(--sub); }
+.hp-noche { font-size: .72rem; color: var(--sub); }
 .hp-ver   { font-size: .78rem; color: var(--ocean); font-weight: 500; }
 
 .hoteles-footer {
   margin-top: .75rem;
-  font-size: .62rem;
+  font-size: .72rem;
   color: var(--sub);
   text-align: right;
 }

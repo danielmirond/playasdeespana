@@ -12,7 +12,7 @@
   border-bottom: 1px solid var(--line);
 }
 .hdTitle {
-  font-size: .68rem; font-weight: 600;
+  font-size: .74rem; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
 }
 .hdRefresh {
@@ -29,7 +29,7 @@
   border-radius: 16px; text-align: center;
 }
 .ctaTxt  { font-size: .85rem; color: var(--muted); }
-.ctaHint { font-size: .68rem; color: var(--muted); opacity: .6; }
+.ctaHint { font-size: .74rem; color: var(--muted); opacity: .6; }
 .ctaBtn {
   display: flex; align-items: center; gap: .5rem;
   background: var(--accent); color: white;
@@ -65,9 +65,9 @@
   transition: all .15s;
 }
 .card:hover {
-  border-color: rgba(176,104,32,.35);
+  border-color: rgba(107,64,10,.35);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(176,104,32,.08);
+  box-shadow: 0 6px 20px rgba(107,64,10,.08);
 }
 
 .cardTop {
@@ -81,7 +81,7 @@
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   max-width: 140px;
 }
-.lugar { font-size: .62rem; color: var(--muted); margin-top: .1rem; }
+.lugar { font-size: .72rem; color: var(--muted); margin-top: .1rem; }
 .dist  {
   font-family: var(--font-serif);
   font-size: .95rem; font-weight: 700;
@@ -95,11 +95,11 @@
 .pill {
   display: inline-flex; align-items: center; gap: .25rem;
   padding: .15rem .5rem; border-radius: 100px;
-  font-size: .6rem; font-weight: 600;
+  font-size: .72rem; font-weight: 600;
 }
 .pillDot { width: 5px; height: 5px; border-radius: 50%; }
-.dato { font-size: .68rem; color: var(--muted); }
-.cargando { font-size: .65rem; color: var(--muted); opacity: .6; }
+.dato { font-size: .74rem; color: var(--muted); }
+.cargando { font-size: .72rem; color: var(--muted); opacity: .6; }
 
 @media (max-width: 700px) {
   .grid { grid-template-columns: repeat(2, 1fr); }

@@ -46,7 +46,7 @@ export default function NavigationProgress() {
       <div style={{
         height: '100%',
         width: `${progress}%`,
-        background: 'var(--accent, #b06820)',
+        background: 'var(--accent, #6b400a)',
         transition: 'width 0.3s ease',
         borderRadius: '0 2px 2px 0',
       }}/>

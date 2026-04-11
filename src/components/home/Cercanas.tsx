@@ -72,7 +72,7 @@ export default function Cercanas({ locale = 'es' }: Props) {
   if (estado === 'idle') return (
     <section className={styles.section}>
       <div className={styles.hd}>
-        <span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span>
+        <span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span>
       </div>
       <div className={styles.cta}>
         <p className={styles.ctaTxt}>{locale === 'en' ? 'Discover the nearest beaches to you right now.' : 'Descubre las playas más próximas a ti ahora mismo.'}</p>
@@ -89,7 +89,7 @@ export default function Cercanas({ locale = 'es' }: Props) {
 
   if (estado === 'loading') return (
     <section className={styles.section}>
-      <div className={styles.hd}><span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span></div>
+      <div className={styles.hd}><span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span></div>
       <div className={styles.cta}>
         <div className={styles.spinner}/>
         <p className={styles.ctaTxt}>Buscando playas cercanas…</p>
@@ -99,7 +99,7 @@ export default function Cercanas({ locale = 'es' }: Props) {
 
   if (estado === 'denied') return (
     <section className={styles.section}>
-      <div className={styles.hd}><span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span></div>
+      <div className={styles.hd}><span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span></div>
       <div className={styles.cta}>
         <p className={styles.ctaTxt}>Permiso de ubicación denegado. Actívalo en la configuración del navegador.</p>
         <button className={styles.ctaBtn} onClick={() => setEstado('idle')}>Reintentar</button>
@@ -110,7 +110,7 @@ export default function Cercanas({ locale = 'es' }: Props) {
   return (
     <section className={styles.section}>
       <div className={styles.hd}>
-        <span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span>
+        <span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span>
         <button className={styles.hdRefresh} onClick={buscar}>↻ Actualizar</button>
       </div>
       <div className={styles.grid}>
@@ -134,8 +134,8 @@ export default function Cercanas({ locale = 'es' }: Props) {
                       <span className={styles.pillDot} style={{ background: estColor }}/>
                       {estLabel}
                     </span>
-                    <span className={styles.dato}><Drop size={14} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:2}}/>{m.agua}°</span>
-                    <span className={styles.dato}><Waves size={14} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:2}}/>{m.olas}m</span>
+                    <span className={styles.dato}><Drop size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:2}}/>{m.agua}°</span>
+                    <span className={styles.dato}><Waves size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:2}}/>{m.olas}m</span>
                   </>
                 ) : (
                   <span className={styles.cargando}>Cargando…</span>

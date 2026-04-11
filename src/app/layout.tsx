@@ -43,13 +43,16 @@ export const metadata: Metadata = {
 // Critical CSS inline — renderiza antes del paint inicial
 const CRITICAL_CSS = `
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f0e6d0;--bg2:#e8dcc4;--ink:#2a1a08;--muted:#9a7848;--accent:#b06820;--accent2:#e8a030;--line:rgba(180,130,60,.18);--card-bg:rgba(255,255,255,.5);--metric-bg:rgba(255,255,255,.55);--ring:#c4904a;--calma:#22c55e;--buena:#3b82f6;--aviso:#f59e0b;--peligro:#ef4444;--surf:#0ea5e9;--viento:#eab308;--font-serif:var(--font-playfair,Georgia,serif);--font-sans:var(--font-dm-sans,system-ui,sans-serif);--r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px}
+:root{--bg:#f0e6d0;--bg2:#e8dcc4;--ink:#2a1a08;--muted:#5a3d12;--accent:#6b400a;--accent2:#e8a030;--line:rgba(180,130,60,.18);--card-bg:rgba(255,255,255,.5);--metric-bg:rgba(255,255,255,.55);--ring:#c4904a;--calma:#22c55e;--buena:#3b82f6;--aviso:#f59e0b;--peligro:#ef4444;--surf:#0ea5e9;--viento:#eab308;--font-serif:var(--font-playfair,Georgia,serif);--font-sans:var(--font-dm-sans,system-ui,sans-serif);--r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px}
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
 img{max-width:100%;height:auto;display:block}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px;box-shadow:0 0 0 5px rgba(107,64,10,.18)}
+a:hover,a:focus-visible{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+header a:hover,nav a:hover{text-decoration:none}
+p{line-height:1.65}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
 `

@@ -33,7 +33,7 @@
 .kicker {
   position: relative; z-index: 2;
   display: inline-flex; align-items: center; gap: .5rem;
-  font-size: .7rem; font-weight: 500;
+  font-size: .75rem; font-weight: 500;
   letter-spacing: .1em; text-transform: uppercase;
   color: var(--muted); margin-bottom: .85rem;
 }
@@ -83,7 +83,7 @@
   color: var(--accent); display: block; line-height: 1;
 }
 .statL {
-  font-size: .55rem; font-weight: 500;
+  font-size: .72rem; font-weight: 500;
   letter-spacing: .1em; text-transform: uppercase;
   color: var(--muted); display: block; margin-top: .18rem;
 }
@@ -93,7 +93,7 @@
   .hero { padding: 2.5rem 1.25rem 2rem; min-height: auto; }
   .stats { padding: .65rem 1rem; gap: .85rem; }
   .statV { font-size: 1rem; }
-  .statL { font-size: .5rem; }
+  .statL { font-size: .72rem; }
 }
 
 @media (max-width: 380px) {

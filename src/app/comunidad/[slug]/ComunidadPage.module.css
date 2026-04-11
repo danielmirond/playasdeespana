@@ -28,7 +28,7 @@
   font-family: var(--font-serif); font-size: 1.8rem; font-weight: 900;
   color: var(--accent); display: block; line-height: 1;
 }
-.statL { font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.statL { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
 
 /* ── WRAP ── */
 .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
@@ -43,7 +43,7 @@
   padding: 1rem 1.25rem .75rem;
 }
 .mapaTitle { font-family: var(--font-serif); font-size: 1rem; font-weight: 700; color: var(--ink); }
-.mapaSrc   { font-size: .62rem; color: var(--muted); }
+.mapaSrc   { font-size: .72rem; color: var(--muted); }
 .mapaEmbed { height: 380px; }
 .mapaLinks {
   display: flex; flex-wrap: wrap; gap: .4rem;
@@ -89,11 +89,11 @@
   align-self: flex-start;
 }
 .pcDot   { width: 6px; height: 6px; border-radius: 50%; }
-.pcLabel { font-size: .6rem; font-weight: 700; letter-spacing: .05em; }
+.pcLabel { font-size: .72rem; font-weight: 700; letter-spacing: .05em; }
 
 .pcNombre { font-size: .88rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
-.pcMeta   { font-size: .7rem; color: var(--muted); }
-.pcData   { display: flex; gap: .6rem; font-size: .68rem; color: var(--muted); }
+.pcMeta   { font-size: .75rem; color: var(--muted); }
+.pcData   { display: flex; gap: .6rem; font-size: .74rem; color: var(--muted); }
 .pcServicios { display: flex; gap: .2rem; font-size: .8rem; margin-top: .15rem; }
 .pcSrv   { opacity: .7; }
 

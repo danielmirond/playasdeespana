@@ -34,8 +34,8 @@
   transition: border-color .2s, box-shadow .2s;
 }
 .searchBox:focus-within {
-  border-color: rgba(176,104,32,.5);
-  box-shadow: 0 0 0 4px rgba(176,104,32,.08);
+  border-color: rgba(107,64,10,.5);
+  box-shadow: 0 0 0 4px rgba(107,64,10,.08);
 }
 .searchBox svg { color: var(--muted); flex-shrink: 0; }
 .searchInput {
@@ -45,7 +45,7 @@
 }
 .searchInput::placeholder { color: var(--muted); }
 .clearBtn {
-  font-size: .7rem; color: var(--muted);
+  font-size: .75rem; color: var(--muted);
   background: var(--metric-bg); border: 1.5px solid var(--line);
   border-radius: 6px; padding: .2rem .45rem; cursor: pointer;
   transition: all .15s; flex-shrink: 0;
@@ -64,7 +64,7 @@
   padding: .35rem .65rem; cursor: pointer; outline: none;
   transition: border-color .15s;
 }
-.select:focus { border-color: rgba(176,104,32,.5); }
+.select:focus { border-color: rgba(107,64,10,.5); }
 .chips { display: flex; flex-wrap: wrap; gap: .35rem; }
 .chip {
   display: flex; align-items: center; gap: .25rem;
@@ -74,7 +74,7 @@
   font-size: .72rem; font-weight: 500; color: var(--muted);
   cursor: pointer; transition: all .15s; white-space: nowrap;
 }
-.chip:hover { border-color: rgba(176,104,32,.4); color: var(--accent); }
+.chip:hover { border-color: rgba(107,64,10,.4); color: var(--accent); }
 .chip:focus-visible,
 .select:focus-visible,
 .clearBtn:focus-visible {
@@ -83,10 +83,10 @@
 }
 .chipOn { background: var(--accent); border-color: var(--accent); color: white; }
 .resetBtn {
-  font-size: .7rem; color: var(--accent);
+  font-size: .75rem; color: var(--accent);
   background: none; border: none; cursor: pointer;
   text-decoration: underline; text-underline-offset: 2px;
-  text-decoration-color: rgba(176,104,32,.3);
+  text-decoration-color: rgba(107,64,10,.3);
   padding: 0 .25rem;
 }
 
@@ -134,9 +134,9 @@
   text-decoration: none;
 }
 .card:hover {
-  border-color: rgba(176,104,32,.35);
+  border-color: rgba(107,64,10,.35);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(176,104,32,.08);
+  box-shadow: 0 4px 16px rgba(107,64,10,.08);
 }
 .cardMain { flex: 1; min-width: 0; }
 .cardNombre {
@@ -144,9 +144,9 @@
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   line-height: 1.2;
 }
-.cardLugar { font-size: .65rem; color: var(--muted); margin-top: .1rem; }
+.cardLugar { font-size: .72rem; color: var(--muted); margin-top: .1rem; }
 .cardComunidad {
-  font-size: .6rem; color: var(--accent);
+  font-size: .72rem; color: var(--accent);
   font-weight: 500; margin-top: .15rem;
 }
 .cardBadges { display: flex; gap: .2rem; flex-shrink: 0; }
@@ -165,7 +165,7 @@
   font-size: .8rem; font-weight: 500; color: var(--ink);
   cursor: pointer; transition: all .15s;
 }
-.pageBtn:hover:not(:disabled) { border-color: rgba(176,104,32,.4); color: var(--accent); }
+.pageBtn:hover:not(:disabled) { border-color: rgba(107,64,10,.4); color: var(--accent); }
 .pageBtn:disabled { opacity: .35; cursor: not-allowed; }
 .pageInfo { font-size: .78rem; color: var(--muted); }
 
@@ -175,5 +175,5 @@
   .grid { grid-template-columns: 1fr; }
   .filtrosWrap { gap: .4rem; }
   .chips { gap: .25rem; }
-  .chip { font-size: .68rem; padding: .25rem .55rem; }
+  .chip { font-size: .74rem; padding: .25rem .55rem; }
 }

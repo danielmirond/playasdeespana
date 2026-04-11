@@ -42,7 +42,7 @@
   padding: .85rem 1.25rem .75rem;
 }
 .mapaTitle { font-family: var(--font-serif); font-size: .95rem; font-weight: 700; color: var(--ink); }
-.mapaSrc   { font-size: .62rem; color: var(--muted); }
+.mapaSrc   { font-size: .72rem; color: var(--muted); }
 .mapaEmbed { height: 320px; }
 
 /* ── LISTA ── */
@@ -73,22 +73,22 @@
 .rowInfo { flex: 1; min-width: 0; }
 .rowNombre { font-size: .88rem; font-weight: 700; color: var(--ink); }
 .rowMeta {
-  font-size: .68rem; color: var(--muted); margin-top: .15rem;
+  font-size: .74rem; color: var(--muted); margin-top: .15rem;
   display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
 }
 .badge {
   background: var(--metric-bg); border: 1px solid var(--line);
-  padding: .1rem .4rem; border-radius: 4px; font-size: .6rem;
+  padding: .1rem .4rem; border-radius: 4px; font-size: .72rem;
   white-space: nowrap;
 }
 .rowMeteo {
-  display: flex; gap: .5rem; font-size: .68rem; color: var(--muted);
+  display: flex; gap: .5rem; font-size: .74rem; color: var(--muted);
   flex-shrink: 0; white-space: nowrap;
 }
 .rowEstado {
   display: flex; align-items: center; gap: .3rem;
   padding: .2rem .55rem; border-radius: 100px; border: 1.5px solid;
-  flex-shrink: 0; font-size: .62rem; font-weight: 700; letter-spacing: .04em;
+  flex-shrink: 0; font-size: .72rem; font-weight: 700; letter-spacing: .04em;
 }
 .rowDot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .rowArrow { color: var(--accent); font-size: .8rem; flex-shrink: 0; }
@@ -107,6 +107,6 @@
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
   .rowMeteo { display: none; }
-  .rowEstado { font-size: .58rem; padding: .18rem .45rem; }
+  .rowEstado { font-size: .72rem; padding: .18rem .45rem; }
   .mapaEmbed { height: 220px; }
 }

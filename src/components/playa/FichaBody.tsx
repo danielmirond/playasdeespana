@@ -195,7 +195,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const horasLuz = solData?.horas_luz ?? '—'
 
   const nivelCalidad          = calidad?.nivel ?? 'Excelente'
-  const [dotColor, textColor] = COLORES_CALIDAD[nivelCalidad] ?? ['#9a7848', '#9a7848']
+  const [dotColor, textColor] = COLORES_CALIDAD[nivelCalidad] ?? ['#5a3d12', '#5a3d12']
   const pctCalidad            = calidad?.porcentaje ?? 99
   const temporadaCalidad      = calidad?.temporada ?? 2024
 
@@ -262,11 +262,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       border: `1.5px solid ${m.tipo === 'pleamar' ? 'rgba(59,130,246,.2)' : 'rgba(245,158,11,.2)'}`,
                       borderRadius:'12px', padding:'.55rem .5rem',
                     }}>
-                      <div style={{ fontSize:'.65rem', color:'var(--muted)', fontWeight:600, textTransform:'uppercase', letterSpacing:'.04em' }}>
+                      <div style={{ fontSize:'.72rem', color:'var(--muted)', fontWeight:600, textTransform:'uppercase', letterSpacing:'.04em' }}>
                         {m.tipo === 'pleamar' ? (locale === 'en' ? '▲ High' : '▲ Plea.') : (locale === 'en' ? '▼ Low' : '▼ Baja.')}
                       </div>
                       <div style={{ fontSize:'1.05rem', fontWeight:800, color:'var(--ink)', marginTop:'.15rem' }}>{m.hora}</div>
-                      <div style={{ fontSize:'.65rem', color:'var(--muted)' }}>{m.altura}m</div>
+                      <div style={{ fontSize:'.72rem', color:'var(--muted)' }}>{m.altura}m</div>
                     </div>
                   ))}
                 </div>
@@ -401,7 +401,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <div style={{ fontSize: '.82rem', fontWeight: 700, color: '#fff', marginBottom: 4 }}>
                 {locale === 'en' ? `Activities near ${playa.nombre}` : `Actividades cerca de ${playa.nombre}`}
               </div>
-              <div style={{ fontSize: '.68rem', color: 'rgba(255,255,255,.85)' }}>
+              <div style={{ fontSize:'.74rem', color: 'rgba(255,255,255,.85)' }}>
                 {locale === 'en' ? 'Surf lessons, kayak tours, snorkeling and more' : 'Clases de surf, kayak, snorkel y más'}
               </div>
             </div>
@@ -426,16 +426,16 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--accent,#b06820)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--accent,#6b400a)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
                 <Car size={18} weight='bold'/> {locale === 'en' ? 'By car — open in Google Maps' : 'En coche — abrir en Google Maps'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
                 <Bus size={18} weight='bold'/> {locale === 'en' ? 'By public transport' : 'En transporte público'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=bicycling`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=bicycling`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
                 <Bicycle size={18} weight='bold'/> {locale === 'en' ? 'By bike' : 'En bicicleta'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
                 <Person size={18} weight='bold'/> {locale === 'en' ? 'Walking' : 'A pie'}
               </a>
               {/* Rentalcars affiliate */}
@@ -458,7 +458,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
             {/* Detalles oficiales de acceso (MITECO) */}
             {(playa.forma_acceso || playa.carretera || playa.autobus_tipo || playa.parking_tipo || playa.parking_plazas || playa.tipo_paseo || playa.puerto_deportivo) && (
-              <div style={{ marginTop: '1rem', padding: '.85rem 1rem', background: 'rgba(176,104,32,.05)', border: '1px solid var(--line)', borderRadius: '12px' }}>
+              <div style={{ marginTop: '1rem', padding: '.85rem 1rem', background: 'rgba(107,64,10,.05)', border: '1px solid var(--line)', borderRadius: '12px' }}>
                 {playa.forma_acceso    && <DataRow k={i18n.forma_acceso}   v={playa.forma_acceso}/>}
                 {playa.carretera       && <DataRow k={i18n.carretera}      v={playa.carretera}/>}
                 {playa.autobus_tipo    && <DataRow k={locale === 'en' ? 'Bus type' : 'Tipo de autobús'} v={playa.autobus_tipo}/>}
@@ -498,27 +498,27 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 const mapsUrl = r.googleId ? `https://www.google.com/maps/place/?q=place_id:${r.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(r.nombre)}`
                 return (
                   <div key={r.id ?? r.nombre} className={styles.listItem}>
-                    <ForkKnife size={16} weight='bold' style={{color:'var(--accent,#b06820)'}}/> 
+                    <ForkKnife size={16} weight='bold' style={{color:'var(--accent,#6b400a)'}}/> 
                     <div className={styles.listInfo}>
                       <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
                         <div className={styles.listNombre}>{r.nombre}</div>
                       </a>
                       <div className={styles.listMeta}>
                         {r.tipo} · {r.distancia_m}m · {r.precio}
-                        {r.reseñas > 0 && <span style={{ color:'#9a7848' }}> · {r.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} {i18n.resenas}</span>}
+                        {r.reseñas > 0 && <span style={{ color:'#5a3d12' }}> · {r.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} {i18n.resenas}</span>}
                         {r.horario && <span style={{ color: r.horario === 'Abierto ahora' ? '#22c55e' : '#ef4444', marginLeft:'6px' }}>· {r.horario}</span>}
                       </div>
                       {r.resena && <div style={{ fontSize:'.75rem', color:'#6b5a3e', fontStyle:'italic', marginTop:'4px', lineHeight:'1.4' }}>"{r.resena}"</div>}
                       {(r.website || r.telefono) && (
                         <div style={{ display:'flex', gap:'8px', marginTop:'6px', flexWrap:'wrap' }}>
-                          {r.website && <a href={r.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.7rem', background:'#b06820', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
-                          {r.telefono && <a href={`tel:${r.telefono}`} style={{ fontSize:'.7rem', background:'rgba(176,104,32,.12)', color:'#b06820', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(176,104,32,.3)' }}>{r.telefono}</a>}
+                          {r.website && <a href={r.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', background:'#6b400a', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
+                          {r.telefono && <a href={`tel:${r.telefono}`} style={{ fontSize:'.75rem', background:'rgba(107,64,10,.12)', color:'#6b400a', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(107,64,10,.3)' }}>{r.telefono}</a>}
                         </div>
                       )}
                     </div>
                     <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:'4px', flexShrink:0 }}>
                       {r.rating > 0 && <span className={styles.rating}>{r.rating}</span>}
-                      <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.7rem', color:'#b06820', fontWeight:600, textDecoration:'none' }}>Ver →</a>
+                      <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', color:'#6b400a', fontWeight:600, textDecoration:'none' }}>Ver →</a>
                     </div>
                   </div>
                 )
@@ -562,7 +562,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 const mapsUrl = h.googleId ? `https://www.google.com/maps/place/?q=place_id:${h.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(h.nombre)}`
                 return (
                   <div key={h.id} className={styles.hotelItem}>
-                    <div className={styles.hotelFoto} style={h.foto ? { backgroundImage:`url(${h.foto})`, backgroundSize:'cover', backgroundPosition:'center' } : {}}>{!h.foto && <Bed size={22} color='var(--muted,#8a7560)'/>}</div>
+                    <div className={styles.hotelFoto} style={h.foto ? { backgroundImage:`url(${h.foto})`, backgroundSize:'cover', backgroundPosition:'center' } : {}}>{!h.foto && <Bed size={22} color='var(--muted,#5a3d12)'/>}</div>
                     <div className={styles.listInfo}>
                       <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
                         <div className={styles.listNombre}>{h.nombre}</div>
@@ -571,8 +571,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       <div className={styles.listMeta}>{h.distancia_m}m{h.rating > 0 && <span> · {h.rating} <Star size={12} weight="fill" color="#f5a623" style={{verticalAlign:'middle'}}/> ({h.reseñas?.toLocaleString(locale === 'en' ? 'en' : 'es')})</span>}{h.precio && <span> · {h.precio}</span>}</div>
                       {(h.website || h.telefono) && (
                         <div style={{ display:'flex', gap:'8px', marginTop:'6px' }}>
-                          {h.website && <a href={h.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.7rem', background:'#b06820', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
-                          {h.telefono && <a href={`tel:${h.telefono}`} style={{ fontSize:'.7rem', background:'rgba(176,104,32,.12)', color:'#b06820', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(176,104,32,.3)' }}>{h.telefono}</a>}
+                          {h.website && <a href={h.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', background:'#6b400a', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
+                          {h.telefono && <a href={`tel:${h.telefono}`} style={{ fontSize:'.75rem', background:'rgba(107,64,10,.12)', color:'#6b400a', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(107,64,10,.3)' }}>{h.telefono}</a>}
                         </div>
                       )}
                     </div>
@@ -731,11 +731,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         </div>
         {horaIdeal && (
           <div style={{
-            background: 'linear-gradient(160deg, rgba(245,158,11,.08), rgba(176,104,32,.06))',
-            border: '1.5px solid rgba(176,104,32,.25)',
+            background: 'linear-gradient(160deg, rgba(245,158,11,.08), rgba(107,64,10,.06))',
+            border: '1.5px solid rgba(107,64,10,.25)',
             borderRadius: 14, padding: '.85rem 1rem',
           }}>
-            <div style={{ fontSize: '.65rem', fontWeight: 700, color: 'var(--accent,#b06820)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+            <div style={{ fontSize:'.72rem', fontWeight: 700, color: 'var(--accent,#6b400a)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
               {locale === 'en' ? 'Best time to go' : 'Mejor hora para ir'}
             </div>
             <div style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--ink)', margin: '.3rem 0 .2rem', fontFamily: 'var(--font-serif)' }}>
@@ -754,7 +754,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             background: 'var(--card-bg,#faf6ef)', border: '1.5px solid var(--line,#e8dcc8)',
             borderRadius: 14, padding: '.7rem', display: 'flex', flexDirection: 'column', gap: '.35rem',
           }}>
-            <div style={{ fontSize: '.6rem', fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', padding: '0 .2rem' }}>
+            <div style={{ fontSize:'.72rem', fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', padding: '0 .2rem' }}>
               {locale === 'en' ? 'Beach essentials' : 'Equipo de playa'}
             </div>
             {[
@@ -775,7 +775,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               >
                 <span>{item.icon}</span>
                 <span style={{ flex: 1 }}>{item.label}</span>
-                <span style={{ fontSize: '.65rem', color: 'var(--accent)', fontWeight: 600 }}>Amazon →</span>
+                <span style={{ fontSize:'.72rem', color: 'var(--accent)', fontWeight: 600 }}>Amazon →</span>
               </a>
             ))}
           </div>
@@ -855,7 +855,7 @@ function FaqSection({ playa, meteo, banderaPlaya, medusas, mareasLunar, locale =
           <details key={i} style={{ borderBottom: i < faqs.length - 1 ? '1px solid var(--line,#e8dcc8)' : 'none', padding: '.65rem 0' }}>
             <summary style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               {faq.q}
-              <span style={{ color: 'var(--muted)', fontSize: '.7rem', flexShrink: 0, marginLeft: '.5rem' }}>+</span>
+              <span style={{ color: 'var(--muted)', fontSize:'.75rem', flexShrink: 0, marginLeft: '.5rem' }}>+</span>
             </summary>
             <p style={{ fontSize: '.78rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.4rem' }}>{faq.a}</p>
           </details>
@@ -881,7 +881,7 @@ function TempCell({ icon, val, label }: { icon: React.ReactNode; val:string; lab
 
 function DataRow({ k, v, mono, href }: { k:string; v:string; mono?:boolean; href?:string }) {
   const val = href
-    ? <Link href={href} style={{ color:'var(--accent,#b06820)', textDecoration:'none', fontWeight:600 }}>{v}</Link>
+    ? <Link href={href} style={{ color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600 }}>{v}</Link>
     : v
   return <div className={styles.dataRow}><span className={styles.drK}>{k}</span><span className={`${styles.drV} ${mono ? styles.drMono : ''}`}>{val}</span></div>
 }
@@ -892,15 +892,15 @@ function CompassSVG({ dir }: { dir: string }) {
   return (
     <svg width="82" height="82" viewBox="0 0 82 82" style={{ flexShrink:0 }} role="img" aria-label={`Viento dirección ${dir}`}>
       <circle cx="41" cy="41" r="37" fill="rgba(255,255,255,.45)" stroke="rgba(180,130,60,.2)" strokeWidth="1.5"/>
-      <text x="41" y="10" textAnchor="middle" fontSize="8" fill="#9a7848" fontFamily="sans-serif" fontWeight="600">N</text>
-      <text x="72" y="44" textAnchor="middle" fontSize="8" fill="#9a7848" fontFamily="sans-serif">E</text>
-      <text x="41" y="77" textAnchor="middle" fontSize="8" fill="#9a7848" fontFamily="sans-serif">S</text>
-      <text x="10" y="44" textAnchor="middle" fontSize="8" fill="#9a7848" fontFamily="sans-serif">O</text>
+      <text x="41" y="10" textAnchor="middle" fontSize="8" fill="#5a3d12" fontFamily="sans-serif" fontWeight="600">N</text>
+      <text x="72" y="44" textAnchor="middle" fontSize="8" fill="#5a3d12" fontFamily="sans-serif">E</text>
+      <text x="41" y="77" textAnchor="middle" fontSize="8" fill="#5a3d12" fontFamily="sans-serif">S</text>
+      <text x="10" y="44" textAnchor="middle" fontSize="8" fill="#5a3d12" fontFamily="sans-serif">O</text>
       <line x1="41" y1="14" x2="41" y2="68" stroke="rgba(180,130,60,.12)" strokeWidth="1"/>
       <line x1="14" y1="41" x2="68" y2="41" stroke="rgba(180,130,60,.12)" strokeWidth="1"/>
       <g transform={`rotate(${angle},41,41)`}>
-        <polygon points="41,14 37,44 41,38 45,44" fill="#b06820"/>
-        <polygon points="41,68 37,38 41,44 45,38" fill="rgba(176,104,32,.25)"/>
+        <polygon points="41,14 37,44 41,38 45,44" fill="#6b400a"/>
+        <polygon points="41,68 37,38 41,44 45,38" fill="rgba(107,64,10,.25)"/>
       </g>
     </svg>
   )

@@ -34,7 +34,7 @@
   padding: .85rem 1.25rem .75rem;
 }
 .mapaTitle { font-family: var(--font-serif); font-size: .95rem; font-weight: 700; color: var(--ink); }
-.mapaSrc   { font-size: .62rem; color: var(--muted); }
+.mapaSrc   { font-size: .72rem; color: var(--muted); }
 
 .grupo { margin-bottom: 2rem; }
 .grupoHead {
@@ -60,12 +60,12 @@
 .rowInfo { flex: 1; min-width: 0; }
 .rowNombre { font-size: .88rem; font-weight: 700; color: var(--ink); }
 .rowMeta {
-  font-size: .68rem; color: var(--muted); margin-top: .12rem;
+  font-size: .74rem; color: var(--muted); margin-top: .12rem;
   display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
 }
 .badge {
   background: var(--metric-bg); border: 1px solid var(--line);
-  padding: .1rem .4rem; border-radius: 4px; font-size: .6rem;
+  padding: .1rem .4rem; border-radius: 4px; font-size: .72rem;
   white-space: nowrap;
 }
 .rowArrow { color: var(--accent); font-size: .8rem; flex-shrink: 0; }
@@ -88,7 +88,7 @@
   color: var(--ink); letter-spacing: -.02em;
 }
 .statLabel {
-  font-size: .68rem; color: var(--muted);
+  font-size: .74rem; color: var(--muted);
   text-transform: uppercase; letter-spacing: .06em;
 }
 

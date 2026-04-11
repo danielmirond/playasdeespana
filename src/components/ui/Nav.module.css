@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   padding: .6rem 1rem;
-  background: var(--accent, #b06820);
+  background: var(--accent, #6b400a);
   color: #fff;
   font-size: .8rem;
   font-weight: 700;
@@ -58,7 +58,7 @@
 .iconBtn:focus-visible,
 .langBtn:focus-visible,
 .logo:focus-visible {
-  outline: 2px solid var(--accent, #b06820);
+  outline: 2px solid var(--accent, #6b400a);
   outline-offset: 2px;
   border-radius: 8px;
 }
@@ -112,7 +112,7 @@
 .langBtn {
   font-size: .72rem;
   font-weight: 600;
-  color: var(--muted, #8a7560);
+  color: var(--muted, #5a3d12);
   padding: .2rem .45rem;
   border-radius: 6px;
   text-decoration: none;
@@ -124,6 +124,6 @@
 }
 
 .langActive {
-  background: var(--accent, #b06820);
+  background: var(--accent, #6b400a);
   color: #fff !important;
 }
