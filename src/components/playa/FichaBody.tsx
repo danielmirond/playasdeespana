@@ -15,6 +15,7 @@ import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
+import PhotoCarousel from './PhotoCarousel'
 import type { Escuela } from '@/lib/escuelas'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
@@ -210,32 +211,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <h2 className={styles.cardTitle}>{i18n.galeria(playa.nombre)}</h2>
             <span className={styles.cardSrc}>{i18n.galSrc}</span>
           </div>
-          {fotos && fotos.length > 0 ? (
-            <div className={styles.carousel}>
-              {fotos.map((f, i) => (
-                <div key={i} className={styles.carouselSlide}>
-                  <img
-                    src={i === 0 ? f.url : f.thumb}
-                    alt={`${playa.nombre} - foto ${i + 1}`}
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    fetchPriority={i === 0 ? 'high' : undefined}
-                  />
-                  {i === 0 && (
-                    <div className={styles.gFuente}><Camera size={12}/> {f.fuente === 'wikimedia' ? 'Wikimedia Commons' : f.fuente === 'flickr' ? 'Flickr' : 'Unsplash'}</div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className={styles.carousel}>
-              <div className={styles.carouselSlide} style={{ background:'linear-gradient(160deg,#1a6b8a,#2a9a7a)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-                <div style={{ textAlign:'center', color:'rgba(255,255,255,.7)', padding:'2rem' }}>
-                  <Camera size={32} weight="light" style={{ marginBottom:'.5rem', opacity:.6 }}/>
-                  <div style={{ fontSize:'.8rem' }}>{locale === 'en' ? 'No photos available yet' : 'Sin fotos disponibles'}</div>
-                </div>
-              </div>
-            </div>
-          )}
+          <PhotoCarousel
+            fotos={fotos ?? []}
+            nombreAlt={playa.nombre}
+            locale={locale}
+          />
         </div>
 
         {/* AD — entre fotos y oleaje */}

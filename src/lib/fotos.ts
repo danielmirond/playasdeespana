@@ -41,10 +41,14 @@ function extraerFotosDePages(pages: any[]): FotoPlaya[] {
         if (ratio < 0.7 || ratio > 3) return null
       }
       const score = POSITIVAS.test(titulo) ? 1 : 0
+      // Wikimedia devuelve un thumb a 800px (iiurlwidth). Usamos esa misma
+      // URL para ambos tamaños: evita falsos 404 que aparecían antes por
+      // intentar reconstruir un /300px-/ que no siempre existe (imágenes
+      // más pequeñas que 800, o con nombres con dígitos que rompían el regex).
       return {
         score,
         url: ii.thumburl,
-        thumb: ii.thumburl.replace(/\/\d+px-/, '/300px-'),
+        thumb: ii.thumburl,
         fuente: 'wikimedia' as const,
         autor: ii.extmetadata?.Artist?.value?.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').slice(0, 60) ?? undefined,
       }
@@ -204,10 +208,13 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
         .map((item: any): FotoPlaya | null => {
           const titulo = (item.title ?? '').toLowerCase()
           if (NEGATIVAS.test(titulo)) return null
-          // item.media.m es el thumbnail de tamaño M (240px) — reemplazar por _b (1024px)
+          // item.media.m es el thumbnail de tamaño M (240px). Subimos a _c
+          // (800px, disponible desde 2012) en vez de _b (1024px) porque
+          // _b falta en fotos pequeñas o antiguas y producía imágenes rotas.
           const mediaUrl = item.media?.m ?? ''
           if (!mediaUrl) return null
-          const url = mediaUrl.replace(/_m\.(jpg|jpeg|png)/i, '_b.$1')
+          if (!/_m\.(jpg|jpeg|png)/i.test(mediaUrl)) return null
+          const url = mediaUrl.replace(/_m\.(jpg|jpeg|png)/i, '_c.$1')
           const thumb = mediaUrl // _m queda como thumb
           return {
             url,
