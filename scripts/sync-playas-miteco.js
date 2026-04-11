@@ -548,6 +548,55 @@ async function main() {
   }
   console.log(`[5d] Enriquecidas por INE: ${ineEnriched}`)
 
+  // 5e. Proximity fallback: para playas sin ningún match previo, buscar la
+  //     MITECO más cercana dentro de 500 m y en la misma provincia. Esta
+  //     pasada recoge playas que el matcher v3 descartó por nombre (grava
+  //     vs arena, topónimos locales no oficiales, acrónimos…) pero que son
+  //     físicamente la misma playa.
+  console.log('\n[5e] Enrichment por proximidad <500 m + misma provincia')
+  const mitecoGrid = new Map()
+  const CELL = 100
+  for (const m of mitecoPlayas) {
+    if (!m.lat || !m.lng) continue
+    const k = `${Math.round(m.lat * CELL)},${Math.round(m.lng * CELL)}`
+    if (!mitecoGrid.has(k)) mitecoGrid.set(k, [])
+    mitecoGrid.get(k).push(m)
+  }
+  function nearbyMiteco(lat, lng) {
+    const la = Math.round(lat * CELL), lo = Math.round(lng * CELL)
+    const out = []
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      const k = `${la + dx},${lo + dy}`
+      if (mitecoGrid.has(k)) out.push(...mitecoGrid.get(k))
+    }
+    return out
+  }
+  function slugifyQuick(s) {
+    return String(s ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  }
+  let proxEnriched = 0
+  for (const o of osmPlayas) {
+    if (enrichmentBySlug.has(o.slug)) continue
+    if (!o.lat || !o.lng) continue
+    const candidates = nearbyMiteco(o.lat, o.lng)
+    const oProv = slugifyQuick(o.provincia)
+    let best = null, bestDist = Infinity
+    for (const m of candidates) {
+      if (slugifyQuick(m.provincia) !== oProv) continue
+      const d = haversine(o.lat, o.lng, m.lat, m.lng)
+      if (d < bestDist && d < 500) {
+        bestDist = d
+        best = m
+      }
+    }
+    if (best) {
+      enrichmentBySlug.set(o.slug, best)
+      proxEnriched++
+    }
+  }
+  console.log(`[5e] Enriquecidas por proximidad: ${proxEnriched}`)
+
   // 5. Construir playas.json final:
   //    - Todas las OSM (enriquecidas las que tengan match válido)
   //    - + MITECO huérfanas (nuevas playas que OSM no tenía)
@@ -564,6 +613,38 @@ async function main() {
       finalPlayas.push(limpiar(o))
     }
   }
+
+  // 6b. Descripción procedimental para playas sin descripción MITECO.
+  //     Construye un texto mínimo usando los campos ya presentes para que
+  //     TODA ficha tenga algo legible (SEO + UX). Se marca con la flag
+  //     `descripcion_generada: true` para que futuras pasadas puedan
+  //     distinguir el texto oficial MITECO del generado automáticamente.
+  let descGen = 0
+  for (const p of finalPlayas) {
+    if (p.descripcion) continue
+    const partes = []
+    partes.push(`${p.nombre} es una playa ubicada en el municipio de ${p.municipio}, en la provincia de ${p.provincia}, ${p.comunidad}.`)
+    const tipoTxt = p.composicion || p.tipo || ''
+    if (tipoTxt) partes.push(`Su composición es principalmente ${String(tipoTxt).toLowerCase()}.`)
+    if (p.longitud) partes.push(`Tiene una longitud aproximada de ${p.longitud} metros.`)
+    const servicios = []
+    if (p.socorrismo) servicios.push('socorrismo')
+    if (p.duchas) servicios.push('duchas')
+    if (p.aseos) servicios.push('aseos')
+    if (p.parking) servicios.push('parking')
+    if (p.accesible) servicios.push('acceso para personas con movilidad reducida')
+    if (servicios.length > 0) {
+      const last = servicios[servicios.length - 1]
+      const head = servicios.slice(0, -1).join(', ')
+      partes.push(`Dispone de ${head}${head ? ' y ' : ''}${last}.`)
+    }
+    if (p.bandera) partes.push('Está galardonada con Bandera Azul, distintivo internacional de calidad ambiental y seguridad.')
+    if (p.perros) partes.push('Permite el acceso con perros, aunque conviene consultar la ordenanza municipal antes de desplazarse.')
+    p.descripcion = partes.join(' ')
+    p.descripcion_generada = true
+    descGen++
+  }
+  console.log(`\n[6b] Descripciones procedimentales generadas: ${descGen}`)
 
   // 5b. MITECO huérfanas. Las playas "huérfanas" son MITECO sin match EXCELENTE
   //     ni BUENO, pero muchas de ellas SÍ tienen una playa OSM dentro de 500 m

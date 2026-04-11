@@ -113,6 +113,26 @@ out center tags;`
       const lng = el.type === 'node' ? el.lon : el.center?.lon
       if (!lat || !lng) return null
       const tags = el.tags
+      // Surface normalization — OSM tiene muchos valores
+      const composicionMap = {
+        sand:          'Arena',
+        pebble:        'Grava/Piedra',
+        gravel:        'Gravilla',
+        rock:          'Roca',
+        rocks:         'Roca',
+        shingle:       'Grava',
+        fine_gravel:   'Gravilla fina',
+        compacted:     'Compacto',
+      }
+      const composicion = composicionMap[tags.surface] || (tags.surface ? tags.surface : 'Arena')
+      // Tipo de playa (beach tag values)
+      const tipoMap = {
+        sand:   'arena',
+        pebble: 'guijarros',
+        rock:   'rocosa',
+        nude:   'nudista',
+      }
+      const tipo = tipoMap[tags.beach] || 'arena'
       return {
         nombre:      tags.name,
         municipio:   tags['addr:city'] || tags['addr:municipality'] || tags.municipality || '',
@@ -120,17 +140,35 @@ out center tags;`
         comunidad:   tags['addr:state'] || '',
         lat:         parseFloat(lat.toFixed(6)),
         lng:         parseFloat(lng.toFixed(6)),
-        tipo:        tags.beach === 'nude' ? 'nudista' : 'arena',
-        composicion: tags.surface === 'pebble' ? 'Grava/Piedra' : 'Arena',
+        tipo,
+        composicion,
+        // Descripción: description → description:es → description:en
+        descripcion: tags['description:es'] || tags['description'] || tags['description:en'] || null,
+        nombres_alt: tags['name:es'] || tags['name:en'] || tags['alt_name'] || tags['old_name'] || null,
+        // Longitud / anchura / capacity
         longitud:    tags.length ? parseInt(tags.length) : null,
-        anchura:     null,
+        anchura:     tags.width ? parseInt(tags.width) : null,
+        // Servicios base
         socorrismo:  !!(tags.lifeguard === 'yes' || tags['lifeguard:count']),
         duchas:      tags.shower === 'yes',
-        accesible:   tags.wheelchair === 'yes',
-        parking:     tags.parking === 'yes',
-        bandera:     false,
-        perros:      !!(tags.dog === 'yes' || tags['dog:leash']),
+        // Accesibilidad: 'yes', 'designated' o 'limited' son válidos
+        accesible:   ['yes', 'designated', 'limited'].includes(tags.wheelchair),
+        parking:     tags.parking === 'yes' || !!tags['parking:free'] || !!tags['amenity:parking'],
+        aseos:       tags.toilets === 'yes',
+        lavapies:    !!(tags['water:foot_wash'] === 'yes' || tags.footwash === 'yes'),
+        papelera:    !!tags.waste_basket || tags.bin === 'yes',
+        bandera:     !!(tags['seamark:type'] === 'blue_flag' || tags.blue_flag === 'yes'),
+        perros:      !!(tags.dog === 'yes' || tags['dog:leash'] || tags.dogs === 'yes'),
         nudista:     tags.nudism === 'yes' || tags.beach === 'nude',
+        oficina_turismo: tags.tourism === 'information',
+        // Web + referencias externas
+        web_ayuntamiento: tags.website || tags['contact:website'] || tags.url || null,
+        wikipedia:   tags.wikipedia || null,
+        wikidata:    tags.wikidata || null,
+        // Transporte
+        autobus:     !!(tags['public_transport'] === 'bus' || tags.bus === 'yes'),
+        // Observaciones libres
+        observaciones: tags.note || tags['description:es'] || null,
         osm_id:      String(el.id),
         source:      'osm',
         // Actividades detectadas desde tags de la propia playa

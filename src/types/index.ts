@@ -14,6 +14,8 @@ export interface Playa {
   composicion?: string | null
   tipo?:        string | null
   descripcion?: string | null
+  /** True si la descripción se generó proceduralmente (no es texto oficial MITECO). */
+  descripcion_generada?: boolean
   nombres_alt?: string | null
   bandera?:     boolean
   socorrismo?:  boolean
