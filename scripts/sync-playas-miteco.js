@@ -27,7 +27,7 @@ const https = require('https')
 const fs    = require('fs')
 const path  = require('path')
 
-const { matchAll } = require('./lib/miteco-match')
+const { matchAll, esFluvial } = require('./lib/miteco-match')
 
 const DATA_DIR     = path.join(__dirname, '..', 'public', 'data')
 const PLAYAS_JSON  = path.join(DATA_DIR, 'playas.json')
@@ -333,6 +333,62 @@ async function main() {
     enrichmentBySlug.set(m.osm_slug, mitecoPlaya)
   }
   console.log(`\n[5] Enriquecer ${enrichmentBySlug.size} playas OSM con datos MITECO`)
+
+  // 5c. Fallback CartoCiudad: para las playas OSM sin match MITECO, consultar
+  //     el reverse geocoder oficial del IGN (CartoCiudad) y sobrescribir
+  //     municipio/provincia/comunidad con los valores oficiales. Evita el
+  //     caso Bogatell histórico donde OSM etiqueta una playa de Barcelona
+  //     como Tarragona.
+  //
+  //     Se puede saltar con MITECO_SKIP_CARTOCIUDAD=1.
+  const skipCarto = process.env.MITECO_SKIP_CARTOCIUDAD === '1'
+  if (!skipCarto) {
+    const carto = require('./lib/cartociudad')
+    const candidatas = osmPlayas.filter(o =>
+      !enrichmentBySlug.has(o.slug) &&
+      typeof o.lat === 'number' &&
+      typeof o.lng === 'number' &&
+      !esFluvial(o.nombre)
+    )
+    console.log(`\n[5c] CartoCiudad fallback → ${candidatas.length} playas sin match MITECO`)
+
+    let updated = 0
+    let abortedDueToFailures = false
+    for (let i = 0; i < candidatas.length; i++) {
+      const o = candidatas[i]
+
+      // Safety: si CartoCiudad falla 50 veces seguidas abortamos el paso
+      // entero para no bloquear el workflow por un outage externo.
+      if (carto.stats().consecutiveFailures >= 50) {
+        console.warn('\n[5c] 50 fallos consecutivos — abortando CartoCiudad fallback')
+        abortedDueToFailures = true
+        break
+      }
+
+      const data = await carto.reverseGeocode(o.lat, o.lng)
+      if (data) {
+        o.municipio = data.municipio
+        o.provincia = data.provincia
+        o.comunidad = data.comunidad || provinciaAComunidad(data.provincia)
+        if (data.ine_municipio) o.ine_municipio = data.ine_municipio
+        o.source = 'osm+cartociudad'
+        updated++
+      }
+
+      // Progress cada 100 playas
+      if ((i + 1) % 100 === 0) {
+        const s = carto.stats()
+        process.stdout.write(`\r[5c] ${i + 1}/${candidatas.length} — actualizadas ${updated}, cache ${s.cacheHits}, fail ${s.failed}`)
+      }
+    }
+    const s = carto.stats()
+    console.log(`\n[5c] Hecho. Actualizadas: ${updated}/${candidatas.length}`)
+    console.log(`     Llamadas reales: ${s.calls}, cache hits: ${s.cacheHits}`)
+    console.log(`     Éxitos: ${s.success}, vacías: ${s.empty}, fallos: ${s.failed}, rate-limited: ${s.rateLimited}`)
+    if (abortedDueToFailures) console.log('     (paso abortado por fallos consecutivos)')
+  } else {
+    console.log('\n[5c] CartoCiudad fallback omitido (MITECO_SKIP_CARTOCIUDAD=1)')
+  }
 
   // 5. Construir playas.json final:
   //    - Todas las OSM (enriquecidas las que tengan match válido)

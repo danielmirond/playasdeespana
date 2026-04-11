@@ -210,6 +210,8 @@ export default async function PlayaPage({ params }: Props) {
         mareasLunar={mareasLunar}
         horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
+        municipioSlug={municipioSlugProp}
+        provinciaSlug={provinciaSlug}
       />
     </>
   )

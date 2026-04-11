@@ -198,6 +198,8 @@ export default async function BeachPageEn({ params }: Props) {
         mareasLunar={mareasLunar}
         horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
+        municipioSlug={municipioSlugProp}
+        provinciaSlug={provinciaSlug}
       />
     </>
   )

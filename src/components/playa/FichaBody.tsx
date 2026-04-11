@@ -66,6 +66,10 @@ interface Props {
   horaIdeal?:      HoraIdeal
   playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean }[]
   locale?:         'es' | 'en'
+  /** Slug del municipio si la página existe (ver getMunicipioSlugsSet). */
+  municipioSlug?:  string
+  /** Slug de la provincia si la página existe. */
+  provinciaSlug?:  string
 }
 
 const T = {
@@ -188,7 +192,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es' }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
@@ -648,9 +652,25 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             {playa.vegetacion      && <DataRow k={i18n.vegetacion}      v={locale === 'en' ? 'Yes' : 'Sí'}/>}
             {playa.zona_fondeo     && <DataRow k={i18n.zona_fondeo}     v={locale === 'en' ? 'Yes' : 'Sí'}/>}
             {playa.espacio_protegido && <DataRow k={i18n.espacio_protegido} v={locale === 'en' ? 'Yes' : 'Sí'}/>}
-            <DataRow k={i18n.municipio}   v={playa.municipio} href={locale === 'en' ? `/en/towns/${slug(playa.municipio)}` : `/municipio/${slug(playa.municipio)}`}/>
-            <DataRow k={i18n.provincia}   v={playa.provincia} href={locale === 'en' ? `/en/provinces/${slug(playa.provincia)}` : `/provincia/${slug(playa.provincia)}`}/>
-            <DataRow k={i18n.comunidad}   v={playa.comunidad} href={locale === 'en' ? `/en/communities/${slug(playa.comunidad)}` : `/comunidad/${slug(playa.comunidad)}`}/>
+            <DataRow
+              k={i18n.municipio}
+              v={playa.municipio}
+              href={municipioSlug
+                ? (locale === 'en' ? `/en/towns/${municipioSlug}` : `/municipio/${municipioSlug}`)
+                : undefined}
+            />
+            <DataRow
+              k={i18n.provincia}
+              v={playa.provincia}
+              href={provinciaSlug
+                ? (locale === 'en' ? `/en/provinces/${provinciaSlug}` : `/provincia/${provinciaSlug}`)
+                : undefined}
+            />
+            <DataRow
+              k={i18n.comunidad}
+              v={playa.comunidad}
+              href={locale === 'en' ? `/en/communities/${slug(playa.comunidad)}` : `/comunidad/${slug(playa.comunidad)}`}
+            />
             <DataRow k={i18n.coordenadas} v={`${playa.lat}° N, ${playa.lng}° E`} mono/>
             {playa.web_ayuntamiento && (
               <DataRow k={i18n.webAyuntamiento} v={i18n.verSitio} href={playa.web_ayuntamiento}/>
