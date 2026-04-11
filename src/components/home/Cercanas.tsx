@@ -89,9 +89,9 @@ export default function Cercanas({ locale = 'es' }: Props) {
 
   if (estado === 'loading') return (
     <section className={styles.section}>
-      <div className={styles.hd}><span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:4}}/> Playas cercanas</span></div>
-      <div className={styles.cta}>
-        <div className={styles.spinner}/>
+      <div className={styles.hd}><span className={styles.hdTitle}><MapPin size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:4}} aria-hidden="true"/> Playas cercanas</span></div>
+      <div className={styles.cta} role="status" aria-live="polite">
+        <div className={styles.spinner} aria-hidden="true"/>
         <p className={styles.ctaTxt}>Buscando playas cercanas…</p>
       </div>
     </section>

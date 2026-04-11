@@ -164,15 +164,20 @@ function BuscarContent() {
           )}
         </div>
 
+        {/* Announcer para lectores de pantalla: cambia al filtrar */}
+        <div className={styles.resultsAnnouncer} role="status" aria-live="polite" aria-atomic="true">
+          {!loading && `${resultados.length} ${resultados.length === 1 ? 'playa encontrada' : 'playas encontradas'}`}
+        </div>
+
         {/* Resultados */}
         {loading ? (
-          <div className={styles.loading}>
-            <div className={styles.spinner}/>
+          <div className={styles.loading} role="status" aria-live="polite" aria-label="Cargando playas">
+            <div className={styles.spinner} aria-hidden="true"/>
             <span>Cargando playas…</span>
           </div>
         ) : resultados.length === 0 ? (
-          <div className={styles.empty}>
-            <span className={styles.emptyIcon}>~</span>
+          <div className={styles.empty} role="status">
+            <span className={styles.emptyIcon} aria-hidden="true">~</span>
             <p>No hay playas con esos criterios.</p>
             <button className={styles.emptyBtn} onClick={() => { setQ(''); setFiltros({}); setComunidad('') }}>
               Ver todas las playas
@@ -180,7 +185,7 @@ function BuscarContent() {
           </div>
         ) : (
           <>
-            <div className={styles.grid} aria-live="polite" aria-atomic="false">
+            <div className={styles.grid}>
               {visible.map(p => (
                 <Link key={p.slug} href={`/playas/${p.slug}`} className={styles.card}>
                   <div className={styles.cardMain}>

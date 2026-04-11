@@ -566,7 +566,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 const mapsUrl = h.googleId ? `https://www.google.com/maps/place/?q=place_id:${h.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(h.nombre)}`
                 return (
                   <div key={h.id} className={styles.hotelItem}>
-                    <div className={styles.hotelFoto} style={h.foto ? { backgroundImage:`url(${h.foto})`, backgroundSize:'cover', backgroundPosition:'center' } : {}}>{!h.foto && <Bed size={22} color='var(--muted,#5a3d12)'/>}</div>
+                    <div
+                      className={styles.hotelFoto}
+                      role={h.foto ? 'img' : undefined}
+                      aria-label={h.foto ? (locale === 'en' ? `Photo of ${h.nombre}` : `Foto de ${h.nombre}`) : undefined}
+                      style={h.foto ? { backgroundImage:`url(${h.foto})`, backgroundSize:'cover', backgroundPosition:'center' } : {}}
+                    >
+                      {!h.foto && <Bed size={22} color='var(--muted,#5a3d12)' aria-hidden="true"/>}
+                    </div>
                     <div className={styles.listInfo}>
                       <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
                         <div className={styles.listNombre}>{h.nombre}</div>

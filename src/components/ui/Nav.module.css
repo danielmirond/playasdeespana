@@ -77,8 +77,8 @@
 .right { display: flex; gap: .35rem; }
 
 .iconBtn {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1.5px solid var(--line);
   background: var(--metric-bg);
@@ -110,13 +110,18 @@
 }
 
 .langBtn {
-  font-size: .72rem;
-  font-weight: 600;
+  font-size: .75rem;
+  font-weight: 700;
   color: var(--muted, #5a3d12);
-  padding: .2rem .45rem;
+  padding: .5rem .8rem;
   border-radius: 6px;
   text-decoration: none;
   transition: all .15s;
+  min-width: 44px;
+  min-height: 36px; /* A bit more relaxed in Nav header for density */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .langBtn:hover {
