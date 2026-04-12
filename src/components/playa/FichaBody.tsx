@@ -19,6 +19,7 @@ import TextoSEO from './TextoSEO'
 import PhotoCarousel from './PhotoCarousel'
 import type { Escuela } from '@/lib/escuelas'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
+import Comentarios from './Comentarios'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
@@ -799,6 +800,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
         {/* FAQS */}
         <FaqSection playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} mareasLunar={mareasLunar} locale={locale} />
+
+        {/* COMENTARIOS */}
+        <Comentarios playaSlug={playa.slug} playaNombre={playa.nombre} locale={locale} />
 
       </div>
 
