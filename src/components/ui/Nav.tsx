@@ -42,6 +42,7 @@ export default function Nav() {
           <Link href={isEn ? '/en/communities' : '/comunidades'} className={styles.link}>{isEn ? 'Communities' : 'Comunidades'}</Link>
           <Link href={isEn ? '/en/blue-flag' : '/banderas-azules'} className={styles.link}>{isEn ? 'Blue Flag' : 'Banderas Azules'}</Link>
           {!isEn && <Link href="/playas-perros" className={styles.link}>Perros</Link>}
+          {!isEn && <Link href="/playas-nudistas" className={styles.link}>Nudistas</Link>}
           <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
         </nav>
         <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label={isEn ? 'Playas de España — Home' : 'Playas de España — Inicio'}>
