@@ -185,7 +185,7 @@ export default async function PlayaPage({ params }: Props) {
   return (
     <>
       {preloadFoto && <link rel="preload" as="image" href={preloadFoto} />}
-      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} viento={meteo.viento} calidad={calidad?.nivel} banderaColor={banderaPlaya.color} banderaLabel={banderaPlaya.label} medusasLabel={medusas.label} mareasTexto={mareasLunar.zona === 'mediterraneo' ? `En el Mediterráneo las mareas son insignificantes (${mareasLunar.rango}m).` : `Hoy las pleamares en ${playa.nombre} son a las ${mareasLunar.mareas.filter(m => m.tipo === 'pleamar').map(m => m.hora).join(' y ')} (${mareasLunar.rango}m). Coeficiente ${mareasLunar.coeficiente}.`} dateModified={dateModified} />
+      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} dateModified={dateModified} />
       <Nav />
       <FichaHero
         playa={playa}
