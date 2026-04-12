@@ -18,6 +18,7 @@ import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
 import PhotoCarousel from './PhotoCarousel'
 import type { Escuela } from '@/lib/escuelas'
+import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
@@ -874,67 +875,29 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 function FaqSection({ playa, meteo, banderaPlaya, medusas, mareasLunar, locale = 'es' }: {
   playa: Playa; meteo: Meteo; banderaPlaya?: BanderaPlaya; medusas?: MedusasRiesgo; mareasLunar?: MareasDia; locale?: 'es' | 'en'
 }) {
-  const n = playa.nombre
   const es = locale === 'es'
-
-  const faqs: { q: string; a: string }[] = [
-    {
-      q: es ? `¿Cómo está el agua en ${n} hoy?` : `How is the water at ${n} today?`,
-      a: es
-        ? `La temperatura del agua en ${n} es de ${meteo.agua}°C con olas de ${meteo.olas}m.`
-        : `Water temperature at ${n} is ${meteo.agua}°C with ${meteo.olas}m waves.`,
-    },
-    banderaPlaya ? {
-      q: es ? `¿Qué bandera tiene ${n} hoy?` : `What flag does ${n} have today?`,
-      a: es ? (banderaPlaya.label + '. ' + banderaPlaya.motivo + '.') : (banderaPlaya.labelEn + '. ' + banderaPlaya.motivoEn + '.'),
-    } : null,
-    medusas ? {
-      q: es ? `¿Hay medusas en ${n}?` : `Are there jellyfish at ${n}?`,
-      a: es ? (medusas.label + '. ' + medusas.detalle + '.') : (medusas.labelEn + '. ' + medusas.detalleEn + '.'),
-    } : null,
-    {
-      q: es ? `¿Cuánto viento hace en ${n}?` : `How windy is it at ${n}?`,
-      a: es
-        ? `El viento en ${n} es de ${meteo.viento} km/h con rachas de ${meteo.vientoRacha} km/h (dirección ${meteo.vientoDireccion}).`
-        : `Wind at ${n} is ${meteo.viento} km/h with gusts of ${meteo.vientoRacha} km/h (${meteo.vientoDireccion}).`,
-    },
-    mareasLunar ? {
-      q: es ? `¿A qué hora es la pleamar en ${n}?` : `What time is high tide at ${n}?`,
-      a: (() => {
-        const pleas = mareasLunar.mareas.filter(m => m.tipo === 'pleamar')
-        const tipoLabel = es
-          ? (mareasLunar.tipo === 'vivas' ? 'mareas vivas' : mareasLunar.tipo === 'muertas' ? 'mareas muertas' : 'mareas medias')
-          : (mareasLunar.tipo === 'vivas' ? 'spring tides' : mareasLunar.tipo === 'muertas' ? 'neap tides' : 'average tides')
-        if (mareasLunar.zona === 'mediterraneo') {
-          return es
-            ? `En el Mediterráneo las mareas son insignificantes (${mareasLunar.rango}m). El nivel del agua apenas varía.`
-            : `Mediterranean tides are negligible (${mareasLunar.rango}m). Water level barely changes.`
-        }
-        return es
-          ? `Hoy las pleamares en ${n} son a las ${pleas.map(p => p.hora).join(' y ')} (${pleas[0]?.altura}m). Coeficiente ${mareasLunar.coeficiente}, ${tipoLabel}.`
-          : `Today's high tides at ${n} are at ${pleas.map(p => p.hora).join(' and ')} (${pleas[0]?.altura}m). Coefficient ${mareasLunar.coeficiente}, ${tipoLabel}.`
-      })(),
-    } : null,
-    playa.parking !== undefined ? {
-      q: es ? `¿Hay parking cerca de ${n}?` : `Is there parking near ${n}?`,
-      a: es
-        ? (playa.parking ? `Sí, hay aparcamiento próximo a ${n}.` : `${n} no dispone de parking oficial.`)
-        : (playa.parking ? `Yes, there is parking near ${n}.` : `${n} does not have official parking.`),
-    } : null,
-    playa.perros !== undefined ? {
-      q: es ? `¿Se permiten perros en ${n}?` : `Are dogs allowed at ${n}?`,
-      a: es
-        ? (playa.perros ? `Sí, ${n} permite perros.` : `No, en ${n} no se permiten perros.`)
-        : (playa.perros ? `Yes, dogs are allowed at ${n}.` : `No, dogs are not allowed at ${n}.`),
-    } : null,
-  ].filter(Boolean) as { q: string; a: string }[]
+  // Fuente única de verdad para las preguntas frecuentes: compartida
+  // con SchemaPlaya JSON-LD para garantizar que el schema refleja
+  // EXACTAMENTE lo que se muestra al usuario.
+  const faqs = generarFaqsPlaya({
+    playa,
+    aguaC: meteo.agua,
+    olasM: meteo.olas,
+    vientoKmh: meteo.viento,
+    vientoRacha: meteo.vientoRacha,
+    vientoDir: meteo.vientoDireccion,
+    banderaPlaya,
+    medusas,
+    mareasLunar,
+    locale,
+  })
 
   if (faqs.length === 0) return null
 
   return (
     <div className={styles.card} id="s-faqs">
       <div className={styles.cardHead}>
-        <h2 className={styles.cardTitle}>{es ? `Preguntas frecuentes sobre ${n}` : `Frequently asked questions about ${n}`}</h2>
+        <h2 className={styles.cardTitle}>{es ? `Preguntas frecuentes sobre ${playa.nombre}` : `Frequently asked questions about ${playa.nombre}`}</h2>
       </div>
       <div className={styles.cardBody}>
         {faqs.map((faq, i) => (

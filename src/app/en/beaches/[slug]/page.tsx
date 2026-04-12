@@ -19,6 +19,7 @@ import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
+import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 
 export const revalidate = 3600
 export const maxDuration = 25
@@ -169,7 +170,24 @@ export default async function BeachPageEn({ params }: Props) {
   return (
     <>
       {preloadFoto && <link rel="preload" as="image" href={preloadFoto} />}
-      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} dateModified={dateModified} />
+      <SchemaPlaya
+        playa={playa}
+        agua={meteo.agua}
+        olas={meteo.olas}
+        dateModified={dateModified}
+        faqs={generarFaqsPlaya({
+          playa,
+          aguaC: meteo.agua,
+          olasM: meteo.olas,
+          vientoKmh: meteo.viento,
+          vientoRacha: meteo.vientoRacha,
+          vientoDir: meteo.vientoDireccion,
+          banderaPlaya,
+          medusas,
+          mareasLunar,
+          locale: 'en',
+        })}
+      />
       <Nav />
       <FichaHero
         playa={playa}

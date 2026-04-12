@@ -1,26 +1,24 @@
 // src/components/playa/SchemaPlaya.tsx
-// JSON-LD structured data para Google — Beach + TouristAttraction + BreadcrumbList.
+// JSON-LD structured data para Google — Beach + TouristAttraction +
+// BreadcrumbList + FAQPage (opcional).
 //
-// NOTA: ya no emitimos FAQPage aquí. Google Search Console reportaba
-// "Duplicate FAQ" porque el esquema era idéntico (solo cambiaba el nombre
-// de la playa) en 5000+ URLs y además las preguntas no eran visibles en
-// el HTML de la ficha — incumple ambas reglas de la guía de FAQ rich
-// results. Las FAQs visibles y específicas las mantenemos solo en
-// /banderas-azules y /playas-perros, que son páginas dedicadas.
+// El FAQPage solo se emite si la página pasa las mismas preguntas que
+// renderiza visiblemente en el HTML (ver FichaBody → FaqSection). La
+// fuente de verdad es `generarFaqsPlaya()` en src/lib/faqsPlaya.ts; de
+// esa forma el schema SIEMPRE refleja el HTML y Google no reporta
+// "Duplicate FAQ" por mismatch entre JSON-LD y visible content.
 import type { Playa } from '@/types'
 import { generarTextoPlaya } from '@/lib/textoPlaya'
+import type { FaqItem } from '@/lib/faqsPlaya'
 
 interface Props {
   playa:         Playa
   agua:          number
   olas:          number
-  viento?:       number
-  calidad?:      string
-  banderaColor?: string
-  banderaLabel?: string
-  medusasLabel?: string
-  mareasTexto?:  string
   dateModified?: string
+  /** FAQs visibles en la página. Deben coincidir EXACTAMENTE con las
+   *  que FichaBody renderiza, para evitar mismatch entre schema y HTML. */
+  faqs?:         FaqItem[]
 }
 
 const ACTIVIDAD_LABELS: Record<string, string> = {
@@ -33,7 +31,7 @@ const ACTIVIDAD_LABELS: Record<string, string> = {
   paddle:    'Paddle surf',
 }
 
-export default function SchemaPlaya({ playa, agua, olas, dateModified }: Props) {
+export default function SchemaPlaya({ playa, agua, olas, dateModified, faqs }: Props) {
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
   const url  = `${BASE}/playas/${playa.slug}`
 
@@ -108,6 +106,18 @@ export default function SchemaPlaya({ playa, agua, olas, dateModified }: Props) 
     ...(dateModified ? { dateModified } : {}),
   }
 
+  // FAQPage: solo se emite si la página va a renderizar el mismo array
+  // visible en el HTML. Así evitamos el "Duplicate FAQ" de Search Console.
+  const faqSchema = faqs && faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type':    'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type':          'Question',
+      name:             f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  } : null
+
   return (
     <>
       <script
@@ -118,6 +128,12 @@ export default function SchemaPlaya({ playa, agua, olas, dateModified }: Props) 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
     </>
   )
 }
