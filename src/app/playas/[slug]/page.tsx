@@ -34,10 +34,10 @@ export const maxDuration = 25
 // Pre-renderiza las playas con Bandera Azul (las más visitadas) en build
 // El resto se genera on-demand con ISR y se cachea 1h
 export async function generateStaticParams() {
-  const playas = await getPlayas()
-  return playas
-    .filter(p => p.bandera)
-    .map(p => ({ slug: p.slug }))
+  // No pre-renderizar en build — ISR con revalidate: 3600 genera cada
+  // página al primer visitante y la cachea 1 h. Antes pre-renderizábamos
+  // todas las banderas azules (647 páginas × 11 API calls = timeout).
+  return []
 }
 
 interface Props { params: Promise<{ slug: string }> }

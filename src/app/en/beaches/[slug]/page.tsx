@@ -25,10 +25,8 @@ export const revalidate = 3600
 export const maxDuration = 25
 
 export async function generateStaticParams() {
-  const playas = await getPlayas()
-  return playas
-    .filter(p => p.bandera)
-    .map(p => ({ slug: p.slug }))
+  // ISR on-demand — no pre-render at build to avoid 45-min timeout.
+  return []
 }
 
 interface Props { params: Promise<{ slug: string }> }
