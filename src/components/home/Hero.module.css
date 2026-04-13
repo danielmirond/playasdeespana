@@ -61,8 +61,42 @@
 .sub {
   position: relative; z-index: 2;
   font-size: .92rem; color: var(--muted);
-  max-width: 400px; line-height: 1.6;
+  max-width: 440px; line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* CTAs */
+.ctas {
+  position: relative; z-index: 2;
+  display: flex; flex-wrap: wrap; gap: .55rem;
+  justify-content: center;
   margin-bottom: 2rem;
+}
+.ctaPrimary {
+  background: var(--accent); color: #fff;
+  padding: .75rem 1.5rem; border-radius: 12px;
+  font-size: .92rem; font-weight: 800;
+  text-decoration: none;
+  transition: all .15s;
+  min-height: 44px;
+  display: inline-flex; align-items: center;
+  box-shadow: 0 4px 14px rgba(107,64,10,.2);
+}
+.ctaPrimary:hover { opacity: .9; transform: translateY(-1px); text-decoration: none; }
+.ctaSecondary {
+  background: var(--card-bg); color: var(--accent);
+  border: 1.5px solid var(--line);
+  padding: .65rem 1.15rem; border-radius: 10px;
+  font-size: .82rem; font-weight: 700;
+  text-decoration: none;
+  transition: all .15s;
+  min-height: 44px;
+  display: inline-flex; align-items: center;
+}
+.ctaSecondary:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--card-bg));
+  text-decoration: none;
 }
 
 /* Stats bar */

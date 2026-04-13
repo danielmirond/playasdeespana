@@ -1,10 +1,13 @@
-// src/components/home/Hero.tsx
+// src/components/home/Hero.tsx — Product-focused hero.
+// Pregunta: "¿A qué playa voy hoy?" + 3 CTAs accionables que
+// llevan a /buscar con filtros pre-aplicados.
+import Link from 'next/link'
 import styles from './Hero.module.css'
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.rings} aria-hidden>
+      <div className={styles.rings} aria-hidden="true">
         <svg viewBox="0 0 800 600" fill="none">
           <ellipse cx="400" cy="340" rx="740" ry="520" stroke="currentColor" strokeWidth="1"/>
           <ellipse cx="400" cy="340" rx="580" ry="400" stroke="currentColor" strokeWidth="1"/>
@@ -14,57 +17,51 @@ export default function Hero() {
         </svg>
       </div>
 
-      <div className={styles.ilu} aria-hidden>
-        <svg viewBox="0 0 220 160" fill="none" width="220" height="160">
-          <rect x="15" y="120" width="190" height="12" rx="3" fill="#c4884a" opacity=".4"/>
-          <rect x="5"  y="128" width="210" height="14" rx="3" fill="#c4884a" opacity=".55"/>
-          <rect x="0"  y="138" width="220" height="22" rx="0" fill="#c4884a" opacity=".7"/>
-          <path d="M5,122 C25,114 48,124 72,118 C96,112 118,124 144,118 C166,113 190,121 215,117" fill="none" stroke="#a8cce0" strokeWidth="2" strokeLinecap="round" opacity=".5"/>
-          <path d="M0,132 C28,124 58,134 90,127 C122,120 155,132 190,126 L220,125 L220,142 L0,142Z" fill="#a8cce0" opacity=".12"/>
-          <path d="M76,120 A34,34 0 0,1 144,120" fill="#e8a030" opacity=".9"/>
-          <circle cx="110" cy="120" r="24" fill="#e8a030"/>
-          <circle cx="110" cy="120" r="18" fill="#f5be40"/>
-          <line x1="110" y1="78"  x2="110" y2="88"  stroke="#e8a030" strokeWidth="2.5" strokeLinecap="round"/>
-          <line x1="82"  y1="86"  x2="87"  y2="94"  stroke="#e8a030" strokeWidth="2"   strokeLinecap="round" opacity=".8"/>
-          <line x1="138" y1="86"  x2="133" y2="94"  stroke="#e8a030" strokeWidth="2"   strokeLinecap="round" opacity=".8"/>
-          <line x1="68"  y1="105" x2="77"  y2="108" stroke="#e8a030" strokeWidth="1.5" strokeLinecap="round" opacity=".55"/>
-          <line x1="152" y1="105" x2="143" y2="108" stroke="#e8a030" strokeWidth="1.5" strokeLinecap="round" opacity=".55"/>
-        </svg>
-      </div>
-
       <p className={styles.kicker}>
         <span className={styles.kickerDot}/>
-        5.611 playas · datos en tiempo real
+        Datos actualizados cada hora · gratis
       </p>
 
       <h1 className={styles.title}>
-        El estado del mar,<br/>
-        <em>antes de salir de casa</em>
+        ¿A qué playa<br/>
+        <em>voy hoy?</em>
       </h1>
       <p className={styles.sub}>
-        Temperatura del agua, oleaje y calidad en todas las playas de España.
+        Puntuamos cada playa de 0 a 100 según el estado actual del mar,
+        el viento, los servicios y el acceso. Elige la mejor para ti.
       </p>
+
+      {/* CTAs accionables — cada uno lleva a /buscar con filtro preseleccionado */}
+      <div className={styles.ctas}>
+        <Link href="/buscar?orden=score" className={styles.ctaPrimary}>
+          Mejores playas ahora
+        </Link>
+        <Link href="/buscar?filtro=sinviento" className={styles.ctaSecondary}>
+          Sin viento
+        </Link>
+        <Link href="/buscar?filtro=familiar" className={styles.ctaSecondary}>
+          Familiares
+        </Link>
+        <Link href="/buscar?filtro=tranquila" className={styles.ctaSecondary}>
+          Tranquilas
+        </Link>
+      </div>
 
       {/* Stats bar */}
       <div className={styles.stats}>
         <div className={styles.stat}>
-          <span className={styles.statV}>5.611</span>
+          <span className={styles.statV}>5.054</span>
           <span className={styles.statL}>Playas</span>
         </div>
         <div className={styles.statDiv}/>
         <div className={styles.stat}>
-          <span className={styles.statV}>17</span>
-          <span className={styles.statL}>Comunidades</span>
+          <span className={styles.statV}>Score 0-100</span>
+          <span className={styles.statL}>En tiempo real</span>
         </div>
         <div className={styles.statDiv}/>
         <div className={styles.stat}>
-          <span className={styles.statV}>1h</span>
+          <span className={styles.statV}>1 h</span>
           <span className={styles.statL}>Actualización</span>
-        </div>
-        <div className={styles.statDiv}/>
-        <div className={styles.stat}>
-          <span className={styles.statV}>∞</span>
-          <span className={styles.statL}>Gratis</span>
         </div>
       </div>
     </section>

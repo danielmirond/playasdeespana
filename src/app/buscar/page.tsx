@@ -32,10 +32,18 @@ function BuscarContent() {
   const [playas,    setPlayas]    = useState<Playa[]>([])
   const [loading,   setLoading]   = useState(true)
   const [q,         setQ]         = useState(searchParams.get('q') ?? '')
-  const [filtros,   setFiltros]   = useState<Record<string, boolean>>({})
   const [comunidad, setComunidad] = useState(searchParams.get('comunidad') ?? '')
   const [pagina,    setPagina]    = useState(1)
   const PER_PAGE = 24
+
+  // Inicializar filtros desde URL params (e.g. ?bandera=1&parking=1)
+  const [filtros, setFiltros] = useState<Record<string, boolean>>(() => {
+    const init: Record<string, boolean> = {}
+    for (const f of FILTROS) {
+      if (searchParams.get(f.key) === '1') init[f.key] = true
+    }
+    return init
+  })
 
   useEffect(() => {
     fetch('/data/playas.json')
@@ -48,10 +56,13 @@ function BuscarContent() {
     const params = new URLSearchParams()
     if (q)         params.set('q', q)
     if (comunidad) params.set('comunidad', comunidad)
+    for (const [k, v] of Object.entries(filtros)) {
+      if (v) params.set(k, '1')
+    }
     const str = params.toString()
     router.replace(str ? `/buscar?${str}` : '/buscar', { scroll: false })
     setPagina(1)
-  }, [q, comunidad])
+  }, [q, comunidad, filtros])
 
   const toggleFiltro = useCallback((key: string) => {
     setFiltros(prev => {
