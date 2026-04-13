@@ -15,6 +15,7 @@ import Buscador from '@/components/home/Buscador'
 import Destacadas from '@/components/home/Destacadas'
 import Comunidades from '@/components/home/Comunidades'
 import ClientBlocks from '@/components/home/ClientBlocks'
+import TopCercanas from '@/components/home/TopCercanas'
 import { getPlayas, getComunidades } from '@/lib/playas'
 
 export const revalidate = 3600
@@ -68,6 +69,7 @@ export default async function HomePage() {
       <main>
         <Hero />
         <Buscador />
+        <TopCercanas />
         <Destacadas playas={candidatas} topCount={8} avoidCount={4} />
         <ClientBlocks />
         <Comunidades comunidades={comunidades} />
