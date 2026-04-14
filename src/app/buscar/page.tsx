@@ -1,10 +1,11 @@
 // src/app/buscar/page.tsx
 'use client'
-import { useState, useEffect, useMemo, useCallback, Suspense } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import type { Playa } from '@/types'
+import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
 import styles from './buscar.module.css'
 
 const FILTROS = [
@@ -35,6 +36,16 @@ function BuscarContent() {
   const [comunidad, setComunidad] = useState(searchParams.get('comunidad') ?? '')
   const [pagina,    setPagina]    = useState(1)
   const PER_PAGE = 24
+
+  // Ubicación del usuario (viene de ?lat=X&lng=Y de la home o ficha)
+  const userLat = parseFloat(searchParams.get('lat') ?? '') || null
+  const userLng = parseFloat(searchParams.get('lng') ?? '') || null
+  const ordenCercanas = searchParams.get('orden') === 'cercanas' && userLat && userLng
+
+  // Scores para las playas visibles (cargados progresivamente)
+  const [scores, setScores] = useState<Map<string, PlayaScore>>(new Map())
+  const [scoringDone, setScoringDone] = useState(false)
+  const scoringRef = useRef(false)
 
   // Inicializar filtros desde URL params (e.g. ?bandera=1&parking=1)
   const [filtros, setFiltros] = useState<Record<string, boolean>>(() => {
@@ -73,9 +84,18 @@ function BuscarContent() {
     setPagina(1)
   }, [])
 
+  // Haversine para distancia
+  function haversine(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    const R = 6371
+    const dLat = (lat2 - lat1) * Math.PI / 180
+    const dLon = (lon2 - lon1) * Math.PI / 180
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  }
+
   const resultados = useMemo(() => {
     const qLow = q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    return playas.filter(p => {
+    let filtered = playas.filter(p => {
       if (q) {
         const haystack = [p.nombre, p.municipio, p.provincia, p.comunidad]
           .join(' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -85,9 +105,79 @@ function BuscarContent() {
       for (const k of Object.keys(filtros)) {
         if (filtros[k] && !(p as any)[k]) return false
       }
+      // Si hay coords, filtrar a <80km
+      if (ordenCercanas && userLat && userLng && p.lat && p.lng) {
+        const d = haversine(userLat, userLng, p.lat, p.lng)
+        if (d > 80) return false
+      }
       return true
     })
-  }, [playas, q, comunidad, filtros])
+
+    // Cuando tenemos scores, ordenar por score desc. Si no, por distancia o nombre.
+    if (ordenCercanas && userLat && userLng) {
+      if (scoringDone && scores.size > 0) {
+        // Ordenar por score (mayor = mejor)
+        filtered.sort((a, b) => {
+          const sa = scores.get(a.slug)?.score ?? 0
+          const sb = scores.get(b.slug)?.score ?? 0
+          return sb - sa
+        })
+      } else {
+        // Mientras se cargan los scores, ordenar por distancia
+        filtered.sort((a, b) => {
+          const da = haversine(userLat, userLng, a.lat, a.lng)
+          const db = haversine(userLat, userLng, b.lat, b.lng)
+          return da - db
+        })
+      }
+    }
+
+    return filtered
+  }, [playas, q, comunidad, filtros, ordenCercanas, userLat, userLng, scores, scoringDone])
+
+  // Fetch meteo + score para los primeros 12 resultados cuando hay coords
+  useEffect(() => {
+    if (!ordenCercanas || !userLat || !userLng || playas.length === 0 || scoringRef.current) return
+    scoringRef.current = true
+
+    const candidates = playas
+      .filter(p => p.lat && p.lng && haversine(userLat, userLng, p.lat, p.lng) < 80)
+      .sort((a, b) => haversine(userLat, userLng, a.lat, a.lng) - haversine(userLat, userLng, b.lat, b.lng))
+      .slice(0, 12)
+
+    if (candidates.length === 0) { setScoringDone(true); return }
+
+    async function fetchMeteo(lat: number, lng: number): Promise<MeteoInput> {
+      try {
+        const h = new Date().getHours()
+        const controller = new AbortController()
+        const timer = setTimeout(() => controller.abort(), 4000)
+        const [rM, rF] = await Promise.all([
+          fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}&hourly=wave_height,sea_surface_temperature&forecast_days=1&timezone=Europe%2FMadrid`, { signal: controller.signal }),
+          fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&hourly=wind_speed_10m,uv_index&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`, { signal: controller.signal }),
+        ])
+        clearTimeout(timer)
+        const marine = rM.ok ? await rM.json() : null
+        const meteo = rF.ok ? await rF.json() : null
+        return {
+          olas:   parseFloat((marine?.hourly?.wave_height?.[h] ?? 0.4).toFixed(1)),
+          agua:   Math.round(marine?.hourly?.sea_surface_temperature?.[h] ?? 18),
+          viento: Math.round(meteo?.hourly?.wind_speed_10m?.[h] ?? 10),
+          uv:     Math.round(meteo?.hourly?.uv_index?.[h] ?? 3),
+        }
+      } catch { return { agua: 18, olas: 0.4, viento: 10, uv: 3 } }
+    }
+
+    Promise.all(candidates.map(async p => {
+      const m = await fetchMeteo(p.lat, p.lng)
+      return { slug: p.slug, ps: calcularPlayaScore(p, m) }
+    })).then(results => {
+      const map = new Map<string, PlayaScore>()
+      for (const r of results) map.set(r.slug, r.ps)
+      setScores(map)
+      setScoringDone(true)
+    }).catch(() => setScoringDone(true))
+  }, [playas, ordenCercanas, userLat, userLng])
 
   const paginas     = Math.ceil(resultados.length / PER_PAGE)
   const visible     = resultados.slice((pagina - 1) * PER_PAGE, pagina * PER_PAGE)
@@ -100,10 +190,14 @@ function BuscarContent() {
 
         {/* Header */}
         <div className={styles.header}>
-          <h1 className={styles.title}>Buscar playas</h1>
+          <h1 className={styles.title}>
+            {ordenCercanas ? 'Mejores playas cerca de ti' : 'Buscar playas'}
+          </h1>
           {!loading && (
             <span className={styles.total}>
               {resultados.length.toLocaleString('es')} resultado{resultados.length !== 1 ? 's' : ''}
+              {ordenCercanas && !scoringDone && ' · calculando scores…'}
+              {ordenCercanas && scoringDone && ' · ordenadas por puntuación'}
             </span>
           )}
         </div>
@@ -197,26 +291,64 @@ function BuscarContent() {
         ) : (
           <>
             <div className={styles.grid}>
-              {visible.map(p => (
-                <Link key={p.slug} href={`/playas/${p.slug}`} className={styles.card}>
-                  <div className={styles.cardMain}>
-                    <div className={styles.cardNombre}>{p.nombre}</div>
-                    <div className={styles.cardLugar}>{p.municipio} · {p.provincia}</div>
-                    <div className={styles.cardComunidad}>{p.comunidad}</div>
-                  </div>
-                  <div className={styles.cardBadges}>
-                    {p.bandera    && <span className={styles.badge} aria-label="Bandera Azul">B. Azul</span>}
-                    {p.socorrismo && <span className={styles.badge} aria-label="Servicio de socorrismo">Socorr.</span>}
-                    {p.accesible  && <span className={styles.badge} aria-label="Accesible para personas con movilidad reducida">PMR</span>}
-                    {p.perros     && <span className={styles.badge} aria-label="Permitida entrada de perros">Perros</span>}
-                    {p.duchas     && <span className={styles.badge} aria-label="Con duchas">Duchas</span>}
-                    {p.parking    && <span className={styles.badge} aria-label="Con parking">P</span>}
-                  </div>
-                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
-                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/>
-                  </svg>
-                </Link>
-              ))}
+              {visible.map(p => {
+                const ps = scores.get(p.slug)
+                const dist = (ordenCercanas && userLat && userLng && p.lat && p.lng)
+                  ? haversine(userLat, userLng, p.lat, p.lng)
+                  : null
+                return (
+                  <Link key={p.slug} href={`/playas/${p.slug}`} className={styles.card}>
+                    <div className={styles.cardMain}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '.45rem', marginBottom: '.1rem' }}>
+                        <div className={styles.cardNombre} style={{ flex: 1 }}>{p.nombre}</div>
+                        {/* Score badge */}
+                        {ps && (
+                          <span style={{
+                            background: ps.color, color: '#fff',
+                            fontFamily: 'var(--font-serif)', fontWeight: 900,
+                            fontSize: '.78rem', padding: '.2rem .4rem', borderRadius: 6,
+                            display: 'inline-flex', alignItems: 'center', gap: '.15rem',
+                            flexShrink: 0,
+                          }}>
+                            {ps.score}<span style={{ fontSize: '.5rem', opacity: .8 }}>/100</span>
+                          </span>
+                        )}
+                      </div>
+                      <div className={styles.cardLugar}>
+                        {p.municipio} · {p.provincia}
+                        {dist !== null && (
+                          <span style={{ marginLeft: '.4rem', fontWeight: 700, color: 'var(--accent)' }}>
+                            · {dist < 1 ? `${Math.round(dist * 1000)}m` : `${dist.toFixed(1)}km`}
+                          </span>
+                        )}
+                      </div>
+                      {/* Factor pills when score available */}
+                      {ps && ps.factors.length > 0 && (
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.2rem', marginTop: '.25rem' }}>
+                          {ps.factors.slice(0, 3).map(f => (
+                            <span key={f.icon} style={{
+                              fontSize: '.62rem', fontWeight: 700, color: f.color,
+                              background: `${f.color}12`, border: `1px solid ${f.color}30`,
+                              padding: '.1rem .3rem', borderRadius: 4,
+                            }}>{f.label}</span>
+                          ))}
+                        </div>
+                      )}
+                      {!ps && <div className={styles.cardComunidad}>{p.comunidad}</div>}
+                    </div>
+                    <div className={styles.cardBadges}>
+                      {p.bandera    && <span className={styles.badge} aria-label="Bandera Azul">B. Azul</span>}
+                      {p.socorrismo && <span className={styles.badge} aria-label="Servicio de socorrismo">Socorr.</span>}
+                      {p.accesible  && <span className={styles.badge} aria-label="PMR">PMR</span>}
+                      {p.perros     && <span className={styles.badge} aria-label="Perros">Perros</span>}
+                      {p.parking    && <span className={styles.badge} aria-label="Parking">P</span>}
+                    </div>
+                    <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
+                      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/>
+                    </svg>
+                  </Link>
+                )
+              })}
             </div>
 
             {/* Paginación */}
