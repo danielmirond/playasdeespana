@@ -52,15 +52,18 @@ export default function SchemaPlaya({ playa, agua, olas, dateModified, faqs }: P
     ...actividades.map(a => ({ '@type': 'LocationFeatureSpecification', name: a, value: true })),
   ].filter(Boolean)
 
-  // BreadcrumbList
+  const slugify = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+
+  // BreadcrumbList — Inicio › Comunidad › Provincia › Municipio › Playa
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type':    'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Inicio',        item: BASE },
-      { '@type': 'ListItem', position: 2, name: playa.comunidad, item: `${BASE}/comunidad/${playa.comunidad.toLowerCase().replace(/ /g, '-')}` },
-      { '@type': 'ListItem', position: 3, name: playa.provincia, item: `${BASE}/provincia/${playa.provincia.toLowerCase().replace(/ /g, '-')}` },
-      { '@type': 'ListItem', position: 4, name: playa.nombre,    item: url },
+      { '@type': 'ListItem', position: 1, name: 'Inicio',          item: BASE },
+      { '@type': 'ListItem', position: 2, name: playa.comunidad,   item: `${BASE}/comunidad/${slugify(playa.comunidad)}` },
+      { '@type': 'ListItem', position: 3, name: playa.provincia,   item: `${BASE}/provincia/${slugify(playa.provincia)}` },
+      { '@type': 'ListItem', position: 4, name: playa.municipio,   item: `${BASE}/municipio/${slugify(playa.municipio)}` },
+      { '@type': 'ListItem', position: 5, name: playa.nombre,      item: url },
     ],
   }
 

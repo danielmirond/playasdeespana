@@ -87,13 +87,21 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
           <ellipse cx="300" cy="280" rx="110" ry="80"  stroke="currentColor" strokeWidth="1"/>
         </svg>
       </div>
-      <div className={styles.bc}>
+      <nav className={styles.bc} aria-label={locale === 'en' ? 'Breadcrumb' : 'Ruta de navegación'}>
         <Link href={homeHref}>{i18n.inicio}</Link>
-        <span>›</span>
+        <span aria-hidden="true">›</span>
         <Link href={i18n.comunidadBase(comunidadSlug)}>{playa.comunidad}</Link>
-        <span>›</span>
-        <span>{playa.nombre}</span>
-      </div>
+        <span aria-hidden="true">›</span>
+        {provinciaHref
+          ? <Link href={provinciaHref}>{playa.provincia}</Link>
+          : <span>{playa.provincia}</span>}
+        <span aria-hidden="true">›</span>
+        {municipioHref
+          ? <Link href={municipioHref}>{playa.municipio}</Link>
+          : <span>{playa.municipio}</span>}
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">{playa.nombre}</span>
+      </nav>
       <h1 className={styles.nombre}>{locale === 'en' ? `${playa.nombre} today — ${playa.municipio}` : `${nombreConPlaya(playa.nombre)} hoy — ${playa.municipio}`}</h1>
       <div className={styles.lugar}>
         {municipioHref
