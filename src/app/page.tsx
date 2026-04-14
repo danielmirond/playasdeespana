@@ -16,6 +16,9 @@ import Destacadas from '@/components/home/Destacadas'
 import Comunidades from '@/components/home/Comunidades'
 import ClientBlocks from '@/components/home/ClientBlocks'
 import TopCercanas from '@/components/home/TopCercanas'
+import ActividadesHoy from '@/components/home/ActividadesHoy'
+import ParkingHoy from '@/components/home/ParkingHoy'
+import MonetizacionBlock from '@/components/home/MonetizacionBlock'
 import { getPlayas, getComunidades } from '@/lib/playas'
 
 export const revalidate = 3600
@@ -71,6 +74,9 @@ export default async function HomePage() {
         <Buscador />
         <TopCercanas />
         <Destacadas playas={candidatas} topCount={8} avoidCount={4} />
+        <ParkingHoy playas={playas} />
+        <ActividadesHoy playas={playas} />
+        <MonetizacionBlock />
         <ClientBlocks />
         <Comunidades comunidades={comunidades} />
 
