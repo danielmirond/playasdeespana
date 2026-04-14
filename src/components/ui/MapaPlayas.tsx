@@ -153,6 +153,27 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
     ;(map as any)._addMarkers('TODOS')
     ;(map as any)._modoRadio = false
     ;(map as any)._radioKm = 50
+
+    // Geolocation: intentar centrar en el usuario. Si ya tiene permiso,
+    // vuela a su posición. Si no, queda en la vista general de España.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords
+          map.flyTo([latitude, longitude], 11, { duration: 1.5 })
+          // Marker "Tú estás aquí"
+          const userIcon = L.divIcon({
+            html: `<div style="width:14px;height:14px;border-radius:50%;background:#6b400a;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,.3)"></div>`,
+            className: '', iconSize: [14, 14], iconAnchor: [7, 7],
+          })
+          L.marker([latitude, longitude], { icon: userIcon })
+            .bindPopup('<div style="font-family:system-ui;font-size:.82rem;font-weight:700;text-align:center">Tu ubicación</div>')
+            .addTo(map)
+        },
+        () => { /* Denied/error: queda en la vista general */ },
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 },
+      )
+    }
   }, [leafletReady, playas])
 
   useEffect(() => { if (mapObj.current?._addMarkers) mapObj.current._addMarkers(filtro) }, [filtro])
@@ -203,6 +224,28 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
         ))}
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '.4rem' }}>
           {loading && <span style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)' }}>Cargando…</span>}
+          {/* Centrar en mi ubicación */}
+          <button
+            type="button"
+            onClick={() => {
+              if (!navigator.geolocation || !mapObj.current) return
+              navigator.geolocation.getCurrentPosition(
+                (pos) => mapObj.current?.flyTo([pos.coords.latitude, pos.coords.longitude], 12, { duration: 1 }),
+                () => {},
+                { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 },
+              )
+            }}
+            aria-label="Centrar en mi ubicación"
+            style={{
+              fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px',
+              border: '1.5px solid var(--line,#e8dcc8)',
+              background: 'transparent',
+              color: 'var(--accent,#6b400a)', cursor: 'pointer',
+              minHeight: '32px', display: 'flex', alignItems: 'center', gap: '.3rem',
+            }}
+          >
+            📍 Mi zona
+          </button>
           {/* Base map switcher: OSM ↔ Aérea (IGN PNOA) */}
           <div
             role="group"
