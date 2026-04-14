@@ -40,9 +40,11 @@ export default async function HomePage() {
     getComunidades(),
   ])
 
-  // Seleccionar ~30 candidatas geográficamente diversas y bien equipadas
-  // para que el score tenga sentido. 3 por cada comunidad costera, preferimos
-  // playas con socorrismo / bandera / parking (más comparables).
+  // Seleccionar ~48 candidatas: 2 bien equipadas + 2 al azar por comunidad.
+  // La mezcla es clave: las bien equipadas compiten por "Top playas hoy" y
+  // las aleatorias (que pueden tener pocos servicios o malas condiciones)
+  // alimentan "Evita hoy". Sin diversidad de candidatas, "Evita" queda
+  // siempre vacío porque las mejores playas NUNCA bajan de 45.
   const candidatas: typeof playas = []
   const porComunidad = new Map<string, typeof playas>()
   for (const p of playas) {
@@ -58,12 +60,26 @@ export default async function HomePage() {
 
   for (const com of COSTERAS) {
     const list = porComunidad.get(com) ?? []
-    // Priorizar las que tienen más servicios (heurística rápida)
+    if (list.length === 0) continue
+
+    // Top 2 por servicios (candidatas a "Top playas hoy")
     const scored = list.map(p => ({
       p,
       pts: (p.bandera ? 3 : 0) + (p.socorrismo ? 2 : 0) + (p.parking ? 1 : 0) + (p.duchas ? 1 : 0),
     })).sort((a, b) => b.pts - a.pts)
-    candidatas.push(...scored.slice(0, 3).map(x => x.p))
+    candidatas.push(...scored.slice(0, 2).map(x => x.p))
+
+    // 2 aleatorias (potenciales candidatas a "Evita hoy" si las condiciones son malas)
+    // Usamos un hash determinista del slug para que el resultado sea estable por hora
+    const hour = new Date().getHours()
+    const shuffled = list
+      .filter(p => !scored.slice(0, 2).some(s => s.p.slug === p.slug))
+      .sort((a, b) => {
+        const ha = (a.slug.charCodeAt(0) * 31 + hour) % 997
+        const hb = (b.slug.charCodeAt(0) * 31 + hour) % 997
+        return ha - hb
+      })
+    candidatas.push(...shuffled.slice(0, 2))
   }
 
   return (

@@ -265,12 +265,30 @@ export default function TopCercanas() {
               {r.playa.municipio} · {r.playa.provincia}
             </div>
 
-            {/* WHY it's good today — the key differentiator */}
+            {/* Factor pills — viento, oleaje, parking, UV */}
+            {r.ps.factors.length > 0 && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginBottom: '.4rem' }}>
+                {r.ps.factors.map(f => (
+                  <span key={f.icon} style={{
+                    fontSize: '.68rem', fontWeight: 700,
+                    color: f.color,
+                    background: `${f.color}12`,
+                    border: `1px solid ${f.color}30`,
+                    padding: '.15rem .4rem', borderRadius: 6,
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {f.label}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* WHY — reason text */}
             {r.ps.reasons.length > 0 && (
               <div style={{
-                fontSize: '.78rem', color: r.ps.color, fontWeight: 600,
-                lineHeight: 1.45, marginBottom: '.5rem',
-                padding: '.4rem .6rem',
+                fontSize: '.76rem', color: r.ps.color, fontWeight: 600,
+                lineHeight: 1.45, marginBottom: '.4rem',
+                padding: '.35rem .55rem',
                 background: `${r.ps.color}0d`,
                 borderRadius: 8,
                 borderLeft: `3px solid ${r.ps.color}`,

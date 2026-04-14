@@ -159,10 +159,21 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
         <div className={styles.body}>
           <div className={styles.nombre}>{p.nombre}</div>
           <div className={styles.lugar}>{p.municipio} · {p.provincia}</div>
-          {/* Score reasons */}
-          {ps.reasons.length > 0 && (
-            <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.25rem', lineHeight: 1.4 }}>
-              {(locale === 'en' ? ps.reasonsEn : ps.reasons).join(' · ')}
+          {/* Factor pills — viento, oleaje, parking, UV */}
+          {ps.factors.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginTop: '.35rem' }}>
+              {ps.factors.map(f => (
+                <span key={f.icon} style={{
+                  fontSize: '.68rem', fontWeight: 700,
+                  color: f.color,
+                  background: `${f.color}12`,
+                  border: `1px solid ${f.color}30`,
+                  padding: '.15rem .4rem', borderRadius: 6,
+                  whiteSpace: 'nowrap',
+                }}>
+                  {locale === 'en' ? f.labelEn : f.label}
+                </span>
+              ))}
             </div>
           )}
           <div className={styles.datos}>
