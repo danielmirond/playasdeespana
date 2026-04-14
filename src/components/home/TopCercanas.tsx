@@ -1,16 +1,13 @@
 'use client'
 // src/components/home/TopCercanas.tsx
-// "Mejores playas cerca de ti" — versión robusta.
+// "Mejores playas cerca de ti" — versión ultra-robusta.
 //
-// NO hace auto-request de geolocalización al cargar (era flaky).
-// Muestra un botón "Ver playas cerca de mí" que el usuario clica
-// explícitamente. Si el browser ya tiene permiso de una sesión anterior
-// lo detecta vía Permissions API y carga silenciosamente sin botón.
-//
-// Pipeline: geoloc (6s max) → playas.json → 6 nearest → meteo (8s max) → score → render
-// Si cualquier paso falla → hide silencioso. Cero spinners eternos.
+// SIEMPRE muestra el botón. Cero dependencia de Permissions API
+// (Safari no lo soporta para geolocation y falla silenciosamente).
+// Al clicar: pide ubicación → carga playas → meteo → score → render.
+// Si falla → muestra error con retry. Nunca se queda en loading eterno.
 
-import { useEffect, useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import type { Playa } from '@/types'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
@@ -31,9 +28,9 @@ function haversine(lat1: number, lon1: number, lat2: number, lon2: number): numb
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 }
 
-async function fetchMeteoWithTimeout(lat: number, lng: number, timeoutMs = 5000): Promise<MeteoInput> {
+async function fetchMeteo(lat: number, lng: number): Promise<MeteoInput> {
   const controller = new AbortController()
-  const timer = setTimeout(() => controller.abort(), timeoutMs)
+  const timer = setTimeout(() => controller.abort(), 4000)
   try {
     const h = new Date().getHours()
     const [rM, rF] = await Promise.all([
@@ -55,71 +52,66 @@ async function fetchMeteoWithTimeout(lat: number, lng: number, timeoutMs = 5000)
   }
 }
 
-function getPosition(timeoutMs = 6000): Promise<GeolocationPosition> {
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('timeout')), timeoutMs)
-    navigator.geolocation.getCurrentPosition(
-      (pos) => { clearTimeout(timer); resolve(pos) },
-      (err) => { clearTimeout(timer); reject(err) },
-      { enableHighAccuracy: false, timeout: timeoutMs, maximumAge: 600000 },
-    )
-  })
-}
-
-type Estado = 'button' | 'loading' | 'ready' | 'hidden'
+type Estado = 'button' | 'loading' | 'ready' | 'error'
 
 export default function TopCercanas() {
-  const [estado, setEstado] = useState<Estado>('hidden')
+  const [estado, setEstado] = useState<Estado>('button')
   const [results, setResults] = useState<ScoredNearby[]>([])
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null)
-
-  // Check if geolocation was previously granted — if so, load silently
-  useEffect(() => {
-    if (!navigator.geolocation) return
-    if (!navigator.permissions) { setEstado('button'); return }
-
-    navigator.permissions.query({ name: 'geolocation' }).then(r => {
-      if (r.state === 'granted') {
-        // Already granted from a previous session — auto-load
-        doLoad()
-      } else if (r.state === 'prompt') {
-        // Not yet decided — show the button
-        setEstado('button')
-      }
-      // 'denied' → stay hidden
-    }).catch(() => {
-      setEstado('button')
-    })
-  }, [])
+  const [errorMsg, setErrorMsg] = useState('')
+  const abortRef = useRef<AbortController | null>(null)
 
   const doLoad = useCallback(async () => {
+    // Cancel any previous attempt
+    if (abortRef.current) abortRef.current.abort()
+    const ac = new AbortController()
+    abortRef.current = ac
+
     setEstado('loading')
+    setErrorMsg('')
+
     try {
-      const pos = await getPosition(6000)
+      // Step 1: Geolocation — wrapped in Promise with hard timeout
+      if (!navigator.geolocation) throw new Error('no-geo')
+
+      const pos = await new Promise<GeolocationPosition>((resolve, reject) => {
+        const t = setTimeout(() => reject(new Error('geo-timeout')), 6000)
+        navigator.geolocation.getCurrentPosition(
+          (p) => { clearTimeout(t); resolve(p) },
+          (e) => { clearTimeout(t); reject(e) },
+          { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 },
+        )
+      })
+
+      if (ac.signal.aborted) return
       const { latitude: lat, longitude: lng } = pos.coords
       setUserCoords({ lat, lng })
 
-      const resp = await fetch('/data/playas.json')
-      if (!resp.ok) throw new Error('fetch failed')
+      // Step 2: Load playas.json
+      const resp = await fetch('/data/playas.json', { signal: ac.signal })
+      if (!resp.ok) throw new Error('fetch-fail')
       const playas: Playa[] = await resp.json()
 
-      // Find 6 closest coastal beaches
+      // Step 3: Find 6 nearest
       const nearby = playas
-        .filter(p => p.lat && p.lng)
+        .filter(p => typeof p.lat === 'number' && typeof p.lng === 'number')
         .map(p => ({ p, dist: haversine(lat, lng, p.lat, p.lng) }))
         .filter(x => x.dist < 80)
         .sort((a, b) => a.dist - b.dist)
         .slice(0, 6)
 
-      if (nearby.length === 0) { setEstado('hidden'); return }
+      if (nearby.length === 0) throw new Error('no-nearby')
+      if (ac.signal.aborted) return
 
-      // Fetch meteo for all 6 in parallel with 8s total timeout
-      const meteoPromise = Promise.all(nearby.map(x => fetchMeteoWithTimeout(x.p.lat, x.p.lng, 5000)))
-      const meteoTimer = new Promise<null>((resolve) => setTimeout(() => resolve(null), 8000))
-      const meteos = await Promise.race([meteoPromise, meteoTimer])
+      // Step 4: Fetch meteo — race with 7s total timeout
+      const meteoRace = Promise.race([
+        Promise.all(nearby.map(x => fetchMeteo(x.p.lat, x.p.lng))),
+        new Promise<null>((r) => setTimeout(() => r(null), 7000)),
+      ])
+      const meteos = await meteoRace
+      if (!meteos || ac.signal.aborted) throw new Error('meteo-timeout')
 
-      if (!meteos) { setEstado('hidden'); return }
-
+      // Step 5: Score and sort
       const scored: ScoredNearby[] = nearby.map((x, i) => ({
         playa: x.p,
         distKm: x.dist,
@@ -129,14 +121,19 @@ export default function TopCercanas() {
 
       setResults(scored)
       setEstado('ready')
-    } catch {
-      setEstado('hidden')
+    } catch (err) {
+      if (ac.signal.aborted) return
+      const msg = (err as Error)?.message ?? ''
+      if (msg === 'no-geo') setErrorMsg('Tu navegador no soporta geolocalización')
+      else if (msg === 'geo-timeout') setErrorMsg('No se pudo obtener tu ubicación. Inténtalo de nuevo.')
+      else if (msg === 'no-nearby') setErrorMsg('No hay playas cerca de tu ubicación (<80km)')
+      else if ((err as GeolocationPositionError)?.code === 1) setErrorMsg('Has denegado el acceso a la ubicación. Actívalo en los ajustes del navegador.')
+      else setErrorMsg('Error al cargar. Inténtalo de nuevo.')
+      setEstado('error')
     }
   }, [])
 
-  if (estado === 'hidden') return null
-
-  // Button state — prominent CTA to activate location
+  // Button state
   if (estado === 'button') {
     return (
       <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
@@ -148,10 +145,8 @@ export default function TopCercanas() {
             width: '100%', padding: '1rem 1.25rem',
             background: 'color-mix(in srgb, var(--accent) 8%, var(--card-bg))',
             border: '1.5px solid var(--line)', borderRadius: 14,
-            cursor: 'pointer', transition: 'all .15s',
-            minHeight: 56,
+            cursor: 'pointer', transition: 'all .15s', minHeight: 56,
           }}
-          aria-label="Activar ubicación para ver playas cercanas"
         >
           <MapPin size={22} weight="bold" color="var(--accent)" aria-hidden="true" />
           <div style={{ flex: 1, textAlign: 'left' }}>
@@ -159,16 +154,16 @@ export default function TopCercanas() {
               Ver playas cerca de mí
             </div>
             <div style={{ fontSize: '.75rem', color: 'var(--muted)', marginTop: '.1rem' }}>
-              Con puntuación en tiempo real según viento, oleaje y servicios
+              Puntuación en tiempo real: viento, oleaje, parking y servicios
             </div>
           </div>
-          <span style={{ fontSize: '.85rem', fontWeight: 700, color: 'var(--accent)' }}>Activar →</span>
+          <span style={{ fontSize: '.85rem', fontWeight: 700, color: 'var(--accent)', flexShrink: 0 }}>Activar →</span>
         </button>
       </section>
     )
   }
 
-  // Loading state — compact, disappears fast
+  // Loading
   if (estado === 'loading') {
     return (
       <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
@@ -177,7 +172,7 @@ export default function TopCercanas() {
           padding: '1rem 1.25rem',
           background: 'color-mix(in srgb, var(--accent) 6%, var(--card-bg))',
           border: '1.5px solid var(--line)', borderRadius: 14,
-        }} role="status" aria-live="polite">
+        }} role="status">
           <MapPin size={20} weight="bold" color="var(--accent)" aria-hidden="true" />
           <span style={{ fontSize: '.88rem', fontWeight: 600, color: 'var(--ink)', flex: 1 }}>
             Analizando playas cercanas…
@@ -192,7 +187,35 @@ export default function TopCercanas() {
     )
   }
 
-  // Ready — scored cards
+  // Error — with retry button
+  if (estado === 'error') {
+    return (
+      <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '.65rem',
+          padding: '1rem 1.25rem',
+          background: 'rgba(239,68,68,.06)',
+          border: '1.5px solid rgba(239,68,68,.25)', borderRadius: 14,
+        }}>
+          <MapPin size={20} weight="bold" color="#ef4444" aria-hidden="true" />
+          <span style={{ fontSize: '.85rem', color: '#b91c1c', flex: 1 }}>{errorMsg}</span>
+          <button
+            type="button"
+            onClick={doLoad}
+            style={{
+              fontSize: '.82rem', fontWeight: 700, color: 'var(--accent)',
+              background: 'none', border: 'none', cursor: 'pointer',
+              textDecoration: 'underline', flexShrink: 0,
+            }}
+          >
+            Reintentar
+          </button>
+        </div>
+      </section>
+    )
+  }
+
+  // Ready — results
   return (
     <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
       <div style={{
@@ -233,12 +256,9 @@ export default function TopCercanas() {
               textDecoration: 'none', transition: 'all .15s',
             }}
           >
-            {/* Score + rank + distance */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.4rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-                <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '1rem', color: 'var(--accent)' }}>
-                  #{i + 1}
-                </span>
+                <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '1rem', color: 'var(--accent)' }}>#{i + 1}</span>
                 <span style={{
                   background: r.ps.color, color: '#fff',
                   fontFamily: 'var(--font-serif)', fontWeight: 900,
@@ -257,7 +277,6 @@ export default function TopCercanas() {
             <div style={{ fontWeight: 800, fontSize: '.95rem', color: 'var(--ink)', lineHeight: 1.2, marginBottom: '.15rem' }}>{r.playa.nombre}</div>
             <div style={{ fontSize: '.74rem', color: 'var(--muted)', marginBottom: '.4rem' }}>{r.playa.municipio} · {r.playa.provincia}</div>
 
-            {/* Factor pills */}
             {r.ps.factors.length > 0 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginBottom: '.4rem' }}>
                 {r.ps.factors.map(f => (
@@ -270,7 +289,6 @@ export default function TopCercanas() {
               </div>
             )}
 
-            {/* Meteo */}
             <div style={{ display: 'flex', gap: '.6rem', fontSize: '.74rem', color: 'var(--muted)', marginTop: 'auto' }}>
               <span><strong style={{ color: 'var(--ink)' }}>{r.meteo.agua}°C</strong> agua</span>
               <span><strong style={{ color: 'var(--ink)' }}>{r.meteo.olas}m</strong> olas</span>
