@@ -133,43 +133,40 @@ export default function TopCercanas() {
     }
   }, [])
 
-  // Button state — big, aggressive, unmissable on mobile
+  // Button state — big, centered, breathes
   if (estado === 'button') {
     return (
-      <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1rem 1.5rem 0' }}>
+      <section style={{ maxWidth: 600, margin: '0 auto', padding: '1.5rem 1.5rem .5rem', textAlign: 'center' }}>
         <button
           type="button"
           onClick={doLoad}
           style={{
             display: 'flex', alignItems: 'center', gap: '.85rem',
-            width: '100%', padding: '1.15rem 1.35rem',
+            width: '100%', padding: '1.25rem 1.5rem',
             background: 'var(--accent)',
-            border: 'none', borderRadius: 16,
+            border: 'none', borderRadius: 18,
             cursor: 'pointer', transition: 'all .15s',
-            minHeight: 64,
-            boxShadow: '0 6px 20px rgba(107,64,10,.25)',
+            minHeight: 68,
+            boxShadow: '0 8px 28px rgba(107,64,10,.22)',
+            justifyContent: 'center',
           }}
         >
           <div style={{
-            width: 44, height: 44, borderRadius: '50%',
+            width: 46, height: 46, borderRadius: '50%',
             background: 'rgba(255,255,255,.2)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             flexShrink: 0,
           }}>
             <MapPin size={24} weight="bold" color="#fff" aria-hidden="true" />
           </div>
-          <div style={{ flex: 1, textAlign: 'left' }}>
-            <div style={{ fontWeight: 900, fontSize: '1.05rem', color: '#fff', lineHeight: 1.2 }}>
+          <div style={{ textAlign: 'left' }}>
+            <div style={{ fontWeight: 900, fontSize: '1.1rem', color: '#fff', lineHeight: 1.2 }}>
               ¿Qué playa me queda cerca?
             </div>
-            <div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.75)', marginTop: '.15rem' }}>
+            <div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.7)', marginTop: '.2rem' }}>
               Activa tu ubicación · score en tiempo real
             </div>
           </div>
-          <span style={{
-            fontSize: '1.1rem', fontWeight: 900, color: '#fff',
-            flexShrink: 0,
-          }}>→</span>
         </button>
       </section>
     )
