@@ -23,6 +23,7 @@ import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
+import { calcularPlayaScore } from '@/lib/scoring'
 
 export const revalidate = 3600
 // Dejamos techo de 25 s al render (Overpass para hoteles/restaurantes puede
@@ -163,6 +164,14 @@ export default async function PlayaPage({ params }: Props) {
   const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
+
+  // Score 0-100 en tiempo real
+  const playaScore = calcularPlayaScore(playa, {
+    agua: meteo.agua,
+    olas: meteo.olas,
+    viento: meteo.viento,
+    uv: meteo.uv,
+  })
   const horaIdeal = calcularHoraIdeal({
     uv: meteoPlayaData?.uv_max ?? null,
     amanecer: solData?.amanecer,
@@ -212,6 +221,7 @@ export default async function PlayaPage({ params }: Props) {
         frase={frase}
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
+        playaScore={playaScore}
       />
       <FichaNav />
       <FichaBody

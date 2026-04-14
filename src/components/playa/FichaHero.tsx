@@ -4,6 +4,7 @@ import Link from 'next/link'
 import FichaHeroActions from './FichaHeroActions'
 import type { Playa } from '@/types'
 import type { EstadoConfig } from '@/lib/estados'
+import type { PlayaScore } from '@/lib/scoring'
 import IluEstado from './IluEstado'
 import styles from './FichaHero.module.css'
 import { Drop, Waves, Sun, Wind, Thermometer } from '@phosphor-icons/react'
@@ -31,6 +32,8 @@ interface Props {
    * asignada. Enlaza a `/provincia/{slug}` (o `/en/provinces/{slug}`).
    */
   provinciaSlug?: string
+  /** Score 0-100 calculado en tiempo real con meteo + servicios. */
+  playaScore?: PlayaScore
 }
 
 const t = {
@@ -62,7 +65,7 @@ const t = {
   },
 }
 
-export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', municipioSlug, provinciaSlug, playaScore }: Props) {
   const i18n = t[locale]
   const comunidadSlug = playa.comunidad.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const homeHref = locale === 'en' ? '/en' : '/'
@@ -103,6 +106,77 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
         <span aria-current="page">{playa.nombre}</span>
       </nav>
       <h1 className={styles.nombre}>{locale === 'en' ? `${playa.nombre} today — ${playa.municipio}` : `${nombreConPlaya(playa.nombre)} hoy — ${playa.municipio}`}</h1>
+
+      {/* Score badge — "¿Ir hoy?" */}
+      {playaScore && (
+        <div style={{
+          position: 'relative', zIndex: 2,
+          display: 'flex', alignItems: 'center', gap: '.65rem',
+          justifyContent: 'center', flexWrap: 'wrap',
+          marginBottom: '.6rem',
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '.45rem',
+            background: 'rgba(255,255,255,.65)',
+            backdropFilter: 'blur(8px)',
+            border: `2px solid ${playaScore.color}50`,
+            borderRadius: 14, padding: '.55rem 1rem',
+          }}>
+            <span style={{
+              background: playaScore.color, color: '#fff',
+              fontFamily: 'var(--font-serif)', fontWeight: 900,
+              fontSize: '1.25rem', lineHeight: 1,
+              padding: '.4rem .6rem', borderRadius: 10,
+              display: 'inline-flex', alignItems: 'center', gap: '.25rem',
+            }}>
+              {playaScore.score}
+              <span style={{ fontSize: '.65rem', fontWeight: 600, opacity: .8 }}>/100</span>
+            </span>
+            <div>
+              <div style={{ fontWeight: 800, fontSize: '.95rem', color: playaScore.color, lineHeight: 1.1 }}>
+                {locale === 'en' ? playaScore.labelEn : playaScore.label}
+              </div>
+              <div style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.2 }}>
+                {locale === 'en' ? 'Score today' : 'Puntuación hoy'}
+              </div>
+            </div>
+          </div>
+          {/* Factor pills */}
+          {playaScore.factors.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.3rem', justifyContent: 'center' }}>
+              {playaScore.factors.map(f => (
+                <span key={f.icon} style={{
+                  fontSize: '.72rem', fontWeight: 700, color: f.color,
+                  background: `rgba(255,255,255,.7)`,
+                  border: `1.5px solid ${f.color}50`,
+                  padding: '.25rem .55rem', borderRadius: 8,
+                  backdropFilter: 'blur(4px)',
+                  whiteSpace: 'nowrap',
+                }}>
+                  {locale === 'en' ? f.labelEn : f.label}
+                </span>
+              ))}
+            </div>
+          )}
+          {/* CTA: ver mejores playas cercanas */}
+          <Link
+            href={`/buscar?lat=${playa.lat}&lng=${playa.lng}&orden=cercanas`}
+            style={{
+              fontSize: '.78rem', fontWeight: 700,
+              color: 'var(--accent)',
+              background: 'rgba(255,255,255,.65)',
+              backdropFilter: 'blur(4px)',
+              border: '1.5px solid var(--line)',
+              borderRadius: 8, padding: '.4rem .8rem',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {locale === 'en' ? '📍 Better beaches nearby?' : '📍 ¿Hay mejores playas cerca?'}
+          </Link>
+        </div>
+      )}
+
       <div className={styles.lugar}>
         {municipioHref
           ? <Link href={municipioHref} className={styles.lugarLink}>{playa.municipio}</Link>

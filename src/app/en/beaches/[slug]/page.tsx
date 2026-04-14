@@ -20,6 +20,7 @@ import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
+import { calcularPlayaScore } from '@/lib/scoring'
 
 export const revalidate = 3600
 export const maxDuration = 25
@@ -143,6 +144,7 @@ export default async function BeachPageEn({ params }: Props) {
 
   const dateModified = meteoPlayaData?.timestamp ?? new Date().toISOString()
 
+  const playaScore = calcularPlayaScore(playa, { agua: meteo.agua, olas: meteo.olas, viento: meteo.viento, uv: meteo.uv })
   const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
@@ -195,6 +197,7 @@ export default async function BeachPageEn({ params }: Props) {
         locale="en"
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
+        playaScore={playaScore}
       />
       <FichaNav locale="en" />
       <FichaBody locale="en"
