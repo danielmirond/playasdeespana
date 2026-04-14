@@ -87,8 +87,8 @@ export default async function HomePage() {
       <Nav />
       <main>
         <Hero />
-        <Buscador />
         <TopCercanas />
+        <Buscador />
         <Destacadas playas={candidatas} topCount={8} avoidCount={4} />
         <ParkingHoy playas={playas} />
         <ActividadesHoy playas={playas} />

@@ -133,31 +133,43 @@ export default function TopCercanas() {
     }
   }, [])
 
-  // Button state
+  // Button state — big, aggressive, unmissable on mobile
   if (estado === 'button') {
     return (
-      <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
+      <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1rem 1.5rem 0' }}>
         <button
           type="button"
           onClick={doLoad}
           style={{
-            display: 'flex', alignItems: 'center', gap: '.65rem',
-            width: '100%', padding: '1rem 1.25rem',
-            background: 'color-mix(in srgb, var(--accent) 8%, var(--card-bg))',
-            border: '1.5px solid var(--line)', borderRadius: 14,
-            cursor: 'pointer', transition: 'all .15s', minHeight: 56,
+            display: 'flex', alignItems: 'center', gap: '.85rem',
+            width: '100%', padding: '1.15rem 1.35rem',
+            background: 'var(--accent)',
+            border: 'none', borderRadius: 16,
+            cursor: 'pointer', transition: 'all .15s',
+            minHeight: 64,
+            boxShadow: '0 6px 20px rgba(107,64,10,.25)',
           }}
         >
-          <MapPin size={22} weight="bold" color="var(--accent)" aria-hidden="true" />
+          <div style={{
+            width: 44, height: 44, borderRadius: '50%',
+            background: 'rgba(255,255,255,.2)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <MapPin size={24} weight="bold" color="#fff" aria-hidden="true" />
+          </div>
           <div style={{ flex: 1, textAlign: 'left' }}>
-            <div style={{ fontWeight: 800, fontSize: '.95rem', color: 'var(--ink)' }}>
-              Ver playas cerca de mí
+            <div style={{ fontWeight: 900, fontSize: '1.05rem', color: '#fff', lineHeight: 1.2 }}>
+              ¿Qué playa me queda cerca?
             </div>
-            <div style={{ fontSize: '.75rem', color: 'var(--muted)', marginTop: '.1rem' }}>
-              Puntuación en tiempo real: viento, oleaje, parking y servicios
+            <div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.75)', marginTop: '.15rem' }}>
+              Activa tu ubicación · score en tiempo real
             </div>
           </div>
-          <span style={{ fontSize: '.85rem', fontWeight: 700, color: 'var(--accent)', flexShrink: 0 }}>Activar →</span>
+          <span style={{
+            fontSize: '1.1rem', fontWeight: 900, color: '#fff',
+            flexShrink: 0,
+          }}>→</span>
         </button>
       </section>
     )
