@@ -51,11 +51,25 @@ export default async function RutasPage() {
         }}>
           Rutas de playas por las costas de España
         </h1>
-        <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '2.5rem', maxWidth: 600, lineHeight: 1.6 }}>
+        <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '1.5rem', maxWidth: 600, lineHeight: 1.6 }}>
           {rutas.length} itinerarios por las costas más emblemáticas de España.
           Cada ruta conecta las 5 mejores playas de la zona, ordenadas para recorrer en coche
           con enlace directo a Google Maps.
         </p>
+
+        <Link
+          href="/rutas/configurar"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '.4rem',
+            background: 'var(--accent)', color: '#fff',
+            padding: '.75rem 1.25rem', borderRadius: 12,
+            fontSize: '.92rem', fontWeight: 800, textDecoration: 'none',
+            minHeight: 44, marginBottom: '2.5rem',
+            boxShadow: '0 4px 14px rgba(107,64,10,.2)',
+          }}
+        >
+          🛣️ Configura tu propia ruta
+        </Link>
 
         {ZONAS.map(zona => {
           const zonalRutas = rutasByZona.get(zona.key) ?? []
