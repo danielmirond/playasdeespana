@@ -5,27 +5,24 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import { getPlayas } from '@/lib/playas'
-import { getRutas, type Ruta } from '@/lib/rutas'
+import { getRutas } from '@/lib/rutas'
 
 export const revalidate = 86400
-
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
   const playas = await getPlayas()
-  const rutas = await getRutas(playas)
-  return rutas.map(r => ({ slug: r.slug }))
+  return (await getRutas(playas)).map(r => ({ slug: r.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const playas = await getPlayas()
-  const rutas = await getRutas(playas)
-  const ruta = rutas.find(r => r.slug === slug)
+  const ruta = (await getRutas(playas)).find(r => r.slug === slug)
   if (!ruta) return {}
   return {
-    title: `${ruta.nombre} — Itinerario de playas`,
-    description: `Recorre ${ruta.paradas.length} de las mejores playas de ${ruta.provincia} en ${ruta.totalKm} km. Itinerario con mapa, puntuación y enlace a Google Maps.`,
+    title: `${ruta.nombre} — ${ruta.paradas.length} playas imprescindibles`,
+    description: `Recorre ${ruta.paradas.length} de las mejores playas de la ${ruta.costa.nombre} en ${ruta.totalKm} km. ${ruta.costa.descripcion}`,
     alternates: { canonical: `/rutas/${slug}` },
   }
 }
@@ -33,8 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function RutaPage({ params }: Props) {
   const { slug } = await params
   const playas = await getPlayas()
-  const rutas = await getRutas(playas)
-  const ruta = rutas.find(r => r.slug === slug)
+  const ruta = (await getRutas(playas)).find(r => r.slug === slug)
   if (!ruta) notFound()
 
   const playasRuta = ruta.paradas.map(p => p.playa)
@@ -44,12 +40,10 @@ export default async function RutaPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: ruta.nombre,
-    description: `Ruta de ${ruta.paradas.length} playas por ${ruta.provincia}`,
+    description: ruta.costa.descripcion,
     numberOfItems: ruta.paradas.length,
     itemListElement: ruta.paradas.map((p, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: p.playa.nombre,
+      '@type': 'ListItem', position: i + 1, name: p.playa.nombre,
       url: `https://playas-espana.com/playas/${p.playa.slug}`,
     })),
   }
@@ -58,7 +52,6 @@ export default async function RutaPage({ params }: Props) {
     <>
       <Nav />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
-        {/* Breadcrumb */}
         <nav style={{
           display: 'flex', alignItems: 'center', gap: '.4rem', flexWrap: 'wrap',
           fontSize: '.75rem', color: 'var(--muted)', marginBottom: '.85rem',
@@ -67,53 +60,60 @@ export default async function RutaPage({ params }: Props) {
           <span aria-hidden="true">›</span>
           <Link href="/rutas" style={{ color: 'var(--accent)', textDecoration: 'none' }}>Rutas</Link>
           <span aria-hidden="true">›</span>
-          <span aria-current="page">{ruta.provincia}</span>
+          <span style={{ color: 'var(--muted)' }}>{ruta.costa.zonaLabel}</span>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">{ruta.costa.nombre}</span>
         </nav>
 
-        <h1 style={{
-          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4.5vw, 2.4rem)',
-          fontWeight: 900, letterSpacing: '-.025em', color: 'var(--ink)',
-          lineHeight: 1.1, marginBottom: '.5rem',
+        {/* Hero */}
+        <div style={{
+          marginBottom: '2rem', paddingBottom: '1.5rem',
+          borderBottom: '1.5px solid var(--line)',
+          borderLeft: `4px solid ${ruta.costa.color}`,
+          paddingLeft: '1.25rem',
         }}>
-          {ruta.nombre}
-        </h1>
-        <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '.5rem' }}>
-          {ruta.comunidad} · {ruta.paradas.length} paradas · {ruta.totalKm} km · Puntuación media {avgScore}/100
-        </p>
+          <h1 style={{
+            fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4.5vw, 2.4rem)',
+            fontWeight: 900, letterSpacing: '-.025em', color: 'var(--ink)',
+            lineHeight: 1.1, marginBottom: '.4rem',
+          }}>
+            {ruta.nombre}
+          </h1>
+          <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '.35rem', maxWidth: 560, lineHeight: 1.55 }}>
+            {ruta.costa.descripcion}
+          </p>
+          <p style={{ fontSize: '.82rem', color: 'var(--muted)' }}>
+            {ruta.costa.zonaLabel} · {ruta.paradas.length} paradas · {ruta.totalKm} km · Puntuación media <strong style={{ color: 'var(--ink)' }}>{avgScore}/100</strong>
+          </p>
+        </div>
 
-        {/* CTA Google Maps */}
+        {/* CTAs */}
         <div style={{ display: 'flex', gap: '.55rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
           <a
             href={ruta.googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            target="_blank" rel="noopener noreferrer"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '.4rem',
               background: 'var(--accent)', color: '#fff',
               padding: '.75rem 1.25rem', borderRadius: 12,
-              fontSize: '.92rem', fontWeight: 800,
-              textDecoration: 'none', minHeight: 44,
-              boxShadow: '0 4px 14px rgba(107,64,10,.2)',
+              fontSize: '.92rem', fontWeight: 800, textDecoration: 'none',
+              minHeight: 44, boxShadow: '0 4px 14px rgba(107,64,10,.2)',
             }}
           >
-            🗺️ Abrir ruta en Google Maps
+            🗺️ Abrir en Google Maps
           </a>
-          <Link
-            href={`/provincia/${ruta.provincia.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-')}`}
-            style={{
-              display: 'inline-flex', alignItems: 'center',
-              background: 'var(--card-bg)', color: 'var(--accent)',
-              border: '1.5px solid var(--line)',
-              padding: '.65rem 1.15rem', borderRadius: 10,
-              fontSize: '.85rem', fontWeight: 700,
-              textDecoration: 'none', minHeight: 44,
-            }}
-          >
-            Todas las playas de {ruta.provincia} →
+          <Link href="/rutas" style={{
+            display: 'inline-flex', alignItems: 'center',
+            background: 'var(--card-bg)', color: 'var(--accent)',
+            border: '1.5px solid var(--line)',
+            padding: '.65rem 1.15rem', borderRadius: 10,
+            fontSize: '.85rem', fontWeight: 700, textDecoration: 'none', minHeight: 44,
+          }}>
+            Todas las rutas →
           </Link>
         </div>
 
-        {/* Mapa con las paradas */}
+        {/* Mapa */}
         <div style={{
           background: 'var(--card-bg)', border: '1.5px solid var(--line)',
           borderRadius: 20, overflow: 'hidden', marginBottom: '2rem',
@@ -127,10 +127,10 @@ export default async function RutaPage({ params }: Props) {
             </span>
             <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>{ruta.paradas.length} paradas</span>
           </div>
-          <MapaPlayas playas={playasRuta} height="450px" provincia={ruta.provincia} />
+          <MapaPlayas playas={playasRuta} height="450px" />
         </div>
 
-        {/* Lista de paradas */}
+        {/* Itinerario */}
         <h2 style={{
           fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: 800,
           color: 'var(--ink)', margin: '0 0 1rem',
@@ -140,63 +140,42 @@ export default async function RutaPage({ params }: Props) {
 
         <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
           {ruta.paradas.map((p, i) => {
-            const scoreColor = p.score >= 75 ? '#22c55e' : p.score >= 55 ? '#eab308' : p.score >= 35 ? '#f97316' : '#ef4444'
+            const sc = p.score >= 75 ? '#22c55e' : p.score >= 55 ? '#eab308' : p.score >= 35 ? '#f97316' : '#ef4444'
             return (
-              <li key={p.playa.slug} style={{
-                display: 'flex', gap: '1rem', alignItems: 'flex-start',
-              }}>
-                {/* Step number + connector line */}
-                <div style={{
-                  display: 'flex', flexDirection: 'column', alignItems: 'center',
-                  flexShrink: 0, width: 36,
-                }}>
+              <li key={p.playa.slug} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0, width: 36 }}>
                   <div style={{
                     width: 36, height: 36, borderRadius: '50%',
-                    background: 'var(--accent)', color: '#fff',
-                    fontFamily: 'var(--font-serif)', fontWeight: 900,
-                    fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: ruta.costa.color === '#f8fafc' ? 'var(--accent)' : ruta.costa.color, color: '#fff',
+                    fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '1rem',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
                     {i + 1}
                   </div>
                   {i < ruta.paradas.length - 1 && (
-                    <div style={{
-                      width: 2, flex: 1, minHeight: 20,
-                      background: 'var(--line)', margin: '.3rem 0',
-                    }} />
+                    <div style={{ width: 2, flex: 1, minHeight: 20, background: 'var(--line)', margin: '.3rem 0' }} />
                   )}
                 </div>
-
-                {/* Card */}
-                <Link
-                  href={`/playas/${p.playa.slug}`}
-                  style={{
-                    flex: 1,
-                    display: 'flex', flexDirection: 'column',
-                    background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                    borderRadius: 14, padding: '1rem 1.15rem',
-                    textDecoration: 'none', transition: 'all .15s',
-                  }}
-                >
+                <Link href={`/playas/${p.playa.slug}`} style={{
+                  flex: 1, display: 'flex', flexDirection: 'column',
+                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                  borderRadius: 14, padding: '1rem 1.15rem', textDecoration: 'none', transition: 'all .15s',
+                }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.25rem' }}>
-                    <span style={{ fontWeight: 800, fontSize: '.95rem', color: 'var(--ink)' }}>
-                      {p.playa.nombre}
-                    </span>
-                    <span style={{
-                      background: scoreColor, color: '#fff',
-                      fontFamily: 'var(--font-serif)', fontWeight: 900,
-                      fontSize: '.82rem', padding: '.2rem .45rem', borderRadius: 6,
-                    }}>
+                    <span style={{ fontWeight: 800, fontSize: '.95rem', color: 'var(--ink)' }}>{p.playa.nombre}</span>
+                    <span style={{ background: sc, color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '.82rem', padding: '.2rem .45rem', borderRadius: 6 }}>
                       {p.score}
                     </span>
                   </div>
                   <div style={{ fontSize: '.78rem', color: 'var(--muted)', marginBottom: '.35rem' }}>
-                    {p.playa.municipio}
-                    {p.distFromPrev > 0 && (
-                      <span style={{ marginLeft: '.4rem', fontWeight: 700, color: 'var(--accent)' }}>
-                        · {p.distFromPrev.toFixed(1)} km desde la anterior
-                      </span>
-                    )}
+                    {p.playa.municipio} · {p.playa.provincia}
+                    {p.distFromPrev > 0 && <span style={{ marginLeft: '.4rem', fontWeight: 700, color: 'var(--accent)' }}>· {p.distFromPrev.toFixed(1)} km</span>}
                   </div>
+                  {p.playa.descripcion && !(p.playa as any).descripcion_generada && (
+                    <div style={{ fontSize: '.78rem', color: 'var(--muted)', lineHeight: 1.45, marginBottom: '.35rem' }}>
+                      {(p.playa.descripcion ?? '').slice(0, 120)}…
+                    </div>
+                  )}
                   <div style={{ display: 'flex', gap: '.25rem', flexWrap: 'wrap' }}>
                     {p.playa.bandera && <span style={{ fontSize: '.68rem', fontWeight: 700, color: 'var(--accent)', background: 'color-mix(in srgb, var(--accent) 10%, var(--card-bg))', padding: '.12rem .35rem', borderRadius: 4 }}>Bandera Azul</span>}
                     {p.playa.socorrismo && <span style={{ fontSize: '.68rem', background: 'var(--metric-bg)', border: '1px solid var(--line)', padding: '.12rem .35rem', borderRadius: 4 }}>Socorrismo</span>}
@@ -208,12 +187,23 @@ export default async function RutaPage({ params }: Props) {
             )
           })}
         </ol>
+
+        {/* CTA final */}
+        <div style={{
+          marginTop: '2rem', padding: '1.25rem',
+          background: 'color-mix(in srgb, var(--accent) 6%, var(--card-bg))',
+          border: '1.5px solid var(--line)', borderRadius: 14,
+          textAlign: 'center',
+        }}>
+          <a href={ruta.googleMapsUrl} target="_blank" rel="noopener noreferrer" style={{
+            fontSize: '1rem', fontWeight: 800, color: 'var(--accent)', textDecoration: 'none',
+          }}>
+            🗺️ Abrir la {ruta.nombre} completa en Google Maps →
+          </a>
+        </div>
       </main>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }} />
     </>
   )
 }

@@ -1,28 +1,34 @@
-// src/app/rutas/page.tsx — Índice de rutas costeras de playas
+// src/app/rutas/page.tsx — Rutas de playas por las costas de España
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
-import { getRutas } from '@/lib/rutas'
+import { getRutas, COSTAS, type Ruta } from '@/lib/rutas'
 
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Rutas de playas por la costa de España — Itinerarios',
-  description: 'Rutas de 5 playas por cada provincia costera de España. Itinerarios para recorrer en coche las mejores playas de Cádiz, Málaga, Barcelona, Canarias y más.',
+  title: 'Rutas de playas por las costas de España — Itinerarios',
+  description: 'Recorre las mejores playas de cada costa de España: Costa del Sol, Costa Brava, Costa de la Luz, Rías Baixas, Islas Canarias y más. Itinerarios con mapa y Google Maps.',
   alternates: { canonical: '/rutas' },
 }
+
+const ZONAS = [
+  { key: 'cantabrica', label: 'Zona Cantábrica', desc: 'Acantilados verdes, rías y oleaje atlántico. Asturias, Cantabria y País Vasco.' },
+  { key: 'atlantica',  label: 'Zona Atlántica',  desc: 'Rías gallegas, costa da morte y las playas infinitas de Huelva y Cádiz.' },
+  { key: 'mediterranea', label: 'Zona Mediterránea', desc: 'De la Costa Brava a la Costa del Sol. Calas, sol y chiringuitos.' },
+  { key: 'insular',    label: 'Islas',            desc: 'Baleares y Canarias. Aguas turquesa, volcanes y posidonia.' },
+]
 
 export default async function RutasPage() {
   const playas = await getPlayas()
   const rutas = await getRutas(playas)
 
-  // Agrupar por comunidad
-  const porComunidad = new Map<string, typeof rutas>()
+  const rutasByZona = new Map<string, Ruta[]>()
   for (const r of rutas) {
-    const list = porComunidad.get(r.comunidad) ?? []
+    const list = rutasByZona.get(r.costa.zona) ?? []
     list.push(r)
-    porComunidad.set(r.comunidad, list)
+    rutasByZona.set(r.costa.zona, list)
   }
 
   return (
@@ -35,7 +41,7 @@ export default async function RutasPage() {
         }} aria-label="Ruta de navegación">
           <Link href="/" style={{ color: 'var(--accent)', textDecoration: 'none' }}>Inicio</Link>
           <span aria-hidden="true">›</span>
-          <span aria-current="page">Rutas de playas</span>
+          <span aria-current="page">Rutas por la costa</span>
         </nav>
 
         <h1 style={{
@@ -43,63 +49,72 @@ export default async function RutasPage() {
           fontWeight: 900, letterSpacing: '-.025em', color: 'var(--ink)',
           lineHeight: 1, marginBottom: '.5rem',
         }}>
-          Rutas de playas por la costa
+          Rutas de playas por las costas de España
         </h1>
-        <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '2.5rem', maxWidth: 560 }}>
-          Itinerarios de 5 playas para recorrer en coche cada provincia costera de España.
-          Las mejores playas por puntuación, ordenadas geográficamente para minimizar el recorrido.
+        <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '2.5rem', maxWidth: 600, lineHeight: 1.6 }}>
+          {rutas.length} itinerarios por las costas más emblemáticas de España.
+          Cada ruta conecta las 5 mejores playas de la zona, ordenadas para recorrer en coche
+          con enlace directo a Google Maps.
         </p>
 
-        {Array.from(porComunidad.entries()).map(([comunidad, rutas]) => (
-          <section key={comunidad} style={{ marginBottom: '2.5rem' }}>
-            <h2 style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: 800,
-              color: 'var(--ink)', margin: '0 0 1rem', letterSpacing: '-.015em',
-            }}>
-              {comunidad}
-            </h2>
-            <div style={{
-              display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: '.65rem',
-            }}>
-              {rutas.map(r => (
-                <Link
-                  key={r.slug}
-                  href={`/rutas/${r.slug}`}
-                  style={{
-                    display: 'flex', flexDirection: 'column',
-                    background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                    borderRadius: 14, padding: '1.1rem 1.2rem',
-                    textDecoration: 'none', transition: 'all .15s',
-                  }}
-                >
-                  <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--ink)', marginBottom: '.25rem' }}>
-                    {r.nombre}
-                  </div>
-                  <div style={{ fontSize: '.78rem', color: 'var(--muted)', marginBottom: '.55rem' }}>
-                    {r.paradas.length} paradas · {r.totalKm} km de recorrido
-                  </div>
-                  <div style={{ display: 'flex', gap: '.3rem', flexWrap: 'wrap', marginTop: 'auto' }}>
-                    {r.paradas.slice(0, 3).map((p, i) => (
-                      <span key={p.playa.slug} style={{
-                        fontSize: '.72rem', fontWeight: 600,
-                        color: 'var(--accent)', background: 'color-mix(in srgb, var(--accent) 8%, var(--card-bg))',
-                        padding: '.15rem .4rem', borderRadius: 4,
-                      }}>
-                        {i + 1}. {p.playa.nombre}
-                      </span>
-                    ))}
-                    {r.paradas.length > 3 && (
-                      <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>
-                        +{r.paradas.length - 3} más
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        ))}
+        {ZONAS.map(zona => {
+          const zonalRutas = rutasByZona.get(zona.key) ?? []
+          if (zonalRutas.length === 0) return null
+          return (
+            <section key={zona.key} style={{ marginBottom: '3rem' }}>
+              <h2 style={{
+                fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 900,
+                color: 'var(--ink)', margin: '0 0 .35rem', letterSpacing: '-.015em',
+              }}>
+                {zona.label}
+              </h2>
+              <p style={{ fontSize: '.85rem', color: 'var(--muted)', margin: '0 0 1.25rem', maxWidth: 500 }}>
+                {zona.desc}
+              </p>
+
+              <div style={{
+                display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                gap: '.75rem',
+              }}>
+                {zonalRutas.map(r => (
+                  <Link
+                    key={r.slug}
+                    href={`/rutas/${r.slug}`}
+                    style={{
+                      display: 'flex', flexDirection: 'column',
+                      background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                      borderRadius: 16, padding: '1.2rem 1.3rem',
+                      textDecoration: 'none', transition: 'all .15s',
+                      borderLeft: `4px solid ${r.costa.color}`,
+                    }}
+                  >
+                    <div style={{ fontWeight: 900, fontSize: '1.05rem', color: 'var(--ink)', marginBottom: '.2rem', fontFamily: 'var(--font-serif)' }}>
+                      {r.nombre}
+                    </div>
+                    <div style={{ fontSize: '.78rem', color: 'var(--muted)', marginBottom: '.55rem', lineHeight: 1.5 }}>
+                      {r.costa.descripcion}
+                    </div>
+                    <div style={{ fontSize: '.78rem', color: 'var(--muted)', marginBottom: '.65rem' }}>
+                      {r.paradas.length} paradas · {r.totalKm} km
+                    </div>
+                    <div style={{ display: 'flex', gap: '.3rem', flexWrap: 'wrap', marginTop: 'auto' }}>
+                      {r.paradas.map((p, i) => (
+                        <span key={p.playa.slug} style={{
+                          fontSize: '.72rem', fontWeight: 600,
+                          color: r.costa.color === '#f8fafc' ? 'var(--accent)' : r.costa.color,
+                          background: `${r.costa.color === '#f8fafc' ? 'var(--accent)' : r.costa.color}12`,
+                          padding: '.15rem .4rem', borderRadius: 4,
+                        }}>
+                          {i + 1}. {p.playa.nombre}
+                        </span>
+                      ))}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )
+        })}
       </main>
     </>
   )
