@@ -204,3 +204,41 @@ export const getNudistasStats = cache(async (): Promise<NudistasStats> => {
       .sort((a, b) => b.count - a.count),
   }
 })
+
+// ────────────────────────────────────────────────────────────────────────
+// Helpers para /playas-accesibles (PMR)
+
+export const getPlayasAccesibles = cache(async (): Promise<Playa[]> => {
+  const playas = await getPlayas()
+  return playas.filter(p => p.accesible === true)
+})
+
+export const getAccesiblesStats = cache(async (): Promise<NudistasStats> => {
+  const playas = await getPlayasAccesibles()
+  const byCom = new Map<string, number>()
+  const byProv = new Map<string, { count: number; comunidad: string }>()
+  const byMun = new Map<string, { count: number; provincia: string }>()
+  for (const p of playas) {
+    byCom.set(p.comunidad, (byCom.get(p.comunidad) ?? 0) + 1)
+    const prev = byProv.get(p.provincia)
+    byProv.set(p.provincia, { count: (prev?.count ?? 0) + 1, comunidad: p.comunidad })
+    const mprev = byMun.get(p.municipio)
+    byMun.set(p.municipio, { count: (mprev?.count ?? 0) + 1, provincia: p.provincia })
+  }
+  return {
+    total: playas.length,
+    comunidades: Array.from(byCom.entries())
+      .map(([nombre, count]) => ({ nombre, slug: toSlug(nombre), count }))
+      .sort((a, b) => b.count - a.count),
+    provincias: Array.from(byProv.entries())
+      .map(([nombre, { count, comunidad }]) => ({
+        nombre, slug: toSlug(nombre), comunidad, comunidadSlug: toSlug(comunidad), count,
+      }))
+      .sort((a, b) => b.count - a.count),
+    municipios: Array.from(byMun.entries())
+      .map(([nombre, { count, provincia }]) => ({
+        nombre, slug: toSlug(nombre), provincia, provinciaSlug: toSlug(provincia), count,
+      }))
+      .sort((a, b) => b.count - a.count),
+  }
+})
