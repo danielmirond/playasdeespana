@@ -67,31 +67,50 @@ export default function TopCercanas() {
   useEffect(() => {
     if (!navigator.geolocation) { setEstado('denied'); return }
 
+    // Safety timer: si tras 12s no hemos recibido ni accept ni deny,
+    // consideramos que el usuario ignoró/cerró el popup → hide silencioso.
+    let safetyTimer: ReturnType<typeof setTimeout> | null = null
+    let resolved = false
+
+    const resolve = () => {
+      resolved = true
+      if (safetyTimer) clearTimeout(safetyTimer)
+    }
+
     const tryGeo = () => {
       setEstado('asking')
+      safetyTimer = setTimeout(() => {
+        if (!resolved) setEstado('denied')
+      }, 12000)
+
       navigator.geolocation.getCurrentPosition(
         (pos) => {
+          resolve()
           setUserLat(pos.coords.latitude)
           setUserLng(pos.coords.longitude)
           loadAndScore(pos.coords.latitude, pos.coords.longitude)
         },
-        () => setEstado('denied'),
+        () => { resolve(); setEstado('denied') },
         GEO_OPTS,
       )
     }
 
     if (navigator.permissions) {
       navigator.permissions.query({ name: 'geolocation' }).then(r => {
-        if (r.state === 'denied') setEstado('denied')
-        else tryGeo()
+        if (r.state === 'denied') { setEstado('denied'); return }
+        tryGeo()
       }).catch(tryGeo)
     } else {
       tryGeo()
     }
+
+    return () => { if (safetyTimer) clearTimeout(safetyTimer) }
   }, [])
 
   async function loadAndScore(lat: number, lng: number) {
     setEstado('loading_meteo')
+    // Si el meteo tarda >15s, forzar hide para no bloquear la home
+    const meteoTimer = setTimeout(() => setEstado('denied'), 15000)
     try {
       const resp = await fetch('/data/playas.json')
       const playas: Playa[] = await resp.json()
@@ -122,9 +141,11 @@ export default function TopCercanas() {
       // Sort by score desc (best first)
       scored.sort((a, b) => b.ps.score - a.ps.score)
 
+      clearTimeout(meteoTimer)
       setResults(scored.slice(0, 8))
       setEstado('ready')
     } catch {
+      clearTimeout(meteoTimer)
       setEstado('denied')
     }
   }
