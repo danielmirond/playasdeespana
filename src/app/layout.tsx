@@ -127,6 +127,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-LFHYJE8S16');
+
+            // Custom events for product analytics
+            document.addEventListener('click', function(e) {
+              var el = e.target.closest ? e.target.closest('a,button') : null;
+              if (!el) return;
+              var href = el.getAttribute('href') || '';
+
+              // Beach click from home/search
+              if (href.match(/\\/playas\\//)) {
+                gtag('event', 'beach_click', { beach_slug: href.split('/playas/')[1] });
+              }
+              // Hotel affiliate
+              if (href.includes('booking.com') || href.includes('expedia')) {
+                gtag('event', 'hotel_click', { provider: href.includes('booking') ? 'booking' : 'expedia' });
+              }
+              // Activity affiliate
+              if (href.includes('civitatis') || href.includes('getyourguide')) {
+                gtag('event', 'activity_click', { provider: href.includes('civitatis') ? 'civitatis' : 'gyg' });
+              }
+              // Restaurant affiliate
+              if (href.includes('thefork') || href.includes('eltenedor')) {
+                gtag('event', 'restaurant_click');
+              }
+              // Parking affiliate
+              if (href.includes('parclick')) {
+                gtag('event', 'parking_click');
+              }
+              // Route to Google Maps
+              if (href.includes('google.com/maps/dir')) {
+                gtag('event', 'route_open');
+              }
+              // Filter click
+              if (el.getAttribute('aria-pressed') !== null) {
+                gtag('event', 'filter_click', { filter: el.textContent });
+              }
+            });
           `}
         </Script>
         <CookieBanner />
