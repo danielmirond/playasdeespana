@@ -800,6 +800,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* FAQS */}
         <FaqSection playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} mareasLunar={mareasLunar} locale={locale} />
 
+        {/* Cross-links: ruta + top de esta costa */}
+        <CrossLinks playa={playa} locale={locale} />
+
       </div>
 
       {/* ASIDE */}
@@ -978,6 +981,84 @@ function OleajeChart({ olas, oleajeHoras, nowLabel = 'Ahora' }: { olas: number; 
           </div>
         )
       })}
+    </div>
+  )
+}
+
+// Cross-links: connects the beach to its coast route + top 10 ranking
+function CrossLinks({ playa, locale = 'es' }: { playa: Playa; locale?: 'es' | 'en' }) {
+  const es = locale === 'es'
+  // Find which costa this beach belongs to
+  const COSTA_MAP: Record<string, { slug: string; nombre: string }> = {
+    'Gipuzkoa': { slug: 'costa-vasca', nombre: 'Costa Vasca' },
+    'Bizkaia': { slug: 'costa-vasca', nombre: 'Costa Vasca' },
+    'Cantabria': { slug: 'costa-de-cantabria', nombre: 'Costa de Cantabria' },
+    'Asturias': { slug: 'costa-verde', nombre: 'Costa Verde' },
+    'A Coruña': { slug: 'rias-altas', nombre: 'Rías Altas' },
+    'Lugo': { slug: 'rias-altas', nombre: 'Rías Altas' },
+    'Pontevedra': { slug: 'rias-baixas', nombre: 'Rías Baixas' },
+    'Huelva': { slug: 'costa-de-la-luz', nombre: 'Costa de la Luz' },
+    'Cádiz': { slug: 'costa-de-la-luz', nombre: 'Costa de la Luz' },
+    'Málaga': { slug: 'costa-del-sol', nombre: 'Costa del Sol' },
+    'Granada': { slug: 'costa-tropical', nombre: 'Costa Tropical' },
+    'Almería': { slug: 'costa-de-almeria', nombre: 'Costa de Almería' },
+    'Murcia': { slug: 'costa-calida', nombre: 'Costa Cálida' },
+    'Alicante': { slug: 'costa-blanca', nombre: 'Costa Blanca' },
+    'Castellón': { slug: 'costa-del-azahar', nombre: 'Costa del Azahar' },
+    'Valencia': { slug: 'costa-de-valencia', nombre: 'Costa de Valencia' },
+    'Tarragona': { slug: 'costa-dorada', nombre: 'Costa Dorada' },
+    'Barcelona': { slug: 'costa-del-garraf', nombre: 'Costa del Garraf' },
+    'Girona': { slug: 'costa-brava', nombre: 'Costa Brava' },
+    'Baleares': { slug: 'islas-baleares', nombre: 'Islas Baleares' },
+    'Las Palmas': { slug: 'islas-canarias', nombre: 'Islas Canarias' },
+    'Santa Cruz de Tenerife': { slug: 'islas-canarias', nombre: 'Islas Canarias' },
+  }
+  const costa = COSTA_MAP[playa.provincia]
+  if (!costa) return null
+  const routeBase = es ? '/rutas' : '/en/routes'
+  const topBase = es ? '/top' : '/en/top'
+
+  return (
+    <div className={styles.card} style={{ padding: '1rem' }}>
+      <div style={{ fontSize: '.82rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.65rem' }}>
+        {es ? 'Descubre más de esta costa' : 'Discover more from this coast'}
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '.45rem' }}>
+        <Link href={`${routeBase}/ruta-${costa.slug}`} style={{
+          display: 'flex', alignItems: 'center', gap: '.6rem',
+          padding: '.65rem .85rem', borderRadius: 10,
+          border: '1.5px solid var(--line)', textDecoration: 'none',
+          transition: 'all .15s',
+        }}>
+          <span style={{ fontSize: '1rem' }} aria-hidden="true">🛣️</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)' }}>
+              {es ? `Ruta por la ${costa.nombre}` : `${costa.nombre} Route`}
+            </div>
+            <div style={{ fontSize: '.72rem', color: 'var(--muted)' }}>
+              {es ? '5 playas en coche con Google Maps' : '5 beaches by car with Google Maps'}
+            </div>
+          </div>
+          <span style={{ color: 'var(--accent)', fontWeight: 700 }}>→</span>
+        </Link>
+        <Link href={`${topBase}/${costa.slug}`} style={{
+          display: 'flex', alignItems: 'center', gap: '.6rem',
+          padding: '.65rem .85rem', borderRadius: 10,
+          border: '1.5px solid var(--line)', textDecoration: 'none',
+          transition: 'all .15s',
+        }}>
+          <span style={{ fontSize: '1rem' }} aria-hidden="true">🏆</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)' }}>
+              {es ? `Top 10 ${costa.nombre}` : `Top 10 ${costa.nombre}`}
+            </div>
+            <div style={{ fontSize: '.72rem', color: 'var(--muted)' }}>
+              {es ? 'Ranking de las mejores playas' : 'Best beaches ranking'}
+            </div>
+          </div>
+          <span style={{ color: 'var(--accent)', fontWeight: 700 }}>→</span>
+        </Link>
+      </div>
     </div>
   )
 }

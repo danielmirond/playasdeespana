@@ -138,23 +138,48 @@ export default async function HomePage() {
 
       <footer style={{
         borderTop: '1px solid var(--line)',
-        padding: '1.75rem 2rem',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        flexWrap: 'wrap', gap: '1rem',
+        padding: '2rem 2rem 3rem',
         maxWidth: '1000px', margin: '0 auto',
         fontSize: '.78rem', color: 'var(--muted)',
       }}>
-        <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)', fontSize: '.9rem' }}>
-          Playas de España
-        </span>
-        <nav style={{ display: 'flex', gap: '.85rem', flexWrap: 'wrap' }}>
-          <Link href="/comunidades" style={{ color: 'var(--muted)' }}>Comunidades</Link>
-          <Link href="/banderas-azules" style={{ color: 'var(--muted)' }}>Banderas Azules</Link>
-          <Link href="/playas-perros" style={{ color: 'var(--muted)' }}>Perros</Link>
-          <Link href="/playas-nudistas" style={{ color: 'var(--muted)' }}>Nudistas</Link>
-          <Link href="/mapa" style={{ color: 'var(--muted)' }}>Mapa</Link>
-        </nav>
-        <span>Open-Meteo · MITECO · IGN · OSM</span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2.5rem', marginBottom: '1.5rem' }}>
+          <div>
+            <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)', fontSize: '1rem', marginBottom: '.5rem' }}>Playas de España</div>
+            <div style={{ fontSize: '.75rem', maxWidth: 250, lineHeight: 1.5 }}>Motor de decisión en tiempo real. Puntuamos cada playa de 0 a 100.</div>
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Explorar</div>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
+              <Link href="/comunidades">Comunidades</Link>
+              <Link href="/banderas-azules">Banderas Azules</Link>
+              <Link href="/surf">Surf</Link>
+              <Link href="/atardeceres">Atardeceres</Link>
+              <Link href="/mapa">Mapa</Link>
+            </nav>
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Temáticas</div>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
+              <Link href="/playas-perros">Perros</Link>
+              <Link href="/playas-nudistas">Nudistas</Link>
+              <Link href="/playas-accesibles">Accesibles PMR</Link>
+              <Link href="/top">Top 10 Rankings</Link>
+              <Link href="/rutas">Rutas por la costa</Link>
+            </nav>
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Herramientas</div>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
+              <Link href="/buscar">Buscar playas</Link>
+              <Link href="/rutas/configurar">Configurar ruta</Link>
+              <Link href="/en">English version</Link>
+            </nav>
+          </div>
+        </div>
+        <div style={{ borderTop: '1px solid var(--line)', paddingTop: '.85rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '.5rem' }}>
+          <span>Datos: Open-Meteo · MITECO · IGN · CartoCiudad · OSM</span>
+          <span>© {new Date().getFullYear()} playas-espana.com</span>
+        </div>
       </footer>
     </>
   )
