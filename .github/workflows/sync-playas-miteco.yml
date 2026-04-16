@@ -1,0 +1,42 @@
+name: Sync Playas MITECO
+
+# Fusiona el dataset oficial MITECO con el playas.json existente
+# Solo trigger MANUAL (cron deshabilitado hasta verificar que no rompe slugs)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run MITECO sync
+        run: npm run sync:playas-miteco
+
+      - name: Commit and push changes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f public/data/playas.json public/data/slug-index.json
+          # slug-redirects.json sólo existe si el sync lo generó (Bandera Azul).
+          # Usamos -A con un pathspec para capturar tanto adiciones como borrados.
+          git add -A public/data/slug-redirects.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "data: sync playas.json from MITECO ArcGIS
+
+            Automated weekly sync from official dataset
+            https://hub.arcgis.com/datasets/84ddbc8cf4104a579d579f6441fcaa8a_0"
+            git push
+          fi

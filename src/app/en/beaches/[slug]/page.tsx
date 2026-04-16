@@ -1,7 +1,7 @@
 // src/app/en/beaches/[slug]/page.tsx
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPlayaBySlug, getPlayas } from '@/lib/playas'
+import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getCalidad } from '@/lib/calidad'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
@@ -10,6 +10,7 @@ import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
+import { calcularHoraIdeal } from '@/lib/hora-ideal'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import { getHoteles } from '@/lib/hoteles'
@@ -18,14 +19,15 @@ import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
+import { generarFaqsPlaya } from '@/lib/faqsPlaya'
+import { calcularPlayaScore } from '@/lib/scoring'
 
 export const revalidate = 3600
+export const maxDuration = 25
 
 export async function generateStaticParams() {
-  const playas = await getPlayas()
-  return playas
-    .filter(p => p.bandera)
-    .map(p => ({ slug: p.slug }))
+  // ISR on-demand — no pre-render at build to avoid 45-min timeout.
+  return []
 }
 
 interface Props { params: Promise<{ slug: string }> }
@@ -78,18 +80,24 @@ export default async function BeachPageEn({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult] = await Promise.allSettled([
+  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
     getRestaurantes(playa.lat, playa.lng),
-    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng),
+    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia),
     getHoteles(playa.lat, playa.lng),
     getTurbidez(playa.lat, playa.lng),
     getMeteoForecast(playa.lat, playa.lng),
     getCalidad(slug),
     getPlayas(),
+    getMunicipioSlugsSet(),
   ])
+
+  const municipioSlug = toSlug(playa.municipio)
+  const provinciaSlug = playa.provincia ? toSlug(playa.provincia) : undefined
+  const municipioSlugsSet = municipioSlugsResult.status === 'fulfilled' ? municipioSlugsResult.value : new Set<string>()
+  const municipioSlugProp = municipioSlugsSet.has(municipioSlug) ? municipioSlug : undefined
 
   const mareasData        = mareas.status          === 'fulfilled' ? mareas.value          : null
   const solData           = sol.status             === 'fulfilled' ? sol.value             : null
@@ -136,9 +144,17 @@ export default async function BeachPageEn({ params }: Props) {
 
   const dateModified = meteoPlayaData?.timestamp ?? new Date().toISOString()
 
+  const playaScore = calcularPlayaScore(playa, { agua: meteo.agua, olas: meteo.olas, viento: meteo.viento, uv: meteo.uv })
   const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
+  const horaIdeal = calcularHoraIdeal({
+    uv: meteoPlayaData?.uv_max ?? null,
+    amanecer: solData?.amanecer,
+    atardecer: solData?.atardecer,
+    mareas: mareasLunar,
+    mes: new Date().getMonth() + 1,
+  })
 
   const calidad = calidadResult.status === 'fulfilled' ? calidadResult.value : null
 
@@ -154,9 +170,35 @@ export default async function BeachPageEn({ params }: Props) {
   return (
     <>
       {preloadFoto && <link rel="preload" as="image" href={preloadFoto} />}
-      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} viento={meteo.viento} calidad={calidad?.nivel} banderaColor={banderaPlaya.color} banderaLabel={banderaPlaya.labelEn} medusasLabel={medusas.labelEn} mareasTexto={mareasLunar.zona === 'mediterraneo' ? `Mediterranean tides are negligible (${mareasLunar.rango}m).` : `Today's high tides at ${playa.nombre} are at ${mareasLunar.mareas.filter(m => m.tipo === 'pleamar').map(m => m.hora).join(' and ')} (${mareasLunar.rango}m). Coefficient ${mareasLunar.coeficiente}.`} dateModified={dateModified} />
+      <SchemaPlaya
+        playa={playa}
+        agua={meteo.agua}
+        olas={meteo.olas}
+        dateModified={dateModified}
+        faqs={generarFaqsPlaya({
+          playa,
+          aguaC: meteo.agua,
+          olasM: meteo.olas,
+          vientoKmh: meteo.viento,
+          vientoRacha: meteo.vientoRacha,
+          vientoDir: meteo.vientoDireccion,
+          banderaPlaya,
+          medusas,
+          mareasLunar,
+          locale: 'en',
+        })}
+      />
       <Nav />
-      <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} locale="en" />
+      <FichaHero
+        playa={playa}
+        meteo={meteo}
+        estado={estado}
+        frase={frase}
+        locale="en"
+        municipioSlug={municipioSlugProp}
+        provinciaSlug={provinciaSlug}
+        playaScore={playaScore}
+      />
       <FichaNav locale="en" />
       <FichaBody locale="en"
         playa={playa}
@@ -174,7 +216,10 @@ export default async function BeachPageEn({ params }: Props) {
         banderaPlaya={banderaPlaya}
         medusas={medusas}
         mareasLunar={mareasLunar}
+        horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
+        municipioSlug={municipioSlugProp}
+        provinciaSlug={provinciaSlug}
       />
     </>
   )

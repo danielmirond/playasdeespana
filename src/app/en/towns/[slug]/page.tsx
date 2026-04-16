@@ -58,14 +58,14 @@ export default async function TownPageEn({ params }: Props) {
 
       <div className={styles.hero}>
         <div className={styles.heroInner}>
-          <nav className={styles.breadcrumb}>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
             <Link href="/en">Home</Link>
-            <span>›</span>
+            <span aria-hidden="true">›</span>
             <Link href={`/en/communities/${municipio.comunidadSlug}`}>{municipio.comunidad}</Link>
-            <span>›</span>
+            <span aria-hidden="true">›</span>
             <Link href={`/en/provinces/${municipio.provinciaSlug}`}>{municipio.provincia}</Link>
-            <span>›</span>
-            <span>{municipio.nombre}</span>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">{municipio.nombre}</span>
           </nav>
           <h1 className={styles.titulo}>Beaches in {municipio.nombre}</h1>
           <p className={styles.subtitulo}>{municipio.provincia} · {municipio.comunidad}</p>

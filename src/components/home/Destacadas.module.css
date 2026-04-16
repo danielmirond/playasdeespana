@@ -15,7 +15,7 @@
   border-bottom: 1px solid var(--line);
 }
 .hdTitle {
-  font-size: .68rem;
+  font-size: .74rem;
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -67,7 +67,7 @@
 }
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(176,104,32,.12);
+  box-shadow: 0 12px 32px rgba(107,64,10,.12);
 }
 
 .vis {
@@ -98,7 +98,7 @@
   gap: .3rem;
   padding: .2rem .55rem;
   border-radius: 100px;
-  font-size: .6rem;
+  font-size: .72rem;
   font-weight: 600;
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,.3);
@@ -132,7 +132,7 @@
   margin-bottom: .1rem;
 }
 .lugar {
-  font-size: .68rem;
+  font-size: .74rem;
   color: var(--muted);
   margin-bottom: .6rem;
 }
@@ -144,7 +144,7 @@
 }
 .dato { display: flex; flex-direction: column; }
 .datoV { font-size: .88rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
-.datoL { font-size: .6rem; color: var(--muted); }
+.datoL { font-size: .72rem; color: var(--muted); }
 
 .foot {
   display: flex;
@@ -155,7 +155,7 @@
 }
 .badges { display: flex; gap: .28rem; flex-wrap: wrap; }
 .badge {
-  font-size: .6rem;
+  font-size: .72rem;
   padding: .14rem .42rem;
   border-radius: 100px;
   border: 1.5px solid var(--line);

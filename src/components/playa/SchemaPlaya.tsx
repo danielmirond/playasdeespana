@@ -1,19 +1,24 @@
 // src/components/playa/SchemaPlaya.tsx
-// JSON-LD structured data para Google — Beach + TouristAttraction + FAQPage + BreadcrumbList
+// JSON-LD structured data para Google — Beach + TouristAttraction +
+// BreadcrumbList + FAQPage (opcional).
+//
+// El FAQPage solo se emite si la página pasa las mismas preguntas que
+// renderiza visiblemente en el HTML (ver FichaBody → FaqSection). La
+// fuente de verdad es `generarFaqsPlaya()` en src/lib/faqsPlaya.ts; de
+// esa forma el schema SIEMPRE refleja el HTML y Google no reporta
+// "Duplicate FAQ" por mismatch entre JSON-LD y visible content.
 import type { Playa } from '@/types'
 import { generarTextoPlaya } from '@/lib/textoPlaya'
+import type { FaqItem } from '@/lib/faqsPlaya'
 
 interface Props {
   playa:         Playa
   agua:          number
   olas:          number
-  viento?:       number
-  calidad?:      string
-  banderaColor?: string
-  banderaLabel?: string
-  medusasLabel?: string
-  mareasTexto?:  string
   dateModified?: string
+  /** FAQs visibles en la página. Deben coincidir EXACTAMENTE con las
+   *  que FichaBody renderiza, para evitar mismatch entre schema y HTML. */
+  faqs?:         FaqItem[]
 }
 
 const ACTIVIDAD_LABELS: Record<string, string> = {
@@ -26,7 +31,7 @@ const ACTIVIDAD_LABELS: Record<string, string> = {
   paddle:    'Paddle surf',
 }
 
-export default function SchemaPlaya({ playa, agua, olas, viento, calidad, banderaColor, banderaLabel, medusasLabel, mareasTexto, dateModified }: Props) {
+export default function SchemaPlaya({ playa, agua, olas, dateModified, faqs }: Props) {
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
   const url  = `${BASE}/playas/${playa.slug}`
 
@@ -47,81 +52,18 @@ export default function SchemaPlaya({ playa, agua, olas, viento, calidad, bander
     ...actividades.map(a => ({ '@type': 'LocationFeatureSpecification', name: a, value: true })),
   ].filter(Boolean)
 
-  // FAQPage — preguntas reales de intención de visita
-  const faqs = [
-    {
-      q: `¿Cómo está el agua en ${playa.nombre} hoy?`,
-      a: `La temperatura del agua en ${playa.nombre} es actualmente de ${agua}°C, con un oleaje de ${olas}m.${calidad ? ` La calidad del agua es ${calidad} según la Directiva europea 2006/7/CE.` : ''}`,
-    },
-    banderaLabel && {
-      q: `¿Qué bandera tiene ${playa.nombre} hoy?`,
-      a: `${playa.nombre} tiene hoy ${banderaLabel.toLowerCase()}. ${banderaColor === 'verde' ? 'Mar en calma, apto para el baño.' : banderaColor === 'amarilla' ? 'Se recomienda precaución al bañarse.' : 'No se recomienda el baño por condiciones adversas.'}`,
-    },
-    medusasLabel && {
-      q: `¿Hay medusas en ${playa.nombre}?`,
-      a: `${medusasLabel}. La presencia de medusas depende de la temperatura del agua (${agua}°C), la estación del año y la región costera.`,
-    },
-    viento !== undefined && {
-      q: `¿Cuánto viento hace en ${playa.nombre} hoy?`,
-      a: `El viento en ${playa.nombre} es de ${viento} km/h actualmente. ${(viento ?? 0) < 15 ? 'Condiciones tranquilas.' : (viento ?? 0) < 30 ? 'Viento moderado, ideal para deportes de vela.' : 'Viento fuerte, precaución.'}`,
-    },
-    {
-      q: `¿Cuál es la temperatura del agua en ${playa.nombre}?`,
-      a: `La temperatura del agua en ${playa.nombre} es de ${agua}°C. ${agua >= 24 ? 'Agua cálida, perfecta para el baño.' : agua >= 20 ? 'Temperatura agradable para bañarse.' : agua >= 16 ? 'Agua fresca, se recomienda neopreno para estancias largas.' : 'Agua fría, recomendable traje de neopreno.'}`,
-    },
-    mareasTexto ? {
-      q: `¿A qué hora es la pleamar en ${playa.nombre}?`,
-      a: mareasTexto,
-    } : null,
-    playa.socorrismo !== undefined && {
-      q: `¿Tiene socorrismo ${playa.nombre}?`,
-      a: playa.socorrismo
-        ? `Sí, ${playa.nombre} cuenta con servicio de socorrismo en temporada alta.`
-        : `${playa.nombre} no dispone de servicio de socorrismo. Te recomendamos extremar la precaución.`,
-    },
-    playa.parking !== undefined && {
-      q: `¿Hay parking cerca de ${playa.nombre}?`,
-      a: playa.parking
-        ? `Sí, hay zona de aparcamiento próxima a ${playa.nombre}.`
-        : `${playa.nombre} no dispone de parking oficial. Consulta el estado del tráfico en tiempo real en esta página.`,
-    },
-    playa.perros !== undefined && {
-      q: `¿Se pueden llevar perros a ${playa.nombre}?`,
-      a: playa.perros
-        ? `Sí, ${playa.nombre} es una playa donde se permiten perros.`
-        : `No, en ${playa.nombre} no está permitido el acceso con perros, especialmente en temporada alta.`,
-    },
-    actividades.length > 0 && {
-      q: `¿Qué actividades se pueden hacer en ${playa.nombre}?`,
-      a: `En ${playa.nombre} puedes practicar: ${actividades.join(', ')}.`,
-    },
-    playa.bandera !== undefined && {
-      q: `¿Tiene bandera azul ${playa.nombre}?`,
-      a: playa.bandera
-        ? `Sí, ${playa.nombre} tiene bandera azul, garantía de calidad del agua y gestión medioambiental responsable.`
-        : `${playa.nombre} no tiene bandera azul en la última temporada registrada.`,
-    },
-  ].filter(Boolean) as { q: string; a: string }[]
+  const slugify = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 
-  const faqSchema = faqs.length > 0 ? {
-    '@context': 'https://schema.org',
-    '@type':    'FAQPage',
-    mainEntity: faqs.map(({ q, a }) => ({
-      '@type':          'Question',
-      name:             q,
-      acceptedAnswer: { '@type': 'Answer', text: a },
-    })),
-  } : null
-
-  // BreadcrumbList
+  // BreadcrumbList — Inicio › Comunidad › Provincia › Municipio › Playa
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type':    'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Inicio',        item: BASE },
-      { '@type': 'ListItem', position: 2, name: playa.comunidad, item: `${BASE}/comunidad/${playa.comunidad.toLowerCase().replace(/ /g, '-')}` },
-      { '@type': 'ListItem', position: 3, name: playa.provincia, item: `${BASE}/provincia/${playa.provincia.toLowerCase().replace(/ /g, '-')}` },
-      { '@type': 'ListItem', position: 4, name: playa.nombre,    item: url },
+      { '@type': 'ListItem', position: 1, name: 'Inicio',          item: BASE },
+      { '@type': 'ListItem', position: 2, name: playa.comunidad,   item: `${BASE}/comunidad/${slugify(playa.comunidad)}` },
+      { '@type': 'ListItem', position: 3, name: playa.provincia,   item: `${BASE}/provincia/${slugify(playa.provincia)}` },
+      { '@type': 'ListItem', position: 4, name: playa.municipio,   item: `${BASE}/municipio/${slugify(playa.municipio)}` },
+      { '@type': 'ListItem', position: 5, name: playa.nombre,      item: url },
     ],
   }
 
@@ -167,17 +109,34 @@ export default function SchemaPlaya({ playa, agua, olas, viento, calidad, bander
     ...(dateModified ? { dateModified } : {}),
   }
 
-  const schemas = [beach, breadcrumb, ...(faqSchema ? [faqSchema] : [])]
+  // FAQPage: solo se emite si la página va a renderizar el mismo array
+  // visible en el HTML. Así evitamos el "Duplicate FAQ" de Search Console.
+  const faqSchema = faqs && faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type':    'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type':          'Question',
+      name:             f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  } : null
 
   return (
     <>
-      {schemas.map((s, i) => (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(beach) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      {faqSchema && (
         <script
-          key={i}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
-      ))}
+      )}
     </>
   )
 }

@@ -58,14 +58,14 @@ export default async function MunicipioPage({ params }: Props) {
 
       <div className={styles.hero}>
         <div className={styles.heroInner}>
-          <nav className={styles.breadcrumb}>
+          <nav className={styles.breadcrumb} aria-label="Ruta de navegación">
             <Link href="/">Inicio</Link>
-            <span>›</span>
+            <span aria-hidden="true">›</span>
             <Link href={`/comunidad/${municipio.comunidadSlug}`}>{municipio.comunidad}</Link>
-            <span>›</span>
+            <span aria-hidden="true">›</span>
             <Link href={`/provincia/${municipio.provinciaSlug}`}>{municipio.provincia}</Link>
-            <span>›</span>
-            <span>{municipio.nombre}</span>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">{municipio.nombre}</span>
           </nav>
           <h1 className={styles.titulo}>Playas de {municipio.nombre}</h1>
           <p className={styles.subtitulo}>{municipio.provincia} · {municipio.comunidad}</p>

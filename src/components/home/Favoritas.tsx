@@ -100,7 +100,7 @@ export default function Favoritas({ locale = 'es' }: Props) {
   return (
     <section className={styles.section}>
       <div className={styles.hd}>
-        <span className={styles.hdTitle}><Heart size={14} weight="fill" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:4}}/> Mis favoritas</span>
+        <span className={styles.hdTitle}><Heart size={14} weight="fill" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:4}}/> Mis favoritas</span>
         <span className={styles.hdCount}>{favs.length} {locale === 'en' ? 'saved' : 'guardadas'}</span>
       </div>
       <div className={styles.grid}>
@@ -125,8 +125,8 @@ export default function Favoritas({ locale = 'es' }: Props) {
                 </div>
                 {m && (
                   <div className={styles.datos}>
-                    <span className={styles.dato}><Drop size={14} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:2}}/>{m.agua}°C</span>
-                    <span className={styles.dato}><Waves size={14} weight="bold" color="var(--accent,#b06820)" style={{verticalAlign:'middle',marginRight:2}}/>{m.olas}m</span>
+                    <span className={styles.dato}><Drop size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:2}}/>{m.agua}°C</span>
+                    <span className={styles.dato}><Waves size={14} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:2}}/>{m.olas}m</span>
                   </div>
                 )}
               </Link>

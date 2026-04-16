@@ -12,10 +12,10 @@
   border-bottom: 1px solid var(--line);
 }
 .hdTitle {
-  font-size: .68rem; font-weight: 600;
+  font-size: .74rem; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
 }
-.hdCount { font-size: .7rem; color: var(--muted); }
+.hdCount { font-size: .75rem; color: var(--muted); }
 
 .grid {
   display: grid;
@@ -32,8 +32,8 @@
   transition: all .15s;
 }
 .card:hover {
-  border-color: rgba(176,104,32,.35);
-  box-shadow: 0 6px 20px rgba(176,104,32,.08);
+  border-color: rgba(107,64,10,.35);
+  box-shadow: 0 6px 20px rgba(107,64,10,.08);
 }
 
 .cardLink {
@@ -52,24 +52,24 @@
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   max-width: 130px;
 }
-.lugar { font-size: .62rem; color: var(--muted); margin-top: .1rem; }
+.lugar { font-size: .72rem; color: var(--muted); margin-top: .1rem; }
 
 .pill {
   display: inline-flex; align-items: center; gap: .25rem;
   padding: .15rem .5rem; border-radius: 100px;
-  font-size: .6rem; font-weight: 600; flex-shrink: 0;
+  font-size: .72rem; font-weight: 600; flex-shrink: 0;
 }
 .pillDot { width: 5px; height: 5px; border-radius: 50%; }
 
 .datos { display: flex; gap: .6rem; }
-.dato  { font-size: .68rem; color: var(--muted); }
+.dato  { font-size: .74rem; color: var(--muted); }
 
 /* Botón quitar */
 .btnQuitar {
   position: absolute; top: .5rem; right: .5rem;
   width: 20px; height: 20px; border-radius: 50%;
   background: rgba(0,0,0,.06); border: none;
-  font-size: .6rem; color: var(--muted);
+  font-size: .72rem; color: var(--muted);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all .15s;
   line-height: 1;

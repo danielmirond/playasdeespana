@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPlayaBySlug, getPlayas } from '@/lib/playas'
+import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getCalidad } from '@/lib/calidad'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
@@ -9,6 +9,7 @@ import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
+import { calcularHoraIdeal } from '@/lib/hora-ideal'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getFotos } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
@@ -21,16 +22,23 @@ import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
+import { generarFaqsPlaya } from '@/lib/faqsPlaya'
+import { calcularPlayaScore } from '@/lib/scoring'
 
 export const revalidate = 3600
+// Dejamos techo de 25 s al render (Overpass para hoteles/restaurantes puede
+// tardar 5-8 s). Hobby plan cappea a 10 s, Pro hasta 60 s — la plataforma
+// elige el mínimo. Si la lookup server-side falla, FichaBody reintenta
+// desde el cliente via /api/hoteles y /api/restaurantes.
+export const maxDuration = 25
 
 // Pre-renderiza las playas con Bandera Azul (las más visitadas) en build
 // El resto se genera on-demand con ISR y se cachea 1h
 export async function generateStaticParams() {
-  const playas = await getPlayas()
-  return playas
-    .filter(p => p.bandera)
-    .map(p => ({ slug: p.slug }))
+  // No pre-renderizar en build — ISR con revalidate: 3600 genera cada
+  // página al primer visitante y la cachea 1 h. Antes pre-renderizábamos
+  // todas las banderas azules (647 páginas × 11 API calls = timeout).
+  return []
 }
 
 interface Props { params: Promise<{ slug: string }> }
@@ -81,19 +89,28 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult] = await Promise.allSettled([
+  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
     getRestaurantes(playa.lat, playa.lng),
-    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng),
+    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia),
     getHoteles(playa.lat, playa.lng),
     getEscuelas(playa.lat, playa.lng),
     getTurbidez(playa.lat, playa.lng),
     getMeteoForecast(playa.lat, playa.lng),
     getCalidad(slug),
     getPlayas(),
+    getMunicipioSlugsSet(),
   ])
+
+  // Enlaces condicionales de municipio y provincia: solo enlazamos el
+  // municipio si tiene página propia (>=4 playas). La provincia siempre
+  // es enlazable si existe. Cádiz / Cádiz genera dos links distintos.
+  const municipioSlug = toSlug(playa.municipio)
+  const provinciaSlug = playa.provincia ? toSlug(playa.provincia) : undefined
+  const municipioSlugsSet = municipioSlugsResult.status === 'fulfilled' ? municipioSlugsResult.value : new Set<string>()
+  const municipioSlugProp = municipioSlugsSet.has(municipioSlug) ? municipioSlug : undefined
 
   const mareasData        = mareas.status === 'fulfilled' ? mareas.value : null
   const solData           = sol.status === 'fulfilled' ? sol.value : null
@@ -148,6 +165,21 @@ export default async function PlayaPage({ params }: Props) {
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
+  // Score 0-100 en tiempo real
+  const playaScore = calcularPlayaScore(playa, {
+    agua: meteo.agua,
+    olas: meteo.olas,
+    viento: meteo.viento,
+    uv: meteo.uv,
+  })
+  const horaIdeal = calcularHoraIdeal({
+    uv: meteoPlayaData?.uv_max ?? null,
+    amanecer: solData?.amanecer,
+    atardecer: solData?.atardecer,
+    mareas: mareasLunar,
+    mes: new Date().getMonth() + 1,
+  })
+
   const calidad = calidadResult.status === 'fulfilled' ? calidadResult.value : null
 
   const preloadFoto = fotosData[0]?.thumb ?? null
@@ -163,9 +195,34 @@ export default async function PlayaPage({ params }: Props) {
   return (
     <>
       {preloadFoto && <link rel="preload" as="image" href={preloadFoto} />}
-      <SchemaPlaya playa={playa} agua={meteo.agua} olas={meteo.olas} viento={meteo.viento} calidad={calidad?.nivel} banderaColor={banderaPlaya.color} banderaLabel={banderaPlaya.label} medusasLabel={medusas.label} mareasTexto={mareasLunar.zona === 'mediterraneo' ? `En el Mediterráneo las mareas son insignificantes (${mareasLunar.rango}m).` : `Hoy las pleamares en ${playa.nombre} son a las ${mareasLunar.mareas.filter(m => m.tipo === 'pleamar').map(m => m.hora).join(' y ')} (${mareasLunar.rango}m). Coeficiente ${mareasLunar.coeficiente}.`} dateModified={dateModified} />
+      <SchemaPlaya
+        playa={playa}
+        agua={meteo.agua}
+        olas={meteo.olas}
+        dateModified={dateModified}
+        faqs={generarFaqsPlaya({
+          playa,
+          aguaC: meteo.agua,
+          olasM: meteo.olas,
+          vientoKmh: meteo.viento,
+          vientoRacha: meteo.vientoRacha,
+          vientoDir: meteo.vientoDireccion,
+          banderaPlaya,
+          medusas,
+          mareasLunar,
+          locale: 'es',
+        })}
+      />
       <Nav />
-      <FichaHero playa={playa} meteo={meteo} estado={estado} frase={frase} />
+      <FichaHero
+        playa={playa}
+        meteo={meteo}
+        estado={estado}
+        frase={frase}
+        municipioSlug={municipioSlugProp}
+        provinciaSlug={provinciaSlug}
+        playaScore={playaScore}
+      />
       <FichaNav />
       <FichaBody
         playa={playa}
@@ -184,7 +241,10 @@ export default async function PlayaPage({ params }: Props) {
         banderaPlaya={banderaPlaya}
         medusas={medusas}
         mareasLunar={mareasLunar}
+        horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
+        municipioSlug={municipioSlugProp}
+        provinciaSlug={provinciaSlug}
       />
     </>
   )

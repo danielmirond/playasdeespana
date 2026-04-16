@@ -1,5 +1,29 @@
 /* src/components/ui/Nav.module.css */
 
+/* Skip link: visually hidden until focused, then shows as a
+   button top-left. Primer elemento focusable del documento. */
+.skipLink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: .6rem 1rem;
+  background: var(--accent, #6b400a);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 700;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  z-index: 1000;
+  transform: translateY(-120%);
+  transition: transform .15s;
+}
+.skipLink:focus,
+.skipLink:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+}
+
 .nav {
   position: sticky;
   top: 0;
@@ -30,6 +54,14 @@
   background: rgba(255,255,255,.5);
   color: var(--accent);
 }
+.link:focus-visible,
+.iconBtn:focus-visible,
+.langBtn:focus-visible,
+.logo:focus-visible {
+  outline: 2px solid var(--accent, #6b400a);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
 
 .logo {
   font-family: var(--font-serif);
@@ -45,8 +77,8 @@
 .right { display: flex; gap: .35rem; }
 
 .iconBtn {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1.5px solid var(--line);
   background: var(--metric-bg);
@@ -78,13 +110,18 @@
 }
 
 .langBtn {
-  font-size: .72rem;
-  font-weight: 600;
-  color: var(--muted, #8a7560);
-  padding: .2rem .45rem;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--muted, #5a3d12);
+  padding: .5rem .8rem;
   border-radius: 6px;
   text-decoration: none;
   transition: all .15s;
+  min-width: 44px;
+  min-height: 36px; /* A bit more relaxed in Nav header for density */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .langBtn:hover {
@@ -92,6 +129,6 @@
 }
 
 .langActive {
-  background: var(--accent, #b06820);
+  background: var(--accent, #6b400a);
   color: #fff !important;
 }

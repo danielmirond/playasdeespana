@@ -31,27 +31,42 @@ export default function Nav() {
   const enUrl = getLangUrl(pathname, 'en')
 
   return (
-    <header className={styles.nav} id="main-nav">
-      <nav className={styles.links}>
-        <Link href={isEn ? '/en' : '/'} className={styles.link}>{isEn ? 'Home' : 'Inicio'}</Link>
-        <Link href={isEn ? '/en/communities' : '/comunidades'} className={styles.link}>{isEn ? 'Communities' : 'Comunidades'}</Link>
-        <Link href={isEn ? '/en/blue-flag' : '/banderas-azules'} className={styles.link}>{isEn ? 'Blue Flag' : 'Banderas Azules'}</Link>
-        <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
-      </nav>
-      <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label="Playas de España — Inicio">
-        <img src="/logo.svg" alt="Playas de España" width={28} height={28} style={{ display:'block' }} />
-      </Link>
-      <div className={styles.right}>
-        <Link href="/buscar" className={styles.iconBtn} aria-label="Buscar">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
+    <>
+      <header className={styles.nav} id="main-nav">
+        {/* Skip link: primer elemento focusable. Solo visible con foco. */}
+        <a href="#main-content" className={styles.skipLink}>
+          {isEn ? 'Skip to main content' : 'Saltar al contenido principal'}
+        </a>
+        <nav className={styles.links} aria-label={isEn ? 'Main navigation' : 'Navegación principal'}>
+          <Link href={isEn ? '/en' : '/'} className={styles.link}>{isEn ? 'Home' : 'Inicio'}</Link>
+          <Link href={isEn ? '/en/communities' : '/comunidades'} className={styles.link}>{isEn ? 'Communities' : 'Comunidades'}</Link>
+          <Link href={isEn ? '/en/blue-flag' : '/banderas-azules'} className={styles.link}>{isEn ? 'Blue Flag' : 'Banderas Azules'}</Link>
+          {!isEn && <Link href="/playas-perros" className={styles.link}>Perros</Link>}
+          {!isEn && <Link href="/playas-nudistas" className={styles.link}>Nudistas</Link>}
+          {!isEn && <Link href="/surf" className={styles.link}>Surf</Link>}
+          {!isEn && <Link href="/rutas" className={styles.link}>Rutas</Link>}
+          <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
+        </nav>
+        <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label={isEn ? 'Playas de España — Home' : 'Playas de España — Inicio'}>
+          <img src="/logo.svg" alt="Playas de España" width={28} height={28} style={{ display:'block' }} />
         </Link>
-        <div className={styles.langSwitch}>
-          <Link href={esUrl} className={`${styles.langBtn} ${!isEn ? styles.langActive : ''}`}>ES</Link>
-          <Link href={enUrl} className={`${styles.langBtn} ${isEn ? styles.langActive : ''}`}>EN</Link>
+        <div className={styles.right}>
+          <Link href="/buscar" className={styles.iconBtn} aria-label={isEn ? 'Search' : 'Buscar'}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </Link>
+          <div className={styles.langSwitch} role="group" aria-label={isEn ? 'Language selector' : 'Selector de idioma'}>
+            <Link href={esUrl} className={`${styles.langBtn} ${!isEn ? styles.langActive : ''}`} aria-current={!isEn ? 'page' : undefined} lang="es" hrefLang="es">ES</Link>
+            <Link href={enUrl} className={`${styles.langBtn} ${isEn ? styles.langActive : ''}`} aria-current={isEn ? 'page' : undefined} lang="en" hrefLang="en">EN</Link>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      {/* Skip link target. Focused on click via href="#main-content".
+          tabIndex=-1 makes it programmatically focusable, the element is
+          invisible but occupies 0 px so the next Tab lands on the first
+          interactive element of the page content. */}
+      <div id="main-content" tabIndex={-1} style={{ outline: 'none' }} />
+    </>
   )
 }

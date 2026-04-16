@@ -17,7 +17,19 @@
   font-weight: 900; letter-spacing: -.025em;
   color: var(--ink); line-height: 1; margin-bottom: .4rem;
 }
-.sub { font-size: .8rem; color: var(--muted); }
+.sub { font-size: .82rem; color: var(--muted); }
+
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: 1.35rem; font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 1rem;
+  letter-spacing: -.015em;
+}
+.sectionDesc {
+  font-size: .78rem; color: var(--muted);
+  margin: -.5rem 0 1rem;
+}
 
 /* Grid de cards */
 .grid {
@@ -33,7 +45,7 @@
   overflow: hidden;
   transition: box-shadow .15s;
 }
-.card:hover { box-shadow: 0 6px 24px rgba(176,104,32,.1); }
+.card:hover { box-shadow: 0 6px 24px rgba(107,64,10,.1); }
 
 /* Cabecera comunidad */
 .cardHead {
@@ -44,14 +56,26 @@
 }
 .cardHead:hover { background: rgba(255,255,255,.6); }
 
-.icono { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+.icono {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 10%, var(--card-bg));
+  color: var(--accent);
+  font-family: var(--font-serif);
+  font-size: .82rem; font-weight: 900;
+  letter-spacing: .02em;
+  border: 1.5px solid var(--line);
+}
 .cardHeadInfo { flex: 1; min-width: 0; }
 .nombre {
   font-family: var(--font-serif);
-  font-size: 1rem; font-weight: 700;
+  font-size: 1.05rem; font-weight: 800;
   color: var(--ink); display: block; line-height: 1.2;
+  letter-spacing: -.01em;
 }
-.count { font-size: .65rem; color: var(--muted); }
+.count { font-size: .74rem; color: var(--muted); }
 .arrow {
   color: var(--muted); flex-shrink: 0;
   transition: all .15s;
@@ -71,10 +95,10 @@
   gap: .5rem;
 }
 .prov:last-child { border-bottom: none; }
-.prov:hover { background: rgba(176,104,32,.05); color: var(--accent); }
+.prov:hover { background: rgba(107,64,10,.05); color: var(--accent); }
 .provNombre { flex: 1; }
 .provCount {
-  font-size: .65rem; color: var(--muted);
+  font-size: .72rem; color: var(--muted);
   background: var(--metric-bg);
   border: 1px solid var(--line);
   border-radius: 100px;

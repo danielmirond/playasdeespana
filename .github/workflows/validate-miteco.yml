@@ -1,0 +1,29 @@
+name: Validate MITECO Merge
+
+# Valida el matching OSM ↔ MITECO sin modificar nada
+# Solo imprime un reporte y sube el preview como artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run validation
+        run: npm run validate:miteco
+
+      - name: Upload preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: merge-preview
+          path: public/data/merge-preview.json
+          retention-days: 7

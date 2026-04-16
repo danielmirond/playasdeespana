@@ -24,8 +24,8 @@
   transition: border-color .2s, box-shadow .2s;
 }
 .box:focus-within {
-  border-color: rgba(176,104,32,.5);
-  box-shadow: 0 0 0 4px rgba(176,104,32,.08);
+  border-color: rgba(107,64,10,.5);
+  box-shadow: 0 0 0 4px rgba(107,64,10,.08);
 }
 
 .icon { color: var(--muted); flex-shrink: 0; }
@@ -68,7 +68,7 @@
   font-size: .75rem;
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgba(176,104,32,.3);
+  text-decoration-color: rgba(107,64,10,.3);
   transition: text-decoration-color .15s;
   padding: 0;
 }
@@ -84,7 +84,7 @@
   max-width: 960px;
 }
 .filtrosLbl {
-  font-size: .68rem;
+  font-size: .74rem;
   font-weight: 500;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -106,7 +106,7 @@
   backdrop-filter: blur(6px);
   white-space: nowrap;
 }
-.chip:hover { border-color: rgba(176,104,32,.4); color: var(--accent); }
+.chip:hover { border-color: rgba(107,64,10,.4); color: var(--accent); }
 .chipOn { background: var(--accent); border-color: var(--accent); color: white; }
 
 @media (max-width: 640px) {

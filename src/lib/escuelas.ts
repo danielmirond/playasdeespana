@@ -73,7 +73,7 @@ export async function getEscuelas(lat: number, lng: number, radio = 5000): Promi
       body:    `data=${encodeURIComponent(query)}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       next:    { revalidate: 86400 },
-    })
+    }, 15000) // Overpass: default 3s es demasiado agresivo
     if (!res.ok) return []
     const data = await res.json()
 
