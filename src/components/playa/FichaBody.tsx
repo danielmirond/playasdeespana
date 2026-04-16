@@ -34,6 +34,10 @@ const ReportarEstado = dynamic(() => import('./ReportarEstado'), {
   ssr: false,
   loading: () => <div style={{ height: 258, borderRadius: 14, border: '1.5px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
 })
+const VotacionPlaya = dynamic(() => import('./VotacionPlaya'), {
+  ssr: false,
+  loading: () => <div style={{ height: 148, borderRadius: 14, border: '1.5px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
+})
 
 interface Meteo {
   agua: number; olas: number; viento: number; vientoRacha: number
@@ -636,6 +640,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         </div>
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} />
+        <VotacionPlaya slug={playa.slug} locale={locale} />
         <ReportarEstado slug={playa.slug} locale={locale} />
         {/* Amazon affiliate — equipo de playa */}
         {AMAZON_TAG && (
