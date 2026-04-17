@@ -16,6 +16,7 @@ import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
+import HubsRelacionados from './HubsRelacionados'
 import PhotoCarousel from './PhotoCarousel'
 import type { Escuela } from '@/lib/escuelas'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
@@ -800,6 +801,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         <TextoSEO playa={playa} locale={locale} />
+
+        {/* Hubs temáticos relevantes (cross-linking semántico) */}
+        <HubsRelacionados playa={playa} locale={locale} />
 
         {/* FAQS */}
         <FaqSection playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} mareasLunar={mareasLunar} locale={locale} />

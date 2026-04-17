@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getCalidad } from '@/lib/calidad'
+import { getVotos } from '@/lib/votos'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
@@ -80,7 +81,7 @@ export default async function BeachPageEn({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult] = await Promise.allSettled([
+  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -92,6 +93,7 @@ export default async function BeachPageEn({ params }: Props) {
     getCalidad(slug),
     getPlayas(),
     getMunicipioSlugsSet(),
+    getVotos(slug),
   ])
 
   const municipioSlug = toSlug(playa.municipio)
@@ -174,6 +176,17 @@ export default async function BeachPageEn({ params }: Props) {
         playa={playa}
         agua={meteo.agua}
         olas={meteo.olas}
+        viento={meteo.viento}
+        uv={meteo.uv}
+        tempAire={meteo.tempAire}
+        calidadNivel={calidad?.nivel ?? null}
+        fotoUrl={fotosData[0]?.url ?? null}
+        fotoAutor={fotosData[0]?.autor}
+        rating={(() => {
+          if (votosResult.status !== 'fulfilled') return null
+          const v = votosResult.value
+          return v && v.votos > 0 ? { ratingValue: v.media, ratingCount: v.votos } : null
+        })()}
         dateModified={dateModified}
         faqs={generarFaqsPlaya({
           playa,

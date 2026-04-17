@@ -7,6 +7,7 @@ import { getPlayas, getPlayasByProvincia, getProvincias, getMunicipios } from '@
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './ProvinciaPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import SchemaItemList from '@/components/seo/SchemaItemList'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -60,8 +61,17 @@ export default async function ProvinciaPage({ params }: Props) {
   const buenas = playasConEstado.filter(p => p.estadoKey === 'CALMA' || p.estadoKey === 'BUENA').length
   const conBandera = playas.filter(p => p.bandera).length
 
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+
   return (
     <>
+      <SchemaItemList
+        name={`Playas de ${provincia.nombre}`}
+        description={`${playas.length} playas en la provincia de ${provincia.nombre}, España. Estado del mar, calidad y servicios.`}
+        url={`${BASE}/provincia/${slug}`}
+        beaches={playas.map(p => ({ slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia }))}
+        locale="es"
+      />
       <Nav />
 
       {/* BREADCRUMB + HERO */}

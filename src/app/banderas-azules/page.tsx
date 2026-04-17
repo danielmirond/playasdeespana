@@ -5,6 +5,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import styles from './BanderasAzules.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import SchemaItemList from '@/components/seo/SchemaItemList'
 
 export const revalidate = 86400
 
@@ -99,8 +100,17 @@ export default async function BanderasAzulesPage() {
     })),
   }
 
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+
   return (
     <>
+      <SchemaItemList
+        name="Playas con Bandera Azul en España"
+        description={`${azules.length} playas con Bandera Azul en España, distribuidas por comunidad autónoma. Distintivo de calidad ambiental y de servicios.`}
+        url={`${BASE}/banderas-azules`}
+        beaches={azules.map(p => ({ slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia }))}
+        locale="es"
+      />
       <Nav />
 
       <div className={styles.hero}>

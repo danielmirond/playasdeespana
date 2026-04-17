@@ -7,6 +7,7 @@ import { getPlayas, getPlayasByComunidad, getComunidades, getMunicipios } from '
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './ComunidadPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import SchemaItemList from '@/components/seo/SchemaItemList'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -69,8 +70,17 @@ export default async function ComunidadPage({ params }: Props) {
   const centerLat = (minLat + maxLat) / 2
   const centerLng = (minLng + maxLng) / 2
 
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+
   return (
     <>
+      <SchemaItemList
+        name={`Playas de ${comunidad.nombre}`}
+        description={`${comunidad.count} playas en ${comunidad.nombre}, España. Estado del mar, calidad del agua, servicios y actividades.`}
+        url={`${BASE}/comunidad/${slug}`}
+        beaches={playas.map(p => ({ slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia }))}
+        locale="es"
+      />
       <Nav />
       <div className={styles.hero}>
         <div className={styles.heroInner}>
