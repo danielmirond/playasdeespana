@@ -215,16 +215,30 @@ export default function TraficoSection({ playa }: Props) {
           <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)' }}><Car size={16} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:6}}/> Tráfico, afluencia y donde aparcar, parking cerca</span>
           <span style={{ fontSize:'.75rem', color: 'var(--muted,#5a3d12)' }}>Tiempo real</span>
         </div>
-        <div style={{ display: 'flex', gap: '.35rem', marginTop: '.65rem' }}>
+        <div
+          role="tablist"
+          aria-label="Secciones de tráfico, afluencia y aparcamiento"
+          style={{ display: 'flex', gap: '.35rem', marginTop: '.65rem' }}
+        >
           {(['afluencia', 'trafico', 'parking'] as const).map(tab => (
-            <button key={tab} onClick={() => setTabActivo(tab)} style={{
-              fontSize:'.72rem', fontWeight: 700, padding: '.22rem .65rem',
-              borderRadius: '100px', border: '1.5px solid',
-              borderColor: tabActivo === tab ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
-              background: tabActivo === tab ? 'rgba(107,64,10,.1)' : 'transparent',
-              color: tabActivo === tab ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)',
-              cursor: 'pointer', textTransform: 'capitalize',
-            }}>
+            <button
+              key={tab}
+              type="button"
+              role="tab"
+              id={`tab-${tab}`}
+              aria-selected={tabActivo === tab ? 'true' : 'false'}
+              aria-controls={`tabpanel-${tab}`}
+              tabIndex={tabActivo === tab ? 0 : -1}
+              onClick={() => setTabActivo(tab)}
+              style={{
+                fontSize:'.72rem', fontWeight: 700, padding: '.22rem .65rem',
+                borderRadius: '100px', border: '1.5px solid',
+                borderColor: tabActivo === tab ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
+                background: tabActivo === tab ? 'rgba(107,64,10,.1)' : 'transparent',
+                color: tabActivo === tab ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)',
+                cursor: 'pointer', textTransform: 'capitalize',
+              }}
+            >
               {tab === 'afluencia' ? <><Users size={14}/>&nbsp;Afluencia</> : tab === 'trafico' ? <><Car size={14}/>&nbsp;Tráfico</> : <><Park size={14}/>&nbsp;Aparcamiento</>}
             </button>
           ))}
@@ -235,7 +249,7 @@ export default function TraficoSection({ playa }: Props) {
 
         {/* TAB AFLUENCIA */}
         {tabActivo === 'afluencia' && (
-          <div>
+          <div role="tabpanel" id="tabpanel-afluencia" aria-labelledby="tab-afluencia">
             <div style={{
               display: 'flex', alignItems: 'center', gap: '1rem',
               padding: '.75rem 1rem', borderRadius: '12px',
@@ -279,7 +293,7 @@ export default function TraficoSection({ playa }: Props) {
 
         {/* TAB TRÁFICO */}
         {tabActivo === 'trafico' && (
-          <div>
+          <div role="tabpanel" id="tabpanel-trafico" aria-labelledby="tab-trafico">
             {loadingT ? (
               <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--muted,#5a3d12)', fontSize: '.8rem' }}>Consultando tráfico…</div>
             ) : trafico ? (
@@ -338,7 +352,7 @@ export default function TraficoSection({ playa }: Props) {
 
         {/* TAB APARCAMIENTO */}
         {tabActivo === 'parking' && (
-          <div>
+          <div role="tabpanel" id="tabpanel-parking" aria-labelledby="tab-parking">
             {loadingP ? (
               <div style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--muted,#5a3d12)', fontSize: '.8rem' }}>
                 <div style={{ width: '24px', height: '24px', borderRadius: '50%', border: '3px solid var(--line)', borderTopColor: 'var(--accent)', animation: 'spin .7s linear infinite', margin: '0 auto .5rem' }}/>

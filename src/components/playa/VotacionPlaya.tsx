@@ -87,6 +87,8 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
       {/* Estrellas */}
       <div style={{ padding: '.9rem .7rem .7rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '.5rem' }}>
         <div
+          role="radiogroup"
+          aria-label={es ? 'Valoración de la playa, de 1 a 5 estrellas' : 'Rate the beach, 1 to 5 stars'}
           style={{ display: 'flex', gap: 4 }}
           onMouseLeave={() => setHover(null)}
         >
@@ -96,6 +98,9 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
             return (
               <button
                 key={n}
+                type="button"
+                role="radio"
+                aria-checked={miVoto === n ? 'true' : 'false'}
                 onClick={() => votar(n)}
                 onMouseEnter={() => interactivo && setHover(n)}
                 disabled={!interactivo || sending}
@@ -114,7 +119,8 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
                 <Star
                   size={28}
                   weight={llena ? 'fill' : 'regular'}
-                  color={llena ? '#f5a623' : '#d4c8b0'}
+                  color={llena ? '#f5a623' : '#8a7560'}
+                  aria-hidden="true"
                 />
               </button>
             )
@@ -143,12 +149,17 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
         )}
 
         {miVoto !== null && (
-          <div style={{
-            fontSize: '.65rem',
-            color: '#22c55e',
-            fontWeight: 600,
-            marginTop: 2,
-          }}>
+          <div
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            style={{
+              fontSize: '.65rem',
+              color: '#22c55e',
+              fontWeight: 600,
+              marginTop: 2,
+            }}
+          >
             {es ? '✓ Gracias por tu voto' : '✓ Thanks for your vote'}
           </div>
         )}

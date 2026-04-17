@@ -283,18 +283,33 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
               }}
             >Aérea</button>
           </div>
-          <button onClick={() => setModoRadio(r => !r)} style={{
-            fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px', border: '1.5px solid',
-            borderColor: modoRadio ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
-            background: modoRadio ? 'rgba(107,64,10,.1)' : 'transparent',
-            color: modoRadio ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)', cursor: 'pointer',
-            minHeight: '32px',
-          }}>Radio</button>
+          <button
+            type="button"
+            onClick={() => setModoRadio(r => !r)}
+            aria-pressed={modoRadio ? 'true' : 'false'}
+            aria-label={modoRadio ? 'Ocultar filtro de radio' : 'Mostrar filtro de radio de búsqueda'}
+            style={{
+              fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px', border: '1.5px solid',
+              borderColor: modoRadio ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
+              background: modoRadio ? 'rgba(107,64,10,.1)' : 'transparent',
+              color: modoRadio ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)', cursor: 'pointer',
+              minHeight: '32px',
+            }}
+          >Radio</button>
           {modoRadio && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '.3rem' }}>
-              <input type="range" min={5} max={200} value={radio} onChange={e => setRadio(+e.target.value)}
-                style={{ width: '70px', accentColor: 'var(--accent,#6b400a)' }} />
-              <span style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', minWidth: '30px' }}>{radio}km</span>
+            <div role="group" aria-label="Ajustar radio de búsqueda" style={{ display: 'flex', alignItems: 'center', gap: '.3rem' }}>
+              <label htmlFor="mapa-radio-range" className="sr-only">Radio de búsqueda en kilómetros</label>
+              <input
+                id="mapa-radio-range"
+                type="range"
+                min={5}
+                max={200}
+                value={radio}
+                onChange={e => setRadio(+e.target.value)}
+                aria-valuetext={`${radio} kilómetros`}
+                style={{ width: '70px', accentColor: 'var(--accent,#6b400a)' }}
+              />
+              <span aria-live="polite" style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', minWidth: '30px' }}>{radio}km</span>
             </div>
           )}
         </div>

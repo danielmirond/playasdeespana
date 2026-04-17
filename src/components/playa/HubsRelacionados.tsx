@@ -128,13 +128,13 @@ export default function HubsRelacionados({ playa, locale = 'es' }: Props) {
               style={{
                 display: 'inline-flex',
                 padding: '.4rem .75rem',
-                background: 'rgba(107,64,10,.08)',
-                color: 'var(--accent, #6b400a)',
+                background: 'rgba(107,64,10,.14)',
+                color: '#4a2c05',
                 borderRadius: 100,
                 fontSize: '.75rem',
                 fontWeight: 600,
                 textDecoration: 'none',
-                border: '1px solid rgba(107,64,10,.15)',
+                border: '1px solid rgba(107,64,10,.3)',
               }}
             >
               {h.label} →

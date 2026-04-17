@@ -131,10 +131,12 @@ export default function Favoritas({ locale = 'es' }: Props) {
                 )}
               </Link>
               <button
+                type="button"
                 className={styles.btnQuitar}
                 onClick={() => toggle(p.slug)}
+                aria-label={locale === 'en' ? `Remove ${p.nombre} from favorites` : `Quitar ${p.nombre} de favoritas`}
                 title="Quitar de favoritas"
-              >✕</button>
+              ><span aria-hidden="true">✕</span></button>
             </div>
           )
         })}

@@ -10,7 +10,7 @@ export default function IluEstado({ estado, size = 'lg' }: Props) {
   const vb = size === 'lg' ? '0 0 220 180' : '0 0 110 88'
 
   if (estado === 'CALMA') return (
-    <svg viewBox={vb} fill="none" width={w} height={h}>
+    <svg viewBox={vb} fill="none" width={w} height={h} role="img" aria-label={`Ilustración: estado del mar ${estado.toLowerCase()}`}>
       <rect x={size==='lg'?20:5}  y={size==='lg'?128:64} width={size==='lg'?180:100} height={size==='lg'?14:8}  rx="3" fill="#c4884a" opacity=".45"/>
       <rect x={size==='lg'?8:0}   y={size==='lg'?136:70} width={size==='lg'?204:110} height={size==='lg'?16:10} rx="3" fill="#c4884a" opacity=".6"/>
       <rect x="0" y={size==='lg'?146:76} width={size==='lg'?220:110} height={size==='lg'?34:12} fill="#c4884a" opacity=".8"/>
@@ -38,7 +38,7 @@ export default function IluEstado({ estado, size = 'lg' }: Props) {
   )
 
   if (estado === 'PELIGRO') return (
-    <svg viewBox={vb} fill="none" width={w} height={h}>
+    <svg viewBox={vb} fill="none" width={w} height={h} role="img" aria-label={`Ilustración: estado del mar ${estado.toLowerCase()}`}>
       <rect x="0" y={size==='lg'?150:76} width={size==='lg'?220:110} height={size==='lg'?30:12} fill="#c4884a" opacity=".5"/>
       <path d={size==='lg'
         ? "M0,140 C18,128 36,142 54,132 C72,122 90,138 110,128 C130,118 150,134 170,124 C186,116 204,128 220,122 L220,160 L0,160Z"
@@ -55,7 +55,7 @@ export default function IluEstado({ estado, size = 'lg' }: Props) {
   )
 
   if (estado === 'SURF') return (
-    <svg viewBox={vb} fill="none" width={w} height={h}>
+    <svg viewBox={vb} fill="none" width={w} height={h} role="img" aria-label={`Ilustración: estado del mar ${estado.toLowerCase()}`}>
       <rect x="0" y={size==='lg'?155:78} width={size==='lg'?220:110} height={size==='lg'?25:10} fill="#c4884a" opacity=".4"/>
       <path d={size==='lg'
         ? "M0,80 C16,56 32,84 56,64 C80,44 100,76 128,52 C152,32 180,72 220,48 L220,160 L0,160Z"
@@ -72,7 +72,7 @@ export default function IluEstado({ estado, size = 'lg' }: Props) {
   )
 
   if (estado === 'AVISO') return (
-    <svg viewBox={vb} fill="none" width={w} height={h}>
+    <svg viewBox={vb} fill="none" width={w} height={h} role="img" aria-label={`Ilustración: estado del mar ${estado.toLowerCase()}`}>
       <rect x="0" y={size==='lg'?150:76} width={size==='lg'?220:110} height={size==='lg'?30:12} fill="#c4884a" opacity=".4"/>
       <path d={size==='lg'
         ? "M0,100 C20,80 44,104 68,84 C92,64 116,96 140,76 C164,56 192,88 220,72 L220,160 L0,160Z"
@@ -89,7 +89,7 @@ export default function IluEstado({ estado, size = 'lg' }: Props) {
 
   // BUENA / VIENTO
   return (
-    <svg viewBox={vb} fill="none" width={w} height={h}>
+    <svg viewBox={vb} fill="none" width={w} height={h} role="img" aria-label={`Ilustración: estado del mar ${estado.toLowerCase()}`}>
       <rect x="0" y={size==='lg'?150:76} width={size==='lg'?220:110} height={size==='lg'?30:12} fill="#c4884a" opacity=".4"/>
       <path d={size==='lg'
         ? "M0,104 C28,80 56,104 84,88 C112,72 140,100 168,84 C192,70 208,88 220,80 L220,160 L0,160Z"

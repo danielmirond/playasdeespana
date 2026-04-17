@@ -20,7 +20,8 @@ export default function CookieBanner() {
   const aLabelRechazar = locale === 'en' ? 'Only essential cookies' : 'Aceptar solo cookies esenciales'
   return (
     <div
-      role="region"
+      role="dialog"
+      aria-modal="false"
       aria-label={locale === 'en' ? 'Cookie consent' : 'Consentimiento de cookies'}
       style={{ position:'fixed', bottom:'1.25rem', left:'50%', transform:'translateX(-50%)', width:'min(560px, calc(100vw - 2rem))', background:'#faf6ef', border:'1.5px solid #e8dcc8', borderRadius:'20px', padding:'1.25rem 1.5rem', boxShadow:'0 8px 32px rgba(42,26,8,.12)', zIndex:9999, display:'flex', flexDirection:'column', gap:'.75rem' }}
     >

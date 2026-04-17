@@ -26,7 +26,10 @@ export default function AdSlot({ slot, format = 'auto', responsive = true, style
   if (!ADSENSE_ID) return null
 
   return (
-    <div style={{ textAlign: 'center', margin: '.85rem 0', minHeight: 90, ...style }}>
+    <aside
+      aria-label="Publicidad"
+      style={{ textAlign: 'center', margin: '.85rem 0', minHeight: 90, ...style }}
+    >
       <ins
         ref={adRef}
         className="adsbygoogle"
@@ -36,6 +39,6 @@ export default function AdSlot({ slot, format = 'auto', responsive = true, style
         data-ad-format={format}
         data-full-width-responsive={responsive}
       />
-    </div>
+    </aside>
   )
 }
