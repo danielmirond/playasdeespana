@@ -18,6 +18,7 @@ import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
 import HubsRelacionados from './HubsRelacionados'
+import FerriesCTA from './FerriesCTA'
 import PhotoCarousel from './PhotoCarousel'
 import type { Escuela } from '@/lib/escuelas'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
@@ -688,6 +689,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             )}
           </div>
         </div>
+
+        {/* FERRY CTA — solo se muestra en Baleares y Canarias */}
+        <FerriesCTA playa={playa} locale={locale} />
 
         {/* CAMPINGS Y AUTOCARAVANAS */}
         {campings && campings.length > 0 && (
