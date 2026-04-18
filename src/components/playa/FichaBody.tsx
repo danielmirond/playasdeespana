@@ -5,6 +5,7 @@ import type { Playa, Restaurante } from '@/types'
 import type { FotoPlaya } from '@/lib/fotos'
 import type { HotelReal } from '@/lib/hoteles'
 import type { Camping } from '@/lib/campings'
+import type { CentroBuceo } from '@/lib/buceo'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
@@ -65,6 +66,7 @@ interface Props {
   fotos?:         FotoPlaya[]
   hoteles?:       HotelReal[]
   campings?:      Camping[]
+  centrosBuceo?:  CentroBuceo[]
   escuelas?:      Escuela[]
   turbidez?:      TurbidezData | null
   forecastSurf?:  ForecastDay[] | null
@@ -202,7 +204,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
@@ -798,6 +800,64 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   ⛺ {locale === 'en' ? 'Find campsites on Booking.com' : 'Buscar campings en Booking.com'}
                 </a>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* CENTROS DE BUCEO */}
+        {centrosBuceo && centrosBuceo.length > 0 && (
+          <div className={styles.card} id="s-buceo">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>
+                <Fish size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'#0891b2'}}/>
+                {locale === 'en' ? `Dive centers near ${playa.nombre}` : `Centros de buceo cerca de ${playa.nombre}`}
+              </h2>
+              <span className={styles.cardSrc}>OpenStreetMap</span>
+            </div>
+            <div className={styles.cardBody}>
+              <div className={styles.list}>
+                {centrosBuceo.map(c => {
+                  const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(c.nombre)}/@${c.lat},${c.lon},15z`
+                  return (
+                    <div key={c.id} className={styles.listItem}>
+                      <div style={{
+                        width: 44, height: 44, borderRadius: 8, flexShrink: 0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        background: 'rgba(8,145,178,.12)', color: '#0891b2', fontSize: '1.3rem',
+                      }} aria-hidden="true"><Fish size={22} weight="bold" /></div>
+                      <div className={styles.listInfo}>
+                        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                          <div className={styles.listNombre}>{c.nombre}</div>
+                        </a>
+                        <div style={{ fontSize: '.66rem', color: '#0891b2', fontWeight: 700, marginTop: '.1rem' }}>
+                          {c.tipo}
+                          {c.certificacion && <span style={{ marginLeft: '.35rem', background: '#0891b222', padding: '.1rem .35rem', borderRadius: 4, fontSize: '.6rem' }}>{c.certificacion}</span>}
+                        </div>
+                        <div className={styles.listMeta}>
+                          {c.distancia_m >= 1000 ? `${(c.distancia_m/1000).toFixed(1)} km` : `${c.distancia_m} m`}
+                        </div>
+                        {c.servicios.length > 0 && (
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginTop: '.35rem' }}>
+                            {c.servicios.slice(0, 4).map(s => (
+                              <span key={s} style={{
+                                fontSize: '.62rem', padding: '.1rem .4rem',
+                                background: 'rgba(8,145,178,.08)', color: '#0e7490',
+                                borderRadius: 4, fontWeight: 500,
+                              }}>{s}</span>
+                            ))}
+                          </div>
+                        )}
+                        {(c.website || c.telefono) && (
+                          <div style={{ display: 'flex', gap: '.5rem', marginTop: '.5rem', flexWrap: 'wrap' }}>
+                            {c.website && <a href={c.website} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.7rem', background: '#0891b2', color: '#fff', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600 }}>Web</a>}
+                            {c.telefono && <a href={`tel:${c.telefono}`} style={{ fontSize: '.7rem', background: 'rgba(8,145,178,.12)', color: '#0e7490', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600, border: '1px solid rgba(8,145,178,.3)' }}>{c.telefono}</a>}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
         )}

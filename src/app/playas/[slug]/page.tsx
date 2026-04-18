@@ -14,6 +14,8 @@ import { calcularHoraIdeal } from '@/lib/hora-ideal'
 import { getRestaurantes } from '@/lib/restaurantes'
 import { getCampings } from '@/lib/campings'
 import type { Camping } from '@/lib/campings'
+import { getCentrosBuceo } from '@/lib/buceo'
+import type { CentroBuceo } from '@/lib/buceo'
 import { getFotos } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
 import { getHoteles } from '@/lib/hoteles'
@@ -92,7 +94,7 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult] = await Promise.allSettled([
+  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -107,8 +109,10 @@ export default async function PlayaPage({ params }: Props) {
     getMunicipioSlugsSet(),
     getVotos(slug),
     getCampings(playa.lat, playa.lng),
+    getCentrosBuceo(playa.lat, playa.lng),
   ])
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
+  const buceoData: CentroBuceo[] = buceoResult.status === 'fulfilled' ? buceoResult.value : []
 
   // Enlaces condicionales de municipio y provincia: solo enlazamos el
   // municipio si tiene página propia (>=4 playas). La provincia siempre
@@ -251,6 +255,7 @@ export default async function PlayaPage({ params }: Props) {
         fotos={fotosData}
         hoteles={hotelesData}
         campings={campingsData}
+        centrosBuceo={buceoData}
         escuelas={escuelasData}
         turbidez={turbidezData}
         forecastSurf={forecastSurf}
