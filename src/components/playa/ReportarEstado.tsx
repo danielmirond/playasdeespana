@@ -213,7 +213,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
               type="button"
               onClick={() => enviarBinario(o.tipo)}
               disabled={done || sending === o.tipo}
-              aria-pressed={done}
+              aria-pressed={done ? 'true' : 'false'}
               aria-label={done
                 ? (es ? `${label} (ya reportado)` : `${label} (already reported)`)
                 : label}
@@ -288,7 +288,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
               </legend>
 
               {/* Stars */}
-              <div role="radiogroup" aria-label={label} style={{
+              <div role="radiogroup" aria-label={es ? `Valorar ${label.toLowerCase()} de 1 a 5 estrellas` : `Rate ${label.toLowerCase()} 1 to 5 stars`} style={{
                 display: 'flex', gap: '.3rem', alignItems: 'center',
               }}>
                 {[1, 2, 3, 4, 5].map(n => {
@@ -298,7 +298,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                       key={n}
                       type="button"
                       role="radio"
-                      aria-checked={voted === n}
+                      aria-checked={voted === n ? 'true' : 'false'}
                       onClick={() => enviarRating(r.tipo, n)}
                       disabled={done || sending === r.tipo}
                       aria-label={`${label}: ${n} ${es ? (n === 1 ? 'estrella' : 'estrellas') : (n === 1 ? 'star' : 'stars')}`}
