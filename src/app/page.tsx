@@ -153,6 +153,7 @@ export default async function HomePage() {
               <Link href="/comunidades">Comunidades</Link>
               <Link href="/banderas-azules">Banderas Azules</Link>
               <Link href="/surf">Surf</Link>
+              <Link href="/buceo">Buceo</Link>
               <Link href="/atardeceres">Atardeceres</Link>
               <Link href="/mapa">Mapa</Link>
             </nav>
@@ -163,14 +164,34 @@ export default async function HomePage() {
               <Link href="/playas-perros">Perros</Link>
               <Link href="/playas-nudistas">Nudistas</Link>
               <Link href="/playas-accesibles">Accesibles PMR</Link>
+              <Link href="/familias">Familias</Link>
+              <Link href="/playas-aguas-cristalinas">Aguas cristalinas</Link>
               <Link href="/top">Top 10 Rankings</Link>
+            </nav>
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Escapadas</div>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
               <Link href="/rutas">Rutas por la costa</Link>
+              <Link href="/campings">Campings</Link>
+              <Link href="/playas-autocaravana">Autocaravana</Link>
+              <Link href="/alquiler-barco-playa">Alquiler de barco</Link>
+            </nav>
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Guías</div>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
+              <Link href="/seguros-viaje">Seguros de viaje</Link>
+              <Link href="/protectores-solares">Protectores solares</Link>
+              <Link href="/calidad-agua">Calidad del agua</Link>
+              <Link href="/medusas">Medusas</Link>
             </nav>
           </div>
           <div>
             <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Herramientas</div>
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
               <Link href="/buscar">Buscar playas</Link>
+              <Link href="/comparar">Comparador</Link>
               <Link href="/rutas/configurar">Configurar ruta</Link>
               <Link href="/en">English version</Link>
             </nav>

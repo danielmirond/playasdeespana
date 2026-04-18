@@ -85,7 +85,7 @@ export default async function PlayasAutocaravanaPage() {
         }}>
           Playas para autocaravana en España
         </h1>
-        <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '1.5rem', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.6 }}>
           Guía completa para viajar en autocaravana por la costa española: áreas de servicio cerca del mar,
           zonas de pernocta legal, vaciados, enganche eléctrico y las comunidades más amigables con
           caravanistas. En cada ficha de playa mostramos el parking y las áreas más cercanas.
@@ -134,7 +134,7 @@ export default async function PlayasAutocaravanaPage() {
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '1rem' }}>
           Mejores comunidades para ruta en autocaravana
         </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '.6rem', marginBottom: '3rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '.6rem', marginBottom: '2.5rem' }}>
           {COMUNIDADES_AUTOCARAVANA.map((c, i) => {
             const slug = slugify(c.nombre)
             const count = comunidades.find(x => x.nombre === c.nombre)?.count ?? 0
@@ -178,7 +178,7 @@ export default async function PlayasAutocaravanaPage() {
           Selección de playas con parking grande y Bandera Azul —las más fáciles para acceder con caravana
           y con áreas de servicio habitualmente cerca.
         </p>
-        <ol style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.5rem', marginBottom: '3rem' }}>
+        <ol style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.5rem', marginBottom: '2.5rem' }}>
           {destacadas.map(p => (
             <li key={p.slug}>
               <Link

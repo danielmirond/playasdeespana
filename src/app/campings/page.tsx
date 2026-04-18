@@ -82,7 +82,7 @@ export default async function CampingsPage() {
         }}>
           Campings cerca de la playa en España
         </h1>
-        <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '1.5rem', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.6 }}>
           España tiene cientos de campings junto a la costa, desde glamping de lujo en Baleares hasta
           áreas de autocaravanas frente al mar en Galicia. En cada ficha de playa mostramos los campings
           más cercanos con servicios, distancia y datos de contacto.
@@ -116,7 +116,7 @@ export default async function CampingsPage() {
         </h2>
         <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-          gap: '.75rem', marginBottom: '3rem',
+          gap: '.75rem', marginBottom: '2.5rem',
         }}>
           {costeras.map(c => {
             const playasC = playasPorComunidad.get(c.nombre) ?? []
