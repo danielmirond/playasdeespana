@@ -91,7 +91,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: '/api/(restaurantes|hoteles|parkings)',
+        source: '/api/(restaurantes|hoteles|parkings|campings)',
         headers: [
           { key: 'Cache-Control', value: 'public, s-maxage=86400, stale-while-revalidate=172800' },
         ],

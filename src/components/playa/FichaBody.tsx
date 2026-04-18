@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import type { Playa, Restaurante } from '@/types'
 import type { FotoPlaya } from '@/lib/fotos'
 import type { HotelReal } from '@/lib/hoteles'
+import type { Camping } from '@/lib/campings'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
@@ -62,6 +63,7 @@ interface Props {
   restaurantes?:  Restaurante[]
   fotos?:         FotoPlaya[]
   hoteles?:       HotelReal[]
+  campings?:      Camping[]
   escuelas?:      Escuela[]
   turbidez?:      TurbidezData | null
   forecastSurf?:  ForecastDay[] | null
@@ -199,7 +201,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#ef4444', '#7a1010'],
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
@@ -686,6 +688,115 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             )}
           </div>
         </div>
+
+        {/* CAMPINGS Y AUTOCARAVANAS */}
+        {campings && campings.length > 0 && (
+          <div className={styles.card} id="s-campings">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>
+                <Car size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'var(--accent,#6b400a)'}}/>
+                {locale === 'en' ? `Campsites near ${playa.nombre}` : `Campings cerca de ${playa.nombre}`}
+              </h2>
+              <span className={styles.cardSrc}>OpenStreetMap</span>
+            </div>
+            <div className={styles.cardBody}>
+              <div className={styles.list}>
+                {campings.map(c => {
+                  const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(c.nombre)}/@${c.lat},${c.lon},15z`
+                  return (
+                    <div key={c.id} className={styles.listItem}>
+                      <div style={{
+                        width: 44, height: 44, borderRadius: 8, flexShrink: 0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        background: 'rgba(34,197,94,.12)', color: '#22c55e', fontSize: '1.5rem',
+                      }} aria-hidden="true">⛺</div>
+                      <div className={styles.listInfo}>
+                        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                          <div className={styles.listNombre}>{c.nombre}</div>
+                        </a>
+                        <div style={{ fontSize: '.66rem', color: '#22c55e', fontWeight: 700, marginTop: '.1rem' }}>
+                          {c.tipo}
+                          {c.categoria > 0 && (
+                            <span style={{ marginLeft: '.35rem', color: 'var(--muted,#5a3d12)' }}>
+                              · {'★'.repeat(Math.min(c.categoria, 5))}
+                            </span>
+                          )}
+                        </div>
+                        <div className={styles.listMeta}>
+                          {c.distancia_m >= 1000 ? `${(c.distancia_m/1000).toFixed(1)} km` : `${c.distancia_m} m`}
+                          {c.autocaravanas && <span> · {locale === 'en' ? 'Motorhomes' : 'Autocaravanas'}</span>}
+                          {c.tiendas && <span> · {locale === 'en' ? 'Tents' : 'Tiendas'}</span>}
+                          {c.bungalows && <span> · {locale === 'en' ? 'Bungalows' : 'Bungalows'}</span>}
+                          {c.perros && <span> · {locale === 'en' ? 'Dog-friendly' : 'Admite perros'}</span>}
+                        </div>
+                        {c.servicios.length > 0 && (
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginTop: '.35rem' }}>
+                            {c.servicios.slice(0, 5).map(s => (
+                              <span key={s} style={{
+                                fontSize: '.62rem', padding: '.1rem .4rem',
+                                background: 'rgba(107,64,10,.08)',
+                                color: '#4a2c05',
+                                borderRadius: 4, fontWeight: 500,
+                              }}>{s}</span>
+                            ))}
+                          </div>
+                        )}
+                        {(c.website || c.telefono) && (
+                          <div style={{ display: 'flex', gap: '.5rem', marginTop: '.5rem', flexWrap: 'wrap' }}>
+                            {c.website && (
+                              <a href={c.website} target="_blank" rel="noopener noreferrer"
+                                style={{ fontSize: '.7rem', background: '#22c55e', color: '#fff', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600 }}>
+                                Web
+                              </a>
+                            )}
+                            {c.telefono && (
+                              <a href={`tel:${c.telefono}`}
+                                style={{ fontSize: '.7rem', background: 'rgba(34,197,94,.12)', color: '#166534', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600, border: '1px solid rgba(34,197,94,.3)' }}>
+                                {c.telefono}
+                              </a>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Pitchup affiliate CTA */}
+              {process.env.NEXT_PUBLIC_PITCHUP_AFF && (
+                <a
+                  href={`https://www.pitchup.com/es/campings/espana/?aff=${process.env.NEXT_PUBLIC_PITCHUP_AFF}&q=${encodeURIComponent(playa.municipio)}`}
+                  target="_blank" rel="noopener noreferrer sponsored"
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
+                    width: '100%', padding: '.7rem', marginTop: '.6rem',
+                    background: '#ff6b35', color: '#fff', borderRadius: 10,
+                    fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
+                  }}
+                >
+                  ⛺ {locale === 'en' ? `Book camping with Pitchup` : `Reservar camping en Pitchup`}
+                </a>
+              )}
+
+              {/* Fallback: Booking.com también tiene campings */}
+              {!process.env.NEXT_PUBLIC_PITCHUP_AFF && process.env.NEXT_PUBLIC_BOOKING_AID && (
+                <a
+                  href={`https://www.booking.com/searchresults.html?aid=${process.env.NEXT_PUBLIC_BOOKING_AID}&label=camping-${playa.slug}&latitude=${playa.lat}&longitude=${playa.lng}&radius=10&nflt=privacy_type%3D3`}
+                  target="_blank" rel="noopener noreferrer sponsored"
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
+                    width: '100%', padding: '.7rem', marginTop: '.6rem',
+                    background: '#003580', color: '#fff', borderRadius: 10,
+                    fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
+                  }}
+                >
+                  ⛺ {locale === 'en' ? 'Find campsites on Booking.com' : 'Buscar campings en Booking.com'}
+                </a>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* AD — entre hoteles y servicios */}
         <AdSlot slot="hoteles-servicios" format="horizontal" />
