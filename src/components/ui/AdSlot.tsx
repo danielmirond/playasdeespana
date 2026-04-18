@@ -28,7 +28,7 @@ export default function AdSlot({ slot, format = 'auto', responsive = true, style
   return (
     <aside
       aria-label="Publicidad"
-      style={{ textAlign: 'center', margin: '.85rem 0', minHeight: 90, ...style }}
+      style={{ textAlign: 'center', minHeight: 90, ...style }}
     >
       <ins
         ref={adRef}

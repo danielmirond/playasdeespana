@@ -104,7 +104,6 @@ export default function HubsRelacionados({ playa, locale = 'es' }: Props) {
         border: '1.5px solid var(--line, #e8dcc8)',
         borderRadius: 16,
         padding: '1rem 1.15rem',
-        marginBottom: '.85rem',
       }}
     >
       <div style={{

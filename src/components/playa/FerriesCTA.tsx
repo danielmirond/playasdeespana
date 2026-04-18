@@ -53,7 +53,6 @@ export default function FerriesCTA({ playa, locale = 'es' }: Props) {
         background: 'linear-gradient(135deg, #003580 0%, #0071c2 100%)',
         borderRadius: 16,
         padding: '1.1rem 1.25rem',
-        marginBottom: '.85rem',
         color: '#fff',
       }}
     >

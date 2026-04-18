@@ -8,7 +8,16 @@
   gap: 1.5rem; align-items: start;
 }
 
-.main { min-width: 0; }
+.main {
+  min-width: 0;
+  /* Espaciado uniforme entre módulos — sustituye a los margin-bottom
+     individuales de cada card / sección. Todos los hijos directos
+     tienen la misma separación vertical sin margin collapse ni
+     doble margen con AdSlot. */
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+}
 
 /* ── CARDS ──────────────────────────────────────────────────────── */
 .card {
@@ -16,7 +25,6 @@
   border: 1.5px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
-  margin-bottom: .85rem;
 }
 .cardHead {
   display: flex; align-items: center; justify-content: space-between;
@@ -319,8 +327,11 @@
 @media (max-width: 600px) {
   .wrap { padding: .65rem .65rem 4rem; }
 
+  /* Ajustar gap en mobile — antes era margin-bottom: .65rem en .card */
+  .main { gap: .65rem; }
+
   /* Cards */
-  .card { border-radius: 14px; margin-bottom: .65rem; }
+  .card { border-radius: 14px; }
   .cardHead { padding: .7rem .85rem .4rem; }
   .cardBody { padding: .15rem .85rem .85rem; }
   .divider  { margin: 0 .85rem; }
