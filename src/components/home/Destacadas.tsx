@@ -51,23 +51,22 @@ function calcEstado(m: MeteoInput): string {
   return 'CALMA'
 }
 
-// ── Score badge ───────────────────────────────────────────────────
+// ── Score badge · circular (brand book compact variant) ───────────
 function ScoreBadge({ ps }: { ps: PlayaScore }) {
   return (
     <div
       style={{
-        position: 'absolute', top: 8, right: 8, zIndex: 3,
+        position: 'absolute', top: 10, right: 10, zIndex: 3,
         background: ps.color, color: '#fff',
-        fontFamily: 'var(--font-serif)', fontWeight: 900,
+        fontFamily: 'var(--font-serif)', fontWeight: 700,
         fontSize: '.95rem', lineHeight: 1,
-        padding: '.35rem .55rem', borderRadius: 8,
-        boxShadow: '0 2px 8px rgba(0,0,0,.15)',
-        display: 'flex', alignItems: 'center', gap: '.3rem',
+        width: 42, height: 42, borderRadius: '50%',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        border: '2px solid #f5ecd5',
       }}
       aria-label={`Score ${ps.score}/100 — ${ps.label}`}
     >
       {ps.score}
-      <span style={{ fontSize: '.6rem', fontWeight: 600, opacity: .8 }}>/100</span>
     </div>
   )
 }
@@ -146,13 +145,16 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
           <div className={styles.temp}>{m.agua}°</div>
           {rank !== undefined && (
             <div style={{
-              position: 'absolute', top: 8, left: 8, zIndex: 3,
-              background: 'rgba(0,0,0,.45)', color: '#fff',
-              fontFamily: 'var(--font-serif)', fontWeight: 900,
-              fontSize: '.85rem', width: 28, height: 28, borderRadius: '50%',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              {rank}
+              position: 'absolute', top: 10, left: 12, zIndex: 3,
+              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+              fontWeight: 400,
+              fontSize: '1.35rem', color: '#2a1a08',
+              lineHeight: 1,
+              letterSpacing: '-.02em',
+            }}
+            aria-label={`Posición ${rank}`}
+            >
+              n°{rank}
             </div>
           )}
         </div>

@@ -22,8 +22,8 @@ export default function Hero() {
       </p>
 
       <h1 className={styles.title}>
-        ¿A qué playa<br/>
-        <em>voy hoy?</em>
+        Hoy el mar está<br/>
+        <em>para bañarse</em>
       </h1>
       <p className={styles.sub}>
         Puntuamos cada playa de 0 a 100 según el estado actual del mar,

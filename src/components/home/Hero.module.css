@@ -51,12 +51,15 @@
 .title {
   position: relative; z-index: 2;
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  font-weight: 900; line-height: .95;
-  letter-spacing: -.03em; color: var(--ink);
+  font-size: clamp(2.2rem, 6.2vw, 4.25rem);
+  font-weight: 700; line-height: .98;
+  letter-spacing: -.02em; color: var(--ink);
   margin-bottom: .65rem;
 }
-.title em { font-style: italic; color: var(--accent); }
+.title em {
+  font-style: italic; font-weight: 500;
+  color: var(--accent);
+}
 
 .sub {
   position: relative; z-index: 2;
@@ -74,20 +77,19 @@
 }
 .ctaPrimary {
   background: var(--accent); color: #fff;
-  padding: .75rem 1.5rem; border-radius: 12px;
-  font-size: .92rem; font-weight: 800;
+  padding: .75rem 1.5rem; border-radius: 4px;
+  font-size: .92rem; font-weight: 700;
   text-decoration: none;
   transition: all .15s;
   min-height: 44px;
   display: inline-flex; align-items: center;
-  box-shadow: 0 4px 14px rgba(107,64,10,.2);
 }
-.ctaPrimary:hover { opacity: .9; transform: translateY(-1px); text-decoration: none; }
+.ctaPrimary:hover { opacity: .9; text-decoration: none; }
 .ctaSecondary {
   background: var(--card-bg); color: var(--accent);
-  border: 1.5px solid var(--line);
-  padding: .65rem 1.15rem; border-radius: 10px;
-  font-size: .82rem; font-weight: 700;
+  border: 1px solid var(--line);
+  padding: .65rem 1.15rem; border-radius: 4px;
+  font-size: .82rem; font-weight: 500;
   text-decoration: none;
   transition: all .15s;
   min-height: 44px;
@@ -104,9 +106,8 @@
   position: relative; z-index: 2;
   display: flex; align-items: center;
   background: var(--metric-bg);
-  backdrop-filter: blur(12px);
-  border: 1.5px solid var(--line);
-  border-radius: 16px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   padding: .75rem 1.5rem;
   gap: 1.25rem;
 }
