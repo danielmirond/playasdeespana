@@ -197,9 +197,23 @@ export default async function HomePage() {
             </nav>
           </div>
         </div>
-        <div style={{ borderTop: '1px solid var(--line)', paddingTop: '.85rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '.5rem' }}>
+        {/* Disclosure de afiliación (LSSI + buenas prácticas FTC) */}
+        <div style={{
+          borderTop: '1px solid var(--line)', paddingTop: '.85rem', marginBottom: '.75rem',
+          fontSize: '.7rem', color: 'var(--muted)', lineHeight: 1.55,
+        }}>
+          <strong>Transparencia:</strong> Algunas páginas contienen enlaces de afiliación a
+          Booking, Amazon, Civitatis, Click&Boat, Rentalcars, TheFork, Parclick, Pitchup, Heymondo, IATI y otros.
+          Si reservas o compras a través de ellos, podemos recibir una comisión sin coste adicional para ti.
+          Los datos y rankings no están influenciados por estas colaboraciones.{' '}
+          <Link href="/cookies" style={{ textDecoration: 'underline' }}>Más info</Link>.
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '.5rem' }}>
           <span>Datos: Open-Meteo · MITECO · IGN · CartoCiudad · OSM</span>
-          <span>© {new Date().getFullYear()} playas-espana.com</span>
+          <div style={{ display: 'flex', gap: '.75rem' }}>
+            <Link href="/cookies" style={{ textDecoration: 'underline' }}>Cookies</Link>
+            <span>© {new Date().getFullYear()} playas-espana.com</span>
+          </div>
         </div>
       </footer>
     </>
