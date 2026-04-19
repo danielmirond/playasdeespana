@@ -64,17 +64,18 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
   return (
     <div style={{
       background: 'var(--card-bg, #faf6ef)',
-      border: '1.5px solid var(--line, #e8dcc8)',
-      borderRadius: 14,
+      border: '1px solid var(--line, #e8dcc8)',
+      borderRadius: 6,
       overflow: 'hidden',
     }}>
       {/* Header */}
       <div style={{
         padding: '.55rem .9rem',
         borderBottom: '1px solid var(--line, #e8dcc8)',
-        fontSize: '.6rem',
-        fontWeight: 600,
-        letterSpacing: '.1em',
+        fontFamily: 'var(--font-sans)',
+        fontSize: '.68rem',
+        fontWeight: 500,
+        letterSpacing: '.14em',
         textTransform: 'uppercase',
         color: 'var(--muted, #8a7560)',
       }}>
@@ -130,15 +131,22 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
         {/* Resumen */}
         {data && data.votos > 0 ? (
           <div style={{
-            fontSize: '.72rem',
+            fontSize: '.75rem',
             color: 'var(--muted, #8a7560)',
             textAlign: 'center',
             lineHeight: 1.3,
+            fontVariantNumeric: 'tabular-nums',
           }}>
-            <span style={{ color: 'var(--ink, #2a1a08)', fontWeight: 700 }}>{data.media.toFixed(1)}</span>
+            <span style={{
+              color: 'var(--ink, #2a1a08)', fontWeight: 700,
+              fontFamily: 'var(--font-serif)', fontSize: '.9rem',
+            }}>{data.media.toFixed(1)}</span>
             <span style={{ color: '#f5a623' }}> ★</span>
             {' · '}
-            {data.votos} {data.votos === 1
+            <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.7rem' }}>
+              {data.votos}
+            </span>{' '}
+            {data.votos === 1
               ? (es ? 'valoración' : 'rating')
               : (es ? 'valoraciones' : 'ratings')}
           </div>

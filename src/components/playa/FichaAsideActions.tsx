@@ -35,15 +35,16 @@ export default function FichaAsideActions({ lat, lng, nombre, slug }: Props) {
     justifyContent:'center',
     gap:           '6px',
     width:         '100%',
-    padding:       '9px 12px',
-    borderRadius:  '10px',
-    fontSize:      '.8rem',
+    padding:       '10px 12px',
+    borderRadius:  '4px',
+    fontFamily:    'var(--font-sans)',
+    fontSize:      '.82rem',
     fontWeight:    500,
     cursor:        'pointer',
-    border:        '1.5px solid rgba(138,117,96,.25)',
-    background:    'rgba(138,117,96,.06)',
-    color:         'var(--brown, #6b4c2a)',
-    transition:    'all .2s',
+    border:        '1px solid var(--line, #e8dcc8)',
+    background:    'var(--card-bg, #faf6ef)',
+    color:         'var(--accent, #6b400a)',
+    transition:    'border-color .15s, background .15s',
   }
 
   return (

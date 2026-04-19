@@ -101,15 +101,16 @@ export default function HubsRelacionados({ playa, locale = 'es' }: Props) {
       aria-label={es ? 'Páginas relacionadas' : 'Related pages'}
       style={{
         background: 'var(--card-bg, #faf6ef)',
-        border: '1.5px solid var(--line, #e8dcc8)',
-        borderRadius: 16,
+        border: '1px solid var(--line, #e8dcc8)',
+        borderRadius: 6,
         padding: '1rem 1.15rem',
       }}
     >
       <div style={{
-        fontSize: '.6rem',
-        fontWeight: 700,
-        letterSpacing: '.1em',
+        fontFamily: 'var(--font-sans)',
+        fontSize: '.7rem',
+        fontWeight: 500,
+        letterSpacing: '.14em',
         textTransform: 'uppercase',
         color: 'var(--muted, #5a3d12)',
         marginBottom: '.75rem',

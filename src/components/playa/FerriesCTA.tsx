@@ -51,7 +51,7 @@ export default function FerriesCTA({ playa, locale = 'es' }: Props) {
       aria-label={es ? 'Ferries a esta isla' : 'Ferries to this island'}
       style={{
         background: 'linear-gradient(135deg, #003580 0%, #0071c2 100%)',
-        borderRadius: 16,
+        borderRadius: 6,
         padding: '1.1rem 1.25rem',
         color: '#fff',
       }}
@@ -80,7 +80,7 @@ export default function FerriesCTA({ playa, locale = 'es' }: Props) {
               target="_blank" rel="noopener noreferrer sponsored"
               style={{
                 padding: '.55rem 1rem', background: '#fff', color: '#003580',
-                borderRadius: 8, fontSize: '.78rem', fontWeight: 700,
+                borderRadius: 4, fontSize: '.78rem', fontWeight: 500,
                 textDecoration: 'none', whiteSpace: 'nowrap',
               }}
             >
@@ -93,7 +93,7 @@ export default function FerriesCTA({ playa, locale = 'es' }: Props) {
               target="_blank" rel="noopener noreferrer sponsored"
               style={{
                 padding: '.55rem 1rem', background: 'rgba(255,255,255,.2)', color: '#fff',
-                borderRadius: 8, fontSize: '.78rem', fontWeight: 700,
+                borderRadius: 4, fontSize: '.78rem', fontWeight: 500,
                 textDecoration: 'none', whiteSpace: 'nowrap',
                 border: '1px solid rgba(255,255,255,.4)',
               }}

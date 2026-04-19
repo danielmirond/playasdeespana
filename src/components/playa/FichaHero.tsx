@@ -107,50 +107,49 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
       </nav>
       <h1 className={styles.nombre}>{locale === 'en' ? `${playa.nombre} today — ${playa.municipio}` : `${nombreConPlaya(playa.nombre)} hoy — ${playa.municipio}`}</h1>
 
-      {/* Score badge — "¿Ir hoy?" */}
+      {/* Score editorial — Playfair huge + verdict italic (brand book 05) */}
       {playaScore && (
         <div style={{
           position: 'relative', zIndex: 2,
-          display: 'flex', alignItems: 'center', gap: '.65rem',
+          display: 'flex', alignItems: 'center', gap: '.9rem',
           justifyContent: 'center', flexWrap: 'wrap',
-          marginBottom: '.6rem',
+          marginBottom: '.85rem',
         }}>
           <div style={{
-            display: 'flex', alignItems: 'center', gap: '.45rem',
-            background: 'rgba(255,255,255,.65)',
-            backdropFilter: 'blur(8px)',
-            border: `2px solid ${playaScore.color}50`,
-            borderRadius: 14, padding: '.55rem 1rem',
+            display: 'flex', alignItems: 'baseline', gap: '.5rem',
           }}>
             <span style={{
-              background: playaScore.color, color: '#fff',
-              fontFamily: 'var(--font-serif)', fontWeight: 900,
-              fontSize: '1.25rem', lineHeight: 1,
-              padding: '.4rem .6rem', borderRadius: 10,
-              display: 'inline-flex', alignItems: 'center', gap: '.25rem',
+              fontFamily: 'var(--font-serif)', fontWeight: 700,
+              fontSize: '3.4rem', lineHeight: 1,
+              letterSpacing: '-.02em',
+              color: 'var(--ink)',
+              fontVariantNumeric: 'tabular-nums',
             }}>
               {playaScore.score}
-              <span style={{ fontSize: '.65rem', fontWeight: 600, opacity: .8 }}>/100</span>
             </span>
-            <div>
-              <div style={{ fontWeight: 800, fontSize: '.95rem', color: playaScore.color, lineHeight: 1.1 }}>
-                {locale === 'en' ? playaScore.labelEn : playaScore.label}
-              </div>
-              <div style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.2 }}>
-                {locale === 'en' ? 'Score today' : 'Puntuación hoy'}
-              </div>
-            </div>
+            <span style={{
+              fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+              fontSize: '.78rem', fontWeight: 500,
+              color: 'var(--muted)',
+            }}>/100</span>
+            <span style={{
+              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+              fontWeight: 400,
+              fontSize: '1.3rem', color: playaScore.color,
+              marginLeft: '.3rem',
+            }}>
+              {locale === 'en' ? playaScore.labelEn : playaScore.label}
+            </span>
           </div>
           {/* Factor pills */}
           {playaScore.factors.length > 0 && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.3rem', justifyContent: 'center' }}>
               {playaScore.factors.map(f => (
                 <span key={f.icon} style={{
-                  fontSize: '.72rem', fontWeight: 700, color: f.color,
-                  background: `rgba(255,255,255,.7)`,
-                  border: `1.5px solid ${f.color}50`,
-                  padding: '.25rem .55rem', borderRadius: 8,
-                  backdropFilter: 'blur(4px)',
+                  fontSize: '.72rem', fontWeight: 500, color: f.color,
+                  background: 'rgba(255,255,255,.7)',
+                  border: `1px solid ${f.color}50`,
+                  padding: '.25rem .55rem', borderRadius: 100,
                   whiteSpace: 'nowrap',
                 }}>
                   {locale === 'en' ? f.labelEn : f.label}
@@ -158,21 +157,19 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
               ))}
             </div>
           )}
-          {/* CTA: ver mejores playas cercanas */}
+          {/* CTA arrow link — brand book button con arrow */}
           <Link
             href={`/buscar?lat=${playa.lat}&lng=${playa.lng}&orden=cercanas`}
             style={{
-              fontSize: '.78rem', fontWeight: 700,
+              fontSize: '.8rem', fontWeight: 500,
               color: 'var(--accent)',
-              background: 'rgba(255,255,255,.65)',
-              backdropFilter: 'blur(4px)',
-              border: '1.5px solid var(--line)',
-              borderRadius: 8, padding: '.4rem .8rem',
               textDecoration: 'none',
               whiteSpace: 'nowrap',
+              borderBottom: '1px solid var(--accent)',
+              paddingBottom: 1,
             }}
           >
-            {locale === 'en' ? '📍 Better beaches nearby?' : '📍 ¿Hay mejores playas cerca?'}
+            {locale === 'en' ? 'Better beaches nearby →' : '¿Mejores playas cerca? →'}
           </Link>
         </div>
       )}

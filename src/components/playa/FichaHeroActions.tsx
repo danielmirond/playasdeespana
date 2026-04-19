@@ -48,12 +48,13 @@ export default function FichaHeroActions({ slug, nombre }: Props) {
     gap:           '6px',
     padding:       '7px 16px',
     borderRadius:  '99px',
+    fontFamily:    'var(--font-sans)',
     fontSize:      '.8rem',
     fontWeight:    500,
     cursor:        'pointer',
-    border:        '1.5px solid currentColor',
+    border:        '1px solid currentColor',
     background:    'transparent',
-    transition:    'all .2s',
+    transition:    'border-color .15s, background .15s',
     letterSpacing: '.01em',
   }
 

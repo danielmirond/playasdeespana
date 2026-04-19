@@ -183,17 +183,18 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
   return (
     <div style={{
       background: 'var(--card-bg, #faf6ef)',
-      border: '1.5px solid var(--line, #e8dcc8)',
-      borderRadius: 14,
+      border: '1px solid var(--line, #e8dcc8)',
+      borderRadius: 6,
       overflow: 'hidden',
     }}>
       {/* Header */}
       <div style={{
         padding: '.55rem .9rem',
         borderBottom: '1px solid var(--line, #e8dcc8)',
-        fontSize: '.74rem',
-        fontWeight: 700,
-        letterSpacing: '.1em',
+        fontFamily: 'var(--font-sans)',
+        fontSize: '.7rem',
+        fontWeight: 500,
+        letterSpacing: '.14em',
         textTransform: 'uppercase',
         color: 'var(--muted, #5a3d12)',
       }}>
@@ -220,14 +221,14 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
               style={{
                 display: 'flex', alignItems: 'center', gap: '.5rem',
                 width: '100%', padding: '.55rem .8rem',
-                borderRadius: 10,
-                border: done ? `1.5px solid ${o.color}66` : '1.5px solid var(--line, #e8dcc8)',
+                borderRadius: 4,
+                border: done ? `1px solid ${o.color}66` : '1px solid var(--line, #e8dcc8)',
                 background: done ? `${o.color}14` : 'transparent',
                 cursor: done ? 'default' : 'pointer',
-                fontSize: '.82rem', fontWeight: 600,
+                fontSize: '.82rem', fontWeight: 500,
                 fontFamily: 'var(--font-sans, system-ui)',
                 color: done ? o.color : 'var(--ink, #2a1a08)',
-                transition: 'all .2s',
+                transition: 'border-color .15s, background .15s',
                 opacity: sending === o.tipo ? 0.6 : 1,
                 minHeight: 44,
               }}
@@ -303,8 +304,8 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                       disabled={done || sending === r.tipo}
                       aria-label={`${label}: ${n} ${es ? (n === 1 ? 'estrella' : 'estrellas') : (n === 1 ? 'star' : 'stars')}`}
                       style={{
-                        width: 36, height: 36, borderRadius: 8,
-                        border: '1.5px solid var(--line, #e8dcc8)',
+                        width: 36, height: 36, borderRadius: 4,
+                        border: '1px solid var(--line, #e8dcc8)',
                         background: active ? `${r.color}14` : 'transparent',
                         cursor: done ? 'default' : 'pointer',
                         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
