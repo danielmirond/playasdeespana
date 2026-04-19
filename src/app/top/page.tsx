@@ -34,12 +34,13 @@ export default function TopPage() {
         </nav>
 
         <h1 style={{
-          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 5vw, 2.8rem)',
-          fontWeight: 900, color: 'var(--ink)', lineHeight: 1, marginBottom: '.5rem',
+          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.9rem, 5.4vw, 3rem)',
+          fontWeight: 700, color: 'var(--ink)', lineHeight: 1.02,
+          letterSpacing: '-.02em', marginBottom: '.5rem',
         }}>
-          Top 10 mejores playas por costa
+          Las <em style={{ fontWeight: 500, color: 'var(--accent)' }}>10 mejores playas</em> por costa
         </h1>
-        <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '2.5rem', maxWidth: 560 }}>
+        <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '2.5rem', maxWidth: 560, lineHeight: 1.6 }}>
           Rankings de las 10 mejores playas de cada costa de España, puntuadas por servicios, accesibilidad, bandera azul y ocupación.
         </p>
 
@@ -55,9 +56,9 @@ export default function TopPage() {
                   <Link key={c.slug} href={`/top/${c.slug}`} style={{
                     display: 'flex', alignItems: 'center', gap: '.75rem',
                     padding: '1rem 1.15rem',
-                    background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                    borderLeft: `4px solid ${c.color === '#f8fafc' ? 'var(--accent)' : c.color}`,
-                    borderRadius: 14, textDecoration: 'none', transition: 'all .15s',
+                    background: 'var(--card-bg)', border: '1px solid var(--line)',
+                    borderLeft: `3px solid ${c.color === '#f8fafc' ? 'var(--accent)' : c.color}`,
+                    borderRadius: 6, textDecoration: 'none', transition: 'border-color .15s',
                   }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontWeight: 800, fontSize: '.95rem', color: 'var(--ink)' }}>

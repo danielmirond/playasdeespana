@@ -113,11 +113,11 @@ export default async function Page() {
         </nav>
 
         <h1 style={{
-          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 5vw, 2.6rem)',
-          fontWeight: 900, color: 'var(--ink)', lineHeight: 1.1,
+          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.9rem, 5.4vw, 3rem)',
+          fontWeight: 700, color: 'var(--ink)', lineHeight: 1.05,
           letterSpacing: '-.02em', marginBottom: '.75rem',
         }}>
-          Playas con aguas cristalinas en España
+          Las playas <em style={{ fontWeight: 500, color: 'var(--accent)' }}>de aguas más cristalinas</em> de España
         </h1>
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.6 }}>
           Las aguas más transparentes de España están en Canarias, Baleares y zonas concretas
@@ -127,8 +127,8 @@ export default async function Page() {
 
         {/* Intro educativa */}
         <section aria-labelledby="h2-que" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2rem',
         }}>
           <h2 id="h2-que" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.5rem' }}>
             ¿Qué hace a una playa de aguas cristalinas?

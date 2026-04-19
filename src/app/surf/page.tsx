@@ -85,10 +85,11 @@ export default async function SurfPage() {
         </nav>
 
         <h1 style={{
-          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 5vw, 2.8rem)',
-          fontWeight: 900, color: 'var(--ink)', lineHeight: 1, marginBottom: '.5rem',
+          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.9rem, 5.4vw, 3rem)',
+          fontWeight: 700, color: 'var(--ink)', lineHeight: 1.02,
+          letterSpacing: '-.02em', marginBottom: '.5rem',
         }}>
-          🏄 Surf en España — Previsión hoy
+          Dónde <em style={{ fontWeight: 500, color: 'var(--accent)' }}>surfear hoy</em> en España
         </h1>
         <p style={{ fontSize: '.92rem', color: 'var(--muted)', marginBottom: '2rem', maxWidth: 560 }}>
           Condiciones de surf actualizadas cada hora para {surfPlayas.length} playas.

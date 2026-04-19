@@ -78,11 +78,11 @@ export default async function AtardeceresPage() {
         </nav>
 
         <h1 style={{
-          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 5vw, 2.8rem)',
-          fontWeight: 900, letterSpacing: '-.025em', color: 'var(--ink)',
-          lineHeight: 1, marginBottom: '.5rem',
+          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.9rem, 5.4vw, 3rem)',
+          fontWeight: 700, letterSpacing: '-.02em', color: 'var(--ink)',
+          lineHeight: 1.02, marginBottom: '.5rem',
         }}>
-          Playas para ver el atardecer
+          Playas <em style={{ fontWeight: 500, color: 'var(--accent)' }}>para ver el atardecer</em>
         </h1>
         <p style={{ fontSize: '.92rem', color: 'var(--muted)', maxWidth: 560, lineHeight: 1.6, marginBottom: '.5rem' }}>
           {atardeceres.length} playas orientadas al oeste y suroeste, donde el sol se pone sobre el mar.

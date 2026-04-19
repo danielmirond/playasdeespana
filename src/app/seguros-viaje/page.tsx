@@ -99,11 +99,11 @@ export default function SegurosViajePage() {
         </nav>
 
         <h1 style={{
-          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 5vw, 2.6rem)',
-          fontWeight: 900, color: 'var(--ink)', lineHeight: 1.1, letterSpacing: '-.02em',
+          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.9rem, 5.4vw, 3rem)',
+          fontWeight: 700, color: 'var(--ink)', lineHeight: 1.05, letterSpacing: '-.02em',
           marginBottom: '.75rem',
         }}>
-          Seguro de viaje para España
+          El mejor <em style={{ fontWeight: 500, color: 'var(--accent)' }}>seguro de viaje</em> para España
         </h1>
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.65 }}>
           Comparativa actualizada de los mejores seguros de viaje para tus vacaciones de playa
