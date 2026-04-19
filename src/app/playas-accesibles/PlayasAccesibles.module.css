@@ -42,13 +42,13 @@
   margin-bottom: 2rem;
 }
 .statCard {
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 14px; padding: 1rem 1.1rem;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 1rem 1.1rem;
   display: flex; flex-direction: column; gap: .15rem;
 }
 .statValue {
   font-family: var(--font-serif);
-  font-size: 1.75rem; font-weight: 900; line-height: 1;
+  font-size: 1.75rem; font-weight: 700; line-height: 1;
   color: var(--ink); letter-spacing: -.02em;
 }
 .statLabel {
@@ -57,8 +57,8 @@
 }
 
 .mapaCard {
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 20px; overflow: hidden; margin-bottom: 2.5rem;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; overflow: hidden; margin-bottom: 2.5rem;
 }
 .mapaHead {
   display: flex; justify-content: space-between; align-items: center;
@@ -70,7 +70,7 @@
 /* Section title */
 .sectionTitle {
   font-family: var(--font-serif);
-  font-size: 1.35rem; font-weight: 800;
+  font-size: 1.35rem; font-weight: 700;
   color: var(--ink);
   margin: 0 0 1rem;
   letter-spacing: -.015em;
@@ -83,7 +83,7 @@
   margin-bottom: .5rem; padding-bottom: .4rem; border-bottom: 1px solid var(--line);
 }
 .grupoTitulo {
-  font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800;
+  font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700;
   color: var(--ink); margin: 0;
 }
 .grupoTitulo a { color: inherit; text-decoration: none; border-bottom: 1.5px solid transparent; }
@@ -94,8 +94,8 @@
 
 .row {
   display: flex; align-items: center; gap: .75rem;
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 14px; padding: .7rem 1rem;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; padding: .7rem 1rem;
   text-decoration: none; transition: border-color .15s, transform .1s;
 }
 .row:hover, .row:focus-visible {
@@ -126,15 +126,14 @@
   display: flex; align-items: center; justify-content: space-between;
   padding: .85rem 1.1rem;
   background: var(--card-bg);
-  border: 1.5px solid var(--line);
-  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   text-decoration: none;
-  transition: all .15s;
+  transition: border-color .15s, background .15s, color .15s;
 }
 .linkCard:hover, .linkCard:focus-visible {
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(107,64,10,.08);
 }
 .linkCardNombre {
   font-size: .88rem; font-weight: 700; color: var(--ink);
@@ -148,8 +147,8 @@
 /* Info callout */
 .info {
   background: color-mix(in srgb, var(--accent) 5%, var(--card-bg));
-  border: 1.5px solid var(--line);
-  border-radius: 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   padding: 1.2rem 1.3rem;
   margin-bottom: 2rem;
   display: flex; gap: .9rem; align-items: flex-start;
@@ -168,13 +167,13 @@
 .faq { margin-top: 3rem; }
 .faqTitulo {
   font-family: var(--font-serif);
-  font-size: 1.45rem; font-weight: 900;
+  font-size: 1.45rem; font-weight: 700;
   color: var(--ink); margin: 0 0 1rem;
   letter-spacing: -.02em;
 }
 .faqItem {
-  border: 1.5px solid var(--line);
-  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   padding: .85rem 1.1rem;
   margin-bottom: .5rem;
   background: var(--card-bg);
@@ -192,7 +191,7 @@
 .faqQ::after {
   content: '+';
   margin-left: auto;
-  color: var(--accent); font-weight: 900;
+  color: var(--accent); font-weight: 700;
   transition: transform .2s;
 }
 .faqItem[open] .faqQ::after { content: '−'; }

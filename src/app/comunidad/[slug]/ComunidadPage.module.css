@@ -30,7 +30,7 @@
 .stats { display: flex; gap: 2rem; }
 .stat { text-align: center; }
 .statV {
-  font-family: var(--font-serif); font-size: 1.8rem; font-weight: 900;
+  font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700;
   color: var(--accent); display: block; line-height: 1;
 }
 .statL { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
@@ -40,8 +40,8 @@
 
 /* ── MAPA ── */
 .mapaCard {
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 20px; overflow: hidden; margin-bottom: 2rem;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; overflow: hidden; margin-bottom: 2rem;
 }
 .mapaHead {
   display: flex; justify-content: space-between; align-items: center;
@@ -68,7 +68,7 @@
 .provinciaHead { margin-bottom: .85rem; }
 .provinciaLink { text-decoration: none; display: flex; align-items: baseline; gap: .75rem; }
 .provinciaTitulo {
-  font-family: var(--font-serif); font-size: 1.3rem; font-weight: 800;
+  font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700;
   color: var(--ink); margin: 0;
 }
 .provinciaCount { font-size: .75rem; color: var(--accent); font-weight: 600; }
@@ -81,8 +81,8 @@
   gap: .75rem;
 }
 .playaCard {
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 16px; padding: .85rem; text-decoration: none;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; padding: .85rem; text-decoration: none;
   transition: border-color .15s, transform .15s;
   display: flex; flex-direction: column; gap: .35rem;
 }
@@ -90,7 +90,7 @@
 
 .pcEstado {
   display: inline-flex; align-items: center; gap: .3rem;
-  padding: .2rem .55rem; border-radius: 100px; border: 1.5px solid;
+  padding: .2rem .55rem; border-radius: 100px; border: 1px solid;
   align-self: flex-start;
 }
 .pcDot   { width: 6px; height: 6px; border-radius: 50%; }

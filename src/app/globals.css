@@ -3,8 +3,7 @@
 
 .card {
   background: var(--card-bg);
-  backdrop-filter: blur(8px);
-  border: 1.5px solid var(--line);
+  border: 1px solid var(--line);
   border-radius: var(--r-xl);
 }
 .divider { height: 1px; background: var(--line); }

@@ -26,14 +26,13 @@
 .card {
   position: relative;
   background: var(--card-bg);
-  border: 1.5px solid var(--line);
-  border-radius: 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   overflow: hidden;
-  transition: all .15s;
+  transition: border-color .15s, background .15s, color .15s;
 }
 .card:hover {
   border-color: rgba(107,64,10,.35);
-  box-shadow: 0 6px 20px rgba(107,64,10,.08);
 }
 
 .cardLink {
@@ -71,7 +70,7 @@
   background: rgba(0,0,0,.06); border: none;
   font-size: .72rem; color: var(--muted);
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all .15s;
+  cursor: pointer; transition: border-color .15s, background .15s, color .15s;
   line-height: 1;
 }
 .btnQuitar:hover { background: rgba(239,68,68,.12); color: #ef4444; }
@@ -80,8 +79,8 @@
 .btnFav {
   font-size: 1.1rem; color: var(--muted);
   background: none; border: none; cursor: pointer;
-  transition: all .15s; line-height: 1;
-  padding: .2rem .35rem; border-radius: 8px;
+  transition: border-color .15s, background .15s, color .15s; line-height: 1;
+  padding: .2rem .35rem; border-radius: 4px;
 }
 .btnFav:hover   { color: #ef4444; background: rgba(239,68,68,.08); }
 .btnFavOn       { color: #ef4444; }

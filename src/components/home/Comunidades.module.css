@@ -41,11 +41,10 @@
   text-align: center;
   gap: .3rem;
   padding: .9rem .75rem;
-  border-radius: 14px;
-  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  border: 1px solid var(--line);
   background: var(--card-bg);
-  backdrop-filter: blur(8px);
-  transition: all .15s;
+  transition: border-color .15s, background .15s, color .15s;
 }
 .item:hover {
   background: rgba(255,255,255,.75);

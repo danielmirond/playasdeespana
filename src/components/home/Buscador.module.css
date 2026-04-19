@@ -16,9 +16,8 @@
   align-items: center;
   gap: .5rem;
   background: rgba(255,255,255,.75);
-  backdrop-filter: blur(10px);
-  border: 2px solid var(--line);
-  border-radius: 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   padding: .55rem .55rem .55rem 1rem;
   width: 100%;
   transition: border-color .2s, box-shadow .2s;
@@ -45,7 +44,7 @@
   background: var(--accent);
   color: white;
   padding: .5rem 1.2rem;
-  border-radius: 11px;
+  border-radius: 4px;
   font-size: .8rem;
   font-weight: 600;
   white-space: nowrap;
@@ -97,13 +96,12 @@
   gap: .28rem;
   padding: .3rem .72rem;
   border-radius: 100px;
-  border: 1.5px solid var(--line);
+  border: 1px solid var(--line);
   background: var(--metric-bg);
   font-size: .72rem;
   font-weight: 500;
   color: var(--muted);
-  transition: all .15s;
-  backdrop-filter: blur(6px);
+  transition: border-color .15s, background .15s, color .15s;
   white-space: nowrap;
 }
 .chip:hover { border-color: rgba(107,64,10,.4); color: var(--accent); }

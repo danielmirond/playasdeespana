@@ -15,7 +15,7 @@
 .title {
   font-family: var(--font-serif);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 900; letter-spacing: -.02em;
+  font-weight: 700; letter-spacing: -.02em;
   color: var(--ink); line-height: 1;
 }
 .total {
@@ -27,9 +27,8 @@
 .searchBox {
   display: flex; align-items: center; gap: .5rem;
   background: rgba(255,255,255,.8);
-  backdrop-filter: blur(10px);
-  border: 2px solid var(--line);
-  border-radius: 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   padding: .6rem .6rem .6rem 1rem;
   transition: border-color .2s, box-shadow .2s;
 }
@@ -47,9 +46,9 @@
 .searchInput::placeholder { color: var(--muted); }
 .clearBtn {
   font-size: .85rem; color: var(--muted);
-  background: var(--metric-bg); border: 1.5px solid var(--line);
-  border-radius: 8px; padding: .55rem .8rem; cursor: pointer;
-  transition: all .15s; flex-shrink: 0;
+  background: var(--metric-bg); border: 1px solid var(--line);
+  border-radius: 4px; padding: .55rem .8rem; cursor: pointer;
+  transition: border-color .15s, background .15s, color .15s; flex-shrink: 0;
   min-width: 44px; min-height: 44px; /* WCAG 2.5.5 AAA */
   display: flex; align-items: center; justify-content: center;
 }
@@ -63,7 +62,7 @@
 .select {
   font-family: var(--font-sans); font-size: .82rem;
   color: var(--ink); background: var(--metric-bg);
-  border: 1.5px solid var(--line); border-radius: 10px;
+  border: 1px solid var(--line); border-radius: 4px;
   padding: .55rem .8rem; cursor: pointer; outline: none;
   transition: border-color .15s;
   min-height: 44px; /* WCAG 2.5.5 AAA touch target */
@@ -73,10 +72,10 @@
 .chip {
   display: flex; align-items: center; gap: .25rem;
   padding: .6rem 1rem; border-radius: 100px;
-  border: 1.5px solid var(--line);
+  border: 1px solid var(--line);
   background: var(--metric-bg);
   font-size: .78rem; font-weight: 500; color: var(--muted);
-  cursor: pointer; transition: all .15s; white-space: nowrap;
+  cursor: pointer; transition: border-color .15s, background .15s, color .15s; white-space: nowrap;
   min-height: 44px; /* WCAG 2.5.5 AAA touch target */
 }
 .chip:hover { border-color: rgba(107,64,10,.4); color: var(--accent); }
@@ -116,7 +115,7 @@
 .empty p { font-size: .9rem; color: var(--muted); }
 .emptyBtn {
   background: var(--accent); color: white;
-  padding: .55rem 1.25rem; border-radius: 10px;
+  padding: .55rem 1.25rem; border-radius: 4px;
   font-size: .8rem; font-weight: 600; border: none; cursor: pointer;
   transition: opacity .15s;
 }
@@ -133,15 +132,14 @@
   display: flex; align-items: center; gap: .75rem;
   padding: .75rem 1rem;
   background: var(--card-bg);
-  border: 1.5px solid var(--line);
-  border-radius: 14px;
-  transition: all .15s;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  transition: border-color .15s, background .15s, color .15s;
   text-decoration: none;
 }
 .card:hover {
   border-color: rgba(107,64,10,.35);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(107,64,10,.08);
 }
 .cardMain { flex: 1; min-width: 0; }
 .cardNombre {
@@ -156,7 +154,7 @@
 }
 .cardBadges { display: flex; gap: .2rem; flex-shrink: 0; }
 .badge { font-size: .75rem; line-height: 1; }
-.arrow { color: var(--muted); flex-shrink: 0; transition: all .15s; }
+.arrow { color: var(--muted); flex-shrink: 0; transition: border-color .15s, background .15s, color .15s; }
 .card:hover .arrow { color: var(--accent); transform: translateX(2px); }
 
 /* Paginación */
@@ -165,10 +163,10 @@
   gap: 1rem; margin-top: 2rem;
 }
 .pageBtn {
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 10px; padding: .7rem 1.3rem;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 4px; padding: .7rem 1.3rem;
   font-size: .85rem; font-weight: 500; color: var(--ink);
-  cursor: pointer; transition: all .15s;
+  cursor: pointer; transition: border-color .15s, background .15s, color .15s;
   min-height: 44px; min-width: 44px; /* WCAG 2.5.5 AAA touch target */
 }
 .pageBtn:hover:not(:disabled) { border-color: rgba(107,64,10,.4); color: var(--accent); }

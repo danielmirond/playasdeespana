@@ -101,7 +101,6 @@
   border-radius: 100px;
   font-size: .72rem;
   font-weight: 600;
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,.3);
 }
 .dot {
@@ -171,7 +170,7 @@
 
 .arrow {
   color: var(--muted);
-  transition: all .15s;
+  transition: border-color .15s, background .15s, color .15s;
   flex-shrink: 0;
 }
 .card:hover .arrow {

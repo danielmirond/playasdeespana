@@ -9,7 +9,7 @@
   align-items: center;
   gap: .9rem;
   padding: .75rem;
-  border-radius: 10px;
+  border-radius: 4px;
   border: 1px solid var(--line);
   text-decoration: none;
   color: var(--ink);
@@ -25,7 +25,7 @@
 .hotel-foto {
   width: 64px;
   height: 64px;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   flex-shrink: 0;
   display: flex;

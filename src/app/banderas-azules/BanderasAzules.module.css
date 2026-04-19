@@ -31,8 +31,8 @@
 .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
 
 .mapaCard {
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 20px; overflow: hidden; margin-bottom: 2.5rem;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; overflow: hidden; margin-bottom: 2.5rem;
 }
 .mapaHead {
   display: flex; justify-content: space-between; align-items: center;
@@ -47,7 +47,7 @@
   margin-bottom: .5rem; padding-bottom: .4rem; border-bottom: 1px solid var(--line);
 }
 .grupoTitulo {
-  font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800;
+  font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700;
   color: var(--ink); margin: 0;
 }
 .grupoCount { font-size: .72rem; color: var(--muted); }
@@ -56,8 +56,8 @@
 
 .row {
   display: flex; align-items: center; gap: .75rem;
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 14px; padding: .65rem 1rem;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; padding: .65rem 1rem;
   text-decoration: none; transition: border-color .15s, transform .1s;
 }
 .row:hover { border-color: var(--accent); transform: translateX(3px); }
@@ -83,13 +83,13 @@
   margin-bottom: 2.5rem;
 }
 .statCard {
-  background: var(--card-bg); border: 1.5px solid var(--line);
-  border-radius: 14px; padding: 1rem 1.1rem;
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 1rem 1.1rem;
   display: flex; flex-direction: column; gap: .15rem;
 }
 .statValue {
   font-family: var(--font-serif);
-  font-size: 1.75rem; font-weight: 900; line-height: 1;
+  font-size: 1.75rem; font-weight: 700; line-height: 1;
   color: var(--ink); letter-spacing: -.02em;
 }
 .statLabel {
@@ -100,13 +100,13 @@
 /* Criterios */
 .criterios {
   background: color-mix(in srgb, var(--accent) 4%, var(--card-bg));
-  border: 1.5px solid var(--line);
-  border-radius: 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   padding: 1.75rem 1.5rem;
   margin-bottom: 2.5rem;
 }
 .criteriosTitulo {
-  font-family: var(--font-serif); font-size: 1.35rem; font-weight: 800;
+  font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700;
   color: var(--ink); margin: 0 0 .5rem;
 }
 .criteriosIntro {
@@ -122,11 +122,11 @@
   display: flex; gap: .75rem; align-items: flex-start;
   background: var(--card-bg);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: .9rem 1rem;
 }
 .criterioNum {
-  font-family: var(--font-serif); font-weight: 900;
+  font-family: var(--font-serif); font-weight: 700;
   font-size: 1.1rem; color: var(--accent);
   background: color-mix(in srgb, var(--accent) 12%, var(--card-bg));
   border-radius: 6px;
@@ -146,7 +146,7 @@
 /* Listado */
 .listadoTitulo {
   font-family: var(--font-serif);
-  font-size: 1.45rem; font-weight: 900;
+  font-size: 1.45rem; font-weight: 700;
   color: var(--ink); margin: 0 0 1.25rem;
   letter-spacing: -.02em;
 }
@@ -155,13 +155,13 @@
 .faq { margin-top: 3rem; }
 .faqTitulo {
   font-family: var(--font-serif);
-  font-size: 1.45rem; font-weight: 900;
+  font-size: 1.45rem; font-weight: 700;
   color: var(--ink); margin: 0 0 1rem;
   letter-spacing: -.02em;
 }
 .faqItem {
-  border: 1.5px solid var(--line);
-  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   padding: .85rem 1.1rem;
   margin-bottom: .5rem;
   background: var(--card-bg);
@@ -176,7 +176,7 @@
 .faqQ::after {
   content: '+';
   float: right;
-  color: var(--accent); font-weight: 900;
+  color: var(--accent); font-weight: 700;
   transition: transform .2s;
 }
 .faqItem[open] .faqQ::after { content: '−'; }
