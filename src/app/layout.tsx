@@ -101,7 +101,20 @@ h1,h2,h3,h4,h5,h6{scroll-margin-top:80px;line-height:1.12;letter-spacing:-.02em;
 .v-limitado{color:var(--limitado)}
 .v-noapto{color:var(--noapto)}
 .v-mar{color:var(--mar)}
-@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
+/* View Transitions API · Chrome 111+, Safari 18+, Firefox 137+, fallback gracioso */
+@view-transition{navigation:auto}
+::view-transition-group(root){animation-duration:.18s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-old(root){animation:none;mix-blend-mode:normal;opacity:1}
+::view-transition-new(root){animation:vtIn .18s cubic-bezier(.4,0,.2,1) both;mix-blend-mode:normal}
+@keyframes vtIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+/* content-visibility · skip render off-screen sections, instant scroll */
+.cv-auto{content-visibility:auto;contain-intrinsic-size:auto 600px}
+/* Fade-in helper · evita flash en blocks hidratados */
+.fade-in{animation:fadeIn .25s ease-out both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+/* Cookie banner slide-up · transform = compositor-only, sin reflow */
+@keyframes cbSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}@view-transition{navigation:none}}
 @media (prefers-contrast: more){:root{--muted:var(--tinta-700);--accent:var(--terra-900);--line:rgba(26,15,4,.45);--line-strong:var(--tinta-800)}a,button{text-decoration:underline}}
 @media (forced-colors: active){:root{--accent:LinkText;--muted:CanvasText;--line:CanvasText;--line-strong:CanvasText}a{color:LinkText}:focus-visible{outline:3px solid Highlight;box-shadow:none}}
 @media print{header,nav,footer,aside,[class*="AdSlot"],[class*="cookieBanner"],[class*="banner"],script{display:none !important}body{background:#fff !important;color:#000 !important}a{color:#000 !important;text-decoration:underline !important}a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;color:#555}}
@@ -113,6 +126,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* Critical CSS inline — paint inmediato sin esperar CSS externo */}
         <style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />
+
+        {/* Preload del logo · está en el LCP del nav, eliminar el round-trip */}
+        <link rel="preload" as="image" href="/logo.svg" fetchPriority="high" />
 
         {/* Preconnect/DNS prefetch — elimina RTT para APIs externas */}
         <link rel="preconnect" href="https://api.open-meteo.com" />

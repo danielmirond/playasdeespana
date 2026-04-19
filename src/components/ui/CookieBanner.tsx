@@ -150,16 +150,17 @@ export default function CookieBanner() {
         maxWidth: 540,
         marginLeft: 'auto',
         marginRight: 'auto',
-        background: '#faf6ef',
-        border: '1.5px solid #e8dcc8',
-        borderRadius: 16,
+        background: 'var(--card-bg, #faf6ef)',
+        border: '1px solid var(--line, #e8dcc8)',
+        borderRadius: 6,
         padding: '.85rem 1rem',
-        boxShadow: '0 8px 32px rgba(42,26,8,.15)',
         zIndex: 9999,
         display: 'flex',
         flexDirection: 'column',
         gap: '.6rem',
         fontSize: '.85rem',
+        animation: 'cbSlideUp .25s cubic-bezier(.4,0,.2,1) both',
+        willChange: 'transform',
       }}
     >
       {/* Close button (top-right) — rechaza opcionales, UX esperada */}

@@ -136,7 +136,11 @@ export default function TopCercanas() {
   // Button state — big, centered, breathes
   if (estado === 'button') {
     return (
-      <section style={{ maxWidth: 600, margin: '0 auto', padding: '1.5rem 1.5rem .5rem', textAlign: 'center' }}>
+      <section style={{
+        maxWidth: 600, margin: '0 auto', padding: '1.5rem 1.5rem .5rem',
+        textAlign: 'center',
+        contain: 'layout style',
+      }}>
         <button
           type="button"
           onClick={doLoad}
@@ -144,10 +148,9 @@ export default function TopCercanas() {
             display: 'flex', alignItems: 'center', gap: '.85rem',
             width: '100%', padding: '1.25rem 1.5rem',
             background: 'var(--accent)',
-            border: 'none', borderRadius: 18,
-            cursor: 'pointer', transition: 'all .15s',
-            minHeight: 68,
-            boxShadow: '0 8px 28px rgba(107,64,10,.22)',
+            border: 'none', borderRadius: 6,
+            cursor: 'pointer', transition: 'opacity .15s',
+            minHeight: 88,
             justifyContent: 'center',
           }}
         >
@@ -179,12 +182,15 @@ export default function TopCercanas() {
   // Loading
   if (estado === 'loading') {
     return (
-      <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
+      <section style={{
+        maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0',
+        minHeight: 88, contain: 'layout style',
+      }}>
         <div style={{
           display: 'flex', alignItems: 'center', gap: '.65rem',
           padding: '1rem 1.25rem',
           background: 'color-mix(in srgb, var(--accent) 6%, var(--card-bg))',
-          border: '1.5px solid var(--line)', borderRadius: 14,
+          border: '1px solid var(--line)', borderRadius: 6,
         }} role="status">
           <MapPin size={20} weight="bold" color="var(--accent)" aria-hidden="true" />
           <span style={{ fontSize: '.88rem', fontWeight: 600, color: 'var(--ink)', flex: 1 }}>

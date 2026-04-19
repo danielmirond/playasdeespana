@@ -90,11 +90,11 @@ export default async function HomePage() {
         <TopCercanas />
         <Buscador />
         <Destacadas playas={candidatas} topCount={8} avoidCount={4} />
-        <ParkingHoy playas={playas} />
-        <ActividadesHoy playas={playas} />
-        <MonetizacionBlock />
-        <ClientBlocks />
-        <Comunidades comunidades={comunidades} />
+        <div className="cv-auto"><ParkingHoy playas={playas} /></div>
+        <div className="cv-auto"><ActividadesHoy playas={playas} /></div>
+        <div className="cv-auto"><MonetizacionBlock /></div>
+        <div className="cv-auto"><ClientBlocks /></div>
+        <div className="cv-auto"><Comunidades comunidades={comunidades} /></div>
 
         {/* Hub SEO — links a secciones temáticas */}
         <section style={{
