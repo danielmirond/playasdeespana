@@ -47,9 +47,8 @@
   transition: border-color .15s, background .15s, color .15s;
 }
 .item:hover {
-  background: rgba(255,255,255,.75);
-  border-color: rgba(107,64,10,.35);
-  transform: translateY(-2px);
+  background: var(--card-bg);
+  border-color: var(--accent);
 }
 
 .ilu {

@@ -98,7 +98,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
     // Dos base layers: OSM (por defecto) y PNOA ortofoto IGN. Solo una está
     // montada en el mapa a la vez; el toggle las intercambia.
     osmLayerRef.current = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors', maxZoom: 19,
+      attribution: 'IGN · © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · EEA', maxZoom: 19,
     })
     aerialLayerRef.current = L.tileLayer(PNOA_URL, {
       attribution: PNOA_ATTRIB, maxZoom: 19, minZoom: 4,
@@ -136,14 +136,14 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
         })
         const marker = L.marker([p.lat, p.lng], { icon })
           .bindPopup(`
-            <div style="font-family:system-ui;min-width:160px">
-              <div style="font-weight:700;font-size:.88rem;margin-bottom:.2rem">${p.nombre}</div>
-              <div style="font-size: .75rem;color:#666;margin-bottom:.4rem">${p.municipio ?? ''}, ${p.provincia ?? ''}</div>
-              <div style="display:flex;gap:.3rem;margin-bottom:.5rem;align-items:center">
-                <span style="background:${color}22;color:${color};border:1px solid ${color}44;padding:2px 7px;border-radius:100px;font-size: .72rem;font-weight:700">${estado}</span>
-                <span style="font-size: .72rem;color:#666">${olas}m · ${viento}km/h</span>
+            <div style="font-family:var(--font-sans,system-ui);min-width:170px;color:#2a1a08">
+              <div style="font-family:var(--font-serif,Georgia,serif);font-style:italic;font-weight:700;font-size:1rem;line-height:1.1;margin-bottom:.25rem;letter-spacing:-.01em">${p.nombre}</div>
+              <div style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.7rem;color:#7a6858;margin-bottom:.5rem;letter-spacing:.04em">${p.municipio ?? ''} · ${p.provincia ?? ''}</div>
+              <div style="display:flex;gap:.3rem;margin-bottom:.55rem;align-items:center">
+                <span style="background:${color}14;color:${color};border:1px solid ${color}44;padding:2px 7px;border-radius:100px;font-size:.7rem;font-weight:500">${estado}</span>
+                <span style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.68rem;color:#7a6858">${olas}m · ${viento}km/h</span>
               </div>
-              <a href="/playas/${p.slug}" style="display:block;text-align:center;background:#6b400a;color:white;padding:5px 10px;border-radius:8px;font-size: .75rem;font-weight:600;text-decoration:none">Ver playa →</a>
+              <a href="/playas/${p.slug}" style="display:block;text-align:center;background:#6b400a;color:white;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">Ver playa →</a>
             </div>
           `, { maxWidth: 220 })
           .addTo(map)

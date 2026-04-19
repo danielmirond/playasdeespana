@@ -109,7 +109,7 @@ h1,h2,h3,h4,h5,h6{scroll-margin-top:80px;line-height:1.12;letter-spacing:-.02em;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="es" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
       <head>
         {/* Critical CSS inline — paint inmediato sin esperar CSS externo */}
         <style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />

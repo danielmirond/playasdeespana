@@ -160,7 +160,13 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
         </div>
         <div className={styles.body}>
           <div className={styles.nombre}>{p.nombre}</div>
-          <div className={styles.lugar}>{p.municipio} · {p.provincia}</div>
+          <div className={styles.lugar}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0, opacity: .7 }}>
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>{p.municipio} · {p.provincia}</span>
+          </div>
           {/* Factor pills — viento, oleaje, parking, UV */}
           {ps.factors.length > 0 && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginTop: '.35rem' }}>

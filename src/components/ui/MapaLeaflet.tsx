@@ -32,7 +32,7 @@ export default function MapaLeaflet({ lat, lng, nombre, zoom = 15, height = '300
       map.setView([lat, lng], zoom)
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        attribution: 'IGN · © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · EEA',
         maxZoom: 19,
       }).addTo(map)
 

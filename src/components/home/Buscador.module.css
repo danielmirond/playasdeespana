@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   gap: .5rem;
-  background: rgba(255,255,255,.75);
+  background: var(--card-bg);
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: .55rem .55rem .55rem 1rem;

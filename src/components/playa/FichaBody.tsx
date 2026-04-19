@@ -197,11 +197,14 @@ const T = {
   },
 }
 
+// Calidad del agua (clasificación EEA) mapeada a paleta semántica brand book.
+// Dot, texto → mismo color brand. "Buena" EEA usa --muybueno (no azul, que
+// por regla brand sólo aparece en contexto marino no-verdict).
 const COLORES_CALIDAD: Record<string, [string, string]> = {
-  'Excelente':  ['#22c55e', '#2a5e2a'],
-  'Buena':      ['#3b82f6', '#1e3a7e'],
-  'Suficiente': ['#f59e0b', '#7a4008'],
-  'Deficiente': ['#ef4444', '#7a1010'],
+  'Excelente':  ['#3d6b1f', '#2a4a14'],  // --excelente
+  'Buena':      ['#7a8a30', '#4a5a20'],  // --muybueno
+  'Suficiente': ['#c48a1e', '#7a4008'],  // --aceptable
+  'Deficiente': ['#7a2818', '#4a1810'],  // --noapto
 }
 
 export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es', municipioSlug, provinciaSlug }: Props) {
