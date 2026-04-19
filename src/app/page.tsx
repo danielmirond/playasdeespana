@@ -112,6 +112,7 @@ export default async function HomePage() {
             gap: '.55rem',
           }}>
             {[
+              { href: '/playas-cerca-de-mi', label: 'Playas cerca de mí', count: playas.length },
               { href: '/banderas-azules', label: 'Banderas Azules', count: playas.filter(p => p.bandera).length },
               { href: '/playas-perros', label: 'Playas para perros', count: playas.filter(p => p.perros).length },
               { href: '/playas-nudistas', label: 'Playas nudistas', count: playas.filter(p => p.nudista).length },
@@ -369,6 +370,7 @@ export default async function HomePage() {
                   marginBottom: '.9rem', color: 'var(--ink)',
                 }}>Herramientas</div>
                 <nav style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', fontSize: '.82rem' }}>
+                  <Link href="/playas-cerca-de-mi">Playas cerca de mí</Link>
                   <Link href="/buscar">Buscar playas</Link>
                   <Link href="/comparar">Comparador</Link>
                   <Link href="/rutas/configurar">Configurar ruta</Link>

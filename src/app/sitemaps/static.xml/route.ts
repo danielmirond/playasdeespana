@@ -39,6 +39,7 @@ export async function GET() {
   // Static pages (ES + EN)
   const pages = [
     { es: '/',                       en: '/en',                    p: '1.0', f: 'daily' },
+    { es: '/playas-cerca-de-mi',     en: null,                     p: '0.9', f: 'weekly' },
     { es: '/mapa',                   en: null,                     p: '0.9', f: 'daily' },
     { es: '/buscar',                 en: '/en/search',             p: '0.8', f: 'weekly' },
     { es: '/comunidades',            en: null,                     p: '0.8', f: 'weekly' },
