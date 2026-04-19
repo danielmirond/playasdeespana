@@ -43,15 +43,15 @@
   gap: .15rem;
 }
 .link {
-  font-size: .75rem;
+  font-size: .78rem;
   font-weight: 500;
   color: var(--muted);
   padding: .32rem .7rem;
-  border-radius: 8px;
-  transition: all .15s;
+  border-radius: 4px;
+  transition: color .15s, background .15s;
 }
 .link:hover {
-  background: rgba(255,255,255,.5);
+  background: rgba(255,255,255,.55);
   color: var(--accent);
 }
 .link:focus-visible,
@@ -60,7 +60,7 @@
 .logo:focus-visible {
   outline: 2px solid var(--accent, #6b400a);
   outline-offset: 2px;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .logo {
@@ -80,13 +80,13 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1.5px solid var(--line);
+  border: 1px solid var(--line);
   background: var(--metric-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--muted);
-  transition: all .15s;
+  transition: color .15s, background .15s;
 }
 .iconBtn:hover {
   background: rgba(255,255,255,.8);
@@ -104,21 +104,23 @@
   gap: .15rem;
   margin-left: .5rem;
   background: var(--card-bg2, #f5ede0);
-  border: 1.5px solid var(--line, #e8dcc8);
-  border-radius: 8px;
+  border: 1px solid var(--line, #e8dcc8);
+  border-radius: 4px;
   padding: .15rem;
 }
 
 .langBtn {
-  font-size: .75rem;
-  font-weight: 700;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .05em;
   color: var(--muted, #5a3d12);
   padding: .5rem .8rem;
-  border-radius: 6px;
+  border-radius: 3px;
   text-decoration: none;
-  transition: all .15s;
+  transition: color .15s, background .15s;
   min-width: 44px;
-  min-height: 36px; /* A bit more relaxed in Nav header for density */
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -22,8 +22,8 @@
 /* ── CARDS ──────────────────────────────────────────────────────── */
 .card {
   background: var(--card-bg);
-  border: 1.5px solid var(--line);
-  border-radius: 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   overflow: hidden;
 }
 .cardHead {
@@ -33,10 +33,14 @@
 }
 .cardTitle {
   font-family: var(--font-serif);
-  font-size: .95rem; font-weight: 700; color: var(--ink);
+  font-size: 1.1rem; font-weight: 700; color: var(--ink);
+  letter-spacing: -.015em;
   display: flex; align-items: center; gap: .35rem;
 }
-.cardSrc { font-size: .72rem; color: var(--muted); opacity: .7; }
+.cardSrc {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: .7rem; color: var(--muted); opacity: .75;
+}
 .cardBody { padding: .2rem 1rem 1rem; }
 .divider { height: 1px; background: var(--line); margin: 0 1rem; }
 
@@ -232,25 +236,26 @@
 
 .asideCard {
   background: var(--card-bg);
-  border: 1.5px solid var(--line); border-radius: 16px;
+  border: 1px solid var(--line); border-radius: 6px;
   overflow: hidden; text-align: center;
 }
-.aeIlu { padding: 1rem 1.25rem .4rem; display: flex; justify-content: center; }
+.aeIlu { padding: 1.1rem 1.25rem .4rem; display: flex; justify-content: center; }
 .aeEstado {
   font-family: var(--font-serif);
-  font-size: 1.6rem; font-weight: 900;
-  letter-spacing: -.02em; display: block; line-height: 1; margin-bottom: .2rem;
+  font-size: 1.7rem; font-weight: 700;
+  letter-spacing: -.02em; display: block; line-height: 1; margin-bottom: .25rem;
 }
 .aeFrase {
-  font-family: var(--font-serif); font-style: italic;
-  font-size: .78rem; color: var(--muted);
-  display: block; margin-bottom: .55rem; padding: 0 .75rem;
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-size: .82rem; color: var(--muted);
+  display: block; margin-bottom: .65rem; padding: 0 .75rem;
 }
 .aePill {
-  display: inline-flex; align-items: center; gap: .3rem;
-  padding: .25rem .65rem; border-radius: 100px; margin-bottom: .75rem;
-  font-size: .72rem; font-weight: 600;
-  background: var(--metric-bg); border: 1.5px solid var(--line); color: var(--muted);
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .25rem .65rem; border-radius: 100px; margin-bottom: .85rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: .7rem; font-weight: 500;
+  background: var(--metric-bg); border: 1px solid var(--line); color: var(--muted);
 }
 .aeDot { width: 6px; height: 6px; border-radius: 50%; animation: blink 2s infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
@@ -259,13 +264,21 @@
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 1px; background: var(--line); border-top: 1px solid var(--line);
 }
-.aeQ  { background: var(--metric-bg); padding: .55rem .35rem; text-align: center; }
-.aeQv { font-family: var(--font-serif); font-size: .95rem; font-weight: 700; color: var(--ink); display: block; line-height: 1; }
-.aeQl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; display: block; margin-top: .12rem; }
+.aeQ  { background: var(--metric-bg); padding: .6rem .35rem; text-align: center; }
+.aeQv {
+  font-family: var(--font-serif); font-size: 1rem; font-weight: 700;
+  color: var(--ink); display: block; line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.aeQl {
+  font-size: .7rem; color: var(--muted); text-transform: uppercase;
+  letter-spacing: .08em; font-weight: 500;
+  display: block; margin-top: .18rem;
+}
 
 .asideBox {
   background: var(--card-bg);
-  border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
 }
 .abHead {
   padding: .55rem .9rem; border-bottom: 1px solid var(--line);
