@@ -40,11 +40,11 @@ const EscuelasSection = dynamic(() => import('./EscuelasSection'))
 const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), { ssr: false })
 const ReportarEstado = dynamic(() => import('./ReportarEstado'), {
   ssr: false,
-  loading: () => <div style={{ height: 258, borderRadius: 14, border: '1.5px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
+  loading: () => <div style={{ height: 258, borderRadius: 6, border: '1px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
 })
 const VotacionPlaya = dynamic(() => import('./VotacionPlaya'), {
   ssr: false,
-  loading: () => <div style={{ height: 148, borderRadius: 14, border: '1.5px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
+  loading: () => <div style={{ height: 148, borderRadius: 6, border: '1px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
 })
 
 interface Meteo {
@@ -321,8 +321,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     <div key={i} style={{
                       flex:'1 1 auto', minWidth:'70px', textAlign:'center',
                       background: m.tipo === 'pleamar' ? 'rgba(59,130,246,.08)' : 'rgba(245,158,11,.08)',
-                      border: `1.5px solid ${m.tipo === 'pleamar' ? 'rgba(59,130,246,.2)' : 'rgba(245,158,11,.2)'}`,
-                      borderRadius:'12px', padding:'.55rem .5rem',
+                      border: `1px solid ${m.tipo === 'pleamar' ? 'rgba(59,130,246,.2)' : 'rgba(245,158,11,.2)'}`,
+                      borderRadius:'4px', padding:'.55rem .5rem',
                     }}>
                       <div style={{ fontSize:'.72rem', color:'var(--muted)', fontWeight:600, textTransform:'uppercase', letterSpacing:'.04em' }}>
                         {m.tipo === 'pleamar' ? (locale === 'en' ? '▲ High' : '▲ Plea.') : (locale === 'en' ? '▼ Low' : '▼ Baja.')}
@@ -456,7 +456,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {CIVITATIS_AFF && (
           <div style={{
             background: 'linear-gradient(135deg, #ff6b35, #f7931e)',
-            borderRadius: 16, padding: '1rem 1.15rem', marginBottom: '.85rem',
+            borderRadius: 6, padding: '1rem 1.15rem', marginBottom: '.85rem',
             display: 'flex', alignItems: 'center', gap: '.75rem',
           }}>
             <div style={{ flex: 1 }}>
@@ -472,7 +472,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               target="_blank" rel="noopener noreferrer sponsored"
               style={{
                 padding: '.55rem 1rem', background: '#fff', color: '#ff6b35',
-                borderRadius: 10, fontSize: '.78rem', fontWeight: 700,
+                borderRadius: 4, fontSize: '.78rem', fontWeight: 500,
                 textDecoration: 'none', flexShrink: 0,
               }}
             >
@@ -488,16 +488,16 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--accent,#6b400a)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent,#6b400a)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
                 <Car size={18} weight='bold'/> {locale === 'en' ? 'By car — open in Google Maps' : 'En coche — abrir en Google Maps'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
                 <Bus size={18} weight='bold'/> {locale === 'en' ? 'By public transport' : 'En transporte público'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=bicycling`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=bicycling`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
                 <Bicycle size={18} weight='bold'/> {locale === 'en' ? 'By bike' : 'En bicicleta'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'12px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1.5px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
                 <Person size={18} weight='bold'/> {locale === 'en' ? 'Walking' : 'A pie'}
               </a>
               {/* Rentalcars affiliate */}
@@ -507,7 +507,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   target="_blank" rel="noopener noreferrer sponsored"
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
-                    padding: '.9rem 1.1rem', borderRadius: 12,
+                    padding: '.9rem 1.1rem', borderRadius: 4,
                     background: '#0071c2', color: '#fff',
                     textDecoration: 'none', fontWeight: 600, fontSize: '.9rem',
                   }}
@@ -609,7 +609,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
                   width: '100%', padding: '.65rem', marginTop: '.6rem',
-                  background: '#00665c', color: '#fff', borderRadius: 10,
+                  background: '#00665c', color: '#fff', borderRadius: 4,
                   fontSize: '.8rem', fontWeight: 700, textDecoration: 'none',
                 }}
               >
@@ -680,7 +680,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
                   width: '100%', padding: '.7rem', marginTop: '.6rem',
-                  background: '#003580', color: '#fff', borderRadius: 10,
+                  background: '#003580', color: '#fff', borderRadius: 4,
                   fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
                   transition: 'opacity .15s',
                 }}
@@ -777,7 +777,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
                     width: '100%', padding: '.7rem', marginTop: '.6rem',
-                    background: '#ff6b35', color: '#fff', borderRadius: 10,
+                    background: '#ff6b35', color: '#fff', borderRadius: 4,
                     fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
                   }}
                 >
@@ -793,7 +793,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
                     width: '100%', padding: '.7rem', marginTop: '.6rem',
-                    background: '#003580', color: '#fff', borderRadius: 10,
+                    background: '#003580', color: '#fff', borderRadius: 4,
                     fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
                   }}
                 >
@@ -944,7 +944,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     <a href="tel:112" style={{
                       display:'inline-flex', alignItems:'center',
                       background:'rgba(239,68,68,.12)', color:'#ef4444',
-                      border:'1.5px solid rgba(239,68,68,.3)',
+                      border:'1px solid rgba(239,68,68,.3)',
                       padding:'.4rem .85rem', borderRadius:'8px',
                       textDecoration:'none', fontSize:'.72rem', fontWeight:700,
                     }}>
@@ -1005,8 +1005,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {horaIdeal && (
           <div style={{
             background: 'linear-gradient(160deg, rgba(245,158,11,.08), rgba(107,64,10,.06))',
-            border: '1.5px solid rgba(107,64,10,.25)',
-            borderRadius: 14, padding: '.85rem 1rem',
+            border: '1px solid rgba(107,64,10,.25)',
+            borderRadius: 6, padding: '.85rem 1rem',
           }}>
             <div style={{ fontSize:'.72rem', fontWeight: 700, color: 'var(--accent,#6b400a)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
               {locale === 'en' ? 'Best time to go' : 'Mejor hora para ir'}
@@ -1025,8 +1025,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* Amazon affiliate — equipo de playa */}
         {AMAZON_TAG && (
           <div style={{
-            background: 'var(--card-bg,#faf6ef)', border: '1.5px solid var(--line,#e8dcc8)',
-            borderRadius: 14, padding: '.7rem', display: 'flex', flexDirection: 'column', gap: '.35rem',
+            background: 'var(--card-bg,#faf6ef)', border: '1px solid var(--line,#e8dcc8)',
+            borderRadius: 6, padding: '.7rem', display: 'flex', flexDirection: 'column', gap: '.35rem',
           }}>
             <div style={{ fontSize:'.72rem', fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', padding: '0 .2rem' }}>
               {locale === 'en' ? 'Beach essentials' : 'Equipo de playa'}
@@ -1210,8 +1210,8 @@ function CrossLinks({ playa, locale = 'es' }: { playa: Playa; locale?: 'es' | 'e
       <div style={{ display: 'flex', flexDirection: 'column', gap: '.45rem' }}>
         <Link href={`${routeBase}/ruta-${costa.slug}`} style={{
           display: 'flex', alignItems: 'center', gap: '.6rem',
-          padding: '.65rem .85rem', borderRadius: 10,
-          border: '1.5px solid var(--line)', textDecoration: 'none',
+          padding: '.65rem .85rem', borderRadius: 4,
+          border: '1px solid var(--line)', textDecoration: 'none',
           transition: 'all .15s',
         }}>
           <span style={{ fontSize: '1rem' }} aria-hidden="true">🛣️</span>
@@ -1227,8 +1227,8 @@ function CrossLinks({ playa, locale = 'es' }: { playa: Playa; locale?: 'es' | 'e
         </Link>
         <Link href={`${topBase}/${costa.slug}`} style={{
           display: 'flex', alignItems: 'center', gap: '.6rem',
-          padding: '.65rem .85rem', borderRadius: 10,
-          border: '1.5px solid var(--line)', textDecoration: 'none',
+          padding: '.65rem .85rem', borderRadius: 4,
+          border: '1px solid var(--line)', textDecoration: 'none',
           transition: 'all .15s',
         }}>
           <span style={{ fontSize: '1rem' }} aria-hidden="true">🏆</span>
