@@ -49,12 +49,15 @@ export default function ParkingHoy({ playas, locale = 'es' }: Props) {
         marginBottom: '1rem', flexWrap: 'wrap', gap: '.5rem',
       }}>
         <h2 style={{
-          fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: 900,
+          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.45rem, 3vw, 1.75rem)', fontWeight: 700,
           color: 'var(--ink)', margin: 0, letterSpacing: '-.015em',
+          lineHeight: 1.1,
           display: 'flex', alignItems: 'center', gap: '.45rem',
         }}>
           <Car size={20} weight="bold" color="var(--accent)" aria-hidden="true" />
-          {es ? 'Parking hoy' : 'Parking today'}
+          {es
+            ? <>Parking <em style={{ fontWeight: 500, color: 'var(--accent)' }}>hoy</em></>
+            : <>Parking <em style={{ fontWeight: 500, color: 'var(--accent)' }}>today</em></>}
         </h2>
         <Link
           href="/buscar?parking=1"

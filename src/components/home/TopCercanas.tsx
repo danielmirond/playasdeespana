@@ -160,7 +160,11 @@ export default function TopCercanas() {
             <MapPin size={24} weight="bold" color="#fff" aria-hidden="true" />
           </div>
           <div style={{ textAlign: 'left' }}>
-            <div style={{ fontWeight: 900, fontSize: '1.1rem', color: '#fff', lineHeight: 1.2 }}>
+            <div style={{
+              fontFamily: 'var(--font-serif)', fontWeight: 700,
+              fontSize: '1.15rem', color: '#fff', lineHeight: 1.15,
+              letterSpacing: '-.01em',
+            }}>
               ¿Qué playa me queda cerca?
             </div>
             <div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.7)', marginTop: '.2rem' }}>
@@ -232,12 +236,13 @@ export default function TopCercanas() {
         marginBottom: '.85rem', flexWrap: 'wrap', gap: '.5rem',
       }}>
         <h2 style={{
-          fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: 900,
+          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.45rem, 3vw, 1.75rem)', fontWeight: 700,
           color: 'var(--ink)', margin: 0, letterSpacing: '-.015em',
+          lineHeight: 1.1,
           display: 'flex', alignItems: 'center', gap: '.45rem',
         }}>
           <MapPin size={18} weight="bold" color="var(--accent)" aria-hidden="true" />
-          Mejores playas cerca de ti
+          Mejores playas <em style={{ fontWeight: 500, color: 'var(--accent)' }}>cerca de ti</em>
         </h2>
         {userCoords && (
           <Link
@@ -260,30 +265,38 @@ export default function TopCercanas() {
             href={`/playas/${r.playa.slug}`}
             style={{
               display: 'flex', flexDirection: 'column',
-              background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-              borderRadius: 14, padding: '1rem 1.1rem',
-              textDecoration: 'none', transition: 'all .15s',
+              background: 'var(--card-bg)', border: '1px solid var(--line)',
+              borderRadius: 6, padding: '1rem 1.1rem',
+              textDecoration: 'none', transition: 'border-color .15s',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.4rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-                <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '1rem', color: 'var(--accent)' }}>#{i + 1}</span>
+                <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, fontSize: '1.05rem', color: 'var(--ink)', letterSpacing: '-.01em' }}>n°{i + 1}</span>
                 <span style={{
                   background: r.ps.color, color: '#fff',
-                  fontFamily: 'var(--font-serif)', fontWeight: 900,
-                  fontSize: '.88rem', padding: '.3rem .5rem', borderRadius: 8,
-                  display: 'inline-flex', alignItems: 'center', gap: '.2rem',
+                  fontFamily: 'var(--font-serif)', fontWeight: 700,
+                  fontSize: '.92rem', width: 36, height: 36, borderRadius: '50%',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  fontVariantNumeric: 'tabular-nums',
                 }}>
-                  {r.ps.score}<span style={{ fontSize: '.55rem', opacity: .8 }}>/100</span>
+                  {r.ps.score}
                 </span>
-                <span style={{ fontSize: '.75rem', fontWeight: 700, color: r.ps.color }}>{r.ps.label}</span>
+                <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, fontSize: '.95rem', color: r.ps.color }}>{r.ps.label}</span>
               </div>
-              <span style={{ fontSize: '.72rem', fontWeight: 700, color: 'var(--muted)', background: 'var(--metric-bg)', border: '1px solid var(--line)', padding: '.15rem .5rem', borderRadius: 100 }}>
+              <span style={{
+                fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+                fontSize: '.7rem', fontWeight: 500,
+                color: 'var(--muted)', background: 'var(--metric-bg)',
+                border: '1px solid var(--line)', padding: '.15rem .5rem',
+                borderRadius: 100, fontVariantNumeric: 'tabular-nums',
+                letterSpacing: '.04em',
+              }}>
                 {r.distKm < 1 ? `${Math.round(r.distKm * 1000)}m` : `${r.distKm.toFixed(1)}km`}
               </span>
             </div>
 
-            <div style={{ fontWeight: 800, fontSize: '.95rem', color: 'var(--ink)', lineHeight: 1.2, marginBottom: '.15rem' }}>{r.playa.nombre}</div>
+            <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem', color: 'var(--ink)', lineHeight: 1.15, marginBottom: '.2rem' }}>{r.playa.nombre}</div>
             <div style={{ fontSize: '.74rem', color: 'var(--muted)', marginBottom: '.4rem' }}>{r.playa.municipio} · {r.playa.provincia}</div>
 
             {r.ps.factors.length > 0 && (

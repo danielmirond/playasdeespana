@@ -74,10 +74,13 @@ export default function ActividadesHoy({ playas, locale = 'es' }: Props) {
   return (
     <section style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 0' }}>
       <h2 style={{
-        fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: 900,
+        fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.45rem, 3vw, 1.75rem)', fontWeight: 700,
         color: 'var(--ink)', margin: '0 0 1.25rem', letterSpacing: '-.015em',
+        lineHeight: 1.1,
       }}>
-        {es ? 'Actividades hoy' : 'Activities today'}
+        {es
+          ? <>Actividades <em style={{ fontWeight: 500, color: 'var(--accent)' }}>hoy</em></>
+          : <>Activities <em style={{ fontWeight: 500, color: 'var(--accent)' }}>today</em></>}
       </h2>
 
       <div style={{
