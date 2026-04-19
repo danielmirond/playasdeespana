@@ -138,83 +138,224 @@ export default async function HomePage() {
 
       <footer style={{
         borderTop: '1px solid var(--line)',
-        padding: '2rem 2rem 3rem',
-        maxWidth: '1000px', margin: '0 auto',
-        fontSize: '.78rem', color: 'var(--muted)',
+        background: 'color-mix(in srgb, var(--accent) 3%, var(--bg))',
+        marginTop: '3rem',
       }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2.5rem', marginBottom: '1.5rem' }}>
-          <div>
-            <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)', fontSize: '1rem', marginBottom: '.5rem' }}>Playas de España</div>
-            <div style={{ fontSize: '.75rem', maxWidth: 250, lineHeight: 1.5 }}>Motor de decisión en tiempo real. Puntuamos cada playa de 0 a 100.</div>
-          </div>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Explorar</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
-              <Link href="/comunidades">Comunidades</Link>
-              <Link href="/banderas-azules">Banderas Azules</Link>
-              <Link href="/surf">Surf</Link>
-              <Link href="/buceo">Buceo</Link>
-              <Link href="/atardeceres">Atardeceres</Link>
-              <Link href="/mapa">Mapa</Link>
-            </nav>
-          </div>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Temáticas</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
-              <Link href="/playas-perros">Perros</Link>
-              <Link href="/playas-nudistas">Nudistas</Link>
-              <Link href="/playas-accesibles">Accesibles PMR</Link>
-              <Link href="/familias">Familias</Link>
-              <Link href="/playas-aguas-cristalinas">Aguas cristalinas</Link>
-              <Link href="/top">Top 10 Rankings</Link>
-            </nav>
-          </div>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Escapadas</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
-              <Link href="/rutas">Rutas por la costa</Link>
-              <Link href="/campings">Campings</Link>
-              <Link href="/playas-autocaravana">Autocaravana</Link>
-              <Link href="/alquiler-barco-playa">Alquiler de barco</Link>
-            </nav>
-          </div>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Guías</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
-              <Link href="/seguros-viaje">Seguros de viaje</Link>
-              <Link href="/protectores-solares">Protectores solares</Link>
-              <Link href="/calidad-agua">Calidad del agua</Link>
-              <Link href="/medusas">Medusas</Link>
-            </nav>
-          </div>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: '.5rem', color: 'var(--ink)' }}>Herramientas</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
-              <Link href="/buscar">Buscar playas</Link>
-              <Link href="/comparar">Comparador</Link>
-              <Link href="/rutas/configurar">Configurar ruta</Link>
-              <Link href="/en">English version</Link>
-            </nav>
-          </div>
-        </div>
-        {/* Disclosure de afiliación (LSSI + buenas prácticas FTC) */}
         <div style={{
-          borderTop: '1px solid var(--line)', paddingTop: '.85rem', marginBottom: '.75rem',
-          fontSize: '.7rem', color: 'var(--muted)', lineHeight: 1.55,
+          maxWidth: '1280px', margin: '0 auto',
+          padding: '3.5rem 2rem 2rem',
+          color: 'var(--muted)',
         }}>
-          <strong>Transparencia:</strong> Algunas páginas contienen enlaces de afiliación a
-          Booking, Amazon, Civitatis, Click&Boat, Rentalcars, TheFork, Parclick, Pitchup, Heymondo, IATI y otros.
-          Si reservas o compras a través de ellos, podemos recibir una comisión sin coste adicional para ti.
-          Los datos y rankings no están influenciados por estas colaboraciones.{' '}
-          <Link href="/cookies" style={{ textDecoration: 'underline' }}>Más info</Link>.
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '.5rem' }}>
-          <span>Datos: Open-Meteo · MITECO · IGN · CartoCiudad · OSM</span>
-          <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
-            <Link href="/aviso-legal" style={{ textDecoration: 'underline' }}>Aviso legal</Link>
-            <Link href="/privacidad" style={{ textDecoration: 'underline' }}>Privacidad</Link>
-            <Link href="/cookies" style={{ textDecoration: 'underline' }}>Cookies</Link>
-            <span>© {new Date().getFullYear()} playas-espana.com</span>
+          {/* Brand + claim editorial */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'minmax(260px, 1fr) 3fr',
+            gap: '3rem',
+            marginBottom: '2.5rem',
+            paddingBottom: '2.5rem',
+            borderBottom: '1px solid var(--line)',
+          }}>
+            <div>
+              <div style={{
+                fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+                fontWeight: 700,
+                color: 'var(--ink)', fontSize: '1.5rem',
+                letterSpacing: '-.01em',
+                lineHeight: 1.1,
+                marginBottom: '.75rem',
+              }}>≈ playas de España</div>
+              <p style={{
+                fontSize: '.88rem', lineHeight: 1.6,
+                color: 'var(--muted)', margin: 0,
+              }}>
+                Motor de decisión en tiempo real. Puntuamos cada playa de 0 a 100 según
+                el estado del mar, el viento, los servicios y el acceso — para que elijas
+                la mejor hoy, no la más fotografiada.
+              </p>
+              <div style={{
+                marginTop: '1rem',
+                fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+                fontSize: '.68rem', letterSpacing: '.08em',
+                textTransform: 'uppercase', color: 'var(--muted)',
+                opacity: .8,
+              }}>
+                5.054 playas · datos cada hora
+              </div>
+            </div>
+
+            {/* Columnas de navegación */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+              gap: '2rem',
+            }}>
+              <div>
+                <div style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 500, fontSize: '.7rem',
+                  textTransform: 'uppercase', letterSpacing: '.14em',
+                  marginBottom: '.9rem', color: 'var(--ink)',
+                }}>Explorar</div>
+                <nav style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', fontSize: '.82rem' }}>
+                  <Link href="/comunidades">Comunidades y provincias</Link>
+                  <Link href="/banderas-azules">Banderas Azules</Link>
+                  <Link href="/top">Top 10 por costa</Link>
+                  <Link href="/mapa">Mapa interactivo</Link>
+                  <Link href="/playa-del-dia">Playa del día</Link>
+                  <Link href="/atardeceres">Atardeceres</Link>
+                </nav>
+              </div>
+
+              <div>
+                <div style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 500, fontSize: '.7rem',
+                  textTransform: 'uppercase', letterSpacing: '.14em',
+                  marginBottom: '.9rem', color: 'var(--ink)',
+                }}>Temáticas</div>
+                <nav style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', fontSize: '.82rem' }}>
+                  <Link href="/playas-perros">Playas para perros</Link>
+                  <Link href="/playas-nudistas">Playas nudistas</Link>
+                  <Link href="/playas-accesibles">Accesibles PMR</Link>
+                  <Link href="/familias">Para familias</Link>
+                  <Link href="/playas-aguas-cristalinas">Aguas cristalinas</Link>
+                  <Link href="/playas-secretas">Playas secretas</Link>
+                  <Link href="/islas">Playas por isla</Link>
+                </nav>
+              </div>
+
+              <div>
+                <div style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 500, fontSize: '.7rem',
+                  textTransform: 'uppercase', letterSpacing: '.14em',
+                  marginBottom: '.9rem', color: 'var(--ink)',
+                }}>Deportes y escapadas</div>
+                <nav style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', fontSize: '.82rem' }}>
+                  <Link href="/surf">Surf</Link>
+                  <Link href="/buceo">Buceo</Link>
+                  <Link href="/rutas">Rutas por la costa</Link>
+                  <Link href="/campings">Campings</Link>
+                  <Link href="/playas-autocaravana">Autocaravana</Link>
+                  <Link href="/alquiler-barco-playa">Alquiler de barco</Link>
+                </nav>
+              </div>
+
+              <div>
+                <div style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 500, fontSize: '.7rem',
+                  textTransform: 'uppercase', letterSpacing: '.14em',
+                  marginBottom: '.9rem', color: 'var(--ink)',
+                }}>Guías prácticas</div>
+                <nav style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', fontSize: '.82rem' }}>
+                  <Link href="/seguros-viaje">Seguros de viaje</Link>
+                  <Link href="/protectores-solares">Protectores solares</Link>
+                  <Link href="/calidad-agua">Calidad del agua</Link>
+                  <Link href="/medusas">Temporada de medusas</Link>
+                </nav>
+              </div>
+
+              <div>
+                <div style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 500, fontSize: '.7rem',
+                  textTransform: 'uppercase', letterSpacing: '.14em',
+                  marginBottom: '.9rem', color: 'var(--ink)',
+                }}>Herramientas</div>
+                <nav style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', fontSize: '.82rem' }}>
+                  <Link href="/buscar">Buscar playas</Link>
+                  <Link href="/comparar">Comparador</Link>
+                  <Link href="/rutas/configurar">Configurar ruta</Link>
+                  <Link href="/en">English version</Link>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          {/* Fuentes de datos */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '1.5rem',
+            marginBottom: '2rem',
+            paddingBottom: '1.75rem',
+            borderBottom: '1px solid var(--line)',
+          }}>
+            <div>
+              <div style={{
+                fontFamily: 'var(--font-sans)',
+                fontWeight: 500, fontSize: '.68rem',
+                textTransform: 'uppercase', letterSpacing: '.14em',
+                marginBottom: '.5rem', color: 'var(--ink)',
+              }}>Fuentes oficiales</div>
+              <p style={{ fontSize: '.75rem', lineHeight: 1.55, margin: 0, fontFamily: 'var(--font-mono, ui-monospace, monospace)' }}>
+                Open-Meteo · MITECO · IGN · EEA · CartoCiudad · OpenStreetMap · ADEAC
+              </p>
+            </div>
+            <div>
+              <div style={{
+                fontFamily: 'var(--font-sans)',
+                fontWeight: 500, fontSize: '.68rem',
+                textTransform: 'uppercase', letterSpacing: '.14em',
+                marginBottom: '.5rem', color: 'var(--ink)',
+              }}>Metodología</div>
+              <p style={{ fontSize: '.75rem', lineHeight: 1.55, margin: 0 }}>
+                Puntuación independiente basada en datos públicos.
+                Sin pagar por aparecer, sin rankings patrocinados.
+              </p>
+            </div>
+            <div>
+              <div style={{
+                fontFamily: 'var(--font-sans)',
+                fontWeight: 500, fontSize: '.68rem',
+                textTransform: 'uppercase', letterSpacing: '.14em',
+                marginBottom: '.5rem', color: 'var(--ink)',
+              }}>Contribuye</div>
+              <p style={{ fontSize: '.75rem', lineHeight: 1.55, margin: 0 }}>
+                Reporta medusas, banderas o estado real desde cada ficha.
+                Los datos de usuarios son anónimos y caducan a las 24 h.
+              </p>
+            </div>
+          </div>
+
+          {/* Disclosure de afiliación */}
+          <div style={{
+            background: 'var(--card-bg)',
+            border: '1px solid var(--line)',
+            borderRadius: 6,
+            padding: '1rem 1.15rem',
+            marginBottom: '1.5rem',
+            fontSize: '.75rem', lineHeight: 1.6,
+          }}>
+            <strong style={{ color: 'var(--ink)' }}>Transparencia de afiliación.</strong>{' '}
+            Algunas páginas contienen enlaces patrocinados a Booking, Amazon, Civitatis,
+            Click&Boat, Rentalcars, TheFork, Parclick, Pitchup, Heymondo, IATI, Chapka y
+            Direct Ferries. Si reservas o compras a través de ellos, podemos recibir una
+            comisión sin coste adicional para ti. <strong>Los datos, rankings y puntuaciones
+            no están influenciados por estas colaboraciones.</strong>{' '}
+            <Link href="/cookies" style={{ textDecoration: 'underline' }}>Más información</Link>.
+          </div>
+
+          {/* Bottom bar */}
+          <div style={{
+            display: 'flex', justifyContent: 'space-between',
+            alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
+            paddingTop: '1rem',
+            fontSize: '.75rem',
+          }}>
+            <div style={{
+              fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+              fontSize: '.7rem', color: 'var(--muted)',
+              letterSpacing: '.04em',
+            }}>
+              © {new Date().getFullYear()} playas-espana.com · Hecho con mimo para el Mediterráneo y el Atlántico
+            </div>
+            <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
+              <Link href="/aviso-legal">Aviso legal</Link>
+              <Link href="/privacidad">Privacidad</Link>
+              <Link href="/cookies">Cookies</Link>
+            </div>
           </div>
         </div>
       </footer>
