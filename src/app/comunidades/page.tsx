@@ -88,7 +88,7 @@ export default async function ComunidadesPage() {
       <Nav />
       <main className={styles.main}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Comunidades y provincias</h1>
+          <h1 className={styles.title}>Comunidades <em>y provincias</em></h1>
           <p className={styles.sub}>
             {comunidades.length} comunidades · {provincias.length} provincias · {comunidades.reduce((a, c) => a + c.count, 0).toLocaleString('es')} playas
           </p>

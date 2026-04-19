@@ -88,7 +88,7 @@ export default async function PlayasPerrosPage() {
             <span aria-hidden="true">›</span>
             <span aria-current="page">Playas para perros</span>
           </nav>
-          <h1 className={styles.titulo}>Playas para perros en España</h1>
+          <h1 className={styles.titulo}>Playas <em>para perros</em> en España</h1>
           <p className={styles.subtitulo}>
             {stats.total} playas identificadas en {stats.comunidades.length} comunidades y {stats.provincias.length} provincias
           </p>

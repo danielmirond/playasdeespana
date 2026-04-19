@@ -89,7 +89,7 @@ export default async function ComunidadPage({ params }: Props) {
             <span aria-hidden="true">›</span>
             <span aria-current="page">{comunidad.nombre}</span>
           </nav>
-          <h1 className={styles.titulo}>Playas de {comunidad.nombre}</h1>
+          <h1 className={styles.titulo}>Playas <em>de {comunidad.nombre}</em></h1>
           <p className={styles.subtitulo}>{comunidad.count} playas · España</p>
           <div className={styles.stats}>
             <div className={styles.stat}>

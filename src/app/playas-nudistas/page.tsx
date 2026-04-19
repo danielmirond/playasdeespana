@@ -84,7 +84,7 @@ export default async function PlayasNudistasPage() {
             <span aria-hidden="true">›</span>
             <span aria-current="page">Playas nudistas</span>
           </nav>
-          <h1 className={styles.titulo}>Playas nudistas en España</h1>
+          <h1 className={styles.titulo}>Playas <em>nudistas</em> en España</h1>
           <p className={styles.subtitulo}>
             {stats.total} playas en {stats.comunidades.length} comunidades y {stats.provincias.length} provincias
           </p>

@@ -120,7 +120,7 @@ export default async function BanderasAzulesPage() {
             <span aria-hidden="true">›</span>
             <span aria-current="page">Banderas Azules</span>
           </nav>
-          <h1 className={styles.titulo}>Playas con Bandera Azul en España</h1>
+          <h1 className={styles.titulo}>Playas <em>con Bandera Azul</em> en España</h1>
           <p className={styles.subtitulo}>
             {azules.length} playas certificadas en {grupos.length} comunidades autónomas
           </p>

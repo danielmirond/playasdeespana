@@ -16,9 +16,14 @@
 
 .titulo {
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 900; letter-spacing: -.03em;
-  color: var(--ink); margin: 0 0 .25rem;
+  font-size: clamp(1.9rem, 5.4vw, 3rem);
+  font-weight: 700; letter-spacing: -.02em;
+  line-height: 1.02;
+  color: var(--ink); margin: 0 0 .35rem;
+}
+.titulo em {
+  font-style: italic; font-weight: 500;
+  color: var(--accent);
 }
 .subtitulo { font-size: .9rem; color: var(--muted); margin: 0 0 .5rem; }
 .desc { font-size: .78rem; color: var(--muted); max-width: 600px; line-height: 1.5; }
