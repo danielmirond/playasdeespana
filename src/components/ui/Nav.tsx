@@ -48,7 +48,7 @@ export default function Nav() {
           <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
         </nav>
         <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label={isEn ? 'Playas de España — Home' : 'Playas de España — Inicio'}>
-          <img src="/logo.svg" alt="Playas de España" width={28} height={28} style={{ display:'block' }} />
+          <img src="/logo.svg" alt="Playas de España" width={140} height={36} style={{ display:'block', height: 36, width: 'auto' }} />
         </Link>
         <div className={styles.right}>
           <Link href="/buscar" className={styles.iconBtn} aria-label={isEn ? 'Search' : 'Buscar'}>

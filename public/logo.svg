@@ -1,5 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" fill="none">
-  <circle cx="26" cy="26" r="26" fill="#b06820"/>
-  <circle cx="26" cy="26" r="15" fill="#e8821a"/>
-  <circle cx="26" cy="26" r="9" fill="#f5c842"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 72" role="img" aria-label="Playas de España">
+  <title>Playas de España</title>
+  <!-- Ondita decorativa (≈) a la izquierda -->
+  <path d="M6 32 Q14 26 22 32 T38 32" fill="none" stroke="#6b400a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M6 38 Q14 32 22 38 T38 38" fill="none" stroke="#6b400a" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Palabra "playas" en Playfair italic 700 -->
+  <text x="50" y="44"
+        font-family="Playfair Display, Georgia, serif"
+        font-size="32"
+        font-weight="700"
+        font-style="italic"
+        fill="#2a1a08"
+        letter-spacing="-0.5">playas</text>
+
+  <!-- Línea decorativa bajo "playas" -->
+  <path d="M55 50 Q95 52 155 50" fill="none" stroke="#6b400a" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- "DE ESPAÑA" en DM Sans uppercase tracking amplio -->
+  <text x="50" y="63"
+        font-family="DM Sans, system-ui, sans-serif"
+        font-size="9"
+        font-weight="500"
+        letter-spacing="3"
+        fill="#5a3d12">DE ESPAÑA</text>
 </svg>

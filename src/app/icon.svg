@@ -1,5 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" fill="none">
-  <circle cx="26" cy="26" r="26" fill="#b06820"/>
-  <circle cx="26" cy="26" r="15" fill="#e8821a"/>
-  <circle cx="26" cy="26" r="9" fill="#f5c842"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Playas de España">
+  <title>Playas de España</title>
+  <!-- Fondo arena -->
+  <rect width="64" height="64" rx="10" fill="#f5ecd5"/>
+  <!-- Caja con borde tinta -->
+  <rect x="8" y="8" width="48" height="48" rx="4" fill="none" stroke="#2a1a08" stroke-width="2"/>
+  <!-- Letra P en Playfair italic serif -->
+  <text x="32" y="43"
+        font-family="Playfair Display, Georgia, serif"
+        font-size="34"
+        font-weight="700"
+        font-style="italic"
+        fill="#2a1a08"
+        text-anchor="middle">P</text>
+  <!-- Ondita decorativa bajo la P -->
+  <path d="M18 50 Q26 46 32 50 T46 50" fill="none" stroke="#6b400a" stroke-width="2" stroke-linecap="round"/>
 </svg>
