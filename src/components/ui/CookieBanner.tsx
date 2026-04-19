@@ -1,23 +1,23 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ShieldCheck } from '@phosphor-icons/react'
-import { useState, useEffect, useCallback } from 'react'
+import { ShieldCheck, X } from '@phosphor-icons/react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 
-// Categorías de cookies según AEPD/LSSI-CE:
-// - tecnicas: estrictamente necesarias (exentas de consentimiento)
-// - analiticas: Google Analytics 4 — requieren consentimiento
-// - marketing: AdSense, afiliados — requieren consentimiento
+// Consentimiento granular por categoría (AEPD/LSSI-CE + RGPD).
+// Categorías:
+// - tecnicas: estrictamente necesarias (exentas art. 22.2 LSSI)
+// - analiticas: Google Analytics 4 — requiere consentimiento
+// - marketing: AdSense + afiliados — requiere consentimiento
 export interface CookieConsent {
-  tecnicas:   true       // siempre true (exentas)
+  tecnicas:   true
   analiticas: boolean
   marketing:  boolean
-  timestamp:  number     // Date.now() del consentimiento
+  timestamp:  number
 }
 
 const LS_KEY = 'cookie_consent_v2'
 
-/** Lee el consentimiento actual. Retorna null si no hay. */
 export function readConsent(): CookieConsent | null {
   if (typeof window === 'undefined') return null
   try {
@@ -29,7 +29,6 @@ export function readConsent(): CookieConsent | null {
   }
 }
 
-/** Comprueba si una categoría está consentida. */
 export function hasConsent(cat: 'analiticas' | 'marketing'): boolean {
   const c = readConsent()
   return c?.[cat] ?? false
@@ -42,32 +41,36 @@ function saveConsent(c: CookieConsent) {
 
 const t = {
   es: {
-    titulo:      'Configuración de cookies',
-    texto:       'Usamos cookies propias y de terceros. Las técnicas son necesarias para que la web funcione. Las analíticas nos ayudan a entender cómo usas la web. Las de marketing permiten mostrar anuncios relevantes y enlaces de afiliación.',
-    tecnicas:    'Técnicas (necesarias)',
-    tecnicasDesc:'Sesión, preferencias de idioma, consentimiento. Siempre activas.',
+    titulo:      'Cookies',
+    texto:       'Usamos cookies técnicas (necesarias) y, con tu permiso, analíticas y de marketing. Puedes aceptar, rechazar o configurar.',
+    tecnicas:    'Técnicas (siempre activas)',
+    tecnicasDesc:'Necesarias para que la web funcione (consentimiento, favoritos, reportes).',
     analiticas:  'Analíticas',
-    analiticasDesc: 'Google Analytics 4 — datos anónimos de tráfico.',
+    analiticasDesc: 'Google Analytics 4 — tráfico anónimo.',
     marketing:   'Marketing y afiliación',
-    marketingDesc:  'Google AdSense, cookies de afiliados (Booking, Amazon, etc.).',
-    aceptarTodo: 'Aceptar todo',
-    rechazarOpcionales: 'Solo necesarias',
-    guardar:     'Guardar preferencias',
+    marketingDesc:  'Google AdSense, enlaces de afiliados (Booking, Amazon, etc.).',
+    aceptarTodo: 'Aceptar',
+    rechazar:    'Rechazar',
+    configurar:  'Configurar',
+    guardar:     'Guardar',
     politica:    'Política de cookies',
+    cerrar:      'Cerrar (rechazar opcionales)',
   },
   en: {
-    titulo:      'Cookie settings',
-    texto:       'We use our own and third-party cookies. Technical cookies are necessary for the site to work. Analytics help us understand how you use the site. Marketing cookies enable relevant ads and affiliate links.',
-    tecnicas:    'Technical (necessary)',
-    tecnicasDesc:'Session, language, consent. Always active.',
+    titulo:      'Cookies',
+    texto:       'We use technical cookies (required) and, with your permission, analytics and marketing. You can accept, reject or configure.',
+    tecnicas:    'Technical (always on)',
+    tecnicasDesc:'Required for the site to work (consent, favourites, reports).',
     analiticas:  'Analytics',
-    analiticasDesc: 'Google Analytics 4 — anonymous traffic data.',
+    analiticasDesc: 'Google Analytics 4 — anonymous traffic.',
     marketing:   'Marketing & affiliates',
-    marketingDesc:  'Google AdSense, affiliate cookies (Booking, Amazon, etc.).',
-    aceptarTodo: 'Accept all',
-    rechazarOpcionales: 'Necessary only',
-    guardar:     'Save preferences',
+    marketingDesc:  'Google AdSense, affiliate links (Booking, Amazon, etc.).',
+    aceptarTodo: 'Accept',
+    rechazar:    'Reject',
+    configurar:  'Configure',
+    guardar:     'Save',
     politica:    'Cookie policy',
+    cerrar:      'Close (reject optional)',
   },
 }
 
@@ -79,137 +82,196 @@ export default function CookieBanner() {
   const [showDetails, setShowDetails] = useState(false)
   const [analiticas, setAnaliticas] = useState(false)
   const [marketing, setMarketing] = useState(false)
+  const rootRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const existing = readConsent()
-    if (!existing) {
-      setVisible(true)
-    } else {
+    if (!existing) setVisible(true)
+    else {
       setAnaliticas(existing.analiticas)
       setMarketing(existing.marketing)
     }
   }, [])
 
   const accept = useCallback((analytics: boolean, mkt: boolean) => {
-    const consent: CookieConsent = {
+    saveConsent({
       tecnicas: true,
       analiticas: analytics,
       marketing: mkt,
       timestamp: Date.now(),
-    }
-    saveConsent(consent)
+    })
     setVisible(false)
   }, [])
+
+  // ESC cierra rechazando opcionales (UX esperada)
+  useEffect(() => {
+    if (!visible) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') accept(false, false)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [visible, accept])
+
+  // Al abrir detalles, focus en el primer toggle (a11y)
+  useEffect(() => {
+    if (showDetails && rootRef.current) {
+      const first = rootRef.current.querySelector<HTMLInputElement>('input[type="checkbox"]:not(:disabled)')
+      first?.focus()
+    }
+  }, [showDetails])
 
   if (!visible) return null
 
   const btnBase: React.CSSProperties = {
-    padding: '.5rem 1.1rem',
+    padding: '.55rem 1.1rem',
     borderRadius: 100,
-    fontSize: '.8rem',
+    fontSize: '.82rem',
     fontWeight: 700,
     cursor: 'pointer',
-    minHeight: 44,
-    display: 'flex',
+    minHeight: 40,
+    display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
+    whiteSpace: 'nowrap',
   }
 
   return (
     <div
-      role="dialog"
-      aria-modal="true"
+      ref={rootRef}
+      role="region"
       aria-label={i18n.titulo}
+      aria-live="polite"
       style={{
-        position: 'fixed', bottom: '1.25rem', left: '50%', transform: 'translateX(-50%)',
-        width: 'min(580px, calc(100vw - 1.5rem))',
-        background: '#faf6ef', border: '1.5px solid #e8dcc8', borderRadius: 20,
-        padding: '1.25rem 1.5rem', boxShadow: '0 8px 32px rgba(42,26,8,.15)',
-        zIndex: 9999, display: 'flex', flexDirection: 'column', gap: '.75rem',
+        position: 'fixed',
+        bottom: '1rem',
+        left: '1rem',
+        right: '1rem',
+        maxWidth: 540,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        background: '#faf6ef',
+        border: '1.5px solid #e8dcc8',
+        borderRadius: 16,
+        padding: '.85rem 1rem',
+        boxShadow: '0 8px 32px rgba(42,26,8,.15)',
+        zIndex: 9999,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '.6rem',
+        fontSize: '.85rem',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '.75rem' }}>
-        <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', marginTop: 2 }} aria-hidden="true">
-          <ShieldCheck size={18} weight="bold" color="var(--accent,#6b400a)" />
-        </span>
-        <div>
-          <div style={{ fontWeight: 800, fontSize: '.88rem', color: '#2a1a08', marginBottom: '.25rem' }}>{i18n.titulo}</div>
-          <p style={{ margin: 0, fontSize: '.78rem', lineHeight: 1.6, color: '#4a3520' }}>
-            {i18n.texto}{' '}
-            <Link href={locale === 'en' ? '/en/cookies' : '/cookies'} style={{ color: '#6b400a', textDecoration: 'underline' }}>
-              {i18n.politica}
-            </Link>
-          </p>
-        </div>
+      {/* Close button (top-right) — rechaza opcionales, UX esperada */}
+      <button
+        type="button"
+        onClick={() => accept(false, false)}
+        aria-label={i18n.cerrar}
+        style={{
+          position: 'absolute', top: 8, right: 8,
+          width: 32, height: 32, borderRadius: '50%',
+          border: 'none', background: 'transparent', color: '#8a7560',
+          cursor: 'pointer', display: 'flex',
+          alignItems: 'center', justifyContent: 'center',
+        }}
+      >
+        <X size={16} weight="bold" aria-hidden="true" />
+      </button>
+
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '.6rem', paddingRight: '2rem' }}>
+        <ShieldCheck size={18} weight="bold" color="var(--accent,#6b400a)" aria-hidden="true" style={{ flexShrink: 0, marginTop: 2 }} />
+        <p style={{ margin: 0, fontSize: '.82rem', lineHeight: 1.55, color: '#4a3520' }}>
+          <strong style={{ color: '#2a1a08' }}>{i18n.titulo}.</strong>{' '}
+          {i18n.texto}{' '}
+          <Link href={locale === 'en' ? '/en/cookies' : '/cookies'} style={{ color: '#6b400a', textDecoration: 'underline' }}>
+            {i18n.politica}
+          </Link>
+        </p>
       </div>
 
       {/* Detalle granular */}
       {showDetails && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', padding: '.5rem 0' }}>
-          {/* Técnicas — siempre activas */}
-          <label style={{ display: 'flex', alignItems: 'center', gap: '.5rem', fontSize: '.8rem' }}>
-            <input type="checkbox" checked disabled style={{ accentColor: '#6b400a' }} />
-            <div>
-              <div style={{ fontWeight: 700, color: '#2a1a08' }}>{i18n.tecnicas}</div>
-              <div style={{ fontSize: '.72rem', color: '#8a7560' }}>{i18n.tecnicasDesc}</div>
-            </div>
-          </label>
-          {/* Analíticas */}
-          <label style={{ display: 'flex', alignItems: 'center', gap: '.5rem', fontSize: '.8rem', cursor: 'pointer' }}>
-            <input type="checkbox" checked={analiticas} onChange={e => setAnaliticas(e.target.checked)} style={{ accentColor: '#6b400a', width: 18, height: 18 }} />
-            <div>
-              <div style={{ fontWeight: 700, color: '#2a1a08' }}>{i18n.analiticas}</div>
-              <div style={{ fontSize: '.72rem', color: '#8a7560' }}>{i18n.analiticasDesc}</div>
-            </div>
-          </label>
-          {/* Marketing */}
-          <label style={{ display: 'flex', alignItems: 'center', gap: '.5rem', fontSize: '.8rem', cursor: 'pointer' }}>
-            <input type="checkbox" checked={marketing} onChange={e => setMarketing(e.target.checked)} style={{ accentColor: '#6b400a', width: 18, height: 18 }} />
-            <div>
-              <div style={{ fontWeight: 700, color: '#2a1a08' }}>{i18n.marketing}</div>
-              <div style={{ fontSize: '.72rem', color: '#8a7560' }}>{i18n.marketingDesc}</div>
-            </div>
-          </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem', paddingLeft: '1.6rem' }}>
+          <Toggle checked disabled label={i18n.tecnicas} desc={i18n.tecnicasDesc} />
+          <Toggle checked={analiticas} onChange={setAnaliticas} label={i18n.analiticas} desc={i18n.analiticasDesc} />
+          <Toggle checked={marketing} onChange={setMarketing} label={i18n.marketing} desc={i18n.marketingDesc} />
         </div>
       )}
 
-      {/* Botones — equilibrados visualmente (AEPD anti dark-patterns) */}
-      <div style={{ display: 'flex', gap: '.5rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
-        {!showDetails && (
-          <button
-            type="button"
-            onClick={() => setShowDetails(true)}
-            style={{ ...btnBase, border: '1.5px solid #e8dcc8', background: 'transparent', color: '#5a3d12', marginRight: 'auto' }}
-          >
-            {locale === 'en' ? 'Manage' : 'Configurar'}
-          </button>
+      {/* Botones — equilibrados (anti dark-pattern AEPD) */}
+      <div style={{ display: 'flex', gap: '.4rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+        {!showDetails ? (
+          <>
+            <button
+              type="button"
+              onClick={() => setShowDetails(true)}
+              style={{ ...btnBase, border: 'none', background: 'transparent', color: '#5a3d12', marginRight: 'auto', textDecoration: 'underline' }}
+            >
+              {i18n.configurar}
+            </button>
+            <button
+              type="button"
+              onClick={() => accept(false, false)}
+              style={{ ...btnBase, border: '1.5px solid #6b400a', background: 'transparent', color: '#6b400a' }}
+            >
+              {i18n.rechazar}
+            </button>
+            <button
+              type="button"
+              onClick={() => accept(true, true)}
+              style={{ ...btnBase, border: 'none', background: '#6b400a', color: '#fff' }}
+            >
+              {i18n.aceptarTodo}
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => accept(false, false)}
+              style={{ ...btnBase, border: '1.5px solid #6b400a', background: 'transparent', color: '#6b400a', marginRight: 'auto' }}
+            >
+              {i18n.rechazar}
+            </button>
+            <button
+              type="button"
+              onClick={() => accept(analiticas, marketing)}
+              style={{ ...btnBase, border: 'none', background: '#6b400a', color: '#fff' }}
+            >
+              {i18n.guardar}
+            </button>
+          </>
         )}
-        {showDetails && (
-          <button
-            type="button"
-            onClick={() => accept(analiticas, marketing)}
-            style={{ ...btnBase, border: '1.5px solid #e8dcc8', background: 'transparent', color: '#5a3d12', marginRight: 'auto' }}
-          >
-            {i18n.guardar}
-          </button>
-        )}
-        <button
-          type="button"
-          onClick={() => accept(false, false)}
-          aria-label={locale === 'en' ? 'Reject optional cookies' : 'Rechazar cookies opcionales'}
-          style={{ ...btnBase, border: '1.5px solid #6b400a', background: 'transparent', color: '#6b400a' }}
-        >
-          {i18n.rechazarOpcionales}
-        </button>
-        <button
-          type="button"
-          onClick={() => accept(true, true)}
-          aria-label={locale === 'en' ? 'Accept all cookies' : 'Aceptar todas las cookies'}
-          style={{ ...btnBase, border: 'none', background: '#6b400a', color: '#fff' }}
-        >
-          {i18n.aceptarTodo}
-        </button>
       </div>
     </div>
+  )
+}
+
+function Toggle({ checked, disabled, onChange, label, desc }: {
+  checked:   boolean
+  disabled?: boolean
+  onChange?: (v: boolean) => void
+  label:     string
+  desc:      string
+}) {
+  return (
+    <label style={{
+      display: 'flex', alignItems: 'center', gap: '.5rem',
+      fontSize: '.78rem', cursor: disabled ? 'default' : 'pointer',
+      padding: '.3rem 0',
+    }}>
+      <input
+        type="checkbox"
+        checked={checked}
+        disabled={disabled}
+        onChange={e => onChange?.(e.target.checked)}
+        style={{ accentColor: '#6b400a', width: 18, height: 18, flexShrink: 0 }}
+      />
+      <div>
+        <div style={{ fontWeight: 700, color: '#2a1a08' }}>{label}</div>
+        <div style={{ fontSize: '.7rem', color: '#8a7560', lineHeight: 1.4 }}>{desc}</div>
+      </div>
+    </label>
   )
 }
