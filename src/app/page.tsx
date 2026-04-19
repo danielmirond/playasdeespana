@@ -134,6 +134,110 @@ export default async function HomePage() {
             ))}
           </div>
         </section>
+
+        {/* EEAT · Por qué confiar en nuestros datos */}
+        <section aria-labelledby="eeat-title" style={{
+          maxWidth: 1000, margin: '3rem auto 0', padding: '2.5rem 1.5rem 0',
+        }}>
+          <div style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '.7rem', fontWeight: 500,
+            letterSpacing: '.16em', textTransform: 'uppercase',
+            color: 'var(--muted)', marginBottom: '.5rem',
+          }}>
+            Transparencia editorial
+          </div>
+          <h2 id="eeat-title" style={{
+            fontFamily: 'var(--font-serif)',
+            fontSize: 'clamp(1.5rem, 3.8vw, 2rem)',
+            fontWeight: 700, color: 'var(--ink)',
+            lineHeight: 1.1, letterSpacing: '-.015em',
+            marginBottom: '.5rem',
+          }}>
+            Datos <em style={{ fontWeight: 500, color: 'var(--accent)' }}>independientes</em> de fuentes oficiales
+          </h2>
+          <p style={{
+            fontSize: '.95rem', color: 'var(--muted)', lineHeight: 1.65,
+            maxWidth: 640, marginBottom: '1.5rem',
+          }}>
+            Cada score 0–100 combina siete factores calculados con APIs oficiales, actualizadas
+            cada hora. Ninguna playa, municipio o anunciante puede comprar posición.
+          </p>
+
+          {/* Grid de fuentes con URL (señal EEAT explícita) */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+            gap: '.5rem',
+            marginBottom: '1.25rem',
+          }}>
+            {[
+              { nombre: 'Open-Meteo',        rol: 'Oleaje y viento',       ref: 'open-meteo.com',   href: 'https://open-meteo.com' },
+              { nombre: 'MITECO',            rol: 'Inventario oficial',    ref: 'miteco.gob.es',     href: 'https://www.miteco.gob.es' },
+              { nombre: 'EEA',               rol: 'Calidad del agua',      ref: 'eea.europa.eu',     href: 'https://www.eea.europa.eu' },
+              { nombre: 'ADEAC',             rol: 'Bandera Azul',          ref: 'adeac.es',          href: 'https://www.adeac.es' },
+              { nombre: 'IGN · CartoCiudad', rol: 'Cartografía',           ref: 'ign.es',            href: 'https://www.ign.es' },
+              { nombre: 'OpenStreetMap',     rol: 'Servicios y POI',       ref: 'openstreetmap.org', href: 'https://www.openstreetmap.org' },
+            ].map(f => (
+              <a
+                key={f.nombre}
+                href={f.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'flex', flexDirection: 'column', gap: '.15rem',
+                  padding: '.75rem .9rem',
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 4,
+                  textDecoration: 'none',
+                  transition: 'border-color .15s',
+                }}
+              >
+                <div style={{
+                  fontFamily: 'var(--font-serif)', fontWeight: 700,
+                  fontSize: '.88rem', color: 'var(--ink)',
+                }}>
+                  {f.nombre}
+                </div>
+                <div style={{ fontSize: '.72rem', color: 'var(--accent)', fontWeight: 500 }}>
+                  {f.rol}
+                </div>
+                <div style={{
+                  fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+                  fontSize: '.65rem', color: 'var(--muted)',
+                  marginTop: '.15rem', opacity: .85,
+                }}>
+                  {f.ref} ↗
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div style={{
+            display: 'flex', flexWrap: 'wrap', gap: '1rem',
+            alignItems: 'center',
+            fontSize: '.82rem',
+          }}>
+            <Link
+              href="/metodologia"
+              style={{
+                color: 'var(--accent)', fontWeight: 500,
+                textDecoration: 'none',
+                borderBottom: '1px solid var(--accent)',
+                paddingBottom: 1,
+              }}
+            >
+              Ver metodología completa →
+            </Link>
+            <span style={{ color: 'var(--muted)', fontSize: '.78rem' }}>
+              Última revisión del método:{' '}
+              <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)' }}>
+                abril 2026
+              </span>
+            </span>
+          </div>
+        </section>
       </main>
 
       <footer style={{
@@ -267,6 +371,7 @@ export default async function HomePage() {
                   <Link href="/buscar">Buscar playas</Link>
                   <Link href="/comparar">Comparador</Link>
                   <Link href="/rutas/configurar">Configurar ruta</Link>
+                  <Link href="/metodologia">Metodología y fuentes</Link>
                   <Link href="/en">English version</Link>
                 </nav>
               </div>
@@ -292,6 +397,15 @@ export default async function HomePage() {
               <p style={{ fontSize: '.75rem', lineHeight: 1.55, margin: 0, fontFamily: 'var(--font-mono, ui-monospace, monospace)' }}>
                 Open-Meteo · MITECO · IGN · EEA · CartoCiudad · OpenStreetMap · ADEAC
               </p>
+              <Link href="/metodologia" style={{
+                fontSize: '.72rem', color: 'var(--accent)',
+                fontFamily: 'var(--font-sans)', fontWeight: 500,
+                display: 'inline-block', marginTop: '.5rem',
+                borderBottom: '1px solid var(--accent)', paddingBottom: 1,
+                textDecoration: 'none',
+              }}>
+                Ver todas con URL y frecuencia →
+              </Link>
             </div>
             <div>
               <div style={{
@@ -300,10 +414,18 @@ export default async function HomePage() {
                 textTransform: 'uppercase', letterSpacing: '.14em',
                 marginBottom: '.5rem', color: 'var(--ink)',
               }}>Metodología</div>
-              <p style={{ fontSize: '.75rem', lineHeight: 1.55, margin: 0 }}>
+              <p style={{ fontSize: '.75rem', lineHeight: 1.55, margin: '0 0 .5rem' }}>
                 Puntuación independiente basada en datos públicos.
                 Sin pagar por aparecer, sin rankings patrocinados.
               </p>
+              <Link href="/metodologia" style={{
+                fontSize: '.72rem', color: 'var(--accent)',
+                fontFamily: 'var(--font-sans)', fontWeight: 500,
+                borderBottom: '1px solid var(--accent)', paddingBottom: 1,
+                textDecoration: 'none',
+              }}>
+                Cómo calculamos el score →
+              </Link>
             </div>
             <div>
               <div style={{
