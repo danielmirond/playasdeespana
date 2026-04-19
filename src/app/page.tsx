@@ -210,7 +210,9 @@ export default async function HomePage() {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '.5rem' }}>
           <span>Datos: Open-Meteo · MITECO · IGN · CartoCiudad · OSM</span>
-          <div style={{ display: 'flex', gap: '.75rem' }}>
+          <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
+            <Link href="/aviso-legal" style={{ textDecoration: 'underline' }}>Aviso legal</Link>
+            <Link href="/privacidad" style={{ textDecoration: 'underline' }}>Privacidad</Link>
             <Link href="/cookies" style={{ textDecoration: 'underline' }}>Cookies</Link>
             <span>© {new Date().getFullYear()} playas-espana.com</span>
           </div>
