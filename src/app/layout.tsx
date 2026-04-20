@@ -45,7 +45,15 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://playas-espana.com' },
-  verification: { google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E' },
+  verification: {
+    google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E',
+    // Bing, Yandex y Seznam: sustituye XXXXXX por el código de cada dashboard
+    other: {
+      'msvalidate.01': process.env.BING_VERIFY ?? '',
+      'yandex-verification': process.env.YANDEX_VERIFY ?? '',
+      'seznam-wmt': process.env.SEZNAM_VERIFY ?? '',
+    },
+  },
 }
 
 // Critical CSS inline — renderiza antes del paint inicial
