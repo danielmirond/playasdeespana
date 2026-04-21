@@ -71,6 +71,18 @@
   text-decoration: none;
 }
 
+/* Coordenadas mono — brand book 08: "ubicación con coord mono" */
+.coords {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: .7rem; font-weight: 400;
+  letter-spacing: .04em;
+  color: var(--muted);
+  opacity: .75;
+  margin-top: -.5rem;
+  margin-bottom: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
 .badges {
   display: flex; gap: .35rem; flex-wrap: wrap;
   margin-bottom: 1rem;
@@ -193,6 +205,11 @@
   text-align: center;
 }
 
+/* ── Sticky CTA mobile — hidden on desktop ─────────────────────── */
+.stickyMobile {
+  display: none;
+}
+
 /* ── TABLET ─────────────────────────────────────────────────────── */
 @media (max-width: 800px) {
   .hero { padding: 1.25rem 1.25rem 1.5rem; }
@@ -223,24 +240,71 @@
 
 /* ── MOBILE ─────────────────────────────────────────────────────── */
 @media (max-width: 520px) {
-  .hero { padding: 1rem .85rem 1.25rem; }
-  .bc { font-size: .68rem; margin-bottom: 1rem; gap: .2rem; }
-  .bc span:last-child { max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .nombre { font-size: clamp(1.7rem, 8vw, 2.4rem); margin-bottom: .4rem; }
-  .eyebrow { font-size: .65rem; margin-bottom: .35rem; }
-  .lugar { font-size: .68rem; margin-bottom: .65rem; gap: .35rem; }
-  .badges { margin-bottom: .65rem; gap: .25rem; }
-  .badge { font-size: .65rem; padding: .18rem .45rem; }
-  .scoreNum { font-size: 2rem; }
+  .hero {
+    padding: 1rem .85rem 1.25rem;
+    padding-bottom: calc(1.25rem + 56px);
+  }
+  .bc { font-size: .65rem; margin-bottom: .75rem; gap: .2rem; }
+  .bc span:last-child { max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .eyebrow { font-size: .62rem; margin-bottom: .3rem; }
+  .nombre { font-size: clamp(1.6rem, 7.5vw, 2.2rem); margin-bottom: .3rem; }
+  .lugar { font-size: .65rem; margin-bottom: .25rem; gap: .3rem; }
+  .coords { font-size: .62rem; margin-bottom: .65rem; margin-top: -.15rem; }
+  .badges { margin-bottom: .5rem; gap: .2rem; }
+  .badge { font-size: .62rem; padding: .15rem .42rem; }
+  .actions { margin-bottom: .35rem; }
+  .frase { font-size: .82rem; }
+
+  /* Score card mobile: compact horizontal bar */
+  .scoreCard {
+    border-radius: 6px;
+  }
+  .scoreHead {
+    flex-direction: row;
+    gap: .55rem;
+    padding: .85rem 1rem;
+    align-items: baseline;
+  }
+  .iluWrap { display: none; }
+  .scoreNum { font-size: 2.2rem; }
+  .scoreOf { font-size: .62rem; }
   .scoreVerdict { font-size: .95rem; }
-  .m { padding: .5rem .3rem; }
-  .mv { font-size: .85rem; }
-  .ml { font-size: .55rem; letter-spacing: .06em; }
+  .scoreFrase { display: none; }
+  .pills { padding: 0 .85rem .55rem; justify-content: flex-start; }
+  .pill { font-size: .6rem; padding: .15rem .4rem; }
+
+  /* Metrics: 4 cols compact, single row */
+  .metrics { grid-template-columns: repeat(4, 1fr); }
+  .m { padding: .5rem .25rem; }
+  .mv { font-size: .82rem; }
+  .ml { font-size: .5rem; letter-spacing: .06em; }
+
+  /* Hide in-card CTA on mobile (sticky replaces it) */
+  .ctaLink { display: none; }
+  .updatePill { display: none; }
+
+  /* Sticky CTA bottom — always visible */
+  .stickyMobile {
+    display: flex;
+    align-items: center; justify-content: center; gap: .5rem;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 90;
+    padding: .85rem 1.5rem;
+    min-height: 52px;
+    background: var(--tinta-900, #1a0f04);
+    color: var(--arena-50, #faf4e6);
+    font-family: var(--font-sans);
+    font-size: .88rem; font-weight: 500;
+    text-decoration: none;
+    border-top: 1px solid var(--tinta-700, #3d2a14);
+  }
 }
 
 @media (max-width: 380px) {
-  .hero { padding: .75rem .65rem 1rem; }
-  .nombre { font-size: 1.55rem; }
+  .hero { padding: .75rem .65rem 1rem; padding-bottom: calc(1rem + 56px); }
+  .nombre { font-size: 1.45rem; }
   .badges span:nth-child(n+3) { display: none; }
   .metrics { grid-template-columns: repeat(2, 1fr); }
+  .scoreNum { font-size: 1.8rem; }
 }

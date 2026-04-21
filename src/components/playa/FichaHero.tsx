@@ -85,6 +85,9 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
               ? <Link href={provinciaHref} className={styles.lugarLink}>{playa.provincia}</Link>
               : <span>{playa.provincia}</span>}
           </div>
+          <div className={styles.coords}>
+            {playa.lat.toFixed(4)}, {playa.lng.toFixed(4)}
+          </div>
           <div className={styles.badges}>
             {playa.bandera    && <span className={styles.badge}>{i18n.bandera}</span>}
             {playa.socorrismo && <span className={styles.badge}>{i18n.socorrismo}</span>}
@@ -171,6 +174,17 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
           </Link>
         </div>
       </div>
+
+      {/* Sticky CTA mobile — brand book 08: "CTA sticky bottom Cómo llegar" */}
+      <a
+        href={mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.stickyMobile}
+      >
+        <MapPin size={16} weight="fill" aria-hidden="true" />
+        {i18n.como}
+      </a>
     </section>
   )
 }
