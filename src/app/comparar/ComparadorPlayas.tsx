@@ -201,7 +201,7 @@ export default function ComparadorPlayas() {
               {suggestions.map(p => (
                 <button key={p.slug} onClick={() => addBeach(p, showSearch)} style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: '.55rem .75rem', borderRadius: 8,
+                  padding: '.55rem .75rem', borderRadius: 4,
                   border: '1px solid var(--line)', background: 'transparent',
                   cursor: 'pointer', textAlign: 'left', width: '100%',
                 }}>

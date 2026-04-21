@@ -136,7 +136,7 @@ export default async function TopCostaPage({ params }: Props) {
                   <span style={{
                     background: sc, color: '#fff',
                     fontFamily: 'var(--font-serif)', fontWeight: 700,
-                    fontSize: '1rem', padding: '.35rem .55rem', borderRadius: 8,
+                    fontSize: '1rem', padding: '.35rem .55rem', borderRadius: 4,
                     flexShrink: 0,
                   }}>
                     {score}

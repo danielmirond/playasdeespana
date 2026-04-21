@@ -7,7 +7,7 @@ export default function LoadingPlaya() {
       {/* Nav skeleton */}
       <div style={{
         position: 'sticky', top: 0, zIndex: 100, height: 52,
-        background: 'rgba(240,230,208,.88)', backdropFilter: 'blur(18px)',
+        background: 'rgba(240,230,208,.88)', 
         borderBottom: '1px solid rgba(180,130,60,.18)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 2rem',
@@ -66,7 +66,7 @@ export default function LoadingPlaya() {
       {/* FichaNav skeleton */}
       <div style={{
         position: 'sticky', top: 52, zIndex: 50,
-        background: 'rgba(240,230,208,.92)', backdropFilter: 'blur(12px)',
+        background: 'rgba(240,230,208,.92)', 
         borderBottom: '1px solid rgba(180,130,60,.18)',
         padding: '0 1rem', display: 'flex', gap: 4, overflowX: 'auto',
         height: 44, alignItems: 'center',

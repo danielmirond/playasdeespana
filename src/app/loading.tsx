@@ -6,7 +6,7 @@ export default function LoadingHome() {
       {/* Nav */}
       <div style={{
         position: 'sticky', top: 0, zIndex: 100, height: 52,
-        background: 'rgba(240,230,208,.88)', backdropFilter: 'blur(18px)',
+        background: 'rgba(240,230,208,.88)', 
         borderBottom: '1px solid rgba(180,130,60,.18)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 2rem',

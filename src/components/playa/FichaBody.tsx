@@ -722,7 +722,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   return (
                     <div key={c.id} className={styles.listItem}>
                       <div style={{
-                        width: 44, height: 44, borderRadius: 8, flexShrink: 0,
+                        width: 44, height: 44, borderRadius: 4, flexShrink: 0,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         background: 'rgba(34,197,94,.12)', color: '#22c55e', fontSize: '1.5rem',
                       }} aria-hidden="true">⛺</div>
@@ -831,7 +831,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   return (
                     <div key={c.id} className={styles.listItem}>
                       <div style={{
-                        width: 44, height: 44, borderRadius: 8, flexShrink: 0,
+                        width: 44, height: 44, borderRadius: 4, flexShrink: 0,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         background: 'rgba(8,145,178,.12)', color: '#0891b2', fontSize: '1.3rem',
                       }} aria-hidden="true"><Fish size={22} weight="bold" /></div>
@@ -1054,7 +1054,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 target="_blank" rel="noopener noreferrer sponsored"
                 style={{
                   display: 'flex', alignItems: 'center', gap: '.5rem',
-                  padding: '.45rem .6rem', borderRadius: 8,
+                  padding: '.45rem .6rem', borderRadius: 4,
                   border: '1px solid var(--line,#e8dcc8)', background: 'rgba(255,255,255,.5)',
                   fontSize: '.75rem', fontWeight: 500, color: 'var(--ink)', textDecoration: 'none',
                 }}

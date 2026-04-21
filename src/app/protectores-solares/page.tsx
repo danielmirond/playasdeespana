@@ -147,7 +147,7 @@ export default function ProtectoresSolaresPage() {
             ].map(r => (
               <div key={r.uv} style={{
                 borderLeft: `4px solid ${r.color}`, background: `${r.color}08`,
-                borderRadius: '0 10px 10px 0', padding: '.65rem .8rem',
+                borderRadius: '0 4px 4px 0', padding: '.65rem .8rem',
               }}>
                 <div style={{ fontWeight: 800, fontSize: '.88rem', color: r.color }}>UV {r.uv}</div>
                 <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.1rem' }}>{r.nivel}</div>
@@ -204,7 +204,7 @@ export default function ProtectoresSolaresPage() {
                     style={{
                       display: 'inline-flex', alignItems: 'center', gap: '.4rem',
                       marginTop: '.6rem', padding: '.4rem .85rem',
-                      background: '#ff9900', color: '#111', borderRadius: 8,
+                      background: '#ff9900', color: '#111', borderRadius: 4,
                       fontSize: '.78rem', fontWeight: 700, textDecoration: 'none',
                     }}
                   >
@@ -254,7 +254,7 @@ export default function ProtectoresSolaresPage() {
               target="_blank" rel="noopener noreferrer sponsored"
               style={{
                 display: 'inline-flex', marginTop: '.6rem', padding: '.4rem .85rem',
-                background: '#059669', color: '#fff', borderRadius: 8,
+                background: '#059669', color: '#fff', borderRadius: 4,
                 fontSize: '.78rem', fontWeight: 700, textDecoration: 'none',
               }}
             >
