@@ -104,7 +104,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
         {/* Right — score card */}
         <div className={styles.scoreCard}>
           <div className={styles.scoreHead}>
-            <div className={styles.iluWrap}><IluEstado estado={meteo.estado} size="sm" /></div>
+            <div className={styles.iluWrap}><IluEstado estado={meteo.estado} size="sm" animated /></div>
             {playaScore ? (
               <>
                 <span className={styles.scoreNum}>{playaScore.score}</span>
