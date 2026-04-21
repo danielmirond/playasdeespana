@@ -25,10 +25,10 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Playas de España — ¿A qué playa voy hoy?',
-  description: 'Motor de decisión en tiempo real: puntuamos cada playa de 0 a 100 según el viento, oleaje, temperatura y servicios. Elige la mejor playa para hoy.',
+  description: 'Estado del mar en tiempo real en más de 5.000 playas de España. Temperatura del agua, oleaje, viento y servicios. Datos actualizados cada hora.',
   openGraph: {
     title: 'Playas de España — ¿A qué playa voy hoy?',
-    description: 'Puntuamos cada playa de 0 a 100 en tiempo real.',
+    description: 'Consulta el estado del mar en más de 5.000 playas españolas.',
     url: 'https://playas-espana.com',
     images: [{ url: '/api/og?playa=Playas+de+España', width: 1200, height: 630 }],
   },
@@ -274,9 +274,9 @@ export default async function HomePage() {
                 fontSize: '.88rem', lineHeight: 1.6,
                 color: 'var(--muted)', margin: 0,
               }}>
-                Motor de decisión en tiempo real. Puntuamos cada playa de 0 a 100 según
-                el estado del mar, el viento, los servicios y el acceso — para que elijas
-                la mejor hoy, no la más fotografiada.
+                Cada playa tiene una nota de 0 a 100 basada en el oleaje, el viento, la
+                temperatura del agua y los servicios disponibles. Se actualiza cada hora
+                con datos oficiales.
               </p>
               <div style={{
                 marginTop: '1rem',
@@ -474,7 +474,7 @@ export default async function HomePage() {
               fontSize: '.7rem', color: 'var(--muted)',
               letterSpacing: '.04em',
             }}>
-              © {new Date().getFullYear()} playas-espana.com · Hecho con mimo para el Mediterráneo y el Atlántico
+              © {new Date().getFullYear()} playas-espana.com
             </div>
             <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
               <Link href="/aviso-legal">Aviso legal</Link>

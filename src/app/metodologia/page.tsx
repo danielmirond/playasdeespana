@@ -11,12 +11,12 @@ export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Metodología y fuentes — Cómo puntuamos cada playa',
-  description: 'Fuentes oficiales, metodología del scoring 0-100, política editorial y frecuencia de actualización. Datos transparentes de Open-Meteo, MITECO, EEA, IGN, ADEAC y OpenStreetMap.',
+  title: 'Metodología y fuentes — De dónde salen los datos',
+  description: 'De dónde vienen los datos de cada playa, cómo se calcula la nota 0-100 y con qué frecuencia se actualizan. Fuentes: Open-Meteo, MITECO, EEA, IGN, ADEAC, OpenStreetMap.',
   alternates: { canonical: '/metodologia' },
   openGraph: {
     title: 'Metodología y fuentes de playas-espana.com',
-    description: 'Cómo calculamos el score 0-100 de cada playa. Fuentes oficiales con referencias y frecuencia de actualización.',
+    description: 'De dónde salen los datos de cada playa y cómo se calcula la nota.',
     url: `${BASE}/metodologia`,
     type: 'article',
   },
@@ -111,7 +111,7 @@ export default function MetodologiaPage() {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: 'Metodología y fuentes — playas-espana.com',
-    description: 'Metodología del scoring 0-100, fuentes oficiales y política editorial.',
+    description: 'Cómo se calcula la nota de cada playa, fuentes y política editorial.',
     url: `${BASE}/metodologia`,
     publisher: {
       '@type': 'Organization',
@@ -120,7 +120,7 @@ export default function MetodologiaPage() {
     },
     mainEntity: {
       '@type': 'Article',
-      headline: 'Cómo puntuamos cada playa — metodología y fuentes',
+      headline: 'De dónde salen los datos y cómo se calcula la nota',
       datePublished: '2024-06-01',
       dateModified: new Date().toISOString().slice(0, 10),
       author: {
@@ -162,16 +162,16 @@ export default function MetodologiaPage() {
           fontWeight: 700, color: 'var(--ink)', lineHeight: 1.05,
           letterSpacing: '-.02em', marginBottom: '.75rem',
         }}>
-          Cómo <em style={{ fontWeight: 500, color: 'var(--accent)' }}>puntuamos cada playa</em>
+          De dónde salen <em style={{ fontWeight: 500, color: 'var(--accent)' }}>los datos</em>
         </h1>
 
         <p style={{
           fontSize: '1.08rem', color: 'var(--muted)',
           lineHeight: 1.65, marginBottom: '2.5rem', maxWidth: 680,
         }}>
-          Cada playa tiene un score 0–100 calculado con datos oficiales actualizados cada hora.
-          Aquí explicamos, sin tecnicismos, qué entra en la fórmula, de dónde vienen los datos
-          y qué controles hay para que los rankings sean independientes.
+          Cada playa tiene una nota de 0 a 100. Se calcula con datos públicos que se
+          actualizan cada hora. En esta página explicamos qué fuentes usamos, qué pesa
+          más en la nota y cómo nos aseguramos de que nadie pague por salir mejor.
         </p>
 
         {/* Última actualización + autoría */}
@@ -218,14 +218,14 @@ export default function MetodologiaPage() {
             fontFamily: 'var(--font-serif)', fontSize: '1.65rem', fontWeight: 700,
             color: 'var(--ink)', letterSpacing: '-.015em', marginBottom: '.85rem',
           }}>
-            Cómo se calcula el score 0–100
+            Cómo se calcula la nota
           </h2>
           <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.65, marginBottom: '1.5rem' }}>
-            Combinamos siete factores con pesos fijos, calibrados según la literatura de
-            seguridad en playas del <strong>Consejo Superior de Deportes</strong>, recomendaciones
-            de <strong>Cruz Roja Española</strong> y la guía operativa de la <strong>RFESS
-            </strong> (Real Federación Española de Salvamento y Socorrismo). El resultado es un
-            único número comparable entre playas y entre días.
+            La nota de cada playa sale de siete factores. Los pesos se basan en las
+            recomendaciones de <strong>Cruz Roja Española</strong> y la <strong>RFESS</strong>
+            {' '}(Real Federación Española de Salvamento y Socorrismo) sobre condiciones
+            seguras de baño. El resultado es un número de 0 a 100 que puedes comparar
+            entre playas y entre días.
           </p>
 
           <div style={{
@@ -261,10 +261,10 @@ export default function MetodologiaPage() {
             fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.6,
             borderLeft: '3px solid var(--accent)', paddingLeft: '1rem',
           }}>
-            <strong style={{ color: 'var(--ink)' }}>El score es informativo, no prescriptivo.</strong>{' '}
-            Una playa con score 92 puede tener medusas puntualmente; una con 58 puede ser
-            perfecta para surf. Siempre prima la señalización oficial (bandera roja)
-            y la indicación del servicio de socorrismo.
+            <strong style={{ color: 'var(--ink)' }}>La nota es orientativa.</strong>{' '}
+            Una playa con 92 puede tener medusas ese día; una con 58 puede ser
+            perfecta para surfear. Si ves bandera roja o el socorrista te dice que no,
+            la nota da igual.
           </p>
         </section>
 

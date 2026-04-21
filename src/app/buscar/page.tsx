@@ -196,8 +196,8 @@ function BuscarContent() {
           {!loading && (
             <span className={styles.total}>
               {resultados.length.toLocaleString('es')} resultado{resultados.length !== 1 ? 's' : ''}
-              {ordenCercanas && !scoringDone && ' · calculando scores…'}
-              {ordenCercanas && scoringDone && ' · ordenadas por puntuación'}
+              {ordenCercanas && !scoringDone && ' · cargando datos…'}
+              {ordenCercanas && scoringDone && ' · por cercanía'}
             </span>
           )}
         </div>

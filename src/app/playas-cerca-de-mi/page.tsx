@@ -150,7 +150,7 @@ export default async function PlayasCercaDeMiPage() {
             letterSpacing: '.16em', textTransform: 'uppercase',
             color: 'var(--muted)', marginBottom: '.75rem',
           }}>
-            Motor de decisión · {totalPlayas.toLocaleString('es')} playas
+            {totalPlayas.toLocaleString('es')} playas · datos cada hora
           </div>
           <h1 style={{
             fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 6vw, 3.4rem)',
@@ -205,7 +205,7 @@ export default async function PlayasCercaDeMiPage() {
               {
                 n: '02',
                 titulo: 'Cálculo de distancia',
-                texto: 'Con la fórmula haversine calculamos la distancia esfera-tierra a las 5.054 playas del inventario MITECO. El ordenamiento por cercanía es instantáneo.',
+                texto: 'Medimos la distancia en línea recta desde tu posición a las más de 5.000 playas del catálogo oficial (MITECO). Se ordenan de más cercana a más lejana al instante.',
               },
               {
                 n: '03',

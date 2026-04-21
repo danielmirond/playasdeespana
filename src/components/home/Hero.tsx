@@ -26,8 +26,8 @@ export default function Hero() {
         <em>para bañarse</em>
       </h1>
       <p className={styles.sub}>
-        Puntuamos cada playa de 0 a 100 según el estado actual del mar,
-        el viento, los servicios y el acceso. Elige la mejor para ti.
+        Consulta oleaje, viento, temperatura del agua y servicios
+        en más de 5.000 playas. Datos oficiales, actualizados cada hora.
       </p>
 
       {/* CTAs accionables — la geolocalización se pide automáticamente
