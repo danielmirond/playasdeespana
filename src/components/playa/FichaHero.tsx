@@ -1,5 +1,7 @@
 'use client'
 // src/components/playa/FichaHero.tsx
+// Brand book 08 — Ficha desktop: breadcrumb + h1 + lugar (izq),
+// score card con métricas (der). Ficha móvil: compacto.
 import Link from 'next/link'
 import FichaHeroActions from './FichaHeroActions'
 import type { Playa } from '@/types'
@@ -7,7 +9,7 @@ import type { EstadoConfig } from '@/lib/estados'
 import type { PlayaScore } from '@/lib/scoring'
 import IluEstado from './IluEstado'
 import styles from './FichaHero.module.css'
-import { Drop, Waves, Sun, Wind, Thermometer } from '@phosphor-icons/react'
+import { Drop, Waves, Sun, Wind, MapPin } from '@phosphor-icons/react'
 import { nombreConPlaya } from '@/lib/geo'
 
 interface Meteo {
@@ -15,217 +17,159 @@ interface Meteo {
   uv: number; tempAire: number; estado: string
 }
 interface Props {
-  playa:   Playa
-  meteo:   Meteo
-  estado:  EstadoConfig
-  frase:   string
-  locale?: 'es' | 'en'
-  /**
-   * Slug del municipio si la página existe (municipio con ≥4 playas).
-   * Cuando se pasa, el nombre del municipio en el hero se renderiza como
-   * enlace a `/municipio/{slug}` (o `/en/towns/{slug}`). Si es undefined
-   * se renderiza como texto plano.
-   */
+  playa:          Playa
+  meteo:          Meteo
+  estado:         EstadoConfig
+  frase:          string
+  locale?:        'es' | 'en'
   municipioSlug?: string
-  /**
-   * Slug de la provincia. Siempre presente para playas con provincia
-   * asignada. Enlaza a `/provincia/{slug}` (o `/en/provinces/{slug}`).
-   */
   provinciaSlug?: string
-  /** Score 0-100 calculado en tiempo real con meteo + servicios. */
-  playaScore?: PlayaScore
+  playaScore?:    PlayaScore
 }
 
 const t = {
   es: {
-    inicio:        'Inicio',
-    agua:          'Agua',
-    olas:          'Olas',
-    viento:        'Viento',
-    indice:        'Índice',
-    aire:          'Aire',
-    bandera:       'Bandera Azul',
-    socorrismo:    'Socorrismo',
-    accesible:     'Accesible',
-    verFicha:      'Ver ficha completa',
-    comunidadBase: (slug: string) => `/comunidad/${slug}`,
+    inicio: 'Inicio', agua: 'Agua', olas: 'Olas', viento: 'Viento',
+    uv: 'UV', bandera: 'Bandera Azul', socorrismo: 'Socorrismo',
+    accesible: 'Accesible', como: 'Cómo llegar', cercanas: '¿Mejores cerca?',
+    comunidadBase: (s: string) => `/comunidad/${s}`,
   },
   en: {
-    inicio:        'Home',
-    agua:          'Water',
-    olas:          'Waves',
-    viento:        'Wind',
-    indice:        'Index',
-    aire:          'Air',
-    bandera:       'Blue Flag',
-    socorrismo:    'Lifeguard',
-    accesible:     'Accessible',
-    verFicha:      'View full beach info',
-    comunidadBase: (slug: string) => `/en/communities/${slug}`,
+    inicio: 'Home', agua: 'Water', olas: 'Waves', viento: 'Wind',
+    uv: 'UV', bandera: 'Blue Flag', socorrismo: 'Lifeguard',
+    accesible: 'Accessible', como: 'Directions', cercanas: 'Better nearby?',
+    comunidadBase: (s: string) => `/en/communities/${s}`,
   },
 }
 
 export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', municipioSlug, provinciaSlug, playaScore }: Props) {
   const i18n = t[locale]
-  const comunidadSlug = playa.comunidad.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const homeHref = locale === 'en' ? '/en' : '/'
-  // Solo enlazamos el municipio si la página existe (pasa minPlayas). Cuando
-  // municipioSlug coincide con provinciaSlug (p. ej. Cádiz/Cádiz) las dos
-  // <Link> siguen siendo distintas porque van a /municipio/... y /provincia/...
-  const municipioHref = municipioSlug
-    ? (locale === 'en' ? `/en/towns/${municipioSlug}` : `/municipio/${municipioSlug}`)
-    : null
-  const provinciaHref = provinciaSlug
-    ? (locale === 'en' ? `/en/provinces/${provinciaSlug}` : `/provincia/${provinciaSlug}`)
-    : null
+  const comunidadSlug = slug(playa.comunidad)
+  const municipioHref = municipioSlug ? (locale === 'en' ? `/en/towns/${municipioSlug}` : `/municipio/${municipioSlug}`) : null
+  const provinciaHref = provinciaSlug ? (locale === 'en' ? `/en/provinces/${provinciaSlug}` : `/provincia/${provinciaSlug}`) : null
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${playa.lat},${playa.lng}`
 
   return (
-    <section className={styles.hero} style={{ '--ring': estado.ringColor, background: estado.ringBg } as React.CSSProperties}>
-      <div className={styles.rings} aria-hidden>
-        <svg viewBox="0 0 600 500" fill="none">
-          <ellipse cx="300" cy="280" rx="560" ry="440" stroke="currentColor" strokeWidth="1"/>
-          <ellipse cx="300" cy="280" rx="440" ry="340" stroke="currentColor" strokeWidth="1"/>
-          <ellipse cx="300" cy="280" rx="320" ry="240" stroke="currentColor" strokeWidth="1"/>
-          <ellipse cx="300" cy="280" rx="210" ry="155" stroke="currentColor" strokeWidth="1"/>
-          <ellipse cx="300" cy="280" rx="110" ry="80"  stroke="currentColor" strokeWidth="1"/>
-        </svg>
-      </div>
+    <section className={styles.hero} style={{ background: estado.ringBg } as React.CSSProperties}>
+      {/* Breadcrumb */}
       <nav className={styles.bc} aria-label={locale === 'en' ? 'Breadcrumb' : 'Ruta de navegación'}>
         <Link href={homeHref}>{i18n.inicio}</Link>
         <span aria-hidden="true">›</span>
         <Link href={i18n.comunidadBase(comunidadSlug)}>{playa.comunidad}</Link>
         <span aria-hidden="true">›</span>
-        {provinciaHref
-          ? <Link href={provinciaHref}>{playa.provincia}</Link>
-          : <span>{playa.provincia}</span>}
+        {provinciaHref ? <Link href={provinciaHref}>{playa.provincia}</Link> : <span>{playa.provincia}</span>}
         <span aria-hidden="true">›</span>
-        {municipioHref
-          ? <Link href={municipioHref}>{playa.municipio}</Link>
-          : <span>{playa.municipio}</span>}
+        {municipioHref ? <Link href={municipioHref}>{playa.municipio}</Link> : <span>{playa.municipio}</span>}
         <span aria-hidden="true">›</span>
         <span aria-current="page">{playa.nombre}</span>
       </nav>
-      <h1 className={styles.nombre}>{locale === 'en' ? `${playa.nombre} today — ${playa.municipio}` : `${nombreConPlaya(playa.nombre)} hoy — ${playa.municipio}`}</h1>
 
-      {/* Score editorial — Playfair huge + verdict italic (brand book 05) */}
-      {playaScore && (
-        <div style={{
-          position: 'relative', zIndex: 2,
-          display: 'flex', alignItems: 'center', gap: '.9rem',
-          justifyContent: 'center', flexWrap: 'wrap',
-          marginBottom: '.85rem',
-        }}>
-          <div style={{
-            display: 'flex', alignItems: 'baseline', gap: '.5rem',
-          }}>
-            <span style={{
-              fontFamily: 'var(--font-serif)', fontWeight: 700,
-              fontSize: '3.4rem', lineHeight: 1,
-              letterSpacing: '-.02em',
-              color: 'var(--ink)',
-              fontVariantNumeric: 'tabular-nums',
-            }}>
-              {playaScore.score}
-            </span>
-            <span style={{
-              fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-              fontSize: '.78rem', fontWeight: 500,
-              color: 'var(--muted)',
-            }}>/100</span>
-            <span style={{
-              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-              fontWeight: 400,
-              fontSize: '1.3rem', color: playaScore.color,
-              marginLeft: '.3rem',
-            }}>
-              {locale === 'en' ? playaScore.labelEn : playaScore.label}
-            </span>
+      {/* Two-column grid */}
+      <div className={styles.grid}>
+        {/* Left — editorial */}
+        <div className={styles.left}>
+          <div className={styles.eyebrow}>
+            {locale === 'en' ? 'Beach report · today' : 'Estado del mar · hoy'}
           </div>
+          <h1 className={styles.nombre}>
+            {locale === 'en' ? playa.nombre : nombreConPlaya(playa.nombre)}
+          </h1>
+          <div className={styles.lugar}>
+            {municipioHref
+              ? <Link href={municipioHref} className={styles.lugarLink}>{playa.municipio}</Link>
+              : <span>{playa.municipio}</span>}
+            <span className={styles.dot} aria-hidden="true">·</span>
+            {provinciaHref
+              ? <Link href={provinciaHref} className={styles.lugarLink}>{playa.provincia}</Link>
+              : <span>{playa.provincia}</span>}
+          </div>
+          <div className={styles.badges}>
+            {playa.bandera    && <span className={styles.badge}>{i18n.bandera}</span>}
+            {playa.socorrismo && <span className={styles.badge}>{i18n.socorrismo}</span>}
+            {playa.accesible  && <span className={styles.badge}>{i18n.accesible}</span>}
+          </div>
+          <div className={styles.actions}>
+            <FichaHeroActions slug={playa.slug} nombre={playa.nombre} />
+          </div>
+          <div className={styles.frase}>
+            <em>{locale === 'en' ? estado.fraseEn : frase}</em>
+          </div>
+        </div>
+
+        {/* Right — score card */}
+        <div className={styles.scoreCard}>
+          <div className={styles.scoreHead}>
+            <div className={styles.iluWrap}><IluEstado estado={meteo.estado} size="sm" /></div>
+            {playaScore ? (
+              <>
+                <span className={styles.scoreNum}>{playaScore.score}</span>
+                <span className={styles.scoreOf}>/100</span>
+                <span className={styles.scoreVerdict} style={{ color: playaScore.color }}>
+                  {locale === 'en' ? playaScore.labelEn : playaScore.label}
+                </span>
+              </>
+            ) : (
+              <span className={styles.scoreVerdict} style={{ color: estado.dot }}>
+                {locale === 'en' ? estado.labelEn : estado.label}
+              </span>
+            )}
+          </div>
+          <div className={styles.scoreFrase}>
+            <em>{locale === 'en' ? estado.fraseEn : frase}</em>
+          </div>
+
           {/* Factor pills */}
-          {playaScore.factors.length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.3rem', justifyContent: 'center' }}>
+          {playaScore && playaScore.factors.length > 0 && (
+            <div className={styles.pills}>
               {playaScore.factors.map(f => (
-                <span key={f.icon} style={{
-                  fontSize: '.72rem', fontWeight: 500, color: f.color,
-                  background: 'rgba(255,255,255,.7)',
-                  border: `1px solid ${f.color}50`,
-                  padding: '.25rem .55rem', borderRadius: 100,
-                  whiteSpace: 'nowrap',
-                }}>
+                <span key={f.icon} className={styles.pill} style={{ color: f.color, borderColor: `${f.color}50` }}>
                   {locale === 'en' ? f.labelEn : f.label}
                 </span>
               ))}
             </div>
           )}
-          {/* CTA arrow link — brand book button con arrow */}
+
+          {/* Metrics 2×2 — brand book 05 "Métricas card: 2×2 grid" */}
+          <div className={styles.metrics}>
+            <div className={styles.m}>
+              <Drop size={14} weight="fill" color="var(--accent)" aria-hidden="true" />
+              <span className={styles.mv}>{meteo.agua}°C</span>
+              <span className={styles.ml}>{i18n.agua}</span>
+            </div>
+            <div className={styles.m}>
+              <Waves size={14} weight="bold" color="var(--accent)" aria-hidden="true" />
+              <span className={styles.mv}>{meteo.olas}m</span>
+              <span className={styles.ml}>{i18n.olas}</span>
+            </div>
+            <div className={styles.m}>
+              <Wind size={14} weight="bold" color="var(--accent)" aria-hidden="true" />
+              <span className={styles.mv}>{meteo.viento}km/h</span>
+              <span className={styles.ml}>{i18n.viento}</span>
+            </div>
+            <div className={styles.m}>
+              <Sun size={14} weight="bold" color="var(--accent)" aria-hidden="true" />
+              <span className={styles.mv}>UV {meteo.uv}</span>
+              <span className={styles.ml}>{i18n.uv}</span>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.ctaLink}>
+            <MapPin size={14} weight="fill" aria-hidden="true" />
+            {i18n.como} →
+          </a>
+
+          {/* Nearby link */}
           <Link
             href={`/buscar?lat=${playa.lat}&lng=${playa.lng}&orden=cercanas`}
-            style={{
-              fontSize: '.8rem', fontWeight: 500,
-              color: 'var(--accent)',
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              borderBottom: '1px solid var(--accent)',
-              paddingBottom: 1,
-            }}
+            className={styles.ctaLink}
+            style={{ borderTop: 'none', color: 'var(--muted)', fontSize: '.72rem' }}
           >
-            {locale === 'en' ? 'Better beaches nearby →' : '¿Mejores playas cerca? →'}
+            {i18n.cercanas} →
           </Link>
         </div>
-      )}
-
-      <div className={styles.lugar}>
-        {municipioHref
-          ? <Link href={municipioHref} className={styles.lugarLink}>{playa.municipio}</Link>
-          : <span>{playa.municipio}</span>}
-        <span className={styles.dot} aria-hidden="true">·</span>
-        {provinciaHref
-          ? <Link href={provinciaHref} className={styles.lugarLink}>{playa.provincia}</Link>
-          : <span>{playa.provincia}</span>}
-      </div>
-      <div className={styles.badges}>
-        {playa.bandera    && <span className={styles.badge}>{i18n.bandera}</span>}
-        {playa.socorrismo && <span className={styles.badge}>{i18n.socorrismo}</span>}
-        {playa.accesible  && <span className={styles.badge}>{i18n.accesible}</span>}
-      </div>
-      <FichaHeroActions slug={playa.slug} nombre={playa.nombre} />
-      <div className={styles.ilu}>
-        <IluEstado estado={meteo.estado} size="lg" />
-      </div>
-      <div className={styles.metrics}>
-        <div className={styles.m}>
-          <Drop size={15} weight='fill' color='var(--accent,#6b400a)'/>
-          <span className={styles.mv}>{meteo.agua}°C</span>
-          <span className={styles.ml}>{i18n.agua}</span>
-        </div>
-        <div className={styles.m}>
-          <Waves size={15} weight='bold' color='var(--accent,#6b400a)'/>
-          <span className={styles.mv}>{meteo.olas}m</span>
-          <span className={styles.ml}>{i18n.olas}</span>
-        </div>
-        <div className={styles.m}>
-          <Wind size={15} weight='bold' color='var(--accent,#6b400a)'/>
-          <span className={styles.mv}>{meteo.viento}km/h</span>
-          <span className={styles.ml}>{i18n.viento}</span>
-        </div>
-        <div className={styles.m}>
-          <Sun size={15} weight='bold' color='var(--accent,#6b400a)'/>
-          <span className={styles.mv}>UV {meteo.uv}</span>
-          <span className={styles.ml}>{i18n.indice}</span>
-        </div>
-        <div className={styles.m}>
-          <Thermometer size={15} weight='bold' color='var(--accent,#6b400a)'/>
-          <span className={styles.mv}>{meteo.tempAire}°C</span>
-          <span className={styles.ml}>{i18n.aire}</span>
-        </div>
-      </div>
-      <div className={styles.estadoLabel} style={{ color: estado.dot }}>{locale === 'en' ? estado.labelEn : estado.label}</div>
-      <div className={styles.frase}><em>{locale === 'en' ? estado.fraseEn : frase}</em></div>
-      <div className={styles.scrollCue}>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-          <path d="M6 9l6 6 6-6"/>
-        </svg>
-        <span>{i18n.verFicha}</span>
       </div>
     </section>
   )
