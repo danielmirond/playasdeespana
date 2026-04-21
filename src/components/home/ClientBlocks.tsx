@@ -13,7 +13,7 @@ function Placeholder() {
       }} />
       <div style={{
         height: 80,
-        borderRadius: 14,
+        borderRadius: 6,
         background: 'var(--metric-bg, #f5ede0)',
         border: '1.5px solid var(--line, #e8dcc8)',
       }} />

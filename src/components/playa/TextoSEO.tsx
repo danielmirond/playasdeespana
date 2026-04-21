@@ -34,7 +34,7 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
   return (
     <details style={{
       background: 'var(--card-bg,#faf6ef)',
-      border: '1.5px solid var(--line,#e8dcc8)',
+      border: '1px solid var(--line,#e8dcc8)',
       borderRadius: '20px',
       overflow: 'hidden',
       marginBottom: '1rem',

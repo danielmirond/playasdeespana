@@ -214,7 +214,7 @@ export default function TopCercanas() {
           display: 'flex', alignItems: 'center', gap: '.65rem',
           padding: '1rem 1.25rem',
           background: 'rgba(239,68,68,.06)',
-          border: '1.5px solid rgba(239,68,68,.25)', borderRadius: 14,
+          border: '1px solid rgba(239,68,68,.25)', borderRadius: 6,
         }}>
           <MapPin size={20} weight="bold" color="#ef4444" aria-hidden="true" />
           <span style={{ fontSize: '.85rem', color: '#b91c1c', flex: 1 }}>{errorMsg}</span>

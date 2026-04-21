@@ -25,7 +25,7 @@ export default function EscuelasSection({ escuelas, locale = 'es' }: Props) {
   const titulo = locale === 'en' ? 'Water sports schools' : 'Escuelas de deportes acuáticos'
 
   return (
-    <div style={{ background: 'var(--card-bg,#faf6f0)', border: '1.5px solid var(--line,#e8dcc8)', borderRadius: '20px', overflow: 'hidden', marginBottom: '1rem' }} id="s-escuelas">
+    <div style={{ background: 'var(--card-bg,#faf6f0)', border: '1px solid var(--line,#e8dcc8)', borderRadius: '6px', overflow: 'hidden', marginBottom: '1rem' }} id="s-escuelas">
       <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line,#e8dcc8)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h2 style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)', margin: 0, display: 'flex', alignItems: 'center', gap: '.4rem' }}>
           <Waves size={16} weight="bold"/> {titulo}

@@ -74,8 +74,8 @@ export default function ParkingHoy({ playas, locale = 'es' }: Props) {
       }}>
         {groups.map(g => (
           <div key={g.key} style={{
-            background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-            borderRadius: 14, overflow: 'hidden',
+            background: 'var(--card-bg)', border: '1px solid var(--line)',
+            borderRadius: 6, overflow: 'hidden',
           }}>
             <div style={{
               display: 'flex', alignItems: 'center', gap: '.5rem',
@@ -123,7 +123,7 @@ export default function ParkingHoy({ playas, locale = 'es' }: Props) {
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
             marginTop: '1rem', padding: '.85rem 1.25rem',
             background: 'color-mix(in srgb, var(--accent) 8%, var(--card-bg))',
-            border: '1.5px solid var(--line)', borderRadius: 12,
+            border: '1px solid var(--line)', borderRadius: 4,
             fontSize: '.88rem', fontWeight: 700, color: 'var(--accent)',
             textDecoration: 'none', transition: 'all .15s',
           }}

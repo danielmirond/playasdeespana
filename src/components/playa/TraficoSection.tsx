@@ -205,8 +205,8 @@ export default function TraficoSection({ playa }: Props) {
 
   return (
     <div style={{
-      background: 'var(--card-bg,#faf6ef)', border: '1.5px solid var(--line,#e8dcc8)',
-      borderRadius: '20px', overflow: 'hidden',
+      background: 'var(--card-bg,#faf6ef)', border: '1px solid var(--line,#e8dcc8)',
+      borderRadius: '4px', overflow: 'hidden',
     }} id="s-trafico">
 
       {/* CABECERA */}
@@ -232,7 +232,7 @@ export default function TraficoSection({ playa }: Props) {
               onClick={() => setTabActivo(tab)}
               style={{
                 fontSize:'.72rem', fontWeight: 700, padding: '.22rem .65rem',
-                borderRadius: '100px', border: '1.5px solid',
+                borderRadius: '100px', border: '1px solid',
                 borderColor: tabActivo === tab ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
                 background: tabActivo === tab ? 'rgba(107,64,10,.1)' : 'transparent',
                 color: tabActivo === tab ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)',
@@ -256,7 +256,7 @@ export default function TraficoSection({ playa }: Props) {
               background: nivelAhora.bg, marginBottom: '1rem',
             }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '1.6rem', fontWeight: 900, color: nivelAhora.color, lineHeight: 1 }}>{ahoraData.pct}%</div>
+                <div style={{ fontSize: '1.6rem', fontWeight: 700, color: nivelAhora.color, lineHeight: 1 }}>{ahoraData.pct}%</div>
                 <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', marginTop: '.1rem' }}>ocupación</div>
               </div>
               <div>
@@ -303,7 +303,7 @@ export default function TraficoSection({ playa }: Props) {
                 background: trafico.color + '12', marginBottom: '1rem',
               }}>
                 <div style={{ textAlign: 'center', minWidth: '60px' }}>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: trafico.color, lineHeight: 1 }}>{trafico.velocidad}</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: trafico.color, lineHeight: 1 }}>{trafico.velocidad}</div>
                   <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)' }}>km/h actual</div>
                 </div>
                 <div>
@@ -417,7 +417,7 @@ export default function TraficoSection({ playa }: Props) {
 function btnStyle(bg: string, color: string, outline = false): React.CSSProperties {
   return {
     display: 'block', padding: '.55rem .85rem',
-    borderRadius: '10px', border: outline ? `1.5px solid rgba(107,64,10,.25)` : 'none',
+    borderRadius: '4px', border: outline ? `1px solid rgba(107,64,10,.25)` : 'none',
     background: bg, color, fontSize: '.75rem', fontWeight: 600,
     textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
   }

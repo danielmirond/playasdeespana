@@ -89,8 +89,8 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
 
   return (
     <div style={{
-      background: 'var(--card-bg,#faf6ef)', border: '1.5px solid var(--line,#e8dcc8)',
-      borderRadius: '20px', overflow: 'hidden',
+      background: 'var(--card-bg,#faf6ef)', border: '1px solid var(--line,#e8dcc8)',
+      borderRadius: '6px', overflow: 'hidden',
     }} id="s-actividades">
 
       {/* CABECERA */}
@@ -117,7 +117,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
           <div style={{ fontSize: '2rem', display:'flex', alignItems:'center' }}><Waves size={28} weight="bold" color={estadoInfo.color}/></div>
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '.5rem', marginBottom: '.15rem' }}>
-              <span style={{ fontSize: '1.4rem', fontWeight: 900, color: estadoInfo.color, lineHeight: 1 }}>{olas}m</span>
+              <span style={{ fontSize: '1.4rem', fontWeight: 700, color: estadoInfo.color, lineHeight: 1 }}>{olas}m</span>
               <span style={{ fontSize: '.75rem', fontWeight: 700, color: estadoInfo.color }}>{estadoInfo.label}</span>
             </div>
             <div style={{ fontSize: '.72rem', color: 'var(--muted,#5a3d12)' }}>{estadoInfo.desc}</div>
@@ -178,7 +178,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             <div key={act.label} style={{
               padding: '.7rem .85rem', borderRadius: '12px',
               background: act.score >= 3 ? `${act.color}10` : 'rgba(0,0,0,.02)',
-              border: `1.5px solid ${act.score >= 3 ? act.color + '30' : 'var(--line,#e8dcc8)'}`,
+              border: `1px solid ${act.score >= 3 ? act.color + '30' : 'var(--line,#e8dcc8)'}`,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '.35rem' }}>
                 <span style={{ fontSize: '1.1rem' }}>{act.icon}</span>
@@ -232,7 +232,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                   <div key={i} style={{
                     padding: '.6rem .4rem', borderRadius: '10px', textAlign: 'center',
                     background: i === 0 ? est.bg : 'rgba(0,0,0,.02)',
-                    border: `1.5px solid ${i === 0 ? est.color + '40' : 'var(--line,#e8dcc8)'}`,
+                    border: `1px solid ${i === 0 ? est.color + '40' : 'var(--line,#e8dcc8)'}`,
                   }}>
                     <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', fontWeight: 600, marginBottom: '.2rem' }}>
                       {i === 0 ? 'Hoy' : d?.fecha ?? (() => {
