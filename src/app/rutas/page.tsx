@@ -62,7 +62,7 @@ export default async function RutasPage() {
           style={{
             display: 'inline-flex', alignItems: 'center', gap: '.4rem',
             background: 'var(--accent)', color: '#fff',
-            padding: '.75rem 1.25rem', borderRadius: 12,
+            padding: '.75rem 1.25rem', borderRadius: 6,
             fontSize: '.92rem', fontWeight: 800, textDecoration: 'none',
             minHeight: 44, marginBottom: '2.5rem',
             boxShadow: '0 4px 14px rgba(107,64,10,.2)',
@@ -77,7 +77,7 @@ export default async function RutasPage() {
           return (
             <section key={zona.key} style={{ marginBottom: '3rem' }}>
               <h2 style={{
-                fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 900,
+                fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 700,
                 color: 'var(--ink)', margin: '0 0 .35rem', letterSpacing: '-.015em',
               }}>
                 {zona.label}
@@ -96,13 +96,13 @@ export default async function RutasPage() {
                     href={`/rutas/${r.slug}`}
                     style={{
                       display: 'flex', flexDirection: 'column',
-                      background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                      borderRadius: 16, padding: '1.2rem 1.3rem',
+                      background: 'var(--card-bg)', border: '1px solid var(--line)',
+                      borderRadius: 6, padding: '1.2rem 1.3rem',
                       textDecoration: 'none', transition: 'all .15s',
                       borderLeft: `4px solid ${r.costa.color}`,
                     }}
                   >
-                    <div style={{ fontWeight: 900, fontSize: '1.05rem', color: 'var(--ink)', marginBottom: '.2rem', fontFamily: 'var(--font-serif)' }}>
+                    <div style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--ink)', marginBottom: '.2rem', fontFamily: 'var(--font-serif)' }}>
                       {r.nombre}
                     </div>
                     <div style={{ fontSize: '.78rem', color: 'var(--muted)', marginBottom: '.55rem', lineHeight: 1.5 }}>

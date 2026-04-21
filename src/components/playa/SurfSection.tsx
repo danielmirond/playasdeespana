@@ -110,7 +110,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
         {/* ESTADO SURF AHORA */}
         <div style={{
           display: 'flex', gap: '1rem', alignItems: 'center',
-          padding: '.75rem 1rem', borderRadius: '14px',
+          padding: '.75rem 1rem', borderRadius: '6px',
           background: estadoInfo.bg, marginBottom: '1.25rem',
           border: `1px solid ${estadoInfo.color}22`,
         }}>
@@ -176,7 +176,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             },
           ].map(act => (
             <div key={act.label} style={{
-              padding: '.7rem .85rem', borderRadius: '12px',
+              padding: '.7rem .85rem', borderRadius: '4px',
               background: act.score >= 3 ? `${act.color}10` : 'rgba(0,0,0,.02)',
               border: `1px solid ${act.score >= 3 ? act.color + '30' : 'var(--line,#e8dcc8)'}`,
             }}>
@@ -196,7 +196,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
         {/* VISIBILIDAD BUCEO */}
         {turbidez && (
           <div style={{
-            padding: '.75rem 1rem', borderRadius: '12px', marginBottom: '1.25rem',
+            padding: '.75rem 1rem', borderRadius: '4px', marginBottom: '1.25rem',
             background: turbidez.color + '10', border: `1px solid ${turbidez.color}30`,
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem' }}>

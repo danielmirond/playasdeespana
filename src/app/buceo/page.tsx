@@ -81,10 +81,10 @@ export default async function BuceoPage() {
             { val: '5-30m', label: 'Visibilidad media' },
           ].map(s => (
             <div key={s.label} style={{
-              background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-              borderRadius: 12, padding: '.75rem', textAlign: 'center',
+              background: 'var(--card-bg)', border: '1px solid var(--line)',
+              borderRadius: 6, padding: '.75rem', textAlign: 'center',
             }}>
-              <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 800, color: 'var(--accent,#6b400a)' }}>{s.val}</div>
+              <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--accent,#6b400a)' }}>{s.val}</div>
               <div style={{ fontSize: '.65rem', color: 'var(--muted)', marginTop: '.15rem', textTransform: 'uppercase', letterSpacing: '.06em' }}>{s.label}</div>
             </div>
           ))}
@@ -101,8 +101,8 @@ export default async function BuceoPage() {
               href={`/comunidad/${s.comSlug}`}
               style={{
                 display: 'flex', alignItems: 'center', gap: '.85rem',
-                padding: '.85rem 1.1rem', borderRadius: 14,
-                background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                padding: '.85rem 1.1rem', borderRadius: 6,
+                background: 'var(--card-bg)', border: '1px solid var(--line)',
                 textDecoration: 'none', color: 'inherit',
               }}
             >
@@ -130,8 +130,8 @@ export default async function BuceoPage() {
 
         {/* Certificaciones */}
         <section aria-labelledby="h2-cert" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2rem',
         }}>
           <h2 id="h2-cert" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.65rem' }}>
             Certificaciones: ¿cuál elegir?
@@ -144,10 +144,10 @@ export default async function BuceoPage() {
               { sigla: 'FEDAS', nombre: 'Federación Española de Actividades Subacuáticas', desc: 'Título oficial español equivalente. Válido en toda España.' },
             ].map(c => (
               <div key={c.sigla} style={{
-                border: '1.5px solid var(--line)', borderRadius: 10,
+                border: '1px solid var(--line)', borderRadius: 4,
                 padding: '.75rem', background: 'rgba(255,255,255,.4)',
               }}>
-                <div style={{ fontWeight: 900, fontSize: '1rem', color: '#0891b2' }}>{c.sigla}</div>
+                <div style={{ fontWeight: 700, fontSize: '1rem', color: '#0891b2' }}>{c.sigla}</div>
                 <div style={{ fontSize: '.65rem', color: 'var(--muted)', marginBottom: '.25rem' }}>{c.nombre}</div>
                 <div style={{ fontSize: '.78rem', color: 'var(--muted)', lineHeight: 1.45 }}>{c.desc}</div>
               </div>
@@ -157,8 +157,8 @@ export default async function BuceoPage() {
 
         {/* Equipo + afiliación */}
         <section aria-labelledby="h2-equipo" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2rem',
         }}>
           <h2 id="h2-equipo" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.65rem' }}>
             Equipo básico de buceo
@@ -201,7 +201,7 @@ export default async function BuceoPage() {
         {CIVITATIS_AFF && (
           <div style={{
             background: 'linear-gradient(135deg, #0891b2, #06b6d4)',
-            borderRadius: 16, padding: '1.1rem 1.25rem', marginBottom: '2rem',
+            borderRadius: 6, padding: '1.1rem 1.25rem', marginBottom: '2rem',
             display: 'flex', alignItems: 'center', gap: '.85rem', flexWrap: 'wrap',
           }}>
             <div style={{ flex: 1, minWidth: 200, color: '#fff' }}>
@@ -217,7 +217,7 @@ export default async function BuceoPage() {
               target="_blank" rel="noopener noreferrer sponsored"
               style={{
                 padding: '.55rem 1.1rem', background: '#fff', color: '#0891b2',
-                borderRadius: 10, fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
+                borderRadius: 4, fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
               }}
             >
               Reservar bautismo →
@@ -268,7 +268,7 @@ export default async function BuceoPage() {
                 a: 'Las 10 reservas marinas españolas permiten buceo con permiso previo. Las más populares: Islas Medas (Cataluña), Cabo de Palos-Islas Hormigas (Murcia), Isla de El Hierro (Canarias), Columbretes (Castellón) e Islas Cíes (Galicia).',
               },
             ].map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1.5px solid var(--line)', borderRadius: 12, padding: '.85rem 1rem' }}>
+              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>{f.q}</summary>
                 <p style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: '.55rem' }}>{f.a}</p>
               </details>

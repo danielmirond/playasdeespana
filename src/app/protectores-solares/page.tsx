@@ -131,8 +131,8 @@ export default function ProtectoresSolaresPage() {
 
         {/* Guía rápida SPF */}
         <section aria-labelledby="h2-spf" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2rem',
         }}>
           <h2 id="h2-spf" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.65rem' }}>
             ¿Qué SPF necesito según el índice UV?
@@ -168,13 +168,13 @@ export default function ProtectoresSolaresPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem', marginBottom: '2.5rem' }}>
           {PRODUCTOS.map(p => (
             <div key={p.nombre} style={{
-              background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-              borderRadius: 16, padding: '1.1rem 1.25rem',
+              background: 'var(--card-bg)', border: '1px solid var(--line)',
+              borderRadius: 6, padding: '1.1rem 1.25rem',
               display: 'flex', gap: '1rem', alignItems: 'flex-start',
             }}>
               {/* Icon */}
               <div style={{
-                width: 48, height: 48, borderRadius: 12, flexShrink: 0,
+                width: 48, height: 48, borderRadius: 6, flexShrink: 0,
                 background: 'rgba(249,115,22,.1)', display: 'flex', alignItems: 'center',
                 justifyContent: 'center', fontSize: '1.5rem',
               }} aria-hidden="true">☀️</div>
@@ -218,8 +218,8 @@ export default function ProtectoresSolaresPage() {
 
         {/* Consejos */}
         <section aria-labelledby="h2-tips" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2.5rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2.5rem',
         }}>
           <h2 id="h2-tips" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.65rem' }}>
             Cómo usar el protector solar en la playa
@@ -235,8 +235,8 @@ export default function ProtectoresSolaresPage() {
 
         {/* Reef-safe */}
         <section aria-labelledby="h2-reef" style={{
-          background: 'rgba(5,150,105,.06)', border: '1.5px solid rgba(5,150,105,.3)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2.5rem',
+          background: 'rgba(5,150,105,.06)', border: '1px solid rgba(5,150,105,.3)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2.5rem',
         }}>
           <h2 id="h2-reef" style={{ fontSize: '1.05rem', fontWeight: 800, color: '#065f46', marginBottom: '.65rem' }}>
             Protector solar reef-safe: ¿por qué importa?
@@ -314,7 +314,7 @@ export default function ProtectoresSolaresPage() {
                 a: 'La etiqueta "water resistant" significa que mantiene su SPF tras 40 minutos en agua. "Very water resistant" son 80 minutos. Pero siempre debes reaplicar al salir del agua: el roce con la toalla y la arena elimina gran parte del producto.',
               },
             ].map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1.5px solid var(--line)', borderRadius: 12, padding: '.85rem 1rem' }}>
+              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>{f.q}</summary>
                 <p style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: '.55rem' }}>{f.a}</p>
               </details>

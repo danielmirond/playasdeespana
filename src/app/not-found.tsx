@@ -13,7 +13,7 @@ export default function NotFound() {
       }}>
         <div style={{ fontSize: '4rem', marginBottom: '1rem' }} aria-hidden="true">🌊</div>
         <h1 style={{
-          fontFamily: 'var(--font-serif)', fontSize: '2.2rem', fontWeight: 900,
+          fontFamily: 'var(--font-serif)', fontSize: '2.2rem', fontWeight: 700,
           color: 'var(--ink)', marginBottom: '.5rem',
         }}>
           Playa no encontrada
@@ -25,7 +25,7 @@ export default function NotFound() {
         <div style={{ display: 'flex', gap: '.55rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <Link href="/" style={{
             background: 'var(--accent)', color: '#fff',
-            padding: '.75rem 1.25rem', borderRadius: 12,
+            padding: '.75rem 1.25rem', borderRadius: 6,
             fontSize: '.92rem', fontWeight: 800, textDecoration: 'none',
             minHeight: 44, display: 'inline-flex', alignItems: 'center',
           }}>
@@ -33,8 +33,8 @@ export default function NotFound() {
           </Link>
           <Link href="/buscar" style={{
             background: 'var(--card-bg)', color: 'var(--accent)',
-            border: '1.5px solid var(--line)',
-            padding: '.65rem 1.15rem', borderRadius: 10,
+            border: '1px solid var(--line)',
+            padding: '.65rem 1.15rem', borderRadius: 4,
             fontSize: '.85rem', fontWeight: 700, textDecoration: 'none',
             minHeight: 44, display: 'inline-flex', alignItems: 'center',
           }}>
@@ -42,8 +42,8 @@ export default function NotFound() {
           </Link>
           <Link href="/rutas" style={{
             background: 'var(--card-bg)', color: 'var(--accent)',
-            border: '1.5px solid var(--line)',
-            padding: '.65rem 1.15rem', borderRadius: 10,
+            border: '1px solid var(--line)',
+            padding: '.65rem 1.15rem', borderRadius: 4,
             fontSize: '.85rem', fontWeight: 700, textDecoration: 'none',
             minHeight: 44, display: 'inline-flex', alignItems: 'center',
           }}>

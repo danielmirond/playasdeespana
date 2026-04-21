@@ -100,8 +100,8 @@ export default async function CampingsPage() {
             { icon: '🐕', label: 'Pet-friendly', desc: 'Campings que admiten mascotas' },
           ].map(h => (
             <div key={h.label} style={{
-              background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-              borderRadius: 14, padding: '1rem', textAlign: 'center',
+              background: 'var(--card-bg)', border: '1px solid var(--line)',
+              borderRadius: 6, padding: '1rem', textAlign: 'center',
             }}>
               <div style={{ fontSize: '1.6rem', marginBottom: '.35rem' }} aria-hidden="true">{h.icon}</div>
               <div style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>{h.label}</div>
@@ -122,8 +122,8 @@ export default async function CampingsPage() {
             const playasC = playasPorComunidad.get(c.nombre) ?? []
             return (
               <div key={c.slug} style={{
-                background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                borderRadius: 16, overflow: 'hidden',
+                background: 'var(--card-bg)', border: '1px solid var(--line)',
+                borderRadius: 6, overflow: 'hidden',
               }}>
                 <Link
                   href={`/comunidad/${c.slug}`}
@@ -171,8 +171,8 @@ export default async function CampingsPage() {
 
         {/* Guía práctica */}
         <section aria-labelledby="h2-guia" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2.5rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2.5rem',
         }}>
           <h2 id="h2-guia" style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.65rem' }}>
             Consejos para acampar cerca de la playa
@@ -240,7 +240,7 @@ export default async function CampingsPage() {
                 a: 'Busca áreas de autocaravanas reguladas con servicio de vaciado y enganche eléctrico. En cada ficha de playa indicamos los parkings y áreas cercanas. Pernoctar en parking público está prohibido en muchos municipios costeros.',
               },
             ].map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1.5px solid var(--line)', borderRadius: 12, padding: '.85rem 1rem' }}>
+              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>
                   {f.q}
                 </summary>

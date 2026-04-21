@@ -96,8 +96,8 @@ export default async function PlayasAutocaravanaPage() {
           aria-label="Aviso legal"
           style={{
             background: 'rgba(234,179,8,.1)',
-            border: '1.5px solid rgba(234,179,8,.4)',
-            borderRadius: 14, padding: '1rem 1.15rem',
+            border: '1px solid rgba(234,179,8,.4)',
+            borderRadius: 6, padding: '1rem 1.15rem',
             marginBottom: '2rem',
           }}
         >
@@ -120,8 +120,8 @@ export default async function PlayasAutocaravanaPage() {
             { icon: '🌙', label: 'Pernocta libre',            desc: 'En vehículo, sin desplegar nada' },
           ].map(h => (
             <div key={h.label} style={{
-              background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-              borderRadius: 14, padding: '1rem',
+              background: 'var(--card-bg)', border: '1px solid var(--line)',
+              borderRadius: 6, padding: '1rem',
             }}>
               <div style={{ fontSize: '1.6rem', marginBottom: '.3rem' }} aria-hidden="true">{h.icon}</div>
               <div style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)' }}>{h.label}</div>
@@ -144,8 +144,8 @@ export default async function PlayasAutocaravanaPage() {
                 href={`/comunidad/${slug}`}
                 style={{
                   display: 'flex', alignItems: 'center', gap: '1rem',
-                  padding: '.9rem 1.1rem', borderRadius: 14,
-                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                  padding: '.9rem 1.1rem', borderRadius: 6,
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
                   textDecoration: 'none', color: 'inherit',
                 }}
               >
@@ -185,8 +185,8 @@ export default async function PlayasAutocaravanaPage() {
                 href={`/playas/${p.slug}`}
                 prefetch={false}
                 style={{
-                  display: 'block', padding: '.7rem .9rem', borderRadius: 12,
-                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                  display: 'block', padding: '.7rem .9rem', borderRadius: 6,
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
                   textDecoration: 'none', color: 'inherit',
                 }}
               >
@@ -205,8 +205,8 @@ export default async function PlayasAutocaravanaPage() {
 
         {/* Apps y recursos */}
         <section aria-labelledby="h2-apps" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2.5rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2.5rem',
         }}>
           <h2 id="h2-apps" style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.65rem' }}>
             Apps imprescindibles para autocaravanistas
@@ -278,7 +278,7 @@ export default async function PlayasAutocaravanaPage() {
                 a: 'En la mayoría de playas hay parkings habilitados a 100-500m de la arena. No se permite el acceso a la arena o a caminos no asfaltados. En cada ficha de playa indicamos el parking más cercano y su distancia real.',
               },
             ].map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1.5px solid var(--line)', borderRadius: 12, padding: '.85rem 1rem' }}>
+              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>
                   {f.q}
                 </summary>

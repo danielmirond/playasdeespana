@@ -122,8 +122,8 @@ export default async function HomePage() {
               <Link key={item.href} href={item.href} style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 padding: '.85rem 1.1rem',
-                background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                borderRadius: 12, textDecoration: 'none',
+                background: 'var(--card-bg)', border: '1px solid var(--line)',
+                borderRadius: 6, textDecoration: 'none',
                 transition: 'all .15s',
               }}>
                 <span style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>{item.label}</span>

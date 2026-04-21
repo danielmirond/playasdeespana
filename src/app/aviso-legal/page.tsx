@@ -21,7 +21,7 @@ export default function AvisoLegalPage() {
           <span aria-current="page">Aviso legal</span>
         </nav>
 
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: 900, color: 'var(--ink)', marginBottom: '1rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
           Aviso legal
         </h1>
         <p style={{ fontSize: '.88rem', color: 'var(--muted)', marginBottom: '2rem' }}>

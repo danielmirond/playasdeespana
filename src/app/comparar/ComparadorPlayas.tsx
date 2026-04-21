@@ -86,8 +86,8 @@ export default function ComparadorPlayas() {
       }}>
         {slots.map((s, i) => (
           <div key={s.playa.slug} style={{
-            background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-            borderRadius: 16, padding: '1.1rem', position: 'relative',
+            background: 'var(--card-bg)', border: '1px solid var(--line)',
+            borderRadius: 6, padding: '1.1rem', position: 'relative',
             display: 'flex', flexDirection: 'column', gap: '.5rem',
           }}>
             <button onClick={() => removeSlot(i)} style={{
@@ -103,8 +103,8 @@ export default function ComparadorPlayas() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '.45rem' }}>
                 <span style={{
                   background: s.ps.color, color: '#fff',
-                  fontFamily: 'var(--font-serif)', fontWeight: 900,
-                  fontSize: '1.5rem', padding: '.4rem .6rem', borderRadius: 10,
+                  fontFamily: 'var(--font-serif)', fontWeight: 700,
+                  fontSize: '1.5rem', padding: '.4rem .6rem', borderRadius: 4,
                 }}>
                   {s.ps.score}
                 </span>
@@ -114,7 +114,7 @@ export default function ComparadorPlayas() {
             {s.loading && <div style={{ fontSize: '.82rem', color: 'var(--muted)' }}>Cargando score…</div>}
 
             <Link href={`/playas/${s.playa.slug}`} style={{
-              fontWeight: 900, fontSize: '1.05rem', color: 'var(--ink)',
+              fontWeight: 700, fontSize: '1.05rem', color: 'var(--ink)',
               fontFamily: 'var(--font-serif)', textDecoration: 'none',
             }}>{s.playa.nombre}</Link>
             <div style={{ fontSize: '.78rem', color: 'var(--muted)' }}>{s.playa.municipio} · {s.playa.provincia}</div>
@@ -159,7 +159,7 @@ export default function ComparadorPlayas() {
             onClick={() => setShowSearch(slots.length)}
             style={{
               background: 'var(--card-bg)', border: '2px dashed var(--line)',
-              borderRadius: 16, padding: '2rem 1rem',
+              borderRadius: 6, padding: '2rem 1rem',
               cursor: 'pointer', display: 'flex', flexDirection: 'column',
               alignItems: 'center', justifyContent: 'center', gap: '.35rem',
               minHeight: 200, minWidth: 180,
@@ -180,8 +180,8 @@ export default function ComparadorPlayas() {
       {/* Search overlay */}
       {showSearch !== null && (
         <div style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 14, padding: '1rem', marginBottom: '1rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1rem', marginBottom: '1rem',
         }}>
           <input
             type="search"
@@ -190,8 +190,8 @@ export default function ComparadorPlayas() {
             placeholder="Buscar playa por nombre…"
             autoFocus
             style={{
-              width: '100%', border: '1.5px solid var(--line)',
-              borderRadius: 10, padding: '.65rem .85rem',
+              width: '100%', border: '1px solid var(--line)',
+              borderRadius: 4, padding: '.65rem .85rem',
               fontSize: '.92rem', fontFamily: 'inherit', color: 'var(--ink)',
               background: 'var(--metric-bg)', minHeight: 44,
             }}
@@ -225,8 +225,8 @@ export default function ComparadorPlayas() {
       {slots.length >= 2 && slots.every(s => s.ps) && (
         <div style={{
           background: 'color-mix(in srgb, var(--accent) 6%, var(--card-bg))',
-          border: '1.5px solid var(--line)',
-          borderRadius: 14, padding: '1rem 1.25rem',
+          border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1rem 1.25rem',
           textAlign: 'center',
         }}>
           {(() => {
@@ -234,7 +234,7 @@ export default function ComparadorPlayas() {
             const winner = sorted[0]
             return (
               <div>
-                <div style={{ fontWeight: 900, fontSize: '1.1rem', color: 'var(--accent)', fontFamily: 'var(--font-serif)' }}>
+                <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--accent)', fontFamily: 'var(--font-serif)' }}>
                   🏆 Hoy gana: {winner.playa.nombre}
                 </div>
                 <div style={{ fontSize: '.85rem', color: 'var(--muted)', marginTop: '.25rem' }}>
@@ -243,7 +243,7 @@ export default function ComparadorPlayas() {
                 <Link href={`/playas/${winner.playa.slug}`} style={{
                   display: 'inline-block', marginTop: '.65rem',
                   background: 'var(--accent)', color: '#fff',
-                  padding: '.55rem 1rem', borderRadius: 10,
+                  padding: '.55rem 1rem', borderRadius: 4,
                   fontSize: '.85rem', fontWeight: 800, textDecoration: 'none',
                 }}>
                   Ver ficha completa →

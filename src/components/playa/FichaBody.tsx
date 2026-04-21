@@ -525,7 +525,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
             {/* Detalles oficiales de acceso (MITECO) */}
             {(playa.forma_acceso || playa.carretera || playa.autobus_tipo || playa.parking_tipo || playa.parking_plazas || playa.tipo_paseo || playa.puerto_deportivo) && (
-              <div style={{ marginTop: '1rem', padding: '.85rem 1rem', background: 'rgba(107,64,10,.05)', border: '1px solid var(--line)', borderRadius: '12px' }}>
+              <div style={{ marginTop: '1rem', padding: '.85rem 1rem', background: 'rgba(107,64,10,.05)', border: '1px solid var(--line)', borderRadius: '4px' }}>
                 {playa.forma_acceso    && <DataRow k={i18n.forma_acceso}   v={playa.forma_acceso}/>}
                 {playa.carretera       && <DataRow k={i18n.carretera}      v={playa.carretera}/>}
                 {playa.autobus_tipo    && <DataRow k={locale === 'en' ? 'Bus type' : 'Tipo de autobús'} v={playa.autobus_tipo}/>}

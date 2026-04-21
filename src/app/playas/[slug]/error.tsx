@@ -13,13 +13,13 @@ export default function PlayaError({ reset }: { reset: () => void }) {
           type="button"
           onClick={reset}
           aria-label="Reintentar carga de la playa"
-          style={{ background: '#6b400a', color: '#fff', border: 'none', borderRadius: '8px', padding: '.75rem 1.5rem', fontSize: '1rem', cursor: 'pointer', minHeight: '44px' }}
+          style={{ background: '#6b400a', color: '#fff', border: 'none', borderRadius: '4px', padding: '.75rem 1.5rem', fontSize: '1rem', cursor: 'pointer', minHeight: '44px' }}
         >
           Reintentar
         </button>
         <Link
           href="/"
-          style={{ background: 'transparent', color: '#6b400a', border: '1.5px solid #6b400a', borderRadius: '8px', padding: '.72rem 1.5rem', fontSize: '1rem', textDecoration: 'none', fontWeight: 600, minHeight: '44px', display: 'inline-flex', alignItems: 'center' }}
+          style={{ background: 'transparent', color: '#6b400a', border: '1px solid #6b400a', borderRadius: '4px', padding: '.72rem 1.5rem', fontSize: '1rem', textDecoration: 'none', fontWeight: 600, minHeight: '44px', display: 'inline-flex', alignItems: 'center' }}
         >
           Volver a inicio
         </Link>

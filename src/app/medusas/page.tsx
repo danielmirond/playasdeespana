@@ -19,7 +19,7 @@ export default function Page() {
     </p>
     <div style={{display:'flex',flexDirection:'column',gap:'.55rem',marginBottom:'2.5rem'}}>
       {meses.map(m => (
-        <div key={m.mes} style={{display:'flex',alignItems:'center',gap:'1rem',background:'var(--card-bg)',border:'1.5px solid var(--line)',borderRadius:12,padding:'.85rem 1rem'}}>
+        <div key={m.mes} style={{display:'flex',alignItems:'center',gap:'1rem',background:'var(--card-bg)',border:'1px solid var(--line)',borderRadius:4,padding:'.85rem 1rem'}}>
           <div style={{width:90,fontWeight:800,fontSize:'.88rem',color:'var(--ink)',flexShrink:0}}>{m.mes}</div>
           <span style={{background:m.color,color:'#fff',fontWeight:800,fontSize:'.72rem',padding:'.2rem .5rem',borderRadius:6,flexShrink:0}}>{m.riesgo}</span>
           <div style={{fontSize:'.82rem',color:'var(--muted)',flex:1}}>{m.desc}</div>

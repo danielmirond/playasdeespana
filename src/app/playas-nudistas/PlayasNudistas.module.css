@@ -2,7 +2,7 @@
 
 .hero {
   background: linear-gradient(160deg, var(--bg) 0%, color-mix(in srgb, var(--accent) 6%, var(--bg)) 100%);
-  border-bottom: 1.5px solid var(--line);
+  border-bottom: 1px solid var(--line);
   padding: 2.5rem 1.5rem 2rem;
 }
 .heroInner { max-width: 960px; margin: 0 auto; }
@@ -86,7 +86,7 @@
   font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700;
   color: var(--ink); margin: 0;
 }
-.grupoTitulo a { color: inherit; text-decoration: none; border-bottom: 1.5px solid transparent; }
+.grupoTitulo a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
 .grupoTitulo a:hover { border-bottom-color: var(--accent); color: var(--accent); }
 .grupoCount { font-size: .74rem; color: var(--muted); }
 

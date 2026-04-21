@@ -21,7 +21,7 @@ export default function PrivacidadPage() {
           <span aria-current="page">Política de privacidad</span>
         </nav>
 
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: 900, color: 'var(--ink)', marginBottom: '1rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
           Política de privacidad
         </h1>
         <p style={{ fontSize: '.88rem', color: 'var(--muted)', marginBottom: '.5rem' }}>

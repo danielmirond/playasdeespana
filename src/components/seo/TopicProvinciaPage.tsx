@@ -76,7 +76,7 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
 
         <h1 style={{
           fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 5vw, 2.6rem)',
-          fontWeight: 900, color: 'var(--ink)', lineHeight: 1.1,
+          fontWeight: 700, color: 'var(--ink)', lineHeight: 1.1,
           letterSpacing: '-.02em', marginBottom: '.75rem',
         }}>
           <span aria-hidden="true" style={{ marginRight: '.35rem' }}>{config.emoji}</span>
@@ -93,8 +93,8 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
         }}>
           {config.highlights.map(h => (
             <div key={h.label} style={{
-              background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-              borderRadius: 14, padding: '1rem',
+              background: 'var(--card-bg)', border: '1px solid var(--line)',
+              borderRadius: 6, padding: '1rem',
             }}>
               <div style={{ fontSize: '1.5rem', marginBottom: '.3rem' }} aria-hidden="true">{h.icon}</div>
               <div style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)' }}>{h.label}</div>
@@ -120,8 +120,8 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
                   prefetch={false}
                   style={{
                     display: 'flex', flexDirection: 'column', gap: '.15rem',
-                    padding: '.85rem 1rem', borderRadius: 12,
-                    background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                    padding: '.85rem 1rem', borderRadius: 6,
+                    background: 'var(--card-bg)', border: '1px solid var(--line)',
                     textDecoration: 'none', color: 'inherit',
                   }}
                 >
@@ -168,7 +168,7 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
             {config.faqs.map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1.5px solid var(--line)', borderRadius: 12, padding: '.85rem 1rem' }}>
+              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>
                   {f.q.replace(/{provincia}/g, provincia.nombre)}
                 </summary>

@@ -64,7 +64,7 @@ export default function MapaLeaflet({ lat, lng, nombre, zoom = 15, height = '300
         role="application"
         aria-label={nombre ? `Mapa interactivo de ${nombre}` : 'Mapa interactivo'}
         tabIndex={0}
-        style={{ width: '100%', height, borderRadius: '12px', overflow: 'hidden', marginTop: '1rem' }}
+        style={{ width: '100%', height, borderRadius: '4px', overflow: 'hidden', marginTop: '1rem' }}
       />
     </>
   )

@@ -24,7 +24,7 @@ export default function Page() {
         </nav>
         <h1 style={{
           fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4.5vw, 2.4rem)',
-          fontWeight: 900, color: 'var(--ink)', marginBottom: '.4rem',
+          fontWeight: 700, color: 'var(--ink)', marginBottom: '.4rem',
         }}>
           Comparar playas
         </h1>

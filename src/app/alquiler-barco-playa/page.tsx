@@ -128,8 +128,8 @@ export default function AlquilerBarcoPage() {
         </h2>
         {plataformasActivas.length === 0 ? (
           <div style={{
-            background: 'rgba(234,179,8,.1)', border: '1.5px solid rgba(234,179,8,.4)',
-            borderRadius: 12, padding: '1rem', fontSize: '.88rem', color: 'var(--muted)',
+            background: 'rgba(234,179,8,.1)', border: '1px solid rgba(234,179,8,.4)',
+            borderRadius: 6, padding: '1rem', fontSize: '.88rem', color: 'var(--muted)',
             marginBottom: '2rem',
           }}>
             Comparativa próximamente disponible.
@@ -139,12 +139,12 @@ export default function AlquilerBarcoPage() {
             {plataformasActivas.map(p => (
               <div key={p.marca} style={{
                 background: 'var(--card-bg)', border: `2px solid ${p.color}22`,
-                borderRadius: 16, padding: '1.25rem',
+                borderRadius: 6, padding: '1.25rem',
                 display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap',
               }}>
                 <div style={{ flex: '1 1 280px', minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', flexWrap: 'wrap', marginBottom: '.35rem' }}>
-                    <span style={{ fontWeight: 900, fontSize: '1.1rem', color: p.color }}>{p.marca}</span>
+                    <span style={{ fontWeight: 700, fontSize: '1.1rem', color: p.color }}>{p.marca}</span>
                     <span style={{
                       fontSize: '.65rem', fontWeight: 700, padding: '.2rem .5rem',
                       background: `${p.color}14`, color: p.color, borderRadius: 100,
@@ -160,7 +160,7 @@ export default function AlquilerBarcoPage() {
                   target="_blank" rel="noopener noreferrer sponsored"
                   style={{
                     alignSelf: 'center', padding: '.75rem 1.5rem',
-                    background: p.color, color: '#fff', borderRadius: 10,
+                    background: p.color, color: '#fff', borderRadius: 4,
                     fontSize: '.88rem', fontWeight: 800, textDecoration: 'none',
                     whiteSpace: 'nowrap',
                   }}
@@ -185,8 +185,8 @@ export default function AlquilerBarcoPage() {
               key={d.nombre}
               href={`/comunidad/${d.slug}`}
               style={{
-                background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                borderRadius: 14, padding: '1rem 1.15rem',
+                background: 'var(--card-bg)', border: '1px solid var(--line)',
+                borderRadius: 6, padding: '1rem 1.15rem',
                 textDecoration: 'none', color: 'inherit',
                 display: 'flex', flexDirection: 'column', gap: '.35rem',
               }}
@@ -205,8 +205,8 @@ export default function AlquilerBarcoPage() {
 
         {/* Sin licencia */}
         <section aria-labelledby="h2-sin" style={{
-          background: 'rgba(14,165,233,.06)', border: '1.5px solid rgba(14,165,233,.3)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2.5rem',
+          background: 'rgba(14,165,233,.06)', border: '1px solid rgba(14,165,233,.3)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2.5rem',
         }}>
           <h2 id="h2-sin" style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0369a1', marginBottom: '.65rem' }}>
             Barcos sin licencia: ¿qué puedo alquilar?
@@ -221,8 +221,8 @@ export default function AlquilerBarcoPage() {
 
         {/* Consejos */}
         <section aria-labelledby="h2-tips" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2.5rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2.5rem',
         }}>
           <h2 id="h2-tips" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.65rem' }}>
             Consejos antes de reservar
@@ -284,7 +284,7 @@ export default function AlquilerBarcoPage() {
                 a: 'Normalmente: barco, seguro básico, equipo de seguridad. NO incluye: combustible (150-400€/día según barco), limpieza final (50-150€), skipper si no tienes licencia (+150-300€/día), comida y bebida.',
               },
             ].map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1.5px solid var(--line)', borderRadius: 12, padding: '.85rem 1rem' }}>
+              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>{f.q}</summary>
                 <p style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: '.55rem' }}>{f.a}</p>
               </details>

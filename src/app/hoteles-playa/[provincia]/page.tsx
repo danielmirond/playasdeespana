@@ -30,7 +30,7 @@ function ExtraSections({ provincia }: { provincia: string }) {
   return (
     <div style={{
       background: 'linear-gradient(135deg, #003580 0%, #0071c2 100%)',
-      borderRadius: 16, padding: '1.25rem', marginBottom: '2.5rem',
+      borderRadius: 6, padding: '1.25rem', marginBottom: '2.5rem',
       display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap',
     }}>
       <div style={{ flex: 1, minWidth: 200, color: '#fff' }}>
@@ -46,7 +46,7 @@ function ExtraSections({ provincia }: { provincia: string }) {
         target="_blank" rel="noopener noreferrer sponsored"
         style={{
           padding: '.7rem 1.3rem', background: '#fff', color: '#003580',
-          borderRadius: 10, fontSize: '.9rem', fontWeight: 800, textDecoration: 'none',
+          borderRadius: 4, fontSize: '.9rem', fontWeight: 800, textDecoration: 'none',
         }}
       >
         Ver hoteles en Booking →

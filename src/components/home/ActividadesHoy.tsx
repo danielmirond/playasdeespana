@@ -92,7 +92,7 @@ export default function ActividadesHoy({ playas, locale = 'es' }: Props) {
           const Icon = g.icon
           return (
             <div key={g.key} style={{
-              background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+              background: 'var(--card-bg)', border: '1px solid var(--line)',
               borderRadius: 6, overflow: 'hidden',
             }}>
               {/* Header */}
@@ -103,7 +103,7 @@ export default function ActividadesHoy({ playas, locale = 'es' }: Props) {
               }}>
                 <div style={{
                   width: 36, height: 36, borderRadius: 4,
-                  background: `${g.color}14`, border: `1.5px solid ${g.color}30`,
+                  background: `${g.color}14`, border: `1px solid ${g.color}30`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0,
                 }}>

@@ -164,7 +164,7 @@ export default async function ComunidadPage({ params }: Props) {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginTop: '.75rem' }}>
               {municipios.map(m => (
                 <Link key={m.slug} href={`/municipio/${m.slug}`} style={{
-                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
                   borderRadius: '100px', padding: '.4rem .9rem', textDecoration: 'none',
                   fontSize: '.78rem', fontWeight: 600, color: 'var(--accent)',
                   transition: 'border-color .15s',

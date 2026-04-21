@@ -23,7 +23,7 @@ export default function CookiesPage() {
 
         <h1 style={{
           fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4vw, 2.2rem)',
-          fontWeight: 900, color: 'var(--ink)', marginBottom: '1rem',
+          fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem',
         }}>
           Política de cookies
         </h1>
@@ -171,7 +171,7 @@ function CookieTable() {
     { nombre: 'Cookies afiliados', tipo: 'Marketing', proveedor: 'Varios',    duracion: 'Variable',   finalidad: 'Atribución de referencia' },
   ]
   return (
-    <div style={{ overflowX: 'auto', border: '1.5px solid var(--line)', borderRadius: 12, marginBottom: '1.5rem' }}>
+    <div style={{ overflowX: 'auto', border: '1px solid var(--line)', borderRadius: 6, marginBottom: '1.5rem' }}>
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.82rem' }}>
         <thead>
           <tr style={{ background: 'rgba(107,64,10,.08)' }}>

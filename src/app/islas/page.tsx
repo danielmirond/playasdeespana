@@ -29,8 +29,8 @@ export default async function Page() {
         const count = playas.filter(isla.filter).length
         return <Link key={isla.nombre} href={`/buscar?q=${encodeURIComponent(isla.nombre)}`} style={{
           display:'flex',alignItems:'center',justifyContent:'space-between',
-          padding:'1rem 1.15rem',background:'var(--card-bg)',border:'1.5px solid var(--line)',
-          borderRadius:14,textDecoration:'none',
+          padding:'1rem 1.15rem',background:'var(--card-bg)',border:'1px solid var(--line)',
+          borderRadius:6,textDecoration:'none',
         }}>
           <div><div style={{fontWeight:800,fontSize:'.95rem',color:'var(--ink)'}}>{isla.nombre}</div></div>
           <span style={{fontSize:'.82rem',fontWeight:700,color:'var(--accent)',background:'color-mix(in srgb, var(--accent) 10%, var(--card-bg))',padding:'.2rem .55rem',borderRadius:100}}>{count}</span>

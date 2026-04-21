@@ -154,8 +154,8 @@ export default async function Page() {
                 prefetch={false}
                 style={{
                   display: 'flex', alignItems: 'center', gap: '.65rem',
-                  padding: '.75rem .9rem', borderRadius: 14,
-                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                  padding: '.75rem .9rem', borderRadius: 6,
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
                   textDecoration: 'none', color: 'inherit',
                 }}
               >
@@ -244,7 +244,7 @@ export default async function Page() {
                 a: 'En verano tras días sin viento fuerte. El oleaje suspende arena y reduce la visibilidad. Las mejores semanas suelen ser a mediados de junio y septiembre (agua estable, poco plancton) en Mediterráneo; todo el año en Canarias.',
               },
             ].map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1.5px solid var(--line)', borderRadius: 12, padding: '.85rem 1rem' }}>
+              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>
                   {f.q}
                 </summary>

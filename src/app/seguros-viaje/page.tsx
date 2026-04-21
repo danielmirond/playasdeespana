@@ -113,8 +113,8 @@ export default function SegurosViajePage() {
 
         {/* Por qué */}
         <section aria-labelledby="h2-why" style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 16, padding: '1.25rem', marginBottom: '2rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, padding: '1.25rem', marginBottom: '2rem',
         }}>
           <h2 id="h2-why" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.65rem' }}>
             ¿Necesito seguro si viajo a España?
@@ -134,8 +134,8 @@ export default function SegurosViajePage() {
         </h2>
         {disponibles.length === 0 ? (
           <div style={{
-            background: 'rgba(234,179,8,.1)', border: '1.5px solid rgba(234,179,8,.4)',
-            borderRadius: 12, padding: '1rem', fontSize: '.88rem', color: 'var(--muted)',
+            background: 'rgba(234,179,8,.1)', border: '1px solid rgba(234,179,8,.4)',
+            borderRadius: 6, padding: '1rem', fontSize: '.88rem', color: 'var(--muted)',
             marginBottom: '2rem',
           }}>
             Comparativa próximamente disponible.
@@ -145,12 +145,12 @@ export default function SegurosViajePage() {
             {disponibles.map(s => (
               <div key={s.marca} style={{
                 background: 'var(--card-bg)', border: `2px solid ${s.color}22`,
-                borderRadius: 16, padding: '1.25rem',
+                borderRadius: 6, padding: '1.25rem',
                 display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap',
               }}>
                 <div style={{ flex: '1 1 280px', minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', flexWrap: 'wrap', marginBottom: '.35rem' }}>
-                    <span style={{ fontWeight: 900, fontSize: '1.1rem', color: s.color }}>{s.marca}</span>
+                    <span style={{ fontWeight: 700, fontSize: '1.1rem', color: s.color }}>{s.marca}</span>
                     <span style={{
                       fontSize: '.65rem', fontWeight: 700, padding: '.2rem .5rem',
                       background: `${s.color}14`, color: s.color, borderRadius: 100,
@@ -169,7 +169,7 @@ export default function SegurosViajePage() {
                   target="_blank" rel="noopener noreferrer sponsored"
                   style={{
                     alignSelf: 'center', padding: '.75rem 1.5rem',
-                    background: s.color, color: '#fff', borderRadius: 10,
+                    background: s.color, color: '#fff', borderRadius: 4,
                     fontSize: '.88rem', fontWeight: 800, textDecoration: 'none',
                     whiteSpace: 'nowrap',
                   }}
@@ -185,7 +185,7 @@ export default function SegurosViajePage() {
         <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.75rem' }}>
           ¿Qué cobertura necesito?
         </h2>
-        <div style={{ overflowX: 'auto', marginBottom: '2rem', border: '1.5px solid var(--line)', borderRadius: 12 }}>
+        <div style={{ overflowX: 'auto', marginBottom: '2rem', border: '1px solid var(--line)', borderRadius: 4 }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.85rem' }}>
             <thead>
               <tr style={{ background: 'rgba(107,64,10,.08)' }}>
@@ -237,7 +237,7 @@ export default function SegurosViajePage() {
                 a: 'La TSE cubre urgencias en sanidad pública. NO cubre: sanidad privada, transporte médico, cancelación, equipaje ni deportes. Un seguro complementa todo lo que la TSE no cubre.',
               },
             ].map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1.5px solid var(--line)', borderRadius: 12, padding: '.85rem 1rem' }}>
+              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>{f.q}</summary>
                 <p style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: '.55rem' }}>{f.a}</p>
               </details>

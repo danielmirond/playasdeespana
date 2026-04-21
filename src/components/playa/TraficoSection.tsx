@@ -252,7 +252,7 @@ export default function TraficoSection({ playa }: Props) {
           <div role="tabpanel" id="tabpanel-afluencia" aria-labelledby="tab-afluencia">
             <div style={{
               display: 'flex', alignItems: 'center', gap: '1rem',
-              padding: '.75rem 1rem', borderRadius: '12px',
+              padding: '.75rem 1rem', borderRadius: '4px',
               background: nivelAhora.bg, marginBottom: '1rem',
             }}>
               <div style={{ textAlign: 'center' }}>
@@ -299,7 +299,7 @@ export default function TraficoSection({ playa }: Props) {
             ) : trafico ? (
               <div style={{
                 display: 'flex', alignItems: 'center', gap: '1rem',
-                padding: '.75rem 1rem', borderRadius: '12px',
+                padding: '.75rem 1rem', borderRadius: '4px',
                 background: trafico.color + '12', marginBottom: '1rem',
               }}>
                 <div style={{ textAlign: 'center', minWidth: '60px' }}>
@@ -316,7 +316,7 @@ export default function TraficoSection({ playa }: Props) {
               </div>
             ) : (
               <div style={{
-                padding: '.75rem 1rem', borderRadius: '12px',
+                padding: '.75rem 1rem', borderRadius: '4px',
                 background: '#22c55e12', marginBottom: '1rem', fontSize: '.8rem', color: '#166534',
               }}>
                 <span style={{ display:'inline-block', width:8, height:8, borderRadius:'50%', background:'#22c55e', marginRight:6, verticalAlign:'middle' }}/> Sin datos de tráfico disponibles
@@ -340,7 +340,7 @@ export default function TraficoSection({ playa }: Props) {
               </a>
             </div>
 
-            <div style={{ marginTop: '1rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--line,#e8dcc8)' }}>
+            <div style={{ marginTop: '1rem', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--line,#e8dcc8)' }}>
               <iframe
                 src={``}
                 width="100%" height="200" style={{ border: 'none', display: 'block' }}

@@ -48,7 +48,7 @@ export default function TopPage() {
           const costas = COSTAS.filter(c => c.zona === zona.key)
           return (
             <section key={zona.key} style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: 800, color: 'var(--ink)', margin: '0 0 1rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--ink)', margin: '0 0 1rem' }}>
                 {zona.label}
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '.65rem' }}>

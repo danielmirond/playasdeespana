@@ -136,8 +136,8 @@ export default function ConfiguradorRuta() {
     <div>
       {/* Controles */}
       <div style={{
-        background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-        borderRadius: 16, padding: '1.25rem', marginBottom: '2rem',
+        background: 'var(--card-bg)', border: '1px solid var(--line)',
+        borderRadius: 6, padding: '1.25rem', marginBottom: '2rem',
         display: 'flex', flexDirection: 'column', gap: '1rem',
       }}>
         {/* Costa selector */}
@@ -155,7 +155,7 @@ export default function ConfiguradorRuta() {
             onChange={e => setCostaSlug(e.target.value)}
             style={{
               width: '100%', padding: '.65rem .85rem',
-              border: '1.5px solid var(--line)', borderRadius: 10,
+              border: '1px solid var(--line)', borderRadius: 4,
               background: 'var(--metric-bg)', color: 'var(--ink)',
               fontSize: '.88rem', fontFamily: 'inherit',
               minHeight: 44, cursor: 'pointer',
@@ -212,7 +212,7 @@ export default function ConfiguradorRuta() {
                 aria-pressed={!!filtros[f.key]}
                 style={{
                   padding: '.45rem .85rem', borderRadius: 100,
-                  border: '1.5px solid',
+                  border: '1px solid',
                   borderColor: filtros[f.key] ? 'var(--accent)' : 'var(--line)',
                   background: filtros[f.key] ? 'var(--accent)' : 'transparent',
                   color: filtros[f.key] ? '#fff' : 'var(--muted)',
@@ -237,8 +237,8 @@ export default function ConfiguradorRuta() {
       {!loading && !resultado && (
         <div style={{
           textAlign: 'center', padding: '2rem',
-          background: 'rgba(239,68,68,.06)', border: '1.5px solid rgba(239,68,68,.2)',
-          borderRadius: 14, color: '#b91c1c', fontSize: '.88rem',
+          background: 'rgba(239,68,68,.06)', border: '1px solid rgba(239,68,68,.2)',
+          borderRadius: 6, color: '#b91c1c', fontSize: '.88rem',
         }}>
           No hay suficientes playas con esos criterios.
           {costaSeleccionada ? ` Prueba otra costa o reduce las paradas.` : ' Reduce los filtros.'}
@@ -252,7 +252,7 @@ export default function ConfiguradorRuta() {
             display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap',
             marginBottom: '1rem',
           }}>
-            <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '1.15rem', color: 'var(--ink)' }}>
+            <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.15rem', color: 'var(--ink)' }}>
               {costaSeleccionada ? `Ruta por la ${costaSeleccionada.nombre}` : `Ruta de ${numParadas} playas por España`}
             </div>
             <span style={{ fontSize: '.82rem', color: 'var(--muted)' }}>
@@ -267,7 +267,7 @@ export default function ConfiguradorRuta() {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '.4rem',
               background: 'var(--accent)', color: '#fff',
-              padding: '.75rem 1.25rem', borderRadius: 12,
+              padding: '.75rem 1.25rem', borderRadius: 6,
               fontSize: '.92rem', fontWeight: 800, textDecoration: 'none',
               minHeight: 44, marginBottom: '1.5rem',
               boxShadow: '0 4px 14px rgba(107,64,10,.2)',
@@ -286,7 +286,7 @@ export default function ConfiguradorRuta() {
                     <div style={{
                       width: 32, height: 32, borderRadius: '50%',
                       background: costaSeleccionada?.color && costaSeleccionada.color !== '#f8fafc' ? costaSeleccionada.color : 'var(--accent)',
-                      color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '.88rem',
+                      color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.88rem',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
                       {i + 1}
@@ -297,8 +297,8 @@ export default function ConfiguradorRuta() {
                   </div>
                   <Link href={`/playas/${p.playa.slug}`} style={{
                     flex: 1, display: 'flex', alignItems: 'center', gap: '.75rem',
-                    background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                    borderRadius: 12, padding: '.85rem 1rem',
+                    background: 'var(--card-bg)', border: '1px solid var(--line)',
+                    borderRadius: 6, padding: '.85rem 1rem',
                     textDecoration: 'none', transition: 'all .15s',
                   }}>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -313,7 +313,7 @@ export default function ConfiguradorRuta() {
                         {p.playa.parking && <span style={{ fontSize: '.65rem', background: 'var(--metric-bg)', border: '1px solid var(--line)', padding: '.1rem .3rem', borderRadius: 4 }}>P</span>}
                       </div>
                     </div>
-                    <span style={{ background: sc, color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '.82rem', padding: '.25rem .45rem', borderRadius: 6, flexShrink: 0 }}>
+                    <span style={{ background: sc, color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.82rem', padding: '.25rem .45rem', borderRadius: 6, flexShrink: 0 }}>
                       {p.score}
                     </span>
                   </Link>

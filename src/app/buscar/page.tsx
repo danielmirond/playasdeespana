@@ -305,7 +305,7 @@ function BuscarContent() {
                         {ps && (
                           <span style={{
                             background: ps.color, color: '#fff',
-                            fontFamily: 'var(--font-serif)', fontWeight: 900,
+                            fontFamily: 'var(--font-serif)', fontWeight: 700,
                             fontSize: '.78rem', padding: '.2rem .4rem', borderRadius: 6,
                             display: 'inline-flex', alignItems: 'center', gap: '.15rem',
                             flexShrink: 0,

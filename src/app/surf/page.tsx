@@ -97,8 +97,8 @@ export default async function SurfPage() {
         </p>
 
         <div style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 20, overflow: 'hidden', marginBottom: '2rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, overflow: 'hidden', marginBottom: '2rem',
         }}>
           <MapaPlayas playas={surfPlayas} height="400px" />
         </div>
@@ -107,8 +107,8 @@ export default async function SurfPage() {
           {scored.map(({ playa: p, meteo: m, quality: q }) => (
             <Link key={p.slug} href={`/playas/${p.slug}`} style={{
               display: 'flex', alignItems: 'center', gap: '.85rem',
-              background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-              borderRadius: 14, padding: '1rem 1.15rem',
+              background: 'var(--card-bg)', border: '1px solid var(--line)',
+              borderRadius: 6, padding: '1rem 1.15rem',
               textDecoration: 'none', transition: 'all .15s',
             }}>
               {/* Quality badge */}
@@ -117,7 +117,7 @@ export default async function SurfPage() {
               }}>
                 <div style={{
                   background: q.color, color: '#fff',
-                  fontWeight: 900, fontSize: '.72rem',
+                  fontWeight: 700, fontSize: '.72rem',
                   padding: '.3rem .5rem', borderRadius: 6,
                   letterSpacing: '.05em',
                 }}>

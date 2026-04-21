@@ -22,8 +22,8 @@ export default async function Page() {
     <p style={{fontSize:'.92rem',color:'var(--muted)',marginTop:'.35rem'}}>{pick.p.municipio} · {pick.p.provincia} · {pick.p.comunidad}</p>
     {pick.p.descripcion && <p style={{fontSize:'.88rem',color:'var(--ink)',maxWidth:500,margin:'1rem auto',lineHeight:1.6,fontStyle:'italic'}}>{(pick.p.descripcion??'').slice(0,200)}…</p>}
     <div style={{display:'flex',gap:'.5rem',justifyContent:'center',flexWrap:'wrap',marginTop:'1.5rem'}}>
-      <Link href={`/playas/${pick.p.slug}`} style={{background:'var(--accent)',color:'#fff',padding:'.75rem 1.25rem',borderRadius:12,fontWeight:800,textDecoration:'none'}}>Ver ficha completa →</Link>
-      <Link href="/buscar" style={{background:'var(--card-bg)',color:'var(--accent)',border:'1.5px solid var(--line)',padding:'.65rem 1.15rem',borderRadius:10,fontWeight:700,textDecoration:'none'}}>Buscar otra</Link>
+      <Link href={`/playas/${pick.p.slug}`} style={{background:'var(--accent)',color:'#fff',padding:'.75rem 1.25rem',borderRadius:4,fontWeight:800,textDecoration:'none'}}>Ver ficha completa →</Link>
+      <Link href="/buscar" style={{background:'var(--card-bg)',color:'var(--accent)',border:'1px solid var(--line)',padding:'.65rem 1.15rem',borderRadius:4,fontWeight:700,textDecoration:'none'}}>Buscar otra</Link>
     </div>
   </main></>)
 }

@@ -214,7 +214,7 @@ export default function CookieBanner() {
             <button
               type="button"
               onClick={() => accept(false, false)}
-              style={{ ...btnBase, border: '1.5px solid #6b400a', background: 'transparent', color: '#6b400a' }}
+              style={{ ...btnBase, border: '1px solid #6b400a', background: 'transparent', color: '#6b400a' }}
             >
               {i18n.rechazar}
             </button>
@@ -231,7 +231,7 @@ export default function CookieBanner() {
             <button
               type="button"
               onClick={() => accept(false, false)}
-              style={{ ...btnBase, border: '1.5px solid #6b400a', background: 'transparent', color: '#6b400a', marginRight: 'auto' }}
+              style={{ ...btnBase, border: '1px solid #6b400a', background: 'transparent', color: '#6b400a', marginRight: 'auto' }}
             >
               {i18n.rechazar}
             </button>

@@ -95,14 +95,14 @@ export default function MonetizacionBlock({ locale = 'es' }: Props) {
               style={{
                 display: 'flex', alignItems: 'center', gap: '.75rem',
                 padding: '1rem 1.1rem',
-                background: 'var(--card-bg)', border: '1.5px solid var(--line)',
+                background: 'var(--card-bg)', border: '1px solid var(--line)',
                 borderRadius: 6, textDecoration: 'none',
                 transition: 'all .15s',
               }}
             >
               <div style={{
                 width: 42, height: 42, borderRadius: 4,
-                background: `${c.color}12`, border: `1.5px solid ${c.color}25`,
+                background: `${c.color}12`, border: `1px solid ${c.color}25`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,
               }}>

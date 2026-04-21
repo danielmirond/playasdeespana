@@ -214,7 +214,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-pressed={filtro === e ? 'true' : 'false'}
             aria-label={e === 'TODOS' ? 'Mostrar todas las playas' : `Filtrar por estado ${e.toLowerCase()}`}
             style={{
-              fontSize:'.72rem', fontWeight: 700, padding: '.2rem .55rem', borderRadius: '100px', border: '1.5px solid',
+              fontSize:'.72rem', fontWeight: 700, padding: '.2rem .55rem', borderRadius: '100px', border: '1px solid',
               borderColor: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#6b400a)') : 'var(--line,#e8dcc8)',
               background: filtro === e ? ((ESTADO_COLORES[e] ?? '#6b400a') + '18') : 'transparent',
               color: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#6b400a)') : 'var(--muted,#5a3d12)',
@@ -238,7 +238,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-label="Centrar en mi ubicación"
             style={{
               fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px',
-              border: '1.5px solid var(--line,#e8dcc8)',
+              border: '1px solid var(--line,#e8dcc8)',
               background: 'transparent',
               color: 'var(--accent,#6b400a)', cursor: 'pointer',
               minHeight: '32px', display: 'flex', alignItems: 'center', gap: '.3rem',
@@ -252,7 +252,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-label="Cambiar tipo de mapa"
             style={{
               display: 'flex', alignItems: 'center',
-              border: '1.5px solid var(--line,#e8dcc8)',
+              border: '1px solid var(--line,#e8dcc8)',
               borderRadius: '100px', padding: '2px', gap: '2px',
             }}
           >
@@ -289,7 +289,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-pressed={modoRadio ? 'true' : 'false'}
             aria-label={modoRadio ? 'Ocultar filtro de radio' : 'Mostrar filtro de radio de búsqueda'}
             style={{
-              fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px', border: '1.5px solid',
+              fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px', border: '1px solid',
               borderColor: modoRadio ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
               background: modoRadio ? 'rgba(107,64,10,.1)' : 'transparent',
               color: modoRadio ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)', cursor: 'pointer',

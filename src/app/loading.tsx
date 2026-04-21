@@ -50,8 +50,8 @@ export default function LoadingHome() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 12 }}>
           {[...Array(8)].map((_, i) => (
             <div key={i} style={{
-              background: 'rgba(255,255,255,.5)', border: '1.5px solid rgba(180,130,60,.18)',
-              borderRadius: 14, padding: '1rem',
+              background: 'rgba(255,255,255,.5)', border: '1px solid rgba(180,130,60,.18)',
+              borderRadius: 6, padding: '1rem',
             }}>
               <Bone w={0} h={18} r={4} style={{ width: '80%' }} />
               <div style={{ marginTop: 6 }}><Bone w={0} h={12} r={3} style={{ width: '60%' }} /></div>

@@ -77,7 +77,7 @@ export default async function TopCostaPage({ params }: Props) {
         <div style={{ borderLeft: `4px solid ${costa.color === '#f8fafc' ? 'var(--accent)' : costa.color}`, paddingLeft: '1.25rem', marginBottom: '2rem' }}>
           <h1 style={{
             fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4.5vw, 2.4rem)',
-            fontWeight: 900, color: 'var(--ink)', lineHeight: 1.1, marginBottom: '.4rem',
+            fontWeight: 700, color: 'var(--ink)', lineHeight: 1.1, marginBottom: '.4rem',
           }}>
             Top 10 mejores playas de la {costa.nombre}
           </h1>
@@ -90,8 +90,8 @@ export default async function TopCostaPage({ params }: Props) {
         </div>
 
         <div style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 20, overflow: 'hidden', marginBottom: '2rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, overflow: 'hidden', marginBottom: '2rem',
         }}>
           <MapaPlayas playas={top} height="400px" />
         </div>
@@ -103,16 +103,16 @@ export default async function TopCostaPage({ params }: Props) {
               <li key={p.slug}>
                 <Link href={`/playas/${p.slug}`} style={{
                   display: 'flex', alignItems: 'center', gap: '1rem',
-                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                  borderRadius: 14, padding: '1rem 1.15rem',
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
+                  borderRadius: 6, padding: '1rem 1.15rem',
                   textDecoration: 'none', transition: 'all .15s',
                 }}>
                   <span style={{
                     width: 38, height: 38, borderRadius: '50%',
                     background: i < 3 ? 'var(--accent)' : 'var(--metric-bg)',
-                    border: i < 3 ? 'none' : '1.5px solid var(--line)',
+                    border: i < 3 ? 'none' : '1px solid var(--line)',
                     color: i < 3 ? '#fff' : 'var(--ink)',
-                    fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '1rem',
+                    fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     flexShrink: 0,
                   }}>
@@ -135,7 +135,7 @@ export default async function TopCostaPage({ params }: Props) {
                   </div>
                   <span style={{
                     background: sc, color: '#fff',
-                    fontFamily: 'var(--font-serif)', fontWeight: 900,
+                    fontFamily: 'var(--font-serif)', fontWeight: 700,
                     fontSize: '1rem', padding: '.35rem .55rem', borderRadius: 8,
                     flexShrink: 0,
                   }}>

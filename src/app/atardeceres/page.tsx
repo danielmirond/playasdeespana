@@ -89,7 +89,7 @@ export default async function AtardeceresPage() {
           Costa de la Luz, Rías Baixas, Costa da Morte, Baleares y Canarias.
         </p>
         <p style={{
-          fontSize: '1.15rem', fontFamily: 'var(--font-serif)', fontWeight: 800,
+          fontSize: '1.15rem', fontFamily: 'var(--font-serif)', fontWeight: 700,
           color: 'var(--accent)', marginBottom: '2rem',
         }}>
           🌅 Atardecer hoy aprox. {sunsetStr}h
@@ -97,8 +97,8 @@ export default async function AtardeceresPage() {
 
         {/* Mapa */}
         <div style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 20, overflow: 'hidden', marginBottom: '2.5rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, overflow: 'hidden', marginBottom: '2.5rem',
         }}>
           <div style={{
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -116,7 +116,7 @@ export default async function AtardeceresPage() {
         {Array.from(porCom.entries()).map(([com, list]) => (
           <section key={com} style={{ marginBottom: '2.5rem' }}>
             <h2 style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: 800,
+              fontFamily: 'var(--font-serif)', fontWeight: 700,
               color: 'var(--ink)', margin: '0 0 .75rem',
             }}>
               {com} <span style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--muted)' }}>({list.length} playas)</span>
@@ -129,8 +129,8 @@ export default async function AtardeceresPage() {
                 <Link key={p.slug} href={`/playas/${p.slug}`} style={{
                   display: 'flex', alignItems: 'center', gap: '.75rem',
                   padding: '.75rem 1rem',
-                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                  borderRadius: 12, textDecoration: 'none', transition: 'all .15s',
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
+                  borderRadius: 6, textDecoration: 'none', transition: 'all .15s',
                 }}>
                   <span style={{ fontSize: '1.2rem' }} aria-hidden="true">🌅</span>
                   <div style={{ flex: 1, minWidth: 0 }}>

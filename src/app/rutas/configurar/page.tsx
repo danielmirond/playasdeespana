@@ -28,7 +28,7 @@ export default function ConfigurarPage() {
 
         <h1 style={{
           fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4.5vw, 2.4rem)',
-          fontWeight: 900, letterSpacing: '-.025em', color: 'var(--ink)',
+          fontWeight: 700, letterSpacing: '-.025em', color: 'var(--ink)',
           lineHeight: 1.1, marginBottom: '.4rem',
         }}>
           Configura tu ruta de playas

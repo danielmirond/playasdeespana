@@ -50,8 +50,8 @@ export default function LoadingPlaya() {
         <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)',
           width: '100%', maxWidth: 500, marginTop: 24,
-          background: 'rgba(255,255,255,.55)', border: '1.5px solid rgba(180,130,60,.18)',
-          borderRadius: 18, overflow: 'hidden',
+          background: 'rgba(255,255,255,.55)', border: '1px solid rgba(180,130,60,.18)',
+          borderRadius: 6, overflow: 'hidden',
         }}>
           {[...Array(5)].map((_, i) => (
             <div key={i} style={{ padding: '0.75rem 0.5rem', textAlign: 'center' }}>
@@ -97,8 +97,8 @@ export default function LoadingPlaya() {
         {/* Aside */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
           <div style={{
-            background: 'rgba(255,255,255,.5)', border: '1.5px solid rgba(180,130,60,.18)',
-            borderRadius: 16, padding: '1rem', textAlign: 'center',
+            background: 'rgba(255,255,255,.5)', border: '1px solid rgba(180,130,60,.18)',
+            borderRadius: 6, padding: '1rem', textAlign: 'center',
           }}>
             <Bone w={60} h={60} r={30} style={{ margin: '0 auto 8px' }} />
             <Bone w={100} h={24} r={6} style={{ margin: '0 auto 6px' }} />
@@ -145,8 +145,8 @@ function SkeletonCard({ h }: { h: number }) {
   return (
     <div style={{
       background: 'rgba(255,255,255,.5)',
-      border: '1.5px solid rgba(180,130,60,.18)',
-      borderRadius: 16, marginBottom: '.85rem',
+      border: '1px solid rgba(180,130,60,.18)',
+      borderRadius: 6, marginBottom: '.85rem',
       overflow: 'hidden',
     }}>
       <div style={{ padding: '.85rem 1rem .45rem', display: 'flex', alignItems: 'center', gap: 8 }}>

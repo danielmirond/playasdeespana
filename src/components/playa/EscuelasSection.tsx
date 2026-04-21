@@ -34,7 +34,7 @@ export default function EscuelasSection({ escuelas, locale = 'es' }: Props) {
       </div>
       <div style={{ padding: '1rem 1.25rem', display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
         {escuelas.map(e => (
-          <div key={e.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '.75rem', padding: '.75rem', background: 'var(--card-bg2,#f5ede0)', borderRadius: '12px' }}>
+          <div key={e.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '.75rem', padding: '.75rem', background: 'var(--card-bg2,#f5ede0)', borderRadius: '4px' }}>
             <div style={{ width: 36, height: 36, borderRadius: '10px', background: 'var(--accent,#6b400a)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               {TIPO_ICON[e.tipo] ?? <Waves size={14} weight="bold"/>}
             </div>

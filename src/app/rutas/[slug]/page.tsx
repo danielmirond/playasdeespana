@@ -68,13 +68,13 @@ export default async function RutaPage({ params }: Props) {
         {/* Hero */}
         <div style={{
           marginBottom: '2rem', paddingBottom: '1.5rem',
-          borderBottom: '1.5px solid var(--line)',
+          borderBottom: '1px solid var(--line)',
           borderLeft: `4px solid ${ruta.costa.color}`,
           paddingLeft: '1.25rem',
         }}>
           <h1 style={{
             fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4.5vw, 2.4rem)',
-            fontWeight: 900, letterSpacing: '-.025em', color: 'var(--ink)',
+            fontWeight: 700, letterSpacing: '-.025em', color: 'var(--ink)',
             lineHeight: 1.1, marginBottom: '.4rem',
           }}>
             {ruta.nombre}
@@ -95,7 +95,7 @@ export default async function RutaPage({ params }: Props) {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '.4rem',
               background: 'var(--accent)', color: '#fff',
-              padding: '.75rem 1.25rem', borderRadius: 12,
+              padding: '.75rem 1.25rem', borderRadius: 6,
               fontSize: '.92rem', fontWeight: 800, textDecoration: 'none',
               minHeight: 44, boxShadow: '0 4px 14px rgba(107,64,10,.2)',
             }}
@@ -105,8 +105,8 @@ export default async function RutaPage({ params }: Props) {
           <Link href="/rutas" style={{
             display: 'inline-flex', alignItems: 'center',
             background: 'var(--card-bg)', color: 'var(--accent)',
-            border: '1.5px solid var(--line)',
-            padding: '.65rem 1.15rem', borderRadius: 10,
+            border: '1px solid var(--line)',
+            padding: '.65rem 1.15rem', borderRadius: 4,
             fontSize: '.85rem', fontWeight: 700, textDecoration: 'none', minHeight: 44,
           }}>
             Todas las rutas →
@@ -115,8 +115,8 @@ export default async function RutaPage({ params }: Props) {
 
         {/* Mapa */}
         <div style={{
-          background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-          borderRadius: 20, overflow: 'hidden', marginBottom: '2rem',
+          background: 'var(--card-bg)', border: '1px solid var(--line)',
+          borderRadius: 6, overflow: 'hidden', marginBottom: '2rem',
         }}>
           <div style={{
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -132,7 +132,7 @@ export default async function RutaPage({ params }: Props) {
 
         {/* Itinerario */}
         <h2 style={{
-          fontFamily: 'var(--font-serif)', fontSize: '1.35rem', fontWeight: 800,
+          fontFamily: 'var(--font-serif)', fontWeight: 700,
           color: 'var(--ink)', margin: '0 0 1rem',
         }}>
           Itinerario
@@ -147,7 +147,7 @@ export default async function RutaPage({ params }: Props) {
                   <div style={{
                     width: 36, height: 36, borderRadius: '50%',
                     background: ruta.costa.color === '#f8fafc' ? 'var(--accent)' : ruta.costa.color, color: '#fff',
-                    fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '1rem',
+                    fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
                     {i + 1}
@@ -158,12 +158,12 @@ export default async function RutaPage({ params }: Props) {
                 </div>
                 <Link href={`/playas/${p.playa.slug}`} style={{
                   flex: 1, display: 'flex', flexDirection: 'column',
-                  background: 'var(--card-bg)', border: '1.5px solid var(--line)',
-                  borderRadius: 14, padding: '1rem 1.15rem', textDecoration: 'none', transition: 'all .15s',
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
+                  borderRadius: 6, padding: '1rem 1.15rem', textDecoration: 'none', transition: 'all .15s',
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.25rem' }}>
                     <span style={{ fontWeight: 800, fontSize: '.95rem', color: 'var(--ink)' }}>{p.playa.nombre}</span>
-                    <span style={{ background: sc, color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 900, fontSize: '.82rem', padding: '.2rem .45rem', borderRadius: 6 }}>
+                    <span style={{ background: sc, color: '#fff', fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.82rem', padding: '.2rem .45rem', borderRadius: 6 }}>
                       {p.score}
                     </span>
                   </div>
@@ -192,7 +192,7 @@ export default async function RutaPage({ params }: Props) {
         <div style={{
           marginTop: '2rem', padding: '1.25rem',
           background: 'color-mix(in srgb, var(--accent) 6%, var(--card-bg))',
-          border: '1.5px solid var(--line)', borderRadius: 14,
+          border: '1px solid var(--line)', borderRadius: 6,
           textAlign: 'center',
         }}>
           <a href={ruta.googleMapsUrl} target="_blank" rel="noopener noreferrer" style={{
