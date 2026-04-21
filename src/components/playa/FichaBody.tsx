@@ -14,6 +14,7 @@ import type { HoraIdeal } from '@/lib/hora-ideal'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import IluEstado from './IluEstado'
+import Collapsible from '@/components/ui/Collapsible'
 import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
@@ -490,6 +491,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? `How to get to ${playa.nombre}` : `Cómo llegar a ${playa.nombre}`}</h2>
           </div>
           <div className={styles.cardBody}>
+            <Collapsible maxHeight={160} labelMore={locale === 'en' ? 'Show all options' : 'Ver todas las opciones'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent,#6b400a)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
                 <Car size={18} weight='bold'/> {locale === 'en' ? 'By car — open in Google Maps' : 'En coche — abrir en Google Maps'}
@@ -541,6 +543,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             )}
 
             <MapaLeaflet lat={playa.lat} lng={playa.lng} nombre={playa.nombre} zoom={15} height="300px" />
+            </Collapsible>
           </div>
         </div>
 
@@ -558,6 +561,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </span>
           </div>
           <div className={styles.cardBody}>
+            <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
             <div className={styles.list}>
               {restList ? restList.slice(0, 5).map((r: any) => {
                 const mapsUrl = r.googleId ? `https://www.google.com/maps/place/?q=place_id:${r.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(r.nombre)}`
@@ -620,6 +624,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 {locale === 'en' ? `Book a table in ${playa.municipio}` : `Reservar mesa en ${playa.municipio}`}
               </a>
             )}
+            </Collapsible>
           </div>
         </div>
         <div className={styles.card} id="s-dormir">
@@ -628,6 +633,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <span className={styles.cardSrc}>{clientHoteles && clientHoteles.length > 0 ? i18n.dormirSrc : ''}</span>
           </div>
           <div className={styles.cardBody}>
+            <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
             <div className={styles.list}>
               {clientHoteles && clientHoteles.length > 0 ? clientHoteles.map((h: any) => {
                 const mapsUrl = h.googleId ? `https://www.google.com/maps/place/?q=place_id:${h.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(h.nombre)}`
@@ -692,6 +698,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 {locale === 'en' ? `Find hotels near ${playa.nombre}` : `Buscar hoteles cerca de ${playa.nombre}`}
               </a>
             )}
+            </Collapsible>
           </div>
         </div>
 
@@ -891,6 +898,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <span className={styles.cardSrc}>{i18n.infoSrc}</span>
           </div>
           <div className={styles.cardBody}>
+            <Collapsible maxHeight={180} labelMore={locale === 'en' ? 'Show all details' : 'Ver todos los datos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
             {playa.longitud    && <DataRow k={i18n.longitud}     v={`${playa.longitud} m`}/>}
             {playa.anchura     && <DataRow k={i18n.anchura}      v={`${playa.anchura} m`}/>}
             {playa.composicion && <DataRow k={i18n.composicion}  v={playa.composicion}/>}
@@ -957,6 +965,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 )}
               </>
             )}
+            </Collapsible>
           </div>
         </div>
 
