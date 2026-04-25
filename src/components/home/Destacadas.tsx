@@ -157,7 +157,6 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
             <span className={styles.dot} style={{ background: e.dot }}/>
             {locale === 'en' ? e.labelEn : e.label}
           </div>
-          <div className={styles.temp}>{m.agua}°</div>
           {rank !== undefined && (
             <div style={{
               position: 'absolute', top: 10, left: 12, zIndex: 3,
