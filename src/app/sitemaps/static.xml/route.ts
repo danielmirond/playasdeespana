@@ -57,6 +57,8 @@ export async function GET() {
     { es: '/buceo',                  en: null,                     p: '0.7', f: 'weekly' },
     { es: '/playas-autocaravana',    en: null,                     p: '0.7', f: 'weekly' },
     { es: '/playas-aguas-cristalinas', en: null,                   p: '0.7', f: 'weekly' },
+    { es: '/playas-paradisiacas',    en: null,                   p: '0.7', f: 'weekly' },
+    { es: '/calas-con-encanto',      en: null,                   p: '0.7', f: 'weekly' },
     { es: '/protectores-solares',    en: null,                     p: '0.6', f: 'monthly' },
     { es: '/seguros-viaje',          en: null,                     p: '0.6', f: 'monthly' },
     { es: '/alquiler-barco-playa',   en: null,                     p: '0.6', f: 'monthly' },
