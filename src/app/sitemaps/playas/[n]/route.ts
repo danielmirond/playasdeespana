@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getPlayas } from '@/lib/playas'
 
-export const dynamic = 'force-dynamic'
 export const revalidate = 86400
 const BASE  = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const CHUNK = 1000

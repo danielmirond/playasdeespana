@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
 
   const data = await getReportes(slug)
   return NextResponse.json(data, {
-    headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' },
+    headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=1800' },
   })
 }
 
