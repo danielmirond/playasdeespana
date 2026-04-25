@@ -1,4 +1,4 @@
-// src/app/top/page.tsx — Top 10 mejores playas por costa
+// src/app/top/page.tsx. Top 10 mejores playas por costa
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -7,7 +7,7 @@ import { COSTAS } from '@/lib/rutas'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Top 10 mejores playas de España por costa — Rankings',
+  title: 'Top 10 mejores playas de España por costa | Rankings',
   description: 'Rankings de las 10 mejores playas de cada costa de España: Costa del Sol, Costa Brava, Costa de la Luz, Rías Baixas y más. Puntuación por servicios y accesibilidad.',
   alternates: { canonical: '/top' },
 }

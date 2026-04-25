@@ -1,5 +1,5 @@
 // src/app/playas-paradisiacas/page.tsx
-// Hub SEO: "Playas paradisíacas en España" — KW de alto volumen estacional.
+// Hub SEO: "Playas paradisíacas en España". KW de alto volumen estacional.
 // Lista las playas mejor puntuadas por transparencia del agua + arena +
 // Bandera Azul + baja ocupación. Agrupadas por comunidad y provincia
 // con cross-links para long-tail.
@@ -14,7 +14,7 @@ export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Playas paradisíacas en España — Las más bonitas por comunidad y provincia',
+  title: 'Playas paradisíacas en España | Las más bonitas por comunidad y provincia',
   description: 'Las playas más paradisíacas de España: aguas cristalinas, arena fina, poca masificación y Bandera Azul. Ranking por comunidad autónoma y provincia con estado del mar en tiempo real.',
   alternates: {
     canonical: '/playas-paradisiacas',

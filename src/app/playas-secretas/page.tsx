@@ -1,4 +1,4 @@
-// src/app/playas-secretas/page.tsx — Hidden gems: low occupancy, high score
+// src/app/playas-secretas/page.tsx. Hidden gems: low occupancy, high score
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -8,7 +8,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Playas secretas en España — Calas escondidas y poco masificadas',
+  title: 'Playas secretas en España | Calas escondidas y poco masificadas',
   description: 'Las playas menos masificadas de España: baja ocupación, sin parking, sin chiringuito. Calas escondidas y rincones vírgenes.',
   alternates: { canonical: '/playas-secretas' },
 }

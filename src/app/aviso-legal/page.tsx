@@ -1,10 +1,10 @@
-// src/app/aviso-legal/page.tsx — Aviso legal conforme LSSI-CE art. 10
+// src/app/aviso-legal/page.tsx. Aviso legal conforme LSSI-CE art. 10
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 
 export const metadata: Metadata = {
-  title: 'Aviso legal — Playas de España',
+  title: 'Aviso legal | Playas de España',
   description: 'Información legal sobre el sitio web playas-espana.com: titularidad, condiciones de uso y responsabilidad.',
   alternates: { canonical: '/aviso-legal' },
   robots: { index: true, follow: true },

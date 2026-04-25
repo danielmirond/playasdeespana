@@ -326,7 +326,7 @@ export default function TraficoSection({ playa }: Props) {
             <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>Tráfico, afluencia y donde aparcar, parking cerca</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={btnStyle('#6b400a', '#fff')}>
-                <Car size={16} weight='bold'/> En coche — abrir en Google Maps
+                <Car size={16} weight='bold'/> En coche. abrir en Google Maps
               </a>
               <a href={gmTransit} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', '#6b400a', true)}>
                 <Bus size={16} weight='bold'/> En transporte público

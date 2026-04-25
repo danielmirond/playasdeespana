@@ -1,5 +1,5 @@
 // src/components/home/ActividadesHoy.tsx
-// "Actividades hoy" — qué puedes hacer según las playas + condiciones.
+// "Actividades hoy". qué puedes hacer según las playas + condiciones.
 // Agrupa playas por tipo de actividad (surf, snorkel, paddle, etc.) y
 // muestra las que tienen esa actividad registrada. No fetcha meteo: usa
 // los atributos estáticos del JSON. El card enlaza a la ficha donde el

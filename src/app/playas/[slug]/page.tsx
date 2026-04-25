@@ -32,7 +32,7 @@ import { calcularPlayaScore } from '@/lib/scoring'
 
 export const revalidate = 3600
 // Dejamos techo de 25 s al render (Overpass para hoteles/restaurantes puede
-// tardar 5-8 s). Hobby plan cappea a 10 s, Pro hasta 60 s — la plataforma
+// tardar 5-8 s). Hobby plan cappea a 10 s, Pro hasta 60 s. la plataforma
 // elige el mínimo. Si la lookup server-side falla, FichaBody reintenta
 // desde el cliente via /api/hoteles y /api/restaurantes.
 export const maxDuration = 25
@@ -40,7 +40,7 @@ export const maxDuration = 25
 // Pre-renderiza las playas con Bandera Azul (las más visitadas) en build
 // El resto se genera on-demand con ISR y se cachea 1h
 export async function generateStaticParams() {
-  // No pre-renderizar en build — ISR con revalidate: 3600 genera cada
+  // No pre-renderizar en build. ISR con revalidate: 3600 genera cada
   // página al primer visitante y la cachea 1 h. Antes pre-renderizábamos
   // todas las banderas azules (647 páginas × 11 API calls = timeout).
   return []
@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: '2026-03-09T00:00:00Z',
       modifiedTime: new Date().toISOString(),
-      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${np} — condiciones en tiempo real` }],
+      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${np}. condiciones en tiempo real` }],
     },
     twitter: { card: 'summary_large_image', title, description, images: [ogUrl] },
     alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },

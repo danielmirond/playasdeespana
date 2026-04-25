@@ -1,4 +1,4 @@
-// src/app/atardeceres/page.tsx — Mejores playas para ver el atardecer
+// src/app/atardeceres/page.tsx. Mejores playas para ver el atardecer
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -8,7 +8,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Mejores playas para ver el atardecer en España — Puestas de sol',
+  title: 'Mejores playas para ver el atardecer en España | Puestas de sol',
   description: 'Playas españolas con las mejores puestas de sol: orientadas al oeste y suroeste. Costa de la Luz, Rías Baixas, Costa da Morte, Baleares y Canarias.',
   alternates: { canonical: '/atardeceres' },
 }
@@ -35,21 +35,21 @@ const faqSchema = {
 // En las islas depende de la posición en la isla.
 // Simplificación pragmática: seleccionamos por zona geográfica.
 function esPlayaAtardecer(p: { lat: number; lng: number; provincia: string; comunidad: string }): boolean {
-  // Costa atlántica (Galicia, Huelva, Cádiz atlántico) — casi todas miran al oeste
+  // Costa atlántica (Galicia, Huelva, Cádiz atlántico). casi todas miran al oeste
   if (p.comunidad === 'Galicia') return true
   if (p.provincia === 'Huelva') return true
   if (p.provincia === 'Cádiz' && p.lng < -5.5) return true // Cádiz atlántico
 
-  // Asturias y Cantabria — miran al norte, pero con puestas de sol laterales espectaculares en verano
+  // Asturias y Cantabria. miran al norte, pero con puestas de sol laterales espectaculares en verano
   if (p.comunidad === 'Asturias' || p.comunidad === 'Cantabria') return true
 
-  // Baleares — costa oeste de cada isla
+  // Baleares. costa oeste de cada isla
   if (p.comunidad === 'Islas Baleares' && p.lng < 2.8) return true // Mallorca/Ibiza west coast
 
-  // Canarias — costa oeste
+  // Canarias. costa oeste
   if (p.comunidad === 'Canarias' && p.lng < -15.5) return true
 
-  // Costa mediterránea — solo calas puntuales que miran al SW (raras)
+  // Costa mediterránea. solo calas puntuales que miran al SW (raras)
   // Incluimos las del Delta del Ebro y costa sur de Tarragona
   if (p.provincia === 'Tarragona' && p.lat < 41) return true
 
@@ -61,7 +61,7 @@ export default async function AtardeceresPage() {
   const atardeceres = playas
     .filter(p => typeof p.lat === 'number' && typeof p.lng === 'number' && esPlayaAtardecer(p))
     .sort((a, b) => {
-      // Sort by "westness" — more negative lng = faces more into the sunset
+      // Sort by "westness". more negative lng = faces more into the sunset
       return a.lng - b.lng
     })
 
@@ -73,7 +73,7 @@ export default async function AtardeceresPage() {
     porCom.set(p.comunidad, list)
   }
 
-  // Sunset time estimate (based on month — rough but atmospheric)
+  // Sunset time estimate (based on month. rough but atmospheric)
   const month = new Date().getMonth() // 0-11
   const sunsetHours = [18, 18.5, 19, 20, 21, 21.5, 21.5, 21, 20, 19, 18.5, 18]
   const h = Math.floor(sunsetHours[month])

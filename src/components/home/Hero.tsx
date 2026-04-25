@@ -1,4 +1,4 @@
-// src/components/home/Hero.tsx — Product-focused hero.
+// src/components/home/Hero.tsx. Product-focused hero.
 // "¿A qué playa voy hoy?" + CTAs accionables
 import Link from 'next/link'
 import styles from './Hero.module.css'
@@ -30,7 +30,7 @@ export default function Hero() {
         en más de 5.000 playas. Datos oficiales, actualizados cada hora.
       </p>
 
-      {/* CTAs accionables — la geolocalización se pide automáticamente
+      {/* CTAs accionables. la geolocalización se pide automáticamente
           vía TopCercanas al cargar la home, no necesita botón aquí */}
       <div className={styles.ctas}>
         <Link href="/buscar?orden=score" className={styles.ctaPrimary}>

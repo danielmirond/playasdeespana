@@ -1,18 +1,18 @@
 // src/app/protectores-solares/page.tsx
-// Landing comercial: "Protectores solares para playa" — Amazon affiliate.
+// Landing comercial: "Protectores solares para playa". Amazon affiliate.
 // Query de alto volumen comercial + informativo. La audiencia de la web
 // (gente que busca playas) es exactamente la que compra crema solar.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 
-export const revalidate = 604800 // 7 días — contenido evergreen
+export const revalidate = 604800 // 7 días. contenido evergreen
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
 
 export const metadata: Metadata = {
-  title: 'Mejores protectores solares para playa 2026 — Guía y recomendaciones',
+  title: 'Mejores protectores solares para playa 2026 | Guía y recomendaciones',
   description: 'Guía completa de protectores solares para la playa: SPF, resistencia al agua, reef-safe, niños y pieles sensibles. Recomendaciones actualizadas con enlaces de compra.',
   alternates: { canonical: '/protectores-solares' },
   openGraph: {
@@ -157,7 +157,7 @@ export default function ProtectoresSolaresPage() {
           </div>
           <p style={{ fontSize: '.8rem', color: 'var(--muted)', marginTop: '.75rem', lineHeight: 1.5 }}>
             En cada ficha de playa mostramos el <strong>índice UV actual</strong> para que elijas el SPF adecuado.
-            En verano en España el UV medio es 8-10 — siempre SPF50+.
+            En verano en España el UV medio es 8-10. siempre SPF50+.
           </p>
         </section>
 
@@ -225,11 +225,11 @@ export default function ProtectoresSolaresPage() {
             Cómo usar el protector solar en la playa
           </h2>
           <ol style={{ fontSize: '.9rem', color: 'var(--muted)', lineHeight: 1.75, paddingLeft: '1.2rem' }}>
-            <li><strong>30 minutos antes</strong> de exponerte al sol — necesita tiempo para absorberse.</li>
-            <li><strong>2 mg/cm²</strong> — equivale a una cucharada sopera para cara y cuello, otra para cada brazo.</li>
-            <li><strong>Reaplicar cada 2 horas</strong> — y siempre tras bañarse, aunque diga "waterproof".</li>
+            <li><strong>30 minutos antes</strong> de exponerte al sol. necesita tiempo para absorberse.</li>
+            <li><strong>2 mg/cm².</strong> equivale a una cucharada sopera para cara y cuello, otra para cada brazo.</li>
+            <li><strong>Reaplicar cada 2 horas.</strong> y siempre tras bañarse, aunque diga "waterproof".</li>
             <li><strong>No olvidar</strong>: orejas, nuca, empeines, labios (con stick SPF).</li>
-            <li><strong>Sombra 12-16h</strong> — el UV es máximo; ni el SPF50+ sustituye la sombra.</li>
+            <li><strong>Sombra 12-16h.</strong> el UV es máximo; ni el SPF50+ sustituye la sombra.</li>
           </ol>
         </section>
 

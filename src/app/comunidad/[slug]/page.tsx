@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const c = comunidades.find(x => x.slug === slug)
   if (!c) return {}
   return {
-    title: `Playas de ${c.nombre} — ${c.count} playas`,
+    title: `Playas de ${c.nombre} | ${c.count} playas`,
     description: `Descubre las ${c.count} mejores playas de ${c.nombre}. Estado del mar, temperatura del agua y servicios en tiempo real.`,
     alternates: { canonical: `/comunidad/${slug}` },
   }

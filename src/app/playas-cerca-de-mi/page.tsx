@@ -1,5 +1,5 @@
 // src/app/playas-cerca-de-mi/page.tsx
-// Landing KW "playas cerca de mí" — intención navegacional + informacional.
+// Landing KW "playas cerca de mí". intención navegacional + informacional.
 // Server-render con fallback por comunidad (sin geolocation) + CTA cliente
 // que activa GPS y redirige a /buscar?lat=X&lng=Y&orden=cercanas.
 //
@@ -16,11 +16,11 @@ export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Playas cerca de mí — Encuentra la más cercana con estado del mar hoy',
+  title: 'Playas cerca de mí | Encuentra la más cercana con estado del mar hoy',
   description: 'Activa tu ubicación y descubre las playas más cercanas en tiempo real: distancia exacta, temperatura del agua, oleaje, viento y score 0-100. Sin registro, gratis.',
   alternates: { canonical: '/playas-cerca-de-mi' },
   openGraph: {
-    title: 'Playas cerca de mí — Playas de España',
+    title: 'Playas cerca de mí | Playas de España',
     description: 'Las playas más cercanas con estado del mar actualizado cada hora.',
     url: `${BASE}/playas-cerca-de-mi`,
     type: 'website',
@@ -41,7 +41,7 @@ const FAQ = [
   },
   {
     q: '¿Qué precisión tiene la búsqueda por GPS?',
-    a: 'En móvil con GPS activo, la precisión es de 5-20 metros. En escritorio o sin GPS (solo IP/Wi-Fi), puede ser de 100 metros a varios kilómetros. Para ordenar playas cercanas es suficiente en ambos casos — el error es muy inferior a la distancia entre playas.',
+    a: 'En móvil con GPS activo, la precisión es de 5-20 metros. En escritorio o sin GPS (solo IP/Wi-Fi), puede ser de 100 metros a varios kilómetros. Para ordenar playas cercanas es suficiente en ambos casos. el error es muy inferior a la distancia entre playas.',
   },
   {
     q: '¿Funciona si no doy permiso de ubicación?',
@@ -200,7 +200,7 @@ export default async function PlayasCercaDeMiPage() {
               {
                 n: '01',
                 titulo: 'Geolocalización del navegador',
-                texto: 'El navegador usa GPS, Wi-Fi e IP para obtener tu latitud y longitud actuales. Todo el cálculo ocurre en tu dispositivo — nosotros solo recibimos dos números.',
+                texto: 'El navegador usa GPS, Wi-Fi e IP para obtener tu latitud y longitud actuales. Todo el cálculo ocurre en tu dispositivo. nosotros solo recibimos dos números.',
               },
               {
                 n: '02',

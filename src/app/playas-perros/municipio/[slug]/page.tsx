@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const mun = stats.municipios.find(m => m.slug === slug)
   if (!mun) return {}
   return {
-    title: `Playas para perros en ${mun.nombre} — ${mun.count} playas caninas`,
+    title: `Playas para perros en ${mun.nombre} | ${mun.count} playas caninas`,
     description: `${mun.count} playas donde se permite la entrada de perros en ${mun.nombre} (${mun.provincia}). Mapa, servicios y normativa local.`,
     alternates: { canonical: `/playas-perros/municipio/${slug}` },
   }

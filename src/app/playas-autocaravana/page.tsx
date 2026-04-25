@@ -1,5 +1,5 @@
 // src/app/playas-autocaravana/page.tsx
-// Pillar SEO: "Playas para autocaravana en España" — hub específico para
+// Pillar SEO: "Playas para autocaravana en España". hub específico para
 // viajeros en autocaravana que buscan áreas cerca del mar (diferente de
 // /campings, que es general).
 
@@ -14,7 +14,7 @@ export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Playas para autocaravana en España — Áreas, pernocta y rutas costeras',
+  title: 'Playas para autocaravana en España | Áreas, pernocta y rutas costeras',
   description: 'Guía completa de playas aptas para autocaravana en España. Áreas de autocaravanas cercanas, zonas de pernocta legal, servicios de vaciado y enganche eléctrico por comunidad.',
   alternates: { canonical: '/playas-autocaravana' },
   openGraph: {
@@ -212,11 +212,11 @@ export default async function PlayasAutocaravanaPage() {
             Apps imprescindibles para autocaravanistas
           </h2>
           <ul style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.8, paddingLeft: '1.2rem' }}>
-            <li><strong>Park4Night</strong> — mapa colaborativo con áreas, parkings y pernoctas (reviews de usuarios).</li>
-            <li><strong>Caramaps</strong> — guía francesa con buena cobertura de España; áreas y servicios.</li>
-            <li><strong>Campercontact</strong> — enfocado en áreas europeas, datos de servicios y precios.</li>
-            <li><strong>ACSI CampingCard</strong> — descuentos en 3.000+ campings europeos fuera de temporada.</li>
-            <li><strong>iOverlander</strong> — alternativa gratuita, enfocada en viajeros de larga duración.</li>
+            <li><strong>Park4Night.</strong> mapa colaborativo con áreas, parkings y pernoctas (reviews de usuarios).</li>
+            <li><strong>Caramaps.</strong> guía francesa con buena cobertura de España; áreas y servicios.</li>
+            <li><strong>Campercontact.</strong> enfocado en áreas europeas, datos de servicios y precios.</li>
+            <li><strong>ACSI CampingCard.</strong> descuentos en 3.000+ campings europeos fuera de temporada.</li>
+            <li><strong>iOverlander.</strong> alternativa gratuita, enfocada en viajeros de larga duración.</li>
           </ul>
         </section>
 
@@ -259,7 +259,7 @@ export default async function PlayasAutocaravanaPage() {
             {[
               {
                 q: '¿Se puede dormir en una autocaravana junto a la playa en España?',
-                a: 'Sí, siempre que pernoctes dentro del vehículo sin desplegar toldos, patas, sillas ni mesa — eso sería acampada libre y está prohibido en toda la costa. La pernocta con ruedas en el suelo y el vehículo matriculado es legal en parkings públicos no señalizados como prohibidos. Algunos municipios costeros limitan la pernocta a 24-48h.',
+                a: 'Sí, siempre que pernoctes dentro del vehículo sin desplegar toldos, patas, sillas ni mesa. eso sería acampada libre y está prohibido en toda la costa. La pernocta con ruedas en el suelo y el vehículo matriculado es legal en parkings públicos no señalizados como prohibidos. Algunos municipios costeros limitan la pernocta a 24-48h.',
               },
               {
                 q: '¿Qué multa te ponen por acampar ilegalmente con una autocaravana?',

@@ -1,7 +1,7 @@
-// src/app/page.tsx — Homepage orientada a producto.
+// src/app/page.tsx. Homepage orientada a producto.
 //
 // Estructura:
-//   1. Hero — "¿A qué playa voy hoy?" + CTAs
+//   1. Hero. "¿A qué playa voy hoy?" + CTAs
 //   2. Buscador (con filtros funcionales)
 //   3. Top playas hoy (por score 0-100 real)
 //   4. Evita hoy (playas con peor score)
@@ -25,10 +25,10 @@ import { getPlayas, getComunidades } from '@/lib/playas'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Playas de España — ¿A qué playa voy hoy?',
+  title: 'Playas de España | ¿A qué playa voy hoy?',
   description: 'Estado del mar en tiempo real en más de 5.000 playas de España. Temperatura del agua, oleaje, viento y servicios. Datos actualizados cada hora.',
   openGraph: {
-    title: 'Playas de España — ¿A qué playa voy hoy?',
+    title: 'Playas de España | ¿A qué playa voy hoy?',
     description: 'Consulta el estado del mar en más de 5.000 playas españolas.',
     url: 'https://playas-espana.com',
     images: [{ url: '/api/og?playa=Playas+de+España', width: 1200, height: 630 }],
@@ -105,7 +105,7 @@ export default async function HomePage() {
         <div className="cv-auto"><ClientBlocks /></div>
         <div className="cv-auto"><Comunidades comunidades={comunidades} /></div>
 
-        {/* Hub SEO — links a secciones temáticas */}
+        {/* Hub SEO. links a secciones temáticas */}
         <section style={{
           maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 1rem',
         }}>

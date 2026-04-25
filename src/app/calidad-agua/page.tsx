@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 export const revalidate = 86400
-export const metadata: Metadata = { title: 'Calidad del agua en playas de España — Datos EEA', description: 'Clasificación de calidad del agua de baño en las playas de España según la Directiva europea 2006/7/CE.', alternates: { canonical: '/calidad-agua' } }
+export const metadata: Metadata = { title: 'Calidad del agua en playas de España | Datos EEA', description: 'Clasificación de calidad del agua de baño en las playas de España según la Directiva europea 2006/7/CE.', alternates: { canonical: '/calidad-agua' } }
 export default async function Page() {
   const playas = await getPlayas()
   const conBandera = playas.filter(p => p.bandera).length

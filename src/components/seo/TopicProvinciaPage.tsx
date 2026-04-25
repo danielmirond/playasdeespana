@@ -1,6 +1,6 @@
 // src/components/seo/TopicProvinciaPage.tsx
 // Componente SSR reutilizable para landings del tipo
-// /{topic}/{provincia} — genera la estructura común (hero, lista de
+// /{topic}/{provincia}. genera la estructura común (hero, lista de
 // playas destacadas de esa provincia, FAQ, cross-links, schema) y
 // deja que cada route pase su contenido específico vía props.
 //

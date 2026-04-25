@@ -1,5 +1,5 @@
 'use client'
-// ConsentScripts — carga GA4 y AdSense SOLO si el usuario ha consentido.
+// ConsentScripts. carga GA4 y AdSense SOLO si el usuario ha consentido.
 // Escucha el evento 'cookie-consent-change' disparado por CookieBanner.
 // Si no hay consentimiento, NO se carga nada (cumple LSSI-CE art. 22.2).
 import { useEffect, useState } from 'react'
@@ -26,7 +26,7 @@ export default function ConsentScripts() {
 
   return (
     <>
-      {/* GA4 — solo si consentimiento analíticas */}
+      {/* GA4. solo si consentimiento analíticas */}
       {analytics && (
         <>
           <Script
@@ -57,7 +57,7 @@ export default function ConsentScripts() {
         </>
       )}
 
-      {/* AdSense — solo si consentimiento marketing */}
+      {/* AdSense. solo si consentimiento marketing */}
       {marketing && ADSENSE_ID && (
         <Script
           async

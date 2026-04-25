@@ -1,5 +1,5 @@
 // src/components/home/ParkingHoy.tsx
-// "Parking hoy" — playas con parking, agrupadas por nivel de ocupación.
+// "Parking hoy". playas con parking, agrupadas por nivel de ocupación.
 // CTA monetizable a Parclick.
 import Link from 'next/link'
 import type { Playa } from '@/types'

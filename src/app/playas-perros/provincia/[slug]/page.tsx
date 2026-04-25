@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const provincia = stats.provincias.find(p => p.slug === slug)
   if (!provincia) return {}
   return {
-    title: `Playas para perros en ${provincia.nombre} (${provincia.count}) — Listado 2026`,
+    title: `Playas para perros en ${provincia.nombre} (${provincia.count}) | Listado 2026`,
     description: `${provincia.count} playas caninas en ${provincia.nombre}: mapa interactivo, municipios pet-friendly y normativa local.`,
     alternates: { canonical: `/playas-perros/provincia/${slug}` },
   }

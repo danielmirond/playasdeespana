@@ -10,7 +10,7 @@ import styles from './PlayasNudistas.module.css'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Playas nudistas en España 2026 — Listado completo por provincia',
+  title: 'Playas nudistas en España 2026 | Listado completo por provincia',
   description: 'Listado completo de playas nudistas y de naturismo en España. Ordenadas por comunidad, provincia y municipio con mapa interactivo y servicios.',
   alternates: { canonical: '/playas-nudistas' },
   openGraph: {
@@ -40,7 +40,7 @@ const FAQ = [
   },
   {
     q: '¿Son seguras las playas nudistas?',
-    a: 'Tan seguras como cualquier otra playa. Las playas con socorrismo y bandera están supervisadas independientemente de si son nudistas o no. Las playas aisladas (calas, acantilados) pueden tener accesos difíciles — comprueba las condiciones de acceso en la ficha de cada playa.',
+    a: 'Tan seguras como cualquier otra playa. Las playas con socorrismo y bandera están supervisadas independientemente de si son nudistas o no. Las playas aisladas (calas, acantilados) pueden tener accesos difíciles. comprueba las condiciones de acceso en la ficha de cada playa.',
   },
 ]
 

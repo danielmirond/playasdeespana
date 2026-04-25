@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = (await getAccesiblesStats()).provincias.find(p => p.slug === slug)
   if (!p) return {}
   return {
-    title: `Playas accesibles en ${p.nombre} (${p.count}) — Listado 2026`,
+    title: `Playas accesibles en ${p.nombre} (${p.count}) | Listado 2026`,
     description: `${p.count} playas accesibles en la provincia de ${p.nombre}. Mapa interactivo, municipios y servicios.`,
     alternates: { canonical: `/playas-accesibles/provincia/${slug}` },
   }

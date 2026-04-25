@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   if (!data) return {}
   const title = `Chiringuitos en las playas de ${data.provincia.nombre}`
   return {
-    title: `${title} — Los mejores 2026`,
+    title: `${title} | Los mejores 2026`,
     description: `Guía de chiringuitos, bares y restaurantes con vistas al mar en ${data.provincia.nombre}. Listado por playa con precios y reservas.`,
     alternates: { canonical: `/chiringuitos/${provincia}` },
     openGraph: { title, url: `${BASE}/chiringuitos/${provincia}`, type: 'article' },

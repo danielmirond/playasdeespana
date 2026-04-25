@@ -1,4 +1,4 @@
-// src/app/not-found.tsx — Custom 404 with beach suggestions
+// src/app/not-found.tsx. Custom 404 with beach suggestions
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 

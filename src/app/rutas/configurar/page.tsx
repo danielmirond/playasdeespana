@@ -5,7 +5,7 @@ import Nav from '@/components/ui/Nav'
 import ConfiguradorRuta from './ConfiguradorRuta'
 
 export const metadata: Metadata = {
-  title: 'Configura tu ruta de playas — Playas de España',
+  title: 'Configura tu ruta de playas | Playas de España',
   description: 'Crea tu propia ruta de playas por cualquier costa de España. Elige costa, número de paradas, filtros y abre el itinerario en Google Maps.',
   alternates: { canonical: '/rutas/configurar' },
 }

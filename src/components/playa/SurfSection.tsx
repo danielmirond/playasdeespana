@@ -25,12 +25,12 @@ interface Props {
 }
 
 const ESTADO_SURF: Record<string, { label: string; color: string; bg: string; desc: string }> = {
-  CALMA:   { label: 'Plana',    color: '#9ca3af', bg: '#f9fafb', desc: 'Mar en calma — no apto surf' },
-  BUENA:   { label: 'Suave',    color: '#4a7a90', bg: 'rgba(74,122,144,.08)', desc: 'Olas pequeñas — ideal principiantes' },
-  AVISO:   { label: 'Mediana',  color: '#c48a1e', bg: 'rgba(196,138,30,.06)', desc: 'Buenas condiciones — nivel medio' },
-  SURF:    { label: 'Potente',  color: '#4a7a90', bg: 'rgba(74,122,144,.06)', desc: 'Excelente para surf — nivel avanzado' },
-  VIENTO:  { label: 'Ventosa',  color: '#c48a1e', bg: 'rgba(196,138,30,.08)', desc: 'Viento fuerte — ideal kitesurf/windsurf' },
-  PELIGRO: { label: 'Peligrosa',color: '#7a2818', bg: 'rgba(122,40,24,.06)', desc: 'Mar peligroso — no recomendado' },
+  CALMA:   { label: 'Plana',    color: '#9ca3af', bg: '#f9fafb', desc: 'Mar en calma. no apto surf' },
+  BUENA:   { label: 'Suave',    color: '#4a7a90', bg: 'rgba(74,122,144,.08)', desc: 'Olas pequeñas. ideal principiantes' },
+  AVISO:   { label: 'Mediana',  color: '#c48a1e', bg: 'rgba(196,138,30,.06)', desc: 'Buenas condiciones. nivel medio' },
+  SURF:    { label: 'Potente',  color: '#4a7a90', bg: 'rgba(74,122,144,.06)', desc: 'Excelente para surf. nivel avanzado' },
+  VIENTO:  { label: 'Ventosa',  color: '#c48a1e', bg: 'rgba(196,138,30,.08)', desc: 'Viento fuerte. ideal kitesurf/windsurf' },
+  PELIGRO: { label: 'Peligrosa',color: '#7a2818', bg: 'rgba(122,40,24,.06)', desc: 'Mar peligroso. no recomendado' },
 }
 
 function calcEstado(olas: number, viento: number): string {
@@ -215,7 +215,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
           </div>
         )}
 
-        {/* FORECAST 5 DÍAS — olas + lluvia combinados */}
+        {/* FORECAST 5 DÍAS. olas + lluvia combinados */}
         {(forecast?.length || meteo?.length) && (
           <div>
             <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>
@@ -269,7 +269,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
           </div>
         )}
 
-        {/* Affiliates — deportes de agua + protección solar */}
+        {/* Affiliates. deportes de agua + protección solar */}
         {(process.env.NEXT_PUBLIC_AMAZON_TAG || process.env.NEXT_PUBLIC_CIVITATIS_AFF) && (
           <div style={{ padding: '0 1.1rem 1rem', display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
             {process.env.NEXT_PUBLIC_AMAZON_TAG && (

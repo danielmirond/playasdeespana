@@ -10,7 +10,7 @@ interface Props { params: Promise<{ slug: string }> }
 export async function generateStaticParams() { return (await getRutas(await getPlayas())).map(r => ({ slug: r.slug })) }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params; const r = (await getRutas(await getPlayas())).find(x => x.slug === slug); if (!r) return {}
-  return { title: `${r.nombre} — Beach Itinerary`, alternates: { canonical: `/en/routes/${slug}` } }
+  return { title: `${r.nombre} | Beach Itinerary`, alternates: { canonical: `/en/routes/${slug}` } }
 }
 export default async function Page({ params }: Props) {
   const { slug } = await params; const ruta = (await getRutas(await getPlayas())).find(r => r.slug === slug); if (!ruta) notFound()

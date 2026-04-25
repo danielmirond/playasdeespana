@@ -15,7 +15,7 @@ const IATI_AFF     = process.env.NEXT_PUBLIC_IATI_AFF ?? ''
 const CHAPKA_AFF   = process.env.NEXT_PUBLIC_CHAPKA_AFF ?? ''
 
 export const metadata: Metadata = {
-  title: 'Seguro de viaje para España — Comparativa 2026',
+  title: 'Seguro de viaje para España | Comparativa 2026',
   description: 'Compara los mejores seguros de viaje para visitar España: cobertura médica, cancelación y equipaje. Heymondo, IATI y Chapka con descuento exclusivo.',
   alternates: { canonical: '/seguros-viaje' },
   openGraph: {
@@ -124,7 +124,7 @@ export default function SegurosViajePage() {
             <li><strong>Turistas de fuera de la UE</strong>: cualquier urgencia privada cuesta 150-500€. Un seguro desde 1,80€/día evita facturas.</li>
             <li><strong>Deportes acuáticos</strong>: surf, buceo, kayak y paddle NO entran en la TSE. El seguro específico sí.</li>
             <li><strong>Cancelación de viaje</strong>: si enfermas antes de venir, recuperas el dinero de vuelos, hotel y reservas.</li>
-            <li><strong>Equipaje</strong>: robos en playa son comunes en zonas turísticas — 500-2000€ de cobertura.</li>
+            <li><strong>Equipaje</strong>: robos en playa son comunes en zonas turísticas. Cobertura de 500 a 2000€ de cobertura.</li>
           </ul>
         </section>
 
@@ -198,10 +198,10 @@ export default function SegurosViajePage() {
               {[
                 ['Asistencia médica',    '30.000€',    '150.000€+'],
                 ['Hospitalización',       'Incluido',   'Sin franquicia'],
-                ['Cancelación',           '—',          '2.000-5.000€'],
+                ['Cancelación',           '–',          '2.000-5.000€'],
                 ['Equipaje',              '500€',       '2.000€'],
                 ['Deportes acuáticos',    'Verificar',  'Incluido expresamente'],
-                ['Retraso de vuelo',      '—',          '150€+'],
+                ['Retraso de vuelo',      '–',          '150€+'],
               ].map(row => (
                 <tr key={row[0]} style={{ borderTop: '1px solid var(--line)' }}>
                   <td style={{ padding: '.6rem .85rem', color: 'var(--ink)' }}>{row[0]}</td>

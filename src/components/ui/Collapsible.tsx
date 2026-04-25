@@ -44,7 +44,7 @@ export default function Collapsible({
         {children}
       </div>
 
-      {/* Gradient fade overlay — only when collapsed */}
+      {/* Gradient fade overlay. only when collapsed */}
       {!open && (
         <div
           aria-hidden="true"

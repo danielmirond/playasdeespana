@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   if (!data) return {}
   const title = `Clases de surf en ${data.provincia.nombre}`
   return {
-    title: `${title} — Escuelas, precios y mejores playas`,
+    title: `${title} | Escuelas, precios y mejores playas`,
     description: `Clases de surf para principiantes y perfeccionamiento en ${data.provincia.nombre}. Escuelas cerca de la playa, precios desde 30€, alquiler de tablas.`,
     alternates: { canonical: `/clases-surf/${provincia}` },
     openGraph: { title, url: `${BASE}/clases-surf/${provincia}`, type: 'article' },

@@ -9,7 +9,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Blue Flag Beaches in Spain — Complete list',
+  title: 'Blue Flag Beaches in Spain | Complete list',
   description: 'All Blue Flag certified beaches in Spain. Water quality, facilities and real-time sea conditions.',
   alternates: {
     canonical: '/en/blue-flag',

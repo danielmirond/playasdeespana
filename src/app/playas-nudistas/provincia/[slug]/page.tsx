@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = (await getNudistasStats()).provincias.find(p => p.slug === slug)
   if (!p) return {}
   return {
-    title: `Playas nudistas en ${p.nombre} (${p.count}) — Listado 2026`,
+    title: `Playas nudistas en ${p.nombre} (${p.count}) | Listado 2026`,
     description: `${p.count} playas nudistas en la provincia de ${p.nombre}. Mapa interactivo, municipios y servicios.`,
     alternates: { canonical: `/playas-nudistas/provincia/${slug}` },
   }

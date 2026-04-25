@@ -13,7 +13,7 @@ export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Campings cerca de la playa en España — Guía completa',
+  title: 'Campings cerca de la playa en España | Guía completa',
   description: 'Encuentra campings, glamping y áreas de autocaravanas junto a las mejores playas de España. Listado por comunidad autónoma con servicios, distancia y precios orientativos.',
   alternates: { canonical: '/campings' },
   openGraph: {
@@ -178,11 +178,11 @@ export default async function CampingsPage() {
             Consejos para acampar cerca de la playa
           </h2>
           <ul style={{ fontSize: '.9rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.2rem' }}>
-            <li><strong>Reserva con antelación</strong> — en julio y agosto los campings costeros se llenan semanas antes.</li>
-            <li><strong>Comprueba la distancia real</strong> — en cada ficha de playa mostramos la distancia exacta al camping más cercano.</li>
-            <li><strong>Valora los servicios</strong> — piscina, restaurante y supermercado marcan la diferencia con niños.</li>
-            <li><strong>Acampada libre</strong> — está prohibida en la mayoría de playas españolas. Usa siempre campings regulados.</li>
-            <li><strong>Autocaravanas</strong> — busca áreas con servicio de vaciado y enganche eléctrico; muchas playas tienen prohibido pernoctar en parking.</li>
+            <li><strong>Reserva con antelación.</strong> en julio y agosto los campings costeros se llenan semanas antes.</li>
+            <li><strong>Comprueba la distancia real.</strong> en cada ficha de playa mostramos la distancia exacta al camping más cercano.</li>
+            <li><strong>Valora los servicios.</strong> piscina, restaurante y supermercado marcan la diferencia con niños.</li>
+            <li><strong>Acampada libre.</strong> está prohibida en la mayoría de playas españolas. Usa siempre campings regulados.</li>
+            <li><strong>Autocaravanas.</strong> busca áreas con servicio de vaciado y enganche eléctrico; muchas playas tienen prohibido pernoctar en parking.</li>
           </ul>
         </section>
 

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = provincias.find(x => x.slug === slug)
   if (!p) return {}
   return {
-    title: `Playas de ${p.nombre} — ${p.count} playas`,
+    title: `Playas de ${p.nombre} | ${p.count} playas`,
     description: `Las mejores playas de ${p.nombre}, ${p.comunidad}. Estado del mar y condiciones en tiempo real.`,
     alternates: { canonical: `/provincia/${slug}` },
   }

@@ -16,7 +16,7 @@ export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Playas con aguas cristalinas en España — Las más transparentes',
+  title: 'Playas con aguas cristalinas en España | Las más transparentes',
   description: 'Descubre las playas de España con aguas más cristalinas y transparentes: Canarias, Islas Baleares, costas de Almería y Menorca. Rankings por visibilidad, calidad EEA y Bandera Azul.',
   alternates: { canonical: '/playas-aguas-cristalinas' },
   openGraph: {
@@ -50,7 +50,7 @@ function scoreAguasCristalinas(
   else if (esAlmeria)    score += 32
   else if (esMurcia)     score += 28
   else if (esCatOrMed)   score += 22
-  else                   score += 14  // Atlántico/Cantábrico — aguas más oscuras naturalmente
+  else                   score += 14  // Atlántico/Cantábrico. aguas más oscuras naturalmente
 
   // Visibilidad del agua (peso 40). 25m = máxima (Canarias verano)
   const vis = turbidez?.visibilidad_m ?? 10
@@ -122,7 +122,7 @@ export default async function Page() {
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.6 }}>
           Las aguas más transparentes de España están en Canarias, Baleares y zonas concretas
           de Almería y Murcia. Ranking basado en visibilidad estimada, calidad EEA del agua
-          y Bandera Azul — los tres indicadores que mejor predicen la transparencia real.
+          y Bandera Azul. los tres indicadores que mejor predicen la transparencia real.
         </p>
 
         {/* Intro educativa */}
@@ -134,11 +134,11 @@ export default async function Page() {
             ¿Qué hace a una playa de aguas cristalinas?
           </h2>
           <ul style={{ fontSize: '.9rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.2rem' }}>
-            <li><strong>Fondo de arena blanca o rocoso</strong> — refleja la luz, no levanta sedimento.</li>
-            <li><strong>Ausencia de ríos cercanos</strong> — los aportes de agua dulce turbian el mar.</li>
-            <li><strong>Poco oleaje habitual</strong> — las olas suspenden arena y restan visibilidad.</li>
-            <li><strong>Clima cálido y estable</strong> — menos plancton (clorofila) en el agua.</li>
-            <li><strong>Protección de contaminación</strong> — Bandera Azul y clasificación EEA Excelente.</li>
+            <li><strong>Fondo de arena blanca o rocoso.</strong> refleja la luz, no levanta sedimento.</li>
+            <li><strong>Ausencia de ríos cercanos.</strong> los aportes de agua dulce turbian el mar.</li>
+            <li><strong>Poco oleaje habitual.</strong> las olas suspenden arena y restan visibilidad.</li>
+            <li><strong>Clima cálido y estable.</strong> menos plancton (clorofila) en el agua.</li>
+            <li><strong>Protección de contaminación.</strong> Bandera Azul y clasificación EEA Excelente.</li>
           </ul>
         </section>
 
@@ -237,7 +237,7 @@ export default async function Page() {
               },
               {
                 q: '¿Es la misma cosa que la calidad del agua?',
-                a: 'No. La calidad del agua (Directiva EEA 2006/7/CE) mide contaminación bacteriológica — es un indicador sanitario. La transparencia mide la claridad visual. Una playa puede tener calidad Excelente y aguas turbias (por ejemplo en desembocaduras de ríos).',
+                a: 'No. La calidad del agua (Directiva EEA 2006/7/CE) mide contaminación bacteriológica (es un indicador sanitario. La transparencia mide la claridad visual. Una playa puede tener calidad Excelente y aguas turbias (por ejemplo en desembocaduras de ríos).',
               },
               {
                 q: '¿Cuándo hay más transparencia?',
@@ -274,7 +274,7 @@ export default async function Page() {
             },
             {
               '@type': 'Question', name: '¿Es la misma cosa que la calidad del agua?',
-              acceptedAnswer: { '@type': 'Answer', text: 'No. La calidad del agua (Directiva EEA 2006/7/CE) mide contaminación bacteriológica — es un indicador sanitario. La transparencia mide la claridad visual. Una playa puede tener calidad Excelente y aguas turbias (por ejemplo en desembocaduras de ríos).' },
+              acceptedAnswer: { '@type': 'Answer', text: 'No. La calidad del agua (Directiva EEA 2006/7/CE) mide contaminación bacteriológica (es un indicador sanitario. La transparencia mide la claridad visual. Una playa puede tener calidad Excelente y aguas turbias (por ejemplo en desembocaduras de ríos).' },
             },
             {
               '@type': 'Question', name: '¿Cuándo hay más transparencia?',

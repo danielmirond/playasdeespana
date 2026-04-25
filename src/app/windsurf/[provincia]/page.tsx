@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   const { provincia } = await params
   const data = await getPlayasByProvinciaSlug(provincia)
   if (!data) return {}
-  const title = `Windsurf en ${data.provincia.nombre} — Spots y escuelas`
+  const title = `Windsurf en ${data.provincia.nombre}. Spots y escuelas`
   return {
     title,
     description: `Mejores playas y escuelas de windsurf en ${data.provincia.nombre}. Cursos de iniciación y alquiler de material.`,

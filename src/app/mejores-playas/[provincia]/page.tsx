@@ -1,5 +1,5 @@
 // src/app/mejores-playas/[provincia]/page.tsx
-// Long-tail SEO: "Mejores playas de [provincia]" — ~50 páginas automáticas.
+// Long-tail SEO: "Mejores playas de [provincia]". ~50 páginas automáticas.
 // Ranking por score de servicios (bandera azul + socorrismo + parking + duchas).
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const prov = provs.find(p => p.slug === provincia)
   if (!prov) return {}
   return {
-    title: `Mejores playas de ${prov.nombre} — Ranking ${new Date().getFullYear()}`,
+    title: `Mejores playas de ${prov.nombre} | Ranking ${new Date().getFullYear()}`,
     description: `Las ${Math.min(prov.count, 20)} mejores playas de ${prov.nombre}: ranking por servicios, Bandera Azul, accesibilidad y estado del mar. Datos actualizados.`,
     alternates: { canonical: `/mejores-playas/${provincia}` },
   }

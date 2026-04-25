@@ -1,5 +1,5 @@
 // src/app/prediccion-fin-de-semana/page.tsx
-// "¿Dónde ir este sábado?" — forecast a 3 días para las mejores playas.
+// "¿Dónde ir este sábado?". forecast a 3 días para las mejores playas.
 // Contenido fresco que cambia cada día → Google reindexe frecuentemente.
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -13,7 +13,7 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const DIAS_ES = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 
 export const metadata: Metadata = {
-  title: 'Predicción de playas para el fin de semana — ¿Dónde ir este sábado?',
+  title: 'Predicción de playas para el fin de semana | ¿Dónde ir este sábado?',
   description: 'Previsión a 3 días de las mejores playas de España: oleaje, viento y temperatura. Encuentra la playa perfecta para este fin de semana.',
   alternates: { canonical: '/prediccion-fin-de-semana' },
   openGraph: {

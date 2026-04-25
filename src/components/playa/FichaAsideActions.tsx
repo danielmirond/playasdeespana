@@ -21,7 +21,7 @@ export default function FichaAsideActions({ lat, lng, nombre, slug, meteo, score
   function compartir() {
     const url = `${window.location.origin}/playas/${slug}`
     const text = meteo
-      ? `${nombre} · ${meteo.agua}°C · Olas ${meteo.olas}m · Viento ${meteo.viento}km/h${scoreLabel ? ` — ${scoreLabel}` : ''}`
+      ? `${nombre} · ${meteo.agua}°C · Olas ${meteo.olas}m · Viento ${meteo.viento}km/h${scoreLabel ? `. ${scoreLabel}` : ''}`
       : nombre
     if (navigator.share) {
       navigator.share({ title: nombre, text, url })

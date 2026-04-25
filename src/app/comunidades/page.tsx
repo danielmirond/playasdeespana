@@ -8,7 +8,7 @@ import styles from './comunidades.module.css'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Comunidades y provincias — Playas de España',
+  title: 'Comunidades y provincias | Playas de España',
   description: 'Explora las playas de España por comunidad autónoma y provincia.',
 }
 
@@ -38,7 +38,7 @@ export default async function ComunidadesPage() {
   ])
 
   // Filtrar valores basura que aparecen cuando CartoCiudad no puede
-  // resolver la provincia (fallback "España") — no es una comunidad real.
+  // resolver la provincia (fallback "España"). no es una comunidad real.
   const comunidades = comunidadesRaw.filter(c => c.nombre !== 'España' && c.nombre)
 
   // Agrupar provincias por comunidad
@@ -103,7 +103,7 @@ export default async function ComunidadesPage() {
 
         {interiores.length > 0 && (
           <section aria-labelledby="interior-title" style={{ marginTop: '3rem' }}>
-            <h2 id="interior-title" className={styles.sectionTitle}>Interior — playas fluviales y lagos</h2>
+            <h2 id="interior-title" className={styles.sectionTitle}>Interior. playas fluviales y lagos</h2>
             <p className={styles.sectionDesc}>
               Playas de ríos, embalses y lagos en comunidades sin costa.
             </p>

@@ -31,7 +31,7 @@ export const revalidate = 3600
 export const maxDuration = 25
 
 export async function generateStaticParams() {
-  // ISR on-demand — no pre-render at build to avoid 45-min timeout.
+  // ISR on-demand. no pre-render at build to avoid 45-min timeout.
   return []
 }
 
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: '2026-03-09T00:00:00Z',
       modifiedTime: new Date().toISOString(),
-      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${np} — live sea conditions` }],
+      images: [{ url: ogUrl, width: 1200, height: 630, alt: `${np}. live sea conditions` }],
     },
     twitter: { card: 'summary_large_image', title, description, images: [ogUrl] },
     alternates: {

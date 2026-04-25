@@ -4,7 +4,7 @@
 // señalando a Google/lectores la relación entre la ficha (long-tail) y
 // las páginas pilar (head terms).
 //
-// Solo se muestran los hubs aplicables — una playa nudista linkea al hub
+// Solo se muestran los hubs aplicables. una playa nudista linkea al hub
 // nudista, una con bandera azul al hub bandera azul, etc. Esto evita
 // link-stuffing y mantiene la relevancia semántica.
 import Link from 'next/link'
@@ -30,7 +30,7 @@ function buildHubs(playa: Playa, locale: 'es' | 'en'): Hub[] {
   const comSlug  = slugify(playa.comunidad)
   const hubs: Hub[] = []
 
-  // Bandera Azul — hub principal de calidad
+  // Bandera Azul. hub principal de calidad
   if (playa.bandera) {
     hubs.push({
       href: es ? '/banderas-azules' : '/en/blue-flag',
@@ -38,7 +38,7 @@ function buildHubs(playa: Playa, locale: 'es' | 'en'): Hub[] {
     })
   }
 
-  // Nudistas — hubs jerárquicos
+  // Nudistas. hubs jerárquicos
   if (playa.nudista) {
     hubs.push({
       href: es ? `/playas-nudistas/provincia/${provSlug}` : '/en/nudist-beaches',
@@ -46,7 +46,7 @@ function buildHubs(playa: Playa, locale: 'es' | 'en'): Hub[] {
     })
   }
 
-  // Perros — hubs jerárquicos
+  // Perros. hubs jerárquicos
   if (playa.perros) {
     hubs.push({
       href: es ? `/playas-perros/provincia/${provSlug}` : '/en/dog-beaches',
@@ -62,7 +62,7 @@ function buildHubs(playa: Playa, locale: 'es' | 'en'): Hub[] {
     })
   }
 
-  // Surf — si la playa tiene actividades de surf
+  // Surf. si la playa tiene actividades de surf
   if (playa.actividades?.surf) {
     hubs.push({
       href: es ? '/surf' : '/en/surf',
@@ -70,7 +70,7 @@ function buildHubs(playa: Playa, locale: 'es' | 'en'): Hub[] {
     })
   }
 
-  // Hub de la comunidad — siempre presente
+  // Hub de la comunidad. siempre presente
   hubs.push({
     href: es ? `/comunidad/${comSlug}` : `/en/communities/${comSlug}`,
     label: es ? `Todas las playas de ${playa.comunidad}` : `All beaches in ${playa.comunidad}`,

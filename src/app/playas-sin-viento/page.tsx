@@ -1,5 +1,5 @@
 // src/app/playas-sin-viento/page.tsx
-// KW estacional: "playas sin viento hoy" — landing dinámica que muestra
+// KW estacional: "playas sin viento hoy". landing dinámica que muestra
 // las playas con menos viento ahora mismo. Se revalida cada hora.
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -12,7 +12,7 @@ export const revalidate = 3600
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Playas sin viento hoy en España — Las más resguardadas',
+  title: 'Playas sin viento hoy en España | Las más resguardadas',
   description: 'Playas con menos viento ahora mismo en España. Datos en tiempo real de Open-Meteo. Ideales para familias, paddle surf y snorkel.',
   alternates: { canonical: '/playas-sin-viento' },
   openGraph: {

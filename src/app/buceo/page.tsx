@@ -1,5 +1,5 @@
 // src/app/buceo/page.tsx
-// Hub SEO: "Buceo en España — Mejores playas y centros de inmersión"
+// Hub SEO: "Buceo en España. Mejores playas y centros de inmersión"
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -12,7 +12,7 @@ const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
 const CIVITATIS_AFF = process.env.NEXT_PUBLIC_CIVITATIS_AFF ?? ''
 
 export const metadata: Metadata = {
-  title: 'Buceo en España — Mejores playas, centros y reservas marinas',
+  title: 'Buceo en España | Mejores playas, centros y reservas marinas',
   description: 'Guía completa de buceo en España: mejores spots por comunidad, reservas marinas, centros PADI/SSI, bautismos, equipo y certificaciones. De Cabo de Palos a Canarias.',
   alternates: { canonical: '/buceo' },
   openGraph: {
@@ -164,12 +164,12 @@ export default async function BuceoPage() {
             Equipo básico de buceo
           </h2>
           <ul style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.75, paddingLeft: '1.2rem' }}>
-            <li><strong>Máscara</strong> — silicona transparente, cristal templado. Probar en cara sin apretar correa (debe hacer vacío).</li>
-            <li><strong>Neopreno</strong> — 3mm en Mediterráneo verano, 5mm en Atlántico o invierno, 7mm en inmersiones profundas.</li>
-            <li><strong>Aletas</strong> — de talón abierto con escarpines para roca; cerradas para snorkel.</li>
-            <li><strong>Regulador + BCD + botella</strong> — mejor alquilar hasta que bucees regularmente.</li>
-            <li><strong>Linterna submarina</strong> — imprescindible en cuevas y nocturnas.</li>
-            <li><strong>Ordenador de buceo</strong> — desde 150€, vale la pena si vas a bucear más de 10 veces.</li>
+            <li><strong>Máscara.</strong> silicona transparente, cristal templado. Probar en cara sin apretar correa (debe hacer vacío).</li>
+            <li><strong>Neopreno.</strong> 3mm en Mediterráneo verano, 5mm en Atlántico o invierno, 7mm en inmersiones profundas.</li>
+            <li><strong>Aletas.</strong> de talón abierto con escarpines para roca; cerradas para snorkel.</li>
+            <li><strong>Regulador + BCD + botella.</strong> mejor alquilar hasta que bucees regularmente.</li>
+            <li><strong>Linterna submarina.</strong> imprescindible en cuevas y nocturnas.</li>
+            <li><strong>Ordenador de buceo.</strong> desde 150€, compensa si vas a bucear más de 10 veces.</li>
           </ul>
           {AMAZON_TAG && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem', marginTop: '.75rem' }}>

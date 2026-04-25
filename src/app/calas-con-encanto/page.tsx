@@ -1,5 +1,5 @@
 // src/app/calas-con-encanto/page.tsx
-// Hub SEO: "Calas con encanto en España" — KW de alto volumen estacional.
+// Hub SEO: "Calas con encanto en España". KW de alto volumen estacional.
 // Lista las playas mejor puntuadas por transparencia del agua + arena +
 // Bandera Azul + baja ocupación. Agrupadas por comunidad y provincia
 // con cross-links para long-tail.
@@ -14,7 +14,7 @@ export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Calas con encanto en España — Las más bonitas por comunidad y provincia',
+  title: 'Calas con encanto en España | Las más bonitas por comunidad y provincia',
   description: 'Las calas con más encanto de España: rincones escondidos, aguas turquesa, accesos por sendero y poca masificación. Listado por comunidad autónoma y provincia.',
   alternates: {
     canonical: '/calas-con-encanto',

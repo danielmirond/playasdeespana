@@ -1,4 +1,4 @@
-// src/app/rutas/[slug]/page.tsx — Detalle de una ruta costera
+// src/app/rutas/[slug]/page.tsx. Detalle de una ruta costera
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ruta = (await getRutas(playas)).find(r => r.slug === slug)
   if (!ruta) return {}
   return {
-    title: `${ruta.nombre} — ${ruta.paradas.length} playas imprescindibles`,
+    title: `${ruta.nombre} | ${ruta.paradas.length} playas imprescindibles`,
     description: `Recorre ${ruta.paradas.length} de las mejores playas de la ${ruta.costa.nombre} en ${ruta.totalKm} km. ${ruta.costa.descripcion}`,
     alternates: { canonical: `/rutas/${slug}` },
   }

@@ -1,6 +1,6 @@
 'use client'
 // src/components/playa/FichaHero.tsx
-// Brand book 08 — Ficha desktop: breadcrumb + h1 + lugar (izq),
+// Brand book 08. Ficha desktop: breadcrumb + h1 + lugar (izq),
 // score card con métricas (der). Ficha móvil: compacto.
 import Link from 'next/link'
 import FichaHeroActions from './FichaHeroActions'
@@ -68,7 +68,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
 
       {/* Two-column grid */}
       <div className={styles.grid}>
-        {/* Left — editorial */}
+        {/* Left. editorial */}
         <div className={styles.left}>
           <div className={styles.eyebrow}>
             {locale === 'en' ? 'Beach report · today' : 'Estado del mar · hoy'}
@@ -101,7 +101,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
           </div>
         </div>
 
-        {/* Right — score card */}
+        {/* Right. score card */}
         <div className={styles.scoreCard}>
           <div className={styles.scoreHead}>
             <div className={styles.iluWrap}><IluEstado estado={meteo.estado} size="sm" animated /></div>
@@ -134,7 +134,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
             </div>
           )}
 
-          {/* Metrics 2×2 — brand book 05 "Métricas card: 2×2 grid" */}
+          {/* Metrics 2×2. brand book 05 "Métricas card: 2×2 grid" */}
           <div className={styles.metrics}>
             <div className={styles.m}>
               <Drop size={14} weight="fill" color="var(--accent)" aria-hidden="true" />
@@ -175,7 +175,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
         </div>
       </div>
 
-      {/* Sticky CTA mobile — brand book 08: "CTA sticky bottom Cómo llegar" */}
+      {/* Sticky CTA mobile. brand book 08: "CTA sticky bottom Cómo llegar" */}
       <a
         href={mapsUrl}
         target="_blank"

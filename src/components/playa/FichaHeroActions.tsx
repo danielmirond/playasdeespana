@@ -34,7 +34,7 @@ export default function FichaHeroActions({ slug, nombre, meteo, scoreLabel }: Pr
   function compartir() {
     const url = window.location.href
     const text = meteo
-      ? `${nombre} · ${meteo.agua}°C · Olas ${meteo.olas}m · Viento ${meteo.viento}km/h${scoreLabel ? ` — ${scoreLabel}` : ''}`
+      ? `${nombre} · ${meteo.agua}°C · Olas ${meteo.olas}m · Viento ${meteo.viento}km/h${scoreLabel ? `. ${scoreLabel}` : ''}`
       : nombre
     if (navigator.share) {
       navigator.share({ title: nombre, text, url })

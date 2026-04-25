@@ -4,7 +4,7 @@ import Nav from '@/components/ui/Nav'
 import ComparadorPlayas from './ComparadorPlayas'
 
 export const metadata: Metadata = {
-  title: 'Comparar playas — ¿Cuál es mejor hoy?',
+  title: 'Comparar playas | ¿Cuál es mejor hoy?',
   description: 'Compara 2 o 3 playas lado a lado: puntuación en tiempo real, viento, oleaje, temperatura, servicios y accesibilidad.',
   alternates: { canonical: '/comparar' },
 }

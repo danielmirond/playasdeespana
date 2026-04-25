@@ -1,4 +1,4 @@
-// src/app/playas-perros/page.tsx — Índice principal de playas para perros
+// src/app/playas-perros/page.tsx. Índice principal de playas para perros
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -10,7 +10,7 @@ import styles from './PlayasPerros.module.css'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Playas para perros en España 2026 — Listado por comunidad',
+  title: 'Playas para perros en España 2026 | Listado por comunidad',
   description: 'Playas donde se permite la entrada de perros en España. Listado oficial por comunidad autónoma, provincia y municipio. Consejos, normativa y mapa interactivo.',
   alternates: {
     canonical: '/playas-perros',

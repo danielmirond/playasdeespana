@@ -238,7 +238,7 @@ export default function ComparadorPlayas() {
                   🏆 Hoy gana: {winner.playa.nombre}
                 </div>
                 <div style={{ fontSize: '.85rem', color: 'var(--muted)', marginTop: '.25rem' }}>
-                  Con {winner.ps?.score}/100 — {winner.ps?.reasons.join(', ')}
+                  Con {winner.ps?.score}/100. {winner.ps?.reasons.join(', ')}
                 </div>
                 <Link href={`/playas/${winner.playa.slug}`} style={{
                   display: 'inline-block', marginTop: '.65rem',

@@ -10,7 +10,7 @@ import styles from './PlayasAccesibles.module.css'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Playas accesibles en España 2026 — Listado PMR completo',
+  title: 'Playas accesibles en España 2026 | Listado PMR completo',
   description: 'Listado de playas accesibles para personas con movilidad reducida (PMR) en España. Rampas, pasarelas, sillas anfibias y aseos adaptados por comunidad, provincia y municipio.',
   alternates: { canonical: '/playas-accesibles' },
   openGraph: {

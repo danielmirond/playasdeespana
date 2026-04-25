@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = provincias.find(x => x.slug === slug)
   if (!p) return {}
   return {
-    title: `Beaches in ${p.nombre} — ${p.count} beaches`,
+    title: `Beaches in ${p.nombre} | ${p.count} beaches`,
     description: `The best beaches in ${p.nombre}, ${p.comunidad}, Spain. Real-time sea conditions, water temperature and beach facilities.`,
     openGraph: { locale: 'en_GB' },
     alternates: {

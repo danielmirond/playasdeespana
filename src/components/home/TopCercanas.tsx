@@ -1,6 +1,6 @@
 'use client'
 // src/components/home/TopCercanas.tsx
-// "Mejores playas cerca de ti" — versión ultra-robusta.
+// "Mejores playas cerca de ti". versión ultra-robusta.
 //
 // SIEMPRE muestra el botón. Cero dependencia de Permissions API
 // (Safari no lo soporta para geolocation y falla silenciosamente).
@@ -71,7 +71,7 @@ export default function TopCercanas() {
     setErrorMsg('')
 
     try {
-      // Step 1: Geolocation — wrapped in Promise with hard timeout
+      // Step 1: Geolocation. wrapped in Promise with hard timeout
       if (!navigator.geolocation) throw new Error('no-geo')
 
       const pos = await new Promise<GeolocationPosition>((resolve, reject) => {
@@ -103,7 +103,7 @@ export default function TopCercanas() {
       if (nearby.length === 0) throw new Error('no-nearby')
       if (ac.signal.aborted) return
 
-      // Step 4: Fetch meteo — race with 7s total timeout
+      // Step 4: Fetch meteo. race with 7s total timeout
       const meteoRace = Promise.race([
         Promise.all(nearby.map(x => fetchMeteo(x.p.lat, x.p.lng))),
         new Promise<null>((r) => setTimeout(() => r(null), 7000)),
@@ -133,7 +133,7 @@ export default function TopCercanas() {
     }
   }, [])
 
-  // Button state — big, centered, breathes
+  // Button state. big, centered, breathes
   if (estado === 'button') {
     return (
       <section style={{
@@ -206,7 +206,7 @@ export default function TopCercanas() {
     )
   }
 
-  // Error — with retry button
+  // Error. with retry button
   if (estado === 'error') {
     return (
       <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
@@ -234,7 +234,7 @@ export default function TopCercanas() {
     )
   }
 
-  // Ready — results
+  // Ready. results
   return (
     <section style={{ maxWidth: 1000, margin: '0 auto', padding: '1.25rem 1.5rem 0' }}>
       <div style={{

@@ -1,5 +1,5 @@
 'use client'
-// src/components/home/Buscador.tsx — Buscador de la home.
+// src/components/home/Buscador.tsx. Buscador de la home.
 //
 // Fix principal: los chips de filtro ahora NAVEGAN a /buscar con el
 // filtro preseleccionado. Antes eran decorativos (cambiaban estado

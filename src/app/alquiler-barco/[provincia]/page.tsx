@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   if (!data) return {}
   const title = `Alquiler de barco en ${data.provincia.nombre}`
   return {
-    title: `${title} — Con y sin licencia`,
+    title: `${title} | Con y sin licencia`,
     description: `Alquila un barco en ${data.provincia.nombre} para descubrir las mejores calas. Lanchas sin licencia desde 80€/día, veleros con patrón, catamaranes para grupos.`,
     alternates: { canonical: `/alquiler-barco/${provincia}` },
     openGraph: { title, url: `${BASE}/alquiler-barco/${provincia}`, type: 'article' },

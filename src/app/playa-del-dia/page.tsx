@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 export const revalidate = 3600
-export const metadata: Metadata = { title: 'Playa del día — La mejor playa de España hoy', description: 'Cada día seleccionamos la playa con mejor puntuación en tiempo real de toda España.', alternates: { canonical: '/playa-del-dia' } }
+export const metadata: Metadata = { title: 'Playa del día | La mejor playa de España hoy', description: 'Cada día seleccionamos la playa con mejor puntuación en tiempo real de toda España.', alternates: { canonical: '/playa-del-dia' } }
 function score(p: any) { let s=40; if(p.bandera)s+=15;if(p.socorrismo)s+=12;if(p.duchas)s+=8;if(p.parking)s+=8;if(p.accesible)s+=5; const g=(p.grado_ocupacion??'').toLowerCase(); if(g.includes('bajo'))s+=8; return Math.min(100,s) }
 export default async function Page() {
   const playas = await getPlayas()

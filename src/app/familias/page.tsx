@@ -1,4 +1,4 @@
-// src/app/familias/page.tsx — Playas para familias con niños
+// src/app/familias/page.tsx. Playas para familias con niños
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -24,7 +24,7 @@ const faqSchema = {
 }
 
 export const metadata: Metadata = {
-  title: 'Playas para familias con niños en España — Las más seguras',
+  title: 'Playas para familias con niños en España | Las más seguras',
   description: 'Playas familiares en España: socorrismo, duchas, baja ocupación, accesibles y agua poco profunda. Las más seguras para ir con niños.',
   alternates: { canonical: '/familias' },
 }

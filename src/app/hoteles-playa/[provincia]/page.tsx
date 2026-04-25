@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   if (!data) return {}
   const title = `Hoteles en la playa de ${data.provincia.nombre}`
   return {
-    title: `${title} — Con reservas en Booking`,
+    title: `${title} | Con reservas en Booking`,
     description: `Mejores hoteles en primera línea de playa en ${data.provincia.nombre}. Comparador de precios y reserva con cancelación gratuita.`,
     alternates: { canonical: `/hoteles-playa/${provincia}` },
     openGraph: { title, url: `${BASE}/hoteles-playa/${provincia}`, type: 'article' },

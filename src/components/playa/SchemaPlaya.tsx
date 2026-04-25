@@ -1,5 +1,5 @@
 // src/components/playa/SchemaPlaya.tsx
-// JSON-LD structured data — Beach + TouristDestination + WaterBodyForSwimming +
+// JSON-LD structured data. Beach + TouristDestination + WaterBodyForSwimming +
 // BreadcrumbList + FAQPage + AggregateRating (cuando hay votos).
 //
 // Estrategia semántica (Schema.org + Knowledge Graph):
@@ -118,7 +118,7 @@ export default function SchemaPlaya({
     },
   }
 
-  // BreadcrumbList — Inicio › Comunidad › Provincia › Municipio › Playa
+  // BreadcrumbList. Inicio › Comunidad › Provincia › Municipio › Playa
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type':    'BreadcrumbList',
@@ -131,7 +131,7 @@ export default function SchemaPlaya({
     ],
   }
 
-  // Photo — declara la imagen principal con autoría (importante para citaciones)
+  // Photo. declara la imagen principal con autoría (importante para citaciones)
   const photoEntity = fotoUrl ? {
     '@type':       'ImageObject',
     url:           fotoUrl,
@@ -142,7 +142,7 @@ export default function SchemaPlaya({
     } : {}),
   } : null
 
-  // Beach principal — Beach + TouristDestination (entidades híbridas)
+  // Beach principal. Beach + TouristDestination (entidades híbridas)
   const beach = {
     '@context': 'https://schema.org',
     '@type':    ['Beach', 'TouristDestination', 'TouristAttraction'],
@@ -188,7 +188,7 @@ export default function SchemaPlaya({
     isAccessibleForFree: true,
     publicAccess:        true,
     smokingAllowed:      false,
-    // Acción "cómo llegar" — Google la usa para Discover y assistant
+    // Acción "cómo llegar". Google la usa para Discover y assistant
     potentialAction: {
       '@type': 'TravelAction',
       target:  `https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}`,
@@ -210,7 +210,7 @@ export default function SchemaPlaya({
     ...(dateModified ? { dateModified } : {}),
   }
 
-  // WaterBodyForSwimming — entidad separada para el cuerpo de agua,
+  // WaterBodyForSwimming. entidad separada para el cuerpo de agua,
   // con temperatura y oleaje. Permite a Google entender "agua de baño".
   const waterBody = {
     '@context': 'https://schema.org',

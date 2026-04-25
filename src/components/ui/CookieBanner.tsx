@@ -7,8 +7,8 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 // Consentimiento granular por categoría (AEPD/LSSI-CE + RGPD).
 // Categorías:
 // - tecnicas: estrictamente necesarias (exentas art. 22.2 LSSI)
-// - analiticas: Google Analytics 4 — requiere consentimiento
-// - marketing: AdSense + afiliados — requiere consentimiento
+// - analiticas: Google Analytics 4. requiere consentimiento
+// - marketing: AdSense + afiliados. requiere consentimiento
 export interface CookieConsent {
   tecnicas:   true
   analiticas: boolean
@@ -46,7 +46,7 @@ const t = {
     tecnicas:    'Técnicas (siempre activas)',
     tecnicasDesc:'Necesarias para que la web funcione (consentimiento, favoritos, reportes).',
     analiticas:  'Analíticas',
-    analiticasDesc: 'Google Analytics 4 — tráfico anónimo.',
+    analiticasDesc: 'Google Analytics 4. tráfico anónimo.',
     marketing:   'Marketing y afiliación',
     marketingDesc:  'Google AdSense, enlaces de afiliados (Booking, Amazon, etc.).',
     aceptarTodo: 'Aceptar',
@@ -62,7 +62,7 @@ const t = {
     tecnicas:    'Technical (always on)',
     tecnicasDesc:'Required for the site to work (consent, favourites, reports).',
     analiticas:  'Analytics',
-    analiticasDesc: 'Google Analytics 4 — anonymous traffic.',
+    analiticasDesc: 'Google Analytics 4. anonymous traffic.',
     marketing:   'Marketing & affiliates',
     marketingDesc:  'Google AdSense, affiliate links (Booking, Amazon, etc.).',
     aceptarTodo: 'Accept',
@@ -163,7 +163,7 @@ export default function CookieBanner() {
         willChange: 'transform',
       }}
     >
-      {/* Close button (top-right) — rechaza opcionales, UX esperada */}
+      {/* Close button (top-right). rechaza opcionales, UX esperada */}
       <button
         type="button"
         onClick={() => accept(false, false)}
@@ -200,7 +200,7 @@ export default function CookieBanner() {
         </div>
       )}
 
-      {/* Botones — equilibrados (anti dark-pattern AEPD) */}
+      {/* Botones. equilibrados (anti dark-pattern AEPD) */}
       <div style={{ display: 'flex', gap: '.4rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
         {!showDetails ? (
           <>

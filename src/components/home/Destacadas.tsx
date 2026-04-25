@@ -1,4 +1,4 @@
-// src/components/home/Destacadas.tsx — Ranked beach cards: "Top hoy" + "Evita hoy"
+// src/components/home/Destacadas.tsx. Ranked beach cards: "Top hoy" + "Evita hoy"
 //
 // Recibe un subconjunto de playas candidatas (seleccionadas por page.tsx),
 // fetcha meteo real para cada una en servidor, calcula el score 0-100 y
@@ -83,7 +83,7 @@ function ScoreChip({ ps }: { ps: PlayaScore }) {
         fontSize: 15, letterSpacing: '-.01em',
         color: ps.color, lineHeight: 1,
       }}
-      aria-label={`Score ${ps.score}/100 — ${ps.label}`}
+      aria-label={`Score ${ps.score}/100. ${ps.label}`}
     >
       {ps.score}
       <small style={{

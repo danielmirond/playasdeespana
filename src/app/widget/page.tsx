@@ -1,4 +1,4 @@
-// src/app/widget/page.tsx — Página de docs del widget embebible
+// src/app/widget/page.tsx. Página de docs del widget embebible
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -8,7 +8,7 @@ export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Widget de playa — Embebe el estado del mar en tu web',
+  title: 'Widget de playa | Embebe el estado del mar en tu web',
   description: 'Widget gratuito con el score de cualquier playa de España. Copia y pega una línea de HTML en tu blog, hotel o web de turismo.',
   alternates: { canonical: '/widget' },
 }
@@ -227,7 +227,7 @@ Response:
             paddingLeft: '1.25rem', margin: 0,
           }}>
             <li>Gratuito para uso personal, blogs, hoteles, campings y webs de turismo.</li>
-            <li>El widget incluye un enlace a playas-espana.com — no lo elimines.</li>
+            <li>El widget incluye un enlace a playas-espana.com. no lo elimines.</li>
             <li>Los datos se actualizan cada hora. No caches los resultados más de 1 hora.</li>
             <li>Para uso comercial masivo ({'>'} 10.000 peticiones/día), contacta a <a href="mailto:hola@playas-espana.com" style={{ color: 'var(--accent)' }}>hola@playas-espana.com</a>.</li>
           </ul>

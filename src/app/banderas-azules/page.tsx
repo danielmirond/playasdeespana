@@ -10,7 +10,7 @@ import SchemaItemList from '@/components/seo/SchemaItemList'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Playas con Bandera Azul en España 2026 — Listado oficial',
+  title: 'Playas con Bandera Azul en España 2026 | Listado oficial',
   description: 'Listado completo y oficial de playas con Bandera Azul en España. Ordenadas por comunidad autónoma, con calidad del agua, servicios, accesibilidad y mapa interactivo.',
   alternates: {
     canonical: '/banderas-azules',

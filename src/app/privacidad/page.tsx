@@ -1,10 +1,10 @@
-// src/app/privacidad/page.tsx — Política de privacidad LOPDGDD + RGPD
+// src/app/privacidad/page.tsx. Política de privacidad LOPDGDD + RGPD
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 
 export const metadata: Metadata = {
-  title: 'Política de privacidad — Playas de España',
+  title: 'Política de privacidad | Playas de España',
   description: 'Información sobre el tratamiento de datos personales en playas-espana.com conforme al RGPD y la LOPDGDD.',
   alternates: { canonical: '/privacidad' },
   robots: { index: true, follow: true },
@@ -59,7 +59,7 @@ export default function PrivacidadPage() {
 
         <Section title="3. Base legal del tratamiento">
           <ul>
-            <li><strong>Logs de servidor</strong>: interés legítimo del responsable (art. 6.1.f RGPD) —
+            <li><strong>Logs de servidor</strong>: interés legítimo del responsable (art. 6.1.f RGPD).
             seguridad del sistema y prevención de fraude.</li>
             <li><strong>Cookies técnicas</strong>: exención del art. 22.2 LSSI-CE.</li>
             <li><strong>Cookies analíticas y marketing</strong>: consentimiento del usuario (art. 6.1.a RGPD).
@@ -79,11 +79,11 @@ export default function PrivacidadPage() {
         <Section title="5. Destinatarios y transferencias internacionales">
           <p>Los datos pueden ser comunicados a los siguientes encargados del tratamiento:</p>
           <ul>
-            <li><strong>Vercel Inc.</strong> (EE.UU.) — hosting del sitio web. Vercel está certificado bajo el
+            <li><strong>Vercel Inc.</strong> (EE.UU.). hosting del sitio web. Vercel está certificado bajo el
             Data Privacy Framework UE-EE.UU.</li>
-            <li><strong>Google LLC</strong> (EE.UU.) — Google Analytics 4 y AdSense (solo con consentimiento).
+            <li><strong>Google LLC</strong> (EE.UU.). Google Analytics 4 y AdSense (solo con consentimiento).
             Google está certificado bajo el Data Privacy Framework.</li>
-            <li><strong>Partners de afiliación</strong> (Booking, Amazon, Civitatis, etc.) — solo si haces clic
+            <li><strong>Partners de afiliación</strong> (Booking, Amazon, Civitatis, etc.). solo si haces clic
             en un enlace de afiliación, y según sus propias políticas.</li>
           </ul>
           <p>Las transferencias a EE.UU. se basan en el <strong>EU-US Data Privacy Framework</strong>

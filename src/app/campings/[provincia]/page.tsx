@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   if (!data) return {}
   const title = `Campings cerca de la playa en ${data.provincia.nombre}`
   return {
-    title: `${title} — Guía actualizada`,
+    title: `${title} | Guía actualizada`,
     description: `Campings, glamping y áreas de autocaravanas cerca de las playas de ${data.provincia.nombre}. ${data.provincia.count} playas con servicios y precios.`,
     alternates: { canonical: `/campings/${provincia}` },
     openGraph: { title, url: `${BASE}/campings/${provincia}`, type: 'article' },

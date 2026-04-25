@@ -10,7 +10,7 @@ interface Props { params: Promise<{ slug: string }> }
 export async function generateStaticParams() { return COSTAS.map(c => ({ slug: c.slug })) }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params; const c = COSTAS.find(x => x.slug === slug); if (!c) return {}
-  return { title: `Top 10 Best Beaches — ${c.nombre}`, alternates: { canonical: `/en/top/${slug}` } }
+  return { title: `Top 10 Best Beaches | ${c.nombre}`, alternates: { canonical: `/en/top/${slug}` } }
 }
 function score(p: any) { let s=40; if(p.bandera)s+=15;if(p.socorrismo)s+=12;if(p.duchas)s+=8;if(p.parking)s+=8;if(p.accesible)s+=5; return Math.min(100,s) }
 export default async function Page({ params }: Props) {
@@ -18,7 +18,7 @@ export default async function Page({ params }: Props) {
   const playas = await getPlayas()
   const top = playas.filter(p => costa.provincias.includes(p.provincia) && p.lat && p.lng).map(p => ({p, sc: score(p)})).sort((a,b) => b.sc-a.sc).slice(0,10)
   return (<><Nav /><main style={{maxWidth:1000,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
-    <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'1rem'}}>Top 10 Best Beaches — {costa.nombre}</h1>
+    <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'1rem'}}>Top 10 Best Beaches. {costa.nombre}</h1>
     <p style={{fontSize:'.88rem',color:'var(--muted)',marginBottom:'2rem'}}>{costa.descripcion}</p>
     <div style={{background:'var(--card-bg)',border:'1px solid var(--line)',borderRadius:6,overflow:'hidden',marginBottom:'2rem'}}><MapaPlayas playas={top.map(x=>x.p)} height="400px" /></div>
     <ol style={{margin:0,padding:0,listStyle:'none',display:'flex',flexDirection:'column',gap:'.55rem'}}>

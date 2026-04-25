@@ -1,4 +1,4 @@
-// src/app/api/og/route.tsx — Brand book v1 · plantilla social
+// src/app/api/og/route.tsx. Brand book v1 · plantilla social
 // OG image 1200×630 conforme al brand book:
 // - Fondo arena
 // - Logo "≈ playas de España" arriba-izquierda
@@ -159,7 +159,7 @@ export async function GET(req: NextRequest) {
           </div>
         )}
 
-        {/* Título — nombre playa en Playfair-style */}
+        {/* Título. nombre playa en Playfair-style */}
         <div style={{
           position: 'absolute',
           left: 56, top: 224,

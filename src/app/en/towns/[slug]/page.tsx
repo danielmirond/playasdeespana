@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const m = municipios.find(x => x.slug === slug)
   if (!m) return {}
   return {
-    title: `Beaches in ${m.nombre} — ${m.count} beaches`,
+    title: `Beaches in ${m.nombre} | ${m.count} beaches`,
     description: `All beaches in ${m.nombre} (${m.provincia}). Real-time sea conditions, water temperature and facilities.`,
     alternates: {
       canonical: `/en/towns/${slug}`,

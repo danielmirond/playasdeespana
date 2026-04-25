@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   if (!data) return {}
   const title = `Buceo y centros de inmersión en ${data.provincia.nombre}`
   return {
-    title: `${title} — Guía completa`,
+    title: `${title} | Guía completa`,
     description: `Mejores playas para bucear en ${data.provincia.nombre}, centros PADI/SSI, bautismos y reservas marinas. ${data.provincia.count} playas con datos actualizados.`,
     alternates: { canonical: `/buceo/${provincia}` },
     openGraph: { title, url: `${BASE}/buceo/${provincia}`, type: 'article' },

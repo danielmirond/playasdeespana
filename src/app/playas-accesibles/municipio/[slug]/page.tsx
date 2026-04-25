@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const m = (await getAccesiblesStats()).municipios.find(m => m.slug === slug)
   if (!m) return {}
   return {
-    title: `Playas accesibles en ${m.nombre} — ${m.count} playas`,
+    title: `Playas accesibles en ${m.nombre} | ${m.count} playas`,
     description: `${m.count} playas accesibles en ${m.nombre} (${m.provincia}). Mapa, servicios y accesos.`,
     alternates: { canonical: `/playas-accesibles/municipio/${slug}` },
   }

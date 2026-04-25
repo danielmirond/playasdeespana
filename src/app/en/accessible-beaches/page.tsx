@@ -4,7 +4,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 export const revalidate = 86400
-export const metadata: Metadata = { title: 'Accessible Beaches in Spain — PMR List', description: 'Beaches with wheelchair access, ramps, amphibious chairs and adapted facilities in Spain.', alternates: { canonical: '/en/accessible-beaches', languages: { 'es': '/playas-accesibles', 'en': '/en/accessible-beaches' } } }
+export const metadata: Metadata = { title: 'Accessible Beaches in Spain | PMR List', description: 'Beaches with wheelchair access, ramps, amphibious chairs and adapted facilities in Spain.', alternates: { canonical: '/en/accessible-beaches', languages: { 'es': '/playas-accesibles', 'en': '/en/accessible-beaches' } } }
 function toSlug(s: string) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') }
 export default async function Page() {
   const playas = (await getPlayas()).filter(p => p.accesible === true)

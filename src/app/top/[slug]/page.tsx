@@ -1,4 +1,4 @@
-// src/app/top/[slug]/page.tsx — Top 10 playas de una costa
+// src/app/top/[slug]/page.tsx. Top 10 playas de una costa
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const costa = COSTAS.find(c => c.slug === slug)
   if (!costa) return {}
   return {
-    title: `Top 10 mejores playas de la ${costa.nombre} — Ranking`,
+    title: `Top 10 mejores playas de la ${costa.nombre} | Ranking`,
     description: `Las 10 mejores playas de la ${costa.nombre} (${costa.provincias.join(', ')}). Ranking por servicios, bandera azul, accesibilidad y ocupación.`,
     alternates: { canonical: `/top/${slug}` },
   }

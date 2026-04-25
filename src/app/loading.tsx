@@ -1,4 +1,4 @@
-// src/app/loading.tsx — Skeleton instant de la homepage
+// src/app/loading.tsx. Skeleton instant de la homepage
 
 export default function LoadingHome() {
   return (

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 export const revalidate = 86400
-export const metadata: Metadata = { title: 'Temporada de medusas en España — Cuándo y dónde', description: 'Mapa de riesgo de medusas por región y mes en España. Cuándo hay medusas, qué playas se ven más afectadas y cómo protegerse.', alternates: { canonical: '/medusas' } }
+export const metadata: Metadata = { title: 'Temporada de medusas en España | Cuándo y dónde', description: 'Mapa de riesgo de medusas por región y mes en España. Cuándo hay medusas, qué playas se ven más afectadas y cómo protegerse.', alternates: { canonical: '/medusas' } }
 
 const FAQ = [
   { q: '¿Cuándo hay más medusas en España?', a: 'La mayor concentración de medusas se da entre junio y septiembre, con el pico en agosto. En el Mediterráneo el riesgo es especialmente alto cuando el agua supera los 25 °C y las corrientes empujan los enjambres hacia la costa.' },
@@ -45,7 +45,7 @@ export default function Page() {
     </div>
     <h2 style={{fontFamily:'var(--font-serif)',fontSize:'1.2rem',fontWeight:800,color:'var(--ink)',marginBottom:'.75rem'}}>Consejos</h2>
     <ul style={{fontSize:'.88rem',color:'var(--ink)',lineHeight:1.65,paddingLeft:'1.5rem'}}>
-      <li>No toques una medusa varada en la arena — sigue picando.</li>
+      <li>No toques una medusa varada en la arena: sigue picando.</li>
       <li>Si te pica, lava con agua salada (nunca dulce). No frotes.</li>
       <li>Aplica vinagre si es medusa mediterránea. Si es carabela portuguesa, NO uses vinagre.</li>
       <li>Consulta la ficha de cada playa para ver el riesgo estimado en tiempo real.</li>

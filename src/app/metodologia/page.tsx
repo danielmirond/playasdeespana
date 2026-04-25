@@ -1,4 +1,4 @@
-// src/app/metodologia/page.tsx — Página EEAT
+// src/app/metodologia/page.tsx. Página EEAT
 // Señales de Experience, Expertise, Authoritativeness, Trustworthiness:
 // fuentes con URL + año, metodología del scoring 0-100, política
 // editorial, frecuencia de actualización, equipo y contacto.
@@ -11,7 +11,7 @@ export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Metodología y fuentes — De dónde salen los datos',
+  title: 'Metodología y fuentes | De dónde salen los datos',
   description: 'De dónde vienen los datos de cada playa, cómo se calcula la nota 0-100 y con qué frecuencia se actualizan. Fuentes: Open-Meteo, MITECO, EEA, IGN, ADEAC, OpenStreetMap.',
   alternates: { canonical: '/metodologia' },
   openGraph: {
@@ -46,28 +46,28 @@ const FUENTES: Fuente[] = [
     frecuencia: 'Cada hora',
   },
   {
-    nombre:     'MITECO — Ministerio para la Transición Ecológica',
+    nombre:     'MITECO. Ministerio para la Transición Ecológica',
     url:        'https://www.miteco.gob.es/es/costas/temas/proteccion-medio-marino/playas.html',
     rol:        'Inventario oficial de playas',
     dato:       'Composición, servicios, accesibilidad, longitud y tipo de cada playa española.',
     frecuencia: 'Anual (actualización temporada)',
   },
   {
-    nombre:     'EEA — European Environment Agency',
+    nombre:     'EEA. European Environment Agency',
     url:        'https://www.eea.europa.eu/themes/water/europes-seas-and-coasts/assessments/state-of-bathing-water',
     rol:        'Calidad del agua de baño',
     dato:       'Clasificación oficial EEA (Excelente / Buena / Suficiente / Deficiente) por punto de muestreo.',
     frecuencia: 'Anual (temporada pasada)',
   },
   {
-    nombre:     'ADEAC — Bandera Azul',
+    nombre:     'ADEAC. Bandera Azul',
     url:        'https://www.adeac.es/',
     rol:        'Distintivo Bandera Azul',
     dato:       'Listado oficial de playas galardonadas en España, actualizado cada temporada.',
     frecuencia: 'Anual (mayo)',
   },
   {
-    nombre:     'IGN — Instituto Geográfico Nacional',
+    nombre:     'IGN. Instituto Geográfico Nacional',
     url:        'https://www.ign.es/',
     rol:        'Cartografía base',
     dato:       'Coordenadas oficiales, mapas ortofoto e información geográfica del territorio.',
@@ -106,11 +106,11 @@ const FACTORES: Factor[] = [
 ]
 
 export default function MetodologiaPage() {
-  // Schema.org AboutPage — ayuda a Google a entender la intención EEAT
+  // Schema.org AboutPage. ayuda a Google a entender la intención EEAT
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    name: 'Metodología y fuentes — playas-espana.com',
+    name: 'Metodología y fuentes. playas-espana.com',
     description: 'Cómo se calcula la nota de cada playa, fuentes y política editorial.',
     url: `${BASE}/metodologia`,
     publisher: {
@@ -278,7 +278,7 @@ export default function MetodologiaPage() {
           </h2>
           <p style={{ fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.65, marginBottom: '1.5rem' }}>
             Todos los datos provienen de APIs públicas o catálogos oficiales. No reinventamos
-            la medición — solo la presentamos con contexto útil. Cada ficha de playa enlaza
+            la medición. solo la presentamos con contexto útil. Cada ficha de playa enlaza
             a la fuente cuando aplica.
           </p>
 

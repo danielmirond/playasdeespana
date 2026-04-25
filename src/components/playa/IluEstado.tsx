@@ -1,5 +1,5 @@
 // src/components/playa/IluEstado.tsx
-// Brand book v1: 6 estados del mar — 48×48, trazo 1.5px, horizonte y=30.
+// Brand book v1: 6 estados del mar. 48×48, trazo 1.5px, horizonte y=30.
 // Prop `animated` añade CSS keyframes (olas se mueven, sol respira,
 // bandera ondea). Respeta prefers-reduced-motion vía media query.
 

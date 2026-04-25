@@ -20,7 +20,7 @@ const dmSans = DM_Sans({
   weight: ['300', '400', '500', '600', '700'],
 })
 
-// JetBrains Mono — para datos técnicos (coordenadas, metadata, timestamps)
+// JetBrains Mono. para datos técnicos (coordenadas, metadata, timestamps)
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
@@ -31,7 +31,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'),
   title: {
-    default: 'Playas de España — Estado del mar en tiempo real',
+    default: 'Playas de España. Estado del mar en tiempo real',
     template: '%s · Playas de España',
   },
   description: 'Temperatura del agua, oleaje, calidad y servicios de las 5.611 playas españolas. Datos Open-Meteo y EEA actualizados cada hora.',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
 }
 
-// Critical CSS inline — renderiza antes del paint inicial
+// Critical CSS inline. renderiza antes del paint inicial
 // Design system v2 · tokens alineados con Figma export abril 2026
 const CRITICAL_CSS = `
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -67,7 +67,7 @@ const CRITICAL_CSS = `
 --tinta-900:#1a0f04;--tinta-800:#2a1a08;--tinta-700:#3d2a14;--tinta-600:#524030;--tinta-500:#7a6850;--tinta-400:#a89880;
 /* Acentos · marca */
 --terra-900:#4a2a04;--terra-800:#6b400a;--terra-700:#8a5418;--terra-600:#a8691e;--ocre-500:#d48a1a;--ocre-400:#e8a030;--ocre-300:#f0bc62;
-/* Mar — solo contexto marino */
+/* Mar. solo contexto marino */
 --mar-700:#2d5266;--mar-500:#4a7a90;--mar-300:#8aa8b8;
 /* Semánticos (puntuación) */
 --excelente:#3d6b1f;--muybueno:#7a8a30;--aceptable:#c48a1e;--limitado:#a04818;--noapto:#7a2818;
@@ -83,9 +83,9 @@ const CRITICAL_CSS = `
 --calma:var(--sea-calma);--buena:var(--sea-buena);--aviso:var(--sea-aviso);--peligro:var(--sea-peligro);--surf:var(--sea-surf);--viento:var(--sea-viento);
 /* Fonts */
 --font-serif:var(--font-playfair,'Playfair Display',Georgia,serif);--font-sans:var(--font-dm-sans,'DM Sans',system-ui,sans-serif);--font-mono:var(--font-mono,'JetBrains Mono',ui-monospace,monospace);
-/* Radii — editorial discreto */
+/* Radii. editorial discreto */
 --r-xs:2px;--r-sm:4px;--r-md:6px;--r-lg:10px;--r-xl:16px;--r-pill:999px;
-/* Shadows — muy sutiles */
+/* Shadows. muy sutiles */
 --shadow-sm:0 1px 0 rgba(42,26,8,.06),0 1px 2px rgba(42,26,8,.04);
 --shadow-md:0 2px 4px rgba(42,26,8,.06),0 4px 12px rgba(42,26,8,.05);
 /* Motion */
@@ -150,13 +150,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
       <head>
-        {/* Critical CSS inline — paint inmediato sin esperar CSS externo */}
+        {/* Critical CSS inline. paint inmediato sin esperar CSS externo */}
         <style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />
 
         {/* Preload del logo · está en el LCP del nav, eliminar el round-trip */}
         <link rel="preload" as="image" href="/logo.svg" fetchPriority="high" />
 
-        {/* Preconnect/DNS prefetch — elimina RTT para APIs externas */}
+        {/* Preconnect/DNS prefetch. elimina RTT para APIs externas */}
         <link rel="preconnect" href="https://api.open-meteo.com" />
         <link rel="preconnect" href="https://marine-api.open-meteo.com" />
         <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
@@ -166,7 +166,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* AdSense se carga via ConsentScripts (requiere consentimiento marketing) */}
 
-        {/* Speculation Rules — prefetch/prerender para navegación instant */}
+        {/* Speculation Rules. prefetch/prerender para navegación instant */}
         <script
           type="speculationrules"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -200,13 +200,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }],
           })}}
         />
-        {/* Service Worker registration — offline beach fichas */}
+        {/* Service Worker registration. offline beach fichas */}
         <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js')` }} />
       </head>
       <body>
         <NavigationProgress />
         {children}
-        {/* GA4 + AdSense — cargados condicionalmente por consentimiento */}
+        {/* GA4 + AdSense. cargados condicionalmente por consentimiento */}
         <ConsentScripts />
         <CookieBanner />
       </body>

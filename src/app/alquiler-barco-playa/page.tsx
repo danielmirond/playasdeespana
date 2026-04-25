@@ -15,7 +15,7 @@ const SAMBOAT_AFF   = process.env.NEXT_PUBLIC_SAMBOAT_AFF ?? ''
 const NAUTAL_AFF    = process.env.NEXT_PUBLIC_NAUTAL_AFF ?? ''
 
 export const metadata: Metadata = {
-  title: 'Alquiler de barco para ir de playas en España — Sin licencia y con patrón',
+  title: 'Alquiler de barco para ir de playas en España | Sin licencia y con patrón',
   description: 'Compara plataformas de alquiler de barcos: Click&Boat, Samboat y Nautal. Barcos con y sin licencia en Baleares, Costa Brava, Canarias y Costa del Sol.',
   alternates: { canonical: '/alquiler-barco-playa' },
   openGraph: {
@@ -35,14 +35,14 @@ interface Destino {
 }
 
 const DESTINOS: Destino[] = [
-  { nombre: 'Mallorca',     comunidad: 'Islas Baleares', slug: 'islas-baleares', emoji: '🏖️', desc: 'Cala Salada, Es Trenc, Es Caló des Moro — solo accesibles en barco.' },
+  { nombre: 'Mallorca',     comunidad: 'Islas Baleares', slug: 'islas-baleares', emoji: '🏖️', desc: 'Cala Salada, Es Trenc, Es Caló des Moro. solo accesibles en barco.' },
   { nombre: 'Ibiza',        comunidad: 'Islas Baleares', slug: 'islas-baleares', emoji: '🌊', desc: 'Formentera en ferry privado, Cala Comte y Es Vedrà al atardecer.' },
   { nombre: 'Menorca',      comunidad: 'Islas Baleares', slug: 'islas-baleares', emoji: '🐚', desc: 'Cala Macarella, Mitjana y Turqueta desde el mar.' },
-  { nombre: 'Costa Brava',  comunidad: 'Cataluña',       slug: 'cataluna',       emoji: '⛵', desc: 'Cala Montgó, Illes Medes, Cap de Creus — snorkel protegido.' },
+  { nombre: 'Costa Brava',  comunidad: 'Cataluña',       slug: 'cataluna',       emoji: '⛵', desc: 'Cala Montgó, Illes Medes, Cap de Creus. snorkel protegido.' },
   { nombre: 'Cabo de Gata', comunidad: 'Andalucía',      slug: 'andalucia',      emoji: '🏜️', desc: 'Playa de los Muertos, Cala de San Pedro, Playazo de Rodalquilar.' },
   { nombre: 'Canarias',     comunidad: 'Canarias',       slug: 'canarias',       emoji: '🌋', desc: 'La Graciosa, acantilados de Los Gigantes, Lobos en Fuerteventura.' },
   { nombre: 'Costa del Sol', comunidad: 'Andalucía',     slug: 'andalucia',      emoji: '☀️', desc: 'Acantilados de Maro-Cerro Gordo, cuevas del Higuerón.' },
-  { nombre: 'Murcia',       comunidad: 'Murcia',         slug: 'murcia',         emoji: '🐠', desc: 'Cabo de Palos, Islas Hormigas — reserva marina mejor vista desde barco.' },
+  { nombre: 'Murcia',       comunidad: 'Murcia',         slug: 'murcia',         emoji: '🐠', desc: 'Cabo de Palos, Islas Hormigas. reserva marina mejor vista desde barco.' },
 ]
 
 interface Plataforma {
@@ -64,7 +64,7 @@ const PLATAFORMAS: Plataforma[] = [
     puntos: [
       '40.000+ barcos en el Mediterráneo',
       'Con o sin patrón (skipper opcional)',
-      'Protección "Best Price" — precio mínimo garantizado',
+      'Protección "Best Price". precio mínimo garantizado',
       'Cancelación gratuita hasta 60 días antes',
     ],
   },

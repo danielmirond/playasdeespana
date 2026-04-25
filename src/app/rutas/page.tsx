@@ -1,4 +1,4 @@
-// src/app/rutas/page.tsx — Rutas de playas por las costas de España
+// src/app/rutas/page.tsx. Rutas de playas por las costas de España
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -8,7 +8,7 @@ import { getRutas, COSTAS, type Ruta } from '@/lib/rutas'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Rutas de playas por las costas de España — Itinerarios',
+  title: 'Rutas de playas por las costas de España | Itinerarios',
   description: 'Recorre las mejores playas de cada costa de España: Costa del Sol, Costa Brava, Costa de la Luz, Rías Baixas, Islas Canarias y más. Itinerarios con mapa y Google Maps.',
   alternates: { canonical: '/rutas' },
 }

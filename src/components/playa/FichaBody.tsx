@@ -212,7 +212,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
-  const horasLuz = solData?.horas_luz ?? '—'
+  const horasLuz = solData?.horas_luz ?? '–'
 
   const nivelCalidad          = calidad?.nivel ?? 'Excelente'
   const [dotColor, textColor] = COLORES_CALIDAD[nivelCalidad] ?? ['#5a3d12', '#5a3d12']
@@ -284,7 +284,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           />
         </div>
 
-        {/* AD — entre fotos y oleaje */}
+        {/* AD. entre fotos y oleaje */}
         <AdSlot slot="fotos-oleaje" format="horizontal" />
 
         {/* OLEAJE + METEO */}
@@ -305,9 +305,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <div className={styles.solRow}>
-              <div className={styles.sr}><span className={styles.srV}><SunHorizon size={14} weight="bold" color="var(--accent)" style={{verticalAlign:'middle',marginRight:4}}/>{solData?.amanecer ?? meteo.amanecer ?? '—'}</span><span className={styles.srL}>{i18n.amanecer}</span></div>
+              <div className={styles.sr}><span className={styles.srV}><SunHorizon size={14} weight="bold" color="var(--accent)" style={{verticalAlign:'middle',marginRight:4}}/>{solData?.amanecer ?? meteo.amanecer ?? '–'}</span><span className={styles.srL}>{i18n.amanecer}</span></div>
               <div className={styles.sr}><span className={styles.srV}>{horasLuz}</span><span className={styles.srL}>{i18n.horasLuz}</span></div>
-              <div className={styles.sr}><span className={styles.srV}><SunHorizon size={14} weight="bold" color="var(--muted)" style={{verticalAlign:'middle',marginRight:4}}/>{solData?.atardecer ?? meteo.atardecer ?? '—'}</span><span className={styles.srL}>{i18n.atardecer}</span></div>
+              <div className={styles.sr}><span className={styles.srV}><SunHorizon size={14} weight="bold" color="var(--muted)" style={{verticalAlign:'middle',marginRight:4}}/>{solData?.atardecer ?? meteo.atardecer ?? '–'}</span><span className={styles.srL}>{i18n.atardecer}</span></div>
             </div>
           </div>
 
@@ -390,7 +390,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 <span>
                   <strong style={{ color: meteo.uv >= 8 ? '#7a2818' : meteo.uv >= 6 ? '#a04818' : '#c48a1e' }}>
                     {meteo.uv >= 8 ? (locale === 'en' ? 'Very high UV' : 'UV muy alto') : meteo.uv >= 6 ? (locale === 'en' ? 'High UV' : 'UV alto') : (locale === 'en' ? 'Moderate UV' : 'UV moderado')}
-                    {' — '}
+                    {'. '}
                     {meteo.uv >= 6 ? 'SPF 50+' : 'SPF 30+'}
                   </strong>
                   {' '}
@@ -517,7 +517,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <Collapsible maxHeight={160} labelMore={locale === 'en' ? 'Show all options' : 'Ver todas las opciones'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent,#6b400a)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
-                <Car size={18} weight='bold'/> {locale === 'en' ? 'By car — open in Google Maps' : 'En coche — abrir en Google Maps'}
+                <Car size={18} weight='bold'/> {locale === 'en' ? 'By car. open in Google Maps' : 'En coche. abrir en Google Maps'}
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
                 <Bus size={18} weight='bold'/> {locale === 'en' ? 'By public transport' : 'En transporte público'}
@@ -541,7 +541,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   }}
                 >
                   <Car size={18} weight="bold" />
-                  {locale === 'en' ? 'Rent a car — Rentalcars.com' : 'Alquilar coche — Rentalcars.com'}
+                  {locale === 'en' ? 'Rent a car. Rentalcars.com' : 'Alquilar coche. Rentalcars.com'}
                 </a>
               )}
             </div>
@@ -725,7 +725,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         </div>
 
-        {/* FERRY CTA — solo se muestra en Baleares y Canarias */}
+        {/* FERRY CTA. solo se muestra en Baleares y Canarias */}
         <FerriesCTA playa={playa} locale={locale} />
 
         {/* CAMPINGS Y AUTOCARAVANAS */}
@@ -895,7 +895,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         )}
 
-        {/* AD — entre hoteles y servicios */}
+        {/* AD. entre hoteles y servicios */}
         <AdSlot slot="hoteles-servicios" format="horizontal" />
 
         {/* SERVICIOS */}
@@ -1057,7 +1057,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} meteo={{ agua: meteo.agua, olas: meteo.olas, viento: meteo.viento }} />
         <VotacionPlaya slug={playa.slug} locale={locale} />
         <ReportarEstado slug={playa.slug} locale={locale} />
-        {/* Amazon affiliate — equipo de playa */}
+        {/* Amazon affiliate. equipo de playa */}
         {AMAZON_TAG && (
           <div style={{
             background: 'var(--card-bg,#faf6ef)', border: '1px solid var(--line,#e8dcc8)',

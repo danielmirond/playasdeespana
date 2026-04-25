@@ -35,11 +35,11 @@ function toSlug(str: string): string {
   return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 }
 
-// IGN PNOA WMTS — ortofotos aéreas oficiales de España (actualizadas 2x/año,
+// IGN PNOA WMTS. ortofotos aéreas oficiales de España (actualizadas 2x/año,
 // JPEG tiles en GoogleMapsCompatible grid). No requiere API key.
 // Docs: https://www.ign.es/wmts/pnoa-ma?request=GetCapabilities&service=WMTS
 const PNOA_URL = 'https://www.ign.es/wmts/pnoa-ma?layer=OI.OrthoimageCoverage&style=default&tilematrixset=GoogleMapsCompatible&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/jpeg&TileMatrix={z}&TileCol={x}&TileRow={y}'
-const PNOA_ATTRIB = '© <a href="https://pnoa.ign.es/" target="_blank" rel="noopener">PNOA</a> — IGN España'
+const PNOA_ATTRIB = '© <a href="https://pnoa.ign.es/" target="_blank" rel="noopener">PNOA</a>. IGN España'
 
 type BaseMap = 'osm' | 'aerial'
 

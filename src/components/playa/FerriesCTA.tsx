@@ -1,5 +1,5 @@
 // src/components/playa/FerriesCTA.tsx
-// CTA de ferry — solo se muestra en playas de Baleares y Canarias, donde
+// CTA de ferry. solo se muestra en playas de Baleares y Canarias, donde
 // la mayoría de turistas llega en ferry (Barcelona/Valencia/Denia → Baleares,
 // Huelva/Cádiz → Canarias). AOV alto (100-400€ por billete ida+vuelta).
 

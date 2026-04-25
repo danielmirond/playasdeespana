@@ -1,4 +1,4 @@
-// src/app/surf/page.tsx — Surf forecast: playas con actividad surf
+// src/app/surf/page.tsx. Surf forecast: playas con actividad surf
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -8,7 +8,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Surf en España — Previsión de olas y viento en playas de surf',
+  title: 'Surf en España | Previsión de olas y viento en playas de surf',
   description: 'Previsión de surf en España: playas con olas, periodo, viento y condiciones para surfear hoy. Costa Vasca, Asturias, Galicia, Canarias, Cádiz y más.',
   alternates: { canonical: '/surf' },
 }

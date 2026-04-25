@@ -1,10 +1,10 @@
-// src/app/cookies/page.tsx — Política de cookies conforme LSSI-CE y RGPD
+// src/app/cookies/page.tsx. Política de cookies conforme LSSI-CE y RGPD
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 
 export const metadata: Metadata = {
-  title: 'Política de cookies — Playas de España',
+  title: 'Política de cookies | Playas de España',
   description: 'Información sobre las cookies que utiliza playas-espana.com: tipos, finalidad, duración y cómo gestionarlas.',
   alternates: { canonical: '/cookies' },
   robots: { index: true, follow: true },
@@ -54,10 +54,10 @@ export default function CookiesPage() {
           <p>Estas cookies son <strong>estrictamente necesarias</strong> para que la web funcione. No requieren
           consentimiento (exención del art. 22.2 LSSI-CE).</p>
           <ul>
-            <li><strong>cookie_consent_v2</strong> — almacena tu elección de cookies. Duración: 1 año. Propia.</li>
-            <li><strong>playas_favoritas</strong> — lista de playas guardadas como favoritas. Duración: permanente. Propia (localStorage).</li>
-            <li><strong>voto:{'{slug}'}</strong> — tu valoración por estrellas en una playa. Duración: permanente. Propia (localStorage).</li>
-            <li><strong>rep:{'{slug}:{tipo}'}</strong> — tu reporte de condiciones en una playa. Duración: 24h. Propia (localStorage).</li>
+            <li><strong>cookie_consent_v2.</strong> almacena tu elección de cookies. Duración: 1 año. Propia.</li>
+            <li><strong>playas_favoritas.</strong> lista de playas guardadas como favoritas. Duración: permanente. Propia (localStorage).</li>
+            <li><strong>voto:{'{slug}'}.</strong> tu valoración por estrellas en una playa. Duración: permanente. Propia (localStorage).</li>
+            <li><strong>rep:{'{slug}:{tipo}'}.</strong> tu reporte de condiciones en una playa. Duración: 24h. Propia (localStorage).</li>
           </ul>
         </Section>
 
@@ -65,7 +65,7 @@ export default function CookiesPage() {
         <Section title="2. Cookies analíticas">
           <p>Solo se activan si aceptas las cookies analíticas en el banner de consentimiento.</p>
           <ul>
-            <li><strong>_ga, _ga_*</strong> — Google Analytics 4 (GA4). Identificador anónimo de sesión. Duración: 2 años. Terceros (Google LLC).</li>
+            <li><strong>_ga, _ga_*.</strong> Google Analytics 4 (GA4). Identificador anónimo de sesión. Duración: 2 años. Terceros (Google LLC).</li>
             <li>Finalidad: medir el número de visitas, páginas vistas, tiempo en el sitio y fuente del tráfico. Los datos son anónimos y agregados.</li>
             <li>Proveedor: Google LLC (EE.UU.). <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de privacidad de Google</a>.</li>
           </ul>
@@ -75,8 +75,8 @@ export default function CookiesPage() {
         <Section title="3. Cookies de marketing y afiliación">
           <p>Solo se activan si aceptas las cookies de marketing en el banner.</p>
           <ul>
-            <li><strong>Google AdSense</strong> — cookies de publicidad personalizadas. Duración: variable. Terceros (Google LLC).</li>
-            <li><strong>Cookies de afiliados</strong> — cuando haces clic en un enlace de afiliado (Booking.com, Amazon,
+            <li><strong>Google AdSense.</strong> cookies de publicidad personalizadas. Duración: variable. Terceros (Google LLC).</li>
+            <li><strong>Cookies de afiliados.</strong> cuando haces clic en un enlace de afiliado (Booking.com, Amazon,
             Civitatis, Click&Boat, Rentalcars, TheFork, Parclick, Pitchup, Heymondo, IATI, Chapka, Samboat,
             Nautal, Direct Ferries, Baleària), el proveedor puede instalar cookies de seguimiento para atribuirnos
             la referencia. Cada proveedor tiene su propia política de cookies.</li>
@@ -91,16 +91,16 @@ export default function CookiesPage() {
           <code> rel=&quot;sponsored&quot;</code> en el HTML.</p>
           <p>Los proveedores con los que trabajamos incluyen:</p>
           <ul>
-            <li>Booking.com — hoteles y alojamiento</li>
-            <li>Amazon.es — equipo de playa, protectores solares</li>
-            <li>Civitatis — actividades y excursiones</li>
-            <li>Click&Boat, Samboat, Nautal — alquiler de barcos</li>
-            <li>Rentalcars — alquiler de coches</li>
-            <li>TheFork — reservas de restaurantes</li>
-            <li>Parclick — reservas de parking</li>
-            <li>Pitchup — reservas de campings</li>
-            <li>Heymondo, IATI, Chapka — seguros de viaje</li>
-            <li>Direct Ferries, Baleària — ferries</li>
+            <li>Booking.com. hoteles y alojamiento</li>
+            <li>Amazon.es. equipo de playa, protectores solares</li>
+            <li>Civitatis. actividades y excursiones</li>
+            <li>Click&Boat, Samboat, Nautal. alquiler de barcos</li>
+            <li>Rentalcars. alquiler de coches</li>
+            <li>TheFork. reservas de restaurantes</li>
+            <li>Parclick. reservas de parking</li>
+            <li>Pitchup. reservas de campings</li>
+            <li>Heymondo, IATI, Chapka. seguros de viaje</li>
+            <li>Direct Ferries, Baleària. ferries</li>
           </ul>
           <p>La afiliación <strong>no influye</strong> en los datos meteorológicos, puntuaciones, rankings ni
           contenido informativo. Estos provienen de fuentes independientes (Open-Meteo, MITECO, EEA, OSM).</p>
