@@ -511,7 +511,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* CÓMO LLEGAR */}
         <div className={styles.card} id="s-comoLlegar">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? `How to get to ${playa.nombre}` : `Cómo llegar a ${playa.nombre}`}</h2>
+            <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? <>How to <em>get there</em></> : <>Cómo <em>llegar</em></>}</h2>
           </div>
           <div className={styles.cardBody}>
             <Collapsible maxHeight={160} labelMore={locale === 'en' ? 'Show all options' : 'Ver todas las opciones'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
@@ -734,7 +734,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>
                 <Car size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'var(--accent,#6b400a)'}}/>
-                {locale === 'en' ? `Campsites near ${playa.nombre}` : `Campings cerca de ${playa.nombre}`}
+                {locale === 'en' ? <>Campsites <em>nearby</em></> : <><em>Campings</em> y autocaravanas</>}
               </h2>
               <span className={styles.cardSrc}>OpenStreetMap</span>
             </div>
@@ -843,7 +843,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>
                 <Fish size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'#0891b2'}}/>
-                {locale === 'en' ? `Dive centers near ${playa.nombre}` : `Centros de buceo cerca de ${playa.nombre}`}
+                {locale === 'en' ? <>Dive <em>centers</em></> : <>Centros de <em>buceo</em></>}
               </h2>
               <span className={styles.cardSrc}>OpenStreetMap</span>
             </div>
@@ -901,7 +901,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* SERVICIOS */}
         <div className={styles.card} id="s-servicios">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.servicios(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Facilities <em>&amp; services</em></> : <>Servicios <em>y equipamiento</em></>}</h2>
             <span className={styles.cardSrc}>{i18n.serviciosSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -996,7 +996,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {playasCercanas && playasCercanas.length > 0 && (
           <div className={styles.card} id="s-cercanas">
             <div className={styles.cardHead}>
-              <h2 className={styles.cardTitle}>{locale === 'en' ? `Beaches near ${playa.nombre}` : `Playas cerca de ${playa.nombre}`}</h2>
+              <h2 className={styles.cardTitle}>{locale === 'en' ? <>Beaches <em>nearby</em></> : <>Playas <em>cercanas</em></>}</h2>
             </div>
             <div className={styles.carousel}>
               {playasCercanas.map(pc => (
@@ -1025,6 +1025,37 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
       {/* ASIDE */}
       <aside className={styles.aside}>
+
+        {/* Ficha técnica — design system sidebar pattern */}
+        {(playa.longitud || playa.composicion || playa.tipo || calidad) && (
+          <div className={styles.asideBox}>
+            <div className={styles.abHead}>
+              {locale === 'en' ? 'Beach facts' : 'Ficha técnica'}
+            </div>
+            <div className={styles.abBody}>
+              {[
+                playa.longitud    ? [locale === 'en' ? 'Length' : 'Longitud',        `${playa.longitud} m`] : null,
+                playa.anchura     ? [locale === 'en' ? 'Width' : 'Anchura',          `${playa.anchura} m`] : null,
+                playa.composicion ? [locale === 'en' ? 'Sand' : 'Arena',             playa.composicion] : null,
+                playa.tipo        ? [locale === 'en' ? 'Type' : 'Tipo',              playa.tipo] : null,
+                calidad           ? [locale === 'en' ? 'Water quality' : 'Calidad',  calidad.nivel] : null,
+                playa.bandera     ? [locale === 'en' ? 'Blue Flag' : 'Bandera',      locale === 'en' ? 'Blue Flag 2026' : 'Azul 2026'] : null,
+                [locale === 'en' ? 'Lifeguard' : 'Socorrismo',    playa.socorrismo ? (locale === 'en' ? 'Yes' : 'Sí') : 'No'],
+                [locale === 'en' ? 'Accessible' : 'Accesible PMR', playa.accesible  ? (locale === 'en' ? 'Partial' : 'Parcial') : 'No'],
+                [locale === 'en' ? 'Dogs allowed' : 'Perros',      playa.perros     ? (locale === 'en' ? 'Yes' : 'Sí') : 'No'],
+              ].filter(Boolean).map(row => {
+                const [k, v] = row as [string, string]
+                return (
+                  <div key={k} className={styles.ftRow}>
+                    <span className={styles.ftK}>{k}</span>
+                    <span className={styles.ftV}>{v}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
         <div className={styles.asideCard}>
           <div className={styles.aeIlu}><IluEstado estado={meteo.estado} size="sm" animated/></div>
           <div className={styles.aeEstado} style={{ color: estado.dot }}>{estado.label}</div>

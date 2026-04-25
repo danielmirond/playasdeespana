@@ -38,8 +38,15 @@
   display: flex; align-items: center; gap: .35rem;
 }
 .cardSrc {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: .7rem; color: var(--muted); opacity: .75;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: .72rem; color: var(--muted); opacity: .8;
+}
+
+/* Accent italic emphasis inside section titles */
+.cardTitle em {
+  font-style: italic; font-weight: 500;
+  color: var(--accent);
 }
 .cardBody { padding: .2rem 1rem 1rem; }
 .divider { height: 1px; background: var(--line); margin: 0 1rem; }
@@ -236,6 +243,19 @@
 .asdCell { text-align: center; }
 .asdV { font-family: var(--font-serif); font-size: .9rem; font-weight: 700; color: var(--ink); display: block; }
 .asdL { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+
+/* ── FICHA TÉCNICA SIDEBAR ──────────────────────────────────────── */
+.ftRow {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: .32rem 0; border-bottom: 1px solid var(--line);
+  font-size: .78rem; gap: .4rem;
+}
+.ftRow:last-child { border: none; }
+.ftK {
+  font-family: var(--font-serif); font-style: italic;
+  color: var(--muted); flex-shrink: 0;
+}
+.ftV { font-weight: 500; color: var(--ink); text-align: right; word-break: break-word; }
 
 /* ── ASIDE ──────────────────────────────────────────────────────── */
 .aside { display: flex; flex-direction: column; gap: .65rem; position: sticky; top: 108px; }
