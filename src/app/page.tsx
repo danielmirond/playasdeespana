@@ -374,6 +374,7 @@ export default async function HomePage() {
                   <Link href="/buscar">Buscar playas</Link>
                   <Link href="/comparar">Comparador</Link>
                   <Link href="/rutas/configurar">Configurar ruta</Link>
+                  <Link href="/widget">Widget para tu web</Link>
                   <Link href="/metodologia">Metodología y fuentes</Link>
                   <Link href="/en">English version</Link>
                 </nav>

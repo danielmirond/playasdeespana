@@ -68,6 +68,7 @@ export async function GET() {
     { es: '/comparar',               en: null,                     p: '0.6', f: 'weekly' },
     { es: '/calidad-agua',           en: null,                     p: '0.6', f: 'weekly' },
     // EEAT + legal
+    { es: '/widget',                  en: null,                     p: '0.5', f: 'monthly' },
     { es: '/metodologia',            en: null,                     p: '0.5', f: 'monthly' },
     { es: '/aviso-legal',            en: null,                     p: '0.3', f: 'yearly' },
     { es: '/privacidad',             en: null,                     p: '0.3', f: 'yearly' },
