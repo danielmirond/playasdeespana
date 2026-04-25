@@ -1,6 +1,6 @@
 // src/lib/fetch-timeout.ts — Fetch con timeout para evitar que APIs lentas bloqueen la página
 
-const DEFAULT_TIMEOUT = 2000
+const DEFAULT_TIMEOUT = 4000
 
 export async function fetchWithTimeout(
   url: string,
