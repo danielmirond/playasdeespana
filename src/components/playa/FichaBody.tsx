@@ -16,6 +16,7 @@ import Link from 'next/link'
 import IluEstado from './IluEstado'
 import Collapsible from '@/components/ui/Collapsible'
 import { ESTADOS } from '@/lib/estados'
+import { getProductosParaPlaya } from '@/lib/amazon-productos'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
@@ -32,7 +33,6 @@ const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
 const CIVITATIS_AFF = process.env.NEXT_PUBLIC_CIVITATIS_AFF ?? ''
 const THEFORK_AFF = process.env.NEXT_PUBLIC_THEFORK_AFF ?? ''
 const RENTALCARS_AFF = process.env.NEXT_PUBLIC_RENTALCARS_AFF ?? ''
-const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
 
 // Lazy load below-fold components (SSR habilitado para SEO; solo Leaflet no soporta SSR)
 const TraficoSection = dynamic(() => import('./TraficoSection'))
@@ -212,6 +212,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
+  const amazonProductos = getProductosParaPlaya(playa, meteo.estado)
   const horasLuz = solData?.horas_luz ?? '–'
 
   const nivelCalidad          = calidad?.nivel ?? 'Excelente'
@@ -1082,23 +1083,19 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} meteo={{ agua: meteo.agua, olas: meteo.olas, viento: meteo.viento }} />
         <VotacionPlaya slug={playa.slug} locale={locale} />
         <ReportarEstado slug={playa.slug} locale={locale} />
-        {/* Amazon affiliate. equipo de playa */}
-        {AMAZON_TAG && (
+        {/* Amazon affiliate — contextual products for this beach */}
+        {amazonProductos.length > 0 && (
           <div style={{
             background: 'var(--card-bg,#faf6ef)', border: '1px solid var(--line,#e8dcc8)',
             borderRadius: 6, padding: '.7rem', display: 'flex', flexDirection: 'column', gap: '.35rem',
           }}>
             <div style={{ fontSize:'.72rem', fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', padding: '0 .2rem' }}>
-              {locale === 'en' ? 'Beach essentials' : 'Equipo de playa'}
+              {locale === 'en' ? 'Gear for this beach' : 'Equipo para esta playa'}
             </div>
-            {[
-              { q: 'protector+solar+playa', label: locale === 'en' ? 'Sunscreen' : 'Protector solar', icon: '☀️' },
-              { q: 'gafas+snorkel', label: locale === 'en' ? 'Snorkel mask' : 'Gafas de snorkel', icon: '🤿' },
-              { q: 'tabla+paddle+surf+hinchable', label: 'Paddle surf', icon: '🏄' },
-            ].map(item => (
+            {amazonProductos.map(p => (
               <a
-                key={item.q}
-                href={`https://www.amazon.es/s?k=${item.q}&tag=${AMAZON_TAG}`}
+                key={p.asin}
+                href={`https://www.amazon.es/dp/${p.asin}/?tag=nuus-21`}
                 target="_blank" rel="noopener noreferrer sponsored"
                 style={{
                   display: 'flex', alignItems: 'center', gap: '.5rem',
@@ -1107,11 +1104,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   fontSize: '.75rem', fontWeight: 500, color: 'var(--ink)', textDecoration: 'none',
                 }}
               >
-                <span>{item.icon}</span>
-                <span style={{ flex: 1 }}>{item.label}</span>
-                <span style={{ fontSize:'.72rem', color: 'var(--accent)', fontWeight: 600 }}>Amazon →</span>
+                <span style={{ flex: 1 }}>{p.nombre}</span>
+                <span style={{ fontSize: '.65rem', color: 'var(--muted)' }}>{p.precio}€</span>
+                <span style={{ fontSize:'.72rem', color: 'var(--accent)', fontWeight: 600 }}>→</span>
               </a>
             ))}
+            <div style={{ fontSize: '.6rem', color: 'var(--muted)', opacity: .7, padding: '0 .2rem', marginTop: '.1rem' }}>
+              Amazon.es · enlaces de afiliado
+            </div>
           </div>
         )}
       </aside>
