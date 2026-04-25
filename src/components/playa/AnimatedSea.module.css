@@ -1,0 +1,35 @@
+/* AnimatedSea — CSS keyframes from design system v1 §04 */
+
+@keyframes seaDrift     { from { transform: translateX(-32px); } to { transform: translateX(0); } }
+@keyframes seaDriftR    { from { transform: translateX(0); }     to { transform: translateX(-32px); } }
+@keyframes seaDriftFast { from { transform: translateX(-48px); } to { transform: translateX(0); } }
+@keyframes seaSpin      { from { transform: rotate(0); }         to { transform: rotate(360deg); } }
+@keyframes seaRise      { 0%,100% { transform: translateY(2px); }  50% { transform: translateY(-2px); } }
+@keyframes seaPulse     { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes seaBob       { 0%,100% { transform: translateY(0); }   50% { transform: translateY(-2px); } }
+@keyframes seaBoat      { 0% { transform: translateX(0) translateY(0); } 50% { transform: translateX(8px) translateY(-1px); } 100% { transform: translateX(0) translateY(0); } }
+@keyframes seaShake     { 0%,100% { transform: translateX(0); } 25% { transform: translateX(1.5px); } 75% { transform: translateX(-1.5px); } }
+@keyframes seaFlag      { 0%,100% { transform: skewX(-2deg) scaleX(1); } 50% { transform: skewX(6deg) scaleX(0.96); } }
+@keyframes seaGust      { 0% { transform: translateX(-110%); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(40%); opacity: 0; } }
+
+.drift       { animation: seaDrift 6s linear infinite; }
+.driftR      { animation: seaDriftR 7s linear infinite; }
+.driftFast   { animation: seaDriftFast 3.4s linear infinite; }
+.driftSlow   { animation: seaDrift 14s linear infinite; }
+.driftSlowR  { animation: seaDriftR 16s linear infinite; }
+.spinSlow    { animation: seaSpin 32s linear infinite; transform-origin: center; }
+.rise        { animation: seaRise 7s ease-in-out infinite; }
+.pulse       { animation: seaPulse 2.4s ease-in-out infinite; }
+.bob         { animation: seaBob 1.6s ease-in-out infinite; }
+.boat        { animation: seaBoat 9s ease-in-out infinite; }
+.shake       { animation: seaShake 0.45s ease-in-out infinite; }
+.flag        { animation: seaFlag 1.2s ease-in-out infinite; transform-origin: 0 -26px; }
+.gust1       { animation: seaGust 2.6s ease-in-out infinite; }
+.gust2       { animation: seaGust 3.4s ease-in-out 0.4s infinite; }
+.gust3       { animation: seaGust 2.0s ease-in-out 0.9s infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .drift, .driftR, .driftFast, .driftSlow, .driftSlowR,
+  .spinSlow, .rise, .pulse, .bob, .boat, .shake,
+  .flag, .gust1, .gust2, .gust3 { animation: none !important; }
+}

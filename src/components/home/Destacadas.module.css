@@ -74,6 +74,12 @@
   overflow: hidden;
 }
 
+.seaOverlay {
+  position: absolute; inset: 0 0 40% 0;
+  opacity: .55; mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
 .rank {
   position: absolute; top: 10px; left: 10px; z-index: 2;
   font-family: var(--font-serif); font-style: italic;

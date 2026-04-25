@@ -9,6 +9,7 @@ import Link from 'next/link'
 import type { Playa } from '@/types'
 import { ESTADOS } from '@/lib/estados'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
+import AnimatedSea from '@/components/playa/AnimatedSea'
 import styles from './Destacadas.module.css'
 
 // ── Meteo batch vía Open-Meteo (1 request por API en vez de N) ────
@@ -111,6 +112,9 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
         prefetch={true}
       >
         <div className={styles.vis} style={{ background: GRADIENTS[idx % GRADIENTS.length] }}>
+          <div className={styles.seaOverlay}>
+            <AnimatedSea estado={estado} color="rgba(255,255,255,0.85)" tint="transparent" />
+          </div>
           {rank !== undefined && (
             <span className={styles.rank} aria-label={`Posición ${rank}`}>nº{rank}</span>
           )}

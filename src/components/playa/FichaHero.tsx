@@ -8,6 +8,7 @@ import type { Playa } from '@/types'
 import type { EstadoConfig } from '@/lib/estados'
 import type { PlayaScore } from '@/lib/scoring'
 import IluEstado from './IluEstado'
+import AnimatedSea from './AnimatedSea'
 import styles from './FichaHero.module.css'
 import { Drop, Waves, Sun, Wind, MapPin } from '@phosphor-icons/react'
 import { nombreConPlaya } from '@/lib/geo'
@@ -53,6 +54,11 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
 
   return (
     <section className={styles.hero} style={{ '--hero-bg': estado.tileBg, '--hero-bg-dark': estado.tileBgDark } as React.CSSProperties}>
+      {/* Animated sea atmosphere */}
+      <div className={styles.seaLayer}>
+        <AnimatedSea estado={meteo.estado} />
+      </div>
+
       {/* Breadcrumb */}
       <nav className={styles.bc} aria-label={locale === 'en' ? 'Breadcrumb' : 'Ruta de navegación'}>
         <Link href={homeHref}>{i18n.inicio}</Link>
