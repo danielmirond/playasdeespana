@@ -13,6 +13,19 @@
   background: var(--hero-bg-dark, #1a0f04);
 }
 
+/* Atmospheric video background — fills hero, hover to play */
+.videoLayer {
+  position: absolute; inset: 0;
+  z-index: 0;
+  opacity: .35;
+  transition: opacity .5s ease;
+  pointer-events: none;
+}
+.hero:hover .videoLayer {
+  opacity: .55;
+  pointer-events: auto;
+}
+
 /* ── Breadcrumb ──────────────────────────────────────────────────── */
 .bc {
   position: relative; z-index: 2;
