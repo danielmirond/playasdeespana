@@ -13,6 +13,22 @@ export const metadata: Metadata = {
   alternates: { canonical: '/atardeceres' },
 }
 
+const FAQ = [
+  { q: '¿Qué playas de España miran al oeste?', a: 'Las playas de la costa atlántica son las que más miran al oeste: toda Galicia, Huelva y la zona atlántica de Cádiz. En Baleares, la costa oeste de Mallorca e Ibiza ofrece puestas de sol directas sobre el mar. En Canarias, las costas occidentales de Tenerife y La Palma también son ideales.' },
+  { q: '¿A qué hora es el atardecer en las playas de España?', a: 'Varía mucho según la época del año. En verano (junio-julio), el sol se pone alrededor de las 21:30 h en la Península, mientras que en invierno (diciembre) lo hace cerca de las 18:00 h. En Canarias el atardecer es unos 30 minutos antes que en la Península.' },
+  { q: '¿Qué costa de España tiene los mejores atardeceres?', a: 'La Costa de la Luz (Huelva y Cádiz atlántico) es la más célebre por sus puestas de sol sobre el océano. Las Rías Baixas gallegas y la Costa da Morte también ofrecen atardeceres espectaculares. En Baleares, los acantilados del oeste de Ibiza (como Cala Comte) son legendarios.' },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+
 // Playas que miran al oeste/suroeste son las mejores para atardeceres.
 // Heurística: en la costa atlántica (lng < -2) casi todas miran al oeste.
 // En la mediterránea solo las que están en cabos/puntas con orientación W.
@@ -67,6 +83,7 @@ export default async function AtardeceresPage() {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
         <nav style={{
           display: 'flex', alignItems: 'center', gap: '.4rem',

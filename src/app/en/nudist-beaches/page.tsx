@@ -4,7 +4,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 export const revalidate = 86400
-export const metadata: Metadata = { title: 'Nudist Beaches in Spain — Complete List', description: 'Complete list of nudist and naturist beaches in Spain.', alternates: { canonical: '/en/nudist-beaches' } }
+export const metadata: Metadata = { title: 'Nudist Beaches in Spain — Complete List', description: 'Complete list of nudist and naturist beaches in Spain.', alternates: { canonical: '/en/nudist-beaches', languages: { 'es': '/playas-nudistas', 'en': '/en/nudist-beaches' } } }
 function toSlug(s: string) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') }
 export default async function Page() {
   const playas = (await getPlayas()).filter(p => p.nudista === true)

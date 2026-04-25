@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { COSTAS } from '@/lib/rutas'
 export const revalidate = 86400
-export const metadata: Metadata = { title: 'Top 10 Best Beaches by Coast — Spain Rankings', description: 'Rankings of the 10 best beaches on each coast of Spain.', alternates: { canonical: '/en/top' } }
+export const metadata: Metadata = { title: 'Top 10 Best Beaches by Coast — Spain Rankings', description: 'Rankings of the 10 best beaches on each coast of Spain.', alternates: { canonical: '/en/top', languages: { 'es': '/top', 'en': '/en/top' } } }
 export default function Page() {
   return (<><Nav /><main style={{maxWidth:1000,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
     <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'2rem'}}>Top 10 Best Beaches by Coast</h1>

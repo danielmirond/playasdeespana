@@ -4,7 +4,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 export const revalidate = 3600
-export const metadata: Metadata = { title: 'Surf Forecast Spain — Wave & Wind Conditions', description: 'Real-time surf forecast for Spain: wave height, period, wind and water temperature.', alternates: { canonical: '/en/surf' } }
+export const metadata: Metadata = { title: 'Surf Forecast Spain — Wave & Wind Conditions', description: 'Real-time surf forecast for Spain: wave height, period, wind and water temperature.', alternates: { canonical: '/en/surf', languages: { 'es': '/surf', 'en': '/en/surf' } } }
 export default async function Page() {
   const playas = (await getPlayas()).filter(p => p.actividades?.surf && p.lat && p.lng)
   return (<><Nav /><main style={{maxWidth:1000,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>

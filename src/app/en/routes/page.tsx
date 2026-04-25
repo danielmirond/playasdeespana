@@ -4,7 +4,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import { getRutas, COSTAS } from '@/lib/rutas'
 export const revalidate = 86400
-export const metadata: Metadata = { title: 'Beach Routes Along the Spanish Coast', description: 'Driving itineraries of the 5 best beaches on each coast of Spain with Google Maps link.', alternates: { canonical: '/en/routes' } }
+export const metadata: Metadata = { title: 'Beach Routes Along the Spanish Coast', description: 'Driving itineraries of the 5 best beaches on each coast of Spain with Google Maps link.', alternates: { canonical: '/en/routes', languages: { 'es': '/rutas', 'en': '/en/routes' } } }
 export default async function Page() {
   const rutas = await getRutas(await getPlayas())
   return (<><Nav /><main style={{maxWidth:1000,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>

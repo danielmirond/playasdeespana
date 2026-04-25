@@ -4,7 +4,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 export const revalidate = 86400
-export const metadata: Metadata = { title: 'Best Sunset Beaches in Spain', description: 'West-facing beaches in Spain with the most beautiful sunsets. Atlantic coast, Galicia, Baleares, Canarias.', alternates: { canonical: '/en/sunsets' } }
+export const metadata: Metadata = { title: 'Best Sunset Beaches in Spain', description: 'West-facing beaches in Spain with the most beautiful sunsets. Atlantic coast, Galicia, Baleares, Canarias.', alternates: { canonical: '/en/sunsets', languages: { 'es': '/atardeceres', 'en': '/en/sunsets' } } }
 function isWest(p: any): boolean { if (p.comunidad==='Galicia') return true; if (p.provincia==='Huelva') return true; if (p.provincia==='Cádiz'&&p.lng<-5.5) return true; if (p.comunidad==='Asturias'||p.comunidad==='Cantabria') return true; if (p.comunidad==='Islas Baleares'&&p.lng<2.8) return true; if (p.comunidad==='Canarias'&&p.lng<-15.5) return true; return false }
 export default async function Page() {
   const playas = (await getPlayas()).filter(p => p.lat && p.lng && isWest(p))

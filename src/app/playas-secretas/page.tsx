@@ -13,6 +13,22 @@ export const metadata: Metadata = {
   alternates: { canonical: '/playas-secretas' },
 }
 
+const FAQ = [
+  { q: '¿Qué es una playa secreta?', a: 'Llamamos playa secreta a aquella con baja ocupación, acceso difícil o a pie, y mínimos servicios como parking o chiringuito. Son calas y rincones que no aparecen en las guías turísticas convencionales y que conservan un entorno natural casi virgen.' },
+  { q: '¿Cómo llegar a playas escondidas?', a: 'La mayoría requiere caminar entre 15 minutos y una hora por senderos costeros, a veces sin señalizar. Conviene llevar calzado deportivo, agua y protección solar. Algunas calas solo son accesibles en barco o kayak, especialmente en Baleares y la Costa Brava.' },
+  { q: '¿Son seguras las calas aisladas?', a: 'Generalmente sí, pero al no contar con socorrismo ni cobertura móvil en muchos casos, es importante tomar precauciones: no bañarse solo, informar a alguien de tu ruta y comprobar el estado del mar antes de ir. Evita días de fuerte oleaje o bandera roja en playas cercanas.' },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+
 export default async function Page() {
   const playas = await getPlayas()
   const secretas = playas.filter(p => {
@@ -31,6 +47,7 @@ export default async function Page() {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', fontWeight: 700, color: 'var(--ink)', marginBottom: '.5rem' }}>
           🤫 Playas secretas

@@ -7,6 +7,22 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 
 export const revalidate = 86400
 
+const FAQ = [
+  { q: '¿Qué hace a una playa familiar?', a: 'Una playa familiar reúne varios criterios: servicio de socorrismo activo, duchas y aseos públicos, baja o media ocupación y, preferiblemente, aguas poco profundas con entrada progresiva. También es importante que cuente con acceso adaptado para carritos y sillas de ruedas.' },
+  { q: '¿Son seguras las playas familiares en España?', a: 'Sí, las playas que seleccionamos tienen socorrismo y bandera azul en muchos casos, lo que garantiza controles de calidad del agua, señalización de corrientes y personal de rescate. Aun así, conviene vigilar siempre a los niños y respetar las indicaciones del socorrista.' },
+  { q: '¿Qué llevar a la playa con niños?', a: 'Lo imprescindible incluye protector solar de alta protección (SPF 50+), gorra o sombrero, agua abundante, algo de fruta y una sombrilla o carpa de playa. Para los más pequeños, un chaleco de flotación y calzado acuático para evitar cortes en las rocas.' },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+
 export const metadata: Metadata = {
   title: 'Playas para familias con niños en España — Las más seguras',
   description: 'Playas familiares en España: socorrismo, duchas, baja ocupación, accesibles y agua poco profunda. Las más seguras para ir con niños.',
@@ -30,6 +46,7 @@ export default async function Page() {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', fontWeight: 700, color: 'var(--ink)', marginBottom: '.5rem' }}>
           👨‍👩‍👧‍👦 Playas para familias con niños
