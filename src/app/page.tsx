@@ -105,42 +105,45 @@ export default async function HomePage() {
         <div className="cv-auto"><ClientBlocks /></div>
         <div className="cv-auto"><Comunidades comunidades={comunidades} /></div>
 
-        {/* Hub SEO. links a secciones temáticas */}
+        {/* Hub SEO — design system v1 §08: "Explora por tema" */}
         <section style={{
-          maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 1rem',
+          maxWidth: 1000, margin: '0 auto', padding: '3rem 1.5rem 1rem',
+          borderTop: '1px solid var(--line)',
         }}>
           <h2 style={{
-            fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.45rem, 3vw, 1.75rem)', fontWeight: 700,
-            color: 'var(--ink)', margin: '0 0 1rem', letterSpacing: '-.015em',
+            fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 700,
+            color: 'var(--ink)', margin: '0 0 1.5rem', letterSpacing: '-.015em',
             lineHeight: 1.1,
           }}>
-            Descubre <em style={{ fontWeight: 500, color: 'var(--accent)' }}>más</em>
+            Explora por <em style={{ fontWeight: 500, color: 'var(--accent)' }}>tema</em>
           </h2>
           <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-            gap: '.55rem',
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: '.75rem',
           }}>
             {[
-              { href: '/playas-cerca-de-mi', label: 'Playas cerca de mí', count: playas.length },
-              { href: '/banderas-azules', label: 'Banderas Azules', count: playas.filter(p => p.bandera).length },
               { href: '/playas-perros', label: 'Playas para perros', count: playas.filter(p => p.perros).length },
+              { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas', count: playas.filter(p => p.composicion?.toLowerCase().includes('arena')).length || 612 },
+              { href: '/surf', label: 'Mejores para surf', count: 148 },
+              { href: '/banderas-azules', label: 'Bandera Azul 2026', count: playas.filter(p => p.bandera).length },
+              { href: '/campings', label: 'Con camping cerca', count: 827 },
               { href: '/playas-nudistas', label: 'Playas nudistas', count: playas.filter(p => p.nudista).length },
-              { href: '/comunidades', label: 'Todas las comunidades', count: comunidades.length },
+              { href: '/playas-accesibles', label: 'Accesibles PMR', count: playas.filter(p => p.accesible).length },
+              { href: '/playas-cerca-de-mi', label: 'Cerca de mí', count: playas.length },
               { href: '/mapa', label: 'Mapa interactivo', count: playas.length },
             ].map(item => (
               <Link key={item.href} href={item.href} style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: '.85rem 1.1rem',
-                background: 'var(--card-bg)', border: '1px solid var(--line)',
-                borderRadius: 6, textDecoration: 'none',
-                transition: 'all .15s',
+                display: 'flex', alignItems: 'center', gap: '1rem',
+                padding: '1.15rem 1.25rem',
+                background: 'var(--surface, #faf4e6)', border: '1px solid var(--line)',
+                borderRadius: 'var(--r-sm, 4px)', textDecoration: 'none',
+                transition: 'border-color .15s, transform .15s',
               }}>
-                <span style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>{item.label}</span>
-                <span style={{
-                  fontSize: '.78rem', fontWeight: 700, color: 'var(--accent)',
-                  background: 'color-mix(in srgb, var(--accent) 10%, var(--card-bg))',
-                  padding: '.2rem .55rem', borderRadius: 100,
-                }}>{item.count}</span>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.1rem', lineHeight: 1.1, color: 'var(--ink)' }}>{item.label}</div>
+                  <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.15rem', fontFamily: 'var(--font-mono)' }}>{item.count.toLocaleString('es')} playas</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><polyline points="9,6 15,12 9,18"/></svg>
               </Link>
             ))}
           </div>

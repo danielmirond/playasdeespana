@@ -63,7 +63,7 @@ const CRITICAL_CSS = `
 /* Arena · superficies */
 --arena-50:#faf4e6;--arena-100:#f5ecd5;--arena-200:#f0e6d0;--arena-300:#e5d6b4;--arena-400:#d4c090;--arena-500:#b8a06a;
 /* Tinta · texto */
---tinta-900:#1a0f04;--tinta-800:#2a1a08;--tinta-700:#3d2a14;--tinta-600:#524030;--tinta-500:#7a6850;--tinta-400:#a89880;
+--tinta-900:#1a0f04;--tinta-800:#2a1a08;--tinta-700:#3d2a14;--tinta-600:#524030;--tinta-500:#6a5840;--tinta-400:#a89880;
 /* Acentos · marca */
 --terra-900:#4a2a04;--terra-800:#6b400a;--terra-700:#8a5418;--terra-600:#a8691e;--ocre-500:#d48a1a;--ocre-400:#e8a030;--ocre-300:#f0bc62;
 /* Mar. solo contexto marino */

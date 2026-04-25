@@ -1,67 +1,56 @@
-// src/components/home/Hero.tsx. Product-focused hero.
-// "¿A qué playa voy hoy?" + CTAs accionables
+// src/components/home/Hero.tsx — Design system v1 §08: HomeDesktop hero
+// Left-aligned, editorial serif XL, integrated search, quick-explore chips
 import Link from 'next/link'
 import styles from './Hero.module.css'
+
+const CHIPS = [
+  { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas' },
+  { href: '/playas-perros', label: 'Playas con perros' },
+  { href: '/surf', label: 'Surf' },
+  { href: '/playas-nudistas', label: 'Nudismo' },
+  { href: '/playas-autocaravana', label: 'Autocaravana' },
+  { href: '/buceo', label: 'Buceo' },
+]
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.rings} aria-hidden="true">
-        <svg viewBox="0 0 800 600" fill="none">
-          <ellipse cx="400" cy="340" rx="740" ry="520" stroke="currentColor" strokeWidth="1"/>
-          <ellipse cx="400" cy="340" rx="580" ry="400" stroke="currentColor" strokeWidth="1"/>
-          <ellipse cx="400" cy="340" rx="420" ry="285" stroke="currentColor" strokeWidth="1"/>
-          <ellipse cx="400" cy="340" rx="270" ry="180" stroke="currentColor" strokeWidth="1"/>
-          <ellipse cx="400" cy="340" rx="140" ry="95"  stroke="currentColor" strokeWidth="1"/>
-        </svg>
-      </div>
+      <div className={styles.inner}>
+        <p className={styles.kicker}>
+          <span className={styles.kickerDot}/>
+          Datos en tiempo real · actualizado cada hora
+        </p>
 
-      <p className={styles.kicker}>
-        <span className={styles.kickerDot}/>
-        Datos actualizados cada hora · gratis
-      </p>
+        <h1 className={styles.title}>
+          Hoy el mar está{' '}
+          <em>para bañarse</em>
+        </h1>
+        <p className={styles.sub}>
+          Cinco mil playas del litoral español, con una puntuación de 0 a 100
+          recalculada cada hora a partir de datos oficiales de MITECO, EEA y AEMET.
+        </p>
 
-      <h1 className={styles.title}>
-        Hoy el mar está<br/>
-        <em>para bañarse</em>
-      </h1>
-      <p className={styles.sub}>
-        Consulta oleaje, viento, temperatura del agua y servicios
-        en más de 5.000 playas. Datos oficiales, actualizados cada hora.
-      </p>
+        {/* Search bar — design system pattern */}
+        <form action="/buscar" method="get" className={styles.searchBar}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" className={styles.searchIcon}>
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            name="q"
+            type="search"
+            placeholder="Busca una playa, municipio, provincia…"
+            className={styles.searchInput}
+            aria-label="Buscar playa"
+          />
+          <button type="submit" className={styles.searchBtn}>Buscar</button>
+        </form>
 
-      {/* CTAs accionables. la geolocalización se pide automáticamente
-          vía TopCercanas al cargar la home, no necesita botón aquí */}
-      <div className={styles.ctas}>
-        <Link href="/buscar?orden=score" className={styles.ctaPrimary}>
-          Mejores playas ahora
-        </Link>
-        <Link href="/buscar?filtro=sinviento" className={styles.ctaSecondary}>
-          Sin viento
-        </Link>
-        <Link href="/buscar?filtro=familiar" className={styles.ctaSecondary}>
-          Familiares
-        </Link>
-        <Link href="/buscar?filtro=tranquila" className={styles.ctaSecondary}>
-          Tranquilas
-        </Link>
-      </div>
-
-      {/* Stats bar */}
-      <div className={styles.stats}>
-        <div className={styles.stat}>
-          <span className={styles.statV}>5.054</span>
-          <span className={styles.statL}>Playas</span>
-        </div>
-        <div className={styles.statDiv}/>
-        <div className={styles.stat}>
-          <span className={styles.statV}>Score 0-100</span>
-          <span className={styles.statL}>En tiempo real</span>
-        </div>
-        <div className={styles.statDiv}/>
-        <div className={styles.stat}>
-          <span className={styles.statV}>1 h</span>
-          <span className={styles.statL}>Actualización</span>
+        {/* Quick explore chips */}
+        <div className={styles.chips}>
+          <span className={styles.chipsLabel}>o explora:</span>
+          {CHIPS.map(c => (
+            <Link key={c.href} href={c.href} className={styles.chip}>{c.label}</Link>
+          ))}
         </div>
       </div>
     </section>

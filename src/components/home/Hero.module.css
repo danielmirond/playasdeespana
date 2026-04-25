@@ -1,60 +1,38 @@
-/* src/components/home/Hero.module.css */
+/* src/components/home/Hero.module.css — Design system v1 §08: HomeDesktop hero */
 
 .hero {
-  position: relative;
-  overflow: hidden;
-  padding: 3.5rem 2rem 3rem;
-  text-align: center;
-  min-height: 480px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .1rem;
+  padding: 3.5rem 2rem 2.5rem;
 }
 
-.rings {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  pointer-events: none;
-}
-.rings svg {
-  width: 130%; max-width: 900px;
-  color: var(--ring);
-  opacity: .1;
-  position: absolute;
-}
-
-.ilu {
-  position: relative; z-index: 2;
-  margin-bottom: 1.25rem;
+.inner {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .kicker {
-  position: relative; z-index: 2;
   display: inline-flex; align-items: center; gap: .5rem;
-  font-size: .75rem; font-weight: 500;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: .85rem;
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: .75rem;
 }
 .kickerDot {
   width: 6px; height: 6px; border-radius: 50%;
-  background: var(--calma);
-  box-shadow: 0 0 0 3px rgba(34,197,94,.2);
+  background: var(--sea-calma, #5a8a7a);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sea-calma, #5a8a7a) 20%, transparent);
   animation: pulse 2.2s infinite; flex-shrink: 0;
 }
 @keyframes pulse {
-  0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
-  50%      { box-shadow: 0 0 0 7px rgba(34,197,94,.06); }
+  0%,100% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--sea-calma) 20%, transparent); }
+  50%      { box-shadow: 0 0 0 7px color-mix(in srgb, var(--sea-calma) 6%, transparent); }
 }
 
 .title {
-  position: relative; z-index: 2;
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 6.2vw, 4.25rem);
-  font-weight: 700; line-height: .98;
-  letter-spacing: -.02em; color: var(--ink);
-  margin-bottom: .65rem;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 700; line-height: .94;
+  letter-spacing: -.03em; color: var(--ink);
+  max-width: 14ch;
+  margin-bottom: .75rem;
 }
 .title em {
   font-style: italic; font-weight: 500;
@@ -62,76 +40,74 @@
 }
 
 .sub {
-  position: relative; z-index: 2;
-  font-size: .92rem; color: var(--muted);
-  max-width: 440px; line-height: 1.6;
-  margin-bottom: 1.5rem;
+  font-size: 1.05rem; color: var(--muted);
+  max-width: 54ch; line-height: 1.6;
+  margin-bottom: 1.75rem;
 }
 
-/* CTAs */
-.ctas {
-  position: relative; z-index: 2;
-  display: flex; flex-wrap: wrap; gap: .55rem;
-  justify-content: center;
-  margin-bottom: 2rem;
+/* ── Search bar ────────────────────────────────────────────── */
+.searchBar {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .35rem .35rem .35rem 1.1rem;
+  background: var(--surface, #faf4e6);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm, 4px);
+  max-width: 640px;
 }
-.ctaPrimary {
-  background: var(--accent); color: #fff;
-  padding: .75rem 1.5rem; border-radius: 4px;
-  font-size: .92rem; font-weight: 700;
-  text-decoration: none;
-  transition: border-color .15s, background .15s, color .15s;
-  min-height: 44px;
-  display: inline-flex; align-items: center;
+.searchIcon { color: var(--muted); flex-shrink: 0; }
+.searchInput {
+  flex: 1; border: none; background: transparent;
+  color: var(--ink); font-size: .94rem;
+  font-family: inherit; padding: .85rem 0;
+  outline: none; min-width: 0;
 }
-.ctaPrimary:hover { opacity: .9; text-decoration: none; }
-.ctaSecondary {
-  background: var(--card-bg); color: var(--accent);
-  border: 1px solid var(--line);
-  padding: .65rem 1.15rem; border-radius: 4px;
-  font-size: .82rem; font-weight: 500;
-  text-decoration: none;
-  transition: border-color .15s, background .15s, color .15s;
-  min-height: 44px;
-  display: inline-flex; align-items: center;
+.searchInput::placeholder { color: var(--muted); }
+.searchBtn {
+  background: var(--accent); color: var(--arena-50, #faf4e6);
+  padding: .65rem 1.15rem; border-radius: var(--r-sm, 4px);
+  font-size: .82rem; font-weight: 700;
+  font-family: inherit; border: none; cursor: pointer;
+  white-space: nowrap; min-height: 44px;
+  transition: opacity .15s;
 }
-.ctaSecondary:hover {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 8%, var(--card-bg));
-  text-decoration: none;
-}
+.searchBtn:hover { opacity: .9; }
 
-/* Stats bar */
-.stats {
-  position: relative; z-index: 2;
-  display: flex; align-items: center;
-  background: var(--metric-bg);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: .75rem 1.5rem;
-  gap: 1.25rem;
+/* ── Quick explore chips ───────────────────────────────────── */
+.chips {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  align-items: center;
+  margin-top: 1.1rem;
 }
-.stat { text-align: center; }
-.statV {
-  font-family: var(--font-serif);
-  font-size: 1.15rem; font-weight: 700;
-  color: var(--accent); display: block; line-height: 1;
-}
-.statL {
+.chipsLabel {
   font-size: .72rem; font-weight: 500;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--muted); display: block; margin-top: .18rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
 }
-.statDiv { width: 1px; height: 28px; background: var(--line); }
+.chip {
+  display: inline-flex; align-items: center;
+  padding: .3rem .7rem; border-radius: 999px;
+  font-size: .78rem; font-weight: 500;
+  border: 1px solid var(--line);
+  background: transparent; color: var(--muted);
+  text-decoration: none;
+  transition: border-color .15s, color .15s;
+}
+.chip:hover {
+  border-color: var(--accent); color: var(--accent);
+  text-decoration: none;
+}
 
+/* ── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .hero { padding: 2.5rem 1.25rem 2rem; min-height: auto; }
-  .stats { padding: .65rem 1rem; gap: .85rem; }
-  .statV { font-size: 1rem; }
-  .statL { font-size: .72rem; }
+  .hero { padding: 2.5rem 1.25rem 2rem; }
+  .title { font-size: clamp(2rem, 9vw, 3rem); }
+  .sub { font-size: .92rem; }
+  .searchBar { flex-wrap: wrap; }
+  .searchInput { min-width: 200px; }
 }
 
 @media (max-width: 380px) {
-  .stats { gap: .6rem; padding: .55rem .75rem; }
-  .statDiv { display: none; }
+  .hero { padding: 2rem 1rem 1.5rem; }
+  .chips { gap: .35rem; }
+  .chip { font-size: .72rem; padding: .25rem .5rem; }
 }
