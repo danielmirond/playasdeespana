@@ -14,7 +14,7 @@ const COLORS: Record<string, string> = {
   BUENA:   '#7a8a30',
   AVISO:   '#c48a1e',
   SURF:    '#4a7a90',
-  VIENTO:  '#c48a1e',
+  VIENTO:  '#7a7a7a',
   PELIGRO: '#7a2818',
 }
 

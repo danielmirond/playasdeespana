@@ -52,7 +52,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${playa.lat},${playa.lng}`
 
   return (
-    <section className={styles.hero} style={{ background: estado.ringBg } as React.CSSProperties}>
+    <section className={styles.hero} style={{ '--hero-bg': estado.tileBg, '--hero-bg-dark': estado.tileBgDark } as React.CSSProperties}>
       {/* Breadcrumb */}
       <nav className={styles.bc} aria-label={locale === 'en' ? 'Breadcrumb' : 'Ruta de navegación'}>
         <Link href={homeHref}>{i18n.inicio}</Link>

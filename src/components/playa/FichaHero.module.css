@@ -6,7 +6,11 @@
   position: relative;
   overflow: hidden;
   padding: 1.5rem 2rem 2rem;
+  background: var(--hero-bg, #f0e6d0);
   transition: background .4s;
+}
+[data-theme="dark"] .hero {
+  background: var(--hero-bg-dark, #1a0f04);
 }
 
 /* ── Breadcrumb ──────────────────────────────────────────────────── */

@@ -12,6 +12,10 @@ export interface EstadoConfig {
   text:      string
   ringBg:    string
   ringColor: string
+  verb:      string
+  verbEn:    string
+  tileBg:    string
+  tileBgDark:string
 }
 
 export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
@@ -25,6 +29,10 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     text:      '#3a6a5a',
     ringBg:    '#f0e6d0',
     ringColor: '#c4904a',
+    verb:      'báñate',
+    verbEn:    'swim',
+    tileBg:    '#dfe9e3',
+    tileBgDark:'#1f2e28',
   },
   BUENA: {
     label:     'BUENA',
@@ -36,6 +44,10 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     text:      '#2a4a14',
     ringBg:    '#f0ece0',
     ringColor: '#8a7a40',
+    verb:      'apto',
+    verbEn:    'suitable',
+    tileBg:    '#e3eadc',
+    tileBgDark:'#1f2a16',
   },
   AVISO: {
     label:     'AVISO',
@@ -47,6 +59,10 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     text:      '#7a4a08',
     ringBg:    '#f8f0e0',
     ringColor: '#c89040',
+    verb:      'cuidado',
+    verbEn:    'caution',
+    tileBg:    '#f4e7cd',
+    tileBgDark:'#2e2410',
   },
   PELIGRO: {
     label:     'PELIGRO',
@@ -58,6 +74,10 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     text:      '#4a1810',
     ringBg:    '#f8ece8',
     ringColor: '#a04040',
+    verb:      'no entres',
+    verbEn:    'stay out',
+    tileBg:    '#efd9d2',
+    tileBgDark:'#2a1410',
   },
   SURF: {
     label:     'SURF',
@@ -69,6 +89,10 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     text:      '#1a3a4a',
     ringBg:    '#e8f0f4',
     ringColor: '#2d5266',
+    verb:      'tabla',
+    verbEn:    'board',
+    tileBg:    '#d8e2e8',
+    tileBgDark:'#142028',
   },
   VIENTO: {
     label:     'VIENTO',
@@ -80,6 +104,10 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     text:      '#5a5a5a',
     ringBg:    '#f0ede8',
     ringColor: '#8a8a8a',
+    verb:      'abrígate',
+    verbEn:    'shelter',
+    tileBg:    '#e3e3e3',
+    tileBgDark:'#1f1f1f',
   },
 }
 
