@@ -12,12 +12,12 @@ export default function LoadingHome() {
         padding: '0 2rem',
       }}>
         <div style={{ display: 'flex', gap: 6 }}>
-          <Bone w={60} h={28} r={8} />
-          <Bone w={80} h={28} r={8} />
-          <Bone w={90} h={28} r={8} />
+          <Bone w={60} h={28} r={4} />
+          <Bone w={80} h={28} r={4} />
+          <Bone w={90} h={28} r={4} />
         </div>
-        <Bone w={28} h={28} r={14} />
-        <Bone w={60} h={28} r={8} />
+        <Bone w={28} h={28} r={100} />
+        <Bone w={60} h={28} r={4} />
       </div>
 
       {/* Hero */}
@@ -31,14 +31,14 @@ export default function LoadingHome() {
         <div style={{ marginTop: 12 }}><Bone w={360} h={18} r={4} /></div>
         <div style={{ marginTop: 6 }}><Bone w={300} h={18} r={4} /></div>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', padding: '2rem 0' }}>
-          <Bone w={220} h={160} r={10} />
+          <Bone w={220} h={160} r={6} />
         </div>
         <Bone w={140} h={14} r={4} />
       </section>
 
       {/* Buscador */}
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '0 2rem 2rem' }}>
-        <Bone w={0} h={48} r={14} style={{ width: '100%', maxWidth: 540, margin: '0 auto' }} />
+        <Bone w={0} h={48} r={6} style={{ width: '100%', maxWidth: 540, margin: '0 auto' }} />
       </div>
 
       {/* Destacadas */}

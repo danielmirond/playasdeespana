@@ -13,12 +13,12 @@ export default function LoadingPlaya() {
         padding: '0 2rem',
       }}>
         <div style={{ display: 'flex', gap: 6 }}>
-          <Bone w={60} h={28} r={8} />
-          <Bone w={80} h={28} r={8} />
-          <Bone w={90} h={28} r={8} />
+          <Bone w={60} h={28} r={4} />
+          <Bone w={80} h={28} r={4} />
+          <Bone w={90} h={28} r={4} />
         </div>
-        <Bone w={28} h={28} r={14} />
-        <Bone w={60} h={28} r={8} />
+        <Bone w={28} h={28} r={100} />
+        <Bone w={60} h={28} r={4} />
       </div>
 
       {/* Hero skeleton */}
@@ -72,7 +72,7 @@ export default function LoadingPlaya() {
         height: 44, alignItems: 'center',
       }}>
         {['80px','60px','70px','90px','60px','80px'].map((w, i) => (
-          <Bone key={i} w={parseInt(w)} h={28} r={8} />
+          <Bone key={i} w={parseInt(w)} h={28} r={4} />
         ))}
       </div>
 
@@ -154,7 +154,7 @@ function SkeletonCard({ h }: { h: number }) {
         <Bone w={120} h={16} r={4} />
       </div>
       <div style={{ padding: '.2rem 1rem 1rem' }}>
-        <Bone w={0} h={h - 60} r={10} style={{ width: '100%' }} />
+        <Bone w={0} h={h - 60} r={6} style={{ width: '100%' }} />
       </div>
     </div>
   )
