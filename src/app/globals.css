@@ -7,3 +7,28 @@
   border-radius: var(--r-xl);
 }
 .divider { height: 1px; background: var(--line); }
+
+/* ── Sea state badge utilities (design system v1 §04) ───────── */
+.badge-sea-calma   { color: var(--sea-calma,#5a8a7a);   border-color: color-mix(in srgb, var(--sea-calma,#5a8a7a) 40%, transparent); background: color-mix(in srgb, var(--sea-calma,#5a8a7a) 8%, transparent); }
+.badge-sea-buena   { color: var(--sea-buena,#3d6b1f);   border-color: color-mix(in srgb, var(--sea-buena,#3d6b1f) 40%, transparent); background: color-mix(in srgb, var(--sea-buena,#3d6b1f) 8%, transparent); }
+.badge-sea-aviso   { color: var(--sea-aviso,#c48a1e);   border-color: color-mix(in srgb, var(--sea-aviso,#c48a1e) 50%, transparent); background: color-mix(in srgb, var(--sea-aviso,#c48a1e) 12%, transparent); }
+.badge-sea-surf    { color: var(--sea-surf,#2d5266);    border-color: color-mix(in srgb, var(--sea-surf,#2d5266) 40%, transparent); background: color-mix(in srgb, var(--sea-surf,#2d5266) 8%, transparent); }
+.badge-sea-viento  { color: var(--sea-viento,#7a7a7a);  border-color: color-mix(in srgb, var(--sea-viento,#7a7a7a) 40%, transparent); background: color-mix(in srgb, var(--sea-viento,#7a7a7a) 8%, transparent); }
+.badge-sea-peligro { color: var(--sea-peligro,#7a2818); border-color: color-mix(in srgb, var(--sea-peligro,#7a2818) 40%, transparent); background: color-mix(in srgb, var(--sea-peligro,#7a2818) 10%, transparent); }
+
+/* ── Score chip utilities (design system v1 §05) ────────────── */
+.score-chip {
+  display: inline-flex; align-items: baseline; gap: 3px;
+  background: var(--card-bg,#faf6ef); border: 1px solid var(--line);
+  padding: 4px 9px; border-radius: 999px;
+  font-family: var(--font-serif); font-weight: 700; font-size: .88rem;
+  letter-spacing: -.01em; color: var(--ink); line-height: 1;
+}
+.score-chip small {
+  font-family: var(--font-sans); font-weight: 500; font-size: .56rem;
+  color: var(--muted); letter-spacing: .04em;
+}
+.score-excel  { border-color: var(--sea-buena,#3d6b1f); color: var(--sea-buena,#3d6b1f); }
+.score-bueno  { border-color: var(--sea-calma,#5a8a7a); color: var(--sea-calma,#5a8a7a); }
+.score-aviso  { border-color: var(--sea-aviso,#c48a1e); color: var(--sea-aviso,#c48a1e); }
+.score-peligro { border-color: var(--sea-peligro,#7a2818); color: var(--sea-peligro,#7a2818); }
