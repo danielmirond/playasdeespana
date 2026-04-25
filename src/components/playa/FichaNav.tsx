@@ -1,32 +1,37 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './FichaNav.module.css'
 
 const SECCIONES = {
   es: [
     { id: 's-fotos',       label: 'Fotos' },
-    { id: 's-meteo',       label: 'Meteorología' },
+    { id: 's-meteo',       label: 'Mar y meteo' },
+    { id: 's-seguridad',   label: 'Seguridad' },
     { id: 's-calidad',     label: 'Calidad agua' },
-    { id: 's-actividades', label: 'Actividades' },
     { id: 's-comoLlegar',  label: 'Cómo llegar' },
-    { id: 's-trafico',     label: 'Tráfico, afluencia y donde aparcar' },
+    { id: 's-trafico',     label: 'Parking' },
     { id: 's-comer',       label: 'Comer' },
     { id: 's-dormir',      label: 'Dormir' },
-    { id: 's-escuelas',   label: 'Escuelas acuáticas' },
+    { id: 's-campings',    label: 'Campings' },
+    { id: 's-buceo',       label: 'Buceo' },
     { id: 's-servicios',   label: 'Servicios' },
-    { id: 's-info',        label: 'Info' },
+    { id: 's-info',        label: 'Datos' },
+    { id: 's-cercanas',    label: 'Cercanas' },
   ],
   en: [
     { id: 's-fotos',       label: 'Photos' },
-    { id: 's-meteo',       label: 'Weather' },
+    { id: 's-meteo',       label: 'Sea & weather' },
+    { id: 's-seguridad',   label: 'Safety' },
     { id: 's-calidad',     label: 'Water quality' },
-    { id: 's-actividades', label: 'Activities' },
-    { id: 's-comoLlegar',  label: 'How to get there' },
-    { id: 's-trafico',     label: 'Traffic, crowds & where to park' },
+    { id: 's-comoLlegar',  label: 'Directions' },
+    { id: 's-trafico',     label: 'Parking' },
     { id: 's-comer',       label: 'Eat' },
     { id: 's-dormir',      label: 'Sleep' },
+    { id: 's-campings',    label: 'Campings' },
+    { id: 's-buceo',       label: 'Diving' },
     { id: 's-servicios',   label: 'Facilities' },
     { id: 's-info',        label: 'Info' },
+    { id: 's-cercanas',    label: 'Nearby' },
   ],
 }
 
@@ -44,16 +49,23 @@ function scrollToSection(id: string) {
 
 export default function FichaNav({ locale = 'es' }: { locale?: 'es' | 'en' }) {
   const navRef = useRef<HTMLElement>(null)
-  const secciones = SECCIONES[locale]
+  const allSecciones = SECCIONES[locale]
+  const [visibles, setVisibles] = useState<typeof allSecciones>([])
 
   useEffect(() => {
+    const present = allSecciones.filter(s => document.getElementById(s.id))
+    setVisibles(present)
+  }, [allSecciones])
+
+  useEffect(() => {
+    if (visibles.length === 0) return
     const btns = navRef.current?.querySelectorAll('button')
     if (!btns) return
 
     const obs = new IntersectionObserver(entries => {
       let best: { idx: number; ratio: number } = { idx: -1, ratio: 0 }
       entries.forEach(e => {
-        const i = secciones.findIndex(s => s.id === e.target.id)
+        const i = visibles.findIndex(s => s.id === e.target.id)
         if (i >= 0 && e.intersectionRatio > best.ratio) {
           best = { idx: i, ratio: e.intersectionRatio }
         }
@@ -68,17 +80,19 @@ export default function FichaNav({ locale = 'es' }: { locale?: 'es' | 'en' }) {
       threshold: [0, 0.1, 0.5, 1],
     })
 
-    secciones.forEach(s => {
+    visibles.forEach(s => {
       const el = document.getElementById(s.id)
       if (el) obs.observe(el)
     })
 
     return () => obs.disconnect()
-  }, [secciones])
+  }, [visibles])
+
+  if (visibles.length === 0) return null
 
   return (
     <nav className={styles.nav} ref={navRef} id="ficha-nav">
-      {secciones.map((s, i) => (
+      {visibles.map((s, i) => (
         <button
           key={s.id}
           className={`${styles.item} ${i === 0 ? styles.active : ''}`}
