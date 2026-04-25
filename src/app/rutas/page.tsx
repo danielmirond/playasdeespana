@@ -13,6 +13,22 @@ export const metadata: Metadata = {
   alternates: { canonical: '/rutas' },
 }
 
+const FAQ = [
+  { q: '¿Cuánto dura una ruta de playas en España?', a: 'Depende de la costa que elijas. Las rutas más cortas, como la de la Costa Tropical (Granada), se pueden recorrer en medio día. Las más largas, como la ruta por las Rías Baixas o toda la Costa Brava, pueden ocupar entre 3 y 5 días si quieres disfrutar de cada parada con calma.' },
+  { q: '¿Se puede hacer una ruta de playas en un día?', a: 'Sí, muchas de nuestras rutas están diseñadas con 5 paradas conectadas por carretera para completar en una jornada. Lo ideal es salir temprano, dedicar entre 1 y 2 horas a cada playa y usar el enlace de Google Maps que incluimos para optimizar el recorrido.' },
+  { q: '¿Qué necesito para una ruta costera en coche?', a: 'Además del vehículo, conviene llevar toallas, protector solar, agua abundante y calzado cómodo para caminar por senderos si la ruta incluye calas. Descarga los mapas offline por si pierdes cobertura en zonas rurales. En verano, madruga para evitar los parkings llenos en playas populares.' },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+
 const ZONAS = [
   { key: 'cantabrica', label: 'Zona Cantábrica', desc: 'Acantilados verdes, rías y oleaje atlántico. Asturias, Cantabria y País Vasco.' },
   { key: 'atlantica',  label: 'Zona Atlántica',  desc: 'Rías gallegas, costa da morte y las playas infinitas de Huelva y Cádiz.' },
@@ -34,6 +50,7 @@ export default async function RutasPage() {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
         <nav style={{
           display: 'flex', alignItems: 'center', gap: '.4rem',

@@ -13,6 +13,22 @@ export const metadata: Metadata = {
   alternates: { canonical: '/surf' },
 }
 
+const FAQ = [
+  { q: '¿Cuáles son las mejores playas de surf en España?', a: 'La playa de Mundaka (País Vasco) tiene una de las mejores olas izquierdas del mundo. Otras playas destacadas son Rodiles (Asturias), Pantín (Galicia), El Palmar (Cádiz) y las playas del norte de Fuerteventura. Cada zona ofrece condiciones distintas según la época del año.' },
+  { q: '¿Cuándo es la mejor época para surfear en España?', a: 'El otoño (septiembre-noviembre) es la mejor temporada en el Cantábrico y Galicia, con swells consistentes del Atlántico y agua todavía templada. En Canarias se puede surfear todo el año. En la costa sur (Cádiz, Málaga), el invierno trae las mejores olas gracias a las borrascas atlánticas.' },
+  { q: '¿Se puede surfear en España sin experiencia?', a: 'Sí. Hay decenas de escuelas de surf en todas las costas, especialmente en Asturias, Cantabria, País Vasco y Cádiz. Las clases para principiantes suelen durar 2 horas e incluyen neopreno y tabla. Playas como Somo (Cantabria) o El Palmar (Cádiz) son ideales para aprender por su fondo de arena y olas suaves.' },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+
 interface SurfMeteo {
   olas: number; periodo: number; viento: number; vientoDir: string; agua: number
 }
@@ -74,6 +90,7 @@ export default async function SurfPage() {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
         <nav style={{
           display: 'flex', alignItems: 'center', gap: '.4rem',
