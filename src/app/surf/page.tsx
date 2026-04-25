@@ -58,14 +58,14 @@ async function fetchSurfMeteo(lat: number, lng: number): Promise<SurfMeteo> {
 
 function surfQuality(m: SurfMeteo): { label: string; color: string; desc: string } {
   if (m.olas >= 1.0 && m.olas <= 2.5 && m.viento <= 20 && m.periodo >= 8)
-    return { label: 'EPIC', color: '#22c55e', desc: 'Condiciones ideales para surfear' }
+    return { label: 'EPIC', color: '#3d6b1f', desc: 'Condiciones ideales para surfear' }
   if (m.olas >= 0.8 && m.olas <= 3.0 && m.viento <= 25)
-    return { label: 'BUENO', color: '#3b82f6', desc: 'Buen día de surf' }
+    return { label: 'BUENO', color: '#4a7a90', desc: 'Buen día de surf' }
   if (m.olas >= 0.5 && m.viento <= 35)
-    return { label: 'REGULAR', color: '#eab308', desc: 'Se puede surfear con condiciones' }
+    return { label: 'REGULAR', color: '#c48a1e', desc: 'Se puede surfear con condiciones' }
   if (m.olas < 0.5)
     return { label: 'FLAT', color: '#9ca3af', desc: 'Mar plano, sin olas' }
-  return { label: 'HOLD', color: '#ef4444', desc: 'Demasiado fuerte o ventoso' }
+  return { label: 'HOLD', color: '#7a2818', desc: 'Demasiado fuerte o ventoso' }
 }
 
 export default async function SurfPage() {

@@ -15,7 +15,7 @@ export default async function Page() {
       En cada ficha de playa mostramos la clasificación actualizada.
     </p>
     <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:'.65rem'}}>
-      {[{label:'Excelente',color:'#22c55e',desc:'Cumple los estándares más altos'},{label:'Buena',color:'#3b82f6',desc:'Apta para el baño'},{label:'Suficiente',color:'#eab308',desc:'Cumple el mínimo'},{label:'Insuficiente',color:'#ef4444',desc:'No recomendada para el baño'}].map(q => (
+      {[{label:'Excelente',color:'#3d6b1f',desc:'Cumple los estándares más altos'},{label:'Buena',color:'#4a7a90',desc:'Apta para el baño'},{label:'Suficiente',color:'#c48a1e',desc:'Cumple el mínimo'},{label:'Insuficiente',color:'#7a2818',desc:'No recomendada para el baño'}].map(q => (
         <div key={q.label} style={{background:'var(--card-bg)',border:'1px solid var(--line)',borderLeft:`4px solid ${q.color}`,borderRadius:6,padding:'1rem'}}>
           <div style={{fontWeight:800,color:q.color}}>{q.label}</div>
           <div style={{fontSize:'.78rem',color:'var(--muted)',marginTop:'.2rem'}}>{q.desc}</div>

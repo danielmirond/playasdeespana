@@ -161,7 +161,7 @@ export default async function Page() {
               >
                 <span style={{
                   flexShrink: 0, width: 28, height: 28, borderRadius: '50%',
-                  background: i < 3 ? 'linear-gradient(135deg, #0ea5e9, #06b6d4)' : 'rgba(14,165,233,.15)',
+                  background: i < 3 ? 'linear-gradient(135deg, #4a7a90, #4a7a90)' : 'rgba(74,122,144,.15)',
                   color: i < 3 ? '#fff' : '#0369a1',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '.75rem', fontWeight: 800,

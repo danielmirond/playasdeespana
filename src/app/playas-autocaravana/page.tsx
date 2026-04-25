@@ -151,7 +151,7 @@ export default async function PlayasAutocaravanaPage() {
               >
                 <span style={{
                   flexShrink: 0, width: 32, height: 32, borderRadius: '50%',
-                  background: i < 3 ? 'linear-gradient(135deg, #f97316, #ea580c)' : 'rgba(249,115,22,.15)',
+                  background: i < 3 ? 'linear-gradient(135deg, #a04818, #8a5418)' : 'rgba(249,115,22,.15)',
                   color: i < 3 ? '#fff' : '#9a3412',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '.8rem', fontWeight: 800,

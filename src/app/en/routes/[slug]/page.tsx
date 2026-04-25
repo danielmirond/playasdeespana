@@ -24,7 +24,7 @@ export default async function Page({ params }: Props) {
         <li key={p.playa.slug}><Link href={`/en/beaches/${p.playa.slug}`} style={{display:'flex',alignItems:'center',gap:'1rem',background:'var(--card-bg)',border:'1px solid var(--line)',borderRadius:6,padding:'1rem',textDecoration:'none'}}>
           <span style={{width:32,height:32,borderRadius:'50%',background:ruta.costa.color,color:'#fff',fontWeight:900,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>{i+1}</span>
           <div style={{flex:1}}><div style={{fontWeight:800,color:'var(--ink)'}}>{p.playa.nombre}</div><div style={{fontSize:'.75rem',color:'var(--muted)'}}>{p.playa.municipio}{p.distFromPrev>0?` · ${p.distFromPrev.toFixed(1)} km`:''}</div></div>
-          <span style={{background:p.score>=75?'#22c55e':p.score>=55?'#eab308':'#f97316',color:'#fff',fontWeight:900,padding:'.2rem .4rem',borderRadius:6}}>{p.score}</span>
+          <span style={{background:p.score>=75?'#3d6b1f':p.score>=55?'#c48a1e':'#a04818',color:'#fff',fontWeight:900,padding:'.2rem .4rem',borderRadius:6}}>{p.score}</span>
         </Link></li>
       ))}
     </ol>

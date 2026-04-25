@@ -41,7 +41,7 @@ const PRODUCTOS: Producto[] = [
     puntos: ['Textura ultraligera', 'No deja residuo blanco', 'Apto rostro y cuerpo'],
     query: 'ISDIN+Fusion+Water+SPF50',
     badge: 'Top ventas',
-    badgeColor: '#f59e0b',
+    badgeColor: '#c48a1e',
   },
   {
     nombre: 'Hawaiian Tropic Silk Hydration SPF50',
@@ -57,7 +57,7 @@ const PRODUCTOS: Producto[] = [
     puntos: ['Formato familiar 400ml', 'Resistente al agua', 'Absorción rápida'],
     query: 'Nivea+Sun+proteccion+hidratacion+SPF50',
     badge: 'Mejor precio',
-    badgeColor: '#22c55e',
+    badgeColor: '#3d6b1f',
   },
   {
     nombre: 'La Roche-Posay Anthelios UVMune 400 SPF50+',
@@ -73,7 +73,7 @@ const PRODUCTOS: Producto[] = [
     puntos: ['Hipoalergénico', 'Sin parabenos', 'Resistente al agua, arena y cloro'],
     query: 'Garnier+Delial+ninos+sensitive+SPF50',
     badge: 'Niños',
-    badgeColor: '#3b82f6',
+    badgeColor: '#4a7a90',
   },
   {
     nombre: 'Avène Solar Spray SPF50+ 200ml',
@@ -139,10 +139,10 @@ export default function ProtectoresSolaresPage() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '.5rem' }}>
             {[
-              { uv: '1-2',  nivel: 'Bajo',      spf: 'SPF 15-20', color: '#22c55e' },
-              { uv: '3-5',  nivel: 'Moderado',   spf: 'SPF 30',    color: '#eab308' },
-              { uv: '6-7',  nivel: 'Alto',        spf: 'SPF 50',    color: '#f97316' },
-              { uv: '8-10', nivel: 'Muy alto',    spf: 'SPF 50+',   color: '#ef4444' },
+              { uv: '1-2',  nivel: 'Bajo',      spf: 'SPF 15-20', color: '#3d6b1f' },
+              { uv: '3-5',  nivel: 'Moderado',   spf: 'SPF 30',    color: '#c48a1e' },
+              { uv: '6-7',  nivel: 'Alto',        spf: 'SPF 50',    color: '#a04818' },
+              { uv: '8-10', nivel: 'Muy alto',    spf: 'SPF 50+',   color: '#7a2818' },
               { uv: '11+',  nivel: 'Extremo',     spf: 'SPF 50+ (reaplicar cada 60 min)', color: '#7c3aed' },
             ].map(r => (
               <div key={r.uv} style={{

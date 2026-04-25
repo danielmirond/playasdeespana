@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
 const CONFIG: TopicConfig = {
   slug: 'campings',
   emoji: '⛺',
-  color: '#22c55e',
+  color: '#3d6b1f',
   tituloTopic: 'Campings',
   intro: 'Guía de campings, glamping y áreas de autocaravanas cerca de las playas de {provincia}. Selección de playas con buen acceso y servicios cercanos. En cada ficha mostramos los campings más cercanos con distancia real y datos de contacto.',
   score: p => (p.parking ? 2 : 0) + (p.bandera ? 1 : 0),

@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
 const CONFIG: TopicConfig = {
   slug: 'chiringuitos',
   emoji: '🍹',
-  color: '#f59e0b',
+  color: '#c48a1e',
   tituloTopic: 'Chiringuitos',
   intro: 'Guía de chiringuitos, beach clubs y restaurantes con vistas al mar en las playas de {provincia}. Desde chiringuitos tradicionales hasta beach clubs premium. En cada playa mostramos los restaurantes más cercanos con rating y precios.',
   score: p => (p.bandera ? 2 : 0) + (p.parking ? 1 : 0),

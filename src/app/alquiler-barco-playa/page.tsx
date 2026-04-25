@@ -70,7 +70,7 @@ const PLATAFORMAS: Plataforma[] = [
   },
   {
     marca: 'Samboat',
-    color: '#f97316',
+    color: '#a04818',
     aff: SAMBOAT_AFF,
     url: (aff, lugar) => `https://www.samboat.es/alquiler-barco${lugar ? `/${lugar}` : ''}?referrer=${aff}`,
     destacado: 'Mejor para principiantes',
@@ -205,7 +205,7 @@ export default function AlquilerBarcoPage() {
 
         {/* Sin licencia */}
         <section aria-labelledby="h2-sin" style={{
-          background: 'rgba(14,165,233,.06)', border: '1px solid rgba(14,165,233,.3)',
+          background: 'rgba(74,122,144,.06)', border: '1px solid rgba(74,122,144,.3)',
           borderRadius: 6, padding: '1.25rem', marginBottom: '2.5rem',
         }}>
           <h2 id="h2-sin" style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0369a1', marginBottom: '.65rem' }}>

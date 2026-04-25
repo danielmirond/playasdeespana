@@ -108,7 +108,7 @@ export default async function BuceoPage() {
             >
               <span style={{
                 flexShrink: 0, width: 30, height: 30, borderRadius: '50%',
-                background: i < 3 ? 'linear-gradient(135deg, #0891b2, #06b6d4)' : 'rgba(8,145,178,.12)',
+                background: i < 3 ? 'linear-gradient(135deg, #0891b2, #4a7a90)' : 'rgba(8,145,178,.12)',
                 color: i < 3 ? '#fff' : '#0e7490',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '.78rem', fontWeight: 800,
@@ -118,7 +118,7 @@ export default async function BuceoPage() {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '.45rem', flexWrap: 'wrap' }}>
                   <span style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)' }}>{s.nombre}</span>
-                  {s.reserva && <span style={{ fontSize: '.58rem', fontWeight: 700, padding: '.1rem .4rem', borderRadius: 100, background: '#22c55e22', color: '#16a34a', border: '1px solid #22c55e44' }}>Reserva Marina</span>}
+                  {s.reserva && <span style={{ fontSize: '.58rem', fontWeight: 700, padding: '.1rem .4rem', borderRadius: 100, background: '#3d6b1f22', color: '#2a5a1a', border: '1px solid #3d6b1f44' }}>Reserva Marina</span>}
                 </div>
                 <div style={{ fontSize: '.75rem', color: 'var(--muted)', marginTop: '.1rem' }}>
                   {s.zona} · Prof. máx {s.profMax} · {s.destaca}
@@ -200,7 +200,7 @@ export default async function BuceoPage() {
         {/* Civitatis CTA */}
         {CIVITATIS_AFF && (
           <div style={{
-            background: 'linear-gradient(135deg, #0891b2, #06b6d4)',
+            background: 'linear-gradient(135deg, #0891b2, #4a7a90)',
             borderRadius: 6, padding: '1.1rem 1.25rem', marginBottom: '2rem',
             display: 'flex', alignItems: 'center', gap: '.85rem', flexWrap: 'wrap',
           }}>

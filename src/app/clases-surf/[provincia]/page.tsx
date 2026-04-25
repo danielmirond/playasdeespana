@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
 const CONFIG: TopicConfig = {
   slug: 'clases-surf',
   emoji: '🏄',
-  color: '#0ea5e9',
+  color: '#4a7a90',
   tituloTopic: 'Clases de surf',
   intro: 'Escuelas y clases de surf en las playas de {provincia}. Desde bautismos para principiantes (desde 30€) hasta perfeccionamiento con instructor titulado. En cada playa mostramos las escuelas cercanas con contacto directo.',
   score: p => (p.actividades?.surf ? 3 : 0) + (p.actividades?.paddle ? 1 : 0),

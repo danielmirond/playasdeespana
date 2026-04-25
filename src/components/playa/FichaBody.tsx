@@ -377,6 +377,29 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <TempCell icon={<Sun size={18} weight="bold" color="var(--accent)"/>} val={`UV ${meteo.uv}`}        label={i18n.indiceUV}/>
               <TempCell icon={<Gauge size={18} weight="bold" color="var(--accent)"/>} val={`${meteo.humedad}%`}     label={i18n.humedad}/>
             </div>
+            {meteo.uv >= 3 && (
+              <Link href="/protectores-solares" style={{
+                display: 'flex', alignItems: 'center', gap: '.5rem',
+                marginTop: '.65rem', padding: '.6rem .85rem',
+                background: meteo.uv >= 8 ? 'rgba(122,40,24,.06)' : meteo.uv >= 6 ? 'rgba(160,72,24,.06)' : 'rgba(196,138,30,.06)',
+                border: `1px solid ${meteo.uv >= 8 ? 'rgba(122,40,24,.2)' : meteo.uv >= 6 ? 'rgba(160,72,24,.2)' : 'rgba(196,138,30,.2)'}`,
+                borderRadius: 4, textDecoration: 'none', color: 'var(--ink)',
+                fontSize: '.82rem', lineHeight: 1.4,
+              }}>
+                <Sun size={16} weight="bold" color={meteo.uv >= 8 ? '#7a2818' : meteo.uv >= 6 ? '#a04818' : '#c48a1e'} aria-hidden="true" style={{ flexShrink: 0 }} />
+                <span>
+                  <strong style={{ color: meteo.uv >= 8 ? '#7a2818' : meteo.uv >= 6 ? '#a04818' : '#c48a1e' }}>
+                    {meteo.uv >= 8 ? (locale === 'en' ? 'Very high UV' : 'UV muy alto') : meteo.uv >= 6 ? (locale === 'en' ? 'High UV' : 'UV alto') : (locale === 'en' ? 'Moderate UV' : 'UV moderado')}
+                    {' — '}
+                    {meteo.uv >= 6 ? 'SPF 50+' : 'SPF 30+'}
+                  </strong>
+                  {' '}
+                  <span style={{ color: 'var(--muted)', fontSize: '.78rem' }}>
+                    {locale === 'en' ? 'See our sunscreen guide →' : 'Ver guía de protectores →'}
+                  </span>
+                </span>
+              </Link>
+            )}
           </div>
 
           <div className={styles.divider}/>
