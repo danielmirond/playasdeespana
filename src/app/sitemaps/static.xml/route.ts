@@ -40,6 +40,8 @@ export async function GET() {
   const pages = [
     { es: '/',                       en: '/en',                    p: '1.0', f: 'daily' },
     { es: '/playas-cerca-de-mi',     en: null,                     p: '0.9', f: 'weekly' },
+    { es: '/playas-sin-viento',      en: null,                     p: '0.8', f: 'daily' },
+    { es: '/prediccion-fin-de-semana', en: null,                   p: '0.8', f: 'daily' },
     { es: '/mapa',                   en: null,                     p: '0.9', f: 'daily' },
     { es: '/buscar',                 en: '/en/search',             p: '0.8', f: 'weekly' },
     { es: '/comunidades',            en: null,                     p: '0.8', f: 'weekly' },
@@ -96,6 +98,11 @@ export async function GET() {
   for (const p of nudistasStats.provincias) urls.push(u(`/playas-nudistas/provincia/${p.slug}`, '0.6', 'weekly', today))
   for (const c of accesiblesStats.comunidades) urls.push(u(`/playas-accesibles/comunidad/${c.slug}`, '0.6', 'weekly', today))
   for (const p of accesiblesStats.provincias) urls.push(u(`/playas-accesibles/provincia/${p.slug}`, '0.6', 'weekly', today))
+
+  // Mejores playas por provincia
+  for (const p of provincias) {
+    urls.push(u(`/mejores-playas/${p.slug}`, '0.6', 'weekly', today))
+  }
 
   // Topic × provincia pages (campings, buceo, clases-surf, etc.)
   const TOPIC_SLUGS = [
