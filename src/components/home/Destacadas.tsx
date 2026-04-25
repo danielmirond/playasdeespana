@@ -68,62 +68,6 @@ function calcEstado(m: MeteoInput): string {
   return 'CALMA'
 }
 
-// ── Score chip · pill with tinted bg (design system .score-chip) ──
-function ScoreChip({ ps }: { ps: PlayaScore }) {
-  return (
-    <div
-      style={{
-        position: 'absolute', top: 10, right: 10, zIndex: 3,
-        display: 'inline-flex', alignItems: 'baseline', gap: 3,
-        background: `color-mix(in srgb, ${ps.color} 8%, var(--surface, #faf4e6))`,
-        border: `1px solid ${ps.color}`,
-        padding: '4px 9px',
-        borderRadius: 'var(--r-pill, 999px)',
-        fontFamily: 'var(--font-serif)', fontWeight: 700,
-        fontSize: 15, letterSpacing: '-.01em',
-        color: ps.color, lineHeight: 1,
-      }}
-      aria-label={`Score ${ps.score}/100. ${ps.label}`}
-    >
-      {ps.score}
-      <small style={{
-        fontFamily: 'var(--font-sans)', fontWeight: 500,
-        fontSize: 9, color: 'var(--muted)',
-        letterSpacing: '.04em',
-      }}>/100</small>
-    </div>
-  )
-}
-
-// ── Mini ilu (kept from original) ─────────────────────────────────
-function IluCard({ estado }: { estado: string }) {
-  if (estado === 'CALMA' || estado === 'BUENA') return (
-    <svg viewBox="0 0 110 80" fill="none" aria-hidden="true">
-      <rect x="5" y="60" width="100" height="8" rx="2" fill="var(--arena-400,#d4c090)" opacity=".5"/>
-      <rect x="0" y="66" width="110" height="14" fill="var(--arena-400,#d4c090)" opacity=".7"/>
-      <path d="M5,62 C15,57 28,63 42,59 C56,55 70,62 84,58 C96,55 104,60 110,57" fill="none" stroke="var(--mar-300,#8aa8b8)" strokeWidth="1.5" strokeLinecap="round" opacity=".5"/>
-      <path d="M40,60 A15,15 0 0,1 70,60" fill="var(--ocre-400,#e8a030)" opacity=".9"/>
-      <circle cx="55" cy="60" r="12" fill="var(--ocre-400,#e8a030)"/>
-      <circle cx="55" cy="60" r="9"  fill="var(--ocre-300,#f0bc62)"/>
-      <line x1="55" y1="38" x2="55" y2="44" stroke="var(--ocre-400,#e8a030)" strokeWidth="2" strokeLinecap="round"/>
-    </svg>
-  )
-  if (estado === 'PELIGRO') return (
-    <svg viewBox="0 0 110 80" fill="none" aria-hidden="true">
-      <path d="M0,52 C8,42 18,54 28,44 C38,34 50,50 62,40 C74,30 86,46 98,38 L110,36 L110,80 L0,80Z" fill="var(--mar-300,#8aa8b8)" opacity=".3"/>
-      <path d="M0,64 C14,56 28,66 44,58 C60,50 76,62 92,55 L110,52 L110,80 L0,80Z" fill="var(--mar-300,#8aa8b8)" opacity=".5"/>
-      <line x1="46" y1="12" x2="64" y2="28" stroke="var(--sea-peligro,#7a2818)" strokeWidth="2.5" strokeLinecap="round" opacity=".55"/>
-      <line x1="64" y1="12" x2="46" y2="28" stroke="var(--sea-peligro,#7a2818)" strokeWidth="2.5" strokeLinecap="round" opacity=".55"/>
-    </svg>
-  )
-  return (
-    <svg viewBox="0 0 110 80" fill="none" aria-hidden="true">
-      <path d="M0,50 C10,40 22,52 34,42 C46,32 58,48 70,38 C82,28 96,44 110,36 L110,80 L0,80Z" fill="var(--mar-300,#8aa8b8)" opacity=".25"/>
-      <path d="M0,62 C15,54 30,64 46,56 C62,48 78,60 94,53 L110,50 L110,80 L0,80Z" fill="var(--mar-300,#8aa8b8)" opacity=".45"/>
-      <polygon points="55,8 62,22 48,22" fill="var(--ocre-400,#e8a030)" opacity=".7"/>
-    </svg>
-  )
-}
 
 interface Props {
   locale?: 'es' | 'en'
@@ -147,8 +91,17 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
   const top   = scored.slice(0, topCount)
   const avoid = scored.filter(s => s.ps.score < 45).slice(-avoidCount).reverse()
 
-  const renderCard = (item: typeof top[number], rank?: number) => {
-    const { playa: p, meteo: m, ps, estado } = item
+  const GRADIENTS = [
+    'linear-gradient(180deg, #c7d8dc 0%, #a3b9c0 35%, #e8d9b8 55%, #d9c7a0 100%)',
+    'linear-gradient(180deg, #a3b6b8 0%, #6b8890 40%, #d4c090 60%, #b8a06a 100%)',
+    'linear-gradient(180deg, #d8ccae 0%, #b5a582 45%, #9d8a62 70%, #6b5840 100%)',
+    'linear-gradient(180deg, #b8c8c8 0%, #8aa4a8 35%, #c9b890 55%, #a8956c 100%)',
+    'linear-gradient(180deg, #d0bba0 0%, #ac9670 40%, #826444 70%, #4e3a22 100%)',
+    'linear-gradient(180deg, #c4d0d0 0%, #94adb0 30%, #b9a57c 55%, #7a6040 100%)',
+  ]
+
+  const renderCard = (item: typeof top[number], rank?: number, idx = 0) => {
+    const { playa: p, ps, estado } = item
     const e = ESTADOS[estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
     return (
       <Link
@@ -157,54 +110,18 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
         className={styles.card}
         prefetch={true}
       >
-        <div className={styles.vis}>
-          <div className={styles.visIlu}><IluCard estado={estado}/></div>
-          <ScoreChip ps={ps} />
-          <div className={styles.estadoPill} style={{ background: e.bg, color: e.text }}>
-            <span className={styles.dot} style={{ background: e.dot }}/>
-            {locale === 'en' ? e.labelEn : e.label}
-          </div>
+        <div className={styles.vis} style={{ background: GRADIENTS[idx % GRADIENTS.length] }}>
           {rank !== undefined && (
-            <div style={{
-              position: 'absolute', top: 10, left: 12, zIndex: 3,
-              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-              fontWeight: 400,
-              fontSize: '1.35rem', color: 'var(--ink)',
-              lineHeight: 1,
-              letterSpacing: '-.02em',
-            }}
-            aria-label={`Posición ${rank}`}
-            >
-              n°{rank}
-            </div>
+            <span className={styles.rank} aria-label={`Posición ${rank}`}>nº{rank}</span>
           )}
+          <span className={styles.scorePill} style={{ color: ps.color }}>{ps.score}</span>
         </div>
         <div className={styles.body}>
-          <div className={styles.lugar}>{p.municipio} · {p.provincia}</div>
           <div className={styles.nombre}>{p.nombre}</div>
-          <div className={styles.datos}>
-            <div className={styles.dato}>
-              <span className={styles.datoV}>{m.olas}m</span>
-              <span className={styles.datoL}>{locale === 'en' ? 'Waves' : 'Olas'}</span>
-            </div>
-            <div className={styles.dato}>
-              <span className={styles.datoV}>{m.viento}km/h</span>
-              <span className={styles.datoL}>{locale === 'en' ? 'Wind' : 'Viento'}</span>
-            </div>
-            <div className={styles.dato}>
-              <span className={styles.datoV}>UV {m.uv}</span>
-              <span className={styles.datoL}>UV</span>
-            </div>
-          </div>
-          <div className={styles.foot}>
-            <div className={styles.badges}>
-              {p.bandera    && <span className={styles.badge}>{locale === 'en' ? 'Blue Flag' : 'B. Azul'}</span>}
-              {p.socorrismo && <span className={styles.badge}>{locale === 'en' ? 'Lifeguard' : 'Socorr.'}</span>}
-              {p.accesible  && <span className={`${styles.badge} ${styles.badgeVerde}`}><abbr title={locale === 'en' ? 'Reduced mobility access' : 'Personas con movilidad reducida'}>PMR</abbr></span>}
-            </div>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={styles.arrow} aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/>
-            </svg>
+          <div className={styles.lugar}>{p.municipio} · {p.provincia}</div>
+          <div className={styles.estado} style={{ color: e.dot }}>
+            <span className={styles.dot} style={{ background: e.dot }}/>
+            <em>{locale === 'en' ? e.labelEn.toLowerCase() : e.label.toLowerCase()}</em>
           </div>
         </div>
       </Link>
@@ -224,7 +141,7 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
           </Link>
         </div>
         <div className={styles.grid}>
-          {top.map((item, i) => renderCard(item, i + 1))}
+          {top.map((item, i) => renderCard(item, i + 1, i))}
         </div>
       </section>
 
@@ -240,7 +157,7 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
             </span>
           </div>
           <div className={styles.grid}>
-            {avoid.map(item => renderCard(item))}
+            {avoid.map((item, i) => renderCard(item, undefined, i))}
           </div>
         </section>
       )}
