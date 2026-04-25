@@ -1,4 +1,4 @@
-/* src/components/home/Comunidades.module.css */
+/* src/components/home/Comunidades.module.css — Design system hub card pattern */
 
 .section {
   max-width: 1000px;
@@ -10,17 +10,19 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: .85rem;
+  margin-bottom: 1rem;
   padding-bottom: .55rem;
   border-bottom: 1px solid var(--line);
 }
 .hdTitle {
-  font-size: .74rem;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 700;
   color: var(--ink);
+  letter-spacing: -.015em;
+  line-height: 1.1;
 }
+.hdTitle em { font-weight: 500; color: var(--accent); }
 .hdAction {
   font-size: .75rem;
   color: var(--accent);
@@ -30,48 +32,81 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
-  gap: .5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: .6rem;
 }
 
+/* ── Hub card — horizontal with serif name + mono count + chevron ── */
 .item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: .3rem;
-  padding: .9rem .75rem;
-  border-radius: 6px;
+  gap: .75rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--r-sm, 4px);
   border: 1px solid var(--line);
-  background: var(--card-bg);
-  transition: border-color .15s, background .15s, color .15s;
+  background: var(--surface, #faf4e6);
+  text-decoration: none;
+  transition: border-color .15s, transform .15s;
 }
 .item:hover {
-  background: var(--card-bg);
-  border-color: var(--accent);
+  border-color: var(--ink);
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
-.ilu {
-  width: 48px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: sepia(.15) saturate(.8);
-  opacity: .85;
-}
+.info { flex: 1; display: flex; flex-direction: column; gap: .1rem; }
 .nombre {
-  font-size: .8rem;
-  font-weight: 600;
-  line-height: 1.2;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.15;
   color: var(--ink);
+  letter-spacing: -.01em;
 }
 .n {
-  font-size: .72rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: .7rem;
   color: var(--muted);
 }
 
+.chevron {
+  flex-shrink: 0;
+  transition: transform .15s;
+}
+.item:hover .chevron { transform: translateX(2px); }
+
+/* ── Smaller communities — pill row ────────────────────────────── */
+.restRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .85rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--line);
+}
+.restItem {
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--muted);
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  transition: border-color .15s, color .15s;
+}
+.restItem:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+.restN { font-weight: 400; opacity: .7; }
+
 @media (max-width: 640px) {
   .section { padding-left: 1.25rem; padding-right: 1.25rem; }
-  .grid { grid-template-columns: repeat(3, 1fr); }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
+  .nombre { font-size: .92rem; }
+}
+
+@media (max-width: 380px) {
+  .grid { grid-template-columns: 1fr; }
 }

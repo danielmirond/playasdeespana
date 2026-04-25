@@ -290,13 +290,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* OLEAJE + METEO */}
         <div className={styles.card} id="s-meteo">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.oleaje(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Sea & <em>weather</em></> : <>Mar y <em>meteo</em></>}</h2>
             <span className={styles.cardSrc}>{i18n.oleajeSrc}</span>
           </div>
           <div className={styles.cardBody}>
             <OleajeChart olas={meteo.olas} oleajeHoras={oleajeHoras} nowLabel={i18n.nowLabel} />
           </div>
 
+          <Collapsible maxHeight={0} labelMore={locale === 'en' ? 'Sun, tides, temperature, wind' : 'Sol, mareas, temperatura, viento'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
@@ -419,9 +420,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               </table>
             </div>
           </div>
+          </Collapsible>
         </div>
 
-        {/* SEGURIDAD: BANDERA + MEDUSAS */}
+        {/* SEGURIDAD: BANDERA + MEDUSAS + CALIDAD */}
         {(banderaPlaya || medusas) && (
           <div className={styles.card} id="s-seguridad">
             <div className={styles.cardHead}>
@@ -1026,7 +1028,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
       {/* ASIDE */}
       <aside className={styles.aside}>
 
-        {/* Ficha técnica — design system sidebar pattern */}
+        {/* Ficha técnica — only physical specs, no badges (shown in hero) */}
         {(playa.longitud || playa.composicion || playa.tipo || calidad) && (
           <div className={styles.asideBox}>
             <div className={styles.abHead}>
@@ -1039,10 +1041,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 playa.composicion ? [locale === 'en' ? 'Sand' : 'Arena',             playa.composicion] : null,
                 playa.tipo        ? [locale === 'en' ? 'Type' : 'Tipo',              playa.tipo] : null,
                 calidad           ? [locale === 'en' ? 'Water quality' : 'Calidad',  calidad.nivel] : null,
-                playa.bandera     ? [locale === 'en' ? 'Blue Flag' : 'Bandera',      locale === 'en' ? 'Blue Flag 2026' : 'Azul 2026'] : null,
-                [locale === 'en' ? 'Lifeguard' : 'Socorrismo',    playa.socorrismo ? (locale === 'en' ? 'Yes' : 'Sí') : 'No'],
-                [locale === 'en' ? 'Accessible' : 'Accesible PMR', playa.accesible  ? (locale === 'en' ? 'Partial' : 'Parcial') : 'No'],
-                [locale === 'en' ? 'Dogs allowed' : 'Perros',      playa.perros     ? (locale === 'en' ? 'Yes' : 'Sí') : 'No'],
+                playa.grado_ocupacion ? [locale === 'en' ? 'Crowding' : 'Ocupación', playa.grado_ocupacion] : null,
               ].filter(Boolean).map(row => {
                 const [k, v] = row as [string, string]
                 return (
@@ -1056,17 +1055,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         )}
 
+        {/* Estado card — IluEstado + frase + timestamp (unique location) */}
         <div className={styles.asideCard}>
           <div className={styles.aeIlu}><IluEstado estado={meteo.estado} size="sm" animated/></div>
-          <div className={styles.aeEstado} style={{ color: estado.dot }}>{estado.label}</div>
-          <div className={styles.aeFrase}><em>{estado.frase}</em></div>
+          <div className={styles.aeEstado} style={{ color: estado.dot }}>{locale === 'en' ? estado.labelEn : estado.label}</div>
+          <div className={styles.aeFrase}><em>{locale === 'en' ? estado.fraseEn : estado.frase}</em></div>
           <div className={styles.aePill}><span className={styles.aeDot} style={{ background: estado.dot }}/>{i18n.actualizado} · <time dateTime={dateModified}>{formatTime(dateModified, locale)}</time></div>
-          <div className={styles.aeQs}>
-            <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.agua}°C</span><span className={styles.aeQl}>{i18n.agua}</span></div>
-            <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.tempAire}°C</span><span className={styles.aeQl}>{i18n.aire}</span></div>
-            <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.olas}m</span><span className={styles.aeQl}>{i18n.olas}</span></div>
-            <div className={styles.aeQ}><span className={styles.aeQv}>{meteo.viento}km/h</span><span className={styles.aeQl}>{i18n.vientoLabel}</span></div>
-          </div>
         </div>
         {horaIdeal && (
           <div style={{

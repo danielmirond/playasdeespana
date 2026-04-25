@@ -74,7 +74,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
 
       {/* Two-column grid */}
       <div className={styles.grid}>
-        {/* Left. editorial */}
+        {/* Left: editorial */}
         <div className={styles.left}>
           <div className={styles.eyebrow}>
             {locale === 'en' ? 'Beach report · today' : 'Estado del mar · hoy'}
@@ -91,9 +91,6 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
               ? <Link href={provinciaHref} className={styles.lugarLink}>{playa.provincia}</Link>
               : <span>{playa.provincia}</span>}
           </div>
-          <div className={styles.coords}>
-            {playa.lat.toFixed(4)}, {playa.lng.toFixed(4)}
-          </div>
           <div className={styles.badges}>
             {playa.bandera    && <span className={styles.badge}>{i18n.bandera}</span>}
             {playa.socorrismo && <span className={styles.badge}>{i18n.socorrismo}</span>}
@@ -102,15 +99,11 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
           <div className={styles.actions}>
             <FichaHeroActions slug={playa.slug} nombre={playa.nombre} meteo={meteo} scoreLabel={playaScore?.label} />
           </div>
-          <div className={styles.frase}>
-            <em>{locale === 'en' ? estado.fraseEn : frase}</em>
-          </div>
         </div>
 
-        {/* Right. score card */}
+        {/* Right: score card */}
         <div className={styles.scoreCard}>
           <div className={styles.scoreHead}>
-            <div className={styles.iluWrap}><IluEstado estado={meteo.estado} size="sm" animated /></div>
             {playaScore ? (
               <>
                 <span className={styles.scoreNum}>{playaScore.score}</span>
@@ -125,9 +118,6 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
               </span>
             )}
           </div>
-          <div className={styles.scoreFrase}>
-            <em>{locale === 'en' ? estado.fraseEn : frase}</em>
-          </div>
 
           {/* Factor pills */}
           {playaScore && playaScore.factors.length > 0 && (
@@ -140,7 +130,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
             </div>
           )}
 
-          {/* Metrics 2×2. brand book 05 "Métricas card: 2×2 grid" */}
+          {/* Metrics 2×2 */}
           <div className={styles.metrics}>
             <div className={styles.m}>
               <Drop size={14} weight="fill" color="var(--accent)" aria-hidden="true" />
@@ -163,21 +153,6 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
               <span className={styles.ml}>{i18n.uv}</span>
             </div>
           </div>
-
-          {/* CTA */}
-          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.ctaLink}>
-            <MapPin size={14} weight="fill" aria-hidden="true" />
-            {i18n.como} →
-          </a>
-
-          {/* Nearby link */}
-          <Link
-            href={`/buscar?lat=${playa.lat}&lng=${playa.lng}&orden=cercanas`}
-            className={styles.ctaLink}
-            style={{ borderTop: 'none', color: 'var(--muted)', fontSize: '.72rem' }}
-          >
-            {i18n.cercanas} →
-          </Link>
         </div>
       </div>
 
