@@ -1054,7 +1054,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
           </div>
         )}
-        <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} />
+        <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} meteo={{ agua: meteo.agua, olas: meteo.olas, viento: meteo.viento }} />
         <VotacionPlaya slug={playa.slug} locale={locale} />
         <ReportarEstado slug={playa.slug} locale={locale} />
         {/* Amazon affiliate — equipo de playa */}

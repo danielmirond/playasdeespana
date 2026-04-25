@@ -1,16 +1,17 @@
 'use client'
 import { CheckCircle, Heart } from '@phosphor-icons/react'
-// src/components/playa/FichaHeroActions.tsx
 import { useState, useEffect } from 'react'
 
 interface Props {
-  slug:   string
-  nombre: string
+  slug:       string
+  nombre:     string
+  meteo?:     { agua: number; olas: number; viento: number }
+  scoreLabel?: string
 }
 
 const KEY = 'playas_favoritas'
 
-export default function FichaHeroActions({ slug, nombre }: Props) {
+export default function FichaHeroActions({ slug, nombre, meteo, scoreLabel }: Props) {
   const [fav, setFav] = useState(false)
   const [copied, setCopied] = useState(false)
 
@@ -32,10 +33,13 @@ export default function FichaHeroActions({ slug, nombre }: Props) {
 
   function compartir() {
     const url = window.location.href
+    const text = meteo
+      ? `${nombre} · ${meteo.agua}°C · Olas ${meteo.olas}m · Viento ${meteo.viento}km/h${scoreLabel ? ` — ${scoreLabel}` : ''}`
+      : nombre
     if (navigator.share) {
-      navigator.share({ title: nombre, url })
+      navigator.share({ title: nombre, text, url })
     } else {
-      navigator.clipboard.writeText(url).then(() => {
+      navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
       })
@@ -62,9 +66,9 @@ export default function FichaHeroActions({ slug, nombre }: Props) {
     <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', margin: '4px 0 0' }}>
       <button onClick={toggleFav} style={{
         ...base,
-        color:       fav ? '#c0392b' : 'var(--muted, #5a3d12)',
-        background:  fav ? 'rgba(192,57,43,.08)' : 'transparent',
-        borderColor: fav ? 'rgba(192,57,43,.3)' : 'rgba(138,117,96,.3)',
+        color:       fav ? '#7a2818' : 'var(--muted, #5a3d12)',
+        background:  fav ? 'rgba(122,40,24,.08)' : 'transparent',
+        borderColor: fav ? 'rgba(122,40,24,.3)' : 'rgba(138,117,96,.3)',
       }}>
         <Heart size={14} weight={fav ? 'fill' : 'regular'} color="currentColor"/> {fav ? 'Guardada' : 'Guardar'}
       </button>

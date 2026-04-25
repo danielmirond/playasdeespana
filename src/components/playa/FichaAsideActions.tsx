@@ -1,16 +1,17 @@
 'use client'
-// src/components/playa/FichaAsideActions.tsx
 import { CheckCircle, MapPin } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 interface Props {
-  lat:    number
-  lng:    number
-  nombre: string
-  slug:   string
+  lat:        number
+  lng:        number
+  nombre:     string
+  slug:       string
+  meteo?:     { agua: number; olas: number; viento: number }
+  scoreLabel?: string
 }
 
-export default function FichaAsideActions({ lat, lng, nombre, slug }: Props) {
+export default function FichaAsideActions({ lat, lng, nombre, slug, meteo, scoreLabel }: Props) {
   const [copied, setCopied] = useState(false)
 
   function verEnMapa() {
@@ -19,10 +20,13 @@ export default function FichaAsideActions({ lat, lng, nombre, slug }: Props) {
 
   function compartir() {
     const url = `${window.location.origin}/playas/${slug}`
+    const text = meteo
+      ? `${nombre} · ${meteo.agua}°C · Olas ${meteo.olas}m · Viento ${meteo.viento}km/h${scoreLabel ? ` — ${scoreLabel}` : ''}`
+      : nombre
     if (navigator.share) {
-      navigator.share({ title: nombre, url })
+      navigator.share({ title: nombre, text, url })
     } else {
-      navigator.clipboard.writeText(url).then(() => {
+      navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
       })

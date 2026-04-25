@@ -94,7 +94,7 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
             {playa.accesible  && <span className={styles.badge}>{i18n.accesible}</span>}
           </div>
           <div className={styles.actions}>
-            <FichaHeroActions slug={playa.slug} nombre={playa.nombre} />
+            <FichaHeroActions slug={playa.slug} nombre={playa.nombre} meteo={meteo} scoreLabel={playaScore?.label} />
           </div>
           <div className={styles.frase}>
             <em>{locale === 'en' ? estado.fraseEn : frase}</em>
