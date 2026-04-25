@@ -152,45 +152,43 @@ export function calcularPlayaScore(playa: Playa, meteo: MeteoInput): PlayaScore 
   const allReasonsEn = [...mar.reasonsEn, ...agua.reasonsEn, ...uv.reasonsEn, ...srv.reasonsEn]
 
   let label: string, labelEn: string, emoji: string, color: string
-  if (score >= 75) {
-    label = 'Excelente'; labelEn = 'Excellent'; emoji = '🟢'; color = '#22c55e'
-  } else if (score >= 55) {
-    label = 'Buena'; labelEn = 'Good'; emoji = '🟡'; color = '#eab308'
-  } else if (score >= 35) {
-    label = 'Regular'; labelEn = 'Fair'; emoji = '🟠'; color = '#f97316'
+  if (score >= 85) {
+    label = 'Excelente'; labelEn = 'Excellent'; emoji = '🟢'; color = '#3d6b1f'
+  } else if (score >= 70) {
+    label = 'Muy buena'; labelEn = 'Very good'; emoji = '🟢'; color = '#7a8a30'
+  } else if (score >= 50) {
+    label = 'Aceptable'; labelEn = 'Fair'; emoji = '🟡'; color = '#c48a1e'
+  } else if (score >= 30) {
+    label = 'Limitada'; labelEn = 'Limited'; emoji = '🟠'; color = '#a04818'
   } else {
-    label = 'Mala'; labelEn = 'Poor'; emoji = '🔴'; color = '#ef4444'
+    label = 'No apta'; labelEn = 'Poor'; emoji = '🔴'; color = '#7a2818'
   }
 
-  // Factor pills — indicadores rápidos de condiciones clave
   const factors: Factor[] = []
 
-  // Viento
-  if (meteo.viento <= 10)      factors.push({ label: 'Sin viento',     labelEn: 'No wind',      color: '#22c55e', icon: 'wind' })
-  else if (meteo.viento <= 20) factors.push({ label: 'Brisa suave',    labelEn: 'Light breeze',  color: '#eab308', icon: 'wind' })
-  else if (meteo.viento <= 35) factors.push({ label: 'Viento fuerte',  labelEn: 'Strong wind',   color: '#f97316', icon: 'wind' })
-  else                         factors.push({ label: 'Viento extremo', labelEn: 'Extreme wind',  color: '#ef4444', icon: 'wind' })
+  if (meteo.viento <= 10)      factors.push({ label: 'Sin viento',     labelEn: 'No wind',      color: '#3d6b1f', icon: 'wind' })
+  else if (meteo.viento <= 20) factors.push({ label: 'Brisa suave',    labelEn: 'Light breeze',  color: '#7a8a30', icon: 'wind' })
+  else if (meteo.viento <= 35) factors.push({ label: 'Viento fuerte',  labelEn: 'Strong wind',   color: '#a04818', icon: 'wind' })
+  else                         factors.push({ label: 'Viento extremo', labelEn: 'Extreme wind',  color: '#7a2818', icon: 'wind' })
 
-  // Oleaje
-  if (meteo.olas <= 0.3)       factors.push({ label: 'Mar calmo',      labelEn: 'Calm sea',      color: '#22c55e', icon: 'waves' })
-  else if (meteo.olas <= 1.0)  factors.push({ label: 'Oleaje moderado',labelEn: 'Moderate waves', color: '#eab308', icon: 'waves' })
-  else if (meteo.olas <= 2.0)  factors.push({ label: 'Mar agitado',    labelEn: 'Rough sea',     color: '#f97316', icon: 'waves' })
-  else                         factors.push({ label: 'Mar muy agitado',labelEn: 'Very rough',    color: '#ef4444', icon: 'waves' })
+  if (meteo.olas <= 0.3)       factors.push({ label: 'Mar calmo',      labelEn: 'Calm sea',      color: '#3d6b1f', icon: 'waves' })
+  else if (meteo.olas <= 1.0)  factors.push({ label: 'Oleaje moderado',labelEn: 'Moderate waves', color: '#c48a1e', icon: 'waves' })
+  else if (meteo.olas <= 2.0)  factors.push({ label: 'Mar agitado',    labelEn: 'Rough sea',     color: '#a04818', icon: 'waves' })
+  else                         factors.push({ label: 'Mar muy agitado',labelEn: 'Very rough',    color: '#7a2818', icon: 'waves' })
 
-  // Parking
   if (playa.parking) {
     const g = (playa.grado_ocupacion ?? '').toLowerCase()
-    if (g.includes('bajo'))       factors.push({ label: 'Fácil aparcar',    labelEn: 'Easy parking',  color: '#22c55e', icon: 'parking' })
-    else if (g.includes('medio')) factors.push({ label: 'Parking disponible',labelEn: 'Parking available', color: '#eab308', icon: 'parking' })
-    else if (g.includes('alto'))  factors.push({ label: 'Difícil aparcar',  labelEn: 'Hard to park',  color: '#ef4444', icon: 'parking' })
-    else                          factors.push({ label: 'Con parking',      labelEn: 'Has parking',   color: '#22c55e', icon: 'parking' })
+    if (g.includes('bajo'))       factors.push({ label: 'Fácil aparcar',    labelEn: 'Easy parking',  color: '#3d6b1f', icon: 'parking' })
+    else if (g.includes('medio')) factors.push({ label: 'Parking disponible',labelEn: 'Parking available', color: '#c48a1e', icon: 'parking' })
+    else if (g.includes('alto'))  factors.push({ label: 'Difícil aparcar',  labelEn: 'Hard to park',  color: '#7a2818', icon: 'parking' })
+    else                          factors.push({ label: 'Con parking',      labelEn: 'Has parking',   color: '#3d6b1f', icon: 'parking' })
   } else {
-    factors.push({ label: 'Sin parking',   labelEn: 'No parking',   color: '#ef4444', icon: 'parking' })
+    factors.push({ label: 'Sin parking',   labelEn: 'No parking',   color: '#a04818', icon: 'parking' })
   }
 
   // UV
-  if (meteo.uv >= 8)           factors.push({ label: 'UV muy alto',    labelEn: 'Very high UV',  color: '#ef4444', icon: 'sun' })
-  else if (meteo.uv >= 6)      factors.push({ label: 'UV alto',        labelEn: 'High UV',       color: '#f97316', icon: 'sun' })
+  if (meteo.uv >= 8)           factors.push({ label: 'UV muy alto',    labelEn: 'Very high UV',  color: '#7a2818', icon: 'sun' })
+  else if (meteo.uv >= 6)      factors.push({ label: 'UV alto',        labelEn: 'High UV',       color: '#a04818', icon: 'sun' })
 
   return {
     score,

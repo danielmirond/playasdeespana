@@ -338,7 +338,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 </div>
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:'.72rem', color:'var(--muted)' }}>
                   <span>{i18n.coeficiente}: <strong style={{ color:'var(--ink)' }}>{mareasLunar.coeficiente}</strong></span>
-                  <span style={{ color: mareasLunar.tipo === 'vivas' ? '#3b82f6' : mareasLunar.tipo === 'muertas' ? '#f59e0b' : 'var(--muted)', fontWeight:600 }}>
+                  <span style={{ color: mareasLunar.tipo === 'vivas' ? '#4a7a90' : mareasLunar.tipo === 'muertas' ? '#c48a1e' : 'var(--muted)', fontWeight:600 }}>
                     {mareasLunar.tipo === 'vivas' ? i18n.vivas : mareasLunar.tipo === 'muertas' ? i18n.muertas : i18n.mediasLabel}
                   </span>
                 </div>
@@ -575,7 +575,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       <div className={styles.listMeta}>
                         {r.tipo} · {r.distancia_m}m · {r.precio}
                         {r.reseñas > 0 && <span style={{ color:'#5a3d12' }}> · {r.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} {i18n.resenas}</span>}
-                        {r.horario && <span style={{ color: r.horario === 'Abierto ahora' ? '#22c55e' : '#ef4444', marginLeft:'6px' }}>· {r.horario}</span>}
+                        {r.horario && <span style={{ color: r.horario === 'Abierto ahora' ? '#3d6b1f' : '#7a2818', marginLeft:'6px' }}>· {r.horario}</span>}
                       </div>
                       {r.resena && <div style={{ fontSize:'.75rem', color:'#6b5a3e', fontStyle:'italic', marginTop:'4px', lineHeight:'1.4' }}>"{r.resena}"</div>}
                       {(r.website || r.telefono) && (
@@ -724,13 +724,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       <div style={{
                         width: 44, height: 44, borderRadius: 4, flexShrink: 0,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        background: 'rgba(34,197,94,.12)', color: '#22c55e', fontSize: '1.5rem',
+                        background: 'rgba(61,107,31,.1)', color: '#3d6b1f', fontSize: '1.5rem',
                       }} aria-hidden="true">⛺</div>
                       <div className={styles.listInfo}>
                         <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                           <div className={styles.listNombre}>{c.nombre}</div>
                         </a>
-                        <div style={{ fontSize: '.66rem', color: '#22c55e', fontWeight: 700, marginTop: '.1rem' }}>
+                        <div style={{ fontSize: '.66rem', color: '#3d6b1f', fontWeight: 700, marginTop: '.1rem' }}>
                           {c.tipo}
                           {c.categoria > 0 && (
                             <span style={{ marginLeft: '.35rem', color: 'var(--muted,#5a3d12)' }}>
@@ -761,13 +761,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                           <div style={{ display: 'flex', gap: '.5rem', marginTop: '.5rem', flexWrap: 'wrap' }}>
                             {c.website && (
                               <a href={c.website} target="_blank" rel="noopener noreferrer"
-                                style={{ fontSize: '.7rem', background: '#22c55e', color: '#fff', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600 }}>
+                                style={{ fontSize: '.7rem', background: '#3d6b1f', color: '#fff', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600 }}>
                                 Web
                               </a>
                             )}
                             {c.telefono && (
                               <a href={`tel:${c.telefono}`}
-                                style={{ fontSize: '.7rem', background: 'rgba(34,197,94,.12)', color: '#166534', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600, border: '1px solid rgba(34,197,94,.3)' }}>
+                                style={{ fontSize: '.7rem', background: 'rgba(61,107,31,.1)', color: '#166534', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600, border: '1px solid rgba(34,197,94,.3)' }}>
                                 {c.telefono}
                               </a>
                             )}
@@ -946,7 +946,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   <div style={{ marginTop:'.65rem', display:'flex', gap:'.5rem', flexWrap:'wrap' }}>
                     <a href={`tel:${playa.hospital_tel}`} style={{
                       display:'inline-flex', alignItems:'center',
-                      background:'#ef4444', color:'#fff',
+                      background:'#7a2818', color:'#fff',
                       padding:'.4rem .85rem', borderRadius:'8px',
                       textDecoration:'none', fontSize:'.72rem', fontWeight:700,
                     }}>
@@ -954,7 +954,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     </a>
                     <a href="tel:112" style={{
                       display:'inline-flex', alignItems:'center',
-                      background:'rgba(239,68,68,.12)', color:'#ef4444',
+                      background:'rgba(122,40,24,.1)', color:'#7a2818',
                       border:'1px solid rgba(239,68,68,.3)',
                       padding:'.4rem .85rem', borderRadius:'8px',
                       textDecoration:'none', fontSize:'.72rem', fontWeight:700,
