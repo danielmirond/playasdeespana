@@ -154,23 +154,24 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
     ;(map as any)._modoRadio = false
     ;(map as any)._radioKm = 50
 
-    // Geolocation: intentar centrar en el usuario. Si ya tiene permiso,
-    // vuela a su posición. Si no, queda en la vista general de España.
-    if (navigator.geolocation) {
+    // Geolocation: solo en el mapa general (/mapa). Cuando el mapa
+    // se usa en una página de región (comunidad, provincia, perros/nudistas
+    // por zona) el fitBounds ya centra correctamente y flyTo lo rompería.
+    const isRegionMap = !!(playasProp || comunidad || provincia)
+    if (!isRegionMap && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           const { latitude, longitude } = pos.coords
           map.flyTo([latitude, longitude], 11, { duration: 1.5 })
-          // Marker "Tú estás aquí"
           const userIcon = L.divIcon({
             html: `<div style="width:14px;height:14px;border-radius:50%;background:#6b400a;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,.3)"></div>`,
             className: '', iconSize: [14, 14], iconAnchor: [7, 7],
           })
           L.marker([latitude, longitude], { icon: userIcon })
-            .bindPopup('<div style="font-family:system-ui;font-size:.82rem;font-weight:700;text-align:center">Tu ubicación</div>')
+            .bindPopup('<div style="font-family:var(--font-sans,system-ui);font-size:.82rem;font-weight:700;text-align:center">Tu ubicación</div>')
             .addTo(map)
         },
-        () => { /* Denied/error: queda en la vista general */ },
+        () => {},
         { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 },
       )
     }
