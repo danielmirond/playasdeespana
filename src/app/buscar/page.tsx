@@ -194,7 +194,7 @@ function BuscarContent() {
             {ordenCercanas ? 'Mejores playas cerca de ti' : 'Buscar playas'}
           </h1>
           {!loading && (
-            <span className={styles.total}>
+            <span className={styles.total} aria-live="polite" aria-atomic="true">
               {resultados.length.toLocaleString('es')} resultado{resultados.length !== 1 ? 's' : ''}
               {ordenCercanas && !scoringDone && ' · cargando datos…'}
               {ordenCercanas && scoringDone && ' · por cercanía'}

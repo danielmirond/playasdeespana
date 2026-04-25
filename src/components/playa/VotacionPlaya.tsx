@@ -110,9 +110,10 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
                   background: 'none',
                   border: 'none',
                   cursor: interactivo ? 'pointer' : 'default',
-                  padding: 2,
+                  padding: 8,
+                  minWidth: 44, minHeight: 44,
                   display: 'flex',
-                  alignItems: 'center',
+                  alignItems: 'center', justifyContent: 'center',
                   transition: 'transform .1s',
                   transform: hover === n ? 'scale(1.15)' : 'scale(1)',
                 }}

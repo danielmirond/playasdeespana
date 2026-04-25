@@ -72,8 +72,9 @@ export default function FichaNav({ locale = 'es' }: { locale?: 'es' | 'en' }) {
         }
       })
       if (best.idx >= 0) {
-        btns.forEach(b => b.classList.remove(styles.active))
+        btns.forEach(b => { b.classList.remove(styles.active); b.removeAttribute('aria-current') })
         btns[best.idx]?.classList.add(styles.active)
+        btns[best.idx]?.setAttribute('aria-current', 'location')
         btns[best.idx]?.scrollIntoView({ inline: 'nearest', block: 'nearest' })
       }
     }, {
@@ -98,6 +99,7 @@ export default function FichaNav({ locale = 'es' }: { locale?: 'es' | 'en' }) {
           key={s.id}
           className={`${styles.item} ${i === 0 ? styles.active : ''}`}
           onClick={() => scrollToSection(s.id)}
+          aria-current={i === 0 ? 'location' : undefined}
         >
           {s.label}
         </button>

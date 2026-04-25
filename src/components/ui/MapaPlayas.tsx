@@ -242,7 +242,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
               border: '1px solid var(--line,#e8dcc8)',
               background: 'transparent',
               color: 'var(--accent,#6b400a)', cursor: 'pointer',
-              minHeight: '32px', display: 'flex', alignItems: 'center', gap: '.3rem',
+              minHeight: '44px', display: 'flex', alignItems: 'center', gap: '.3rem',
             }}
           >
             📍 Mi zona
@@ -267,7 +267,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
                 border: 'none',
                 background: baseMap === 'osm' ? 'var(--accent,#6b400a)' : 'transparent',
                 color: baseMap === 'osm' ? '#fff' : 'var(--muted,#5a3d12)',
-                cursor: 'pointer', minHeight: '32px',
+                cursor: 'pointer', minHeight: '44px',
               }}
             >Mapa</button>
             <button
@@ -280,7 +280,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
                 border: 'none',
                 background: baseMap === 'aerial' ? 'var(--accent,#6b400a)' : 'transparent',
                 color: baseMap === 'aerial' ? '#fff' : 'var(--muted,#5a3d12)',
-                cursor: 'pointer', minHeight: '32px',
+                cursor: 'pointer', minHeight: '44px',
               }}
             >Aérea</button>
           </div>
@@ -294,7 +294,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
               borderColor: modoRadio ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
               background: modoRadio ? 'rgba(107,64,10,.1)' : 'transparent',
               color: modoRadio ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)', cursor: 'pointer',
-              minHeight: '32px',
+              minHeight: '44px',
             }}
           >Radio</button>
           {modoRadio && (
