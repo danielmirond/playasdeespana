@@ -8,6 +8,7 @@
 //   5. Favoritas + Cercanas (client blocks)
 //   6. Hub SEO: comunidades + banderas + perros + nudistas
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import Hero from '@/components/home/Hero'
@@ -67,19 +68,17 @@ export default async function HomePage() {
       p,
       pts: (p.bandera ? 3 : 0) + (p.socorrismo ? 2 : 0) + (p.parking ? 1 : 0) + (p.duchas ? 1 : 0),
     })).sort((a, b) => b.pts - a.pts)
-    candidatas.push(...scored.slice(0, 2).map(x => x.p))
+    candidatas.push(scored[0].p)
 
-    // 2 aleatorias (potenciales candidatas a "Evita hoy" si las condiciones son malas)
-    // Usamos un hash determinista del slug para que el resultado sea estable por hora
     const hour = new Date().getHours()
     const shuffled = list
-      .filter(p => !scored.slice(0, 2).some(s => s.p.slug === p.slug))
+      .filter(p => p.slug !== scored[0].p.slug)
       .sort((a, b) => {
         const ha = (a.slug.charCodeAt(0) * 31 + hour) % 997
         const hb = (b.slug.charCodeAt(0) * 31 + hour) % 997
         return ha - hb
       })
-    candidatas.push(...shuffled.slice(0, 2))
+    candidatas.push(shuffled[0])
   }
 
   return (
@@ -89,7 +88,17 @@ export default async function HomePage() {
         <Hero />
         <TopCercanas />
         <Buscador />
-        <Destacadas playas={candidatas} topCount={8} avoidCount={4} />
+        <Suspense fallback={
+          <div style={{ maxWidth: 1000, margin: '0 auto', padding: '0 2rem 2.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '.75rem' }}>
+              {[...Array(6)].map((_, i) => (
+                <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, height: 220, animation: 'fadeIn .3s ease both' }} />
+              ))}
+            </div>
+          </div>
+        }>
+          <Destacadas playas={candidatas} topCount={6} avoidCount={3} />
+        </Suspense>
         <div className="cv-auto"><ParkingHoy playas={playas} /></div>
         <div className="cv-auto"><ActividadesHoy playas={playas} /></div>
         <div className="cv-auto"><MonetizacionBlock /></div>

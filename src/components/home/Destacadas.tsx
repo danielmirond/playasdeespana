@@ -11,34 +11,51 @@ import { ESTADOS } from '@/lib/estados'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
 import styles from './Destacadas.module.css'
 
-// ── Meteo real vía Open-Meteo (servidor) ──────────────────────────
-async function fetchMeteoCard(lat: number, lng: number): Promise<MeteoInput> {
+// ── Meteo batch vía Open-Meteo (1 request por API en vez de N) ────
+// Open-Meteo acepta coordenadas separadas por coma. Esto convierte
+// 96 fetches (48 playas × 2 APIs) en solo 2 fetches.
+async function fetchMeteoBatch(coords: { lat: number; lng: number }[]): Promise<MeteoInput[]> {
+  if (coords.length === 0) return []
+  const ahora = new Date().getHours()
+  const lats = coords.map(c => c.lat.toFixed(4)).join(',')
+  const lngs = coords.map(c => c.lng.toFixed(4)).join(',')
+  const fallback: MeteoInput = { agua: 18, olas: 0.4, viento: 10, uv: 4 }
+
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), 3000)
+
   try {
-    const ahora = new Date().getHours()
     const [rMarine, rMeteo] = await Promise.all([
       fetch(
-        `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
+        `https://marine-api.open-meteo.com/v1/marine?latitude=${lats}&longitude=${lngs}`
         + `&hourly=wave_height,sea_surface_temperature&forecast_days=1&timezone=Europe%2FMadrid`,
-        { next: { revalidate: 3600 } }
+        { next: { revalidate: 3600 }, signal: controller.signal }
       ),
       fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}`
         + `&hourly=wind_speed_10m,uv_index&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`,
-        { next: { revalidate: 3600 } }
+        { next: { revalidate: 3600 }, signal: controller.signal }
       ),
     ])
+    clearTimeout(timer)
 
     const marine = rMarine.ok ? await rMarine.json() : null
     const meteo  = rMeteo.ok  ? await rMeteo.json()  : null
 
-    return {
-      olas:   parseFloat((marine?.hourly?.wave_height?.[ahora] ?? 0.3).toFixed(1)),
-      agua:   Math.round(marine?.hourly?.sea_surface_temperature?.[ahora] ?? 18),
-      viento: Math.round(meteo?.hourly?.wind_speed_10m?.[ahora] ?? 10),
-      uv:     Math.round(meteo?.hourly?.uv_index?.[ahora] ?? 3),
-    }
+    return coords.map((_, i) => {
+      const mArr = coords.length === 1 ? marine?.hourly : marine?.[i]?.hourly
+      const fArr = coords.length === 1 ? meteo?.hourly : meteo?.[i]?.hourly
+      if (!mArr && !fArr) return fallback
+      return {
+        olas:   parseFloat((mArr?.wave_height?.[ahora] ?? 0.4).toFixed(1)),
+        agua:   Math.round(mArr?.sea_surface_temperature?.[ahora] ?? 18),
+        viento: Math.round(fArr?.wind_speed_10m?.[ahora] ?? 10),
+        uv:     Math.round(fArr?.uv_index?.[ahora] ?? 4),
+      }
+    })
   } catch {
-    return { agua: 18, olas: 0.4, viento: 10, uv: 4 }
+    clearTimeout(timer)
+    return coords.map(() => fallback)
   }
 }
 
@@ -109,10 +126,8 @@ interface Props {
 }
 
 export default async function Destacadas({ playas, topCount = 8, avoidCount = 4, locale = 'es' }: Props) {
-  // Fetch meteo real for all candidates in parallel
-  const meteos = await Promise.all(
-    playas.map(p => fetchMeteoCard(p.lat, p.lng))
-  )
+  // Batch fetch: 2 requests total instead of N×2
+  const meteos = await fetchMeteoBatch(playas.map(p => ({ lat: p.lat, lng: p.lng })))
 
   // Score each playa
   const scored = playas.map((p, i) => {
