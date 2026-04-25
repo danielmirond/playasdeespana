@@ -68,22 +68,29 @@ function calcEstado(m: MeteoInput): string {
   return 'CALMA'
 }
 
-// ── Score badge · circular (brand book compact variant) ───────────
-function ScoreBadge({ ps }: { ps: PlayaScore }) {
+// ── Score chip · pill with tinted bg (design system .score-chip) ──
+function ScoreChip({ ps }: { ps: PlayaScore }) {
   return (
     <div
       style={{
         position: 'absolute', top: 10, right: 10, zIndex: 3,
-        background: ps.color, color: '#fff',
+        display: 'inline-flex', alignItems: 'baseline', gap: 3,
+        background: `color-mix(in srgb, ${ps.color} 8%, var(--surface, #faf4e6))`,
+        border: `1px solid ${ps.color}`,
+        padding: '4px 9px',
+        borderRadius: 'var(--r-pill, 999px)',
         fontFamily: 'var(--font-serif)', fontWeight: 700,
-        fontSize: '.95rem', lineHeight: 1,
-        width: 42, height: 42, borderRadius: '50%',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        border: '2px solid #f5ecd5',
+        fontSize: 15, letterSpacing: '-.01em',
+        color: ps.color, lineHeight: 1,
       }}
       aria-label={`Score ${ps.score}/100 — ${ps.label}`}
     >
       {ps.score}
+      <small style={{
+        fontFamily: 'var(--font-sans)', fontWeight: 500,
+        fontSize: 9, color: 'var(--muted)',
+        letterSpacing: '.04em',
+      }}>/100</small>
     </div>
   )
 }
@@ -152,7 +159,7 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
       >
         <div className={styles.vis}>
           <div className={styles.visIlu}><IluCard estado={estado}/></div>
-          <ScoreBadge ps={ps} />
+          <ScoreChip ps={ps} />
           <div className={styles.estadoPill} style={{ background: e.bg, color: e.text }}>
             <span className={styles.dot} style={{ background: e.dot }}/>
             {locale === 'en' ? e.labelEn : e.label}
@@ -173,31 +180,8 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
           )}
         </div>
         <div className={styles.body}>
+          <div className={styles.lugar}>{p.municipio} · {p.provincia}</div>
           <div className={styles.nombre}>{p.nombre}</div>
-          <div className={styles.lugar}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0, opacity: .7 }}>
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            <span>{p.municipio} · {p.provincia}</span>
-          </div>
-          {/* Factor pills — viento, oleaje, parking, UV */}
-          {ps.factors.length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginTop: '.35rem' }}>
-              {ps.factors.map(f => (
-                <span key={f.icon} style={{
-                  fontSize: '.68rem', fontWeight: 700,
-                  color: f.color,
-                  background: `${f.color}12`,
-                  border: `1px solid ${f.color}30`,
-                  padding: '.15rem .4rem', borderRadius: 6,
-                  whiteSpace: 'nowrap',
-                }}>
-                  {locale === 'en' ? f.labelEn : f.label}
-                </span>
-              ))}
-            </div>
-          )}
           <div className={styles.datos}>
             <div className={styles.dato}>
               <span className={styles.datoV}>{m.olas}m</span>
