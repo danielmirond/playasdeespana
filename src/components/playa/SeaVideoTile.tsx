@@ -59,16 +59,21 @@ export default function SeaVideoTile({ estado, className }: Props) {
       className={className}
       style={{ position: 'absolute', inset: 0, overflow: 'hidden', zIndex: 0, pointerEvents: 'auto' }}
     >
-      {/* Poster — desaturated, visible until video plays */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: `url(${v.poster})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        filter: `grayscale(1) contrast(1.2) brightness(0.78)${playing ? ' blur(2px)' : ''}`,
-        transition: 'filter 400ms ease, opacity 400ms ease',
-        opacity: playing ? 0 : 1,
-      }}/>
+      {/* Poster — img element (not backgroundImage) to avoid duplicate load with <video poster> */}
+      {!playing && (
+        <img
+          src={v.poster}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          style={{
+            position: 'absolute', inset: 0, width: '100%', height: '100%',
+            objectFit: 'cover',
+            filter: 'grayscale(1) contrast(1.2) brightness(0.78)',
+          }}
+        />
+      )}
 
       <video
         ref={ref}
@@ -76,7 +81,6 @@ export default function SeaVideoTile({ estado, className }: Props) {
         playsInline
         loop
         preload="none"
-        poster={v.poster}
         crossOrigin="anonymous"
         onError={() => setErrored(true)}
         style={{

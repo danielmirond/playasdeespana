@@ -51,7 +51,7 @@ interface Props { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const playa = await getPlayaBySlug(slug)
+  const [playa, cal] = await Promise.all([getPlayaBySlug(slug), getCalidad(slug)])
   if (!playa) return {}
 
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -59,13 +59,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `Cómo está ${np} hoy | Bandera, estado, viento y temperatura del agua - Parking, hoteles y donde comer cerca`
   const description = `Estado del mar en ${np} hoy. Temperatura del agua, oleaje, viento, bandera, medusas y servicios. Parking cercano, hoteles y restaurantes.`
 
-  // OG image dinámica vía /api/og con paleta por comunidad
   const ogImage = new URL(`${BASE}/api/og`)
   ogImage.searchParams.set('playa', np)
   ogImage.searchParams.set('municipio', `${playa.municipio} · ${playa.provincia}`)
   if (playa.bandera) ogImage.searchParams.set('azul', 'true')
   ogImage.searchParams.set('comunidad', playa.comunidad)
-  const cal = await getCalidad(slug)
   if (cal?.nivel) ogImage.searchParams.set('calidad', cal.nivel)
 
   const ogUrl = ogImage.toString()

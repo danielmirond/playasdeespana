@@ -1,6 +1,27 @@
 /* Non-critical CSS — las clases no above-the-fold
    Las variables y reset están inlineadas en layout.tsx */
 
+/* ── View Transitions ───────────────────────────────────────── */
+@view-transition { navigation: auto; }
+::view-transition-group(root) { animation-duration: .18s; animation-timing-function: cubic-bezier(.4,0,.2,1); }
+::view-transition-old(root) { animation: none; mix-blend-mode: normal; opacity: 1; }
+::view-transition-new(root) { animation: vtIn .18s cubic-bezier(.4,0,.2,1) both; mix-blend-mode: normal; }
+@keyframes vtIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Utilities ──────────────────────────────────────────────── */
+.cv-auto { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+.fade-in { animation: fadeIn .25s ease-out both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cbSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Print ──────────────────────────────────────────────────── */
+@media print {
+  header, nav, footer, aside, [class*="AdSlot"], [class*="cookieBanner"], [class*="banner"], script { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  a { color: #000 !important; text-decoration: underline !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .85em; color: #555; }
+}
+
 .card {
   background: var(--card-bg);
   border: 1px solid var(--line);

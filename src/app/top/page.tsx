@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { COSTAS } from '@/lib/rutas'
 
-export const revalidate = 86400
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Top 10 mejores playas de España por costa | Rankings',

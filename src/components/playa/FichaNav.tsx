@@ -35,15 +35,16 @@ const SECCIONES = {
   ],
 }
 
+let cachedOffset = 0
 function scrollToSection(id: string) {
   const el = document.getElementById(id)
   if (!el) return
-  const mainNav  = document.querySelector('#main-nav')  as HTMLElement | null
-  const fichaNav = document.querySelector('#ficha-nav') as HTMLElement | null
-  const navH     = mainNav?.offsetHeight  ?? 52
-  const fichaNavH = fichaNav?.offsetHeight ?? 44
-  const offset   = navH + fichaNavH + 8
-  const top = el.getBoundingClientRect().top + window.scrollY - offset
+  if (!cachedOffset) {
+    const navH = document.querySelector('#main-nav')?.getBoundingClientRect().height ?? 52
+    const fichaNavH = document.querySelector('#ficha-nav')?.getBoundingClientRect().height ?? 44
+    cachedOffset = navH + fichaNavH + 8
+  }
+  const top = el.getBoundingClientRect().top + window.scrollY - cachedOffset
   window.scrollTo({ top, behavior: 'smooth' })
 }
 
