@@ -14,7 +14,6 @@ import type { HoraIdeal } from '@/lib/hora-ideal'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import IluEstado from './IluEstado'
-import SeaVideoTile from './SeaVideoTile'
 import Collapsible from '@/components/ui/Collapsible'
 import { ESTADOS } from '@/lib/estados'
 import styles from './FichaBody.module.css'
@@ -1058,7 +1057,6 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         <div className={styles.asideCard}>
-          <div className={styles.aeVideo}><SeaVideoTile estado={meteo.estado} /></div>
           <div className={styles.aeIlu}><IluEstado estado={meteo.estado} size="sm" animated/></div>
           <div className={styles.aeEstado} style={{ color: estado.dot }}>{estado.label}</div>
           <div className={styles.aeFrase}><em>{estado.frase}</em></div>
