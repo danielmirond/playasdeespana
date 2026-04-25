@@ -26,11 +26,11 @@ interface Props {
 
 const ESTADO_SURF: Record<string, { label: string; color: string; bg: string; desc: string }> = {
   CALMA:   { label: 'Plana',    color: '#9ca3af', bg: '#f9fafb', desc: 'Mar en calma — no apto surf' },
-  BUENA:   { label: 'Suave',    color: '#3b82f6', bg: '#eff6ff', desc: 'Olas pequeñas — ideal principiantes' },
-  AVISO:   { label: 'Mediana',  color: '#f59e0b', bg: '#fffbeb', desc: 'Buenas condiciones — nivel medio' },
-  SURF:    { label: 'Potente',  color: '#0ea5e9', bg: '#f0f9ff', desc: 'Excelente para surf — nivel avanzado' },
-  VIENTO:  { label: 'Ventosa',  color: '#eab308', bg: '#fefce8', desc: 'Viento fuerte — ideal kitesurf/windsurf' },
-  PELIGRO: { label: 'Peligrosa',color: '#ef4444', bg: '#fef2f2', desc: 'Mar peligroso — no recomendado' },
+  BUENA:   { label: 'Suave',    color: '#4a7a90', bg: 'rgba(74,122,144,.08)', desc: 'Olas pequeñas — ideal principiantes' },
+  AVISO:   { label: 'Mediana',  color: '#c48a1e', bg: 'rgba(196,138,30,.06)', desc: 'Buenas condiciones — nivel medio' },
+  SURF:    { label: 'Potente',  color: '#4a7a90', bg: 'rgba(74,122,144,.06)', desc: 'Excelente para surf — nivel avanzado' },
+  VIENTO:  { label: 'Ventosa',  color: '#c48a1e', bg: 'rgba(196,138,30,.08)', desc: 'Viento fuerte — ideal kitesurf/windsurf' },
+  PELIGRO: { label: 'Peligrosa',color: '#7a2818', bg: 'rgba(122,40,24,.06)', desc: 'Mar peligroso — no recomendado' },
 }
 
 function calcEstado(olas: number, viento: number): string {
@@ -98,7 +98,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)' }}><Waves size={16} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:6}}/> Actividades acuáticas</span>
           {tieneSpot && (
-            <span style={{ fontSize:'.72rem', fontWeight: 700, padding: '.15rem .55rem', borderRadius: '100px', background: '#0ea5e922', color: '#0ea5e9', border: '1px solid #0ea5e944' }}>
+            <span style={{ fontSize:'.72rem', fontWeight: 700, padding: '.15rem .55rem', borderRadius: '100px', background: 'rgba(74,122,144,.13)', color: '#4a7a90', border: '1px solid rgba(74,122,144,.27)' }}>
               Spot verificado OSM
             </span>
           )}
@@ -135,7 +135,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {
               icon: <PersonSimpleSwim size={18}/>, label: 'Surf',
               score: scoreSurf(olas, viento),
-              color: '#0ea5e9',
+              color: '#4a7a90',
               datos: `${olas}m · ${periodo}s · ${viento}km/h`,
               disponible: playa.actividades?.surf,
             },
@@ -156,7 +156,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {
               icon: <Eye size={18} weight="bold"/>, label: 'Snorkel',
               score: scoreSnorkel(olas, turbidez),
-              color: '#22c55e',
+              color: '#3d6b1f',
               datos: turbidez ? `${turbidez.visibilidad_m}m visibilidad` : olas < 0.5 ? 'Agua tranquila' : 'Algo de oleaje',
               disponible: playa.actividades?.snorkel,
             },
@@ -170,7 +170,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {
               icon: <Boat size={18} weight="bold"/>, label: 'Kayak',
               score: olas < 0.5 && viento < 20 ? 5 : olas < 1 && viento < 30 ? 3 : 1,
-              color: '#f59e0b',
+              color: '#c48a1e',
               datos: olas < 0.5 && viento < 20 ? 'Condiciones ideales' : olas < 1 ? 'Aceptable' : 'Mar movido',
               disponible: playa.actividades?.kayak,
             },
@@ -242,7 +242,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                     </div>
                     {/* Icono meteo si hay lluvia, sino icono surf */}
                     <div style={{ fontSize: '1.1rem', marginBottom: '.1rem' }}>
-                      {m?.icono ?? (d?.estado === 'SURF' ? <Waves size={18} weight="bold" color="#0ea5e9"/> : d?.estado === 'PELIGRO' ? <Wind size={18} weight="bold" color="#ef4444"/> : <Sun size={18} weight="bold" color="#f5be40"/>)}
+                      {m?.icono ?? (d?.estado === 'SURF' ? <Waves size={18} weight="bold" color="#4a7a90"/> : d?.estado === 'PELIGRO' ? <Wind size={18} weight="bold" color="#7a2818"/> : <Sun size={18} weight="bold" color="#f5be40"/>)}
                     </div>
                     {/* Temperaturas */}
                     {m && (
@@ -256,7 +256,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                     {m && (
                       <div style={{
                         fontSize:'.72rem', marginTop: '.2rem', fontWeight: 600,
-                        color: llueve ? '#3b82f6' : 'var(--muted,#5a3d12)',
+                        color: llueve ? '#4a7a90' : 'var(--muted,#5a3d12)',
                       }}>
                         {llueve ? `${probLluvia}%` : m.lluvia_mm > 0 ? `${m.lluvia_mm}mm` : 'Seco'}
                       </div>
@@ -275,9 +275,9 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {process.env.NEXT_PUBLIC_AMAZON_TAG && (
               <>
                 <AffPill href={`https://www.amazon.es/s?k=crema+solar+50+playa&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Crema solar SPF50" bg="#ff9900" />
-                <AffPill href={`https://www.amazon.es/s?k=neopreno+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Neoprenos" bg="#0ea5e9" />
-                <AffPill href={`https://www.amazon.es/s?k=tabla+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Tablas de surf" bg="#0ea5e9" />
-                <AffPill href={`https://www.amazon.es/s?k=kayak+hinchable&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Kayaks" bg="#22c55e" />
+                <AffPill href={`https://www.amazon.es/s?k=neopreno+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Neoprenos" bg="#4a7a90" />
+                <AffPill href={`https://www.amazon.es/s?k=tabla+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Tablas de surf" bg="#4a7a90" />
+                <AffPill href={`https://www.amazon.es/s?k=kayak+hinchable&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Kayaks" bg="#3d6b1f" />
               </>
             )}
           </div>

@@ -216,7 +216,7 @@ export default function TopCercanas() {
           background: 'rgba(239,68,68,.06)',
           border: '1px solid rgba(239,68,68,.25)', borderRadius: 6,
         }}>
-          <MapPin size={20} weight="bold" color="#ef4444" aria-hidden="true" />
+          <MapPin size={20} weight="bold" color="#7a2818" aria-hidden="true" />
           <span style={{ fontSize: '.85rem', color: '#b91c1c', flex: 1 }}>{errorMsg}</span>
           <button
             type="button"

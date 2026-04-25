@@ -35,9 +35,9 @@ export default function ParkingHoy({ playas, locale = 'es' }: Props) {
   }).slice(0, 4)
 
   const groups = [
-    { key: 'facil', label: es ? 'Fácil aparcar' : 'Easy parking', color: '#22c55e', playas: facil },
-    { key: 'medio', label: es ? 'Parking disponible' : 'Parking available', color: '#eab308', playas: medio },
-    { key: 'dificil', label: es ? 'Difícil aparcar' : 'Hard to park', color: '#ef4444', playas: dificil },
+    { key: 'facil', label: es ? 'Fácil aparcar' : 'Easy parking', color: '#3d6b1f', playas: facil },
+    { key: 'medio', label: es ? 'Parking disponible' : 'Parking available', color: '#c48a1e', playas: medio },
+    { key: 'dificil', label: es ? 'Difícil aparcar' : 'Hard to park', color: '#7a2818', playas: dificil },
   ].filter(g => g.playas.length > 0)
 
   if (groups.length === 0) return null

@@ -61,8 +61,8 @@ export default function Cercanas({ locale = 'es' }: Props) {
   }
 
   const ESTADO_COLOR: Record<string, string> = {
-    CALMA: '#22c55e', BUENA: '#3b82f6', AVISO: '#f59e0b',
-    PELIGRO: '#ef4444', SURF: '#0ea5e9', VIENTO: '#eab308',
+    CALMA: '#3d6b1f', BUENA: '#7a8a30', AVISO: '#c48a1e',
+    PELIGRO: '#7a2818', SURF: '#4a7a90', VIENTO: '#c48a1e',
   }
   const ESTADO_LABEL: Record<string, string> = {
     CALMA: 'Calma', BUENA: 'Buenas cond.', AVISO: 'Aviso',

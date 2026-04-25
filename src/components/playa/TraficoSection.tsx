@@ -115,10 +115,10 @@ function calcAfluencia(
 }
 
 function nivelAfluencia(pct: number): { label: string; color: string; bg: string } {
-  if (pct >= 85) return { label: 'Llena',          color: '#ef4444', bg: '#fef2f2' }
-  if (pct >= 65) return { label: 'Muy concurrida', color: '#f59e0b', bg: '#fffbeb' }
-  if (pct >= 40) return { label: 'Concurrida',     color: '#3b82f6', bg: '#eff6ff' }
-  if (pct >= 15) return { label: 'Tranquila',      color: '#22c55e', bg: '#f0fdf4' }
+  if (pct >= 85) return { label: 'Llena',          color: '#7a2818', bg: 'rgba(122,40,24,.06)' }
+  if (pct >= 65) return { label: 'Muy concurrida', color: '#c48a1e', bg: 'rgba(196,138,30,.06)' }
+  if (pct >= 40) return { label: 'Concurrida',     color: '#4a7a90', bg: 'rgba(74,122,144,.08)' }
+  if (pct >= 15) return { label: 'Tranquila',      color: '#3d6b1f', bg: 'rgba(61,107,31,.06)' }
   return               { label: 'Vacía',           color: '#9ca3af', bg: '#f9fafb' }
 }
 
@@ -145,8 +145,8 @@ async function fetchTrafico(lat: number, lng: number): Promise<TraficoData | nul
     const nivel: TraficoData['nivel'] =
       fluidez >= 80 ? 'Libre' : fluidez >= 55 ? 'Fluido' : fluidez >= 30 ? 'Denso' : 'Colapso'
     const color =
-      nivel === 'Libre' ? '#22c55e' : nivel === 'Fluido' ? '#3b82f6' :
-      nivel === 'Denso' ? '#f59e0b' : '#ef4444'
+      nivel === 'Libre' ? '#3d6b1f' : nivel === 'Fluido' ? '#4a7a90' :
+      nivel === 'Denso' ? '#c48a1e' : '#7a2818'
     return { fluidez, velocidad: seg.currentSpeed, velocidadRef: seg.freeFlowSpeed, nivel, color }
   } catch { return null }
 }
@@ -317,9 +317,9 @@ export default function TraficoSection({ playa }: Props) {
             ) : (
               <div style={{
                 padding: '.75rem 1rem', borderRadius: '4px',
-                background: '#22c55e12', marginBottom: '1rem', fontSize: '.8rem', color: '#166534',
+                background: 'rgba(61,107,31,.07)', marginBottom: '1rem', fontSize: '.8rem', color: '#2a4a14',
               }}>
-                <span style={{ display:'inline-block', width:8, height:8, borderRadius:'50%', background:'#22c55e', marginRight:6, verticalAlign:'middle' }}/> Sin datos de tráfico disponibles
+                <span style={{ display:'inline-block', width:8, height:8, borderRadius:'50%', background:'#3d6b1f', marginRight:6, verticalAlign:'middle' }}/> Sin datos de tráfico disponibles
               </div>
             )}
 

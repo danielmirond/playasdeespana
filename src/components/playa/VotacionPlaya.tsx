@@ -163,7 +163,7 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
             aria-atomic="true"
             style={{
               fontSize: '.65rem',
-              color: '#22c55e',
+              color: '#3d6b1f',
               fontWeight: 600,
               marginTop: 2,
             }}

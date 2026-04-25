@@ -23,13 +23,13 @@ interface BinarioDef {
 
 const BINARIOS: BinarioDef[] = [
   { tipo: 'medusas',          icon: Fish,    es: 'He visto medusas',      en: 'Jellyfish spotted',  color: '#e879a0' },
-  { tipo: 'bandera_verde',    icon: Flag,    es: 'Bandera verde',         en: 'Green flag',         color: '#22c55e' },
-  { tipo: 'bandera_amarilla', icon: Flag,    es: 'Bandera amarilla',      en: 'Yellow flag',        color: '#eab308' },
-  { tipo: 'bandera_roja',     icon: Flag,    es: 'Bandera roja',          en: 'Red flag',           color: '#ef4444' },
-  { tipo: 'parking_dificil',  icon: Car,     es: 'Difícil aparcar',       en: 'Hard to park',       color: '#f97316' },
+  { tipo: 'bandera_verde',    icon: Flag,    es: 'Bandera verde',         en: 'Green flag',         color: '#3d6b1f' },
+  { tipo: 'bandera_amarilla', icon: Flag,    es: 'Bandera amarilla',      en: 'Yellow flag',        color: '#c48a1e' },
+  { tipo: 'bandera_roja',     icon: Flag,    es: 'Bandera roja',          en: 'Red flag',           color: '#7a2818' },
+  { tipo: 'parking_dificil',  icon: Car,     es: 'Difícil aparcar',       en: 'Hard to park',       color: '#a04818' },
   { tipo: 'acceso_roto',      icon: Warning, es: 'Acceso roto',           en: 'Broken access',      color: '#dc2626' },
-  { tipo: 'mucho_oleaje',     icon: Waves,   es: 'Mucho oleaje',          en: 'Heavy swell',        color: '#0ea5e9' },
-  { tipo: 'mucho_viento',     icon: Wind,    es: 'Mucho viento',          en: 'Windy',              color: '#eab308' },
+  { tipo: 'mucho_oleaje',     icon: Waves,   es: 'Mucho oleaje',          en: 'Heavy swell',        color: '#4a7a90' },
+  { tipo: 'mucho_viento',     icon: Wind,    es: 'Mucho viento',          en: 'Windy',              color: '#c48a1e' },
 ]
 
 // ── Catálogo de ratings ──────────────────────────────────────────────
@@ -51,7 +51,7 @@ const RATINGS: RatingDef[] = [
     es: 'Limpieza', en: 'Cleanliness',
     esLow: 'Sucia', esHigh: 'Muy limpia',
     enLow: 'Dirty', enHigh: 'Very clean',
-    color: '#0ea5e9',
+    color: '#4a7a90',
   },
   {
     tipo: 'afluencia', icon: Users,

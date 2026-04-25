@@ -29,7 +29,7 @@ const ACTIVIDADES: Actividad[] = [
     icon: Waves,
     desc: 'Playas con oleaje para surfear',
     descEn: 'Beaches with rideable waves',
-    color: '#0ea5e9',
+    color: '#4a7a90',
   },
   {
     key: 'snorkel', label: 'Snorkel', labelEn: 'Snorkel',
@@ -50,7 +50,7 @@ const ACTIVIDADES: Actividad[] = [
     icon: Wind,
     desc: 'Spots con viento para deportes de vela',
     descEn: 'Windy spots for sailing sports',
-    color: '#eab308',
+    color: '#c48a1e',
   },
 ]
 
