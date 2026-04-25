@@ -113,6 +113,11 @@
   line-height: 1.2;
   color: var(--ink);
   letter-spacing: -.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .lugar {
@@ -144,10 +149,15 @@
 @media (max-width: 640px) {
   .section { padding-left: 1.25rem; padding-right: 1.25rem; }
   .grid { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
-  .nombre { font-size: .95rem; }
+  .nombre { font-size: .92rem; }
   .vis { aspect-ratio: 4 / 3; }
+  .scorePill { font-size: .76rem; padding: 3px 8px; }
+  .rank { font-size: 1.1rem; }
+  .body { padding: .6rem .7rem .7rem; }
+  .lugar { font-size: .65rem; }
 }
 
 @media (max-width: 380px) {
   .grid { grid-template-columns: 1fr; }
+  .vis { aspect-ratio: 3 / 2; }
 }

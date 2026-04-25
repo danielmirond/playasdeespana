@@ -17,3 +17,12 @@
 }
 .item:hover { color: var(--accent); }
 .active { color: var(--accent) !important; border-bottom-color: var(--accent); font-weight: 600; }
+
+@media (max-width: 640px) {
+  .nav { padding: 0 1rem; }
+  .item { padding: .6rem .8rem; font-size: .68rem; }
+}
+@media (max-width: 380px) {
+  .nav { padding: 0 .75rem; }
+  .item { padding: .5rem .6rem; font-size: .62rem; }
+}

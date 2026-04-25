@@ -62,6 +62,7 @@
   line-height: 1.15;
   color: var(--ink);
   letter-spacing: -.01em;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .n {
   font-family: var(--font-mono, ui-monospace, monospace);

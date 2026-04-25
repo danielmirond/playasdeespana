@@ -100,14 +100,17 @@
 /* ── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .hero { padding: 2.5rem 1.25rem 2rem; }
-  .title { font-size: clamp(2rem, 9vw, 3rem); }
+  .title { font-size: clamp(2.2rem, 9vw, 3rem); }
   .sub { font-size: .92rem; }
   .searchBar { flex-wrap: wrap; }
-  .searchInput { min-width: 200px; }
+  .searchInput { min-width: 150px; }
 }
 
 @media (max-width: 380px) {
   .hero { padding: 2rem 1rem 1.5rem; }
   .chips { gap: .35rem; }
   .chip { font-size: .72rem; padding: .25rem .5rem; }
+  .searchBar { flex-direction: column; gap: .5rem; padding: .75rem; }
+  .searchInput { min-width: 0; width: 100%; }
+  .searchBtn { width: 100%; }
 }

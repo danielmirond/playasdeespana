@@ -95,6 +95,9 @@
   .nav { padding: 0 1.1rem; }
   .links { display: none; }
 }
+@media (max-width: 380px) {
+  .nav { padding: 0 .75rem; }
+}
 
 .langSwitch {
   display: flex;
