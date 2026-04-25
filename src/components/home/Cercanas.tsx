@@ -3,6 +3,7 @@ import { Drop, MapPin, Waves } from '@phosphor-icons/react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { Playa } from '@/types'
+import { ESTADOS } from '@/lib/estados'
 import styles from './Cercanas.module.css'
 
 interface PlayaConDist extends Playa { distKm: number }
@@ -60,14 +61,8 @@ export default function Cercanas({ locale = 'es' }: Props) {
     )
   }
 
-  const ESTADO_COLOR: Record<string, string> = {
-    CALMA: '#3d6b1f', BUENA: '#7a8a30', AVISO: '#c48a1e',
-    PELIGRO: '#7a2818', SURF: '#4a7a90', VIENTO: '#c48a1e',
-  }
-  const ESTADO_LABEL: Record<string, string> = {
-    CALMA: 'Calma', BUENA: 'Buenas cond.', AVISO: 'Aviso',
-    PELIGRO: 'Peligro', SURF: 'Surf', VIENTO: 'Viento',
-  }
+  const ESTADO_COLOR = Object.fromEntries(Object.entries(ESTADOS).map(([k, v]) => [k, v.dot]))
+  const ESTADO_LABEL = Object.fromEntries(Object.entries(ESTADOS).map(([k, v]) => [k, v.label]))
 
   if (estado === 'idle') return (
     <section className={styles.section}>

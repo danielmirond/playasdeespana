@@ -160,12 +160,12 @@ export default function TopCercanas() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             flexShrink: 0,
           }}>
-            <MapPin size={24} weight="bold" color="#fff" aria-hidden="true" />
+            <MapPin size={24} weight="bold" color="var(--arena-50,#faf4e6)" aria-hidden="true" />
           </div>
           <div style={{ textAlign: 'left' }}>
             <div style={{
               fontFamily: 'var(--font-serif)', fontWeight: 700,
-              fontSize: '1.15rem', color: '#fff', lineHeight: 1.15,
+              fontSize: '1.15rem', color: 'var(--arena-50,#faf4e6)', lineHeight: 1.15,
               letterSpacing: '-.01em',
             }}>
               ¿Qué playa me queda cerca?
@@ -217,7 +217,7 @@ export default function TopCercanas() {
           border: '1px solid rgba(239,68,68,.25)', borderRadius: 6,
         }}>
           <MapPin size={20} weight="bold" color="#7a2818" aria-hidden="true" />
-          <span style={{ fontSize: '.85rem', color: '#b91c1c', flex: 1 }}>{errorMsg}</span>
+          <span style={{ fontSize: '.85rem', color: 'var(--sea-peligro,#7a2818)', flex: 1 }}>{errorMsg}</span>
           <button
             type="button"
             onClick={doLoad}
@@ -280,7 +280,7 @@ export default function TopCercanas() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
                 <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, fontSize: '1.05rem', color: 'var(--ink)', letterSpacing: '-.01em' }}>n°{i + 1}</span>
                 <span style={{
-                  background: r.ps.color, color: '#fff',
+                  background: r.ps.color, color: 'var(--arena-50,#faf4e6)',
                   fontFamily: 'var(--font-serif)', fontWeight: 700,
                   fontSize: '.92rem', width: 36, height: 36, borderRadius: '50%',
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',

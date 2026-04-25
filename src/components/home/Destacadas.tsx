@@ -99,28 +99,28 @@ function ScoreChip({ ps }: { ps: PlayaScore }) {
 function IluCard({ estado }: { estado: string }) {
   if (estado === 'CALMA' || estado === 'BUENA') return (
     <svg viewBox="0 0 110 80" fill="none" aria-hidden="true">
-      <rect x="5" y="60" width="100" height="8" rx="2" fill="#c4884a" opacity=".5"/>
-      <rect x="0" y="66" width="110" height="14" fill="#c4884a" opacity=".7"/>
-      <path d="M5,62 C15,57 28,63 42,59 C56,55 70,62 84,58 C96,55 104,60 110,57" fill="none" stroke="#a8cce0" strokeWidth="1.5" strokeLinecap="round" opacity=".5"/>
-      <path d="M40,60 A15,15 0 0,1 70,60" fill="#e8a030" opacity=".9"/>
-      <circle cx="55" cy="60" r="12" fill="#e8a030"/>
-      <circle cx="55" cy="60" r="9"  fill="#f5be40"/>
-      <line x1="55" y1="38" x2="55" y2="44" stroke="#e8a030" strokeWidth="2" strokeLinecap="round"/>
+      <rect x="5" y="60" width="100" height="8" rx="2" fill="var(--arena-400,#d4c090)" opacity=".5"/>
+      <rect x="0" y="66" width="110" height="14" fill="var(--arena-400,#d4c090)" opacity=".7"/>
+      <path d="M5,62 C15,57 28,63 42,59 C56,55 70,62 84,58 C96,55 104,60 110,57" fill="none" stroke="var(--mar-300,#8aa8b8)" strokeWidth="1.5" strokeLinecap="round" opacity=".5"/>
+      <path d="M40,60 A15,15 0 0,1 70,60" fill="var(--ocre-400,#e8a030)" opacity=".9"/>
+      <circle cx="55" cy="60" r="12" fill="var(--ocre-400,#e8a030)"/>
+      <circle cx="55" cy="60" r="9"  fill="var(--ocre-300,#f0bc62)"/>
+      <line x1="55" y1="38" x2="55" y2="44" stroke="var(--ocre-400,#e8a030)" strokeWidth="2" strokeLinecap="round"/>
     </svg>
   )
   if (estado === 'PELIGRO') return (
     <svg viewBox="0 0 110 80" fill="none" aria-hidden="true">
-      <path d="M0,52 C8,42 18,54 28,44 C38,34 50,50 62,40 C74,30 86,46 98,38 L110,36 L110,80 L0,80Z" fill="#7a9ab0" opacity=".3"/>
-      <path d="M0,64 C14,56 28,66 44,58 C60,50 76,62 92,55 L110,52 L110,80 L0,80Z" fill="#7a9ab0" opacity=".5"/>
-      <line x1="46" y1="12" x2="64" y2="28" stroke="#8a2020" strokeWidth="2.5" strokeLinecap="round" opacity=".55"/>
-      <line x1="64" y1="12" x2="46" y2="28" stroke="#8a2020" strokeWidth="2.5" strokeLinecap="round" opacity=".55"/>
+      <path d="M0,52 C8,42 18,54 28,44 C38,34 50,50 62,40 C74,30 86,46 98,38 L110,36 L110,80 L0,80Z" fill="var(--mar-300,#8aa8b8)" opacity=".3"/>
+      <path d="M0,64 C14,56 28,66 44,58 C60,50 76,62 92,55 L110,52 L110,80 L0,80Z" fill="var(--mar-300,#8aa8b8)" opacity=".5"/>
+      <line x1="46" y1="12" x2="64" y2="28" stroke="var(--sea-peligro,#7a2818)" strokeWidth="2.5" strokeLinecap="round" opacity=".55"/>
+      <line x1="64" y1="12" x2="46" y2="28" stroke="var(--sea-peligro,#7a2818)" strokeWidth="2.5" strokeLinecap="round" opacity=".55"/>
     </svg>
   )
   return (
     <svg viewBox="0 0 110 80" fill="none" aria-hidden="true">
-      <path d="M0,50 C10,40 22,52 34,42 C46,32 58,48 70,38 C82,28 96,44 110,36 L110,80 L0,80Z" fill="#6a9ab8" opacity=".25"/>
-      <path d="M0,62 C15,54 30,64 46,56 C62,48 78,60 94,53 L110,50 L110,80 L0,80Z" fill="#6a9ab8" opacity=".45"/>
-      <polygon points="55,8 62,22 48,22" fill="#e8a030" opacity=".7"/>
+      <path d="M0,50 C10,40 22,52 34,42 C46,32 58,48 70,38 C82,28 96,44 110,36 L110,80 L0,80Z" fill="var(--mar-300,#8aa8b8)" opacity=".25"/>
+      <path d="M0,62 C15,54 30,64 46,56 C62,48 78,60 94,53 L110,50 L110,80 L0,80Z" fill="var(--mar-300,#8aa8b8)" opacity=".45"/>
+      <polygon points="55,8 62,22 48,22" fill="var(--ocre-400,#e8a030)" opacity=".7"/>
     </svg>
   )
 }
@@ -169,7 +169,7 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
               position: 'absolute', top: 10, left: 12, zIndex: 3,
               fontFamily: 'var(--font-serif)', fontStyle: 'italic',
               fontWeight: 400,
-              fontSize: '1.35rem', color: '#2a1a08',
+              fontSize: '1.35rem', color: 'var(--ink)',
               lineHeight: 1,
               letterSpacing: '-.02em',
             }}
@@ -232,7 +232,7 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
       {avoid.length > 0 && (
         <section className={styles.section} style={{ marginTop: '2.5rem' }}>
           <div className={styles.hd}>
-            <span className={styles.hdTitle} style={{ color: '#7a2818' }}>
+            <span className={styles.hdTitle} style={{ color: 'var(--sea-peligro,#7a2818)' }}>
               {locale === 'en' ? 'Avoid today' : 'Evita hoy'}
             </span>
             <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>
