@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getCalidad } from '@/lib/calidad'
 import { getVotos } from '@/lib/votos'
+import { getReportes } from '@/lib/reportes'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
@@ -92,7 +93,7 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult] = await Promise.allSettled([
+  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult, reportesResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -108,7 +109,9 @@ export default async function PlayaPage({ params }: Props) {
     getVotos(slug),
     getCampings(playa.lat, playa.lng),
     getCentrosBuceo(playa.lat, playa.lng),
+    getReportes(slug),
   ])
+  const reportesData = reportesResult.status === 'fulfilled' ? reportesResult.value : null
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
   const buceoData: CentroBuceo[] = buceoResult.status === 'fulfilled' ? buceoResult.value : []
 
@@ -241,6 +244,7 @@ export default async function PlayaPage({ params }: Props) {
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
         playaScore={playaScore}
+        reportes={reportesData}
       />
       <FichaNav />
       <FichaBody
