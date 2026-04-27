@@ -30,23 +30,26 @@
 .bc span { opacity: .5; }
 .bc span[aria-current] { opacity: 1; color: var(--ink); }
 
-/* ── Two-column grid ─────────────────────────────────────────────── */
+/* ── Atmósfera animada como capa sutil de fondo del hero ─────────── */
+.seaLayer {
+  position: absolute; inset: 0;
+  z-index: 0;
+  opacity: .28;
+  pointer-events: none;
+  display: flex; align-items: flex-end;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 100%);
+}
+.seaLayer > div { width: 100%; }
+
+/* ── Single-column editorial ─────────────────────────────────────── */
 .grid {
   position: relative; z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 2.5rem;
-  align-items: stretch;
-  max-width: 1080px;
+  display: block;
+  max-width: 960px;
   margin: 0 auto;
 }
-
-/* ── Left column — editorial ─────────────────────────────────────── */
-.left {
-  grid-column: 1; grid-row: 1;
-  display: flex; flex-direction: column;
-  min-width: 0;
-}
+.left { display: flex; flex-direction: column; min-width: 0; }
 
 .nombre {
   font-family: var(--font-serif);
@@ -172,20 +175,6 @@
   margin-top: 1rem;
 }
 
-/* ── Right column — atmósfera animada ────────────────────────────── */
-.atmos {
-  grid-column: 2; grid-row: 1;
-  position: relative;
-  align-self: stretch;
-  min-height: 240px;
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--card-bg);
-  border: 1px solid var(--line);
-}
-.atmos > div { width: 100%; height: 100%; }
-.atmos svg { width: 100%; height: 100%; display: block; }
-
 /* ── Animations ──────────────────────────────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
@@ -202,9 +191,6 @@
 /* ── TABLET ──────────────────────────────────────────────────────── */
 @media (max-width: 800px) {
   .hero { padding: 1.25rem 1.25rem 1.5rem; }
-  .grid { grid-template-columns: 1fr; gap: 1.25rem; }
-  .atmos { grid-column: 1; grid-row: 2; min-height: 160px; }
-  .left  { grid-row: 1; }
 }
 
 /* ── MOBILE ──────────────────────────────────────────────────────── */
@@ -225,7 +211,6 @@
   .more { margin-left: 0; font-size: .62rem; }
   .statusLine { font-size: .68rem; }
   .linkBtn { font-size: .62rem; }
-  .atmos { min-height: 130px; }
 
   /* Sticky CTA bottom — siempre visible */
   .stickyMobile {

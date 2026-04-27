@@ -87,6 +87,11 @@ export default function FichaHero({
       className={styles.hero}
       style={{ '--hero-bg': estado.tileBg, '--hero-bg-dark': estado.tileBgDark } as React.CSSProperties}
     >
+      {/* Atmósfera animada como capa sutil de fondo */}
+      <div className={styles.seaLayer} aria-hidden="true">
+        <AnimatedSea estado={meteo.estado} />
+      </div>
+
       {/* Breadcrumb */}
       <nav className={styles.bc} aria-label={locale === 'en' ? 'Breadcrumb' : 'Ruta de navegación'}>
         <Link href={homeHref}>{i18n.inicio}</Link>
@@ -100,7 +105,7 @@ export default function FichaHero({
         <span aria-current="page">{playa.nombre}</span>
       </nav>
 
-      {/* Two columns: editorial left + AnimatedSea right */}
+      {/* Editorial single column */}
       <div className={styles.grid}>
         <div className={styles.left}>
           <h1 className={styles.nombre}>
@@ -157,11 +162,6 @@ export default function FichaHero({
           <div className={styles.actions}>
             <FichaHeroActions slug={playa.slug} nombre={playa.nombre} meteo={meteo} scoreLabel={playaScore?.label} />
           </div>
-        </div>
-
-        {/* Atmósfera animada — antes era capa de fondo, ahora columna derecha */}
-        <div className={styles.atmos} aria-hidden="true">
-          <AnimatedSea estado={meteo.estado} />
         </div>
       </div>
 
