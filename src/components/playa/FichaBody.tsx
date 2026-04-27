@@ -40,6 +40,8 @@ const SurfSection = dynamic(() => import('./SurfSection'))
 const EscuelasSection = dynamic(() => import('./EscuelasSection'))
 const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), { ssr: false })
 const ReportarDrawer = dynamic(() => import('./ReportarDrawer'), { ssr: false })
+const AfiliacionDrawer = dynamic(() => import('./AfiliacionDrawer'), { ssr: false })
+const AsideAfiliacionCTA = dynamic(() => import('./AsideAfiliacionCTA'), { ssr: false })
 const VotacionPlaya = dynamic(() => import('./VotacionPlaya'), {
   ssr: false,
   loading: () => <div style={{ height: 148, borderRadius: 6, border: '1px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
@@ -1079,43 +1081,24 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} meteo={{ agua: meteo.agua, olas: meteo.olas, viento: meteo.viento }} />
         <VotacionPlaya slug={playa.slug} locale={locale} />
-        {/* ReportarEstado ahora vive en un drawer disparado desde el "+ avisar"
-            del hero. El componente se monta fuera del aside (más abajo). */}
-        {/* Amazon affiliate — contextual products for this beach */}
-        {amazonProductos.length > 0 && (
-          <div style={{
-            background: 'var(--card-bg,#faf6ef)', border: '1px solid var(--line,#e8dcc8)',
-            borderRadius: 6, padding: '.7rem', display: 'flex', flexDirection: 'column', gap: '.35rem',
-          }}>
-            <div style={{ fontSize:'.72rem', fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', padding: '0 .2rem' }}>
-              {locale === 'en' ? 'Gear for this beach' : 'Equipo para esta playa'}
-            </div>
-            {amazonProductos.map(p => (
-              <a
-                key={p.asin}
-                href={`https://www.amazon.es/dp/${p.asin}/?tag=nuus-21`}
-                target="_blank" rel="noopener noreferrer sponsored"
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '.5rem',
-                  padding: '.45rem .6rem', borderRadius: 4,
-                  border: '1px solid var(--line,#e8dcc8)', background: 'rgba(255,255,255,.5)',
-                  fontSize: '.75rem', fontWeight: 500, color: 'var(--ink)', textDecoration: 'none',
-                }}
-              >
-                <span style={{ flex: 1 }}>{p.nombre}</span>
-                <span style={{ fontSize: '.65rem', color: 'var(--muted)' }}>{p.precio}€</span>
-                <span style={{ fontSize:'.72rem', color: 'var(--accent)', fontWeight: 600 }}>→</span>
-              </a>
-            ))}
-            <div style={{ fontSize: '.6rem', color: 'var(--muted)', opacity: .7, padding: '0 .2rem', marginTop: '.1rem' }}>
-              Amazon.es · enlaces de afiliado
-            </div>
-          </div>
-        )}
+        {/* Mini-CTA "¿Qué llevar?" — sustituye al bloque Amazon de 6 productos
+            siempre visible. Abre un drawer con la lista contextual. */}
+        <AsideAfiliacionCTA
+          nombre={playa.nombre}
+          count={amazonProductos.length}
+          locale={locale}
+        />
       </aside>
 
-      {/* Drawer global para "+ avisar" — escucha custom event del hero */}
+      {/* Drawers globales (fixed) — escuchan custom events */}
       <ReportarDrawer slug={playa.slug} locale={locale} />
+      {amazonProductos.length > 0 && (
+        <AfiliacionDrawer
+          nombre={playa.nombre}
+          productos={[...amazonProductos]}
+          locale={locale}
+        />
+      )}
     </div>
   )
 }
