@@ -42,6 +42,7 @@ const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), 
 const ReportarDrawer = dynamic(() => import('./ReportarDrawer'), { ssr: false })
 const AfiliacionDrawer = dynamic(() => import('./AfiliacionDrawer'), { ssr: false })
 const AsideAfiliacionCTA = dynamic(() => import('./AsideAfiliacionCTA'), { ssr: false })
+const Opiniones = dynamic(() => import('./Opiniones'))
 const VotacionPlaya = dynamic(() => import('./VotacionPlaya'), {
   ssr: false,
   loading: () => <div style={{ height: 148, borderRadius: 6, border: '1px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
@@ -77,6 +78,8 @@ interface Props {
   mareasLunar?:    MareasDia
   horaIdeal?:      HoraIdeal
   playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean }[]
+  /** Agregado de opiniones server-side para SSR + JSON-LD. */
+  opinionesIniciales?: import('@/lib/opiniones').OpinionesAgregadas | null
   locale?:         'es' | 'en'
   /** Slug del municipio si la página existe (ver getMunicipioSlugsSet). */
   municipioSlug?:  string
@@ -207,7 +210,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#7a2818', '#4a1810'],  // --noapto
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
@@ -993,6 +996,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </Collapsible>
           </div>
         </div>
+
+        {/* OPINIONES — sección dedicada con texto y rating */}
+        <Opiniones
+          slug={playa.slug}
+          nombre={playa.nombre}
+          initial={opinionesIniciales ?? null}
+          locale={locale}
+        />
 
         {/* PLAYAS CERCANAS */}
         {playasCercanas && playasCercanas.length > 0 && (
