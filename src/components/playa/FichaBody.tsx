@@ -1107,6 +1107,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <AfiliacionDrawer
           nombre={playa.nombre}
           productos={[...amazonProductos]}
+          slug={playa.slug}
           locale={locale}
         />
       )}

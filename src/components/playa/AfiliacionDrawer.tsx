@@ -12,10 +12,11 @@ import { AFILIACION_DRAWER_EVENT } from './AsideAfiliacionCTA'
 interface Props {
   nombre:    string
   productos: ProductoAmazon[]
+  slug:      string
   locale?:   'es' | 'en'
 }
 
-export default function AfiliacionDrawer({ nombre, productos, locale = 'es' }: Props) {
+export default function AfiliacionDrawer({ nombre, productos, slug, locale = 'es' }: Props) {
   const [open, setOpen] = useState(false)
   const es = locale === 'es'
 
@@ -101,8 +102,26 @@ export default function AfiliacionDrawer({ nombre, productos, locale = 'es' }: P
         ))}
       </ul>
 
+      <a
+        href={`/playas/${slug}/que-llevar`}
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          marginTop: '1.25rem', padding: '.85rem 1rem',
+          border: '1px solid var(--accent, #6b400a)',
+          borderRadius: 6,
+          background: 'rgba(196, 138, 30, .08)',
+          color: 'var(--accent, #6b400a)',
+          textDecoration: 'none',
+          fontFamily: 'var(--font-serif, Georgia, serif)',
+          fontStyle: 'italic', fontSize: '.95rem',
+        }}
+      >
+        <span>{es ? `Guía completa: qué llevar a ${nombre}` : `Full guide: what to bring to ${nombre}`}</span>
+        <span aria-hidden="true">→</span>
+      </a>
+
       <p style={{
-        margin: '1.25rem 0 0',
+        margin: '1rem 0 0',
         paddingTop: '1rem',
         borderTop: '1px solid var(--line, #e8dcc8)',
         fontFamily: 'var(--font-mono, monospace)',

@@ -1,0 +1,233 @@
+/* src/app/playas/[slug]/que-llevar/que-llevar.module.css */
+
+.main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 4rem;
+  font-family: var(--font-sans, system-ui);
+  color: var(--ink, #2a1a08);
+}
+
+.bc {
+  display: flex; align-items: center; gap: .35rem;
+  font-family: var(--font-mono, monospace);
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted, #5a3d12);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.bc a { color: var(--muted, #5a3d12); text-decoration: none; }
+.bc a:hover { color: var(--accent, #6b400a); }
+.bc span[aria-current] { color: var(--ink, #2a1a08); }
+.bc span:not([aria-current]) { opacity: .5; }
+
+.header { margin-bottom: 2.5rem; }
+.eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: .72rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent, #6b400a);
+  margin-bottom: .55rem;
+}
+.title {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin: 0 0 1rem;
+}
+.title em { font-style: italic; color: var(--accent, #6b400a); font-weight: 400; }
+.intro {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--ink, #2a1a08);
+  margin: 0;
+}
+
+.section {
+  margin: 2.5rem 0;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line, #e8dcc8);
+}
+.section:first-of-type { border-top: 0; padding-top: 0; }
+
+.h2 {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin: 0 0 1.25rem;
+}
+.h2 em { font-style: italic; color: var(--accent, #6b400a); font-weight: 400; }
+
+.parrafo {
+  font-size: .95rem;
+  line-height: 1.65;
+  margin: 0 0 1rem;
+  color: var(--ink, #2a1a08);
+}
+
+/* Lista de productos */
+.lista {
+  list-style: none; padding: 0; margin: 0 0 1.25rem;
+  display: flex; flex-direction: column;
+  gap: 0;
+}
+.prod {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem 1.15rem;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--line, #e8dcc8);
+}
+.prod:first-child { border-top: 0; padding-top: .25rem; }
+
+.numero {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--accent, #6b400a);
+  font-variant-numeric: tabular-nums;
+  width: 2.5rem;
+  text-align: right;
+  align-self: flex-start;
+  padding-top: .15rem;
+}
+
+.prodBody { min-width: 0; }
+.prodNombre {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 .35rem;
+  line-height: 1.25;
+}
+.prodRazon {
+  margin: 0 0 .55rem;
+  font-size: .9rem;
+  line-height: 1.55;
+  color: var(--ink, #2a1a08);
+}
+.prodMeta {
+  display: flex; gap: .5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: .7rem;
+  color: var(--muted, #5a3d12);
+  letter-spacing: .04em;
+}
+.prodSep { opacity: .5; }
+.prodPrecio { color: var(--ink, #2a1a08); font-weight: 600; }
+
+.prodCTA {
+  align-self: flex-start;
+  margin-top: .15rem;
+  padding: .55rem 1.1rem;
+  border-radius: 99px;
+  border: 1px solid var(--ink, #2a1a08);
+  background: transparent;
+  color: var(--ink, #2a1a08);
+  text-decoration: none;
+  font-family: var(--font-sans, system-ui);
+  font-size: .82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.prodCTA:hover {
+  background: var(--ink, #2a1a08);
+  color: var(--bg, #faf4e6);
+}
+
+.disclose {
+  font-family: var(--font-mono, monospace);
+  font-size: .65rem;
+  color: var(--muted, #5a3d12);
+  opacity: .7;
+  line-height: 1.5;
+  margin: 1rem 0 0;
+}
+
+/* Tabla de datos */
+.dataTable {
+  background: var(--card-bg, #faf6ef);
+  border: 1px solid var(--line, #e8dcc8);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.25rem 0 0;
+}
+.dataRow {
+  display: flex;
+  justify-content: space-between;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid var(--line, #e8dcc8);
+  font-size: .85rem;
+}
+.dataRow:last-child { border-bottom: 0; }
+.dk {
+  font-family: var(--font-mono, monospace);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted, #5a3d12);
+}
+.dv { font-weight: 600; }
+
+/* FAQs */
+.faqs {
+  display: flex; flex-direction: column;
+  border-top: 1px solid var(--line, #e8dcc8);
+}
+.faq {
+  border-bottom: 1px solid var(--line, #e8dcc8);
+  padding: 1rem 0;
+}
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.faq summary::after {
+  content: '+';
+  font-family: var(--font-mono, monospace);
+  font-weight: 400;
+  color: var(--muted, #5a3d12);
+  margin-left: 1rem;
+  transition: transform .2s;
+}
+.faq[open] summary::after { content: '−'; }
+.faq p {
+  margin: .65rem 0 0;
+  font-size: .9rem;
+  line-height: 1.6;
+  color: var(--ink, #2a1a08);
+}
+
+.volver {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line, #e8dcc8);
+  text-align: center;
+}
+.volverLink {
+  font-family: var(--font-mono, monospace);
+  font-size: .82rem;
+  letter-spacing: .04em;
+  color: var(--accent, #6b400a);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.volverLink:hover { color: var(--ink, #2a1a08); }
+
+@media (max-width: 640px) {
+  .main { padding: 1rem .85rem 4rem; }
+  .prod { grid-template-columns: auto 1fr; row-gap: .85rem; }
+  .prodCTA { grid-column: 1 / -1; justify-self: stretch; text-align: center; }
+  .numero { font-size: 1.35rem; width: 2rem; }
+}
