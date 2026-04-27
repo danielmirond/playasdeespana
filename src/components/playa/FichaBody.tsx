@@ -39,10 +39,7 @@ const TraficoSection = dynamic(() => import('./TraficoSection'))
 const SurfSection = dynamic(() => import('./SurfSection'))
 const EscuelasSection = dynamic(() => import('./EscuelasSection'))
 const MapaLeaflet = dynamic(() => import('@/components/ui/MapaLeafletWrapper'), { ssr: false })
-const ReportarEstado = dynamic(() => import('./ReportarEstado'), {
-  ssr: false,
-  loading: () => <div style={{ height: 258, borderRadius: 6, border: '1px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
-})
+const ReportarDrawer = dynamic(() => import('./ReportarDrawer'), { ssr: false })
 const VotacionPlaya = dynamic(() => import('./VotacionPlaya'), {
   ssr: false,
   loading: () => <div style={{ height: 148, borderRadius: 6, border: '1px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
@@ -1082,7 +1079,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
         <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} meteo={{ agua: meteo.agua, olas: meteo.olas, viento: meteo.viento }} />
         <VotacionPlaya slug={playa.slug} locale={locale} />
-        <ReportarEstado slug={playa.slug} locale={locale} />
+        {/* ReportarEstado ahora vive en un drawer disparado desde el "+ avisar"
+            del hero. El componente se monta fuera del aside (más abajo). */}
         {/* Amazon affiliate — contextual products for this beach */}
         {amazonProductos.length > 0 && (
           <div style={{
@@ -1115,6 +1113,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         )}
       </aside>
+
+      {/* Drawer global para "+ avisar" — escucha custom event del hero */}
+      <ReportarDrawer slug={playa.slug} locale={locale} />
     </div>
   )
 }

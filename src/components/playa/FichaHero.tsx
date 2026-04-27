@@ -154,9 +154,15 @@ export default function FichaHero({
               <strong>{i18n.comoEsta}:</strong>{' '}
               {avisos.length > 0 ? avisos.join(' · ') : i18n.sinAvisos}
             </span>
-            {/* el trigger del drawer lo añade FichaBody/Drawer en commit 2.
-                Por ahora link al ancla del módulo de reportes. */}
-            <a href="#s-reportar" className={styles.linkBtn}>{i18n.avisar}</a>
+            <button
+              type="button"
+              className={styles.linkBtn}
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('open-reportar-drawer'))
+              }}
+            >
+              {i18n.avisar}
+            </button>
           </div>
 
           <div className={styles.actions}>
