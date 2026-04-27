@@ -31,8 +31,8 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     ringColor: '#c4904a',
     verb:      'báñate',
     verbEn:    'swim',
-    tileBg:    '#dfe9e3',
-    tileBgDark:'#1f2e28',
+    tileBg:    '#c8e8e3',
+    tileBgDark:'#0e2e2c',
   },
   BUENA: {
     label:     'BUENA',
@@ -46,8 +46,8 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     ringColor: '#8a7a40',
     verb:      'apto',
     verbEn:    'suitable',
-    tileBg:    '#e3eadc',
-    tileBgDark:'#1f2a16',
+    tileBg:    '#fae5b0',
+    tileBgDark:'#3a2e10',
   },
   AVISO: {
     label:     'AVISO',
