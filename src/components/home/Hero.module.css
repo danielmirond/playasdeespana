@@ -1,10 +1,53 @@
 /* src/components/home/Hero.module.css — Design system v1 §08: HomeDesktop hero */
 
 .hero {
+  position: relative;
+  overflow: hidden;
   padding: 3.5rem 0 2.5rem;
 }
 
+/* ── Atmósfera: 3 escenas crossfade ───────────────────────────────── */
+.scenes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  filter: saturate(.95);
+  animation: cross 45s infinite;
+}
+.scene.s1 { animation-delay: 0s;   }
+.scene.s2 { animation-delay: -30s; }
+.scene.s3 { animation-delay: -15s; }
+.sceneImg {
+  object-fit: cover;
+  object-position: center;
+}
+@keyframes cross {
+  0%   { opacity: 0; }
+  4%   { opacity: .42; }
+  30%  { opacity: .42; }
+  37%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+.gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg,
+    rgba(247, 239, 222, .95) 0%,
+    rgba(247, 239, 222, .78) 38%,
+    rgba(247, 239, 222, .35) 70%,
+    rgba(247, 239, 222, .10) 100%);
+  z-index: 1;
+}
+
 .inner {
+  position: relative;
+  z-index: 2;
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 2rem;
@@ -116,4 +159,28 @@
   .searchBar { flex-direction: column; gap: .5rem; padding: .75rem; }
   .searchInput { min-width: 0; width: 100%; }
   .searchBtn { width: 100%; }
+}
+
+/* ── Mobile: gradient vertical (no diagonal) para foto más visible abajo ── */
+@media (max-width: 640px) {
+  .gradient {
+    background: linear-gradient(180deg,
+      rgba(247, 239, 222, .92) 0%,
+      rgba(247, 239, 222, .72) 50%,
+      rgba(247, 239, 222, .45) 100%);
+  }
+  .scene { animation-duration: 36s; }
+  @keyframes cross {
+    0%, 100% { opacity: 0; }
+    4% { opacity: .55; }
+    30% { opacity: .55; }
+    37% { opacity: 0; }
+  }
+}
+
+/* ── Reduced motion: foto fija sin crossfade ───────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .scene { animation: none !important; }
+  .scene.s1 { opacity: .35; }
+  .scene.s2, .scene.s3 { display: none; }
 }
