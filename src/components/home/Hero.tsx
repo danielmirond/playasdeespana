@@ -1,6 +1,9 @@
 // src/components/home/Hero.tsx — Design system v1 §08: HomeDesktop hero
-// Left-aligned, editorial serif XL, integrated search, quick-explore chips
+// Editorial serif XL con crossfade sutil de 3 escenas (calma · surf · niños)
+// como atmósfera de fondo. ~42% opacidad, gradiente diagonal mantiene
+// 100% legibilidad. Respeta prefers-reduced-motion (animación pausada).
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from './Hero.module.css'
 
 const CHIPS = [
@@ -12,9 +15,47 @@ const CHIPS = [
   { href: '/buceo', label: 'Buceo' },
 ]
 
+// Tres escenas atmosféricas Unsplash (license CC0 / Unsplash License).
+// Sustituibles por assets propios en /public/hero/ cuando los curemos.
+const SCENES = [
+  {
+    src:    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=70',
+    alt:    'Playa en calma con agua turquesa',
+    credit: 'Sean O. — Unsplash',
+  },
+  {
+    src:    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1600&q=70',
+    alt:    'Olas rompiendo en una playa al amanecer',
+    credit: 'Sean O. — Unsplash',
+  },
+  {
+    src:    'https://images.unsplash.com/photo-1535262971677-1c823d4c814e?w=1600&q=70',
+    alt:    'Atardecer en la costa',
+    credit: 'Sean O. — Unsplash',
+  },
+]
+
 export default function Hero() {
   return (
     <section className={styles.hero}>
+      {/* Fondo atmosférico — crossfade de 3 escenas */}
+      <div className={styles.scenes} aria-hidden="true">
+        {SCENES.map((s, i) => (
+          <div key={i} className={`${styles.scene} ${styles[`s${i + 1}`]}`}>
+            <Image
+              src={s.src}
+              alt=""
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              quality={70}
+              className={styles.sceneImg}
+            />
+          </div>
+        ))}
+        <div className={styles.gradient} />
+      </div>
+
       <div className={styles.inner}>
         <p className={styles.kicker}>
           <span className={styles.kickerDot}/>
