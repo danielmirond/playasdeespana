@@ -252,6 +252,7 @@ export default async function PlayaPage({ params }: Props) {
         provinciaSlug={provinciaSlug}
         playaScore={playaScore}
         reportes={reportesData}
+        foto={fotosData[0] ?? null}
       />
       <FichaNav />
       <FichaBody
