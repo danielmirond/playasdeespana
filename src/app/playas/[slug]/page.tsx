@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getCalidad } from '@/lib/calidad'
 import { getVotos } from '@/lib/votos'
+import { getReportes } from '@/lib/reportes'
+import { getOpiniones } from '@/lib/opiniones'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
@@ -92,7 +94,7 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult] = await Promise.allSettled([
+  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult, reportesResult, opinionesResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -108,7 +110,11 @@ export default async function PlayaPage({ params }: Props) {
     getVotos(slug),
     getCampings(playa.lat, playa.lng),
     getCentrosBuceo(playa.lat, playa.lng),
+    getReportes(slug),
+    getOpiniones(slug, 1, 10),
   ])
+  const reportesData  = reportesResult.status === 'fulfilled'  ? reportesResult.value  : null
+  const opinionesData = opinionesResult.status === 'fulfilled' ? opinionesResult.value : null
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
   const buceoData: CentroBuceo[] = buceoResult.status === 'fulfilled' ? buceoResult.value : []
 
@@ -214,6 +220,10 @@ export default async function PlayaPage({ params }: Props) {
         fotoUrl={fotosData[0]?.url ?? null}
         fotoAutor={fotosData[0]?.autor}
         rating={(() => {
+          // Preferimos opiniones (rating + texto) sobre votos legacy (solo rating).
+          if (opinionesData && opinionesData.total > 0) {
+            return { ratingValue: opinionesData.media, ratingCount: opinionesData.total }
+          }
           if (votosResult.status !== 'fulfilled') return null
           const v = votosResult.value
           return v && v.votos > 0 ? { ratingValue: v.media, ratingCount: v.votos } : null
@@ -241,6 +251,7 @@ export default async function PlayaPage({ params }: Props) {
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
         playaScore={playaScore}
+        reportes={reportesData}
       />
       <FichaNav />
       <FichaBody
@@ -264,6 +275,7 @@ export default async function PlayaPage({ params }: Props) {
         mareasLunar={mareasLunar}
         horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
+        opinionesIniciales={opinionesData}
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
       />

@@ -1,16 +1,17 @@
 'use client'
 // src/components/playa/FichaHero.tsx
-// Brand book 08. Ficha desktop: breadcrumb + h1 + lugar (izq),
-// score card con métricas (der). Ficha móvil: compacto.
+// Editorial single-column hero. AnimatedSea promoted to right column.
+// Status line con avisos (reportes 24h) integrada bajo las quick stats.
+
 import Link from 'next/link'
 import FichaHeroActions from './FichaHeroActions'
 import type { Playa } from '@/types'
 import type { EstadoConfig } from '@/lib/estados'
 import type { PlayaScore } from '@/lib/scoring'
-import IluEstado from './IluEstado'
+import type { ReportesPlaya } from '@/lib/reportes'
 import AnimatedSea from './AnimatedSea'
 import styles from './FichaHero.module.css'
-import { Drop, Waves, Sun, Wind, MapPin } from '@phosphor-icons/react'
+import { MapPin } from '@phosphor-icons/react'
 import { nombreConPlaya } from '@/lib/geo'
 
 interface Meteo {
@@ -26,24 +27,50 @@ interface Props {
   municipioSlug?: string
   provinciaSlug?: string
   playaScore?:    PlayaScore
+  reportes?:      ReportesPlaya | null
 }
 
 const t = {
   es: {
-    inicio: 'Inicio', agua: 'Agua', olas: 'Olas', viento: 'Viento',
-    uv: 'UV', bandera: 'Bandera Azul', socorrismo: 'Socorrismo',
-    accesible: 'Accesible', como: 'Cómo llegar', cercanas: '¿Mejores cerca?',
+    inicio: 'Inicio', agua: 'agua', olas: 'olas',
+    como: 'Cómo llegar', meteoMore: '+ meteo',
     comunidadBase: (s: string) => `/comunidad/${s}`,
+    comoEsta: 'Cómo está hoy', avisar: '+ avisar',
+    sinAvisos: 'Sin avisos hoy.',
   },
   en: {
-    inicio: 'Home', agua: 'Water', olas: 'Waves', viento: 'Wind',
-    uv: 'UV', bandera: 'Blue Flag', socorrismo: 'Lifeguard',
-    accesible: 'Accessible', como: 'Directions', cercanas: 'Better nearby?',
+    inicio: 'Home', agua: 'water', olas: 'waves',
+    como: 'Directions', meteoMore: '+ weather',
     comunidadBase: (s: string) => `/en/communities/${s}`,
+    comoEsta: 'Status today', avisar: '+ report',
+    sinAvisos: 'No reports today.',
   },
 }
 
-export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', municipioSlug, provinciaSlug, playaScore }: Props) {
+function reportesActivos(r: ReportesPlaya | null | undefined, locale: 'es' | 'en'): string[] {
+  if (!r || r.total === 0) return []
+  const out: string[] = []
+  if (r.bandera_roja > 0)     out.push(locale === 'en' ? 'red flag'        : 'bandera roja')
+  if (r.bandera_amarilla > 0) out.push(locale === 'en' ? 'yellow flag'     : 'bandera amarilla')
+  if (r.medusas > 0)          out.push(locale === 'en' ? 'jellyfish'       : 'medusas')
+  if (r.mucho_oleaje > 0)     out.push(locale === 'en' ? 'high waves'      : 'mucho oleaje')
+  if (r.mucho_viento > 0)     out.push(locale === 'en' ? 'strong wind'     : 'mucho viento')
+  if (r.parking_dificil > 0)  out.push(locale === 'en' ? 'parking issues'  : 'parking difícil')
+  if (r.acceso_roto > 0)      out.push(locale === 'en' ? 'broken access'   : 'acceso roto')
+  return out
+}
+
+function statusDot(r: ReportesPlaya | null | undefined): 'ok' | 'warn' | 'danger' {
+  if (!r || r.total === 0) return 'ok'
+  if (r.bandera_roja > 0) return 'danger'
+  if (r.medusas > 0 || r.mucho_oleaje > 0 || r.bandera_amarilla > 0) return 'warn'
+  return 'ok'
+}
+
+export default function FichaHero({
+  playa, meteo, estado, frase, locale = 'es',
+  municipioSlug, provinciaSlug, playaScore, reportes,
+}: Props) {
   const i18n = t[locale]
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const homeHref = locale === 'en' ? '/en' : '/'
@@ -52,10 +79,16 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
   const provinciaHref = provinciaSlug ? (locale === 'en' ? `/en/provinces/${provinciaSlug}` : `/provincia/${provinciaSlug}`) : null
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${playa.lat},${playa.lng}`
 
+  const avisos = reportesActivos(reportes, locale)
+  const dot = statusDot(reportes)
+
   return (
-    <section className={styles.hero} style={{ '--hero-bg': estado.tileBg, '--hero-bg-dark': estado.tileBgDark } as React.CSSProperties}>
-      {/* Animated sea atmosphere */}
-      <div className={styles.seaLayer}>
+    <section
+      className={styles.hero}
+      style={{ '--hero-bg': estado.tileBg, '--hero-bg-dark': estado.tileBgDark } as React.CSSProperties}
+    >
+      {/* Atmósfera animada como capa sutil de fondo */}
+      <div className={styles.seaLayer} aria-hidden="true">
         <AnimatedSea estado={meteo.estado} />
       </div>
 
@@ -72,13 +105,9 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
         <span aria-current="page">{playa.nombre}</span>
       </nav>
 
-      {/* Two-column grid */}
+      {/* Editorial single column */}
       <div className={styles.grid}>
-        {/* Left: editorial */}
         <div className={styles.left}>
-          <div className={styles.eyebrow}>
-            {locale === 'en' ? 'Beach report · today' : 'Estado del mar · hoy'}
-          </div>
           <h1 className={styles.nombre}>
             {locale === 'en' ? playa.nombre : nombreConPlaya(playa.nombre)}
           </h1>
@@ -91,67 +120,53 @@ export default function FichaHero({ playa, meteo, estado, frase, locale = 'es', 
               ? <Link href={provinciaHref} className={styles.lugarLink}>{playa.provincia}</Link>
               : <span>{playa.provincia}</span>}
           </div>
-          <div className={styles.badges}>
-            {playa.bandera    && <span className={styles.badge}>{i18n.bandera}</span>}
-            {playa.socorrismo && <span className={styles.badge}>{i18n.socorrismo}</span>}
-            {playa.accesible  && <span className={styles.badge}>{i18n.accesible}</span>}
-          </div>
-          <div className={styles.actions}>
-            <FichaHeroActions slug={playa.slug} nombre={playa.nombre} meteo={meteo} scoreLabel={playaScore?.label} />
-          </div>
-        </div>
 
-        {/* Right: score card */}
-        <div className={styles.scoreCard}>
-          <div className={styles.scoreHead}>
+          {/* Score editorial inline + verdict */}
+          <div className={styles.verdictRow}>
             {playaScore ? (
               <>
                 <span className={styles.scoreNum}>{playaScore.score}</span>
-                <span className={styles.scoreOf}>/100</span>
-                <span className={styles.scoreVerdict} style={{ color: playaScore.color }}>
+                <span className={styles.verdictTxt} style={{ color: playaScore.color }}>
                   {locale === 'en' ? playaScore.labelEn : playaScore.label}
+                  <span className={styles.verdictSub}>{frase}</span>
                 </span>
               </>
             ) : (
-              <span className={styles.scoreVerdict} style={{ color: estado.dot }}>
+              <span className={styles.verdictTxt} style={{ color: estado.dot }}>
                 {locale === 'en' ? estado.labelEn : estado.label}
+                <span className={styles.verdictSub}>{frase}</span>
               </span>
             )}
           </div>
 
-          {/* Factor pills */}
-          {playaScore && playaScore.factors.length > 0 && (
-            <div className={styles.pills}>
-              {playaScore.factors.map(f => (
-                <span key={f.icon} className={styles.pill} style={{ color: f.color, borderColor: `${f.color}50` }}>
-                  {locale === 'en' ? f.labelEn : f.label}
-                </span>
-              ))}
-            </div>
-          )}
+          {/* Quick stats: solo agua + olas */}
+          <div className={styles.quickStats}>
+            <span><strong>{meteo.agua}°</strong> {i18n.agua}</span>
+            <span className={styles.qDiv} aria-hidden="true">·</span>
+            <span><strong>{meteo.olas} m</strong> {i18n.olas}</span>
+            <a href="#s-meteo" className={styles.more}>{i18n.meteoMore}</a>
+          </div>
 
-          {/* Metrics 2×2 */}
-          <div className={styles.metrics}>
-            <div className={styles.m}>
-              <Drop size={14} weight="fill" color="var(--accent)" aria-hidden="true" />
-              <span className={styles.mv}>{meteo.agua}°C</span>
-              <span className={styles.ml}>{i18n.agua}</span>
-            </div>
-            <div className={styles.m}>
-              <Waves size={14} weight="bold" color="var(--accent)" aria-hidden="true" />
-              <span className={styles.mv}>{meteo.olas}m</span>
-              <span className={styles.ml}>{i18n.olas}</span>
-            </div>
-            <div className={styles.m}>
-              <Wind size={14} weight="bold" color="var(--accent)" aria-hidden="true" />
-              <span className={styles.mv}>{meteo.viento}km/h</span>
-              <span className={styles.ml}>{i18n.viento}</span>
-            </div>
-            <div className={styles.m}>
-              <Sun size={14} weight="bold" color="var(--accent)" aria-hidden="true" />
-              <span className={styles.mv}>UV {meteo.uv}</span>
-              <span className={styles.ml}>{i18n.uv}</span>
-            </div>
+          {/* Status line: avisos 24h + trigger reportar */}
+          <div className={styles.statusLine} data-state={dot}>
+            <span className={`${styles.dotMini} ${styles[`dot_${dot}`]}`} aria-hidden="true" />
+            <span className={styles.statusTxt}>
+              <strong>{i18n.comoEsta}:</strong>{' '}
+              {avisos.length > 0 ? avisos.join(' · ') : i18n.sinAvisos}
+            </span>
+            <button
+              type="button"
+              className={styles.linkBtn}
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('open-reportar-drawer'))
+              }}
+            >
+              {i18n.avisar}
+            </button>
+          </div>
+
+          <div className={styles.actions}>
+            <FichaHeroActions slug={playa.slug} nombre={playa.nombre} meteo={meteo} scoreLabel={playaScore?.label} />
           </div>
         </div>
       </div>

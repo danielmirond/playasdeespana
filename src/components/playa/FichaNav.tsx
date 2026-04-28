@@ -16,6 +16,7 @@ const SECCIONES = {
     { id: 's-campings',    label: 'Campings' },
     { id: 's-buceo',       label: 'Buceo' },
     { id: 's-info',        label: 'Datos' },
+    { id: 's-opiniones',   label: 'Opiniones' },
     { id: 's-cercanas',    label: 'Cercanas' },
   ],
   en: [
@@ -31,6 +32,7 @@ const SECCIONES = {
     { id: 's-campings',    label: 'Campings' },
     { id: 's-buceo',       label: 'Diving' },
     { id: 's-info',        label: 'Info' },
+    { id: 's-opiniones',   label: 'Reviews' },
     { id: 's-cercanas',    label: 'Nearby' },
   ],
 }
