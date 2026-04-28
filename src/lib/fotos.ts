@@ -1,17 +1,20 @@
 // src/lib/fotos.ts — Fotos de playas con matching preciso playa↔ubicación
-// Estrategia en cascada:
-//   1. Wikimedia Commons: geosearch por coordenadas (radio 800m) — más preciso
-//   2. Flickr: feed público con tags (nombre+municipio+beach) — sin key
-//   3. Wikimedia Commons: text search con nombre + municipio entre comillas
-//   4. Unsplash: búsqueda por municipio (requiere UNSPLASH_ACCESS_KEY)
+// Estrategia en cascada (de más preciso a más genérico):
+//   1. Wikimedia Commons: geosearch por coordenadas (radio 1500m) — sin key
+//   2. OpenVerse: agregador CC (Wikimedia + Flickr + más) por nombre+municipio — sin key
+//   3. Flickr: feed público con tags (nombre+municipio+beach) — sin key
+//   4. Wikimedia Commons: text search con nombre + municipio — sin key
+//   5. Pexels: búsqueda por municipio (requiere PEXELS_API_KEY)
+//   6. Unsplash: búsqueda por municipio (requiere UNSPLASH_ACCESS_KEY)
 import { fetchWithTimeout } from './fetch-timeout'
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
+const PEXELS_KEY   = process.env.PEXELS_API_KEY ?? ''
 
 export interface FotoPlaya {
   url:    string
   thumb:  string
-  fuente: 'unsplash' | 'wikimedia' | 'flickr'
+  fuente: 'unsplash' | 'wikimedia' | 'flickr' | 'openverse' | 'pexels'
   autor?: string
 }
 
@@ -66,7 +69,7 @@ async function getFotosWikimediaGeo(lat: number, lon: number): Promise<FotoPlaya
       generator:    'geosearch',
       ggsnamespace: '6',
       ggscoord:     `${lat}|${lon}`,
-      ggsradius:    '800', // metros
+      ggsradius:    '1500', // metros (subido de 800 para mayor cobertura)
       ggslimit:     '30',
       prop:         'imageinfo|pageprops',
       iiprop:       'url|extmetadata|size',
@@ -166,6 +169,96 @@ async function getFotosUnsplash(municipio: string, provincia: string): Promise<F
   return []
 }
 
+// OpenVerse — agregador CC (Wikimedia + Flickr + Smithsonian + …)
+// API pública sin key. Rate limit: 100 req/min anónimo, 5000/min con key.
+// https://api.openverse.org/v1/images/
+async function getFotosOpenVerse(nombre: string, municipio: string): Promise<FotoPlaya[]> {
+  // Probar de más específico a más general
+  const queries = [
+    `"${nombre}" "${municipio}"`,
+    `"${nombre}" ${municipio} beach`,
+    `${nombre} ${municipio} playa`,
+    `${municipio} beach`,
+  ]
+  for (const q of queries) {
+    try {
+      const params = new URLSearchParams({
+        q,
+        license_type: 'all-cc',          // commercial-friendly + share-alike
+        category:     'photograph',       // descarta ilustraciones, mapas
+        size:         'large',
+        aspect_ratio: 'wide',
+        page_size:    '8',
+      })
+      const res = await fetchWithTimeout(
+        `https://api.openverse.org/v1/images/?${params}`,
+        { next: { revalidate: 86400 } }
+      )
+      if (!res.ok) continue
+      const data = await res.json()
+      const results = data?.results ?? []
+      if (results.length === 0) continue
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const fotos: FotoPlaya[] = results.map((r: any): FotoPlaya | null => {
+        const url = r.url
+        const thumb = r.thumbnail ?? r.url
+        if (!url || typeof url !== 'string') return null
+        const titulo = (r.title ?? '').toLowerCase()
+        if (NEGATIVAS.test(titulo)) return null
+        return {
+          url,
+          thumb,
+          fuente: 'openverse' as const,
+          autor: r.creator?.slice(0, 60) ?? undefined,
+        }
+      }).filter(Boolean) as FotoPlaya[]
+
+      if (fotos.length >= 1) return fotos.slice(0, 6)
+    } catch {
+      continue
+    }
+  }
+  return []
+}
+
+// Pexels — fotos profesionales con API key gratuita (200 req/h).
+// Útil como fallback genérico por municipio si nada más funciona.
+async function getFotosPexels(municipio: string, provincia: string): Promise<FotoPlaya[]> {
+  if (!PEXELS_KEY) return []
+  const queries = [
+    `${municipio} beach`,
+    `${municipio} playa`,
+    `${municipio} costa`,
+    `${provincia} beach spain`,
+  ]
+  for (const q of queries) {
+    try {
+      const res = await fetchWithTimeout(
+        `https://api.pexels.com/v1/search?query=${encodeURIComponent(q)}&per_page=6&orientation=landscape&size=large`,
+        {
+          headers: { Authorization: PEXELS_KEY },
+          next: { revalidate: 86400 },
+        }
+      )
+      if (!res.ok) continue
+      const data = await res.json()
+      const photos = data?.photos ?? []
+      if (photos.length === 0) continue
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return photos.map((p: any): FotoPlaya => ({
+        url:    p.src?.large2x ?? p.src?.large ?? p.src?.original,
+        thumb:  p.src?.medium ?? p.src?.small,
+        fuente: 'pexels',
+        autor:  p.photographer,
+      })).filter((f: FotoPlaya) => !!f.url)
+    } catch {
+      continue
+    }
+  }
+  return []
+}
+
 // Flickr — feed público sin API key (usando tags)
 // Limitación: no soporta geosearch, solo filtrado por tags
 // Devuelve hasta 20 fotos públicas recientes con esos tags
@@ -234,13 +327,16 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
 }
 
 /**
- * Obtiene fotos de una playa con máxima precisión:
- * 1. Geosearch en Wikimedia por coordenadas (800m radio) — sin API key
- * 2. Flickr feed público con tags (nombre + municipio + beach) — sin API key
- * 3. Text search en Wikimedia con nombre + municipio entre comillas
- * 4. Unsplash con municipio (fotos genéricas de la zona)
+ * Obtiene fotos de una playa con cascada multi-fuente.
  *
- * Las fuentes se consultan en paralelo para evitar waterfall.
+ * Cinco fuentes en paralelo, ordenadas de más específico (geo) a más
+ * genérico (municipio). Combina sin duplicados:
+ *   1. Wikimedia Commons geosearch (1500m) — sin key
+ *   2. OpenVerse agregador CC — sin key
+ *   3. Flickr feed público por tags — sin key
+ *   4. Wikimedia Commons text search — sin key
+ *   5. Pexels por municipio — requiere PEXELS_API_KEY
+ *   6. Unsplash por municipio — requiere UNSPLASH_ACCESS_KEY
  */
 export async function getFotos(
   nombre: string,
@@ -249,10 +345,12 @@ export async function getFotos(
   lon: number,
   provincia: string = ''
 ): Promise<FotoPlaya[]> {
-  const [wikiGeo, flickr, wikiText, unsplash] = await Promise.all([
+  const [wikiGeo, openverse, flickr, wikiText, pexels, unsplash] = await Promise.all([
     getFotosWikimediaGeo(lat, lon),
+    getFotosOpenVerse(nombre, municipio),
     getFotosFlickr(nombre, municipio),
     getFotosWikimediaText(nombre, municipio),
+    getFotosPexels(municipio, provincia),
     getFotosUnsplash(municipio, provincia),
   ])
 
@@ -269,10 +367,12 @@ export async function getFotos(
     }
   }
 
-  // Prioridad: wikimedia geo > flickr geo > wikimedia texto > unsplash
+  // Prioridad: geo-precisas primero, agregador después, fallbacks genéricos al final
   agregar(wikiGeo)
+  if (combinadas.length < 6) agregar(openverse)
   if (combinadas.length < 6) agregar(flickr)
   if (combinadas.length < 6) agregar(wikiText)
+  if (combinadas.length < 6) agregar(pexels)
   if (combinadas.length < 6) agregar(unsplash)
 
   return combinadas.slice(0, 6)
