@@ -18,12 +18,70 @@ export interface FotoPlaya {
   autor?: string
 }
 
-// Palabras negativas que descartamos de títulos de Wikimedia
-// (mapas, logos, diagramas, símbolos, placas, etc.)
-const NEGATIVAS = /\b(map|mapa|plan|logo|flag|bandera|diagram|diagrama|coat|escudo|sign|placa|street|coordinate|rotulo|icon|chart|grafic)\b/i
+// Palabras negativas que descartamos de títulos / nombres de archivo.
+// Cubre: cartografía y símbolos; arquitectura urbana y religiosa;
+// vehículos, militar, eventos deportivos no costeros; industria;
+// otros falsos positivos que el filtro original dejaba pasar (Melilla
+// con tanques de 'arena' del desierto, Castro-Urdiales con iglesia,
+// Mapillary street-view en El Chorrillo, etc.).
+const NEGATIVAS = new RegExp(
+  '\\b(' +
+  // Cartografía y símbolos
+  'map|mapa|plan(o|os)?|logo|flag|bandera|diagram|diagrama|' +
+  'coat|escudo|sign|placa|coordinate|rotulo|icon|chart|grafic|' +
+  // Arquitectura religiosa
+  'iglesia|church|ermita|capilla|basilica|catedral|cathedral|' +
+  'convento|monasterio|monastery|abadia|abbey|santuario|' +
+  // Arquitectura civil / monumentos / culturales
+  'monumento|monument|estatua|statue|busto|bust|escultura|sculpture|' +
+  'museo|museum|ayuntamiento|edificio|building|fachada|facade|' +
+  'castillo|castle|fortaleza|fortress|alcazaba|alcazar|tower|' +
+  'cementerio|cemetery|tumba|tomb|necropolis|' +
+  // Captura urbana y vehículos
+  'street(view)?|streetview|mapillary|panoramio|driving|coche|car|' +
+  'vehiculo|vehicle|camion|truck|bus|train|aerial|drone|' +
+  // Interiores y detalles arquitectónicos
+  'interior(_de)?|fachada|' +
+  // Militar / vehículos pesados
+  'tanque|tank|militar|military|ejercito|army|guerra|war|soldado|soldier|' +
+  'arma|weapon|cuartel|barracks|maniobra|training_exercise|' +
+  // Eventos deportivos no costeros
+  'motocross|motorbike|motorcycle|motocicleta|moto_|enduro|' +
+  'carrera|race|racing|carreras|competicion|maraton|marathon|' +
+  'futbol|football|baloncesto|basketball|tenis|tennis|golf|' +
+  // Conciertos / festivales / fiestas
+  'concierto|concert|festival|fiesta|party|disco|nightclub|' +
+  // Industrial / no recreativo
+  'fabrica|factory|industrial|silo|chimenea|chimney|grua|crane|' +
+  // Otros típicos falsos positivos
+  'parking_lot|garaje|garage|hotel(?!_playa)|restaurante(?!_playa)' +
+  ')\\b',
+  'i'
+)
 
-// Palabras positivas que boostean relevancia
-const POSITIVAS = /\b(beach|playa|platja|praia|costa|mar|arena|sand|shore|coast|bahia|bay|ensenada|acantilado|cliff)\b/i
+// Palabras positivas que se requieren para aceptar fotos en modo
+// estricto (cards, listados). Si el título no menciona playa/costa/
+// mar/arena/etc., se descarta.
+const POSITIVAS = new RegExp(
+  '\\b(' +
+  // Términos directos
+  'beach|playa(?!_de_aparcamiento)|platja|praia|' +
+  // Geografía costera
+  'costa|coast|shore|orilla|ribera|litoral|seaside|seafront|' +
+  'mar|sea|ocean|oceano|bahia|bay|ensenada|cala|caleta|' +
+  // Elementos típicos de playa
+  'arena|sand|sandy|duna|dune|guijarro|pebble|rocosa|' +
+  'acantilado|cliff|escarpado|rompiente|cantera|paseo_maritimo|' +
+  // Actividades y elementos visibles
+  'chiringuito|sombrilla|umbrella|hamaca|bañista|swimmer|swimming|' +
+  'surf(er)?|surfing|kitesurf|windsurf|snorkel|paddle|kayak|' +
+  // Estados visuales asociables
+  'atardecer|sunset|amanecer|sunrise|horizonte|horizon|' +
+  // Conceptos editoriales
+  'panoramica|panorama|vista|view' +
+  ')\\b',
+  'i'
+)
 
 function extraerFotosDePages(pages: any[]): FotoPlaya[] {
   return pages
@@ -61,7 +119,12 @@ function extraerFotosDePages(pages: any[]): FotoPlaya[] {
     .map(({ score, ...rest }: any) => rest) as FotoPlaya[]
 }
 
-// Wikimedia — geosearch por coordenadas (radio 800m desde la playa)
+// Wikimedia — geosearch por coordenadas (1500m). MODO ESTRICTO:
+// la geosearch devuelve cualquier foto subida en la zona (iglesias,
+// monumentos, edificios). Filtramos exigiendo que el nombre del
+// archivo contenga al menos una palabra del catálogo POSITIVAS. Si
+// no hay matches, devolvemos vacío y dejamos que otra fuente lo
+// intente, en lugar de servir un edificio cercano.
 async function getFotosWikimediaGeo(lat: number, lon: number): Promise<FotoPlaya[]> {
   try {
     const params = new URLSearchParams({
@@ -69,7 +132,7 @@ async function getFotosWikimediaGeo(lat: number, lon: number): Promise<FotoPlaya
       generator:    'geosearch',
       ggsnamespace: '6',
       ggscoord:     `${lat}|${lon}`,
-      ggsradius:    '1500', // metros (subido de 800 para mayor cobertura)
+      ggsradius:    '1500',
       ggslimit:     '30',
       prop:         'imageinfo|pageprops',
       iiprop:       'url|extmetadata|size',
@@ -83,8 +146,15 @@ async function getFotosWikimediaGeo(lat: number, lon: number): Promise<FotoPlaya
     )
     if (!res.ok) return []
     const data = await res.json()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const pages = Object.values(data.query?.pages ?? {}) as any[]
-    return extraerFotosDePages(pages).slice(0, 6)
+    const fotos = extraerFotosDePages(pages)
+    const beachish = fotos.filter(f => {
+      try {
+        return POSITIVAS.test(decodeURIComponent(f.url).toLowerCase())
+      } catch { return false }
+    })
+    return beachish.slice(0, 6)
   } catch {
     return []
   }
@@ -206,6 +276,10 @@ async function getFotosOpenVerse(nombre: string, municipio: string): Promise<Fot
         if (!url || typeof url !== 'string') return null
         const titulo = (r.title ?? '').toLowerCase()
         if (NEGATIVAS.test(titulo)) return null
+        // Modo estricto: el título debe sugerir playa. OpenVerse devuelve
+        // resultados aunque la query incluya "beach" — algunos no son
+        // playa (motocross, eventos, etc.). Sin POSITIVAS, descartamos.
+        if (!POSITIVAS.test(titulo)) return null
         return {
           url,
           thumb,
@@ -301,6 +375,12 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
         .map((item: any): FotoPlaya | null => {
           const titulo = (item.title ?? '').toLowerCase()
           if (NEGATIVAS.test(titulo)) return null
+          // Modo estricto: Flickr devuelve muchas fotos con título críptico
+          // (DSC_1234, IMG_001) o tags promiscuos. Solo aceptamos si el
+          // título o las tags incluyen una palabra del catálogo POSITIVAS,
+          // si no, dejamos pasar de todo (motocross, militar, etc.).
+          const tagsStr = (item.tags ?? '').toLowerCase()
+          if (!POSITIVAS.test(titulo) && !POSITIVAS.test(tagsStr)) return null
           // item.media.m es el thumbnail de tamaño M (240px). Subimos a _c
           // (800px, disponible desde 2012) en vez de _b (1024px) porque
           // _b falta en fotos pequeñas o antiguas y producía imágenes rotas.
