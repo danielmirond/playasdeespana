@@ -125,8 +125,8 @@
 .verdictTxt {
   font-family: var(--font-serif); font-style: italic;
   font-weight: 400;
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
-  line-height: 1.2;
+  font-size: clamp(1.55rem, 3vw, 2.4rem);
+  line-height: 1.18;
   display: flex; flex-direction: column;
   color: #ffd66e;
 }
@@ -134,29 +134,29 @@
   font-family: var(--font-sans, system-ui);
   font-style: normal;
   font-weight: 400;
-  font-size: .92rem;
-  color: rgba(255, 255, 255, .9);
-  margin-top: .25rem;
-  line-height: 1.35;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, .92);
+  margin-top: .35rem;
+  line-height: 1.4;
 }
 .heroPainted .verdictSub { color: var(--muted); }
 
 /* ── Meta line ──────────────────────────────────────────────────── */
 .metaLine {
-  display: flex; align-items: center; gap: .85rem;
+  display: flex; align-items: center; gap: 1rem;
   flex-wrap: wrap;
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: .85rem;
-  color: rgba(255, 255, 255, .88);
-  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, .92);
+  margin-bottom: 1.15rem;
 }
 .heroPainted .metaLine { color: var(--muted); }
 .metaLine strong {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   color: #fff;
-  margin-right: .15rem;
+  margin-right: .2rem;
   font-variant-numeric: tabular-nums;
 }
 .heroPainted .metaLine strong { color: var(--ink); }
@@ -173,7 +173,8 @@
 
 .more {
   margin-left: auto;
-  font-size: .72rem;
+  font-size: .82rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
   color: #ffd66e;
@@ -218,7 +219,7 @@
 .statusTxt {
   flex: 1; min-width: 200px;
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: .8rem;
+  font-size: .92rem;
   color: var(--ink-soft, #3b4a5a);
   line-height: 1.4;
 }
@@ -229,14 +230,14 @@
 }
 
 .avisarCTA {
-  display: inline-flex; align-items: center; gap: .5rem;
+  display: inline-flex; align-items: center; gap: .55rem;
   background: var(--ink, #2a1a08);
   color: var(--bg, #faf4e6);
   border: 0;
-  padding: .6rem 1.15rem;
+  padding: .75rem 1.4rem;
   border-radius: 99px;
   font-family: var(--font-sans, system-ui);
-  font-size: .85rem;
+  font-size: .95rem;
   font-weight: 600;
   letter-spacing: .01em;
   cursor: pointer;
