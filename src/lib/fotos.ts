@@ -374,12 +374,15 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
       const fotos: FotoPlaya[] = items
         .map((item: any): FotoPlaya | null => {
           const titulo = (item.title ?? '').toLowerCase()
-          if (NEGATIVAS.test(titulo)) return null
-          // Modo estricto: Flickr devuelve muchas fotos con título críptico
-          // (DSC_1234, IMG_001) o tags promiscuos. Solo aceptamos si el
-          // título o las tags incluyen una palabra del catálogo POSITIVAS,
-          // si no, dejamos pasar de todo (motocross, militar, etc.).
           const tagsStr = (item.tags ?? '').toLowerCase()
+          // NEGATIVAS también sobre tags: 'Desembarco en Melilla' tenía
+          // título limpio pero tags 'ejercito soldado guerra playa' que
+          // delatan el contenido. Sin esto pasaba el filtro porque
+          // 'playa' está en tags (POSITIVAS match).
+          if (NEGATIVAS.test(titulo) || NEGATIVAS.test(tagsStr)) return null
+          // Modo estricto: Flickr devuelve muchas fotos con título críptico
+          // (DSC_1234, IMG_001). Aceptamos si título O tags incluyen
+          // POSITIVAS (descarta DSC_xxxx con tags neutros).
           if (!POSITIVAS.test(titulo) && !POSITIVAS.test(tagsStr)) return null
           // item.media.m es el thumbnail de tamaño M (240px). Subimos a _c
           // (800px, disponible desde 2012) en vez de _b (1024px) porque
