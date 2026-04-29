@@ -95,11 +95,19 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
   const avoid = scored.filter(s => s.ps.score < 45).slice(-avoidCount).reverse()
 
   // Fetch fotos en paralelo solo para las playas que se van a mostrar
-  // (top + avoid). Wikimedia geo, 1000m, 1 fetch por playa, ISR 24h
-  // por URL gracias al revalidate del fetch interno.
+  // (top + avoid). Cascada multi-fuente con fallback genérico por
+  // estado (CALMA/SURF/VIENTO/...) para coherencia visual cuando no
+  // hay foto específica. ISR 24h por URL.
   const visibles = [...top, ...avoid]
   const fotos = await Promise.all(
-    visibles.map(item => getFotoThumb(item.playa.lat, item.playa.lng))
+    visibles.map(item => getFotoThumb(
+      item.playa.nombre,
+      item.playa.municipio,
+      item.playa.lat,
+      item.playa.lng,
+      item.playa.provincia,
+      { estado: item.estado },
+    ))
   )
   const fotoBySlug = new Map<string, string | null>(
     visibles.map((item, i) => [item.playa.slug, fotos[i]])
