@@ -327,39 +327,51 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
 }
 
 /**
- * Helper rápido para cards de listado: una sola fuente geo (Wikimedia
- * Commons) con radio reducido. Devuelve la URL de la primera foto válida
- * o null. Pensado para uso en bulk/parallel (Destacadas, Top, etc.) sin
- * saturar APIs externas. ~200ms por playa con buena geocobertura.
+ * Foto genérica de respaldo por estado. Cuando ninguna fuente
+ * devuelve foto específica, se usa una imagen Unsplash que proyecta
+ * la atmósfera del estado actual (calma, surf, viento, etc.).
+ * Esto garantiza coherencia visual: una playa con estado SURF nunca
+ * mostrará una foto de mar tranquilo aunque no tengamos foto suya.
  */
-export async function getFotoThumb(lat: number, lon: number): Promise<string | null> {
-  try {
-    const params = new URLSearchParams({
-      action:       'query',
-      generator:    'geosearch',
-      ggsnamespace: '6',
-      ggscoord:     `${lat}|${lon}`,
-      ggsradius:    '1000',
-      ggslimit:     '8',
-      prop:         'imageinfo',
-      iiprop:       'url|size',
-      iiurlwidth:   '600',
-      format:       'json',
-      origin:       '*',
-    })
-    const res = await fetchWithTimeout(
-      `https://commons.wikimedia.org/w/api.php?${params}`,
-      { next: { revalidate: 86400 } }
-    )
-    if (!res.ok) return null
-    const data = await res.json()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const pages = Object.values(data.query?.pages ?? {}) as any[]
-    const fotos = extraerFotosDePages(pages)
-    return fotos[0]?.thumb ?? null
-  } catch {
-    return null
-  }
+export const FOTOS_GENERICAS_POR_ESTADO: Record<string, string> = {
+  CALMA:   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=70',
+  calma:   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=70',
+  BUENA:   'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=70',
+  buena:   'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=70',
+  AVISO:   'https://images.unsplash.com/photo-1535262971677-1c823d4c814e?w=900&q=70',
+  aviso:   'https://images.unsplash.com/photo-1535262971677-1c823d4c814e?w=900&q=70',
+  SURF:    'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=900&q=70',
+  surf:    'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=900&q=70',
+  VIENTO:  'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=900&q=70',
+  viento:  'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=900&q=70',
+  PELIGRO: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=900&q=70',
+  peligro: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=900&q=70',
+}
+
+export const FOTO_GENERICA_DEFAULT = FOTOS_GENERICAS_POR_ESTADO.CALMA
+
+/**
+ * Helper para cards de listado y otros usos donde solo necesitamos el
+ * thumb principal. Reusa la cascada completa de getFotos() (Wikimedia
+ * geo → OpenVerse → Flickr → Wikimedia text → Pexels → Unsplash) para
+ * coherencia visual con la ficha.
+ *
+ * Si nada matchea, devuelve la foto genérica del estado pasado (o el
+ * default si no se pasa estado). Pasar `fallback: false` para
+ * devolver null en su lugar.
+ */
+export async function getFotoThumb(
+  nombre: string,
+  municipio: string,
+  lat: number,
+  lon: number,
+  provincia: string = '',
+  options: { fallback?: boolean; estado?: string } = {}
+): Promise<string | null> {
+  const fotos = await getFotos(nombre, municipio, lat, lon, provincia)
+  if (fotos[0]?.thumb) return fotos[0].thumb
+  if (options.fallback === false) return null
+  return FOTOS_GENERICAS_POR_ESTADO[options.estado ?? 'CALMA'] ?? FOTO_GENERICA_DEFAULT
 }
 
 /**
