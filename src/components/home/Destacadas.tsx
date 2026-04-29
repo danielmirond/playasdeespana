@@ -6,10 +6,12 @@
 //   - Top N (descendente por score) con score badge
 //   - Bottom N (ascendente) como "Evita hoy"
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Playa } from '@/types'
 import { ESTADOS } from '@/lib/estados'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
 import AnimatedSea from '@/components/playa/AnimatedSea'
+import { getFotoThumb } from '@/lib/fotos'
 import styles from './Destacadas.module.css'
 
 // ── Meteo batch vía Open-Meteo (1 request por API en vez de N) ────
@@ -92,6 +94,17 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
   const top   = scored.slice(0, topCount)
   const avoid = scored.filter(s => s.ps.score < 45).slice(-avoidCount).reverse()
 
+  // Fetch fotos en paralelo solo para las playas que se van a mostrar
+  // (top + avoid). Wikimedia geo, 1000m, 1 fetch por playa, ISR 24h
+  // por URL gracias al revalidate del fetch interno.
+  const visibles = [...top, ...avoid]
+  const fotos = await Promise.all(
+    visibles.map(item => getFotoThumb(item.playa.lat, item.playa.lng))
+  )
+  const fotoBySlug = new Map<string, string | null>(
+    visibles.map((item, i) => [item.playa.slug, fotos[i]])
+  )
+
   const GRADIENTS = [
     'linear-gradient(180deg, #c7d8dc 0%, #a3b9c0 35%, #e8d9b8 55%, #d9c7a0 100%)',
     'linear-gradient(180deg, #a3b6b8 0%, #6b8890 40%, #d4c090 60%, #b8a06a 100%)',
@@ -104,6 +117,8 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
   const renderCard = (item: typeof top[number], rank?: number, idx = 0) => {
     const { playa: p, ps, estado } = item
     const e = ESTADOS[estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
+    const foto = fotoBySlug.get(p.slug)
+    const hasPhoto = !!foto
     return (
       <Link
         key={p.slug}
@@ -111,10 +126,26 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
         className={styles.card}
         prefetch={true}
       >
-        <div className={styles.vis} style={{ background: GRADIENTS[idx % GRADIENTS.length] }}>
-          <div className={styles.seaOverlay}>
-            <AnimatedSea estado={estado} color="rgba(255,255,255,0.85)" tint="transparent" />
-          </div>
+        <div
+          className={styles.vis}
+          style={!hasPhoto ? { background: GRADIENTS[idx % GRADIENTS.length] } : undefined}
+        >
+          {hasPhoto ? (
+            <>
+              <Image
+                src={foto!}
+                alt=""
+                fill
+                sizes="(max-width: 640px) 50vw, 250px"
+                className={styles.photoImg}
+              />
+              <div className={styles.photoTint} aria-hidden="true" />
+            </>
+          ) : (
+            <div className={styles.seaOverlay}>
+              <AnimatedSea estado={estado} color="rgba(255,255,255,0.85)" tint="transparent" />
+            </div>
+          )}
           {rank !== undefined && (
             <span className={styles.rank} aria-label={`Posición ${rank}`}>nº{rank}</span>
           )}

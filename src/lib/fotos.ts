@@ -327,6 +327,42 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
 }
 
 /**
+ * Helper rápido para cards de listado: una sola fuente geo (Wikimedia
+ * Commons) con radio reducido. Devuelve la URL de la primera foto válida
+ * o null. Pensado para uso en bulk/parallel (Destacadas, Top, etc.) sin
+ * saturar APIs externas. ~200ms por playa con buena geocobertura.
+ */
+export async function getFotoThumb(lat: number, lon: number): Promise<string | null> {
+  try {
+    const params = new URLSearchParams({
+      action:       'query',
+      generator:    'geosearch',
+      ggsnamespace: '6',
+      ggscoord:     `${lat}|${lon}`,
+      ggsradius:    '1000',
+      ggslimit:     '8',
+      prop:         'imageinfo',
+      iiprop:       'url|size',
+      iiurlwidth:   '600',
+      format:       'json',
+      origin:       '*',
+    })
+    const res = await fetchWithTimeout(
+      `https://commons.wikimedia.org/w/api.php?${params}`,
+      { next: { revalidate: 86400 } }
+    )
+    if (!res.ok) return null
+    const data = await res.json()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const pages = Object.values(data.query?.pages ?? {}) as any[]
+    const fotos = extraerFotosDePages(pages)
+    return fotos[0]?.thumb ?? null
+  } catch {
+    return null
+  }
+}
+
+/**
  * Obtiene fotos de una playa con cascada multi-fuente.
  *
  * Cinco fuentes en paralelo, ordenadas de más específico (geo) a más
