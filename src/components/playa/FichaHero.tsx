@@ -191,7 +191,7 @@ export default function FichaHero({
             className={styles.avisarCTA}
             onClick={() => window.dispatchEvent(new CustomEvent('open-reportar-drawer'))}
           >
-            <Megaphone size={15} weight="bold" aria-hidden="true" />
+            <Megaphone size={17} weight="bold" aria-hidden="true" />
             {i18n.avisar}
           </button>
         </div>
