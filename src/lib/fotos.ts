@@ -424,28 +424,50 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
 }
 
 /**
- * Foto genérica de respaldo por estado. Cuando ninguna fuente
- * devuelve foto específica, se usa una imagen Unsplash que proyecta
- * la atmósfera del estado actual (calma, surf, viento, etc.).
- * Esto garantiza coherencia visual: una playa con estado SURF nunca
- * mostrará una foto de mar tranquilo aunque no tengamos foto suya.
+ * Pool de fotos genéricas por estado. Cuando ninguna fuente devuelve
+ * foto específica, se usa una imagen Unsplash de las que proyecta la
+ * atmósfera del estado (3 por estado para evitar repeticiones cuando
+ * varias cards comparten estado).
  */
-export const FOTOS_GENERICAS_POR_ESTADO: Record<string, string> = {
-  CALMA:   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=70',
-  calma:   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=70',
-  BUENA:   'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=70',
-  buena:   'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=70',
-  AVISO:   'https://images.unsplash.com/photo-1535262971677-1c823d4c814e?w=900&q=70',
-  aviso:   'https://images.unsplash.com/photo-1535262971677-1c823d4c814e?w=900&q=70',
-  SURF:    'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=900&q=70',
-  surf:    'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=900&q=70',
-  VIENTO:  'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=900&q=70',
-  viento:  'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=900&q=70',
-  PELIGRO: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=900&q=70',
-  peligro: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=900&q=70',
+export const FOTOS_GENERICAS_POR_ESTADO: Record<string, string[]> = {
+  CALMA: [
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=70',
+    'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=900&q=70',
+    'https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?w=900&q=70',
+  ],
+  BUENA: [
+    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=70',
+    'https://images.unsplash.com/photo-1525428781336-2bc7a72d68a8?w=900&q=70',
+    'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=900&q=70',
+  ],
+  AVISO: [
+    'https://images.unsplash.com/photo-1535262971677-1c823d4c814e?w=900&q=70',
+    'https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=900&q=70',
+    'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=900&q=70',
+  ],
+  SURF: [
+    'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=900&q=70',
+    'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=900&q=70',
+    'https://images.unsplash.com/photo-1455729552865-3658a5d39692?w=900&q=70',
+  ],
+  VIENTO: [
+    'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=900&q=70',
+    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=70',
+    'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=900&q=70',
+  ],
+  PELIGRO: [
+    'https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=900&q=70',
+    'https://images.unsplash.com/photo-1505144808419-1957a94ca61e?w=900&q=70',
+    'https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?w=900&q=70',
+  ],
 }
 
-export const FOTO_GENERICA_DEFAULT = FOTOS_GENERICAS_POR_ESTADO.CALMA
+export const FOTO_GENERICA_DEFAULT = FOTOS_GENERICAS_POR_ESTADO.CALMA[0]
+
+function poolFor(estado?: string): string[] {
+  const key = (estado ?? 'CALMA').toUpperCase()
+  return FOTOS_GENERICAS_POR_ESTADO[key] ?? FOTOS_GENERICAS_POR_ESTADO.CALMA
+}
 
 /**
  * Helper para cards de listado y otros usos donde solo necesitamos el
@@ -453,9 +475,12 @@ export const FOTO_GENERICA_DEFAULT = FOTOS_GENERICAS_POR_ESTADO.CALMA
  * geo → OpenVerse → Flickr → Wikimedia text → Pexels → Unsplash) para
  * coherencia visual con la ficha.
  *
- * Si nada matchea, devuelve la foto genérica del estado pasado (o el
- * default si no se pasa estado). Pasar `fallback: false` para
- * devolver null en su lugar.
+ * Acepta `excluir?: Set<string>` para dedupe entre cards: si la primera
+ * foto válida ya está en el set, prueba con la siguiente, y así. Si
+ * ninguna candidata es única, recurre al pool genérico del estado
+ * eligiendo el primer item no usado.
+ *
+ * Pasar `fallback: false` para devolver null cuando no hay alternativa.
  */
 export async function getFotoThumb(
   nombre: string,
@@ -463,12 +488,22 @@ export async function getFotoThumb(
   lat: number,
   lon: number,
   provincia: string = '',
-  options: { fallback?: boolean; estado?: string } = {}
+  options: { fallback?: boolean; estado?: string; excluir?: Set<string> } = {}
 ): Promise<string | null> {
   const fotos = await getFotos(nombre, municipio, lat, lon, provincia)
-  if (fotos[0]?.thumb) return fotos[0].thumb
+  const usado = options.excluir
+  // Buscar el primer thumb que no esté ya en uso
+  for (const f of fotos) {
+    if (f?.thumb && (!usado || !usado.has(f.thumb))) return f.thumb
+  }
   if (options.fallback === false) return null
-  return FOTOS_GENERICAS_POR_ESTADO[options.estado ?? 'CALMA'] ?? FOTO_GENERICA_DEFAULT
+  // Pool genérico: primer item del estado que no esté ya en uso
+  const pool = poolFor(options.estado)
+  for (const url of pool) {
+    if (!usado || !usado.has(url)) return url
+  }
+  // Si todo está usado (caso muy improbable), devolvemos el primero
+  return pool[0] ?? FOTO_GENERICA_DEFAULT
 }
 
 /**

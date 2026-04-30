@@ -11,7 +11,7 @@ import type { Playa } from '@/types'
 import { ESTADOS } from '@/lib/estados'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
 import AnimatedSea from '@/components/playa/AnimatedSea'
-import { getFotoThumb } from '@/lib/fotos'
+import { getFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
 import styles from './Destacadas.module.css'
 
 // ── Meteo batch vía Open-Meteo (1 request por API en vez de N) ────
@@ -94,21 +94,44 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
   const top   = scored.slice(0, topCount)
   const avoid = scored.filter(s => s.ps.score < 45).slice(-avoidCount).reverse()
 
-  // Fetch fotos en paralelo solo para las playas que se van a mostrar
-  // (top + avoid). Cascada multi-fuente con fallback genérico por
-  // estado (CALMA/SURF/VIENTO/...) para coherencia visual cuando no
-  // hay foto específica. ISR 24h por URL.
+  // Fetch candidatos en paralelo para las playas visibles (top + avoid).
+  // Después dedupe greedy: cada card pilla la primera URL no usada por
+  // una card anterior. Si todas las candidatas chocan, tira del pool
+  // genérico por estado (3 variantes por estado, también con dedupe).
   const visibles = [...top, ...avoid]
-  const fotos = await Promise.all(
-    visibles.map(item => getFotoThumb(
+  const candidatos = await Promise.all(
+    visibles.map(item => getFotos(
       item.playa.nombre,
       item.playa.municipio,
       item.playa.lat,
       item.playa.lng,
       item.playa.provincia,
-      { estado: item.estado },
     ))
   )
+
+  const usadas = new Set<string>()
+  const fotos: (string | null)[] = visibles.map((item, i) => {
+    // 1) primera candidata no usada
+    const cands = candidatos[i] ?? []
+    for (const c of cands) {
+      if (c?.thumb && !usadas.has(c.thumb)) {
+        usadas.add(c.thumb)
+        return c.thumb
+      }
+    }
+    // 2) primer item del pool genérico de su estado que no esté usado
+    const key = (item.estado ?? 'CALMA').toUpperCase()
+    const pool = FOTOS_GENERICAS_POR_ESTADO[key] ?? FOTOS_GENERICAS_POR_ESTADO.CALMA
+    for (const url of pool) {
+      if (!usadas.has(url)) {
+        usadas.add(url)
+        return url
+      }
+    }
+    // 3) si TODO está usado (caso muy improbable: >18 cards visibles)
+    return null
+  })
+
   const fotoBySlug = new Map<string, string | null>(
     visibles.map((item, i) => [item.playa.slug, fotos[i]])
   )
