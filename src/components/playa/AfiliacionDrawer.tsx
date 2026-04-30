@@ -13,10 +13,26 @@ interface Props {
   nombre:    string
   productos: ProductoAmazon[]
   slug:      string
+  /** Tipos relevantes para esta playa (slugs de TIPOS), ordenados por
+   *  relevancia. Ej. ['playa-rocosa', 'snorkel'] para una rocosa con
+   *  buenos fondos. Si vacío, no se muestran links a guías. */
+  tiposGuia?: string[]
   locale?:   'es' | 'en'
 }
 
-export default function AfiliacionDrawer({ nombre, productos, slug, locale = 'es' }: Props) {
+const NOMBRES_TIPO: Record<string, string> = {
+  'playa-rocosa':   'a una playa rocosa',
+  'playa-arenosa':  'a una playa de arena',
+  'cala':           'a una cala',
+  'playa-familiar': 'a la playa con niños',
+  'surf':           'para hacer surf',
+  'snorkel':        'para hacer snorkel',
+  'kitesurf':       'para hacer kitesurf',
+  'playa-perros':   'a la playa con perro',
+  'playa-nudista':  'a una playa nudista',
+}
+
+export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tiposGuia = [], locale = 'es' }: Props) {
   const [open, setOpen] = useState(false)
   const es = locale === 'es'
 
@@ -102,23 +118,51 @@ export default function AfiliacionDrawer({ nombre, productos, slug, locale = 'es
         ))}
       </ul>
 
-      <a
-        href={`/playas/${slug}/que-llevar`}
-        style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          marginTop: '1.25rem', padding: '.85rem 1rem',
-          border: '1px solid var(--accent, #6b400a)',
-          borderRadius: 6,
-          background: 'rgba(196, 138, 30, .08)',
-          color: 'var(--accent, #6b400a)',
-          textDecoration: 'none',
-          fontFamily: 'var(--font-serif, Georgia, serif)',
-          fontStyle: 'italic', fontSize: '.95rem',
-        }}
-      >
-        <span>{es ? `Guía completa: qué llevar a ${nombre}` : `Full guide: what to bring to ${nombre}`}</span>
-        <span aria-hidden="true">→</span>
-      </a>
+      {tiposGuia.length > 0 && (
+        <div style={{
+          marginTop: '1.25rem',
+          padding: '1rem 0 0',
+          borderTop: '1px solid var(--line, #e8dcc8)',
+        }}>
+          <div style={{
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '.7rem',
+            letterSpacing: '.08em',
+            textTransform: 'uppercase',
+            color: 'var(--muted, #5a3d12)',
+            marginBottom: '.65rem',
+          }}>
+            {es ? 'Guías relacionadas' : 'Related guides'}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '.45rem' }}>
+            {tiposGuia.slice(0, 3).map(tipoSlug => (
+              <a
+                key={tipoSlug}
+                href={`/que-llevar/${tipoSlug}`}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '.75rem 1rem',
+                  border: '1px solid var(--accent, #6b400a)',
+                  borderRadius: 6,
+                  background: 'rgba(196, 138, 30, .08)',
+                  color: 'var(--accent, #6b400a)',
+                  textDecoration: 'none',
+                  fontFamily: 'var(--font-serif, Georgia, serif)',
+                  fontStyle: 'italic',
+                  fontSize: '.95rem',
+                }}
+              >
+                <span>
+                  {es
+                    ? `Qué llevar ${NOMBRES_TIPO[tipoSlug] ?? `a ${tipoSlug}`}`
+                    : `Guide: ${tipoSlug}`}
+                </span>
+                <span aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       <p style={{
         margin: '1rem 0 0',

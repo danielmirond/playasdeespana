@@ -17,6 +17,7 @@ import IluEstado from './IluEstado'
 import Collapsible from '@/components/ui/Collapsible'
 import { ESTADOS } from '@/lib/estados'
 import { getProductosParaPlaya } from '@/lib/amazon-productos'
+import { getTiposParaPlaya } from '@/lib/tiposQueLlevar'
 import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
@@ -215,6 +216,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const amazonProductos = getProductosParaPlaya(playa, meteo.estado)
+  const tiposGuia       = getTiposParaPlaya(playa)
   const horasLuz = solData?.horas_luz ?? '–'
 
   const nivelCalidad          = calidad?.nivel ?? 'Excelente'
@@ -1108,6 +1110,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           nombre={playa.nombre}
           productos={[...amazonProductos]}
           slug={playa.slug}
+          tiposGuia={tiposGuia}
           locale={locale}
         />
       )}

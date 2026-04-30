@@ -38,14 +38,6 @@ export async function GET() {
   </sitemap>`)
   }
 
-  // Páginas /playas/[slug]/que-llevar (long-tail SEO)
-  for (let i = 1; i <= numChunks; i++) {
-    entries.push(`  <sitemap>
-    <loc>${BASE}/sitemaps/que-llevar/${i}</loc>
-    <lastmod>${today}</lastmod>
-  </sitemap>`)
-  }
-
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries.join('\n')}
