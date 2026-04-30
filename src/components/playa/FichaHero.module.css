@@ -26,10 +26,10 @@
   position: absolute; inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, .42) 0%,
-    rgba(0, 0, 0, 0)   18%,
-    rgba(0, 0, 0, 0)   38%,
-    rgba(0, 0, 0, .68) 100%
+    rgba(0, 0, 0, .5)  0%,
+    rgba(0, 0, 0, 0)   22%,
+    rgba(0, 0, 0, 0)   32%,
+    rgba(0, 0, 0, .85) 100%
   );
   z-index: 1;
 }
