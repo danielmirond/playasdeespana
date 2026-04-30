@@ -166,7 +166,13 @@ export default function FichaHero({
             </div>
 
             <div className={styles.actions}>
-              <FichaHeroActions slug={playa.slug} nombre={playa.nombre} meteo={meteo} scoreLabel={playaScore?.label} />
+              <FichaHeroActions
+                slug={playa.slug}
+                nombre={playa.nombre}
+                meteo={meteo}
+                scoreLabel={playaScore?.label}
+                theme={hasPhoto ? 'light' : 'dark'}
+              />
             </div>
           </div>
         </div>
