@@ -1,4 +1,4 @@
-/* src/app/playas/[slug]/que-llevar/que-llevar.module.css */
+/* src/app/que-llevar/[tipo]/que-llevar.module.css */
 
 .main {
   max-width: 760px;
@@ -36,16 +36,16 @@
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -.02em;
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
 }
-.title em { font-style: italic; color: var(--accent, #6b400a); font-weight: 400; }
 .intro {
   font-family: var(--font-serif, Georgia, serif);
-  font-size: 1.1rem;
-  line-height: 1.55;
+  font-size: 1.08rem;
+  line-height: 1.6;
   color: var(--ink, #2a1a08);
-  margin: 0;
+  margin: 0 0 1rem;
 }
+.intro:last-child { margin-bottom: 0; }
 
 .section {
   margin: 2.5rem 0;
@@ -74,7 +74,6 @@
 .lista {
   list-style: none; padding: 0; margin: 0 0 1.25rem;
   display: flex; flex-direction: column;
-  gap: 0;
 }
 .prod {
   display: grid;
@@ -151,30 +150,27 @@
   margin: 1rem 0 0;
 }
 
-/* Tabla de datos */
-.dataTable {
-  background: var(--card-bg, #faf6ef);
-  border: 1px solid var(--line, #e8dcc8);
-  border-radius: 6px;
-  overflow: hidden;
-  margin: 1.25rem 0 0;
+/* Tips */
+.tips {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column;
+  gap: .85rem;
 }
-.dataRow {
-  display: flex;
-  justify-content: space-between;
-  padding: .75rem 1rem;
-  border-bottom: 1px solid var(--line, #e8dcc8);
-  font-size: .85rem;
+.tips li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--ink, #2a1a08);
 }
-.dataRow:last-child { border-bottom: 0; }
-.dk {
+.tips li::before {
+  content: '→';
+  position: absolute;
+  left: 0; top: 0;
+  color: var(--accent, #6b400a);
   font-family: var(--font-mono, monospace);
-  font-size: .72rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--muted, #5a3d12);
+  font-weight: 600;
 }
-.dv { font-weight: 600; }
 
 /* FAQs */
 .faqs {
@@ -199,7 +195,6 @@
   font-weight: 400;
   color: var(--muted, #5a3d12);
   margin-left: 1rem;
-  transition: transform .2s;
 }
 .faq[open] summary::after { content: '−'; }
 .faq p {
@@ -209,21 +204,36 @@
   color: var(--ink, #2a1a08);
 }
 
-.volver {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line, #e8dcc8);
-  text-align: center;
+/* Otras guías */
+.otrasGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: .65rem;
 }
-.volverLink {
-  font-family: var(--font-mono, monospace);
-  font-size: .82rem;
-  letter-spacing: .04em;
-  color: var(--accent, #6b400a);
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.otraCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--line, #e8dcc8);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--ink, #2a1a08);
+  background: var(--card-bg, #faf6ef);
+  transition: border-color .15s, transform .15s;
 }
-.volverLink:hover { color: var(--ink, #2a1a08); }
+.otraCard:hover {
+  border-color: var(--accent, #6b400a);
+  transform: translateX(-2px);
+}
+.otraNombre {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: .92rem;
+  font-weight: 500;
+}
+.otraArrow {
+  color: var(--muted, #5a3d12);
+}
 
 @media (max-width: 640px) {
   .main { padding: 1rem .85rem 4rem; }

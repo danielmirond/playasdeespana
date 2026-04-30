@@ -107,6 +107,12 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Páginas /playas/[slug]/que-llevar antiguas (una por playa, thin
+      // content) → ficha principal de la playa. Las nuevas guías están
+      // en /que-llevar/[tipo] y se enlazan desde la ficha.
+      { source: '/playas/:slug/que-llevar', destination: '/playas/:slug', permanent: true },
+      { source: '/en/beaches/:slug/que-llevar', destination: '/en/beaches/:slug', permanent: true },
+
       // Slugs OSM → MITECO canónicos para Bandera Azul (dinámicos, generados
       // por scripts/sync-playas-miteco.js).
       ...loadSlugRedirects(),

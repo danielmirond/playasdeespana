@@ -6,6 +6,7 @@ import {
   getPlayas, getPerrosStats, getNudistasStats, getAccesiblesStats,
 } from '@/lib/playas'
 import { getRutas, COSTAS } from '@/lib/rutas'
+import { TIPOS } from '@/lib/tiposQueLlevar'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -118,6 +119,10 @@ export async function GET() {
 
   // Top 10 by coast
   for (const c of COSTAS) urls.push(u(`/top/${c.slug}`, '0.7', 'weekly', today, `/en/top/${c.slug}`))
+
+  // Guías "qué llevar" por tipo (editorial — sustituye a las páginas
+  // por playa que generaban thin content)
+  for (const t of TIPOS) urls.push(u(`/que-llevar/${t.slug}`, '0.6', 'monthly', today))
 
   // Routes
   for (const r of rutas) urls.push(u(`/rutas/${r.slug}`, '0.7', 'weekly', today, `/en/routes/${r.slug}`))
