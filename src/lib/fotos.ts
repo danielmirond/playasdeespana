@@ -53,6 +53,17 @@ const NEGATIVAS = new RegExp(
   'concierto|concert|festival|fiesta|party|disco|nightclub|' +
   // Industrial / no recreativo
   'fabrica|factory|industrial|silo|chimenea|chimney|grua|crane|' +
+  // Personas en primer plano (queremos paisaje, no retratos)
+  'retrato|portrait|selfie|autorretrato|self_portrait|posing|posando|' +
+  'modelo|model|models|modelos|modeling|fashion|moda|' +
+  'family|familia|wedding|boda|novio|novia|bride|groom|' +
+  'niño|niños|nina|ninas|kid|kids|child|children|baby|bebe|toddler|' +
+  'gente|people|crowd|multitud|grupo|group|equipo|team|' +
+  'bañista|bañistas|bather|bathers|swimmer|swimmers|' +
+  'sunbather|tomando_el_sol|tumbado|tumbada|broncear|tanning|' +
+  'beachgoer|beachgoers|turista|tourist|visitante|visitor|' +
+  'amigos|friends|pareja|couple|abrazo|hug|kissing|besando|' +
+  'bikini|swimsuit|topless|nudista|nudist|naked|nude|desnudo|desnuda|' +
   // Otros típicos falsos positivos
   'parking_lot|garaje|garage|hotel(?!_playa)|restaurante(?!_playa)' +
   ')\\b',
@@ -72,9 +83,12 @@ const POSITIVAS = new RegExp(
   // Elementos típicos de playa
   'arena|sand|sandy|duna|dune|guijarro|pebble|rocosa|' +
   'acantilado|cliff|escarpado|rompiente|cantera|paseo_maritimo|' +
-  // Actividades y elementos visibles
-  'chiringuito|sombrilla|umbrella|hamaca|bañista|swimmer|swimming|' +
-  'surf(er)?|surfing|kitesurf|windsurf|snorkel|paddle|kayak|' +
+  // Elementos visibles (sin personas en primer plano)
+  'chiringuito|sombrilla|umbrella|hamaca|paseo|' +
+  // Actividades como signal de contexto playero (la mayoría muestran
+  // mar/olas, no retratos): mantenemos pero NEGATIVAS personas filtra
+  // primero los que sí son retratos de surfistas/etc.
+  'surf|surfing|kitesurf|windsurf|snorkel|paddle|kayak|' +
   // Estados visuales asociables
   'atardecer|sunset|amanecer|sunrise|horizonte|horizon|' +
   // Conceptos editoriales
