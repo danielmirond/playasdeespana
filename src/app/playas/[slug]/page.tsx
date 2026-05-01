@@ -94,7 +94,12 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult, reportesResult, opinionesResult] = await Promise.allSettled([
+  // Deadline global de 4s sobre las fetches paralelas. Lo que no resuelva
+  // a tiempo se cae a fallback (vacío o null) — el cliente reintenta
+  // restaurantes/hoteles vía /api/* tras hidratación. Esto evita que un
+  // Overpass lento (5-7s) deje al usuario mirando el browser progress
+  // bar mientras la ficha está casi lista.
+  const promesas = [
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -112,7 +117,18 @@ export default async function PlayaPage({ params }: Props) {
     getCentrosBuceo(playa.lat, playa.lng),
     getReportes(slug),
     getOpiniones(slug, 1, 10),
-  ])
+  ] as const
+  const DEADLINE_MS = 4000
+  const conDeadline = promesas.map(p =>
+    Promise.race([
+      p.then(v => ({ status: 'fulfilled' as const, value: v })),
+      new Promise<{ status: 'rejected'; reason: string }>(r =>
+        setTimeout(() => r({ status: 'rejected', reason: 'deadline' }), DEADLINE_MS)
+      ),
+    ]).catch(reason => ({ status: 'rejected' as const, reason: String(reason) }))
+  )
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult, reportesResult, opinionesResult] = await Promise.all(conDeadline) as any[]
   const reportesData  = reportesResult.status === 'fulfilled'  ? reportesResult.value  : null
   const opinionesData = opinionesResult.status === 'fulfilled' ? opinionesResult.value : null
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
