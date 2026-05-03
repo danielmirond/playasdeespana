@@ -22,6 +22,7 @@ import styles from './FichaBody.module.css'
 import FichaAsideActions from './FichaAsideActions'
 import TextoSEO from './TextoSEO'
 import HubsRelacionados from './HubsRelacionados'
+import AlquilerBarcoCTA, { debeMostrarCTABarco } from './AlquilerBarcoCTA'
 import FerriesCTA from './FerriesCTA'
 import PhotoCarousel from './PhotoCarousel'
 import type { Escuela } from '@/lib/escuelas'
@@ -1026,6 +1027,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         <TextoSEO playa={playa} locale={locale} />
+
+        {/* CTA alquiler de barco — solo para costas relevantes */}
+        {locale === 'es' && debeMostrarCTABarco(playa) && (
+          <AlquilerBarcoCTA variant="card" region={playa.comunidad} />
+        )}
 
         {/* Hubs temáticos relevantes (cross-linking semántico) */}
         <HubsRelacionados playa={playa} locale={locale} />

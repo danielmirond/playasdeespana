@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import AlquilerBarcoCTA from '@/components/playa/AlquilerBarcoCTA'
 import { getPlayas } from '@/lib/playas'
 export const revalidate = 86400
 export const metadata: Metadata = { title: 'Playas por isla | Mallorca, Tenerife, Ibiza, Fuerteventura y más', description: 'Playas de las islas de España: Baleares (Mallorca, Menorca, Ibiza, Formentera) y Canarias (Tenerife, Gran Canaria, Lanzarote, Fuerteventura).', alternates: { canonical: '/islas' } }
@@ -40,8 +41,9 @@ export default async function Page() {
   ]
   return (<><Nav /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /><main style={{maxWidth:1000,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
     <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.5rem'}}>🏝️ Playas por isla</h1>
-    <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem'}}>Baleares y Canarias: cada isla con sus playas.</p>
-    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))',gap:'.65rem'}}>
+    <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'1rem'}}>Baleares y Canarias: cada isla con sus playas.</p>
+    <AlquilerBarcoCTA variant="banner" />
+    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))',gap:'.65rem',marginTop:'1.25rem'}}>
       {islas.map(isla => {
         const count = playas.filter(isla.filter).length
         return <Link key={isla.nombre} href={`/buscar?q=${encodeURIComponent(isla.nombre)}`} style={{
