@@ -6,6 +6,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import AlquilerBarcoCTA from '@/components/playa/AlquilerBarcoCTA'
 import { getPlayas, getComunidades, getProvincias } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 
@@ -150,12 +151,14 @@ export default async function PlayasParadisiacasPage() {
 
         <p style={{
           fontSize: '1.05rem', color: 'var(--muted)',
-          lineHeight: 1.65, maxWidth: 680, marginBottom: '2.5rem',
+          lineHeight: 1.65, maxWidth: 680, marginBottom: '1.25rem',
         }}>
           Aguas cristalinas, arena fina, entornos naturales y poca masificación.
           Selección basada en calidad del agua (EEA), composición de la arena,
           grado de ocupación y Bandera Azul.
         </p>
+
+        <AlquilerBarcoCTA variant="banner" />
 
         {/* Top 50 ranking */}
         <section style={{ marginBottom: '3rem' }}>
