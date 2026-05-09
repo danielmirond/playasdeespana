@@ -9,6 +9,7 @@ import Nav from '@/components/ui/Nav'
 import AlquilerBarcoCTA from '@/components/playa/AlquilerBarcoCTA'
 import { getPlayas, getComunidades, getProvincias } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -160,55 +161,62 @@ export default async function PlayasParadisiacasPage() {
 
         <AlquilerBarcoCTA variant="banner" />
 
-        {/* Top 50 ranking */}
+        {/* Top 10 con foto hero */}
         <section style={{ marginBottom: '3rem' }}>
           <h2 style={{
             fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.45rem, 3vw, 1.8rem)',
             fontWeight: 700, color: 'var(--ink)', lineHeight: 1.1,
             letterSpacing: '-.015em', marginBottom: '1rem',
           }}>
-            Las <em style={{ fontWeight: 500, color: 'var(--accent)' }}>50 más paradisíacas</em>
+            Las <em style={{ fontWeight: 500, color: 'var(--accent)' }}>10 más paradisíacas</em>
           </h2>
-          <ol style={{
-            listStyle: 'none', padding: 0, margin: 0,
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '.55rem',
-          }}>
-            {top50.map((p, i) => (
-              <li key={p.slug}>
-                <Link href={`/playas/${p.slug}`} style={{
-                  display: 'flex', alignItems: 'center', gap: '.65rem',
-                  padding: '.75rem .9rem', borderRadius: 6,
-                  background: 'var(--card-bg)', border: '1px solid var(--line)',
-                  textDecoration: 'none', color: 'inherit',
-                  transition: 'border-color .15s',
-                }}>
-                  <span style={{
-                    fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-                    fontWeight: 400, fontSize: '1.1rem', color: 'var(--ink)',
-                    letterSpacing: '-.01em', flexShrink: 0, width: 32,
-                  }}>
-                    n°{i + 1}
-                  </span>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', lineHeight: 1.2 }}>
-                      {p.nombre}
-                    </div>
-                    <div style={{ fontSize: '.72rem', color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: '.3rem', marginTop: '.1rem' }}>
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ opacity: .6 }}>
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                      </svg>
-                      {p.municipio} · {p.provincia}
-                    </div>
-                  </div>
-                  {p.bandera && (
-                    <span style={{ fontSize: '.6rem', fontWeight: 500, color: 'var(--accent)', background: 'color-mix(in srgb, var(--accent) 10%, var(--card-bg))', padding: '.15rem .4rem', borderRadius: 100 }}>
-                      B. Azul
-                    </span>
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <TopBeachCardsConHero
+            playas={top50.slice(0, 10).map(p => ({
+              slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+              comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+            }))}
+            limit={10}
+            eyebrow={`Top 10 · ${top50.length} playas seleccionadas`}
+          />
+
+          {/* 11-50 como lista compacta */}
+          {top50.length > 10 && (
+            <>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--ink)', marginTop: '1.75rem', marginBottom: '.85rem' }}>
+                Y otras {top50.length - 10}
+              </h3>
+              <ol style={{
+                listStyle: 'none', padding: 0, margin: 0,
+                display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '.5rem',
+              }} start={11}>
+                {top50.slice(10).map((p, i) => (
+                  <li key={p.slug}>
+                    <Link href={`/playas/${p.slug}`} style={{
+                      display: 'flex', alignItems: 'center', gap: '.65rem',
+                      padding: '.65rem .85rem', borderRadius: 6,
+                      background: 'var(--card-bg)', border: '1px solid var(--line)',
+                      textDecoration: 'none', color: 'inherit',
+                    }}>
+                      <span style={{
+                        fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+                        fontWeight: 400, fontSize: '1rem', color: 'var(--ink)',
+                        letterSpacing: '-.01em', flexShrink: 0, width: 30,
+                      }}>
+                        nº{i + 11}
+                      </span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontWeight: 700, fontSize: '.86rem', color: 'var(--ink)' }}>{p.nombre}</div>
+                        <div style={{ fontSize: '.7rem', color: 'var(--muted)', marginTop: '.1rem' }}>{p.municipio} · {p.provincia}</div>
+                      </div>
+                      {p.bandera && (
+                        <span style={{ fontSize: '.58rem', fontWeight: 500, color: 'var(--accent)', background: 'color-mix(in srgb, var(--accent) 10%, var(--card-bg))', padding: '.15rem .4rem', borderRadius: 100 }}>B. Azul</span>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
         </section>
 
         {/* Por Comunidad Autónoma */}

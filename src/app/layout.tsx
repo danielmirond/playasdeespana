@@ -3,6 +3,7 @@ import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ConsentScripts from '@/components/ui/ConsentScripts'
 import NavigationProgress from '@/components/ui/NavigationProgress'
+import Footer from '@/components/ui/Footer'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -192,6 +193,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <NavigationProgress />
         {children}
+        <Footer />
         {/* GA4 + AdSense. cargados condicionalmente por consentimiento */}
         <ConsentScripts />
         <CookieBanner />

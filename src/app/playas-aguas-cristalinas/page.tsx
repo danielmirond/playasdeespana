@@ -10,6 +10,7 @@ import { getPlayas } from '@/lib/playas'
 import { getTurbidez } from '@/lib/marine'
 import type { Playa } from '@/types'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -78,21 +79,25 @@ export default async function Page() {
     })
   )
 
-  // Top 30 con score más alto (agrupadas por comunidad para variedad)
-  const top30 = [...conScore]
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 50)
+  // Top global por score
+  const sorted = [...conScore].sort((a, b) => b.score - a.score)
 
-  // Deduplicar por comunidad (máx 5 por comunidad para diversidad)
-  const porComunidad = new Map<string, typeof top30>()
-  for (const p of top30) {
+  // Selección con diversidad geográfica: cap 5 por CCAA RECORRIENDO
+  // TODAS las playas ordenadas (no solo top 50, que está saturado de
+  // Canarias por el bonus geo +40). Después re-ordenamos por score
+  // global y tomamos las 30 mejores. Garantiza presencia de varias CCAAs.
+  const porComunidad = new Map<string, typeof sorted>()
+  for (const p of sorted) {
     const lista = porComunidad.get(p.comunidad) ?? []
     if (lista.length < 5) {
       lista.push(p)
       porComunidad.set(p.comunidad, lista)
     }
   }
-  const seleccion = Array.from(porComunidad.values()).flat().slice(0, 30)
+  const seleccion = Array.from(porComunidad.values())
+    .flat()
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 30)
 
   return (
     <>
@@ -142,48 +147,65 @@ export default async function Page() {
           </ul>
         </section>
 
-        {/* Ranking por zonas */}
+        {/* Top 10 con foto hero */}
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '1rem' }}>
-          Las 30 playas con aguas más transparentes
+          Las 10 más cristalinas
         </h2>
-        <ol style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '.65rem' }}>
-          {seleccion.map((p, i) => (
-            <li key={p.slug}>
-              <Link
-                href={`/playas/${p.slug}`}
-                prefetch={false}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '.65rem',
-                  padding: '.75rem .9rem', borderRadius: 6,
-                  background: 'var(--card-bg)', border: '1px solid var(--line)',
-                  textDecoration: 'none', color: 'inherit',
-                }}
-              >
-                <span style={{
-                  flexShrink: 0, width: 28, height: 28, borderRadius: '50%',
-                  background: i < 3 ? 'linear-gradient(135deg, #4a7a90, #4a7a90)' : 'rgba(74,122,144,.15)',
-                  color: i < 3 ? '#fff' : '#0369a1',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '.75rem', fontWeight: 800,
-                }}>
-                  {i + 1}
-                </span>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {p.nombre}
-                  </div>
-                  <div style={{ fontSize: '.7rem', color: 'var(--muted)', marginTop: '.15rem' }}>
-                    {p.municipio} · {p.provincia}
-                    {p.bandera && <span style={{ color: '#2563eb', marginLeft: '.35rem' }}>· Bandera Azul</span>}
-                  </div>
-                </div>
-                <span style={{ fontSize: '.72rem', fontWeight: 700, color: '#0369a1', flexShrink: 0 }}>
-                  {p.score}/100
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <TopBeachCardsConHero
+          playas={seleccion.slice(0, 10).map(p => ({
+            slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+            comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera, score: p.score,
+          }))}
+          limit={10}
+          eyebrow="Top 10 · Visibilidad estimada + Bandera Azul + Calidad EEA"
+          scoreColor="#0369a1"
+        />
+
+        {/* Resto del ranking 11-30 como lista compacta */}
+        {seleccion.length > 10 && (
+          <>
+            <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--ink)', marginTop: '2rem', marginBottom: '1rem' }}>
+              Y otras {seleccion.length - 10} con aguas excelentes
+            </h2>
+            <ol style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '.55rem' }} start={11}>
+              {seleccion.slice(10).map((p, i) => (
+                <li key={p.slug}>
+                  <Link
+                    href={`/playas/${p.slug}`}
+                    prefetch={false}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '.65rem',
+                      padding: '.7rem .85rem', borderRadius: 6,
+                      background: 'var(--card-bg)', border: '1px solid var(--line)',
+                      textDecoration: 'none', color: 'inherit',
+                    }}
+                  >
+                    <span style={{
+                      flexShrink: 0, width: 26, height: 26, borderRadius: '50%',
+                      background: 'rgba(74,122,144,.15)', color: '#0369a1',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: '.72rem', fontWeight: 800,
+                    }}>
+                      {i + 11}
+                    </span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontWeight: 700, fontSize: '.86rem', color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {p.nombre}
+                      </div>
+                      <div style={{ fontSize: '.7rem', color: 'var(--muted)', marginTop: '.15rem' }}>
+                        {p.municipio} · {p.provincia}
+                        {p.bandera && <span style={{ color: '#2563eb', marginLeft: '.35rem' }}>· Bandera Azul</span>}
+                      </div>
+                    </div>
+                    <span style={{ fontSize: '.72rem', fontWeight: 700, color: '#0369a1', flexShrink: 0 }}>
+                      {p.score}/100
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </>
+        )}
 
         {/* Cross-links topic cluster */}
         <section aria-labelledby="h2-relacionadas" style={{ marginTop: '3rem' }}>
