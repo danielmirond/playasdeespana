@@ -2,46 +2,6 @@
   {
     "comunidad": "Andalucía",
     "provincia": "Almería",
-    "municipio": "Adra",
-    "playa": "Censo El Carboncillo",
-    "marker": null,
-    "reason": "mejor match score=0.25 (Sirena Loca)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Adra",
-    "playa": "San Nicolás",
-    "marker": null,
-    "reason": "mejor match score=0.36 (Las Cañadas)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Almería",
-    "playa": "Almería El Toyo",
-    "marker": null,
-    "reason": "mejor match score=0.32 (La Almadraba de Monteleva)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Barbate",
-    "playa": "Zahara de los Atunes",
-    "marker": null,
-    "reason": "mejor match score=0.45 (Playa de Guadalupe)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chiclana de la Frontera",
-    "playa": "La Barrosa",
-    "marker": null,
-    "reason": "mejor match score=0.33 (Playa de Camposoto)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
     "municipio": "Cuevas del Almanzora Níjar",
     "playa": "Playazo-Villaricos",
     "marker": null,
@@ -297,46 +257,6 @@
   },
   {
     "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Almuñécar",
-    "playa": "Marina del Este (Los",
-    "marker": null,
-    "reason": "mejor match score=0.42 (Barranco de Enmedio)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Gualchos",
-    "playa": "Sotillo-Castell",
-    "marker": null,
-    "reason": "mejor match score=0.13 (La Rijana)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Gualchos",
-    "playa": "Cambriles",
-    "marker": null,
-    "reason": "mejor match score=0.22 (La Rijana)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Cartaya",
-    "playa": "Caño de la Culata",
-    "marker": null,
-    "reason": "mejor match score=0.24 (Playa Pesca)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Cartaya",
-    "playa": "San Miguel",
-    "marker": null,
-    "reason": "mejor match score=0.09 (Playa Pesca)"
-  },
-  {
-    "comunidad": "Andalucía",
     "provincia": "Jaén",
     "municipio": "Andújar",
     "playa": "El Encinarejo",
@@ -434,66 +354,10 @@
   {
     "comunidad": "Andalucía",
     "provincia": "Málaga",
-    "municipio": "Algarrobo",
-    "playa": "Algarrobo Costa",
-    "marker": null,
-    "reason": "mejor match score=0.33 (Playa de La Caleta)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Benalmádena",
-    "playa": "Carvajal",
-    "marker": null,
-    "reason": "mejor match score=0.33 (Santa Ana)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Benalmádena",
-    "playa": "Fuente de la Salud",
-    "marker": null,
-    "reason": "mejor match score=0.39 (Playa de la Yuca)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Benalmádena",
-    "playa": "Torrebermeja-Santa",
-    "marker": null,
-    "reason": "mejor match score=0.33 (Torrevigía)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
     "municipio": "Casares",
     "playa": "Ancha",
     "marker": null,
     "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Fuengirola",
-    "playa": "Boliches-Gaviotas",
-    "marker": null,
-    "reason": "mejor match score=0.24 (Playa de los Boliches)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Fuengirola",
-    "playa": "Castillo-Ejido",
-    "marker": null,
-    "reason": "mejor match score=0.24 (Playa de los Boliches)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Fuengirola",
-    "playa": "Fuengirola",
-    "marker": null,
-    "reason": "mejor match score=0.20 (Playa de Torreblanca)"
   },
   {
     "comunidad": "Asturias",
@@ -566,22 +430,6 @@
     "playa": "Venus-Bajadilla",
     "marker": null,
     "reason": "mejor match score=0.32 (Dunas de la Carraca)"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Mijas",
-    "playa": "Calahonda I (Royal",
-    "marker": null,
-    "reason": "mejor match score=0.42 (Playa de Calahonda - Riviera)"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Mijas",
-    "playa": "Beach – La Luna)",
-    "marker": null,
-    "reason": "mejor match score=0.35 (Playa Rocas del Cura)"
   },
   {
     "comunidad": "Islas Baleares",
