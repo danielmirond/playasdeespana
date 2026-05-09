@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -56,6 +57,19 @@ export default async function Page() {
           Calas escondidas y playas poco masificadas: baja ocupación, sin parking, acceso a pie.
           Los rincones que solo conocen los locales.
         </p>
+        {/* Top 10 con foto hero */}
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+          Las <em style={{ fontWeight: 500, color: 'var(--accent)' }}>10 más escondidas</em>
+        </h2>
+        <TopBeachCardsConHero
+          playas={secretas.slice(0, 10).map(p => ({
+            slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+            comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+          }))}
+          limit={10}
+          eyebrow={`Top 10 · ${secretas.length} playas con baja ocupación y acceso difícil`}
+        />
+
         <div style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, overflow: 'hidden', marginBottom: '2rem' }}>
           <MapaPlayas playas={secretas.slice(0, 50)} height="400px" />
         </div>

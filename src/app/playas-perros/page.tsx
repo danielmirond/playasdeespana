@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayasPerros, getPerrosStats } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import { Dog, Info } from '@phosphor-icons/react/dist/ssr'
 import styles from './PlayasPerros.module.css'
 
@@ -130,6 +131,23 @@ export default async function PlayasPerrosPage() {
             de desplazarte. Llevar cartilla sanitaria, correa, bolsa para excrementos y, en razas PPP, bozal y seguro.
           </p>
         </div>
+
+        {/* Top 10 con foto hero */}
+        {playas.length > 0 && (
+          <section aria-labelledby="top-perros" style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+            <h2 id="top-perros" className={styles.sectionTitle}>
+              Las 10 más recomendadas
+            </h2>
+            <TopBeachCardsConHero
+              playas={playas.slice(0, 10).map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={10}
+              eyebrow={`Top 10 · ${playas.length} playas que admiten perros`}
+            />
+          </section>
+        )}
 
         {/* Mapa */}
         {playas.length > 0 && (

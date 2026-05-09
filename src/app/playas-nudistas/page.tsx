@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayasNudistas, getNudistasStats } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import { Info } from '@phosphor-icons/react/dist/ssr'
 import styles from './PlayasNudistas.module.css'
 
@@ -122,6 +123,20 @@ export default async function PlayasNudistasPage() {
             de tradición nudista. Respeta siempre a los demás bañistas y consulta la ordenanza municipal si tienes dudas.
           </p>
         </div>
+
+        {playas.length > 0 && (
+          <section aria-labelledby="top-nudistas" style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+            <h2 id="top-nudistas" className={styles.sectionTitle}>Las 10 más recomendadas</h2>
+            <TopBeachCardsConHero
+              playas={playas.slice(0, 10).map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={10}
+              eyebrow={`Top 10 · ${playas.length} playas naturistas`}
+            />
+          </section>
+        )}
 
         {playas.length > 0 && (
           <div className={styles.mapaCard}>
