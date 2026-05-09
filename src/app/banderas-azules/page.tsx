@@ -34,8 +34,8 @@ const FAQ = [
     a: 'Calidad de agua de baño excelente durante varias temporadas, educación e información ambiental, gestión ambiental de la playa (papeleras, limpieza, aseos, accesibilidad), servicios de salvamento y socorrismo, plan de emergencias y respeto a la normativa vigente. En España la Asociación de Educación Ambiental y del Consumidor (ADEAC) es la responsable de conceder el galardón.',
   },
   {
-    q: '¿Cuántas playas tienen Bandera Azul en España?',
-    a: 'España es el país con más playas galardonadas del mundo. El listado cambia cada temporada. En esta página verás siempre el dato actualizado del último reconocimiento disponible.',
+    q: '¿Cuántas playas tienen Bandera Azul en España en 2026?',
+    a: 'En la temporada 2026-2027, España revalidó su liderazgo mundial con 794 distintivos: 677 playas, 111 puertos deportivos y 6 embarcaciones turísticas. Comunidad Valenciana lidera con 151 playas, seguida de Andalucía (143), Galicia (118) y Cataluña (101).',
   },
   {
     q: '¿Una playa con Bandera Azul tiene siempre buena calidad del agua?',
