@@ -10,7 +10,8 @@
     "sync:playas": "node scripts/sync-playas.js",
     "validate:miteco": "node scripts/validate-miteco-merge.js",
     "sync:playas-miteco": "node scripts/sync-playas-miteco.js",
-    "sync:calidad": "node scripts/sync-calidad-agua.js"
+    "sync:calidad": "node scripts/sync-calidad-agua.js",
+    "sync:bandera-azul": "node scripts/sync-bandera-azul.js"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
