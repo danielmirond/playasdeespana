@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 3600
 
@@ -176,6 +177,8 @@ export default async function SurfPage() {
             Mostrando las 20 playas de surf más relevantes. <Link href="/buscar" style={{ color: 'var(--accent)', fontWeight: 700 }}>Buscar todas →</Link>
           </p>
         )}
+      
+        <EnlacesRelacionados topic="surf" />
       </main>
     </>
   )

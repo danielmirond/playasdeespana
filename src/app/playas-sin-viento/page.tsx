@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import type { Playa } from '@/types'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 3600
 
@@ -167,6 +168,8 @@ export default async function PlayasSinVientoPage() {
             Buscar más playas sin viento →
           </Link>
         </div>
+      
+        <EnlacesRelacionados topic="sin-viento" />
       </main>
     </>
   )

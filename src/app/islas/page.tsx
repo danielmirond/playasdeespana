@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import AlquilerBarcoCTA from '@/components/playa/AlquilerBarcoCTA'
 import { getPlayas } from '@/lib/playas'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 export const revalidate = 86400
 export const metadata: Metadata = { title: 'Playas por isla | Mallorca, Tenerife, Ibiza, Fuerteventura y más', description: 'Playas de las islas de España: Baleares (Mallorca, Menorca, Ibiza, Formentera) y Canarias (Tenerife, Gran Canaria, Lanzarote, Fuerteventura).', alternates: { canonical: '/islas' } }
 
@@ -56,5 +57,7 @@ export default async function Page() {
         </Link>
       })}
     </div>
-  </main></>)
+  
+        <EnlacesRelacionados topic="islas" />
+      </main></>)
 }

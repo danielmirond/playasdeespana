@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 export const revalidate = 86400
 export const metadata: Metadata = { title: 'Calidad del agua en playas de España | Datos EEA', description: 'Clasificación de calidad del agua de baño en las playas de España según la Directiva europea 2006/7/CE.', alternates: { canonical: '/calidad-agua' } }
 export default async function Page() {
@@ -25,5 +26,7 @@ export default async function Page() {
     <div style={{marginTop:'2rem'}}>
       <Link href="/banderas-azules" style={{color:'var(--accent)',fontWeight:700,textDecoration:'none'}}>Ver playas con Bandera Azul →</Link>
     </div>
-  </main></>)
+  
+        <EnlacesRelacionados topic="calidad-agua" />
+      </main></>)
 }

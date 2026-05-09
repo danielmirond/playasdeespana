@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 86400
 
@@ -275,6 +276,8 @@ export default async function BuceoPage() {
             ))}
           </div>
         </section>
+      
+        <EnlacesRelacionados topic="buceo" />
       </main>
 
       <script

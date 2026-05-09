@@ -7,6 +7,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import { Info } from '@phosphor-icons/react/dist/ssr'
 import styles from './PlayasNudistas.module.css'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 86400
 
@@ -195,6 +196,8 @@ export default async function PlayasNudistasPage() {
             </details>
           ))}
         </section>
+
+        <EnlacesRelacionados topic="nudistas" />
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />

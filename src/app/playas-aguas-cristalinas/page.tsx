@@ -10,6 +10,7 @@ import { getPlayas } from '@/lib/playas'
 import { getTurbidez } from '@/lib/marine'
 import type { Playa } from '@/types'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
@@ -277,6 +278,8 @@ export default async function Page() {
             ))}
           </div>
         </section>
+      
+        <EnlacesRelacionados topic="aguas-cristalinas" />
       </main>
 
       {/* FAQPage schema */}

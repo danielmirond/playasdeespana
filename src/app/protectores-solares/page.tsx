@@ -5,6 +5,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 604800 // 7 días. contenido evergreen
 
@@ -321,6 +322,8 @@ export default function ProtectoresSolaresPage() {
             ))}
           </div>
         </section>
+      
+        <EnlacesRelacionados topic="protectores-solares" />
       </main>
 
       {/* FAQPage schema */}

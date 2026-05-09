@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 86400
 
@@ -289,6 +290,8 @@ export default async function PlayasAutocaravanaPage() {
             ))}
           </div>
         </section>
+      
+        <EnlacesRelacionados topic="autocaravana" />
       </main>
 
       {/* FAQPage schema */}

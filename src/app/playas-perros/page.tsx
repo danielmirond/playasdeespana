@@ -7,6 +7,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import { Dog, Info } from '@phosphor-icons/react/dist/ssr'
 import styles from './PlayasPerros.module.css'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 86400
 
@@ -223,6 +224,8 @@ export default async function PlayasPerrosPage() {
             </details>
           ))}
         </section>
+
+        <EnlacesRelacionados topic="perros" />
       </div>
 
       <script

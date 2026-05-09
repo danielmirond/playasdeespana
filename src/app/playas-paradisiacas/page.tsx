@@ -9,6 +9,7 @@ import Nav from '@/components/ui/Nav'
 import AlquilerBarcoCTA from '@/components/playa/AlquilerBarcoCTA'
 import { getPlayas, getComunidades, getProvincias } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
@@ -356,6 +357,8 @@ export default async function PlayasParadisiacasPage() {
             ))}
           </div>
         </section>
+      
+        <EnlacesRelacionados topic="paradisiacas" />
       </main>
     </>
   )

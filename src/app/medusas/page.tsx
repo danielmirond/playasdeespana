@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 export const revalidate = 86400
 export const metadata: Metadata = { title: 'Temporada de medusas en España | Cuándo y dónde', description: 'Mapa de riesgo de medusas por región y mes en España. Cuándo hay medusas, qué playas se ven más afectadas y cómo protegerse.', alternates: { canonical: '/medusas' } }
 
@@ -51,5 +52,7 @@ export default function Page() {
       <li>Consulta la ficha de cada playa para ver el riesgo estimado en tiempo real.</li>
     </ul>
     <div style={{marginTop:'1.5rem'}}><Link href="/buscar" style={{color:'var(--accent)',fontWeight:700,textDecoration:'none'}}>Buscar playas con bajo riesgo →</Link></div>
-  </main></>)
+  
+        <EnlacesRelacionados topic="medusas" />
+      </main></>)
 }

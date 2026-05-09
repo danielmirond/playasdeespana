@@ -4,6 +4,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 604800
 
@@ -244,6 +245,8 @@ export default function SegurosViajePage() {
             ))}
           </div>
         </section>
+      
+        <EnlacesRelacionados topic="seguros-viaje" />
       </main>
 
       <script

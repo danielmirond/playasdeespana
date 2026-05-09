@@ -5,6 +5,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 86400
 
@@ -179,6 +180,8 @@ export default async function AtardeceresPage() {
             </div>
           </section>
         ))}
+      
+        <EnlacesRelacionados topic="atardeceres" />
       </main>
     </>
   )

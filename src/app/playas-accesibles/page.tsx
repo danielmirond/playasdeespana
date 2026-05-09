@@ -7,6 +7,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import { Info } from '@phosphor-icons/react/dist/ssr'
 import styles from './PlayasAccesibles.module.css'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 86400
 
@@ -195,6 +196,8 @@ export default async function PlayasAccesiblesPage() {
             </details>
           ))}
         </section>
+
+        <EnlacesRelacionados topic="accesibles" />
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />

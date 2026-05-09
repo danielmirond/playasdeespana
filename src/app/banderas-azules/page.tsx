@@ -6,6 +6,7 @@ import { getPlayas, getComunidades } from '@/lib/playas'
 import styles from './BanderasAzules.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 86400
 
@@ -230,6 +231,8 @@ export default async function BanderasAzulesPage() {
             </details>
           ))}
         </section>
+
+        <EnlacesRelacionados topic="banderas-azules" />
       </div>
 
       <script
