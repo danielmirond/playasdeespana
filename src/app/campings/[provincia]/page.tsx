@@ -9,8 +9,9 @@ import Nav from '@/components/ui/Nav'
 import { getProvinciasCosteras, getPlayasByProvinciaSlug } from '@/lib/provinciaTopicHelpers'
 import { getCampingsEnBbox, type CampingConPlaya } from '@/lib/campings'
 
-// Semanal: campings cambian poco
-export const revalidate = 86400 * 7
+// Semanal: campings cambian poco (604800 = 86400 * 7).
+// Next.js requiere literal numérico estáticamente analizable, no una expresión.
+export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export async function generateStaticParams() {

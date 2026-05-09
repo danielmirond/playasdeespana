@@ -5,7 +5,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayasPerros, getPerrosStats } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
-import { Dog, Info } from '@phosphor-icons/react/dist/ssr'
+import IconInfo from '@/components/ui/IconInfo'
 import styles from './PlayasPerros.module.css'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
@@ -125,7 +125,7 @@ export default async function PlayasPerrosPage() {
 
         {/* Callout normativa */}
         <div className={styles.info} role="note">
-          <Info size={22} weight="bold" className={styles.infoIcon} aria-hidden="true" />
+          <IconInfo size={22} className={styles.infoIcon} />
           <p className={styles.infoText}>
             <strong>Importante:</strong> la normativa de perros en playas depende del ayuntamiento. Este listado
             recoge playas donde se ha documentado el permiso, pero consulta siempre la ordenanza municipal antes
