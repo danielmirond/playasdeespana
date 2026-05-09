@@ -157,6 +157,8 @@ def main():
                 'miteco_nombre': merge_target['nombre'],
                 'miteco_slug':   merge_target['slug'],
                 'bba_nombre':    nombre,
+                'bba_municipio': municipio,
+                'bba_stub_slug': stub['slug'],
                 'distancia_m':   round(merge_dist, 0),
             })
         else:
