@@ -1,137 +1,25 @@
 {
-  "added": [
-    {
-      "slug": "playa-de-sancti-petri",
-      "nombre": "Playa de Sancti Petri",
-      "municipio": "Chiclana de la Frontera",
-      "score": 0.9
-    },
-    {
-      "slug": "playa-de-los-berengueles",
-      "nombre": "Los Berengueles",
-      "municipio": "Almuñécar",
-      "score": 0.9
-    },
-    {
-      "slug": "playa-de-la-casita-azul",
-      "nombre": "Playa de la Casita Azul",
-      "municipio": "Isla Cristina",
-      "score": 0.9
-    },
-    {
-      "slug": "playa-de-cabopino",
-      "nombre": "Playa de Cabopino",
-      "municipio": "Marbella",
-      "score": 0.9
-    },
-    {
-      "slug": "playa-de-navia",
-      "nombre": "Navia",
-      "municipio": "Navia",
-      "score": 1
-    },
-    {
-      "slug": "platja-es-canar",
-      "nombre": "Platja es Canar",
-      "municipio": "Santa Eulària des Riu",
-      "score": 0.9
-    },
-    {
-      "slug": "bahia-de-timijiraque",
-      "nombre": "Timijiraque",
-      "municipio": "Valverde",
-      "score": 1
-    },
-    {
-      "slug": "platja-del-callao",
-      "nombre": "El Callao",
-      "municipio": "Mataró",
-      "score": 0.9
-    },
-    {
-      "slug": "platja-del-varador-2",
-      "nombre": "El Varador",
-      "municipio": "Mataró",
-      "score": 0.9
-    },
-    {
-      "slug": "platja-de-lesquirol",
-      "nombre": "L'Esquirol",
-      "municipio": "Cambrils",
-      "score": 0.9
-    },
-    {
-      "slug": "platja-de-cunit-llevant",
-      "nombre": "Platja de Cunit-Llevant",
-      "municipio": "Cunit",
-      "score": 0.9
-    },
-    {
-      "slug": "platja-de-cunit-ponent",
-      "nombre": "Platja de Cunit-Ponent",
-      "municipio": "Cunit",
-      "score": 0.9
-    },
-    {
-      "slug": "platja-de-ponent",
-      "nombre": "Platja de Ponent",
-      "municipio": "Benidorm",
-      "score": 0.9
-    },
-    {
-      "slug": "cala-del-raco-del-corb",
-      "nombre": "Cala del Racó del Corb",
-      "municipio": "Calp",
-      "score": 0.9
-    },
-    {
-      "slug": "platja-manyetes",
-      "nombre": "Platja Manyetes",
-      "municipio": "Alcalà de Xivert",
-      "score": 0.9
-    },
-    {
-      "slug": "platja-de-bellreguard",
-      "nombre": "Platja de Bellreguard",
-      "municipio": "Bellreguard",
-      "score": 0.9
-    },
-    {
-      "slug": "cala-del-pinar",
-      "nombre": "Cala del Pinar o del Faralló",
-      "municipio": "Vinaròs",
-      "score": 0.9
-    },
-    {
-      "slug": "platja-de-miramar",
-      "nombre": "Platja de Miramar",
-      "municipio": "Miramar",
-      "score": 0.9
-    },
-    {
-      "slug": "praia-de-caranza",
-      "nombre": "Caranza",
-      "municipio": "Ferrol",
-      "score": 1
-    },
-    {
-      "slug": "praia-de-area-maior-2",
-      "nombre": "Area Maior",
-      "municipio": "Malpica de Bergantiños",
-      "score": 0.9
-    },
-    {
-      "slug": "praia-de-xilloi",
-      "nombre": "Praia de Xilloi",
-      "municipio": "O Vicedo",
-      "score": 0.9
-    }
-  ],
+  "added": [],
   "kept": [
+    {
+      "slug": "censo-adra",
+      "nombre": "Censo",
+      "municipio": "Adra"
+    },
+    {
+      "slug": "san-nicolas-adra",
+      "nombre": "San Nicolás",
+      "municipio": "Adra"
+    },
     {
       "slug": "sirena-loca",
       "nombre": "Sirena Loca",
       "municipio": "Adra"
+    },
+    {
+      "slug": "almeria-almeria",
+      "nombre": "Almería",
+      "municipio": "Almería"
     },
     {
       "slug": "san-miguel-de-cabo-de-gata-almeria",
@@ -159,6 +47,11 @@
       "municipio": "Algeciras"
     },
     {
+      "slug": "zahara-de-los-atunes-barbate",
+      "nombre": "Zahara de los Atunes",
+      "municipio": "Barbate"
+    },
+    {
       "slug": "la-victoria-cadiz",
       "nombre": "La Victoria",
       "municipio": "Cádiz"
@@ -167,6 +60,16 @@
       "slug": "santa-maria-del-mar-cadiz",
       "nombre": "Santa María del Mar",
       "municipio": "Cádiz"
+    },
+    {
+      "slug": "la-barrosa-chiclana-de-la-frontera",
+      "nombre": "La Barrosa",
+      "municipio": "Chiclana de la Frontera"
+    },
+    {
+      "slug": "sancti-petri-chiclana-de-la-frontera",
+      "nombre": "Sancti Petri",
+      "municipio": "Chiclana de la Frontera"
     },
     {
       "slug": "el-descargador-mojacar",
@@ -194,6 +97,16 @@
       "municipio": "Almuñécar"
     },
     {
+      "slug": "marina-del-este-los-berengueles-almunecar",
+      "nombre": "Marina del Este (Los Berengueles)",
+      "municipio": "Almuñécar"
+    },
+    {
+      "slug": "playa-de-los-berengueles",
+      "nombre": "Los Berengueles",
+      "municipio": "Almuñécar"
+    },
+    {
       "slug": "puerta-del-mar-almunecar",
       "nombre": "Puerta del Mar",
       "municipio": "Almuñécar"
@@ -209,6 +122,16 @@
       "municipio": "Almuñécar"
     },
     {
+      "slug": "sotillo-castell-gualchos",
+      "nombre": "Sotillo-Castell",
+      "municipio": "Gualchos"
+    },
+    {
+      "slug": "cambriles-gualchos",
+      "nombre": "Cambriles",
+      "municipio": "Gualchos"
+    },
+    {
       "slug": "isla-canela-ayamonte",
       "nombre": "Isla Canela",
       "municipio": "Ayamonte"
@@ -219,13 +142,63 @@
       "municipio": "Ayamonte"
     },
     {
+      "slug": "cano-de-la-culata-cartaya",
+      "nombre": "Caño de la Culata",
+      "municipio": "Cartaya"
+    },
+    {
+      "slug": "san-miguel-cartaya",
+      "nombre": "San Miguel",
+      "municipio": "Cartaya"
+    },
+    {
+      "slug": "la-casita-azul-isla-cristina",
+      "nombre": "La Casita Azul",
+      "municipio": "Isla Cristina"
+    },
+    {
+      "slug": "algarrobo-costa-algarrobo",
+      "nombre": "Algarrobo Costa",
+      "municipio": "Algarrobo"
+    },
+    {
+      "slug": "carvajal-benalmadena",
+      "nombre": "Carvajal",
+      "municipio": "Benalmádena"
+    },
+    {
+      "slug": "fuente-de-la-salud-benalmadena",
+      "nombre": "Fuente de la Salud",
+      "municipio": "Benalmádena"
+    },
+    {
+      "slug": "torrebermeja-santa-ana-benalmadena",
+      "nombre": "Torrebermeja-Santa Ana",
+      "municipio": "Benalmádena"
+    },
+    {
       "slug": "santa-ana-benalmadena",
       "nombre": "Santa Ana",
       "municipio": "Benalmádena"
     },
     {
-      "slug": "playa-torreblanca-carvajal",
-      "nombre": "Playa Torreblanca-Carvajal",
+      "slug": "boliches-gaviotas-fuengirola",
+      "nombre": "Boliches-Gaviotas",
+      "municipio": "Fuengirola"
+    },
+    {
+      "slug": "carvajal-fuengirola",
+      "nombre": "Carvajal",
+      "municipio": "Fuengirola"
+    },
+    {
+      "slug": "castillo-ejido-fuengirola",
+      "nombre": "Castillo-Ejido",
+      "municipio": "Fuengirola"
+    },
+    {
+      "slug": "fuengirola-fuengirola",
+      "nombre": "Fuengirola",
       "municipio": "Fuengirola"
     },
     {
@@ -234,8 +207,8 @@
       "municipio": "Málaga"
     },
     {
-      "slug": "playa-de-la-malagueta",
-      "nombre": "La Malagueta",
+      "slug": "malagueta-malaga",
+      "nombre": "Malagueta",
       "municipio": "Málaga"
     },
     {
@@ -284,13 +257,38 @@
       "municipio": "Sant Joan de Labritja"
     },
     {
+      "slug": "cabopino-marbella",
+      "nombre": "Cabopino",
+      "municipio": "Marbella"
+    },
+    {
+      "slug": "calahonda-i-royal-beach-la-luna-mijas",
+      "nombre": "Calahonda I (Royal Beach-La Luna)",
+      "municipio": "Mijas"
+    },
+    {
+      "slug": "calahonda-i-royal-beach-la-luna-mijas",
+      "nombre": "Calahonda I (Royal Beach-La Luna)",
+      "municipio": "Mijas"
+    },
+    {
       "slug": "aguilar-muros-de-nalon",
       "nombre": "Aguilar",
       "municipio": "Muros de Nalón"
     },
     {
+      "slug": "playa-de-navia",
+      "nombre": "Navia",
+      "municipio": "Navia"
+    },
+    {
       "slug": "platja-de-santa-eularia",
       "nombre": "Platja de Santa Eulària",
+      "municipio": "Santa Eulària des Riu"
+    },
+    {
+      "slug": "platja-es-canar",
+      "nombre": "Platja es Canar",
       "municipio": "Santa Eulària des Riu"
     },
     {
@@ -414,6 +412,11 @@
       "municipio": "Castro-Urdiales"
     },
     {
+      "slug": "bahia-de-timijiraque",
+      "nombre": "Timijiraque",
+      "municipio": "Valverde"
+    },
+    {
       "slug": "platja-del-coco-2",
       "nombre": "Platja del Coco",
       "municipio": "Badalona"
@@ -474,6 +477,16 @@
       "municipio": "Malgrat de Mar"
     },
     {
+      "slug": "platja-del-callao",
+      "nombre": "El Callao",
+      "municipio": "Mataró"
+    },
+    {
+      "slug": "platja-del-varador-2",
+      "nombre": "El Varador",
+      "municipio": "Mataró"
+    },
+    {
       "slug": "canadell-palafrugell",
       "nombre": "Canadell",
       "municipio": "Palafrugell"
@@ -504,6 +517,11 @@
       "municipio": "Cambrils"
     },
     {
+      "slug": "platja-de-lesquirol",
+      "nombre": "L'Esquirol",
+      "municipio": "Cambrils"
+    },
+    {
       "slug": "prat-den-fores-i-regueral-cambrils",
       "nombre": "Prat d'En Forés i Regueral",
       "municipio": "Cambrils"
@@ -517,6 +535,16 @@
       "slug": "vilafortuny-cambrils",
       "nombre": "Vilafortuny",
       "municipio": "Cambrils"
+    },
+    {
+      "slug": "platja-de-cunit-llevant",
+      "nombre": "Platja de Cunit-Llevant",
+      "municipio": "Cunit"
+    },
+    {
+      "slug": "platja-de-cunit-ponent",
+      "nombre": "Platja de Cunit-Ponent",
+      "municipio": "Cunit"
     },
     {
       "slug": "larrabassada-tarragona",
@@ -539,6 +567,11 @@
       "municipio": "Altea"
     },
     {
+      "slug": "platja-de-ponent",
+      "nombre": "Platja de Ponent",
+      "municipio": "Benidorm"
+    },
+    {
       "slug": "cala-baladrar",
       "nombre": "El Baladrar",
       "municipio": "Benissa"
@@ -551,6 +584,11 @@
     {
       "slug": "arenal-bol-calp",
       "nombre": "Arenal-Bol",
+      "municipio": "Calp"
+    },
+    {
+      "slug": "cala-del-raco-del-corb",
+      "nombre": "Cala del Racó del Corb",
       "municipio": "Calp"
     },
     {
@@ -649,6 +687,11 @@
       "municipio": "Alcalà de Xivert"
     },
     {
+      "slug": "platja-manyetes",
+      "nombre": "Platja Manyetes",
+      "municipio": "Alcalà de Xivert"
+    },
+    {
       "slug": "platja-de-benafeli",
       "nombre": "Platja de Benafelí",
       "municipio": "Almassora"
@@ -662,6 +705,11 @@
       "slug": "morrongo-benicarlo",
       "nombre": "Morrongo",
       "municipio": "Benicarló"
+    },
+    {
+      "slug": "platja-de-bellreguard",
+      "nombre": "Platja de Bellreguard",
+      "municipio": "Bellreguard"
     },
     {
       "slug": "cap-blanc-cullera",
@@ -682,6 +730,16 @@
       "slug": "platja-nord-de-gandia",
       "nombre": "Platja Nord de Gandia",
       "municipio": "Gandia"
+    },
+    {
+      "slug": "cala-del-pinar",
+      "nombre": "Cala del Pinar o del Faralló",
+      "municipio": "Vinaròs"
+    },
+    {
+      "slug": "platja-de-miramar",
+      "nombre": "Platja de Miramar",
+      "municipio": "Miramar"
     },
     {
       "slug": "platja-de-laigua-blanca",
@@ -769,9 +827,19 @@
       "municipio": "Ferrol"
     },
     {
+      "slug": "praia-de-caranza",
+      "nombre": "Caranza",
+      "municipio": "Ferrol"
+    },
+    {
       "slug": "doninos-ferrol",
       "nombre": "Doniños",
       "municipio": "Ferrol"
+    },
+    {
+      "slug": "praia-de-area-maior-2",
+      "nombre": "Area Maior",
+      "municipio": "Malpica de Bergantiños"
     },
     {
       "slug": "coto-barreiros",
@@ -894,6 +962,11 @@
       "municipio": "O Vicedo"
     },
     {
+      "slug": "praia-de-xilloi",
+      "nombre": "Praia de Xilloi",
+      "municipio": "O Vicedo"
+    },
+    {
       "slug": "cabeceira-poio",
       "nombre": "Cabeceira",
       "municipio": "Poio"
@@ -976,46 +1049,6 @@
   ],
   "deactivated": [],
   "unmatched": [
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Almería",
-      "municipio": "Adra",
-      "playa": "Censo El Carboncillo",
-      "marker": null,
-      "reason": "mejor match score=0.25 (Sirena Loca)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Almería",
-      "municipio": "Adra",
-      "playa": "San Nicolás",
-      "marker": null,
-      "reason": "mejor match score=0.36 (Las Cañadas)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Almería",
-      "municipio": "Almería",
-      "playa": "Almería El Toyo",
-      "marker": null,
-      "reason": "mejor match score=0.32 (La Almadraba de Monteleva)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Cádiz",
-      "municipio": "Barbate",
-      "playa": "Zahara de los Atunes",
-      "marker": null,
-      "reason": "mejor match score=0.45 (Playa de Guadalupe)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Cádiz",
-      "municipio": "Chiclana de la Frontera",
-      "playa": "La Barrosa",
-      "marker": null,
-      "reason": "mejor match score=0.33 (Playa de Camposoto)"
-    },
     {
       "comunidad": "Andalucía",
       "provincia": "Almería",
@@ -1274,46 +1307,6 @@
     },
     {
       "comunidad": "Andalucía",
-      "provincia": "Granada",
-      "municipio": "Almuñécar",
-      "playa": "Marina del Este (Los",
-      "marker": null,
-      "reason": "mejor match score=0.42 (Barranco de Enmedio)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Granada",
-      "municipio": "Gualchos",
-      "playa": "Sotillo-Castell",
-      "marker": null,
-      "reason": "mejor match score=0.13 (La Rijana)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Granada",
-      "municipio": "Gualchos",
-      "playa": "Cambriles",
-      "marker": null,
-      "reason": "mejor match score=0.22 (La Rijana)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Huelva",
-      "municipio": "Cartaya",
-      "playa": "Caño de la Culata",
-      "marker": null,
-      "reason": "mejor match score=0.24 (Playa Pesca)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Huelva",
-      "municipio": "Cartaya",
-      "playa": "San Miguel",
-      "marker": null,
-      "reason": "mejor match score=0.09 (Playa Pesca)"
-    },
-    {
-      "comunidad": "Andalucía",
       "provincia": "Jaén",
       "municipio": "Andújar",
       "playa": "El Encinarejo",
@@ -1411,66 +1404,10 @@
     {
       "comunidad": "Andalucía",
       "provincia": "Málaga",
-      "municipio": "Algarrobo",
-      "playa": "Algarrobo Costa",
-      "marker": null,
-      "reason": "mejor match score=0.33 (Playa de La Caleta)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Málaga",
-      "municipio": "Benalmádena",
-      "playa": "Carvajal",
-      "marker": null,
-      "reason": "mejor match score=0.33 (Santa Ana)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Málaga",
-      "municipio": "Benalmádena",
-      "playa": "Fuente de la Salud",
-      "marker": null,
-      "reason": "mejor match score=0.39 (Playa de la Yuca)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Málaga",
-      "municipio": "Benalmádena",
-      "playa": "Torrebermeja-Santa",
-      "marker": null,
-      "reason": "mejor match score=0.33 (Torrevigía)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Málaga",
       "municipio": "Casares",
       "playa": "Ancha",
       "marker": null,
       "reason": "municipio no encontrado"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Málaga",
-      "municipio": "Fuengirola",
-      "playa": "Boliches-Gaviotas",
-      "marker": null,
-      "reason": "mejor match score=0.24 (Playa de los Boliches)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Málaga",
-      "municipio": "Fuengirola",
-      "playa": "Castillo-Ejido",
-      "marker": null,
-      "reason": "mejor match score=0.24 (Playa de los Boliches)"
-    },
-    {
-      "comunidad": "Andalucía",
-      "provincia": "Málaga",
-      "municipio": "Fuengirola",
-      "playa": "Fuengirola",
-      "marker": null,
-      "reason": "mejor match score=0.20 (Playa de Torreblanca)"
     },
     {
       "comunidad": "Asturias",
@@ -1543,22 +1480,6 @@
       "playa": "Venus-Bajadilla",
       "marker": null,
       "reason": "mejor match score=0.32 (Dunas de la Carraca)"
-    },
-    {
-      "comunidad": "Islas Baleares",
-      "provincia": "Málaga",
-      "municipio": "Mijas",
-      "playa": "Calahonda I (Royal",
-      "marker": null,
-      "reason": "mejor match score=0.42 (Playa de Calahonda - Riviera)"
-    },
-    {
-      "comunidad": "Islas Baleares",
-      "provincia": "Málaga",
-      "municipio": "Mijas",
-      "playa": "Beach – La Luna)",
-      "marker": null,
-      "reason": "mejor match score=0.35 (Playa Rocas del Cura)"
     },
     {
       "comunidad": "Islas Baleares",
