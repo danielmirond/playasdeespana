@@ -1,0 +1,224 @@
+[
+  {
+    "miteco_nombre": "Nueva Almería",
+    "miteco_slug": "nueva-almeria-almeria",
+    "bba_nombre": "Almería",
+    "distancia_m": 56.0
+  },
+  {
+    "miteco_nombre": "Playa de los Cocones",
+    "miteco_slug": "playa-de-los-cocones",
+    "bba_nombre": "El Ancón",
+    "distancia_m": 179.0
+  },
+  {
+    "miteco_nombre": "Playa de los Cocones",
+    "miteco_slug": "playa-de-los-cocones",
+    "bba_nombre": "Los Barquicos-Cocones",
+    "distancia_m": 179.0
+  },
+  {
+    "miteco_nombre": "Venta del Bancal",
+    "miteco_slug": "venta-del-bancal-mojacar",
+    "bba_nombre": "Venta del Bancal-Ventanicas",
+    "distancia_m": 28.0
+  },
+  {
+    "miteco_nombre": "Mar Rabiosa",
+    "miteco_slug": "mar-rabiosa-pulpi",
+    "bba_nombre": "Los Nardos",
+    "distancia_m": 9.0
+  },
+  {
+    "miteco_nombre": "La Bajadilla",
+    "miteco_slug": "la-bajadilla-roquetas-de-mar",
+    "bba_nombre": "Romanillas",
+    "distancia_m": 45.0
+  },
+  {
+    "miteco_nombre": "La Bajadilla",
+    "miteco_slug": "la-bajadilla-roquetas-de-mar",
+    "bba_nombre": "Urbanización Roquetas",
+    "distancia_m": 45.0
+  },
+  {
+    "miteco_nombre": "Playa de La Caleta",
+    "miteco_slug": "playa-de-la-caleta-5",
+    "bba_nombre": "La Caleta",
+    "distancia_m": 189.0
+  },
+  {
+    "miteco_nombre": "Cruz del Mar",
+    "miteco_slug": "cruz-del-mar-chipiona",
+    "bba_nombre": "Cruz del Mar-Canteras",
+    "distancia_m": 95.0
+  },
+  {
+    "miteco_nombre": "Playa de Regla",
+    "miteco_slug": "playa-de-regla",
+    "bba_nombre": "Regla",
+    "distancia_m": 96.0
+  },
+  {
+    "miteco_nombre": "Granada",
+    "miteco_slug": "granada-motril",
+    "bba_nombre": "Playa Granada",
+    "distancia_m": 202.0
+  },
+  {
+    "miteco_nombre": "Playa Salmonete",
+    "miteco_slug": "playa-salmonete",
+    "bba_nombre": "Carchuna",
+    "distancia_m": 0.0
+  },
+  {
+    "miteco_nombre": "Playa Urbana de Punta Umbría",
+    "miteco_slug": "playa-urbana-de-punta-umbria",
+    "bba_nombre": "El Albergue",
+    "distancia_m": 11.0
+  },
+  {
+    "miteco_nombre": "Playa de La Caleta",
+    "miteco_slug": "playa-de-la-caleta",
+    "bba_nombre": "Algarrobo Costa",
+    "distancia_m": 11.0
+  },
+  {
+    "miteco_nombre": "Torrevigía",
+    "miteco_slug": "playa-de-torre-vigia",
+    "bba_nombre": "Torrebermeja-Santa Ana",
+    "distancia_m": 10.0
+  },
+  {
+    "miteco_nombre": "Playa de los Boliches",
+    "miteco_slug": "playa-de-los-boliches",
+    "bba_nombre": "Boliches-Gaviotas",
+    "distancia_m": 50.0
+  },
+  {
+    "miteco_nombre": "Playa Torreblanca-Carvajal",
+    "miteco_slug": "playa-torreblanca-carvajal",
+    "bba_nombre": "Carvajal",
+    "distancia_m": 51.0
+  },
+  {
+    "miteco_nombre": "Playa del Castillo",
+    "miteco_slug": "playa-del-castillo",
+    "bba_nombre": "Castillo",
+    "distancia_m": 34.0
+  },
+  {
+    "miteco_nombre": "Playa de San Francisco",
+    "miteco_slug": "playa-de-san-francisco",
+    "bba_nombre": "Fuengirola",
+    "distancia_m": 34.0
+  },
+  {
+    "miteco_nombre": "El Chanquete",
+    "miteco_slug": "playa-de-el-dedo",
+    "bba_nombre": "El Dedo",
+    "distancia_m": 131.0
+  },
+  {
+    "miteco_nombre": "La Malagueta",
+    "miteco_slug": "playa-de-la-malagueta",
+    "bba_nombre": "Malagueta",
+    "distancia_m": 234.0
+  },
+  {
+    "miteco_nombre": "Playa de Casablanca",
+    "miteco_slug": "playa-de-casablanca",
+    "bba_nombre": "Casablanca",
+    "distancia_m": 0.0
+  },
+  {
+    "miteco_nombre": "El Faro",
+    "miteco_slug": "el-faro-marbella",
+    "bba_nombre": "La Fontanilla",
+    "distancia_m": 137.0
+  },
+  {
+    "miteco_nombre": "El Faro",
+    "miteco_slug": "el-faro-marbella",
+    "bba_nombre": "Puerto Banús-Levante",
+    "distancia_m": 169.0
+  },
+  {
+    "miteco_nombre": "La Bajadilla",
+    "miteco_slug": "playa-de-la-bajadilla-2",
+    "bba_nombre": "Venus-Bajadilla",
+    "distancia_m": 105.0
+  },
+  {
+    "miteco_nombre": "La Luna-Royale Beach",
+    "miteco_slug": "la-luna-royale-beach",
+    "bba_nombre": "Calahonda I (Royal Beach-La Luna)",
+    "distancia_m": 0.0
+  },
+  {
+    "miteco_nombre": "Playa de La Cala - El Torreón",
+    "miteco_slug": "playa-de-la-cala-el-torreon",
+    "bba_nombre": "La Cala",
+    "distancia_m": 57.0
+  },
+  {
+    "miteco_nombre": "Playa Piedra de Tarzán",
+    "miteco_slug": "playa-piedra-de-tarzan",
+    "bba_nombre": "Torrecilla",
+    "distancia_m": 2.0
+  },
+  {
+    "miteco_nombre": "Playa de los Álamos",
+    "miteco_slug": "playa-de-los-alamos",
+    "bba_nombre": "Los Álamos",
+    "distancia_m": 102.0
+  },
+  {
+    "miteco_nombre": "Playa de Ferrara",
+    "miteco_slug": "playa-de-ferrara",
+    "bba_nombre": "Ferrara",
+    "distancia_m": 0.0
+  },
+  {
+    "miteco_nombre": "playa canina",
+    "miteco_slug": "playa-canina",
+    "bba_nombre": "Torre del Mar",
+    "distancia_m": 74.0
+  },
+  {
+    "miteco_nombre": "Los Berengueles",
+    "miteco_slug": "playa-de-los-berengueles",
+    "bba_nombre": "Marina del Este (Los Berengueles)",
+    "distancia_m": 53.0
+  },
+  {
+    "miteco_nombre": "Playa del Bajondillo",
+    "miteco_slug": "playa-del-bajondillo",
+    "bba_nombre": "El Bajondillo",
+    "distancia_m": 4.0
+  },
+  {
+    "miteco_nombre": "Playa de la Pelá",
+    "miteco_slug": "playa-de-la-pela",
+    "bba_nombre": "Del Cañón-La Pelá",
+    "distancia_m": 3.0
+  },
+  {
+    "miteco_nombre": "Playa de San Francisco",
+    "miteco_slug": "playa-de-san-francisco",
+    "bba_nombre": "Castillo-Ejido",
+    "distancia_m": 34.0
+  },
+  {
+    "miteco_nombre": "La Carihuela",
+    "miteco_slug": "playa-de-la-carihuela",
+    "bba_nombre": "La Carihuela-Montemar",
+    "distancia_m": 91.0
+  },
+  {
+    "miteco_nombre": "Playa de las Lindes",
+    "miteco_slug": "playa-de-las-lindes",
+    "bba_nombre": "Cenicero-Las Dunas",
+    "distancia_m": 0.0
+  }
+]
