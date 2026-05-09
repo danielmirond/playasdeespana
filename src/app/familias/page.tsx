@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -55,30 +56,51 @@ export default async function Page() {
           {familiares.length} playas con socorrismo, duchas y ocupación media-baja.
           Las más seguras para ir con niños.
         </p>
-        <div style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, overflow: 'hidden', marginBottom: '2rem' }}>
+        {/* Top 10 con foto hero */}
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+          Las <em style={{ fontWeight: 500, color: 'var(--accent)' }}>10 más recomendadas</em> para familias
+        </h2>
+        <TopBeachCardsConHero
+          playas={familiares.slice(0, 10).map(p => ({
+            slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+            comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+          }))}
+          limit={10}
+          eyebrow={`Top 10 · ${familiares.length} playas con socorrismo, duchas y ocupación media-baja`}
+        />
+
+        <div style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, overflow: 'hidden', margin: '2rem 0' }}>
           <MapaPlayas playas={familiares.slice(0, 50)} height="400px" />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '.55rem' }}>
-          {familiares.map(p => (
-            <Link key={p.slug} href={`/playas/${p.slug}`} style={{
-              display: 'flex', alignItems: 'center', gap: '.75rem',
-              padding: '.75rem 1rem', background: 'var(--card-bg)',
-              border: '1px solid var(--line)', borderRadius: 6,
-              textDecoration: 'none',
-            }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>{p.nombre}</div>
-                <div style={{ fontSize: '.72rem', color: 'var(--muted)' }}>{p.municipio} · {p.provincia}</div>
-                <div style={{ display: 'flex', gap: '.2rem', marginTop: '.25rem', flexWrap: 'wrap' }}>
-                  {p.bandera && <span style={{ fontSize: '.62rem', fontWeight: 700, color: 'var(--accent)', background: 'color-mix(in srgb, var(--accent) 10%, var(--card-bg))', padding: '.1rem .3rem', borderRadius: 4 }}>B. Azul</span>}
-                  {p.accesible && <span style={{ fontSize: '.62rem', background: 'var(--metric-bg)', border: '1px solid var(--line)', padding: '.1rem .3rem', borderRadius: 4 }}>PMR</span>}
-                  {p.parking && <span style={{ fontSize: '.62rem', background: 'var(--metric-bg)', border: '1px solid var(--line)', padding: '.1rem .3rem', borderRadius: 4 }}>P</span>}
-                </div>
-              </div>
-              <span style={{ color: 'var(--accent)', fontWeight: 700 }}>→</span>
-            </Link>
-          ))}
-        </div>
+
+        {familiares.length > 10 && (
+          <>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '.85rem' }}>
+              Y otras {familiares.length - 10}
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '.55rem' }}>
+              {familiares.slice(10).map(p => (
+                <Link key={p.slug} href={`/playas/${p.slug}`} style={{
+                  display: 'flex', alignItems: 'center', gap: '.75rem',
+                  padding: '.65rem .85rem', background: 'var(--card-bg)',
+                  border: '1px solid var(--line)', borderRadius: 6,
+                  textDecoration: 'none',
+                }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontWeight: 700, fontSize: '.86rem', color: 'var(--ink)' }}>{p.nombre}</div>
+                    <div style={{ fontSize: '.7rem', color: 'var(--muted)' }}>{p.municipio} · {p.provincia}</div>
+                    <div style={{ display: 'flex', gap: '.2rem', marginTop: '.25rem', flexWrap: 'wrap' }}>
+                      {p.bandera && <span style={{ fontSize: '.62rem', fontWeight: 700, color: 'var(--accent)', background: 'color-mix(in srgb, var(--accent) 10%, var(--card-bg))', padding: '.1rem .3rem', borderRadius: 4 }}>B. Azul</span>}
+                      {p.accesible && <span style={{ fontSize: '.62rem', background: 'var(--metric-bg)', border: '1px solid var(--line)', padding: '.1rem .3rem', borderRadius: 4 }}>PMR</span>}
+                      {p.parking && <span style={{ fontSize: '.62rem', background: 'var(--metric-bg)', border: '1px solid var(--line)', padding: '.1rem .3rem', borderRadius: 4 }}>P</span>}
+                    </div>
+                  </div>
+                  <span style={{ color: 'var(--accent)', fontWeight: 700 }}>→</span>
+                </Link>
+              ))}
+            </div>
+          </>
+        )}
       </main>
     </>
   )

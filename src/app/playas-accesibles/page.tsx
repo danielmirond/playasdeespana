@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayasAccesibles, getAccesiblesStats } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import { Info } from '@phosphor-icons/react/dist/ssr'
 import styles from './PlayasAccesibles.module.css'
 
@@ -122,6 +123,20 @@ export default async function PlayasAccesiblesPage() {
             de tradición accesible. Respeta siempre a los demás bañistas y consulta la ordenanza municipal si tienes dudas.
           </p>
         </div>
+
+        {playas.length > 0 && (
+          <section aria-labelledby="top-accesibles" style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+            <h2 id="top-accesibles" className={styles.sectionTitle}>Las 10 más recomendadas</h2>
+            <TopBeachCardsConHero
+              playas={playas.slice(0, 10).map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={10}
+              eyebrow={`Top 10 · ${playas.length} playas con accesibilidad PMR`}
+            />
+          </section>
+        )}
 
         {playas.length > 0 && (
           <div className={styles.mapaCard}>

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -128,6 +129,19 @@ export default async function AtardeceresPage() {
           </div>
           <MapaPlayas playas={atardeceres} height="440px" />
         </div>
+
+        {/* Top 10 con foto hero */}
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginTop: '2rem', marginBottom: '1rem' }}>
+          Las <em style={{ fontWeight: 500, color: 'var(--accent)' }}>10 mejores</em> para ver el atardecer
+        </h2>
+        <TopBeachCardsConHero
+          playas={atardeceres.slice(0, 10).map(p => ({
+            slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+            comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+          }))}
+          limit={10}
+          eyebrow={`Top 10 · Costa orientada al oeste · Hoy puesta de sol ${sunsetStr}`}
+        />
 
         {/* Grouped by comunidad */}
         {Array.from(porCom.entries()).map(([com, list]) => (
