@@ -5,11 +5,22 @@
 //   - 'banner' → top de páginas temáticas (calas, paradisíacas, islas)
 //   - 'inline' → línea de texto editorial al final de un párrafo
 //
-// La decisión de mostrarlo o no se hace en el componente padre con
-// debeMostrarCTABarco(playa).
+// Server component puro — usa SVG inline en vez de @phosphor-icons/react
+// porque al ser server-rendered con Turbopack y optimizePackageImports,
+// el tree-shaking de Phosphor causaba 'createContext is not a function'.
 
 import Link from 'next/link'
-import { Sailboat, ArrowRight } from '@phosphor-icons/react'
+
+const Sailboat = ({ size = 20, color = 'currentColor' }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 256 256" fill={color}>
+    <path d="M232.45,154.61a8,8,0,0,0-7-2.61H192V104a16,16,0,0,0-16-16H136V40a8,8,0,0,0-12.94-6.27L74.22,72A8,8,0,0,0,72,77.76V152H56a8,8,0,0,0-7.45,2A8,8,0,0,0,46.43,160a96.07,96.07,0,0,0,180.16,0,8,8,0,0,0,5.86-5.39ZM176,104v48H88V81.66l32-25V96a8,8,0,0,0,8,8Zm-12.41,93A79.93,79.93,0,0,1,71.6,168H213.32A79.92,79.92,0,0,1,163.59,197Z"/>
+  </svg>
+)
+const ArrowRight = ({ size = 16, color = 'currentColor' }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 256 256" fill={color}>
+    <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/>
+  </svg>
+)
 
 interface Props {
   variant?: 'card' | 'banner' | 'inline'
@@ -62,7 +73,7 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
           margin: '1rem 0',
         }}
       >
-        <Sailboat size={28} weight="regular" color="var(--accent, #6b400a)" aria-hidden="true" />
+        <Sailboat size={28} color="var(--accent, #6b400a)" />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
             fontFamily: 'var(--font-serif, Georgia, serif)',
@@ -82,7 +93,7 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
             Alquila un barco con o sin patrón · Click&Boat, Samboat, Nautal comparados
           </div>
         </div>
-        <ArrowRight size={18} weight="bold" color="var(--accent, #6b400a)" aria-hidden="true" />
+        <ArrowRight size={18} color="var(--accent, #6b400a)" />
       </Link>
     )
   }
@@ -104,7 +115,7 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '.85rem', marginBottom: '.5rem' }}>
-        <Sailboat size={22} weight="regular" color="var(--accent, #6b400a)" aria-hidden="true" />
+        <Sailboat size={22} color="var(--accent, #6b400a)" />
         <h3 style={{
           margin: 0,
           fontFamily: 'var(--font-serif, Georgia, serif)',
@@ -137,7 +148,7 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
         fontWeight: 600,
       }}>
         Comparar plataformas
-        <ArrowRight size={14} weight="bold" aria-hidden="true" />
+        <ArrowRight size={14} />
       </span>
     </Link>
   )
