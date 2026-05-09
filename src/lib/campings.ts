@@ -128,3 +128,129 @@ out center body 40;`
     .sort((a: Camping, b: Camping) => a.distancia_m - b.distancia_m)
     .slice(0, 5)
 }
+
+
+// ── Por provincia / bbox ────────────────────────────────────────────
+//
+// Consulta Overpass UNA vez para todo el bbox de una provincia y
+// devuelve campings con la playa más cercana adjunta. Pensado para las
+// landings /campings y /campings/[provincia] que necesitan listar
+// campings reales (no playas).
+
+export interface CampingConPlaya extends Camping {
+  /** Playa más cercana al camping (de playas.json). */
+  playa: {
+    slug:       string
+    nombre:     string
+    municipio:  string
+    distancia_m:number
+  } | null
+}
+
+interface BBox {
+  minLat: number
+  maxLat: number
+  minLng: number
+  maxLng: number
+}
+
+function bboxFromPoints(points: Array<{lat: number; lng: number}>, padding = 0.05): BBox {
+  if (points.length === 0) return { minLat: 0, maxLat: 0, minLng: 0, maxLng: 0 }
+  const lats = points.map(p => p.lat)
+  const lngs = points.map(p => p.lng)
+  return {
+    minLat: Math.min(...lats) - padding,
+    maxLat: Math.max(...lats) + padding,
+    minLng: Math.min(...lngs) - padding,
+    maxLng: Math.max(...lngs) + padding,
+  }
+}
+
+/**
+ * Devuelve campings dentro del bbox de un conjunto de playas (provincia,
+ * comunidad, etc.) con la playa más cercana adjunta. ISR 7 días por
+ * defecto al cachear el fetch de Overpass.
+ */
+export async function getCampingsEnBbox(
+  playas: Array<{ slug: string; nombre: string; municipio: string; lat: number; lng: number }>,
+  options: { revalidate?: number; max?: number } = {}
+): Promise<CampingConPlaya[]> {
+  if (playas.length === 0) return []
+  const bbox = bboxFromPoints(playas)
+  // Overpass bbox: south,west,north,east
+  const bboxStr = `${bbox.minLat},${bbox.minLng},${bbox.maxLat},${bbox.maxLng}`
+
+  const query = `[out:json][timeout:25];
+(
+  node["tourism"="camp_site"](${bboxStr});
+  node["tourism"="caravan_site"](${bboxStr});
+  way["tourism"="camp_site"](${bboxStr});
+  way["tourism"="caravan_site"](${bboxStr});
+);
+out center body 200;`
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const elements = await queryOverpass(query, {
+    timeoutPerAttempt: 12000,
+    revalidate: options.revalidate ?? 7 * 86400,
+    label: 'campings-bbox',
+  })
+  if (!elements) return []
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const max = options.max ?? 100
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const camps: CampingConPlaya[] = elements
+    .filter((el: any) => el.tags?.name)
+    .map((el: any): CampingConPlaya => {
+      const tags = el.tags ?? {}
+      const elLat = el.lat ?? el.center?.lat
+      const elLon = el.lon ?? el.center?.lon
+      if (typeof elLat !== 'number' || typeof elLon !== 'number') return null as never
+
+      // Playa más cercana
+      let nearest = null as CampingConPlaya['playa']
+      let nearestDist = Infinity
+      for (const p of playas) {
+        const d = haversine(elLat, elLon, p.lat, p.lng)
+        if (d < nearestDist) {
+          nearestDist = d
+          nearest = { slug: p.slug, nombre: p.nombre, municipio: p.municipio, distancia_m: Math.round(d) }
+        }
+      }
+
+      const esAutocaravanasSolo = tags.tourism === 'caravan_site'
+      const glamping = isGlamping(tags)
+      const tipo: Camping['tipo'] = glamping ? 'Glamping' : esAutocaravanasSolo ? 'Autocaravanas' : 'Camping'
+
+      let perros: boolean | undefined
+      if (tags.dog === 'yes' || tags.dogs === 'yes') perros = true
+      else if (tags.dog === 'no' || tags.dogs === 'no') perros = false
+
+      return {
+        id:          String(el.id),
+        nombre:      tags.name,
+        tipo,
+        categoria:   inferirCategoria(tags),
+        distancia_m: nearest?.distancia_m ?? 0,
+        servicios:   extraerServicios(tags),
+        tiendas:     tags.tents !== 'no' && !esAutocaravanasSolo,
+        autocaravanas: tags.caravans !== 'no' || esAutocaravanasSolo,
+        bungalows:   tags.cabins === 'yes' || tags.static_caravans === 'yes',
+        perros,
+        website:     tags.website ?? tags['contact:website'] ?? null,
+        telefono:    tags.phone ?? tags['contact:phone'] ?? null,
+        email:       tags.email ?? tags['contact:email'] ?? null,
+        lat:         elLat,
+        lon:         elLon,
+        source:      'osm',
+        playa:       nearest,
+      }
+    })
+    .filter(Boolean)
+    .sort((a: CampingConPlaya, b: CampingConPlaya) => (a.playa?.distancia_m ?? Infinity) - (b.playa?.distancia_m ?? Infinity))
+    .slice(0, max)
+
+  return camps
+}
