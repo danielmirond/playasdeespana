@@ -66,8 +66,14 @@ out center body;`
       .sort((a: any, b: any) => a.distancia - b.distancia)
       .slice(0, 5)
 
-    return NextResponse.json(parkings)
+    return NextResponse.json(parkings, {
+      headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=172800' },
+    })
   } catch {
-    return NextResponse.json([], { status: 200 })
+    // Cache cortito en error para no martillear OSM si está caído.
+    return NextResponse.json([], {
+      status: 200,
+      headers: { 'Cache-Control': 'public, s-maxage=300' },
+    })
   }
 }
