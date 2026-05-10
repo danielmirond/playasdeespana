@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     description: 'Guía completa de campings junto a playas españolas, por comunidad y provincia.',
     url: `${BASE}/campings`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Campings%20cerca%20de%20la%20playa', width: 1200, height: 630 }],
   },
 }
 

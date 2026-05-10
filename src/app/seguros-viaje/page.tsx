@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     description: 'Comparativa de seguros con cobertura médica, cancelación y equipaje.',
     url: `${BASE}/seguros-viaje`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Seguro%20de%20viaje%20para%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 

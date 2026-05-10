@@ -27,6 +27,10 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: 'Playas de España | ¿A qué playa voy hoy?',
   description: 'Estado del mar en tiempo real en más de 5.000 playas de España. Temperatura del agua, oleaje, viento y servicios. Datos actualizados cada hora.',
+  alternates: {
+    canonical: '/',
+    languages: { 'es': '/', 'en': '/en' },
+  },
   openGraph: {
     title: 'Playas de España | ¿A qué playa voy hoy?',
     description: 'Consulta el estado del mar en más de 5.000 playas españolas.',

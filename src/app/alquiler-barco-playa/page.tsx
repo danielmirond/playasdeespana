@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description: 'Descubre calas vírgenes en barco. Plataformas comparadas para Baleares, Canarias y toda la costa.',
     url: `${BASE}/alquiler-barco-playa`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Alquilar%20barco%20con%20patr%C3%B3n', width: 1200, height: 630 }],
   },
 }
 

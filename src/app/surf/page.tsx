@@ -14,6 +14,7 @@ const MODIFIED = getEditorialModified('src/app/surf/page.tsx', ['public/data/pla
 export const metadata: Metadata = {
   title: 'Surf en España | Previsión de olas y viento en playas de surf',
   description: 'Previsión de surf en España: playas con olas, periodo, viento y condiciones para surfear hoy. Costa Vasca, Asturias, Galicia, Canarias, Cádiz y más.',
+  openGraph: { type: 'website', images: [{ url: '/api/og?playa=Surf%20en%20Espa%C3%B1a', width: 1200, height: 630 }] },
   alternates: { canonical: '/surf' },
 }
 

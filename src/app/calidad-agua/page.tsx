@@ -13,7 +13,9 @@ export const metadata: Metadata = {
   title: 'Calidad del agua en playas de España | Datos EEA',
   description: 'Clasificación de calidad del agua de baño en las playas de España según la Directiva europea 2006/7/CE.',
   alternates: { canonical: '/calidad-agua' },
-  openGraph: { type: 'article', modifiedTime: MODIFIED, url: 'https://playas-espana.com/calidad-agua' },
+  openGraph: { type: 'article', modifiedTime: MODIFIED, url: 'https://playas-espana.com/calidad-agua',
+    images: [{ url: '/api/og?playa=Calidad%20del%20agua%20de%20ba%C3%B1o', width: 1200, height: 630 }],
+  },
   other: { 'article:modified_time': MODIFIED },
 }
 export default async function Page() {

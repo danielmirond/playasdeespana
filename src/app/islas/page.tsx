@@ -8,7 +8,8 @@ import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import { getEditorialModified } from '@/lib/dateModified'
 export const revalidate = 86400
 const MODIFIED = getEditorialModified('src/app/islas/page.tsx', ['public/data/playas.json'])
-export const metadata: Metadata = { title: 'Playas por isla | Mallorca, Tenerife, Ibiza, Fuerteventura y más', description: 'Playas de las islas de España: Baleares (Mallorca, Menorca, Ibiza, Formentera) y Canarias (Tenerife, Gran Canaria, Lanzarote, Fuerteventura).', alternates: { canonical: '/islas' } }
+export const metadata: Metadata = { title: 'Playas por isla | Mallorca, Tenerife, Ibiza, Fuerteventura y más', description: 'Playas de las islas de España: Baleares (Mallorca, Menorca, Ibiza, Formentera) y Canarias (Tenerife, Gran Canaria, Lanzarote, Fuerteventura).',
+  openGraph: { type: 'website', images: [{ url: '/api/og?playa=Playas%20por%20isla%20en%20Espa%C3%B1a', width: 1200, height: 630 }] }, alternates: { canonical: '/islas' } }
 
 const FAQ = [
   { q: '¿Cuál es la mejor isla de España para playas?', a: 'Depende de lo que busques. Menorca destaca por sus calas vírgenes de agua turquesa, Fuerteventura ofrece las playas más extensas y salvajes, y Mallorca combina calas pequeñas con playas amplias y buen equipamiento. Para arena negra volcánica, Lanzarote y Tenerife son únicas.' },

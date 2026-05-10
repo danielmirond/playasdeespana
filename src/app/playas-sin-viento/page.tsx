@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     title: 'Playas sin viento hoy',
     description: 'Las playas más resguardadas de España ahora mismo.',
     url: `${BASE}/playas-sin-viento`,
+    images: [{ url: '/api/og?playa=Playas%20sin%20viento%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 

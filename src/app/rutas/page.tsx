@@ -10,6 +10,7 @@ export const revalidate = 86400
 export const metadata: Metadata = {
   title: 'Rutas de playas por las costas de España | Itinerarios',
   description: 'Recorre las mejores playas de cada costa de España: Costa del Sol, Costa Brava, Costa de la Luz, Rías Baixas, Islas Canarias y más. Itinerarios con mapa y Google Maps.',
+  openGraph: { type: 'website', images: [{ url: '/api/og?playa=Rutas%20costeras%20por%20Espa%C3%B1a', width: 1200, height: 630 }] },
   alternates: { canonical: '/rutas' },
 }
 

@@ -10,7 +10,9 @@ export const metadata: Metadata = {
   title: 'Temporada de medusas en España | Cuándo y dónde',
   description: 'Mapa de riesgo de medusas por región y mes en España. Cuándo hay medusas, qué playas se ven más afectadas y cómo protegerse.',
   alternates: { canonical: '/medusas' },
-  openGraph: { type: 'article', modifiedTime: MODIFIED, url: 'https://playas-espana.com/medusas' },
+  openGraph: { type: 'article', modifiedTime: MODIFIED, url: 'https://playas-espana.com/medusas',
+    images: [{ url: '/api/og?playa=Temporada%20de%20medusas%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
+  },
   other: { 'article:modified_time': MODIFIED },
 }
 

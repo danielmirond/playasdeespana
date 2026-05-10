@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     description: 'SPF, resistencia al agua, reef-safe. Guía práctica con recomendaciones.',
     url: `${BASE}/protectores-solares`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Mejores%20protectores%20solares%20para%20playa', width: 1200, height: 630 }],
   },
 }
 

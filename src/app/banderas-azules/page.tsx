@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     description: 'Listado completo de las playas galardonadas con Bandera Azul, ordenadas por comunidad autónoma.',
     url: 'https://playas-espana.com/banderas-azules',
     type: 'website',
+    images: [{ url: '/api/og?playa=Playas%20con%20Bandera%20Azul%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 
