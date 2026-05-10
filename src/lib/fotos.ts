@@ -518,12 +518,34 @@ export async function getFotoThumb(
  *   5. Pexels por municipio — requiere PEXELS_API_KEY
  *   6. Unsplash por municipio — requiere UNSPLASH_ACCESS_KEY
  */
-export async function getFotos(
-  nombre: string,
-  municipio: string,
-  lat: number,
-  lon: number,
-  provincia: string = ''
+// ── KV cache abstraction ────────────────────────────────────────────
+// Mismo patrón que opiniones.ts / votos.ts. Cacheamos el resultado
+// completo de la cascada por (lat, lon) con TTL 7 días — las fotos de
+// una playa cambian poquísimo. El primer hit hace los 6 fetches; el
+// resto sirve desde KV en ms. TTFB de la ficha cae drásticamente.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type KV = { get: (key: string) => Promise<any>; set: (key: string, value: any, opts?: any) => Promise<any> }
+let _kv: KV | null | undefined
+async function getKV(): Promise<KV | null> {
+  if (_kv !== undefined) return _kv
+  try {
+    const mod = await (Function('return import("@vercel/kv")')() as Promise<{ kv: KV }>)
+    _kv = mod.kv
+    return _kv
+  } catch {
+    _kv = null
+    return null
+  }
+}
+
+const KV_TTL_SEC = 7 * 24 * 3600  // 7 días
+
+function cacheKey(lat: number, lon: number): string {
+  return `fotos:${lat.toFixed(4)}:${lon.toFixed(4)}`
+}
+
+async function getFotosUncached(
+  nombre: string, municipio: string, lat: number, lon: number, provincia: string,
 ): Promise<FotoPlaya[]> {
   const [wikiGeo, openverse, flickr, wikiText, pexels, unsplash] = await Promise.all([
     getFotosWikimediaGeo(lat, lon),
@@ -556,4 +578,37 @@ export async function getFotos(
   if (combinadas.length < 6) agregar(unsplash)
 
   return combinadas.slice(0, 6)
+}
+
+export async function getFotos(
+  nombre: string,
+  municipio: string,
+  lat: number,
+  lon: number,
+  provincia: string = ''
+): Promise<FotoPlaya[]> {
+  const key = cacheKey(lat, lon)
+  const kv = await getKV()
+
+  // 1. Intentar KV cache
+  if (kv) {
+    try {
+      const cached = await kv.get(key) as FotoPlaya[] | null
+      if (cached && Array.isArray(cached) && cached.length > 0) {
+        return cached
+      }
+    } catch {
+      // KV down: caemos al fetch directo, no rompemos.
+    }
+  }
+
+  // 2. Cascada en vivo
+  const fotos = await getFotosUncached(nombre, municipio, lat, lon, provincia)
+
+  // 3. Persistir resultado (fire-and-forget — no esperamos)
+  if (kv && fotos.length > 0) {
+    kv.set(key, fotos, { ex: KV_TTL_SEC }).catch(() => {})
+  }
+
+  return fotos
 }
