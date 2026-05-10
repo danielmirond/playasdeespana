@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayasPerros, getPerrosStats, toSlug } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
-import { Info } from '@phosphor-icons/react/dist/ssr'
+import IconInfo from '@/components/ui/IconInfo'
 import styles from '../../PlayasPerros.module.css'
 
 export const revalidate = 86400
@@ -90,7 +90,7 @@ export default async function MunicipioPerrosPage({ params }: Props) {
 
       <div className={styles.wrap}>
         <div className={styles.info} role="note">
-          <Info size={22} weight="bold" className={styles.infoIcon} aria-hidden="true" />
+          <IconInfo size={22} className={styles.infoIcon} />
           <p className={styles.infoText}>
             La documentación y los horarios para acceder a las playas con perros los define el ayuntamiento
             de {mun.nombre}. Lleva cartilla sanitaria, correa, bozal si procede y bolsa para excrementos.

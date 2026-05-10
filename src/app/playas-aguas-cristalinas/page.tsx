@@ -10,12 +10,16 @@ import { getPlayas } from '@/lib/playas'
 import { getTurbidez } from '@/lib/marine'
 import type { Playa } from '@/types'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+const MODIFIED = getEditorialModified('src/app/playas-aguas-cristalinas/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas con aguas cristalinas en España | Las más transparentes',
   description: 'Descubre las playas de España con aguas más cristalinas y transparentes: Canarias, Islas Baleares, costas de Almería y Menorca. Rankings por visibilidad, calidad EEA y Bandera Azul.',
@@ -277,6 +281,9 @@ export default async function Page() {
             ))}
           </div>
         </section>
+      
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-aguas-cristalinas" name="Playas con aguas cristalinas en España" visible={false} />
+        <EnlacesRelacionados topic="aguas-cristalinas" />
       </main>
 
       {/* FAQPage schema */}

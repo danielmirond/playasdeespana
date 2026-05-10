@@ -5,11 +5,15 @@ import Nav from '@/components/ui/Nav'
 import { getPlayasAccesibles, getAccesiblesStats } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
-import { Info } from '@phosphor-icons/react/dist/ssr'
+import IconInfo from '@/components/ui/IconInfo'
 import styles from './PlayasAccesibles.module.css'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
+const MODIFIED = getEditorialModified('src/app/playas-accesibles/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas accesibles en España 2026 | Listado PMR completo',
   description: 'Listado de playas accesibles para personas con movilidad reducida (PMR) en España. Rampas, pasarelas, sillas anfibias y aseos adaptados por comunidad, provincia y municipio.',
@@ -117,7 +121,7 @@ export default async function PlayasAccesiblesPage() {
         </div>
 
         <div className={styles.info} role="note">
-          <Info size={22} weight="bold" className={styles.infoIcon} aria-hidden="true" />
+          <IconInfo size={22} className={styles.infoIcon} />
           <p className={styles.infoText}>
             El accesibilidad es legal en España. Este listado incluye tanto playas señalizadas oficialmente como zonas
             de tradición accesible. Respeta siempre a los demás bañistas y consulta la ordenanza municipal si tienes dudas.
@@ -195,6 +199,9 @@ export default async function PlayasAccesiblesPage() {
             </details>
           ))}
         </section>
+
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-accesibles" name="Playas accesibles en España" visible={false} />
+        <EnlacesRelacionados topic="accesibles" />
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />

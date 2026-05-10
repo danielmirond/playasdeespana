@@ -5,6 +5,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const revalidate = 604800
 
@@ -391,6 +392,8 @@ export default function MetodologiaPage() {
             la fuente oficial. Revisamos todas las incidencias en menos de 72 horas.
           </p>
         </section>
+      
+        <EnlacesRelacionados topic="metodologia" />
       </main>
     </>
   )

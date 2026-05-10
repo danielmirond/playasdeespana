@@ -7,11 +7,15 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+const MODIFIED = getEditorialModified('src/app/campings/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Campings cerca de la playa en España | Guía completa',
   description: 'Encuentra campings, glamping y áreas de autocaravanas junto a las mejores playas de España. Listado por comunidad autónoma con servicios, distancia y precios orientativos.',
@@ -251,6 +255,9 @@ export default async function CampingsPage() {
             ))}
           </div>
         </section>
+      
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/campings" name="Campings cerca de la playa en España" visible={false} />
+        <EnlacesRelacionados topic="campings" />
       </main>
 
       {/* FAQPage schema */}

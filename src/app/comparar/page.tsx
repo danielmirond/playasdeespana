@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import ComparadorPlayas from './ComparadorPlayas'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 
 export const metadata: Metadata = {
   title: 'Comparar playas | ¿Cuál es mejor hoy?',
@@ -33,6 +34,8 @@ export default function Page() {
           Te decimos cuál es mejor hoy.
         </p>
         <ComparadorPlayas />
+      
+        <EnlacesRelacionados topic="comparar" />
       </main>
     </>
   )

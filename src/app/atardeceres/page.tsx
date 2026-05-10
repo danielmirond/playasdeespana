@@ -5,9 +5,13 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
+const MODIFIED = getEditorialModified('src/app/atardeceres/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Mejores playas para ver el atardecer en España | Puestas de sol',
   description: 'Playas españolas con las mejores puestas de sol: orientadas al oeste y suroeste. Costa de la Luz, Rías Baixas, Costa da Morte, Baleares y Canarias.',
@@ -179,6 +183,9 @@ export default async function AtardeceresPage() {
             </div>
           </section>
         ))}
+      
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/atardeceres" name="Mejores playas para ver el atardecer en España" visible={false} />
+        <EnlacesRelacionados topic="atardeceres" />
       </main>
     </>
   )

@@ -5,11 +5,15 @@ import Nav from '@/components/ui/Nav'
 import { getPlayasPerros, getPerrosStats } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
-import { Dog, Info } from '@phosphor-icons/react/dist/ssr'
+import IconInfo from '@/components/ui/IconInfo'
 import styles from './PlayasPerros.module.css'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
+const MODIFIED = getEditorialModified('src/app/playas-perros/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas para perros en España 2026 | Listado por comunidad',
   description: 'Playas donde se permite la entrada de perros en España. Listado oficial por comunidad autónoma, provincia y municipio. Consejos, normativa y mapa interactivo.',
@@ -124,7 +128,7 @@ export default async function PlayasPerrosPage() {
 
         {/* Callout normativa */}
         <div className={styles.info} role="note">
-          <Info size={22} weight="bold" className={styles.infoIcon} aria-hidden="true" />
+          <IconInfo size={22} className={styles.infoIcon} />
           <p className={styles.infoText}>
             <strong>Importante:</strong> la normativa de perros en playas depende del ayuntamiento. Este listado
             recoge playas donde se ha documentado el permiso, pero consulta siempre la ordenanza municipal antes
@@ -223,6 +227,9 @@ export default async function PlayasPerrosPage() {
             </details>
           ))}
         </section>
+
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-perros" name="Playas para perros en España" visible={false} />
+        <EnlacesRelacionados topic="perros" />
       </div>
 
       <script

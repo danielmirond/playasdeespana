@@ -3,7 +3,11 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import AlquilerBarcoCTA from '@/components/playa/AlquilerBarcoCTA'
 import { getPlayas } from '@/lib/playas'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 export const revalidate = 86400
+const MODIFIED = getEditorialModified('src/app/islas/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = { title: 'Playas por isla | Mallorca, Tenerife, Ibiza, Fuerteventura y más', description: 'Playas de las islas de España: Baleares (Mallorca, Menorca, Ibiza, Formentera) y Canarias (Tenerife, Gran Canaria, Lanzarote, Fuerteventura).', alternates: { canonical: '/islas' } }
 
 const FAQ = [
@@ -40,7 +44,7 @@ export default async function Page() {
     { nombre: 'Fuerteventura', filter: (p: any) => ['La Oliva','Puerto del Rosario','Tuineje','Pájara','Antigua','Betancuria'].some(m => p.municipio?.includes(m)) },
   ]
   return (<><Nav /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /><main style={{maxWidth:1000,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
-    <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.5rem'}}>🏝️ Playas por isla</h1>
+    <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.5rem'}}>Playas por isla en España <span aria-hidden="true">🏝️</span></h1>
     <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'1rem'}}>Baleares y Canarias: cada isla con sus playas.</p>
     <AlquilerBarcoCTA variant="banner" />
     <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))',gap:'.65rem',marginTop:'1.25rem'}}>
@@ -56,5 +60,8 @@ export default async function Page() {
         </Link>
       })}
     </div>
-  </main></>)
+  
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/islas" name="Playas por isla en España" visible={false} />
+        <EnlacesRelacionados topic="islas" />
+      </main></>)
 }

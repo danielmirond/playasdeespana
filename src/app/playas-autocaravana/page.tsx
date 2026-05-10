@@ -8,11 +8,15 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+const MODIFIED = getEditorialModified('src/app/playas-autocaravana/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas para autocaravana en España | Áreas, pernocta y rutas costeras',
   description: 'Guía completa de playas aptas para autocaravana en España. Áreas de autocaravanas cercanas, zonas de pernocta legal, servicios de vaciado y enganche eléctrico por comunidad.',
@@ -289,6 +293,9 @@ export default async function PlayasAutocaravanaPage() {
             ))}
           </div>
         </section>
+      
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-autocaravana" name="Playas para autocaravana en España" visible={false} />
+        <EnlacesRelacionados topic="autocaravana" />
       </main>
 
       {/* FAQPage schema */}

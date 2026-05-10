@@ -11,6 +11,18 @@
     {
       "path": "/api/ping-google",
       "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/warm?slice=landings",
+      "schedule": "30 */6 * * *"
+    },
+    {
+      "path": "/api/cron/warm?slice=geo",
+      "schedule": "15 5 * * *"
+    },
+    {
+      "path": "/api/cron/warm?slice=top",
+      "schedule": "45 */12 * * *"
     }
   ],
 

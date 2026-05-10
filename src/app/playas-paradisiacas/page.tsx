@@ -9,12 +9,16 @@ import Nav from '@/components/ui/Nav'
 import AlquilerBarcoCTA from '@/components/playa/AlquilerBarcoCTA'
 import { getPlayas, getComunidades, getProvincias } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+const MODIFIED = getEditorialModified('src/app/playas-paradisiacas/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas paradisíacas en España | Las más bonitas por comunidad y provincia',
   description: 'Las playas más paradisíacas de España: aguas cristalinas, arena fina, poca masificación y Bandera Azul. Ranking por comunidad autónoma y provincia con estado del mar en tiempo real.',
@@ -356,6 +360,9 @@ export default async function PlayasParadisiacasPage() {
             ))}
           </div>
         </section>
+      
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-paradisiacas" name="Playas paradisíacas en España" visible={false} />
+        <EnlacesRelacionados topic="paradisiacas" />
       </main>
     </>
   )
