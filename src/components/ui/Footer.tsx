@@ -1,10 +1,13 @@
 // src/components/ui/Footer.tsx
-// Footer común desplegado en layout.tsx. Cumple 3 funciones:
-//   1. Internal linking SEO: hubs por tipo de playa, comunidades top
-//   2. Brand info / legal (privacidad, cookies, aviso legal, metodología)
-//   3. Disclosure de afiliación (legal en España)
+// Footer común desplegado en layout.tsx. Cumple 4 funciones:
+//   1. Internal linking SEO: anchors coinciden con H1 destino para evitar
+//      anchorMismatch (señal documentada en la Content Warehouse leak).
+//   2. Brand info / legal (privacidad, cookies, aviso legal, metodología).
+//   3. Disclosure de afiliación (legal en España).
+//   4. E-E-A-T: atribución visible a fuentes oficiales + última sincro.
 
 import Link from 'next/link'
+import { getPlayasDataModified, relativeTime } from '@/lib/dateModified'
 
 interface Props {
   locale?: 'es' | 'en'
@@ -12,6 +15,7 @@ interface Props {
 
 export default function Footer({ locale = 'es' }: Props) {
   const es = locale === 'es'
+  const dataModified = getPlayasDataModified()
 
   return (
     <footer style={{
@@ -53,32 +57,33 @@ export default function Footer({ locale = 'es' }: Props) {
             </p>
           </div>
 
-          {/* Por tipo */}
+          {/* Por tipo de playa */}
           <div>
-            <FootHeading>{es ? 'Por tipo' : 'By type'}</FootHeading>
+            <FootHeading>{es ? 'Por tipo de playa' : 'By beach type'}</FootHeading>
             <FootList>
-              <Link href="/playas-aguas-cristalinas" style={ls}>{es ? 'Aguas cristalinas' : 'Crystal-clear waters'}</Link>
+              <Link href="/playas-aguas-cristalinas" style={ls}>{es ? 'Playas con aguas cristalinas' : 'Crystal-clear water beaches'}</Link>
               <Link href="/calas-con-encanto" style={ls}>{es ? 'Calas con encanto' : 'Hidden coves'}</Link>
               <Link href="/playas-paradisiacas" style={ls}>{es ? 'Playas paradisíacas' : 'Paradise beaches'}</Link>
               <Link href="/playas-secretas" style={ls}>{es ? 'Playas secretas' : 'Secret beaches'}</Link>
-              <Link href="/familias" style={ls}>{es ? 'Para familias' : 'For families'}</Link>
-              <Link href="/atardeceres" style={ls}>{es ? 'Atardeceres' : 'Sunsets'}</Link>
-              <Link href="/playas-perros" style={ls}>{es ? 'Para perros' : 'Dog-friendly'}</Link>
-              <Link href="/playas-nudistas" style={ls}>{es ? 'Nudistas' : 'Nudist'}</Link>
-              <Link href="/playas-accesibles" style={ls}>{es ? 'Accesibles' : 'Accessible'}</Link>
-              <Link href="/banderas-azules" style={ls}>{es ? 'Banderas Azules 2026' : 'Blue Flag 2026'}</Link>
+              <Link href="/familias" style={ls}>{es ? 'Playas para familias' : 'Family-friendly beaches'}</Link>
+              <Link href="/atardeceres" style={ls}>{es ? 'Playas para ver el atardecer' : 'Sunset beaches'}</Link>
+              <Link href="/playas-perros" style={ls}>{es ? 'Playas para perros' : 'Dog-friendly beaches'}</Link>
+              <Link href="/playas-nudistas" style={ls}>{es ? 'Playas nudistas' : 'Nudist beaches'}</Link>
+              <Link href="/playas-accesibles" style={ls}>{es ? 'Playas accesibles' : 'Accessible beaches'}</Link>
+              <Link href="/banderas-azules" style={ls}>{es ? 'Playas con Bandera Azul' : 'Blue Flag beaches'}</Link>
             </FootList>
           </div>
 
-          {/* Servicios */}
+          {/* Servicios cerca de la playa */}
           <div>
-            <FootHeading>{es ? 'Servicios cerca' : 'Nearby'}</FootHeading>
+            <FootHeading>{es ? 'Servicios cerca' : 'Nearby services'}</FootHeading>
             <FootList>
-              <Link href="/campings" style={ls}>{es ? 'Campings' : 'Campsites'}</Link>
-              <Link href="/buceo" style={ls}>{es ? 'Buceo' : 'Diving'}</Link>
-              <Link href="/surf" style={ls}>Surf</Link>
-              <Link href="/alquiler-barco-playa" style={ls}>{es ? 'Alquilar barco' : 'Boat rental'}</Link>
-              <Link href="/playas-autocaravana" style={ls}>{es ? 'Autocaravana' : 'Camper'}</Link>
+              <Link href="/campings" style={ls}>{es ? 'Campings cerca de la playa' : 'Campsites near beaches'}</Link>
+              <Link href="/buceo" style={ls}>{es ? 'Buceo en España' : 'Diving in Spain'}</Link>
+              <Link href="/surf" style={ls}>{es ? 'Surf en España' : 'Surf in Spain'}</Link>
+              <Link href="/alquiler-barco-playa" style={ls}>{es ? 'Alquilar barco con patrón' : 'Skippered boat rental'}</Link>
+              <Link href="/playas-autocaravana" style={ls}>{es ? 'Playas para autocaravana' : 'Beaches for campervans'}</Link>
+              <Link href="/hoteles-playa" style={ls}>{es ? 'Hoteles en la playa' : 'Beach hotels'}</Link>
               <Link href="/protectores-solares" style={ls}>{es ? 'Protectores solares' : 'Sunscreens'}</Link>
               <Link href="/seguros-viaje" style={ls}>{es ? 'Seguros de viaje' : 'Travel insurance'}</Link>
             </FootList>
@@ -86,16 +91,16 @@ export default function Footer({ locale = 'es' }: Props) {
 
           {/* Por destino */}
           <div>
-            <FootHeading>{es ? 'Por destino' : 'By destination'}</FootHeading>
+            <FootHeading>{es ? 'Por comunidad' : 'By region'}</FootHeading>
             <FootList>
-              <Link href={es ? '/comunidades' : '/en/communities'} style={ls}>{es ? 'Todas las comunidades' : 'All communities'}</Link>
-              <Link href="/comunidad/andalucia" style={ls}>Andalucía</Link>
-              <Link href="/comunidad/cataluna" style={ls}>Cataluña</Link>
-              <Link href="/comunidad/comunitat-valenciana" style={ls}>Valencia</Link>
-              <Link href="/comunidad/galicia" style={ls}>Galicia</Link>
-              <Link href="/comunidad/islas-baleares" style={ls}>Baleares</Link>
-              <Link href="/comunidad/canarias" style={ls}>Canarias</Link>
-              <Link href="/islas" style={ls}>{es ? 'Por isla' : 'By island'}</Link>
+              <Link href={es ? '/comunidades' : '/en/communities'} style={ls}>{es ? 'Todas las comunidades' : 'All regions'}</Link>
+              <Link href="/comunidad/andalucia" style={ls}>{es ? 'Playas de Andalucía' : 'Beaches of Andalusia'}</Link>
+              <Link href="/comunidad/cataluna" style={ls}>{es ? 'Playas de Cataluña' : 'Beaches of Catalonia'}</Link>
+              <Link href="/comunidad/comunitat-valenciana" style={ls}>{es ? 'Playas de la Comunidad Valenciana' : 'Beaches of Valencia'}</Link>
+              <Link href="/comunidad/galicia" style={ls}>{es ? 'Playas de Galicia' : 'Beaches of Galicia'}</Link>
+              <Link href="/comunidad/islas-baleares" style={ls}>{es ? 'Playas de Baleares' : 'Beaches of the Balearics'}</Link>
+              <Link href="/comunidad/canarias" style={ls}>{es ? 'Playas de Canarias' : 'Beaches of the Canaries'}</Link>
+              <Link href="/islas" style={ls}>{es ? 'Playas por isla' : 'Beaches by island'}</Link>
             </FootList>
           </div>
 
@@ -103,44 +108,70 @@ export default function Footer({ locale = 'es' }: Props) {
           <div>
             <FootHeading>{es ? 'Guías' : 'Guides'}</FootHeading>
             <FootList>
-              <Link href="/que-llevar/playa-arenosa" style={ls}>{es ? 'Qué llevar' : 'What to bring'}</Link>
-              <Link href="/calidad-agua" style={ls}>{es ? 'Calidad del agua' : 'Water quality'}</Link>
-              <Link href="/medusas" style={ls}>{es ? 'Medusas' : 'Jellyfish'}</Link>
-              <Link href="/mapa" style={ls}>{es ? 'Mapa interactivo' : 'Interactive map'}</Link>
+              <Link href="/que-llevar/playa-arenosa" style={ls}>{es ? 'Qué llevar a la playa' : 'What to bring to the beach'}</Link>
+              <Link href="/calidad-agua" style={ls}>{es ? 'Calidad del agua de baño' : 'Bathing water quality'}</Link>
+              <Link href="/medusas" style={ls}>{es ? 'Temporada de medusas' : 'Jellyfish season'}</Link>
+              <Link href="/mapa" style={ls}>{es ? 'Mapa interactivo de playas' : 'Interactive beach map'}</Link>
               <Link href="/comparar" style={ls}>{es ? 'Comparar playas' : 'Compare beaches'}</Link>
-              <Link href="/rutas" style={ls}>{es ? 'Rutas por la costa' : 'Coastal routes'}</Link>
-              <Link href="/playas-cerca-de-mi" style={ls}>{es ? 'Cerca de mí' : 'Near me'}</Link>
+              <Link href="/rutas" style={ls}>{es ? 'Rutas costeras por España' : 'Coastal routes in Spain'}</Link>
+              <Link href="/playas-cerca-de-mi" style={ls}>{es ? 'Playas cerca de mí' : 'Beaches near me'}</Link>
             </FootList>
           </div>
 
           {/* Sobre */}
           <div>
-            <FootHeading>{es ? 'Sobre' : 'About'}</FootHeading>
+            <FootHeading>{es ? 'Sobre Playas de España' : 'About'}</FootHeading>
             <FootList>
-              <Link href="/metodologia" style={ls}>{es ? 'Metodología y datos' : 'Methodology'}</Link>
+              <Link href="/metodologia" style={ls}>{es ? 'Metodología y fuentes de datos' : 'Methodology'}</Link>
               <Link href="/widget" style={ls}>{es ? 'Widget para tu web' : 'Widget for your site'}</Link>
-              <Link href="/aviso-legal" style={ls}>{es ? 'Aviso legal' : 'Legal'}</Link>
-              <Link href="/privacidad" style={ls}>{es ? 'Privacidad' : 'Privacy'}</Link>
-              <Link href="/cookies" style={ls}>Cookies</Link>
+              <Link href="/aviso-legal" style={ls}>{es ? 'Aviso legal' : 'Legal notice'}</Link>
+              <Link href="/privacidad" style={ls}>{es ? 'Política de privacidad' : 'Privacy policy'}</Link>
+              <Link href="/cookies" style={ls}>{es ? 'Política de cookies' : 'Cookie policy'}</Link>
             </FootList>
           </div>
         </div>
 
-        {/* Bottom row: copyright + disclosure */}
+        {/* Bloque E-E-A-T: atribución visible + última sincro */}
         <div style={{
-          paddingTop: '1.5rem',
-          borderTop: '1px solid var(--line, #e8dcc8)',
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1rem',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          fontSize: '.72rem',
-          color: 'var(--muted, #5a3d12)',
-          lineHeight: 1.5,
+          background:    'var(--bg, #fffaf0)',
+          border:        '1px solid var(--line, #e8dcc8)',
+          borderRadius:  6,
+          padding:       '1rem 1.15rem',
+          marginBottom:  '1.5rem',
+          fontSize:      '.78rem',
+          color:         'var(--ink, #2a1a08)',
+          lineHeight:    1.55,
         }}>
-          <div>
-            © {new Date().getFullYear()} Playas de España.{' '}
+          <div style={{
+            fontFamily:    'var(--font-mono, monospace)',
+            fontSize:      '.7rem',
+            fontWeight:    600,
+            letterSpacing: '.12em',
+            textTransform: 'uppercase',
+            color:         'var(--muted, #5a3d12)',
+            marginBottom:  '.5rem',
+          }}>
+            {es ? 'Datos oficiales' : 'Official data sources'}
+          </div>
+          <p style={{ margin: '0 0 .35rem' }}>
+            {es
+              ? <>Información de las {' '}
+                  <Link href="/metodologia" style={{ color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>
+                    fuentes oficiales españolas y europeas
+                  </Link>
+                  : Ministerio para la Transición Ecológica (MITECO),
+                  Agencia Europea de Medio Ambiente (EEA), AEMET y Open-Meteo.
+                </>
+              : <>Data from official Spanish and European sources: MITECO, EEA, AEMET and Open-Meteo.{' '}
+                  <Link href="/metodologia" style={{ color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>
+                    Read our methodology
+                  </Link>.
+                </>}
+          </p>
+          <p style={{ margin: 0, fontSize: '.72rem', color: 'var(--muted, #5a3d12)' }}>
+            {es ? 'Última sincronización con MITECO: ' : 'Last sync with MITECO: '}
+            <time dateTime={dataModified}>{relativeTime(dataModified, locale)}</time>
+            {' · '}
             <a href="https://www.miteco.gob.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>MITECO</a>
             {' · '}
             <a href="https://www.eea.europa.eu/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>EEA</a>
@@ -148,8 +179,31 @@ export default function Footer({ locale = 'es' }: Props) {
             <a href="https://www.aemet.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>AEMET</a>
             {' · '}
             <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>Open-Meteo</a>
+          </p>
+        </div>
+
+        {/* Bottom row: copyright + disclosure */}
+        <div style={{
+          paddingTop:     '1.5rem',
+          borderTop:      '1px solid var(--line, #e8dcc8)',
+          display:        'flex',
+          flexWrap:       'wrap',
+          gap:            '1rem',
+          justifyContent: 'space-between',
+          alignItems:     'flex-start',
+          fontSize:       '.72rem',
+          color:          'var(--muted, #5a3d12)',
+          lineHeight:     1.5,
+        }}>
+          <div>
+            © {new Date(dataModified).getFullYear()} Playas de España ·{' '}
+            <Link href="/metodologia" style={{ color: 'inherit' }}>{es ? 'Metodología' : 'Methodology'}</Link>
+            {' · '}
+            <Link href="/aviso-legal" style={{ color: 'inherit' }}>{es ? 'Aviso legal' : 'Legal'}</Link>
+            {' · '}
+            <Link href="/privacidad" style={{ color: 'inherit' }}>{es ? 'Privacidad' : 'Privacy'}</Link>
           </div>
-          <div style={{ maxWidth: 460, textAlign: 'right' }}>
+          <div style={{ maxWidth: 480, textAlign: 'right' }}>
             {es
               ? 'Algunos enlaces son de afiliación. Si compras a través de ellos ganamos una comisión sin coste adicional para ti.'
               : 'Some links are affiliate. If you purchase through them we earn a commission at no extra cost.'}
