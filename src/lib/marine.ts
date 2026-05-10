@@ -1,6 +1,7 @@
 // src/lib/marine.ts
 import { cache } from 'react'
 import { fetchWithTimeout } from './fetch-timeout'
+import { kvCached } from './kv-cache'
 
 
 export interface MarineData {
@@ -44,7 +45,15 @@ function calcEstadoSurf(olas: number, viento: number): string {
   return 'CALMA'
 }
 
-export const getMareas = cache(async (lat: number, lng: number): Promise<MarineData | null> => {
+// TTL meteo marino: 30 min (Open-Meteo marine refresca c/3-6h pero
+// guardar 30 min basta — el oleaje no salta en ese intervalo).
+const KV_TTL_MAREAS = 30 * 60
+
+export const getMareas = cache((lat: number, lng: number): Promise<MarineData | null> => {
+  return kvCached('mareas', [lat, lng], KV_TTL_MAREAS, () => fetchMareasUncached(lat, lng))
+})
+
+async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData | null> {
   try {
     // Una sola llamada combinando oleaje + SST
     const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
@@ -93,12 +102,21 @@ export const getMareas = cache(async (lat: number, lng: number): Promise<MarineD
   } catch {
     return null
   }
+}
+
+// TTL sol: 12h. Amanecer/atardecer dependen del día → la clave de KV
+// incluye la fecha YYYY-MM-DD para invalidar automáticamente al cambiar
+// de día.
+const KV_TTL_SOL = 12 * 3600
+
+export const getSol = cache((lat: number, lng: number): Promise<SolData | null> => {
+  const hoy = new Date().toISOString().split('T')[0]
+  return kvCached('sol', [hoy, lat, lng], KV_TTL_SOL, () => fetchSolUncached(lat, lng, hoy))
 })
 
-export const getSol = cache(async (lat: number, lng: number): Promise<SolData | null> => {
+async function fetchSolUncached(lat: number, lng: number, fecha: string): Promise<SolData | null> {
   try {
-    const hoy = new Date().toISOString().split('T')[0]
-    const url = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${hoy}&formatted=0`
+    const url = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${fecha}&formatted=0`
     const res = await fetchWithTimeout(url, { next: { revalidate: 86400 } })
     if (!res.ok) return null
     const data = await res.json()
@@ -115,7 +133,7 @@ export const getSol = cache(async (lat: number, lng: number): Promise<SolData | 
       pct_dia:   Math.round((luz / 86400) * 100),
     }
   } catch { return null }
-})
+}
 
 export const getTurbidez = cache(async (lat: number, lng: number): Promise<TurbidezData | null> => {
   return estimarTurbidez(lat, lng)
