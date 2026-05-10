@@ -61,7 +61,7 @@ export default function ComunidadesEn({ comunidades }: Props) {
     <section className={styles.section}>
       <div className={styles.hd}>
         <span className={styles.hdTitle}>By region</span>
-        <Link href="/en/communities" className={styles.hdAction}>View all →</Link>
+        <Link href="/en" className={styles.hdAction}>View all →</Link>
       </div>
       <div className={styles.grid}>
         {comunidades.map(c => {

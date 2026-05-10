@@ -99,7 +99,10 @@ export default function FichaHero({
           <div className={styles.photoLayer} aria-hidden="true">
             <Image
               src={foto!.url}
-              alt=""
+              // alt descriptivo para Google Imágenes (imageQualityClick-
+              // Signals). El div padre es aria-hidden para no ensuciar
+              // el flujo accesible del H1 visible.
+              alt={`${nombreH1} en ${playa.municipio}, ${playa.provincia}`}
               fill
               priority
               sizes="100vw"

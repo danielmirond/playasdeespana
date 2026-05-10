@@ -45,6 +45,7 @@ export async function GET(_req: Request, context: any) {
     <priority>${p.bandera ? '0.9' : '0.7'}</priority>
     <xhtml:link rel="alternate" hreflang="es" href="${BASE}/playas/${p.slug}"/>
     <xhtml:link rel="alternate" hreflang="en" href="${BASE}/en/beaches/${p.slug}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE}/en/beaches/${p.slug}"/>
     <image:image>
       <image:loc>${xmlEscape(ogUrl)}</image:loc>
       <image:title>${titulo}</image:title>

@@ -124,7 +124,7 @@ export default async function TopBeachCardsConHero({
                   {foto ? (
                     <Image
                       src={foto}
-                      alt=""
+                      alt={`Playa ${p.nombre}, ${p.municipio} (${p.provincia})`}
                       fill
                       sizes="(max-width: 640px) 50vw, 250px"
                       style={{ objectFit: 'cover', objectPosition: 'center 55%' }}
