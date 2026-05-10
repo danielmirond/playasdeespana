@@ -31,6 +31,11 @@ import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { calcularPlayaScore } from '@/lib/scoring'
+import { getPlayasDataModified } from '@/lib/dateModified'
+
+// Mtime real del dataset MITECO. Reemplaza al fallback `new Date()` que
+// Google detecta como timestamp-spam (lastSignificantUpdate del leak).
+const PLAYAS_DATA_MODIFIED = getPlayasDataModified()
 
 export const revalidate = 3600
 // Dejamos techo de 25 s al render (Overpass para hoteles/restaurantes puede
@@ -189,7 +194,13 @@ export default async function PlayaPage({ params }: Props) {
 
   const forecastSurf = mareasData?.forecast ?? null
 
-  const dateModified = meteoPlayaData?.timestamp ?? new Date().toISOString()
+  // dateModified prioritiza señales reales (Content Warehouse:
+  // lastSignificantUpdate / semanticDateInfo). Orden:
+  //   1. timestamp del meteo (cambia ~cada hora, refleja contenido actual)
+  //   2. mtime del dataset MITECO (cambia con cada sync semanal)
+  //   3. mtime del page.tsx (cambia con cada deploy del template)
+  // Evitar `new Date()` por build: Google lo detecta como timestamp spam.
+  const dateModified = meteoPlayaData?.timestamp ?? PLAYAS_DATA_MODIFIED
 
   const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)

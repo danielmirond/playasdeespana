@@ -6,10 +6,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import AuthorByline from '@/components/seo/AuthorByline'
+import { getFileLastModified } from '@/lib/dateModified'
+import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
 
 export const revalidate = 604800
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+const MODIFIED = getFileLastModified('src/app/metodologia/page.tsx')
 
 export const metadata: Metadata = {
   title: 'Metodología y fuentes | De dónde salen los datos',
@@ -165,6 +169,13 @@ export default function MetodologiaPage() {
         }}>
           De dónde salen <em style={{ fontWeight: 500, color: 'var(--accent)' }}>los datos</em>
         </h1>
+        <AuthorByline
+          headline="Metodología, fuentes de datos y proceso editorial"
+          url={`${BASE}/metodologia`}
+          dateModified={MODIFIED}
+          description="De dónde vienen los datos de cada playa, cómo se calcula la nota 0-100 y con qué frecuencia se actualizan."
+          articleSection="Metodología"
+        />
 
         <p style={{
           fontSize: '1.08rem', color: 'var(--muted)',

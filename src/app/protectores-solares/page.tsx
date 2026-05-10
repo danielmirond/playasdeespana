@@ -6,11 +6,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import AuthorByline from '@/components/seo/AuthorByline'
+import { getFileLastModified } from '@/lib/dateModified'
 
 export const revalidate = 604800 // 7 días. contenido evergreen
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
+const MODIFIED = getFileLastModified('src/app/protectores-solares/page.tsx')
 
 export const metadata: Metadata = {
   title: 'Mejores protectores solares para playa 2026 | Guía y recomendaciones',
@@ -123,6 +126,13 @@ export default function ProtectoresSolaresPage() {
         }}>
           Los <em style={{ fontWeight: 500, color: 'var(--accent)' }}>mejores protectores solares</em> para la playa
         </h1>
+        <AuthorByline
+          headline="Mejores protectores solares para playa"
+          url={`${BASE}/protectores-solares`}
+          dateModified={MODIFIED}
+          description="Guía completa de protectores solares para la playa: SPF, resistencia al agua, reef-safe, niños y pieles sensibles."
+          articleSection="Salud y seguridad en la playa"
+        />
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.65 }}>
           Guía actualizada con los protectores solares más recomendados para ir a la playa en España:
           alto SPF, resistencia al agua, opciones para niños, pieles sensibles y respetuosos con el

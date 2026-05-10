@@ -19,6 +19,7 @@
 import type { Playa } from '@/types'
 import { generarTextoPlaya } from '@/lib/textoPlaya'
 import type { FaqItem } from '@/lib/faqsPlaya'
+import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
 
 interface AggregateRatingData {
   ratingValue: number  // media (1-5)
@@ -131,16 +132,25 @@ export default function SchemaPlaya({
     ],
   }
 
-  // Photo. declara la imagen principal con autoría (importante para citaciones)
-  const photoEntity = fotoUrl ? {
-    '@type':       'ImageObject',
-    url:           fotoUrl,
-    contentUrl:    fotoUrl,
+  // Photo. Siempre emitimos image para que Google KG tenga representación
+  // visual de la entidad (imageQualityClickSignals del Content Warehouse
+  // leak premia entidades con imagen asociada). Si no hay foto cacheada
+  // de la cascada, caemos a la OG image dinámica que siempre devuelve algo.
+  const fotoUrlEffective = fotoUrl ?? `${BASE}/api/og?slug=${encodeURIComponent(playa.slug)}`
+  const photoEntity = {
+    '@type':              'ImageObject',
+    url:                  fotoUrlEffective,
+    contentUrl:           fotoUrlEffective,
+    representativeOfPage: true,
     ...(fotoAutor ? {
-      creator: { '@type': 'Person', name: fotoAutor },
+      creator:         { '@type': 'Person', name: fotoAutor },
       copyrightHolder: { '@type': 'Person', name: fotoAutor },
-    } : {}),
-  } : null
+    } : {
+      // OG generada por nosotros: el copyright es de la organización.
+      creator:         { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
+      copyrightHolder: { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
+    }),
+  }
 
   // Beach principal. Beach + TouristDestination (entidades híbridas)
   const beach = {
@@ -194,8 +204,17 @@ export default function SchemaPlaya({
       target:  `https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}`,
       name:    `Cómo llegar a ${playa.nombre}`,
     },
-    // Foto principal con autoría
-    ...(photoEntity ? { image: photoEntity, photo: photoEntity } : {}),
+    // Foto principal (siempre presente, fallback a OG dinámica si no hay
+    // foto cacheada de la cascada).
+    image: photoEntity,
+    photo: photoEntity,
+    // Provider / publisher canónicos: enlazan la entidad Beach con la
+    // Organization 'Playas de España' (Content Warehouse: trustedSource,
+    // authorEntities). El @id estable permite a Google fusionar todas las
+    // menciones a la misma entidad del KG.
+    provider:   { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
+    publisher:  { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
+    inLanguage: 'es-ES',
     // Aggregate rating de los usuarios (votos)
     ...(rating && rating.ratingCount > 0 ? {
       aggregateRating: {
