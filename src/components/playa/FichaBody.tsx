@@ -228,14 +228,22 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   // Hoteles + restaurantes: si el server no los pudo traer (Overpass lento
   // o Vercel timeout), reintentamos client-side contra /api/*. Así la ficha
   // renderiza rápido y los datos aparecen cuando están listos.
+  // Client retry para los 5 fetches Overpass cuando el SSR cae a [] por
+  // deadline (1.5s). Cada API tiene KV cache, así que el retry es ms
+  // tras la primera petición. Esto permite TTFB sub-segundo en el shell
+  // sin perder los datos: simplemente aparecen tras hidratación.
   const [clientRestaurantes, setClientRestaurantes] = useState<Restaurante[]>(restaurantes ?? [])
   const [clientHoteles, setClientHoteles]           = useState<HotelReal[]>(hoteles ?? [])
+  const [clientCampings, setClientCampings]         = useState<Camping[]>(campings ?? [])
+  const [clientBuceo, setClientBuceo]               = useState<CentroBuceo[]>(centrosBuceo ?? [])
   const [loadingCercanos, setLoadingCercanos]       = useState(false)
 
   useEffect(() => {
-    const needsRest = !restaurantes || restaurantes.length === 0
-    const needsHot  = !hoteles || hoteles.length === 0
-    if (!needsRest && !needsHot) return
+    const needsRest    = !restaurantes  || restaurantes.length  === 0
+    const needsHot     = !hoteles       || hoteles.length       === 0
+    const needsCamp    = !campings      || campings.length      === 0
+    const needsBuc     = !centrosBuceo  || centrosBuceo.length  === 0
+    if (!needsRest && !needsHot && !needsCamp && !needsBuc) return
 
     const ac = new AbortController()
     setLoadingCercanos(true)
@@ -263,7 +271,26 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           .catch(() => { /* silencioso */ })
       )
     }
-
+    if (needsCamp) {
+      promises.push(
+        fetch(url('/api/campings'), { signal: ac.signal })
+          .then(r => r.ok ? r.json() : null)
+          .then(d => {
+            if (d?.campings && Array.isArray(d.campings)) setClientCampings(d.campings)
+          })
+          .catch(() => { /* silencioso */ })
+      )
+    }
+    if (needsBuc) {
+      promises.push(
+        fetch(url('/api/buceo'), { signal: ac.signal })
+          .then(r => r.ok ? r.json() : null)
+          .then(d => {
+            if (d?.centros && Array.isArray(d.centros)) setClientBuceo(d.centros)
+          })
+          .catch(() => { /* silencioso */ })
+      )
+    }
     Promise.all(promises).finally(() => {
       if (!ac.signal.aborted) setLoadingCercanos(false)
     })
@@ -737,7 +764,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <FerriesCTA playa={playa} locale={locale} />
 
         {/* CAMPINGS Y AUTOCARAVANAS */}
-        {campings && campings.length > 0 && (
+        {clientCampings && clientCampings.length > 0 && (
           <div className={styles.card} id="s-campings">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>
@@ -748,7 +775,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
             <div className={styles.cardBody}>
               <div className={styles.list}>
-                {campings.map(c => {
+                {clientCampings.map(c => {
                   const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(c.nombre)}/@${c.lat},${c.lon},15z`
                   return (
                     <div key={c.id} className={styles.listItem}>
@@ -846,7 +873,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         {/* CENTROS DE BUCEO */}
-        {centrosBuceo && centrosBuceo.length > 0 && (
+        {clientBuceo && clientBuceo.length > 0 && (
           <div className={styles.card} id="s-buceo">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>
@@ -857,7 +884,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
             <div className={styles.cardBody}>
               <div className={styles.list}>
-                {centrosBuceo.map(c => {
+                {clientBuceo.map(c => {
                   const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(c.nombre)}/@${c.lat},${c.lon},15z`
                   return (
                     <div key={c.id} className={styles.listItem}>
