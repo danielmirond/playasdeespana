@@ -44,13 +44,35 @@ export const revalidate = 3600
 // desde el cliente via /api/hoteles y /api/restaurantes.
 export const maxDuration = 25
 
-// Pre-renderiza las playas con Bandera Azul (las más visitadas) en build
-// El resto se genera on-demand con ISR y se cachea 1h
+// Pre-renderizamos en build solo las TOP 30 fichas más populares.
+// Antes era todas las banderas azules (647 × 17 fetches = timeout).
+// Ahora con KV cache + deadline 1.5s + cron warm, build solo procesa
+// 30 páginas y la mayoría de fetches sirve desde KV en ms.
+//
+// El resto (~5000 playas) sigue ISR con SWR 7d. Garantizamos TTFB
+// CDN-edge para las más visitadas (las que mueven la aguja en NavBoost).
 export async function generateStaticParams() {
-  // No pre-renderizar en build. ISR con revalidate: 3600 genera cada
-  // página al primer visitante y la cachea 1 h. Antes pre-renderizábamos
-  // todas las banderas azules (647 páginas × 11 API calls = timeout).
-  return []
+  // Importamos getPlayas dentro de la función para evitar el cycle entre
+  // este archivo y src/lib/playas durante el build initial.
+  const { getPlayas } = await import('@/lib/playas')
+  const playas = await getPlayas()
+
+  // Heurística sin GSC: top 30 con Bandera Azul + servicios + accesibilidad.
+  // Misma lógica que el cron /api/cron/warm?slice=top (mantener sincronizado).
+  return playas
+    .map(p => ({
+      slug: p.slug,
+      score:
+        (p.bandera     ? 5 : 0) +
+        (p.socorrismo  ? 1 : 0) +
+        (p.parking     ? 1 : 0) +
+        (p.accesible   ? 1 : 0) +
+        (p.lat && p.lng ? 1 : 0),
+    }))
+    .filter(x => x.score >= 7)            // bandera azul + ≥2 servicios
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 30)
+    .map(x => ({ slug: x.slug }))
 }
 
 interface Props { params: Promise<{ slug: string }> }
