@@ -76,10 +76,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
+    alternateLocale: ['en_GB'],
     siteName: 'Playas de España',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@playasespana',
+    creator: '@playasespana',
+  },
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://playas-espana.com' },
   verification: {
