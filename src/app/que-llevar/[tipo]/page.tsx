@@ -63,19 +63,60 @@ export default async function QueLlevarTipoPage({ params }: Props) {
     .filter(Boolean) as Array<{ asin: string; nombre: string; precio: string; categoria: string; razon: string }>
 
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+  const orgRef = { '@id': `${BASE}/#organization` }
+
+  // HowTo step list — Google muestra rich result tipo "lista de pasos"
+  // en SERP. Cada producto es un HowToSupply, cada consejo es un HowToStep.
+  // Importante: las imágenes/links del HowTo deben coincidir con el HTML
+  // visible para que Google valide el rich result.
+  const howToSchema = productos.length > 0 || t.consejos.length > 0 ? {
+    '@type':       'HowTo',
+    '@id':         `${BASE}/que-llevar/${t.slug}#howto`,
+    name:          t.titulo,
+    description:   t.descripcion,
+    inLanguage:    'es-ES',
+    totalTime:     'PT15M',
+    supply: productos.map(p => ({
+      '@type':       'HowToSupply',
+      name:          p.nombre,
+      requiredQuantity: 1,
+    })),
+    step: t.consejos.length > 0
+      ? t.consejos.map((c, i) => ({
+          '@type':    'HowToStep',
+          position:   i + 1,
+          name:       `Paso ${i + 1}`,
+          text:       c,
+          url:        `${BASE}/que-llevar/${t.slug}#paso-${i + 1}`,
+        }))
+      : [
+          {
+            '@type':  'HowToStep',
+            position: 1,
+            name:     'Preparar el equipaje',
+            text:     `Reúne los elementos esenciales para una jornada en ${t.titulo.toLowerCase()}.`,
+          },
+        ],
+  } : null
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'Article',
-        headline: t.titulo,
-        description: t.descripcion,
-        author: { '@type': 'Organization', name: 'Playas de España' },
-        publisher: { '@type': 'Organization', name: 'Playas de España' },
-        url: `${BASE}/que-llevar/${t.slug}`,
-        datePublished: '2026-04-30T00:00:00Z',
-        dateModified: new Date().toISOString(),
+        '@type':         'Article',
+        '@id':           `${BASE}/que-llevar/${t.slug}#article`,
+        headline:        t.titulo,
+        description:     t.descripcion,
+        author:          orgRef,
+        publisher:       orgRef,
+        url:             `${BASE}/que-llevar/${t.slug}`,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE}/que-llevar/${t.slug}` },
+        articleSection:  'Qué llevar a la playa',
+        inLanguage:      'es-ES',
+        datePublished:   '2026-04-30T00:00:00Z',
+        dateModified:    '2026-04-30T00:00:00Z',
       },
+      ...(howToSchema ? [howToSchema] : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
@@ -155,11 +196,13 @@ export default async function QueLlevarTipoPage({ params }: Props) {
 
         <section className={styles.section} aria-labelledby="consejos">
           <h2 id="consejos" className={styles.h2}>Consejos prácticos</h2>
-          <ul className={styles.tips}>
+          <ol className={styles.tips}>
             {t.consejos.map((c, i) => (
-              <li key={i}>{c}</li>
+              // id="paso-N" coincide con HowToStep.url del schema HowTo →
+              // Google puede validar la consistencia y mostrar rich result.
+              <li key={i} id={`paso-${i + 1}`}>{c}</li>
             ))}
-          </ul>
+          </ol>
         </section>
 
         {t.faqs.length > 0 && (

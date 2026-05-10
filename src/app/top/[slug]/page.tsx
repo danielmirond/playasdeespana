@@ -6,6 +6,11 @@ import Nav from '@/components/ui/Nav'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import { getPlayas } from '@/lib/playas'
 import { COSTAS } from '@/lib/rutas'
+import { getPlayasDataModified } from '@/lib/dateModified'
+
+const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+const ORG_REF = { '@id': `${BASE}/#organization` }
+const PLAYAS_MODIFIED = getPlayasDataModified()
 
 export const revalidate = 86400
 interface Props { params: Promise<{ slug: string }> }
@@ -21,7 +26,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Top 10 mejores playas de la ${costa.nombre} | Ranking`,
     description: `Las 10 mejores playas de la ${costa.nombre} (${costa.provincias.join(', ')}). Ranking por servicios, bandera azul, accesibilidad y ocupación.`,
-    alternates: { canonical: `/top/${slug}` },
+    alternates: {
+      canonical: `/top/${slug}`,
+      languages: {
+        'es':        `/top/${slug}`,
+        'en':        `/en/top/${slug}`,
+        'x-default': `/en/top/${slug}`,
+      },
+    },
+    openGraph: {
+      type:  'article',
+      url:   `${BASE}/top/${slug}`,
+      title: `Top 10 mejores playas de la ${costa.nombre}`,
+      images: [{ url: `/api/og?playa=${encodeURIComponent('Top 10 ' + costa.nombre)}`, width: 1200, height: 630 }],
+    },
   }
 }
 
@@ -49,15 +67,57 @@ export default async function TopCostaPage({ params }: Props) {
 
   const top = costaPlayas.map(x => x.p)
 
-  const listSchema = {
-    '@context': 'https://schema.org', '@type': 'ItemList',
-    name: `Top 10 mejores playas de la ${costa.nombre}`,
-    numberOfItems: top.length,
-    itemListElement: top.map((p, i) => ({
-      '@type': 'ListItem', position: i + 1, name: p.nombre,
-      url: `https://playas-espana.com/playas/${p.slug}`,
-    })),
+  // CollectionPage + ItemList con Beach@id en cada item para que Google
+  // enlace los items a las entidades Beach del KG. Evita duplicate content
+  // y refuerza el grafo (cada Beach del top está referenciado).
+  const collectionSchema = {
+    '@context':   'https://schema.org',
+    '@type':      'CollectionPage',
+    '@id':        `${BASE}/top/${slug}#collection`,
+    name:         `Top 10 mejores playas de la ${costa.nombre}`,
+    headline:     `Top 10 mejores playas de la ${costa.nombre}`,
+    description:  costa.descripcion ?? `Ranking de las 10 mejores playas de la ${costa.nombre}, ordenadas por servicios, bandera azul, accesibilidad y ocupación.`,
+    url:          `${BASE}/top/${slug}`,
+    inLanguage:   'es-ES',
+    dateModified: PLAYAS_MODIFIED,
+    publisher:    ORG_REF,
+    author:       ORG_REF,
+    isPartOf:     { '@id': `${BASE}/#website` },
+    mainEntity: {
+      '@type':         'ItemList',
+      name:            `Top 10 mejores playas de la ${costa.nombre}`,
+      numberOfItems:   top.length,
+      itemListOrder:   'https://schema.org/ItemListOrderDescending',
+      itemListElement: top.map((p, i) => ({
+        '@type':   'ListItem',
+        position:  i + 1,
+        name:      p.nombre,
+        url:       `${BASE}/playas/${p.slug}`,
+        // @id apunta al Beach declarado en cada ficha → entity linking.
+        item: {
+          '@id':  `${BASE}/playas/${p.slug}#beach`,
+          '@type': 'Beach',
+          name:    p.nombre,
+          url:     `${BASE}/playas/${p.slug}`,
+          address: {
+            '@type':         'PostalAddress',
+            addressLocality: p.municipio,
+            addressRegion:   p.provincia,
+            addressCountry:  'ES',
+          },
+        },
+      })),
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${BASE}/` },
+        { '@type': 'ListItem', position: 2, name: 'Top 10', item: `${BASE}/top` },
+        { '@type': 'ListItem', position: 3, name: costa.nombre, item: `${BASE}/top/${slug}` },
+      ],
+    },
   }
+  const listSchema = collectionSchema
 
   return (
     <>
