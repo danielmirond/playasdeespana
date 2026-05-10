@@ -44,7 +44,7 @@ export default function Hero() {
           <div key={i} className={`${styles.scene} ${styles[`s${i + 1}`]}`}>
             <Image
               src={s.src}
-              alt=""
+              alt={s.alt}
               fill
               priority={i === 0}
               sizes="100vw"

@@ -90,7 +90,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: ogUrl, width: 1200, height: 630, alt: `${np}. condiciones en tiempo real` }],
     },
     twitter: { card: 'summary_large_image', title, description, images: [ogUrl] },
-    alternates: { canonical: `/playas/${slug}`, languages: { 'es': `/playas/${slug}`, 'en': `/en/beaches/${slug}` } },
+    alternates: {
+      canonical: `/playas/${slug}`,
+      languages: {
+        'es':        `/playas/${slug}`,
+        'en':        `/en/beaches/${slug}`,
+        'x-default': `/en/beaches/${slug}`,
+      },
+    },
   }
 }
 

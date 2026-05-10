@@ -18,7 +18,11 @@ export const metadata: Metadata = {
   description: 'Listado completo y oficial de playas con Bandera Azul en España. Ordenadas por comunidad autónoma, con calidad del agua, servicios, accesibilidad y mapa interactivo.',
   alternates: {
     canonical: '/banderas-azules',
-    languages: { 'es': '/banderas-azules', 'en': '/en/blue-flag' },
+    languages: {
+      'es':        '/banderas-azules',
+      'en':        '/en/blue-flag',
+      'x-default': '/en/blue-flag',
+    },
   },
   openGraph: {
     title: 'Playas con Bandera Azul en España 2026',
