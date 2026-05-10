@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     description: 'Las calas más bonitas y escondidas de España por comunidad y provincia.',
     url: `${BASE}/calas-con-encanto`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Calas%20con%20encanto%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 

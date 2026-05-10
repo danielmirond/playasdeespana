@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     description: 'De dónde salen los datos de cada playa y cómo se calcula la nota.',
     url: `${BASE}/metodologia`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Metodolog%C3%ADa%20y%20fuentes', width: 1200, height: 630 }],
   },
 }
 

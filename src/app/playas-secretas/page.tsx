@@ -15,6 +15,7 @@ const MODIFIED = getEditorialModified('src/app/playas-secretas/page.tsx', ['publ
 export const metadata: Metadata = {
   title: 'Playas secretas en España | Calas escondidas y poco masificadas',
   description: 'Las playas menos masificadas de España: baja ocupación, sin parking, sin chiringuito. Calas escondidas y rincones vírgenes.',
+  openGraph: { type: 'website', images: [{ url: '/api/og?playa=Playas%20secretas%20en%20Espa%C3%B1a', width: 1200, height: 630 }] },
   alternates: { canonical: '/playas-secretas' },
 }
 

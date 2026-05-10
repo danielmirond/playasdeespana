@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     description: 'Las playas más cercanas con estado del mar actualizado cada hora.',
     url: `${BASE}/playas-cerca-de-mi`,
     type: 'website',
+    images: [{ url: '/api/og?playa=Playas%20cerca%20de%20m%C3%AD', width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
 }

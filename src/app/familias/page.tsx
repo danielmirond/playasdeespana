@@ -31,6 +31,7 @@ const MODIFIED = getEditorialModified('src/app/familias/page.tsx', ['public/data
 export const metadata: Metadata = {
   title: 'Playas para familias con niños en España | Las más seguras',
   description: 'Playas familiares en España: socorrismo, duchas, baja ocupación, accesibles y agua poco profunda. Las más seguras para ir con niños.',
+  openGraph: { type: 'website', images: [{ url: '/api/og?playa=Playas%20para%20familias%20en%20Espa%C3%B1a', width: 1200, height: 630 }] },
   alternates: { canonical: '/familias' },
 }
 

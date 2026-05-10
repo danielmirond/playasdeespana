@@ -10,6 +10,10 @@ export const revalidate = 86400
 export const metadata: Metadata = {
   title: 'Comunidades y provincias | Playas de España',
   description: 'Explora las playas de España por comunidad autónoma y provincia.',
+  alternates: {
+    canonical: '/comunidades',
+    // Sin hreflang en: el hub /en/communities (sin slug) no existe.
+  },
 }
 
 const ICONOS: Record<string, string> = {

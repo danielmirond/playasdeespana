@@ -15,6 +15,7 @@ const MODIFIED = getEditorialModified('src/app/atardeceres/page.tsx', ['public/d
 export const metadata: Metadata = {
   title: 'Mejores playas para ver el atardecer en España | Puestas de sol',
   description: 'Playas españolas con las mejores puestas de sol: orientadas al oeste y suroeste. Costa de la Luz, Rías Baixas, Costa da Morte, Baleares y Canarias.',
+  openGraph: { type: 'website', images: [{ url: '/api/og?playa=Mejores%20playas%20para%20ver%20el%20atardecer', width: 1200, height: 630 }] },
   alternates: { canonical: '/atardeceres' },
 }
 

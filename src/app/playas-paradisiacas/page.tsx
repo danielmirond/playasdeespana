@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     description: 'Las playas más bonitas de España: ranking por comunidad y provincia.',
     url: `${BASE}/playas-paradisiacas`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Playas%20paradis%C3%ADacas%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 

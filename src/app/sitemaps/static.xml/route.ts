@@ -1,5 +1,10 @@
 // src/app/sitemaps/static.xml/route.ts
 // Sitemap completo con TODAS las secciones del site.
+//
+// Cada URL emite <image:image> apuntando a la OG dinámica /api/og?playa=X
+// (Content Warehouse: imageQualityClickSignals — Google Imágenes asocia
+// una imagen representativa a cada URL del KG).
+
 import { NextResponse } from 'next/server'
 import {
   getComunidades, getProvincias, getMunicipios,
@@ -7,22 +12,51 @@ import {
 } from '@/lib/playas'
 import { getRutas, COSTAS } from '@/lib/rutas'
 import { TIPOS } from '@/lib/tiposQueLlevar'
+import { getPlayasDataModified } from '@/lib/dateModified'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
-function u(path: string, priority: string, freq: string, today: string, hreflangEn?: string) {
+function xmlEscape(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
+}
+
+/** Devuelve URL absoluta a la OG dinámica con el título dado. */
+function ogFor(label: string): string {
+  return `${BASE}/api/og?playa=${encodeURIComponent(label)}`
+}
+
+interface UrlOpts {
+  hreflangEn?: string
+  /** Etiqueta humana para la OG image. Si se omite, deriva del path. */
+  ogLabel?:    string
+  /** Caption para image:caption */
+  caption?:    string
+}
+
+function u(path: string, priority: string, freq: string, today: string, opts: UrlOpts | string = {}) {
+  // Backwards-compat: si el 5º arg es un string, lo tratamos como hreflangEn.
+  const o: UrlOpts = typeof opts === 'string' ? { hreflangEn: opts } : opts
+  const derived = path.replace(/^\//, '').replace(/-/g, ' ').replace(/\//g, ' · ') || 'Playas de España'
+  const ogLabel = o.ogLabel ?? derived
+  const caption = o.caption ?? `Información de ${ogLabel} en Playas de España`
+
   let xml = `  <url>
     <loc>${BASE}${path}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${freq}</changefreq>
     <priority>${priority}</priority>`
-  if (hreflangEn) {
+  if (o.hreflangEn) {
     xml += `
     <xhtml:link rel="alternate" hreflang="es" href="${BASE}${path}" />
-    <xhtml:link rel="alternate" hreflang="en" href="${BASE}${hreflangEn}" />`
+    <xhtml:link rel="alternate" hreflang="en" href="${BASE}${o.hreflangEn}" />`
   }
   xml += `
+    <image:image>
+      <image:loc>${xmlEscape(ogFor(ogLabel))}</image:loc>
+      <image:title>${xmlEscape(ogLabel)}</image:title>
+      <image:caption>${xmlEscape(caption)}</image:caption>
+    </image:image>
   </url>`
   return xml
 }
@@ -34,7 +68,8 @@ export async function GET() {
   const [perrosStats, nudistasStats, accesiblesStats, rutas] = await Promise.all([
     getPerrosStats(), getNudistasStats(), getAccesiblesStats(), getRutas(playas),
   ])
-  const today = new Date().toISOString().split('T')[0]
+  // lastmod real del dataset (no fecha de build).
+  const today = getPlayasDataModified().split('T')[0]
   const urls: string[] = []
 
   // Static pages (ES + EN)
@@ -129,7 +164,8 @@ export async function GET() {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.join('\n')}
 </urlset>`
 

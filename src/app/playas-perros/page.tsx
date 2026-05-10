@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     description: 'Listado completo de playas caninas (pet-friendly) en España, ordenadas por comunidad y provincia.',
     url: 'https://playas-espana.com/playas-perros',
     type: 'website',
+    images: [{ url: '/api/og?playa=Playas%20para%20perros%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 

@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     description: 'Mejores spots, centros PADI/SSI, reservas marinas y equipo.',
     url: `${BASE}/buceo`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Buceo%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 

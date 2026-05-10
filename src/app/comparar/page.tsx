@@ -7,6 +7,7 @@ import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 export const metadata: Metadata = {
   title: 'Comparar playas | ¿Cuál es mejor hoy?',
   description: 'Compara 2 o 3 playas lado a lado: puntuación en tiempo real, viento, oleaje, temperatura, servicios y accesibilidad.',
+  openGraph: { type: 'website', images: [{ url: '/api/og?playa=Comparar%20playas', width: 1200, height: 630 }] },
   alternates: { canonical: '/comparar' },
 }
 

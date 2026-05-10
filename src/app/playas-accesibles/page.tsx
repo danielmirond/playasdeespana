@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description: 'Listado completo de playas accesibles en España, ordenadas por comunidad y provincia.',
     url: 'https://playas-espana.com/playas-accesibles',
     type: 'website',
+    images: [{ url: '/api/og?playa=Playas%20accesibles%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 

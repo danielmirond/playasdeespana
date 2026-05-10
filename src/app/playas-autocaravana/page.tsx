@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     description: 'Áreas de autocaravanas cerca del mar, rutas costeras y consejos prácticos.',
     url: `${BASE}/playas-autocaravana`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Playas%20para%20autocaravana', width: 1200, height: 630 }],
   },
 }
 

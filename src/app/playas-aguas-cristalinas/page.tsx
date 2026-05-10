@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     description: 'Las playas más transparentes de España: ranking por visibilidad del agua, calidad EEA y Bandera Azul.',
     url: `${BASE}/playas-aguas-cristalinas`,
     type: 'article',
+    images: [{ url: '/api/og?playa=Playas%20con%20aguas%20cristalinas%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
 }
