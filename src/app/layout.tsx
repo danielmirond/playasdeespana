@@ -4,7 +4,17 @@ import CookieBanner from '@/components/ui/CookieBanner'
 import ConsentScripts from '@/components/ui/ConsentScripts'
 import NavigationProgress from '@/components/ui/NavigationProgress'
 import Footer from '@/components/ui/Footer'
+import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
 import './globals.css'
+
+// Organization JSON-LD global. Se emite una sola vez por página y todos los
+// schemas de la app referencian su @id (Beach.publisher, Article.author...).
+// Le permite a Google fusionar las menciones a una única entidad del
+// Knowledge Graph (Content Warehouse: authorEntities, trustedSource).
+const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  ...AUTOR_PLAYAS_ESPANA,
+}
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -191,6 +201,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js')` }} />
       </head>
       <body>
+        {/* Organization global referenciable por @id desde cualquier schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}
+        />
         <NavigationProgress />
         {children}
         <Footer />

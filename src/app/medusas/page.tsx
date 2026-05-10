@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
-import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import AuthorByline from '@/components/seo/AuthorByline'
 import { getFileLastModified } from '@/lib/dateModified'
 export const revalidate = 86400
 const MODIFIED = getFileLastModified('src/app/medusas/page.tsx')
@@ -40,7 +40,13 @@ export default function Page() {
   ]
   return (<><Nav /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /><main style={{maxWidth:800,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
     <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.25rem'}}>Temporada de medusas en España <span aria-hidden="true">🪼</span></h1>
-    <div style={{marginBottom:'.75rem'}}><UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/medusas" name="Temporada de medusas en España" /></div>
+    <AuthorByline
+      headline="Temporada de medusas en España: cuándo y dónde"
+      url="https://playas-espana.com/medusas"
+      dateModified={MODIFIED}
+      description="Mapa de riesgo de medusas por región y mes en España. Cuándo hay medusas, qué playas se ven más afectadas y cómo protegerse."
+      articleSection="Salud y seguridad en la playa"
+    />
     <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem',maxWidth:520}}>
       El riesgo de medusas depende de la temperatura del agua, las corrientes y la estación.
       En cada ficha de playa estimamos el riesgo en tiempo real.

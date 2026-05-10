@@ -3,8 +3,10 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
-import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import AuthorByline from '@/components/seo/AuthorByline'
 import { getEditorialModified } from '@/lib/dateModified'
+// (UpdatedBadge sustituido por AuthorByline: emite Article schema con
+//  dateModified Y author en el mismo bloque, evitando schema duplicado.)
 export const revalidate = 86400
 const MODIFIED = getEditorialModified('src/app/calidad-agua/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
@@ -20,7 +22,13 @@ export default async function Page() {
   const total = playas.length
   return (<><Nav /><main style={{maxWidth:1000,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
     <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.25rem'}}>Calidad del agua de baño en España <span aria-hidden="true">💧</span></h1>
-    <div style={{marginBottom:'.75rem'}}><UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/calidad-agua" name="Calidad del agua de baño en España" /></div>
+    <AuthorByline
+      headline="Calidad del agua de baño en las playas de España"
+      url="https://playas-espana.com/calidad-agua"
+      dateModified={MODIFIED}
+      description="Clasificación oficial de calidad del agua de baño en las playas españolas según la Directiva europea 2006/7/CE."
+      articleSection="Calidad del agua"
+    />
     <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem',maxWidth:560}}>
       La calidad del agua se mide según la Directiva europea 2006/7/CE. Las playas con Bandera Azul ({conBandera} de {total}) garantizan calidad excelente.
       En cada ficha de playa mostramos la clasificación actualizada.

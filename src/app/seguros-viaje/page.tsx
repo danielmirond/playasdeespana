@@ -5,10 +5,13 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import AuthorByline from '@/components/seo/AuthorByline'
+import { getFileLastModified } from '@/lib/dateModified'
 
 export const revalidate = 604800
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+const MODIFIED = getFileLastModified('src/app/seguros-viaje/page.tsx')
 
 // Affiliate URLs. Si no hay env var, se oculta el CTA del proveedor.
 const HEYMONDO_AFF = process.env.NEXT_PUBLIC_HEYMONDO_AFF ?? ''
@@ -106,6 +109,13 @@ export default function SegurosViajePage() {
         }}>
           El mejor <em style={{ fontWeight: 500, color: 'var(--accent)' }}>seguro de viaje</em> para España
         </h1>
+        <AuthorByline
+          headline="El mejor seguro de viaje para España"
+          url={`${BASE}/seguros-viaje`}
+          dateModified={MODIFIED}
+          description="Compara los mejores seguros de viaje para España: cobertura médica, cancelación y equipaje. Heymondo, IATI y Chapka."
+          articleSection="Viajar a España"
+        />
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.65 }}>
           Comparativa actualizada de los mejores seguros de viaje para tus vacaciones de playa
           en España. Aunque la sanidad pública es buena, un seguro te cubre cancelaciones, equipaje
