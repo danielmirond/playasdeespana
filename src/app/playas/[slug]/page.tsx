@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getCalidad } from '@/lib/calidad'
 import { getVotos } from '@/lib/votos'
@@ -180,6 +181,31 @@ export default async function PlayaPage({ params }: Props) {
   const opinionesData = opinionesResult.status === 'fulfilled' ? opinionesResult.value : null
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
   const buceoData: CentroBuceo[] = buceoResult.status === 'fulfilled' ? buceoResult.value : []
+
+  // Warming post-respuesta: si algún fetch cayó por deadline, lo
+  // re-disparamos en background DESPUÉS de devolver el HTML al usuario.
+  // El cómputo termina sin bloquear al cliente actual; KV queda poblado
+  // para el siguiente visitante. Soluciona el peor caso TTFB (cold KV +
+  // Overpass lento). Vercel `after()` garantiza ejecución hasta 30s post-
+  // respuesta antes de suspender la lambda.
+  const failed: Array<[string, () => Promise<unknown>]> = []
+  if (meteoPlaya.status     === 'rejected') failed.push(['meteo',     () => getMeteoPlaya(playa.lat, playa.lng)])
+  if (mareas.status         === 'rejected') failed.push(['mareas',    () => getMareas(playa.lat, playa.lng)])
+  if (sol.status            === 'rejected') failed.push(['sol',       () => getSol(playa.lat, playa.lng)])
+  if (fotos.status          === 'rejected') failed.push(['fotos',     () => getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia)])
+  if (restaurantes.status   === 'rejected') failed.push(['rest',      () => getRestaurantes(playa.lat, playa.lng)])
+  if (hoteles.status        === 'rejected') failed.push(['hot',       () => getHoteles(playa.lat, playa.lng)])
+  if (campingsResult.status === 'rejected') failed.push(['camp',      () => getCampings(playa.lat, playa.lng)])
+  if (buceoResult.status    === 'rejected') failed.push(['buc',       () => getCentrosBuceo(playa.lat, playa.lng)])
+  if (escuelasResult.status === 'rejected') failed.push(['esc',       () => getEscuelas(playa.lat, playa.lng)])
+
+  if (failed.length > 0) {
+    after(async () => {
+      // Ejecutamos en paralelo. Ignoramos errores individuales — el
+      // objetivo es solo poblar KV; ya servimos al usuario actual.
+      await Promise.allSettled(failed.map(([, fn]) => fn()))
+    })
+  }
 
   // Enlaces condicionales de municipio y provincia: solo enlazamos el
   // municipio si tiene página propia (>=4 playas). La provincia siempre
