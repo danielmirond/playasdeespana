@@ -39,16 +39,19 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Fichas de playa: CDN 1h, browser 5min, stale 24h
+        // Fichas de playa: browser 10min (era 5min), CDN 1h, stale 7d.
+        // El SWR de 7d (era 24h) hace que cualquier visita a una ficha
+        // dormida sirva el HTML cacheado instantáneo y revalide en
+        // background — TTFB ms en lugar de invocar la lambda.
         source: '/playas/:slug*',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400' },
+          { key: 'Cache-Control', value: 'public, max-age=600, s-maxage=3600, stale-while-revalidate=604800' },
         ],
       },
       {
         source: '/en/beaches/:slug*',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400' },
+          { key: 'Cache-Control', value: 'public, max-age=600, s-maxage=3600, stale-while-revalidate=604800' },
         ],
       },
       {
