@@ -2,8 +2,23 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
+
 export const revalidate = 3600
-export const metadata: Metadata = { title: 'Playa del día | La mejor playa de España hoy', description: 'Cada día seleccionamos la playa con mejor puntuación en tiempo real de toda España.', alternates: { canonical: '/playa-del-dia' } }
+
+const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+const ORG_REF = { '@id': `${BASE}/#organization` }
+
+export const metadata: Metadata = {
+  title: 'Playa del día | La mejor playa de España hoy',
+  description: 'Cada día seleccionamos la playa con mejor puntuación en tiempo real de toda España.',
+  alternates: { canonical: '/playa-del-dia' },
+  openGraph: {
+    type:  'article',
+    url:   `${BASE}/playa-del-dia`,
+    title: 'Playa del día | La mejor playa de España hoy',
+    images: [{ url: '/api/og?playa=Playa%20del%20d%C3%ADa', width: 1200, height: 630 }],
+  },
+}
 function score(p: any) { let s=40; if(p.bandera)s+=15;if(p.socorrismo)s+=12;if(p.duchas)s+=8;if(p.parking)s+=8;if(p.accesible)s+=5; const g=(p.grado_ocupacion??'').toLowerCase(); if(g.includes('bajo'))s+=8; return Math.min(100,s) }
 export default async function Page() {
   const playas = await getPlayas()
@@ -14,7 +29,35 @@ export default async function Page() {
     .sort((a,b) => b.sc - a.sc)
   const pick = candidates[0]
   if (!pick) return <><Nav /><main style={{padding:'3rem',textAlign:'center'}}>No hay playa del día</main></>
-  return (<><Nav /><main style={{maxWidth:800,margin:'0 auto',padding:'2rem 1.5rem 5rem',textAlign:'center'}}>
+
+  // NewsArticle — contenido fresco diario, candidato a Google Discover.
+  // datePublished = inicio del día UTC para que cada deploy del día
+  // declare la misma fecha (no actualiza el timestamp en cada build).
+  const today = new Date()
+  today.setUTCHours(0, 0, 0, 0)
+  const todayIso = today.toISOString()
+
+  const newsSchema = {
+    '@context':       'https://schema.org',
+    '@type':          'NewsArticle',
+    '@id':            `${BASE}/playa-del-dia#article-${todayIso.split('T')[0]}`,
+    headline:         `Playa del día: ${pick.p.nombre} (${pick.p.municipio})`,
+    description:      `Hoy destacamos ${pick.p.nombre} en ${pick.p.municipio} (${pick.p.provincia}) por su combinación de servicios, calidad del agua y baja ocupación.`,
+    url:              `${BASE}/playa-del-dia`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE}/playa-del-dia` },
+    image:            [`${BASE}/api/og?slug=${encodeURIComponent(pick.p.slug)}`],
+    author:           ORG_REF,
+    publisher:        ORG_REF,
+    datePublished:    todayIso,
+    dateModified:     todayIso,
+    inLanguage:       'es-ES',
+    articleSection:   'Playa del día',
+    about:            { '@id': `${BASE}/playas/${pick.p.slug}#beach` },
+  }
+
+  return (<><Nav />
+  <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }} />
+  <main style={{maxWidth:800,margin:'0 auto',padding:'2rem 1.5rem 5rem',textAlign:'center'}}>
     <p style={{fontSize:'.82rem',color:'var(--muted)',marginBottom:'.5rem'}}>🗓 {new Date().toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long'})}</p>
     <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(2rem,5vw,3rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.5rem'}}>Playa del día</h1>
     <div style={{fontSize:'3rem',marginBottom:'.5rem'}}>🏖️</div>
