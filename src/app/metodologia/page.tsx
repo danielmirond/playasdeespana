@@ -112,38 +112,87 @@ const FACTORES: Factor[] = [
 ]
 
 export default function MetodologiaPage() {
-  // Schema.org AboutPage. ayuda a Google a entender la intención EEAT
-  const schema = {
+  // AboutPage. Ayuda a Google a entender la intención EEAT.
+  const aboutSchema = {
     '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: 'Metodología y fuentes. playas-espana.com',
+    '@type':    'AboutPage',
+    name:       'Metodología y fuentes. playas-espana.com',
     description: 'Cómo se calcula la nota de cada playa, fuentes y política editorial.',
-    url: `${BASE}/metodologia`,
-    publisher: {
-      '@type': 'Organization',
-      name: 'playas-espana.com',
-      url: BASE,
-    },
+    url:        `${BASE}/metodologia`,
+    publisher:  { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
     mainEntity: {
-      '@type': 'Article',
-      headline: 'De dónde salen los datos y cómo se calcula la nota',
+      '@type':       'Article',
+      headline:      'De dónde salen los datos y cómo se calcula la nota',
       datePublished: '2024-06-01',
-      dateModified: new Date().toISOString().slice(0, 10),
-      author: {
-        '@type': 'Organization',
-        name: 'Equipo editorial de playas-espana.com',
-      },
+      dateModified:  MODIFIED,
+      author:        { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
       citation: FUENTES.map(f => ({
         '@type': 'CreativeWork',
-        name: f.nombre,
-        url: f.url,
+        name:    f.nombre,
+        url:     f.url,
       })),
     },
   }
 
+  // Dataset schema. Declara el dataset de las 5.000+ playas para que
+  // aparezca en Google Dataset Search (datasetsearch.research.google.com).
+  // Importante para autoridad temática y para investigadores que pueden
+  // citar el dataset, generando backlinks de alto valor.
+  const datasetSchema = {
+    '@context':   'https://schema.org',
+    '@type':      'Dataset',
+    '@id':        `${BASE}/metodologia#dataset`,
+    name:         'Playas de España: estado del mar, calidad del agua y servicios',
+    alternateName: 'Spanish beaches dataset (sea conditions, water quality, services)',
+    description:
+      'Dataset agregado de las 5.000+ playas españolas con datos en tiempo real ' +
+      '(temperatura del agua, oleaje, viento, UV) y datos estructurales ' +
+      '(servicios, accesibilidad, Bandera Azul, calidad EEA, geolocalización). ' +
+      'Recopilado de fuentes oficiales: MITECO, EEA Bathing Water, AEMET, ' +
+      'Open-Meteo, ADEAC, OpenStreetMap, IGN.',
+    url:          `${BASE}/metodologia`,
+    sameAs:       `${BASE}/banderas-azules`,
+    isAccessibleForFree: true,
+    license:      'https://creativecommons.org/licenses/by-sa/4.0/',
+    keywords: [
+      'Playas de España', 'Spanish beaches', 'Bandera Azul', 'Blue Flag',
+      'Calidad del agua de baño', 'Bathing water quality', 'EEA',
+      'Estado del mar', 'Sea conditions', 'Oleaje', 'Wave height',
+      'Temperatura del mar', 'Sea temperature',
+    ],
+    creator:    { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
+    publisher:  { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
+    spatialCoverage: {
+      '@type':   'Place',
+      name:      'España',
+      geo: {
+        '@type':       'GeoShape',
+        // Bounding box aproximado del litoral peninsular + islas + Ceuta + Melilla.
+        box: '27.6 -18.2 43.8 4.3',
+      },
+    },
+    temporalCoverage: '2024-01-01/..',
+    inLanguage:    ['es-ES', 'en-GB'],
+    dateModified:  MODIFIED,
+    distribution: [
+      {
+        '@type':       'DataDownload',
+        encodingFormat: 'application/xml',
+        contentUrl:    `${BASE}/sitemap-index.xml`,
+        name:          'Sitemap XML con metadatos de cada playa',
+      },
+    ],
+    citation: FUENTES.map(f => ({
+      '@type': 'CreativeWork',
+      name:    f.nombre,
+      url:     f.url,
+    })),
+  }
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }} />
       <Nav />
       <main style={{ maxWidth: 860, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
         <nav aria-label="Ruta de navegación" style={{
