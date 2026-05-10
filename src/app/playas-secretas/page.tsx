@@ -6,9 +6,12 @@ import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
+const MODIFIED = getEditorialModified('src/app/playas-secretas/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas secretas en España | Calas escondidas y poco masificadas',
   description: 'Las playas menos masificadas de España: baja ocupación, sin parking, sin chiringuito. Calas escondidas y rincones vírgenes.',
@@ -97,6 +100,7 @@ export default async function Page() {
           </section>
         ))}
       
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-secretas" name="Playas secretas en España" visible={false} />
         <EnlacesRelacionados topic="secretas" />
       </main>
     </>

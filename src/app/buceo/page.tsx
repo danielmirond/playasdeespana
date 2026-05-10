@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
@@ -12,6 +14,7 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
 const CIVITATIS_AFF = process.env.NEXT_PUBLIC_CIVITATIS_AFF ?? ''
 
+const MODIFIED = getEditorialModified('src/app/buceo/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Buceo en España | Mejores playas, centros y reservas marinas',
   description: 'Guía completa de buceo en España: mejores spots por comunidad, reservas marinas, centros PADI/SSI, bautismos, equipo y certificaciones. De Cabo de Palos a Canarias.',
@@ -277,6 +280,7 @@ export default async function BuceoPage() {
           </div>
         </section>
       
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/buceo" name="Buceo en España" visible={false} />
         <EnlacesRelacionados topic="buceo" />
       </main>
 

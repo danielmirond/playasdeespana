@@ -8,9 +8,12 @@ import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import IconInfo from '@/components/ui/IconInfo'
 import styles from './PlayasNudistas.module.css'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
+const MODIFIED = getEditorialModified('src/app/playas-nudistas/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas nudistas en España 2026 | Listado completo por provincia',
   description: 'Listado completo de playas nudistas y de naturismo en España. Ordenadas por comunidad, provincia y municipio con mapa interactivo y servicios.',
@@ -197,6 +200,7 @@ export default async function PlayasNudistasPage() {
           ))}
         </section>
 
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-nudistas" name="Playas nudistas en España" visible={false} />
         <EnlacesRelacionados topic="nudistas" />
       </div>
 

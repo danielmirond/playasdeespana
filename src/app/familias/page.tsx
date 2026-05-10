@@ -6,6 +6,8 @@ import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
@@ -25,6 +27,7 @@ const faqSchema = {
   })),
 }
 
+const MODIFIED = getEditorialModified('src/app/familias/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas para familias con niños en España | Las más seguras',
   description: 'Playas familiares en España: socorrismo, duchas, baja ocupación, accesibles y agua poco profunda. Las más seguras para ir con niños.',
@@ -103,6 +106,7 @@ export default async function Page() {
           </>
         )}
       
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/familias" name="Playas para familias en España" visible={false} />
         <EnlacesRelacionados topic="familias" />
       </main>
     </>

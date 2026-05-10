@@ -7,11 +7,14 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import type { Playa } from '@/types'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 3600
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+const MODIFIED = getEditorialModified('src/app/playas-sin-viento/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas sin viento hoy en España | Las más resguardadas',
   description: 'Playas con menos viento ahora mismo en España. Datos en tiempo real de Open-Meteo. Ideales para familias, paddle surf y snorkel.',
@@ -169,6 +172,7 @@ export default async function PlayasSinVientoPage() {
           </Link>
         </div>
       
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-sin-viento" name="Playas sin viento en España" visible={false} />
         <EnlacesRelacionados topic="sin-viento" />
       </main>
     </>

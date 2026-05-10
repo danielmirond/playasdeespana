@@ -5,9 +5,12 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 3600
 
+const MODIFIED = getEditorialModified('src/app/surf/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Surf en España | Previsión de olas y viento en playas de surf',
   description: 'Previsión de surf en España: playas con olas, periodo, viento y condiciones para surfear hoy. Costa Vasca, Asturias, Galicia, Canarias, Cádiz y más.',
@@ -178,6 +181,7 @@ export default async function SurfPage() {
           </p>
         )}
       
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/surf" name="Surf en España" visible={false} />
         <EnlacesRelacionados topic="surf" />
       </main>
     </>

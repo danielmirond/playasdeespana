@@ -7,9 +7,12 @@ import styles from './BanderasAzules.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
+const MODIFIED = getEditorialModified('src/app/banderas-azules/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas con Bandera Azul en España 2026 | Listado oficial',
   description: 'Listado completo y oficial de playas con Bandera Azul en España. Ordenadas por comunidad autónoma, con calidad del agua, servicios, accesibilidad y mapa interactivo.',
@@ -232,6 +235,7 @@ export default async function BanderasAzulesPage() {
           ))}
         </section>
 
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/banderas-azules" name="Playas con Bandera Azul en España" visible={false} />
         <EnlacesRelacionados topic="banderas-azules" />
       </div>
 

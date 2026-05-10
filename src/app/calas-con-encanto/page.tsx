@@ -10,12 +10,15 @@ import AlquilerBarcoCTA from '@/components/playa/AlquilerBarcoCTA'
 import { getPlayas, getComunidades, getProvincias } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+const MODIFIED = getEditorialModified('src/app/calas-con-encanto/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Calas con encanto en España | Las más bonitas por comunidad y provincia',
   description: 'Las calas con más encanto de España: rincones escondidos, aguas turquesa, accesos por sendero y poca masificación. Listado por comunidad autónoma y provincia.',
@@ -357,6 +360,7 @@ export default async function CalasConEncantoPage() {
           </div>
         </section>
       
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/calas-con-encanto" name="Calas con encanto en España" visible={false} />
         <EnlacesRelacionados topic="calas" />
       </main>
     </>

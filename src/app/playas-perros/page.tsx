@@ -8,9 +8,12 @@ import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import IconInfo from '@/components/ui/IconInfo'
 import styles from './PlayasPerros.module.css'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
 
+const MODIFIED = getEditorialModified('src/app/playas-perros/page.tsx', ['public/data/playas.json'])
 export const metadata: Metadata = {
   title: 'Playas para perros en España 2026 | Listado por comunidad',
   description: 'Playas donde se permite la entrada de perros en España. Listado oficial por comunidad autónoma, provincia y municipio. Consejos, normativa y mapa interactivo.',
@@ -225,6 +228,7 @@ export default async function PlayasPerrosPage() {
           ))}
         </section>
 
+        <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/playas-perros" name="Playas para perros en España" visible={false} />
         <EnlacesRelacionados topic="perros" />
       </div>
 

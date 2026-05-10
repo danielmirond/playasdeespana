@@ -2,8 +2,17 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import { getFileLastModified } from '@/lib/dateModified'
 export const revalidate = 86400
-export const metadata: Metadata = { title: 'Temporada de medusas en España | Cuándo y dónde', description: 'Mapa de riesgo de medusas por región y mes en España. Cuándo hay medusas, qué playas se ven más afectadas y cómo protegerse.', alternates: { canonical: '/medusas' } }
+const MODIFIED = getFileLastModified('src/app/medusas/page.tsx')
+export const metadata: Metadata = {
+  title: 'Temporada de medusas en España | Cuándo y dónde',
+  description: 'Mapa de riesgo de medusas por región y mes en España. Cuándo hay medusas, qué playas se ven más afectadas y cómo protegerse.',
+  alternates: { canonical: '/medusas' },
+  openGraph: { type: 'article', modifiedTime: MODIFIED, url: 'https://playas-espana.com/medusas' },
+  other: { 'article:modified_time': MODIFIED },
+}
 
 const FAQ = [
   { q: '¿Cuándo hay más medusas en España?', a: 'La mayor concentración de medusas se da entre junio y septiembre, con el pico en agosto. En el Mediterráneo el riesgo es especialmente alto cuando el agua supera los 25 °C y las corrientes empujan los enjambres hacia la costa.' },
@@ -30,7 +39,8 @@ export default function Page() {
     {mes:'Oct-Dic',riesgo:'Bajo',color:'#3d6b1f',desc:'Agua se enfría, las medusas desaparecen gradualmente.'},
   ]
   return (<><Nav /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /><main style={{maxWidth:800,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
-    <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.5rem'}}>🪼 Temporada de medusas</h1>
+    <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.25rem'}}>Temporada de medusas en España <span aria-hidden="true">🪼</span></h1>
+    <div style={{marginBottom:'.75rem'}}><UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/medusas" name="Temporada de medusas en España" /></div>
     <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem',maxWidth:520}}>
       El riesgo de medusas depende de la temperatura del agua, las corrientes y la estación.
       En cada ficha de playa estimamos el riesgo en tiempo real.
