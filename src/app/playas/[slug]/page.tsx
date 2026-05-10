@@ -106,31 +106,38 @@ export default async function PlayaPage({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  // Deadline global de 4s sobre las fetches paralelas. Lo que no resuelva
-  // a tiempo se cae a fallback (vacío o null) — el cliente reintenta
-  // restaurantes/hoteles vía /api/* tras hidratación. Esto evita que un
-  // Overpass lento (5-7s) deje al usuario mirando el browser progress
-  // bar mientras la ficha está casi lista.
+  // Deadline global de 1.5s sobre las fetches paralelas. Lo que no
+  // resuelva se cae a fallback (vacío/null) — el cliente reintenta vía
+  // /api/* tras hidratación (restaurantes, hoteles, campings, buceo,
+  // escuelas tienen route handler propio). Antes era 4s y dejaba TTFB
+  // hasta 4s en p99 si Overpass no respondía. 1.5s mantiene el meteo
+  // y la cascada de fotos pero corta los Overpass lentos.
+  //
+  // ORDEN: los fetches críticos para hero/above-the-fold van primero
+  // (no afecta tiempo, pero deja claro el contrato).
   const promesas = [
-    getMareas(playa.lat, playa.lng),
-    getSol(playa.lat, playa.lng),
+    // Críticos
     getMeteoPlaya(playa.lat, playa.lng),
-    getRestaurantes(playa.lat, playa.lng),
-    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia),
-    getHoteles(playa.lat, playa.lng),
-    getEscuelas(playa.lat, playa.lng),
-    getTurbidez(playa.lat, playa.lng),
-    getMeteoForecast(playa.lat, playa.lng),
+    getSol(playa.lat, playa.lng),
+    getMareas(playa.lat, playa.lng),
     getCalidad(slug),
-    getPlayas(),
-    getMunicipioSlugsSet(),
-    getVotos(slug),
-    getCampings(playa.lat, playa.lng),
-    getCentrosBuceo(playa.lat, playa.lng),
+    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia),
     getReportes(slug),
     getOpiniones(slug, 1, 10),
+    getVotos(slug),
+    getMeteoForecast(playa.lat, playa.lng),
+    getTurbidez(playa.lat, playa.lng),
+    // Usados below-the-fold (más sensibles a deadline)
+    getRestaurantes(playa.lat, playa.lng),
+    getHoteles(playa.lat, playa.lng),
+    getCampings(playa.lat, playa.lng),
+    getCentrosBuceo(playa.lat, playa.lng),
+    getEscuelas(playa.lat, playa.lng),
+    // Datos del filesystem (rápidos)
+    getPlayas(),
+    getMunicipioSlugsSet(),
   ] as const
-  const DEADLINE_MS = 4000
+  const DEADLINE_MS = 1500
   const conDeadline = promesas.map(p =>
     Promise.race([
       p.then(v => ({ status: 'fulfilled' as const, value: v })),
@@ -140,7 +147,13 @@ export default async function PlayaPage({ params }: Props) {
     ]).catch(reason => ({ status: 'rejected' as const, reason: String(reason) }))
   )
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [mareas, sol, meteoPlaya, restaurantes, fotos, hoteles, escuelasResult, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult, reportesResult, opinionesResult] = await Promise.all(conDeadline) as any[]
+  const [
+    meteoPlaya, sol, mareas, calidadResult, fotos,
+    reportesResult, opinionesResult, votosResult,
+    meteoForecast, turbidez,
+    restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
+    allPlayasResult, municipioSlugsResult,
+  ] = await Promise.all(conDeadline) as any[]
   const reportesData  = reportesResult.status === 'fulfilled'  ? reportesResult.value  : null
   const opinionesData = opinionesResult.status === 'fulfilled' ? opinionesResult.value : null
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
