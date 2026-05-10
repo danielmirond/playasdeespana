@@ -255,6 +255,7 @@ export default async function PlayaPage({ params }: Props) {
           const v = votosResult.value
           return v && v.votos > 0 ? { ratingValue: v.media, ratingCount: v.votos } : null
         })()}
+        reviews={opinionesData?.items ?? undefined}
         dateModified={dateModified}
         faqs={generarFaqsPlaya({
           playa,

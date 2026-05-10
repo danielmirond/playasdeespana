@@ -7,6 +7,8 @@ import Footer from '@/components/ui/Footer'
 import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
 import './globals.css'
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
+
 // Organization JSON-LD global. Se emite una sola vez por página y todos los
 // schemas de la app referencian su @id (Beach.publisher, Article.author...).
 // Le permite a Google fusionar las menciones a una única entidad del
@@ -14,6 +16,31 @@ import './globals.css'
 const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   ...AUTOR_PLAYAS_ESPANA,
+}
+
+// WebSite + SearchAction: activa el cuadro de búsqueda de Google bajo el
+// dominio en SERP (sitelinks searchbox). Aumenta visibilidad de marca
+// y CTR. El @id estable enlaza el WebSite con la Organization vía
+// publisher. Content Warehouse: brand entity, sitelinks signals.
+const WEBSITE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type':    'WebSite',
+  '@id':      `${BASE_URL}/#website`,
+  url:        BASE_URL,
+  name:       'Playas de España',
+  alternateName: ['playas-espana.com', 'Playas España'],
+  description:
+    'Estado del mar y guía de las 5.000+ playas españolas. Datos oficiales de MITECO, EEA y AEMET actualizados cada hora.',
+  inLanguage: 'es-ES',
+  publisher:  { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
+  potentialAction: {
+    '@type':       'SearchAction',
+    target: {
+      '@type':       'EntryPoint',
+      urlTemplate:   `${BASE_URL}/buscar?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
 }
 
 const playfair = Playfair_Display({
@@ -201,10 +228,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js')` }} />
       </head>
       <body>
-        {/* Organization global referenciable por @id desde cualquier schema */}
+        {/* Organization + WebSite globales referenciables por @id */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
         />
         <NavigationProgress />
         {children}
