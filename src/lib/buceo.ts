@@ -3,6 +3,7 @@
 // surf y demás deportes que mezcla getEscuelas().
 import { haversine } from './geo'
 import { queryOverpass } from './overpass'
+import { kvCached } from './kv-cache'
 
 const RADIUS_M = 15000 // 15 km: centros de buceo están más dispersos
 
@@ -59,7 +60,14 @@ function extraerServicios(tags: Record<string, string>): string[] {
   return out
 }
 
-export async function getCentrosBuceo(lat: number, lon: number): Promise<CentroBuceo[]> {
+// TTL: centros de buceo abren/cierran lentamente. 7 días.
+const KV_TTL_BUCEO = 7 * 24 * 3600
+
+export function getCentrosBuceo(lat: number, lon: number): Promise<CentroBuceo[]> {
+  return kvCached('buceo', [lat, lon], KV_TTL_BUCEO, () => fetchCentrosBuceoFromOverpass(lat, lon))
+}
+
+async function fetchCentrosBuceoFromOverpass(lat: number, lon: number): Promise<CentroBuceo[]> {
   const query = `[out:json][timeout:10];
 (
   node["sport"="scuba_diving"](around:${RADIUS_M},${lat},${lon});

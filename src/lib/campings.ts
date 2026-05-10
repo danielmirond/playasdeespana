@@ -7,6 +7,7 @@
 // hoteles, y 5 km dejaba muchas playas sin resultados.
 import { haversine } from './geo'
 import { queryOverpass } from './overpass'
+import { kvCached } from './kv-cache'
 
 const RADIUS_M = 10000
 
@@ -71,7 +72,14 @@ function extraerServicios(tags: Record<string, string>): string[] {
   return out
 }
 
-export async function getCampings(lat: number, lon: number): Promise<Camping[]> {
+// TTL: campings cambian poco. 7 días.
+const KV_TTL_CAMPINGS = 7 * 24 * 3600
+
+export function getCampings(lat: number, lon: number): Promise<Camping[]> {
+  return kvCached('campings', [lat, lon], KV_TTL_CAMPINGS, () => fetchCampingsFromOverpass(lat, lon))
+}
+
+async function fetchCampingsFromOverpass(lat: number, lon: number): Promise<Camping[]> {
   // Nodes + ways (camping grandes suelen estar mapeados como área). `out center`
   // nos da lat/lon del centro para los ways. Limitamos a 40 resultados para
   // evitar JSON enorme de Overpass.

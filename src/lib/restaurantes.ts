@@ -6,6 +6,7 @@
 import type { Restaurante } from '@/types'
 import { haversine } from './geo'
 import { queryOverpass } from './overpass'
+import { kvCached } from './kv-cache'
 
 // Radio razonable para playas: hasta 3 km cubre el paseo marítimo y zonas
 // limítrofes, sin hacer la query tan grande que Overpass tarde 15 s.
@@ -17,7 +18,14 @@ function tipoDesdeAmenity(amenity: string): string {
   return 'Restaurante'
 }
 
-export async function getRestaurantes(lat: number, lon: number): Promise<Restaurante[]> {
+// TTL: bares y restaurantes abren/cierran. 3 días es razonable.
+const KV_TTL_RESTAURANTES = 3 * 24 * 3600
+
+export function getRestaurantes(lat: number, lon: number): Promise<Restaurante[]> {
+  return kvCached('restaurantes', [lat, lon], KV_TTL_RESTAURANTES, () => fetchRestaurantesFromOverpass(lat, lon))
+}
+
+async function fetchRestaurantesFromOverpass(lat: number, lon: number): Promise<Restaurante[]> {
   // Query compacta: restaurantes, bares, cafés como nodos dentro del radio.
   // [out:json][timeout:8] limita el tiempo interno de Overpass a 8 s,
   // complementa nuestro timeout por intento de 7 s en el cliente.

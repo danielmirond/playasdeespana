@@ -1,6 +1,7 @@
 // src/lib/escuelas.ts
 // Escuelas de deportes acuáticos via OpenStreetMap Overpass API
 import { fetchWithTimeout } from './fetch-timeout'
+import { kvCached } from './kv-cache'
 
 export interface Escuela {
   id:        number
@@ -52,7 +53,14 @@ function distancia(lat1: number, lng1: number, lat2: number, lng2: number): numb
   return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)))
 }
 
-export async function getEscuelas(lat: number, lng: number, radio = 5000): Promise<Escuela[]> {
+// TTL: escuelas de surf/kite/etc cambian lento. 5 días.
+const KV_TTL_ESCUELAS = 5 * 24 * 3600
+
+export function getEscuelas(lat: number, lng: number, radio = 5000): Promise<Escuela[]> {
+  return kvCached('escuelas', [lat, lng, radio], KV_TTL_ESCUELAS, () => fetchEscuelasUncached(lat, lng, radio))
+}
+
+async function fetchEscuelasUncached(lat: number, lng: number, radio = 5000): Promise<Escuela[]> {
   // Intentar Foursquare primero (mejor cobertura)
   const foursquare = await getEscuelasFoursquare(lat, lng, radio)
   if (foursquare.length >= 2) return foursquare
