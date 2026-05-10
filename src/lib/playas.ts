@@ -33,9 +33,19 @@ export const getPlayas = cache(async (): Promise<Playa[]> => {
   }
 })
 
-export const getPlayaBySlug = cache(async (slug: string): Promise<Playa | undefined> => {
+// Index slug → Playa precomputado en la primera invocación. O(1) lookup
+// frente al find lineal sobre 5000+ playas (sub-ms vs ~5ms cada vez,
+// pero la ficha llama a getPlayaBySlug en metadata + render).
+const _slugIndex = cache(async (): Promise<Map<string, Playa>> => {
   const playas = await getPlayas()
-  return playas.find(p => p.slug === slug)
+  const map = new Map<string, Playa>()
+  for (const p of playas) map.set(p.slug, p)
+  return map
+})
+
+export const getPlayaBySlug = cache(async (slug: string): Promise<Playa | undefined> => {
+  const idx = await _slugIndex()
+  return idx.get(slug)
 })
 
 export const getPlayasByComunidad = cache(async (comunidadSlug: string): Promise<Playa[]> => {

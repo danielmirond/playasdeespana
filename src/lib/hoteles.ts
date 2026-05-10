@@ -6,6 +6,7 @@
 // aportar demasiado. Solo nodos de tourism = hotel / hostel / guest_house.
 import { haversine } from './geo'
 import { queryOverpass } from './overpass'
+import { kvCached } from './kv-cache'
 
 const RADIUS_M = 5000
 
@@ -42,7 +43,14 @@ function inferirPrecio(estrellas: number): string {
   return '€'
 }
 
-export async function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
+// TTL de cache: hoteles cambian poco (raramente abren/cierran). 7 días.
+const KV_TTL_HOTELES = 7 * 24 * 3600
+
+export function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
+  return kvCached('hoteles', [lat, lon], KV_TTL_HOTELES, () => fetchHotelesFromOverpass(lat, lon))
+}
+
+async function fetchHotelesFromOverpass(lat: number, lon: number): Promise<HotelReal[]> {
   // Query solo con nodos. Incluye ways solo para hoteles (los edificios
   // grandes vienen como ways en OSM), con `out center` para conseguir
   // las coordenadas centrales.
