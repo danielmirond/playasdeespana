@@ -9,7 +9,7 @@
       "schedule": "0 4 * * 1"
     },
     {
-      "path": "/api/ping-google",
+      "path": "/api/cron/indexnow",
       "schedule": "0 6 * * *"
     },
     {
