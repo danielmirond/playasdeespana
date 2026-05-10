@@ -26,6 +26,17 @@ interface AggregateRatingData {
   ratingCount: number  // total de valoraciones
 }
 
+/** Opinión individual normalizada para emitir Review schema. Subset
+ *  intencionalmente compatible con OpinionPublica de lib/opiniones.ts
+ *  para que el caller pueda pasar el array directamente. */
+interface ReviewInput {
+  id:     string
+  rating: number       // 1-5
+  alias:  string       // author name
+  ts:     number       // ms timestamp
+  texto?: string       // reviewBody (opcional)
+}
+
 interface Props {
   playa:         Playa
   agua:          number
@@ -37,6 +48,10 @@ interface Props {
   fotoUrl?:      string | null
   fotoAutor?:    string
   rating?:       AggregateRatingData | null
+  /** Opiniones individuales (top N, ya filtradas y validadas).
+   *  Se emiten como Review[] dentro del Beach. Google muestra estrellas
+   *  en SERP cuando hay AggregateRating + Review[] coherentes. */
+  reviews?:      ReviewInput[]
   dateModified?: string
   /** FAQs visibles en la página. Deben coincidir EXACTAMENTE con las
    *  que FichaBody renderiza, para evitar mismatch entre schema y HTML. */
@@ -55,7 +70,7 @@ const ACTIVIDAD_LABELS: Record<string, string> = {
 
 export default function SchemaPlaya({
   playa, agua, olas, viento, uv, tempAire,
-  calidadNivel, fotoUrl, fotoAutor, rating,
+  calidadNivel, fotoUrl, fotoAutor, rating, reviews,
   dateModified, faqs,
 }: Props) {
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -224,6 +239,28 @@ export default function SchemaPlaya({
         bestRating:  5,
         worstRating: 1,
       },
+    } : {}),
+    // Reviews individuales — Google requiere que coincidan en número con
+    // ratingCount-ish (al menos algunas) y que cada Review tenga author,
+    // reviewRating, datePublished. Limitamos a top 10 con texto para
+    // que el HTML los pueda mostrar también (consistencia schema↔HTML).
+    ...(reviews && reviews.length > 0 ? {
+      review: reviews
+        .filter(r => r.alias && r.rating >= 1 && r.rating <= 5)
+        .slice(0, 10)
+        .map(r => ({
+          '@type':       'Review',
+          author:        { '@type': 'Person', name: r.alias },
+          reviewRating: {
+            '@type':     'Rating',
+            ratingValue: r.rating,
+            bestRating:  5,
+            worstRating: 1,
+          },
+          datePublished: new Date(r.ts).toISOString(),
+          ...(r.texto ? { reviewBody: r.texto } : {}),
+          itemReviewed:  { '@id': `${url}#beach` },
+        })),
     } : {}),
     datePublished: '2026-03-09',
     ...(dateModified ? { dateModified } : {}),
