@@ -3,6 +3,7 @@
 import { cache } from 'react'
 import { gradosADireccion } from './geo'
 import { fetchWithTimeout } from './fetch-timeout'
+import { kvCached } from './kv-cache'
 
 export interface MeteoPlaya {
   temp_aire:      number
@@ -39,12 +40,24 @@ interface MeteoRaw {
   forecast: MeteoForecast[]
 }
 
+// TTL del caché meteo: 30 min. Open-Meteo refresca cada hora pero el
+// dataset current/forecast tarda 5-10 min en propagarse a sus mirrors.
+// 30 min ofrece TTFB sub-segundo a costa de datos hasta 30 min antiguos.
+const KV_TTL_METEO = 30 * 60
+
 /**
  * Obtiene datos meteorológicos completos en UNA sola llamada a Open-Meteo:
  * - current: temperatura, viento, UV, humedad, sensación térmica
  * - daily (5 días): temp max/min, lluvia, nubosidad, icono
+ *
+ * Cacheado en KV por (lat, lng) con TTL 30 min. React.cache() arriba
+ * deduplica dentro del mismo request; KV deduplica entre requests.
  */
-const fetchMeteo = cache(async (lat: number, lng: number): Promise<MeteoRaw | null> => {
+const fetchMeteo = cache((lat: number, lng: number): Promise<MeteoRaw | null> => {
+  return kvCached('meteo', [lat, lng], KV_TTL_METEO, () => fetchMeteoUncached(lat, lng))
+})
+
+async function fetchMeteoUncached(lat: number, lng: number): Promise<MeteoRaw | null> {
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}`
       + `&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index`
@@ -85,7 +98,7 @@ const fetchMeteo = cache(async (lat: number, lng: number): Promise<MeteoRaw | nu
   } catch {
     return null
   }
-})
+}
 
 /** Datos meteorológicos actuales (temperatura, viento, UV, humedad, sensación) */
 export const getMeteoPlaya = cache(async (lat: number, lng: number): Promise<MeteoPlaya | null> => {
