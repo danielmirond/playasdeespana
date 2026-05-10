@@ -257,20 +257,30 @@ function Stars({ value, size = 14 }: { value: number; size?: number }) {
 }
 
 function Review({ op, locale }: { op: OpinionPublica; locale: 'es' | 'en' }) {
-  const date = new Date(op.ts).toLocaleDateString(locale === 'en' ? 'en-GB' : 'es-ES', {
+  const isoDate = new Date(op.ts).toISOString()
+  const dateLabel = new Date(op.ts).toLocaleDateString(locale === 'en' ? 'en-GB' : 'es-ES', {
     month: 'short', year: 'numeric',
   })
   const initial = op.alias.charAt(0).toUpperCase()
+  // itemScope + itemProp microdata redundante con el JSON-LD por si Google
+  // intenta validar consistencia HTML↔schema (Review schema requiere
+  // author, reviewRating, datePublished — todos presentes y machine-readable).
   return (
-    <li className={styles.review}>
+    <li className={styles.review} itemProp="review" itemScope itemType="https://schema.org/Review">
       <span className={styles.avatar} aria-hidden="true">{initial}</span>
       <div className={styles.revBody}>
         <div className={styles.revMeta}>
-          <span className={styles.revName}>{op.alias}</span>
-          <span className={styles.revDate}>· {date}</span>
-          <span className={styles.revStars}><Stars value={op.rating} size={12} /></span>
+          <span className={styles.revName} itemProp="author" itemScope itemType="https://schema.org/Person">
+            <span itemProp="name">{op.alias}</span>
+          </span>
+          <span className={styles.revDate}>· <time dateTime={isoDate} itemProp="datePublished">{dateLabel}</time></span>
+          <span className={styles.revStars} itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+            <meta itemProp="ratingValue" content={String(op.rating)} />
+            <meta itemProp="bestRating" content="5" />
+            <Stars value={op.rating} size={12} />
+          </span>
         </div>
-        {op.texto && <p className={styles.revTexto}>{op.texto}</p>}
+        {op.texto && <p className={styles.revTexto} itemProp="reviewBody">{op.texto}</p>}
       </div>
     </li>
   )

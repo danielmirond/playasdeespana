@@ -49,7 +49,7 @@ export default function Page() {
       description="Mapa de riesgo de medusas por región y mes en España. Cuándo hay medusas, qué playas se ven más afectadas y cómo protegerse."
       articleSection="Salud y seguridad en la playa"
     />
-    <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem',maxWidth:520}}>
+    <p data-speakable style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem',maxWidth:520}}>
       El riesgo de medusas depende de la temperatura del agua, las corrientes y la estación.
       En cada ficha de playa estimamos el riesgo en tiempo real.
     </p>

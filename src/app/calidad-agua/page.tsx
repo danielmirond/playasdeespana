@@ -31,7 +31,7 @@ export default async function Page() {
       description="Clasificación oficial de calidad del agua de baño en las playas españolas según la Directiva europea 2006/7/CE."
       articleSection="Calidad del agua"
     />
-    <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem',maxWidth:560}}>
+    <p data-speakable style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem',maxWidth:560}}>
       La calidad del agua se mide según la Directiva europea 2006/7/CE. Las playas con Bandera Azul ({conBandera} de {total}) garantizan calidad excelente.
       En cada ficha de playa mostramos la clasificación actualizada.
     </p>

@@ -55,6 +55,13 @@ export default function AuthorByline({
     dateModified,
     datePublished:  datePublished ?? dateModified,
     inLanguage:     locale === 'es' ? 'es-ES' : 'en-GB',
+    // Speakable: zonas relevantes para text-to-speech (Google Assistant /
+    // Discover). Apuntan a h1 + .lead/p de descripción. Content Warehouse:
+    // mejora la elegibilidad para Discover y resultados de voz.
+    speakable: {
+      '@type':    'SpeakableSpecification',
+      cssSelector: ['h1', '[data-speakable]', '.lead'],
+    },
   }
   if (image)         schema.image = image
   if (description)   schema.description = description
