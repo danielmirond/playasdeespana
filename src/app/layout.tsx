@@ -185,13 +185,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Preload del logo · está en el LCP del nav, eliminar el round-trip */}
         <link rel="preload" as="image" href="/logo.svg" fetchPriority="high" />
 
-        {/* Preconnect/DNS prefetch. elimina RTT para APIs externas */}
+        {/* Preconnect/DNS prefetch. Elimina RTT para APIs externas críticas
+            que se llaman casi siempre desde el render server-side de la
+            ficha y home. Preconnect = 3-way TCP+TLS pre-abierto;
+            dns-prefetch = solo resolución DNS (más barato pero menos efectivo). */}
         <link rel="preconnect" href="https://api.open-meteo.com" />
         <link rel="preconnect" href="https://marine-api.open-meteo.com" />
         <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://live.staticflickr.com" />
         <link rel="dns-prefetch" href="https://commons.wikimedia.org" />
         <link rel="dns-prefetch" href="https://overpass-api.de" />
+        <link rel="dns-prefetch" href="https://overpass.kumi.systems" />
         <link rel="dns-prefetch" href="https://www.ign.es" />
+        <link rel="dns-prefetch" href="https://api.openverse.org" />
+        <link rel="dns-prefetch" href="https://api.pexels.com" />
+        <link rel="dns-prefetch" href="https://api.sunrise-sunset.org" />
+        <link rel="dns-prefetch" href="https://www.flickr.com" />
 
         {/* AdSense se carga via ConsentScripts (requiere consentimiento marketing) */}
 

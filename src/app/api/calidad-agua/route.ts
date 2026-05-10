@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     )
     const body = id ? { id, calidad: db[id] ?? null } : db
     return NextResponse.json(body, {
-      headers: { 'Cache-Control': 'public, s-maxage=2592000' },
+      headers: { 'Cache-Control': 'public, max-age=86400, s-maxage=2592000, stale-while-revalidate=2592000' },
     })
   } catch {
     return NextResponse.json({ error: 'Datos no disponibles' }, { status: 503 })

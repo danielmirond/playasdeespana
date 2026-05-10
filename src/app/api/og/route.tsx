@@ -257,6 +257,17 @@ export async function GET(req: NextRequest) {
         }}/>
       </div>
     ),
-    { width: 1200, height: 630 }
+    {
+      width: 1200,
+      height: 630,
+      // Cache-Control agresivo: la OG es determinista por params (mismo
+      // slug → misma imagen). Con 1d en CDN evitamos recomputar en cada
+      // petición de Google Imágenes / image sitemap (5000+ URLs en sitemap
+      // image apuntan aquí). 7d stale-while-revalidate sirve la versión
+      // anterior mientras se regenera, sin TTFB hit visible.
+      headers: {
+        'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
+      },
+    }
   )
 }
