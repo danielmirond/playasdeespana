@@ -19,7 +19,7 @@ import { getCampings } from '@/lib/campings'
 import type { Camping } from '@/lib/campings'
 import { getCentrosBuceo } from '@/lib/buceo'
 import type { CentroBuceo } from '@/lib/buceo'
-import { getFotos } from '@/lib/fotos'
+import { getFotos, refetchAndStoreFotos } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
 import { getHoteles } from '@/lib/hoteles'
 import { getEscuelas } from '@/lib/escuelas'
@@ -188,16 +188,34 @@ export default async function PlayaPage({ params }: Props) {
   // para el siguiente visitante. Soluciona el peor caso TTFB (cold KV +
   // Overpass lento). Vercel `after()` garantiza ejecución hasta 30s post-
   // respuesta antes de suspender la lambda.
+  // Helpers para detectar resultados "no útiles":
+  // - rejected (deadline)
+  // - fulfilled pero con array vacío / null (la API respondió sin datos)
+  // Ambos casos merecen warming post-respuesta: el primero porque el
+  // dato no llegó; el segundo porque kvCached NO persiste arrays vacíos
+  // (correcto para no envenenar el cache) — sin warming quedaría
+  // permanentemente sin foto/hoteles si el cron warm tampoco lo logra.
+  const needsWarm = (r: any): boolean => {
+    if (!r || r.status === 'rejected') return true
+    const v = r.value
+    if (v === null || v === undefined) return true
+    if (Array.isArray(v) && v.length === 0) return true
+    return false
+  }
+
   const failed: Array<[string, () => Promise<unknown>]> = []
-  if (meteoPlaya.status     === 'rejected') failed.push(['meteo',     () => getMeteoPlaya(playa.lat, playa.lng)])
-  if (mareas.status         === 'rejected') failed.push(['mareas',    () => getMareas(playa.lat, playa.lng)])
-  if (sol.status            === 'rejected') failed.push(['sol',       () => getSol(playa.lat, playa.lng)])
-  if (fotos.status          === 'rejected') failed.push(['fotos',     () => getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia)])
-  if (restaurantes.status   === 'rejected') failed.push(['rest',      () => getRestaurantes(playa.lat, playa.lng)])
-  if (hoteles.status        === 'rejected') failed.push(['hot',       () => getHoteles(playa.lat, playa.lng)])
-  if (campingsResult.status === 'rejected') failed.push(['camp',      () => getCampings(playa.lat, playa.lng)])
-  if (buceoResult.status    === 'rejected') failed.push(['buc',       () => getCentrosBuceo(playa.lat, playa.lng)])
-  if (escuelasResult.status === 'rejected') failed.push(['esc',       () => getEscuelas(playa.lat, playa.lng)])
+  if (needsWarm(meteoPlaya))     failed.push(['meteo',  () => getMeteoPlaya(playa.lat, playa.lng)])
+  if (needsWarm(mareas))         failed.push(['mareas', () => getMareas(playa.lat, playa.lng)])
+  if (needsWarm(sol))            failed.push(['sol',    () => getSol(playa.lat, playa.lng)])
+  // Para fotos: usamos refetchAndStoreFotos (salta el cache, incluido
+  // el negative marker que se puede haber escrito al caer en deadline).
+  // Así garantizamos un segundo intento real sin restricciones de tiempo.
+  if (needsWarm(fotos))          failed.push(['fotos',  () => refetchAndStoreFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia)])
+  if (needsWarm(restaurantes))   failed.push(['rest',   () => getRestaurantes(playa.lat, playa.lng)])
+  if (needsWarm(hoteles))        failed.push(['hot',    () => getHoteles(playa.lat, playa.lng)])
+  if (needsWarm(campingsResult)) failed.push(['camp',   () => getCampings(playa.lat, playa.lng)])
+  if (needsWarm(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng)])
+  if (needsWarm(escuelasResult)) failed.push(['esc',    () => getEscuelas(playa.lat, playa.lng)])
 
   if (failed.length > 0) {
     after(async () => {
