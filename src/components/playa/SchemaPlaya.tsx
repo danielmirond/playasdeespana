@@ -20,6 +20,7 @@ import type { Playa } from '@/types'
 import { generarTextoPlaya } from '@/lib/textoPlaya'
 import type { FaqItem } from '@/lib/faqsPlaya'
 import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
+import { NOMBRES_POPULARES } from '@/lib/nombres-populares'
 
 interface AggregateRatingData {
   ratingValue: number  // media (1-5)
@@ -177,6 +178,14 @@ export default function SchemaPlaya({
     alternateName: [
       `Playa de ${playa.nombre}`,
       `${playa.nombre} (${playa.municipio})`,
+      // Si la playa tiene nombre popular en castellano (Kontxa →
+      // La Concha), lo añadimos como alternateName para que Google
+      // mapee ambas búsquedas a la misma entidad del KG.
+      ...(NOMBRES_POPULARES[playa.slug] ? [
+        NOMBRES_POPULARES[playa.slug].popular,
+        `${NOMBRES_POPULARES[playa.slug].popular} de ${playa.municipio}`,
+        `Playa de ${NOMBRES_POPULARES[playa.slug].popular}`,
+      ] : []),
     ],
     description: textoSEO,
     url,

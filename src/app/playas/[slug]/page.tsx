@@ -12,6 +12,7 @@ import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
+import { nombreMostrado } from '@/lib/nombres-populares'
 import { estimarMareas } from '@/lib/mareas-lunar'
 import { calcularHoraIdeal } from '@/lib/hora-ideal'
 import { getRestaurantes } from '@/lib/restaurantes'
@@ -85,7 +86,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!playa) return {}
 
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
-  const np = nombreConPlaya(playa.nombre)
+  // Si la playa tiene alias popular (Kontxa Hondartza → La Concha),
+  // lo usamos en title y descripcion para SEO castellano. Schema y H1
+  // mantienen el oficial bilingue.
+  const nombreParaSeo = nombreMostrado(slug, playa.nombre)
+  const np = nombreConPlaya(nombreParaSeo)
   const title = `Cómo está ${np} hoy | Bandera, estado, viento y temperatura del agua - Parking, hoteles y donde comer cerca`
   const description = `Estado del mar en ${np} hoy. Temperatura del agua, oleaje, viento, bandera, medusas y servicios. Parking cercano, hoteles y restaurantes.`
 
