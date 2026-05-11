@@ -6,6 +6,7 @@ import { getPlayas, getComunidades } from '@/lib/playas'
 import styles from './BanderasAzules.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import { getEditorialModified } from '@/lib/dateModified'
@@ -168,6 +169,25 @@ export default async function BanderasAzulesPage() {
             <div className={styles.statLabel}>Accesibles PMR</div>
           </div>
         </div>
+
+        {/* Top 6 con hero — variedad geográfica priorizando playas con servicios */}
+        <section aria-labelledby="top-bba" style={{ margin: '2rem 0' }}>
+          <h2 id="top-bba" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+            Una selección de las <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{azules.length} con Bandera Azul</em>
+          </h2>
+          <TopBeachCardsConHero
+            playas={azules
+              .filter(p => p.lat && p.lng)
+              .sort((a, b) => (b.accesible ? 1 : 0) + (b.socorrismo ? 1 : 0) - (a.accesible ? 1 : 0) - (a.socorrismo ? 1 : 0))
+              .slice(0, 6)
+              .map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+            limit={6}
+            eyebrow={`Top 6 · ${azules.length} playas con Bandera Azul`}
+          />
+        </section>
 
         {/* Mapa */}
         <div className={styles.mapaCard}>

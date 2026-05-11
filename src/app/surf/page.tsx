@@ -5,6 +5,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import { getEditorialModified } from '@/lib/dateModified'
 
@@ -117,6 +118,27 @@ export default async function SurfPage() {
           Condiciones de surf actualizadas cada hora para {surfPlayas.length} playas.
           Olas, periodo, viento y temperatura del agua.
         </p>
+
+        {/* Top 6 con hero foto */}
+        {scored.length >= 6 && (
+          <section aria-labelledby="top-surf" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-surf" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+              color: 'var(--ink)', marginBottom: '1rem',
+            }}>
+              Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>para surfear hoy</em>
+            </h2>
+            <TopBeachCardsConHero
+              playas={scored.slice(0, 6).map(s => ({
+                slug: s.playa.slug, nombre: s.playa.nombre, municipio: s.playa.municipio,
+                provincia: s.playa.provincia, comunidad: s.playa.comunidad,
+                lat: s.playa.lat, lng: s.playa.lng, bandera: s.playa.bandera,
+              }))}
+              limit={6}
+              eyebrow={`Top 6 · ${surfPlayas.length} playas de surf monitorizadas`}
+            />
+          </section>
+        )}
 
         <div style={{
           background: 'var(--card-bg)', border: '1px solid var(--line)',
