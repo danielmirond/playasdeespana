@@ -27,6 +27,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { getPlayas, getComunidades, getProvincias } from '@/lib/playas'
+import { refetchAndStoreFotos } from '@/lib/fotos'
 
 export const runtime  = 'nodejs'
 export const dynamic  = 'force-dynamic'  // siempre recalcular, no cachear el cron
@@ -157,9 +158,9 @@ export async function GET(req: NextRequest) {
   if (slice === 'top' || slice === 'all') {
     const playas = await getPlayas()
     // Heurística sin GSC: priorizar Bandera Azul + servicios + bajo NSE
-    const top = playas
+    const topPlayas = playas
       .map(p => ({
-        slug: p.slug,
+        playa: p,
         score:
           (p.bandera ? 5 : 0) +
           (p.socorrismo ? 1 : 0) +
@@ -170,8 +171,42 @@ export async function GET(req: NextRequest) {
       .filter(x => x.score >= 5)
       .sort((a, b) => b.score - a.score)
       .slice(0, 100)
-      .map(x => `${BASE}/playas/${x.slug}`)
+    const top = topPlayas.map(x => `${BASE}/playas/${x.playa.slug}`)
     buckets.top = summarise('top', await warmBatch(top))
+
+    // Además: forzar refetchAndStoreFotos para las top playas. El GET a
+    // /playas/X tiene deadline 1.5s y, si la cascada de fotos tarda más,
+    // escribe negative marker en KV. refetchAndStoreFotos salta el cache
+    // y la ejecuta sin deadline → garantía de que el KV de fotos para
+    // las populares siempre se mantiene fresco.
+    // Concurrencia limitada para no saturar APIs (Wikimedia, Flickr, etc).
+    const fotosCronT0 = Date.now()
+    let fotosOk = 0
+    let fotosVacias = 0
+    let fotosErr = 0
+    const fotosBatchSize = 4  // 4 playas en paralelo
+    for (let i = 0; i < topPlayas.length; i += fotosBatchSize) {
+      const batch = topPlayas.slice(i, i + fotosBatchSize)
+      await Promise.all(batch.map(async ({ playa }) => {
+        try {
+          const r = await refetchAndStoreFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia)
+          if (r.length > 0) fotosOk++; else fotosVacias++
+        } catch {
+          fotosErr++
+        }
+      }))
+    }
+    buckets.fotos = {
+      label: 'fotos-top',
+      total: topPlayas.length,
+      ok:    fotosOk,
+      errs:  fotosErr,
+      hits:  fotosOk,         // foto recuperada y persistida
+      miss:  fotosVacias,     // cascada terminó sin fotos
+      stale: 0,
+      avgMs: Math.round((Date.now() - fotosCronT0) / Math.max(1, topPlayas.length)),
+      slowest: [],
+    }
   }
 
   return NextResponse.json({
