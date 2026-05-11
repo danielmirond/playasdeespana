@@ -88,16 +88,17 @@ export default function FichaHero({
   const dot = statusDot(reportes)
   const hasPhoto = !!foto?.url
   // Nombre popular (castellano) si la playa está en idioma cooficial
-  // y tiene alias curado (ej. Kontxa Hondartza → La Concha). Si no,
-  // usa el nombre del dataset con prefijo "Playa de".
+  // y tiene alias curado (ej. Kontxa Hondartza → "La Concha de San
+  // Sebastián"). El campo `popular` ya contiene el nombre completo
+  // como lo quieras mostrar (no se concatena municipio).
   const nombrePopular = nombreMostrado(playa.slug, playa.nombre)
   const nombreOficial = nombreOficialAside(playa.slug, playa.nombre)  // null si no hay alias
-  const nombreH1Base  = locale === 'en' ? playa.nombre : nombreConPlaya(nombrePopular)
-  // En castellano, si hay nombre popular ≠ oficial, mostramos
-  // "La Concha de San Sebastián" para máxima visibilidad SEO.
-  const nombreH1 = locale === 'es' && nombreOficial && nombrePopular !== playa.nombre
-    ? `${nombrePopular} de ${playa.municipio}`
-    : nombreH1Base
+  const tieneAlias    = nombreOficial !== null
+  const nombreH1 = locale === 'en'
+    ? playa.nombre
+    : tieneAlias
+      ? nombrePopular                       // alias popular tal cual (ej. "Playa de las Catedrales")
+      : nombreConPlaya(playa.nombre)        // dataset name con prefijo "Playa de"
 
   return (
     <>
