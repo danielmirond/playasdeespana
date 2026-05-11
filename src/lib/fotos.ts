@@ -156,7 +156,8 @@ async function getFotosWikimediaGeo(lat: number, lon: number): Promise<FotoPlaya
     })
     const res = await fetchWithTimeout(
       `https://commons.wikimedia.org/w/api.php?${params}`,
-      { next: { revalidate: 86400 } }
+      { next: { revalidate: 86400 } },
+      3500,  // timeout más generoso: fotos son críticas para UX (hero)
     )
     if (!res.ok) return []
     const data = await res.json()
@@ -203,7 +204,8 @@ async function getFotosWikimediaText(nombre: string, municipio: string): Promise
       })
       const res = await fetchWithTimeout(
         `https://commons.wikimedia.org/w/api.php?${params}`,
-        { next: { revalidate: 86400 } }
+        { next: { revalidate: 86400 } },
+        3500,
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -234,7 +236,8 @@ async function getFotosUnsplash(municipio: string, provincia: string): Promise<F
         {
           headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` },
           next: { revalidate: 86400 },
-        }
+        },
+        3500,
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -276,7 +279,8 @@ async function getFotosOpenVerse(nombre: string, municipio: string): Promise<Fot
       })
       const res = await fetchWithTimeout(
         `https://api.openverse.org/v1/images/?${params}`,
-        { next: { revalidate: 86400 } }
+        { next: { revalidate: 86400 } },
+        3500,
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -327,7 +331,8 @@ async function getFotosPexels(municipio: string, provincia: string): Promise<Fot
         {
           headers: { Authorization: PEXELS_KEY },
           next: { revalidate: 86400 },
-        }
+        },
+        3500,
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -378,7 +383,8 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
       })
       const res = await fetchWithTimeout(
         `https://www.flickr.com/services/feeds/photos_public.gne?${params}`,
-        { next: { revalidate: 86400 } }
+        { next: { revalidate: 86400 } },
+        3500,
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -580,6 +586,15 @@ async function getFotosUncached(
   return combinadas.slice(0, 6)
 }
 
+// Negative caching: si la cascada devuelve [], persistimos un marcador
+// 'EMPTY' en KV con TTL corto (1h) para evitar martilleo. Si tras 1h
+// vuelve a haber visita, reintentamos por si el API se ha recuperado.
+const KV_TTL_NEGATIVE = 60 * 60
+
+// Marcador especial: array con un objeto sentinela. Se distingue de un
+// array de FotoPlaya válida porque tiene fuente='__empty__'.
+type EmptyMarker = { __empty: true; ts: number }
+
 export async function getFotos(
   nombre: string,
   municipio: string,
@@ -593,9 +608,15 @@ export async function getFotos(
   // 1. Intentar KV cache
   if (kv) {
     try {
-      const cached = await kv.get(key) as FotoPlaya[] | null
+      const cached = await kv.get(key) as FotoPlaya[] | EmptyMarker | null
       if (cached && Array.isArray(cached) && cached.length > 0) {
         return cached
+      }
+      // Negative cache hit: el último intento (< 1h) devolvió vacío.
+      // Devolvemos [] sin reintentar — el FichaHero ya tiene fallbacks
+      // genéricos por estado del mar.
+      if (cached && typeof cached === 'object' && '__empty' in cached) {
+        return []
       }
     } catch {
       // KV down: caemos al fetch directo, no rompemos.
@@ -606,9 +627,41 @@ export async function getFotos(
   const fotos = await getFotosUncached(nombre, municipio, lat, lon, provincia)
 
   // 3. Persistir resultado (fire-and-forget — no esperamos)
-  if (kv && fotos.length > 0) {
-    kv.set(key, fotos, { ex: KV_TTL_SEC }).catch(() => {})
+  if (kv) {
+    if (fotos.length > 0) {
+      kv.set(key, fotos, { ex: KV_TTL_SEC }).catch(() => {})
+    } else {
+      // Negative cache para evitar martilleo. TTL 1h: si el API vuelve
+      // a responder, lo intentamos otra vez en 1h.
+      const marker: EmptyMarker = { __empty: true, ts: Date.now() }
+      kv.set(key, marker, { ex: KV_TTL_NEGATIVE }).catch(() => {})
+    }
   }
 
+  return fotos
+}
+
+/**
+ * Re-ejecuta la cascada de fotos saltándose el cache (incluido el
+ * negative marker) y persiste el resultado en KV si hay fotos.
+ * Para uso desde `after()` post-respuesta: si el SSR cayó a [] por
+ * deadline, este reintento sin restricciones de tiempo puede recuperar
+ * fotos y poblar el cache para la próxima visita.
+ */
+export async function refetchAndStoreFotos(
+  nombre: string,
+  municipio: string,
+  lat: number,
+  lon: number,
+  provincia: string = ''
+): Promise<FotoPlaya[]> {
+  const fotos = await getFotosUncached(nombre, municipio, lat, lon, provincia)
+  if (fotos.length > 0) {
+    const kv = await getKV()
+    if (kv) {
+      const key = cacheKey(lat, lon)
+      kv.set(key, fotos, { ex: KV_TTL_SEC }).catch(() => {})
+    }
+  }
   return fotos
 }
