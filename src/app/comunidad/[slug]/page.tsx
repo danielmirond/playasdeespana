@@ -8,6 +8,7 @@ import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './ComunidadPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -109,6 +110,49 @@ export default async function ComunidadPage({ params }: Props) {
       </div>
 
       <div className={styles.wrap}>
+        {/* TOP 6 con hero foto (variedad por provincia priorizando servicios) */}
+        {playas.length >= 6 && (() => {
+          // 1 por provincia hasta llenar 6; si quedan huecos, mejor scoring.
+          const seen = new Set<string>()
+          const picks: typeof playas = []
+          const sorted = [...playas]
+            .filter(p => p.lat && p.lng)
+            .sort((a, b) => {
+              const sa = (a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0) + (a.parking ? 1 : 0)
+              const sb = (b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0) + (b.parking ? 1 : 0)
+              return sb - sa
+            })
+          for (const p of sorted) {
+            if (seen.has(p.provincia)) continue
+            seen.add(p.provincia)
+            picks.push(p)
+            if (picks.length >= 6) break
+          }
+          for (const p of sorted) {
+            if (picks.length >= 6) break
+            if (picks.find(x => x.slug === p.slug)) continue
+            picks.push(p)
+          }
+          return (
+            <section aria-labelledby="top-com" style={{ marginBottom: '2.5rem' }}>
+              <h2 id="top-com" style={{
+                fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+                color: 'var(--ink, #2a1a08)', marginBottom: '1rem',
+              }}>
+                Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>en {comunidad.nombre}</em>
+              </h2>
+              <TopBeachCardsConHero
+                playas={picks.map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+                limit={6}
+                eyebrow={`Selección · una por provincia entre ${comunidad.count} playas`}
+              />
+            </section>
+          )
+        })()}
+
         {/* MAPA */}
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
