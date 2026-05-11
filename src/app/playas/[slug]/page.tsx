@@ -20,7 +20,7 @@ import { getCampings } from '@/lib/campings'
 import type { Camping } from '@/lib/campings'
 import { getCentrosBuceo } from '@/lib/buceo'
 import type { CentroBuceo } from '@/lib/buceo'
-import { getFotos, refetchAndStoreFotos } from '@/lib/fotos'
+import { getFotos, refetchAndStoreFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
 import { getHoteles } from '@/lib/hoteles'
 import { getEscuelas } from '@/lib/escuelas'
@@ -314,7 +314,24 @@ export default async function PlayaPage({ params }: Props) {
 
   const calidad = calidadResult.status === 'fulfilled' ? calidadResult.value : null
 
-  const preloadFoto = fotosData[0]?.thumb ?? null
+  // Fallback genérico si la cascada de fotos cayó a [] (deadline,
+  // negative cache, playa sin fotos en ninguna fuente). Mostramos una
+  // foto genérica del pool por estado del mar para que el hero NUNCA
+  // quede sin imagen. Marcamos source='__fallback' para distinguirla
+  // de fotos reales en el schema (no representativeOfPage).
+  const hayFotoReal = fotosData.length > 0
+  let fotoHero = fotosData[0]
+  if (!hayFotoReal) {
+    const pool = FOTOS_GENERICAS_POR_ESTADO[(estadoKey as string).toUpperCase()] ?? FOTOS_GENERICAS_POR_ESTADO.CALMA
+    const idx = (playa.slug.length + (estadoKey as string).length) % pool.length
+    fotoHero = {
+      url:    pool[idx],
+      thumb:  pool[idx],
+      fuente: 'unsplash' as const,
+    }
+  }
+
+  const preloadFoto = fotoHero?.thumb ?? null
 
   // Playas cercanas (server-side, sin API extra)
   const allPlayas = allPlayasResult.status === 'fulfilled' ? allPlayasResult.value : []
@@ -335,8 +352,8 @@ export default async function PlayaPage({ params }: Props) {
         uv={meteo.uv}
         tempAire={meteo.tempAire}
         calidadNivel={calidad?.nivel ?? null}
-        fotoUrl={fotosData[0]?.url ?? null}
-        fotoAutor={fotosData[0]?.autor}
+        fotoUrl={hayFotoReal ? fotosData[0]?.url : null}
+        fotoAutor={hayFotoReal ? fotosData[0]?.autor : undefined}
         rating={(() => {
           // Preferimos opiniones (rating + texto) sobre votos legacy (solo rating).
           if (opinionesData && opinionesData.total > 0) {
@@ -371,7 +388,7 @@ export default async function PlayaPage({ params }: Props) {
         provinciaSlug={provinciaSlug}
         playaScore={playaScore}
         reportes={reportesData}
-        foto={fotosData[0] ?? null}
+        foto={fotoHero ?? null}
       />
       <FichaNav />
       <FichaBody
