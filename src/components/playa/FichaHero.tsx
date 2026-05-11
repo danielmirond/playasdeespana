@@ -16,6 +16,7 @@ import AnimatedSea from './AnimatedSea'
 import styles from './FichaHero.module.css'
 import { MapPin, Megaphone } from '@phosphor-icons/react'
 import { nombreConPlaya } from '@/lib/geo'
+import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 
 interface Meteo {
   agua: number; olas: number; viento: number
@@ -86,7 +87,17 @@ export default function FichaHero({
   const avisos = reportesActivos(reportes, locale)
   const dot = statusDot(reportes)
   const hasPhoto = !!foto?.url
-  const nombreH1 = locale === 'en' ? playa.nombre : nombreConPlaya(playa.nombre)
+  // Nombre popular (castellano) si la playa está en idioma cooficial
+  // y tiene alias curado (ej. Kontxa Hondartza → La Concha). Si no,
+  // usa el nombre del dataset con prefijo "Playa de".
+  const nombrePopular = nombreMostrado(playa.slug, playa.nombre)
+  const nombreOficial = nombreOficialAside(playa.slug, playa.nombre)  // null si no hay alias
+  const nombreH1Base  = locale === 'en' ? playa.nombre : nombreConPlaya(nombrePopular)
+  // En castellano, si hay nombre popular ≠ oficial, mostramos
+  // "La Concha de San Sebastián" para máxima visibilidad SEO.
+  const nombreH1 = locale === 'es' && nombreOficial && nombrePopular !== playa.nombre
+    ? `${nombrePopular} de ${playa.municipio}`
+    : nombreH1Base
 
   return (
     <>
@@ -135,6 +146,20 @@ export default function FichaHero({
         <div className={styles.contentBottom}>
           <div className={styles.inner}>
             <h1 className={styles.nombre}>{nombreH1}</h1>
+            {/* Nombre oficial bilingüe si difiere del popular. SEO + UX:
+                refuerza ambas variantes (búsquedas en castellano y euskera/
+                catalán/gallego encuentran la misma playa). */}
+            {nombreOficial && locale === 'es' && (
+              <p style={{
+                fontSize:     '.85rem',
+                fontStyle:    'italic',
+                color:        'rgba(255,255,255,.85)',
+                marginTop:    '.15rem',
+                marginBottom: '.5rem',
+              }}>
+                Conocida también como <span>{nombreOficial}</span>
+              </p>
+            )}
 
             <div className={styles.scoreLine}>
               {playaScore && (
