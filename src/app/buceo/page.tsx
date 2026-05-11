@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import { getEditorialModified } from '@/lib/dateModified'
 
@@ -76,6 +77,30 @@ export default async function BuceoPage() {
           Desde bautismos en calas de Baleares hasta inmersiones profundas en Cabo de Palos o El Hierro.
           En cada ficha de playa mostramos los centros de buceo más cercanos con contacto directo.
         </p>
+
+        {/* Top 6 con hero foto */}
+        {conBuceo.length >= 6 && (
+          <section aria-labelledby="top-buceo" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-buceo" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+              color: 'var(--ink)', marginBottom: '1rem',
+            }}>
+              Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>spots de buceo</em>
+            </h2>
+            <TopBeachCardsConHero
+              playas={conBuceo
+                .filter(p => p.lat && p.lng)
+                .sort((a, b) => (b.bandera ? 1 : 0) - (a.bandera ? 1 : 0))
+                .slice(0, 6)
+                .map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+              limit={6}
+              eyebrow={`Top 6 · ${conBuceo.length} playas con buceo/snorkel`}
+            />
+          </section>
+        )}
 
         {/* Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '.5rem', marginBottom: '2rem' }}>

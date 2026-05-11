@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import { getEditorialModified } from '@/lib/dateModified'
@@ -95,6 +96,26 @@ export default async function PlayasAutocaravanaPage() {
           zonas de pernocta legal, vaciados, enganche eléctrico y las comunidades más amigables con
           caravanistas. En cada ficha de playa mostramos el parking y las áreas más cercanas.
         </p>
+
+        {/* Top 6 con hero foto */}
+        {destacadas.length >= 6 && (
+          <section aria-labelledby="top-ac" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-ac" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+              color: 'var(--ink)', marginBottom: '1rem',
+            }}>
+              Selección <em style={{ fontWeight: 500, color: 'var(--accent)' }}>recomendada</em>
+            </h2>
+            <TopBeachCardsConHero
+              playas={destacadas.slice(0, 6).map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={6}
+              eyebrow="Top 6 · con parking y áreas cercanas para autocaravana"
+            />
+          </section>
+        )}
 
         {/* Clave: pernocta vs acampada */}
         <aside

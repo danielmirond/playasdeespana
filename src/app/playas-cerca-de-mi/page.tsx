@@ -10,6 +10,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import GeolocateCTA from './GeolocateCTA'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -71,6 +72,27 @@ interface DestinoComunidad {
 
 export default async function PlayasCercaDeMiPage() {
   const [playas, comunidades] = await Promise.all([getPlayas(), getComunidades()])
+
+  // Top 6 playas representativas (sin geo, hasta que el usuario active
+  // GPS): mejores de cada zona costera. Mientras carga el componente
+  // cliente, el usuario ya ve una selección visual.
+  const top6 = (() => {
+    const seen = new Set<string>()
+    const picked: typeof playas = []
+    const sorted = [...playas].sort((a, b) => {
+      const sa = (a.bandera ? 4 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0)
+      const sb = (b.bandera ? 4 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0)
+      return sb - sa
+    })
+    for (const p of sorted) {
+      if (!p.lat || !p.lng) continue
+      if (seen.has(p.comunidad)) continue
+      seen.add(p.comunidad)
+      picked.push(p)
+      if (picked.length >= 6) break
+    }
+    return picked
+  })()
 
   // Muestreo determinista de 3 playas por comunidad costera (prioriza Bandera
   // Azul + socorrismo como representativas).
@@ -174,6 +196,26 @@ export default async function PlayasCercaDeMiPage() {
 
         {/* CTA cliente */}
         <GeolocateCTA />
+
+        {/* Top 6 con hero — variedad geográfica mientras el usuario no activa GPS */}
+        {top6.length >= 6 && (
+          <section aria-labelledby="top-cm" style={{ marginTop: '2.5rem', marginBottom: '2.5rem' }}>
+            <h2 id="top-cm" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+              color: 'var(--ink)', marginBottom: '1rem',
+            }}>
+              <em style={{ fontWeight: 500, color: 'var(--accent)' }}>Mientras tanto</em>, mira estas
+            </h2>
+            <TopBeachCardsConHero
+              playas={top6.map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={6}
+              eyebrow="Selección · una de cada costa española"
+            />
+          </section>
+        )}
 
         {/* Explainer · cómo funciona · privacidad · precisión */}
         <section aria-labelledby="h2-como" style={{ marginBottom: '3rem' }}>

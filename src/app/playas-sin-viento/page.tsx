@@ -7,6 +7,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import type { Playa } from '@/types'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import { getEditorialModified } from '@/lib/dateModified'
 
@@ -95,6 +96,26 @@ export default async function PlayasSinVientoPage() {
           Las playas más resguardadas de España ahora mismo. Ideales para
           familias con niños, paddle surf, snorkel y días de toalla tranquila.
         </p>
+
+        {/* Top 6 con hero foto */}
+        {sinViento.length >= 6 && (
+          <section aria-labelledby="top-sv" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-sv" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+              color: 'var(--ink)', marginBottom: '1rem',
+            }}>
+              Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>sin viento ahora</em>
+            </h2>
+            <TopBeachCardsConHero
+              playas={sinViento.slice(0, 6).map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={6}
+              eyebrow={`Top 6 · viento <12 km/h ahora mismo`}
+            />
+          </section>
+        )}
 
         {sinViento.length > 0 && (
           <section style={{ marginBottom: '2.5rem' }}>
