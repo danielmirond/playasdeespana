@@ -24,9 +24,16 @@ export interface NombrePopular {
 /** slug → alias */
 export const NOMBRES_POPULARES: Record<string, NombrePopular> = {
   'kontxa-hondartza': {
-    popular: 'La Concha',
+    popular: 'La Concha de San Sebastián',  // forma completa para H1/SEO
     oficial: 'Kontxa Hondartza',
-    corto:   'La Concha',
+    corto:   'La Concha',                    // forma corta para breadcrumb/cards
+  },
+  // Playa de las Catedrales (Ribadeo) — patrimonio natural mundialmente
+  // conocido por su nombre castellano. Oficial en gallego: "As Catedrais".
+  'as-catedrais-ribadeo': {
+    popular: 'Playa de las Catedrales',
+    oficial: 'As Catedrais',
+    corto:   'Las Catedrales',
   },
 }
 
