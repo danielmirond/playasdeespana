@@ -1,4 +1,8 @@
-// src/app/top/[slug]/page.tsx. Top 10 playas de una costa
+// src/app/top/[slug]/page.tsx. Pillar page de costa.
+// Top 10 playas + intro editorial + mejor época + tipos destacados +
+// municipios + provincias + FAQ. Cross-links a landings temáticas
+// (/playas-aguas-cristalinas, /buceo, /alquiler-barco-playa, etc.)
+// y a /provincia/[slug] / /municipio/[slug].
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -7,6 +11,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import { getPlayas } from '@/lib/playas'
 import { COSTAS } from '@/lib/rutas'
 import { getPlayasDataModified } from '@/lib/dateModified'
+import { getCostaEditorial } from '@/lib/costas-editorial'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const ORG_REF = { '@id': `${BASE}/#organization` }
@@ -66,6 +71,11 @@ export default async function TopCostaPage({ params }: Props) {
     .slice(0, 10)
 
   const top = costaPlayas.map(x => x.p)
+  const editorial = getCostaEditorial(slug)
+  const provinciaSlugs = costa.provincias.map(prov => ({
+    nombre: prov,
+    slug:   prov.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+  }))
 
   // CollectionPage + ItemList con Beach@id en cada item para que Google
   // enlace los items a las entidades Beach del KG. Evita duplicate content
@@ -118,6 +128,18 @@ export default async function TopCostaPage({ params }: Props) {
     },
   }
   const listSchema = collectionSchema
+
+  // FAQPage schema cuando hay preguntas curadas para esta costa.
+  const faqSchema = editorial.faq && editorial.faq.length > 0 ? {
+    '@context':  'https://schema.org',
+    '@type':     'FAQPage',
+    '@id':       `${BASE}/top/${slug}#faq`,
+    mainEntity: editorial.faq.map(f => ({
+      '@type':         'Question',
+      name:            f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  } : null
 
   return (
     <>
@@ -214,8 +236,163 @@ export default async function TopCostaPage({ params }: Props) {
             🛣️ Ver la ruta por la {costa.nombre} →
           </Link>
         </div>
+
+        {/* Intro editorial (solo costas con copy curado en costas-editorial.ts) */}
+        {editorial.intro && editorial.intro.length > 0 && (
+          <section aria-labelledby="intro-title" style={{ marginTop: '3rem' }}>
+            <h2 id="intro-title" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem',
+              fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem',
+            }}>
+              Sobre la <em>{costa.nombre}</em>
+            </h2>
+            {editorial.intro.map((p, i) => (
+              <p key={i} style={{ fontSize: '.95rem', lineHeight: 1.7, color: 'var(--ink)', marginBottom: '.85rem' }}>
+                {p}
+              </p>
+            ))}
+          </section>
+        )}
+
+        {/* Mejor época */}
+        {editorial.mejorEpoca && editorial.mejorEpoca.length > 0 && (
+          <section aria-labelledby="epoca-title" style={{ marginTop: '2.5rem' }}>
+            <h2 id="epoca-title" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.3rem',
+              fontWeight: 700, color: 'var(--ink)', marginBottom: '.85rem',
+            }}>
+              Cuándo ir a la {costa.nombre}
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '.75rem' }}>
+              {editorial.mejorEpoca.map((e, i) => (
+                <div key={i} style={{
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
+                  borderLeft: `4px solid ${costa.color}`, borderRadius: 4,
+                  padding: '.85rem 1rem',
+                }}>
+                  <div style={{ fontWeight: 800, fontSize: '.92rem', color: 'var(--ink)', marginBottom: '.2rem' }}>{e.ventana}</div>
+                  <div style={{ fontSize: '.82rem', color: 'var(--muted)', lineHeight: 1.5 }}>{e.razon}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Tipos destacados (cross-links a landings temáticas) */}
+        {editorial.tiposDestacados && editorial.tiposDestacados.length > 0 && (
+          <section aria-labelledby="tipos-title" style={{ marginTop: '2.5rem' }}>
+            <h2 id="tipos-title" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.3rem',
+              fontWeight: 700, color: 'var(--ink)', marginBottom: '.85rem',
+            }}>
+              Tipos de playa que destacan en la {costa.nombre}
+            </h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
+              {editorial.tiposDestacados.map(t => (
+                <Link key={t.slug} href={t.slug} style={{
+                  display: 'block', padding: '.85rem 1rem',
+                  background: 'var(--card-bg)', border: '1px solid var(--line)',
+                  borderRadius: 6, textDecoration: 'none', color: 'var(--ink)',
+                }}>
+                  <div style={{ fontWeight: 700, fontSize: '.95rem', marginBottom: '.2rem' }}>{t.nombre} →</div>
+                  <div style={{ fontSize: '.82rem', color: 'var(--muted)', lineHeight: 1.5 }}>{t.razon}</div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Municipios destacados */}
+        {editorial.municipios && editorial.municipios.length > 0 && (
+          <section aria-labelledby="muni-title" style={{ marginTop: '2.5rem' }}>
+            <h2 id="muni-title" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.3rem',
+              fontWeight: 700, color: 'var(--ink)', marginBottom: '.85rem',
+            }}>
+              Municipios costeros de referencia
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '.65rem' }}>
+              {editorial.municipios.map(m => {
+                const inner = (
+                  <>
+                    <div style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', marginBottom: '.2rem' }}>
+                      {m.nombre}{m.slug ? ' →' : ''}
+                    </div>
+                    <div style={{ fontSize: '.82rem', color: 'var(--muted)', lineHeight: 1.5 }}>{m.resumen}</div>
+                  </>
+                )
+                return m.slug ? (
+                  <Link key={m.nombre} href={`/municipio/${m.slug}`} style={{
+                    display: 'block', padding: '.85rem 1rem',
+                    background: 'var(--card-bg)', border: '1px solid var(--line)',
+                    borderRadius: 6, textDecoration: 'none', color: 'var(--ink)',
+                  }}>
+                    {inner}
+                  </Link>
+                ) : (
+                  <div key={m.nombre} style={{
+                    padding: '.85rem 1rem', background: 'var(--card-bg)',
+                    border: '1px solid var(--line)', borderRadius: 6,
+                  }}>
+                    {inner}
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* Provincias de la costa */}
+        <section aria-labelledby="prov-title" style={{ marginTop: '2.5rem' }}>
+          <h2 id="prov-title" style={{
+            fontFamily: 'var(--font-serif)', fontSize: '1.3rem',
+            fontWeight: 700, color: 'var(--ink)', marginBottom: '.85rem',
+          }}>
+            Por provincia
+          </h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+            {provinciaSlugs.map(p => (
+              <Link key={p.slug} href={`/provincia/${p.slug}`} style={{
+                padding: '.45rem 1rem', borderRadius: 99,
+                background: 'var(--card-bg)', border: '1px solid var(--line)',
+                color: 'var(--ink)', fontSize: '.85rem', fontWeight: 600,
+                textDecoration: 'none',
+              }}>
+                Playas de {p.nombre} →
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* FAQ */}
+        {editorial.faq && editorial.faq.length > 0 && (
+          <section aria-labelledby="faq-title" style={{ marginTop: '2.5rem' }}>
+            <h2 id="faq-title" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.3rem',
+              fontWeight: 700, color: 'var(--ink)', marginBottom: '.85rem',
+            }}>
+              Preguntas frecuentes
+            </h2>
+            {editorial.faq.map(item => (
+              <details key={item.q} style={{
+                background: 'var(--card-bg)', border: '1px solid var(--line)',
+                borderRadius: 6, padding: '.85rem 1rem', marginBottom: '.5rem',
+              }}>
+                <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>
+                  {item.q}
+                </summary>
+                <p style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: '.55rem' }}>
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </section>
+        )}
       </main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }} />
+      {faqSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
     </>
   )
 }
