@@ -1,14 +1,24 @@
 'use client'
 // src/components/home/Buscador.tsx. Buscador de la home.
 //
-// Fix principal: los chips de filtro ahora NAVEGAN a /buscar con el
-// filtro preseleccionado. Antes eran decorativos (cambiaban estado
-// local pero no hacían nada con él).
+// Las sugerencias 'Prueba:' navegan DIRECTO a la ficha de cada playa
+// (mejor UX que pasar por /buscar). Los chips de filtro siguen yendo
+// a /buscar con el filtro preseleccionado.
 import { useState, useCallback } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import styles from './Buscador.module.css'
 
-const SUGERENCIAS = ['La Concha', 'Ses Illetes', 'Tarifa', 'Famara', 'Bolonia', 'Zurriola']
+// Cada sugerencia apunta a la ficha de una playa icónica concreta.
+// Diversidad geográfica: Cantábrica, Mediterránea, Atlántica, Canarias.
+const SUGERENCIAS: { label: string; slug: string }[] = [
+  { label: 'La Concha',   slug: 'kontxa-hondartza' },     // Donostia, Gipuzkoa
+  { label: 'Ses Illetes', slug: 'platja-dilletes' },      // Calvià, Mallorca
+  { label: 'Bolonia',     slug: 'playa-de-bolonia' },     // Tarifa, Cádiz
+  { label: 'Famara',      slug: 'playa-de-famara' },      // Lanzarote
+  { label: 'Zurriola',    slug: 'zurriola' },             // Donostia
+  { label: 'Las Rodas',   slug: 'a-area-das-rodas' },     // Islas Cíes, Pontevedra
+]
 
 const FILTROS = [
   { key: 'bandera',    label: 'Bandera Azul', labelEn: 'Blue Flag' },
@@ -44,9 +54,9 @@ export default function Buscador({ locale = 'es' }: Props) {
     if (e.key === 'Enter') handleSearch()
   }
 
-  const handleSuggestion = (s: string) => {
-    router.push(`${searchBase}?q=${encodeURIComponent(s)}`)
-  }
+  // Ya no usamos router programático para las sugerencias: ahora son
+  // <Link> reales a /playas/<slug>. Mejor SEO (Google indexa los hrefs)
+  // y mejor accesibilidad (middle-click abre en pestaña nueva).
 
   // Los chips ahora navegan directamente a /buscar con el filtro activo.
   // Ya no mantienen estado local (que no hacía nada).
@@ -81,11 +91,14 @@ export default function Buscador({ locale = 'es' }: Props) {
 
       <div className={styles.suggest}>
         <span>{es ? 'Prueba:' : 'Try:'}</span>
-        {SUGERENCIAS.map(s => (
-          <button key={s} type="button" className={styles.sugBtn} onClick={() => handleSuggestion(s)}>
-            {s}
-          </button>
-        ))}
+        {SUGERENCIAS.map(s => {
+          const href = es ? `/playas/${s.slug}` : `/en/beaches/${s.slug}`
+          return (
+            <Link key={s.slug} href={href} className={styles.sugBtn}>
+              {s.label}
+            </Link>
+          )
+        })}
       </div>
 
       <div className={styles.filtros} role="group" aria-label={es ? 'Filtros rápidos' : 'Quick filters'}>
