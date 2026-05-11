@@ -7,6 +7,7 @@ import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './MunicipioPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 3600
 
@@ -78,6 +79,34 @@ export default async function MunicipioPage({ params }: Props) {
       </div>
 
       <div className={styles.wrap}>
+        {/* TOP 6 con hero foto: mejor scoring del municipio */}
+        {playas.length >= 6 && (
+          <section aria-labelledby="top-muni" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-muni" style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+              color: 'var(--ink, #2a1a08)', marginBottom: '1rem',
+            }}>
+              Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>en {municipio.nombre}</em>
+            </h2>
+            <TopBeachCardsConHero
+              playas={[...playas]
+                .filter(p => p.lat && p.lng)
+                .sort((a, b) => {
+                  const sa = (a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0) + (a.parking ? 1 : 0)
+                  const sb = (b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0) + (b.parking ? 1 : 0)
+                  return sb - sa
+                })
+                .slice(0, 6)
+                .map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+              limit={6}
+              eyebrow={`Selección · ${playas.length} playas en ${municipio.nombre}`}
+            />
+          </section>
+        )}
+
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
             <span className={styles.mapaTitle}>Mapa de playas · {municipio.nombre}</span>
