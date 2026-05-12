@@ -6,6 +6,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayasPerros, getPerrosStats } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import IconInfo from '@/components/ui/IconInfo'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import styles from '../../PlayasPerros.module.css'
 
 export const revalidate = 86400
@@ -96,6 +97,22 @@ export default async function ComunidadPerrosPage({ params }: Props) {
             (correa, horarios, bozal) varían entre municipios de {comunidad.nombre}.
           </p>
         </div>
+
+        {playasFiltradas.length >= 6 && (
+          <section aria-labelledby="top-com-perros" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-com-perros" className={styles.sectionTitle}>
+              Top 6 playas para perros en {comunidad.nombre}
+            </h2>
+            <TopBeachCardsConHero
+              playas={playasFiltradas.slice(0, 6).map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={6}
+              eyebrow={`Top 6 · ${playasFiltradas.length} playas caninas en ${comunidad.nombre}`}
+            />
+          </section>
+        )}
 
         {playasFiltradas.length > 0 && (
           <div className={styles.mapaCard}>

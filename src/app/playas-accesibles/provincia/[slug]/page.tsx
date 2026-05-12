@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayasAccesibles, getAccesiblesStats, toSlug } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import styles from '../../PlayasAccesibles.module.css'
 
 export const revalidate = 86400
@@ -52,6 +53,19 @@ export default async function ProvinciaAccesiblesPage({ params }: Props) {
         </div>
       </div>
       <div className={styles.wrap}>
+        {filtradas.length >= 6 && (
+          <section aria-labelledby="top-prov-acc" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-prov-acc" className={styles.sectionTitle}>Top 6 playas accesibles en {provincia.nombre}</h2>
+            <TopBeachCardsConHero
+              playas={filtradas.slice(0, 6).map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={6}
+              eyebrow={`Top 6 · ${filtradas.length} playas accesibles en ${provincia.nombre}`}
+            />
+          </section>
+        )}
         {filtradas.length > 0 && (
           <div className={styles.mapaCard}>
             <div className={styles.mapaHead}>
