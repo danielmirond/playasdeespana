@@ -129,6 +129,48 @@ export default async function TopCostaPage({ params }: Props) {
   }
   const listSchema = collectionSchema
 
+  // TouristDestination — refuerza el reconocimiento de la costa como
+  // destino turístico con identidad propia. Google KG entiende mejor
+  // "Costa Brava" como entity destino cuando hay este schema.
+  const touristSchema = {
+    '@context':   'https://schema.org',
+    '@type':      'TouristDestination',
+    '@id':        `${BASE}/top/${slug}#destination`,
+    name:         costa.nombre,
+    description:  editorial.intro?.[0] ?? costa.descripcion ?? `${costa.nombre} en ${costa.provincias.join(', ')}.`,
+    url:          `${BASE}/top/${slug}`,
+    inLanguage:   'es-ES',
+    publisher:    ORG_REF,
+    image:        `${BASE}/api/og?playa=${encodeURIComponent('Top 10 ' + costa.nombre)}`,
+    touristType: [
+      'Turismo de sol y playa',
+      'Familias',
+      ...(editorial.tiposDestacados?.map(t => t.nombre) ?? []),
+    ],
+    // Provincias que la componen como `containedInPlace`.
+    containedInPlace: costa.provincias.map(prov => ({
+      '@type':   'AdministrativeArea',
+      name:      prov,
+      url:       `${BASE}/provincia/${prov.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`,
+      containedInPlace: { '@type': 'Country', name: 'España', identifier: 'ES' },
+    })),
+    // Las top playas como `includesAttraction`.
+    includesAttraction: top.map(p => ({
+      '@type':   'Beach',
+      '@id':     `${BASE}/playas/${p.slug}#beach`,
+      name:      p.nombre,
+      url:       `${BASE}/playas/${p.slug}`,
+    })),
+    // Municipios destacados como `subPlace`.
+    ...(editorial.municipios && editorial.municipios.length > 0 ? {
+      subPlace: editorial.municipios.map(m => ({
+        '@type': 'AdministrativeArea',
+        name:    m.nombre,
+        ...(m.slug ? { url: `${BASE}/municipio/${m.slug}` } : {}),
+      })),
+    } : {}),
+  }
+
   // FAQPage schema cuando hay preguntas curadas para esta costa.
   const faqSchema = editorial.faq && editorial.faq.length > 0 ? {
     '@context':  'https://schema.org',
@@ -390,6 +432,7 @@ export default async function TopCostaPage({ params }: Props) {
         )}
       </main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(touristSchema) }} />
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}

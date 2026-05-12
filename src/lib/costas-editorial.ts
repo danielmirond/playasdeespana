@@ -191,6 +191,143 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
         a: 'La calima es viento del Sahara cargado de polvo en suspensión. Aparece de forma puntual (5-10 días al año) sobre todo en febrero-marzo y octubre. Cuando hay calima fuerte el sol se vela, sube la temperatura ambiente y baja la visibilidad. No hace daño bañarse pero conviene proteger los ojos y la electrónica.' },
     ],
   },
+
+  // ── Costa Cantábrica ──────────────────────────────────────────────
+  'costa-vasca': {
+    intro: [
+      'La Costa Vasca recorre 150 kilómetros desde la desembocadura del Bidasoa (Hondarribia) hasta Muskiz, en las provincias de Gipuzkoa y Bizkaia. Es la costa más urbana del Cantábrico: las ciudades de Donostia y Bilbao tienen sus propias playas (La Concha, Zurriola, Ondarreta, Las Arenas), y entre medias se suceden pueblos pesqueros vivos — Getaria, Zumaia, Lekeitio, Bermeo — y la mejor ola de Europa, Mundaka.',
+      'La temperatura del agua oscila entre 14 °C en febrero y 22 °C en agosto. El swell atlántico que entra por Vizcaya hace que el surf sea consistente todo el año. La luz es la del norte: nubes bajas que se abren al mediodía, atardeceres largos en verano y el verde de los montes hasta la línea del mar.',
+      'La gastronomía es razón suficiente para venir: pintxos en San Sebastián, anchoas de Getaria, txuleta, sidra natural en Astigarraga. Y el flysch de Zumaia, la formación geológica más fotogénica de la península, asoma a pie de playa.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Julio–agosto',  razon: 'Agua a 21-22 °C, pico de la temporada. Las playas urbanas se llenan pero las calas (Saturraran, Itzurun, Karraspio) siguen accesibles.' },
+      { ventana: 'Septiembre',    razon: 'Mejor mes para sol seguro y agua aún cálida. Surf consistente vuelve. Hoteles más baratos.' },
+      { ventana: 'Octubre–marzo', razon: 'Para surf serio: el swell del Atlántico Norte produce las olas más grandes del año en Mundaka, Sopelana y Punta Galea.' },
+    ],
+    tiposDestacados: [
+      { slug: '/surf',                       nombre: 'Surf',                     razon: 'Mundaka, Bakio, Sopelana, Zarautz. La costa de surf más histórica de España.' },
+      { slug: '/atardeceres',                nombre: 'Atardeceres',              razon: 'Itzurun (Zumaia), Sakoneta, Saturraran. Acantilados orientados oeste-noroeste.' },
+      { slug: '/playas-secretas',            nombre: 'Playas secretas',          razon: 'Pueblos pesqueros entre Lekeitio y Ondarroa esconden calas con acceso a pie.' },
+      { slug: '/familias',                   nombre: 'Playas para familias',     razon: 'La Concha, Ondarreta, Las Arenas: socorrismo, paseo marítimo, accesibilidad PMR.' },
+    ],
+    municipios: [
+      { nombre: 'Donostia-San Sebastián', slug: 'donostia',     resumen: 'La Concha y Zurriola en pleno centro. Una de las bahías más bonitas de Europa.' },
+      { nombre: 'Mundaka',                slug: 'mundaka',      resumen: 'La ola izquierda más famosa del Atlántico. Pueblo pesquero y reserva de la biosfera.' },
+      { nombre: 'Zarautz',                slug: 'zarautz',      resumen: 'La playa de surf por excelencia: 2.500 m de arena, eventos WSL.' },
+      { nombre: 'Zumaia',                 slug: 'zumaia',       resumen: 'Itzurun y el flysch de Algorri. Geología espectacular a pie de playa.' },
+      { nombre: 'Lekeitio',               slug: 'lekeitio',     resumen: 'Karraspio e Isuntza. Puerto pesquero y bajamar que conecta con Isla de San Nicolás.' },
+    ],
+    faq: [
+      { q: '¿Cuándo es la mejor época para bañarse en el País Vasco?',
+        a: 'De finales de julio a mediados de septiembre, cuando la temperatura del agua sube a 20-22 °C y la del aire ronda los 22-26 °C. Antes (junio) y después (octubre) el agua está fría para baño largo pero perfecta para surf. En invierno, el agua baja a 14 °C; solo surfistas con neopreno 4/3.' },
+      { q: '¿Es Mundaka la mejor ola de España?',
+        a: 'Mundaka tiene la mejor "ola izquierda" del Atlántico cuando rompe con fondo y dirección perfectos (oeste-noroeste, marea baja). Pero la mejor ola depende del nivel: para principiantes Zarautz o Bakio; para intermedios Sopelana o Hendaya; para expertos Mundaka, Roka Putre o Punta Galea.' },
+      { q: '¿Cuáles son las playas más bonitas del País Vasco?',
+        a: 'La Concha (San Sebastián) por su bahía, Itzurun (Zumaia) por el flysch, Saturraran por las islas-roca, Laga por las dunas, Plentzia por el ambiente urbano-natural. Cada una con su carácter.' },
+    ],
+  },
+
+  'costa-de-cantabria': {
+    intro: [
+      'La Costa de Cantabria son 220 km que van desde Castro Urdiales en la frontera con Vizcaya hasta San Vicente de la Barquera, junto a Asturias. Una sucesión de playas largas de arena fina (Sardinero, Liencres, Oyambre), dunas que entran en pinares (Liencres, Berria), pueblos pesqueros con vista al mar (Comillas, San Vicente, Castro Urdiales) y la silueta de los Picos de Europa al fondo.',
+      'A diferencia del País Vasco, Cantabria es más rural: la costa alterna playas urbanas con kilómetros de costa virgen. Liencres, las dunas de Berria, Oyambre y la playa de la Concha en Suances son referentes. El agua en agosto llega a 21 °C, suficiente para baño cómodo.',
+      'Su gastronomía: anchoas de Santoña, sobaos pasiegos, cocido montañés, y los pescados de las lonjas de Laredo y Santander. La Cueva de Altamira (Santillana del Mar) y los Picos de Europa están a menos de una hora de cualquier playa.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Julio–agosto',     razon: 'Pico de turistas pero playas largas absorben el aforo. Agua a 20-21 °C.' },
+      { ventana: 'Mediados septiembre', razon: 'Cantabria queda casi vacía cuando empieza el cole. Hoteles a la mitad.' },
+      { ventana: 'Abril–junio',      razon: 'Para senderismo costero y bicicleta: tiempo amable, costa de verde profundo.' },
+    ],
+    tiposDestacados: [
+      { slug: '/familias',                  nombre: 'Playas para familias',     razon: 'El Sardinero, Comillas, Laredo: anchas, suaves, accesibles, con paseo marítimo.' },
+      { slug: '/playas-paradisiacas',       nombre: 'Playas paradisíacas',      razon: 'Liencres y sus dunas, Oyambre, La Concha de Suances. Naturaleza cantábrica intacta.' },
+      { slug: '/surf',                       nombre: 'Surf',                     razon: 'Somo, Liencres, Loredo. Olas suaves perfectas para aprender.' },
+      { slug: '/playas-autocaravana',       nombre: 'Playas para autocaravana', razon: 'Áreas señalizadas en Noja, Berria, Laredo. Cantabria es muy permisiva con caravanistas.' },
+    ],
+    municipios: [
+      { nombre: 'Santander',               slug: 'santander',               resumen: 'El Sardinero, Magdalena, Camello, Bikinis. Capital con playa urbana variada.' },
+      { nombre: 'Comillas',                slug: 'comillas',                resumen: 'Pueblo monumental (Gaudí, Capricho) y playa con paseo de palmeras.' },
+      { nombre: 'San Vicente de la Barquera', slug: 'san-vicente-de-la-barquera', resumen: 'Pueblo medieval entre estuario y Picos de Europa. Playas de Merón y Gerra.' },
+      { nombre: 'Laredo',                  slug: 'laredo',                  resumen: 'Salvé: 5 km de arena fina al pie del casco antiguo de pescadores.' },
+      { nombre: 'Suances',                 slug: 'suances',                 resumen: 'La Concha (la cántabra, no la vasca): playa concéntrica con surf consistente.' },
+    ],
+    faq: [
+      { q: '¿Cuándo se puede bañar uno en Cantabria?',
+        a: 'De junio a septiembre con comodidad. El agua llega a 18 °C en junio, pico de 21 °C en agosto-septiembre y vuelve a 17 °C en octubre. Algunos cántabros se bañan los 12 meses, pero requiere costumbre.' },
+      { q: '¿Cuál es la playa más bonita de Cantabria?',
+        a: 'Liencres por las dunas (sistema dunar mejor conservado del norte), Oyambre por la combinación playa-marisma-pinares, y el Sardinero por la elegancia urbana. Para calas más pequeñas: Cobreces, La Maza, Tagle, Berellín.' },
+      { q: '¿Hay playas nudistas en Cantabria?',
+        a: 'Sí. La más conocida es Valdearenas-Liencres (zona oeste, cerca de las dunas grandes), pero también Cuberris, La Arena (Castro), El Madero (Suances) y rincones de Berria toleran tradicionalmente el nudismo. Convive con el textil sin problema.' },
+    ],
+  },
+
+  'costa-verde': {
+    intro: [
+      'La Costa Verde son 350 km de Asturias, desde la ría del Eo (frontera con Galicia) hasta la del Tinamayor (frontera con Cantabria). Acantilados altos, calas escondidas entre montañas, playas que se forman dentro de meandros, ríos que llegan al mar en estuarios, y un verde intenso que es marca de la casa.',
+      'La temperatura del agua oscila entre 15 °C en febrero y 21 °C en septiembre. Las playas son más salvajes que en Cantabria: muchas requieren bajar acantilado o atravesar pinares, y la marea sube y baja hasta 4 metros (mareas vivas), descubriendo calas que desaparecen con pleamar.',
+      'Las joyas: Gulpiyuri (la playa interior más famosa de España, sin acceso directo al mar), Cuevas del Mar, Torimbia, Mexota, Playa del Silencio. Tres villas marineras vivas: Cudillero, Lastres, Ribadesella. La gastronomía: fabada, cabrales, sidra natural, lubina al horno. Y los Picos de Europa están aquí también, asomando al mar.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Julio–agosto',     razon: 'Pico de temperatura: 21 °C agua, 25 °C aire. Las playas se llenan pero hay 100+ entre las que elegir.' },
+      { ventana: 'Mediados septiembre', razon: 'Asturias vacía. Agua aún cálida. Hoteles libres en Llanes, Ribadesella, Cudillero.' },
+      { ventana: 'Mayo–junio',       razon: 'Para senderismo y rutas en bici. Costa virgen sin gente.' },
+    ],
+    tiposDestacados: [
+      { slug: '/calas-con-encanto',         nombre: 'Calas con encanto',        razon: 'Llanes concentra 30 calas en 30 km. Cuevas, Torimbia, Toró, Borizu, Antilles.' },
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Mexota, Cadavedo, Frejulfe, Aramar. Acceso a pie o bajamar.' },
+      { slug: '/playas-paradisiacas',       nombre: 'Playas paradisíacas',      razon: 'Playa del Silencio, Gulpiyuri, Torimbia. Geografía de cuento.' },
+      { slug: '/atardeceres',               nombre: 'Atardeceres',              razon: 'Verdicio, Aguilar, Sablón. Orientación oeste para puestas sobre acantilado.' },
+    ],
+    municipios: [
+      { nombre: 'Llanes',                  slug: 'llanes',                  resumen: '30 playas en su término municipal. Capital playera del oriente asturiano.' },
+      { nombre: 'Ribadesella',             slug: 'ribadesella',             resumen: 'Playa de Santa Marina dentro del pueblo, descenso del Sella anual.' },
+      { nombre: 'Cudillero',               slug: 'cudillero',               resumen: 'Pueblo pesquero de postal. Acceso a Playa del Silencio (Castañeras).' },
+      { nombre: 'Tapia de Casariego',      slug: 'tapia-de-casariego',      resumen: 'Surf consistente, pueblo bonito y campeonato anual.' },
+      { nombre: 'Gozón',                   slug: 'gozon',                   resumen: 'Verdicio, Bañugues, Xagó. Cabo Peñas en el medio.' },
+    ],
+    faq: [
+      { q: '¿Cuál es la playa más bonita de Asturias?',
+        a: 'Para muchos, Playa del Silencio (Castañeras): acantilado de pizarra, islotes, agua transparente, acceso solo a pie. Otras candidatas: Gulpiyuri (la única playa interior de España), Torimbia (forma de concha perfecta), Cuevas del Mar (arcos y túneles de roca).' },
+      { q: '¿Hay buena temperatura del agua en Asturias?',
+        a: 'En agosto-septiembre el agua llega a 20-21 °C, cómoda. Junio y octubre rondan 17-18 °C, ya posibles. Resto del año por debajo de 16 °C. Las playas del oriente (Llanes) son ligeramente más cálidas que las del occidente (Tapia, Luarca).' },
+      { q: '¿Qué es Gulpiyuri y por qué es famosa?',
+        a: 'Es la única playa "interior" de España: un agujero kárstico a 100 m del mar conectado por un túnel submarino. La marea entra y sale, formando una playa de 50 m completa dentro de un prado. Patrimonio natural. Solo accesible a pie desde Naves (Llanes).' },
+    ],
+  },
+
+  'costa-de-almeria': {
+    intro: [
+      'La Costa de Almería son 220 kilómetros de litoral desde Mojácar hasta Adra. Es la costa más seca de Europa (200 mm de precipitación al año, similar al norte de África) y la más virgen del Mediterráneo español: el Parque Natural Cabo de Gata-Níjar protege 50 km de costa con calas vírgenes, dunas fósiles y acantilados de origen volcánico.',
+      'Las playas emblemáticas — Mónsul, Los Genoveses, Los Muertos, La Cala del Plomo, El Playazo de Rodalquilar — no tienen apenas urbanización, llegan tras 1-2 km de pista de tierra y conservan el aspecto de la película "Indiana Jones y la Última Cruzada" (rodada aquí). El mar Mediterráneo en estado puro.',
+      'A esto suma Cabo de Gata el clima más estable de España (320 días de sol), aguas claras (en verano la visibilidad supera los 10 m sin esfuerzo), y una gastronomía donde el pescado azul (caballa, melva, atún de almadraba) compite con las verduras del invernadero y el ajoblanco.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Mayo–junio',      razon: 'Calor sin extremo (25-28 °C), agua a 19-21 °C, playas semi-vacías.' },
+      { ventana: 'Mediados septiembre', razon: 'Pico de agua (22-23 °C), poniente moderado, turistas se van.' },
+      { ventana: 'Marzo–abril',     razon: 'Para senderismo costero en Cabo de Gata sin sol abrasador. Floración del cardo marítimo.' },
+    ],
+    tiposDestacados: [
+      { slug: '/playas-paradisiacas',       nombre: 'Playas paradisíacas',      razon: 'Mónsul, Los Genoveses, Cala de Enmedio. Aspecto de costa salvaje protegida.' },
+      { slug: '/playas-aguas-cristalinas',  nombre: 'Playas con aguas cristalinas', razon: 'Cabo de Gata combina fondos rocosos y vientos suaves: visibilidad excepcional.' },
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Cala San Pedro (solo a pie o en barco), Cala del Plomo, Cala del Carbón.' },
+      { slug: '/buceo',                      nombre: 'Buceo y snorkel',          razon: 'Reserva marina de Cabo de Gata: meros, barracudas, pulpos. Cala Carbón, Punta de la Polacra.' },
+    ],
+    municipios: [
+      { nombre: 'Níjar',                   slug: 'nijar',                   resumen: 'Corazón del parque natural. Mónsul, Genoveses, Rodalquilar, San Pedro.' },
+      { nombre: 'Carboneras',              slug: 'carboneras',              resumen: 'Playas Los Muertos y El Algarrobico. Pueblo pesquero.' },
+      { nombre: 'Mojácar',                 slug: 'mojacar',                 resumen: 'Playas largas para turismo familiar, pueblo blanco moruno encima.' },
+      { nombre: 'Almería',                 slug: 'almeria',                 resumen: 'Capital con varias playas urbanas y acceso fácil a Cabo de Gata.' },
+      { nombre: 'Roquetas de Mar',         slug: 'roquetas-de-mar',         resumen: 'Las Salinas, Aguadulce. Playas largas, paseo marítimo, vela.' },
+    ],
+    faq: [
+      { q: '¿Por qué Almería tiene aguas tan cristalinas?',
+        a: 'Tres razones: poca lluvia (sin escorrentías que enturbien), poca urbanización en Cabo de Gata (sin desagües), y fondos rocosos en vez de arena (no se levanta sedimento con el oleaje). En verano la visibilidad supera fácilmente los 10 m, y en zonas como Cala del Carbón llega a 20 m.' },
+      { q: '¿Cómo se llega a Mónsul y Genoveses?',
+        a: 'Por carretera AL-3115 desde San José hacia Cabo de Gata. En julio y agosto el acceso en coche está limitado: hay que aparcar en San José y coger bus lanzadera (5 €/día), o ir antes de las 9 AM o después de las 18 PM. Por bici o a pie desde San José: 30-45 minutos.' },
+      { q: '¿Hay playas en Almería fuera de Cabo de Gata?',
+        a: 'Sí. Carboneras, Mojácar y Vera tienen playas largas urbanas con todos los servicios. La playa nudista oficial más grande de España está en Vera (El Playazo, 1.500 m de arena con dos zonas nudistas claras).' },
+    ],
+  },
 }
 
 /** Devuelve el editorial de una costa, o un objeto vacío si no hay copy. */
