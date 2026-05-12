@@ -328,6 +328,144 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
         a: 'Sí. Carboneras, Mojácar y Vera tienen playas largas urbanas con todos los servicios. La playa nudista oficial más grande de España está en Vera (El Playazo, 1.500 m de arena con dos zonas nudistas claras).' },
     ],
   },
+
+  // ── Atlántica gallega ─────────────────────────────────────────────
+  'rias-baixas': {
+    intro: [
+      'Las Rías Baixas son cuatro grandes entradas de mar en la provincia de Pontevedra: Vigo, Pontevedra, Arousa y Muros-Noia (esta última en A Coruña). Suman más de 200 km de costa con playas resguardadas del Atlántico, arena fina blanca, agua sorprendentemente cálida para el norte (21 °C en agosto) y un horizonte de islas — Cíes, Ons, Sálvora, Cortegada — que forman el Parque Nacional de las Islas Atlánticas.',
+      'Playa de Rodas (Cíes) figura en muchas listas como la mejor playa del mundo: 1.300 m de arena de cristal, aguas turquesa por su orientación protegida y solo accesible en barco con permiso del parque (junio-septiembre, aforo limitado). Otras joyas: A Lanzada (más de 2 km de surf y dunas), Areas Gordas (Bayona), Montalvo, Praia das Catedrais — espera, esa está en Lugo.',
+      'Las Rías Baixas se viven con marisco: vieiras, mejillón de batea, percebes, navajas, almejas. Cambados es la capital del albariño. Y los pueblos costeros — Combarro, Sanxenxo, Baiona, Cangas — combinan tradición pesquera con turismo cuidado.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Julio–agosto',     razon: 'Pico de temperatura: 21 °C agua, 25 °C aire. Acceso a Cíes activo.' },
+      { ventana: 'Mediados septiembre', razon: 'Gallegos vuelven al trabajo. Cíes aún abierto. Mariscadas más baratas.' },
+      { ventana: 'Mayo–junio',       razon: 'Para senderos costeros sin calor. Las playas de Cangas o Bueu casi vacías.' },
+    ],
+    tiposDestacados: [
+      { slug: '/playas-paradisiacas',       nombre: 'Playas paradisíacas',      razon: 'Rodas (Cíes), Areas Gordas, A Lanzada, Montalvo. La gallega más vendible.' },
+      { slug: '/playas-aguas-cristalinas',  nombre: 'Playas con aguas cristalinas', razon: 'Las rías filtran el oleaje atlántico: aguas más claras del noroeste.' },
+      { slug: '/alquiler-barco-playa',       nombre: 'Alquilar barco',           razon: 'Acceso a Cíes (con permiso), Ons y Sálvora. Puerto de Vigo y Sanxenxo.' },
+      { slug: '/buceo',                       nombre: 'Buceo',                    razon: 'Reserva del Parque Nacional. Centros en Cangas, Bueu y Vigo.' },
+    ],
+    municipios: [
+      { nombre: 'Sanxenxo',                slug: 'sanxenxo',                resumen: 'Capital turística. Silgar, Areas y A Lanzada en su entorno.' },
+      { nombre: 'Vigo (Islas Cíes)',       slug: 'vigo',                    resumen: 'Acceso a Rodas y Figueiras. Reserva del Parque Nacional.' },
+      { nombre: 'Cangas',                  slug: 'cangas',                  resumen: 'Frente a Cíes, pueblo pesquero. Playas Melide, Areacova.' },
+      { nombre: 'Baiona',                  slug: 'baiona',                  resumen: 'Pueblo histórico (Colón) frente a las islas. Areas Gordas, Ladeira.' },
+      { nombre: 'O Grove',                 slug: 'o-grove',                 resumen: 'Conectado por istmo. A Lanzada, San Vicente do Mar.' },
+    ],
+    faq: [
+      { q: '¿Cómo se llega a las Cíes y cuánto cuesta?',
+        a: 'Solo en barco regular desde Vigo, Cangas o Baiona (junio-septiembre, 18-22 € ida y vuelta). Se necesita autorización online previa de la Xunta (xunta.gal/cies-illasatlanticas): gratuita pero con aforo diario limitado. Hay que reservarla DÍAS antes en agosto. Sin autorización el barco no permite embarcar.' },
+      { q: '¿Cuál es la mejor playa de las Rías Baixas?',
+        a: 'Rodas (Cíes) según la mayoría de listas, pero requiere planificación. Si vienes sin reserva: A Lanzada (2.4 km de arena, dunas y surf), Areas Gordas (Bayona, vista a Cíes), Montalvo (Sanxenxo, calmada), Coiro (Cangas, calita escondida).' },
+      { q: '¿El agua está fría en las Rías Baixas?',
+        a: 'No tanto como parece. Las rías retienen el calor del verano y el agua llega a 21 °C en agosto-septiembre, similar a la Costa Brava. Mayo y octubre rondan los 17 °C, todavía bañable. El truco son las rías profundas vs costa abierta: Vigo y Pontevedra más cálidas, Cangas y O Grove un poco más frescas.' },
+    ],
+  },
+
+  // ── Mediterránea (Costa Blanca, Cálida, Dorada) ─────────────────
+  'costa-blanca': {
+    intro: [
+      'La Costa Blanca son 220 km del litoral de Alicante, desde Dénia (frontera con Valencia) hasta Pilar de la Horadada (frontera con Murcia). Su nombre lo dio el viaje de placer británico de los años 60 por la luz blanca y la arena casi cegadora. Hoy combina turismo masivo (Benidorm), pueblos blancos con calas pequeñas (Calpe, Jávea, Moraira) y zonas naturales protegidas (Cabo de las Huertas, Cabo de Sant Antoni).',
+      'Las playas se dividen en dos tipos muy distintos: las largas y urbanas (Levante de Benidorm, Postiguet de Alicante, Playa de Saladar) y las calas rocosas con aguas turquesa (Cala Granadella, Moraig, Cala del Portichol, Cala Llebeig). Las primeras tienen todos los servicios; las segundas requieren a veces andar 10 minutos por sendero costero.',
+      'Clima: 320 días de sol al año, agua entre 16 °C en invierno y 27 °C en agosto. Gastronomía mediterránea con identidad — arroz a banda, arroz del senyoret, fideuá, esgarraet — y vino de Jumilla y Yecla cerca. Aeropuerto de Alicante y AVE conectan en 3h con Madrid.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Mayo–junio',       razon: 'Calor amable (25 °C), agua a 20-22 °C, sin masificación de julio-agosto.' },
+      { ventana: 'Septiembre',       razon: 'Agua a 25 °C (pico del año), turistas familia se van, Benidorm respira.' },
+      { ventana: 'Octubre–noviembre', razon: 'Único lugar del Mediterráneo español con 22 °C ambiente en noviembre. Baño aún posible los primeros días.' },
+    ],
+    tiposDestacados: [
+      { slug: '/calas-con-encanto',         nombre: 'Calas con encanto',        razon: 'Granadella, Moraig, Portichol, Llebeig: top calas mediterráneas.' },
+      { slug: '/playas-aguas-cristalinas',  nombre: 'Playas con aguas cristalinas', razon: 'Costa rocosa y fondos sin sedimento: visibilidad >10m en agosto.' },
+      { slug: '/familias',                  nombre: 'Playas para familias',     razon: 'Benidorm (Levante, Poniente), Postiguet, San Juan: paseo, accesibilidad, ocio.' },
+      { slug: '/buceo',                      nombre: 'Buceo',                    razon: 'Reserva marina del Cabo de San Antonio (Jávea) y Cabo de las Huertas (Alicante).' },
+    ],
+    municipios: [
+      { nombre: 'Jávea (Xàbia)',           slug: 'javea',                   resumen: 'Granadella, Portichol, Arenal. Mezcla de playas urbanas y calas vírgenes.' },
+      { nombre: 'Calpe',                   slug: 'calpe',                   resumen: 'Peñón de Ifach + 2 playas largas y calas pequeñas alrededor.' },
+      { nombre: 'Benidorm',                slug: 'benidorm',                resumen: 'Levante y Poniente: dos playas de 2km. Skyline icónico.' },
+      { nombre: 'Moraira',                 slug: 'moraira',                 resumen: 'Pueblo bonito con calas exclusivas: l\'Ampolla, El Portet, Llebeig.' },
+      { nombre: 'Alicante',                slug: 'alicante',                resumen: 'Postiguet, San Juan, Albufereta. Capital con playas urbanas.' },
+    ],
+    faq: [
+      { q: '¿Cuál es la diferencia entre Costa Blanca norte y sur?',
+        a: 'La Costa Blanca norte (Dénia a Altea) es rocosa, con calas pequeñas, agua muy clara y precios más altos. Pueblos como Jávea, Moraira, Calpe. La Costa Blanca sur (Benidorm a Pilar de la Horadada) es de playas largas de arena fina, más turística, accesible y económica. La frontera natural es Sierra Helada (cerca de Benidorm).' },
+      { q: '¿Cuáles son las mejores calas de Costa Blanca?',
+        a: 'Cala Granadella (Jávea), Cala Moraig (Benitatxell), Cala del Portichol (Jávea), Cala Llebeig (Benitatxell-Moraira), Cala Blanca (Benissa). Aguas turquesa por fondos rocosos, acceso a pie por sendero. En verano hay regulación de aforo en Granadella.' },
+      { q: '¿Cuándo es la mejor época para ir a Costa Blanca sin masificación?',
+        a: 'Mayo es ideal: agua a 20 °C, todos los chiringuitos abren, sol seguro y las playas grandes (Benidorm) están al 30% de aforo veraniego. Septiembre es la otra ventana, mejor temperatura pero más gente que en mayo. Octubre regala buen tiempo pero el agua empieza a bajar de 21 °C.' },
+    ],
+  },
+
+  'costa-calida': {
+    intro: [
+      'La Costa Cálida son 250 km de Murcia, desde San Pedro del Pinatar hasta Águilas. Se llama así por la temperatura del agua: la del Mar Menor (la laguna salada más grande de Europa, 170 km²) alcanza los 30 °C en agosto, y la del Mediterráneo abierto va de los 15 °C en febrero a los 27 °C en agosto.',
+      'Tres geografías muy distintas. El Mar Menor: aguas someras (1-7 m de profundidad), tranquilas, ideales para niños, paddle, vela ligera. La Manga, La Ribera, Los Urrutias, Los Nietos. Cabo de Palos y Calblanque: zona protegida de costa rocosa con calas vírgenes (Calblanque, Negrete, Las Salinas). El Mediterráneo de Águilas y Mazarrón: playas más largas, dunas (Playa Amarilla), Cabo Tiñoso al fondo.',
+      'Es la costa más infravalorada del Mediterráneo español: precios un 30% por debajo de Alicante o Málaga, accesibilidad fácil (autovía A-7), gastronomía local fuerte (caldero, paparajotes, tarta de Murcia). El Mar Menor ha tenido años duros (eutrofización 2019-2022) pero las playas exteriores (Calblanque, Águilas) están en perfecto estado y son el verdadero tesoro.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Junio',          razon: 'Mar Menor a 24 °C, abierto a 22 °C, sin overcrowding.' },
+      { ventana: 'Septiembre',     razon: 'Agua aún a 25-27 °C, turismo bajando. Las salinas con flamencos.' },
+      { ventana: 'Mayo / octubre', razon: 'Para senderismo en Calblanque y Parque de Cabo Cope sin calor extremo.' },
+    ],
+    tiposDestacados: [
+      { slug: '/familias',                  nombre: 'Playas para familias',     razon: 'Mar Menor: agua a la altura del tobillo decenas de metros. Sin oleaje.' },
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Calblanque (parque regional), Negrete, La Galera. Pista de tierra para llegar.' },
+      { slug: '/buceo',                      nombre: 'Buceo',                    razon: 'Cabo de Palos: reserva marina con barcos hundidos y meros gigantes.' },
+      { slug: '/playas-autocaravana',       nombre: 'Playas para autocaravana', razon: 'Áreas en Mazarrón, Águilas y zonas de pernocta legal junto al mar.' },
+    ],
+    municipios: [
+      { nombre: 'Cartagena',               slug: 'cartagena',               resumen: 'Calblanque y Cala Cortina. Capital histórica con costa rocosa virgen.' },
+      { nombre: 'Águilas',                 slug: 'aguilas',                 resumen: 'Playas de Calabardina, Calarreona, La Cola. Cabo Cope al fondo.' },
+      { nombre: 'Mazarrón',                slug: 'mazarron',                resumen: 'Bahía y costa de Cabo Tiñoso. Playas largas y calas pequeñas.' },
+      { nombre: 'San Pedro del Pinatar',   slug: 'san-pedro-del-pinatar',   resumen: 'Las Salinas con flamencos, baños de lodos, playa de Villananitos.' },
+      { nombre: 'La Manga del Mar Menor',  slug: 'la-manga-del-mar-menor',  resumen: 'Lengua de arena de 21km entre Mar Menor y Mediterráneo abierto.' },
+    ],
+    faq: [
+      { q: '¿Cómo está el Mar Menor ahora? ¿Se puede bañar?',
+        a: 'Tras los episodios de eutrofización de 2019-2022, el Mar Menor está en lenta recuperación. La calidad del agua es legalmente apta para baño (controlada por la CARM) pero la transparencia y vida marina aún no han vuelto a niveles previos. Las playas exteriores de la Manga (lado del Mediterráneo) están perfectas. Las del Mar Menor son aptas pero con menos atractivo visual.' },
+      { q: '¿Qué hay en Calblanque?',
+        a: 'Calblanque es un parque regional protegido entre Cabo de Palos y Portmán. 9 km de costa con 4 playas principales (Calblanque, Las Cañas, Negrete, El Lastre) accesibles por pista de tierra. Aguas turquesa, fondos de roca, sin construcciones, sin chiringuito. En verano hay aforo limitado: a partir del 15 de junio se llega solo en bus lanzadera desde el parking exterior.' },
+      { q: '¿Cuál es la mejor playa para niños en la Costa Cálida?',
+        a: 'Las del Mar Menor (Los Nietos, Los Urrutias, Veneziola): aguas someras de 1-2 m, sin oleaje, temperatura cálida desde junio. Para playa con olas suaves: Bahía de Mazarrón. Para combinar calas y servicios: La Manga (Levante).' },
+    ],
+  },
+
+  'costa-dorada': {
+    intro: [
+      'La Costa Dorada son 92 km del litoral de Tarragona, desde Cubelles (frontera Barcelona) hasta Alcanar (frontera Castellón). Su nombre lo da la arena: grano fino y dorado, casi naranja en algunas playas, distinto de las arenas blancas de Cataluña norte. Las playas son largas, poco profundas (puedes andar 30 m mar adentro sin pasar de la cintura), perfectas para familias y niños.',
+      'La oferta es muy variada. Cambrils y Salou son las capitales turísticas (PortAventura, gastronomía marinera, parque de atracciones), pero al norte (Vendrell, Calafell, Cunit) hay playas amplias menos masificadas, y al sur (Cala Romana, L\'Ametlla de Mar, Hospitalet del Infante) aparecen calas rocosas y costa más virgen. La desembocadura del Ebro (Delta) cierra la costa con 320 km² de marismas, arrozales y playas vírgenes (Trabucador, Eucaliptus, La Marquesa).',
+      'A esto suma el patrimonio romano de Tarragona (anfiteatro, acueducto, Tarraco), pueblos pesqueros vivos (L\'Ametlla, Cambrils), gastronomía catalana con identidad (calçots, romescu, suquet) y un clima Mediterráneo amable: 300 días de sol, agua a 25 °C en agosto.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Julio–agosto',     razon: 'Pico turístico pero la oferta absorbe: 60+ playas en 92 km.' },
+      { ventana: 'Mediados septiembre', razon: 'Agua aún a 24 °C, los catalanes vuelven a trabajar. Calles tranquilas en Salou.' },
+      { ventana: 'Mayo–junio',       razon: 'Para Delta del Ebro y Tarragona romana. Tiempo de 23-25 °C ideal.' },
+    ],
+    tiposDestacados: [
+      { slug: '/familias',                  nombre: 'Playas para familias',     razon: 'Aguas someras 30m mar adentro: Salou, Cambrils, Vendrell, Calafell.' },
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Delta del Ebro: 30km de costa virgen, dunas, arrozales hasta el mar.' },
+      { slug: '/banderas-azules',           nombre: 'Playas con Bandera Azul',  razon: 'Costa Dorada lidera Cataluña en banderas azules certificadas.' },
+      { slug: '/playas-autocaravana',       nombre: 'Playas para autocaravana', razon: 'Áreas en Cambrils, Vendrell, Hospitalet del Infante. Buenas instalaciones.' },
+    ],
+    municipios: [
+      { nombre: 'Tarragona',               slug: 'tarragona',               resumen: 'Capital. Playa Larga, Arrabassada, Savinosa, Miracle. Ruinas romanas.' },
+      { nombre: 'Cambrils',                slug: 'cambrils',                resumen: 'Pueblo pesquero (mejor gastronomía de la costa) con 9 km de playa.' },
+      { nombre: 'Salou',                   slug: 'salou',                   resumen: 'PortAventura + Playa Llarga + Cala Crancs. Capital del turismo familiar.' },
+      { nombre: 'L\'Ametlla de Mar',       slug: 'l-ametlla-de-mar',        resumen: 'Costa rocosa virgen, calas pequeñas, tonyina (atún) de almadraba.' },
+      { nombre: 'Deltebre',                slug: 'deltebre',                resumen: 'Acceso al Parque Natural del Delta. Playas Trabucador, Eucaliptus.' },
+    ],
+    faq: [
+      { q: '¿Qué hace especial a la arena de la Costa Dorada?',
+        a: 'Es de grano más fino y color más dorado/naranja que la arena del resto de Cataluña, gracias a los sedimentos del Ebro y la geología de la zona. Las playas son largas (1-3 km) y poco profundas: el lecho marino baja muy gradualmente. Esto hace que el agua se caliente más rápido (25 °C en agosto frente a 22-23 °C en Costa Brava) y que sean ideales para niños.' },
+      { q: '¿Vale la pena visitar el Delta del Ebro?',
+        a: 'Sí, sobre todo en mayo (floración del arroz) y septiembre (siega + flamencos). El parque natural tiene 320 km² de marismas, arrozales, playas vírgenes (Trabucador es una lengua de arena de 5 km), y observatorios de aves. Se puede recorrer en bici, en barco por el río o en coche con paradas.' },
+      { q: '¿Es PortAventura un buen plan complementario a la playa?',
+        a: 'Sí, especialmente para familias con niños 6-14 años. Está en Salou, a 10 minutos de las principales playas. Ofrece 6 áreas temáticas, montañas rusas (Shambhala es de las mejores de Europa), parque acuático (Caribe Aquatic Park) y Ferrari Land. Las entradas combinadas con hotel suelen salir más baratas.' },
+    ],
+  },
 }
 
 /** Devuelve el editorial de una costa, o un objeto vacío si no hay copy. */
