@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import { getRutas, COSTAS, type Ruta } from '@/lib/rutas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -88,6 +89,61 @@ export default async function RutasPage() {
         >
           🛣️ Configura tu propia ruta
         </Link>
+
+        {/* Top 6 paradas más representativas: una por zona costera diferente */}
+        {(() => {
+          const top6 = (() => {
+            const seen = new Set<string>()
+            const picked: typeof rutas[number]['paradas'][number]['playa'][] = []
+            // Recorrer por zonas para diversidad geográfica
+            for (const z of ZONAS) {
+              const zRutas = rutasByZona.get(z.key) ?? []
+              for (const r of zRutas) {
+                for (const par of r.paradas) {
+                  if (!par.playa.lat || !par.playa.lng) continue
+                  if (seen.has(par.playa.slug)) continue
+                  seen.add(par.playa.slug)
+                  picked.push(par.playa)
+                  break  // 1 de cada zona, mejor scoring
+                }
+                if (picked.length >= 6) break
+              }
+              if (picked.length >= 6) break
+            }
+            // Completar si faltan
+            for (const r of rutas) {
+              if (picked.length >= 6) break
+              for (const par of r.paradas) {
+                if (!par.playa.lat || !par.playa.lng) continue
+                if (seen.has(par.playa.slug)) continue
+                seen.add(par.playa.slug)
+                picked.push(par.playa)
+                if (picked.length >= 6) break
+              }
+            }
+            return picked
+          })()
+
+          if (top6.length < 6) return null
+          return (
+            <section aria-labelledby="top-rutas" style={{ marginBottom: '3rem' }}>
+              <h2 id="top-rutas" style={{
+                fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+                color: 'var(--ink)', marginBottom: '1rem',
+              }}>
+                Empieza por <em style={{ fontWeight: 500, color: 'var(--accent)' }}>estas paradas</em>
+              </h2>
+              <TopBeachCardsConHero
+                playas={top6.map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+                limit={6}
+                eyebrow={`Top 6 · una por costa entre ${rutas.length} rutas`}
+              />
+            </section>
+          )
+        })()}
 
         {ZONAS.map(zona => {
           const zonalRutas = rutasByZona.get(zona.key) ?? []
