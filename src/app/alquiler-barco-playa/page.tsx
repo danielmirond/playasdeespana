@@ -5,6 +5,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import { getPlayas } from '@/lib/playas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 604800
 
@@ -97,8 +99,40 @@ const PLATAFORMAS: Plataforma[] = [
   },
 ]
 
-export default function AlquilerBarcoPage() {
+export default async function AlquilerBarcoPage() {
   const plataformasActivas = PLATAFORMAS.filter(p => p.aff)
+  const allPlayas = await getPlayas()
+
+  // Top 6 playas paradisíacas accesibles en barco: una por provincia
+  // costera con bandera azul para variedad geográfica. Las playas
+  // donde el alquiler de barco más sentido tiene (Baleares, Cíes,
+  // Cabo de Gata).
+  const top6Barco = (() => {
+    const seen = new Set<string>()
+    const picked: typeof allPlayas = []
+    // Priorizamos provincias insulares y costas con calas escondidas
+    const provinciasPriorityList = [
+      'Baleares', 'Las Palmas', 'Santa Cruz de Tenerife',
+      'Girona', 'Almería', 'Pontevedra', 'Cádiz', 'Murcia',
+    ]
+    for (const prov of provinciasPriorityList) {
+      if (picked.length >= 6) break
+      const candidatas = allPlayas
+        .filter((p: any) => p.provincia === prov && p.lat && p.lng && p.bandera)
+        .sort((a: any, b: any) => {
+          const sa = (a.accesible ? 1 : 0) + (a.socorrismo ? 1 : 0)
+          const sb = (b.accesible ? 1 : 0) + (b.socorrismo ? 1 : 0)
+          return sb - sa
+        })
+      for (const c of candidatas) {
+        if (seen.has(c.slug)) continue
+        seen.add(c.slug)
+        picked.push(c)
+        break
+      }
+    }
+    return picked
+  })()
 
   return (
     <>
@@ -122,6 +156,23 @@ export default function AlquilerBarcoPage() {
           de alquiler de barcos con y sin licencia: catamaranes, veleros, lanchas y yates en Baleares,
           Costa Brava, Cabo de Gata, Canarias y Costa del Sol.
         </p>
+
+        {/* Top 6 destinos con hero foto */}
+        {top6Barco.length >= 6 && (
+          <section aria-labelledby="top-barco" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-barco" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+              Destinos top <em style={{ fontWeight: 500, color: 'var(--accent)' }}>para alquilar barco</em>
+            </h2>
+            <TopBeachCardsConHero
+              playas={top6Barco.map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={6}
+              eyebrow="Top 6 · una playa por costa donde el barco merece la pena"
+            />
+          </section>
+        )}
 
         {/* Plataformas */}
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '1rem' }}>
