@@ -152,6 +152,87 @@ export async function GET(req: NextRequest) {
       ...provs.map(p => `${BASE}/provincia/${p.slug}`),
     ]
     buckets.geo = summarise('geo', await warmBatch(urls))
+
+    // Hero cards: cada /comunidad y /provincia muestra top 6 playas con
+    // hero. Si la cascada de fotos no estaba cacheada, esas cards se
+    // ven con genérica. Identificamos las top 6 por CCAA + top 6 por
+    // provincia (mismo scoring que el componente) y disparamos
+    // refetchAndStoreFotos para garantizar foto real en KV.
+    const allPlayas = await getPlayas()
+    const slugsToWarm = new Set<string>()
+
+    // Top 6 por CCAA (1 por provincia + mejor scoring)
+    for (const ccaa of ccaas) {
+      const playasCCAA = allPlayas.filter((p: any) => {
+        // Match por nombre de comunidad o slug derivado
+        return (p.comunidad ?? '').toLowerCase() === ccaa.nombre.toLowerCase()
+      })
+      const seenProv = new Set<string>()
+      const picked: typeof playasCCAA = []
+      const sorted = [...playasCCAA].sort((a: any, b: any) => {
+        const sa = (a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0) + (a.parking ? 1 : 0)
+        const sb = (b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0) + (b.parking ? 1 : 0)
+        return sb - sa
+      })
+      for (const p of sorted) {
+        if (!p.lat || !p.lng) continue
+        if (seenProv.has(p.provincia)) continue
+        seenProv.add(p.provincia)
+        picked.push(p)
+        if (picked.length >= 6) break
+      }
+      for (const p of picked) slugsToWarm.add(p.slug)
+    }
+
+    // Top 6 por provincia (1 por municipio + mejor scoring)
+    for (const prov of provs) {
+      const playasProv = allPlayas.filter((p: any) => {
+        return (p.provincia ?? '').toLowerCase() === prov.nombre.toLowerCase()
+      })
+      const seenMun = new Set<string>()
+      const picked: typeof playasProv = []
+      const sorted = [...playasProv].sort((a: any, b: any) => {
+        const sa = (a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0) + (a.parking ? 1 : 0)
+        const sb = (b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0) + (b.parking ? 1 : 0)
+        return sb - sa
+      })
+      for (const p of sorted) {
+        if (!p.lat || !p.lng) continue
+        if (seenMun.has(p.municipio)) continue
+        seenMun.add(p.municipio)
+        picked.push(p)
+        if (picked.length >= 6) break
+      }
+      for (const p of picked) slugsToWarm.add(p.slug)
+    }
+
+    // Resolver slugs → playas y disparar refetchAndStoreFotos.
+    const playasParaFoto = allPlayas.filter((p: any) => slugsToWarm.has(p.slug))
+    const fotosCronT0 = Date.now()
+    let fotosOk = 0, fotosVacias = 0, fotosErr = 0
+    const fotosBatchSize = 4
+    for (let i = 0; i < playasParaFoto.length; i += fotosBatchSize) {
+      const batch = playasParaFoto.slice(i, i + fotosBatchSize)
+      await Promise.all(batch.map(async (p: any) => {
+        try {
+          const r = await refetchAndStoreFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia)
+          if (r.length > 0) fotosOk++; else fotosVacias++
+        } catch {
+          fotosErr++
+        }
+      }))
+    }
+    buckets.fotosGeo = {
+      label: 'fotos-geo-hero',
+      total: playasParaFoto.length,
+      ok:    fotosOk,
+      errs:  fotosErr,
+      hits:  fotosOk,
+      miss:  fotosVacias,
+      stale: 0,
+      avgMs: Math.round((Date.now() - fotosCronT0) / Math.max(1, playasParaFoto.length)),
+      slowest: [],
+    }
   }
 
   // ─── TOP fichas (por score interno) ────────────────────────────

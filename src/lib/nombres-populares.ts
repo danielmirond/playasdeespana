@@ -23,18 +23,49 @@ export interface NombrePopular {
 
 /** slug → alias */
 export const NOMBRES_POPULARES: Record<string, NombrePopular> = {
+  // ── Cantábrica / euskera ────────────────────────────────────────────
   'kontxa-hondartza': {
     popular: 'La Concha de San Sebastián',  // forma completa para H1/SEO
     oficial: 'Kontxa Hondartza',
     corto:   'La Concha',                    // forma corta para breadcrumb/cards
   },
-  // Playa de las Catedrales (Ribadeo) — patrimonio natural mundialmente
-  // conocido por su nombre castellano. Oficial en gallego: "As Catedrais".
+
+  // ── Galicia / gallego ───────────────────────────────────────────────
+  // Patrimonio natural mundialmente conocido por su nombre castellano.
   'as-catedrais-ribadeo': {
     popular: 'Playa de las Catedrales',
     oficial: 'As Catedrais',
     corto:   'Las Catedrales',
   },
+  // Praia de Pantín → "Playa de Pantín". Una de las playas de surf
+  // más famosas de Galicia (campeonato WSL anual).
+  'praia-de-pantin': {
+    popular: 'Playa de Pantín',
+    oficial: 'Praia de Pantín',
+    corto:   'Pantín',
+  },
+  // Playa de Doniños (Ferrol). Nombre oficial en gallego en el dataset.
+  'doninos-ferrol': {
+    popular: 'Playa de Doniños',
+    oficial: 'Doniños',
+    corto:   'Doniños',
+  },
+
+  // ── Islas Baleares / catalán ───────────────────────────────────────
+  // Ses Illetes (Calvià, Mallorca). Conocida también como "Las Illetas"
+  // en castellano, pero el catalán es la forma estándar en turismo.
+  // Mantenemos el oficial como popular pero añadimos aside.
+  'platja-dilletes': {
+    popular: 'Ses Illetes',
+    oficial: 'Platja d\'Illetes',
+    corto:   'Ses Illetes',
+  },
+
+  // NOTA: NO se añade "Playa del Silencio" (Asturias) porque ya está en
+  // castellano en el dataset ('Playa del Silencio'/'Playa el Silencio').
+  // NO se añade "Mundaka" porque el nombre es igual en ambos idiomas.
+  // NO se añade "Cofete", "Maspalomas", "El Palmar" porque ya están en
+  // castellano.
 }
 
 /** Devuelve nombre a mostrar. Cae al nombre del dataset si no hay alias. */
