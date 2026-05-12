@@ -466,6 +466,212 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
         a: 'Sí, especialmente para familias con niños 6-14 años. Está en Salou, a 10 minutos de las principales playas. Ofrece 6 áreas temáticas, montañas rusas (Shambhala es de las mejores de Europa), parque acuático (Caribe Aquatic Park) y Ferrari Land. Las entradas combinadas con hotel suelen salir más baratas.' },
     ],
   },
+
+  // ── Mediterránea (Tropical, Azahar, Valencia, Garraf) ───────────
+  'costa-tropical': {
+    intro: [
+      'La Costa Tropical son 80 km de la provincia de Granada, desde La Herradura hasta Adra (frontera con Almería). Es la costa con clima subtropical de la península: rodeada por Sierra Nevada al norte (que actúa de barrera contra el frío) y el mar de Alborán al sur, las temperaturas mínimas no bajan de 14 °C en invierno y permiten cultivar mango, aguacate, chirimoyo y caña de azúcar — fruta tropical real, no metáfora.',
+      'Las playas son una mezcla de acantilados, calas entre rocas (La Herradura, Marina del Este, Cantarriján) y arenales largos (Almuñécar Playa San Cristóbal, Salobreña). El agua es transparente por los fondos rocosos y el escaso aporte de ríos. La temperatura del agua alcanza los 24 °C en agosto y baja a 16 °C en febrero — la más templada del Mediterráneo español tras Almería.',
+      'Tras la playa, Granada está a 75 km (Alhambra, Sierra Nevada). En primavera puedes esquiar por la mañana y bañarte por la tarde. Salobreña conserva castillo árabe sobre el mar, Almuñécar tiene parque ornitológico y acuario, y la subida a la Alpujarra granadina es a 30 minutos. Gastronomía mediterránea con toque andaluz: pescaíto frito, gambones de Motril, vinos de la contraviesa.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Mayo–junio',     razon: 'Calor sin extremo, agua a 19-21 °C, playas tranquilas.' },
+      { ventana: 'Septiembre',     razon: 'Agua a 24 °C, su pico, sin masificación tras el verano fuerte.' },
+      { ventana: 'Diciembre–enero', razon: 'Microclima subtropical: 18-19 °C ambiente. Único lugar donde se cultiva mango en Europa.' },
+    ],
+    tiposDestacados: [
+      { slug: '/playas-aguas-cristalinas',  nombre: 'Playas con aguas cristalinas', razon: 'La Herradura, Marina del Este, Cantarriján. Fondos rocosos sin sedimento.' },
+      { slug: '/buceo',                      nombre: 'Buceo',                    razon: 'Marina del Este es el centro de buceo más activo del litoral granadino.' },
+      { slug: '/calas-con-encanto',         nombre: 'Calas con encanto',        razon: 'Cantarriján (nudista), Cala del Ruso, El Cañuelo, La Riviera.' },
+      { slug: '/atardeceres',               nombre: 'Atardeceres',              razon: 'Salobreña, Almuñécar y el faro de Sacratif: vistas con Sierra Nevada al fondo.' },
+    ],
+    municipios: [
+      { nombre: 'Almuñécar',               slug: 'almunecar',               resumen: 'Capital. San Cristóbal, Velilla, Cabria. Acuario y parque ornitológico.' },
+      { nombre: 'Salobreña',               slug: 'salobrena',               resumen: 'Castillo árabe sobre la playa. La Charca, La Guardia, La Caleta.' },
+      { nombre: 'La Herradura',            slug: 'la-herradura',            resumen: 'Bahía protegida con buceo, vela y deportes acuáticos. Cantarriján al lado.' },
+      { nombre: 'Motril',                  slug: 'motril',                  resumen: 'Playa larga de Poniente y Granada. Puerto pesquero importante.' },
+      { nombre: 'Castell de Ferro',        slug: 'castell-de-ferro',        resumen: 'Pueblo pesquero con calas en torno a Punta del Llano. Menos turístico.' },
+    ],
+    faq: [
+      { q: '¿Por qué se llama Costa Tropical?',
+        a: 'Por su microclima subtropical real (no marketing): mínimas anuales sobre 14 °C, máximas en verano 28 °C, agua del mar entre 16 y 24 °C. Esto permite cultivar mango, aguacate, chirimoyo, papaya, caña de azúcar y plátano enano — la única zona de Europa continental donde estas frutas dan cosecha comercial. Sierra Nevada actúa de escudo contra el frío norte.' },
+      { q: '¿Se puede ir de la nieve a la playa el mismo día?',
+        a: 'Sí, es la promesa turística de la zona. Sierra Nevada (Pradollano, 2.100 m) está a 90 minutos en coche de Almuñécar. En marzo-abril es perfectamente realista esquiar por la mañana (estación abre 9 AM) y bañarse en La Herradura a las 16 PM. En enero el agua está fría (16 °C) pero se puede.' },
+      { q: '¿Cuál es la mejor playa de la Costa Tropical?',
+        a: 'La Herradura por su bahía protegida y agua clara. Cantarriján por su carácter virgen y nudista oficial. Marina del Este (un puerto deportivo con cala) por la facilidad de aparcar. Cala del Ruso (Albuñol) por el aislamiento. Salobreña por la postal del castillo.' },
+    ],
+  },
+
+  'costa-del-azahar': {
+    intro: [
+      'La Costa del Azahar son 120 km del litoral de Castellón, desde Vinaròs (frontera con Cataluña) hasta Almenara (frontera con Valencia). El nombre lo dieron los azahares de los naranjos que llegan literalmente hasta el mar: campos de cítricos que perfuman la primavera y dan a la costa su seña de identidad. Es una de las costas más turísticas y a la vez más infravalorada del Mediterráneo español.',
+      'Peñíscola domina con su silueta de castillo templario sobre el peñón rocoso (el Papa Luna vivió aquí) y sus playas Norte y Sur. Benicàssim mantiene su mística desde los años 50 (festival FIB) con villas modernistas frente al paseo marítimo. Oropesa tiene la Marina d\'Or de eslogan vacacional. Y en medio, kilómetros de playas amplias de arena fina, fáciles de aparcar, sin masificación extrema.',
+      'Castellón conecta bien por AVE (Madrid 2h, Valencia 30 min) y autovía A-7. La gastronomía mezcla mar y huerta: arroz a banda, fideuá negra, all i pebre de anguila, naranjas Valencia. Las Islas Columbretes (reserva marina volcánica a 50 km de la costa) son un secreto bien guardado.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Mayo–junio',     razon: 'Aire a 22-26 °C, agua subiendo a 20 °C, naranjos en flor. Sin gente.' },
+      { ventana: 'Septiembre',     razon: 'Agua a 25 °C (pico anual), turismo se va, semana de Benicàssim antes del FIB.' },
+      { ventana: 'Marzo–abril',    razon: 'Para senderismo a Sierra de Irta (parque natural) y costa virgen al norte de Peñíscola.' },
+    ],
+    tiposDestacados: [
+      { slug: '/familias',                  nombre: 'Playas para familias',     razon: 'Peñíscola Norte, Benicàssim, Oropesa: playas amplias con servicios, accesibilidad.' },
+      { slug: '/banderas-azules',           nombre: 'Playas con Bandera Azul',  razon: 'Castellón concentra una de las mayores densidades de bandera azul por km de costa.' },
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Sierra de Irta entre Peñíscola y Alcossebre: 15 km de costa virgen sin urbanizar.' },
+      { slug: '/buceo',                      nombre: 'Buceo',                    razon: 'Islas Columbretes: reserva marina volcánica a 50 km, accesible en barco desde Castellón.' },
+    ],
+    municipios: [
+      { nombre: 'Peñíscola',               slug: 'peniscola',               resumen: 'Castillo templario sobre el mar. Playas Norte y Sur, casco antiguo amurallado.' },
+      { nombre: 'Benicàssim',              slug: 'benicassim',              resumen: 'Villas modernistas, FIB en julio. Playas Almadrava, Voramar, Heliópolis.' },
+      { nombre: 'Oropesa del Mar',         slug: 'oropesa-del-mar',         resumen: 'Marina d\'Or, La Concha, Playa Morro de Gos. Familiar y accesible.' },
+      { nombre: 'Vinaròs',                 slug: 'vinaros',                 resumen: 'Frontera con Cataluña. Calas norte de la Sierra de Irta. Langostino de Vinaròs.' },
+      { nombre: 'Alcossebre',              slug: 'alcossebre',              resumen: 'Playas Cargador, Carregador, Romana. Calas naturales en Sierra de Irta.' },
+    ],
+    faq: [
+      { q: '¿Cómo se llega a las Islas Columbretes?',
+        a: 'Solo en barco organizado desde el puerto de Castellón (50 km mar adentro, viaje 2h en cada sentido). Hay dos empresas con permiso del parque natural que operan abril-octubre con grupos limitados. Solo se puede pisar Columbrete Gran (la isla principal). El resto solo se puede ver desde el barco o haciendo snorkel/buceo desde fondeo.' },
+      { q: '¿Vale la pena Peñíscola si no me interesa la playa?',
+        a: 'Sí. El casco antiguo amurallado sobre el peñón es uno de los pueblos más fotogénicos del Mediterráneo (Juego de Tronos, El Cid, Calabuch). El Castillo del Papa Luna se visita en 1.5 h. Plaza Constitución, Bufador, Plaza del Caracol. Y los chiringuitos de Playa Sur al atardecer con el castillo iluminado al fondo.' },
+      { q: '¿Cuándo hay azahar en la Costa del Azahar?',
+        a: 'La floración del naranjo (azahar) ocurre dos veces al año: principal entre marzo y mayo, y secundaria en septiembre-octubre. El perfume es más intenso al atardecer en zonas como Burriana, Nules, Almenara. Algunas fincas ofrecen visitas con cata de naranjas y aceite de azahar destilado.' },
+    ],
+  },
+
+  'costa-de-valencia': {
+    intro: [
+      'La Costa de Valencia son 110 km del litoral de Valencia (provincia), desde Pucol al norte hasta Oliva al sur. Combina las playas urbanas más grandes de España (la Malvarrosa de Valencia es la playa de Espacio Schengen más grande de una capital europea, 1.300 m por 130 m de ancho) con la Albufera al sur (parque natural con arrozales y barracas) y kilómetros de playas familiares (El Saler, La Devesa, Gandía).',
+      'La Malvarrosa fue pintada por Sorolla y mantiene el aire mediterráneo de paseo marítimo con casas bajas, paellas en chiringuito (Levante o Casa Carmela) y agua de calidad europea ya en pleno casco urbano. El Saler y La Devesa, dentro del parque natural de la Albufera, son largas, arenosas, con pinares hasta el mar. Gandía concentra el turismo familiar masivo: paseo, restaurantes, calidad de servicios.',
+      'Tras la playa, Valencia ciudad ofrece la Ciudad de las Artes, el Mercado Central, Bioparc, casco histórico (catedral, Lonja, Mercat). Gastronómicamente es el centro de la paella (no confundir con el "arroz con cosas"). Y la huerta proporciona naranjas, alcachofas, chufa (horchata).',
+    ],
+    mejorEpoca: [
+      { ventana: 'Mayo–junio',     razon: 'Agua a 19-21 °C, paellas en chiringuito sin colas, valencianos aún no van masivos a la playa.' },
+      { ventana: 'Septiembre',     razon: 'Agua a 25 °C pico, turismo se va, Las Fallas no condicionan. Mejor mes objetivo.' },
+      { ventana: 'Diciembre–febrero', razon: 'Solo para visitar Valencia ciudad con clima amable (18 °C). El baño no es opción.' },
+    ],
+    tiposDestacados: [
+      { slug: '/familias',                  nombre: 'Playas para familias',     razon: 'Malvarrosa, El Saler, Gandía: arena amplia, paseo, accesibilidad, paellas.' },
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Albufera (El Saler, La Devesa, El Perellonet): pinares hasta el mar.' },
+      { slug: '/playas-autocaravana',       nombre: 'Playas para autocaravana', razon: 'Áreas señalizadas en Sueca, Tavernes de la Valldigna, Daimús, Oliva.' },
+      { slug: '/banderas-azules',           nombre: 'Playas con Bandera Azul',  razon: 'Comunidad Valenciana lidera el ranking nacional con 151 banderas.' },
+    ],
+    municipios: [
+      { nombre: 'Valencia',                slug: 'valencia',                resumen: 'Malvarrosa, Las Arenas, El Saler dentro del término. Capital con playa urbana.' },
+      { nombre: 'Gandía',                  slug: 'gandia',                  resumen: 'Playa Norte (4 km) y Playa de Veneziola. Familiar por excelencia.' },
+      { nombre: 'Cullera',                 slug: 'cullera',                 resumen: 'Faro, dos playas largas y calas pequeñas. Castillo árabe sobre el mar.' },
+      { nombre: 'Oliva',                   slug: 'oliva',                   resumen: 'Frontera con Alicante. Playa de Pau Pi, Terranova. Surf y kite suaves.' },
+      { nombre: 'Sueca',                   slug: 'sueca',                   resumen: 'Mareny de Barraquetes, El Perelló. Costa del arroz, escenarios sin urbanizar.' },
+    ],
+    faq: [
+      { q: '¿Cuál es la mejor playa para comer paella en chiringuito?',
+        a: 'En Valencia capital: La Pepica (Malvarrosa, desde 1898), Casa Carmela (Malvarrosa, paella sobre fuego de leña), Levante (Malvarrosa). En la Albufera: Bon Aire (El Saler). En Gandía: Aquí t\'espere. Recordatorio: la paella tradicional valenciana lleva pollo, conejo, judía verde y garrofó. No lleva chorizo NUNCA. No la pidas "mixta": es valenciana o "arroz" (con marisco, banda, negra, etc).' },
+      { q: '¿La Albufera es solo arroz o también playa?',
+        a: 'Ambos. El parque natural protege 21.000 ha entre laguna, marjal y dunas. La parte costera (Devesa de l\'Albufera, El Saler) son playas de arena fina con pinares atrás. Acceso libre, parking gratuito, sin construcciones a pie de mar. Imprescindible la visita en barca por la laguna al atardecer y comida en barraca de El Palmar.' },
+      { q: '¿Cuándo es la mejor época para Valencia ciudad + playa?',
+        a: 'Mayo y septiembre. Mayo: clima amable, Las Fallas ya pasadas, agua subiendo a 21 °C, todos los chiringuitos abren. Septiembre: agua en pico (25 °C), turismo se va, fiestas de la Vendimia. Agosto evitar: calor extremo (35 °C), Malvarrosa al máximo aforo, ciudad medio cerrada por vacaciones.' },
+    ],
+  },
+
+  'costa-del-garraf': {
+    intro: [
+      'La Costa del Garraf son 45 km del litoral de Barcelona, desde el Llobregat hasta Sitges. Es la costa más urbana de Cataluña (3 millones de habitantes en su entorno), con tres ciudades de playa muy distintas: Barcelona (Barceloneta, Bogatell, Mar Bella, Nova Icaria), Castelldefels (3 km de arena con paseo marítimo) y Sitges (capital LGTBI y modernista, 17 calas).',
+      'Barceloneta es la playa urbana más fotografiada de Europa: arena traída expresamente para las Olimpiadas del 92, escultura "Estel Ferit" (Rebecca Horn) y vistas al W Hotel. Bogatell y Mar Bella son las playas más relajadas dentro del término municipal. Castelldefels combina paseo, deportes acuáticos (kitesurf, paddle), y aeropuerto al lado. Sitges es escena, restaurantes top y patrimonio modernista (Cau Ferrat).',
+      'A 30 minutos de Barcelona en cualquier dirección: el Garraf (sierra costera con calas vírgenes como Cala Morisca, Cala Ginesta), Vilanova y Cunit. Gastronomía mediterránea con identidad fuerte: pescado azul de Vilanova, calçotada del Penedès, cava de Sant Sadurní.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Mayo–junio',     razon: 'Barcelona sin masas turísticas de julio, playa templada (20 °C agua), terrazas en su mejor momento.' },
+      { ventana: 'Septiembre',     razon: 'Agua a 24 °C, BCN se vacía tras Sant Joan + agosto. Mejor mes objetivo.' },
+      { ventana: 'Diciembre',      razon: 'Sitges Christmas y Mar Bella al sol invernal. No para baño pero sí paseo.' },
+    ],
+    tiposDestacados: [
+      { slug: '/familias',                  nombre: 'Playas para familias',     razon: 'Castelldefels y Bogatell: paseo marítimo, accesibilidad, socorrismo, calidad europea.' },
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Macizo del Garraf: Cala Morisca, Cala Ginesta, Garraf-Vallcarca. Acceso a pie.' },
+      { slug: '/playas-nudistas',           nombre: 'Playas nudistas',          razon: 'Mar Bella (BCN), Sitges (Aiguadolç), Vilanova. Tradición LGTBI fuerte.' },
+      { slug: '/atardeceres',               nombre: 'Atardeceres',              razon: 'Sitges Plaza Bahía, Macizo del Garraf desde mirador. Vistas a Montjuïc.' },
+    ],
+    municipios: [
+      { nombre: 'Barcelona',               slug: 'barcelona',               resumen: 'Barceloneta, Bogatell, Mar Bella, Nova Icaria. Playa urbana europea por excelencia.' },
+      { nombre: 'Sitges',                  slug: 'sitges',                  resumen: 'Capital LGTBI con 17 calas. Cau Ferrat, modernismo, festivales.' },
+      { nombre: 'Castelldefels',           slug: 'castelldefels',           resumen: '3 km de paseo marítimo, kite, paddle. Familiar y deportiva.' },
+      { nombre: 'Vilanova i la Geltrú',    slug: 'vilanova-i-la-geltru',    resumen: 'Puerto pesquero, pescado azul fresco, playas amplias menos masificadas.' },
+      { nombre: 'Garraf',                  slug: 'garraf',                  resumen: 'Pueblo de pescadores con casas blancas. Parque natural detrás.' },
+    ],
+    faq: [
+      { q: '¿Qué playa de Barcelona elegir según mi perfil?',
+        a: 'Barceloneta: si vienes pocos días y quieres LA playa icónica con todos los servicios (esperar masas en julio-agosto). Bogatell: si buscas más espacio y menos turistas pero similar oferta. Mar Bella: zona nudista oficial + skate park + ambiente LGTBI. Nova Mar Bella: la más tranquila, familiar local. Llevant: la más reciente, menos masificada.' },
+      { q: '¿Cómo llegar a las calas del Garraf desde Barcelona?',
+        a: 'En tren cercanías R2 Sur hasta Garraf (35 min desde BCN Sants). Desde la estación, las calas más accesibles son Garraf-Vallcarca a pie por la C-31 (precaución, no apta para niños). Para Cala Morisca y Cala Ginesta, mejor coche a Sitges y caminar 30-45 min por sendero. En verano hay aforo limitado y bus lanzadera desde Sitges.' },
+      { q: '¿Es Sitges buen plan para ir con niños?',
+        a: 'Sí. La playa principal (Sant Sebastià, Estanyol) es familiar, con socorrismo y servicios. La de la Bassa Rodona y Aiguadolç son nudistas (no para niños). Sitges en sí ofrece paseos por casco antiguo, museos pequeños (Cau Ferrat, Maricel), el faro y las terrazas. Para un mix playa-cultura sin desplazarse, es perfecto.' },
+    ],
+  },
+
+  // ── Atlántica gallega norte ────────────────────────────────────
+  'rias-altas': {
+    intro: [
+      'Las Rías Altas son las cuatro grandes entradas de mar al norte de Galicia: Betanzos, Ferrol, Cedeira y Ortigueira (en A Coruña) más la ría de Ribadeo y Foz (en Lugo). Son más bravas que las Rías Baixas: el Atlántico Norte entra con fuerza, los acantilados son altos (los de Loiba, los de O Vicedo, los de Estaca de Bares), y las playas alternan arenales grandes (Doniños, Pantín, Lariño) con calas escondidas accesibles solo a pie.',
+      'El agua es más fría que en Rías Baixas (19-20 °C en agosto), pero las playas son menos masificadas y la costa virgen es real: la zona entre Cariño y Estaca de Bares (el cabo más al norte de la península) tiene apenas urbanización y kilómetros de acantilados con calas en cada arruga. Famosos los acantilados de Loiba ("el mejor banco del mundo" según una placa).',
+      'Pueblos: Ferrol (ciudad ilustrada, modernismo, gastronomía de mar), Pontedeume, Betanzos (vinos, casco histórico medieval), Viveiro (Semana Santa) y Ribadeo. Las Catedrales (Ribadeo) son la playa estrella, accesibles solo en bajamar con reserva previa. Surf en Pantín (campeonato WSL anual) y Doniños.',
+    ],
+    mejorEpoca: [
+      { ventana: 'Julio–agosto',     razon: 'Pico térmico: 20 °C agua, 23 °C aire. Tiempo más seguro de Galicia.' },
+      { ventana: 'Septiembre',       razon: 'Las Rías Altas se vacían pronto: gallegos vuelven al cole y a Coruña.' },
+      { ventana: 'Octubre–noviembre', razon: 'Para surf en Pantín, senderismo costero (los acantilados están en su mejor punto) y vino del Ribeiro Sacro.' },
+    ],
+    tiposDestacados: [
+      { slug: '/surf',                       nombre: 'Surf',                     razon: 'Pantín (WSL), Doniños, Esmelle, San Xurxo. Tradición fuerte y olas consistentes.' },
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Costa entre Cariño y Estaca de Bares: 50 km con apenas urbanización.' },
+      { slug: '/atardeceres',               nombre: 'Atardeceres',              razon: 'Acantilados de Loiba, San Andrés de Teixido, Bares: los más altos de la España continental.' },
+      { slug: '/playas-paradisiacas',       nombre: 'Playas paradisíacas',      razon: 'As Catedrais (Ribadeo), Esteiro, Lariño. Geografía espectacular.' },
+    ],
+    municipios: [
+      { nombre: 'Ferrol',                  slug: 'ferrol',                  resumen: 'Doniños, San Xurxo. Ciudad ilustrada con casco histórico ordenado.' },
+      { nombre: 'Valdoviño',               slug: 'valdovino',               resumen: 'A Frouxeira, Pantín, Vilarrube. Surf-spot reconocido WSL.' },
+      { nombre: 'Cedeira',                 slug: 'cedeira',                 resumen: 'Ría protegida con playas urbanas tranquilas. Magoito, Vilarrube cerca.' },
+      { nombre: 'Ribadeo',                 slug: 'ribadeo',                 resumen: 'Playa de las Catedrales (As Catedrais). Pueblo indiano elegante.' },
+      { nombre: 'Ortigueira',              slug: 'ortigueira',              resumen: 'Acceso a Cariño, Estaca de Bares y costa virgen del norte.' },
+    ],
+    faq: [
+      { q: '¿Hace falta reservar para ir a las Catedrales?',
+        a: 'Sí, durante Semana Santa y de julio a septiembre. Reserva gratuita online (areadasvelas.com) con aforo limitado. Sin reserva no se accede. Para el resto del año el acceso es libre pero hay que ir con bajamar coeficiente >50 (la playa desaparece con marea alta). Consulta las tablas antes de ir.' },
+      { q: '¿Cuál es la mejor playa de surf de Galicia?',
+        a: 'Pantín (Valdoviño) por su consistencia: olas todo el año, fondo de arena, viento offshore frecuente. Cada septiembre acoge el Pantín Classic, prueba del WSL World Qualifying Series. Otras top: Doniños (Ferrol), Esteiro (Muxía), Razo (Carballo), San Xurxo (Ferrol). Todas con escuelas y nivel intermedio-avanzado.' },
+      { q: '¿Se puede llegar en transporte público a las Rías Altas?',
+        a: 'A las playas grandes sí: Ferrol tiene tren desde A Coruña, y Doniños/San Xurxo se alcanzan en bus urbano. A Pantín y Frouxeira, en bus desde Ferrol o Cedeira (poca frecuencia). Para As Catedrais hay parada de bus desde Ribadeo en verano. Para la costa norte (Cariño, Estaca de Bares) coche es necesario.' },
+    ],
+  },
+
+  'costa-da-morte': {
+    intro: [
+      'La Costa da Morte son 200 km de litoral de A Coruña, desde Caión (al norte) hasta Cabo Fisterra (al sur), pasando por Malpica, Camariñas, Muxía y Carnota. Su nombre se lo dieron los más de 1.000 naufragios catalogados desde el siglo XVI: el Atlántico Norte entra aquí con sus tormentas más bravas, las nieblas son frecuentes, y los acantilados (Cabo Vilán, Cabo Roncudo, Punta da Barca) cobran tributo. Es la costa más salvaje de la península ibérica.',
+      'Pero detrás del nombre temible está una belleza brutal: arenales de cinco kilómetros sin nadie (Lariño, Carnota, Ézaro), faros sobre acantilados (Vilán, Roncudo, Touriñán), cabos terminales (Fisterra fue durante siglos "el fin del mundo" para el Camino de Santiago) y playas de geografía dramática (Mar de Fora en Fisterra, Praia da Lago, Praia das Furnas). El agua está fresca (18-19 °C en agosto) pero el sol del norte de Galicia es generoso en julio-septiembre.',
+      'Gastronomía de percebes (Roncudo es la capital mundial), pescados de la lonja de Fisterra y Camariñas, y el famoso bordado de Camariñas. Carnota tiene además el hórreo más largo de Galicia (35 m) y unas vistas espectaculares al monte Pindo, "el Olimpo Celta".',
+    ],
+    mejorEpoca: [
+      { ventana: 'Julio–agosto',     razon: 'Único momento con sol seguro y agua a 19-20 °C. Playas semivacías comparado con sur.' },
+      { ventana: 'Septiembre',       razon: 'Gallegos vuelven al cole, costa queda casi vacía. Tiempo aún bueno.' },
+      { ventana: 'Mayo–junio',       razon: 'Para senderismo costero (camino dos Faros conecta toda la costa en 200 km) y observación de percebes.' },
+    ],
+    tiposDestacados: [
+      { slug: '/playas-secretas',           nombre: 'Playas secretas',          razon: 'Carnota (4 km sin urbanizar), Mar de Fora, As Furnas. La costa más virgen de la península.' },
+      { slug: '/atardeceres',               nombre: 'Atardeceres',              razon: 'Cabo Fisterra (el fin del mundo histórico), Cabo Touriñán, Faro Vilán. Atlánticos puros.' },
+      { slug: '/surf',                       nombre: 'Surf',                     razon: 'Razo (Carballo), Caión, A Lapa. Olas grandes consistentes pero solo nivel medio-avanzado.' },
+      { slug: '/playas-paradisiacas',       nombre: 'Playas paradisíacas',      razon: 'Lariño, Ézaro (única cascada que cae al mar de Europa continental), Carnota.' },
+    ],
+    municipios: [
+      { nombre: 'Fisterra',                slug: 'fisterra',                resumen: 'Faro Cabo Fisterra, fin del Camino. Playa Mar de Fora y Langosteira.' },
+      { nombre: 'Carnota',                 slug: 'carnota',                 resumen: 'Playa más larga de Galicia (5 km) bajo el monte Pindo. Hórreo de Carnota.' },
+      { nombre: 'Muxía',                   slug: 'muxia',                   resumen: 'Santuario da Barca, As Furnas, Praia da Lago. Final del Camino alternativo.' },
+      { nombre: 'Camariñas',               slug: 'camarinas',               resumen: 'Encajes de bolillos, Faro Vilán. Playas Camelle, Trece, Reira.' },
+      { nombre: 'Malpica',                 slug: 'malpica',                 resumen: 'Capital del percebe (Cabo Roncudo). Playa Malpica, Sieira, Beo.' },
+    ],
+    faq: [
+      { q: '¿Por qué se llama Costa da Morte?',
+        a: 'Por la cantidad de naufragios históricos (más de 1.000 catalogados): tormentas atlánticas, niebla densa frecuente, corrientes traicioneras y costa rocosa sin puertos refugio entre Malpica y Fisterra. El nombre se popularizó en el siglo XIX con la prensa cubriendo el hundimiento de varios barcos en la zona. El más famoso: el HMS Serpent en 1890 (172 muertos en Boi).' },
+      { q: '¿Cuándo es la mejor época para ver percebes en Roncudo?',
+        a: 'Octubre-mayo es la temporada (los percebes se cogen en marejada). En verano están vedados. Para verlos en la roca y ver cómo se cogen (deporte de riesgo extremo), Roncudo y Punta dos Aguillóns son los puntos. Hay rutas guiadas con percebeiros profesionales en Corme y Malpica que combinan caminata costera + cata. Reserva con antelación.' },
+      { q: '¿Es realmente Cabo Fisterra el "fin del mundo"?',
+        a: 'Históricamente sí: los romanos llamaron al cabo "Finis Terrae" y durante toda la Edad Media se consideró el punto más al oeste de Europa conocido. El cabo de Roca (Portugal) está 16 km más al oeste, pero Fisterra mantiene el mito por el Camino de Santiago (muchos peregrinos extienden el camino hasta aquí). El faro, la ermita de San Guillermo y la roca del Buey son las paradas obligadas.' },
+    ],
+  },
 }
 
 /** Devuelve el editorial de una costa, o un objeto vacío si no hay copy. */
