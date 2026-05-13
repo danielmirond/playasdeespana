@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 3600
 
@@ -120,6 +121,24 @@ export default async function PrediccionFinDeSemanaPage() {
           Previsión de viento, oleaje y temperatura a 3 días en playas
           con Bandera Azul. Te decimos cuál es el mejor día para ir a cada una.
         </p>
+
+        {/* Top 6 con hero foto */}
+        {conScore.length >= 6 && (
+          <section aria-labelledby="top-fds" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-fds" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+              Las <em style={{ fontWeight: 500, color: 'var(--accent)' }}>6 mejores</em> para este fin de semana
+            </h2>
+            <TopBeachCardsConHero
+              playas={conScore.slice(0, 6).map(f => ({
+                slug: f.playa.slug, nombre: f.playa.nombre, municipio: f.playa.municipio,
+                provincia: f.playa.provincia, comunidad: f.playa.comunidad,
+                lat: f.playa.lat, lng: f.playa.lng, bandera: f.playa.bandera,
+              }))}
+              limit={6}
+              eyebrow={`Top 6 · forecast 3 días en playas con Bandera Azul`}
+            />
+          </section>
+        )}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
           {conScore.slice(0, 12).map(({ playa: p, dias, bestDay, bestScore }) => (

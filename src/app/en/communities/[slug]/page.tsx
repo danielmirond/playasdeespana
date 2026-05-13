@@ -7,6 +7,7 @@ import { getPlayasByComunidad, getComunidades } from '@/lib/playas'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from '@/app/comunidad/[slug]/ComunidadPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -84,6 +85,42 @@ export default async function CommunitiesPageEn({ params }: Props) {
         </div>
       </div>
       <div className={styles.wrap}>
+        {(() => {
+          // Top 6: 1 per province + best scoring (bandera/socorrismo/accesible)
+          const top6 = (() => {
+            const seenProv = new Set<string>()
+            const sorted = [...playas].sort((a, b) => {
+              const sa = (a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0)
+              const sb = (b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0)
+              return sb - sa
+            })
+            const picked: typeof playas = []
+            for (const p of sorted) {
+              if (!p.lat || !p.lng) continue
+              if (seenProv.has(p.provincia)) continue
+              seenProv.add(p.provincia)
+              picked.push(p)
+              if (picked.length >= 6) break
+            }
+            return picked
+          })()
+          if (top6.length < 6) return null
+          return (
+            <section aria-labelledby="top-com-en" style={{ marginBottom: '2rem' }}>
+              <h2 id="top-com-en" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+                Top 6 beaches in {comunidad.nombre}
+              </h2>
+              <TopBeachCardsConHero
+                playas={top6.map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+                limit={6}
+                eyebrow={`Top 6 · one per province out of ${playas.length} beaches`}
+              />
+            </section>
+          )
+        })()}
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
             <span className={styles.mapaTitle}>Beach map</span>

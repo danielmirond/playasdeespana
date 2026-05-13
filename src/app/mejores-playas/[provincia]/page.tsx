@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas, getProvincias } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -85,6 +86,22 @@ export default async function MejoresPlayasProvinciaPage({ params }: Props) {
           Bandera Azul, socorrismo, accesibilidad y servicios. Estado del mar en tiempo real
           en cada ficha.
         </p>
+
+        {top.length >= 6 && (
+          <section aria-labelledby="top-mp" style={{ marginBottom: '2.5rem' }}>
+            <h2 id="top-mp" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+              Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>destacadas</em>
+            </h2>
+            <TopBeachCardsConHero
+              playas={top.slice(0, 6).map(p => ({
+                slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+              }))}
+              limit={6}
+              eyebrow={`Top 6 · ${provinciaPlayas.length} playas en ${prov.nombre}`}
+            />
+          </section>
+        )}
 
         <ol style={{
           listStyle: 'none', padding: 0, margin: 0,

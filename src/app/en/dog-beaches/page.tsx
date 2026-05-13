@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 export const revalidate = 86400
 export const metadata: Metadata = { title: 'Dog-Friendly Beaches in Spain | Complete List', description: 'Complete list of dog-friendly beaches in Spain by community, province and town.', alternates: { canonical: '/en/dog-beaches', languages: { 'es': '/playas-perros', 'en': '/en/dog-beaches' } } }
 function toSlug(s: string) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') }
@@ -16,6 +17,19 @@ export default async function Page() {
     </nav>
     <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.5rem'}}>Dog-Friendly Beaches in Spain</h1>
     <p style={{fontSize:'.92rem',color:'var(--muted)',marginBottom:'2rem'}}>{playas.length} beaches across Spain</p>
+    {playas.filter(p => p.lat && p.lng).length >= 6 && (
+      <section aria-labelledby="top-dog-en" style={{marginBottom:'2rem'}}>
+        <h2 id="top-dog-en" style={{fontFamily:'var(--font-serif)',fontSize:'1.45rem',fontWeight:700,color:'var(--ink)',marginBottom:'1rem'}}>Top 6 dog-friendly beaches</h2>
+        <TopBeachCardsConHero
+          playas={playas.filter(p => p.lat && p.lng).slice(0, 6).map(p => ({
+            slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+            comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+          }))}
+          limit={6}
+          eyebrow={`Top 6 · ${playas.length} dog-friendly beaches in Spain`}
+        />
+      </section>
+    )}
     {playas.length > 0 && <div style={{background:'var(--card-bg)',border:'1px solid var(--line)',borderRadius:6,overflow:'hidden',marginBottom:'2rem'}}><MapaPlayas playas={playas} height="400px" /></div>}
     {Array.from(byCom.entries()).map(([com, list]) => (
       <section key={com} style={{marginBottom:'2rem'}}>

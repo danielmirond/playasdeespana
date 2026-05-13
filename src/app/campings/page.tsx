@@ -8,6 +8,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import { getEditorialModified } from '@/lib/dateModified'
 
@@ -92,6 +93,36 @@ export default async function CampingsPage() {
           áreas de autocaravanas frente al mar en Galicia. En cada ficha de playa mostramos los campings
           más cercanos con servicios, distancia y datos de contacto.
         </p>
+
+        {/* Top 6 playas con camping cerca: 1 por comunidad para variedad */}
+        {(() => {
+          const top6 = (() => {
+            const picked: typeof allBeaches = []
+            for (const c of costeras) {
+              if (picked.length >= 6) break
+              const candidatas = playasPorComunidad.get(c.nombre) ?? []
+              const conLatLng = candidatas.filter(p => p.lat && p.lng)
+              if (conLatLng.length > 0) picked.push(conLatLng[0])
+            }
+            return picked
+          })()
+          if (top6.length < 6) return null
+          return (
+            <section aria-labelledby="top-camp" style={{ marginBottom: '2.5rem' }}>
+              <h2 id="top-camp" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+                Top 6 playas <em style={{ fontWeight: 500, color: 'var(--accent)' }}>con camping cerca</em>
+              </h2>
+              <TopBeachCardsConHero
+                playas={top6.map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+                limit={6}
+                eyebrow="Top 6 · una playa con camping por costa española"
+              />
+            </section>
+          )
+        })()}
 
         {/* Highlights */}
         <div style={{

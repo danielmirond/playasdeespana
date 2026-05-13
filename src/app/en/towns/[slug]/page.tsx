@@ -7,6 +7,7 @@ import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from '@/app/municipio/[slug]/MunicipioPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 3600
 
@@ -78,6 +79,32 @@ export default async function TownPageEn({ params }: Props) {
       </div>
 
       <div className={styles.wrap}>
+        {(() => {
+          const top6 = [...playas]
+            .filter(p => p.lat && p.lng)
+            .sort((a, b) => {
+              const sa = (a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0) + (a.parking ? 1 : 0)
+              const sb = (b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0) + (b.parking ? 1 : 0)
+              return sb - sa
+            })
+            .slice(0, 6)
+          if (top6.length < 6) return null
+          return (
+            <section aria-labelledby="top-town-en" style={{ marginBottom: '2rem' }}>
+              <h2 id="top-town-en" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+                Top 6 beaches in {municipio.nombre}
+              </h2>
+              <TopBeachCardsConHero
+                playas={top6.map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+                limit={6}
+                eyebrow={`Top 6 · ${playas.length} beaches in ${municipio.nombre}`}
+              />
+            </section>
+          )
+        })()}
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
             <span className={styles.mapaTitle}>Beach map · {municipio.nombre}</span>

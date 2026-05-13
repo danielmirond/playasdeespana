@@ -5,6 +5,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import styles from '@/app/banderas-azules/BanderasAzules.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 export const revalidate = 86400
 
@@ -53,6 +54,26 @@ export default async function BlueFlagPage() {
       </div>
 
       <div className={styles.wrap}>
+        {azules.filter(p => p.lat && p.lng).length >= 6 && (
+          <section aria-labelledby="top-bba-en" style={{ margin: '2rem 0' }}>
+            <h2 id="top-bba-en" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+              A selection of <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{azules.length} Blue Flag beaches</em>
+            </h2>
+            <TopBeachCardsConHero
+              playas={azules
+                .filter(p => p.lat && p.lng)
+                .sort((a, b) => (b.accesible ? 1 : 0) + (b.socorrismo ? 1 : 0) - (a.accesible ? 1 : 0) - (a.socorrismo ? 1 : 0))
+                .slice(0, 6)
+                .map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+              limit={6}
+              eyebrow={`Top 6 · ${azules.length} Blue Flag beaches`}
+            />
+          </section>
+        )}
+
         <div className={styles.mapaCard}>
           <div className={styles.mapaHead}>
             <span className={styles.mapaTitle}>Blue Flag beaches map</span>
