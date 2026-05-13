@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     canonical: '/comunidades',
     // Sin hreflang en: el hub /en/communities (sin slug) no existe.
   },
+  openGraph: {
+    type:  'website',
+    title: 'Playas de España por comunidad y provincia',
+    images: [{ url: '/api/og?playa=Playas%20por%20comunidad', width: 1200, height: 630 }],
+  },
 }
 
 const ICONOS: Record<string, string> = {

@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: 'Widget de playa | Embebe el estado del mar en tu web',
   description: 'Widget gratuito con el score de cualquier playa de España. Copia y pega una línea de HTML en tu blog, hotel o web de turismo.',
   alternates: { canonical: '/widget' },
+  openGraph: {
+    type:  'website',
+    title: 'Widget de playa para tu web',
+    images: [{ url: '/api/og?playa=Widget%20de%20playa', width: 1200, height: 630 }],
+  },
 }
 
 const EXAMPLE_SLUG = 'playa-de-la-concha'
