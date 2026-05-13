@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: 'Mapa de playas de España',
   description: 'Mapa interactivo con todas las playas de España. Filtra por estado del mar y busca playas cerca de ti.',
   alternates: { canonical: '/mapa' },
+  openGraph: {
+    type:  'website',
+    title: 'Mapa interactivo de playas de España',
+    images: [{ url: '/api/og?playa=Mapa%20de%20playas%20de%20Espa%C3%B1a', width: 1200, height: 630 }],
+  },
 }
 
 export default function MapaPage() {

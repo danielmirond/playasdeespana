@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   title: 'Top 10 mejores playas de España por costa | Rankings',
   description: 'Rankings de las 10 mejores playas de cada costa de España: Costa del Sol, Costa Brava, Costa de la Luz, Rías Baixas y más. Puntuación por servicios y accesibilidad.',
   alternates: { canonical: '/top' },
+  openGraph: {
+    type:  'website',
+    title: 'Top 10 mejores playas de España por costa',
+    images: [{ url: '/api/og?playa=Top%2010%20playas%20de%20Espa%C3%B1a', width: 1200, height: 630 }],
+  },
 }
 
 const ZONAS = [
