@@ -10,6 +10,7 @@
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import SchemaItemList from '@/components/seo/SchemaItemList'
+import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import type { Playa } from '@/types'
 
 export interface TopicConfig {
@@ -85,6 +86,27 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.65 }}>
           {config.intro.replace(/{provincia}/g, provincia.nombre)}
         </p>
+
+        {/* Top 6 con hero foto — playas más relevantes para este topic */}
+        {(() => {
+          const top6 = destacadas.filter(p => p.lat && p.lng).slice(0, 6)
+          if (top6.length < 6) return null
+          return (
+            <section aria-labelledby="top-topic" style={{ marginBottom: '2.5rem' }}>
+              <h2 id="top-topic" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '1rem' }}>
+                Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>en {provincia.nombre}</em>
+              </h2>
+              <TopBeachCardsConHero
+                playas={top6.map(p => ({
+                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
+                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
+                }))}
+                limit={6}
+                eyebrow={`Top 6 · ${playas.length} playas en ${provincia.nombre}`}
+              />
+            </section>
+          )
+        })()}
 
         {/* Highlights */}
         <div style={{
