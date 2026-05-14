@@ -139,14 +139,18 @@ function extraerFotosDePages(pages: any[]): FotoPlaya[] {
 // archivo contenga al menos una palabra del catálogo POSITIVAS. Si
 // no hay matches, devolvemos vacío y dejamos que otra fuente lo
 // intente, en lugar de servir un edificio cercano.
-async function getFotosWikimediaGeo(lat: number, lon: number): Promise<FotoPlaya[]> {
+async function getFotosWikimediaGeo(lat: number, lon: number, nombre?: string): Promise<FotoPlaya[]> {
   try {
+    // Radio reducido de 1500m a 700m: con 1500m, playas vecinas a 500m
+    // (Kontxa-Zurriola, Cala A-Cala B en mismo cabo) obtenían el mismo
+    // pool de fotos. 700m sigue cubriendo la propia playa + entorno
+    // inmediato sin solapamiento entre playas diferentes.
     const params = new URLSearchParams({
       action:       'query',
       generator:    'geosearch',
       ggsnamespace: '6',
       ggscoord:     `${lat}|${lon}`,
-      ggsradius:    '1500',
+      ggsradius:    '700',
       ggslimit:     '30',
       prop:         'imageinfo|pageprops',
       iiprop:       'url|extmetadata|size',
@@ -157,18 +161,41 @@ async function getFotosWikimediaGeo(lat: number, lon: number): Promise<FotoPlaya
     const res = await fetchWithTimeout(
       `https://commons.wikimedia.org/w/api.php?${params}`,
       { next: { revalidate: 86400 } },
-      3500,  // timeout más generoso: fotos son críticas para UX (hero)
+      3500,
     )
     if (!res.ok) return []
     const data = await res.json()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const pages = Object.values(data.query?.pages ?? {}) as any[]
     const fotos = extraerFotosDePages(pages)
-    const beachish = fotos.filter(f => {
+    let beachish = fotos.filter(f => {
       try {
         return POSITIVAS.test(decodeURIComponent(f.url).toLowerCase())
       } catch { return false }
     })
+
+    // Si se pasa nombre, dar prioridad a fotos cuyo URL incluya un token
+    // del nombre concreto. Las URLs Wikimedia incluyen el nombre del
+    // archivo (ej. "File:Playa_de_Bolonia.jpg") → buen indicador de
+    // que la foto es DE esa playa, no panorámica genérica del municipio.
+    if (nombre && beachish.length > 1) {
+      const normalizar = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
+      const tokens = [
+        normalizar(nombre),
+        ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
+      ].filter(Boolean)
+      const conNombre = beachish.filter(f => {
+        try {
+          const url = decodeURIComponent(f.url).toLowerCase()
+          return tokens.some(t => t.length >= 4 && url.includes(t))
+        } catch { return false }
+      })
+      // Si hay fotos con nombre, usarlas. Si no, devolver las geo-cercanas
+      // (mejor que [] — algunas playas no tienen ningún archivo Wikimedia
+      // con su nombre en el título).
+      if (conNombre.length > 0) beachish = conNombre
+    }
+
     return beachish.slice(0, 6)
   } catch {
     return []
@@ -388,17 +415,21 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
     ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
   ].filter(Boolean)
 
-  // Probar combinaciones de tags de más específico a más general.
-  // SIEMPRE exigimos que el título o tags del resultado mencione el
-  // nombre concreto de la playa. Aunque la query inicial sea específica
-  // (incluye nombreTag), Flickr puede devolver fotos taggeadas con
-  // múltiples playas del mismo municipio. Ejemplo: una foto panorámica
-  // de la bahía de Donostia con tags "kontxa,zurriola,donostia" matchea
-  // ambas playas; el dedupe estricto elige específica.
+  // SOLO queries que incluyan el nombre concreto de la playa. Las
+  // queries genéricas por municipio (`donostia,playa`) devolvian la
+  // misma foto popular para todas las playas del municipio (ej. La
+  // Concha y Zurriola ambas obtenían la foto 51820147191 porque tenia
+  // tags "kontxa,zurriola,donostia" — el filtro requiereNombre no era
+  // suficiente porque la foto mencionaba a ambas).
+  //
+  // Sin queries genéricas, las playas sin matching Flickr específico
+  // caen a Wikimedia geo → OpenVerse → Wikimedia text → Pexels → Unsplash
+  // → genérica por estado. Es mejor genérica que foto compartida
+  // incorrecta entre playas próximas.
   const queries: Array<{ tags: string; requiereNombre: boolean }> = [
     { tags: `${nombreTag},${municipioTag},beach`, requiereNombre: true },
-    { tags: `${municipioTag},playa`,              requiereNombre: true },
-    { tags: `${municipioTag},beach`,              requiereNombre: true },
+    { tags: `${nombreTag},beach`,                 requiereNombre: true },
+    { tags: `${nombreTag},playa`,                 requiereNombre: true },
   ].filter(q => !q.tags.startsWith(',') && !q.tags.endsWith(','))
 
   for (const { tags, requiereNombre } of queries) {
@@ -618,7 +649,7 @@ async function getFotosUncached(
   nombre: string, municipio: string, lat: number, lon: number, provincia: string,
 ): Promise<FotoPlaya[]> {
   const [wikiGeo, openverse, flickr, wikiText, pexels, unsplash] = await Promise.all([
-    getFotosWikimediaGeo(lat, lon),
+    getFotosWikimediaGeo(lat, lon, nombre),
     getFotosOpenVerse(nombre, municipio),
     getFotosFlickr(nombre, municipio),
     getFotosWikimediaText(nombre, municipio),
