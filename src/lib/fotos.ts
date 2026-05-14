@@ -260,19 +260,30 @@ async function getFotosUnsplash(municipio: string, provincia: string): Promise<F
 // API pública sin key. Rate limit: 100 req/min anónimo, 5000/min con key.
 // https://api.openverse.org/v1/images/
 async function getFotosOpenVerse(nombre: string, municipio: string): Promise<FotoPlaya[]> {
-  // Probar de más específico a más general
+  // Probar de más específico a más general. La query 4 (solo municipio)
+  // se quita: para playas en municipios con varias (Donostia, Marbella,
+  // Mallorca...) devolvía la misma foto para todas. Si no encontramos
+  // por nombre, mejor dejar que otra fuente o el fallback genérico actúe.
   const queries = [
     `"${nombre}" "${municipio}"`,
     `"${nombre}" ${municipio} beach`,
     `${nombre} ${municipio} playa`,
-    `${municipio} beach`,
   ]
+
+  // Tokens del nombre para verificar matching del título.
+  const normalizar = (s: string) => s
+    .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
+  const tokensNombre = [
+    normalizar(nombre),
+    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
+  ].filter(Boolean)
+
   for (const q of queries) {
     try {
       const params = new URLSearchParams({
         q,
-        license_type: 'all-cc',          // commercial-friendly + share-alike
-        category:     'photograph',       // descarta ilustraciones, mapas
+        license_type: 'all-cc',
+        category:     'photograph',
         size:         'large',
         aspect_ratio: 'wide',
         page_size:    '8',
@@ -294,10 +305,13 @@ async function getFotosOpenVerse(nombre: string, municipio: string): Promise<Fot
         if (!url || typeof url !== 'string') return null
         const titulo = (r.title ?? '').toLowerCase()
         if (NEGATIVAS.test(titulo)) return null
-        // Modo estricto: el título debe sugerir playa. OpenVerse devuelve
-        // resultados aunque la query incluya "beach" — algunos no son
-        // playa (motocross, eventos, etc.). Sin POSITIVAS, descartamos.
         if (!POSITIVAS.test(titulo)) return null
+        // Exigir que el título mencione un token del nombre concreto.
+        // Evita que dos playas del mismo municipio compartan foto si
+        // la query devuelve algo genérico.
+        const tituloNorm = normalizar(titulo)
+        const matchToken = tokensNombre.some(t => t.length >= 4 && tituloNorm.includes(t))
+        if (!matchToken) return null
         return {
           url,
           thumb,
@@ -375,10 +389,14 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
   ].filter(Boolean)
 
   // Probar combinaciones de tags de más específico a más general.
-  // Para queries genéricas (solo municipio), marcamos que se debe
-  // verificar el nombre en título/tags del resultado.
+  // SIEMPRE exigimos que el título o tags del resultado mencione el
+  // nombre concreto de la playa. Aunque la query inicial sea específica
+  // (incluye nombreTag), Flickr puede devolver fotos taggeadas con
+  // múltiples playas del mismo municipio. Ejemplo: una foto panorámica
+  // de la bahía de Donostia con tags "kontxa,zurriola,donostia" matchea
+  // ambas playas; el dedupe estricto elige específica.
   const queries: Array<{ tags: string; requiereNombre: boolean }> = [
-    { tags: `${nombreTag},${municipioTag},beach`, requiereNombre: false },
+    { tags: `${nombreTag},${municipioTag},beach`, requiereNombre: true },
     { tags: `${municipioTag},playa`,              requiereNombre: true },
     { tags: `${municipioTag},beach`,              requiereNombre: true },
   ].filter(q => !q.tags.startsWith(',') && !q.tags.endsWith(','))
