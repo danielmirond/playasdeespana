@@ -366,14 +366,24 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
   const nombreTag = normalizar(nombre)
   const municipioTag = normalizar(municipio)
 
-  // Probar combinaciones de tags de más específico a más general
-  const queries = [
-    `${nombreTag},${municipioTag},beach`,
-    `${municipioTag},playa`,
-    `${municipioTag},beach`,
-  ].filter(q => !q.startsWith(',') && !q.endsWith(','))
+  // Tokens del nombre para filtrar resultados de queries genéricas.
+  // Ej: 'kontxahondartza' → ['kontxa','hondartza','concha']
+  // 'lazurriola' → ['lazurriola','zurriola']
+  const tokensNombre = [
+    nombreTag,
+    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
+  ].filter(Boolean)
 
-  for (const tags of queries) {
+  // Probar combinaciones de tags de más específico a más general.
+  // Para queries genéricas (solo municipio), marcamos que se debe
+  // verificar el nombre en título/tags del resultado.
+  const queries: Array<{ tags: string; requiereNombre: boolean }> = [
+    { tags: `${nombreTag},${municipioTag},beach`, requiereNombre: false },
+    { tags: `${municipioTag},playa`,              requiereNombre: true },
+    { tags: `${municipioTag},beach`,              requiereNombre: true },
+  ].filter(q => !q.tags.startsWith(',') && !q.tags.endsWith(','))
+
+  for (const { tags, requiereNombre } of queries) {
     try {
       const params = new URLSearchParams({
         format:         'json',
@@ -404,6 +414,18 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
           // (DSC_1234, IMG_001). Aceptamos si título O tags incluyen
           // POSITIVAS (descarta DSC_xxxx con tags neutros).
           if (!POSITIVAS.test(titulo) && !POSITIVAS.test(tagsStr)) return null
+          // Si la query era genérica (solo municipio), exigimos que el
+          // título o los tags mencionen el nombre concreto de la playa.
+          // Evita que dos playas del mismo municipio compartan foto:
+          // ej. Kontxa Hondartza y Zurriola están ambas en Donostia.
+          if (requiereNombre) {
+            const tituloNorm = normalizar(titulo)
+            const tagsNorm   = normalizar(tagsStr)
+            const matchToken = tokensNombre.some(t =>
+              t.length >= 4 && (tituloNorm.includes(t) || tagsNorm.includes(t))
+            )
+            if (!matchToken) return null
+          }
           // item.media.m es el thumbnail de tamaño M (240px). Subimos a _c
           // (800px, disponible desde 2012) en vez de _b (1024px) porque
           // _b falta en fotos pequeñas o antiguas y producía imágenes rotas.
@@ -546,7 +568,31 @@ async function getKV(): Promise<KV | null> {
 
 const KV_TTL_SEC = 7 * 24 * 3600  // 7 días
 
-function cacheKey(lat: number, lon: number): string {
+// Normaliza un nombre/municipio para usarlo como discriminador en la
+// cache key. Quita acentos, espacios, mayúsculas y caracteres especiales.
+function normalizarParaKey(s: string): string {
+  return (s ?? '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 40)
+}
+
+// La cache key incluye nombre + lat + lon. Antes era solo (lat, lon)
+// pero dos playas a <500m pueden recibir la MISMA foto vía Wikimedia
+// geosearch (radio 1500m) → colisión. Ejemplo: Kontxa Hondartza y
+// Zurriola están a 500m y compartían la foto de La Concha. Añadiendo
+// el nombre normalizado al hash, cada playa tiene su propia entrada
+// aunque la cascada devuelva temporalmente lo mismo (la siguiente
+// visita persiste la foto correcta para cada slug).
+function cacheKey(nombre: string, lat: number, lon: number): string {
+  return `fotos:${normalizarParaKey(nombre)}:${lat.toFixed(4)}:${lon.toFixed(4)}`
+}
+
+// Legacy: la cache key anterior (solo coordenadas). Se mantiene para
+// hacer migración suave: si existe entry vieja, la leemos como fallback.
+function cacheKeyLegacy(lat: number, lon: number): string {
   return `fotos:${lat.toFixed(4)}:${lon.toFixed(4)}`
 }
 
@@ -602,19 +648,24 @@ export async function getFotos(
   lon: number,
   provincia: string = ''
 ): Promise<FotoPlaya[]> {
-  const key = cacheKey(lat, lon)
+  const key       = cacheKey(nombre, lat, lon)
+  const keyLegacy = cacheKeyLegacy(lat, lon)
   const kv = await getKV()
 
-  // 1. Intentar KV cache
+  // 1. Intentar KV cache (nueva clave, luego legacy)
   if (kv) {
     try {
-      const cached = await kv.get(key) as FotoPlaya[] | EmptyMarker | null
+      let cached = await kv.get(key) as FotoPlaya[] | EmptyMarker | null
+      // Fallback a clave legacy si la nueva no tiene nada todavía. Las
+      // entradas viejas se migran cuando expire su TTL (7d) o vía
+      // /api/cron/warm.
+      if (cached === null) {
+        cached = await kv.get(keyLegacy) as FotoPlaya[] | EmptyMarker | null
+      }
       if (cached && Array.isArray(cached) && cached.length > 0) {
         return cached
       }
       // Negative cache hit: el último intento (< 1h) devolvió vacío.
-      // Devolvemos [] sin reintentar — el FichaHero ya tiene fallbacks
-      // genéricos por estado del mar.
       if (cached && typeof cached === 'object' && '__empty' in cached) {
         return []
       }
@@ -626,13 +677,11 @@ export async function getFotos(
   // 2. Cascada en vivo
   const fotos = await getFotosUncached(nombre, municipio, lat, lon, provincia)
 
-  // 3. Persistir resultado (fire-and-forget — no esperamos)
+  // 3. Persistir resultado en la nueva clave (fire-and-forget)
   if (kv) {
     if (fotos.length > 0) {
       kv.set(key, fotos, { ex: KV_TTL_SEC }).catch(() => {})
     } else {
-      // Negative cache para evitar martilleo. TTL 1h: si el API vuelve
-      // a responder, lo intentamos otra vez en 1h.
       const marker: EmptyMarker = { __empty: true, ts: Date.now() }
       kv.set(key, marker, { ex: KV_TTL_NEGATIVE }).catch(() => {})
     }
@@ -659,8 +708,13 @@ export async function refetchAndStoreFotos(
   if (fotos.length > 0) {
     const kv = await getKV()
     if (kv) {
-      const key = cacheKey(lat, lon)
-      kv.set(key, fotos, { ex: KV_TTL_SEC }).catch(() => {})
+      const key       = cacheKey(nombre, lat, lon)
+      const keyLegacy = cacheKeyLegacy(lat, lon)
+      // Escribimos en la clave nueva. También sobrescribimos la legacy
+      // (si existe) para que entradas con coordenadas idénticas pero
+      // playas diferentes no compartan foto incorrecta.
+      kv.set(key,       fotos, { ex: KV_TTL_SEC }).catch(() => {})
+      kv.set(keyLegacy, fotos, { ex: KV_TTL_SEC }).catch(() => {})
     }
   }
   return fotos
