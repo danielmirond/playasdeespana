@@ -1,20 +1,18 @@
 // src/app/api/admin/fotos-refresh/route.ts
 //
-// Endpoint admin para purgar y refrescar fotos de una playa concreta
-// cuando se detecte foto incorrecta (compartida con playa vecina,
-// genérica indebida, etc.).
+// Endpoint para refrescar fotos de una playa concreta cuando hay
+// foto incorrecta o vacía cacheada.
 //
-// Auth: Authorization: Bearer $CRON_SECRET (mismo header que los crons).
+// AUTH: si CRON_SECRET está configurado, exige Authorization: Bearer.
+// Si NO está configurado, el endpoint es PÚBLICO con rate-limit
+// (refrescar fotos no es destructivo: solo recompone cache).
+//
+// Rate-limit: 60 req/min por IP (KV) cuando es público. Si KV no
+// está conectado, fallback a 1 req cada ~500ms global (sleep en
+// lambda) para no saturar Wikimedia/Flickr.
 //
 // Uso:
 //   GET /api/admin/fotos-refresh?slug=kontxa-hondartza
-//
-// Respuesta:
-//   {
-//     "slug": "kontxa-hondartza",
-//     "purged": ["fotos:slug:kontxa", "fotos:43.3192:-1.9826"],
-//     "fotos": [...],   // resultado de la cascada en vivo (sin deadline)
-//   }
 
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
@@ -25,32 +23,64 @@ export const runtime  = 'nodejs'
 export const dynamic  = 'force-dynamic'
 export const maxDuration = 30
 
+// Helper para rate-limit por IP usando KV (60 req/min por IP).
+async function checkRateLimit(ip: string): Promise<boolean> {
+  try {
+    const mod = await (Function('return import("@vercel/kv")')() as Promise<{
+      kv: {
+        incr: (k: string) => Promise<number>
+        expire: (k: string, s: number) => Promise<unknown>
+      }
+    }>)
+    const minute = Math.floor(Date.now() / 60000)
+    const key = `rl:fotos-refresh:${ip}:${minute}`
+    const count = await mod.kv.incr(key)
+    if (count === 1) await mod.kv.expire(key, 65)
+    return count <= 60
+  } catch {
+    // KV no disponible: rate-limit pasivo (sleep 400ms al final).
+    return true
+  }
+}
+
 export async function GET(req: NextRequest) {
-  // Auth idéntica a los crons de Vercel.
-  const authHeader = req.headers.get('authorization')
-  const expected   = process.env.CRON_SECRET
-  const ok         = expected && authHeader === `Bearer ${expected}`
-  const isLocal    = req.nextUrl.hostname === 'localhost' || req.nextUrl.hostname === '127.0.0.1'
-  if (!ok && !isLocal) {
-    return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  // Auth opcional: si hay CRON_SECRET, requiere Bearer. Si no, abierto.
+  const expected = process.env.CRON_SECRET
+  if (expected) {
+    const authHeader = req.headers.get('authorization')
+    const isLocal    = req.nextUrl.hostname === 'localhost' || req.nextUrl.hostname === '127.0.0.1'
+    if (authHeader !== `Bearer ${expected}` && !isLocal) {
+      return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+    }
   }
 
   const slug = req.nextUrl.searchParams.get('slug')?.trim()
   if (!slug) return NextResponse.json({ error: 'missing slug' }, { status: 400 })
 
+  // Rate-limit por IP (solo si endpoint es público).
+  if (!expected) {
+    const ip = (req.headers.get('x-forwarded-for')?.split(',')[0].trim()
+      ?? req.headers.get('x-real-ip')
+      ?? 'unknown')
+    const within = await checkRateLimit(ip)
+    if (!within) {
+      return NextResponse.json({ error: 'rate limit (60/min)' }, { status: 429 })
+    }
+  }
+
   const playa = await getPlayaBySlug(slug)
   if (!playa) return NextResponse.json({ error: 'playa not found' }, { status: 404 })
 
-  // Purgar entradas KV viejas para esta playa. Importamos kv inline
-  // para no introducir dependencia dura en build (kv es opcional).
+  // Purgar entradas KV viejas para esta playa.
   const purged: string[] = []
   try {
     const mod = await (Function('return import("@vercel/kv")')() as Promise<{ kv: { del: (k: string) => Promise<number> } }>)
+    const nombreNorm = (playa.nombre ?? '').toLowerCase().normalize('NFD')
+      .replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '').slice(0, 40)
     const keys = [
-      // Nueva clave (con nombre)
-      `fotos:${(playa.nombre ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40)}:${playa.lat.toFixed(4)}:${playa.lng.toFixed(4)}`,
-      // Clave legacy (solo coords)
-      `fotos:${playa.lat.toFixed(4)}:${playa.lng.toFixed(4)}`,
+      `fotos:${nombreNorm}:${playa.lat.toFixed(4)}:${playa.lng.toFixed(4)}`,  // nueva
+      `fotos:${playa.lat.toFixed(4)}:${playa.lng.toFixed(4)}`,                  // legacy
     ]
     for (const k of keys) {
       try {
@@ -59,11 +89,14 @@ export async function GET(req: NextRequest) {
       } catch { /* ignore */ }
     }
   } catch {
-    // KV no disponible: no rompe el refetch, solo no purgamos.
+    // KV no disponible.
   }
 
-  // Refetch sin deadline (refetchAndStoreFotos ya persiste el resultado).
+  // Refetch sin deadline + persistir en KV.
   const fotos = await refetchAndStoreFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia)
+
+  // Pause defensiva si endpoint es público y KV-rate-limit no funcionó.
+  if (!expected) await new Promise(r => setTimeout(r, 400))
 
   return NextResponse.json({
     slug,
