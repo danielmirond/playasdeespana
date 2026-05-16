@@ -246,15 +246,30 @@ async function getFotosWikimediaText(nombre: string, municipio: string): Promise
   return []
 }
 
-// Unsplash — búsqueda por municipio + keywords playa
-async function getFotosUnsplash(municipio: string, provincia: string): Promise<FotoPlaya[]> {
+// Unsplash — búsqueda con NOMBRE (requerido) + municipio.
+// IMPORTANTE: no usamos queries genéricas por provincia/municipio porque
+// devolvían SIEMPRE la misma foto popular para todas las playas de la
+// zona (ej: 15 playas de A Coruña compartían foto `photo-1546527041...`).
+// Si no hay match por nombre, devolvemos vacío y dejamos que el fallback
+// genérico por estado del mar (en getFotos) actúe.
+async function getFotosUnsplash(nombre: string, municipio: string): Promise<FotoPlaya[]> {
   if (!UNSPLASH_KEY) return []
-  // Probar varias queries de más a menos específicas
+
+  // Tokens del nombre para verificar matching del título/descripción
+  // del resultado y descartar fotos genéricas que no mencionen la playa.
+  const normalizar = (s: string) => s
+    .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
+  const tokensNombre = [
+    normalizar(nombre),
+    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
+  ].filter(Boolean)
+  if (tokensNombre.length === 0) return []
+
+  // Solo queries que incluyan el nombre concreto de la playa.
   const queries = [
-    `${municipio} beach`,
-    `${municipio} playa`,
-    `${municipio} coast`,
-    `${provincia} beach spain`,
+    `${nombre} ${municipio} beach`,
+    `${nombre} ${municipio} playa`,
+    `${nombre} beach`,
   ]
   for (const q of queries) {
     try {
@@ -270,12 +285,23 @@ async function getFotosUnsplash(municipio: string, provincia: string): Promise<F
       const data = await res.json()
       const results = data.results ?? []
       if (results.length === 0) continue
-      return results.map((p: any): FotoPlaya => ({
-        url:    p.urls.regular,
-        thumb:  p.urls.small,
-        fuente: 'unsplash',
-        autor:  p.user?.name,
-      }))
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const filtradas: FotoPlaya[] = results.map((p: any): FotoPlaya | null => {
+        const texto = `${p.description ?? ''} ${p.alt_description ?? ''} ${(p.tags ?? []).map((t: { title?: string }) => t?.title ?? '').join(' ')}`
+        const textoNorm = normalizar(texto)
+        // Exigir que algún token del nombre aparezca en el meta del resultado.
+        const matchNombre = tokensNombre.some(t => t && textoNorm.includes(t))
+        if (!matchNombre) return null
+        return {
+          url:    p.urls.regular,
+          thumb:  p.urls.small,
+          fuente: 'unsplash',
+          autor:  p.user?.name,
+        }
+      }).filter((f: FotoPlaya | null): f is FotoPlaya => f !== null)
+
+      if (filtradas.length >= 1) return filtradas.slice(0, 6)
     } catch {
       continue
     }
@@ -356,14 +382,24 @@ async function getFotosOpenVerse(nombre: string, municipio: string): Promise<Fot
 }
 
 // Pexels — fotos profesionales con API key gratuita (200 req/h).
-// Útil como fallback genérico por municipio si nada más funciona.
-async function getFotosPexels(municipio: string, provincia: string): Promise<FotoPlaya[]> {
+// Solo queries con NOMBRE concreto: las queries genéricas por
+// municipio/provincia generaban colisiones entre playas vecinas
+// (mismo problema que Unsplash y Flickr).
+async function getFotosPexels(nombre: string, municipio: string): Promise<FotoPlaya[]> {
   if (!PEXELS_KEY) return []
+
+  const normalizar = (s: string) => s
+    .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
+  const tokensNombre = [
+    normalizar(nombre),
+    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
+  ].filter(Boolean)
+  if (tokensNombre.length === 0) return []
+
   const queries = [
-    `${municipio} beach`,
-    `${municipio} playa`,
-    `${municipio} costa`,
-    `${provincia} beach spain`,
+    `${nombre} ${municipio} beach`,
+    `${nombre} ${municipio} playa`,
+    `${nombre} beach`,
   ]
   for (const q of queries) {
     try {
@@ -379,13 +415,25 @@ async function getFotosPexels(municipio: string, provincia: string): Promise<Fot
       const data = await res.json()
       const photos = data?.photos ?? []
       if (photos.length === 0) continue
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return photos.map((p: any): FotoPlaya => ({
-        url:    p.src?.large2x ?? p.src?.large ?? p.src?.original,
-        thumb:  p.src?.medium ?? p.src?.small,
-        fuente: 'pexels',
-        autor:  p.photographer,
-      })).filter((f: FotoPlaya) => !!f.url)
+      const filtradas: FotoPlaya[] = photos.map((p: any): FotoPlaya | null => {
+        const url = p.src?.large2x ?? p.src?.large ?? p.src?.original
+        if (!url) return null
+        // Pexels devuelve `alt` con descripción de la foto.
+        const texto = `${p.alt ?? ''} ${p.url ?? ''}`
+        const textoNorm = normalizar(texto)
+        const matchNombre = tokensNombre.some(t => t && textoNorm.includes(t))
+        if (!matchNombre) return null
+        return {
+          url,
+          thumb:  p.src?.medium ?? p.src?.small,
+          fuente: 'pexels',
+          autor:  p.photographer,
+        }
+      }).filter((f: FotoPlaya | null): f is FotoPlaya => f !== null)
+
+      if (filtradas.length >= 1) return filtradas.slice(0, 6)
     } catch {
       continue
     }
@@ -653,8 +701,8 @@ async function getFotosUncached(
     getFotosOpenVerse(nombre, municipio),
     getFotosFlickr(nombre, municipio),
     getFotosWikimediaText(nombre, municipio),
-    getFotosPexels(municipio, provincia),
-    getFotosUnsplash(municipio, provincia),
+    getFotosPexels(nombre, municipio),
+    getFotosUnsplash(nombre, municipio),
   ])
 
   // Combinar sin duplicados (por URL)
