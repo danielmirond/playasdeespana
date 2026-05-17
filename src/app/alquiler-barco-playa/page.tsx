@@ -13,8 +13,26 @@ export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 const CLICKBOAT_AFF = process.env.NEXT_PUBLIC_CLICKBOAT_AFF ?? ''
-const SAMBOAT_AFF   = process.env.NEXT_PUBLIC_SAMBOAT_AFF ?? ''
+// Samboat se enlaza vía Awin (red de afiliación). El awinmid 32683
+// identifica a Samboat en Awin; el awinaffid identifica nuestra cuenta;
+// el clickref nos permite segmentar conversiones (página origen).
+const SAMBOAT_AFF       = process.env.NEXT_PUBLIC_SAMBOAT_AFF ?? ''       // awinaffid
+const SAMBOAT_CLICKREF  = process.env.NEXT_PUBLIC_SAMBOAT_CLICKREF ?? 'unuus-21'
+const SAMBOAT_AWIN_MID  = '32683'
 const NAUTAL_AFF    = process.env.NEXT_PUBLIC_NAUTAL_AFF ?? ''
+
+// Construye URL Awin para Samboat con destino concreto (con o sin lugar).
+// `lugar` se inyecta en la URL Samboat antes de pasarla por Awin como ued.
+function samboatAwinUrl(affid: string, lugar?: string): string {
+  const destino = `https://www.samboat.es/alquiler-barco/espana${lugar ? `/${lugar}` : ''}`
+  const params = new URLSearchParams({
+    awinmid:  SAMBOAT_AWIN_MID,
+    awinaffid: affid,
+    clickref:  SAMBOAT_CLICKREF,
+    ued:       destino,
+  })
+  return `https://www.awin1.com/cread.php?${params.toString()}`
+}
 
 export const metadata: Metadata = {
   title: 'Alquiler de barco para ir de playas en España | Sin licencia y con patrón',
@@ -75,7 +93,7 @@ const PLATAFORMAS: Plataforma[] = [
     marca: 'Samboat',
     color: '#a04818',
     aff: SAMBOAT_AFF,
-    url: (aff, lugar) => `https://www.samboat.es/alquiler-barco${lugar ? `/${lugar}` : ''}?referrer=${aff}`,
+    url: (aff, lugar) => samboatAwinUrl(aff, lugar),
     destacado: 'Mejor para principiantes',
     puntos: [
       'Filtro "sin licencia" muy fácil',
