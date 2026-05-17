@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getCalidad } from '@/lib/calidad'
+import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
 import { getVotos } from '@/lib/votos'
 import { getReportes } from '@/lib/reportes'
 import { getOpiniones } from '@/lib/opiniones'
@@ -103,9 +104,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const ogUrl = ogImage.toString()
 
+  // Indexabilidad: fichas de baja calidad (slugs basura, sin nombre
+  // propio, sin coords) van con noindex,follow. Mantienen valor de
+  // crawl interno (follow) pero no compiten en SERP.
+  const indexable = esIndexable(playa)
+
   return {
     title,
     description,
+    robots: indexable
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
     openGraph: {
       title,
       description,
