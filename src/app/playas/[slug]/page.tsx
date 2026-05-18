@@ -22,6 +22,8 @@ import { getCentrosBuceo } from '@/lib/buceo'
 import type { CentroBuceo } from '@/lib/buceo'
 import { getFotos, refetchAndStoreFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
+import { getVideoYouTube } from '@/lib/videos'
+import BeachVideo from '@/components/playa/BeachVideo'
 import { getHoteles } from '@/lib/hoteles'
 import { getEscuelas } from '@/lib/escuelas'
 import type { Escuela } from '@/lib/escuelas'
@@ -164,6 +166,8 @@ export default async function PlayaPage({ params }: Props) {
     // Datos del filesystem (rápidos)
     getPlayas(),
     getMunicipioSlugsSet(),
+    // Video YouTube — cache KV 30d, llamada API solo en miss
+    getVideoYouTube(playa.nombre, playa.municipio, slug),
   ] as const
   const DEADLINE_MS = 1500
   const conDeadline = promesas.map(p =>
@@ -181,7 +185,9 @@ export default async function PlayaPage({ params }: Props) {
     meteoForecast, turbidez,
     restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
     allPlayasResult, municipioSlugsResult,
+    videoResult,
   ] = await Promise.all(conDeadline) as any[]
+  const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
   const reportesData  = reportesResult.status === 'fulfilled'  ? reportesResult.value  : null
   const opinionesData = opinionesResult.status === 'fulfilled' ? opinionesResult.value : null
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
@@ -377,6 +383,13 @@ export default async function PlayaPage({ params }: Props) {
           mareasLunar,
           locale: 'es',
         })}
+        video={videoData ? {
+          videoId:      videoData.videoId,
+          title:        videoData.title,
+          channelTitle: videoData.channelTitle,
+          publishedAt:  videoData.publishedAt,
+          thumbnail:    videoData.thumbnail,
+        } : null}
       />
       <Nav />
       <FichaHero
@@ -390,6 +403,11 @@ export default async function PlayaPage({ params }: Props) {
         reportes={reportesData}
         foto={fotoHero ?? null}
       />
+      {videoData && (
+        <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 1rem' }}>
+          <BeachVideo video={videoData} nombre={playa.nombre} />
+        </div>
+      )}
       <FichaNav />
       <FichaBody
         playa={playa}

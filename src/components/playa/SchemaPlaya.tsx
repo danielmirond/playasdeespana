@@ -57,6 +57,15 @@ interface Props {
   /** FAQs visibles en la página. Deben coincidir EXACTAMENTE con las
    *  que FichaBody renderiza, para evitar mismatch entre schema y HTML. */
   faqs?:         FaqItem[]
+  /** Video embebido en la ficha. Si está, se emite VideoObject schema
+   *  para que Google sirva el thumbnail al lado del resultado SERP. */
+  video?: {
+    videoId:      string
+    title:        string
+    channelTitle: string
+    publishedAt:  string
+    thumbnail:    string
+  } | null
 }
 
 const ACTIVIDAD_LABELS: Record<string, string> = {
@@ -72,7 +81,7 @@ const ACTIVIDAD_LABELS: Record<string, string> = {
 export default function SchemaPlaya({
   playa, agua, olas, viento, uv, tempAire,
   calidadNivel, fotoUrl, fotoAutor, rating, reviews,
-  dateModified, faqs,
+  dateModified, faqs, video,
 }: Props) {
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
   const url  = `${BASE}/playas/${playa.slug}`
@@ -302,6 +311,33 @@ export default function SchemaPlaya({
     })),
   } : null
 
+  // VideoObject: solo si el componente BeachVideo se va a renderizar
+  // (consistencia schema↔HTML). Google usa esto para el video rich
+  // result (thumbnail junto al resultado SERP).
+  const videoSchema = video ? {
+    '@context':    'https://schema.org',
+    '@type':       'VideoObject',
+    name:          video.title,
+    description:   `Vídeo de ${playa.nombre} en ${playa.municipio} (${playa.provincia}).`,
+    thumbnailUrl:  [video.thumbnail],
+    uploadDate:    video.publishedAt,
+    contentUrl:    `https://www.youtube.com/watch?v=${video.videoId}`,
+    embedUrl:      `https://www.youtube-nocookie.com/embed/${video.videoId}`,
+    publisher: {
+      '@type': 'Organization',
+      name:    video.channelTitle,
+    },
+    locationCreated: {
+      '@type': 'Place',
+      name:    `${playa.nombre}, ${playa.municipio}`,
+      geo: {
+        '@type':    'GeoCoordinates',
+        latitude:  playa.lat,
+        longitude: playa.lng,
+      },
+    },
+  } : null
+
   return (
     <>
       <script
@@ -320,6 +356,12 @@ export default function SchemaPlaya({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      {videoSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
         />
       )}
     </>
