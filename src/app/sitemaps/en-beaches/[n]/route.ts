@@ -5,6 +5,7 @@
 import { NextResponse } from 'next/server'
 import { getPlayas } from '@/lib/playas'
 import { getPlayasDataModified } from '@/lib/dateModified'
+import { esIndexable } from '@/lib/calidad-indexacion'
 
 export const revalidate = 86400
 const BASE  = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -19,7 +20,9 @@ export async function GET(_req: Request, context: any) {
   const n = parseInt(nStr, 10)
   if (!n || n < 1) return new NextResponse('Not found', { status: 404 })
 
-  const playas = await getPlayas()
+  // Mismo filtro de calidad que el sitemap ES (calidad-indexacion).
+  const todas = await getPlayas()
+  const playas = todas.filter(esIndexable)
   const slice  = playas.slice((n - 1) * CHUNK, n * CHUNK)
   if (!slice.length) return new NextResponse('Not found', { status: 404 })
 

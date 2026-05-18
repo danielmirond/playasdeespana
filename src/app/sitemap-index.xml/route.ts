@@ -1,14 +1,19 @@
 // src/app/sitemap-index.xml/route.ts
 import { NextResponse } from 'next/server'
 import { getPlayas } from '@/lib/playas'
+import { esIndexable } from '@/lib/calidad-indexacion'
 
 export const revalidate = 86400
 const BASE  = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const CHUNK = 1000
 
 export async function GET() {
-  const playas    = await getPlayas()
-  const numChunks = Math.ceil(playas.length / CHUNK)
+  // Solo contamos fichas indexables para los chunks: si filtramos
+  // de 5054 a ~2000 y seguimos anunciando 6 sitemaps, Google se topa
+  // con sitemaps vacíos. Recortamos a los chunks reales.
+  const todas     = await getPlayas()
+  const playas    = todas.filter(esIndexable)
+  const numChunks = Math.max(1, Math.ceil(playas.length / CHUNK))
   const today     = new Date().toISOString().split('T')[0]
 
   const entries: string[] = []
