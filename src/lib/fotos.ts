@@ -1,11 +1,12 @@
 // src/lib/fotos.ts — Fotos de playas con matching preciso playa↔ubicación
 // Estrategia en cascada (de más preciso a más genérico):
-//   1. Wikimedia Commons: geosearch por coordenadas (radio 1500m) — sin key
-//   2. OpenVerse: agregador CC (Wikimedia + Flickr + más) por nombre+municipio — sin key
-//   3. Flickr: feed público con tags (nombre+municipio+beach) — sin key
-//   4. Wikimedia Commons: text search con nombre + municipio — sin key
-//   5. Pexels: búsqueda por municipio (requiere PEXELS_API_KEY)
-//   6. Unsplash: búsqueda por municipio (requiere UNSPLASH_ACCESS_KEY)
+//   1. Wikimedia Commons: geosearch por coordenadas (radio 700m) — sin key
+//   2. Wikipedia ES: lead-image del artículo (pageimage canónico) — sin key
+//   3. OpenVerse: agregador CC (Wikimedia + Flickr + más) por nombre+municipio — sin key
+//   4. Flickr: feed público con tags (nombre+municipio+beach) — sin key
+//   5. Wikimedia Commons: text search con nombre + municipio — sin key
+//   6. Pexels: búsqueda con nombre + municipio (requiere PEXELS_API_KEY)
+//   7. Unsplash: búsqueda con nombre + municipio (requiere UNSPLASH_ACCESS_KEY)
 import { fetchWithTimeout } from './fetch-timeout'
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
@@ -200,6 +201,153 @@ async function getFotosWikimediaGeo(lat: number, lon: number, nombre?: string): 
   } catch {
     return []
   }
+}
+
+// Wikipedia ES — lead-image del artículo (pageimage canónico).
+// Las playas con artículo en Wikipedia (~600 españolas, sobre todo
+// las "famosas") tienen una foto principal seleccionada por editores
+// humanos en Commons. Es prácticamente siempre la mejor foto posible:
+// específica, encuadre correcto, libre de NEGATIVAS.
+//
+// Estrategia:
+//   1. Para playas con nombre cooficial (vasco/gallego/catalán) buscamos
+//      también el alias castellano (NOMBRES_POPULARES).
+//   2. action=query&generator=search devuelve hasta 5 artículos por query.
+//   3. Filtramos: no-disambiguation, con pageimage, título contiene
+//      un token discriminante del nombre concreto.
+//   4. Ranking: exact-match > "Playa de {nombre}" > Wikipedia score.
+//
+// Endpoint: https://es.wikipedia.org/w/api.php — público, sin clave.
+//
+// PALABRAS_GENERICAS: tokens demasiado comunes para discriminar. Si
+// el nombre es "Playa de Bolonia", el token "playa" matchea con
+// cualquier artículo de playa — no aporta señal. Excluidos del set.
+const PALABRAS_GENERICAS = new Set([
+  'playa', 'playas', 'platja', 'platges', 'praia', 'praias', 'cala', 'caleta',
+  'calas', 'beach', 'beaches', 'plage', 'plages', 'punta', 'puntas', 'acces',
+  'access', 'area', 'pequena', 'grande', 'principal', 'islas', 'isla', 'illa',
+  'illes', 'illas', 'mar', 'sea', 'costa', 'east', 'oeste', 'norte', 'sur',
+])
+
+async function getFotosWikipediaLeadImage(nombre: string, municipio: string): Promise<FotoPlaya[]> {
+  const normalizar = (s: string) => s
+    .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
+
+  // Tokens discriminantes del nombre. Excluimos palabras genéricas
+  // (playa, cala, isla...) que matchearían cualquier artículo costero.
+  const tokensCrudos = nombre.toLowerCase().split(/[\s-]+/).map(normalizar)
+    .filter(t => t.length >= 4)
+  const tokensDiscriminantes = tokensCrudos.filter(t => !PALABRAS_GENERICAS.has(t))
+  if (tokensDiscriminantes.length === 0) return []
+
+  // Para playas con alias castellano (Kontxa → La Concha, As Catedrais
+  // → Las Catedrales, Pantín → Playa de Pantín), buscar también por el
+  // alias. El dataset usa el nombre OFICIAL del MITECO (cooficial), que
+  // puede aparecer como `oficial` o `corto` en NOMBRES_POPULARES.
+  const { NOMBRES_POPULARES } = await import('./nombres-populares')
+  const aliases: string[] = []
+  const nombreNorm = normalizar(nombre)
+  for (const [, info] of Object.entries(NOMBRES_POPULARES)) {
+    const candidatos = [info.oficial, info.corto, info.popular].filter(Boolean) as string[]
+    if (candidatos.some(c => normalizar(c) === nombreNorm)) {
+      aliases.push(info.popular)
+      // tokens del alias también valen como discriminantes
+      for (const tok of info.popular.toLowerCase().split(/[\s-]+/).map(normalizar)) {
+        if (tok.length >= 4 && !PALABRAS_GENERICAS.has(tok)) tokensDiscriminantes.push(tok)
+      }
+      break
+    }
+  }
+
+  // Queries en orden de especificidad. Si una query devuelve match
+  // válido, paramos. No mezclamos "playa de" + "tarifa playa" porque
+  // añadir ruido baja el ranking del articulo correcto.
+  const queries: string[] = [
+    `Playa de ${nombre}`,           // título canónico esperado
+    nombre,                          // nombre bare
+    ...aliases.flatMap(a => [`Playa de ${a}`, a]),
+    `${nombre} ${municipio}`,        // último recurso para desambiguar
+  ]
+
+  for (const q of queries) {
+    try {
+      const params = new URLSearchParams({
+        action:    'query',
+        generator: 'search',
+        gsrsearch: q,
+        gsrlimit:  '8',
+        prop:      'pageimages|pageprops',
+        piprop:    'original|thumbnail',
+        pithumbsize: '800',
+        format:    'json',
+        origin:    '*',
+      })
+      const res = await fetchWithTimeout(
+        `https://es.wikipedia.org/w/api.php?${params}`,
+        { next: { revalidate: 86400 } },
+        3500,
+      )
+      if (!res.ok) continue
+      const data = await res.json()
+      const pagesObj = data?.query?.pages ?? {}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const pages = Object.values(pagesObj) as any[]
+
+      // Filtrar candidatos válidos.
+      const candidatos = pages
+        .filter((p) => !p?.pageprops?.disambiguation)
+        .filter((p) => typeof p?.original?.source === 'string')
+        // Sólo imágenes raster (jpg/jpeg/png/webp). Algunos artículos tienen
+        // pageimage mal puesto: SVG de bandera, mapa, escudo. Ej: el artículo
+        // "Playa de Doniños" lleva como pageimage `La_Coruña-loc.svg`.
+        .filter((p) => /\.(jpe?g|png|webp)(\?|$)/i.test(p.original.source))
+        // Descartar URLs cuyo nombre de archivo cae en NEGATIVAS (mapa,
+        // escudo, bandera, etc.). Heredamos el catálogo de otras fuentes.
+        .filter((p) => {
+          const filename = decodeURIComponent(p.original.source.split('/').pop() ?? '').toLowerCase()
+          return !NEGATIVAS.test(filename)
+        })
+        .filter((p) => {
+          const tituloNorm = normalizar(p.title ?? '')
+          return tokensDiscriminantes.some((t) => tituloNorm.includes(t))
+        })
+
+      if (candidatos.length === 0) continue
+
+      // Ranking: exact match > "Playa de {token}" > otros con token.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const scored = candidatos.map((p: any) => {
+        const tituloNorm = normalizar(p.title ?? '')
+        let score = 0
+        // Exact match contra cualquier query intentada
+        if (tituloNorm === normalizar(`playa de ${nombre}`)) score += 100
+        if (tituloNorm === normalizar(nombre)) score += 90
+        if (aliases.some(a => tituloNorm === normalizar(`playa de ${a}`))) score += 100
+        if (aliases.some(a => tituloNorm === normalizar(a))) score += 90
+        // Empieza con "Playa de"
+        if (/^playa de /i.test(p.title ?? '')) score += 30
+        // El primer token discriminante aparece (más peso al principal)
+        if (tokensDiscriminantes[0] && tituloNorm.includes(tokensDiscriminantes[0])) score += 20
+        // Wikipedia search ya devuelve por relevancia: bonus por orden inverso
+        return { p, score }
+      })
+
+      scored.sort((a, b) => b.score - a.score)
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const fotos: FotoPlaya[] = scored.map(({ p }: any): FotoPlaya => ({
+        url:    p.original.source,
+        thumb:  p.thumbnail?.source ?? p.original.source,
+        fuente: 'wikimedia',
+        autor:  undefined,
+      }))
+
+      if (fotos.length >= 1) return fotos.slice(0, 3)
+    } catch {
+      continue
+    }
+  }
+  return []
 }
 
 // Wikimedia — búsqueda textual con nombre + municipio entre comillas
@@ -648,8 +796,9 @@ function cacheKeyLegacy(lat: number, lon: number): string {
 async function getFotosUncached(
   nombre: string, municipio: string, lat: number, lon: number, provincia: string,
 ): Promise<FotoPlaya[]> {
-  const [wikiGeo, openverse, flickr, wikiText, pexels, unsplash] = await Promise.all([
+  const [wikiGeo, wikiLead, openverse, flickr, wikiText, pexels, unsplash] = await Promise.all([
     getFotosWikimediaGeo(lat, lon, nombre),
+    getFotosWikipediaLeadImage(nombre, municipio),
     getFotosOpenVerse(nombre, municipio),
     getFotosFlickr(nombre, municipio),
     getFotosWikimediaText(nombre, municipio),
@@ -670,8 +819,16 @@ async function getFotosUncached(
     }
   }
 
-  // Prioridad: geo-precisas primero, agregador después, fallbacks genéricos al final
+  // Prioridad:
+  //   1. Wikimedia geo (700m) — la más precisa cuando hay matches
+  //   2. Wikipedia lead-image — foto canónica del artículo si la playa
+  //      tiene Wiki (la mejor "una sola foto" para playas conocidas)
+  //   3. OpenVerse — agregador CC (Wikimedia + Flickr + más)
+  //   4. Flickr — feed público con tags
+  //   5. Wikimedia text — búsqueda textual en Commons
+  //   6-7. Pexels, Unsplash — stock filtrado por nombre
   agregar(wikiGeo)
+  if (combinadas.length < 6) agregar(wikiLead)
   if (combinadas.length < 6) agregar(openverse)
   if (combinadas.length < 6) agregar(flickr)
   if (combinadas.length < 6) agregar(wikiText)
