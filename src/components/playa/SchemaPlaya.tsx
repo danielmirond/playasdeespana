@@ -57,6 +57,16 @@ interface Props {
   /** FAQs visibles en la página. Deben coincidir EXACTAMENTE con las
    *  que FichaBody renderiza, para evitar mismatch entre schema y HTML. */
   faqs?:         FaqItem[]
+  /** Galería de fotos visibles en la ficha (thumbnail strip + lightbox).
+   *  Si tiene >1 elemento, se emite ImageGallery schema con ImageObject
+   *  por foto — eligible para "image carousel" rich result en SERP y
+   *  hace que cada imagen entre como candidato a Google Images. */
+  fotos?: Array<{
+    url:    string
+    thumb:  string
+    autor?: string
+    fuente: string
+  }>
   /** Video embebido en la ficha. Si está, se emite VideoObject schema
    *  para que Google sirva el thumbnail al lado del resultado SERP. */
   video?: {
@@ -81,7 +91,7 @@ const ACTIVIDAD_LABELS: Record<string, string> = {
 export default function SchemaPlaya({
   playa, agua, olas, viento, uv, tempAire,
   calidadNivel, fotoUrl, fotoAutor, rating, reviews,
-  dateModified, faqs, video,
+  dateModified, faqs, video, fotos,
 }: Props) {
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
   const url  = `${BASE}/playas/${playa.slug}`
@@ -311,6 +321,28 @@ export default function SchemaPlaya({
     })),
   } : null
 
+  // ImageGallery: solo si HeroGallery se va a renderizar (>1 foto).
+  // Pone cada ImageObject como entrada indexable de Google Images.
+  // El @id apunta al beach para enlazar visual ↔ entidad geográfica.
+  const imageGallerySchema = fotos && fotos.length > 1 ? {
+    '@context': 'https://schema.org',
+    '@type':    'ImageGallery',
+    '@id':      `${url}#gallery`,
+    name:       `Galería de fotos de ${playa.nombre}`,
+    description: `${fotos.length} fotos de la playa ${playa.nombre} en ${playa.municipio} (${playa.provincia}).`,
+    about:      { '@id': `${url}#beach` },
+    associatedMedia: fotos.map((f, i) => ({
+      '@type':      'ImageObject',
+      contentUrl:   f.url,
+      thumbnailUrl: f.thumb,
+      name:         `${playa.nombre} en ${playa.municipio} (${playa.provincia}) — foto ${i + 1}`,
+      ...(f.autor ? { author: { '@type': 'Person', name: f.autor } } : {}),
+      ...(f.fuente ? { creditText: f.fuente } : {}),
+      license:      'https://creativecommons.org/licenses/',
+      acquireLicensePage: f.url,
+    })),
+  } : null
+
   // VideoObject: solo si el componente BeachVideo se va a renderizar
   // (consistencia schema↔HTML). Google usa esto para el video rich
   // result (thumbnail junto al resultado SERP).
@@ -362,6 +394,12 @@ export default function SchemaPlaya({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+        />
+      )}
+      {imageGallerySchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(imageGallerySchema) }}
         />
       )}
     </>
