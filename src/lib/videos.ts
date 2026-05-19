@@ -71,6 +71,108 @@ function normalizar(s: string): string {
   return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
 }
 
+// NEGATIVAS_VIDEO: palabras que descalifican un video. Aplicadas
+// SOBRE title + description del candidato (con word-boundary, sin
+// normalizar — los espacios importan para evitar falsos positivos
+// como "tragar agua" vs. "tragar tragedia").
+//
+// Cubre:
+//   - Sucesos / muerte: cadaver, ahogamiento, muerto, accidente fatal,
+//     suicidio, rescate fallido, desaparecido.
+//   - Crimen / violencia: asesinato, agresion, robo, peleas.
+//   - Catastrofes y desastres: temporal con daños, naufragio,
+//     vertido, contaminacion, marea negra.
+//   - Política / activismo: protesta, manifestacion, política.
+//   - Polémica / sensacionalismo: escándalo, escándalo, polémica.
+//   - Sucesos cotidianos no aptos para turismo: pelea, agresion,
+//     denuncia, queja.
+//
+// Filosofía: ante la duda, DESCARTAR. Mejor 1 video menos que 1
+// video tóxico junto al H1 de una ficha turística.
+const NEGATIVAS_VIDEO = new RegExp(
+  '\\b(' +
+  // Muerte / sucesos
+  'cadaver|cadáver|muerto|muerta|fallec[ie]|murio|murió|fatalidad|fatal|' +
+  'ahog[ao]|ahogado|ahogada|ahogamiento|drowning|drowned|' +
+  'rescate(?!_marit|_de_tortuga)|rescatad[oa]|desaparecid[oa]|' +
+  'suicid|suicidio|salto_al_vacio|' +
+  'cuerpo_sin_vida|sin_vida|hallad[oa]_muert|hallad[oa]_sin|' +
+  'tragedia|tragico|tragica|luto|funeral|entierro|' +
+  // Crimen
+  'asesinad[oa]|asesinato|crimen|criminal|homicidio|' +
+  'agresion|agresión|agredid[oa]|apuñala|disparo|tiroteo|' +
+  'robo|robad[oa]|atrac[oa]|hurto|ladron|ladrón|' +
+  'detenid[oa]|detencion|detención|arrestad[oa]|' +
+  'violacion|violación|abuso|maltrato|' +
+  'narcotraf|narco|alijo|droga|cocaina|cocaína|hachis|hachís|' +
+  // Catástrofes naturales con daños
+  'naufragio|hundimiento|barco_hundido|' +
+  'vertido|contaminacion|contaminación|marea_negra|hidrocarburo|petroleo|petróleo|' +
+  'tsunami|maremoto|temporal_destructivo|' +
+  'derrumbe|colapso|hundirse|hundido_en|' +
+  // Política / activismo
+  'manifestacion|manifestación|protesta|protestan|reivindicat|' +
+  'polemic[ao]|polémic[ao]|escandal|escándal|denuncia|denuncian|' +
+  // Migración / inmigración (suelen ser noticias de sucesos en playas)
+  'patera|cayuco|migrant|inmigrant|llegad[ao]s_de|' +
+  'llegan_en_patera|interceptad[ao]|salvamento_maritim|' +
+  // Otros sensacionalismos
+  'invadid[oa]|colaps[ao]_por|peligro_mortal|riesgo_extremo|' +
+  'medusa_carabela|carabela_portuguesa|plaga_de|' +
+  // Periodismo / noticieros (suelen ser sucesos)
+  'noticia|noticias|telediario|informativ|reporter|reportaje|' +
+  'antena3|antena_3|telecinco|tve|laSexta|cuatro_tv|rtve|' +
+  // Suceso del entorno aunque no en la playa concreta
+  'incendio|fuego_en|ardio|ardiendo|' +
+  'accidente_de|colision|colisión|atropello|' +
+  ')\\b',
+  'i'
+)
+
+// Canales en blacklist absoluta: medios de noticias generalistas
+// que mezclan turismo con sucesos. Si el canal es noticiero, mejor
+// no aceptar ningún video aunque el título parezca limpio.
+const CANALES_BLACKLIST = new Set([
+  'rtve', 'antena 3', 'antena3 noticias', 'antena 3 noticias',
+  'telecinco', 'tele 5', 'tele5',
+  'la sexta', 'lasexta', 'la sexta noticias', 'lasexta noticias',
+  'cuatro', 'cuatro tv', 'cuatro noticias',
+  'tve', 'tve noticias', 'rtve noticias',
+  'efe', 'agencia efe',
+  'el pais', 'el país', 'el mundo', 'abc', 'la vanguardia',
+  '20 minutos', '20minutos', 'el confidencial',
+  'sucesos', 'crónica negra', 'cronica negra',
+])
+
+/**
+ * Devuelve true si el video parece tóxico para contexto turístico
+ * (sucesos, crimen, política, ...). Aplica NEGATIVAS_VIDEO sobre
+ * title + description y CANALES_BLACKLIST sobre channelTitle.
+ *
+ * Exportado para poder usarlo desde el endpoint admin video-set y
+ * filtrar también los overrides manuales (defensa en profundidad).
+ */
+export function esVideoToxico(snippet: {
+  title?: string
+  description?: string
+  channelTitle?: string
+}): boolean {
+  const titulo = (snippet.title ?? '').toLowerCase()
+  const descripcion = (snippet.description ?? '').toLowerCase()
+  const canal = (snippet.channelTitle ?? '').toLowerCase().trim()
+
+  // Channel blacklist (medios generalistas).
+  if (CANALES_BLACKLIST.has(canal)) return true
+  // Heurística: el canal contiene "noticias" o "actualidad" → news.
+  if (/\b(noticias?|actualidad|sucesos|crónica|cronica|informativos?)\b/i.test(canal)) return true
+
+  // Regex sobre el cuerpo de texto.
+  if (NEGATIVAS_VIDEO.test(titulo)) return true
+  if (NEGATIVAS_VIDEO.test(descripcion)) return true
+
+  return false
+}
+
 /**
  * Override manual: si el admin ha asignado a mano un videoId al slug,
  * lo devolvemos sin tocar YouTube API.
@@ -170,6 +272,11 @@ export async function getVideoYouTube(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const candidatos: VideoPlaya[] = items.map((it: any): VideoPlaya | null => {
         const snippet = it?.snippet ?? {}
+        // FILTRO TÓXICO (PRIMERO): si menciona sucesos, crimen, muerte
+        // o viene de canal noticiero → descartar antes de cualquier
+        // otra validación. Defensa de marca > cobertura.
+        if (esVideoToxico(snippet)) return null
+
         const titulo = (snippet.title ?? '').toLowerCase()
         const descripcion = (snippet.description ?? '').toLowerCase()
         const tokensFound = tokens.some(t =>
