@@ -25,6 +25,7 @@ import { getFotos, refetchAndStoreFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/li
 import type { FotoPlaya } from '@/lib/fotos'
 import { getVideoYouTube } from '@/lib/videos'
 import BeachVideo from '@/components/playa/BeachVideo'
+import HeroGallery from '@/components/playa/HeroGallery'
 import { getHoteles } from '@/lib/hoteles'
 import { getEscuelas } from '@/lib/escuelas'
 import type { Escuela } from '@/lib/escuelas'
@@ -399,6 +400,12 @@ export default async function PlayaPage({ params }: Props) {
           publishedAt:  videoData.publishedAt,
           thumbnail:    videoData.thumbnail,
         } : null}
+        fotos={hayFotoReal && fotosData.length > 1 ? fotosData.map(f => ({
+          url:    f.url,
+          thumb:  f.thumb,
+          autor:  f.autor,
+          fuente: f.fuente,
+        })) : undefined}
       />
       <Nav />
       <FichaHero
@@ -412,6 +419,15 @@ export default async function PlayaPage({ params }: Props) {
         reportes={reportesData}
         foto={fotoHero ?? null}
       />
+      {hayFotoReal && fotosData.length > 1 && (
+        <HeroGallery
+          fotos={fotosData}
+          nombre={playa.nombre}
+          municipio={playa.municipio}
+          provincia={playa.provincia}
+          heroIndex={0}
+        />
+      )}
       {videoData && (
         <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 1rem' }}>
           <BeachVideo video={videoData} nombre={playa.nombre} />
