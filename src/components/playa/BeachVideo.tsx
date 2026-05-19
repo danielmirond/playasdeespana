@@ -9,7 +9,7 @@
 // Schema VideoObject se inyecta aparte (en SchemaPlaya, server-side)
 // para que Google indexe el video junto con la ficha.
 
-import { videoEmbedUrl, videoCanonicalUrl, type VideoPlaya } from '@/lib/videos'
+import { videoEmbedUrl, type VideoPlaya } from '@/lib/videos'
 
 interface Props {
   video:    VideoPlaya
@@ -18,7 +18,6 @@ interface Props {
 
 export default function BeachVideo({ video, nombre }: Props) {
   const embedUrl = videoEmbedUrl(video.videoId)
-  const canonicalUrl = videoCanonicalUrl(video.videoId)
   const titleAttr = `${video.title} — vídeo de ${nombre}`
 
   return (
@@ -72,37 +71,19 @@ export default function BeachVideo({ video, nombre }: Props) {
         />
       </div>
 
+      {/* Atribución mínima en texto plano (sin enlaces salientes).
+          Mantenemos channelTitle como cumplimiento ligero de
+          atribución, pero sin CTAs a youtube.com — fuga de tráfico
+          que queremos evitar en una ficha turística. */}
       <div
         style={{
-          padding: '.65rem 1rem',
-          fontSize: '.78rem',
+          padding: '.55rem 1rem',
+          fontSize: '.72rem',
           color: 'var(--muted)',
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '.65rem',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          fontStyle: 'italic',
         }}
       >
-        <span>
-          Vídeo de{' '}
-          <a
-            href={`https://www.youtube.com/channel/${encodeURIComponent(video.channelId)}`}
-            target="_blank"
-            rel="noopener noreferrer ugc"
-            style={{ color: 'var(--accent)', textDecoration: 'none' }}
-          >
-            {video.channelTitle}
-          </a>
-        </span>
-        <a
-          href={canonicalUrl}
-          target="_blank"
-          rel="noopener noreferrer ugc"
-          style={{ color: 'var(--accent)', textDecoration: 'none' }}
-        >
-          Ver en YouTube ↗
-        </a>
+        Imágenes aéreas vía {video.channelTitle || 'YouTube'}
       </div>
     </section>
   )
