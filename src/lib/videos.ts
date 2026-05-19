@@ -313,18 +313,34 @@ export async function getVideoYouTube(
 }
 
 /**
- * Construye URL embed con privacy-enhanced mode (no cookies sin click).
- * Usar siempre vía esta función — youtube.com directo planta cookies
- * antes del consentimiento y rompe el badge "Privacy-friendly" del LCP.
+ * Construye URL embed con privacy-enhanced mode + parámetros para
+ * minimizar fugas de tráfico fuera de la ficha:
+ *   - rel=0:              suggested videos limitados al mismo canal
+ *                         (no aparecen miniaturas de otros canales al
+ *                         pausar el video)
+ *   - modestbranding=1:   reduce branding YouTube en la barra (deprecado
+ *                         pero todavía funciona parcialmente)
+ *   - iv_load_policy=3:   sin anotaciones (popups y banners superpuestos)
+ *   - cc_load_policy=0:   subtítulos OFF por defecto (no aparecen
+ *                         enlaces "ver en youtube" en las cc)
+ *   - playsinline=1:      móviles no abren fullscreen nativo (que
+ *                         saldría de la página)
+ *   - fs=1:               permite fullscreen voluntario dentro del
+ *                         iframe (sin salir a youtube.com)
+ *   - disablekb=1:        sin atajos de teclado que abren youtube.com
+ *
+ * NOTA: el botón "YouTube" en la esquina inferior-derecha del iframe
+ * NO se puede ocultar legalmente (ToS). Es el único leak inevitable.
  */
 export function videoEmbedUrl(videoId: string): string {
-  return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?rel=0&modestbranding=1`
-}
-
-/**
- * Construye URL canónica YouTube (para link rel=canonical del schema
- * y enlace de atribución al canal).
- */
-export function videoCanonicalUrl(videoId: string): string {
-  return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`
+  const params = new URLSearchParams({
+    rel:             '0',
+    modestbranding:  '1',
+    iv_load_policy:  '3',
+    cc_load_policy:  '0',
+    playsinline:     '1',
+    fs:              '1',
+    disablekb:       '1',
+  })
+  return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?${params}`
 }
