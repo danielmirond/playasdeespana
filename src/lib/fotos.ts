@@ -229,7 +229,12 @@ const PALABRAS_GENERICAS = new Set([
   'illes', 'illas', 'mar', 'sea', 'costa', 'east', 'oeste', 'norte', 'sur',
 ])
 
-async function getFotosWikipediaLeadImage(nombre: string, municipio: string): Promise<FotoPlaya[]> {
+async function getFotosWikipediaLeadImage(
+  nombre: string,
+  municipio: string,
+  playaLat?: number,
+  playaLon?: number,
+): Promise<FotoPlaya[]> {
   const normalizar = (s: string) => s
     .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
 
@@ -276,9 +281,14 @@ async function getFotosWikipediaLeadImage(nombre: string, municipio: string): Pr
         generator: 'search',
         gsrsearch: q,
         gsrlimit:  '8',
-        prop:      'pageimages|pageprops',
+        // coordinates: añade `prop=coordinates` para que Wikipedia
+        // devuelva las coords del artículo. Lo usamos para descartar
+        // artículos lejanos (ej: "Faro de la playa de Capao da Canoa",
+        // Brasil, vs. "Playa del Faro" en Hondarribia, España).
+        prop:      'pageimages|pageprops|coordinates',
         piprop:    'original|thumbnail',
         pithumbsize: '800',
+        colimit:   '5',
         format:    'json',
         origin:    '*',
       })
@@ -362,6 +372,31 @@ async function getFotosWikipediaLeadImage(nombre: string, municipio: string): Pr
           if (tituloFlat === normalizar(nombre)) return true
           if (aliases.some(a => tituloFlat === normalizar(a))) return true
           return false
+        })
+        // GEO-DISTANCIA: si Wikipedia devuelve coords del artículo Y
+        // tenemos coords de la playa, rechazamos artículos a >50km.
+        // Caso real: "Faro de la playa de Capão da Canoa" (Brasil)
+        // contiene 'faro' y 'playa', pasa el filtro de contexto, pero
+        // está a ~9.000 km de Hondarribia — claramente otro continente.
+        // Si el artículo no tiene coords, no aplica el filtro (no
+        // sabemos dónde está, dejamos pasar como antes).
+        .filter((p) => {
+          if (playaLat == null || playaLon == null) return true
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const coords = (p as any).coordinates as Array<{ lat?: number, lon?: number, primary?: string }> | undefined
+          if (!coords || coords.length === 0) return true
+          const c = coords[0]
+          if (typeof c.lat !== 'number' || typeof c.lon !== 'number') return true
+          // Haversine simplificado (km).
+          const toRad = (d: number) => d * Math.PI / 180
+          const R = 6371
+          const dLat = toRad(c.lat - playaLat)
+          const dLon = toRad(c.lon - playaLon)
+          const a = Math.sin(dLat / 2) ** 2 +
+            Math.cos(toRad(playaLat)) * Math.cos(toRad(c.lat)) *
+            Math.sin(dLon / 2) ** 2
+          const dist = 2 * R * Math.asin(Math.sqrt(a))
+          return dist <= 50
         })
 
       if (candidatos.length === 0) continue
@@ -898,7 +933,7 @@ async function getFotosUncached(
 ): Promise<FotoPlaya[]> {
   const [wikiGeo, wikiLead, openverse, flickr, wikiText, pexels, unsplash] = await Promise.all([
     getFotosWikimediaGeo(lat, lon, nombre),
-    getFotosWikipediaLeadImage(nombre, municipio),
+    getFotosWikipediaLeadImage(nombre, municipio, lat, lon),
     getFotosOpenVerse(nombre, municipio),
     getFotosFlickr(nombre, municipio),
     getFotosWikimediaText(nombre, municipio),
