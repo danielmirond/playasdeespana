@@ -26,7 +26,7 @@ export const maxDuration = 30
 // Helper para rate-limit por IP usando KV (60 req/min por IP).
 async function checkRateLimit(ip: string): Promise<boolean> {
   try {
-    const mod = await (Function('return import("@vercel/kv")')() as Promise<{
+    const mod = await (import("@vercel/kv") as Promise<{
       kv: {
         incr: (k: string) => Promise<number>
         expire: (k: string, s: number) => Promise<unknown>
@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
   // Purgar entradas KV viejas para esta playa.
   const purged: string[] = []
   try {
-    const mod = await (Function('return import("@vercel/kv")')() as Promise<{ kv: { del: (k: string) => Promise<number> } }>)
+    const mod = await (import("@vercel/kv") as Promise<{ kv: { del: (k: string) => Promise<number> } }>)
     const nombreNorm = (playa.nombre ?? '').toLowerCase().normalize('NFD')
       .replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '').slice(0, 40)

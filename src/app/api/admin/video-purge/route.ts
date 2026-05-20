@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
   // Cargamos KV dinámico (igual patrón que fotos.ts).
   let kvMod
   try {
-    kvMod = await (Function('return import("@vercel/kv")')() as Promise<{
+    kvMod = await (import("@vercel/kv") as Promise<{
       kv: {
         del:  (k: string) => Promise<number>
         keys: (pat: string) => Promise<string[]>
