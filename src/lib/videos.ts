@@ -46,7 +46,7 @@ const TTL_NEGATIVE_S = 7 * 24 * 3600
 // Acceso KV opcional (mismo patrón que fotos.ts).
 async function kvGet<T>(key: string): Promise<T | null> {
   try {
-    const mod = await (Function('return import("@vercel/kv")')() as Promise<{
+    const mod = await (import("@vercel/kv") as Promise<{
       kv: { get: <X>(k: string) => Promise<X | null> }
     }>)
     return await mod.kv.get<T>(key)
@@ -57,7 +57,7 @@ async function kvGet<T>(key: string): Promise<T | null> {
 
 async function kvSet(key: string, value: unknown, ttlSeconds: number): Promise<void> {
   try {
-    const mod = await (Function('return import("@vercel/kv")')() as Promise<{
+    const mod = await (import("@vercel/kv") as Promise<{
       kv: { set: (k: string, v: unknown, opts?: { ex?: number }) => Promise<unknown> }
     }>)
     await mod.kv.set(key, value, { ex: ttlSeconds })
@@ -193,7 +193,7 @@ export async function setVideoManual(slug: string, video: VideoPlaya): Promise<v
 
 export async function deleteVideoManual(slug: string): Promise<void> {
   try {
-    const mod = await (Function('return import("@vercel/kv")')() as Promise<{
+    const mod = await (import("@vercel/kv") as Promise<{
       kv: { del: (k: string) => Promise<number> }
     }>)
     await mod.kv.del(`video:override:${slug}`)

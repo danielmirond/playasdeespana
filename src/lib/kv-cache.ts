@@ -22,7 +22,7 @@ let _kv: KV | null | undefined
 async function getKV(): Promise<KV | null> {
   if (_kv !== undefined) return _kv
   try {
-    const mod = await (Function('return import("@vercel/kv")')() as Promise<{ kv: KV }>)
+    const mod = await (import("@vercel/kv") as Promise<{ kv: KV }>)
     _kv = mod.kv
     return _kv
   } catch {
