@@ -442,12 +442,25 @@ async function getFotosWikimediaText(nombre: string, municipio: string): Promise
   // Preparar queries combinando nombre de playa + municipio en varias formas
   const n = nombre.replace(/"/g, '')
   const m = municipio.replace(/"/g, '')
+
+  // Tokens del nombre para validar que el archivo realmente menciona
+  // la playa concreta. Sin esto, Commons fuzzy-search casa archivos
+  // de otros continentes que comparten palabras (ej: "Playa del Faro
+  // Hondarribia" → "Farol_litoral_Capao_da_Canoa_Praia_Araça" Brasil).
+  const normalizarTok = (s: string) => s
+    .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
+  const tokensDiscriminantes = nombre.toLowerCase().split(/[\s-]+/)
+    .map(normalizarTok)
+    .filter(t => t.length >= 4 && !PALABRAS_GENERICAS.has(t))
+
   const queries = [
     `"${n}" "${m}"`,            // nombre + municipio (máxima precisión)
     `"${n}" ${m} beach`,
     `"${n}" ${m} playa`,
     `"${n}" ${m}`,
-    `${n} ${m}`,
+    // ELIMINADA query 5 sin comillas: era el origen de matches fuzzy
+    // como `Playa del Faro Hondarribia` → archivo de Brasil porque
+    // Commons puntua tokens individuales (faro/farol, playa/praia).
   ]
 
   for (const q of queries) {
@@ -472,7 +485,18 @@ async function getFotosWikimediaText(nombre: string, municipio: string): Promise
       if (!res.ok) continue
       const data = await res.json()
       const pages = Object.values(data.query?.pages ?? {}) as any[]
-      const fotos = extraerFotosDePages(pages)
+      const fotosRaw = extraerFotosDePages(pages)
+      // Filtro extra: el filename debe contener algun token discriminante
+      // del nombre. Evita matches fuzzy de Commons que pasan NEGATIVAS+
+      // POSITIVAS pero son de otro contexto (continente distinto).
+      const fotos = tokensDiscriminantes.length > 0
+        ? fotosRaw.filter(f => {
+            const filename = normalizarTok(
+              decodeURIComponent(f.url.split('/').pop() ?? '').replace(/\.(jpe?g|png|webp).*/i, '')
+            )
+            return tokensDiscriminantes.some(t => filename.includes(t))
+          })
+        : fotosRaw
       if (fotos.length >= 2) return fotos.slice(0, 6)
     } catch {
       continue
