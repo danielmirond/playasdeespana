@@ -294,6 +294,32 @@ async function getFotosWikipediaLeadImage(nombre: string, municipio: string): Pr
       const pages = Object.values(pagesObj) as any[]
 
       // Filtrar candidatos válidos.
+      //
+      // Bug previo: matching demasiado laxo aceptaba "Mairie de Pantin"
+      // (ayuntamiento Pantin, Francia) para nuestra "Praia de Pantín"
+      // (Galicia), y "Farol litoral Capão da Canoa" (Brasil) para
+      // "Playa Faro de Trafalgar". Porque:
+      //   1. tituloNorm.includes(token) trata "farol" como match de "faro"
+      //      (substring, no word-boundary).
+      //   2. Aceptábamos cualquier título con el token, sin exigir
+      //      contexto geográfico (palabras como "playa", "praia"...).
+      //
+      // Fix doble:
+      //   A. Tokenizar el título en palabras y exigir match exacto sobre
+      //      una palabra (no substring).
+      //   B. Exigir que el título o bien contenga un marcador geográfico
+      //      costero (Playa/Beach/Praia/Platja/Cala/Caleta/Bahía/...) o
+      //      bien sea EXACTAMENTE el nombre de la playa (caso "Cofete",
+      //      "Maspalomas", donde el artículo Wikipedia es el del topónimo).
+      const MARCADORES_COSTEROS = /^(playa|playas|beach|beaches|praia|praias|platja|platges|cala|caleta|calita|bahia|bahía|ensenada|hondartza|cap|cabo)$/i
+      const NEGATIVAS_TITULO_EXTRA = /^(mairie|ayuntamiento|udaletxe|concello|prefectura|prefecture|hoteldeville|townhall|consistorio|alcaldia|alcaldía)$/i
+
+      const palabras = (t: string): string[] => (t ?? '')
+        .toLowerCase()
+        .split(/[\s\-_().,;:'"·•/]+/)
+        .map(w => normalizar(w))
+        .filter(Boolean)
+
       const candidatos = pages
         .filter((p) => !p?.pageprops?.disambiguation)
         .filter((p) => typeof p?.original?.source === 'string')
@@ -302,14 +328,40 @@ async function getFotosWikipediaLeadImage(nombre: string, municipio: string): Pr
         // "Playa de Doniños" lleva como pageimage `La_Coruña-loc.svg`.
         .filter((p) => /\.(jpe?g|png|webp)(\?|$)/i.test(p.original.source))
         // Descartar URLs cuyo nombre de archivo cae en NEGATIVAS (mapa,
-        // escudo, bandera, etc.). Heredamos el catálogo de otras fuentes.
+        // escudo, bandera, edificios, etc.) o en negativas-título-extra
+        // (mairie, ayuntamiento...).
         .filter((p) => {
           const filename = decodeURIComponent(p.original.source.split('/').pop() ?? '').toLowerCase()
-          return !NEGATIVAS.test(filename)
+          if (NEGATIVAS.test(filename)) return false
+          // Word-level check del filename para mairie/ayuntamiento/...
+          const fnPalabras = palabras(filename.replace(/\.(jpe?g|png|webp).*/i, ''))
+          if (fnPalabras.some(w => NEGATIVAS_TITULO_EXTRA.test(w))) return false
+          return true
         })
+        // Mismo rechazo word-level sobre el TÍTULO del artículo.
         .filter((p) => {
-          const tituloNorm = normalizar(p.title ?? '')
-          return tokensDiscriminantes.some((t) => tituloNorm.includes(t))
+          const titPalabras = palabras(p.title ?? '')
+          return !titPalabras.some(w => NEGATIVAS_TITULO_EXTRA.test(w))
+        })
+        // Token discriminante DEBE aparecer como PALABRA del título,
+        // no substring. Antes "faro" matcheaba "farol" — ahora no.
+        .filter((p) => {
+          const titPalabras = palabras(p.title ?? '')
+          return tokensDiscriminantes.some((t) => titPalabras.includes(t))
+        })
+        // Contexto geográfico: el título debe incluir un marcador
+        // costero (Playa/Beach/Praia/Cala...) O bien ser EXACTAMENTE
+        // un token del nombre (caso "Cofete", "Maspalomas").
+        .filter((p) => {
+          const titPalabras = palabras(p.title ?? '')
+          if (titPalabras.some(w => MARCADORES_COSTEROS.test(w))) return true
+          // Acepta si el título normalizado completo == algún token discriminante
+          const tituloFlat = titPalabras.join('')
+          if (tokensDiscriminantes.some(t => t === tituloFlat)) return true
+          // O si el título completo == nombre (con/sin alias).
+          if (tituloFlat === normalizar(nombre)) return true
+          if (aliases.some(a => tituloFlat === normalizar(a))) return true
+          return false
         })
 
       if (candidatos.length === 0) continue
