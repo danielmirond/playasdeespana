@@ -7,7 +7,7 @@
 //   4. E-E-A-T: atribución visible a fuentes oficiales + última sincro.
 
 import Link from 'next/link'
-import { getPlayasDataModified, relativeTime } from '@/lib/dateModified'
+import { getPlayasDataModified } from '@/lib/dateModified'
 
 interface Props {
   locale?: 'es' | 'en'
@@ -168,17 +168,37 @@ export default function Footer({ locale = 'es' }: Props) {
                   </Link>.
                 </>}
           </p>
+          {/* Atribución honesta: dos timescales distintos.
+              Antes mostrábamos "Última sincronización con MITECO: hace 8 años"
+              que sonaba a abandono total siendo que (a) MITECO no ha publicado
+              dataset nuevo desde 2018 y (b) los datos meteo SÍ se refrescan
+              cada hora. Separar las dos cosas evita el claim engañoso
+              "actualizado cada hora" + "hace 8 años" en la misma página. */}
           <p style={{ margin: 0, fontSize: '.72rem', color: 'var(--muted, #5a3d12)' }}>
-            {es ? 'Última sincronización con MITECO: ' : 'Last sync with MITECO: '}
-            <time dateTime={dataModified}>{relativeTime(dataModified, locale)}</time>
-            {' · '}
-            <a href="https://www.miteco.gob.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>MITECO</a>
-            {' · '}
-            <a href="https://www.eea.europa.eu/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>EEA</a>
-            {' · '}
-            <a href="https://www.aemet.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>AEMET</a>
-            {' · '}
-            <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>Open-Meteo</a>
+            {es
+              ? <>Meteo en tiempo real ·{' '}
+                  <a href="https://www.aemet.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>AEMET</a>
+                  {', '}
+                  <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>Open-Meteo</a>
+                  {' · Datos físicos: dataset '}
+                  <a href="https://www.miteco.gob.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>MITECO</a>
+                  {' 2018 (última edición publicada) · Calidad del agua: '}
+                  <a href="https://www.eea.europa.eu/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>EEA</a>
+                  {' '}
+                  <time dateTime={dataModified}>{new Date(dataModified).getFullYear()}</time>
+                </>
+              : <>Real-time weather ·{' '}
+                  <a href="https://www.aemet.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>AEMET</a>
+                  {', '}
+                  <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>Open-Meteo</a>
+                  {' · Physical data: '}
+                  <a href="https://www.miteco.gob.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>MITECO</a>
+                  {' 2018 dataset · Water quality: '}
+                  <a href="https://www.eea.europa.eu/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>EEA</a>
+                  {' '}
+                  <time dateTime={dataModified}>{new Date(dataModified).getFullYear()}</time>
+                </>
+            }
           </p>
         </div>
 

@@ -27,6 +27,7 @@ import FerriesCTA from './FerriesCTA'
 import PhotoCarousel from './PhotoCarousel'
 import type { Escuela } from '@/lib/escuelas'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
+import { nombreMostrado } from '@/lib/nombres-populares'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
@@ -214,6 +215,12 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
 
 export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  // Nombre para titulares: usa el alias castellano cuando exista
+  // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
+  // Playa de las Catedrales) para que H2 sean consistentes con el H1
+  // del hero (que usa el mismo nombre). Antes, el H1 era "La Concha"
+  // pero los H2 seguian con "Kontxa hondartza" \u2014 schizofrenia visible.
+  const nombreH = locale === 'es' ? nombreMostrado(playa.slug, playa.nombre) : playa.nombre
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const amazonProductos = getProductosParaPlaya(playa, meteo.estado)
@@ -307,7 +314,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* FOTOS */}
         <div className={styles.card} id="s-fotos">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.galeria(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{i18n.galeria(nombreH)}</h2>
             <span className={styles.cardSrc}>{i18n.galSrc}</span>
           </div>
           <PhotoCarousel
@@ -350,7 +357,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <>
               <div className={styles.divider}/>
               <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-                <h2 className={styles.cardTitle}>{i18n.mareas(playa.nombre)}</h2>
+                <h2 className={styles.cardTitle}>{i18n.mareas(nombreH)}</h2>
                 <span className={styles.cardSrc}>{i18n.mareasSrc}</span>
               </div>
               <div className={styles.cardBody}>
@@ -384,7 +391,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <>
               <div className={styles.divider}/>
               <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-                <h2 className={styles.cardTitle}>{i18n.mareas(playa.nombre)}</h2>
+                <h2 className={styles.cardTitle}>{i18n.mareas(nombreH)}</h2>
                 <span className={styles.cardSrc}>{i18n.mareasSrc}</span>
               </div>
               <div className={styles.cardBody}>
@@ -400,7 +407,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-            <h2 className={styles.cardTitle}>{i18n.temperatura(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{i18n.temperatura(nombreH)}</h2>
             <span className={styles.cardSrc}>{i18n.tempSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -439,7 +446,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-            <h2 className={styles.cardTitle}>{i18n.viento(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{i18n.viento(nombreH)}</h2>
           </div>
           <div className={styles.cardBody}>
             <div className={styles.vientoRow}>
@@ -460,7 +467,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {(banderaPlaya || medusas) && (
           <div className={styles.card} id="s-seguridad">
             <div className={styles.cardHead}>
-              <h2 className={styles.cardTitle}>{i18n.seguridad(playa.nombre)}</h2>
+              <h2 className={styles.cardTitle}>{i18n.seguridad(nombreH)}</h2>
               <span className={styles.cardSrc}>{i18n.seguridadSrc}</span>
             </div>
             <div className={styles.cardBody}>
@@ -489,7 +496,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* CALIDAD AGUA */}
         <div className={styles.card} id="s-calidad">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.calidad(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{i18n.calidad(nombreH)}</h2>
             <span className={styles.cardSrc}>{i18n.calidadSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -523,7 +530,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           }}>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: '.82rem', fontWeight: 700, color: '#fff', marginBottom: 4 }}>
-                {locale === 'en' ? `Activities near ${playa.nombre}` : `Actividades cerca de ${playa.nombre}`}
+                {locale === 'en' ? `Activities near ${playa.nombre}` : `Actividades cerca de ${nombreH}`}
               </div>
               <div style={{ fontSize:'.74rem', color: 'rgba(255,255,255,.85)' }}>
                 {locale === 'en' ? 'Surf lessons, kayak tours, snorkeling and more' : 'Clases de surf, kayak, snorkel y más'}
@@ -613,7 +620,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* RESTAURANTES */}
         <div className={styles.card} id="s-comer">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.comer(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{i18n.comer(nombreH)}</h2>
             <span className={styles.cardSrc}>
               {restList ? i18n.comerSrcOSM : ''}
             </span>
@@ -687,7 +694,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         </div>
         <div className={styles.card} id="s-dormir">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.dormir(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{i18n.dormir(nombreH)}</h2>
             <span className={styles.cardSrc}>{clientHoteles && clientHoteles.length > 0 ? i18n.dormirSrc : ''}</span>
           </div>
           <div className={styles.cardBody}>
@@ -753,7 +760,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 }}
               >
                 <Bed size={16} weight="bold" />
-                {locale === 'en' ? `Find hotels near ${playa.nombre}` : `Buscar hoteles cerca de ${playa.nombre}`}
+                {locale === 'en' ? `Find hotels near ${playa.nombre}` : `Buscar hoteles cerca de ${nombreH}`}
               </a>
             )}
             </Collapsible>
@@ -952,7 +959,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* INFO */}
         <div className={styles.card} id="s-info">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.info(playa.nombre)}</h2>
+            <h2 className={styles.cardTitle}>{i18n.info(nombreH)}</h2>
             <span className={styles.cardSrc}>{i18n.infoSrc}</span>
           </div>
           <div className={styles.cardBody}>
