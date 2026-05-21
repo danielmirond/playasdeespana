@@ -28,6 +28,8 @@ import PhotoCarousel from './PhotoCarousel'
 import type { Escuela } from '@/lib/escuelas'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { nombreMostrado } from '@/lib/nombres-populares'
+import { introBrevePlaya } from '@/lib/copyPlaya'
+import { nombreConPlaya } from '@/lib/geo'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
@@ -307,9 +309,30 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
   const restList = clientRestaurantes && clientRestaurantes.length > 0 ? clientRestaurantes : null
 
+  // Intro breve factual visible above-the-fold. Resuelve el brand
+  // issue #7: antes el primer <p> visible era boilerplate del footer
+  // ("Estado del mar y guía de las 5.000+ playas españolas..."). Ahora
+  // cada ficha tiene 1-2 frases concretas: tipo + dimensiones +
+  // servicios + actividades.
+  const introTxt = locale === 'es' ? introBrevePlaya(playa, nombreConPlaya(nombreH)) : null
+
   return (
     <div className={styles.wrap}>
       <div className={styles.main}>
+
+        {/* INTRO BREVE (solo en es de momento) */}
+        {introTxt && (
+          <p style={{
+            margin: '0 0 1.5rem',
+            padding: '0',
+            fontSize: '1rem',
+            lineHeight: 1.65,
+            color: 'var(--ink, #2a1a08)',
+            fontWeight: 400,
+          }}>
+            {introTxt}
+          </p>
+        )}
 
         {/* FOTOS */}
         <div className={styles.card} id="s-fotos">

@@ -13,6 +13,7 @@ import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
+import { descripcionPlaya, introBrevePlaya } from '@/lib/copyPlaya'
 import { nombreMostrado } from '@/lib/nombres-populares'
 import { estimarMareas } from '@/lib/mareas-lunar'
 import { calcularHoraIdeal } from '@/lib/hora-ideal'
@@ -98,7 +99,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Antes era 134 chars → Google cortaba a "... Parking, hoteles y don..."
   // Estructura: [Nombre] hoy: estado del mar, bandera y servicios
   const title = `${np} hoy: estado del mar, bandera y servicios`
-  const description = `Estado del mar en ${np} hoy. Temperatura del agua, oleaje, viento, bandera, medusas y servicios. Parking cercano, hoteles y restaurantes.`
+  // Meta description varía por atributos (bandera azul, actividades,
+  // composición, dimensiones). Evita el "duplicate description" de
+  // Search Console cuando 2.500 fichas comparten meta description
+  // idéntica salvo el nombre.
+  const description = descripcionPlaya(playa, np)
 
   const ogImage = new URL(`${BASE}/api/og`)
   ogImage.searchParams.set('playa', np)
