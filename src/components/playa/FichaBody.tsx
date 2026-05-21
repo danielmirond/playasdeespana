@@ -30,6 +30,9 @@ import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { nombreMostrado } from '@/lib/nombres-populares'
 import { introBrevePlaya } from '@/lib/copyPlaya'
 import { nombreConPlaya } from '@/lib/geo'
+import { generarReporteSistema } from '@/lib/reporteSistema'
+import ReporteSistemaCard from './ReporteSistemaCard'
+import QuickChips from './QuickChips'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
@@ -333,6 +336,24 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             {introTxt}
           </p>
         )}
+
+        {/* ENGAGEMENT LAYER — el "nunca vacío":
+              1. Reporte sistema (siempre presente si hay meteo)
+              2. QuickChips inline (1 tap = aporta) */}
+        {(() => {
+          const reporteSistema = generarReporteSistema({
+            oleaje:        meteo.olas,
+            viento:        meteo.viento,
+            vientoRacha:   meteo.vientoRacha,
+            agua:          meteo.agua,
+            bandera:       banderaPlaya,
+            medusasRiesgo: medusas?.nivel ?? null,
+          })
+          return reporteSistema
+            ? <ReporteSistemaCard reporte={reporteSistema} locale={locale} />
+            : null
+        })()}
+        <QuickChips slug={playa.slug} locale={locale} />
 
         {/* FOTOS */}
         <div className={styles.card} id="s-fotos">

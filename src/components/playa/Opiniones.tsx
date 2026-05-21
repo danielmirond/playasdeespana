@@ -227,7 +227,9 @@ export default function Opiniones({ slug, nombre, initial, locale = 'es' }: Prop
       ) : (
         !loading && (
           <p className={styles.empty}>
-            {es ? 'Sé la primera persona en valorar esta playa.' : 'Be the first to review this beach.'}
+            {es
+              ? <>Nadie ha valorado <em>{nombre}</em> todavía. Si has estado, cuéntalo en 30 segundos — ayuda a quien venga después.</>
+              : <>Nobody has reviewed <em>{nombre}</em> yet. If you have been, share your experience in 30 seconds — it helps the next visitor.</>}
           </p>
         )
       )}
