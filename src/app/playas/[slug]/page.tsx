@@ -94,7 +94,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // mantienen el oficial bilingue.
   const nombreParaSeo = nombreMostrado(slug, playa.nombre)
   const np = nombreConPlaya(nombreParaSeo)
-  const title = `Cómo está ${np} hoy | Bandera, estado, viento y temperatura del agua - Parking, hoteles y donde comer cerca`
+  // Title corto (~50-60 chars) para que Google no lo trunque en SERP.
+  // Antes era 134 chars → Google cortaba a "... Parking, hoteles y don..."
+  // Estructura: [Nombre] hoy: estado del mar, bandera y servicios
+  const title = `${np} hoy: estado del mar, bandera y servicios`
   const description = `Estado del mar en ${np} hoy. Temperatura del agua, oleaje, viento, bandera, medusas y servicios. Parking cercano, hoteles y restaurantes.`
 
   const ogImage = new URL(`${BASE}/api/og`)
