@@ -33,6 +33,7 @@ import { nombreConPlaya } from '@/lib/geo'
 import { generarReporteSistema } from '@/lib/reporteSistema'
 import ReporteSistemaCard from './ReporteSistemaCard'
 import QuickChips from './QuickChips'
+import AsistentePlaya from './AsistentePlaya'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
@@ -88,6 +89,10 @@ interface Props {
   playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean }[]
   /** Agregado de opiniones server-side para SSR + JSON-LD. */
   opinionesIniciales?: import('@/lib/opiniones').OpinionesAgregadas | null
+  /** Necesidades generadas por el asistente (reglas + IA opcional).
+   *  Se renderiza una sección "Qué necesitas hoy" arriba del bloque
+   *  de fotos para que sea visible above-the-fold. */
+  necesidades?:    import('@/lib/asistentePlaya').Necesidad[]
   locale?:         'es' | 'en'
   /** Slug del municipio si la página existe (ver getMunicipioSlugsSet). */
   municipioSlug?:  string
@@ -218,7 +223,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#7a2818', '#4a1810'],  // --noapto
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -354,6 +359,17 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             : null
         })()}
         <QuickChips slug={playa.slug} locale={locale} />
+
+        {/* ASISTENTE — "qué necesitas para ir a esta playa hoy".
+            Generado server-side por getNecesidades() en page.tsx:
+            reglas deterministas + IA opcional + cache KV 24h. */}
+        {necesidades && necesidades.length > 0 && (
+          <AsistentePlaya
+            necesidades={necesidades}
+            nombre={nombreH}
+            locale={locale}
+          />
+        )}
 
         {/* FOTOS */}
         <div className={styles.card} id="s-fotos">
