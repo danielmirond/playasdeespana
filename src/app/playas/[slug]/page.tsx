@@ -14,6 +14,7 @@ import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { descripcionPlaya, introBrevePlaya } from '@/lib/copyPlaya'
+import { getNecesidades } from '@/lib/asistentePlaya'
 import { nombreMostrado } from '@/lib/nombres-populares'
 import { estimarMareas } from '@/lib/mareas-lunar'
 import { calcularHoraIdeal } from '@/lib/hora-ideal'
@@ -320,6 +321,23 @@ export default async function PlayaPage({ params }: Props) {
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
+  // Asistente "qué necesitas hoy" — reglas + IA opcional + cache 24h.
+  // Independiente del cascade de fotos/video, no añade deadline.
+  const necesidadesAsistente = await getNecesidades({
+    playa,
+    meteo: {
+      agua:        meteo.agua,
+      olas:        meteo.olas,
+      viento:      meteo.viento,
+      vientoRacha: meteo.vientoRacha,
+      uv:          meteo.uv,
+      tempAire:    meteo.tempAire,
+    },
+    bandera:  banderaPlaya,
+    medusas,
+    estado:   meteo.estado,
+  }).catch(() => [])
+
   // Score 0-100 en tiempo real
   const playaScore = calcularPlayaScore(playa, {
     agua: meteo.agua,
@@ -450,6 +468,7 @@ export default async function PlayaPage({ params }: Props) {
         opinionesIniciales={opinionesData}
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
+        necesidades={necesidadesAsistente}
       />
     </>
   )
