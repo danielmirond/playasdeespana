@@ -377,33 +377,78 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           />
         )}
 
-        {/* 4. VIDEO (toggle click-to-load): debajo del asistente.
-            Si no hay video, no se renderiza nada. El iframe no se
-            carga hasta que el user pulsa el botón. */}
-        {videoData && (
-          <BeachVideoToggle video={videoData} nombre={nombreH} locale={locale} />
+        {/* 4. SEGURIDAD: BANDERA + MEDUSAS — movido aquí (PR #86)
+            La gente decide '¿me meto o no?' antes que datos meteo
+            abstractos. Va junto al estado-hoy. */}
+        {(banderaPlaya || medusas) && (
+          <div className={styles.card} id="s-seguridad">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{i18n.seguridad(nombreH)}</h2>
+              <span className={styles.cardSrc}>{i18n.seguridadSrc}</span>
+            </div>
+            <div className={styles.cardBody}>
+              {banderaPlaya && (
+                <div style={{ display:'flex', alignItems:'center', gap:'.75rem', marginBottom: medusas ? '1rem' : 0 }}>
+                  <div style={{ width:28, height:28, borderRadius:'50%', background:banderaPlaya.hex, flexShrink:0 }} aria-hidden />
+                  <div>
+                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label}</div>
+                    <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}</div>
+                  </div>
+                </div>
+              )}
+              {medusas && (
+                <div style={{ display:'flex', alignItems:'center', gap:'.75rem' }}>
+                  <div style={{ width:28, height:28, borderRadius:'50%', background:medusas.hex, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden><Fish size={16} weight="bold" color="#fff"/></div>
+                  <div>
+                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? medusas.labelEn : medusas.label}</div>
+                    <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? medusas.detalleEn : medusas.detalle}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         )}
 
-        {/* FOTOS */}
-        <div className={styles.card} id="s-fotos">
+        {/* 5. CALIDAD AGUA — movido aquí (PR #86). Junto a seguridad
+            porque pertenece al mismo bucket "¿puedo bañarme?". */}
+        <div className={styles.card} id="s-calidad">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.galeria(nombreH)}</h2>
-            <span className={styles.cardSrc}>{i18n.galSrc}</span>
+            <h2 className={styles.cardTitle}>{i18n.calidad(nombreH)}</h2>
+            <span className={styles.cardSrc}>{i18n.calidadSrc}</span>
           </div>
-          <PhotoCarousel
-            fotos={fotos ?? []}
-            nombreAlt={playa.nombre}
-            locale={locale}
-          />
+          <div className={styles.cardBody}>
+            <div className={styles.cqNivel}>
+              <div className={styles.cqDot} style={{ background: dotColor }}/>
+              <span className={styles.cqLabel} style={{ color: textColor }}>{nivelCalidad}</span>
+            </div>
+            <div className={styles.cqBar}>
+              <div className={styles.cqBarIn} style={{ width:`${pctCalidad}%`, background:`linear-gradient(90deg,${textColor},${dotColor})` }}/>
+            </div>
+            <DataRow k={i18n.muestras}     v={`${pctCalidad}%`} />
+            <DataRow k={i18n.temporada}    v={String(temporadaCalidad)} />
+            <DataRow k={i18n.clasificacion} v={`${nivelCalidad} (Directiva 2006/7/CE)`} />
+          </div>
         </div>
 
-        {/* AD. entre fotos y oleaje */}
-        <AdSlot slot="fotos-oleaje" format="horizontal" />
+        {/* 6. OPINIONES — movido aquí (PR #86) desde el final. La
+            prueba social pesa para decidir, no debe estar enterrada
+            en posición 31/32. */}
+        <Opiniones
+          slug={playa.slug}
+          nombre={playa.nombre}
+          initial={opinionesIniciales ?? null}
+          locale={locale}
+        />
+
+        {/* AD entre fotos-oleaje ELIMINADO en PR #86 (revisión orden):
+            con galería movida abajo y secciones de seguridad arriba,
+            el ad rompía el flow. El otro AdSlot al final de hoteles
+            sigue activo. */}
 
         {/* OLEAJE + METEO */}
         <div className={styles.card} id="s-meteo">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Sea & <em>weather</em></> : <>Mar y <em>meteo</em></>}</h2>
+            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Waves & <em>wind by hour</em></> : <>Oleaje y <em>viento por horas</em></>}</h2>
             <span className={styles.cardSrc}>{i18n.oleajeSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -536,55 +581,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </Collapsible>
         </div>
 
-        {/* SEGURIDAD: BANDERA + MEDUSAS + CALIDAD */}
-        {(banderaPlaya || medusas) && (
-          <div className={styles.card} id="s-seguridad">
-            <div className={styles.cardHead}>
-              <h2 className={styles.cardTitle}>{i18n.seguridad(nombreH)}</h2>
-              <span className={styles.cardSrc}>{i18n.seguridadSrc}</span>
-            </div>
-            <div className={styles.cardBody}>
-              {banderaPlaya && (
-                <div style={{ display:'flex', alignItems:'center', gap:'.75rem', marginBottom: medusas ? '1rem' : 0 }}>
-                  <div style={{ width:28, height:28, borderRadius:'50%', background:banderaPlaya.hex, flexShrink:0 }} aria-hidden />
-                  <div>
-                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label}</div>
-                    <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}</div>
-                  </div>
-                </div>
-              )}
-              {medusas && (
-                <div style={{ display:'flex', alignItems:'center', gap:'.75rem' }}>
-                  <div style={{ width:28, height:28, borderRadius:'50%', background:medusas.hex, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden><Fish size={16} weight="bold" color="#fff"/></div>
-                  <div>
-                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? medusas.labelEn : medusas.label}</div>
-                    <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? medusas.detalleEn : medusas.detalle}</div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* CALIDAD AGUA */}
-        <div className={styles.card} id="s-calidad">
-          <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.calidad(nombreH)}</h2>
-            <span className={styles.cardSrc}>{i18n.calidadSrc}</span>
-          </div>
-          <div className={styles.cardBody}>
-            <div className={styles.cqNivel}>
-              <div className={styles.cqDot} style={{ background: dotColor }}/>
-              <span className={styles.cqLabel} style={{ color: textColor }}>{nivelCalidad}</span>
-            </div>
-            <div className={styles.cqBar}>
-              <div className={styles.cqBarIn} style={{ width:`${pctCalidad}%`, background:`linear-gradient(90deg,${textColor},${dotColor})` }}/>
-            </div>
-            <DataRow k={i18n.muestras}     v={`${pctCalidad}%`} />
-            <DataRow k={i18n.temporada}    v={String(temporadaCalidad)} />
-            <DataRow k={i18n.clasificacion} v={`${nivelCalidad} (Directiva 2006/7/CE)`} />
-          </div>
-        </div>
+        {/* SEGURIDAD + CALIDAD movidos a posición 4-5 (junto al
+            asistente). Ver inicio del return. PR #86 reorganización. */}
 
         {/* ACTIVIDADES */}
         <SurfSection
@@ -1107,13 +1105,29 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         </div>
 
-        {/* OPINIONES — sección dedicada con texto y rating */}
-        <Opiniones
-          slug={playa.slug}
-          nombre={playa.nombre}
-          initial={opinionesIniciales ?? null}
-          locale={locale}
-        />
+        {/* OPINIONES movido a posición 6 (junto al asistente). PR #86. */}
+
+        {/* GALERÍA FOTOS — movida aquí (PR #86) desde la posición 5
+            (top). Antes robaba la atención antes de los datos críticos
+            (seguridad, decisión de baño). Ahora va como confirmación
+            visual tras todo el contenido de planning. */}
+        <div className={styles.card} id="s-fotos">
+          <div className={styles.cardHead}>
+            <h2 className={styles.cardTitle}>{i18n.galeria(nombreH)}</h2>
+            <span className={styles.cardSrc}>{i18n.galSrc}</span>
+          </div>
+          <PhotoCarousel
+            fotos={fotos ?? []}
+            nombreAlt={playa.nombre}
+            locale={locale}
+          />
+        </div>
+
+        {/* VÍDEO toggle — movido aquí (PR #86). Click-to-load: no
+            carga el iframe hasta que el user pulsa. Wins LCP/INP. */}
+        {videoData && (
+          <BeachVideoToggle video={videoData} nombre={nombreH} locale={locale} />
+        )}
 
         {/* PLAYAS CERCANAS */}
         {playasCercanas && playasCercanas.length > 0 && (
