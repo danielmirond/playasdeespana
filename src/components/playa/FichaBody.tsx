@@ -31,9 +31,9 @@ import { nombreMostrado } from '@/lib/nombres-populares'
 import { introBrevePlaya } from '@/lib/copyPlaya'
 import { nombreConPlaya } from '@/lib/geo'
 import { generarReporteSistema } from '@/lib/reporteSistema'
-import ReporteSistemaCard from './ReporteSistemaCard'
-import QuickChips from './QuickChips'
+import EstadoHoy from './EstadoHoy'
 import AsistentePlaya from './AsistentePlaya'
+import BeachVideoToggle from './BeachVideoToggle'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
@@ -93,6 +93,9 @@ interface Props {
    *  Se renderiza una sección "Qué necesitas hoy" arriba del bloque
    *  de fotos para que sea visible above-the-fold. */
   necesidades?:    import('@/lib/asistentePlaya').Necesidad[]
+  /** Video YouTube si existe. Se renderiza con BeachVideoToggle
+   *  (click-to-load) después del asistente, ya no above-the-fold. */
+  videoData?:      import('@/lib/videos').VideoPlaya | null
   locale?:         'es' | 'en'
   /** Slug del municipio si la página existe (ver getMunicipioSlugsSet). */
   municipioSlug?:  string
@@ -223,7 +226,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#7a2818', '#4a1810'],  // --noapto
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -328,11 +331,19 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
     <div className={styles.wrap}>
       <div className={styles.main}>
 
-        {/* INTRO BREVE (solo en es de momento) */}
+        {/* ORDEN ABOVE-THE-FOLD (post critique PR #84):
+              1. Intro breve (texto, anchor reading)
+              2. EstadoHoy (sistema + chips fusionados)
+              3. AsistentePlaya (qué necesitas hoy — diferencial #1)
+              4. ...resto (galería, mareas, hoteles, ...)
+            El thumbnail strip + BeachVideo bajan a posición posterior
+            (los maneja page.tsx). */}
+
+        {/* 1. INTRO BREVE */}
         {introTxt && (
           <p style={{
             margin: '0 0 1.5rem',
-            padding: '0',
+            padding: 0,
             fontSize: '1rem',
             lineHeight: 1.65,
             color: 'var(--ink, #2a1a08)',
@@ -342,33 +353,35 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </p>
         )}
 
-        {/* ENGAGEMENT LAYER — el "nunca vacío":
-              1. Reporte sistema (siempre presente si hay meteo)
-              2. QuickChips inline (1 tap = aporta) */}
-        {(() => {
-          const reporteSistema = generarReporteSistema({
+        {/* 2. ESTADO HOY — fusión sistema + chips engagement */}
+        <EstadoHoy
+          slug={playa.slug}
+          nombre={nombreH}
+          reporte={generarReporteSistema({
             oleaje:        meteo.olas,
             viento:        meteo.viento,
             vientoRacha:   meteo.vientoRacha,
             agua:          meteo.agua,
             bandera:       banderaPlaya,
             medusasRiesgo: medusas?.nivel ?? null,
-          })
-          return reporteSistema
-            ? <ReporteSistemaCard reporte={reporteSistema} locale={locale} />
-            : null
-        })()}
-        <QuickChips slug={playa.slug} locale={locale} />
+          })}
+          locale={locale}
+        />
 
-        {/* ASISTENTE — "qué necesitas para ir a esta playa hoy".
-            Generado server-side por getNecesidades() en page.tsx:
-            reglas deterministas + IA opcional + cache KV 24h. */}
+        {/* 3. ASISTENTE — qué necesitas hoy */}
         {necesidades && necesidades.length > 0 && (
           <AsistentePlaya
             necesidades={necesidades}
             nombre={nombreH}
             locale={locale}
           />
+        )}
+
+        {/* 4. VIDEO (toggle click-to-load): debajo del asistente.
+            Si no hay video, no se renderiza nada. El iframe no se
+            carga hasta que el user pulsa el botón. */}
+        {videoData && (
+          <BeachVideoToggle video={videoData} nombre={nombreH} locale={locale} />
         )}
 
         {/* FOTOS */}

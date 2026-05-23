@@ -32,18 +32,15 @@ function urlAmazon(n: Necesidad): string {
   return `https://www.amazon.es/s?k=${encodeURIComponent(n.amazonQuery)}&tag=${AMAZON_TAG}`
 }
 
+// Color sobrio para el numerito de prioridad. Antes había además un
+// borderLeft de 3px que se confundía con "warning" — eliminado, no
+// es un aviso. Ahora la prioridad se comunica solo con el color del
+// numerito que precede al título.
 const COLOR_PRIORIDAD: Record<Necesidad['prioridad'], string> = {
   critica: '#7a2818',
   alta:    '#c48a1e',
   media:   '#4a7a90',
-  baja:    '#5a3d12',
-}
-
-const LABEL_PRIORIDAD: Record<Necesidad['prioridad'], { es: string; en: string }> = {
-  critica: { es: 'Imprescindible',   en: 'Essential' },
-  alta:    { es: 'Muy recomendado',  en: 'Highly recommended' },
-  media:   { es: 'Recomendado',      en: 'Recommended' },
-  baja:    { es: 'Si te apetece',    en: 'If you fancy' },
+  baja:    '#7a8a30',
 }
 
 export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: Props) {
@@ -54,9 +51,9 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
     <section
       aria-labelledby="asistente-titulo"
       style={{
-        margin: '2rem 0',
-        padding: '1.25rem 1.25rem 1.5rem',
-        background: 'linear-gradient(135deg, #faf6ef 0%, #f0e6d0 100%)',
+        margin: '0 0 1.5rem',
+        padding: '1.1rem 1.1rem 1.25rem',
+        background: '#fff',
         border: '1px solid var(--line, #e8dcc8)',
         borderRadius: 10,
       }}
@@ -68,25 +65,25 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
         letterSpacing: '.14em',
         textTransform: 'uppercase',
         color: 'var(--muted, #5a3d12)',
-        marginBottom: '.4rem',
+        marginBottom: '.3rem',
       }}>
-        {es ? 'Asistente · condiciones de hoy' : 'Assistant · today\'s conditions'}
+        {es ? 'Lo que necesitas' : 'What you need'}
       </div>
 
       <h2
         id="asistente-titulo"
         style={{
           fontFamily: 'var(--font-serif)',
-          fontSize: '1.3rem',
+          fontSize: '1.15rem',
           fontWeight: 700,
           color: 'var(--ink, #2a1a08)',
-          margin: '0 0 1.1rem',
-          lineHeight: 1.2,
+          margin: '0 0 .9rem',
+          lineHeight: 1.25,
         }}
       >
         {es
-          ? <>Qué necesitas para ir a <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> hoy</>
-          : <>What you need for <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> today</>
+          ? <>Qué llevar a <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> hoy</>
+          : <>What to bring to <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> today</>
         }
       </h2>
 
@@ -96,46 +93,46 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
         margin: 0,
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-        gap: '.75rem',
+        gap: '.6rem',
       }}>
         {necesidades.map((n, idx) => (
           <li key={n.id} style={{
-            background: '#fff',
+            background: 'var(--card-bg, #faf6ef)',
             border: '1px solid var(--line, #e8dcc8)',
-            borderLeft: `3px solid ${COLOR_PRIORIDAD[n.prioridad]}`,
             borderRadius: 6,
-            padding: '.8rem .9rem',
+            padding: '.7rem .85rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '.5rem',
+            gap: '.4rem',
           }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '.5rem' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'baseline', gap: '.4rem' }}>
-                {n.icono && <span style={{ fontSize: '1.1rem' }} aria-hidden="true">{n.icono}</span>}
-                <span style={{ fontWeight: 700, fontSize: '.95rem', color: 'var(--ink, #2a1a08)' }}>
-                  {n.titulo}
-                </span>
-              </div>
-              <span style={{
-                fontSize: '.62rem',
-                fontWeight: 700,
-                padding: '.15rem .45rem',
-                background: `${COLOR_PRIORIDAD[n.prioridad]}11`,
-                color: COLOR_PRIORIDAD[n.prioridad],
-                border: `1px solid ${COLOR_PRIORIDAD[n.prioridad]}33`,
-                borderRadius: 100,
-                letterSpacing: '.04em',
-                textTransform: 'uppercase',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-              }}>
-                {es ? LABEL_PRIORIDAD[n.prioridad].es : LABEL_PRIORIDAD[n.prioridad].en}
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '.45rem' }}>
+              {/* Numerito de prioridad: color subtle, sin borde "warning" */}
+              <span
+                aria-hidden="true"
+                style={{
+                  flexShrink: 0,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 20, height: 20,
+                  borderRadius: '50%',
+                  background: COLOR_PRIORIDAD[n.prioridad],
+                  color: '#fff',
+                  fontSize: '.62rem',
+                  fontWeight: 700,
+                }}
+              >
+                {idx + 1}
+              </span>
+              {n.icono && <span style={{ fontSize: '1.05rem' }} aria-hidden="true">{n.icono}</span>}
+              <span style={{ fontWeight: 700, fontSize: '.93rem', color: 'var(--ink, #2a1a08)' }}>
+                {n.titulo}
               </span>
             </div>
 
             <p style={{
               margin: 0,
-              fontSize: '.82rem',
+              fontSize: '.8rem',
               color: 'var(--muted, #5a3d12)',
               lineHeight: 1.5,
             }}>
@@ -149,7 +146,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
               data-asistente-id={n.id}
               data-asistente-pos={idx + 1}
               style={{
-                marginTop: '.15rem',
+                marginTop: '.1rem',
                 fontSize: '.78rem',
                 fontWeight: 600,
                 color: 'var(--accent)',
