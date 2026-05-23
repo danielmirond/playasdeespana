@@ -67,7 +67,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
         color: 'var(--muted, #5a3d12)',
         marginBottom: '.3rem',
       }}>
-        {es ? 'Lo que necesitas' : 'What you need'}
+        {es ? 'Asistente · hoy' : 'Assistant · today'}
       </div>
 
       <h2
@@ -82,8 +82,8 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
         }}
       >
         {es
-          ? <>Qué llevar a <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> hoy</>
-          : <>What to bring to <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> today</>
+          ? <>Esto necesitas para <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> con estas condiciones</>
+          : <>This is what you need for <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> in these conditions</>
         }
       </h2>
 
@@ -154,7 +154,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
                 alignSelf: 'flex-start',
               }}
             >
-              {es ? 'Buscar en Amazon →' : 'Find on Amazon →'}
+              {es ? 'Ver opciones en Amazon' : 'See options on Amazon'}
             </a>
           </li>
         ))}
@@ -168,8 +168,8 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
         lineHeight: 1.4,
       }}>
         {es
-          ? 'Recomendaciones generadas a partir de las condiciones reales de hoy (oleaje, viento, bandera, medusas) y de las características de la playa. Algunos enlaces son afiliados — sin coste extra para ti.'
-          : 'Recommendations generated from today\'s real conditions and beach characteristics. Some links are affiliate — no extra cost to you.'}
+          ? 'Generado con datos reales de hoy. Si compras por estos enlaces nos llevamos una pequeña comisión — a ti no te cuesta nada.'
+          : 'Generated from today\'s real data. If you buy through these links we get a small commission — at no extra cost to you.'}
       </p>
     </section>
   )

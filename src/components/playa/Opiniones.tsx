@@ -228,8 +228,8 @@ export default function Opiniones({ slug, nombre, initial, locale = 'es' }: Prop
         !loading && (
           <p className={styles.empty}>
             {es
-              ? <>Nadie ha valorado <em>{nombre}</em> todavía. Si has estado, cuéntalo en 30 segundos — ayuda a quien venga después.</>
-              : <>Nobody has reviewed <em>{nombre}</em> yet. If you have been, share your experience in 30 seconds — it helps the next visitor.</>}
+              ? <>Aún no hay reseñas de <em>{nombre}</em>. Tú podrías cambiar eso ahora.</>
+              : <>No reviews of <em>{nombre}</em> yet. You could change that right now.</>}
           </p>
         )
       )}

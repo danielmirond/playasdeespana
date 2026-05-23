@@ -132,8 +132,8 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
           lineHeight: 1.4,
         }}>
           {es
-            ? '¿Has estado hoy? Aporta en 1 tap — ayuda a quien venga después'
-            : 'Been there today? Add in 1 tap — helps next visitors'}
+            ? '¿Estás allí ahora mismo? Cuéntalo en un toque'
+            : 'You there right now? Share it in one tap'}
         </div>
         <QuickChips slug={slug} locale={locale} inlineMode />
       </div>
