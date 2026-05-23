@@ -26,7 +26,7 @@ import type { CentroBuceo } from '@/lib/buceo'
 import { getFotos, refetchAndStoreFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
 import { getVideoYouTube } from '@/lib/videos'
-import BeachVideo from '@/components/playa/BeachVideo'
+import BeachVideoToggle from '@/components/playa/BeachVideoToggle'
 import { getHoteles } from '@/lib/hoteles'
 import { getEscuelas } from '@/lib/escuelas'
 import type { Escuela } from '@/lib/escuelas'
@@ -438,11 +438,12 @@ export default async function PlayaPage({ params }: Props) {
         reportes={reportesData}
         foto={fotoHero ?? null}
       />
-      {videoData && (
-        <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 1rem' }}>
-          <BeachVideo video={videoData} nombre={playa.nombre} />
-        </div>
-      )}
+      {/* BeachVideo se renderiza ahora dentro de FichaBody como
+          BeachVideoToggle (click-to-load) tras el bloque asistente
+          y antes de la galería completa. Esto saca el iframe del
+          above-the-fold y mejora LCP/INP — el critique de diseño
+          (PR #84) destacó que el video estaba robando atención
+          antes del contenido textual concreto. */}
       <FichaNav />
       <FichaBody
         playa={playa}
@@ -469,6 +470,7 @@ export default async function PlayaPage({ params }: Props) {
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
         necesidades={necesidadesAsistente}
+        videoData={videoData}
       />
     </>
   )

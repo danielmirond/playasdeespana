@@ -56,9 +56,13 @@ const WINDOW_MS = 24 * 60 * 60 * 1000
 interface Props {
   slug:   string
   locale?: 'es' | 'en'
+  /** Si true, NO renderiza el wrapper <section> con su header y nota
+   *  al pie — solo los chips. Pensado para usar como subcomponente
+   *  dentro de EstadoHoy.tsx (que ya aporta su propio header). */
+  inlineMode?: boolean
 }
 
-export default function QuickChips({ slug, locale = 'es' }: Props) {
+export default function QuickChips({ slug, locale = 'es', inlineMode = false }: Props) {
   const es = locale === 'es'
   const [voted, setVoted] = useState<Set<string>>(new Set())
   const [sending, setSending] = useState<string | null>(null)
@@ -95,13 +99,62 @@ export default function QuickChips({ slug, locale = 'es' }: Props) {
     setSending(null)
   }, [slug, voted, sending])
 
+  const chipsList = (
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '.45rem',
+    }}>
+      {CHIPS.map(c => {
+        const Icon = c.icon
+        const isVoted = voted.has(c.display)
+        const isSending = sending === c.display
+        return (
+          <button
+            key={c.display}
+            type="button"
+            onClick={() => onChipClick(c)}
+            disabled={isVoted || !!sending}
+            aria-pressed={isVoted}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '.4rem',
+              // Touch target 44px (iOS HIG) — antes era ~32px.
+              padding: '.65rem 1rem',
+              minHeight: 44,
+              background: isVoted ? `${c.color}22` : '#fff',
+              border: `1px solid ${isVoted ? c.color : 'var(--line, #e8dcc8)'}`,
+              borderRadius: 100,
+              fontSize: '.85rem',
+              fontWeight: 500,
+              color: isVoted ? c.color : 'var(--ink, #2a1a08)',
+              cursor: isVoted ? 'default' : 'pointer',
+              opacity: isSending ? 0.6 : 1,
+              transition: 'all .15s ease',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            <Icon size={16} weight={isVoted ? 'fill' : 'regular'} color={c.color} aria-hidden="true" />
+            <span>{c.label}</span>
+            {isVoted && <span style={{ fontSize: '.78rem', opacity: .8 }} aria-hidden="true">✓</span>}
+          </button>
+        )
+      })}
+    </div>
+  )
+
+  // Modo inline (dentro de EstadoHoy): solo los chips, sin wrapper.
+  if (inlineMode) return chipsList
+
+  // Modo standalone (legacy / otros lugares): con wrapper completo.
   return (
     <section
       aria-label={es ? '¿Cómo está hoy? Aporta en 1 tap' : 'How is the beach today? 1 tap'}
       style={{
         margin: '0 0 1.5rem',
         padding: '1rem 1.1rem',
-        background: 'linear-gradient(135deg, #faf6ef 0%, #f5ecd8 100%)',
+        background: 'linear-gradient(135deg, #faf6ef 0%, #f0e6d0 100%)',
         border: '1px solid var(--line, #e8dcc8)',
         borderRadius: 8,
       }}
@@ -117,46 +170,7 @@ export default function QuickChips({ slug, locale = 'es' }: Props) {
       }}>
         {es ? '¿Cómo está hoy? · 1 tap' : 'How is it today? · 1 tap'}
       </div>
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '.45rem',
-      }}>
-        {CHIPS.map(c => {
-          const Icon = c.icon
-          const isVoted = voted.has(c.display)
-          const isSending = sending === c.display
-          return (
-            <button
-              key={c.display}
-              type="button"
-              onClick={() => onChipClick(c)}
-              disabled={isVoted || !!sending}
-              aria-pressed={isVoted}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '.4rem',
-                padding: '.5rem .85rem',
-                background: isVoted ? `${c.color}22` : '#fff',
-                border: `1px solid ${isVoted ? c.color : 'var(--line, #e8dcc8)'}`,
-                borderRadius: 100,
-                fontSize: '.82rem',
-                fontWeight: 500,
-                color: isVoted ? c.color : 'var(--ink, #2a1a08)',
-                cursor: isVoted ? 'default' : 'pointer',
-                opacity: isSending ? 0.6 : 1,
-                transition: 'all .15s ease',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              <Icon size={14} weight={isVoted ? 'fill' : 'regular'} color={c.color} />
-              <span>{c.label}</span>
-              {isVoted && <span style={{ fontSize: '.72rem', opacity: .8 }}>✓</span>}
-            </button>
-          )
-        })}
-      </div>
+      {chipsList}
       <div style={{
         marginTop: '.6rem',
         fontSize: '.7rem',
