@@ -45,17 +45,19 @@ export function generarReporteSistema(input: Input): ReporteSistema | null {
   let severidad: ReporteSistema['severidad'] = 'ok'
 
   // Bandera (la cosa más importante visible).
+  // Copy revisada en PR #85: títulos accionables en vez de jerga
+  // institucional. La gente decide '¿me meto o no?' — no clasifica.
   let titulo = ''
   if (bandera?.color === 'roja') {
-    titulo = 'Bandera roja preventiva'
+    titulo = 'No te metas hoy'
     severidad = 'danger'
   } else if (bandera?.color === 'amarilla') {
-    titulo = 'Bandera amarilla preventiva'
+    titulo = 'Precaución hoy'
     severidad = 'warn'
   } else if (bandera?.color === 'verde') {
-    titulo = 'Bandera verde · baño seguro'
+    titulo = 'Baño OK · agua tranquila'
   } else {
-    titulo = 'Sin avisos meteorológicos'
+    titulo = 'Calma en la costa'
   }
 
   // Oleaje.

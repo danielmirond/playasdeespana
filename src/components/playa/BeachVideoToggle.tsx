@@ -69,14 +69,14 @@ export default function BeachVideoToggle({ video, nombre, locale = 'es' }: Props
       </span>
       <span style={{ flex: 1 }}>
         <span style={{ display: 'block', fontWeight: 600, lineHeight: 1.2 }}>
-          {es ? `Vídeo aéreo de ${nombre}` : `Aerial video of ${nombre}`}
+          {es ? `Ver ${nombre} desde el cielo` : `See ${nombre} from above`}
         </span>
         <span style={{ display: 'block', fontSize: '.72rem', color: 'var(--muted, #5a3d12)', marginTop: 2 }}>
           {video.channelTitle ? (es ? `${video.channelTitle} · vía YouTube` : `${video.channelTitle} · via YouTube`) : 'YouTube'}
         </span>
       </span>
       <span aria-hidden="true" style={{ color: 'var(--muted, #5a3d12)', fontSize: '.78rem' }}>
-        {es ? 'Cargar ▾' : 'Load ▾'}
+        {es ? 'Reproducir ▶' : 'Play ▶'}
       </span>
     </button>
   )
