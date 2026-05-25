@@ -9,7 +9,29 @@
 
 ## 🔴 PROBLEMAS CRÍTICOS IDENTIFICADOS
 
-### 1. **Sobrecarga de Navegación (14 tabs)**
+> **Nota:** La estrategia de PR #86 (fases narrativas) es excelente. Los problemas reales son la **implementación incompleta** de ese PR.
+
+### 1. **Pendientes de PR #86 sin implementar**
+**Crítico para completar la estrategia:**
+
+- [ ] **7 CTAs afiliados dispersos** (TheFork, Booking, Civitatis, Rentalcars, Parclick, Pitchup)
+  - **Problema:** Están sueltos en diferentes secciones = pollution visual
+  - **Solución:** Bloque único con tabs (Comer | Dormir | Transporte | Campings)
+
+- [ ] **Opiniones enterradas** en posición 31
+  - **Problema:** Prueba social debería estar en Fase 1 (decisión)
+  - **Solución:** Subir 3 opiniones destacadas inline después de Seguridad/Calidad
+  - Mantener sección completa al final para los que quieren más
+
+- [ ] **Emergencias sin acceso rápido**
+  - **Problema:** No hay número de emergencias visible
+  - **Solución:** Aside sticky con "Emergencias" + teléfono
+
+- [ ] **'Servicios' + 'Info ficha' redundantes**
+  - **Problema:** Duplicado de información
+  - **Solución:** Fusionar en 'Datos de la playa'
+
+### 2. **Sobrecarga de Navegación (14 tabs)**
 - **Problema:** 14 tabs es excesivo. Causa:
   - Scroll horizontal en móvil
   - Difícil encontrar secciones
@@ -31,16 +53,27 @@ FOTOS | AHORA (Estado + Mar + Seguridad) | SERVICIOS (Parking + Facilities) | AL
 
 ---
 
-### 2. **Orden de Secciones Subóptimo**
-- **Problema:** Las fotos están al FINAL (línea 1114)
-- **Flujo actual:**
-  1. Seguridad → Calidad → Meteo → Cómo Llegar → Comer → Dormir → Campings → Buceo → Servicios → Info → **FOTOS** → Cercanas
+### 2. **Orden de Secciones: BIEN PENSADO (PR #86)** ✅
+- **Estrategia:** Flujo narrativo de decisión en 5 fases
+- **Fase 1 - DECISIÓN (above-the-fold):**
+  - Estado hoy → Asistente → Seguridad → Calidad → Opiniones
+  
+- **Fase 2-3 - PLANNING:**
+  - Oleaje/Viento → Cómo llegar → Parking → Comer → Dormir → Servicios
+  
+- **Fase 4 - CONFIRMACIÓN VISUAL:**
+  - **FOTOS** → Vídeo → Cercanas
+  
+- **Fase 5 - ENRICHMENT:**
+  - FAQs, Hubs temáticos
 
-- **Problema:** El usuario viene por fotos, pero están abajo del todo
-  - No hay "hero gallery" arriba
-  - El carousel de fotos debería estar above-the-fold como confirmación visual
+**Acierto:** Las fotos al final es INTENCIONAL. El usuario que ya decidió "voy aquí" ENTONCES quiere ver fotos. Psicología de decisión correcta.
 
-**Recomendación:** Mover fotos a POSICIÓN 2 o 3 (después de estado/meteo, antes de decisiones)
+**Pendiente de PR #87:**
+- [ ] Agrupar 7 CTAs afiliados (TheFork, Booking, Civitatis, etc.) en bloque con tabs
+- [ ] Fusionar 'Servicios' + 'Info ficha' en 'Datos de la playa'
+- [ ] Subir 3 opiniones destacadas inline en Fase 1 (manteniendo sección completa)
+- [ ] Emergencias a aside sticky
 
 ---
 
