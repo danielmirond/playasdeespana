@@ -930,96 +930,101 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* AD. entre hoteles y servicios */}
         <AdSlot slot="hoteles-servicios" format="horizontal" />
 
-        {/* SERVICIOS */}
-        <div className={styles.card} id="s-servicios">
+        {/* DATOS DE LA PLAYA (PR #86 - Consolidación de Servicios + Info)
+            Unifica servicios & equipamiento con información técnica.
+            Antes estaban dispersos en 2 secciones, ahora en 1 para mejor
+            escaneo visual y menor fragmentación de contenido. */}
+        <div className={styles.card} id="s-datos">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Facilities <em>&amp; services</em></> : <>Servicios <em>y equipamiento</em></>}</h2>
-            <span className={styles.cardSrc}>{i18n.serviciosSrc}</span>
+            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Beach <em>information</em></> : <>Datos de <em>la playa</em></>}</h2>
           </div>
           <div className={styles.cardBody}>
-            <div className={styles.srvGrid}>
-              {i18n.SERVICIOS.map(s => {
-                const on = !!(playa as any)[s.key]
-                return <span key={s.key} className={`${styles.srv} ${on ? styles.srvSi : styles.srvNo}`}>{on ? 'Sí' : 'No'} · {s.label}</span>
-              })}
+            {/* Subsección: Servicios & Equipamiento */}
+            <div>
+              <div style={{ fontSize: '.82rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.03em', marginBottom: '.75rem' }}>
+                {locale === 'en' ? 'Facilities & Services' : 'Servicios y Equipamiento'}
+              </div>
+              <div className={styles.srvGrid}>
+                {i18n.SERVICIOS.map(s => {
+                  const on = !!(playa as any)[s.key]
+                  return <span key={s.key} className={`${styles.srv} ${on ? styles.srvSi : styles.srvNo}`}>{on ? 'Sí' : 'No'} · {s.label}</span>
+                })}
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* INFO */}
-        <div className={styles.card} id="s-info">
-          <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{i18n.info(nombreH)}</h2>
-            <span className={styles.cardSrc}>{i18n.infoSrc}</span>
-          </div>
-          <div className={styles.cardBody}>
+            <div style={{ height: '1rem' }}/>
+
+            {/* Subsección: Información Técnica (Collapsible) */}
             <Collapsible maxHeight={180} labelMore={locale === 'en' ? 'Show all details' : 'Ver todos los datos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
-            {playa.longitud    && <DataRow k={i18n.longitud}     v={`${playa.longitud} m`}/>}
-            {playa.anchura     && <DataRow k={i18n.anchura}      v={`${playa.anchura} m`}/>}
-            {playa.composicion && <DataRow k={i18n.composicion}  v={playa.composicion}/>}
-            {playa.tipo        && <DataRow k={i18n.tipo}         v={playa.tipo}/>}
-            {playa.grado_ocupacion && <DataRow k={i18n.grado_ocupacion} v={playa.grado_ocupacion}/>}
-            {playa.grado_urbano    && <DataRow k={i18n.grado_urbano}    v={playa.grado_urbano}/>}
-            {playa.fachada_litoral && <DataRow k={i18n.fachada_litoral} v={playa.fachada_litoral}/>}
-            {playa.condiciones     && <DataRow k={i18n.condiciones}     v={playa.condiciones}/>}
-            {playa.vegetacion      && <DataRow k={i18n.vegetacion}      v={locale === 'en' ? 'Yes' : 'Sí'}/>}
-            {playa.zona_fondeo     && <DataRow k={i18n.zona_fondeo}     v={locale === 'en' ? 'Yes' : 'Sí'}/>}
-            {playa.espacio_protegido && <DataRow k={i18n.espacio_protegido} v={locale === 'en' ? 'Yes' : 'Sí'}/>}
-            <DataRow
-              k={i18n.municipio}
-              v={playa.municipio}
-              href={municipioSlug
-                ? (locale === 'en' ? `/en/towns/${municipioSlug}` : `/municipio/${municipioSlug}`)
-                : undefined}
-            />
-            <DataRow
-              k={i18n.provincia}
-              v={playa.provincia}
-              href={provinciaSlug
-                ? (locale === 'en' ? `/en/provinces/${provinciaSlug}` : `/provincia/${provinciaSlug}`)
-                : undefined}
-            />
-            <DataRow
-              k={i18n.comunidad}
-              v={playa.comunidad}
-              href={locale === 'en' ? `/en/communities/${slug(playa.comunidad)}` : `/comunidad/${slug(playa.comunidad)}`}
-            />
-            <DataRow k={i18n.coordenadas} v={`${playa.lat}° N, ${playa.lng}° E`} mono/>
-            {playa.web_ayuntamiento && (
-              <DataRow k={i18n.webAyuntamiento} v={i18n.verSitio} href={playa.web_ayuntamiento}/>
-            )}
-            {playa.url_miteco && (
-              <DataRow k={i18n.fichaMiteco} v={i18n.verSitio} href={playa.url_miteco}/>
-            )}
-            {/* Emergencias embebidas en info */}
-            {playa.hospital && (
-              <>
-                <div style={{ height: '.5rem' }}/>
-                <DataRow k={i18n.hospital} v={playa.hospital}/>
-                {playa.hospital_dist && <DataRow k={i18n.hospital_dist} v={playa.hospital_dist}/>}
-                {playa.hospital_tel && (
-                  <div style={{ marginTop:'.65rem', display:'flex', gap:'.5rem', flexWrap:'wrap' }}>
-                    <a href={`tel:${playa.hospital_tel}`} style={{
-                      display:'inline-flex', alignItems:'center',
-                      background:'#7a2818', color:'#fff',
-                      padding:'.4rem .85rem', borderRadius:'8px',
-                      textDecoration:'none', fontSize:'.72rem', fontWeight:700,
-                    }}>
-                      {i18n.llamar} {playa.hospital_tel}
-                    </a>
-                    <a href="tel:112" style={{
-                      display:'inline-flex', alignItems:'center',
-                      background:'rgba(122,40,24,.1)', color:'#7a2818',
-                      border:'1px solid rgba(239,68,68,.3)',
-                      padding:'.4rem .85rem', borderRadius:'8px',
-                      textDecoration:'none', fontSize:'.72rem', fontWeight:700,
-                    }}>
-                      112
-                    </a>
-                  </div>
-                )}
-              </>
-            )}
+              <div style={{ fontSize: '.82rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.03em', marginBottom: '.75rem' }}>
+                {locale === 'en' ? 'Technical Details' : 'Información Técnica'}
+              </div>
+              {playa.longitud    && <DataRow k={i18n.longitud}     v={`${playa.longitud} m`}/>}
+              {playa.anchura     && <DataRow k={i18n.anchura}      v={`${playa.anchura} m`}/>}
+              {playa.composicion && <DataRow k={i18n.composicion}  v={playa.composicion}/>}
+              {playa.tipo        && <DataRow k={i18n.tipo}         v={playa.tipo}/>}
+              {playa.grado_ocupacion && <DataRow k={i18n.grado_ocupacion} v={playa.grado_ocupacion}/>}
+              {playa.grado_urbano    && <DataRow k={i18n.grado_urbano}    v={playa.grado_urbano}/>}
+              {playa.fachada_litoral && <DataRow k={i18n.fachada_litoral} v={playa.fachada_litoral}/>}
+              {playa.condiciones     && <DataRow k={i18n.condiciones}     v={playa.condiciones}/>}
+              {playa.vegetacion      && <DataRow k={i18n.vegetacion}      v={locale === 'en' ? 'Yes' : 'Sí'}/>}
+              {playa.zona_fondeo     && <DataRow k={i18n.zona_fondeo}     v={locale === 'en' ? 'Yes' : 'Sí'}/>}
+              {playa.espacio_protegido && <DataRow k={i18n.espacio_protegido} v={locale === 'en' ? 'Yes' : 'Sí'}/>}
+              <DataRow
+                k={i18n.municipio}
+                v={playa.municipio}
+                href={municipioSlug
+                  ? (locale === 'en' ? `/en/towns/${municipioSlug}` : `/municipio/${municipioSlug}`)
+                  : undefined}
+              />
+              <DataRow
+                k={i18n.provincia}
+                v={playa.provincia}
+                href={provinciaSlug
+                  ? (locale === 'en' ? `/en/provinces/${provinciaSlug}` : `/provincia/${provinciaSlug}`)
+                  : undefined}
+              />
+              <DataRow
+                k={i18n.comunidad}
+                v={playa.comunidad}
+                href={locale === 'en' ? `/en/communities/${slug(playa.comunidad)}` : `/comunidad/${slug(playa.comunidad)}`}
+              />
+              <DataRow k={i18n.coordenadas} v={`${playa.lat}° N, ${playa.lng}° E`} mono/>
+              {playa.web_ayuntamiento && (
+                <DataRow k={i18n.webAyuntamiento} v={i18n.verSitio} href={playa.web_ayuntamiento}/>
+              )}
+              {playa.url_miteco && (
+                <DataRow k={i18n.fichaMiteco} v={i18n.verSitio} href={playa.url_miteco}/>
+              )}
+              {/* Emergencias embebidas */}
+              {playa.hospital && (
+                <>
+                  <div style={{ height: '.5rem' }}/>
+                  <DataRow k={i18n.hospital} v={playa.hospital}/>
+                  {playa.hospital_dist && <DataRow k={i18n.hospital_dist} v={playa.hospital_dist}/>}
+                  {playa.hospital_tel && (
+                    <div style={{ marginTop:'.65rem', display:'flex', gap:'.5rem', flexWrap:'wrap' }}>
+                      <a href={`tel:${playa.hospital_tel}`} style={{
+                        display:'inline-flex', alignItems:'center',
+                        background:'#7a2818', color:'#fff',
+                        padding:'.4rem .85rem', borderRadius:'8px',
+                        textDecoration:'none', fontSize:'.72rem', fontWeight:700,
+                      }}>
+                        {i18n.llamar} {playa.hospital_tel}
+                      </a>
+                      <a href="tel:112" style={{
+                        display:'inline-flex', alignItems:'center',
+                        background:'rgba(122,40,24,.1)', color:'#7a2818',
+                        border:'1px solid rgba(239,68,68,.3)',
+                        padding:'.4rem .85rem', borderRadius:'8px',
+                        textDecoration:'none', fontSize:'.72rem', fontWeight:700,
+                      }}>
+                        112
+                      </a>
+                    </div>
+                  )}
+                </>
+              )}
             </Collapsible>
           </div>
         </div>
