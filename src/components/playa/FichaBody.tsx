@@ -34,6 +34,7 @@ import { generarReporteSistema } from '@/lib/reporteSistema'
 import EstadoHoy from './EstadoHoy'
 import AsistentePlaya from './AsistentePlaya'
 import AffiliatesCTABlock from './AffiliatesCTABlock'
+import OpinionesDestacadas from './OpinionesDestacadas'
 import BeachVideoToggle from './BeachVideoToggle'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
@@ -432,9 +433,19 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         </div>
 
-        {/* 6. OPINIONES — movido aquí (PR #86) desde el final. La
-            prueba social pesa para decidir, no debe estar enterrada
-            en posición 31/32. */}
+        {/* 6. OPINIONES DESTACADAS — 3 opiniones inline (PR #86)
+            Prueba social inline en Fase 1 (decisión).
+            La sección completa sigue abajo para quien quiera más detalles. */}
+        {opinionesIniciales?.items && opinionesIniciales.items.length > 0 && (
+          <OpinionesDestacadas
+            opiniones={opinionesIniciales.items}
+            locale={locale}
+          />
+        )}
+
+        {/* SECCIÓN COMPLETA DE OPINIONES
+            Versión full con form para nuevas opiniones, paginación, etc.
+            Se mantiene al final de la página para quien quiera profundizar. */}
         <Opiniones
           slug={playa.slug}
           nombre={playa.nombre}
