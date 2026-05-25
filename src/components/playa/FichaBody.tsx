@@ -33,6 +33,7 @@ import { nombreConPlaya } from '@/lib/geo'
 import { generarReporteSistema } from '@/lib/reporteSistema'
 import EstadoHoy from './EstadoHoy'
 import AsistentePlaya from './AsistentePlaya'
+import AffiliatesCTABlock from './AffiliatesCTABlock'
 import BeachVideoToggle from './BeachVideoToggle'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
@@ -42,6 +43,7 @@ const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
 const CIVITATIS_AFF = process.env.NEXT_PUBLIC_CIVITATIS_AFF ?? ''
 const THEFORK_AFF = process.env.NEXT_PUBLIC_THEFORK_AFF ?? ''
 const RENTALCARS_AFF = process.env.NEXT_PUBLIC_RENTALCARS_AFF ?? ''
+const PITCHUP_AFF = process.env.NEXT_PUBLIC_PITCHUP_AFF ?? ''
 
 // Lazy load below-fold components (SSR habilitado para SEO; solo Leaflet no soporta SSR)
 const TraficoSection = dynamic(() => import('./TraficoSection'))
@@ -440,6 +442,21 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           locale={locale}
         />
 
+        {/* BLOQUE UNIFICADO DE CTAs AFILIADOS (PR #86 - Consolidación)
+            Reemplaza 7 CTAs dispersos: TheFork, Booking, Civitatis, RentalCars, Pitchup
+            con un bloque tabbed que mantiene todos los servicios accesibles. */}
+        <AffiliatesCTABlock
+          playa={playa}
+          affiliates={{
+            booking: BOOKING_AID || undefined,
+            thefork: THEFORK_AFF || undefined,
+            civitatis: CIVITATIS_AFF || undefined,
+            rentalcars: RENTALCARS_AFF || undefined,
+            pitchup: PITCHUP_AFF || undefined,
+          }}
+          locale={locale}
+        />
+
         {/* AD entre fotos-oleaje ELIMINADO en PR #86 (revisión orden):
             con galería movida abajo y secciones de seguridad arriba,
             el ad rompía el flow. El otro AdSlot al final de hoteles
@@ -592,34 +609,6 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           turbidez={turbidez} meteo={meteoForecast}
         />
 
-        {/* Civitatis affiliate CTA */}
-        {CIVITATIS_AFF && (
-          <div style={{
-            background: 'linear-gradient(135deg, #ff6b35, #f7931e)',
-            borderRadius: 6, padding: '1rem 1.15rem', marginBottom: '.85rem',
-            display: 'flex', alignItems: 'center', gap: '.75rem',
-          }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: '.82rem', fontWeight: 700, color: '#fff', marginBottom: 4 }}>
-                {locale === 'en' ? `Activities near ${playa.nombre}` : `Actividades cerca de ${nombreH}`}
-              </div>
-              <div style={{ fontSize:'.74rem', color: 'rgba(255,255,255,.85)' }}>
-                {locale === 'en' ? 'Surf lessons, kayak tours, snorkeling and more' : 'Clases de surf, kayak, snorkel y más'}
-              </div>
-            </div>
-            <a
-              href={`https://www.civitatis.com/es/${playa.municipio.toLowerCase().replace(/\s+/g,'-')}/?aid=${CIVITATIS_AFF}`}
-              target="_blank" rel="noopener noreferrer sponsored"
-              style={{
-                padding: '.55rem 1rem', background: '#fff', color: '#ff6b35',
-                borderRadius: 4, fontSize: '.78rem', fontWeight: 500,
-                textDecoration: 'none', flexShrink: 0,
-              }}
-            >
-              {locale === 'en' ? 'Explore →' : 'Ver →'}
-            </a>
-          </div>
-        )}
 
         {/* CÓMO LLEGAR */}
         <div className={styles.card} id="s-comoLlegar">
@@ -641,22 +630,6 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
                 <Person size={18} weight='bold'/> {locale === 'en' ? 'Walking' : 'A pie'}
               </a>
-              {/* Rentalcars affiliate */}
-              {RENTALCARS_AFF && (
-                <a
-                  href={`https://www.rentalcars.com/search-results?latitude=${playa.lat}&longitude=${playa.lng}&affiliateCode=${RENTALCARS_AFF}`}
-                  target="_blank" rel="noopener noreferrer sponsored"
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
-                    padding: '.9rem 1.1rem', borderRadius: 4,
-                    background: '#0071c2', color: '#fff',
-                    textDecoration: 'none', fontWeight: 600, fontSize: '.9rem',
-                  }}
-                >
-                  <Car size={18} weight="bold" />
-                  {locale === 'en' ? 'Rent a car. Rentalcars.com' : 'Alquilar coche. Rentalcars.com'}
-                </a>
-              )}
             </div>
 
             {/* Detalles oficiales de acceso (MITECO) */}
@@ -744,22 +717,6 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 </div>
               )}
             </div>
-            {/* TheFork / ElTenedor affiliate CTA */}
-            {THEFORK_AFF && (
-              <a
-                href={`https://www.thefork.es/search?cityId=&geoSlug=&q=${encodeURIComponent(playa.municipio)}&partner=${THEFORK_AFF}`}
-                target="_blank" rel="noopener noreferrer sponsored"
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
-                  width: '100%', padding: '.65rem', marginTop: '.6rem',
-                  background: '#00665c', color: '#fff', borderRadius: 4,
-                  fontSize: '.8rem', fontWeight: 700, textDecoration: 'none',
-                }}
-              >
-                <ForkKnife size={16} weight="bold" />
-                {locale === 'en' ? `Book a table in ${playa.municipio}` : `Reservar mesa en ${playa.municipio}`}
-              </a>
-            )}
             </Collapsible>
           </div>
         </div>
@@ -816,24 +773,6 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 </div>
               )}
             </div>
-            {/* Booking.com affiliate CTA */}
-            {BOOKING_AID && (
-              <a
-                href={`https://www.booking.com/searchresults.html?aid=${BOOKING_AID}&label=playa-${playa.slug}&latitude=${playa.lat}&longitude=${playa.lng}&radius=5&checkin=&checkout=`}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
-                  width: '100%', padding: '.7rem', marginTop: '.6rem',
-                  background: '#003580', color: '#fff', borderRadius: 4,
-                  fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
-                  transition: 'opacity .15s',
-                }}
-              >
-                <Bed size={16} weight="bold" />
-                {locale === 'en' ? `Find hotels near ${playa.nombre}` : `Buscar hoteles cerca de ${nombreH}`}
-              </a>
-            )}
             </Collapsible>
           </div>
         </div>
@@ -915,37 +854,6 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 })}
               </div>
 
-              {/* Pitchup affiliate CTA */}
-              {process.env.NEXT_PUBLIC_PITCHUP_AFF && (
-                <a
-                  href={`https://www.pitchup.com/es/campings/espana/?aff=${process.env.NEXT_PUBLIC_PITCHUP_AFF}&q=${encodeURIComponent(playa.municipio)}`}
-                  target="_blank" rel="noopener noreferrer sponsored"
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
-                    width: '100%', padding: '.7rem', marginTop: '.6rem',
-                    background: '#ff6b35', color: '#fff', borderRadius: 4,
-                    fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
-                  }}
-                >
-                  ⛺ {locale === 'en' ? `Book camping with Pitchup` : `Reservar camping en Pitchup`}
-                </a>
-              )}
-
-              {/* Fallback: Booking.com también tiene campings */}
-              {!process.env.NEXT_PUBLIC_PITCHUP_AFF && process.env.NEXT_PUBLIC_BOOKING_AID && (
-                <a
-                  href={`https://www.booking.com/searchresults.html?aid=${process.env.NEXT_PUBLIC_BOOKING_AID}&label=camping-${playa.slug}&latitude=${playa.lat}&longitude=${playa.lng}&radius=10&nflt=privacy_type%3D3`}
-                  target="_blank" rel="noopener noreferrer sponsored"
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
-                    width: '100%', padding: '.7rem', marginTop: '.6rem',
-                    background: '#003580', color: '#fff', borderRadius: 4,
-                    fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
-                  }}
-                >
-                  ⛺ {locale === 'en' ? 'Find campsites on Booking.com' : 'Buscar campings en Booking.com'}
-                </a>
-              )}
             </div>
           </div>
         )}
