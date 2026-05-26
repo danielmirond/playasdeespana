@@ -37,6 +37,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'webratings.eu' },
     ],
     formats: ['image/avif', 'image/webp'],
+    qualities: [70, 75],
   },
   async headers() {
     return [
