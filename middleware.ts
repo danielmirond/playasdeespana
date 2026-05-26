@@ -35,11 +35,12 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url, { status: 301 })
   }
 
-  // No redirigir rutas ya localizadas, API, archivos estáticos
+  // No redirigir rutas ya localizadas, API, archivos estáticos, ni rutas ES-only
   if (
     pathname.startsWith('/en') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
+    pathname.startsWith('/alquiler-barco') ||
     pathname.includes('.')
   ) return NextResponse.next()
 

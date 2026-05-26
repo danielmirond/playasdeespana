@@ -1,28 +1,27 @@
-import type { NextConfig } from 'next'
-import fs from 'node:fs'
-import path from 'node:path'
+const fs = require('node:fs')
+const path = require('node:path')
 
 // Redirects dinámicos generados por scripts/sync-playas-miteco.js:
 // slugs OSM viejos → slugs MITECO canónicos (solo playas con Bandera Azul).
 // Se cargan una vez al build; si el archivo no existe el array queda vacío.
-function loadSlugRedirects(): Array<{ source: string; destination: string; permanent: boolean }> {
+function loadSlugRedirects() {
   try {
     const file = path.join(process.cwd(), 'public', 'data', 'slug-redirects.json')
     if (!fs.existsSync(file)) return []
-    const data: Record<string, string> = JSON.parse(fs.readFileSync(file, 'utf8'))
-    const out: Array<{ source: string; destination: string; permanent: boolean }> = []
+    const data = JSON.parse(fs.readFileSync(file, 'utf8'))
+    const out = []
     for (const [oldSlug, newSlug] of Object.entries(data)) {
       out.push({ source: `/playas/${oldSlug}`, destination: `/playas/${newSlug}`, permanent: true })
       out.push({ source: `/en/beaches/${oldSlug}`, destination: `/en/beaches/${newSlug}`, permanent: true })
     }
     return out
   } catch (e) {
-    console.warn('[next.config] Could not load slug-redirects.json:', (e as Error).message)
+    console.warn('[next.config] Could not load slug-redirects.json:', e.message)
     return []
   }
 }
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   // Tree-shake agresivo de librerías grandes
   experimental: {
     optimizePackageImports: ['@phosphor-icons/react'],
@@ -157,4 +156,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+module.exports = nextConfig
