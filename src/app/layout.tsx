@@ -3,6 +3,7 @@ import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ConsentScripts from '@/components/ui/ConsentScripts'
 import NavigationProgress from '@/components/ui/NavigationProgress'
+import MobileNav from '@/components/ui/MobileNav'
 import Footer from '@/components/ui/Footer'
 import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
 import './globals.css'
@@ -253,6 +254,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
         />
         <NavigationProgress />
+        <MobileNav />
         {children}
         <Footer />
         {/* GA4 + AdSense. cargados condicionalmente por consentimiento */}

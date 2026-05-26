@@ -1,11 +1,9 @@
 // src/lib/fetch-timeout.ts — Fetch con timeout para evitar que APIs lentas bloqueen la página
 
-// Default 2s. El deadline global del SSR de la ficha es 1.5s
-// (ver src/app/playas/[slug]/page.tsx). Cualquier fetch dentro debería
-// resolver antes para no perderse. APIs específicas pueden subir el
-// timeout localmente si saben que merece esperar (ej. cascada de fotos
-// en cache-warm cron donde no hay deadline de TTFB).
-const DEFAULT_TIMEOUT = 2000
+// Default 3s (aumentado desde 2s para dar más tiempo a APIs internacionales).
+// El deadline global del SSR de la ficha es ~2.5s (ver src/app/playas/[slug]/page.tsx).
+// APIs específicas pueden subir el timeout localmente si necesitan esperar más.
+const DEFAULT_TIMEOUT = 3000
 
 export async function fetchWithTimeout(
   url: string,
