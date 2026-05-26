@@ -32,6 +32,8 @@ const nextConfig = {
       { protocol: 'https', hostname: 'source.unsplash.com' },
       { protocol: 'https', hostname: '**.wikimedia.org' },
       { protocol: 'https', hostname: '**.staticflickr.com' },
+      { protocol: 'https', hostname: 'images.pexels.com' },
+      { protocol: 'https', hostname: 'images.openverse.org' },
       { protocol: 'https', hostname: 'webratings.eu' },
     ],
     formats: ['image/avif', 'image/webp'],
