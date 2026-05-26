@@ -45,19 +45,6 @@ export default async function HomePageEn() {
         <Destacadas playas={destacadas} locale="en" />
         <ComunidadesEn comunidades={comunidades} />
       </main>
-      <footer style={{
-        borderTop: '1px solid var(--line)',
-        padding: '1.75rem 2rem',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        flexWrap: 'wrap', gap: '1rem',
-        maxWidth: '1000px', margin: '0 auto',
-        fontSize: '.75rem', color: 'var(--muted)',
-      }}>
-        <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--accent)', fontSize: '.9rem' }}>
-          Beaches of Spain
-        </span>
-        <span>{en.footer.data_sources}</span>
-      </footer>
     </>
   )
 }
