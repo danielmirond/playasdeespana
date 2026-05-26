@@ -28,12 +28,29 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
+      // Unsplash
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'source.unsplash.com' },
+
+      // Wikimedia (Commons, Wikipedia, etc.)
       { protocol: 'https', hostname: '**.wikimedia.org' },
+
+      // Flickr
       { protocol: 'https', hostname: '**.staticflickr.com' },
+
+      // Pexels
       { protocol: 'https', hostname: 'images.pexels.com' },
+
+      // OpenVerse (agregador que puede servir de múltiples fuentes)
       { protocol: 'https', hostname: 'images.openverse.org' },
+
+      // Museum sources (vía OpenVerse)
+      { protocol: 'https', hostname: '**.metropolitanmuseum.org' },
+      { protocol: 'https', hostname: '**.clevelandart.org' },
+      { protocol: 'https', hostname: '**.si.edu' }, // Smithsonian
+      { protocol: 'https', hostname: '**.yale.edu' },
+
+      // Other sources
       { protocol: 'https', hostname: 'webratings.eu' },
     ],
     formats: ['image/avif', 'image/webp'],
