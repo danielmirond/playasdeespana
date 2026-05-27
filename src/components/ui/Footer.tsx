@@ -81,6 +81,7 @@ export default function Footer({ locale = 'es' }: Props) {
               <Link href="/campings" style={ls}>{es ? 'Campings cerca de la playa' : 'Campsites near beaches'}</Link>
               <Link href="/buceo" style={ls}>{es ? 'Buceo en España' : 'Diving in Spain'}</Link>
               <Link href="/surf" style={ls}>{es ? 'Surf en España' : 'Surf in Spain'}</Link>
+              <Link href="/alquiler-barco" style={ls}>{es ? 'Alquiler de barcos' : 'Boat rental'}</Link>
               <Link href="/alquiler-barco-playa" style={ls}>{es ? 'Alquilar barco con patrón' : 'Skippered boat rental'}</Link>
               <Link href="/playas-autocaravana" style={ls}>{es ? 'Playas para autocaravana' : 'Beaches for campervans'}</Link>
               <Link href="/hoteles-playa" style={ls}>{es ? 'Hoteles en la playa' : 'Beach hotels'}</Link>
