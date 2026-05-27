@@ -192,10 +192,43 @@ export default async function AlquilerBarcoPage() {
           </section>
         )}
 
-        {/* Plataformas */}
+        {/* Plataformas - Tabla Comparativa */}
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '1rem' }}>
           Las 3 plataformas líderes comparadas
         </h2>
+
+        {/* Tabla comparativa */}
+        <div style={{ overflowX: 'auto', marginBottom: '2.5rem' }}>
+          <table style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            fontSize: '.85rem',
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--line)',
+            borderRadius: 6,
+          }}>
+            <thead>
+              <tr style={{ backgroundColor: 'rgba(107,114,128,.08)', borderBottom: '1px solid var(--line)' }}>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 700 }}>Plataforma</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 700 }}>Catálogo</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 700 }}>Licencia</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 700 }}>Cobertura</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 700 }}>Respuesta</th>
+              </tr>
+            </thead>
+            <tbody>
+              {plataformasActivas.map((p, i) => (
+                <tr key={p.marca} style={{ borderBottom: i < plataformasActivas.length - 1 ? '1px solid var(--line)' : 'none' }}>
+                  <td style={{ padding: '1rem', fontWeight: 700, color: p.color }}>{p.marca}</td>
+                  <td style={{ padding: '1rem' }}>40.000+ (CB)<br/>8.000+ (SB)<br/>2.500+ (Nautal)</td>
+                  <td style={{ padding: '1rem' }}>Sí (CB, SB)<br/>Premium (Nautal)</td>
+                  <td style={{ padding: '1rem' }}>España y Med.<br/>España completa<br/>Baleares (fuerte)</td>
+                  <td style={{ padding: '1rem' }}>24-48h (CB)<br/>Chat (SB)<br/>1-2h (Nautal)</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         {plataformasActivas.length === 0 ? (
           <div style={{
             background: 'rgba(234,179,8,.1)', border: '1px solid rgba(234,179,8,.4)',
@@ -330,36 +363,64 @@ export default async function AlquilerBarcoPage() {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* FAQ - Reorganizado por temas */}
         <section aria-labelledby="h2-faq">
           <h2 id="h2-faq" style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.75rem' }}>
             Preguntas frecuentes
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
-            {[
-              {
-                q: '¿Cuánto cuesta alquilar un barco en España?',
-                a: 'Desde 80€/día una lancha pequeña sin licencia. Una semirrígida de 6m ronda 200-350€/día. Un velero de 10m con patrón sale por 400-800€/día. Yates de lujo desde 1.500€/día. Los precios suben un 30-50% en julio-agosto.',
-              },
-              {
-                q: '¿Necesito licencia para alquilar un barco?',
-                a: 'No si es motor de hasta 15CV y eslora hasta 5m (lancha pequeña). Para veleros o motores mayores, necesitas PER (Patrón de Embarcaciones de Recreo) o contratar skipper. Las plataformas filtran barcos sin licencia.',
-              },
-              {
-                q: '¿Se puede dormir en el barco alquilado?',
-                a: 'Sí, en veleros y catamaranes grandes con camarotes. Algunos alquileres de semana incluyen fondeos en calas. Requiere planificación de puerto, agua y combustible. Nautal y Click&Boat tienen filtros para "charter con noches".',
-              },
-              {
-                q: '¿Qué incluye el precio de alquiler?',
-                a: 'Normalmente: barco, seguro básico, equipo de seguridad. NO incluye: combustible (150-400€/día según barco), limpieza final (50-150€), skipper si no tienes licencia (+150-300€/día), comida y bebida.',
-              },
-            ].map((f, i) => (
-              <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
-                <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>{f.q}</summary>
-                <p style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: '.55rem' }}>{f.a}</p>
-              </details>
-            ))}
-          </div>
+
+          {/* FAQ by category */}
+          {[
+            {
+              category: 'Costos y Presupuesto',
+              icon: '💰',
+              questions: [
+                {
+                  q: '¿Cuánto cuesta alquilar un barco en España?',
+                  a: 'Desde 80€/día una lancha pequeña sin licencia. Una semirrígida de 6m ronda 200-350€/día. Un velero de 10m con patrón sale por 400-800€/día. Yates de lujo desde 1.500€/día. Los precios suben un 30-50% en julio-agosto y en destinos premium (Baleares, Canarias).',
+                },
+                {
+                  q: '¿Qué incluye el precio de alquiler?',
+                  a: 'Normalmente: barco, seguro básico, equipo de seguridad. NO incluye: combustible (150-400€/día según barco), limpieza final (50-150€), skipper si no tienes licencia (+150-300€/día), comida y bebida. Algunas plataformas ofrecen "all-inclusive".',
+                },
+              ]
+            },
+            {
+              category: 'Licencia y Regulaciones',
+              icon: '📋',
+              questions: [
+                {
+                  q: '¿Necesito licencia para alquilar un barco?',
+                  a: 'No si es motor hasta 15CV y eslora hasta 5m (lancha pequeña) dentro de 2 millas de costa. Para veleros o motores mayores, necesitas PER (Patrón de Embarcaciones de Recreo) o contratar skipper. Las plataformas filtran barcos sin licencia automáticamente.',
+                },
+              ]
+            },
+            {
+              category: 'Alojamiento y Servicios',
+              icon: '🛏️',
+              questions: [
+                {
+                  q: '¿Se puede dormir en el barco alquilado?',
+                  a: 'Sí, en veleros y catamaranes grandes con camarotes. Algunos alquileres de semana incluyen fondeos en calas. Requiere planificación de puerto, agua y combustible. Nautal y Click&Boat tienen filtros específicos para "charter con noches".',
+                },
+              ]
+            },
+          ].map((section, sectionIdx) => (
+            <div key={sectionIdx} style={{ marginBottom: '2rem' }}>
+              <h3 style={{ fontSize: '.95rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.75rem', display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+                <span style={{ fontSize: '1.2rem' }}>{section.icon}</span>
+                {section.category}
+              </h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
+                {section.questions.map((f, i) => (
+                  <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
+                    <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>{f.q}</summary>
+                    <p style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: '.55rem' }}>{f.a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          ))}
         </section>
       </main>
 
