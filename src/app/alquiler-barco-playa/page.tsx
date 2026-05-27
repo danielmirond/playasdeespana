@@ -17,7 +17,7 @@ const CLICKBOAT_AFF = process.env.NEXT_PUBLIC_CLICKBOAT_AFF ?? ''
 // identifica a Samboat en Awin; el awinaffid identifica nuestra cuenta;
 // el clickref nos permite segmentar conversiones (página origen).
 const SAMBOAT_AFF       = process.env.NEXT_PUBLIC_SAMBOAT_AFF ?? ''       // awinaffid
-const SAMBOAT_CLICKREF  = process.env.NEXT_PUBLIC_SAMBOAT_CLICKREF ?? 'unuus-21'
+const SAMBOAT_CLICKREF  = process.env.NEXT_PUBLIC_SAMBOAT_CLICKREF ?? 'playasdeespana_barco_playa'
 const SAMBOAT_AWIN_MID  = '32683'
 const NAUTAL_AFF    = process.env.NEXT_PUBLIC_NAUTAL_AFF ?? ''
 
