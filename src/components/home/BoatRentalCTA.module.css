@@ -1,0 +1,126 @@
+/* BoatRentalCTA.module.css */
+
+.section {
+  max-width: 1000px;
+  margin: 3rem auto 0;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(135deg, rgba(99, 179, 237, 0.1) 0%, rgba(99, 179, 237, 0.05) 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(99, 179, 237, 0.2);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.leftContent h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  letter-spacing: -0.015em;
+}
+
+.leftContent p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6363ed;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 6px;
+  background: #6363ed;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border: 1px solid #6363ed;
+}
+
+.cta:hover {
+  background: white;
+  color: #6363ed;
+}
+
+.rightContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.featureCard {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(99, 179, 237, 0.15);
+}
+
+.featureIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  background: rgba(99, 179, 237, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.featureLabel {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.featureDesc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 1.5rem;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .leftContent h2 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  }
+
+  .rightContent {
+    order: -1;
+  }
+}
