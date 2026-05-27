@@ -38,6 +38,7 @@ export default function MobileNav() {
     { href: isEn ? '/en/communities' : '/comunidades', label: isEn ? 'Communities' : 'Comunidades' },
     { href: isEn ? '/en/blue-flag' : '/banderas-azules', label: isEn ? 'Blue Flag' : 'Banderas Azules' },
     ...(isEn ? [] : [
+      { href: '/alquiler-barco', label: 'Alquiler de Barcos' },
       { href: '/playas-perros', label: 'Perros' },
       { href: '/playas-nudistas', label: 'Nudistas' },
       { href: '/surf', label: 'Surf' },
