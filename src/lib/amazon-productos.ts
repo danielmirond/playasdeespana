@@ -13,39 +13,39 @@ export interface ProductoAmazon {
 
 export const PRODUCTOS = {
   siempre: [
-    { asin: 'B00WG29EH8', nombre: 'Protector solar SPF50', precio: '20-30', categoria: 'sol' },
-    { asin: 'B07HHMC55Z', nombre: 'Funda móvil estanca', precio: '8-15', categoria: 'tech' },
-    { asin: 'B0BLM5R5JN', nombre: 'Botella térmica 1L', precio: '25-40', categoria: 'hidratación' },
+    { asin: 'B0D7HZSDMC', nombre: 'Protector solar SPF50+ premium', precio: '18-28', categoria: 'sol' },
+    { asin: 'B0CQGZG8Y8', nombre: 'Funda móvil estanca certificada', precio: '10-18', categoria: 'tech' },
+    { asin: 'B0BX9R1H3V', nombre: 'Botella térmica inox 1L', precio: '28-45', categoria: 'hidratación' },
   ],
   calma: [
-    { asin: 'B003E5EVN8', nombre: 'Set snorkel Cressi Palau', precio: '40-60', categoria: 'snorkel' },
-    { asin: 'B07R7H3X5C', nombre: 'Paddle surf hinchable', precio: '350-500', categoria: 'paddle' },
-    { asin: 'B009RQUYNS', nombre: 'Kayak hinchable Intex', precio: '150-220', categoria: 'kayak' },
+    { asin: 'B0BWTY4VDK', nombre: 'Set snorkel Cressi máscara+tubo', precio: '38-58', categoria: 'snorkel' },
+    { asin: 'B0B3Q8KZQK', nombre: 'Paddle surf hinchable 10 pies', precio: '280-420', categoria: 'paddle' },
+    { asin: 'B0BSCLKKXZ', nombre: 'Kayak hinchable Intex 2 plazas', precio: '140-200', categoria: 'kayak' },
   ],
   surf: [
-    { asin: 'B01N1WGRHS', nombre: 'Mochila estanca 30L', precio: '35-55', categoria: 'surf' },
-    { asin: 'B0CGW8HBGS', nombre: 'GoPro Hero 12', precio: '350-450', categoria: 'tech' },
-    { asin: 'B003U3K1WM', nombre: 'Escarpines neopreno Cressi', precio: '15-25', categoria: 'calzado' },
+    { asin: 'B0C2LQM5ZQ', nombre: 'Mochila estanca 25L', precio: '32-52', categoria: 'surf' },
+    { asin: 'B0C7GZQ8C5', nombre: 'Cámara acción 4K sumergible', precio: '120-200', categoria: 'tech' },
+    { asin: 'B0C5WVQPBG', nombre: 'Neopreno escarpines 3mm', precio: '18-28', categoria: 'calzado' },
   ],
   familia: [
-    { asin: 'B07KQHQH3X', nombre: 'Carpa playa UPF50', precio: '40-60', categoria: 'sombra' },
-    { asin: 'B073RXPZTL', nombre: 'Palas y set playa niños', precio: '15-25', categoria: 'juego' },
-    { asin: 'B07VTJBZWY', nombre: 'Nevera portátil Coleman 28L', precio: '50-80', categoria: 'nevera' },
+    { asin: 'B0D2G3MJXV', nombre: 'Tienda playa pop-up UPF50', precio: '35-55', categoria: 'sombra' },
+    { asin: 'B0CXKC8LSV', nombre: 'Set playa niños palas+cubos', precio: '12-22', categoria: 'juego' },
+    { asin: 'B0BZZH2JJ5', nombre: 'Nevera portátil 30L ruedas', precio: '55-85', categoria: 'nevera' },
   ],
   arena: [
-    { asin: 'B07PYM2YLS', nombre: 'Sombrilla antiviento 200cm', precio: '30-45', categoria: 'sombra' },
-    { asin: 'B07YHFK5DY', nombre: 'Toalla microfibra XL', precio: '25-40', categoria: 'toalla' },
-    { asin: 'B0014C5O5K', nombre: 'Crocs Classic Clog', precio: '35-55', categoria: 'calzado' },
+    { asin: 'B0BYLDV3FQ', nombre: 'Sombrilla playa 180cm anti-UV', precio: '28-42', categoria: 'sombra' },
+    { asin: 'B0C9JQPLFR', nombre: 'Toalla microfibra secado rápido', precio: '22-35', categoria: 'toalla' },
+    { asin: 'B0C4WXGJM2', nombre: 'Chanclas neopreno ajustables', precio: '32-50', categoria: 'calzado' },
   ],
   rocosa: [
-    { asin: 'B003U3K1WM', nombre: 'Escarpines neopreno Cressi', precio: '15-25', categoria: 'calzado' },
-    { asin: 'B003E5EVN8', nombre: 'Set snorkel Cressi Palau', precio: '40-60', categoria: 'snorkel' },
-    { asin: 'B003E5GBBQ', nombre: 'Aletas snorkel cortas', precio: '30-50', categoria: 'snorkel' },
+    { asin: 'B0C5WVQPBG', nombre: 'Neopreno escarpines 3mm', precio: '18-28', categoria: 'calzado' },
+    { asin: 'B0BWTY4VDK', nombre: 'Set snorkel Cressi máscara+tubo', precio: '38-58', categoria: 'snorkel' },
+    { asin: 'B0D1GVKHXQ', nombre: 'Aletas snorkel cortas adulto', precio: '28-45', categoria: 'snorkel' },
   ],
   lectura: [
-    { asin: 'B0CFPJYX7P', nombre: 'Kindle Paperwhite', precio: '160-180', categoria: 'lectura' },
-    { asin: 'B07HJSL8KL', nombre: 'Manta picnic impermeable XL', precio: '25-40', categoria: 'picnic' },
-    { asin: 'B0CTKXG1HW', nombre: 'Altavoz JBL Clip 5 waterproof', precio: '60-80', categoria: 'audio' },
+    { asin: 'B0CK3YJDH8', nombre: 'Kindle 11 ed. + funda', precio: '145-170', categoria: 'lectura' },
+    { asin: 'B0C4ZXY8MJ', nombre: 'Manta picnic impermeable 200x150', precio: '20-35', categoria: 'picnic' },
+    { asin: 'B0BYYBZ3HW', nombre: 'Altavoz Bluetooth waterproof', precio: '45-75', categoria: 'audio' },
   ],
 } as const
 
