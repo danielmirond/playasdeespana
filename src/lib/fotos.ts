@@ -107,6 +107,19 @@ function extraerFotosDePages(pages: any[]): FotoPlaya[] {
       if (NEGATIVAS.test(titulo)) return null
       const ext = ii.url?.split('.').pop()?.toLowerCase()
       if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext ?? '')) return null
+
+      // Validar que URL de Wikimedia tenga estructura esperada (evita URLs rotas)
+      // Formato válido: https://*.wikimedia.org/.../{archivo}.{ext}?...
+      const isValidWikimediaUrl = (url: string): boolean => {
+        try {
+          const u = new URL(url)
+          return u.hostname?.includes('wikimedia.org') === true &&
+                 /\.(jpg|jpeg|png|webp)(\?|$)/i.test(url)
+        } catch { return false }
+      }
+
+      if (!isValidWikimediaUrl(ii.thumburl)) return null
+
       const w = ii.width ?? 0
       const h = ii.height ?? 0
       // Descartar imágenes muy pequeñas, verticales raras o mapas
@@ -121,6 +134,7 @@ function extraerFotosDePages(pages: any[]): FotoPlaya[] {
       // URL para ambos tamaños: evita falsos 404 que aparecían antes por
       // intentar reconstruir un /300px-/ que no siempre existe (imágenes
       // más pequeñas que 800, o con nombres con dígitos que rompían el regex).
+      // Ahora también validamos URL para evitar links rotos en cache.
       return {
         score,
         url: ii.thumburl,
@@ -998,9 +1012,10 @@ async function getFotosUncached(
 }
 
 // Negative caching: si la cascada devuelve [], persistimos un marcador
-// 'EMPTY' en KV con TTL corto (1h) para evitar martilleo. Si tras 1h
+// 'EMPTY' en KV con TTL corto (10 min) para evitar martilleo. Si tras 10 min
 // vuelve a haber visita, reintentamos por si el API se ha recuperado.
-const KV_TTL_NEGATIVE = 60 * 60
+// TTL anterior (3600s) era demasiado largo cuando APIs fallaban.
+const KV_TTL_NEGATIVE = 10 * 60
 
 // Marcador especial: array con un objeto sentinela. Se distingue de un
 // array de FotoPlaya válida porque tiene fuente='__empty__'.
