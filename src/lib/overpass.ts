@@ -59,13 +59,10 @@ export async function queryOverpass(
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
-        body: query,
+        body: `data=${encodeURIComponent(query)}`,
         signal: controller.signal,
         headers: {
-          // Overpass acepta text/plain para las query en body. Forzamos
-          // keep-alive en Node 20+ vía headers para reutilizar conexión.
-          'Content-Type': 'text/plain; charset=utf-8',
-          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
           'User-Agent': 'playas-espana.com/1.0',
         },
         next: { revalidate },
