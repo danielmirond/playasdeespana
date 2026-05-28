@@ -22,7 +22,9 @@ function tipoDesdeAmenity(amenity: string): string {
 const KV_TTL_RESTAURANTES = 3 * 24 * 3600
 
 export function getRestaurantes(lat: number, lon: number): Promise<Restaurante[]> {
-  return kvCached('restaurantes', [lat, lon], KV_TTL_RESTAURANTES, () => fetchRestaurantesFromOverpass(lat, lon))
+  // TEMP: Disable during build due to Overpass API overload
+  return Promise.resolve([])
+  // return kvCached('restaurantes', [lat, lon], KV_TTL_RESTAURANTES, () => fetchRestaurantesFromOverpass(lat, lon))
 }
 
 async function fetchRestaurantesFromOverpass(lat: number, lon: number): Promise<Restaurante[]> {

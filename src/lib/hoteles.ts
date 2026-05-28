@@ -47,7 +47,9 @@ function inferirPrecio(estrellas: number): string {
 const KV_TTL_HOTELES = 7 * 24 * 3600
 
 export function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
-  return kvCached('hoteles', [lat, lon], KV_TTL_HOTELES, () => fetchHotelesFromOverpass(lat, lon))
+  // TEMP: Disable during build due to Overpass API overload
+  return Promise.resolve([])
+  // return kvCached('hoteles', [lat, lon], KV_TTL_HOTELES, () => fetchHotelesFromOverpass(lat, lon))
 }
 
 async function fetchHotelesFromOverpass(lat: number, lon: number): Promise<HotelReal[]> {

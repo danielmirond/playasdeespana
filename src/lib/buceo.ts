@@ -64,7 +64,9 @@ function extraerServicios(tags: Record<string, string>): string[] {
 const KV_TTL_BUCEO = 7 * 24 * 3600
 
 export function getCentrosBuceo(lat: number, lon: number): Promise<CentroBuceo[]> {
-  return kvCached('buceo', [lat, lon], KV_TTL_BUCEO, () => fetchCentrosBuceoFromOverpass(lat, lon))
+  // TEMP: Disable during build due to Overpass API overload
+  return Promise.resolve([])
+  // return kvCached('buceo', [lat, lon], KV_TTL_BUCEO, () => fetchCentrosBuceoFromOverpass(lat, lon))
 }
 
 async function fetchCentrosBuceoFromOverpass(lat: number, lon: number): Promise<CentroBuceo[]> {

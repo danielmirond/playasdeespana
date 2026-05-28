@@ -76,7 +76,9 @@ function extraerServicios(tags: Record<string, string>): string[] {
 const KV_TTL_CAMPINGS = 7 * 24 * 3600
 
 export function getCampings(lat: number, lon: number): Promise<Camping[]> {
-  return kvCached('campings', [lat, lon], KV_TTL_CAMPINGS, () => fetchCampingsFromOverpass(lat, lon))
+  // TEMP: Disable during build due to Overpass API overload
+  return Promise.resolve([])
+  // return kvCached('campings', [lat, lon], KV_TTL_CAMPINGS, () => fetchCampingsFromOverpass(lat, lon))
 }
 
 async function fetchCampingsFromOverpass(lat: number, lon: number): Promise<Camping[]> {
