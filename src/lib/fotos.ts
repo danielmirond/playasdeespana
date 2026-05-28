@@ -176,7 +176,7 @@ async function getFotosWikimediaGeo(lat: number, lon: number, nombre?: string): 
     const res = await fetchWithTimeout(
       `https://commons.wikimedia.org/w/api.php?${params}`,
       { next: { revalidate: 86400 } },
-      3500,
+      1000,  // Reducido de 3500: durante build timeout global es 1.5s total
     )
     if (!res.ok) return []
     const data = await res.json()
@@ -494,7 +494,7 @@ async function getFotosWikimediaText(nombre: string, municipio: string): Promise
       const res = await fetchWithTimeout(
         `https://commons.wikimedia.org/w/api.php?${params}`,
         { next: { revalidate: 86400 } },
-        3500,
+        1000,  // Reducido de 3500: durante build timeout global es 1.5s total
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -552,7 +552,7 @@ async function getFotosUnsplash(nombre: string, municipio: string): Promise<Foto
           headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` },
           next: { revalidate: 86400 },
         },
-        3500,
+        1000,  // Reducido de 3500: durante build timeout global es 1.5s total
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -617,7 +617,7 @@ async function getFotosOpenVerse(nombre: string, municipio: string): Promise<Fot
       const res = await fetchWithTimeout(
         `https://api.openverse.org/v1/images/?${params}`,
         { next: { revalidate: 86400 } },
-        3500,
+        1000,  // Reducido de 3500: durante build timeout global es 1.5s total
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -682,7 +682,7 @@ async function getFotosPexels(nombre: string, municipio: string): Promise<FotoPl
           headers: { Authorization: PEXELS_KEY },
           next: { revalidate: 86400 },
         },
-        3500,
+        1000,  // Reducido de 3500: durante build timeout global es 1.5s total
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -764,7 +764,7 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
       const res = await fetchWithTimeout(
         `https://www.flickr.com/services/feeds/photos_public.gne?${params}`,
         { next: { revalidate: 86400 } },
-        3500,
+        1000,  // Reducido de 3500: durante build timeout global es 1.5s total
       )
       if (!res.ok) continue
       const data = await res.json()
@@ -969,7 +969,19 @@ function cacheKeyLegacy(lat: number, lon: number): string {
 async function getFotosUncached(
   nombre: string, municipio: string, lat: number, lon: number, provincia: string,
 ): Promise<FotoPlaya[]> {
-  const [wikiGeo, wikiLead, openverse, flickr, wikiText, pexels, unsplash] = await Promise.all([
+  // Usar allSettled para no fallar si una API es lenta. Mejor tener
+  // algunas fotos que ninguna. Build timeout total: 1.5s en PlayaPage.
+  //
+  // Timeout global adicional: si todo el array tarda > 1.2s, retorna lo que tenga.
+  const startTime = Date.now()
+  const timeoutPromise = new Promise<typeof results>((resolve) => {
+    const timer = setTimeout(() => {
+      clearTimeout(timer)
+      resolve([]) // Simular allSettled vacío si timeout global
+    }, 1200)
+  })
+
+  const fetchPromise = Promise.allSettled([
     getFotosWikimediaGeo(lat, lon, nombre),
     getFotosWikipediaLeadImage(nombre, municipio, lat, lon),
     getFotosOpenVerse(nombre, municipio),
@@ -978,6 +990,12 @@ async function getFotosUncached(
     getFotosPexels(nombre, municipio),
     getFotosUnsplash(nombre, municipio),
   ])
+
+  const results = await Promise.race([fetchPromise, timeoutPromise as any])
+
+  const [wikiGeo, wikiLead, openverse, flickr, wikiText, pexels, unsplash] = (Array.isArray(results) && results.length > 0)
+    ? results.map(r => r && 'status' in r && r.status === 'fulfilled' ? r.value : [])
+    : [[], [], [], [], [], [], []]
 
   // Combinar sin duplicados (por URL)
   const vistas = new Set<string>()
