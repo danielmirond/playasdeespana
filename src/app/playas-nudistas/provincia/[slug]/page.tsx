@@ -7,6 +7,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import styles from '../../PlayasNudistas.module.css'
 
+export const maxDuration = 60
 export const revalidate = 86400
 interface Props { params: Promise<{ slug: string }> }
 

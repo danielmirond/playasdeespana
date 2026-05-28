@@ -12,6 +12,9 @@ import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 interface Props { params: Promise<{ slug: string }> }
 
+export const maxDuration = 60
+export const revalidate = 86400
+
 export async function generateStaticParams() {
   const comunidades = await getComunidades()
   return comunidades.map(c => ({ slug: c.slug }))

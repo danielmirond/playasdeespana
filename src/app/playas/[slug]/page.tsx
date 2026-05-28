@@ -51,11 +51,9 @@ export const revalidate = 3600
 // desde el cliente via /api/hoteles y /api/restaurantes.
 export const maxDuration = 25
 
-// Pre-renderizamos en build solo las TOP 30 fichas más populares.
-// Antes era todas las banderas azules (647 × 17 fetches = timeout).
-// Ahora con KV cache + deadline 1.5s + cron warm, build solo procesa
-// 30 páginas y la mayoría de fetches sirve desde KV en ms.
-//
+// Pre-renderizamos en build solo las TOP 5 fichas más populares.
+// Antes era TOP 30, lo que causa timeout × 10 workers paralelos = 300 requests.
+// TOP 5 = ~12 segundos por página en peor caso, suficiente buffer para el maxDuration=25.
 // El resto (~5000 playas) sigue ISR con SWR 7d. Garantizamos TTFB
 // CDN-edge para las más visitadas (las que mueven la aguja en NavBoost).
 export async function generateStaticParams() {
@@ -64,7 +62,7 @@ export async function generateStaticParams() {
   const { getPlayas } = await import('@/lib/playas')
   const playas = await getPlayas()
 
-  // Heurística sin GSC: top 30 con Bandera Azul + servicios + accesibilidad.
+  // Heurística sin GSC: top 5 con Bandera Azul + servicios + accesibilidad.
   // Misma lógica que el cron /api/cron/warm?slice=top (mantener sincronizado).
   return playas
     .map(p => ({
@@ -78,7 +76,7 @@ export async function generateStaticParams() {
     }))
     .filter(x => x.score >= 7)            // bandera azul + ≥2 servicios
     .sort((a, b) => b.score - a.score)
-    .slice(0, 30)
+    .slice(0, 5)
     .map(x => ({ slug: x.slug }))
 }
 
