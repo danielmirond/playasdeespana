@@ -27,9 +27,9 @@ export function getRestaurantes(lat: number, lon: number): Promise<Restaurante[]
 
 async function fetchRestaurantesFromOverpass(lat: number, lon: number): Promise<Restaurante[]> {
   // Query compacta: restaurantes, bares, cafés como nodos dentro del radio.
-  // [out:json][timeout:8] limita el tiempo interno de Overpass a 8 s,
-  // complementa nuestro timeout por intento de 7 s en el cliente.
-  const query = `[out:json][timeout:8];
+  // [out:json][timeout:3] limita el tiempo interno de Overpass a 3 s,
+  // complementa nuestro timeout por intento de 6 s en el cliente.
+  const query = `[out:json][timeout:3];
 (
   node["amenity"="restaurant"](around:${RADIUS_M},${lat},${lon});
   node["amenity"="bar"](around:${RADIUS_M},${lat},${lon});

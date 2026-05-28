@@ -68,7 +68,7 @@ export function getCentrosBuceo(lat: number, lon: number): Promise<CentroBuceo[]
 }
 
 async function fetchCentrosBuceoFromOverpass(lat: number, lon: number): Promise<CentroBuceo[]> {
-  const query = `[out:json][timeout:10];
+  const query = `[out:json][timeout:3];
 (
   node["sport"="scuba_diving"](around:${RADIUS_M},${lat},${lon});
   node["amenity"="diving_school"](around:${RADIUS_M},${lat},${lon});

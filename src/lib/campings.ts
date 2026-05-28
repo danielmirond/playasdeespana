@@ -83,7 +83,7 @@ async function fetchCampingsFromOverpass(lat: number, lon: number): Promise<Camp
   // Nodes + ways (camping grandes suelen estar mapeados como área). `out center`
   // nos da lat/lon del centro para los ways. Limitamos a 40 resultados para
   // evitar JSON enorme de Overpass.
-  const query = `[out:json][timeout:8];
+  const query = `[out:json][timeout:3];
 (
   node["tourism"="camp_site"](around:${RADIUS_M},${lat},${lon});
   node["tourism"="caravan_site"](around:${RADIUS_M},${lat},${lon});
@@ -188,7 +188,7 @@ export async function getCampingsEnBbox(
   // Overpass bbox: south,west,north,east
   const bboxStr = `${bbox.minLat},${bbox.minLng},${bbox.maxLat},${bbox.maxLng}`
 
-  const query = `[out:json][timeout:25];
+  const query = `[out:json][timeout:3];
 (
   node["tourism"="camp_site"](${bboxStr});
   node["tourism"="caravan_site"](${bboxStr});
