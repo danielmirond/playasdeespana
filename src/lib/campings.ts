@@ -185,7 +185,9 @@ export async function getCampingsEnBbox(
   playas: Array<{ slug: string; nombre: string; municipio: string; lat: number; lng: number }>,
   options: { revalidate?: number; max?: number } = {}
 ): Promise<CampingConPlaya[]> {
-  if (playas.length === 0) return []
+  // TEMP: Disable during build due to Overpass API overload
+  return []
+  // if (playas.length === 0) return []
   const bbox = bboxFromPoints(playas)
   // Overpass bbox: south,west,north,east
   const bboxStr = `${bbox.minLat},${bbox.minLng},${bbox.maxLat},${bbox.maxLng}`
