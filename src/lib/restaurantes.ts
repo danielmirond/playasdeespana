@@ -38,7 +38,7 @@ async function fetchRestaurantesFromOverpass(lat: number, lon: number): Promise<
 out body 30;`
 
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 4000, // Reducido para build
+    timeoutPerAttempt: 6000, // Reducido para build
     revalidate: 86400,
     label: 'restaurantes',
   })

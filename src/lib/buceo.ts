@@ -80,7 +80,7 @@ async function fetchCentrosBuceoFromOverpass(lat: number, lon: number): Promise<
 out center body 30;`
 
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 4000, // Reducido de 7s: 3 mirrors × 2s = 6s máx durante build
+    timeoutPerAttempt: 6000, // Reducido de 7s: 3 mirrors × 2s = 6s máx durante build
     revalidate: 86400,
     label: 'buceo',
   })
