@@ -81,7 +81,7 @@ async function fetchEscuelasUncached(lat: number, lng: number, radio = 5000): Pr
       body:    `data=${encodeURIComponent(query)}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       next:    { revalidate: 86400 },
-    }, 15000) // Overpass: default 3s es demasiado agresivo
+    }, 3000) // Reducido a 3s durante build: timeout > 3s × 10 workers × 2048 páginas = bloquea build
     if (!res.ok) return []
     const data = await res.json()
 
