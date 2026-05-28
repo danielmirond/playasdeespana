@@ -199,7 +199,7 @@ out center body 200;`
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 12000,
+    timeoutPerAttempt: 2000, // Reducido para build
     revalidate: options.revalidate ?? 7 * 86400,
     label: 'campings-bbox',
   })
