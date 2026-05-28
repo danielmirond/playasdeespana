@@ -93,7 +93,7 @@ async function fetchCampingsFromOverpass(lat: number, lon: number): Promise<Camp
 out center body 40;`
 
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 2000, // Reducido de 7s: 3 mirrors × 2s = 6s máx durante build
+    timeoutPerAttempt: 4000, // Reducido de 7s: 3 mirrors × 2s = 6s máx durante build
     revalidate: 86400,
     label: 'campings',
   })
@@ -199,7 +199,7 @@ out center body 200;`
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 2000, // Reducido para build
+    timeoutPerAttempt: 4000, // Reducido para build
     revalidate: options.revalidate ?? 7 * 86400,
     label: 'campings-bbox',
   })

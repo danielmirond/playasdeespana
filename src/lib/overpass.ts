@@ -46,7 +46,7 @@ export async function queryOverpass(
   opts: OverpassOptions = {},
 ): Promise<any[] | null> {
   const {
-    timeoutPerAttempt = 3000, // Default reducido para SSG
+    timeoutPerAttempt = 4000, // Default reducido para SSG
     revalidate = 86400,
     label = 'overpass',
   } = opts

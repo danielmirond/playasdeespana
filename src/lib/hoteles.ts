@@ -64,7 +64,7 @@ async function fetchHotelesFromOverpass(lat: number, lon: number): Promise<Hotel
 out center body 40;`
 
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 2000, // Reducido para build
+    timeoutPerAttempt: 4000, // Reducido para build
     revalidate: 86400,
     label: 'hoteles',
   })
