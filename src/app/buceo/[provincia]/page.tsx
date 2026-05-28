@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import TopicProvinciaPage, { type TopicConfig } from '@/components/seo/TopicProvinciaPage'
 import { getProvinciasCosteras, getPlayasByProvinciaSlug } from '@/lib/provinciaTopicHelpers'
 
+export const maxDuration = 30
 export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 

@@ -7,6 +7,7 @@ import { DESTINOS_PREMIUM, getDestinoBySlug } from '@/lib/embarcaciones'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+export const maxDuration = 30
 export const revalidate = 86400
 
 export function generateStaticParams() {
