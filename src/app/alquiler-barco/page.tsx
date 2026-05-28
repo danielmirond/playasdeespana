@@ -1,7 +1,38 @@
-'use client'
-
+import type { Metadata } from 'next'
 import { getAllLocalities } from '@/lib/boat-rental-localities'
+import {
+  generateBoatRentalTitle,
+  generateBoatRentalDescription,
+  generateOGImage,
+  generateAlternates,
+  type MetadataParams
+} from '@/lib/seo/boat-rental-metadata'
+import { generateOrganizationSchema, generateBreadcrumbSchema } from '@/lib/seo/boat-rental-schema'
+import { JsonLd, MultiJsonLd } from '@/components/seo/JsonLd'
 import Link from 'next/link'
+
+const metaParams: MetadataParams = { type: 'hub' }
+
+export const metadata: Metadata = {
+  title: generateBoatRentalTitle(metaParams),
+  description: generateBoatRentalDescription(metaParams),
+  openGraph: {
+    title: generateBoatRentalTitle(metaParams),
+    description: generateBoatRentalDescription(metaParams),
+    url: 'https://playas-espana.com/alquiler-barco',
+    type: 'website',
+    images: [{ url: generateOGImage(metaParams), width: 1200, height: 630 }],
+  },
+  alternates: generateAlternates(metaParams),
+  keywords: [
+    'alquiler barcos España',
+    'alquiler yate España',
+    'charter barco',
+    'fondeos seguros',
+    'alquiler catamaran',
+    'barcos de vela'
+  ]
+}
 
 export default function BoatRentalHubPage() {
   const localities = getAllLocalities()
@@ -17,17 +48,31 @@ export default function BoatRentalHubPage() {
 
   const totalSearchVolume = localities.reduce((sum, loc) => sum + loc.googleTrendsVolume, 0)
 
+  // Breadcrumb for schema
+  const breadcrumb = [
+    { name: 'Inicio', url: 'https://playas-espana.com' },
+    { name: 'Alquiler de Barcos', url: 'https://playas-espana.com/alquiler-barco' }
+  ]
+
+  const schemas = [
+    generateOrganizationSchema(),
+    generateBreadcrumbSchema(breadcrumb)
+  ]
+
   return (
+    <>
+      <MultiJsonLd schemas={schemas} />
     <div className="min-h-screen bg-white">
-      {/* HERO */}
-      <section className="bg-gradient-to-br from-blue-500 via-blue-400 to-cyan-400 py-16 px-4 md:py-32 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Alquila Barcos en las Costas de España
-          </h1>
-          <p className="text-lg md:text-xl text-blue-50 max-w-2xl mx-auto mb-8">
-            Descubre fondeos seguros, playas hermosas y las mejores tarifas de alquiler de barcos en todas las costas españolas.
-          </p>
+      <div className="min-h-screen bg-white">
+        {/* HERO */}
+        <section className="bg-gradient-to-br from-blue-500 via-blue-400 to-cyan-400 py-16 px-4 md:py-32 text-white">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              Alquila Barcos en las Costas de España
+            </h1>
+            <p className="text-lg md:text-xl text-blue-50 max-w-2xl mx-auto mb-8">
+              Descubre fondeos seguros, playas hermosas y las mejores tarifas de alquiler de barcos en todas las costas españolas. Desde €100/día sin patrón.
+            </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#coasts"
@@ -128,7 +173,9 @@ export default function BoatRentalHubPage() {
             Afiliado con SamBoat • Sin costos adicionales
           </p>
         </div>
-      </section>
-    </div>
+        </section>
+      </div>
+      </div>
+    </>
   )
 }
