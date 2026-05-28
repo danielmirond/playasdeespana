@@ -51,19 +51,21 @@ export const revalidate = 3600
 // desde el cliente via /api/hoteles y /api/restaurantes.
 export const maxDuration = 25
 
-// Pre-renderizamos en build solo las TOP 5 fichas más populares.
-// Antes era TOP 30, lo que causa timeout × 10 workers paralelos = 300 requests.
-// TOP 5 = ~12 segundos por página en peor caso, suficiente buffer para el maxDuration=25.
-// El resto (~5000 playas) sigue ISR con SWR 7d. Garantizamos TTFB
-// CDN-edge para las más visitadas (las que mueven la aguja en NavBoost).
+// Pre-renderizamos en build solo la TOP 1 playa más popular.
+// Esto es un workaround temporal para los timeouts en Vercel.
+// El resto (~5000 playas) se sirven via ISR on-demand con revalidate=3600.
+// Los visitantes nunca ven diferencia: Vercel CDN + SWR 7d = instant TTFB para repeat visits.
+//
+// TODO: Una vez que Vercel build sea estable, aumentar a TOP 10-20
+// (con mayores timeouts o arquitectura de pre-compute diferente).
 export async function generateStaticParams() {
   // Importamos getPlayas dentro de la función para evitar el cycle entre
   // este archivo y src/lib/playas durante el build initial.
   const { getPlayas } = await import('@/lib/playas')
   const playas = await getPlayas()
 
-  // Heurística sin GSC: top 5 con Bandera Azul + servicios + accesibilidad.
-  // Misma lógica que el cron /api/cron/warm?slice=top (mantener sincronizado).
+  // Heurística sin GSC: top 1 con Bandera Azul + servicios + accesibilidad.
+  // Solo la más importante para garantizar build rápido y confiable.
   return playas
     .map(p => ({
       slug: p.slug,
@@ -76,7 +78,7 @@ export async function generateStaticParams() {
     }))
     .filter(x => x.score >= 7)            // bandera azul + ≥2 servicios
     .sort((a, b) => b.score - a.score)
-    .slice(0, 5)
+    .slice(0, 1)
     .map(x => ({ slug: x.slug }))
 }
 
