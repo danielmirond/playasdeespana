@@ -54,7 +54,7 @@ async function fetchHotelesFromOverpass(lat: number, lon: number): Promise<Hotel
   // Query solo con nodos. Incluye ways solo para hoteles (los edificios
   // grandes vienen como ways en OSM), con `out center` para conseguir
   // las coordenadas centrales.
-  const query = `[out:json][timeout:3];
+  const query = `[out:json][timeout:1];
 (
   node["tourism"="hotel"](around:${RADIUS_M},${lat},${lon});
   node["tourism"="hostel"](around:${RADIUS_M},${lat},${lon});
