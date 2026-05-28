@@ -17,7 +17,6 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const ORG_REF = { '@id': `${BASE}/#organization` }
 const PLAYAS_MODIFIED = getPlayasDataModified()
 
-export const maxDuration = 30
 export const revalidate = 86400
 interface Props { params: Promise<{ slug: string }> }
 

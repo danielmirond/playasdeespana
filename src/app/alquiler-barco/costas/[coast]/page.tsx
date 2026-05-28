@@ -6,7 +6,6 @@ interface CoastPageParams {
   coast: string
 }
 
-export const maxDuration = 30
 export async function generateMetadata({ params }: { params: CoastPageParams }): Promise<Metadata> {
   const decodedCoast = decodeURIComponent(params.coast)
   const title = `Alquiler de Barcos en ${decodedCoast} | Playasdeespana.es`

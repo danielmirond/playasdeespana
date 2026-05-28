@@ -11,7 +11,6 @@ import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
 interface Props { params: Promise<{ slug: string }> }
 
-export const maxDuration = 30
 export async function generateStaticParams() {
   const provincias = await getProvincias()
   return provincias.map(p => ({ slug: p.slug }))

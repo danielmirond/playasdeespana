@@ -7,7 +7,6 @@ interface ProvincePageParams {
   province: string
 }
 
-export const maxDuration = 30
 export async function generateMetadata({ params }: { params: ProvincePageParams }): Promise<Metadata> {
   const decodedCoast = decodeURIComponent(params.coast)
   const decodedProvince = decodeURIComponent(params.province)

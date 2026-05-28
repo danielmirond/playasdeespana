@@ -9,7 +9,6 @@ import styles from './MunicipioPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
-export const maxDuration = 30
 export const revalidate = 3600
 
 interface Props { params: Promise<{ slug: string }> }

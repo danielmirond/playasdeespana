@@ -11,7 +11,6 @@ import { getTipoBySlug, TIPOS } from '@/lib/tiposQueLlevar'
 import { PRODUCTOS, AMAZON_TAG } from '@/lib/amazon-productos'
 import styles from './que-llevar.module.css'
 
-export const maxDuration = 30
 export const revalidate = 86400
 
 interface Props { params: Promise<{ tipo: string }> }

@@ -7,7 +7,6 @@ interface ProvincePageParams {
   province: string
 }
 
-export const maxDuration = 30
 export async function generateMetadata({ params }: { params: ProvincePageParams }): Promise<Metadata> {
   const title = `Alquiler de Barcos en ${params.province} | ${params.coast}`
   const description = `Descubre las mejores ofertas de alquiler de barcos en ${params.province}. Fondeos seguros, playas hermosas y precios competitivos.`

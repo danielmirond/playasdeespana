@@ -10,7 +10,6 @@ interface LocalityPageParams {
   locality: string
 }
 
-export const maxDuration = 30
 export async function generateMetadata({ params }: { params: LocalityPageParams }): Promise<Metadata> {
   const locality = getLocalityBySlug(params.locality)
 

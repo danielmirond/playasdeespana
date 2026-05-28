@@ -5,7 +5,6 @@ import Nav from '@/components/ui/Nav'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import { getPlayas } from '@/lib/playas'
 import { getRutas } from '@/lib/rutas'
-export const maxDuration = 30
 export const revalidate = 86400
 interface Props { params: Promise<{ slug: string }> }
 export async function generateStaticParams() { return (await getRutas(await getPlayas())).map(r => ({ slug: r.slug })) }
