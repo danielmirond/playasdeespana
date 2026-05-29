@@ -10,7 +10,8 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { getFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
+import { getFotos, FOTOS_GENERICAS_POR_ESTADO, type FotoPlaya } from '@/lib/fotos'
+import { IS_BUILD } from '@/lib/buildGuard'
 
 interface PlayaInput {
   slug:       string
@@ -50,10 +51,17 @@ export default async function TopBeachCardsConHero({
 }: Props) {
   const top = playas.slice(0, limit)
 
-  // Fetch candidatos en paralelo + dedupe greedy (mismo patrón que home Destacadas)
-  const candidatos = await Promise.all(
-    top.map(p => getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia))
-  )
+  // Fetch candidatos en paralelo + dedupe greedy (mismo patrón que home Destacadas).
+  // CAUSA RAÍZ de los timeouts SSG: getFotos hace una cascada de hasta 7 APIs
+  // externas por playa. Con la caché KV fría durante `next build`, cada página
+  // superaba 60s. Por eso reducir el nº de páginas (TOP 1/TOP 5) nunca lo arregló:
+  // el problema era el tiempo POR página. En build no pedimos fotos; el fallback
+  // genérico por estado del mar cubre el hero. En runtime/ISR se piden y cachean.
+  const candidatos: FotoPlaya[][] = IS_BUILD
+    ? top.map(() => [] as FotoPlaya[])
+    : await Promise.all(
+        top.map(p => getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia))
+      )
   const usadas = new Set<string>()
   const fotos: (string | null)[] = top.map((p, i) => {
     const cands = candidatos[i] ?? []
