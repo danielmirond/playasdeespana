@@ -1,46 +1,58 @@
-'use client'
-
-import { getAllLocalities } from '@/lib/boat-rental-localities'
+// src/app/alquiler-barco/page.tsx — Hub de alquiler de barcos por costas.
+// NOTA: el sitio NO usa Tailwind (design system propio con variables CSS).
+// Esta página estaba escrita 100% con clases Tailwind inexistentes -> salía
+// sin maquetar. Reescrita con estilos en línea + tokens del design system,
+// que renderizan siempre (van en el JS, no dependen de ningún chunk CSS).
+import Nav from '@/components/ui/Nav'
 import Link from 'next/link'
+import { getAllLocalities } from '@/lib/boat-rental-localities'
+
+const AWIN_MAIN = 'https://www.awin1.com/cread.php?awinmid=32683&awinaffid=playasdeespana&clickref=playasdeespana_main&ued=https://www.samboat.es'
+const AWIN_BOTTOM = 'https://www.awin1.com/cread.php?awinmid=32683&awinaffid=playasdeespana&clickref=playasdeespana_bottom&ued=https://www.samboat.es'
 
 export default function BoatRentalHubPage() {
   const localities = getAllLocalities()
 
-  // Group by coast
   const coasts = new Map<string, typeof localities>()
   localities.forEach((locality) => {
-    if (!coasts.has(locality.coast)) {
-      coasts.set(locality.coast, [])
-    }
+    if (!coasts.has(locality.coast)) coasts.set(locality.coast, [])
     coasts.get(locality.coast)!.push(locality)
   })
 
-  const totalSearchVolume = localities.reduce((sum, loc) => sum + loc.googleTrendsVolume, 0)
-
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <Nav />
+
       {/* HERO */}
-      <section className="bg-gradient-to-br from-blue-500 via-blue-400 to-cyan-400 py-16 px-4 md:py-32 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Alquila Barcos en las Costas de España
+      <section style={{
+        background: 'linear-gradient(135deg, #0c4a6e 0%, #0369a1 45%, #0891b2 100%)',
+        color: '#fff', padding: '3.5rem 1.5rem',
+      }}>
+        <div style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
+          <h1 style={{
+            fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 6vw, 3.2rem)',
+            fontWeight: 800, lineHeight: 1.1, letterSpacing: '-.02em', margin: '0 0 1rem',
+          }}>
+            Alquila barcos en las costas de España
           </h1>
-          <p className="text-lg md:text-xl text-blue-50 max-w-2xl mx-auto mb-8">
-            Descubre fondeos seguros, playas hermosas y las mejores tarifas de alquiler de barcos en todas las costas españolas.
+          <p style={{
+            fontSize: '1.05rem', lineHeight: 1.6, maxWidth: 620, margin: '0 auto 1.75rem',
+            color: 'rgba(255,255,255,.9)',
+          }}>
+            Descubre fondeos seguros, calas escondidas y las mejores tarifas de alquiler de barcos en todo el litoral español.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#coasts"
-              className="inline-block bg-white text-blue-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Explorar Costas
+          <div style={{ display: 'flex', gap: '.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="#coasts" style={{
+              padding: '.8rem 1.4rem', background: '#fff', color: '#0369a1',
+              borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: '.95rem',
+            }}>
+              Explorar costas
             </a>
-            <a
-              href="https://www.awin1.com/cread.php?awinmid=32683&awinaffid=playasdeespana&clickref=playasdeespana_main&ued=https://www.samboat.es"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors border-2 border-white"
-            >
+            <a href={AWIN_MAIN} target="_blank" rel="noopener noreferrer sponsored" style={{
+              padding: '.8rem 1.4rem', background: 'rgba(255,255,255,.12)', color: '#fff',
+              border: '2px solid rgba(255,255,255,.7)', borderRadius: 8, fontWeight: 700,
+              textDecoration: 'none', fontSize: '.95rem',
+            }}>
               Ver en SamBoat
             </a>
           </div>
@@ -48,87 +60,103 @@ export default function BoatRentalHubPage() {
       </section>
 
       {/* STATS */}
-      <section className="bg-gray-50 py-12 px-4">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+      <section style={{ background: 'var(--card-bg)', borderBottom: '1px solid var(--line)', padding: '2rem 1.5rem' }}>
+        <div style={{
+          maxWidth: 880, margin: '0 auto',
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1.25rem', textAlign: 'center',
+        }}>
           <div>
-            <div className="text-4xl font-bold text-blue-600 mb-2">{localities.length}+</div>
-            <p className="text-gray-600">Localidades</p>
+            <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', fontWeight: 800, color: 'var(--accent)' }}>{localities.length}+</div>
+            <p style={{ color: 'var(--muted)', fontSize: '.85rem', margin: '.2rem 0 0' }}>Localidades</p>
           </div>
           <div>
-            <div className="text-4xl font-bold text-blue-600 mb-2">{coasts.size}</div>
-            <p className="text-gray-600">Costas Españolas</p>
+            <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', fontWeight: 800, color: 'var(--accent)' }}>{coasts.size}</div>
+            <p style={{ color: 'var(--muted)', fontSize: '.85rem', margin: '.2rem 0 0' }}>Costas españolas</p>
           </div>
           <div>
-            <div className="text-4xl font-bold text-blue-600 mb-2">€100+</div>
-            <p className="text-gray-600">Precios desde</p>
+            <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', fontWeight: 800, color: 'var(--accent)' }}>€100+</div>
+            <p style={{ color: 'var(--muted)', fontSize: '.85rem', margin: '.2rem 0 0' }}>Precios desde</p>
           </div>
         </div>
       </section>
 
-      {/* COASTS SECTION */}
-      <div id="coasts" className="max-w-4xl mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold mb-8 text-gray-900">Costas Disponibles</h2>
+      {/* COASTS */}
+      <main id="coasts" style={{ maxWidth: 880, margin: '0 auto', padding: '2.5rem 1.5rem 4rem' }}>
+        <h2 style={{
+          fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700,
+          color: 'var(--ink)', margin: '0 0 1.75rem',
+        }}>
+          Costas disponibles
+        </h2>
 
-        <div className="space-y-12">
-          {Array.from(coasts.entries()).map(([coast, coastLocalities]) => (
-            <div key={coast} className="border-b pb-12 last:border-b-0">
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{coast}</h3>
-                <p className="text-gray-600">
-                  {coastLocalities.length} localidades disponibles
-                </p>
-              </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+          {Array.from(coasts.entries()).map(([coast, coastLocalities]) => {
+            const coastSlug = coast.toLowerCase().replace(/\s+/g, '-')
+            return (
+              <section key={coast} style={{ borderBottom: '1px solid var(--line)', paddingBottom: '2rem' }}>
+                <div style={{ marginBottom: '1rem' }}>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--ink)', margin: 0 }}>{coast}</h3>
+                  <p style={{ color: 'var(--muted)', fontSize: '.82rem', margin: '.2rem 0 0' }}>
+                    {coastLocalities.length} localidades disponibles
+                  </p>
+                </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                {coastLocalities.slice(0, 4).map((locality) => (
-                  <Link
-                    key={locality.slug}
-                    href={`/alquiler-barco/costas/${coast.toLowerCase().replace(/\s+/g, '-')}/provincias/${locality.province.toLowerCase()}/`}
-                    className="group border border-gray-200 rounded-lg p-4 hover:shadow-md hover:border-blue-300 transition-all"
-                  >
-                    <h4 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">
-                      {locality.locality}
-                    </h4>
-                    <p className="text-sm text-gray-600">
-                      €{locality.pricing.small.min} - €{locality.pricing.captain.max}/día
-                    </p>
-                  </Link>
-                ))}
-              </div>
+                <div style={{
+                  display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                  gap: '.75rem', marginBottom: '1rem',
+                }}>
+                  {coastLocalities.slice(0, 4).map((locality) => (
+                    <Link
+                      key={locality.slug}
+                      href={`/alquiler-barco/costas/${coastSlug}/provincias/${locality.province.toLowerCase()}/`}
+                      prefetch={false}
+                      style={{
+                        display: 'block', background: 'var(--card-bg)', border: '1px solid var(--line)',
+                        borderRadius: 8, padding: '.9rem 1rem', textDecoration: 'none', color: 'inherit',
+                      }}
+                    >
+                      <div style={{ fontWeight: 700, color: 'var(--ink)', marginBottom: '.2rem' }}>
+                        {locality.locality}
+                      </div>
+                      <div style={{ fontSize: '.8rem', color: 'var(--muted)' }}>
+                        €{locality.pricing.small.min} - €{locality.pricing.captain.max}/día
+                      </div>
+                    </Link>
+                  ))}
+                </div>
 
-              <Link
-                href={`/alquiler-barco/costas/${coast.toLowerCase().replace(/\s+/g, '-')}`}
-                className="text-blue-600 hover:text-blue-700 font-semibold"
-              >
-                Ver todas las localidades de {coast} →
-              </Link>
-            </div>
-          ))}
+                <Link
+                  href={`/alquiler-barco/costas/${coastSlug}`}
+                  style={{ color: 'var(--accent)', fontWeight: 600, fontSize: '.9rem', textDecoration: 'none' }}
+                >
+                  Ver todas las localidades de {coast} →
+                </Link>
+              </section>
+            )
+          })}
         </div>
-      </div>
+      </main>
 
-      {/* CTA SECTION */}
-      <section className="bg-blue-600 text-white py-12 px-4 md:py-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Comienza tu Aventura en Barco
+      {/* CTA */}
+      <section style={{ background: 'linear-gradient(135deg, #0369a1 0%, #0891b2 100%)', color: '#fff', padding: '3rem 1.5rem' }}>
+        <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.7rem', fontWeight: 800, margin: '0 0 .75rem' }}>
+            Comienza tu aventura en barco
           </h2>
-          <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p style={{ color: 'rgba(255,255,255,.88)', lineHeight: 1.6, margin: '0 0 1.5rem' }}>
             Explora cientos de barcos verificados en todas las costas españolas. Reserva seguro con SamBoat.
           </p>
-          <a
-            href="https://www.awin1.com/cread.php?awinmid=32683&awinaffid=playasdeespana&clickref=playasdeespana_bottom&ued=https://www.samboat.es"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-white text-blue-600 font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-colors text-lg"
-          >
-            Explorar Ofertas en SamBoat
+          <a href={AWIN_BOTTOM} target="_blank" rel="noopener noreferrer sponsored" style={{
+            display: 'inline-block', padding: '.9rem 1.8rem', background: '#fff', color: '#0369a1',
+            borderRadius: 8, fontWeight: 800, textDecoration: 'none', fontSize: '1rem',
+          }}>
+            Explorar ofertas en SamBoat
           </a>
-          <p className="text-blue-200 text-sm mt-6">
-            Afiliado con SamBoat • Sin costos adicionales
+          <p style={{ color: 'rgba(255,255,255,.7)', fontSize: '.8rem', marginTop: '1.25rem' }}>
+            Afiliado con SamBoat · Sin coste adicional para ti
           </p>
         </div>
       </section>
-    </div>
+    </>
   )
 }
