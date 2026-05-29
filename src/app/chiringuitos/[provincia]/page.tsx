@@ -3,12 +3,13 @@ import { notFound } from 'next/navigation'
 import TopicProvinciaPage, { type TopicConfig } from '@/components/seo/TopicProvinciaPage'
 import { getProvinciasCosteras, getPlayasByProvinciaSlug } from '@/lib/provinciaTopicHelpers'
 
+export const maxDuration = 60
 export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export async function generateStaticParams() {
   const provs = await getProvinciasCosteras()
-  return provs.map(p => ({ provincia: p.slug }))
+  return provs.slice(0, 5).map(p => ({ provincia: p.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ provincia: string }> }): Promise<Metadata> {

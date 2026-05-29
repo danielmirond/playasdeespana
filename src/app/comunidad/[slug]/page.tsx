@@ -17,7 +17,10 @@ export const revalidate = 86400
 
 export async function generateStaticParams() {
   const comunidades = await getComunidades()
-  return comunidades.map(c => ({ slug: c.slug }))
+  return comunidades
+    .sort((a, b) => b.count - a.count)  // Sort by beach count
+    .slice(0, 5)  // TOP 5 most popular comunidades
+    .map(c => ({ slug: c.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

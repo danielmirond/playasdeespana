@@ -11,12 +11,13 @@ import { getCampingsEnBbox, type CampingConPlaya } from '@/lib/campings'
 
 // Semanal: campings cambian poco (604800 = 86400 * 7).
 // Next.js requiere literal numérico estáticamente analizable, no una expresión.
+export const maxDuration = 60
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 export async function generateStaticParams() {
   const provs = await getProvinciasCosteras()
-  return provs.map(p => ({ provincia: p.slug }))
+  return provs.slice(0, 5).map(p => ({ provincia: p.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ provincia: string }> }): Promise<Metadata> {

@@ -13,6 +13,7 @@ import { urlSamboatPremium, getDestinoBySlug as getDestinoEmbarcacion } from '@/
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const SAMBOAT_AFF = process.env.NEXT_PUBLIC_SAMBOAT_AFF ?? ''
 
+export const maxDuration = 60
 export const revalidate = 86400
 
 export function generateStaticParams() {

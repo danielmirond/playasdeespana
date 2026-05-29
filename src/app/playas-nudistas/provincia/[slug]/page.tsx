@@ -12,7 +12,9 @@ export const revalidate = 86400
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  return (await getNudistasStats()).provincias.map(p => ({ slug: p.slug }))
+  return (await getNudistasStats()).provincias
+    .slice(0, 5)  // TOP 5 provincias
+    .map(p => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

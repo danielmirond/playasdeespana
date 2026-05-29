@@ -7,11 +7,14 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import styles from '../../PlayasNudistas.module.css'
 
+export const maxDuration = 60
 export const revalidate = 86400
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  return (await getNudistasStats()).comunidades.map(c => ({ slug: c.slug }))
+  return (await getNudistasStats()).comunidades
+    .slice(0, 5)  // TOP 5 comunidades
+    .map(c => ({ slug: c.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

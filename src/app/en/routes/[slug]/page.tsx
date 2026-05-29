@@ -5,9 +5,10 @@ import Nav from '@/components/ui/Nav'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import { getPlayas } from '@/lib/playas'
 import { getRutas } from '@/lib/rutas'
+export const maxDuration = 60
 export const revalidate = 86400
 interface Props { params: Promise<{ slug: string }> }
-export async function generateStaticParams() { return (await getRutas(await getPlayas())).map(r => ({ slug: r.slug })) }
+export async function generateStaticParams() { return (await getRutas(await getPlayas())).slice(0, 5).map(r => ({ slug: r.slug })) }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params; const r = (await getRutas(await getPlayas())).find(x => x.slug === slug); if (!r) return {}
   return { title: `${r.nombre} | Beach Itinerary`, alternates: { canonical: `/en/routes/${slug}` } }

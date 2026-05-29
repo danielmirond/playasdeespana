@@ -9,6 +9,7 @@ import IconInfo from '@/components/ui/IconInfo'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import styles from '../../PlayasPerros.module.css'
 
+export const maxDuration = 60
 export const revalidate = 86400
 
 interface Props { params: Promise<{ slug: string }> }
