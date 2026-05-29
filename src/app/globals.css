@@ -1,3 +1,21 @@
+/* ── Tailwind ───────────────────────────────────────────────────
+   Activado SOLO para las páginas de barcos (/alquiler-barco,
+   /en/boat-rental) que están escritas con clases Tailwind. El preflight
+   (reset) está desactivado en tailwind.config.js para NO romper el resto
+   del sitio, que usa su propio reset/design system. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Con preflight off, Tailwind no emite los defaults --tw-* en el selector
+   universal. Añadimos aquí los mínimos para que gradientes, sombras, ring
+   y transform de las utilities rendericen bien. */
+*, ::before, ::after {
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+}
+
 /* Non-critical CSS — las clases no above-the-fold
    Las variables y reset están inlineadas en layout.tsx */
 
