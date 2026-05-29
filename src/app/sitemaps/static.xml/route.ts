@@ -11,6 +11,7 @@ import {
   getPlayas, getPerrosStats, getNudistasStats, getAccesiblesStats,
 } from '@/lib/playas'
 import { getRutas, COSTAS } from '@/lib/rutas'
+import { getCamperCities } from '@/lib/autocaravana-localities'
 import { TIPOS } from '@/lib/tiposQueLlevar'
 import { getPlayasDataModified } from '@/lib/dateModified'
 
@@ -162,6 +163,12 @@ export async function GET() {
 
   // Routes
   for (const r of rutas) urls.push(u(`/rutas/${r.slug}`, '0.7', 'weekly', today, `/en/routes/${r.slug}`))
+
+  // Alquiler de autocaravanas — hub + guías + ciudades/regiones
+  for (const p of ['/alquiler-autocaravana', '/alquiler-autocaravana/precios', '/alquiler-autocaravana/tipos', '/alquiler-autocaravana/barata-ofertas', '/alquiler-autocaravana/caravana-vs-autocaravana-vs-camper']) {
+    urls.push(u(p, '0.7', 'weekly', today))
+  }
+  for (const c of getCamperCities()) urls.push(u(`/alquiler-autocaravana/${c.slug}`, '0.6', 'weekly', today))
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
