@@ -1080,6 +1080,12 @@ export async function getFotos(
     }
   }
 
+  // Build SSG: si la KV no tenía foto cacheada, NO hacemos red ni escribimos
+  // marcador negativo (envenenaría la caché). Devolvemos [] y dejamos que el
+  // fallback genérico actúe. En runtime/ISR (o /api/cron/warm) se piden de
+  // verdad y se cachean → la próxima revalidación ya sirve foto real.
+  if (IS_BUILD) return []
+
   // 2. Cascada en vivo
   const fotos = await getFotosUncached(nombre, municipio, lat, lon, provincia)
 

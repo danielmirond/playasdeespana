@@ -11,7 +11,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getFotos, FOTOS_GENERICAS_POR_ESTADO, type FotoPlaya } from '@/lib/fotos'
-import { IS_BUILD } from '@/lib/buildGuard'
 
 interface PlayaInput {
   slug:       string
@@ -57,11 +56,13 @@ export default async function TopBeachCardsConHero({
   // superaba 60s. Por eso reducir el nº de páginas (TOP 1/TOP 5) nunca lo arregló:
   // el problema era el tiempo POR página. En build no pedimos fotos; el fallback
   // genérico por estado del mar cubre el hero. En runtime/ISR se piden y cachean.
-  const candidatos: FotoPlaya[][] = IS_BUILD
-    ? top.map(() => [] as FotoPlaya[])
-    : await Promise.all(
-        top.map(p => getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia))
-      )
+  // getFotos lee KV primero (rápido). En build, getFotos hace cortocircuito tras
+  // la KV (no red, no cascada), así que esto NO reintroduce los timeouts: las
+  // playas con foto cacheada salen con foto real; el resto usa el fallback
+  // genérico por estado del mar. En runtime/ISR se piden y cachean de verdad.
+  const candidatos: FotoPlaya[][] = await Promise.all(
+    top.map(p => getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia))
+  )
   const usadas = new Set<string>()
   const fotos: (string | null)[] = top.map((p, i) => {
     const cands = candidatos[i] ?? []
