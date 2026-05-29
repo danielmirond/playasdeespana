@@ -15,8 +15,14 @@ export const revalidate = 3600
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
+  // Pre-render only TOP 5 municipios at build time.
+  // Rest served via ISR on-demand with revalidate=3600.
+  // 370 municipios × 10 workers would cause timeout cascade.
   const municipios = await getMunicipios()
-  return municipios.map(m => ({ slug: m.slug }))
+  return municipios
+    .sort((a, b) => b.count - a.count)  // Sort by beach count (popularity proxy)
+    .slice(0, 5)
+    .map(m => ({ slug: m.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -12,7 +12,14 @@ export const revalidate = 86400
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  return (await getAccesiblesStats()).municipios.map(m => ({ slug: m.slug }))
+  // Pre-render only TOP 5 municipios at build time.
+  // Rest served via ISR on-demand with revalidate=86400.
+  // This prevents timeout cascade: 10 workers × 334 municipios = catastrophic SSG.
+  const stats = await getAccesiblesStats()
+  return stats.municipios
+    .sort((a, b) => b.count - a.count)  // Sort by beach count (popularity proxy)
+    .slice(0, 5)
+    .map(m => ({ slug: m.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

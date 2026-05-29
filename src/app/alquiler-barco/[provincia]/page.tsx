@@ -9,8 +9,13 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 const CLICKBOAT_AFF = process.env.NEXT_PUBLIC_CLICKBOAT_AFF ?? ''
 
 export async function generateStaticParams() {
+  // Pre-render only TOP 5 provinces at build time.
+  // Rest served via ISR on-demand with revalidate=86400.
+  // This prevents timeout cascade: 10 workers × 27 provinces = slow SSG.
   const provs = await getProvinciasCosteras()
-  return provs.map(p => ({ provincia: p.slug }))
+  return provs
+    .slice(0, 5)  // TOP 5 most populated coastal provinces
+    .map(p => ({ provincia: p.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ provincia: string }> }): Promise<Metadata> {
