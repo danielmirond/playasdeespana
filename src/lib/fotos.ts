@@ -8,6 +8,7 @@
 //   6. Pexels: búsqueda con nombre + municipio (requiere PEXELS_API_KEY)
 //   7. Unsplash: búsqueda con nombre + municipio (requiere UNSPLASH_ACCESS_KEY)
 import { fetchWithTimeout } from './fetch-timeout'
+import { IS_BUILD } from './buildGuard'
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
 const PEXELS_KEY   = process.env.PEXELS_API_KEY ?? ''
@@ -969,6 +970,13 @@ function cacheKeyLegacy(lat: number, lon: number): string {
 async function getFotosUncached(
   nombre: string, municipio: string, lat: number, lon: number, provincia: string,
 ): Promise<FotoPlaya[]> {
+  // CAUSA RAÍZ de los timeouts SSG en Vercel: esta cascada de hasta 7 APIs
+  // externas, con la caché KV fría durante `next build`, superaba los 60s por
+  // página. getFotos() ya devolvió la KV-cache antes de llamarnos; aquí solo
+  // quedaría la red en vivo, que saltamos durante el build. En runtime/ISR
+  // (primera visita o /api/cron/warm) se ejecuta normalmente y se cachea.
+  if (IS_BUILD) return []
+
   // Usar allSettled para no fallar si una API es lenta. Mejor tener
   // algunas fotos que ninguna. Build timeout total: 1.5s en PlayaPage.
   //
