@@ -4,20 +4,22 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+// Next 16: params asíncrono -> await obligatorio.
 interface LocalityPageParams {
   coast: string
   province: string
   locality: string
 }
 
-export async function generateMetadata({ params }: { params: LocalityPageParams }): Promise<Metadata> {
-  const locality = getLocalityBySlug(params.locality)
+export async function generateMetadata({ params }: { params: Promise<LocalityPageParams> }): Promise<Metadata> {
+  const { coast, province, locality: localitySlug } = await params
+  const locality = getLocalityBySlug(localitySlug)
 
   if (!locality) {
     return {}
   }
 
-  const canonical = `https://playas-espana.com/en/boat-rental/coasts/${params.coast}/provinces/${params.province}/${params.locality}`
+  const canonical = `https://playas-espana.com/en/boat-rental/coasts/${coast}/provinces/${province}/${localitySlug}`
   const title = `Rent Boats in ${locality.locality} | Playas de España`
   const description = locality.description.substring(0, 160)
 
@@ -36,8 +38,9 @@ export async function generateMetadata({ params }: { params: LocalityPageParams 
   }
 }
 
-export default function LocalityPage({ params }: { params: LocalityPageParams }) {
-  const locality = getLocalityBySlug(params.locality)
+export default async function LocalityPage({ params }: { params: Promise<LocalityPageParams> }) {
+  const { locality: localitySlug } = await params
+  const locality = getLocalityBySlug(localitySlug)
 
   if (!locality) {
     notFound()

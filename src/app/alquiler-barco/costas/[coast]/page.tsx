@@ -2,28 +2,28 @@ import { getLocalitiesByCoast } from '@/lib/boat-rental-localities'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+// Next 16: params es asíncrono. Hay que await-earlo; leerlo en síncrono
+// (params.coast) devolvía undefined -> "Alquiler de Barcos en undefined".
 interface CoastPageParams {
   coast: string
 }
 
-export async function generateMetadata({ params }: { params: CoastPageParams }): Promise<Metadata> {
-  const decodedCoast = decodeURIComponent(params.coast)
+export async function generateMetadata({ params }: { params: Promise<CoastPageParams> }): Promise<Metadata> {
+  const { coast } = await params
+  const decodedCoast = decodeURIComponent(coast)
   const title = `Alquiler de Barcos en ${decodedCoast} | Playasdeespana.es`
   const description = `Alquila barcos en ${decodedCoast}. Descubre todas las provincias y localidades con fondeos seguros, playas accesibles y las mejores tarifas.`
 
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
+    openGraph: { title, description, type: 'website' },
   }
 }
 
-export default function CoastPage({ params }: { params: CoastPageParams }) {
-  const decodedCoast = decodeURIComponent(params.coast)
+export default async function CoastPage({ params }: { params: Promise<CoastPageParams> }) {
+  const { coast } = await params
+  const decodedCoast = decodeURIComponent(coast)
   const localities = getLocalitiesByCoast(decodedCoast)
 
   // Group by province
@@ -61,7 +61,7 @@ export default function CoastPage({ params }: { params: CoastPageParams }) {
               {provinceLocs.map((locality) => (
                 <Link
                   key={locality.slug}
-                  href={`/alquiler-barco/costas/${params.coast}/provincias/${locality.province.toLowerCase()}/${locality.slug}`}
+                  href={`/alquiler-barco/costas/${coast}/provincias/${locality.province.toLowerCase()}/${locality.slug}`}
                   className="group border border-gray-200 rounded-lg p-4 hover:shadow-md hover:border-blue-300 transition-all"
                 >
                   <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
@@ -75,7 +75,7 @@ export default function CoastPage({ params }: { params: CoastPageParams }) {
             </div>
 
             <Link
-              href={`/alquiler-barco/costas/${params.coast}/provincias/${province.toLowerCase()}`}
+              href={`/alquiler-barco/costas/${coast}/provincias/${province.toLowerCase()}`}
               className="text-blue-600 hover:text-blue-700 font-semibold text-sm"
             >
               Ver todas las localidades de {province} →

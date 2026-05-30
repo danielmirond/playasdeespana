@@ -1,36 +1,37 @@
-import { getLocalitiesByCoast, getLocalitiesByProvince } from '@/lib/boat-rental-localities'
+import { getLocalitiesByCoast } from '@/lib/boat-rental-localities'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+// Next 16: params asíncrono -> await obligatorio.
 interface ProvincePageParams {
   coast: string
   province: string
 }
 
-export async function generateMetadata({ params }: { params: ProvincePageParams }): Promise<Metadata> {
-  const title = `Alquiler de Barcos en ${params.province} | ${params.coast}`
-  const description = `Descubre las mejores ofertas de alquiler de barcos en ${params.province}. Fondeos seguros, playas hermosas y precios competitivos.`
+export async function generateMetadata({ params }: { params: Promise<ProvincePageParams> }): Promise<Metadata> {
+  const { coast, province } = await params
+  const decodedProvince = decodeURIComponent(province)
+  const decodedCoast = decodeURIComponent(coast)
+  const title = `Alquiler de Barcos en ${decodedProvince} | ${decodedCoast}`
+  const description = `Descubre las mejores ofertas de alquiler de barcos en ${decodedProvince}. Fondeos seguros, playas hermosas y precios competitivos.`
 
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
+    openGraph: { title, description, type: 'website' },
   }
 }
 
-export default function ProvincePage({ params }: { params: ProvincePageParams }) {
-  // Get all localities for this coast and filter by province
-  const coastLocalities = getLocalitiesByCoast(params.coast)
-  const provinceLocalities = coastLocalities.filter(
-    (loc) => loc.province.toLowerCase() === params.province.toLowerCase()
-  )
+export default async function ProvincePage({ params }: { params: Promise<ProvincePageParams> }) {
+  const { coast, province } = await params
+  const decodedProvince = decodeURIComponent(province)
+  const decodedCoast = decodeURIComponent(coast)
 
-  const decodedProvince = decodeURIComponent(params.province)
-  const decodedCoast = decodeURIComponent(params.coast)
+  // Localidades de la costa filtradas por provincia
+  const coastLocalities = getLocalitiesByCoast(coast)
+  const provinceLocalities = coastLocalities.filter(
+    (loc) => loc.province.toLowerCase() === decodedProvince.toLowerCase()
+  )
 
   return (
     <div className="min-h-screen bg-white">
@@ -55,7 +56,7 @@ export default function ProvincePage({ params }: { params: ProvincePageParams })
             {provinceLocalities.map((locality) => (
               <Link
                 key={locality.slug}
-                href={`/alquiler-barco/costas/${params.coast}/provincias/${params.province}/${locality.slug}`}
+                href={`/alquiler-barco/costas/${coast}/provincias/${province}/${locality.slug}`}
                 className="group border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-blue-300 transition-all"
               >
                 <div className="mb-4">
@@ -84,7 +85,7 @@ export default function ProvincePage({ params }: { params: ProvincePageParams })
 
         {/* BACK LINK */}
         <div className="mt-12 pt-8 border-t border-gray-200">
-          <Link href={`/alquiler-barco/costas/${params.coast}`} className="text-blue-600 hover:text-blue-700 font-semibold">
+          <Link href={`/alquiler-barco/costas/${coast}`} className="text-blue-600 hover:text-blue-700 font-semibold">
             ← Volver a {decodedCoast}
           </Link>
         </div>

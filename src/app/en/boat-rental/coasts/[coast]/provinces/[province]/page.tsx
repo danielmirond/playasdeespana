@@ -2,31 +2,30 @@ import { getLocalitiesByCoast } from '@/lib/boat-rental-localities'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+// Next 16: params asíncrono -> await obligatorio.
 interface ProvincePageParams {
   coast: string
   province: string
 }
 
-export async function generateMetadata({ params }: { params: ProvincePageParams }): Promise<Metadata> {
-  const decodedCoast = decodeURIComponent(params.coast)
-  const decodedProvince = decodeURIComponent(params.province)
+export async function generateMetadata({ params }: { params: Promise<ProvincePageParams> }): Promise<Metadata> {
+  const { coast, province } = await params
+  const decodedCoast = decodeURIComponent(coast)
+  const decodedProvince = decodeURIComponent(province)
   const title = `Boat Rental in ${decodedProvince}, ${decodedCoast} | Playas de España`
   const description = `Browse boat rental options in ${decodedProvince}. Explore safe moorings, scenic beaches, and competitive rates.`
 
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
+    openGraph: { title, description, type: 'website' },
   }
 }
 
-export default function ProvincePage({ params }: { params: ProvincePageParams }) {
-  const decodedCoast = decodeURIComponent(params.coast)
-  const decodedProvince = decodeURIComponent(params.province)
+export default async function ProvincePage({ params }: { params: Promise<ProvincePageParams> }) {
+  const { coast, province } = await params
+  const decodedCoast = decodeURIComponent(coast)
+  const decodedProvince = decodeURIComponent(province)
   const allLocalities = getLocalitiesByCoast(decodedCoast)
   const localities = allLocalities.filter(
     (loc) => loc.province.toLowerCase() === decodedProvince.toLowerCase()
@@ -52,7 +51,7 @@ export default function ProvincePage({ params }: { params: ProvincePageParams })
           {localities.map((locality) => (
             <Link
               key={locality.slug}
-              href={`/en/boat-rental/coasts/${params.coast}/provinces/${params.province}/${locality.slug}`}
+              href={`/en/boat-rental/coasts/${coast}/provinces/${province}/${locality.slug}`}
               className="group border border-gray-200 rounded-lg p-6 hover:shadow-md hover:border-blue-300 transition-all"
             >
               <h2 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
