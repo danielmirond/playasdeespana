@@ -2,961 +2,393 @@
   {
     "comunidad": "Andalucía",
     "provincia": "Almería",
-    "municipio": "Cuevas del Almanzora Níjar",
-    "playa": "Playazo-Villaricos",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Carboneras",
+    "playa": "El Ancón",
+    "reason": "mejor match score=0.36 (El Algarrobico)"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Almería",
-    "municipio": "Cuevas del Almanzora Níjar",
-    "playa": "Pozo del Esparto",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Carboneras",
+    "playa": "Los Barquicos-Cocones",
+    "reason": "mejor match score=0.52 (Playa de los Cocones)"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Almería",
     "municipio": "Pulpí",
-    "playa": "Quitapellejos-Palomares",
-    "marker": null,
-    "reason": "mejor match score=0.43 (Playa de las Palmeras)"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Pulpí El Ejido",
-    "playa": "Balerma",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Pulpí El Ejido",
-    "playa": "Levante Almerimar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Roquetas",
-    "playa": "Poniente Almerimar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Roquetas",
-    "playa": "San Miguel",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Vera",
-    "playa": "Venta del Bancal-Ventanicas",
-    "marker": null,
-    "reason": "mejor match score=0.26 (Playa El Playazo Garrucha)"
+    "playa": "Los Nardos",
+    "reason": "mejor match score=0.36 (Mar Rabiosa)"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Cádiz",
-    "municipio": "Chipiona Rota",
-    "playa": "Camarón-La Laguna",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chipiona Rota",
-    "playa": "Cruz del Mar-Canteras La Ballena",
-    "marker": "RECUPERA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chipiona Rota",
-    "playa": "Micaela",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chipiona Rota",
-    "playa": "Regla",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Conil de la Frontera El Roche San",
-    "playa": "La Fontanilla Los Bateles",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Fuentebravía La Puntilla",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Santa Catalina (tramo Vejer",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Vistahermosa-Las",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Redes)",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Valdelagrana",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "– 28045 – -",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Aguadulce La Bajadilla Las Salinas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Romanillas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Urbanización Playa",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Serena",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Urbanización Roquetas El Playazo Las Marinas-Bolaga",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Fernando",
-    "playa": "Camposoto-El Castillo",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque",
-    "playa": "Alcaidesa- El Faro",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque",
-    "playa": "Cala Sardina",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque",
-    "playa": "Puerto Sotogrande",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque",
-    "playa": "Torreguadiaro",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque de la Frontera",
-    "playa": "El Palmar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque de la Frontera",
-    "playa": "–",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Chipiona",
+    "playa": "La Ballena",
+    "reason": "mejor match score=0.36 (Playa de Regla)"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Córdoba",
     "municipio": "Almodóvar del Río",
     "playa": "La Breña",
-    "marker": null,
     "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Granada",
+    "municipio": "Almuñécar",
+    "playa": "Marina del Este",
+    "reason": "mejor match score=0.42 (Barranco de Enmedio)"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Granada",
+    "municipio": "Motril",
+    "playa": "Carchuna",
+    "reason": "mejor match score=0.56 (Calahonda)"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Granada",
+    "municipio": "Torrenueva Costa",
+    "playa": "Del Cañón-La Pelá",
+    "reason": "mejor match score=0.59 (Playa de la Pelá)"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Huelva",
+    "municipio": "Huelva",
+    "playa": "Paraje Natural Marismas del Odiel",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Huelva",
+    "municipio": "Lepe",
+    "playa": "Islantilla",
+    "reason": "mejor match score=0.42 (Playa de La Antilla)"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Jaén",
     "municipio": "Andújar",
     "playa": "El Encinarejo",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Motril Salobreña",
-    "playa": "Carchuna",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Motril Salobreña",
-    "playa": "Calahonda",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Torrenueva",
-    "playa": "Playa Granada",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Torrenueva",
-    "playa": "Playa de Poniente",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Huelva Lepe",
-    "playa": "Paraje Natural",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Huelva Lepe",
-    "playa": "Marismas del Odiel",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Punta",
-    "playa": "Playa Central",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Isla Cristina/Lepe",
-    "playa": "Islantilla",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Costa",
-    "playa": "Del Cañon-La Pelá",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Costa",
-    "playa": "Torrenueva",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Umbría",
-    "playa": "Punta Umbría (Tramo El Albergue)",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "provincia": "Málaga",
+    "municipio": "Algarrobo",
+    "playa": "Algarrobo Costa",
+    "reason": "mejor match score=0.33 (Playa de La Caleta)"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Málaga",
     "municipio": "Casares",
     "playa": "Ancha",
-    "marker": null,
     "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Málaga",
+    "municipio": "Fuengirola",
+    "playa": "Boliches-Gaviotas",
+    "reason": "mejor match score=0.24 (Playa de los Boliches)"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Málaga",
+    "municipio": "Fuengirola",
+    "playa": "Castillo-Ejido",
+    "reason": "mejor match score=0.24 (Playa de los Boliches)"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Málaga",
+    "municipio": "Fuengirola",
+    "playa": "Fuengirola",
+    "reason": "mejor match score=0.20 (Playa de Torreblanca)"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Málaga",
+    "municipio": "Manilva",
+    "playa": "Las Gaviotas",
+    "reason": "mejor match score=0.33 (La Duquesa)"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Málaga",
+    "municipio": "Torrox",
+    "playa": "Cenicero-Las Dunas",
+    "reason": "mejor match score=0.37 (Playa de las Lindes)"
   },
   {
     "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Castropol-Tapia de Casariego",
+    "provincia": "Asturias",
+    "municipio": "Castropol",
     "playa": "Peñarronda",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.30 (Arnao)"
+  },
+  {
+    "comunidad": "Asturias",
+    "provincia": "Asturias",
+    "municipio": "El Franco",
+    "playa": "Porcia",
+    "reason": "mejor match score=0.13 (Monellos)"
+  },
+  {
+    "comunidad": "Asturias",
+    "provincia": "Asturias",
+    "municipio": "Navia",
+    "playa": "Frejulfe",
+    "reason": "mejor match score=0.41 (Playa de Frexulfe)"
+  },
+  {
+    "comunidad": "Asturias",
+    "provincia": "Asturias",
+    "municipio": "Valdés",
+    "playa": "Cadavedo",
+    "reason": "mejor match score=0.44 (Campiecho)"
+  },
+  {
+    "comunidad": "Asturias",
+    "provincia": "Asturias",
+    "municipio": "Valdés",
+    "playa": "Otur",
+    "reason": "mejor match score=0.33 (Playa d'Outur)"
   },
   {
     "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
+    "provincia": "Baleares",
     "municipio": "Sant Joan de Labritja",
     "playa": "Cala Benirrás",
-    "marker": null,
     "reason": "mejor match score=0.57 (Caló d'En Serra)"
   },
   {
     "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Manilva Nerja",
-    "playa": "Las Gaviotas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Manilva Nerja",
-    "playa": "Sabinillas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella El Cable Torremolinos",
-    "playa": "El Faro La Fontanilla",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella El Cable Torremolinos",
-    "playa": "Nagüeles-Casablanca Los Monteros (Adelfas)",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella El Cable Torremolinos",
-    "playa": "San Pedro de Alcántara",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella El Cable Torremolinos",
-    "playa": "(Guadalmina)",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Torrox",
-    "playa": "Venus-Bajadilla",
-    "marker": null,
-    "reason": "mejor match score=0.32 (Dunas de la Carraca)"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Vélez-Málaga",
-    "playa": "Calahonda (Riviera) El Bombo El Chaparral La Cala",
-    "marker": null,
-    "reason": "mejor match score=0.26 (Playa de La Caleta)"
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Cudillero Valdés",
-    "playa": "Concha de Artedo",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Navia",
-    "playa": "Frejulfe",
-    "marker": null,
-    "reason": "mejor match score=0.41 (Playa de Frexulfe)"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
+    "provincia": "Baleares",
     "municipio": "Santa Eulària des Riu",
     "playa": "Cala Llenya",
-    "marker": null,
     "reason": "mejor match score=0.31 (Platja s'Estanyol)"
   },
   {
     "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
+    "provincia": "Baleares",
     "municipio": "Santa Eulària des Riu",
     "playa": "Es Figueral",
-    "marker": null,
     "reason": "mejor match score=0.25 (Ses Estaques)"
   },
   {
     "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Santa Eulària des Riu",
-    "playa": "3",
-    "marker": null,
-    "reason": "mejor match score=0.00 (-)"
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
+    "provincia": "Baleares",
     "municipio": "Andratx",
     "playa": "Sant Elm",
-    "marker": null,
     "reason": "mejor match score=0.40 (Cala Llamp)"
   },
   {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
+    "comunidad": "Islas Baleares",
+    "provincia": "Baleares",
     "municipio": "Felanitx",
-    "playa": "Porto Colom (Platja S’",
-    "marker": null,
-    "reason": "mejor match score=0.30 (Cala Mitjana)"
+    "playa": "Porto Colom",
+    "reason": "mejor match score=0.15 (S'Arenal Petit)"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": null,
-    "municipio": "La Oliva",
-    "playa": "Corralejo Viejo",
-    "marker": "RECUPERA",
-    "reason": "mejor match score=0.28 (Dunas de Corralejo)"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Palma de Mallorca Santa",
+    "comunidad": "Islas Baleares",
+    "provincia": "Baleares",
+    "municipio": "Palma de Mallorca",
     "playa": "Cala Estancia",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.46 (Cala Major)"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Palma de Mallorca Santa",
-    "playa": "Cala Major",
-    "marker": "RECUPERA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Palma de Mallorca Santa",
+    "comunidad": "Islas Baleares",
+    "provincia": "Baleares",
+    "municipio": "Palma de Mallorca",
     "playa": "Ciutat Jardí",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.33 (Cala Major)"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Pollença Santanyí",
-    "playa": "Cala Barques",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "comunidad": "Islas Baleares",
+    "provincia": "Baleares",
+    "municipio": "Santa Margalida",
+    "playa": "Can Picafort",
+    "reason": "mejor match score=0.29 (S'Arenal d'En Casat)"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Pollença Santanyí",
-    "playa": "Cala Molins",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "comunidad": "Islas Baleares",
+    "provincia": "Baleares",
+    "municipio": "Santanyí",
+    "playa": "Cala Mondragó",
+    "reason": "mejor match score=0.54 (Cala Gran)"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Pollença Santanyí",
-    "playa": "Formentor",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "comunidad": "Islas Baleares",
+    "provincia": "Baleares",
+    "municipio": "Son Servera",
+    "playa": "Cala Millor",
+    "reason": "mejor match score=0.21 (platja de sa Marjal)"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Cardassar",
-    "playa": "Cala Millor (Cala Nau) Son",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "comunidad": "Islas Baleares",
+    "provincia": "Baleares",
+    "municipio": "Son Servera",
+    "playa": "Es Ribell",
+    "reason": "mejor match score=0.21 (platja de sa Marjal)"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Cardassar",
-    "playa": "Sa Coma",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Sant Lluis",
+    "comunidad": "Islas Baleares",
+    "provincia": "Baleares",
+    "municipio": "Sant Lluís",
     "playa": "Binibeca Nou",
-    "marker": null,
     "reason": "mejor match score=0.42 (Biniparatx)"
   },
   {
     "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Pájara Puerto",
+    "provincia": "Las Palmas",
+    "municipio": "La Oliva",
+    "playa": "Corralejo Viejo",
+    "reason": "mejor match score=0.28 (Dunas de Corralejo)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Las Palmas",
+    "municipio": "La Oliva",
+    "playa": "Grandes Playas",
+    "reason": "mejor match score=0.31 (Playa las Agujas)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Las Palmas",
+    "municipio": "Pájara",
     "playa": "Butihondo",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.20 (Playa Risco del Paso)"
   },
   {
     "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Pájara Puerto",
-    "playa": "Costa Calma El Matorral",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "provincia": "Las Palmas",
+    "municipio": "Pájara",
+    "playa": "Costa Calma",
+    "reason": "mejor match score=0.33 (Playa La Lajita)"
   },
   {
     "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Pájara Puerto",
+    "provincia": "Las Palmas",
+    "municipio": "Pájara",
+    "playa": "El Matorral",
+    "reason": "mejor match score=0.27 (La Lajita)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Las Palmas",
+    "municipio": "Pájara",
     "playa": "Morro Jable",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.20 (Matas Bay - El Rancho Beach)"
   },
   {
     "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Ingenio Telde",
-    "playa": "El Burrero",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "provincia": "Las Palmas",
+    "municipio": "Arucas",
+    "playa": "Los Charcones",
+    "reason": "mejor match score=0.33 (Playa Bocabarranco)"
   },
   {
     "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Ingenio Telde San Bartolomé de Tirajana",
-    "playa": "El Inglés",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Villa Las Burras",
-    "playa": "Maspalomas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Villa Las Burras",
-    "playa": "Meloneras",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Villa Las Burras",
-    "playa": "San Agustín",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Villa Las Burras",
-    "playa": "4",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Can Picafort",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Son Bauló",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Son Serra",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Cala Mondragó (Sa",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Font de n’Alís)",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "S’Amarador",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Salines",
-    "playa": "Es Port-Es Dolç",
-    "marker": "RECUPERA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera",
-    "playa": "Cala Millor",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera",
-    "playa": "Es Ribell",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera del Rosario",
-    "playa": "Blanca Los Pozos",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera del Rosario",
-    "playa": "Puerto Lajas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera del Rosario",
-    "playa": "Gran Tarajal",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "de Agüimes",
+    "provincia": "Las Palmas",
+    "municipio": "Villa de Agüimes",
     "playa": "Arinaga",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
+    "provincia": "Las Palmas",
+    "municipio": "Tías",
+    "playa": "Grande",
+    "reason": "mejor match score=0.33 (Blanca)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Las Palmas",
+    "municipio": "Tías",
+    "playa": "Pocillos",
+    "reason": "mejor match score=0.25 (Playa)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Las Palmas",
+    "municipio": "Yaiza",
+    "playa": "Blanca",
+    "reason": "mejor match score=0.43 (La Cera)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Santa Cruz de Tenerife",
     "municipio": "Pinar del Hierro",
     "playa": "La Restinga",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Canarias",
-    "provincia": "Tenerife",
+    "provincia": "Santa Cruz de Tenerife",
+    "municipio": "Tazacorte",
+    "playa": "El Puerto de Tazacorte",
+    "reason": "mejor match score=0.36 (Playa de Tarajales)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Santa Cruz de Tenerife",
     "municipio": "Adeje",
     "playa": "Torviscas",
-    "marker": null,
     "reason": "mejor match score=0.33 (Troya)"
   },
   {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Tías Yaiza",
-    "playa": "Grande (Blanca)",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "comunidad": "Canarias",
+    "provincia": "Santa Cruz de Tenerife",
+    "municipio": "San Cristóbal de La Laguna",
+    "playa": "Piscinas Naturales de Bajamar",
+    "reason": "mejor match score=0.21 (Playa de los Troches)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Santa Cruz de Tenerife",
+    "municipio": "San Cristóbal de La Laguna",
+    "playa": "Piscina Natural del Arenisco",
+    "reason": "mejor match score=0.21 (Playa de los Troches)"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Santa Cruz de Tenerife",
+    "municipio": "San Cristóbal de La Laguna",
+    "playa": "Piscina Natural de Jóver",
+    "reason": "mejor match score=0.21 (Playa de los Troches)"
   },
   {
     "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Tías Yaiza",
-    "playa": "Matagorda",
-    "marker": "RECUPERA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Tías Yaiza",
-    "playa": "Pila de la Barrilla",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Tías Yaiza",
-    "playa": "Pocillos",
-    "marker": "RECUPERA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Valverde LA PALMA Los Llanos de Aridane Santa",
-    "playa": "Charco Verde Palma",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Valverde LA PALMA Los Llanos de Aridane Santa",
-    "playa": "Puerto Naos",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Icod de los Vinos San",
-    "playa": "San Marcos Laguna",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Icod de los Vinos San Los Realejos",
-    "playa": "Socorro",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances",
+    "provincia": "Cantabria",
+    "municipio": "Noja",
     "playa": "Helgueras",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.25 (Playa de Ris)"
   },
   {
     "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances",
-    "playa": "Ris",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances",
+    "provincia": "Cantabria",
+    "municipio": "Noja",
     "playa": "Trengandín",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances San Vicente de la Barquera",
-    "playa": "Sable de Merón",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances San Vicente de la Barquera",
-    "playa": "5",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la",
-    "playa": "Santa Cruz de la Palma El Puerto de Tazacorte",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Piscinas Naturales de",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Bajamar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Piscina Natural del",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Arenisco",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Piscina Natural de",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Jóver La Arena (Mesa del",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Mar) El Sable de Tagle Los Locos",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Badalona",
-    "playa": "Dels Pescadors La Marina",
-    "marker": null,
-    "reason": "mejor match score=0.50 (Platja de La Marina)"
+    "reason": "mejor match score=0.20 (Ris)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "municipio": "Barcelona",
     "playa": "Zona de Banys Fòrum",
-    "marker": null,
     "reason": "mejor match score=0.32 (Sant Sebastià)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "municipio": "Caldes d´Estrac",
+    "municipio": "Caldes d'Estrac",
     "playa": "Kalima",
-    "marker": null,
     "reason": "mejor match score=0.17 (Platja del Bassiot)"
   },
   {
@@ -964,47 +396,62 @@
     "provincia": "Barcelona",
     "municipio": "Canet de Mar",
     "playa": "Canet de Mar",
-    "marker": "RECUPERA",
     "reason": "mejor match score=0.40 (Platja de Canet)"
   },
   {
     "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Blanes",
-    "playa": "Sant Francesc (Cala",
-    "marker": null,
-    "reason": "mejor match score=0.38 (Cala de Sant Francesc)"
+    "provincia": "Barcelona",
+    "municipio": "Castelldefels",
+    "playa": "Del Baixador",
+    "reason": "mejor match score=0.24 (Platja de la Pineda de Viladecans)"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "municipio": "Castelldefels",
+    "playa": "Lluminetes",
+    "reason": "mejor match score=0.22 (Platja de Castelldefels)"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "municipio": "Cubelles",
+    "playa": "Llarga",
+    "reason": "mejor match score=0.27 (Les Gavines)"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "municipio": "Gavà",
+    "playa": "Gavà Mar",
+    "reason": "mejor match score=0.29 (Platja de Gavà)"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "municipio": "Sitges",
+    "playa": "Les Botigues",
+    "reason": "mejor match score=0.58 (Les Coves)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "municipio": "Blanes",
-    "playa": "Bona)",
-    "marker": null,
-    "reason": "mejor match score=0.33 (Blanes)"
+    "playa": "Sant Francesc (Cala Bona)",
+    "reason": "mejor match score=0.26 (S'Abanell)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "municipio": "Calonge i Sant Antoni",
-    "playa": "Cala Cristus-Ses",
-    "marker": null,
-    "reason": "mejor match score=0.36 (Cala de la Roca dels Musclos)"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Calonge i Sant Antoni",
-    "playa": "Torretes",
-    "marker": null,
-    "reason": "mejor match score=0.11 (Cala de la Roca dels Musclos)"
+    "playa": "Cala Cristus-Ses Torretes",
+    "reason": "mejor match score=0.32 (Cala de la Roca dels Musclos)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "municipio": "Calonge i Sant Antoni",
     "playa": "Es Monestrí",
-    "marker": null,
     "reason": "mejor match score=0.18 (Cala de la Roca dels Musclos)"
   },
   {
@@ -1012,7 +459,6 @@
     "provincia": "Girona",
     "municipio": "Calonge i Sant Antoni",
     "playa": "Sant Antoni",
-    "marker": null,
     "reason": "mejor match score=0.14 (Cala de la Roca dels Musclos)"
   },
   {
@@ -1020,151 +466,27 @@
     "provincia": "Girona",
     "municipio": "Calonge i Sant Antoni",
     "playa": "Torre Valentina",
-    "marker": null,
     "reason": "mejor match score=0.14 (Cala de la Roca dels Musclos)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "municipio": "d’Aro i S’Agaró",
+    "municipio": "Castell d'Aro, Platja d'Aro i S'Agaró",
     "playa": "Cala Rovira",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "municipio": "d’Aro i S’Agaró",
+    "municipio": "Castell d'Aro, Platja d'Aro i S'Agaró",
     "playa": "Platja Gran",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "municipio": "d’Aro i S’Agaró",
+    "municipio": "Castell d'Aro, Platja d'Aro i S'Agaró",
     "playa": "Sa Conca",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Castelldefels Pineda",
-    "playa": "Del Baixador",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Castelldefels Pineda",
-    "playa": "Lluminetes",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Cubelles Sitges",
-    "playa": "Llarga",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Cubelles Sitges",
-    "playa": "Mota de Sant Pere",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Cubelles Sitges El Masnou",
-    "playa": "El Masnou",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Gavà",
-    "playa": "Gavà Mar",
-    "marker": null,
-    "reason": "mejor match score=0.29 (Platja de Gavà)"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Malgrat de Mar",
-    "playa": "L’Astillero",
-    "marker": null,
-    "reason": "mejor match score=0.55 (Platja de l'Astillero)"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Castelló d’Empúries Palamós",
-    "playa": "Empuriabrava",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Llançà Sant",
-    "playa": "Del Port",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Llançà Sant",
-    "playa": "Grifeu",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Lloret de Mar Torroella",
-    "playa": "Cala Canyelles",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Lloret de Mar Torroella",
-    "playa": "Fenals",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Tossa",
-    "playa": "Lloret",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Tossa",
-    "playa": "Sa Boadella",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Tossa",
-    "playa": "Santa Cristina",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1172,151 +494,20 @@
     "provincia": "Girona",
     "municipio": "Palafrugell",
     "playa": "Tamariu",
-    "marker": null,
     "reason": "mejor match score=0.38 (Cala Marquesa)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "municipio": "Palafrugell",
-    "playa": "6",
-    "marker": null,
-    "reason": "mejor match score=0.00 (-)"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "dels Pescadors La Riera",
-    "marker": "RECUPERA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Aiguadolç",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Balmins",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Garraf",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "L’Estanyol La Barra La Ribera",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Les Botigues",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Sant Sebastiá",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Terramar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar i la Geltrú",
-    "playa": "D´Adarró",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar i la Geltrú",
-    "playa": "Ibersol",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar i la Geltrú",
-    "playa": "Ribes Roges",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar i la Geltrú",
-    "playa": "Sant Gervasi",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Feliu de Guíxols",
-    "playa": "Sant Feliu",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Feliu de Guíxols",
-    "playa": "Sant Pol",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Feliu de Guíxols de Montgrí",
-    "playa": "Cala Montgó",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Feliu de Guíxols de Montgrí de Mar",
-    "playa": "Gran de Tossa La Mar Menuda",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Tossa de Mar",
+    "playa": "Gran de Tossa",
+    "reason": "mejor match score=0.38 (Sot d'en Boada)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "municipio": "Calafell",
     "playa": "Segur Llevant",
-    "marker": null,
     "reason": "mejor match score=0.26 (Platja de Segur de Calafell)"
   },
   {
@@ -1324,167 +515,34 @@
     "provincia": "Tarragona",
     "municipio": "Calafell",
     "playa": "Segur Ponent",
-    "marker": null,
     "reason": "mejor match score=0.26 (Platja de Segur de Calafell)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
-    "municipio": "Cunit El Vendrell",
-    "playa": "El Francàs",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cunit El Vendrell",
-    "playa": "Sant Salvador",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Roda de Berà TERRES",
+    "municipio": "Roda de Berà",
     "playa": "Costa Daurada",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.30 (Platja de Cal Guinovart)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
-    "municipio": "Alcanar",
+    "municipio": "Roda de Berà",
     "playa": "Llarga",
-    "marker": null,
-    "reason": "mejor match score=0.31 (El Marjal Sur)"
+    "reason": "mejor match score=0.19 (Platja dels Capellans)"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
-    "municipio": "Deltebre",
-    "playa": "La Móra",
-    "marker": null,
-    "reason": "mejor match score=0.31 (Platja de Riumar)"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Deltebre",
-    "playa": "Savinosa",
-    "marker": null,
-    "reason": "mejor match score=0.13 (Platja de Riumar)"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Vandellós i l’Hospitalet de l’Infant",
-    "playa": "L’Almadrava",
-    "marker": null,
-    "reason": "mejor match score=0.24 (Caleta de l'alguer)"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Vandellós i l’Hospitalet de l’Infant La",
-    "playa": "L’Arenal La Punta del Riu El Torn",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Vandellós i l’Hospitalet de l’Infant La Vila-Seca",
-    "playa": "La Pineda",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Vandellós i l’Hospitalet de l’Infant La Vila-Seca",
-    "playa": "7",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE",
-    "playa": "Les Cases d’Alcanar -El",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE",
-    "playa": "Marjal",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE",
-    "playa": "Riumar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "Cala Forn",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "L’Alguer",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "Sant Jordi d’Alfama",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "Cap Roig",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "Les Avellanes",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Ràpita",
+    "municipio": "La Ràpita",
     "playa": "Les Delícies",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.40 (Platja del Suís)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
     "municipio": "Alicante",
     "playa": "Postiguet",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1492,7 +550,6 @@
     "provincia": "Alicante",
     "municipio": "Alicante",
     "playa": "Saladar-Urbanova",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1500,7 +557,6 @@
     "provincia": "Alicante",
     "municipio": "Alicante",
     "playa": "Sant Joan",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1508,7 +564,6 @@
     "provincia": "Alicante",
     "municipio": "Alicante",
     "playa": "Tabarca",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1516,7 +571,6 @@
     "provincia": "Alicante",
     "municipio": "Benidorm",
     "playa": "Llevant",
-    "marker": null,
     "reason": "mejor match score=0.44 (Playa de Levante)"
   },
   {
@@ -1524,39 +578,20 @@
     "provincia": "Alicante",
     "municipio": "Calp",
     "playa": "Puerto Blanco",
-    "marker": "NUEVA",
     "reason": "mejor match score=0.27 (Platja del Cantal Roig)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Denia El Campello",
-    "playa": "Cala Lanuza",
-    "marker": "NUEVA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia El Campello",
+    "municipio": "El Campello",
     "playa": "Carrer de la Mar",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.47 (Banyets de la Reina)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Denia El Campello",
-    "playa": "Mutxavista",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Benitatxell",
+    "municipio": "El Poble Nou de Benitatxell",
     "playa": "Cala del Moraig",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1564,7 +599,6 @@
     "provincia": "Alicante",
     "municipio": "Elx",
     "playa": "Arenals del Sol-Sur",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1572,231 +606,139 @@
     "provincia": "Alicante",
     "municipio": "Elx",
     "playa": "Carabassí",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
     "municipio": "Elx",
-    "playa": "L’Altet",
-    "marker": null,
+    "playa": "L'Altet",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Teulada",
+    "municipio": "Elx",
     "playa": "La Marina",
-    "marker": null,
-    "reason": "mejor match score=0.50 (La Ampolla)"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Teulada",
-    "playa": "Les Pesqueres-El",
-    "marker": null,
-    "reason": "mejor match score=0.31 (El Portet)"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Teulada",
-    "playa": "Rebollo",
-    "marker": null,
-    "reason": "mejor match score=0.30 (La Ampolla)"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Segura",
-    "playa": "Centre",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Segura",
-    "playa": "Dels Vivers",
-    "marker": null,
+    "municipio": "Elx",
+    "playa": "Les Pesqueres-El Rebollo",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Segura",
-    "playa": "Ortigues-Campo Del Moncaio La Roqueta",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Guardamar del Segura",
+    "playa": "Ortigues-Campo",
+    "reason": "mejor match score=0.26 (Platja del Montcaio)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Vila",
-    "playa": "Racó de l’Albir",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Guardamar del Segura",
+    "playa": "Del Moncaio",
+    "reason": "mejor match score=0.58 (Platja del Montcaio)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Xàbia",
-    "playa": "Cala Estaca",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "L'Alfas del Pi",
+    "playa": "Racó de l'Albir",
+    "reason": "mejor match score=0.43 (El Albir)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Xàbia",
-    "playa": "Campoamor-La Glea La Zenia-Cala Bosque",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Orihuela",
+    "playa": "La Zenia-Cala Bosque",
+    "reason": "mejor match score=0.55 (Cala del Bosque)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Xàbia",
+    "municipio": "Orihuela",
     "playa": "Mil Palmeras",
-    "marker": null,
+    "reason": "mejor match score=0.33 (La Glea)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Santa Pola",
+    "playa": "Calas del Este",
+    "reason": "mejor match score=0.58 (Santa Pola del Este)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Santa Pola",
+    "playa": "La Ermita",
+    "reason": "mejor match score=0.44 (Tamarit)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Vila Joiosa",
+    "playa": "Bon Nou",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Vila Joiosa",
+    "playa": "Ciutat (Centro)",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Vila Joiosa",
+    "playa": "De Torres",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Vila Joiosa",
+    "playa": "La Caleta",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Vila Joiosa",
+    "playa": "Paradís",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Vila Joiosa",
+    "playa": "Varadero",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
     "municipio": "Xàbia",
-    "playa": "Punta Prima",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pilar de la Horadada",
-    "playa": "8",
-    "marker": null,
-    "reason": "mejor match score=0.00 (-)"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Calas del Este",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Calas de Santiago",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Bernabéu La Ermita",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Tamarit",
-    "marker": "RECUPERA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Varador Del Portet",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Les Platgetes",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Cabo Cervera",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Cala de las Piteras El Cura La Mata (antigua La",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Mata Sur) Los Locos Los Náufragos",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Bon Nou",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Ciutat (Centro) De Torres La Caleta",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Paradís",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Varadero",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
     "playa": "Arenal",
-    "marker": "RECUPERA",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Granadella La Grava",
-    "marker": null,
+    "municipio": "Xàbia",
+    "playa": "Granadella",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Alicante",
+    "municipio": "Xàbia",
+    "playa": "La Grava",
     "reason": "municipio no encontrado"
   },
   {
@@ -1804,7 +746,6 @@
     "provincia": "Castellón",
     "municipio": "Benicarló",
     "playa": "La Caracola",
-    "marker": null,
     "reason": "mejor match score=0.30 (Platja de la Parreta)"
   },
   {
@@ -1812,7 +753,6 @@
     "provincia": "Castellón",
     "municipio": "Benicàssim",
     "playa": "Dels Terrers",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1820,15 +760,13 @@
     "provincia": "Castellón",
     "municipio": "Benicàssim",
     "playa": "Heliópolis",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
     "municipio": "Benicàssim",
-    "playa": "L´Almadrava",
-    "marker": null,
+    "playa": "L'Almadrava",
     "reason": "municipio no encontrado"
   },
   {
@@ -1836,7 +774,6 @@
     "provincia": "Castellón",
     "municipio": "Benicàssim",
     "playa": "Torre de Sant Vicent",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1844,135 +781,69 @@
     "provincia": "Castellón",
     "municipio": "Benicàssim",
     "playa": "Voramar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Canet d’en Berenguer",
-    "playa": "Racó de la Mar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Cullera El Brosquil",
-    "playa": "El Dossel El Far El Mareny de Sant",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Llorenç",
-    "playa": "Escollera Los Olivos",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Llorenç",
-    "playa": "Marenyet-L'illa",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Llorenç",
-    "playa": "Racó",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Llorenç",
-    "playa": "Sant Antoni",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
-    "municipio": "Burriana Peñíscola",
+    "municipio": "Burriana",
     "playa": "El Grao",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
-    "municipio": "Burriana Peñíscola",
-    "playa": "L´Arenal",
-    "marker": null,
+    "municipio": "Burriana",
+    "playa": "L'Arenal",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
-    "municipio": "Torreblanca",
+    "municipio": "Burriana",
     "playa": "Malvarrosa",
-    "marker": null,
-    "reason": "mejor match score=0.19 (Platja Nord de Torreblanca)"
+    "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
     "municipio": "Castelló de la Plana",
     "playa": "Gurugú",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
-    "municipio": "Vinaròs",
+    "municipio": "Castelló de la Plana",
+    "playa": "Pinar",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Castellón",
+    "municipio": "Castelló de la Plana",
     "playa": "Serradal",
-    "marker": "RECUPERA",
-    "reason": "mejor match score=0.26 (Cala de La Foradada)"
+    "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
-    "municipio": "Xilxes",
+    "municipio": "Moncofa",
     "playa": "Grao",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.43 (El Grau)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
-    "municipio": "Xilxes",
-    "playa": "L’Estanyol",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Xilxes",
-    "playa": "Masbó",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Xilxes",
-    "playa": "Pedra Roja",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Moncofa",
+    "playa": "L'Estanyol",
+    "reason": "mejor match score=0.22 (Masbo)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Castellón",
     "municipio": "Montanejos",
     "playa": "Fuente de los Baños",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1980,7 +851,6 @@
     "provincia": "Castellón",
     "municipio": "Oropesa del Mar",
     "playa": "La Conxa",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1988,7 +858,6 @@
     "provincia": "Castellón",
     "municipio": "Oropesa del Mar",
     "playa": "Les Amplaries",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -1996,7 +865,6 @@
     "provincia": "Castellón",
     "municipio": "Oropesa del Mar",
     "playa": "Morro de Gos",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -2004,135 +872,181 @@
     "provincia": "Castellón",
     "municipio": "Oropesa del Mar",
     "playa": "Plagetes de Bellver",
-    "marker": null,
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Castellón",
+    "municipio": "Peñíscola",
+    "playa": "Nord",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Castellón",
+    "municipio": "Vinaròs",
+    "playa": "Fora Forat",
+    "reason": "mejor match score=0.43 (Playa de Fora del Forat)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Castellón",
+    "municipio": "Xilxes",
+    "playa": "El Cerezo",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Castellón",
+    "municipio": "Xilxes",
+    "playa": "Les Cases",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
-    "municipio": "Safor",
-    "playa": "Guardamar de la Safor",
-    "marker": null,
+    "municipio": "Canet d'en Berenguer",
+    "playa": "Racó de la Mar",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
-    "municipio": "Safor La Pobla de Farnals",
+    "municipio": "Cullera",
+    "playa": "El Brosquil",
+    "reason": "mejor match score=0.36 (El Racó)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Valencia",
+    "municipio": "Cullera",
+    "playa": "El Dossel",
+    "reason": "mejor match score=0.47 (Platja del Dosser)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Valencia",
+    "municipio": "Cullera",
+    "playa": "Escollera",
+    "reason": "mejor match score=0.40 (Platja de l'Escullera)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Valencia",
+    "municipio": "Cullera",
+    "playa": "Los Olivos",
+    "reason": "mejor match score=0.29 (Platja del Dosser)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Valencia",
+    "municipio": "Cullera",
+    "playa": "Marenyet-L'illa",
+    "reason": "mejor match score=0.47 (Platja de l'Illa)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Valencia",
+    "municipio": "La Pobla de Farnals",
     "playa": "Norte",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Tavernes",
-    "playa": "Pobla Marina",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.11 (Platja Pobla Marina)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
     "municipio": "Navarrés",
     "playa": "Playa-Monte",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
     "municipio": "Oliva",
-    "playa": "L’Aigua Morta",
-    "marker": null,
-    "reason": "mejor match score=0.38 (Platja de l’Aigua Blanca)"
+    "playa": "L'Aigua Blanca",
+    "reason": "mejor match score=0.54 (Platja de l’Aigua Blanca)"
+  },
+  {
+    "comunidad": "Comunidad Valenciana",
+    "provincia": "Valencia",
+    "municipio": "Oliva",
+    "playa": "L'Aigua Morta",
+    "reason": "mejor match score=0.33 (Platja de l’Aigua Blanca)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
     "municipio": "Oliva",
     "playa": "Terranova-Burguera",
-    "marker": null,
     "reason": "mejor match score=0.50 (Platja de Burguera)"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
-    "municipio": "Puçol",
-    "playa": "9",
-    "marker": null,
-    "reason": "mejor match score=0.00 (-)"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "La Goleta",
-    "marker": null,
+    "municipio": "Sagunt",
+    "playa": "Corinto",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Tavernes de la",
-    "marker": null,
+    "municipio": "Sagunt",
+    "playa": "L'Almardà",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Valldigna",
-    "marker": null,
+    "municipio": "Sagunt",
+    "playa": "Malvarrosa",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "L’Arbre del Gos El Saler La Devesa La Garrofera",
-    "marker": null,
+    "municipio": "Sagunt",
+    "playa": "Port de Sagunt",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Comunidad Valenciana",
     "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Malva-Rosa",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
+    "municipio": "Valencia",
     "playa": "Recatí-Perellonet",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Xeraco",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.43 (Platja del Perellonet - Recatí)"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Badajoz",
     "municipio": "Casas de Don Pedro",
     "playa": "Los Calicantos",
-    "marker": null,
     "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Extremadura",
+    "provincia": "Badajoz",
+    "municipio": "Cheles",
+    "playa": "La Dehesa",
+    "reason": "municipio no encontrado"
+  },
+  {
+    "comunidad": "Extremadura",
+    "provincia": "Badajoz",
+    "municipio": "Herrera del Duque",
+    "playa": "El Espolón-Peloche",
+    "reason": "mejor match score=0.44 (Playa de arena de Peloche)"
+  },
+  {
+    "comunidad": "Extremadura",
+    "provincia": "Badajoz",
+    "municipio": "Orellana la Vieja",
+    "playa": "Playa dulce de Orellana",
+    "reason": "mejor match score=0.42 (Playa de Orellana la Vieja)"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Cáceres",
     "municipio": "Cañamero",
     "playa": "Cancho del Fresno",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
@@ -2140,7 +1054,6 @@
     "provincia": "A Coruña",
     "municipio": "A Laracha",
     "playa": "Caión",
-    "marker": null,
     "reason": "mejor match score=0.18 (Praia do Carreiro)"
   },
   {
@@ -2148,7 +1061,6 @@
     "provincia": "A Coruña",
     "municipio": "Arteixo",
     "playa": "A Salsa (Repibelo)",
-    "marker": null,
     "reason": "mejor match score=0.44 (A Santa Baia)"
   },
   {
@@ -2156,7 +1068,6 @@
     "provincia": "A Coruña",
     "municipio": "Arteixo",
     "playa": "Porto de Suevos",
-    "marker": null,
     "reason": "mejor match score=0.37 (Praia dos Cacheiros)"
   },
   {
@@ -2164,7 +1075,6 @@
     "provincia": "A Coruña",
     "municipio": "Arteixo",
     "playa": "Sabón",
-    "marker": null,
     "reason": "mejor match score=0.25 (Barrañán)"
   },
   {
@@ -2172,111 +1082,27 @@
     "provincia": "A Coruña",
     "municipio": "Arteixo",
     "playa": "Valcobo",
-    "marker": null,
     "reason": "mejor match score=0.20 (O Carreiro)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "A Coruña",
-    "municipio": "Rodríguez",
+    "municipio": "As Pontes de García Rodríguez",
     "playa": "Lago de As Pontes",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "Cheles Orellana",
-    "playa": "La Dehesa",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "Herrera del Duque Talarrubias",
-    "playa": "El Espolón-Peloche",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Galicia",
     "provincia": "A Coruña",
-    "municipio": "Camariñas Miño",
-    "playa": "Arou",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Razo Muros",
+    "municipio": "Carballo",
     "playa": "Saíñas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Dumbría Oleiros",
-    "playa": "Ézaro",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Esmelle Ortigueira",
-    "playa": "Ponzos",
-    "marker": "RECUPERA",
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Esmelle Ortigueira",
-    "playa": "San Xurxo",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Laxe Ponteceso",
-    "playa": "Laxe",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.33 (Leira)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "A Coruña",
     "municipio": "Riveira",
-    "playa": "10",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "la Vieja",
-    "playa": "Playa dulce de Orellana",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "la Vieja",
-    "playa": "Talarrubias-Puerto",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "la Vieja",
-    "playa": "Peña",
-    "marker": null,
+    "playa": "Coroso",
     "reason": "municipio no encontrado"
   },
   {
@@ -2284,7 +1110,6 @@
     "provincia": "Lugo",
     "municipio": "Barreiros",
     "playa": "Fontela Valea",
-    "marker": null,
     "reason": "mejor match score=0.43 (Praia da Balea)"
   },
   {
@@ -2292,383 +1117,111 @@
     "provincia": "Lugo",
     "municipio": "Barreiros",
     "playa": "Pasadas",
-    "marker": "RECUPERA",
     "reason": "mejor match score=0.40 (Praia da Arbosa)"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Lugo",
+    "municipio": "Foz",
+    "playa": "As Polas",
+    "reason": "mejor match score=0.56 (Os Fondas)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
     "municipio": "Bueu",
     "playa": "Lagos",
-    "marker": null,
     "reason": "mejor match score=0.38 (Liñeiros)"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Marín",
-    "playa": "Santo de Mar – A",
-    "marker": null,
-    "reason": "mejor match score=0.36 (Area da Isla)"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Foz Ribadeo",
-    "playa": "A Rapadoira",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Foz Ribadeo",
-    "playa": "Areoura",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Foz Ribadeo",
-    "playa": "As Polas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Viveiro",
-    "playa": "Llas",
-    "marker": null,
-    "reason": "mejor match score=0.40 (Covas)"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Viveiro",
-    "playa": "Peizás",
-    "marker": null,
-    "reason": "mejor match score=0.38 (Seiramar)"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Moaña Vigo",
-    "playa": "O Con",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "O Laño",
-    "playa": "Xiorto",
-    "marker": null,
-    "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
     "municipio": "Ponte Caldelas",
     "playa": "Playa fluvial A Calzada",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Baltar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Bascuas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Canelas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Caneliñas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Foxos",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
+    "municipio": "Sanxenxo",
     "playa": "Major",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.33 (Baltar)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Montalvo",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Sanxenxo",
+    "playa": "Nosa Señora da Lanzada",
+    "reason": "mejor match score=0.36 (Praia da Granxa)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Nosa Señora da",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Lanzada",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
+    "municipio": "Sanxenxo",
     "playa": "O Espiñeiro-A Lanzada",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.29 (Praia Lavapáns)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "Panadeira",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Vigo",
+    "playa": "A Argazada",
+    "reason": "mejor match score=0.54 (A Area Grande)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "Paxariñas",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Vigo",
+    "playa": "As Rodas (Islas Cíes)",
+    "reason": "mejor match score=0.37 (A Area das Rodas)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "Pragueira",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "municipio": "Vigo",
+    "playa": "O Adro",
+    "reason": "mejor match score=0.50 (O Vao)"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "Silgar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "11",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "de Arousa",
+    "municipio": "Vilagarcía de Arousa",
     "playa": "Campanario",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "reason": "mejor match score=0.40 (Bamio)"
   },
   {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "de Arousa",
-    "playa": "Compostela",
-    "marker": null,
-    "reason": "municipio no encontrado"
+    "comunidad": "Región de Murcia",
+    "provincia": "Murcia",
+    "municipio": "Cartagena",
+    "playa": "La Azohía-El Cuartel",
+    "reason": "mejor match score=0.42 (Playa Lomas del Castillico)"
+  },
+  {
+    "comunidad": "Región de Murcia",
+    "provincia": "Murcia",
+    "municipio": "San Pedro del Pinatar",
+    "playa": "Las Salinas",
+    "reason": "mejor match score=0.36 (La Puntica)"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Álava",
     "municipio": "Arratzua-Ubarrundia",
     "playa": "Landa",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Ceuta",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Ceuta",
-    "playa": "Chorrillo",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Ceuta",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Ceuta",
-    "playa": "Ribera",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Lorca San",
-    "playa": "Calnegre",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Alamillo San",
-    "playa": "Bahía – La Reya Del Mojón",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Alamillo San",
-    "playa": "Grande-Castellar",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Alamillo San",
-    "playa": "Nares",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Alamillo San San",
-    "playa": "Rihuete",
-    "marker": null,
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Álava",
-    "municipio": "Barrundia Elburgo",
-    "playa": "Moskurio (Garaio",
-    "marker": null,
+    "municipio": "Barrundia",
+    "playa": "Moskurio (Garaio Norte)",
     "reason": "municipio no encontrado"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Álava",
-    "municipio": "Barrundia Elburgo",
-    "playa": "Norte)",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Javier/Cartagena",
-    "playa": "Banco del Tabal-Calnegre",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Javier",
-    "playa": "El Arenal",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Javier",
-    "playa": "Ensenada del Esparto",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Javier",
-    "playa": "Pedrucho",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Pedro del Pinatar",
-    "playa": "El Mojón Las Salinas",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Pedro del Pinatar",
-    "playa": "Torre Derribada",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Melilla",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Melilla",
-    "playa": "Hipódromo Los Galápagos",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Melilla",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Melilla",
-    "playa": "San Lorenzo-Los Cárabos",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Melilla",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Melilla",
-    "playa": "* El Jurado Internacional Bandera sostenibles por un periodo mecanismo de transición se ha acreditación internacionales El galardón otorgado condicionado al cumplimiento",
-    "marker": null,
-    "reason": "municipio no encontrado"
-  },
-  {
-    "comunidad": "Melilla",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Melilla",
-    "playa": "Azul, así como al seguimiento",
-    "marker": null,
+    "municipio": "Elburgo",
+    "playa": "Salurriaga (Garaio Sur)",
     "reason": "municipio no encontrado"
   }
 ]

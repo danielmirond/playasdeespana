@@ -1,3803 +1,681 @@
 [
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Adra",
-    "playa": "Censo El Carboncillo",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Adra",
-    "playa": "San Nicolás",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Adra",
-    "playa": "Sirena Loca",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Almería",
-    "playa": "Almería El Toyo",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Almería",
-    "playa": "San Miguel Cabo de",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Almería",
-    "playa": "Gata",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Balanegra",
-    "playa": "Balanegra",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Carboneras",
-    "playa": "El Ancón Las Marinicas Los Barquicos-Cocones",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Algeciras",
-    "playa": "Getares",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Barbate",
-    "playa": "Zahara de los Atunes",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Cádiz",
-    "playa": "La Caleta La Cortadura-Poniente La Victoria",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Cádiz",
-    "playa": "Santa María del Mar",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chiclana de la Frontera",
-    "playa": "La Barrosa",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chiclana de la Frontera",
-    "playa": "Sancti Petri",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Cuevas del Almanzora Níjar",
-    "playa": "Playazo-Villaricos",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Cuevas del Almanzora Níjar",
-    "playa": "Pozo del Esparto",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Pulpí",
-    "playa": "Quitapellejos-Palomares",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Pulpí El Ejido",
-    "playa": "Balerma",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Pulpí El Ejido",
-    "playa": "Levante Almerimar",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Roquetas",
-    "playa": "Poniente Almerimar",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Roquetas",
-    "playa": "San Miguel",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Mojácar",
-    "playa": "El Cantal El Descargador",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Mojácar",
-    "playa": "Lance Nuevo",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Mojácar",
-    "playa": "Marina de la Torre",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Mojácar",
-    "playa": "Piedra Villazar",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "Vera",
-    "playa": "Venta del Bancal-Ventanicas",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chipiona Rota",
-    "playa": "Camarón-La Laguna",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chipiona Rota",
-    "playa": "Cruz del Mar-Canteras La Ballena",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chipiona Rota",
-    "playa": "Micaela",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Chipiona Rota",
-    "playa": "Regla",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Conil de la Frontera El Roche San",
-    "playa": "La Fontanilla Los Bateles",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Fuentebravía La Puntilla",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Santa Catalina (tramo Vejer",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Vistahermosa-Las",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Redes)",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "Valdelagrana",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "María",
-    "playa": "– 28045 – -",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Aguadulce La Bajadilla Las Salinas",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Romanillas",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Urbanización Playa",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Serena",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "municipio": "de Mar",
-    "playa": "Urbanización Roquetas El Playazo Las Marinas-Bolaga",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Fernando",
-    "playa": "Camposoto-El Castillo",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque",
-    "playa": "Alcaidesa- El Faro",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque",
-    "playa": "Cala Sardina",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque",
-    "playa": "Puerto Sotogrande",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque",
-    "playa": "Torreguadiaro",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque de la Frontera",
-    "playa": "El Palmar",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Cádiz",
-    "municipio": "Roque de la Frontera",
-    "playa": "–",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Córdoba",
-    "municipio": "Almodóvar del Río",
-    "playa": "La Breña",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Almuñécar",
-    "playa": "La Herradura",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Almuñécar",
-    "playa": "Marina del Este (Los",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Almuñécar",
-    "playa": "Berengueles)",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Almuñécar",
-    "playa": "Puerta del Mar",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Almuñécar",
-    "playa": "San Cristóbal",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Almuñécar",
-    "playa": "Velilla",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Gualchos",
-    "playa": "Sotillo-Castell",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Gualchos",
-    "playa": "Cambriles",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Ayamonte",
-    "playa": "Isla Canela Los Haraganes",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Ayamonte",
-    "playa": "Punta del Moral",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Cartaya",
-    "playa": "Caño de la Culata",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Cartaya",
-    "playa": "San Miguel",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Jaén",
-    "municipio": "Andújar",
-    "playa": "El Encinarejo",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Motril Salobreña",
-    "playa": "Carchuna",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Motril Salobreña",
-    "playa": "Calahonda",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Torrenueva",
-    "playa": "Playa Granada",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Torrenueva",
-    "playa": "Playa de Poniente",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Huelva Lepe",
-    "playa": "Paraje Natural",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Huelva Lepe",
-    "playa": "Marismas del Odiel",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Isla Cristina",
-    "playa": "La Casita Azul",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Punta",
-    "playa": "Playa Central",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Isla Cristina/Lepe",
-    "playa": "Islantilla",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Costa",
-    "playa": "Del Cañon-La Pelá",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Granada",
-    "municipio": "Costa",
-    "playa": "Torrenueva",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "municipio": "Umbría",
-    "playa": "Punta Umbría (Tramo El Albergue)",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Algarrobo",
-    "playa": "Algarrobo Costa",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Benalmádena",
-    "playa": "Carvajal",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Benalmádena",
-    "playa": "Fuente de la Salud",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Benalmádena",
-    "playa": "Torrebermeja-Santa",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Benalmádena",
-    "playa": "Ana",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Casares",
-    "playa": "Ancha",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Fuengirola",
-    "playa": "Boliches-Gaviotas",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Fuengirola",
-    "playa": "Carvajal",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Fuengirola",
-    "playa": "Castillo-Ejido",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Fuengirola",
-    "playa": "Fuengirola",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Málaga",
-    "playa": "Caleta El Dedo El Palo",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Málaga",
-    "playa": "Malagueta",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Málaga",
-    "playa": "Misericoria",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Málaga",
-    "playa": "Pedregalejo",
-    "marker": null
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "municipio": "Málaga",
-    "playa": "San Andrés",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Castrillón",
-    "playa": "Arnao",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Castrillón",
-    "playa": "Salinas",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Castrillón",
-    "playa": "Santa María del Mar",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Castropol",
-    "playa": "Arnao",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Castropol-Tapia de Casariego",
-    "playa": "Peñarronda",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Sant Joan de Labritja",
-    "playa": "Cala Benirrás",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Sant Joan de Labritja",
-    "playa": "Cala Sant Vicent",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Sant Joan de Labritja",
-    "playa": "Port de Sant Miquel",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Manilva Nerja",
-    "playa": "Las Gaviotas",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Manilva Nerja",
-    "playa": "Sabinillas",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella",
-    "playa": "Cabopino",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella El Cable Torremolinos",
-    "playa": "El Faro La Fontanilla",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella El Cable Torremolinos",
-    "playa": "Nagüeles-Casablanca Los Monteros (Adelfas)",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella El Cable Torremolinos",
-    "playa": "San Pedro de Alcántara",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Marbella El Cable Torremolinos",
-    "playa": "(Guadalmina)",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Torrox",
-    "playa": "Venus-Bajadilla",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Mijas",
-    "playa": "Calahonda I (Royal",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Mijas",
-    "playa": "Beach – La Luna)",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Málaga",
-    "municipio": "Vélez-Málaga",
-    "playa": "Calahonda (Riviera) El Bombo El Chaparral La Cala",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Cudillero Valdés",
-    "playa": "Concha de Artedo",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Muros de Nalón",
-    "playa": "Aguilar",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Navia",
-    "playa": "Frejulfe",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": null,
-    "municipio": "Navia",
-    "playa": "Navia",
-    "marker": "NUEVA"
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Santa Eulària des Riu",
-    "playa": "Santa Eularia",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Santa Eulària des Riu",
-    "playa": "Cala Llenya",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Santa Eulària des Riu",
-    "playa": "Es Canar",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Santa Eulària des Riu",
-    "playa": "Es Figueral",
-    "marker": null
-  },
-  {
-    "comunidad": "Islas Baleares",
-    "provincia": "Ibiza",
-    "municipio": "Santa Eulària des Riu",
-    "playa": "3",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
-    "municipio": "Alcudia",
-    "playa": "Alcudia",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
-    "municipio": "Andratx",
-    "playa": "Sant Elm",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
-    "municipio": "Felanitx",
-    "playa": "Cala Marçal",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
-    "municipio": "Felanitx",
-    "playa": "Cala Sa Nau",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
-    "municipio": "Felanitx",
-    "playa": "Porto Colom (Platja S’",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
-    "municipio": "Felanitx",
-    "playa": "Arenal)",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Mallorca",
-    "municipio": "Muro",
-    "playa": "Muro",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Menorca",
-    "municipio": "Alaior",
-    "playa": "Cala En Porter",
-    "marker": null
-  },
-  {
-    "comunidad": "Asturias",
-    "provincia": "Menorca",
-    "municipio": "Alaior",
-    "playa": "Son Bou",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": null,
-    "municipio": "La Oliva",
-    "playa": "Corralejo Viejo",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": null,
-    "municipio": "La Oliva",
-    "playa": "Grandes Playas La Concha",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Agaete",
-    "playa": "Las Nieves",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Arucas",
-    "playa": "El Puertillo Los Charcones",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Gáldar",
-    "playa": "Sardina",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Palma de Mallorca Santa",
-    "playa": "Cala Estancia",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Palma de Mallorca Santa",
-    "playa": "Cala Major",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Palma de Mallorca Santa",
-    "playa": "Ciutat Jardí",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Pollença Santanyí",
-    "playa": "Cala Barques",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Pollença Santanyí",
-    "playa": "Cala Molins",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Pollença Santanyí",
-    "playa": "Formentor",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Cardassar",
-    "playa": "Cala Millor (Cala Nau) Son",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Cardassar",
-    "playa": "Sa Coma",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Sant Lluis",
-    "playa": "Binibeca Nou",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Sant Lluis",
-    "playa": "Punta Prima",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Pájara Puerto",
-    "playa": "Butihondo",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Pájara Puerto",
-    "playa": "Costa Calma El Matorral",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Menorca",
-    "municipio": "Pájara Puerto",
-    "playa": "Morro Jable",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Ingenio Telde",
-    "playa": "El Burrero",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Ingenio Telde San Bartolomé de Tirajana",
-    "playa": "El Inglés",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Villa Las Burras",
-    "playa": "Maspalomas",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Villa Las Burras",
-    "playa": "Meloneras",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Villa Las Burras",
-    "playa": "San Agustín",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Villa Las Burras",
-    "playa": "4",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Can Picafort",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Son Bauló",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Son Serra",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Cala Mondragó (Sa",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "Font de n’Alís)",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Margalida",
-    "playa": "S’Amarador",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Salines",
-    "playa": "Es Port-Es Dolç",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera",
-    "playa": "Cala Millor",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera",
-    "playa": "Es Ribell",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera del Rosario",
-    "playa": "Blanca Los Pozos",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera del Rosario",
-    "playa": "Puerto Lajas",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Mallorca",
-    "municipio": "Servera del Rosario",
-    "playa": "Gran Tarajal",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "de Agüimes",
-    "playa": "Arinaga",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Arrecife",
-    "playa": "El Reducto",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Alajeró",
-    "playa": "Santiago",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Pinar del Hierro",
-    "playa": "La Restinga",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Breña Alta",
-    "playa": "Bajamar",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Gran Canaria",
-    "municipio": "Breña Baja",
-    "playa": "Los Cancajos",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Tenerife",
-    "municipio": "Adeje",
-    "playa": "El Duque (Sur)",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Tenerife",
-    "municipio": "Adeje",
-    "playa": "Torviscas",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Tenerife",
-    "municipio": "Arona",
-    "playa": "Las Vistas",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Tenerife",
-    "municipio": "Guía de Isora",
-    "playa": "Playa de la Jaquita",
-    "marker": null
-  },
-  {
-    "comunidad": "Canarias",
-    "provincia": "Tenerife",
-    "municipio": "Guía de Isora",
-    "playa": "Playa San Juan",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Arnuero",
-    "playa": "El Sable de Quejo La Arena",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Castro-Urdiales",
-    "playa": "Brazomar",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Castro-Urdiales",
-    "playa": "Oriñón",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Castro-Urdiales",
-    "playa": "Ostende",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Tías Yaiza",
-    "playa": "Grande (Blanca)",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Tías Yaiza",
-    "playa": "Matagorda",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Tías Yaiza",
-    "playa": "Pila de la Barrilla",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Tías Yaiza",
-    "playa": "Pocillos",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Valverde",
-    "playa": "Timijiraque",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Valverde LA PALMA Los Llanos de Aridane Santa",
-    "playa": "Charco Verde Palma",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": null,
-    "municipio": "Valverde LA PALMA Los Llanos de Aridane Santa",
-    "playa": "Puerto Naos",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Icod de los Vinos San",
-    "playa": "San Marcos Laguna",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Icod de los Vinos San Los Realejos",
-    "playa": "Socorro",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances",
-    "playa": "Helgueras",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances",
-    "playa": "Ris",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances",
-    "playa": "Trengandín",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances San Vicente de la Barquera",
-    "playa": "Sable de Merón",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Noja Suances San Vicente de la Barquera",
-    "playa": "5",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la",
-    "playa": "Santa Cruz de la Palma El Puerto de Tazacorte",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Piscinas Naturales de",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Bajamar",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Piscina Natural del",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Arenisco",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Piscina Natural de",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Jóver La Arena (Mesa del",
-    "marker": null
-  },
-  {
-    "comunidad": "Cantabria",
-    "provincia": "Tenerife",
-    "municipio": "Cruz de la Cristóbal de La",
-    "playa": "Mar) El Sable de Tagle Los Locos",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Badalona",
-    "playa": "Coco",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Badalona",
-    "playa": "Dels Pescadors La Marina",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Barcelona",
-    "playa": "Bogatell",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Barcelona",
-    "playa": "Mar Bella",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Barcelona",
-    "playa": "Nova Icaria",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Barcelona",
-    "playa": "Nova Mar Bella",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Barcelona",
-    "playa": "Sant Sebastià",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Barcelona",
-    "playa": "Somorrostro",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Barcelona",
-    "playa": "Zona de Banys Fòrum",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Caldes d´Estrac",
-    "playa": "Dels Tres Micos",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Caldes d´Estrac",
-    "playa": "Kalima",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Calella",
-    "playa": "Garbí",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Canet de Mar",
-    "playa": "Canet de Mar",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Blanes",
-    "playa": "Blanes",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Blanes",
-    "playa": "S’Abanell",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Blanes",
-    "playa": "Sant Francesc (Cala",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Blanes",
-    "playa": "Bona)",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Calonge i Sant Antoni",
-    "playa": "Cala Cristus-Ses",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Calonge i Sant Antoni",
-    "playa": "Torretes",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Calonge i Sant Antoni",
-    "playa": "Es Monestrí",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Calonge i Sant Antoni",
-    "playa": "Sant Antoni",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Calonge i Sant Antoni",
-    "playa": "Torre Valentina",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "d’Aro i S’Agaró",
-    "playa": "Cala Rovira",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "d’Aro i S’Agaró",
-    "playa": "Platja Gran",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "d’Aro i S’Agaró",
-    "playa": "Sa Conca",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Castelldefels Pineda",
-    "playa": "Del Baixador",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Castelldefels Pineda",
-    "playa": "Lluminetes",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Cubelles Sitges",
-    "playa": "Llarga",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Cubelles Sitges",
-    "playa": "Mota de Sant Pere",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Cubelles Sitges El Masnou",
-    "playa": "El Masnou",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Gavà",
-    "playa": "Gavà Mar",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Malgrat de Mar",
-    "playa": "Malgrat Centre Vilanova",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Malgrat de Mar",
-    "playa": "L’Astillero",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Mataró",
-    "playa": "Del Callao",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "Mataró",
-    "playa": "Varador",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Castelló d’Empúries Palamós",
-    "playa": "Empuriabrava",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Llançà Sant",
-    "playa": "Del Port",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Llançà Sant",
-    "playa": "Grifeu",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Lloret de Mar Torroella",
-    "playa": "Cala Canyelles",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Lloret de Mar Torroella",
-    "playa": "Fenals",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Tossa",
-    "playa": "Lloret",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Tossa",
-    "playa": "Sa Boadella",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Tossa",
-    "playa": "Santa Cristina",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Palafrugell",
-    "playa": "Canadell",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Palafrugell",
-    "playa": "Llafranc",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Palafrugell",
-    "playa": "Tamariu",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Palafrugell",
-    "playa": "6",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "dels Pescadors La Riera",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Aiguadolç",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Balmins",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Garraf",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "L’Estanyol La Barra La Ribera",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Les Botigues",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Sant Sebastiá",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar",
-    "playa": "Terramar",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar i la Geltrú",
-    "playa": "D´Adarró",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar i la Geltrú",
-    "playa": "Ibersol",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar i la Geltrú",
-    "playa": "Ribes Roges",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "municipio": "del Mar i la Geltrú",
-    "playa": "Sant Gervasi",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Feliu de Guíxols",
-    "playa": "Sant Feliu",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Feliu de Guíxols",
-    "playa": "Sant Pol",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Feliu de Guíxols de Montgrí",
-    "playa": "Cala Montgó",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "municipio": "Feliu de Guíxols de Montgrí de Mar",
-    "playa": "Gran de Tossa La Mar Menuda",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Altafulla",
-    "playa": "Altafulla",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Calafell",
-    "playa": "Calafell",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Calafell",
-    "playa": "L’Estany Mas Mel",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Calafell",
-    "playa": "Segur Llevant",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Calafell",
-    "playa": "Segur Ponent",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cambrils",
-    "playa": "Cavet La Llosa",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cambrils",
-    "playa": "L’Esquirol",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cambrils",
-    "playa": "Prat d’en Forés - El",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cambrils",
-    "playa": "Regueral",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cambrils",
-    "playa": "Vilafortuny",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cunit",
-    "playa": "Cunit Llevant",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cunit",
-    "playa": "Cunit Ponent",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cunit El Vendrell",
-    "playa": "El Francàs",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Cunit El Vendrell",
-    "playa": "Sant Salvador",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Roda de Berà TERRES",
-    "playa": "Costa Daurada",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Alcanar",
-    "playa": "Llarga",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Tarragona",
-    "playa": "L’Arrabassada",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Deltebre",
-    "playa": "La Móra",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Deltebre",
-    "playa": "Savinosa",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Torredembarra",
-    "playa": "Els Muntanyans La Paella",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Vandellós i l’Hospitalet de l’Infant",
-    "playa": "L’Almadrava",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Vandellós i l’Hospitalet de l’Infant La",
-    "playa": "L’Arenal La Punta del Riu El Torn",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Vandellós i l’Hospitalet de l’Infant La Vila-Seca",
-    "playa": "La Pineda",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Vandellós i l’Hospitalet de l’Infant La Vila-Seca",
-    "playa": "7",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE",
-    "playa": "Les Cases d’Alcanar -El",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE",
-    "playa": "Marjal",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE",
-    "playa": "Riumar",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "Cala Forn",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "L’Alguer",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "Sant Jordi d’Alfama",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "Cap Roig",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "DE L’EBRE de Mar",
-    "playa": "Les Avellanes",
-    "marker": null
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "municipio": "Ràpita",
-    "playa": "Les Delícies",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Alicante",
-    "playa": "Postiguet",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Alicante",
-    "playa": "Saladar-Urbanova",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Alicante",
-    "playa": "Sant Joan",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Alicante",
-    "playa": "Tabarca",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Altea",
-    "playa": "Cap Blanch El Bol La Roda",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Altea",
-    "playa": "L’Espigó",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Benidorm",
-    "playa": "Llevant",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Benidorm",
-    "playa": "Ponent",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Benissa",
-    "playa": "Cala del Baladrar",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Calp",
-    "playa": "Cantal Roig La Fossa",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Calp",
-    "playa": "L’Arenal -Bol",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Calp",
-    "playa": "Puerto Blanco",
-    "marker": "NUEVA"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Calp",
-    "playa": "Racò",
-    "marker": "NUEVA"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia",
-    "playa": "Els Molins",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia",
-    "playa": "Les Bovetes",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia",
-    "playa": "Les Deveses",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia",
-    "playa": "Les Marines",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia",
-    "playa": "Marineta Cassiana",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia",
-    "playa": "Punta Negra",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia",
-    "playa": "Punta del Raset",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia El Campello",
-    "playa": "Cala Lanuza",
-    "marker": "NUEVA"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia El Campello",
-    "playa": "Carrer de la Mar",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Denia El Campello",
-    "playa": "Mutxavista",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Benitatxell",
-    "playa": "Cala del Moraig",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Elx",
-    "playa": "Arenals del Sol-Sur",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Elx",
-    "playa": "Carabassí",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Elx",
-    "playa": "L’Altet",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Teulada",
-    "playa": "La Marina",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Teulada",
-    "playa": "Les Pesqueres-El",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Teulada",
-    "playa": "Rebollo",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Segura",
-    "playa": "Centre",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Segura",
-    "playa": "Dels Vivers",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Segura",
-    "playa": "Ortigues-Campo Del Moncaio La Roqueta",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Vila",
-    "playa": "Racó de l’Albir",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Orihuela",
-    "playa": "Calas de Aguamarina",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Orihuela",
-    "playa": "Barranco Rubio",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Orihuela",
-    "playa": "Cabo Roig -La Caleta",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Orihuela",
-    "playa": "Cala Capitán",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Orihuela",
-    "playa": "Cala Cerrada",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Xàbia",
-    "playa": "Cala Estaca",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Xàbia",
-    "playa": "Campoamor-La Glea La Zenia-Cala Bosque",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Xàbia",
-    "playa": "Mil Palmeras",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Xàbia",
-    "playa": "Punta Prima",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pilar de la Horadada",
-    "playa": "Del Conde",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pilar de la Horadada",
-    "playa": "Higuericas",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pilar de la Horadada",
-    "playa": "Jesuitas",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pilar de la Horadada",
-    "playa": "Mil Palmeras",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pilar de la Horadada",
-    "playa": "Puerto",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pilar de la Horadada",
-    "playa": "Rocamar",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pilar de la Horadada",
-    "playa": "8",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Calas del Este",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Calas de Santiago",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Bernabéu La Ermita",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Tamarit",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Varador Del Portet",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Les Platgetes",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Cabo Cervera",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Cala de las Piteras El Cura La Mata (antigua La",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Pola",
-    "playa": "Mata Sur) Los Locos Los Náufragos",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Bon Nou",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Ciutat (Centro) De Torres La Caleta",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Paradís",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Varadero",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Arenal",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Alicante",
-    "municipio": "Joiosa",
-    "playa": "Granadella La Grava",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Alcalá de Xivert",
-    "playa": "Del Carregador Del Moro La Romana",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Alcalá de Xivert",
-    "playa": "Manyetes",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Almassora",
-    "playa": "Benafeli",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Almenara",
-    "playa": "Casablanca",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Benicarló",
-    "playa": "La Caracola",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Benicarló",
-    "playa": "Morrongo",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Benicàssim",
-    "playa": "Dels Terrers",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Benicàssim",
-    "playa": "Heliópolis",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Benicàssim",
-    "playa": "L´Almadrava",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Benicàssim",
-    "playa": "Torre de Sant Vicent",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Benicàssim",
-    "playa": "Voramar",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Bellreguard",
-    "playa": "Bellreguard",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Canet d’en Berenguer",
-    "playa": "Racó de la Mar",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Cullera",
-    "playa": "Cap Blanc",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Cullera El Brosquil",
-    "playa": "El Dossel El Far El Mareny de Sant",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Llorenç",
-    "playa": "Escollera Los Olivos",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Llorenç",
-    "playa": "Marenyet-L'illa",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Llorenç",
-    "playa": "Racó",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Llorenç",
-    "playa": "Sant Antoni",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Daimús",
-    "playa": "Daimús",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Gandía",
-    "playa": "Auir",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Gandía",
-    "playa": "Nord",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Burriana Peñíscola",
-    "playa": "El Grao",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Burriana Peñíscola",
-    "playa": "L´Arenal",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Torreblanca",
-    "playa": "Malvarrosa",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Castelló de la Plana",
-    "playa": "Gurugú",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Vinaròs",
-    "playa": "Pinar",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Vinaròs",
-    "playa": "Serradal",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Xilxes",
-    "playa": "Grao",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Xilxes",
-    "playa": "L’Estanyol",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Xilxes",
-    "playa": "Masbó",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Xilxes",
-    "playa": "Pedra Roja",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Montanejos",
-    "playa": "Fuente de los Baños",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Oropesa del Mar",
-    "playa": "La Conxa",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Oropesa del Mar",
-    "playa": "Les Amplaries",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Oropesa del Mar",
-    "playa": "Morro de Gos",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Castellón",
-    "municipio": "Oropesa del Mar",
-    "playa": "Plagetes de Bellver",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Safor",
-    "playa": "Guardamar de la Safor",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Safor La Pobla de Farnals",
-    "playa": "Norte",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Tavernes",
-    "playa": "Pobla Marina",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Miramar",
-    "playa": "Miramar",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Navarrés",
-    "playa": "Playa-Monte",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Oliva",
-    "playa": "L’Aigua Blanca",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Oliva",
-    "playa": "L’Aigua Morta",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Oliva",
-    "playa": "Pau-Pi",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Oliva",
-    "playa": "Terranova-Burguera",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Piles",
-    "playa": "Piles Xeraco",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Puçol",
-    "playa": "Puçol",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "Puçol",
-    "playa": "9",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "La Goleta",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Tavernes de la",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Valldigna",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "L’Arbre del Gos El Saler La Devesa La Garrofera",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Malva-Rosa",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Recatí-Perellonet",
-    "marker": null
-  },
-  {
-    "comunidad": "Comunidad Valenciana",
-    "provincia": "Valencia",
-    "municipio": "de la",
-    "playa": "Xeraco",
-    "marker": null
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "Campanario",
-    "playa": "Campanario",
-    "marker": null
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "Casas de Don Pedro",
-    "playa": "Los Calicantos",
-    "marker": null
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "Castuera",
-    "playa": "Isla del Zújar",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Cáceres",
-    "municipio": "Cañamero",
-    "playa": "Cancho del Fresno",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "A Coruña",
-    "playa": "As Lapas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "A Coruña",
-    "playa": "Orzán-Matadero",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "A Coruña",
-    "playa": "Oza",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "A Coruña",
-    "playa": "Riazor",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "A Coruña",
-    "playa": "San Amaro",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "A Laracha",
-    "playa": "Caión",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "A Pobra do Caramiñal",
-    "playa": "Lombiña-Cabío",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Arteixo",
-    "playa": "A Salsa (Repibelo)",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Arteixo",
-    "playa": "Barrañán",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Arteixo",
-    "playa": "Combouzas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Arteixo",
-    "playa": "Porto de Suevos",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Arteixo",
-    "playa": "Sabón",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Arteixo",
-    "playa": "Valcobo",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Rodríguez",
-    "playa": "Lago de As Pontes",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Bergondo",
-    "playa": "Gandarío",
-    "marker": null
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "Cheles Orellana",
-    "playa": "La Dehesa",
-    "marker": null
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "Herrera del Duque Talarrubias",
-    "playa": "El Espolón-Peloche",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Camariñas Miño",
-    "playa": "Arou",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Carballo",
-    "playa": "Pedra do Sal",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Razo Muros",
-    "playa": "Saíñas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Dumbría Oleiros",
-    "playa": "Ézaro",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Ferrol",
-    "playa": "A Fragata-O Pareixal",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Ferrol",
-    "playa": "Caranza",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Ferrol",
-    "playa": "Doniños",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Esmelle Ortigueira",
-    "playa": "Ponzos",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Esmelle Ortigueira",
-    "playa": "San Xurxo",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Laxe Ponteceso",
-    "playa": "Laxe",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Malpica de Bergantiños",
-    "playa": "Area Mayor",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "municipio": "Riveira",
-    "playa": "10",
-    "marker": null
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "la Vieja",
-    "playa": "Playa dulce de Orellana",
-    "marker": null
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "la Vieja",
-    "playa": "Talarrubias-Puerto",
-    "marker": null
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "municipio": "la Vieja",
-    "playa": "Peña",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Barreiros",
-    "playa": "Coto",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Barreiros",
-    "playa": "Fontela Valea",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Barreiros",
-    "playa": "Pasadas",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Burela",
-    "playa": "A Marosa",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Burela",
-    "playa": "O Portelo",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Cervo",
-    "playa": "O Torno",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Ourense",
-    "municipio": "A Veiga",
-    "playa": "Playa de los Franceses",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "A Guarda",
-    "playa": "Area Grande",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "A Guarda",
-    "playa": "O Muíño",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "A Illa de Arousa",
-    "playa": "Area da Secada",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "A Illa de Arousa",
-    "playa": "Bao (Camaxe)",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Baiona",
-    "playa": "Barbeira",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Baiona",
-    "playa": "Concheira",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Baiona",
-    "playa": "Frades",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Baiona",
-    "playa": "Ladeira",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Baiona",
-    "playa": "Ribeira",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Baiona",
-    "playa": "Santa Marta",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Bueu",
-    "playa": "Area de Bon",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Bueu",
-    "playa": "Lagos",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Bueu",
-    "playa": "Lapamán",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Bueu",
-    "playa": "Portomaior",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Marín",
-    "playa": "Aguete",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Marín",
-    "playa": "Loira",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Marín",
-    "playa": "Mogor",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Marín",
-    "playa": "Portocelo",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Marín",
-    "playa": "Santo de Mar – A",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Marín",
-    "playa": "Coviña",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Foz Ribadeo",
-    "playa": "A Rapadoira",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Foz Ribadeo",
-    "playa": "Areoura",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Foz Ribadeo",
-    "playa": "As Polas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Viveiro",
-    "playa": "Llas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "Viveiro",
-    "playa": "Peizás",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "O Vicedo",
-    "playa": "Abrela",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "municipio": "O Vicedo",
-    "playa": "Xilloi",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Moaña Vigo",
-    "playa": "O Con",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Poio",
-    "playa": "Cabeceira",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "O Laño",
-    "playa": "Xiorto",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Ponte Caldelas",
-    "playa": "Playa fluvial A Calzada",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Sanxenxo",
-    "playa": "A Lapa",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Sanxenxo",
-    "playa": "Agra",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Sanxenxo",
-    "playa": "Areas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Baltar",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Bascuas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Canelas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Caneliñas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Foxos",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Major",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Montalvo",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Nosa Señora da",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "Lanzada",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Areas Gordas Vilagarcía",
-    "playa": "O Espiñeiro-A Lanzada",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "Panadeira",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "Paxariñas",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "Pragueira",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "Silgar",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "Pampaído",
-    "playa": "11",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "de Arousa",
-    "playa": "Campanario",
-    "marker": null
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "municipio": "de Arousa",
-    "playa": "Compostela",
-    "marker": null
-  },
-  {
-    "comunidad": "Madrid",
-    "provincia": null,
-    "municipio": "San Martín de Valdeiglesias",
-    "playa": "Virgen de la Nueva",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Águilas",
-    "playa": "Calarreona El Hornillo La Carolina La Casica Verde La Colonia La Higuerica Las Delicias",
-    "marker": "RECUPERA"
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Águilas",
-    "playa": "Levante",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Águilas",
-    "playa": "Matalentisco",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Águilas",
-    "playa": "Poniente",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Cartagena",
-    "playa": "Cala Cortina",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Cartagena",
-    "playa": "Cala del Barco",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Cartagena",
-    "playa": "Calblanque El Portús",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Cartagena",
-    "playa": "Isla Plana La Azohía-El Cuartel La Chapineta",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Cartagena",
-    "playa": "Levante-Cabo de Palos",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Cartagena",
-    "playa": "San Ginés",
-    "marker": null
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Álava",
-    "municipio": "Arratzua-Ubarrundia",
-    "playa": "Landa",
-    "marker": null
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Vizcaya",
-    "municipio": "Bakio",
-    "playa": "Bakio",
-    "marker": null
-  },
-  {
-    "comunidad": "Ceuta",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Ceuta",
-    "playa": "Chorrillo",
-    "marker": null
-  },
-  {
-    "comunidad": "Ceuta",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Ceuta",
-    "playa": "Ribera",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Lorca San",
-    "playa": "Calnegre",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Alamillo San",
-    "playa": "Bahía – La Reya Del Mojón",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Alamillo San",
-    "playa": "Grande-Castellar",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Alamillo San",
-    "playa": "Nares",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Alamillo San San",
-    "playa": "Rihuete",
-    "marker": null
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Álava",
-    "municipio": "Barrundia Elburgo",
-    "playa": "Moskurio (Garaio",
-    "marker": null
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Álava",
-    "municipio": "Barrundia Elburgo",
-    "playa": "Norte)",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Javier/Cartagena",
-    "playa": "Banco del Tabal-Calnegre",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Javier",
-    "playa": "El Arenal",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Javier",
-    "playa": "Ensenada del Esparto",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Javier",
-    "playa": "Pedrucho",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Pedro del Pinatar",
-    "playa": "El Mojón Las Salinas",
-    "marker": null
-  },
-  {
-    "comunidad": "Murcia",
-    "provincia": null,
-    "municipio": "Pedro del Pinatar",
-    "playa": "Torre Derribada",
-    "marker": null
-  },
-  {
-    "comunidad": "Melilla",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Melilla",
-    "playa": "Hipódromo Los Galápagos",
-    "marker": null
-  },
-  {
-    "comunidad": "Melilla",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Melilla",
-    "playa": "San Lorenzo-Los Cárabos",
-    "marker": null
-  },
-  {
-    "comunidad": "Melilla",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Melilla",
-    "playa": "* El Jurado Internacional Bandera sostenibles por un periodo mecanismo de transición se ha acreditación internacionales El galardón otorgado condicionado al cumplimiento",
-    "marker": null
-  },
-  {
-    "comunidad": "Melilla",
-    "provincia": null,
-    "municipio": "Ciudad Autónoma de Melilla",
-    "playa": "Azul, así como al seguimiento",
-    "marker": null
-  }
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Adra","playa":"Censo"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Adra","playa":"El Carboncillo"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Adra","playa":"San Nicolás"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Adra","playa":"Sirena Loca"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Almería","playa":"Almería"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Almería","playa":"El Toyo"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Almería","playa":"San Miguel Cabo de Gata"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Balanegra","playa":"Balanegra"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Carboneras","playa":"El Ancón"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Carboneras","playa":"Las Marinicas"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Carboneras","playa":"Los Barquicos-Cocones"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Cuevas del Almanzora","playa":"Playazo-Villaricos"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Cuevas del Almanzora","playa":"Pozo del Esparto"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Cuevas del Almanzora","playa":"Quitapellejos-Palomares"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"El Ejido","playa":"Balerma"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"El Ejido","playa":"Levante Almerimar"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"El Ejido","playa":"Poniente Almerimar"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"El Ejido","playa":"San Miguel"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Mojácar","playa":"El Cantal"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Mojácar","playa":"El Descargador"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Mojácar","playa":"Lance Nuevo"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Mojácar","playa":"Marina de la Torre"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Mojácar","playa":"Piedra Villazar"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Mojácar","playa":"Venta del Bancal-Ventanicas"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Níjar","playa":"Aguamarga"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Níjar","playa":"San José"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Pulpí","playa":"Calipso"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Pulpí","playa":"Los Nardos"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Pulpí","playa":"Mar Rabiosa"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Pulpí","playa":"Mar Serena"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Roquetas de Mar","playa":"Aguadulce"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Roquetas de Mar","playa":"La Bajadilla"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Roquetas de Mar","playa":"Las Salinas"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Roquetas de Mar","playa":"Romanillas"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Roquetas de Mar","playa":"Urbanización Playa Serena"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Roquetas de Mar","playa":"Urbanización Roquetas"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Vera","playa":"El Playazo"},
+  {"comunidad":"Andalucía","provincia":"Almería","municipio":"Vera","playa":"Las Marinas-Bolaga"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Algeciras","playa":"Getares"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Barbate","playa":"Zahara de los Atunes"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Cádiz","playa":"La Caleta"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Cádiz","playa":"La Cortadura-Poniente"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Cádiz","playa":"La Victoria"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Cádiz","playa":"Santa María del Mar"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Chiclana de la Frontera","playa":"La Barrosa"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Chiclana de la Frontera","playa":"Sancti Petri"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Chipiona","playa":"Camarón-La Laguna"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Chipiona","playa":"Cruz del Mar-Canteras"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Chipiona","playa":"La Ballena"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Chipiona","playa":"Micaela"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Chipiona","playa":"Regla"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Conil de la Frontera","playa":"El Roche"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Conil de la Frontera","playa":"La Fontanilla"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Conil de la Frontera","playa":"Los Bateles"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"El Puerto de Santa María","playa":"Fuentebravía"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"El Puerto de Santa María","playa":"La Puntilla"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"El Puerto de Santa María","playa":"Santa Catalina"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"El Puerto de Santa María","playa":"Valdelagrana"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Rota","playa":"Galeones"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Rota","playa":"La Ballena"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Rota","playa":"La Costilla"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Rota","playa":"Punta Candor"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Rota","playa":"Puntalillo"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Rota","playa":"Rompidillo-Chorrillo"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"San Fernando","playa":"Camposoto-El Castillo"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"San Roque","playa":"Alcaidesa-El Faro"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"San Roque","playa":"Cala Sardina"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"San Roque","playa":"Puerto Sotogrande"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"San Roque","playa":"Torreguadiaro"},
+  {"comunidad":"Andalucía","provincia":"Cádiz","municipio":"Vejer de la Frontera","playa":"El Palmar"},
+  {"comunidad":"Andalucía","provincia":"Córdoba","municipio":"Almodóvar del Río","playa":"La Breña"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Almuñécar","playa":"La Herradura"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Almuñécar","playa":"Marina del Este"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Almuñécar","playa":"Puerta del Mar"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Almuñécar","playa":"San Cristóbal"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Almuñécar","playa":"Velilla"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Gualchos","playa":"Sotillo-Castell"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Gualchos","playa":"Cambriles"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Motril","playa":"Carchuna"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Motril","playa":"Calahonda"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Motril","playa":"Playa Granada"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Motril","playa":"Playa de Poniente"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Salobreña","playa":"La Guardia"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Torrenueva Costa","playa":"Del Cañón-La Pelá"},
+  {"comunidad":"Andalucía","provincia":"Granada","municipio":"Torrenueva Costa","playa":"Torrenueva"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Ayamonte","playa":"Isla Canela"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Ayamonte","playa":"Los Haraganes"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Ayamonte","playa":"Punta del Moral"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Cartaya","playa":"Caño de la Culata"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Cartaya","playa":"San Miguel"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Huelva","playa":"Paraje Natural Marismas del Odiel"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Isla Cristina","playa":"La Casita Azul"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Isla Cristina","playa":"Playa Central"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Isla Cristina","playa":"Islantilla"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Lepe","playa":"Islantilla"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Lepe","playa":"Santa Pura"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Moguer","playa":"Del Parador"},
+  {"comunidad":"Andalucía","provincia":"Huelva","municipio":"Punta Umbría","playa":"Punta Umbría"},
+  {"comunidad":"Andalucía","provincia":"Jaén","municipio":"Andújar","playa":"El Encinarejo"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Algarrobo","playa":"Algarrobo Costa"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Benalmádena","playa":"Carvajal"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Benalmádena","playa":"Fuente de la Salud"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Benalmádena","playa":"Torrebermeja-Santa Ana"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Casares","playa":"Ancha"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Fuengirola","playa":"Boliches-Gaviotas"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Fuengirola","playa":"Carvajal"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Fuengirola","playa":"Castillo-Ejido"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Fuengirola","playa":"Fuengirola"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Málaga","playa":"Caleta"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Málaga","playa":"El Dedo"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Málaga","playa":"El Palo"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Málaga","playa":"Malagueta"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Málaga","playa":"Misericordia"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Málaga","playa":"Pedregalejo"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Málaga","playa":"San Andrés"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Manilva","playa":"Las Gaviotas"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Manilva","playa":"Sabinillas"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Marbella","playa":"Cabopino"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Marbella","playa":"El Cable"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Marbella","playa":"El Faro"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Marbella","playa":"La Fontanilla"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Marbella","playa":"Nagüeles-Casablanca"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Marbella","playa":"Los Monteros"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Marbella","playa":"San Pedro de Alcántara"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Marbella","playa":"Venus-Bajadilla"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Mijas","playa":"Calahonda I"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Mijas","playa":"Calahonda"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Mijas","playa":"El Bombo"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Mijas","playa":"El Chaparral"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Mijas","playa":"La Cala"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Nerja","playa":"Burriana"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Nerja","playa":"Maro"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Nerja","playa":"Playazo-Chucho"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Nerja","playa":"Torrecilla"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Torremolinos","playa":"El Bajondillo"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Torremolinos","playa":"La Carihuela-Montemar"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Torremolinos","playa":"Los Álamos"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Torremolinos","playa":"Playamar"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Torrox","playa":"Cenicero-Las Dunas"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Torrox","playa":"El Morche"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Torrox","playa":"Ferrara"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Vélez-Málaga","playa":"Benajarafe"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Vélez-Málaga","playa":"La Caleta"},
+  {"comunidad":"Andalucía","provincia":"Málaga","municipio":"Vélez-Málaga","playa":"Torre del Mar"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Castrillón","playa":"Arnao"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Castrillón","playa":"Salinas"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Castrillón","playa":"Santa María del Mar"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Castropol","playa":"Arnao"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Castropol","playa":"Peñarronda"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Tapia de Casariego","playa":"Peñarronda"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Cudillero","playa":"Concha de Artedo"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"El Franco","playa":"Porcia"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Muros de Nalón","playa":"Aguilar"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Navia","playa":"Frejulfe"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Navia","playa":"Navia"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Valdés","playa":"Cadavedo"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Valdés","playa":"Cueva"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Valdés","playa":"Otur"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Valdés","playa":"Salinas o Tercera de Luarca"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Villaviciosa","playa":"La Ñora"},
+  {"comunidad":"Asturias","provincia":"Asturias","municipio":"Villaviciosa","playa":"Rodiles"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Sant Joan de Labritja","playa":"Cala Benirrás"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Sant Joan de Labritja","playa":"Cala Sant Vicent"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Sant Joan de Labritja","playa":"Port de Sant Miquel"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santa Eulària des Riu","playa":"Santa Eularia"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santa Eulària des Riu","playa":"Cala Llenya"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santa Eulària des Riu","playa":"Es Canar"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santa Eulària des Riu","playa":"Es Figueral"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Alcudia","playa":"Alcudia"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Andratx","playa":"Sant Elm"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Felanitx","playa":"Cala Marçal"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Felanitx","playa":"Cala Sa Nau"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Felanitx","playa":"Porto Colom"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Muro","playa":"Muro"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Palma de Mallorca","playa":"Cala Estancia"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Palma de Mallorca","playa":"Cala Major"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Palma de Mallorca","playa":"Ciutat Jardí"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Pollença","playa":"Cala Barques"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Pollença","playa":"Cala Molins"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Pollença","playa":"Formentor"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Sant Llorenç des Cardassar","playa":"Cala Millor"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Sant Llorenç des Cardassar","playa":"Sa Coma"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santa Margalida","playa":"Can Picafort"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santa Margalida","playa":"Son Bauló"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santa Margalida","playa":"Son Serra"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santanyí","playa":"Cala Mondragó"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Santanyí","playa":"S'Amarador"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Ses Salines","playa":"Es Port-Es Dolç"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Son Servera","playa":"Cala Millor"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Son Servera","playa":"Es Ribell"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Alaior","playa":"Cala En Porter"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Alaior","playa":"Son Bou"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Sant Lluís","playa":"Binibeca Nou"},
+  {"comunidad":"Islas Baleares","provincia":"Baleares","municipio":"Sant Lluís","playa":"Punta Prima"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"La Oliva","playa":"Corralejo Viejo"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"La Oliva","playa":"Grandes Playas"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"La Oliva","playa":"La Concha"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Pájara","playa":"Butihondo"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Pájara","playa":"Costa Calma"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Pájara","playa":"El Matorral"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Pájara","playa":"Morro Jable"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Puerto del Rosario","playa":"Blanca"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Puerto del Rosario","playa":"Los Pozos"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Puerto del Rosario","playa":"Puerto Lajas"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Tuineje","playa":"Gran Tarajal"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Agaete","playa":"Las Nieves"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Arucas","playa":"El Puertillo"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Arucas","playa":"Los Charcones"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Gáldar","playa":"Sardina"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Ingenio","playa":"El Burrero"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"San Bartolomé de Tirajana","playa":"El Inglés"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"San Bartolomé de Tirajana","playa":"Las Burras"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"San Bartolomé de Tirajana","playa":"Maspalomas"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"San Bartolomé de Tirajana","playa":"Meloneras"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"San Bartolomé de Tirajana","playa":"San Agustín"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Telde","playa":"Hoya del Pozo"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Telde","playa":"La Garita"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Telde","playa":"Melenara"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Telde","playa":"Salinetas"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Villa de Agüimes","playa":"Arinaga"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Arrecife","playa":"El Reducto"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Tías","playa":"Grande"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Tías","playa":"Matagorda"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Tías","playa":"Pila de la Barrilla"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Tías","playa":"Pocillos"},
+  {"comunidad":"Canarias","provincia":"Las Palmas","municipio":"Yaiza","playa":"Blanca"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Alajeró","playa":"Santiago"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Pinar del Hierro","playa":"La Restinga"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Valverde","playa":"Timijiraque"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Breña Alta","playa":"Bajamar"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Breña Baja","playa":"Los Cancajos"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Los Llanos de Aridane","playa":"Charco Verde"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Los Llanos de Aridane","playa":"Puerto Naos"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Santa Cruz de la Palma","playa":"Santa Cruz de la Palma"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Tazacorte","playa":"El Puerto de Tazacorte"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Adeje","playa":"El Duque"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Adeje","playa":"Torviscas"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Arona","playa":"Las Vistas"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Guía de Isora","playa":"Playa de la Jaquita"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Guía de Isora","playa":"Playa San Juan"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Icod de los Vinos","playa":"San Marcos"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Los Realejos","playa":"Socorro"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"San Cristóbal de La Laguna","playa":"Piscinas Naturales de Bajamar"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"San Cristóbal de La Laguna","playa":"Piscina Natural del Arenisco"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"San Cristóbal de La Laguna","playa":"Piscina Natural de Jóver"},
+  {"comunidad":"Canarias","provincia":"Santa Cruz de Tenerife","municipio":"Tacoronte","playa":"La Arena"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Arnuero","playa":"El Sable de Quejo"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Arnuero","playa":"La Arena"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Castro-Urdiales","playa":"Brazomar"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Castro-Urdiales","playa":"Oriñón"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Castro-Urdiales","playa":"Ostende"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Noja","playa":"Helgueras"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Noja","playa":"Ris"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Noja","playa":"Trengandín"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"San Vicente de la Barquera","playa":"Sable de Merón"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Suances","playa":"El Sable de Tagle"},
+  {"comunidad":"Cantabria","provincia":"Cantabria","municipio":"Suances","playa":"Los Locos"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Badalona","playa":"Coco"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Badalona","playa":"Dels Pescadors"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Badalona","playa":"La Marina"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Barcelona","playa":"Bogatell"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Barcelona","playa":"Mar Bella"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Barcelona","playa":"Nova Icaria"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Barcelona","playa":"Nova Mar Bella"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Barcelona","playa":"Sant Sebastià"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Barcelona","playa":"Somorrostro"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Barcelona","playa":"Zona de Banys Fòrum"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Caldes d'Estrac","playa":"Dels Tres Micos"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Caldes d'Estrac","playa":"Kalima"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Calella","playa":"Garbí"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Canet de Mar","playa":"Canet de Mar"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Castelldefels","playa":"Del Baixador"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Castelldefels","playa":"Lluminetes"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Cubelles","playa":"Llarga"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Cubelles","playa":"Mota de Sant Pere"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"El Masnou","playa":"El Masnou"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Gavà","playa":"Gavà Mar"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Malgrat de Mar","playa":"Malgrat Centre"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Malgrat de Mar","playa":"L'Astillero"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Mataró","playa":"Del Callao"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Mataró","playa":"Varador"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Pineda de Mar","playa":"dels Pescadors"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Pineda de Mar","playa":"La Riera"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"Aiguadolç"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"Balmins"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"Garraf"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"L'Estanyol"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"La Barra"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"La Ribera"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"Les Botigues"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"Sant Sebastià"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Sitges","playa":"Terramar"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Vilanova i la Geltrú","playa":"D'Adarró"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Vilanova i la Geltrú","playa":"Ibersol"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Vilanova i la Geltrú","playa":"Ribes Roges"},
+  {"comunidad":"Cataluña","provincia":"Barcelona","municipio":"Vilanova i la Geltrú","playa":"Sant Gervasi"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Blanes","playa":"Blanes"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Blanes","playa":"S'Abanell"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Blanes","playa":"Sant Francesc (Cala Bona)"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Calonge i Sant Antoni","playa":"Cala Cristus-Ses Torretes"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Calonge i Sant Antoni","playa":"Es Monestrí"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Calonge i Sant Antoni","playa":"Sant Antoni"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Calonge i Sant Antoni","playa":"Torre Valentina"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Castell d'Aro, Platja d'Aro i S'Agaró","playa":"Cala Rovira"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Castell d'Aro, Platja d'Aro i S'Agaró","playa":"Platja Gran"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Castell d'Aro, Platja d'Aro i S'Agaró","playa":"Sa Conca"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Castelló d'Empúries","playa":"Empuriabrava"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Llançà","playa":"Del Port"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Llançà","playa":"Grifeu"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Lloret de Mar","playa":"Cala Canyelles"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Lloret de Mar","playa":"Fenals"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Lloret de Mar","playa":"Lloret"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Lloret de Mar","playa":"Sa Boadella"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Lloret de Mar","playa":"Santa Cristina"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Palafrugell","playa":"Canadell"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Palafrugell","playa":"Llafranc"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Palafrugell","playa":"Tamariu"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Palamós","playa":"La Fosca"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Sant Feliu de Guíxols","playa":"Sant Feliu"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Sant Feliu de Guíxols","playa":"Sant Pol"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Torroella de Montgrí","playa":"Cala Montgó"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Tossa de Mar","playa":"Gran de Tossa"},
+  {"comunidad":"Cataluña","provincia":"Girona","municipio":"Tossa de Mar","playa":"La Mar Menuda"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Altafulla","playa":"Altafulla"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Calafell","playa":"Calafell"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Calafell","playa":"L'Estany Mas Mel"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Calafell","playa":"Segur Llevant"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Calafell","playa":"Segur Ponent"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Cambrils","playa":"Cavet"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Cambrils","playa":"La Llosa"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Cambrils","playa":"L'Esquirol"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Cambrils","playa":"Prat d'en Forés-El Regueral"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Cambrils","playa":"Vilafortuny"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Cunit","playa":"Cunit Llevant"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Cunit","playa":"Cunit Ponent"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"El Vendrell","playa":"El Francàs"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"El Vendrell","playa":"Sant Salvador"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Roda de Berà","playa":"Costa Daurada"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Roda de Berà","playa":"Llarga"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Tarragona","playa":"L'Arrabassada"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Tarragona","playa":"La Móra"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Tarragona","playa":"Savinosa"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Tarragona","playa":"Tamarit"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Torredembarra","playa":"Els Muntanyans"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Torredembarra","playa":"La Paella"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Vandellòs i l'Hospitalet de l'Infant","playa":"L'Almadrava"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Vandellòs i l'Hospitalet de l'Infant","playa":"L'Arenal"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Vandellòs i l'Hospitalet de l'Infant","playa":"La Punta del Riu"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Vandellòs i l'Hospitalet de l'Infant","playa":"El Torn"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Vila-Seca","playa":"La Pineda"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Alcanar","playa":"Les Cases d'Alcanar-El Marjal"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"Deltebre","playa":"Riumar"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"L'Ametlla de Mar","playa":"Cala Forn"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"L'Ametlla de Mar","playa":"L'Alguer"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"L'Ametlla de Mar","playa":"Sant Jordi d'Alfama"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"L'Ampolla","playa":"Cap Roig"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"L'Ampolla","playa":"Les Avellanes"},
+  {"comunidad":"Cataluña","provincia":"Tarragona","municipio":"La Ràpita","playa":"Les Delícies"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Alicante","playa":"Postiguet"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Alicante","playa":"Saladar-Urbanova"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Alicante","playa":"Sant Joan"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Alicante","playa":"Tabarca"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Altea","playa":"Cap Blanch"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Altea","playa":"El Bol"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Altea","playa":"La Roda"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Altea","playa":"L'Espigó"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Benidorm","playa":"Llevant"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Benidorm","playa":"Ponent"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Benissa","playa":"Cala del Baladrar"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Benissa","playa":"L'Advocat"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Calp","playa":"Cantal Roig"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Calp","playa":"La Fossa"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Calp","playa":"L'Arenal-Bol"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Calp","playa":"Puerto Blanco"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Calp","playa":"Racò"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Denia","playa":"Els Molins"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Denia","playa":"Les Bovetes"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Denia","playa":"Les Deveses"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Denia","playa":"Les Marines"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Denia","playa":"Marineta Cassiana"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Denia","playa":"Punta Negra"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Denia","playa":"Punta del Raset"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"El Campello","playa":"Cala Lanuza"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"El Campello","playa":"Carrer de la Mar"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"El Campello","playa":"Mutxavista"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"El Poble Nou de Benitatxell","playa":"Cala del Moraig"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Elx","playa":"Arenals del Sol-Sur"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Elx","playa":"Carabassí"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Elx","playa":"L'Altet"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Elx","playa":"La Marina"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Elx","playa":"Les Pesqueres-El Rebollo"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Guardamar del Segura","playa":"Centre"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Guardamar del Segura","playa":"Dels Vivers"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Guardamar del Segura","playa":"Ortigues-Campo"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Guardamar del Segura","playa":"Del Moncaio"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Guardamar del Segura","playa":"La Roqueta"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"L'Alfas del Pi","playa":"Racó de l'Albir"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Calas de Aguamarina"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Barranco Rubio"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Cabo Roig-La Caleta"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Cala Capitán"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Cala Cerrada"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Cala Estaca"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Campoamor-La Glea"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"La Zenia-Cala Bosque"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Mil Palmeras"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Orihuela","playa":"Punta Prima"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Pilar de la Horadada","playa":"Del Conde"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Pilar de la Horadada","playa":"Higuericas"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Pilar de la Horadada","playa":"Jesuitas"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Pilar de la Horadada","playa":"Mil Palmeras"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Pilar de la Horadada","playa":"Puerto"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Pilar de la Horadada","playa":"Rocamar"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Santa Pola","playa":"Calas del Este"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Santa Pola","playa":"Calas de Santiago Bernabéu"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Santa Pola","playa":"La Ermita"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Santa Pola","playa":"Tamarit"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Santa Pola","playa":"Varador"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Teulada","playa":"Del Portet"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Teulada","playa":"Les Platgetes"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Torrevieja","playa":"Cabo Cervera"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Torrevieja","playa":"Cala de las Piteras"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Torrevieja","playa":"El Cura"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Torrevieja","playa":"La Mata"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Torrevieja","playa":"Los Locos"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Torrevieja","playa":"Los Náufragos"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Vila Joiosa","playa":"Bon Nou"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Vila Joiosa","playa":"Ciutat (Centro)"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Vila Joiosa","playa":"De Torres"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Vila Joiosa","playa":"La Caleta"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Vila Joiosa","playa":"Paradís"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Vila Joiosa","playa":"Varadero"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Xàbia","playa":"Arenal"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Xàbia","playa":"Granadella"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Alicante","municipio":"Xàbia","playa":"La Grava"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Alcalá de Xivert","playa":"Del Carregador"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Alcalá de Xivert","playa":"Del Moro"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Alcalá de Xivert","playa":"La Romana"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Alcalá de Xivert","playa":"Manyetes"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Almassora","playa":"Benafeli"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Almassora","playa":"Pla de la Torre"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Almenara","playa":"Casablanca"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Benicarló","playa":"La Caracola"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Benicarló","playa":"Morrongo"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Benicàssim","playa":"Dels Terrers"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Benicàssim","playa":"Heliópolis"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Benicàssim","playa":"L'Almadrava"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Benicàssim","playa":"Torre de Sant Vicent"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Benicàssim","playa":"Voramar"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Burriana","playa":"El Grao"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Burriana","playa":"L'Arenal"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Burriana","playa":"Malvarrosa"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Castelló de la Plana","playa":"Gurugú"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Castelló de la Plana","playa":"Pinar"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Castelló de la Plana","playa":"Serradal"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Moncofa","playa":"Grao"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Moncofa","playa":"L'Estanyol"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Moncofa","playa":"Masbó"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Moncofa","playa":"Pedra Roja"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Montanejos","playa":"Fuente de los Baños"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Oropesa del Mar","playa":"La Conxa"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Oropesa del Mar","playa":"Les Amplaries"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Oropesa del Mar","playa":"Morro de Gos"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Oropesa del Mar","playa":"Plagetes de Bellver"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Peñíscola","playa":"Nord"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Torreblanca","playa":"Nord"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Torreblanca","playa":"Torrenostra"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Vinaròs","playa":"Fora Forat"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Vinaròs","playa":"Fortí"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Xilxes","playa":"El Cerezo"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Castellón","municipio":"Xilxes","playa":"Les Cases"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Bellreguard","playa":"Bellreguard"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Canet d'en Berenguer","playa":"Racó de la Mar"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"Cap Blanc"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"El Brosquil"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"El Dossel"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"El Far"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"El Mareny de Sant Llorenç"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"Escollera"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"Los Olivos"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"Marenyet-L'illa"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"Racó"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Cullera","playa":"Sant Antoni"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Daimús","playa":"Daimús"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Gandía","playa":"Auir"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Gandía","playa":"Nord"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Guardamar de la Safor","playa":"Guardamar de la Safor"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"La Pobla de Farnals","playa":"Norte"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"La Pobla de Farnals","playa":"Pobla Marina"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Miramar","playa":"Miramar"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Navarrés","playa":"Playa-Monte"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Oliva","playa":"L'Aigua Blanca"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Oliva","playa":"L'Aigua Morta"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Oliva","playa":"Pau-Pi"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Oliva","playa":"Terranova-Burguera"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Piles","playa":"Piles"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Puçol","playa":"Puçol"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Sagunt","playa":"Corinto"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Sagunt","playa":"L'Almardà"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Sagunt","playa":"Malvarrosa"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Sagunt","playa":"Port de Sagunt"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Tavernes de la Valldigna","playa":"La Goleta"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Tavernes de la Valldigna","playa":"Tavernes de la Valldigna"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Valencia","playa":"L'Arbre del Gos"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Valencia","playa":"El Saler"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Valencia","playa":"La Devesa"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Valencia","playa":"La Garrofera"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Valencia","playa":"Malva-Rosa"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Valencia","playa":"Recatí-Perellonet"},
+  {"comunidad":"Comunidad Valenciana","provincia":"Valencia","municipio":"Xeraco","playa":"Xeraco"},
+  {"comunidad":"Extremadura","provincia":"Badajoz","municipio":"Campanario","playa":"Campanario"},
+  {"comunidad":"Extremadura","provincia":"Badajoz","municipio":"Casas de Don Pedro","playa":"Los Calicantos"},
+  {"comunidad":"Extremadura","provincia":"Badajoz","municipio":"Castuera","playa":"Isla del Zújar"},
+  {"comunidad":"Extremadura","provincia":"Badajoz","municipio":"Cheles","playa":"La Dehesa"},
+  {"comunidad":"Extremadura","provincia":"Badajoz","municipio":"Herrera del Duque","playa":"El Espolón-Peloche"},
+  {"comunidad":"Extremadura","provincia":"Badajoz","municipio":"Orellana la Vieja","playa":"Playa dulce de Orellana"},
+  {"comunidad":"Extremadura","provincia":"Badajoz","municipio":"Talarrubias","playa":"Talarrubias-Puerto Peña"},
+  {"comunidad":"Extremadura","provincia":"Cáceres","municipio":"Cañamero","playa":"Cancho del Fresno"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"A Coruña","playa":"As Lapas"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"A Coruña","playa":"Orzán-Matadero"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"A Coruña","playa":"Oza"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"A Coruña","playa":"Riazor"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"A Coruña","playa":"San Amaro"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"A Laracha","playa":"Caión"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"A Pobra do Caramiñal","playa":"Lombiña-Cabío"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Arteixo","playa":"A Salsa (Repibelo)"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Arteixo","playa":"Barrañán"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Arteixo","playa":"Combouzas"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Arteixo","playa":"Porto de Suevos"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Arteixo","playa":"Sabón"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Arteixo","playa":"Valcobo"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"As Pontes de García Rodríguez","playa":"Lago de As Pontes"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Bergondo","playa":"Gandarío"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Camariñas","playa":"Arou"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Carballo","playa":"Pedra do Sal"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Carballo","playa":"Razo"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Carballo","playa":"Saíñas"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Dumbría","playa":"Ézaro"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ferrol","playa":"A Fragata-O Pareixal"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ferrol","playa":"Caranza"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ferrol","playa":"Doniños"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ferrol","playa":"Esmelle"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ferrol","playa":"Ponzos"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ferrol","playa":"San Xurxo"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Laxe","playa":"Laxe"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Malpica de Bergantiños","playa":"Area Mayor"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Miño","playa":"A Ribeira"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Miño","playa":"Grande"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Miño","playa":"Perbes-Andahío"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Muros","playa":"San Francisco"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Oleiros","playa":"Bastiagueiro"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Oleiros","playa":"Espiñeiro"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Oleiros","playa":"Mera"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Oleiros","playa":"Naval"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Oleiros","playa":"Santa Cristina"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ortigueira","playa":"A Concha"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ortigueira","playa":"Morouzos"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ponteceso","playa":"A Ermida"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ponteceso","playa":"Balarés"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ponteceso","playa":"Niñons"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Ponteceso","playa":"O Osmo"},
+  {"comunidad":"Galicia","provincia":"A Coruña","municipio":"Riveira","playa":"Coroso"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Barreiros","playa":"Coto"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Barreiros","playa":"Fontela Valea"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Barreiros","playa":"Pasadas"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Burela","playa":"A Marosa"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Burela","playa":"O Portelo"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Cervo","playa":"O Torno"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Foz","playa":"A Rapadoira"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Foz","playa":"Areoura"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Foz","playa":"As Polas"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Foz","playa":"Llas"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Foz","playa":"Peizás"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"O Vicedo","playa":"Abrela"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"O Vicedo","playa":"Xilloi"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Ribadeo","playa":"As Catedrais"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Ribadeo","playa":"Os Castros-Illas"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Viveiro","playa":"Area"},
+  {"comunidad":"Galicia","provincia":"Lugo","municipio":"Xove","playa":"Esteiro"},
+  {"comunidad":"Galicia","provincia":"Ourense","municipio":"A Veiga","playa":"Playa de los Franceses"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"A Guarda","playa":"Area Grande"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"A Guarda","playa":"O Muiño"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"A Illa de Arousa","playa":"Area da Secada"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"A Illa de Arousa","playa":"Bao (Camaxe)"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Baiona","playa":"Barbeira"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Baiona","playa":"Concheira"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Baiona","playa":"Frades"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Baiona","playa":"Ladeira"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Baiona","playa":"Ribeira"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Baiona","playa":"Santa Marta"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Bueu","playa":"Area de Bon"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Bueu","playa":"Lagos"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Bueu","playa":"Lapamán"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Bueu","playa":"Portomaior"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Marín","playa":"Aguete"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Marín","playa":"Loira"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Marín","playa":"Mogor"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Marín","playa":"Portocelo"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Marín","playa":"Santo de Mar-A Coviña"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Moaña","playa":"O Con"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Poio","playa":"Cabeceira"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Poio","playa":"O Laño"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Poio","playa":"Xiorto"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Ponte Caldelas","playa":"Playa fluvial A Calzada"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"A Lapa"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Agra"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Areas"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Areas Gordas"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Baltar"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Bascuas"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Canelas"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Caneliñas"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Foxos"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Major"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Montalvo"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Nosa Señora da Lanzada"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"O Espiñeiro-A Lanzada"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Pampaído"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Panadeira"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Paxariñas"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Pragueira"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Sanxenxo","playa":"Silgar"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"A Argazada"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"A Fontaíña"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"A Punta"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"As Rodas (Islas Cíes)"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"Canido"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"Carril"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"O Adro"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"O Fortiñón"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"O Mende"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"O Vao"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"Santa Baia"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vigo","playa":"Tombo do Gato"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vilagarcía de Arousa","playa":"Campanario"},
+  {"comunidad":"Galicia","provincia":"Pontevedra","municipio":"Vilagarcía de Arousa","playa":"Compostela"},
+  {"comunidad":"Comunidad de Madrid","provincia":"Madrid","municipio":"San Martín de Valdeiglesias","playa":"Virgen de la Nueva"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"Calarreona"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"El Hornillo"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"La Carolina"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"La Casica Verde"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"La Colonia"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"La Higuerica"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"Las Delicias"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"Levante"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"Matalentisco"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Águilas","playa":"Poniente"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"Cala Cortina"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"Cala del Barco"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"Calblanque"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"El Portús"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"Isla Plana"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"La Azohía-El Cuartel"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"La Chapineta"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"Levante-Cabo de Palos"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Cartagena","playa":"San Ginés"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Lorca","playa":"Calnegre"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Mazarrón","playa":"Alamillo"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Mazarrón","playa":"Bahía-La Reya"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Mazarrón","playa":"Del Mojón"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Mazarrón","playa":"Grande-Castellar"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Mazarrón","playa":"Nares"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"Mazarrón","playa":"Rihuete"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"San Javier","playa":"Banco del Tabal-Calnegre"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"San Javier","playa":"El Arenal"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"San Javier","playa":"Ensenada del Esparto"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"San Javier","playa":"Pedrucho"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"San Pedro del Pinatar","playa":"El Mojón"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"San Pedro del Pinatar","playa":"Las Salinas"},
+  {"comunidad":"Región de Murcia","provincia":"Murcia","municipio":"San Pedro del Pinatar","playa":"Torre Derribada"},
+  {"comunidad":"País Vasco","provincia":"Álava","municipio":"Arratzua-Ubarrundia","playa":"Landa"},
+  {"comunidad":"País Vasco","provincia":"Álava","municipio":"Barrundia","playa":"Moskurio (Garaio Norte)"},
+  {"comunidad":"País Vasco","provincia":"Álava","municipio":"Elburgo","playa":"Salurriaga (Garaio Sur)"},
+  {"comunidad":"País Vasco","provincia":"Vizcaya","municipio":"Bakio","playa":"Bakio"},
+  {"comunidad":"Ceuta","provincia":"Ceuta","municipio":"Ceuta","playa":"Chorrillo"},
+  {"comunidad":"Ceuta","provincia":"Ceuta","municipio":"Ceuta","playa":"Ribera"},
+  {"comunidad":"Melilla","provincia":"Melilla","municipio":"Melilla","playa":"Hipódromo"},
+  {"comunidad":"Melilla","provincia":"Melilla","municipio":"Melilla","playa":"Los Galápagos"},
+  {"comunidad":"Melilla","provincia":"Melilla","municipio":"Melilla","playa":"San Lorenzo-Los Cárabos"}
 ]
