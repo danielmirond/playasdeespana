@@ -38,25 +38,25 @@ export const trackSamBoatClick = (locality: string, coast: string) => {
 }
 
 /**
- * Get coast slug from coast name
- * "Islas Baleares" -> "islas-baleares"
+ * Slug canónico para alquiler de barcos. Normaliza acentos completos (NFD)
+ * y espacios → guion. Debe coincidir con slugifyLoc() de
+ * boat-rental-localities.ts para que las URLs jerárquicas casen con el matching.
+ * "Islas Baleares" -> "islas-baleares", "Málaga" -> "malaga".
  */
-export const getCoastSlug = (coast: string): string => {
-  return coast.toLowerCase().replace(/\s+/g, '-').replace(/á/g, 'a').replace(/é/g, 'e')
-}
+export const boatRentalSlug = (s: string): string =>
+  (s ?? '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/\s+/g, '-')
 
-/**
- * Get province slug from province name
- */
-export const getProvinceSlug = (province: string): string => {
-  return province.toLowerCase().replace(/\s+/g, '-').replace(/á/g, 'a').replace(/é/g, 'e')
-}
+// Alias retrocompatibles
+export const getCoastSlug = (coast: string): string => boatRentalSlug(coast)
+export const getProvinceSlug = (province: string): string => boatRentalSlug(province)
 
 /**
  * Construct canonical URL for boat rental page
  */
 export const getBoatRentalCanonical = (coast: string, province: string, locality: string): string => {
-  const coastSlug = getCoastSlug(coast)
-  const provinceSlug = getProvinceSlug(province)
-  return `https://playasdeespana.es/alquiler-barco/costas/${coastSlug}/provincias/${provinceSlug}/${locality.toLowerCase()}`
+  return `https://playas-espana.com/alquiler-barco/costas/${boatRentalSlug(coast)}/provincias/${boatRentalSlug(province)}/${boatRentalSlug(locality)}`
 }
