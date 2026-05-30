@@ -182,7 +182,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* Verificación de sitio Impact.com (afiliación). Usa atributo `value`
             (no `content`), por eso va como tag literal y no vía Metadata API. */}
-        <meta name="impact-site-verification" value="a656d2a6-4ace-403d-84f9-172e9b6c8da0" />
+        <meta name="impact-site-verification" {...{ value: 'a656d2a6-4ace-403d-84f9-172e9b6c8da0' }} />
 
         {/* Critical CSS inline. paint inmediato sin esperar CSS externo */}
         <style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />
