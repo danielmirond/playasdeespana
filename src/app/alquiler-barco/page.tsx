@@ -6,6 +6,7 @@
 import Nav from '@/components/ui/Nav'
 import Link from 'next/link'
 import { getAllLocalities } from '@/lib/boat-rental-localities'
+import { boatRentalSlug } from '@/lib/boat-rental-helpers'
 
 const AWIN_MAIN = 'https://www.awin1.com/cread.php?awinmid=32683&awinaffid=playasdeespana&clickref=playasdeespana_main&ued=https://www.samboat.es'
 const AWIN_BOTTOM = 'https://www.awin1.com/cread.php?awinmid=32683&awinaffid=playasdeespana&clickref=playasdeespana_bottom&ued=https://www.samboat.es'
@@ -91,7 +92,7 @@ export default function BoatRentalHubPage() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
           {Array.from(coasts.entries()).map(([coast, coastLocalities]) => {
-            const coastSlug = coast.toLowerCase().replace(/\s+/g, '-')
+            const coastSlug = boatRentalSlug(coast)
             return (
               <section key={coast} style={{ borderBottom: '1px solid var(--line)', paddingBottom: '2rem' }}>
                 <div style={{ marginBottom: '1rem' }}>
@@ -108,7 +109,7 @@ export default function BoatRentalHubPage() {
                   {coastLocalities.slice(0, 4).map((locality) => (
                     <Link
                       key={locality.slug}
-                      href={`/alquiler-barco/costas/${coastSlug}/provincias/${locality.province.toLowerCase()}/`}
+                      href={`/alquiler-barco/costas/${coastSlug}/provincias/${boatRentalSlug(locality.province)}/${locality.slug}`}
                       prefetch={false}
                       style={{
                         display: 'block', background: 'var(--card-bg)', border: '1px solid var(--line)',
@@ -127,9 +128,10 @@ export default function BoatRentalHubPage() {
 
                 <Link
                   href={`/alquiler-barco/costas/${coastSlug}`}
+                  prefetch={false}
                   style={{ color: 'var(--accent)', fontWeight: 600, fontSize: '.9rem', textDecoration: 'none' }}
                 >
-                  Ver todas las localidades de {coast} →
+                  Ver las {coastLocalities.length} localidades de {coast} →
                 </Link>
               </section>
             )
