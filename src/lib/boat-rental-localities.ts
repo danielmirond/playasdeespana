@@ -1853,14 +1853,23 @@ export const getAllLocalities = (): BoatRentalLocality[] => {
   return Object.values(BOAT_RENTAL_LOCALITIES)
 }
 
-// Helper: Get all localities by coast
+// Normaliza a slug para que el matching funcione tanto con el nombre
+// ("Costa Brava") como con el slug de la URL ("costa-brava"). Antes se
+// comparaba `loc.coast === coast` y, como las páginas pasan el slug, las
+// páginas de costa/provincia salían VACÍAS.
+const slugifyLoc = (s: string): string =>
+  (s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-')
+
+// Helper: Get all localities by coast (tolerante a nombre o slug)
 export const getLocalitiesByCoast = (coast: string): BoatRentalLocality[] => {
-  return Object.values(BOAT_RENTAL_LOCALITIES).filter(loc => loc.coast === coast)
+  const key = slugifyLoc(coast)
+  return Object.values(BOAT_RENTAL_LOCALITIES).filter(loc => slugifyLoc(loc.coast) === key)
 }
 
-// Helper: Get all localities by province
+// Helper: Get all localities by province (tolerante a nombre o slug)
 export const getLocalitiesByProvince = (province: string): BoatRentalLocality[] => {
-  return Object.values(BOAT_RENTAL_LOCALITIES).filter(loc => loc.province === province)
+  const key = slugifyLoc(province)
+  return Object.values(BOAT_RENTAL_LOCALITIES).filter(loc => slugifyLoc(loc.province) === key)
 }
 
 // Helper: Get coast from locality slug
