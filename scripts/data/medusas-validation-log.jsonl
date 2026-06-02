@@ -1,0 +1,4 @@
+{"date":"2026-06-02","city":"Eivissa","beach":"Playa Den Bossa Sea","lat":38.8955,"lon":1.41411,"load":15,"obs":"medio","sst":24.4,"wind":4.1,"windDir":"SE","model":"medio","score":5,"onF":0.16,"near":true,"exact":true}
+{"date":"2026-06-02","city":"Ciutadella","beach":"Cala en Turqueta","lat":39.9324,"lon":3.91526,"load":15,"obs":"medio","sst":24.2,"wind":16.9,"windDir":"N","model":"medio","score":5,"onF":0,"near":true,"exact":true}
+{"date":"2026-06-02","city":"Begur","beach":"Platja sa Tuna","lat":41.9604,"lon":3.22971,"load":75,"obs":"alto","sst":21.8,"wind":25.6,"windDir":"N","model":"medio","score":4,"onF":0,"near":true,"exact":false}
+{"date":"2026-06-02","city":"Begur","beach":"Platja de S’Eixugador","lat":41.9595,"lon":3.23224,"load":40,"obs":"medio","sst":21.8,"wind":25.6,"windDir":"N","model":"medio","score":4,"onF":0,"near":true,"exact":true}

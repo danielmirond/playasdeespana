@@ -127,27 +127,36 @@ export function estimarMedusas(lat: number, lng: number, tempAgua: number | null
   const onshoreFactor = compDir * compVel  // 0..1
   const onshore = onshoreFactor >= 0.4
 
+  // Modelo recalibrado (jun-2026) tras validar contra avistamientos
+  // observados (meduseo.com). Aprendizajes: (1) el modelo anterior casi
+  // nunca daba BAJO en temporada porque estación+región ya sumaban mucho;
+  // (2) el viento del día NO crea medusas, solo mueve un bloom existente,
+  // que depende sobre todo de la TEMPERATURA del agua. Por eso ahora la SST
+  // es el driver dominante (gate), y estación/región/viento solo modulan.
   let score = 0
 
-  // Región
-  if (esMediterraneo) score += 2
-  else if (esCanarias) score += 1
-  else if (esAtlanticoSur) score += 1
-  // Atlántico norte (Cantábrico/Galicia): score 0
+  // 1) Temperatura del agua = driver principal (los blooms necesitan calor).
+  if (agua >= 25) score += 4
+  else if (agua >= 23) score += 3
+  else if (agua >= 21) score += 2
+  else if (agua >= 19) score += 1
+  else if (agua < 17) score -= 1
+  // Agua fría (<19°C) deja techo bajo aunque sea verano: sin calor no hay bloom.
+  const aguaTemplada = agua >= 20
 
-  // Temperatura del agua
-  if (agua >= 26) score += 3
-  else if (agua >= 23) score += 2
-  else if (agua >= 20) score += 1
-  else if (agua < 18) score -= 1
+  // 2) Región (modificador menor).
+  if (esMediterraneo) score += 1
+  else if (esCanarias || esAtlanticoSur) score += 0
+  // Atlántico norte: 0.
 
-  // Estación
-  if (esVerano) score += 2
-  else if (mes >= 5 && mes <= 10) score += 1
+  // 3) Estación (solo el pico fuerte suma; evita inflar todo el verano).
+  if (esVerano && aguaTemplada) score += 1
 
-  // Viento onshore (gradual: hasta +2)
-  score += Math.round(2 * onshoreFactor)
+  // 4) Viento onshore: solo cuenta si hay agua templada (algo que empujar).
+  if (aguaTemplada) score += Math.round(2 * onshoreFactor)
 
+  // Umbrales recalibrados: ALTO≥6, MEDIO≥4 (antes 6/3). BAJO ahora alcanzable
+  // con agua templada pero sin viento onshore, y casi garantizado con agua fría.
   if (score >= 6) {
     return {
       nivel: 'alto',
@@ -167,7 +176,7 @@ export function estimarMedusas(lat: number, lng: number, tempAgua: number | null
     }
   }
 
-  if (score >= 3) {
+  if (score >= 4) {
     return {
       nivel: 'medio',
       label: 'Riesgo medio de medusas',
