@@ -31,7 +31,24 @@ export interface CamperCity {
   playasNota: string
   areasNota: string
   faqs: { q: string; a: string }[]
+  /** Traducción EN. Si falta, la ciudad no se publica en /en/campervan-rental/[city]. */
+  en?: {
+    intro: string
+    recogida: string
+    rutas: { nombre: string; desc: string }[]
+    playasNota: string
+    areasNota: string
+    faqs: { q: string; a: string }[]
+  }
 }
+
+// FAQs comunes en inglés (espejo de FAQS_COMUNES).
+export const FAQS_COMUNES_EN = (city: string): { q: string; a: string }[] => [
+  { q: `What licence do I need to rent a motorhome in ${city}?`, a: 'A standard category B licence covers vehicles up to 3,500 kg (most motorhomes and campers). Above that you need category C. Usual minimum: 25 years old with 2 years’ driving experience.' },
+  { q: `How much does it cost to rent a motorhome in ${city}?`, a: 'As a guide: €80-120/day in low season and €130-200/day in summer. Booking 2-3 months ahead and midweek saves 20-30%.' },
+  { q: 'Where can I sleep / spend the night?', a: 'You can overnight (sleep inside, without putting out awnings or chairs) wherever parking is allowed. To camp, use motorhome areas or campsites. Handy apps: Park4Night, Areas Autocaravanas.' },
+  { q: 'Can I bring a pet?', a: 'Yes, most vehicles allow pets (sometimes with a cleaning surcharge). Flag it when filtering in the comparison tool.' },
+]
 
 // Tipos de autocaravana/camper (cluster con volumen: 4x4 720, lujo, integral, pick-up)
 export const TIPOS_VEHICULO: VehiculoTipo[] = [
@@ -67,6 +84,21 @@ export const CAMPER_CITIES: CamperCity[] = [
       { q: '¿Afecta la ZBE de Madrid a mi autocaravana?', a: 'Sí: Madrid tiene Zona de Bajas Emisiones. Las autocaravanas de alquiler suelen tener etiqueta C/ECO y pueden circular, pero conviene confirmar la etiqueta al reservar y evitar el centro restringido.' },
       ...FAQS_COMUNES('Madrid'),
     ],
+    en: {
+      intro: 'Madrid is Spain’s biggest motorhome and campervan pickup point and the best base camp for heading to any coast. Compare prices and pick up in the centre or at Barajas airport.',
+      recogida: 'Pickup at downtown depots and near Barajas airport (MAD).',
+      rutas: [
+        { nombre: 'Madrid → Levante (beaches)', desc: 'In ~3-4 h you reach the beaches of Valencia and the Costa Blanca.' },
+        { nombre: 'Madrid → Andalusia', desc: 'Route to the Costa del Sol and Cádiz, stopping at white villages.' },
+        { nombre: 'Sierra de Madrid', desc: 'A short getaway, ideal for a first trip: areas and nature 1 h away.' },
+      ],
+      playasNota: 'Madrid has no coast, but it’s the best base for reaching the Levante beaches (3-4 h) or the north. We link routes to the coast on the page.',
+      areasNota: 'Motorhome areas and campsites in the Sierra and nearby for the first/last night.',
+      faqs: [
+        { q: 'Does Madrid’s low-emission zone affect my motorhome?', a: 'Yes: Madrid has a Low Emission Zone. Rental motorhomes usually carry a C/ECO sticker and can drive, but confirm the sticker when booking and avoid the restricted centre.' },
+        ...FAQS_COMUNES_EN('Madrid'),
+      ],
+    },
   },
   {
     slug: 'barcelona', ciudad: 'Barcelona', provincia: 'Barcelona', comunidad: 'Cataluña',
@@ -86,6 +118,21 @@ export const CAMPER_CITIES: CamperCity[] = [
       { q: '¿Afecta la ZBE de Barcelona?', a: 'Sí, Barcelona tiene ZBE Rondas. Las autocaravanas de alquiler con etiqueta C/ECO circulan con normalidad; confirma la etiqueta al reservar.' },
       ...FAQS_COMUNES('Barcelona'),
     ],
+    en: {
+      intro: 'Barcelona combines high demand with a spectacular coast right next door: the Costa Brava. Compare motorhomes and campers and head out to discover coves within minutes.',
+      recogida: 'Depots in the city and near El Prat airport (BCN).',
+      rutas: [
+        { nombre: 'Costa Brava', desc: 'Cadaqués, Tossa de Mar, the coves of Begur: the camper route par excellence.' },
+        { nombre: 'Catalan Pyrenees', desc: 'Vall de Boí, Aigüestortes: mountains 2-3 h away.' },
+        { nombre: 'Maresme / Costa Dorada', desc: 'Beaches north and south of the city.' },
+      ],
+      playasNota: 'Costa Brava and Maresme under 1 h away. We link the suitable beaches and accessible coves near Barcelona.',
+      areasNota: 'Good network of areas and campsites on the Costa Brava; many open year-round.',
+      faqs: [
+        { q: 'Does Barcelona’s low-emission zone affect me?', a: 'Yes, Barcelona has the ZBE Rondas. Rental motorhomes with a C/ECO sticker drive normally; confirm the sticker when booking.' },
+        ...FAQS_COMUNES_EN('Barcelona'),
+      ],
+    },
   },
   {
     slug: 'valencia', ciudad: 'Valencia', provincia: 'Valencia', comunidad: 'Comunitat Valenciana',
@@ -102,6 +149,18 @@ export const CAMPER_CITIES: CamperCity[] = [
     playasNota: 'Malvarrosa, El Saler y toda la Costa Blanca al sur. Enlazamos playas aptas para autocaravana cerca de Valencia.',
     areasNota: 'Áreas y campings junto a la costa, muchos a pie de playa.',
     faqs: FAQS_COMUNES('Valencia'),
+    en: {
+      intro: 'Valencia means easy pickup, ideal weather and a beach right by the city. Compare motorhomes and campers to tour the Costa Blanca and the Albufera.',
+      recogida: 'Depots in the city and near Manises airport (VLC).',
+      rutas: [
+        { nombre: 'Costa Blanca', desc: 'Heading south: Gandía, Dénia, Jávea, Alicante.' },
+        { nombre: 'Albufera & rice fields', desc: 'Sunsets and unspoilt beaches 20 min away.' },
+        { nombre: 'Inland: Requena / Chera', desc: 'Nature and wine tourism 1 h away.' },
+      ],
+      playasNota: 'Malvarrosa, El Saler and the whole Costa Blanca to the south. We link motorhome-friendly beaches near Valencia.',
+      areasNota: 'Areas and campsites along the coast, many right on the beach.',
+      faqs: FAQS_COMUNES_EN('Valencia'),
+    },
   },
   {
     slug: 'sevilla', ciudad: 'Sevilla', provincia: 'Sevilla', comunidad: 'Andalucía',
@@ -118,6 +177,18 @@ export const CAMPER_CITIES: CamperCity[] = [
     playasNota: 'La Costa de la Luz (Cádiz/Huelva) está a 1-1,5 h. Enlazamos playas aptas y calas de la zona.',
     areasNota: 'Áreas en la Costa de la Luz y campings junto a las mejores playas.',
     faqs: FAQS_COMUNES('Sevilla'),
+    en: {
+      intro: 'Seville is Andalusia’s gateway by motorhome: the Costa de la Luz, Doñana and the white villages are all close by. Compare motorhomes and campers and plan your route.',
+      recogida: 'Depots in the city and near Seville airport (SVQ).',
+      rutas: [
+        { nombre: 'Costa de la Luz', desc: 'Cádiz, Conil, Tarifa: wild, windswept beaches.' },
+        { nombre: 'White Villages', desc: 'Ronda, Grazalema, Arcos: the iconic inland route.' },
+        { nombre: 'Doñana', desc: 'Nature and marsh villages towards Huelva.' },
+      ],
+      playasNota: 'The Costa de la Luz (Cádiz/Huelva) is 1-1.5 h away. We link suitable beaches and coves in the area.',
+      areasNota: 'Areas on the Costa de la Luz and campsites next to the best beaches.',
+      faqs: FAQS_COMUNES_EN('Seville'),
+    },
   },
   {
     slug: 'malaga', ciudad: 'Málaga', provincia: 'Málaga', comunidad: 'Andalucía',
@@ -134,6 +205,18 @@ export const CAMPER_CITIES: CamperCity[] = [
     playasNota: 'Toda la Costa del Sol a pie de carretera. Enlazamos playas aptas para autocaravana cerca de Málaga.',
     areasNota: 'Excelente red de áreas y campings en la Costa del Sol, muchos abiertos todo el año.',
     faqs: FAQS_COMUNES('Málaga'),
+    en: {
+      intro: 'Málaga and the Costa del Sol mean sun, beaches and well-equipped areas. Compare motorhomes and campers and travel the coast cove by cove.',
+      recogida: 'Depots in the city and next to Málaga airport (AGP).',
+      rutas: [
+        { nombre: 'Costa del Sol', desc: 'Nerja, Marbella, Estepona: beaches and beach bars.' },
+        { nombre: 'Cabo de Gata (Almería)', desc: 'The most unspoilt coves of the Mediterranean, heading east.' },
+        { nombre: 'Sierra Nevada / Alpujarras', desc: 'Mountains and white villages 1-2 h away.' },
+      ],
+      playasNota: 'The whole Costa del Sol right off the road. We link motorhome-friendly beaches near Málaga.',
+      areasNota: 'Excellent network of areas and campsites on the Costa del Sol, many open year-round.',
+      faqs: FAQS_COMUNES_EN('Málaga'),
+    },
   },
 
   // ── F2: ciudades de alta demanda ──────────────────────────────
@@ -277,4 +360,8 @@ export function getCamperCities(): CamperCity[] {
 }
 export function getCamperCity(slug: string): CamperCity | undefined {
   return CAMPER_CITIES.find(c => c.slug === slug)
+}
+// EN: solo ciudades con traducción publicada.
+export function getCamperCitiesEn(): CamperCity[] {
+  return CAMPER_CITIES.filter(c => !!c.en)
 }

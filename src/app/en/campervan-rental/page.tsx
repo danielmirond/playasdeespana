@@ -68,7 +68,7 @@ export default function CampervanHubPageEn() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.75rem', marginBottom: '3rem' }}>
           {cities.map(c => (
-            <Link key={c.slug} href={`/alquiler-autocaravana/${c.slug}`} prefetch={false} style={{ display: 'block', background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 8, padding: '1rem 1.1rem', textDecoration: 'none', color: 'inherit' }}>
+            <Link key={c.slug} href={c.en ? `/en/campervan-rental/${c.slug}` : `/alquiler-autocaravana/${c.slug}`} prefetch={false} style={{ display: 'block', background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 8, padding: '1rem 1.1rem', textDecoration: 'none', color: 'inherit' }}>
               <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--ink)' }}>{c.ciudad}</div>
               <div style={{ fontSize: '.8rem', color: 'var(--muted)', marginTop: '.2rem' }}>{c.zona}</div>
               <div style={{ fontSize: '.85rem', color: CTA, fontWeight: 600, marginTop: '.5rem' }}>From {c.precios.baja.split('-')[0]}/day →</div>

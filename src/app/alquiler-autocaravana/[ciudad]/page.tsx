@@ -27,7 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Alquiler de autocaravanas y campers en ${c.ciudad} | Compara precios`,
     description: `Alquila autocaravana o camper en ${c.ciudad} (${c.zona}). Compara precios por temporada, recogida en ${c.aeropuerto}, áreas de pernocta y playas aptas cerca.`,
-    alternates: { canonical: `/alquiler-autocaravana/${c.slug}` },
+    alternates: {
+      canonical: `/alquiler-autocaravana/${c.slug}`,
+      languages: c.en ? { es: `/alquiler-autocaravana/${c.slug}`, en: `/en/campervan-rental/${c.slug}` } : undefined,
+    },
     openGraph: { title: `Alquiler de autocaravanas y campers en ${c.ciudad}`, url: `${BASE}/alquiler-autocaravana/${c.slug}`, type: 'article' },
   }
 }

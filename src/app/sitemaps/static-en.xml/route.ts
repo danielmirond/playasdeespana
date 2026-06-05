@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getComunidades, getProvincias, getMunicipios } from '@/lib/playas'
 import { getAllArticlesEn, CATEGORIES } from '@/lib/magazine'
+import { getCamperCitiesEn } from '@/lib/autocaravana-localities'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -68,6 +69,15 @@ export async function GET() {
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>`)
+  }
+  // EN campervan city pages (translated only)
+  for (const c of getCamperCitiesEn()) {
+    urls.push(`  <url>
+    <loc>${BASE}/en/campervan-rental/${c.slug}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>`)
   }
 
