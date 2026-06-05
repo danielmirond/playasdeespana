@@ -12,6 +12,7 @@ import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import { getEditorialModified } from '@/lib/dateModified'
+import { camperdaysAwinUrl } from '@/lib/camperdaysAwinUrl'
 
 export const revalidate = 86400
 
@@ -228,6 +229,32 @@ export default async function PlayasAutocaravanaPage() {
             </li>
           ))}
         </ol>
+
+        {/* CTA afiliación Camperdays — esta pillar tenía 0 monetización pese
+            a su tráfico. ued genérico de España (no hay deep-link por playa). */}
+        <section style={{
+          background: 'linear-gradient(135deg,#0c4a6e 0%,#0369a1 55%,#0891b2 100%)',
+          color: '#fff', borderRadius: 10, padding: '1.75rem 1.5rem', marginBottom: '2.5rem',
+          textAlign: 'center',
+        }}>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 800, margin: '0 0 .5rem' }}>
+            ¿Aún no tienes autocaravana para la ruta?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,.9)', fontSize: '.9rem', lineHeight: 1.6, margin: '0 auto 1.25rem', maxWidth: 480 }}>
+            Compara modelos y precios de alquiler en toda España. Con kilometraje
+            incluido y seguro, listos para dormir junto al mar.
+          </p>
+          <a
+            href={camperdaysAwinUrl('playasdeespana_camper_playas')}
+            target="_blank" rel="noopener noreferrer sponsored"
+            style={{ display: 'inline-block', padding: '.85rem 1.7rem', background: '#fff', color: '#0369a1', borderRadius: 8, fontWeight: 800, textDecoration: 'none', fontSize: '.95rem' }}
+          >
+            Ver autocaravanas disponibles →
+          </a>
+          <p style={{ color: 'rgba(255,255,255,.65)', fontSize: '.72rem', marginTop: '.9rem' }}>
+            Afiliado con Camperdays · Sin coste adicional para ti
+          </p>
+        </section>
 
         {/* Apps y recursos */}
         <section aria-labelledby="h2-apps" style={{
