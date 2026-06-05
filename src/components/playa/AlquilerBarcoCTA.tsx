@@ -30,19 +30,28 @@ interface Props {
   region?:  string
 }
 
-const REGION_HASH: Record<string, string> = {
-  'Islas Baleares':       '#destinos',
-  'Canarias':             '#destinos',
-  'Cataluña':             '#destinos',
-  'Andalucía':            '#destinos',
-  'Murcia':               '#destinos',
-  'Galicia':              '#destinos',
-  'Comunidad Valenciana': '#destinos',
+// Enlazado interno: cada comunidad → su página de COSTA canónica
+// (/alquiler-barco/costas/{slug}), que es la rica (SSG, fondeos, precios,
+// FAQ), en vez de mandar todo a la guía plana /alquiler-barco-playa.
+// Así las ~2.500 fichas de playa reparten autoridad a las páginas
+// comerciales correctas. Comunidades con una sola costa en el dataset
+// apuntan a ella; el resto (varias costas) cae al hub.
+const REGION_COSTA: Record<string, string> = {
+  'Islas Baleares':       '/alquiler-barco/costas/islas-baleares',
+  'Canarias':             '/alquiler-barco/costas/islas-canarias',
+  'Islas Canarias':       '/alquiler-barco/costas/islas-canarias',
+  'Comunidad Valenciana': '/alquiler-barco/costas/costa-blanca',
+  // Andalucía y Cataluña tienen 2 costas en el dataset → mejor el hub
+  // para no forzar una elección arbitraria.
+  'Cataluña':             '/alquiler-barco',
+  'Andalucía':            '/alquiler-barco',
+  'Murcia':               '/alquiler-barco',
+  'Galicia':              '/alquiler-barco',
+  'Asturias':             '/alquiler-barco',
 }
 
 export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }: Props) {
-  const hash = region ? (REGION_HASH[region] ?? '') : ''
-  const href = `/alquiler-barco-playa${hash}`
+  const href = (region && REGION_COSTA[region]) || '/alquiler-barco'
 
   if (variant === 'inline') {
     return (
