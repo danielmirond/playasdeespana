@@ -39,6 +39,8 @@ interface Props {
   scoreColor?: string
   /** Texto a mostrar bajo el nombre cuando no hay badge (ej. "{municipio} · {provincia}") */
   metaFormat?: 'mun-prov' | 'comunidad' | 'mun-comunidad'
+  /** Idioma de los enlaces de ficha: 'es' → /playas/, 'en' → /en/beaches/ */
+  locale?: 'es' | 'en'
 }
 
 export default async function TopBeachCardsConHero({
@@ -47,7 +49,9 @@ export default async function TopBeachCardsConHero({
   eyebrow,
   scoreColor = 'var(--accent, #6b400a)',
   metaFormat = 'mun-prov',
+  locale = 'es',
 }: Props) {
+  const beachHref = (slug: string) => locale === 'en' ? `/en/beaches/${slug}` : `/playas/${slug}`
   const top = playas.slice(0, limit)
 
   // Fetch candidatos en paralelo + dedupe greedy (mismo patrón que home Destacadas).
@@ -115,7 +119,7 @@ export default async function TopBeachCardsConHero({
           return (
             <li key={p.slug}>
               <Link
-                href={`/playas/${p.slug}`}
+                href={beachHref(p.slug)}
                 prefetch={false}
                 style={{
                   display: 'block',

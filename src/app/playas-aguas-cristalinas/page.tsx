@@ -23,7 +23,7 @@ const MODIFIED = getEditorialModified('src/app/playas-aguas-cristalinas/page.tsx
 export const metadata: Metadata = {
   title: 'Playas con aguas cristalinas en España | Las más transparentes',
   description: 'Descubre las playas de España con aguas más cristalinas y transparentes: Canarias, Islas Baleares, costas de Almería y Menorca. Rankings por visibilidad, calidad EEA y Bandera Azul.',
-  alternates: { canonical: '/playas-aguas-cristalinas' },
+  alternates: { canonical: '/playas-aguas-cristalinas', languages: { es: '/playas-aguas-cristalinas', en: '/en/crystal-clear-water-beaches' } },
   openGraph: {
     title: 'Playas con aguas cristalinas en España',
     description: 'Las playas más transparentes de España: ranking por visibilidad del agua, calidad EEA y Bandera Azul.',
