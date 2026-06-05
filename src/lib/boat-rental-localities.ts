@@ -1840,6 +1840,265 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
         alt: 'Yate de lujo en Marbella, Costa del Sol'
       }
     }
+  },
+
+  // ===== EXPANSIÓN: nuevos destinos (baja competencia editorial) =====
+  formentera: {
+    coast: 'Islas Baleares',
+    province: 'Baleares',
+    locality: 'Formentera',
+    slug: 'formentera',
+    samboatUrl: '/alquiler-barco/formentera',
+    googleTrendsVolume: 58,
+    description:
+      'La isla más virgen de Baleares, accesible desde Ibiza. Alquila barco desde €140/día y fondea en Ses Illetes, aguas tipo Caribe y calas sin urbanizar.',
+    beaches: [
+      { name: 'Ses Illetes', distance: '20 min desde Ibiza', type: 'iconic', description: 'Arena blanca y agua turquesa, mejor playa de Europa, fondeo en arena' },
+      { name: 'Espalmador', distance: '15 min norte', type: 'secret', description: 'Islote privado, laguna de barro natural, fondeo somero protegido' },
+      { name: 'Cala Saona', distance: '25 min oeste', description: 'Cala rojiza entre acantilados, atardeceres, fondeo en arena' },
+      { name: 'Es Caló', distance: '30 min este', description: 'Antiguo puerto pesquero, aguas calmadas, snorkel' },
+      { name: 'Migjorn', distance: '35 min sur', description: 'Playa larga salvaje, varios fondeos, ambiente tranquilo' },
+    ],
+    moorings: [
+      { name: 'Ses Illetes', depth: 4, protection: 'medium', description: 'Campo de boyas obligatorio (posidonia protegida), arena somera' },
+      { name: 'Espalmador', depth: 6, protection: 'high', description: 'Fondeo en arena protegido, muy popular, llegar temprano' },
+      { name: 'Cala Saona', depth: 8, protection: 'medium', description: 'Arena, expuesto a poniente, vistas de acantilado' },
+      { name: 'Es Caló', depth: 5, protection: 'high', description: 'Pequeño y resguardado, ideal con levante' },
+    ],
+    pricing: { small: { min: 140, max: 230 }, medium: { min: 240, max: 420 }, captain: { min: 320, max: 560 } },
+    regulations: [
+      'Posidonia protegida: prohibido fondear sobre praderas en Ses Illetes (boyas obligatorias)',
+      'Parque Natural de Ses Salines: límites de velocidad y zonas vedadas',
+      'Tasa ecológica de fondeo en temporada alta',
+      'Equipo de seguridad obligatorio; chalecos para todos',
+      'Llega antes de las 11h en julio-agosto (fondeos se llenan)',
+    ],
+    bestSeason: 'Junio-Septiembre (agua 24-26°C, mejor luz para el turquesa)',
+    insiderTip:
+      'Sal de Ibiza temprano: Espalmador (baño de barro) → Ses Illetes (almuerzo a bordo) → Cala Saona (atardecer). Reserva boya en Illetes con antelación; el fondeo libre allí es ilegal.',
+    faq: [
+      { question: '¿Puedo ir a Formentera en barco sin licencia?', answer: 'Sí, con embarcación hasta 5,5 m y motor ≤15CV puedes hacer la travesía corta desde Ibiza en día tranquilo. Con mar de fondo, mejor con patrón.' },
+      { question: '¿Dónde fondear en Ses Illetes?', answer: 'Solo en el campo de boyas autorizado: la posidonia está protegida y multan el fondeo sobre pradera. Reserva online en temporada.' },
+      { question: '¿Cuánto cuesta el día de barco a Formentera?', answer: 'Lancha pequeña desde €140/día (sin combustible). Con patrón desde €320. Súmale ~€60-100 de gasolina ida y vuelta desde Ibiza.' },
+      { question: '¿Mejor época para evitar multitudes?', answer: 'Junio y septiembre. En julio-agosto Ses Illetes se llena de barcos a mediodía; ve a primera hora.' },
+      { question: '¿Se puede dormir a bordo fondeado?', answer: 'Solo en fondeos autorizados y fuera de zonas protegidas. Espalmador es popular pero respeta las boyas y la normativa del parque.' },
+    ],
+    images: { hero: { unsplashUrl: 'https://source.unsplash.com/1200x600/?formentera,turquoise,beach,boat', alt: 'Barco fondeado en aguas turquesas de Formentera' } },
+  },
+
+  denia: {
+    coast: 'Costa Blanca',
+    province: 'Alicante',
+    locality: 'Dénia',
+    slug: 'denia',
+    samboatUrl: '/alquiler-barco/denia',
+    googleTrendsVolume: 33,
+    description:
+      'Puerto principal del norte de la Costa Blanca y puerta a las Baleares. Alquila barco desde €105/día para explorar las calas del Montgó y la Reserva del Cabo de San Antonio.',
+    beaches: [
+      { name: 'Cova Tallada', distance: '15 min sur', type: 'secret', description: 'Cueva marina histórica excavada en roca, solo accesible por mar o sendero' },
+      { name: 'Les Rotes', distance: '10 min sur', description: 'Costa rocosa de aguas cristalinas, reserva marina, snorkel excelente' },
+      { name: 'Cabo de San Antonio', distance: '20 min sur', type: 'protected', description: 'Reserva marina entre Dénia y Xàbia, fondos protegidos' },
+      { name: 'Marineta Cassiana', distance: '5 min', type: 'family', description: 'Playa urbana de aguas someras y calmadas, ideal familias' },
+      { name: 'Les Marines', distance: '10 min norte', description: 'Arenal largo al norte del puerto, fondeo en arena' },
+    ],
+    moorings: [
+      { name: 'Les Rotes', depth: 8, protection: 'medium', description: 'Fondo rocoso-arenoso, reserva marina, agua muy clara' },
+      { name: 'Cabo San Antonio', depth: 12, protection: 'medium', description: 'Zona protegida, respeta vedas de fondeo y pesca' },
+      { name: 'Puerto de Dénia', depth: 6, protection: 'high', description: 'Marina con todos los servicios, base ideal' },
+      { name: 'Marineta Cassiana', depth: 4, protection: 'high', description: 'Somero y protegido, perfecto sin experiencia' },
+    ],
+    pricing: { small: { min: 105, max: 170 }, medium: { min: 180, max: 320 }, captain: { min: 240, max: 400 } },
+    regulations: [
+      'Reserva Marina del Cabo de San Antonio: fondeo y pesca restringidos',
+      'Cova Tallada: acceso limitado por cupo en verano, respeta el aforo',
+      'Tráfico de ferris a Baleares: mantente fuera del canal del puerto',
+      'Equipo de seguridad obligatorio',
+      'Viento de poniente puede levantarse por la tarde; vigila el parte',
+    ],
+    bestSeason: 'Mayo-Octubre (agua 19-26°C, mañanas en calma)',
+    insiderTip:
+      'Madrugón a Cova Tallada antes del cupo, snorkel en Les Rotes y vuelta por el Cabo de San Antonio. Dénia es también la salida más corta a Ibiza/Formentera si tienes barco mayor y buen parte.',
+    faq: [
+      { question: '¿Qué ver en barco desde Dénia?', answer: 'La joya es la Cova Tallada y la reserva marina del Cabo de San Antonio, con aguas cristalinas y snorkel de primer nivel en Les Rotes.' },
+      { question: '¿Se puede ir a Ibiza desde Dénia en barco?', answer: 'Es la travesía más corta a Baleares, pero solo con embarcación adecuada, experiencia y parte favorable. En lancha pequeña no es recomendable.' },
+      { question: '¿Precio del alquiler en Dénia?', answer: 'Desde €105/día una lancha sin licencia; con patrón desde €240. Combustible aparte.' },
+      { question: '¿Necesito reservar para la Cova Tallada?', answer: 'En verano hay control de aforo en el entorno protegido. Llega temprano para asegurar el fondeo y el acceso.' },
+      { question: '¿Es buena zona para principiantes?', answer: 'Sí: Marineta Cassiana y Les Marines son someras y calmadas. La reserva exige más cuidado por las vedas.' },
+    ],
+    images: { hero: { unsplashUrl: 'https://source.unsplash.com/1200x600/?denia,montgo,mediterranean,boat', alt: 'Costa de Dénia con el macizo del Montgó al fondo' } },
+  },
+
+  javea: {
+    coast: 'Costa Blanca',
+    province: 'Alicante',
+    locality: 'Xàbia',
+    slug: 'javea',
+    samboatUrl: '/alquiler-barco/javea',
+    googleTrendsVolume: 36,
+    description:
+      'Calas de bandera azul entre el Montgó y el Cabo de la Nao. Alquila barco desde €110/día y descubre la Granadella, elegida mejor playa de España.',
+    beaches: [
+      { name: 'Cala Granadella', distance: '15 min sur', type: 'iconic', description: 'Cala de cantos entre pinares, aguas transparentes, fondeo natural' },
+      { name: 'Cala Portitxol', distance: '10 min sur', type: 'scenic', description: 'Frente a la Isla del Portitxol, casas blancas, snorkel' },
+      { name: 'Cabo de la Nao', distance: '20 min sur', description: 'Acantilado emblemático, cuevas marinas, aguas profundas' },
+      { name: 'Cala Sardinera', distance: '18 min sur', type: 'secret', description: 'Cala virgen sin acceso rodado, solo por mar o sendero' },
+      { name: 'El Arenal', distance: '5 min', type: 'family', description: 'Única playa de arena, paseo y restaurantes, fondeo somero' },
+    ],
+    moorings: [
+      { name: 'Granadella', depth: 10, protection: 'medium', description: 'Fondo de cantos y arena, expuesta a levante, agua clarísima' },
+      { name: 'Portitxol', depth: 8, protection: 'high', description: 'Resguardada tras la isla, fondeo cómodo, mucho snorkel' },
+      { name: 'Cala Sardinera', depth: 9, protection: 'medium', description: 'Tranquila y poco frecuentada, fondo mixto' },
+      { name: 'Puerto de Xàbia', depth: 6, protection: 'high', description: 'Marina con servicios, base de salida' },
+    ],
+    pricing: { small: { min: 110, max: 180 }, medium: { min: 190, max: 340 }, captain: { min: 250, max: 420 } },
+    regulations: [
+      'Cala Granadella: fondeo regulado en verano, no fondear sobre posidonia',
+      'Cabo de la Nao: aguas profundas y tráfico, mantén distancia a la costa',
+      'Reserva marina próxima (Cabo San Antonio): consulta vedas',
+      'Equipo de seguridad obligatorio',
+      'Levante por la tarde: las calas del sur quedan expuestas',
+    ],
+    bestSeason: 'Junio-Septiembre (agua 22-26°C, calas en su mejor color)',
+    insiderTip:
+      'Reserva la mañana para la Granadella (se llena y el fondeo se regula) y el mediodía para Portitxol, más resguardado para comer a bordo. Con levante, refúgiate al norte del Cabo de San Antonio.',
+    faq: [
+      { question: '¿Cuál es la mejor cala de Xàbia en barco?', answer: 'La Granadella, repetidamente elegida mejor playa de España, es imprescindible. Portitxol y Sardinera son alternativas más tranquilas.' },
+      { question: '¿Hace falta licencia?', answer: 'No para lancha hasta 5,5 m y 15CV. Para el Cabo de la Nao y aguas profundas conviene experiencia o patrón.' },
+      { question: '¿Cuánto cuesta?', answer: 'Desde €110/día sin licencia; con patrón desde €250. Combustible no incluido.' },
+      { question: '¿Se puede fondear en la Granadella?', answer: 'Sí pero regulado en temporada y nunca sobre posidonia. Llega temprano: es muy popular.' },
+      { question: '¿Y si hay viento?', answer: 'El levante deja expuestas las calas del sur por la tarde. Refúgiate al abrigo del Cabo de San Antonio o vuelve a puerto.' },
+    ],
+    images: { hero: { unsplashUrl: 'https://source.unsplash.com/1200x600/?javea,granadella,cove,mediterranean', alt: 'Cala Granadella en Xàbia con aguas transparentes' } },
+  },
+
+  estartit: {
+    coast: 'Costa Brava',
+    province: 'Girona',
+    locality: "L'Estartit",
+    slug: 'estartit',
+    samboatUrl: '/alquiler-barco/estartit',
+    googleTrendsVolume: 27,
+    description:
+      'Puerta de las Islas Medes, la mejor reserva marina del Mediterráneo español. Alquila barco desde €120/día para bucear y fondear frente a un parque natural.',
+    beaches: [
+      { name: 'Islas Medes', distance: '10 min', type: 'protected', description: 'Archipiélago protegido, buceo y snorkel de clase mundial, fondeo en boyas' },
+      { name: 'Cala Montgó', distance: '20 min norte', type: 'family', description: 'Bahía resguardada de arena, aguas calmadas' },
+      { name: 'Cova del Bisbe', distance: '15 min', type: 'secret', description: 'Cueva marina en las Medes, solo accesible por mar' },
+      { name: 'El Montgrí (costa)', distance: '25 min norte', description: 'Acantilados del macizo, calas vírgenes encadenadas' },
+      { name: "Platja de l'Estartit", distance: '5 min', type: 'family', description: 'Arenal largo frente al puerto, fondeo somero' },
+    ],
+    moorings: [
+      { name: 'Islas Medes', depth: 12, protection: 'medium', description: 'Boyas obligatorias (reserva integral), no se permite fondear ancla' },
+      { name: 'Cala Montgó', depth: 8, protection: 'high', description: 'Arena, muy protegida, ideal familias y principiantes' },
+      { name: 'Costa del Montgrí', depth: 15, protection: 'low', description: 'Calas expuestas, fondeo solo con buen tiempo' },
+      { name: 'Puerto Estartit', depth: 6, protection: 'high', description: 'Marina con servicios, centros de buceo' },
+    ],
+    pricing: { small: { min: 120, max: 190 }, medium: { min: 200, max: 360 }, captain: { min: 270, max: 450 } },
+    regulations: [
+      'Islas Medes: reserva marina integral, boyas obligatorias, prohibido fondear ancla',
+      'Buceo regulado por cupo diario y con autorización',
+      'Pesca totalmente prohibida en el entorno de las Medes',
+      'Equipo de seguridad obligatorio',
+      'Tramuntana: viento fuerte del norte, puede cerrar la salida sin aviso',
+    ],
+    bestSeason: 'Junio-Septiembre (agua 20-25°C, mejor visibilidad para buceo)',
+    insiderTip:
+      'Las Medes son el motivo del viaje: coge boya, haz snorkel sobre meros enormes y entra a la Cova del Bisbe en barco. Vigila la tramuntana: si sopla del norte, refúgiate en Cala Montgó.',
+    faq: [
+      { question: '¿Qué son las Islas Medes?', answer: 'Una reserva marina integral frente a L\'Estartit, con la mayor biodiversidad del Mediterráneo español: meros, cuevas y praderas. Buceo y snorkel excepcionales.' },
+      { question: '¿Puedo fondear en las Medes?', answer: 'No con ancla: es reserva integral. Hay que coger una de las boyas autorizadas. El acceso y el buceo están regulados por cupo.' },
+      { question: '¿Cuánto cuesta el barco?', answer: 'Desde €120/día sin licencia; con patrón desde €270. Combustible aparte.' },
+      { question: '¿Hace falta saber bucear?', answer: 'No: el snorkel sobre las boyas ya es espectacular. Para inmersión necesitas titulación y reserva en un centro autorizado.' },
+      { question: '¿Cuándo no salir?', answer: 'Con tramuntana (viento fuerte del norte). Llega sin aviso y deja la costa del Montgrí impracticable; consulta el parte antes de zarpar.' },
+    ],
+    images: { hero: { unsplashUrl: 'https://source.unsplash.com/1200x600/?medes,estartit,diving,mediterranean', alt: 'Islas Medes frente a L\'Estartit, Costa Brava' } },
+  },
+
+  salou: {
+    coast: 'Costa Daurada',
+    province: 'Tarragona',
+    locality: 'Salou',
+    slug: 'salou',
+    samboatUrl: '/alquiler-barco/salou',
+    googleTrendsVolume: 29,
+    description:
+      'Corazón de la Costa Daurada, de arena fina y dorada. Alquila barco desde €100/día para descubrir las calas del Cap Salou, las más bonitas de Tarragona.',
+    beaches: [
+      { name: 'Cala Crancs', distance: '10 min', type: 'scenic', description: 'Cala recogida del Cap Salou entre pinos, aguas someras y claras' },
+      { name: 'Cala Vinya', distance: '12 min', type: 'secret', description: 'Pequeña cala poco accesible por tierra, tranquila' },
+      { name: 'Cap Salou', distance: '15 min', description: 'Punta rocosa con faro, encadenado de calas, snorkel' },
+      { name: 'Platja Llarga', distance: '8 min', type: 'family', description: 'Arenal abierto, aguas calmadas, fondeo en arena' },
+      { name: 'Cala Penya Tallada', distance: '14 min', type: 'scenic', description: 'Cala virgen entre acantilados, agua turquesa' },
+    ],
+    moorings: [
+      { name: 'Cap Salou', depth: 8, protection: 'medium', description: 'Encadenado de calas, fondo de arena y roca, snorkel' },
+      { name: 'Platja Llarga', depth: 6, protection: 'high', description: 'Arena, somero y protegido, ideal familias' },
+      { name: 'Cala Crancs', depth: 5, protection: 'high', description: 'Pequeña y resguardada, perfecta para principiantes' },
+      { name: 'Puerto de Salou', depth: 5, protection: 'high', description: 'Marina con servicios, base de salida' },
+    ],
+    pricing: { small: { min: 100, max: 160 }, medium: { min: 170, max: 300 }, captain: { min: 220, max: 380 } },
+    regulations: [
+      'Velocidad limitada cerca de playas balizadas (zona de baño)',
+      'Respeta las boyas de canales de entrada y salida de bañistas',
+      'Pesca recreativa con licencia autonómica',
+      'Equipo de seguridad obligatorio',
+      'Garbí (viento de SO) puede levantar marejada por la tarde',
+    ],
+    bestSeason: 'Junio-Septiembre (agua 21-26°C, costa familiar y tranquila)',
+    insiderTip:
+      'El Cap Salou esconde las mejores calas de la Costa Daurada, casi todas mejores desde el mar. Combina Cala Crancs y Penya Tallada por la mañana y la Platja Llarga para comer fondeado.',
+    faq: [
+      { question: '¿Merece la pena alquilar barco en Salou?', answer: 'Sí: las calas del Cap Salou (Crancs, Vinya, Penya Tallada) son lo más bonito de la Costa Daurada y se disfrutan mucho mejor desde el agua.' },
+      { question: '¿Necesito licencia?', answer: 'No para lancha hasta 5,5 m y 15CV. La costa es tranquila y apta para principiantes.' },
+      { question: '¿Cuánto cuesta?', answer: 'Desde €100/día sin licencia; con patrón desde €220. Es de las zonas más económicas. Combustible aparte.' },
+      { question: '¿Es buena zona para familias?', answer: 'Excelente: aguas someras, calas protegidas y la Platja Llarga muy calmada. Ideal con niños.' },
+      { question: '¿Cuándo hay peor mar?', answer: 'Con garbí (viento del suroeste) la tarde puede picarse. Las mañanas suelen estar en calma.' },
+    ],
+    images: { hero: { unsplashUrl: 'https://source.unsplash.com/1200x600/?salou,costa-daurada,cove,mediterranean', alt: 'Calas del Cap Salou en la Costa Daurada' } },
+  },
+
+  tarifa: {
+    coast: 'Costa de la Luz',
+    province: 'Cádiz',
+    locality: 'Tarifa',
+    slug: 'tarifa',
+    samboatUrl: '/alquiler-barco/tarifa',
+    googleTrendsVolume: 44,
+    description:
+      'Donde el Atlántico se encuentra con el Mediterráneo y África está a la vista. Alquila barco desde €130/día para avistar cetáceos en el Estrecho y fondear en playas vírgenes.',
+    beaches: [
+      { name: 'Isla de las Palomas', distance: '10 min', type: 'scenic', description: 'Punto más al sur de Europa continental, fondos ricos, corrientes' },
+      { name: 'Playa de Bolonia', distance: '30 min noroeste', type: 'scenic', description: 'Duna gigante y ruinas romanas, arenal virgen, fondeo en arena' },
+      { name: 'Los Lances', distance: '5 min', description: 'Arenal inmenso de viento y kitesurf, fondeo somero abierto' },
+      { name: 'Valdevaqueros', distance: '15 min noroeste', type: 'scenic', description: 'Duna y aguas cristalinas, paraíso del viento' },
+      { name: 'Estrecho (avistamiento)', distance: '20-40 min', type: 'adventure', description: 'Aguas del Estrecho: delfines, ballenas piloto y orcas en verano' },
+    ],
+    moorings: [
+      { name: 'Bolonia', depth: 6, protection: 'medium', description: 'Arena, abierta al poniente, mejor con levante flojo' },
+      { name: 'Isla de las Palomas', depth: 12, protection: 'low', description: 'Corrientes fuertes del Estrecho, solo con buen tiempo y experiencia' },
+      { name: 'Puerto de Tarifa', depth: 6, protection: 'high', description: 'Marina protegida, base de salida y avistamientos' },
+      { name: 'Los Lances', depth: 5, protection: 'low', description: 'Abierto y ventoso, fondeo solo en días de calma' },
+    ],
+    pricing: { small: { min: 130, max: 210 }, medium: { min: 220, max: 400 }, captain: { min: 300, max: 520 } },
+    regulations: [
+      'Estrecho de Gibraltar: tráfico mercante intenso, no cruzar el dispositivo de separación',
+      'Avistamiento de cetáceos regulado: distancia mínima y prohibido perseguir',
+      'Levante y poniente fuertes muy frecuentes: el viento manda en Tarifa',
+      'Corrientes de marea importantes (influencia atlántica)',
+      'Equipo de seguridad obligatorio; VHF muy recomendable',
+    ],
+    bestSeason: 'Mayo-Octubre para cetáceos; días de viento flojo (raros, aprovéchalos)',
+    insiderTip:
+      'Tarifa es para días sin viento: aprovéchalos para cruzar a avistar cetáceos en el Estrecho (delfines casi garantizados, orcas en julio-agosto) y fondear en Bolonia. Con levante fuerte, ni salgas: es de los lugares más ventosos de Europa.',
+    faq: [
+      { question: '¿Se pueden ver ballenas y delfines en barco desde Tarifa?', answer: 'Sí: el Estrecho es uno de los mejores lugares de Europa. Delfines todo el año, calderones y cachalotes en temporada, y orcas en julio-agosto. Respeta la distancia legal.' },
+      { question: '¿Es difícil navegar en Tarifa?', answer: 'Puede serlo: viento fuerte casi constante, corrientes de marea y tráfico mercante en el Estrecho. Para la mayoría, mejor con patrón.' },
+      { question: '¿Cuánto cuesta?', answer: 'Desde €130/día sin licencia (días de calma); con patrón desde €300, muy recomendable aquí. Combustible aparte.' },
+      { question: '¿Cuándo se puede salir?', answer: 'Solo con viento flojo, que en Tarifa es lo excepcional. Consulta el parte: levante o poniente fuertes hacen impracticable la navegación de recreo.' },
+      { question: '¿Qué fondear si hay algo de viento?', answer: 'Bolonia da cierto abrigo con levante. La Isla de las Palomas y Los Lances quedan expuestos; evítalos salvo calma total.' },
+    ],
+    images: { hero: { unsplashUrl: 'https://source.unsplash.com/1200x600/?tarifa,strait,whale,atlantic', alt: 'Aguas del Estrecho frente a Tarifa, Costa de la Luz' } },
   }
 }
 

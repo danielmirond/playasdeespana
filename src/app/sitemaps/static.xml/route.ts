@@ -12,6 +12,8 @@ import {
 } from '@/lib/playas'
 import { getRutas, COSTAS } from '@/lib/rutas'
 import { getCamperCities } from '@/lib/autocaravana-localities'
+import { getAllLocalities } from '@/lib/boat-rental-localities'
+import { boatRentalSlug } from '@/lib/boat-rental-helpers'
 import { TIPOS } from '@/lib/tiposQueLlevar'
 import { getPlayasDataModified } from '@/lib/dateModified'
 
@@ -169,6 +171,24 @@ export async function GET() {
     urls.push(u(p, '0.7', 'weekly', today))
   }
   for (const c of getCamperCities()) urls.push(u(`/alquiler-autocaravana/${c.slug}`, '0.6', 'weekly', today))
+
+  // Alquiler de barcos — jerarquía canónica costa → provincia → localidad.
+  // (Antes el sitemap solo listaba el hub plano; las páginas ricas /costas/**
+  // no se enviaban a Google. Se generan desde el dataset → escalan solas.)
+  {
+    const boatLocs = getAllLocalities()
+    const coasts = new Set<string>()
+    const provinces = new Set<string>() // "coastSlug/provinceSlug"
+    for (const l of boatLocs) {
+      const cs = boatRentalSlug(l.coast)
+      const ps = boatRentalSlug(l.province)
+      coasts.add(cs)
+      provinces.add(`${cs}/${ps}`)
+      urls.push(u(`/alquiler-barco/costas/${cs}/provincias/${ps}/${l.slug}`, '0.7', 'weekly', today))
+    }
+    for (const cs of coasts) urls.push(u(`/alquiler-barco/costas/${cs}`, '0.7', 'weekly', today))
+    for (const cp of provinces) urls.push(u(`/alquiler-barco/costas/${cp.split('/')[0]}/provincias/${cp.split('/')[1]}`, '0.6', 'weekly', today))
+  }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
