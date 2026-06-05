@@ -14,7 +14,7 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 export const metadata: Metadata = {
   title: 'Alquiler de autocaravanas y campers en España | Compara precios',
   description: 'Compara el alquiler de autocaravanas y campers en España por ciudad: Madrid, Barcelona, Valencia, Sevilla, Málaga. Precios por temporada, áreas de pernocta y playas aptas.',
-  alternates: { canonical: '/alquiler-autocaravana' },
+  alternates: { canonical: '/alquiler-autocaravana', languages: { es: '/alquiler-autocaravana', en: '/en/campervan-rental' } },
   openGraph: { title: 'Alquiler de autocaravanas y campers en España', url: `${BASE}/alquiler-autocaravana`, type: 'website' },
 }
 

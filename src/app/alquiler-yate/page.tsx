@@ -13,7 +13,7 @@ export const revalidate = 86400
 export const metadata: Metadata = {
   title: 'Alquiler de yate en España: precios por destino | Playas de España',
   description: 'Comparativa real de alquiler de yate en Ibiza, Mallorca, Menorca, Tenerife, Marbella y Costa Brava. Precios por semana, calas accesibles solo por mar, mejor temporada.',
-  alternates: { canonical: '/alquiler-yate' },
+  alternates: { canonical: '/alquiler-yate', languages: { es: '/alquiler-yate', en: '/en/yacht-rental' } },
   openGraph: {
     title: 'Alquiler de yate en España: precios por destino',
     description: 'Comparativa real de alquiler de yate en los 6 destinos premium de España.',

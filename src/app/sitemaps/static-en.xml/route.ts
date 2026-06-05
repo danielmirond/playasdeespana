@@ -61,6 +61,16 @@ export async function GET() {
   </url>`)
   }
 
+  // EN commercial hubs
+  for (const p of ['/en/campervan-rental', '/en/yacht-rental', '/en/catamaran-rental']) {
+    urls.push(`  <url>
+    <loc>${BASE}${p}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`)
+  }
+
   // EN Magazine — índice, categorías y artículos traducidos
   const mag: Array<{ url: string; priority: string; freq: string }> = [
     { url: '/en/magazine', priority: '0.7', freq: 'weekly' },

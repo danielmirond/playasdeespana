@@ -14,7 +14,7 @@ export const revalidate = 86400
 export const metadata: Metadata = {
   title: 'Alquiler de catamarán en España: precios día y semana | Playas de España',
   description: 'Catamarán por destino: Mallorca, Ibiza, Menorca, Costa Brava, Barcelona, Marbella. Precios reales, fondeos solo accesibles por mar y mejor temporada.',
-  alternates: { canonical: '/alquiler-catamaran' },
+  alternates: { canonical: '/alquiler-catamaran', languages: { es: '/alquiler-catamaran', en: '/en/catamaran-rental' } },
   openGraph: {
     title: 'Alquiler de catamarán en España',
     description: 'Comparativa por destino: precios, fondeos y temporadas.',
