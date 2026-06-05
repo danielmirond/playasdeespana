@@ -47,6 +47,7 @@ export default function Nav() {
           {!isEn && <Link href="/playas-nudistas" className={styles.link}>Nudistas</Link>}
           {!isEn && <Link href="/surf" className={styles.link}>Surf</Link>}
           {!isEn && <Link href="/rutas" className={styles.link}>Rutas</Link>}
+          {!isEn && <Link href="/magazine" className={styles.link}>Magazine</Link>}
           <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
         </nav>
         <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label={isEn ? 'Playas de España. Home' : 'Playas de España. Inicio'}>

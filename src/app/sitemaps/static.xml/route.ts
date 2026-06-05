@@ -14,6 +14,7 @@ import { getRutas, COSTAS } from '@/lib/rutas'
 import { getCamperCities } from '@/lib/autocaravana-localities'
 import { getAllLocalities } from '@/lib/boat-rental-localities'
 import { boatRentalSlug } from '@/lib/boat-rental-helpers'
+import { getAllArticles, CATEGORIES } from '@/lib/magazine'
 import { TIPOS } from '@/lib/tiposQueLlevar'
 import { getPlayasDataModified } from '@/lib/dateModified'
 
@@ -189,6 +190,11 @@ export async function GET() {
     for (const cs of coasts) urls.push(u(`/alquiler-barco/costas/${cs}`, '0.7', 'weekly', today))
     for (const cp of provinces) urls.push(u(`/alquiler-barco/costas/${cp.split('/')[0]}/provincias/${cp.split('/')[1]}`, '0.6', 'weekly', today))
   }
+
+  // Magazine — índice, categorías y artículos
+  urls.push(u('/magazine', '0.7', 'weekly', today))
+  for (const c of Object.keys(CATEGORIES)) urls.push(u(`/magazine/categoria/${c}`, '0.6', 'weekly', today))
+  for (const a of getAllArticles()) urls.push(u(`/magazine/${a.slug}`, '0.6', 'monthly', today))
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"

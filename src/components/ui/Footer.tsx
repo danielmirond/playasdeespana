@@ -110,6 +110,7 @@ export default function Footer({ locale = 'es' }: Props) {
           <div>
             <FootHeading>{es ? 'Guías' : 'Guides'}</FootHeading>
             <FootList>
+              <Link href="/magazine" style={ls}>Magazine</Link>
               <Link href="/que-llevar/playa-arenosa" style={ls}>{es ? 'Qué llevar a la playa' : 'What to bring to the beach'}</Link>
               <Link href="/calidad-agua" style={ls}>{es ? 'Calidad del agua de baño' : 'Bathing water quality'}</Link>
               <Link href="/medusas" style={ls}>{es ? 'Temporada de medusas' : 'Jellyfish season'}</Link>
