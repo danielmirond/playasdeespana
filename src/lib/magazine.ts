@@ -45,6 +45,22 @@ export interface Article {
   related: Array<{ href: string; label: string }>
   body: Block[]
   faq?: Array<{ q: string; a: string }>
+  /** Traducción inglesa. Si falta, el artículo no se publica en /en/magazine. */
+  en?: {
+    title: string
+    excerpt: string
+    related: Array<{ href: string; label: string }>
+    body: Block[]
+    faq?: Array<{ q: string; a: string }>
+  }
+}
+
+// Etiquetas de categoría en inglés (para /en/magazine).
+export const CATEGORIES_EN: Record<MagazineCategory, { label: string; description: string }> = {
+  rutas: { label: 'Routes', description: 'Coastal itineraries across Spain, beach by beach.' },
+  curiosidades: { label: 'Curiosities', description: 'History, legends and surprising facts about the coast.' },
+  gastronomia: { label: 'Food', description: 'Where to eat by the sea: beach bars, local produce and recipes.' },
+  guias: { label: 'Practical guides', description: 'Tips to make the most of the beach: seasons, families, safety.' },
 }
 
 export const ARTICLES: Article[] = [
@@ -87,6 +103,36 @@ export const ARTICLES: Article[] = [
       { q: '¿Necesito licencia para esta ruta?', a: 'Para lancha hasta 5,5 m y motor de 15CV no. Para barcos mayores necesitas el PER o contratar patrón. En días de tramuntana, mejor con patrón siempre.' },
       { q: '¿Cuánto cuesta el día de barco en la Costa Brava?', a: 'Una lancha pequeña desde unos 100-125 €/día sin combustible. Con patrón, desde 250 €. Consulta precios por localidad en nuestra sección de alquiler.' },
     ],
+    en: {
+      title: 'The best coves of the Costa Brava by boat: a one-day route',
+      excerpt: 'From Lloret to the Medes Islands: a one-day itinerary through the most beautiful coves of the Costa Brava, many reachable only from the sea.',
+      related: [
+        { href: '/en/boat-rental/coasts/costa-brava', label: 'Boat rental on the Costa Brava' },
+        { href: '/en/routes', label: 'More beach routes in Spain' },
+      ],
+      body: [
+        { t: 'p', html: 'The Costa Brava hides its best face away from the promenades: dozens of turquoise coves wedged between slate cliffs and pine groves, many <strong>with no road access</strong>. The only way to string them together in a day is from the water. This is our favourite route, south to north.' },
+        { t: 'h2', text: 'Stop 1 · Cala Banys & Cala Boadella (Lloret de Mar)', id: 'lloret' },
+        { t: 'p', html: 'Leaving Lloret harbour, in 10 minutes you reach <strong>Cala Banys</strong>, a rocky inlet with a legendary beach bar clinging to the cliff. A little further south, Cala Boadella offers a posidonia seabed perfect for the first snorkel of the day.' },
+        { t: 'h2', text: 'Stop 2 · Cala Giverola & Cala Pola (Tossa)', id: 'tossa' },
+        { t: 'p', html: 'Heading north you reach <strong>Tossa de Mar</strong>, with its walled medieval old town overlooking the sea (stunning from the water). Anchor at Cala Giverola or Cala Pola, two sandy coves among pines with excellent holding.' },
+        { t: 'h2', text: 'Stop 3 · The Medes Islands (L’Estartit)', id: 'medes' },
+        { t: 'p', html: 'The grand finale: the <strong>Medes Islands</strong>, the largest marine reserve in the Spanish Mediterranean. You can’t drop anchor here —there’s a compulsory mooring field— but snorkelling over huge groupers and caves like the Cova del Bisbe is out of this world.' },
+        { t: 'quote', text: 'Set off early: in July and August the Medes moorings fill up by mid-morning and diving access is capped.', cite: 'Sailor’s tip' },
+        { t: 'cta', href: '/en/boat-rental/coasts/costa-brava', label: 'Rent a boat on the Costa Brava', sub: 'With or without a skipper, prices and anchorages by town' },
+        { t: 'h2', text: 'Planning the day', id: 'plan' },
+        { t: 'ul', items: [
+          'Start early: you want to be sailing by 9-10am.',
+          'Bring 2 anchors and plenty of rode; many anchorages are rocky.',
+          'Fuel is extra: budget 15-20 L/hour at cruising speed.',
+          'With tramuntana (north wind), change the plan and shelter to the south.',
+        ] },
+      ],
+      faq: [
+        { q: 'Do I need a licence for this route?', a: 'Not for a boat up to 5.5 m with a 15HP engine. For larger boats you need the Spanish PER licence or a hired skipper. On tramuntana days, always go with a skipper.' },
+        { q: 'How much does a day on a boat cost on the Costa Brava?', a: 'A small boat from about €100-125/day without fuel. With a skipper, from €250. Check prices by town in our rental section.' },
+      ],
+    },
   },
 
   // ─────────────────────── CURIOSIDADES ───────────────────────
@@ -122,6 +168,30 @@ export const ARTICLES: Article[] = [
       { q: '¿La arena negra es peligrosa?', a: 'No es tóxica, pero retiene mucho calor: puede quemar los pies a mediodía. Usa calzado de agua y evita tumbarte sin esterilla aislante.' },
       { q: '¿Por qué el agua sobre arena blanca se ve turquesa?', a: 'La arena clara refleja la luz solar hacia arriba a través del agua; el agua absorbe los rojos y deja pasar los azules y verdes, de ahí el turquesa.' },
     ],
+    en: {
+      title: 'Why are some beaches white, golden or black sand?',
+      excerpt: 'The colour of the sand tells the geological story of each coast: from Caribbean quartz to Canary lava. Here’s why.',
+      related: [
+        { href: '/en/blue-flag', label: 'Blue Flag beaches in Spain' },
+        { href: '/en/communities/canarias', label: 'Beaches of the Canary Islands' },
+      ],
+      body: [
+        { t: 'p', html: 'No two sands are alike. Their colour and texture depend on <strong>which rock they come from</strong> and how much the sea has worked them. These are the main types you’ll see in Spain.' },
+        { t: 'h2', text: 'Golden sand: the most common', id: 'golden' },
+        { t: 'p', html: 'The golden tone of the Mediterranean and the Atlantic mainland comes from a mix of <strong>quartz and feldspar</strong> eroded from the mountains and carried down by rivers. The finer it is, the further it has travelled.' },
+        { t: 'h2', text: 'White sand: pure quartz or shells', id: 'white' },
+        { t: 'p', html: 'Near-white sands (think Ses Illetes, Formentera) are <strong>very pure quartz</strong> or crushed remains of shells and calcareous skeletons. They reflect so much light that the water above looks turquoise.' },
+        { t: 'h2', text: 'Black sand: volcanic', id: 'black' },
+        { t: 'p', html: 'In the Canary Islands —and the odd mainland spot— black sand is <strong>pulverised basalt</strong>, cooled lava ground down by the waves. It gets extremely hot in the sun: watch your bare feet at midday.' },
+        { t: 'quote', text: 'Las Teresitas beach (Tenerife) is a famous exception: its golden sand was imported from the Sahara, because the original was black.' },
+        { t: 'h2', text: 'Pebbles and gravel', id: 'pebbles' },
+        { t: 'p', html: 'On young, steep coasts like parts of the Costa Brava or the Cantabrian coast, the sea hasn’t had time to grind the rock down: you get <strong>pebbles</strong>. Awkward for your towel, but usually a sign of very clean water.' },
+      ],
+      faq: [
+        { q: 'Is black sand dangerous?', a: 'It’s not toxic, but it holds a lot of heat and can burn your feet at midday. Use water shoes and avoid lying down without an insulating mat.' },
+        { q: 'Why does water over white sand look turquoise?', a: 'Pale sand reflects sunlight back up through the water; water absorbs reds and lets blues and greens through, hence the turquoise.' },
+      ],
+    },
   },
 
   // ─────────────────────── GASTRONOMÍA ───────────────────────
@@ -164,6 +234,37 @@ export const ARTICLES: Article[] = [
       { q: '¿Qué es un espeto?', a: 'Sardinas (u otro pescado) ensartadas en una caña y asadas a un lado de las brasas, típicas de la Costa del Sol. Se hacen en una barca llena de arena para proteger la madera del fuego.' },
       { q: '¿Cuándo se come la paella, mediodía o noche?', a: 'En la Comunidad Valenciana la paella es plato de mediodía. Cenar paella es cosa de zonas muy turísticas; para comerla bien, hazlo a la hora del almuerzo.' },
     ],
+    en: {
+      title: 'Eating on the beach: a guide to chiringuitos and local food by coast',
+      excerpt: 'From the Málaga espeto to Menorcan lobster stew: what to order and where, coast by coast, to eat well right on the sand.',
+      related: [
+        { href: '/en/communities/andalucia', label: 'Beaches of Andalusia' },
+        { href: '/en/communities/islas-baleares', label: 'Beaches of the Balearic Islands' },
+      ],
+      body: [
+        { t: 'p', html: 'Eating by the sea in Spain is half the reason for the trip. Every coast has its beach-bar dish and its star produce. Here’s the cheat sheet so you don’t get it wrong.' },
+        { t: 'h2', text: 'Costa del Sol: the espeto', id: 'sol' },
+        { t: 'p', html: 'In Málaga the king is the <strong>sardine espeto</strong>, grilled on a sand-filled boat over olive-wood embers. You order it by the number of skewers and eat with your hands, with a Málaga salad and chilled white wine.' },
+        { t: 'h2', text: 'Levante & Costa Blanca: rice dishes', id: 'levante' },
+        { t: 'p', html: 'Here <strong>rice</strong> rules: real Valencian paella (chicken, rabbit, garrofó beans… never chorizo), arroz a banda or arroz del senyoret. Lunchtime only, never at night, over a wood fire if you can.' },
+        { t: 'h2', text: 'Balearics: stews and peix', id: 'balearics' },
+        { t: 'p', html: 'Menorca boasts <strong>lobster stew</strong> (pricey but unforgettable, especially in Fornells). In Mallorca and Ibiza look for <em>peix sec</em>, <em>bullit de peix</em> and <em>guisat de marisc</em>.' },
+        { t: 'h2', text: 'Galicia & the north: shellfish and fish', id: 'north' },
+        { t: 'p', html: 'In the Rías Baixas, <strong>pulpo á feira</strong> (octopus), mussels and cockles straight from the raft. On the Cantabrian coast, fried squid, North Atlantic bonito and sardines. Produce above all: the less they touch it, the better.' },
+        { t: 'cta', href: '/en/communities/andalucia', label: 'Explore the beaches of Andalusia', sub: 'And the chiringuitos of the Costa del Sol' },
+        { t: 'h2', text: 'Golden rules of the chiringuito', id: 'rules' },
+        { t: 'ul', items: [
+          'Look where the locals eat, not where there are photos on the menu.',
+          'The catch of the day is asked for, not read.',
+          'Book in August or go early: by 2:30pm there are no tables left.',
+          'Seasonal produce beats an endless menu.',
+        ] },
+      ],
+      faq: [
+        { q: 'What is an espeto?', a: 'Sardines (or other fish) skewered on a cane and grilled beside the embers, typical of the Costa del Sol. They’re cooked on a sand-filled boat to protect the wood from the fire.' },
+        { q: 'Is paella eaten at lunch or dinner?', a: 'In the Valencia region paella is a lunch dish. Eating paella for dinner is a tourist-area thing; to have it at its best, go at lunchtime.' },
+      ],
+    },
   },
 
   // ─────────────────────── GUÍAS PRÁCTICAS ───────────────────────
@@ -205,6 +306,36 @@ export const ARTICLES: Article[] = [
       { q: '¿A qué hora pega más fuerte el sol?', a: 'Entre las 12:00 y las 16:00 (hora solar), cuando el sol está más alto y el índice UV es máximo. En verano en España puede superar el nivel 8 (muy alto). Evita el sol directo en esa franja.' },
       { q: '¿Es mejor la playa por la mañana o por la tarde?', a: 'La mañana (antes de las 11h) suele ganar: mar en calma, menos gente, aparcamiento y UV más baja. La tarde (tras las 17h) es la segunda mejor opción por el ambiente y la luz.' },
     ],
+    en: {
+      title: 'The best time to go to the beach in summer (and when to avoid it)',
+      excerpt: 'UV radiation, thermal wind, tides and parking: the guide to picking the perfect hour and dodging the bad ones.',
+      related: [
+        { href: '/en/blue-flag', label: 'Blue Flag beaches' },
+        { href: '/en/dog-beaches', label: 'Dog-friendly beaches' },
+      ],
+      body: [
+        { t: 'p', html: 'Not all beach hours are equal. Picking the right slot is the difference between a perfect day and coming home sunburnt, with no shade and nowhere to park. Here’s the quick guide.' },
+        { t: 'h2', text: 'The golden slot: before 11am', id: 'morning' },
+        { t: 'p', html: 'Early morning the sun isn’t fierce yet, the <strong>sea is usually calm</strong> (the thermal wind kicks in at midday) and you’ll find parking. It’s the best time for families with kids and for photos.' },
+        { t: 'h2', text: 'The hour to avoid: 12pm to 4pm', id: 'midday' },
+        { t: 'p', html: 'This is the <strong>peak UV</strong> window: the index often tops level 8 (very high). If you go, shade is a must, sunscreen every 2 hours and no babies in direct sun. It’s also when the afternoon wind picks up in the Mediterranean.' },
+        { t: 'quote', text: 'Shadow rule: if your shadow is shorter than your height, the sun is high enough to burn you fast. Find shade.' },
+        { t: 'h2', text: 'The second window: after 5pm', id: 'afternoon' },
+        { t: 'p', html: 'UV drops, crowds thin out and the light turns golden. Ideal if you like a quiet vibe and staying for sunset. Note: at some beaches the lifeguard shift ends, so take extra care swimming.' },
+        { t: 'h2', text: 'Factors that change the equation', id: 'factors' },
+        { t: 'ul', items: [
+          'Tide: on the Atlantic and Cantabrian coasts low tide multiplies the available sand; check it before you go.',
+          'Wind: the Levante and tramuntana can ruin the afternoon; check the forecast.',
+          'Orientation: east-facing beaches fall into shade earlier in the afternoon.',
+          'Jellyfish: onshore wind plus warm water raises the risk; check the beach page.',
+        ] },
+        { t: 'cta', href: '/en/blue-flag', label: 'Find top-quality beaches', sub: 'Blue Flag beaches across Spain' },
+      ],
+      faq: [
+        { q: 'When is the sun strongest?', a: 'Between 12pm and 4pm (solar time), when the sun is highest and the UV index peaks. In summer in Spain it can exceed level 8 (very high). Avoid direct sun in that window.' },
+        { q: 'Is the beach better in the morning or afternoon?', a: 'The morning (before 11am) usually wins: calm sea, fewer people, parking and lower UV. The afternoon (after 5pm) is the second-best option for the atmosphere and light.' },
+      ],
+    },
   },
 ]
 
@@ -217,3 +348,10 @@ export const getArticleBySlug = (slug: string): Article | undefined =>
 
 export const getArticlesByCategory = (cat: MagazineCategory): Article[] =>
   getAllArticles().filter((a) => a.category === cat)
+
+// EN: solo artículos con traducción publicada.
+export const getAllArticlesEn = (): Article[] =>
+  getAllArticles().filter((a) => !!a.en)
+
+export const getArticlesByCategoryEn = (cat: MagazineCategory): Article[] =>
+  getAllArticlesEn().filter((a) => a.category === cat)

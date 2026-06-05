@@ -13,6 +13,8 @@ function getLangUrl(pathname: string, targetLocale: 'es' | 'en'): string {
     if (pathname.startsWith('/playas/'))      return pathname.replace('/playas/', '/en/beaches/')
     if (pathname.startsWith('/comunidad/'))   return pathname.replace('/comunidad/', '/en/communities/')
     if (pathname.startsWith('/provincia/'))   return pathname.replace('/provincia/', '/en/provinces/')
+    if (pathname.startsWith('/magazine/categoria/')) return pathname.replace('/magazine/categoria/', '/en/magazine/category/')
+    if (pathname.startsWith('/magazine'))     return pathname.replace('/magazine', '/en/magazine')
     return '/en'
   } else {
     if (!isEn) return pathname
@@ -20,6 +22,8 @@ function getLangUrl(pathname: string, targetLocale: 'es' | 'en'): string {
     if (pathname.startsWith('/en/beaches/'))     return pathname.replace('/en/beaches/', '/playas/')
     if (pathname.startsWith('/en/communities/')) return pathname.replace('/en/communities/', '/comunidad/')
     if (pathname.startsWith('/en/provinces/'))   return pathname.replace('/en/provinces/', '/provincia/')
+    if (pathname.startsWith('/en/magazine/category/')) return pathname.replace('/en/magazine/category/', '/magazine/categoria/')
+    if (pathname.startsWith('/en/magazine'))     return pathname.replace('/en/magazine', '/magazine')
     return '/'
   }
 }
@@ -47,7 +51,7 @@ export default function Nav() {
           {!isEn && <Link href="/playas-nudistas" className={styles.link}>Nudistas</Link>}
           {!isEn && <Link href="/surf" className={styles.link}>Surf</Link>}
           {!isEn && <Link href="/rutas" className={styles.link}>Rutas</Link>}
-          {!isEn && <Link href="/magazine" className={styles.link}>Magazine</Link>}
+          <Link href={isEn ? '/en/magazine' : '/magazine'} className={styles.link}>Magazine</Link>
           <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
         </nav>
         <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label={isEn ? 'Playas de España. Home' : 'Playas de España. Inicio'}>

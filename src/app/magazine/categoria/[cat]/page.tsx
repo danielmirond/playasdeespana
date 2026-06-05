@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ cat: stri
   return {
     title,
     description: meta.description,
-    alternates: { canonical: `/magazine/categoria/${meta.slug}` },
+    alternates: { canonical: `/magazine/categoria/${meta.slug}`, languages: { es: `/magazine/categoria/${meta.slug}`, en: `/en/magazine/category/${meta.slug}` } },
     openGraph: { type: 'website', url: `${BASE}/magazine/categoria/${meta.slug}`, title, description: meta.description },
   }
 }

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getComunidades, getProvincias, getMunicipios } from '@/lib/playas'
+import { getAllArticlesEn, CATEGORIES } from '@/lib/magazine'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -57,6 +58,21 @@ export async function GET() {
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>`)
+  }
+
+  // EN Magazine — índice, categorías y artículos traducidos
+  const mag: Array<{ url: string; priority: string; freq: string }> = [
+    { url: '/en/magazine', priority: '0.7', freq: 'weekly' },
+    ...Object.keys(CATEGORIES).map((c) => ({ url: `/en/magazine/category/${c}`, priority: '0.6', freq: 'weekly' })),
+    ...getAllArticlesEn().map((a) => ({ url: `/en/magazine/${a.slug}`, priority: '0.6', freq: 'monthly' })),
+  ]
+  for (const p of mag) {
+    urls.push(`  <url>
+    <loc>${BASE}${p.url}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${p.freq}</changefreq>
+    <priority>${p.priority}</priority>
   </url>`)
   }
 

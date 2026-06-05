@@ -9,7 +9,7 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 export const metadata: Metadata = {
   title: 'Magazine | Rutas, curiosidades y gastronomía de playa',
   description: 'El magazine de Playas de España: rutas costeras, curiosidades del litoral, dónde comer junto al mar y guías prácticas para disfrutar la playa.',
-  alternates: { canonical: '/magazine' },
+  alternates: { canonical: '/magazine', languages: { es: '/magazine', en: '/en/magazine' } },
   openGraph: {
     type: 'website',
     url: `${BASE}/magazine`,
