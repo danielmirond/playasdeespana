@@ -67,15 +67,28 @@ Listicle sin método · "la más bonita de…" · "el refugio de [famoso]" ·
 (que publican 20 medios). Si se usa un gancho de estos, hay que **darle la vuelta
 con un dato** ("la 'cala secreta' que ya no lo es: así de llena está a las 12h").
 
-## 7 · Estructura de una pieza (~450-650 palabras)
+## 7 · Estructura bicéfala — DOS VOCES en el mismo texto (mín. 600 palabras)
 
-1. **Titular con dato útil** (no intriga): nombre + el dato que decide.
-2. **Entradilla:** qué es + ubicación + el gancho honesto.
-3. **Intro:** una imagen breve, luego al grano.
-4. **H2 — Los datos:** calidad de agua, bandera, medusas, oleaje, aforo.
-5. **H2 — El criterio del local:** cuándo ir, cuándo NO, el truco, la alternativa.
-6. **H2 — Los contras:** sin rodeos (sombra, acceso, corrientes, servicios).
-7. **Cierre:** un dato o imagen que se queda, sin "en definitiva".
+La fórmula de producción NO es una voz pura, sino **alternar dos registros**
+dentro del artículo: el lector entra por el corazón (narrativa) y se queda por
+la cabeza (datos + honestidad). Mínimo **600 palabras con sustancia** (mitad
+narrativa, mitad dato; nada de relleno lírico).
+
+| Bloque | Voz | Función |
+|---|---|---|
+| **Titular** | 🅱️ propia | nombre + el dato que decide (no intriga) |
+| **Apertura** (1-2 párrafos) | 🅰️ narrativa | engancha, crea deseo, gancho cultural/escénico |
+| **H2 — Los datos** | 🅱️ propia | calidad agua (EEA), bandera, medusas, aforo + **el contra** |
+| **H2 — El criterio del local** | 🅱️ propia | cuándo SÍ, cuándo NO, el truco, el viento, la alternativa |
+| **Cierre** (1 párrafo) | 🅰️ narrativa | remata con imagen y **subvierte el cliché** |
+
+- 🅰️ **narrativa**: la del medio de viajes, evocadora, escénica. Solo en
+  apertura y cierre. Es el gancho, no el relleno.
+- 🅱️ **propia**: dato + criterio + honestidad (los contras). Es el cuerpo y el
+  diferencial. Cita la fuente.
+
+Regla de oro de la mezcla: **abre y cierra en narrativa; informa y critica en
+voz propia.** Si un párrafo no aporta ni emoción (A) ni dato útil (B), sobra.
 
 ## 8 · Lo que NO se hace
 

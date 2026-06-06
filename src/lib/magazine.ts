@@ -64,6 +64,67 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── FICHA voz bicéfala (modelo de la casa: A narra, B informa) ─────
+  {
+    slug: 'cala-granadella-xabia-guia-honesta',
+    category: 'curiosidades',
+    title: 'Cala Granadella, Xàbia: la "mejor playa de España" que conviene saber pisar',
+    excerpt:
+      'Premiada, fotografiada y masificada. Lo que de verdad necesitas saber de la Granadella: cantos (no arena), aforo en verano y el mejor snorkel de la Costa Blanca.',
+    heroAlt: 'Cala Granadella en Xàbia, herradura entre acantilados y pinos sobre agua transparente',
+    heroQuery: 'granadella,javea,cove,mediterranean',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-06T00:00:00Z',
+    readingMin: 4,
+    related: [
+      { href: '/alquiler-barco/costas/costa-blanca/provincias/alicante/javea', label: 'Alquiler de barco en Xàbia' },
+      { href: '/comunidad/comunitat-valenciana', label: 'Playas de la Comunidad Valenciana' },
+      { href: '/playas-aguas-cristalinas', label: 'Playas de aguas cristalinas' },
+    ],
+    body: [
+      { t: 'p', html: 'Quien baja el último tramo de carretera entre pinos, con el mar apareciendo a retazos entre las ramas, entiende los premios antes de pisar la orilla. La Granadella se abre de golpe: una herradura encajada entre dos brazos de acantilado, el agua tan transparente que las barcas fondeadas parecen flotar en el aire, y los pinos carrascos asomándose al Mediterráneo como si quisieran bañarse ellos también.' },
+      { t: 'p', html: 'Y guarda un secreto de hormigón. En el flanco norte resiste <strong>un búnker de la Guerra Civil</strong>, uno de los muchos que vigilaban esta costa ante un desembarco que nunca llegó. Donde antes había fusiles, hoy hay snorkel: sus fondos rocosos son de los más ricos de toda la provincia de Alicante.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Hasta aquí, el folleto tiene razón. Ahora la letra pequeña. La Granadella fue elegida <strong>mejor playa de España en 2014</strong> y desde entonces es víctima de su fama. Es una cala de unos 160 metros, con agua clasificada <strong>"excelente" por la Agencia Europea de Medio Ambiente</strong> los últimos años, pero —dato que cambia la maleta— es de <strong>cantos rodados, no de arena</strong>. Sin escarpines y sin colchoneta lo vas a pasar mal: ni se camina cómodo ni se está tumbado a gusto.' },
+      { t: 'p', html: 'El segundo aviso es el aparcamiento: pequeño, de pago, y en <strong>julio y agosto el Ayuntamiento de Xàbia regula el acceso en coche con aforo</strong>. Se llena a media mañana y, cuando se completa, activan bus lanzadera desde el pueblo. Si llegas a mediodía en agosto pensando aparcar al lado, no entras. Sombra natural, poca —el pinar queda en los bordes—; a partir de las doce, sombrilla o sufrir. Servicios: un par de restaurantes buenos, con precio de cala famosa.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'Dicho lo malo, merece muchísimo la pena si la sabes pisar. La regla de oro es <strong>ir fuera de temporada o a primera hora</strong>: en mayo, junio y septiembre el agua ya está para bañarse, la luz es mejor y la cala está a un tercio de su capacidad. A las nueve de la mañana en pleno agosto también la tienes casi para ti.' },
+      { t: 'p', html: 'El otro factor es el viento, y casi nadie lo cuenta. Con <strong>levante</strong> (viento del este) entra marejada y enturbia el agua justo sobre los fondos rocosos que vienes a ver: si has venido a hacer snorkel, un día de levante te arruina el plan. Mira el parte antes de salir. Y si la encuentras a rebosar, no te resignes: la <strong>Cala del Portitxol</strong>, un poco al norte, aguanta mejor el gentío con un encanto parecido.' },
+      { t: 'quote', text: 'No es una joya escondida: la conoce medio mundo. Es una gran cala que premia a quien la pisa con cabeza.' },
+      { t: 'p', html: 'Porque la Granadella no es, por mucho que lo repitan, un secreto. Es otra cosa, quizá mejor: una gran cala mediterránea que regala a quien llega temprano, con escarpines y un ojo en el viento, una de las mejores horas de snorkel de la Costa Blanca. El búnker seguirá ahí, vigilando un mar que hoy solo trae aletas y máscaras.' },
+    ],
+    faq: [
+      { q: '¿La Granadella es de arena o de piedra?', a: 'De cantos rodados, no de arena. Conviene llevar escarpines para entrar al agua y una colchoneta o tumbona para estar cómodo.' },
+      { q: '¿Hay que pagar o reservar para aparcar en verano?', a: 'En julio y agosto el Ayuntamiento de Xàbia regula el acceso en coche por aforo: el aparcamiento (de pago) se llena a media mañana y se activa un bus lanzadera desde el pueblo. Mejor llegar antes de las 10h o ir fuera de temporada.' },
+      { q: '¿Cuándo está mejor el agua para snorkel?', a: 'Con mar en calma. El viento de levante (este) levanta marejada y enturbia los fondos rocosos; revisa el parte. Mayo, junio y septiembre suelen dar el mejor equilibrio de agua clara y poca gente.' },
+    ],
+    en: {
+      title: 'Cala Granadella, Xàbia: the "best beach in Spain" you need to know how to visit',
+      excerpt: 'Award-winning, photographed and overcrowded. What you actually need to know about Granadella: pebbles (not sand), summer capacity limits and the best snorkelling on the Costa Blanca.',
+      related: [
+        { href: '/en/boat-rental/coasts/costa-blanca/provinces/alicante/javea', label: 'Boat rental in Xàbia' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+      ],
+      body: [
+        { t: 'p', html: 'Drive down the last stretch of road through the pines, the sea flashing between the branches, and you understand the awards before you even reach the shore. Granadella opens up all at once: a horseshoe wedged between two arms of cliff, water so clear the anchored boats seem to float in mid-air, and Aleppo pines leaning out over the Mediterranean as if they fancied a swim too.' },
+        { t: 'p', html: 'And it keeps a concrete secret. On the northern flank stands <strong>a Spanish Civil War bunker</strong>, one of many that watched this coast for a landing that never came. Where there were once rifles, there’s now snorkelling: its rocky seabed is among the richest in the whole province of Alicante.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'So far the brochure is right. Now the small print. Granadella was named <strong>best beach in Spain in 2014</strong> and has been a victim of its fame ever since. It’s a cove of about 160 metres, water rated <strong>"excellent" by the European Environment Agency</strong> in recent years, but — the detail that changes your packing — it’s <strong>pebbles, not sand</strong>. Without water shoes and an air bed you’ll struggle: it’s neither comfy to walk on nor to lie on.' },
+        { t: 'p', html: 'The second warning is parking: small, paid, and in <strong>July and August Xàbia council caps car access</strong>. It fills by mid-morning and, once full, a shuttle bus runs from the town. Turn up at midday in August expecting to park beside it and you won’t get in. Natural shade is scarce — the pines stay at the edges — so from noon it’s a parasol or suffer. Services: a couple of good restaurants, at famous-cove prices.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'That said, it’s well worth it if you know how to time it. The golden rule is <strong>go off-season or first thing</strong>: in May, June and September the water’s warm enough, the light is better and the cove is at a third of its capacity. Nine in the morning in peak August also gets you near-empty sand.' },
+        { t: 'p', html: 'The other factor is the wind, which almost nobody mentions. With an <strong>easterly (levante)</strong> a swell rolls in and clouds the water right over the rocky seabed you came to see: if you’re here to snorkel, a levante day ruins the plan. Check the forecast. And if you find it packed, don’t give up — <strong>Cala del Portitxol</strong>, just to the north, handles crowds better with a similar charm.' },
+        { t: 'quote', text: 'It’s not a hidden gem: half the world knows it. It’s a great cove that rewards those who visit it wisely.' },
+        { t: 'p', html: 'Because Granadella, however often they say so, is no secret. It’s something else, perhaps better: a great Mediterranean cove that gives whoever arrives early, with water shoes and an eye on the wind, one of the best snorkelling hours on the Costa Blanca. The bunker will still be there, watching a sea that today brings only fins and masks.' },
+      ],
+      faq: [
+        { q: 'Is Granadella sand or pebbles?', a: 'Pebbles, not sand. Bring water shoes to get into the sea and an air bed or sunlounger to be comfortable.' },
+        { q: 'Do I need to pay or book to park in summer?', a: 'In July and August Xàbia council caps car access: the paid car park fills by mid-morning and a shuttle bus runs from the town. Best to arrive before 10am or go off-season.' },
+        { q: 'When is the water best for snorkelling?', a: 'In calm conditions. An easterly (levante) wind brings swell and clouds the rocky seabed; check the forecast. May, June and September usually offer the best balance of clear water and few people.' },
+      ],
+    },
+  },
+
   // ───────────────────────── RUTAS ─────────────────────────
   {
     slug: 'ruta-calas-costa-brava-barco',
