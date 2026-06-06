@@ -337,6 +337,189 @@ export const ARTICLES: Article[] = [
       ],
     },
   },
+
+  // ─────────── CURIOSIDADES · voice NatGeo (gancho geológico) ───────────
+  {
+    slug: 'playa-murcia-esculturas-arena-erosion',
+    category: 'curiosidades',
+    title: 'La playa de Murcia con esculturas de arena que talló el viento: parecen de otro planeta',
+    excerpt:
+      'En Bolnuevo, junto a Mazarrón, la erosión ha modelado durante miles de años unas formas que parecen sacadas de un decorado de ciencia ficción.',
+    heroAlt: 'Formaciones erosionadas de arenisca dorada junto al mar en Bolnuevo, Murcia',
+    heroQuery: 'bolnuevo,gredas,erosion,murcia',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-05T00:00:00Z',
+    readingMin: 4,
+    related: [
+      { href: '/comunidad/murcia', label: 'Playas de Murcia' },
+      { href: '/playas-paradisiacas', label: 'Playas paradisíacas de España' },
+      { href: '/calas-secretas', label: 'Calas secretas y poco masificadas' },
+    ],
+    body: [
+      { t: 'p', html: 'Al final de un paseo marítimo cualquiera, donde uno esperaría más arena y más sombrillas, el paisaje se quiebra: media docena de torres ocres se levantan del suelo como setas gigantes, agujereadas y retorcidas, recortadas contra el azul del Mediterráneo. No es una instalación de arte. Es lo que el viento y la lluvia llevan miles de años esculpiendo en la costa de Murcia.' },
+      { t: 'h2', text: 'Cuatro millones de años de paciencia', id: 'geologia' },
+      { t: 'p', html: 'Las Gredas de Bolnuevo, en el municipio de Mazarrón, son formaciones de <strong>arenisca y arcilla</strong> del Plioceno. La roca, blanda y desigual, cede de forma distinta según su dureza: las capas más resistentes quedan arriba a modo de sombrero y protegen un pedestal más frágil que el agua y el viento van afilando. El resultado son esos hongos y agujas que parecen a punto de derrumbarse y, sin embargo, llevan ahí siglos.' },
+      { t: 'h2', text: 'Un decorado natural', id: 'paisaje' },
+      { t: 'p', html: 'La estampa, especialmente al atardecer cuando la luz rasante enciende el ocre, ha convertido este rincón en uno de los más fotografiados del litoral murciano. Justo al lado se abre una <strong>playa amplia de arena oscura</strong> y aguas tranquilas, así que la visita combina el asombro geológico con el baño.' },
+      { t: 'h2', text: 'Cómo llegar y cuándo ir', id: 'visita' },
+      { t: 'p', html: 'Las gredas están al pie de la carretera, en el extremo oeste del paseo de Bolnuevo, a unos 5 km de Mazarrón; hay aparcamiento cerca. Se ven en cualquier momento, pero la mejor luz para fotografiarlas es la primera y la última hora del día. Conviene <strong>no caminar sobre las formaciones</strong>: son frágiles y están protegidas.' },
+      { t: 'quote', text: 'Lo que parece un capricho de escenógrafo es, en realidad, geología pura: la prueba de que el viento también esculpe.' },
+    ],
+    faq: [
+      { q: '¿Qué son las Gredas de Bolnuevo?', a: 'Formaciones de arenisca y arcilla del Plioceno (unos 4 millones de años) erosionadas por el viento y la lluvia en Mazarrón, Murcia. Tienen forma de hongos y agujas y están protegidas.' },
+      { q: '¿Se puede uno bañar allí?', a: 'Sí: junto a las gredas hay una playa amplia de arena oscura y aguas tranquilas, con servicios en el paseo de Bolnuevo.' },
+    ],
+    en: {
+      title: 'The Murcia beach with sand sculptures carved by the wind: they look from another planet',
+      excerpt: 'At Bolnuevo, near Mazarrón, erosion has shaped formations over thousands of years that look straight out of a science-fiction set.',
+      related: [
+        { href: '/en/communities/murcia', label: 'Beaches of Murcia' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+      ],
+      body: [
+        { t: 'p', html: 'At the end of an ordinary promenade, where you’d expect more sand and more parasols, the landscape cracks open: half a dozen ochre towers rise from the ground like giant mushrooms, pitted and twisted, silhouetted against the blue Mediterranean. It isn’t an art installation. It’s what wind and rain have been sculpting on the Murcia coast for thousands of years.' },
+        { t: 'h2', text: 'Four million years of patience', id: 'geology' },
+        { t: 'p', html: 'The Gredas de Bolnuevo, in the municipality of Mazarrón, are <strong>sandstone and clay</strong> formations from the Pliocene. The soft, uneven rock erodes differently depending on its hardness: the tougher layers cap the top and shield a more fragile pedestal that water and wind keep whittling. The result is those mushrooms and spires that look about to collapse and yet have stood for centuries.' },
+        { t: 'h2', text: 'A natural film set', id: 'landscape' },
+        { t: 'p', html: 'The scene — especially at sunset, when low light sets the ochre ablaze — has made this one of the most photographed corners of the Murcia coast. Right beside it stretches a <strong>broad dark-sand beach</strong> with calm water, so a visit combines geological wonder with a swim.' },
+        { t: 'h2', text: 'How to get there and when to go', id: 'visit' },
+        { t: 'p', html: 'The formations sit right by the road, at the western end of the Bolnuevo promenade, about 5 km from Mazarrón; there’s parking nearby. They’re visible any time, but the best light for photos is early morning and late afternoon. Please <strong>don’t walk on the formations</strong>: they’re fragile and protected.' },
+        { t: 'quote', text: 'What looks like a set designer’s whim is, in fact, pure geology: proof that the wind sculpts too.' },
+      ],
+      faq: [
+        { q: 'What are the Gredas de Bolnuevo?', a: 'Pliocene sandstone and clay formations (about 4 million years old) eroded by wind and rain in Mazarrón, Murcia. They’re shaped like mushrooms and spires and are protected.' },
+        { q: 'Can you swim there?', a: 'Yes: next to the formations there’s a broad dark-sand beach with calm water and services along the Bolnuevo promenade.' },
+      ],
+    },
+  },
+
+  // ─────────── RUTAS · voice NatGeo (parque natural + acceso) ───────────
+  {
+    slug: 'ruta-calas-cabo-de-gata-almeria',
+    category: 'rutas',
+    title: 'Las calas vírgenes de Cabo de Gata: una ruta por el rincón más salvaje del Mediterráneo',
+    excerpt:
+      'Mónsul, Los Genoveses, El Playazo: un itinerario por las playas de un parque natural volcánico donde el desierto se asoma al mar.',
+    heroAlt: 'Cala de arena dorada entre rocas volcánicas en el Cabo de Gata, Almería',
+    heroQuery: 'cabo-de-gata,monsul,almeria,volcanic',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-05T00:00:00Z',
+    readingMin: 6,
+    related: [
+      { href: '/comunidad/andalucia', label: 'Playas de Andalucía' },
+      { href: '/playas-aguas-cristalinas', label: 'Playas de aguas cristalinas' },
+      { href: '/calas-secretas', label: 'Calas secretas' },
+    ],
+    body: [
+      { t: 'p', html: 'Hay un trozo de costa en Almería donde no hay paseo marítimo, ni hileras de hoteles, ni apenas sombra. Solo roca volcánica, arena dorada y un mar tan transparente que cuesta creer que siga siendo España. Es el Parque Natural de Cabo de Gata-Níjar, el rincón más árido y, para muchos, el más bello del litoral mediterráneo.' },
+      { t: 'h2', text: 'Mónsul, la playa de cine', id: 'monsul' },
+      { t: 'p', html: 'Quien haya visto <em>Indiana Jones y la última cruzada</em> reconocerá la <strong>duna y la roca con forma de ola</strong> de Mónsul: aquí se rodó la escena de la playa. También pasó por estas arenas <em>El viento y el león</em>. Es pequeña, sin servicios y con aparcamiento restringido en verano, lo que la mantiene asombrosamente virgen para su fama.' },
+      { t: 'h2', text: 'Los Genoveses, la gran bahía', id: 'genoveses' },
+      { t: 'p', html: 'A un paso, <strong>Los Genoveses</strong> es lo contrario: un arco de casi un kilómetro de arena fina, dunas y agaves, con aguas someras ideales para familias. Debe su nombre a la flota genovesa que fondeó aquí en el siglo XVI. Sin chiringuitos ni edificios: el parque la protege intacta.' },
+      { t: 'h2', text: 'El Playazo y las calas escondidas', id: 'playazo' },
+      { t: 'p', html: 'Más al norte, <strong>El Playazo de Rodalquilar</strong> se abre entre un castillo del XVIII y antiguas minas de oro. Y entre cala y cala se esconden rincones a los que solo se llega a pie o en barco —Cala de San Pedro, con su manantial y su ambiente alternativo, es la más mítica.' },
+      { t: 'quote', text: 'En Cabo de Gata el lujo es la ausencia: ni un edificio en el horizonte, ni una farola que apague las estrellas.' },
+      { t: 'h2', text: 'Cómo recorrerlo', id: 'plan' },
+      { t: 'ul', items: [
+        'Base en San José o Las Negras; el resto son pistas y senderos.',
+        'En julio-agosto el acceso a Mónsul y Los Genoveses se regula con bus y aparcamiento de pago: llega temprano.',
+        'Lleva agua y sombra: es un desierto, hay poquísima.',
+        'Las calas más vírgenes (San Pedro) se alcanzan a pie o en barco.',
+      ] },
+    ],
+    faq: [
+      { q: '¿Dónde se rodó la escena de la playa de Indiana Jones?', a: 'En la playa de Mónsul, en el Parque Natural de Cabo de Gata (Almería), reconocible por su gran roca con forma de ola. También se rodó allí "El viento y el león".' },
+      { q: '¿Hay que pagar por acceder a las calas de Cabo de Gata?', a: 'En temporada alta (julio-agosto) el acceso en coche a Mónsul y Los Genoveses se restringe; suele haber bus lanzadera y aparcamiento de pago. Fuera de temporada se llega en coche.' },
+      { q: '¿Cuál es la cala más virgen?', a: 'Cala de San Pedro, accesible solo a pie o en barco, con un manantial de agua dulce y un característico ambiente alternativo.' },
+    ],
+    en: {
+      title: 'The wild coves of Cabo de Gata: a route through the Mediterranean’s most untamed corner',
+      excerpt: 'Mónsul, Los Genoveses, El Playazo: an itinerary through the beaches of a volcanic natural park where the desert meets the sea.',
+      related: [
+        { href: '/en/communities/andalucia', label: 'Beaches of Andalusia' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+      ],
+      body: [
+        { t: 'p', html: 'There’s a stretch of coast in Almería with no promenade, no rows of hotels, barely any shade. Just volcanic rock, golden sand and water so clear it’s hard to believe it’s still Spain. This is the Cabo de Gata-Níjar Natural Park, the most arid — and, for many, the most beautiful — corner of the Mediterranean coast.' },
+        { t: 'h2', text: 'Mónsul, the film-set beach', id: 'monsul' },
+        { t: 'p', html: 'Anyone who’s seen <em>Indiana Jones and the Last Crusade</em> will recognise Mónsul’s <strong>dune and wave-shaped rock</strong>: the beach scene was filmed here, as was <em>The Wind and the Lion</em>. It’s small, has no services and restricted parking in summer, which keeps it astonishingly unspoilt for its fame.' },
+        { t: 'h2', text: 'Los Genoveses, the great bay', id: 'genoveses' },
+        { t: 'p', html: 'Right next door, <strong>Los Genoveses</strong> is the opposite: an arc of nearly a kilometre of fine sand, dunes and agaves, with shallow water ideal for families. It takes its name from the Genoese fleet that anchored here in the 16th century. No beach bars, no buildings: the park keeps it intact.' },
+        { t: 'h2', text: 'El Playazo and the hidden coves', id: 'playazo' },
+        { t: 'p', html: 'Further north, <strong>El Playazo de Rodalquilar</strong> opens between an 18th-century castle and old gold mines. And between cove and cove hide spots reachable only on foot or by boat — Cala de San Pedro, with its spring and alternative vibe, is the most legendary.' },
+        { t: 'quote', text: 'At Cabo de Gata the luxury is absence: not a building on the horizon, not a street lamp to dim the stars.' },
+        { t: 'h2', text: 'How to do it', id: 'plan' },
+        { t: 'ul', items: [
+          'Base yourself in San José or Las Negras; the rest are tracks and trails.',
+          'In July-August access to Mónsul and Los Genoveses is regulated with a shuttle bus and paid parking: arrive early.',
+          'Bring water and shade: it’s a desert, there’s very little.',
+          'The wildest coves (San Pedro) are reached on foot or by boat.',
+        ] },
+      ],
+      faq: [
+        { q: 'Where was the Indiana Jones beach scene filmed?', a: 'At Mónsul beach, in the Cabo de Gata Natural Park (Almería), recognisable by its large wave-shaped rock. "The Wind and the Lion" was also filmed there.' },
+        { q: 'Do you have to pay to reach the Cabo de Gata coves?', a: 'In high season (July-August) car access to Mónsul and Los Genoveses is restricted; there’s usually a shuttle bus and paid parking. Off-season you can drive in.' },
+        { q: 'Which is the wildest cove?', a: 'Cala de San Pedro, reachable only on foot or by boat, with a freshwater spring and a distinctive alternative atmosphere.' },
+      ],
+    },
+  },
+
+  // ─────────── GUÍAS · voice NatGeo (gancho récord/noticia) ───────────
+  {
+    slug: 'banderas-azules-espana-record-2026',
+    category: 'guias',
+    title: 'España revalida el récord de banderas azules en 2026: dónde están y qué garantizan',
+    excerpt:
+      'El país lidera el mundo en banderas azules. Te explicamos qué significa de verdad el distintivo y en qué costas se concentra.',
+    heroAlt: 'Bandera azul ondeando en un puesto de socorrismo en una playa española',
+    heroQuery: 'blue-flag,beach,spain,lifeguard',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-05T00:00:00Z',
+    readingMin: 5,
+    related: [
+      { href: '/banderas-azules', label: 'Todas las playas con bandera azul' },
+      { href: '/calidad-agua', label: 'Calidad del agua de baño' },
+      { href: '/comunidad/comunitat-valenciana', label: 'Playas de la Comunidad Valenciana' },
+    ],
+    body: [
+      { t: 'p', html: 'Cada primavera, antes de que empiece la temporada de baño, se reparte un galardón que medio país mira de reojo: la bandera azul. España vuelve a ser, un año más, el <strong>país con más banderas azules del mundo</strong>, muy por delante de Grecia y Turquía. Pero, ¿qué garantiza exactamente esa bandera que ondea en el chiringuito?' },
+      { t: 'h2', text: 'Qué es (y qué no es) una bandera azul', id: 'que-es' },
+      { t: 'p', html: 'La concede la FEE (Fundación para la Educación Ambiental) a través de ADEAC en España, y exige cumplir una treintena de criterios: <strong>calidad de agua excelente</strong>, socorrismo, accesibilidad, información ambiental, gestión de residuos y servicios. No mide la belleza de la playa ni su transparencia: una cala virgen espectacular puede no tener bandera azul simplemente porque carece de servicios, y una playa urbana muy equipada sí tenerla.' },
+      { t: 'h2', text: 'Dónde se concentran', id: 'donde' },
+      { t: 'p', html: 'La Comunidad Valenciana, Galicia, Andalucía y Cataluña encabezan el reparto año tras año. El Mediterráneo domina por número, pero el Atlántico gallego y el Cantábrico suman cada vez más. En nuestra página de banderas azules puedes ver el listado completo, playa por playa y actualizado con la resolución oficial.' },
+      { t: 'h2', text: 'Cómo usar el distintivo al elegir playa', id: 'como-usar' },
+      { t: 'p', html: 'La bandera azul es una buena garantía de <strong>servicios y agua limpia</strong>, ideal si viajas con niños o buscas comodidad. Pero si lo que persigues es una cala salvaje y solitaria, no la tomes como criterio: ahí manda la naturaleza, no el distintivo.' },
+      { t: 'quote', text: 'La bandera azul no dice "esta es la playa más bonita", sino "esta playa está bien cuidada". Son cosas distintas.' },
+    ],
+    faq: [
+      { q: '¿Cuántas banderas azules tiene España?', a: 'España es el país con más banderas azules del mundo, con más de 600 playas galardonadas, por delante de Grecia y Turquía. El número se actualiza cada año con la resolución de ADEAC/FEE.' },
+      { q: '¿Qué garantiza una bandera azul?', a: 'Calidad de agua excelente, socorrismo, accesibilidad, gestión ambiental y servicios. No mide la belleza ni la transparencia del agua: es un distintivo de gestión y seguridad, no de paisaje.' },
+      { q: '¿Una playa sin bandera azul es peor?', a: 'No necesariamente. Muchas calas vírgenes espectaculares no tienen bandera azul porque carecen de servicios o socorrismo, no porque su agua o su entorno sean malos.' },
+    ],
+    en: {
+      title: 'Spain keeps the Blue Flag world record in 2026: where they are and what they guarantee',
+      excerpt: 'The country leads the world in Blue Flags. Here’s what the award really means and which coasts have the most.',
+      related: [
+        { href: '/en/blue-flag', label: 'All Blue Flag beaches' },
+        { href: '/en/communities/comunidad-valenciana', label: 'Beaches of the Valencia region' },
+      ],
+      body: [
+        { t: 'p', html: 'Every spring, before the bathing season starts, an award half the country watches out for is handed out: the Blue Flag. Spain is once again the <strong>country with the most Blue Flags in the world</strong>, well ahead of Greece and Turkey. But what exactly does that flag flying at the beach bar guarantee?' },
+        { t: 'h2', text: 'What a Blue Flag is (and isn’t)', id: 'what' },
+        { t: 'p', html: 'It’s awarded by the FEE (Foundation for Environmental Education), through ADEAC in Spain, and requires meeting around thirty criteria: <strong>excellent water quality</strong>, lifeguards, accessibility, environmental information, waste management and services. It doesn’t measure a beach’s beauty or clarity: a stunning wild cove may have no Blue Flag simply because it lacks services, while a well-equipped urban beach may have one.' },
+        { t: 'h2', text: 'Where they cluster', id: 'where' },
+        { t: 'p', html: 'The Valencia region, Galicia, Andalusia and Catalonia top the list year after year. The Mediterranean dominates by number, but the Galician Atlantic and the Cantabrian coast keep adding more. On our Blue Flag page you can see the full list, beach by beach, updated with the official ruling.' },
+        { t: 'h2', text: 'How to use it when choosing a beach', id: 'how' },
+        { t: 'p', html: 'The Blue Flag is a good guarantee of <strong>services and clean water</strong>, ideal if you travel with kids or want comfort. But if you’re after a wild, lonely cove, don’t use it as your criterion: there, nature rules, not the award.' },
+        { t: 'quote', text: 'A Blue Flag doesn’t say "this is the prettiest beach", it says "this beach is well looked after". Those are different things.' },
+      ],
+      faq: [
+        { q: 'How many Blue Flags does Spain have?', a: 'Spain has the most Blue Flags in the world, with over 600 awarded beaches, ahead of Greece and Turkey. The number is updated each year with the ADEAC/FEE ruling.' },
+        { q: 'What does a Blue Flag guarantee?', a: 'Excellent water quality, lifeguards, accessibility, environmental management and services. It doesn’t measure beauty or water clarity: it’s a management and safety mark, not a scenery one.' },
+        { q: 'Is a beach without a Blue Flag worse?', a: 'Not necessarily. Many stunning wild coves have no Blue Flag because they lack services or lifeguards, not because their water or surroundings are poor.' },
+      ],
+    },
+  },
 ]
 
 // ── Helpers ──────────────────────────────────────────────────
