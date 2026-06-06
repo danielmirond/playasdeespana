@@ -20,6 +20,10 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { getPlayas } from '@/lib/playas'
+import { getAllArticles, getAllArticlesEn, CATEGORIES } from '@/lib/magazine'
+import { getAllLocalities } from '@/lib/boat-rental-localities'
+import { boatRentalSlug } from '@/lib/boat-rental-helpers'
+import { getCamperCitiesEn } from '@/lib/autocaravana-localities'
 
 export const runtime  = 'nodejs'
 export const dynamic  = 'force-dynamic'
@@ -103,8 +107,42 @@ export async function GET(req: NextRequest) {
     .slice(0, 200)
     .map((p: any) => `${BASE}/playas/${p.slug}`)
 
+  // Magazine (ES + EN): índice, categorías y artículos.
+  const magazine = [
+    `${BASE}/magazine`,
+    ...Object.keys(CATEGORIES).map(c => `${BASE}/magazine/categoria/${c}`),
+    ...getAllArticles().map(a => `${BASE}/magazine/${a.slug}`),
+    `${BASE}/en/magazine`,
+    ...Object.keys(CATEGORIES).map(c => `${BASE}/en/magazine/category/${c}`),
+    ...getAllArticlesEn().map(a => `${BASE}/en/magazine/${a.slug}`),
+  ]
+
+  // Alquiler de barcos: jerarquía canónica costa → provincia → localidad.
+  const boat: string[] = []
+  {
+    const locs = getAllLocalities()
+    const coasts = new Set<string>(), provs = new Set<string>()
+    for (const l of locs) {
+      const cs = boatRentalSlug(l.coast), ps = boatRentalSlug(l.province)
+      coasts.add(cs); provs.add(`${cs}/${ps}`)
+      boat.push(`${BASE}/alquiler-barco/costas/${cs}/provincias/${ps}/${l.slug}`)
+    }
+    for (const cs of coasts) boat.push(`${BASE}/alquiler-barco/costas/${cs}`)
+    for (const cp of provs) boat.push(`${BASE}/alquiler-barco/costas/${cp.split('/')[0]}/provincias/${cp.split('/')[1]}`)
+  }
+
+  // Comerciales EN + ciudades camper EN traducidas + pillars EN.
+  const enComercial = [
+    `${BASE}/en/campervan-rental`, `${BASE}/en/yacht-rental`, `${BASE}/en/catamaran-rental`,
+    `${BASE}/en/islands`, `${BASE}/en/crystal-clear-water-beaches`,
+    ...getCamperCitiesEn().map(c => `${BASE}/en/campervan-rental/${c.slug}`),
+  ]
+
   const urls = [
     ...LANDINGS.map(p => `${BASE}${p}`),
+    ...magazine,
+    ...boat,
+    ...enComercial,
     ...topPlayas,
   ]
 
