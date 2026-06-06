@@ -1,108 +1,97 @@
-# Voice del redactor — Playas de España
+# Voz de Playas de España — voz propia
 
-Brief de voz y estructura para todo el contenido editorial (Magazine, fichas,
-pillars). Destilado de: análisis de **National Geographic Viajes** (fichas de
-playa) + análisis de **575 titulares de Travel/Beaches que rankean en 2026**
-(medios ES: El Español, ABC, Levante, Diario de Cádiz, Cadena SER…).
+Voz **original y diferenciada** (no clon de NatGeo ni de los medios de viajes).
+Destilada de: análisis de NatGeo Viajes + 575 titulares que rankean en 2026 +
+**scraping de 8 medios de playas en ES** para mapear el "mar de igualdad" y
+encontrar el hueco vacío.
 
-> Filosofía de marca (Brand Book): *editorial, no turístico — tono de guía, no
-> de folleto · útil antes que bonito · datos como protagonistas*. Este voice
-> operativiza eso.
-
----
-
-## 1 · Persona y tono
-
-- **3ª persona** narrativa. Nunca "yo". El lector aparece como "uno" o de forma
-  impersonal. El "tú" imperativo se reserva **solo para CTAs** ("Compara
-  barcos", "Reserva"), nunca en el cuerpo.
-- Registro **culto pero accesible**: periodístico-literario. Frases con ritmo,
-  vocabulario rico, pero sin pedantería.
-- Tono **evocador y reposado**, sensorial. Pinta una escena antes de informar.
-  Nada de exclamaciones ni euforia de folleto.
-- **Dato como protagonista**: cifras concretas (longitud, hectáreas, año,
-  temperatura, precio) integradas en la prosa, no inventadas.
-
-## 2 · Estructura de una pieza editorial de playa (~500-650 palabras)
-
-1. **Titular** con gancho (ver §3).
-2. **Entradilla** (1 frase): qué es + ubicación administrativa.
-3. **Intro escénica** (80-150 palabras): abre con una imagen o una anécdota,
-   **no** con la ficha. Puede revelar el nombre de la playa en el 2º párrafo.
-4. **H2 — Historia / geología**: el origen, la roca, la leyenda.
-5. **H2 — Singularidad / cultura**: cine, famoso, récord, prensa extranjera.
-6. **H2 — Cómo se vive / cómo llegar**: acceso real, servicios, mejor época,
-   narrado en prosa (nunca ficha técnica de iconos).
-7. **Cierre evocador**: termina en el dato más sugerente. **Sin** "en
-   definitiva" ni llamada motivacional.
-
-Para **listas** ("Las N mejores…"): intro literaria de 2 párrafos (con cita
-célebre si encaja) + un H2 por playa = nombre + (municipio, provincia) + párrafo
-de 60-100 palabras con el mismo ADN.
-
-## 3 · Fórmulas de titular que rankean (2026)
-
-Regla común: **región (no provincia exacta) + ocultar el nombre + un gancho
-concreto + a menudo cita entrecomillada** sacada textual del cuerpo.
-
-- `La playa de [región] con [rasgo] que [hecho sorprendente]`
-- `La [adj] playa de [región] donde [evento de cine/historia]: "[cita]"`
-- `El refugio de [famoso] en [lugar]: [rasgo + dato]`  ← top en 2026
-- `El pueblo de [N] habitantes con [playa/rasgo] y [gancho]`
-- `Ni [X] ni [Y]: la playa de [región] que [diferencial]`
-- `[Medio/autoridad extranjera] elige [N] mejores playas de [lugar]`
-- `La playa más [superlativo] de [región] que [dato medible/récord]`
-- `La cala más remota de [región] a la que [dificultad de acceso]`
-
-## 4 · Ganchos recurrentes (ordena por fuerza)
-
-1. **Cine / cultura pop** — rodajes (Indiana Jones, Lawrence de Arabia, La
-   Historia Interminable…). El más potente; suele ocupar un H2 entero.
-2. **Famosos / "el refugio de…"** — el ángulo nº1 en titulares 2026 (Bisbal,
-   Sandra Golpe, Carolina Marín, José Andrés, Pilar Rubio & Sergio Ramos…).
-3. **Historia / leyenda** — torres contra piratas, búnkeres de la Guerra Civil,
-   pasado romano/genovés.
-4. **Geología / naturaleza singular** — rocas volcánicas, dunas vivas, islotes
-   con aves.
-5. **Récords y superlativos respaldados** — "la más larga de…", "el paseo más
-   largo de Europa".
-6. **Prensa/rankings extranjeros** — "The Sun recomienda", "entre las 50
-   mejores del mundo", banderas azules.
-7. **Acceso difícil / virginidad** — "se mantiene virgen", "llegar por mar o 2 h
-   de caminata". El esfuerzo se vende como valor.
-8. **Gastronomía local** — pescaíto frito, gamba roja, pulpo, paella.
-9. **Servicio/utilidad** — multas y nuevas normas de temporada, inicio de baño.
-
-## 5 · Datos prácticos
-
-Sí, siempre — pero **narrados** dentro de la prosa: cómo llegar (con distancias
-reales), aparcamiento y precio, servicios (o su ausencia, vendida como
-autenticidad), dimensiones, mejor época. Nunca como caja de iconos.
-
-## 6 · Reglas de oro
-
-1. Abre con una escena, no con la playa.
-2. Un gancho cultural por pieza que vertebre un H2.
-3. Cita literal en el titular, tomada del cuerpo.
-4. Datos prácticos narrados, jamás ficha de iconos.
-5. Cierra en lo evocador, sin resumen.
-
-## 7 · Lo que NO se hace (vs. folleto)
-
-1. Nada de "tú" imperativo ni venta directa en el cuerpo ("¡Ven a disfrutar!").
-2. Sin listas de servicios con iconos.
-3. Sin superlativos vacíos ni exclamaciones ("¡el paraíso increíble!").
-4. No dar el nombre de la playa en el titular (intriga).
-5. No cerrar con resumen ni llamada motivacional.
-
-## 8 · Inglés (/en)
-
-Mismo voice, **inglés británico**, registro editorial (estilo NatGeo / The
-Guardian Travel). Traducir la *intención*, no literal. Mantener el dato y el
-gancho; adaptar referencias culturales si el original es muy local. Conservar
-topónimos en español (Cala Salada, no "Salada Cove").
+> Brand Book: *editorial, no turístico · útil antes que bonito · datos como
+> protagonistas.* Esta voz lo lleva al extremo como diferencial.
 
 ---
 
-*Fuentes: análisis NatGeo Viajes + 575 titulares ranking Travel/Beaches ES
-(may-jun 2026). Última actualización: junio 2026.*
+## 1 · La idea en una frase
+
+**Rigor de datos contado como te lo contaría un local con buena pluma.**
+Ni el folleto eufórico ("¡paraíso de ensueño!"), ni la ficha fría, ni el
+clickbait que oculta el nombre. El único medio de playas que **te dice la
+verdad —incluida la incómoda— porque tiene los datos para respaldarla.**
+
+## 2 · Por qué este hueco existe (evidencia)
+
+El scraping de la competencia (Hola, Lonely Planet, NatGeo, Idealista, El País,
+Levante, Traveler, Diario de Cádiz…) demostró que **todo el sector compite en el
+mismo eje**: adjetivo + ranking subjetivo + "joya escondida". Nivel de datos
+verificables: *prácticamente cero*. Queda desierto el eje opuesto —datos reales
++ criterio de local + honestidad sobre contras— y es justo donde tenemos el
+activo único (banderas, calidad EEA, medusas por viento, fondeos, oleaje).
+
+## 3 · Los tres ejes, fundidos
+
+1. **Rigor (la base).** Cada afirmación se apoya en un dato real: bandera azul,
+   calidad de agua EEA/NÁYADE, riesgo de medusas por viento, fondeos, oleaje,
+   mejor hora. Cifras y fuente, nunca adjetivos vacíos.
+2. **Insider local (el alma).** El detalle que solo sabe quien va: dónde aparcar
+   de verdad, a qué hora se llena, qué cala de al lado está vacía, qué viento la
+   estropea. Criterio, no postureo.
+3. **Pulso narrativo (la forma).** Se lee con gusto: abre con una imagen, tiene
+   ritmo. Pero la prosa está **al servicio del dato**, no lo tapa.
+
+## 4 · Rasgos concretos
+
+- **Honesta hasta el contra.** Decimos cuándo **NO** ir y qué tiene de malo.
+  *"En agosto a mediodía es un hervidero; ve a las 9h o ni te molestes."*
+  *"Sin sombra natural y con medusas si sopla levante."* Nadie más lo hace.
+- **El dato manda el titular**, no la intriga. En vez de "La playa secreta que
+  te dejará sin aliento" → *"La cala de Girona con agua a 24°C y aparcamiento
+  para 30 coches: llega antes de las 11h."*
+- **Tú cómplice, no tú imperativo.** Un amigo con criterio, no una agencia.
+- **Sensorial pero medido.** Una buena imagen al abrir; nada de tres párrafos de
+  lirismo vacío.
+- **Cita la fuente del dato** (EEA 2025, ADEAC, Open-Meteo…). La credibilidad es
+  el producto.
+
+## 5 · Lista negra de clichés (PROHIBIDOS)
+
+Saturados en toda la competencia — no usarlos nunca:
+`aguas cristalinas · joya escondida/oculta · paraíso · de ensueño · rincón
+idílico/perfecto/mágico · aguas turquesas · naturaleza en estado puro · virgen
+(como adorno) · parece el Caribe/Maldivas · oasis de tranquilidad ·
+impresionante · espectacular · maravilla natural · que no te dejará indiferente ·
+momentos inolvidables · de postal`
+
+## 6 · Ángulos quemados (evitar o subvertir)
+
+Listicle sin método · "la más bonita de…" · "el refugio de [famoso]" ·
+"ni X ni Y" · "según The Times, esta playa española…" · "la cala secreta"
+(que publican 20 medios). Si se usa un gancho de estos, hay que **darle la vuelta
+con un dato** ("la 'cala secreta' que ya no lo es: así de llena está a las 12h").
+
+## 7 · Estructura de una pieza (~450-650 palabras)
+
+1. **Titular con dato útil** (no intriga): nombre + el dato que decide.
+2. **Entradilla:** qué es + ubicación + el gancho honesto.
+3. **Intro:** una imagen breve, luego al grano.
+4. **H2 — Los datos:** calidad de agua, bandera, medusas, oleaje, aforo.
+5. **H2 — El criterio del local:** cuándo ir, cuándo NO, el truco, la alternativa.
+6. **H2 — Los contras:** sin rodeos (sombra, acceso, corrientes, servicios).
+7. **Cierre:** un dato o imagen que se queda, sin "en definitiva".
+
+## 8 · Lo que NO se hace
+
+1. Nada de "tú" imperativo ni venta directa en el cuerpo.
+2. Sin adjetivos de folleto (ver §5).
+3. No ocultar lo malo: si una playa tiene contras, se dicen.
+4. No afirmar sin dato ni fuente.
+5. No cerrar con resumen motivacional.
+
+## 9 · Inglés (/en)
+
+Mismo carácter, inglés británico, registro The Guardian Travel: seco, honesto,
+con dato. Traducir la intención, no literal. Topónimos en español.
+
+---
+
+*Fuentes: análisis NatGeo Viajes + 575 titulares ranking ES + scraping de 8
+medios de playas (jun 2026). El hueco "datos + criterio + honestidad" está
+vacío en todo el sector. Última actualización: junio 2026.*
