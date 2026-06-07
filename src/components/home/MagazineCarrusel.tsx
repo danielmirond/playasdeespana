@@ -16,7 +16,12 @@ function CarruselCard({ a, base, label, minLabel }: { a: Article; base: string; 
         borderRadius: 12, overflow: 'hidden', textDecoration: 'none', color: 'inherit',
       }}
     >
-      <div style={{ height: 130, background: 'linear-gradient(135deg,#0c4a6e,#0891b2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.4rem' }} aria-hidden>{CATEGORIES[a.category].emoji}</div>
+      {a.heroImage ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={a.heroImage} alt={a.heroAlt} width={280} height={130} loading="lazy" style={{ width: '100%', height: 130, objectFit: 'cover', display: 'block', background: 'var(--card-bg)' }} />
+      ) : (
+        <div style={{ height: 130, background: 'linear-gradient(135deg,#0c4a6e,#0891b2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.4rem' }} aria-hidden>{CATEGORIES[a.category].emoji}</div>
+      )}
       <div style={{ padding: '1rem 1.05rem 1.1rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
         <span style={{ fontSize: '.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.05em', color: 'var(--accent)' }}>{label}</span>
         <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--ink)', margin: '.35rem 0 .4rem', lineHeight: 1.25, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.title}</h3>

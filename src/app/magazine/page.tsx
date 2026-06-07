@@ -21,7 +21,12 @@ function Card({ a }: { a: Article }) {
   const cat = CATEGORIES[a.category]
   return (
     <Link href={`/magazine/${a.slug}`} style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 12, overflow: 'hidden', textDecoration: 'none', color: 'inherit' }}>
-      <div style={{ height: 140, background: `linear-gradient(135deg,#0c4a6e,#0891b2)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem' }} aria-hidden>{cat.emoji}</div>
+      {a.heroImage ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={a.heroImage} alt={a.heroAlt} width={260} height={140} loading="lazy" style={{ width: '100%', height: 140, objectFit: 'cover', display: 'block', background: 'var(--card-bg)' }} />
+      ) : (
+        <div style={{ height: 140, background: `linear-gradient(135deg,#0c4a6e,#0891b2)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem' }} aria-hidden>{cat.emoji}</div>
+      )}
       <div style={{ padding: '1.1rem' }}>
         <span style={{ fontSize: '.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.05em', color: 'var(--accent)' }}>{cat.label}</span>
         <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--ink)', margin: '.35rem 0 .4rem', lineHeight: 1.25 }}>{a.title}</h2>

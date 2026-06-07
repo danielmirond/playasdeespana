@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const a = getArticleBySlug(slug)
   if (!a || !a.en) return {}
   const url = `${BASE}/en/magazine/${a.slug}`
-  const og = `${BASE}/api/og?playa=${encodeURIComponent(a.en.title)}`
+  const og = a.heroImage ?? `${BASE}/api/og?playa=${encodeURIComponent(a.en.title)}`
   return {
     title: `${a.en.title} | Playas de España Magazine`,
     description: a.en.excerpt,
@@ -60,7 +60,7 @@ export default async function ArticlePageEn({ params }: { params: Promise<{ slug
   const cat = CATEGORIES[a.category]
   const catEn = CATEGORIES_EN[a.category]
   const url = `${BASE}/en/magazine/${a.slug}`
-  const og = `${BASE}/api/og?playa=${encodeURIComponent(en.title)}`
+  const og = a.heroImage ?? `${BASE}/api/og?playa=${encodeURIComponent(en.title)}`
 
   const ld = {
     '@context': 'https://schema.org', '@type': 'Article',
@@ -101,6 +101,18 @@ export default async function ArticlePageEn({ params }: { params: Promise<{ slug
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.7rem,4.5vw,2.6rem)', fontWeight: 900, lineHeight: 1.12, color: 'var(--ink)', margin: '0 0 .75rem' }}>{en.title}</h1>
         <p style={{ fontSize: '1.05rem', lineHeight: 1.6, color: 'var(--muted)', margin: '0 0 1rem' }}>{en.excerpt}</p>
         <div style={{ fontSize: '.78rem', color: 'var(--muted)', margin: '.5rem 0 2rem' }}>{a.readingMin} min read</div>
+
+        {a.heroImage && (
+          <figure style={{ margin: '0 0 2rem' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={a.heroImage} alt={a.heroAlt} width={1200} height={630} loading="eager" style={{ width: '100%', height: 'auto', borderRadius: 12, display: 'block', background: 'var(--card-bg)' }} />
+            {a.heroCredit && (
+              <figcaption style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.45rem', textAlign: 'right' }}>
+                Photo: <a href={a.heroCredit.url} target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'var(--muted)' }}>{a.heroCredit.name}</a> / Unsplash
+              </figcaption>
+            )}
+          </figure>
+        )}
 
         <article>{en.body.map(renderBlock)}</article>
 

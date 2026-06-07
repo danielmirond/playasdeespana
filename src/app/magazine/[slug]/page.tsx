@@ -17,7 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const a = getArticleBySlug(slug)
   if (!a) return {}
   const url = `${BASE}/magazine/${a.slug}`
-  const og = `${BASE}/api/og?playa=${encodeURIComponent(a.title)}`
+  // Discover prefiere foto real; si no hay, cae a la tarjeta OG de texto.
+  const og = a.heroImage ?? `${BASE}/api/og?playa=${encodeURIComponent(a.title)}`
   return {
     title: `${a.title} | Magazine Playas de España`,
     description: a.excerpt,
@@ -74,7 +75,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   const cat = CATEGORIES[a.category]
   const url = `${BASE}/magazine/${a.slug}`
-  const og = `${BASE}/api/og?playa=${encodeURIComponent(a.title)}`
+  const og = a.heroImage ?? `${BASE}/api/og?playa=${encodeURIComponent(a.title)}`
 
   const ld = {
     '@context': 'https://schema.org',
@@ -134,6 +135,19 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           articleSection={cat.label}
         />
         <div style={{ fontSize: '.78rem', color: 'var(--muted)', margin: '.5rem 0 2rem' }}>{a.readingMin} min de lectura</div>
+
+        {/* Hero (foto real Unsplash, si está resuelta) */}
+        {a.heroImage && (
+          <figure style={{ margin: '0 0 2rem' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={a.heroImage} alt={a.heroAlt} width={1200} height={630} loading="eager" style={{ width: '100%', height: 'auto', borderRadius: 12, display: 'block', background: 'var(--card-bg)' }} />
+            {a.heroCredit && (
+              <figcaption style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.45rem', textAlign: 'right' }}>
+                Foto: <a href={a.heroCredit.url} target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'var(--muted)' }}>{a.heroCredit.name}</a> / Unsplash
+              </figcaption>
+            )}
+          </figure>
+        )}
 
         {/* Cuerpo */}
         <article>{a.body.map(renderBlock)}</article>

@@ -7,6 +7,10 @@
 // cuerpo (parr/h2/lista/cita/cta). El índice, las fichas, el sitemap y el
 // enlazado se generan solos desde aquí.
 
+// Fotos reales (Unsplash) resueltas offline por scripts/enrich-unsplash.mjs.
+// Mapa slug → { url, creditName, creditUrl }. Build sin red: solo importa JSON.
+import HERO_IMAGES from './magazine-images.json'
+
 export type MagazineCategory = 'rutas' | 'curiosidades' | 'gastronomia' | 'guias'
 
 export interface CategoryMeta {
@@ -37,7 +41,12 @@ export interface Article {
   title: string
   excerpt: string          // 1-2 frases para índice + meta description
   heroAlt: string
-  heroQuery: string        // term para la OG / unsplash
+  heroQuery: string        // término para resolver foto en Unsplash
+  /** Foto real (Unsplash) pre-resuelta por scripts/enrich-unsplash.mjs.
+   *  Se inyecta desde magazine-images.json al cargar el módulo; NO se
+   *  edita a mano. Si falta, las páginas caen a la OG de texto. */
+  heroImage?: string
+  heroCredit?: { name: string; url: string }
   author: string
   datePublished: string    // ISO
   readingMin: number
@@ -762,6 +771,18 @@ export const ARTICLES: Article[] = [
     },
   },
 ]
+
+// Inyecta la foto real (si existe en el sidecar) en cada artículo.
+{
+  const map = HERO_IMAGES as Record<string, { url: string; creditName: string; creditUrl: string }>
+  for (const a of ARTICLES) {
+    const img = map[a.slug]
+    if (img?.url) {
+      a.heroImage = img.url
+      a.heroCredit = { name: img.creditName, url: img.creditUrl }
+    }
+  }
+}
 
 // ── Helpers ──────────────────────────────────────────────────
 export const getAllArticles = (): Article[] =>
