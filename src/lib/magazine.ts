@@ -64,6 +64,66 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas (voz bicéfala) ─────
+  {
+    slug: 'playa-gulpiyuri-asturias-marea',
+    category: 'curiosidades',
+    title: 'Playa de Gulpiyuri, Asturias: la playa sin mar a la que la marea decide si puedes bañarte',
+    excerpt:
+      'Una concha de arena a 100 metros tierra adentro, sin horizonte y declarada Monumento Natural. Lo que de verdad necesitas saber de Gulpiyuri: depende de la marea, no tiene servicios y cabe muy poca gente.',
+    heroAlt: 'Pequeña playa interior de Gulpiyuri rodeada de prados verdes, con agua de mar entrando entre las rocas',
+    heroQuery: 'gulpiyuri,asturias,beach,cove',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-07T08:18:37Z',
+    readingMin: 4,
+    related: [
+      { href: '/comunidad/asturias', label: 'Playas de Asturias' },
+      { href: '/playas-secretas', label: 'Playas y calas poco conocidas' },
+      { href: '/playas-paradisiacas', label: 'Playas paradisíacas' },
+    ],
+    body: [
+      { t: 'p', html: 'No se ve desde la carretera, ni desde el aparcamiento, ni siquiera cuando ya estás caminando por el prado. Se anda un sendero entre vacas y maíz, con el rumor del Cantábrico a la espalda, hasta que el suelo se abre de golpe: una media luna de arena fina escondida entre paredes de roca, con olas pequeñas rompiendo en la orilla… y ni rastro de mar al fondo. El horizonte es verde, no azul. Gulpiyuri es eso: una playa que el océano visita por debajo de la tierra.' },
+      { t: 'p', html: 'El truco es geología pura. El mar batió durante milenios la roca caliza hasta horadar túneles subterráneos que conectan esta hondonada, situada a unos <strong>cien metros tierra adentro</strong>, con la costa abierta de Ribadesella. El agua entra y sale por esas galerías, y por eso aquí hay olas sin que se vea de dónde vienen. Está declarada <strong>Monumento Natural</strong> desde 2001.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La postal es real; la letra pequeña, también. Lo primero que casi ningún reel de Instagram dice: <strong>Gulpiyuri depende por completo de la marea</strong>. Con la marea baja se queda en un charco de arena con apenas un palmo de agua —bonito para una foto, inútil para bañarse—; el momento bueno es con la marea alta o subiendo. Si vas sin mirar la tabla de mareas, hay muchas papeletas de encontrarte una poza y no una playa.' },
+      { t: 'p', html: 'Lo segundo: es <strong>diminuta</strong>, apenas unos 40 metros de arena. En un día de agosto se llena en cuanto abre, y la sensación de "rincón salvaje" se evapora con cincuenta toallas pegadas. Y lo tercero, lo que más sorprende al que llega: <strong>no hay absolutamente nada</strong>. Ni chiringuito, ni socorrista, ni duchas, ni papeleras, ni baños. Es agua del Cantábrico, fría (rara vez pasa de 18-20°C en verano), sin vigilancia y con corriente en las galerías: no es una piscina para niños pequeños. El aparcamiento queda a un buen paseo a pie por el prado.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'La regla que lo cambia todo es una: <strong>consulta la tabla de mareas antes de salir</strong> y planta tu visita en la pleamar. Con la marea llena, Gulpiyuri es la maravilla geológica que te han vendido; con la marea vacía, un viaje a un charco. Es gratis y se publica para cada día en Ribadesella; no hay excusa para fallarla.' },
+      { t: 'p', html: 'Lo demás es sentido común de playa salvaje: ve <strong>fuera de agosto o a primera hora</strong> si quieres el sitio medio vacío (mayo, junio y septiembre son ideales), <strong>llévate todo</strong> —agua, comida y, sobre todo, tu basura de vuelta, porque no hay papeleras y es Monumento Natural—, y calza algo cómodo para el camino desde el aparcamiento. ¿El plan redondo? Encadenarla con las playas grandes de al lado, <strong>San Antolín o Torimbia</strong>, que sí tienen arena de sobra y, Torimbia, ese aire indómito que ya casi no queda. Gulpiyuri para la foto y el asombro; la vecina para el baño largo.' },
+      { t: 'quote', text: 'No es una playa escondida que nadie conozca: es una rareza geológica que cabe en una foto y en muy poca gente. Quien la pisa en marea baja entiende por qué la fama engaña.' },
+      { t: 'p', html: 'Porque Gulpiyuri no se mide en kilómetros de arena ni en servicios, sino en asombro: el de quedarte quieto escuchando romper unas olas que llegan de un mar que no ves, en mitad de un prado asturiano. Acierta con la marea, llega temprano y vuélvete con tu basura, y te llevarás uno de esos lugares que parecen un error precioso de la naturaleza. Equivócate de hora y te llevarás un charco con cola para la foto.' },
+    ],
+    faq: [
+      { q: '¿Por qué hay olas en Gulpiyuri si no se ve el mar?', a: 'Porque el mar entra por túneles subterráneos excavados en la roca caliza que conectan la playa, situada a unos 100 metros tierra adentro, con la costa abierta. El agua sube y baja por esas galerías, así que las olas llegan sin que se vea su origen.' },
+      { q: '¿A qué hora se puede bañar uno en Gulpiyuri?', a: 'Depende de la marea: con marea alta o subiendo hay agua suficiente; con marea baja queda casi seca. Consulta la tabla de mareas de Ribadesella antes de ir y planifica la visita en pleamar.' },
+      { q: '¿Tiene servicios la playa de Gulpiyuri?', a: 'No. No hay chiringuito, socorrista, duchas ni baños, y el aparcamiento queda a un paseo a pie por el prado. Es Monumento Natural: lleva agua, comida y devuelve tu basura. El agua es del Cantábrico, fría y sin vigilancia.' },
+    ],
+    en: {
+      title: 'Playa de Gulpiyuri, Asturias: the sea-less beach where the tide decides if you can swim',
+      excerpt: 'A shell of sand 100 metres inland, with no horizon, declared a Natural Monument. What you actually need to know about Gulpiyuri: it depends on the tide, has no facilities and fits very few people.',
+      related: [
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'You can’t see it from the road, or the car park, or even once you’re walking across the meadow. You follow a path between cows and maize, the Cantabrian Sea murmuring behind you, until the ground suddenly opens: a crescent of fine sand hidden between walls of rock, small waves breaking on the shore… and no sea in sight beyond. The horizon is green, not blue. That’s Gulpiyuri: a beach the ocean visits from beneath the land.' },
+        { t: 'p', html: 'The trick is pure geology. For millennia the sea pounded the limestone until it bored underground tunnels linking this hollow, set about <strong>a hundred metres inland</strong>, to the open coast of Ribadesella. Water flows in and out through those galleries, which is why there are waves here with no visible source. It has been a <strong>Natural Monument</strong> since 2001.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The postcard is real; so is the small print. The first thing almost no Instagram reel mentions: <strong>Gulpiyuri depends entirely on the tide</strong>. At low tide it shrinks to a puddle of sand with barely a hand’s depth of water — pretty for a photo, useless for swimming; the good moment is at high tide or on the rise. Turn up without checking the tide table and there’s a fair chance you’ll find a pool, not a beach.' },
+        { t: 'p', html: 'Second: it’s <strong>tiny</strong>, barely 40 metres of sand. On an August day it fills the moment it opens, and the "wild corner" feeling evaporates under fifty towels. And third, the part that most surprises new arrivals: there is <strong>absolutely nothing here</strong>. No beach bar, no lifeguard, no showers, no bins, no toilets. It’s cold Cantabrian water (rarely above 18-20°C in summer), unsupervised, with a current in the galleries: not a paddling pool for small children. The car park is a good walk away across the meadow.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'One rule changes everything: <strong>check the tide table before you leave</strong> and time your visit for high water. At full tide, Gulpiyuri is the geological marvel you were promised; at low tide, a trip to a puddle. The table is free and published daily for Ribadesella — there’s no excuse for getting it wrong.' },
+        { t: 'p', html: 'The rest is wild-beach common sense: go <strong>outside August or first thing</strong> if you want the place half-empty (May, June and September are ideal), <strong>bring everything</strong> — water, food and, above all, carry your rubbish back out, because there are no bins and this is a Natural Monument — and wear something comfortable for the walk from the car park. The perfect plan? Pair it with the big beaches next door, <strong>San Antolín or Torimbia</strong>, which have sand to spare and, in Torimbia’s case, that untamed air that’s almost gone elsewhere. Gulpiyuri for the photo and the wonder; its neighbour for the long swim.' },
+        { t: 'quote', text: 'It’s not a hidden beach no one knows: it’s a geological oddity that fits in one photo and very few people. Anyone who arrives at low tide understands how the fame misleads.' },
+        { t: 'p', html: 'Because Gulpiyuri isn’t measured in kilometres of sand or in services, but in wonder: the wonder of standing still, listening to waves break that come from a sea you can’t see, in the middle of an Asturian meadow. Get the tide right, arrive early and leave with your rubbish, and you’ll take home one of those places that feel like a beautiful mistake of nature. Get the timing wrong and you’ll take home a puddle with a queue for the photo.' },
+      ],
+      faq: [
+        { q: 'Why are there waves at Gulpiyuri if you can’t see the sea?', a: 'Because the sea enters through underground tunnels carved into the limestone that connect the beach, set about 100 metres inland, with the open coast. Water rises and falls through those galleries, so the waves arrive with no visible source.' },
+        { q: 'When can you swim at Gulpiyuri?', a: 'It depends on the tide: at high tide or on the rise there’s enough water; at low tide it’s nearly dry. Check the Ribadesella tide table before you go and plan your visit for high water.' },
+        { q: 'Does Gulpiyuri have any facilities?', a: 'No. There’s no beach bar, lifeguard, showers or toilets, and the car park is a walk away across the meadow. It’s a Natural Monument: bring water and food and take your rubbish back. The water is cold Cantabrian sea, with no supervision.' },
+      ],
+    },
+  },
   // ───── FICHA voz bicéfala (modelo de la casa: A narra, B informa) ─────
   {
     slug: 'cala-granadella-xabia-guia-honesta',
