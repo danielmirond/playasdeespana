@@ -86,7 +86,16 @@ export const metadata: Metadata = {
     site: '@playasespana',
     creator: '@playasespana',
   },
-  robots: { index: true, follow: true },
+  // Discover/SERP: max-image-preview:large es REQUISITO para que Google
+  // muestre imagen grande (sin esto no hay miniatura grande en Discover).
+  robots: {
+    index: true, follow: true,
+    'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1,
+    googleBot: {
+      index: true, follow: true,
+      'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1,
+    },
+  },
   alternates: { canonical: 'https://playas-espana.com' },
   verification: {
     google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E',

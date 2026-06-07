@@ -74,12 +74,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   const cat = CATEGORIES[a.category]
   const url = `${BASE}/magazine/${a.slug}`
+  const og = `${BASE}/api/og?playa=${encodeURIComponent(a.title)}`
 
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: a.title,
     description: a.excerpt,
+    // Discover requiere imagen grande (≥1200px) en el Article schema.
+    image: [og],
     datePublished: a.datePublished,
     dateModified: a.datePublished,
     author: { '@type': 'Organization', name: 'Playas de España' },

@@ -60,10 +60,11 @@ export default async function ArticlePageEn({ params }: { params: Promise<{ slug
   const cat = CATEGORIES[a.category]
   const catEn = CATEGORIES_EN[a.category]
   const url = `${BASE}/en/magazine/${a.slug}`
+  const og = `${BASE}/api/og?playa=${encodeURIComponent(en.title)}`
 
   const ld = {
     '@context': 'https://schema.org', '@type': 'Article',
-    headline: en.title, description: en.excerpt, datePublished: a.datePublished, dateModified: a.datePublished,
+    headline: en.title, description: en.excerpt, image: [og], datePublished: a.datePublished, dateModified: a.datePublished,
     author: { '@type': 'Organization', name: 'Playas de España' },
     publisher: { '@type': 'Organization', name: 'Playas de España', url: BASE },
     mainEntityOfPage: url, articleSection: catEn.label, inLanguage: 'en',
