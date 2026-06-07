@@ -103,6 +103,56 @@ voz propia.** Si un párrafo no aporta ni emoción (A) ni dato útil (B), sobra.
 Mismo carácter, inglés británico, registro The Guardian Travel: seco, honesto,
 con dato. Traducir la intención, no literal. Topónimos en español.
 
+## 10 · Titulares para Google Discover
+
+Discover **no es búsqueda**: no premia la keyword exacta, premia el *clic en el
+feed*. Buscamos entrar ahí. La buena noticia es que el **Discover Core Update de
+feb-2026 entierra el clickbait y el "curiosity gap"** (titulares que ocultan el
+dato: *"no te lo vas a creer"*, *"este truco"*, *"lo que pasó después"*). Es
+decir: **la substancia tiene que igualar al gancho** — exactamente nuestra regla
+"el dato manda el titular". Por eso aquí Discover y nuestra voz reman juntos.
+
+**Fórmula:** `gancho/molde + entidad (el topónimo) + dato sorprendente y real`.
+Nada de ocultar; al revés, el dato concreto ES el gancho.
+
+### Reglas duras de titulado Discover
+- **El dato clave en los primeros ~60 caracteres** (es lo que se ve en el feed).
+- **Siempre la entidad**: nombre de la playa/cala + provincia o comunidad. Discover
+  ama las entidades reconocibles.
+- **Un dato concreto y verificable** en el titular (°C, distancia, marea, viento,
+  "mejor playa 2014", aforo). El dato sustituye a la intriga.
+- **Nunca ocultes** la información necesaria para entender el artículo.
+- **Rota el vocabulario.** Usa los moldes de abajo pero **cambiando verbos y
+  adjetivos** (banco de sinónimos) para que no parezcan plantilla: Discover
+  penaliza lo repetitivo y nosotros queremos voz propia.
+- **Cero clichés §5** (joya escondida, paraíso, parece el Caribe…). Si un molde
+  Discover usa "secreto/oculto", **subviértelo** ("la 'cala secreta' que ya conoce
+  medio Instagram").
+
+### Moldes Discover adaptados a playas (con dato, no intriga)
+| Molde Discover | Adaptación nuestra (ejemplo con dato) |
+|---|---|
+| Lo inesperado / contraintuitivo | *"La playa de Asturias sin mar a la que solo entras con la marea alta"* |
+| Pregunta directa con dato | *"¿Por qué Gulpiyuri tiene olas si el mar queda a 100 metros?"* |
+| Curiosidad + entidad + dato | *"Bolonia, Tarifa: la duna de 30 metros que el viento decide cada día"* |
+| Cifras y datos | *"El agua de la Granadella roza los 24°C; la pega: es de cantos, no de arena"* |
+| Lo que el folleto calla (honesto) | *"Lo que no te cuentan de la 'mejor playa de España' antes de ir"* |
+| Comparativa | *"Cíes con permiso o sin él: por qué medio mundo se queda en el puerto de Vigo"* |
+| Guía práctica "Cómo… (sin…)" | *"Cómo pisar las Cíes sin quedarte en tierra: el permiso que casi nadie saca"* |
+| Temporada / novedad | *"Bandera Azul 2026: las playas que la han perdido este año (y por qué)"* |
+
+### Banco de sinónimos (rota, no repitas)
+- **Verbos** (en vez de "arrasa/sorprende"): decide, condiciona, esconde, guarda,
+  exige, premia, recompensa, engaña, descoloca, castiga, regala, traiciona (a la
+  postal), reserva.
+- **Adjetivos/encuadres**: honesta, incómoda, contraintuitiva, salvaje, ventosa,
+  masificada, tramposa (la fama), engañosa (la foto), exigente, infravalorada.
+- **Sustantivos-gancho**: el truco, la pega, la letra pequeña, la trampa, la
+  condición, el detalle, el aviso, el matiz.
+
+Regla de oro Discover: **si quitas el dato y el titular sigue funcionando, es
+clickbait y lo borras.** El titular debe caerse sin su cifra.
+
 ---
 
 *Fuentes: análisis NatGeo Viajes + 575 titulares ranking ES + scraping de 8
