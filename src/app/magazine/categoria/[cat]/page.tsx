@@ -29,10 +29,18 @@ export default async function CategoryPage({ params }: { params: Promise<{ cat: 
   const meta = CATEGORIES[cat as MagazineCategory]
   if (!meta) notFound()
   const articles = getArticlesByCategory(meta.slug)
+  const breadcrumbLd = {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Magazine', item: `${BASE}/magazine` },
+      { '@type': 'ListItem', position: 2, name: meta.label, item: `${BASE}/magazine/categoria/${meta.slug}` },
+    ],
+  }
 
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <main style={{ maxWidth: 920, margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
         <nav style={{ fontSize: '.8rem', color: 'var(--muted)', marginBottom: '1rem' }}>
           <Link href="/magazine" style={{ color: 'var(--muted)' }}>Magazine</Link>{' › '}{meta.label}

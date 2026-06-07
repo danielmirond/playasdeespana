@@ -73,12 +73,21 @@ export default async function ArticlePageEn({ params }: { params: Promise<{ slug
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: en.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   } : null
+  const breadcrumbLd = {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Magazine', item: `${BASE}/en/magazine` },
+      { '@type': 'ListItem', position: 2, name: catEn.label, item: `${BASE}/en/magazine/category/${cat.slug}` },
+      { '@type': 'ListItem', position: 3, name: en.title, item: url },
+    ],
+  }
 
   return (
     <>
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
       <main style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1.5rem 4rem' }}>
         <nav style={{ fontSize: '.8rem', color: 'var(--muted)', marginBottom: '1.25rem' }}>
