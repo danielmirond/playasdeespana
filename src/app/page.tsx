@@ -21,6 +21,7 @@ import ActividadesHoy from '@/components/home/ActividadesHoy'
 import ParkingHoy from '@/components/home/ParkingHoy'
 import MonetizacionBlock from '@/components/home/MonetizacionBlock'
 import BoatRentalCTA from '@/components/home/BoatRentalCTA'
+import MagazineCarrusel from '@/components/home/MagazineCarrusel'
 import { getPlayas, getComunidades } from '@/lib/playas'
 
 export const revalidate = 3600
@@ -113,6 +114,7 @@ export default async function HomePage() {
         <div className="cv-auto"><MonetizacionBlock /></div>
         <div className="cv-auto"><BoatRentalCTA locale="es" /></div>
         <div className="cv-auto"><ClientBlocks /></div>
+        <div className="cv-auto"><MagazineCarrusel locale="es" /></div>
         <div className="cv-auto"><Comunidades comunidades={comunidades} /></div>
 
         {/* Hub SEO — design system v1 §08: "Explora por tema" */}

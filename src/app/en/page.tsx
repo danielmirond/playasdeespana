@@ -7,6 +7,7 @@ import Destacadas from '@/components/home/Destacadas'
 import ComunidadesEn from '@/components/home/ComunidadesEn'
 import ClientBlocks from '@/components/home/ClientBlocks'
 import BoatRentalCTA from '@/components/home/BoatRentalCTA'
+import MagazineCarrusel from '@/components/home/MagazineCarrusel'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import en from '@/messages/en.json'
 
@@ -45,6 +46,7 @@ export default async function HomePageEn() {
         <ClientBlocks locale="en" />
         <Destacadas playas={destacadas} locale="en" />
         <BoatRentalCTA locale="en" />
+        <MagazineCarrusel locale="en" />
         <ComunidadesEn comunidades={comunidades} />
       </main>
     </>
