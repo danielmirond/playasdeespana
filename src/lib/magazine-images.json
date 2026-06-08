@@ -1,1 +1,45 @@
-{}
+{
+  "banderas-azules-espana-record-2026": {
+    "url": "https://live.staticflickr.com/65535/54666379476_7026782622_c.jpg",
+    "thumb": "https://live.staticflickr.com/65535/54666379476_7026782622_m.jpg",
+    "source": "Flickr",
+    "author": "glessew"
+  },
+  "cala-granadella-xabia-guia-honesta": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Cala_de_la_Granadella%2C_J%C3%A1vea%2C_Espa%C3%B1a%2C_2014-07-01%2C_DD_37.JPG",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Cala_de_la_Granadella%2C_J%C3%A1vea%2C_Espa%C3%B1a%2C_2014-07-01%2C_DD_37.JPG/1280px-Cala_de_la_Granadella%2C_J%C3%A1vea%2C_Espa%C3%B1a%2C_2014-07-01%2C_DD_37.JPG",
+    "source": "Wikipedia"
+  },
+  "playa-bolonia-tarifa-duna-viento": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Ensenada_de_Bolonia_2009003.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Ensenada_de_Bolonia_2009003.jpg/1280px-Ensenada_de_Bolonia_2009003.jpg",
+    "source": "Wikipedia"
+  },
+  "playa-gulpiyuri-asturias-marea": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Gulpiyuri.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Gulpiyuri.jpg",
+    "source": "Wikipedia"
+  },
+  "playa-murcia-esculturas-arena-erosion": {
+    "url": "https://live.staticflickr.com/65535/50513508487_15441c3284_c.jpg",
+    "thumb": "https://live.staticflickr.com/65535/50513508487_15441c3284_m.jpg",
+    "source": "Flickr",
+    "author": "ManuMatas"
+  },
+  "playa-rodas-islas-cies-permiso": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/C%C3%ADes_uharteak_1.JPG",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/C%C3%ADes_uharteak_1.JPG/1280px-C%C3%ADes_uharteak_1.JPG",
+    "source": "Wikipedia"
+  },
+  "ruta-calas-cabo-de-gata-almeria": {
+    "url": "https://live.staticflickr.com/65535/52336853893_aa20f32397_c.jpg",
+    "thumb": "https://live.staticflickr.com/65535/52336853893_aa20f32397_m.jpg",
+    "source": "Flickr",
+    "author": "elojeador"
+  },
+  "ruta-calas-costa-brava-barco": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Costa_Brava_Calas.JPG",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Costa_Brava_Calas.JPG/1280px-Costa_Brava_Calas.JPG",
+    "source": "Wikipedia"
+  }
+}

@@ -7,8 +7,9 @@
 // cuerpo (parr/h2/lista/cita/cta). El índice, las fichas, el sitemap y el
 // enlazado se generan solos desde aquí.
 
-// Fotos reales (Unsplash) resueltas offline por scripts/enrich-unsplash.mjs.
-// Mapa slug → { url, creditName, creditUrl }. Build sin red: solo importa JSON.
+// Fotos reales resueltas offline por scripts/enrich-magazine-images.mjs
+// (misma cascada que las fichas de playa). Mapa slug → { url, thumb, source,
+// author }. Build sin red: solo importa el JSON ya resuelto.
 import HERO_IMAGES from './magazine-images.json'
 
 export type MagazineCategory = 'rutas' | 'curiosidades' | 'gastronomia' | 'guias'
@@ -42,11 +43,13 @@ export interface Article {
   excerpt: string          // 1-2 frases para índice + meta description
   heroAlt: string
   heroQuery: string        // término para resolver foto en Unsplash
-  /** Foto real (Unsplash) pre-resuelta por scripts/enrich-unsplash.mjs.
-   *  Se inyecta desde magazine-images.json al cargar el módulo; NO se
-   *  edita a mano. Si falta, las páginas caen a la OG de texto. */
+  /** Foto real pre-resuelta por scripts/enrich-magazine-images.mjs usando
+   *  la MISMA cascada que las fichas de playa (Wikimedia/Wikipedia → CC →
+   *  stock). Se inyecta desde magazine-images.json al cargar el módulo; NO
+   *  se edita a mano. Si falta, las páginas caen a la OG de texto. */
   heroImage?: string
-  heroCredit?: { name: string; url: string }
+  heroThumb?: string
+  heroCredit?: { author?: string; source: string }
   author: string
   datePublished: string    // ISO
   readingMin: number
@@ -774,12 +777,13 @@ export const ARTICLES: Article[] = [
 
 // Inyecta la foto real (si existe en el sidecar) en cada artículo.
 {
-  const map = HERO_IMAGES as Record<string, { url: string; creditName: string; creditUrl: string }>
+  const map = HERO_IMAGES as Record<string, { url: string; thumb?: string; source: string; author?: string }>
   for (const a of ARTICLES) {
     const img = map[a.slug]
     if (img?.url) {
       a.heroImage = img.url
-      a.heroCredit = { name: img.creditName, url: img.creditUrl }
+      a.heroThumb = img.thumb ?? img.url
+      a.heroCredit = { author: img.author, source: img.source }
     }
   }
 }

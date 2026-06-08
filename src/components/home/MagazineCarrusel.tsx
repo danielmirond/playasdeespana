@@ -18,7 +18,7 @@ function CarruselCard({ a, base, label, minLabel }: { a: Article; base: string; 
     >
       {a.heroImage ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={a.heroImage} alt={a.heroAlt} width={280} height={130} loading="lazy" style={{ width: '100%', height: 130, objectFit: 'cover', display: 'block', background: 'var(--card-bg)' }} />
+        <img src={a.heroThumb ?? a.heroImage} alt={a.heroAlt} width={280} height={130} loading="lazy" style={{ width: '100%', height: 130, objectFit: 'cover', display: 'block', background: 'var(--card-bg)' }} />
       ) : (
         <div style={{ height: 130, background: 'linear-gradient(135deg,#0c4a6e,#0891b2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.4rem' }} aria-hidden>{CATEGORIES[a.category].emoji}</div>
       )}
