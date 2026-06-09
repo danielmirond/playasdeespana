@@ -169,7 +169,7 @@ export default async function PlayaPage({ params }: Props) {
     getSol(playa.lat, playa.lng),
     getMareas(playa.lat, playa.lng),
     getCalidad(slug),
-    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia),
+    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia, slug),
     getReportes(slug),
     getOpiniones(slug, 1, 10),
     getVotos(slug),

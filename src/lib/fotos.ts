@@ -9,6 +9,11 @@
 //   7. Unsplash: búsqueda con nombre + municipio (requiere UNSPLASH_ACCESS_KEY)
 import { fetchWithTimeout } from './fetch-timeout'
 import { IS_BUILD } from './buildGuard'
+// Fotos pre-resueltas offline por scripts/enrich-playas-images.mjs (misma
+// cascada, pero ejecutada una vez con timeouts largos y User-Agent → sin
+// rate limit ni dependencia de KV). Mapa slug → FotoPlaya[]. Si una playa
+// está aquí, getFotos la sirve al instante sin red. Si no, cae a la cascada.
+import PLAYAS_IMAGES from './playas-images.json'
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
 const PEXELS_KEY   = process.env.PEXELS_API_KEY ?? ''
@@ -1052,8 +1057,16 @@ export async function getFotos(
   municipio: string,
   lat: number,
   lon: number,
-  provincia: string = ''
+  provincia: string = '',
+  slug: string = ''
 ): Promise<FotoPlaya[]> {
+  // 0. Sidecar pre-resuelto (offline-first): si la playa tiene fotos
+  // resueltas, las servimos sin red, sin KV y sin riesgo de rate limit.
+  if (slug) {
+    const pre = (PLAYAS_IMAGES as Record<string, FotoPlaya[]>)[slug]
+    if (pre && Array.isArray(pre) && pre.length > 0) return pre
+  }
+
   const key       = cacheKey(nombre, lat, lon)
   const keyLegacy = cacheKeyLegacy(lat, lon)
   const kv = await getKV()
