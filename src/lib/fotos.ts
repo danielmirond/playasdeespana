@@ -171,8 +171,8 @@ async function getFotosWikimediaGeo(lat: number, lon: number, nombre?: string): 
       generator:    'geosearch',
       ggsnamespace: '6',
       ggscoord:     `${lat}|${lon}`,
-      ggsradius:    '700',
-      ggslimit:     '30',
+      ggsradius:    '1000',
+      ggslimit:     '40',
       prop:         'imageinfo|pageprops',
       iiprop:       'url|extmetadata|size',
       iiurlwidth:   '800',
@@ -189,35 +189,34 @@ async function getFotosWikimediaGeo(lat: number, lon: number, nombre?: string): 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const pages = Object.values(data.query?.pages ?? {}) as any[]
     const fotos = extraerFotosDePages(pages)
-    let beachish = fotos.filter(f => {
+    const beachish = fotos.filter(f => {
       try {
         return POSITIVAS.test(decodeURIComponent(f.url).toLowerCase())
       } catch { return false }
     })
 
-    // Si se pasa nombre, dar prioridad a fotos cuyo URL incluya un token
-    // del nombre concreto. Las URLs Wikimedia incluyen el nombre del
-    // archivo (ej. "File:Playa_de_Bolonia.jpg") → buen indicador de
-    // que la foto es DE esa playa, no panorámica genérica del municipio.
-    if (nombre && beachish.length > 1) {
-      const normalizar = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
-      const tokens = [
-        normalizar(nombre),
-        ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
-      ].filter(Boolean)
-      const conNombre = beachish.filter(f => {
-        try {
-          const url = decodeURIComponent(f.url).toLowerCase()
-          return tokens.some(t => t.length >= 4 && url.includes(t))
-        } catch { return false }
-      })
-      // Si hay fotos con nombre, usarlas. Si no, devolver las geo-cercanas
-      // (mejor que [] — algunas playas no tienen ningún archivo Wikimedia
-      // con su nombre en el título).
-      if (conNombre.length > 0) beachish = conNombre
-    }
+    // Término medio (decisión jun-2026): radio ampliado a 1000m pero
+    // EXIGIENDO que el nombre del archivo contenga el nombre de la playa.
+    // Antes, si ninguna foto cercana llevaba el nombre, se devolvían las
+    // "geo-cercanas" genéricas → colaba el pueblo, un restaurante o las
+    // montañas (ej. 'Vista al Restaurante El Chicle' en Playa de Ferrara).
+    // Ahora: si no hay match de nombre, devolvemos [] y otra fuente / el
+    // fallback por estado del mar actúa. Más cobertura por el radio, sin
+    // fotos equivocadas.
+    const normalizar = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
+    const tokens = [
+      normalizar(nombre ?? ''),
+      ...(nombre ?? '').toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4 && !PALABRAS_GENERICAS.has(t)),
+    ].filter(Boolean)
+    if (tokens.length === 0) return []
+    const conNombre = beachish.filter(f => {
+      try {
+        const url = normalizar(decodeURIComponent(f.url))
+        return tokens.some(t => t.length >= 4 && url.includes(t))
+      } catch { return false }
+    })
 
-    return beachish.slice(0, 6)
+    return conNombre.slice(0, 6)
   } catch {
     return []
   }

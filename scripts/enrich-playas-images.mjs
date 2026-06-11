@@ -101,17 +101,18 @@ function extraerFotosDePages(pages) {
 async function wikimediaGeo(lat, lon, nombre) {
   if (lat == null || lon == null) return []
   try {
-    const params = new URLSearchParams({ action:'query', generator:'geosearch', ggsnamespace:'6', ggscoord:`${lat}|${lon}`, ggsradius:'700', ggslimit:'30', prop:'imageinfo|pageprops', iiprop:'url|extmetadata|size', iiurlwidth:'1200', format:'json', origin:'*' })
+    // Término medio: radio 1000m (antes 700) y EXIGIR que el archivo lleve el
+    // nombre de la playa (sin fallback a "foto cercana genérica" que colaba
+    // restaurantes/pueblo/montaña).
+    const params = new URLSearchParams({ action:'query', generator:'geosearch', ggsnamespace:'6', ggscoord:`${lat}|${lon}`, ggsradius:'1000', ggslimit:'40', prop:'imageinfo|pageprops', iiprop:'url|extmetadata|size', iiurlwidth:'1200', format:'json', origin:'*' })
     const res = await fetchT(`https://commons.wikimedia.org/w/api.php?${params}`)
     if (!res.ok) return []
     const data = await res.json()
-    let beachish = extraerFotosDePages(Object.values(data.query?.pages ?? {})).filter(f => { try { return POSITIVAS.test(decodeURIComponent(f.url).toLowerCase()) } catch { return false } })
-    if (nombre && beachish.length > 1) {
-      const tokens = [normalizar(nombre), ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4)].filter(Boolean)
-      const conNombre = beachish.filter(f => { try { const url = decodeURIComponent(f.url).toLowerCase(); return tokens.some(t => t.length >= 4 && url.includes(t)) } catch { return false } })
-      if (conNombre.length > 0) beachish = conNombre
-    }
-    return beachish.slice(0, 6)
+    const beachish = extraerFotosDePages(Object.values(data.query?.pages ?? {})).filter(f => { try { return POSITIVAS.test(decodeURIComponent(f.url).toLowerCase()) } catch { return false } })
+    const tokens = [normalizar(nombre), ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4 && !PALABRAS_GENERICAS.has(t))].filter(Boolean)
+    if (tokens.length === 0) return []
+    const conNombre = beachish.filter(f => { try { const url = normalizar(decodeURIComponent(f.url)); return tokens.some(t => t.length >= 4 && url.includes(t)) } catch { return false } })
+    return conNombre.slice(0, 6)
   } catch { return [] }
 }
 
@@ -261,7 +262,7 @@ async function main() {
     try {
       const fotos = await cascada(p.nombre, p.municipio ?? '', p.lat, p.lng)
       if (fotos.length > 0) { map[p.slug] = fotos; ok++; if (n % 20 === 0 || n <= 5) console.log(`  ✓ [${n}/${lista.length}] ${p.slug} (${fotos.length}, ${fotos[0].fuente})`) }
-      else { vacias++ }
+      else { vacias++; if (FORCE && map[p.slug]) { delete map[p.slug]; console.log(`  – ${p.slug}: purgada (ya no hay match)`) } }
     } catch (e) { vacias++; console.warn(`  ✗ ${p.slug}: ${e.message}`) }
     // Guardado incremental cada 25 por si se interrumpe.
     if (n % 25 === 0) { const sorted = Object.fromEntries(Object.keys(map).sort().map(k => [k, map[k]])); await writeFile(OUT, JSON.stringify(sorted) + '\n') }
