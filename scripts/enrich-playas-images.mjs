@@ -24,7 +24,7 @@ import { dirname, resolve } from 'node:path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
-const OUT = resolve(ROOT, 'src/lib/playas-images.json')
+const OUT = resolve(ROOT, 'public/data/playas-images.json')
 const PLAYAS = resolve(ROOT, 'public/data/playas.json')
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''

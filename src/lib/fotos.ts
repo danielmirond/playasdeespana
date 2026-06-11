@@ -13,7 +13,21 @@ import { IS_BUILD } from './buildGuard'
 // cascada, pero ejecutada una vez con timeouts largos y User-Agent → sin
 // rate limit ni dependencia de KV). Mapa slug → FotoPlaya[]. Si una playa
 // está aquí, getFotos la sirve al instante sin red. Si no, cae a la cascada.
-import PLAYAS_IMAGES from './playas-images.json'
+// Carga lazy con dynamic import (mismo patrón que getPlayas con playas.json):
+// el JSON crece con la cola larga (~MBs) y no debe inflar el bundle estático.
+let _sidecar: Record<string, FotoPlaya[]> | null | undefined
+async function getSidecar(): Promise<Record<string, FotoPlaya[]> | null> {
+  if (_sidecar !== undefined) return _sidecar
+  try {
+    const { default: data } = await import('@/../public/data/playas-images.json', {
+      assert: { type: 'json' },
+    })
+    _sidecar = data as unknown as Record<string, FotoPlaya[]>
+  } catch {
+    _sidecar = null
+  }
+  return _sidecar
+}
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
 const PEXELS_KEY   = process.env.PEXELS_API_KEY ?? ''
@@ -1062,7 +1076,8 @@ export async function getFotos(
   // 0. Sidecar pre-resuelto (offline-first): si la playa tiene fotos
   // resueltas, las servimos sin red, sin KV y sin riesgo de rate limit.
   if (slug) {
-    const pre = (PLAYAS_IMAGES as Record<string, FotoPlaya[]>)[slug]
+    const sidecar = await getSidecar()
+    const pre = sidecar?.[slug]
     if (pre && Array.isArray(pre) && pre.length > 0) return pre
   }
 
