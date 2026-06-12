@@ -46,7 +46,7 @@ export default function Nav() {
           <Link href={isEn ? '/en/communities' : '/comunidades'} className={styles.link}>{isEn ? 'Communities' : 'Comunidades'}</Link>
           <Link href={isEn ? '/en/blue-flag' : '/banderas-azules'} className={styles.link}>{isEn ? 'Blue Flag' : 'Banderas Azules'}</Link>
           <Link href={isEn ? '/en/boat-rental' : '/alquiler-barco'} className={styles.link}>{isEn ? 'Boat Rental' : 'Alquiler de Barcos'}</Link>
-          {!isEn && <Link href="/alquiler-autocaravana" className={styles.link}>Autocaravanas</Link>}
+          <Link href={isEn ? '/en/campervan-rental' : '/alquiler-autocaravana'} className={styles.link}>{isEn ? 'Campervans' : 'Autocaravanas'}</Link>
           {!isEn && <Link href="/playas-perros" className={styles.link}>Perros</Link>}
           {!isEn && <Link href="/playas-nudistas" className={styles.link}>Nudistas</Link>}
           {!isEn && <Link href="/surf" className={styles.link}>Surf</Link>}

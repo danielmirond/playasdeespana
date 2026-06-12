@@ -137,6 +137,15 @@ export default function BoatRentalHubPage() {
             )
           })}
         </div>
+
+        {/* Cross-link a autocaravanas (venta cruzada + enlazado interno) */}
+        <aside style={{ marginTop: '2.5rem', padding: '1.25rem 1.4rem', background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 10, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+          <div>
+            <div style={{ fontWeight: 800, color: 'var(--ink)', fontSize: '1rem' }}>¿Llegas a la costa por tierra? <span aria-hidden="true">🚐</span></div>
+            <div style={{ fontSize: '.9rem', color: 'var(--muted)', marginTop: '.2rem' }}>Combina el barco con una ruta en autocaravana por el litoral.</div>
+          </div>
+          <Link href="/alquiler-autocaravana" style={{ flex: '0 0 auto', color: 'var(--accent)', fontWeight: 700, fontSize: '.9rem', textDecoration: 'none', whiteSpace: 'nowrap' }}>Alquiler de autocaravanas →</Link>
+        </aside>
       </main>
 
       {/* CTA */}

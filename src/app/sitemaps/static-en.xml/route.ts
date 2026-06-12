@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { getComunidades, getProvincias, getMunicipios } from '@/lib/playas'
 import { getAllArticlesEn, CATEGORIES } from '@/lib/magazine'
 import { getCamperCitiesEn } from '@/lib/autocaravana-localities'
+import { getAllLocalities } from '@/lib/boat-rental-localities'
+import { boatRentalSlug } from '@/lib/boat-rental-helpers'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -63,13 +65,49 @@ export async function GET() {
   }
 
   // EN commercial hubs
-  for (const p of ['/en/campervan-rental', '/en/yacht-rental', '/en/catamaran-rental']) {
+  for (const p of ['/en/boat-rental', '/en/campervan-rental', '/en/yacht-rental', '/en/catamaran-rental']) {
     urls.push(`  <url>
     <loc>${BASE}${p}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>`)
+  }
+
+  // EN boat rental — jerarquía completa coasts → provinces → locality
+  // (paridad con el sitemap ES; antes solo se enviaba el hub).
+  {
+    const boatLocs = getAllLocalities()
+    const coasts = new Set<string>()
+    const provinces = new Set<string>() // "coastSlug/provinceSlug"
+    for (const l of boatLocs) {
+      const cs = boatRentalSlug(l.coast)
+      const ps = boatRentalSlug(l.province)
+      coasts.add(cs)
+      provinces.add(`${cs}/${ps}`)
+      urls.push(`  <url>
+    <loc>${BASE}/en/boat-rental/coasts/${cs}/provinces/${ps}/${l.slug}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>`)
+    }
+    for (const cs of coasts) {
+      urls.push(`  <url>
+    <loc>${BASE}/en/boat-rental/coasts/${cs}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`)
+    }
+    for (const cp of provinces) {
+      urls.push(`  <url>
+    <loc>${BASE}/en/boat-rental/coasts/${cp.split('/')[0]}/provinces/${cp.split('/')[1]}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>`)
+    }
   }
   // EN campervan city pages (translated only)
   for (const c of getCamperCitiesEn()) {

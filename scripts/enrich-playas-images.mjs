@@ -38,6 +38,9 @@ const LIMIT = Number((args.find(a => a.startsWith('--limit=')) ?? '').split('=')
 const OFFSET = Number((args.find(a => a.startsWith('--offset=')) ?? '').split('=')[1] ?? '0') || 0
 const ONLY_SLUG = args.find(a => !a.startsWith('--'))
 const DELAY_MS = 350  // pausa entre playas para no saturar las APIs
+// Concurrencia entre playas (cada una ya paraleliza sus 7 fuentes). Con 3
+// workers el backoff ante 429 sigue protegiendo; no subir más sin vigilar.
+const CONCURRENCY = Math.max(1, Math.min(4, Number((args.find(a => a.startsWith('--concurrency=')) ?? '').split('=')[1] ?? '1') || 1))
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms))
 const normalizar = (s) => (s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
@@ -257,21 +260,33 @@ async function main() {
   console.log(`Resolviendo ${lista.length} playa(s)…`)
 
   let ok = 0, vacias = 0, n = 0
-  for (const p of lista) {
-    n++
-    try {
-      const fotos = await cascada(p.nombre, p.municipio ?? '', p.lat, p.lng)
-      if (fotos.length > 0) { map[p.slug] = fotos; ok++; if (n % 20 === 0 || n <= 5) console.log(`  ✓ [${n}/${lista.length}] ${p.slug} (${fotos.length}, ${fotos[0].fuente})`) }
-      else { vacias++; if (FORCE && map[p.slug]) { delete map[p.slug]; console.log(`  – ${p.slug}: purgada (ya no hay match)`) } }
-    } catch (e) { vacias++; console.warn(`  ✗ ${p.slug}: ${e.message}`) }
-    // Guardado incremental cada 25 por si se interrumpe.
-    if (n % 25 === 0) { const sorted = Object.fromEntries(Object.keys(map).sort().map(k => [k, map[k]])); await writeFile(OUT, JSON.stringify(sorted) + '\n') }
-    await sleep(DELAY_MS)
+  let cursor = 0
+  const worker = async () => {
+    while (cursor < lista.length) {
+      const p = lista[cursor++]
+      const i = ++n
+      try {
+        const fotos = await cascada(p.nombre, p.municipio ?? '', p.lat, p.lng)
+        if (fotos.length > 0) { map[p.slug] = fotos; ok++; if (i % 20 === 0 || i <= 5) console.log(`  ✓ [${i}/${lista.length}] ${p.slug} (${fotos.length}, ${fotos[0].fuente})`) }
+        else {
+          vacias++
+          if (FORCE && map[p.slug]?.length) console.log(`  – ${p.slug}: purgada (ya no hay match)`)
+          // Marcador negativo: [] = "intentada, sin foto". getFotos lo ignora
+          // (exige length>0) y el resume no la reintenta. --force la reintenta.
+          map[p.slug] = []
+        }
+      } catch (e) { vacias++; console.warn(`  ✗ ${p.slug}: ${e.message}`) }
+      // Guardado incremental cada 25 por si se interrumpe.
+      if (i % 25 === 0) { const sorted = Object.fromEntries(Object.keys(map).sort().map(k => [k, map[k]])); await writeFile(OUT, JSON.stringify(sorted) + '\n') }
+      await sleep(DELAY_MS)
+    }
   }
+  await Promise.all(Array.from({ length: CONCURRENCY }, worker))
 
   const sorted = Object.fromEntries(Object.keys(map).sort().map(k => [k, map[k]]))
   await writeFile(OUT, JSON.stringify(sorted) + '\n')
-  console.log(`✓ ${ok} con foto, ${vacias} sin foto. Total en JSON: ${Object.keys(sorted).length}.`)
+  const conFoto = Object.values(sorted).filter(v => v.length > 0).length
+  console.log(`✓ ${ok} con foto, ${vacias} sin foto. JSON: ${conFoto} con foto / ${Object.keys(sorted).length} intentadas.`)
 }
 
 main().catch(e => { console.error(e); process.exit(1) })

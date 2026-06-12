@@ -80,6 +80,15 @@ export default function AutocaravanaHubPage() {
           Ver precios por temporada y ciudad →
         </Link>
 
+        {/* Cross-link a barcos (venta cruzada + enlazado interno) */}
+        <aside style={{ marginTop: '2.5rem', padding: '1.25rem 1.4rem', background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 10, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+          <div>
+            <div style={{ fontWeight: 800, color: 'var(--ink)', fontSize: '1rem' }}>¿Ya en la costa? <span aria-hidden="true">⛵</span></div>
+            <div style={{ fontSize: '.9rem', color: 'var(--muted)', marginTop: '.2rem' }}>Salta al agua: alquila un barco para descubrir las calas a las que no llega la autocaravana.</div>
+          </div>
+          <Link href="/alquiler-barco" style={{ flex: '0 0 auto', color: CTA, fontWeight: 700, fontSize: '.9rem', textDecoration: 'none', whiteSpace: 'nowrap' }}>Alquiler de barcos →</Link>
+        </aside>
+
         {/* CTA final */}
         <section style={{ background: `linear-gradient(135deg, ${CTA} 0%, ${CTA2} 100%)`, color: '#fff', borderRadius: 10, padding: '2.25rem 1.5rem', textAlign: 'center', marginTop: '3rem' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 800, margin: '0 0 .6rem' }}>Compara y reserva tu autocaravana</h2>
