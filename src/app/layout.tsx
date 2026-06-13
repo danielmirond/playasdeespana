@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ConsentScripts from '@/components/ui/ConsentScripts'
@@ -97,6 +97,10 @@ export const metadata: Metadata = {
     },
   },
   alternates: { canonical: 'https://playas-espana.com' },
+  // PWA: instalable ("Añadir a la pantalla de inicio" / prompt de Chrome).
+  manifest: '/manifest.webmanifest',
+  appleWebApp: { capable: true, title: 'Playas', statusBarStyle: 'default' },
+  icons: { apple: '/apple-touch-icon.png' },
   verification: {
     google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E',
     // Bing, Yandex y Seznam: sustituye XXXXXX por el código de cada dashboard
@@ -106,6 +110,10 @@ export const metadata: Metadata = {
       'seznam-wmt': process.env.SEZNAM_VERIFY ?? '',
     },
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0369a1',
 }
 
 // Critical CSS inline. renderiza antes del paint inicial
