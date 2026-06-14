@@ -40,13 +40,17 @@ export interface Factor {
 
 // ── Pesos ──────────────────────────────────────────────────────────
 // Suman 100. Ajustables sin romper la escala.
+// El score responde "¿me baño HOY?" → manda el estado del mar (cambiante),
+// no los servicios (fijos). Por eso la meteo (mar+agua+uv) pesa 70% y los
+// atributos estáticos 30%. Antes era 60/40 y la home repetía siempre las
+// mismas playas bien equipadas porque servicios dominaba el orden.
 const W = {
-  mar:       30,   // olas + viento combinados (lo que más importa para ir a bañarse)
-  agua:      20,   // temperatura del agua (confort)
-  uv:        10,   // UV (moderado > bajo > extremo)
-  servicios: 20,   // socorrismo, duchas, parking, accesible, bandera
+  mar:       35,   // olas + viento combinados (lo que más importa para ir a bañarse)
+  agua:      23,   // temperatura del agua (confort)
+  uv:        12,   // UV (moderado > bajo > extremo)
+  servicios: 12,   // socorrismo, duchas, parking, accesible, bandera
   ocupacion: 10,   // grado de ocupación (bajo = mejor para relax, alto ≠ malo del todo)
-  acceso:    10,   // forma de acceso, parking, autobús
+  acceso:     8,   // forma de acceso, parking, autobús
 }
 
 // ── Sub-scores ─────────────────────────────────────────────────────
