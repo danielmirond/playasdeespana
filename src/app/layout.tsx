@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import InstallPrompt from '@/components/pwa/InstallPrompt'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ConsentScripts from '@/components/ui/ConsentScripts'
 import NavigationProgress from '@/components/ui/NavigationProgress'
@@ -281,6 +282,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* GA4 + AdSense. cargados condicionalmente por consentimiento */}
         <ConsentScripts />
         <CookieBanner />
+        <InstallPrompt />
       </body>
     </html>
   )
