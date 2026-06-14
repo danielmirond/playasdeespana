@@ -854,11 +854,11 @@ export const FOTOS_GENERICAS_POR_ESTADO: Record<string, string[]> = {
   ],
   BUENA: [
     'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=70',
-    'https://images.unsplash.com/photo-1525428781336-2bc7a72d68a8?w=900&q=70',
+    'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=900&q=70',
     'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=900&q=70',
   ],
   AVISO: [
-    'https://images.unsplash.com/photo-1535262971677-1c823d4c814e?w=900&q=70',
+    'https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=900&q=70',
     'https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=900&q=70',
     'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=900&q=70',
   ],
