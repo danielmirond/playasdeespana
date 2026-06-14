@@ -101,7 +101,13 @@ export const metadata: Metadata = {
   // PWA: instalable ("Añadir a la pantalla de inicio" / prompt de Chrome).
   manifest: '/manifest.webmanifest',
   appleWebApp: { capable: true, title: 'Playas', statusBarStyle: 'default' },
-  icons: { apple: '/apple-touch-icon.png' },
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },        // navegadores modernos (nítido)
+      { url: '/favicon.ico', sizes: 'any' },              // fallback: la "P" en .ico (16/32/48)
+    ],
+    apple: '/apple-touch-icon.png',
+  },
   verification: {
     google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E',
     // Bing, Yandex y Seznam: sustituye XXXXXX por el código de cada dashboard
