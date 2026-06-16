@@ -76,6 +76,125 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Medusas (voz bicéfala) ─────
+  {
+    slug: 'que-hacer-picadura-medusa-mitos',
+    category: 'guias',
+    title: 'Qué hacer si te pica una medusa: los pasos correctos (y por qué la orina y el vinagre no siempre valen)',
+    excerpt:
+      'Agua de mar sí, agua dulce no, orina nunca. La guía de primeros auxilios ante una picadura de medusa, con los pasos que de verdad funcionan y los mitos que pueden empeorarla.',
+    heroAlt: 'Medusa Pelagia noctiluca translúcida con tonos violáceos flotando en agua de mar iluminada por el sol',
+    heroQuery: 'jellyfish,mediterranean,sea',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-16T11:00:00Z',
+    readingMin: 4,
+    related: [
+      { href: '/medusas', label: 'Riesgo de medusas por playa' },
+      { href: '/calidad-agua', label: 'Calidad del agua de baño' },
+      { href: '/playas-sin-viento', label: 'Playas resguardadas del viento' },
+    ],
+    body: [
+      { t: 'p', html: 'Primero el roce, casi eléctrico; luego el escozor que sube por el brazo como una quemadura fina. Quien ha pisado una medusa en agosto conoce esa secuencia: el pinchazo invisible, la marca rojiza que aparece en minutos y la pregunta que llega justo después, a pie de orilla, entre el corro de bañistas opinando cada uno una cosa distinta. Y ahí está el problema: casi todo lo que se dice en ese corro es mentira.' },
+      { t: 'p', html: 'La protagonista habitual en el Mediterráneo es la <em>Pelagia noctiluca</em>, el "clavel de mar", pequeña y violácea. Su picadura duele y arde, pero rara vez es grave en un adulto sano. Lo que decide cómo evoluciona no es la suerte: son los <strong>primeros dos minutos</strong> y hacer lo correcto en vez de lo que dijo el cuñado.' },
+      { t: 'h2', text: 'Los pasos correctos (y lo que NO)', id: 'datos' },
+      { t: 'p', html: 'Lo que sí funciona, en orden: <strong>1)</strong> sal del agua sin frotarte y avisa al <strong>socorrista</strong> (para eso está el puesto). <strong>2)</strong> Aclara la zona con <strong>agua de mar</strong>, nunca con agua dulce: el agua dulce cambia la presión y hace estallar los nematocistos (las cápsulas urticantes) que aún no han descargado, así que <strong>empeora la picadura</strong>. <strong>3)</strong> Retira los restos de tentáculo <strong>sin tocarlos con los dedos</strong>: con pinzas o el canto de una tarjeta. <strong>4)</strong> Aplica <strong>frío</strong> para el dolor —una bolsa de hielo, nunca el hielo directo (es agua dulce)—. <strong>5)</strong> No frotes con arena ni con la toalla, no apliques orina ni amoniaco ni alcohol: son remedios de patio que solo reparten más veneno.' },
+      { t: 'p', html: 'El matiz honesto que casi ninguna lista cuenta: lo del <strong>vinagre y lo del calor depende de la especie</strong>. El vinagre desactiva el veneno de algunas especies tropicales y de la carabela portuguesa, pero con la medusa común mediterránea su efecto es discutido y puede ser contraproducente; y aunque para algunas picaduras se recomienda sumergir en <strong>agua caliente (40-45°C)</strong>, no es universal. Por eso la regla de oro es simple: <strong>haz lo seguro (agua de mar + frío + retirar restos) y, para lo demás, pregunta al socorrista</strong>, que sabe qué medusa hay ese día en esa playa.' },
+      { t: 'h2', text: 'Cuándo dejar de improvisar', id: 'local' },
+      { t: 'p', html: 'Hay situaciones en las que toca ir más allá del botiquín de playa. Busca <strong>atención médica o llama al 112</strong> si aparece dificultad para respirar, hinchazón que se extiende, mareo o cualquier signo de <strong>reacción alérgica</strong>; si la picadura es extensa, en la cara o los genitales; o si la víctima es un <strong>niño pequeño, una persona mayor o alguien con problemas de salud</strong>. No es alarmismo: una reacción general es poco frecuente pero existe.' },
+      { t: 'p', html: 'Y un aviso de identificación que salva sustos: la <strong>carabela portuguesa</strong> (<em>Physalia physalis</em>), ese globo azul con un crestón rosado, <strong>no es una medusa</strong> sino una colonia flotante, y su picadura es bastante más seria. Si ves una en la orilla, no la toques aunque parezca muerta —sus tentáculos pican igual— y avisa al socorrista. Con ella, frío y agua de mar, retirar restos con cuidado y atención médica; el vinagre aquí tampoco es consenso.' },
+      { t: 'quote', text: 'La orina no cura una picadura de medusa: solo añade público. Lo que de verdad ayuda cabe en tres palabras: agua de mar, frío y socorrista.' },
+      { t: 'p', html: 'Porque una picadura de medusa es, casi siempre, un mal rato y no una urgencia; pero el mal rato se alarga o se acorta según lo que hagas en los primeros minutos. Olvida los remedios de leyenda, ten claros los cuatro pasos seguros y deja el resto en manos de quien lleva la cruz roja en la camiseta. La playa seguirá ahí mañana, y tu brazo, con un poco de cabeza, lo agradecerá esta misma tarde.' },
+    ],
+    faq: [
+      { q: '¿Hay que echar orina o agua dulce en una picadura de medusa?', a: 'No. La orina es un mito y no sirve. El agua dulce está contraindicada: cambia la presión y hace estallar los nematocistos que no han descargado, empeorando la picadura. Hay que aclarar con agua de mar.' },
+      { q: '¿Frío o calor para una picadura de medusa?', a: 'El frío (bolsa de hielo, nunca hielo directo) calma el dolor y es lo seguro. Para algunas especies se recomienda agua caliente (40-45°C), pero depende de la medusa; ante la duda, aplica frío y pregunta al socorrista.' },
+      { q: '¿Cuándo hay que ir al médico por una picadura de medusa?', a: 'Si aparece dificultad para respirar, hinchazón que se extiende, mareo o signos de alergia; si la picadura es extensa o en cara/genitales; o si afecta a niños pequeños, mayores o personas con problemas de salud. En esos casos, atención médica o 112.' },
+    ],
+    en: {
+      title: 'What to do if a jellyfish stings you: the steps that work (and why urine and vinegar don’t always)',
+      excerpt: 'Seawater yes, fresh water no, urine never. The first-aid guide for a jellyfish sting, with the steps that actually work and the myths that can make it worse.',
+      related: [
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'First the brush, almost electric; then the sting climbing up your arm like a thin burn. Anyone who’s caught a jellyfish in August knows the sequence: the invisible jab, the reddish mark that appears within minutes, and the question that follows right at the shoreline, amid a ring of bathers each offering a different cure. And that’s the problem: almost everything said in that ring is wrong.' },
+        { t: 'p', html: 'The usual culprit in the Mediterranean is <em>Pelagia noctiluca</em>, the "mauve stinger", small and violet. Its sting hurts and burns, but is rarely serious in a healthy adult. What decides how it plays out isn’t luck: it’s the <strong>first two minutes</strong> and doing the right thing instead of what someone’s uncle swears by.' },
+        { t: 'h2', text: 'The right steps (and what NOT to do)', id: 'facts' },
+        { t: 'p', html: 'What works, in order: <strong>1)</strong> get out of the water without rubbing and tell the <strong>lifeguard</strong> (that’s what the post is for). <strong>2)</strong> Rinse the area with <strong>seawater</strong>, never fresh water: fresh water changes the pressure and bursts the nematocysts (the stinging capsules) that haven’t fired yet, so it <strong>makes the sting worse</strong>. <strong>3)</strong> Remove tentacle remains <strong>without touching them with your fingers</strong>: use tweezers or the edge of a card. <strong>4)</strong> Apply <strong>cold</strong> for the pain — an ice pack, never ice directly (it’s fresh water). <strong>5)</strong> Don’t rub with sand or a towel, and don’t apply urine, ammonia or alcohol: backyard remedies that only spread more venom.' },
+        { t: 'p', html: 'The honest nuance almost no list mentions: <strong>vinegar and heat depend on the species</strong>. Vinegar deactivates the venom of some tropical species and the Portuguese man o’ war, but with the common Mediterranean jellyfish its effect is disputed and may backfire; and although hot-water immersion (<strong>40-45°C</strong>) is advised for some stings, it isn’t universal. So the golden rule is simple: <strong>do the safe things (seawater + cold + remove remains) and, for the rest, ask the lifeguard</strong>, who knows which jellyfish is around that day.' },
+        { t: 'h2', text: 'When to stop improvising', id: 'local' },
+        { t: 'p', html: 'There are times to go beyond the beach first-aid kit. Seek <strong>medical attention or call 112</strong> if there’s difficulty breathing, spreading swelling, dizziness or any sign of an <strong>allergic reaction</strong>; if the sting is extensive, on the face or genitals; or if the victim is a <strong>small child, an older person or someone with health problems</strong>. It’s not scaremongering: a general reaction is uncommon but real.' },
+        { t: 'p', html: 'And an ID warning that saves scares: the <strong>Portuguese man o’ war</strong> (<em>Physalia physalis</em>), that blue float with a pink crest, <strong>isn’t a jellyfish</strong> but a floating colony, and its sting is considerably more serious. If you see one on the shore, don’t touch it even if it looks dead — its tentacles still sting — and alert the lifeguard. With it: cold and seawater, careful removal of remains and medical attention; vinegar here is no consensus either.' },
+        { t: 'quote', text: 'Urine doesn’t cure a jellyfish sting: it only adds an audience. What actually helps fits in three words: seawater, cold, lifeguard.' },
+        { t: 'p', html: 'Because a jellyfish sting is, almost always, a bad moment rather than an emergency; but that bad moment stretches or shrinks depending on what you do in the first minutes. Forget the legendary remedies, know the four safe steps, and leave the rest to the person with the red cross on their shirt. The beach will still be there tomorrow, and your arm, with a little sense, will thank you this very afternoon.' },
+      ],
+      faq: [
+        { q: 'Should you put urine or fresh water on a jellyfish sting?', a: 'No. Urine is a myth and doesn’t help. Fresh water is contraindicated: it changes the pressure and bursts the nematocysts that haven’t fired, worsening the sting. Rinse with seawater.' },
+        { q: 'Cold or heat for a jellyfish sting?', a: 'Cold (an ice pack, never ice directly) eases the pain and is the safe option. Hot water (40-45°C) is recommended for some species, but it depends on the jellyfish; when in doubt, apply cold and ask the lifeguard.' },
+        { q: 'When should you see a doctor for a jellyfish sting?', a: 'If there’s difficulty breathing, spreading swelling, dizziness or signs of allergy; if the sting is extensive or on the face/genitals; or if it affects small children, the elderly or people with health problems. In those cases, medical attention or 112.' },
+      ],
+    },
+  },
+  {
+    slug: 'por-que-llegan-medusas-playa-viento',
+    category: 'curiosidades',
+    title: 'Por qué aparecen de golpe las medusas en la playa: el viento que las empuja a la orilla',
+    excerpt:
+      'Un día el agua está limpia y al siguiente, llena de medusas. No es azar: las traen el viento, las corrientes y la temperatura. Por qué proliferan y cómo anticipar el día malo antes de ir.',
+    heroAlt: 'Banco de medusas Pelagia noctiluca cerca de la superficie del mar empujadas hacia la costa',
+    heroQuery: 'jellyfish,bloom,sea,mediterranean',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-16T11:30:00Z',
+    readingMin: 4,
+    related: [
+      { href: '/medusas', label: 'Riesgo de medusas por playa' },
+      { href: '/playas-sin-viento', label: 'Playas resguardadas del viento' },
+      { href: '/calidad-agua', label: 'Calidad del agua de baño' },
+    ],
+    body: [
+      { t: 'p', html: 'Ayer el agua era un cristal y los niños se bañaban hasta la boya; hoy la orilla amanece sembrada de campanas translúcidas y nadie se mete más allá de las rodillas. La estampa desconcierta porque parece caprichosa, casi un castigo del mar. No lo es. Las medusas no "aparecen": llegan, empujadas por fuerzas que se pueden leer en el parte meteorológico de la noche anterior.' },
+      { t: 'p', html: 'La clave para entenderlo es que la mayoría de medusas <strong>nadan muy poco</strong>: son plancton grande, a merced de las corrientes y del viento. Pasan el año mar adentro y, cuando el tiempo se alinea, una masa entera puede plantarse en la orilla en cuestión de horas. Saber qué lo provoca es saber cuándo no madrugar para nada.' },
+      { t: 'h2', text: 'Por qué hay medusas (y por qué llegan a la playa)', id: 'datos' },
+      { t: 'p', html: 'Hay que separar dos cosas. Una es por qué hay <strong>muchas</strong> medusas algunos años: influyen el <strong>aumento de la temperatura del mar</strong> (acelera su ciclo reproductivo), la <strong>sobrepesca de sus depredadores y competidores</strong> (atunes, tortugas, peces que comerían medusas o su mismo alimento) y años de <strong>poca lluvia</strong>, porque el agua dulce de los ríos forma una barrera de baja salinidad que las frena; sin esa barrera, se acercan más. La otra cosa es por qué llegan <strong>hoy a tu playa</strong>: ahí mandan el <strong>viento de mar a tierra (onshore)</strong> y las corrientes, que arrastran los bancos contra la costa. Por eso una playa puede estar limpia por la mañana y llena por la tarde si el viento ha rolado.' },
+      { t: 'p', html: 'Ese es justo el factor que más se ignora y el que más se puede anticipar: <strong>el viento</strong>. Un día de viento soplando desde el mar hacia la orilla es el principal sospechoso de una invasión repentina; con viento de tierra hacia el mar (terral), las medusas tienden a alejarse. La temperatura del agua marca la temporada —más probables con el mar caldeado del verano—, pero el día concreto lo decide de dónde sopla.' },
+      { t: 'h2', text: 'Cómo anticipar el día malo', id: 'local' },
+      { t: 'p', html: 'No hace falta ser oceanógrafo. Antes de salir, <strong>mira el viento</strong>: si sopla con fuerza desde el mar hacia esa costa, sube la probabilidad de medusas en la orilla. Es exactamente el cálculo que hace nuestro <a href="/medusas">estimador de riesgo de medusas por playa</a>, que combina la dirección del viento, la zona y la temperatura del agua para darte un nivel orientativo —bajo, medio o alto— en vez de la lotería de presentarte y ver. No es una certeza (el mar no la da), pero te ahorra más de un viaje en balde.' },
+      { t: 'p', html: 'Y un par de trucos de sentido común: las <strong>playas más resguardadas del viento</strong> dominante suelen sufrir menos invasiones repentinas que las expuestas de cara al mar abierto; si un día hay aviso, una <strong>cala protegida</strong> es mejor apuesta que una playa larga batida por el viento. Hazle caso a las <strong>banderas y carteles</strong> del puesto de socorro —muchos ayuntamientos avisan de la presencia de medusas— y, si las ves en el agua, no es cuestión de valentía: pican igual de cerca de la orilla. Mejor ese día, sombrilla y paseo.' },
+      { t: 'quote', text: 'Las medusas no eligen tu playa al azar: las trae el viento. Mirar de dónde sopla la noche antes evita el chasco del día siguiente.' },
+      { t: 'p', html: 'Porque detrás de esa orilla sembrada de campanas no hay mala suerte, sino física: agua caliente, pocos depredadores y un viento que empuja. Entender eso convierte un fastidio impredecible en algo que casi se puede esquivar mirando el parte. El mar seguirá mandando, pero al menos tú sabrás, antes de cargar el coche, si hoy toca baño o toca paseo.' },
+    ],
+    faq: [
+      { q: '¿Por qué de repente hay muchas medusas en la playa?', a: 'Porque nadan poco y las arrastran el viento y las corrientes: un viento de mar hacia la tierra (onshore) puede empujar un banco entero contra la orilla en pocas horas. Que haya muchas ese año depende además de la temperatura del mar, la sobrepesca de sus depredadores y los años secos (sin la barrera de agua dulce de los ríos).' },
+      { q: '¿Se puede saber si habrá medusas antes de ir a la playa?', a: 'No con certeza, pero sí estimarlo. El factor más anticipable es el viento: si sopla con fuerza desde el mar hacia esa costa, sube el riesgo. Nuestro estimador en /medusas combina viento, zona y temperatura del agua para darte un nivel orientativo por playa.' },
+      { q: '¿Qué playas tienen menos medusas?', a: 'Las más resguardadas del viento dominante suelen sufrir menos invasiones repentinas que las expuestas al mar abierto. En un día con aviso, una cala protegida es mejor apuesta que una playa larga batida por el viento.' },
+    ],
+    en: {
+      title: 'Why jellyfish suddenly show up at the beach: the wind that pushes them ashore',
+      excerpt: 'One day the water’s clear, the next it’s full of jellyfish. It’s not random: wind, currents and temperature bring them. Why they bloom and how to anticipate the bad day before you go.',
+      related: [
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'Yesterday the water was glass and the kids swam out to the buoy; today the shore wakes up strewn with translucent bells and no one wades past their knees. The scene baffles because it seems capricious, almost a punishment from the sea. It isn’t. Jellyfish don’t "appear": they arrive, pushed by forces you can read in the previous night’s weather forecast.' },
+        { t: 'p', html: 'The key is that most jellyfish <strong>barely swim</strong>: they’re large plankton, at the mercy of currents and wind. They spend the year offshore and, when the weather lines up, a whole mass can land on the shore within hours. Knowing what triggers it is knowing when not to bother getting up early.' },
+        { t: 'h2', text: 'Why there are jellyfish (and why they reach the beach)', id: 'facts' },
+        { t: 'p', html: 'Two things need separating. One is why there are <strong>many</strong> jellyfish some years: a factor is the <strong>rising sea temperature</strong> (it speeds their reproductive cycle), the <strong>overfishing of their predators and competitors</strong> (tuna, turtles, fish that would eat jellyfish or their food), and <strong>dry years</strong>, because river freshwater forms a low-salinity barrier that holds them off; without it, they come closer. The other is why they reach <strong>your beach today</strong>: that’s ruled by <strong>onshore wind</strong> and currents, which drag the swarms against the coast. That’s why a beach can be clear in the morning and full by afternoon if the wind has shifted.' },
+        { t: 'p', html: 'That’s precisely the most ignored factor and the most predictable: <strong>the wind</strong>. A day with wind blowing from the sea towards the shore is the prime suspect for a sudden invasion; with offshore wind, jellyfish tend to move away. Water temperature sets the season — more likely with summer’s warm sea — but the specific day is decided by which way the wind blows.' },
+        { t: 'h2', text: 'How to anticipate the bad day', id: 'local' },
+        { t: 'p', html: 'You don’t need to be an oceanographer. Before setting off, <strong>check the wind</strong>: if it blows strongly from the sea towards that coast, the chance of jellyfish on the shore rises. That’s exactly the calculation our <a href="/medusas">per-beach jellyfish-risk estimator</a> makes, combining wind direction, the area and water temperature to give you an indicative level — low, medium or high — instead of the lottery of turning up to see. It’s not a certainty (the sea doesn’t give those), but it saves more than one wasted trip.' },
+        { t: 'p', html: 'And a couple of common-sense tips: beaches <strong>more sheltered from the prevailing wind</strong> usually suffer fewer sudden invasions than exposed ones facing the open sea; on a day with a warning, a <strong>protected cove</strong> is a better bet than a long, wind-battered beach. Heed the <strong>flags and signs</strong> at the lifeguard post — many councils warn of jellyfish presence — and if you see them in the water, it’s not about bravery: they sting just as much near the shore. Better that day to take the parasol and a stroll.' },
+        { t: 'quote', text: 'Jellyfish don’t pick your beach at random: the wind brings them. Checking which way it blows the night before saves the next day’s disappointment.' },
+        { t: 'p', html: 'Because behind that bell-strewn shore there’s no bad luck, only physics: warm water, few predators and a pushing wind. Understanding that turns an unpredictable nuisance into something you can almost dodge by reading the forecast. The sea will still call the shots, but at least you’ll know, before loading the car, whether today is for swimming or for strolling.' },
+      ],
+      faq: [
+        { q: 'Why are there suddenly lots of jellyfish at the beach?', a: 'Because they barely swim and are carried by wind and currents: an onshore wind can push a whole swarm against the shore within hours. Whether there are many in a given year also depends on sea temperature, overfishing of their predators, and dry years (without the freshwater barrier from rivers).' },
+        { q: 'Can you tell if there will be jellyfish before going to the beach?', a: 'Not with certainty, but you can estimate it. The most predictable factor is the wind: if it blows strongly from the sea towards that coast, the risk rises. Our estimator at /medusas combines wind, area and water temperature to give an indicative per-beach level.' },
+        { q: 'Which beaches have fewer jellyfish?', a: 'Those more sheltered from the prevailing wind usually suffer fewer sudden invasions than ones exposed to the open sea. On a day with a warning, a protected cove is a better bet than a long, wind-battered beach.' },
+      ],
+    },
+  },
   // ───── Rutas en barco (voz bicéfala · embudo a alquiler) ─────
   {
     slug: 'ruta-barco-calas-menorca-fondear',
