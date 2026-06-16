@@ -76,6 +76,66 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Snorkel por costas (voz bicéfala · con fuentes) ─────
+  {
+    slug: 'mejores-playas-snorkel-costa-brava',
+    category: 'guias',
+    title: 'Las mejores playas para snorkel en la Costa Brava: dónde ver mero y coral (y la reserva a la que solo entras con guía)',
+    excerpt:
+      'Fondos de roca, una reserva marina con mero y coral rojo, y calas de agua clara. Dónde hacer snorkel de verdad en la Costa Brava, qué viento lo arruina y las normas de las Illes Medes.',
+    heroAlt: 'Buceador haciendo snorkel sobre un fondo rocoso de la Costa Brava con peces y agua clara cerca de las Illes Medes',
+    heroQuery: 'snorkel,medes,costa-brava,sea',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-16T13:00:00Z',
+    readingMin: 6,
+    related: [
+      { href: '/alquiler-barco/costas/costa-brava/provincias/girona/estartit', label: 'Alquiler de barco en l’Estartit' },
+      { href: '/comunidad/cataluna', label: 'Playas de Cataluña' },
+      { href: '/playas-aguas-cristalinas', label: 'Playas de aguas claras' },
+    ],
+    body: [
+      { t: 'p', html: 'Metes la cabeza por primera vez frente a un cabo de la Costa Brava y entiendes por qué media Europa viene a bucear aquí: bajo la superficie, las paredes de roca caen en escalones cubiertos de algas, los bancos de castañuelas se abren a tu paso y, si hay suerte, un mero curioso te mira de frente sin inmutarse. La Costa Brava no es de arena interminable; es de roca, posidonia y vida, y por eso es probablemente el mejor litoral peninsular para el snorkel.' },
+      { t: 'p', html: 'La joya es submarina y tiene nombre: las <strong>Illes Medes</strong>, frente a l’Estartit, una de las reservas marinas más célebres del Mediterráneo. Pero hay mucha Costa Brava buena para meter el tubo sin barca, de Cap de Creus a Tossa. La cuestión, como siempre, no es solo dónde, sino cuándo y cómo.' },
+      { t: 'h2', text: 'Dónde (y los datos que lo respaldan)', id: 'datos' },
+      { t: 'p', html: 'El epicentro son las <strong>Illes Medes</strong>: un archipiélago protegido desde los años 80 e integrado en el <strong>Parc Natural del Montgrí, les Illes Medes i el Baix Ter</strong>, con cientos de hectáreas de aguas protegidas. Décadas de protección han devuelto al fondo <strong>mero, corvallo, coral rojo y rayas</strong> —es snorkel de "acuario real"—, pero con una condición: a la reserva se entra <strong>en barca, fondeando en las boyas, y el snorkel se hace acompañado de guía</strong>; no se toca la fauna ni se pesca. Es la salida estrella desde <strong>l’Estartit</strong>. Cerca, frente a Calella de Palafrugell, las <strong>Illes Formigues</strong> son otro pequeño archipiélago protegido con mucha biodiversidad.' },
+      { t: 'p', html: 'Para snorkel por libre desde la orilla, las mejores son calas de <strong>fondo rocoso y agua transparente</strong>: <strong>Aiguablava</strong> y <strong>Sa Tuna</strong> (Begur) —la primera, somera y fácil; la segunda, una cala de pescadores con roca a ambos lados—, <strong>Cala Pola</strong> (Tossa de Mar), rodeada de pinos, y en el <strong>Cap de Creus</strong>, <strong>Cala Montjoi</strong> y <strong>Cala Jóncols</strong>, de cantos y fondo rocoso. La calidad del agua acompaña: buena parte de estas calas figuran con calidad <strong>"excelente" en los informes de la Agencia Europea de Medio Ambiente</strong> de los últimos años.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'Lo que decide un buen día de snorkel aquí no es la cala, es <strong>el viento</strong>. Con <strong>levante</strong> o <strong>garbí</strong> (vientos del este/sureste) entra marejada y la visibilidad bajo el agua se desploma: el fondo se enturbia y no ves a un palmo. Con la tramontana en calma y mar de fondo bajo, en cambio, el agua se queda quieta y transparente. Mira el parte de mar la noche antes; un día de levante convierte el mejor spot en agua turbia.' },
+      { t: 'p', html: 'Lo demás es sentido común: <strong>escarpines</strong> (esto es roca y erizos, no arena), <strong>ve a primera hora</strong> —el agua está más plana y las calas pequeñas se llenan a media mañana en verano— y no toques nada del fondo. Para las <strong>Medes</strong>, no intentes ir por tu cuenta a nadar entre la fauna: contrata la salida guiada en barca desde l’Estartit, que es como se visita la reserva legalmente y, de paso, te lleva a las mejores cuevas y paredes. Si quieres encadenar varias calas del mismo cabo sin pelear con el aparcamiento, <a href="/alquiler-barco/costas/costa-brava/provincias/girona/estartit">alquilar un barco en l’Estartit</a> es la forma local de hacerlo.' },
+      { t: 'quote', text: 'En la Costa Brava el snorkel no se mide en kilómetros de arena, sino en metros de visibilidad. Y la visibilidad la decide el viento, no la cala.' },
+      { t: 'p', html: 'Porque lo bueno de esta costa está debajo: en la roca, en la posidonia y en una reserva que demostró que el Mediterráneo se recupera cuando se le deja. Elige un día sin levante, ponte los escarpines y baja despacio; verás castañuelas, salpas y, con suerte, ese mero que en las Medes ya no huye. El mejor paisaje de la Costa Brava, casi siempre, está bajo la línea del agua.' },
+    ],
+    faq: [
+      { q: '¿Cuáles son las mejores calas para snorkel en la Costa Brava?', a: 'Para snorkel guiado, las Illes Medes (en barca desde l’Estartit, con guía) son lo mejor por su fauna recuperada. Por libre desde la orilla destacan Aiguablava y Sa Tuna (Begur), Cala Pola (Tossa de Mar) y, en Cap de Creus, Cala Montjoi y Cala Jóncols, todas de fondo rocoso y agua clara.' },
+      { q: '¿Se puede hacer snorkel por libre en las Islas Medes?', a: 'La reserva marina se visita en barca, fondeando en las boyas habilitadas, y el snorkel se realiza acompañado de guía; no está permitido tocar la fauna ni pescar. Es la salida típica desde l’Estartit. No es una cala a la que se llegue nadando desde la playa.' },
+      { q: '¿Qué viento estropea el snorkel en la Costa Brava?', a: 'El levante y el garbí (vientos del este/sureste) levantan marejada y enturbian el agua, hundiendo la visibilidad. Lo ideal es mar en calma; revisa el parte la noche antes y lleva escarpines, porque el fondo es de roca y erizos.' },
+    ],
+    en: {
+      title: 'The best snorkelling beaches on the Costa Brava: where to see grouper and coral (and the reserve you only enter with a guide)',
+      excerpt: 'Rocky seabeds, a marine reserve with grouper and red coral, and clear-water coves. Where to really snorkel on the Costa Brava, which wind ruins it, and the Medes Islands rules.',
+      related: [
+        { href: '/en/boat-rental/coasts/costa-brava/provinces/girona/estartit', label: 'Boat rental in l’Estartit' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+      ],
+      body: [
+        { t: 'p', html: 'Put your head under for the first time off a Costa Brava headland and you understand why half of Europe comes here to dive: below the surface, rock walls drop in algae-covered steps, shoals of damselfish part as you pass and, with luck, a curious grouper stares you down without flinching. The Costa Brava isn’t about endless sand; it’s rock, seagrass and life, which is why it’s probably the best mainland coast for snorkelling.' },
+        { t: 'p', html: 'The jewel is underwater and has a name: the <strong>Medes Islands</strong>, off l’Estartit, one of the most famous marine reserves in the Mediterranean. But there’s plenty of good Costa Brava for snorkelling without a boat, from Cap de Creus to Tossa. The question, as ever, isn’t just where, but when and how.' },
+        { t: 'h2', text: 'Where (and the facts behind it)', id: 'facts' },
+        { t: 'p', html: 'The epicentre is the <strong>Medes Islands</strong>: an archipelago protected since the 1980s and part of the <strong>Montgrí, Medes Islands and Baix Ter Natural Park</strong>, with hundreds of hectares of protected waters. Decades of protection have brought back <strong>grouper, brown meagre, red coral and rays</strong> — it’s "real aquarium" snorkelling — but with one condition: you enter the reserve <strong>by boat, mooring at the buoys, and snorkel accompanied by a guide</strong>; you don’t touch the wildlife or fish. It’s the flagship trip from <strong>l’Estartit</strong>. Nearby, off Calella de Palafrugell, the <strong>Formigues Islands</strong> are another small protected archipelago rich in biodiversity.' },
+        { t: 'p', html: 'For snorkelling from the shore, the best are coves with <strong>rocky bottoms and clear water</strong>: <strong>Aiguablava</strong> and <strong>Sa Tuna</strong> (Begur) — the first shallow and easy, the second a fishing cove with rock on both sides — <strong>Cala Pola</strong> (Tossa de Mar), ringed by pines, and on <strong>Cap de Creus</strong>, <strong>Cala Montjoi</strong> and <strong>Cala Jóncols</strong>, pebbly with rocky beds. Water quality backs it up: many of these coves are rated <strong>"excellent" in recent European Environment Agency reports</strong>.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'What decides a good snorkel day here isn’t the cove, it’s <strong>the wind</strong>. With a <strong>levante</strong> or <strong>garbí</strong> (easterly/south-easterly winds) a swell rolls in and underwater visibility collapses: the bottom clouds over and you can’t see a hand’s width. With calm and low groundswell, by contrast, the water turns still and clear. Check the sea forecast the night before; a levante day turns the best spot into murky water.' },
+        { t: 'p', html: 'The rest is common sense: <strong>water shoes</strong> (this is rock and sea urchins, not sand), <strong>go first thing</strong> — the water is flatter and the small coves fill by mid-morning in summer — and touch nothing on the bottom. For the <strong>Medes</strong>, don’t try to go on your own to swim among the wildlife: book the guided boat trip from l’Estartit, which is how you legally visit the reserve and, along the way, reach the best caves and walls. To string together several coves on the same headland without fighting for parking, <a href="/en/boat-rental/coasts/costa-brava/provinces/girona/estartit">renting a boat in l’Estartit</a> is the local way to do it.' },
+        { t: 'quote', text: 'On the Costa Brava snorkelling isn’t measured in kilometres of sand, but in metres of visibility. And visibility is decided by the wind, not the cove.' },
+        { t: 'p', html: 'Because the good part of this coast is underneath: in the rock, the seagrass and a reserve that proved the Mediterranean recovers when left alone. Pick a day without a levante, put on your water shoes and go down slowly; you’ll see damselfish, salema and, with luck, that grouper which in the Medes no longer flees. The best scenery on the Costa Brava is almost always below the waterline.' },
+      ],
+      faq: [
+        { q: 'Which are the best coves for snorkelling on the Costa Brava?', a: 'For guided snorkelling, the Medes Islands (by boat from l’Estartit, with a guide) are the best for their recovered wildlife. From the shore, the standouts are Aiguablava and Sa Tuna (Begur), Cala Pola (Tossa de Mar) and, on Cap de Creus, Cala Montjoi and Cala Jóncols, all rocky-bottomed with clear water.' },
+        { q: 'Can you snorkel independently in the Medes Islands?', a: 'The marine reserve is visited by boat, mooring at the designated buoys, and snorkelling is done accompanied by a guide; touching wildlife or fishing is not allowed. It’s the typical trip from l’Estartit, not a cove you can swim out to from the beach.' },
+        { q: 'Which wind ruins snorkelling on the Costa Brava?', a: 'The levante and garbí (easterly/south-easterly winds) raise a swell and cloud the water, sinking visibility. Calm seas are ideal; check the forecast the night before and bring water shoes, as the bottom is rock and sea urchins.' },
+      ],
+    },
+  },
   // ───── Medusas (voz bicéfala) ─────
   {
     slug: 'que-hacer-picadura-medusa-mitos',
