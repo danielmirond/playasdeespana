@@ -66,6 +66,17 @@ export default function ConsentScripts() {
           strategy="lazyOnload"
         />
       )}
+
+      {/* GetYourGuide Partner Analytics (afiliación). Solo con consentimiento
+          de marketing: es un tracker de conversión de tours/actividades. */}
+      {marketing && (
+        <Script
+          id="gyg-analytics"
+          src="https://widget.getyourguide.com/dist/pa.umd.production.min.js"
+          data-gyg-partner-id="BMIKRAB"
+          strategy="lazyOnload"
+        />
+      )}
     </>
   )
 }
