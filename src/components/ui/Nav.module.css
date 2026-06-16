@@ -92,11 +92,21 @@
 }
 
 @media (max-width: 640px) {
-  .nav { padding: 0 1.1rem; }
+  /* La hamburguesa es fixed en top-left (12px + 44px = 56px). En móvil usamos
+     grid de 2 columnas: logo a la izquierda (tras reservar el hueco de la
+     hamburguesa) y acciones a la derecha. Así nada se pisa. */
   .links { display: none; }
+  .nav {
+    grid-template-columns: 1fr auto;
+    padding: 0 1.1rem 0 3.75rem;
+  }
+  .logo { grid-column: 1; justify-self: start; }
+  .right { grid-column: 2; justify-self: end; }
+  .logo img { height: 30px; }
 }
 @media (max-width: 380px) {
-  .nav { padding: 0 .75rem; }
+  .nav { padding: 0 .6rem 0 3.5rem; }
+  .logo img { height: 28px; }
 }
 
 .langSwitch {
