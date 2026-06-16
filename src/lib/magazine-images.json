@@ -16,6 +16,12 @@
     "source": "Flickr",
     "author": "Tim&Elisa"
   },
+  "fondear-formentera-barco-ibiza": {
+    "url": "https://live.staticflickr.com/65535/55287908500_b960f78c8f_c.jpg",
+    "thumb": "https://live.staticflickr.com/65535/55287908500_b960f78c8f_m.jpg",
+    "source": "Flickr",
+    "author": "richardjack57"
+  },
   "playa-benijo-tenerife-arena-negra-corrientes": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Playa_de_Benijo.jpg",
     "thumb": "https://upload.wikimedia.org/wikipedia/commons/9/97/Playa_de_Benijo.jpg",
@@ -40,6 +46,11 @@
   "playa-rodas-islas-cies-permiso": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/C%C3%ADes_uharteak_1.JPG",
     "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/C%C3%ADes_uharteak_1.JPG/1280px-C%C3%ADes_uharteak_1.JPG",
+    "source": "Wikipedia"
+  },
+  "ruta-barco-calas-menorca-fondear": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Cala-galdana.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Cala-galdana.jpg/1280px-Cala-galdana.jpg",
     "source": "Wikipedia"
   },
   "ruta-calas-cabo-de-gata-almeria": {

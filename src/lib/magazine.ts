@@ -76,6 +76,125 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Rutas en barco (voz bicéfala · embudo a alquiler) ─────
+  {
+    slug: 'ruta-barco-calas-menorca-fondear',
+    category: 'rutas',
+    title: 'Menorca en barco: la ruta de calas vírgenes a las que no llega la carretera (y dónde fondear sin multa)',
+    excerpt:
+      'Las mejores calas del sur de Menorca solo se ven bien desde el agua. La ruta para hacerlas en barco desde Ciutadella: qué orden seguir, el viento que la arruina y la norma de fondeo sobre posidonia que multa.',
+    heroAlt: 'Barco fondeado frente a una cala virgen de Menorca, agua clara sobre fondo de arena y pinos en el acantilado',
+    heroQuery: 'menorca,cala,boat,balearic',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-16T09:00:00Z',
+    readingMin: 5,
+    related: [
+      { href: '/alquiler-barco/costas/islas-baleares/provincias/baleares/menorca', label: 'Alquiler de barco en Menorca' },
+      { href: '/comunidad/islas-baleares', label: 'Playas de Baleares' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+    ],
+    body: [
+      { t: 'p', html: 'Hay una Menorca que desde tierra apenas se intuye: la del sur, una sucesión de calas de arena clara escondidas entre barrancos y pinos a las que se llega tras caminar media hora… o en diez minutos de navegación. Desde el agua, el archipiélago cambia de cara: las paredes calcáreas se abren en herraduras blancas, el fondo se ve a varios metros y cada recodo descubre una ensenada distinta. Por eso media isla, en verano, se mueve en barco.' },
+      { t: 'p', html: 'Es la forma en que los menorquines disfrutan su propia costa sin pelear por el aparcamiento ni por el último hueco de toalla. Un día de cabotaje tranquilo, saltando de cala en cala, fondeando para comer y para nadar. Pero el mar de Menorca tiene reglas —de viento y de ley— que conviene conocer antes de soltar amarras.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La ruta lógica sale de <strong>Ciutadella</strong>, al oeste, y baja por el sur: <strong>Cala Macarella y Macarelleta</strong>, <strong>Cala en Turqueta</strong>, <strong>Cala Trebalúger</strong> y <strong>Cala Galdana</strong>, todas con mejor estampa y fondeo desde el agua que desde el sendero. La pega que casi nadie cuenta: <strong>Menorca es Reserva de la Biosfera (UNESCO) y gran parte de sus fondos son praderas de posidonia protegidas</strong> (Red Natura 2000). Echar el ancla sobre la posidonia está <strong>prohibido y se multa</strong> —las sanciones pueden llegar a varios miles de euros—; hay que fondear sobre arena (las manchas claras del fondo) o usar las <strong>boyas de fondeo ecológico</strong> reguladas, que en temporada alta se agotan pronto.' },
+      { t: 'p', html: 'El segundo aviso es el viento. La costa sur está resguardada de la <strong>tramontana</strong> del norte, por eso es la buena para este plan; pero con viento de sur (<strong>migjorn</strong>) las calas del sur se pican y se enturbian, y entonces lo sensato es darle la vuelta a la isla y navegar el norte. Mira el parte la noche antes: en Menorca, el día de barco lo decide de qué cuadrante sopla.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'Tres reglas hacen el día redondo. Una: <strong>sal temprano</strong>. A media mañana las calas del sur se llenan de barcos y la foto de ensenada solitaria se evapora; antes de las 10h las tienes casi para ti. Dos: <strong>lleva la app de fondeo</strong> y localiza las boyas o las zonas de arena antes de llegar, para no dar vueltas buscando dónde anclar legalmente. Tres: <strong>si no tienes título, alquila con patrón</strong>; la costa es fácil pero los fondeos sobre arena, las corrientes en los cabos y el tráfico de verano se llevan mejor con alguien que conoce la isla.' },
+      { t: 'p', html: 'Y un truco de itinerario: encadena la <strong>Turqueta</strong> a primera hora (la más fotogénica con luz de mañana), come fondeado en <strong>Trebalúger</strong> (más recogida y con menos gente) y deja <strong>Macarelleta</strong> para el final de la tarde, cuando el bus de mediodía ya se ha llevado a la multitud que llega por tierra. Si el migjorn aprieta, cambia el plan al norte: <strong>Cala Pregonda</strong> y <strong>Cavalleria</strong>, de arena rojiza, son otra Menorca.' },
+      { t: 'quote', text: 'En Menorca el barco no es un lujo: es la única forma de tener una cala para ti un rato. Pero el ancla se echa sobre arena, nunca sobre la posidonia.' },
+      { t: 'p', html: 'Porque navegar Menorca no va de velocidad ni de millas, sino de paladear una costa que en coche se ve a medias y a empujones. Respeta el viento, fondea donde debes y madruga un poco, y tendrás el sur de la isla abriéndose cala a cala, con el motor al ralentí y el fondo de arena pasando bajo el casco. Hazlo a lo loco en agosto a mediodía, y entenderás por qué los que saben zarpan al amanecer.' },
+    ],
+    faq: [
+      { q: '¿Se puede fondear en cualquier cala de Menorca?', a: 'No sobre las praderas de posidonia, que están protegidas (Red Natura 2000) y cuyo fondeo está prohibido y multado, con sanciones que pueden alcanzar varios miles de euros. Hay que anclar sobre arena (las manchas claras del fondo) o usar las boyas de fondeo ecológico reguladas, limitadas en temporada alta.' },
+      { q: '¿Qué calas de Menorca merecen más ir en barco?', a: 'Las del sur entre Ciutadella y Cala Galdana: Macarella y Macarelleta, Cala en Turqueta y Cala Trebalúger, mejor accesibles y más bonitas desde el agua. Con viento del sur (migjorn) conviene navegar el norte (Pregonda, Cavalleria).' },
+      { q: '¿Necesito título para alquilar el barco?', a: 'Depende de la potencia y eslora; muchas embarcaciones pequeñas se pueden llevar sin titulación, pero si no navegas habitualmente lo más cómodo y seguro en Menorca es alquilar con patrón, por los fondeos sobre arena y el tráfico de verano.' },
+    ],
+    en: {
+      title: 'Menorca by boat: the route to wild coves the road can’t reach (and where to anchor without a fine)',
+      excerpt: 'Menorca’s best southern coves only look their best from the water. The boat route from Ciutadella: the order to follow, the wind that ruins it, and the seagrass anchoring rule that fines you.',
+      related: [
+        { href: '/en/boat-rental/coasts/islas-baleares/provinces/baleares/menorca', label: 'Boat rental in Menorca' },
+        { href: '/en/islands', label: 'Beaches by island' },
+      ],
+      body: [
+        { t: 'p', html: 'There’s a Menorca you barely sense from land: the south, a string of pale-sand coves hidden among ravines and pines, reached after a half-hour walk… or ten minutes of sailing. From the water the island changes face: the limestone walls open into white horseshoes, the bottom is visible several metres down, and every bend reveals a different inlet. Which is why half the island, in summer, moves by boat.' },
+        { t: 'p', html: 'It’s how Menorcans enjoy their own coast without fighting for parking or the last patch of towel space. A day of easy coastal hopping, cove to cove, anchoring to eat and swim. But Menorca’s sea has rules — of wind and of law — worth knowing before you cast off.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The logical route leaves <strong>Ciutadella</strong> in the west and runs south: <strong>Cala Macarella and Macarelleta</strong>, <strong>Cala en Turqueta</strong>, <strong>Cala Trebalúger</strong> and <strong>Cala Galdana</strong>, all better seen and anchored from the water than from the path. The catch almost nobody mentions: <strong>Menorca is a UNESCO Biosphere Reserve and much of its seabed is protected Posidonia seagrass</strong> (Natura 2000). Dropping anchor on the seagrass is <strong>banned and fined</strong> — penalties can run to several thousand euros — so you must anchor on sand (the pale patches on the bottom) or use the regulated <strong>eco-mooring buoys</strong>, which sell out early in high season.' },
+        { t: 'p', html: 'The second warning is the wind. The south coast is sheltered from the northerly <strong>tramontana</strong>, which is why it’s the one for this plan; but with a southerly (<strong>migjorn</strong>) the southern coves chop up and cloud over, and the sensible move is to round the island and sail the north. Check the forecast the night before: in Menorca, the boat day is decided by which quarter the wind blows from.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'Three rules make the day: One, <strong>leave early</strong> — by mid-morning the southern coves fill with boats and the empty-inlet picture vanishes; before 10am you’ll have them almost to yourself. Two, <strong>carry the mooring app</strong> and locate the buoys or sand zones before you arrive, so you’re not circling looking for a legal spot. Three, <strong>if you’re not qualified, charter with a skipper</strong>; the coast is easy but sand anchoring, headland currents and summer traffic are handled better by someone who knows the island.' },
+        { t: 'p', html: 'And an itinerary trick: take <strong>Turqueta</strong> first thing (most photogenic in morning light), lunch at anchor in <strong>Trebalúger</strong> (more tucked away, fewer people) and save <strong>Macarelleta</strong> for late afternoon, once the midday bus has carried off the land crowd. If the migjorn picks up, switch north: <strong>Cala Pregonda</strong> and <strong>Cavalleria</strong>, with reddish sand, are another Menorca.' },
+        { t: 'quote', text: 'In Menorca a boat isn’t a luxury: it’s the only way to have a cove to yourself for a while. But you drop anchor on sand, never on the seagrass.' },
+        { t: 'p', html: 'Because sailing Menorca isn’t about speed or miles, but about savouring a coast that by car you only half-see, in a crush. Respect the wind, anchor where you should and set off a little early, and the island’s south will open cove by cove, engine idling, the sandy bottom sliding under the hull. Do it on a whim at midday in August, and you’ll understand why those in the know weigh anchor at dawn.' },
+      ],
+      faq: [
+        { q: 'Can you anchor in any cove in Menorca?', a: 'Not over the Posidonia seagrass meadows, which are protected (Natura 2000) and where anchoring is banned and fined — penalties can reach several thousand euros. You must anchor on sand (the pale patches on the bottom) or use the regulated eco-mooring buoys, which are limited in high season.' },
+        { q: 'Which Menorca coves are most worth reaching by boat?', a: 'The southern ones between Ciutadella and Cala Galdana: Macarella and Macarelleta, Cala en Turqueta and Cala Trebalúger, more accessible and more beautiful from the water. With a southerly (migjorn) it’s better to sail the north (Pregonda, Cavalleria).' },
+        { q: 'Do I need a licence to rent the boat?', a: 'It depends on power and length; many small boats can be operated without a licence, but if you don’t sail regularly the most comfortable and safe option in Menorca is to charter with a skipper, given the sand anchoring and summer traffic.' },
+      ],
+    },
+  },
+  {
+    slug: 'fondear-formentera-barco-ibiza',
+    category: 'rutas',
+    title: 'Formentera en barco desde Ibiza: las calas para fondear y la norma de la posidonia que multa',
+    excerpt:
+      'El plan que hace medio Ibiza en verano: cruzar a Formentera en barco a por sus calas de arena blanca. Cómo es la travesía, dónde fondear y la regulación de la posidonia que puede costarte miles de euros.',
+    heroAlt: 'Barcos fondeados sobre agua clara frente a la playa de Ses Illetes en Formentera, con la arena blanca al fondo',
+    heroQuery: 'formentera,beach,boat,balearic',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-06-16T09:30:00Z',
+    readingMin: 5,
+    related: [
+      { href: '/alquiler-barco/costas/islas-baleares/provincias/baleares/formentera', label: 'Alquiler de barco en Formentera' },
+      { href: '/alquiler-barco/costas/islas-baleares/provincias/baleares/ibiza', label: 'Alquiler de barco en Ibiza' },
+      { href: '/islas', label: 'Playas por isla en España' },
+    ],
+    body: [
+      { t: 'p', html: 'Desde la cubierta, al salir de Ibiza rumbo al sur, Formentera aparece como una línea baja y luminosa sobre un agua que va aclarándose hasta volverse casi blanca. Una hora escasa de travesía y se entiende el mito: arena finísima, fondos de arena clara que tiñen el mar de un verde imposible y, en medio del canal, el islote de <strong>S’Espalmador</strong> con su laguna. No es casualidad que en verano el canal entre las dos islas se llene de barcos: cruzar a Formentera por mar es, para muchos, el mejor día de las Pitiusas.' },
+      { t: 'p', html: 'El plan clásico sale de un puerto de Ibiza —Sant Antoni, Ibiza ciudad o Santa Eulària— y fondea frente a <strong>Ses Illetes</strong> o <strong>Llevant</strong>, las playas del norte de Formentera, dentro del Parque Natural de Ses Salines. Suena idílico, y lo es. Pero ese mismo paraíso tiene una letra pequeña que cada verano cuesta cara a quien no la lee.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La travesía Ibiza–Formentera son unas <strong>10-12 millas</strong> según el puerto de salida: corta, pero a mar abierto, con el canal expuesto al viento; con <strong>levante o poniente fuertes</strong> se forma marejada y la cruzada se hace incómoda. La clave del día es el fondeo, y aquí está el aviso que muchos descubren con la multa en la mano: las aguas de Formentera son <strong>pradera de posidonia, hábitat protegido por la UNESCO y la Red Natura 2000</strong>. Fondear sobre la posidonia está <strong>prohibido y muy vigilado en verano</strong>, con <strong>sanciones que pueden alcanzar varios miles de euros</strong>; hay que anclar sobre las manchas de arena o reservar una de las <strong>boyas de fondeo reguladas</strong> mediante la app oficial, limitadas y muy demandadas en agosto.' },
+      { t: 'p', html: 'El segundo factor es la masificación. Ses Illetes es de las playas más bellas del Mediterráneo y en julio y agosto el fondeadero se convierte en un aparcamiento de barcos; el agua sigue siendo espectacular, pero la sensación de calma desaparece. Y en tierra, Formentera <strong>regula el acceso de vehículos en temporada alta</strong> con cupos —razón de más para llegar por mar y no en coche.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'La regla de oro es <strong>reservar la boya o tener clara la zona de arena antes de zarpar</strong>, y salir <strong>pronto</strong>: a media mañana el fondeo de Ses Illetes está lleno y patrullado. Mira el parte —con canal picado, el cruce deja de ser un placer— y, si no tienes título o experiencia en mar abierto, <strong>alquila con patrón</strong>: el canal, las corrientes y la maniobra de fondeo legal sobre arena se llevan mucho mejor con alguien que lo hace cada día.' },
+      { t: 'p', html: 'Trucos que cambian el día: madruga y fondea primero en <strong>S’Espalmador</strong>, el islote a medio camino, que a primera hora suele estar tranquilo, y deja Ses Illetes para cuando ya estés aclimatado. Lleva <strong>todo de tierra</strong> —agua, comida, sombra— porque los chiringuitos de Formentera son caros y el plan es de barco, no de restaurante. Y respeta las balizas: las zonas de baño y los canales de entrada están señalizados por seguridad de los nadadores. ¿La alternativa con menos gentío? Las calas del sur y del este de Formentera, menos fotografiadas pero igual de limpias.' },
+      { t: 'quote', text: 'A Formentera se va por mar para huir de las colas… y se vuelve con multa si echas el ancla donde no debes. El paraíso también tiene reglas.' },
+      { t: 'p', html: 'Porque cruzar a Formentera en barco es uno de esos planes que justifican el viaje a Ibiza entero: el agua aclarándose milla a milla, el ancla mordiendo la arena blanca, el baño en un mar que parece iluminado por debajo. Hazlo con la boya reservada, el parte mirado y madrugando, y tendrás el mejor día de las Pitiusas. Hazlo improvisando en pleno agosto, y lo recordarás por la cola de barcos y por la sanción del patrullero.' },
+    ],
+    faq: [
+      { q: '¿Cuánto se tarda en barco de Ibiza a Formentera?', a: 'Entre 10 y 12 millas náuticas según el puerto de salida (Sant Antoni, Ibiza ciudad o Santa Eulària): aproximadamente una hora en una embarcación de recreo. Es mar abierto: con levante o poniente fuertes el canal se pica y la travesía se hace incómoda.' },
+      { q: '¿Dónde se puede fondear en Formentera?', a: 'Solo sobre fondos de arena o en las boyas de fondeo reguladas (reservables por app), nunca sobre la posidonia, que es hábitat protegido (UNESCO / Red Natura 2000). El fondeo sobre posidonia está prohibido y muy vigilado, con multas que pueden alcanzar varios miles de euros.' },
+      { q: '¿Mejor ir a Formentera en barco o en ferry?', a: 'En barco propio o de alquiler tienes libertad para fondear frente a Ses Illetes, S’Espalmador y las calas, y evitas el cupo de vehículos que regula la isla en verano. El ferry es más barato y rápido si solo quieres pisar tierra, pero te ata a una playa concreta.' },
+    ],
+    en: {
+      title: 'Formentera by boat from Ibiza: the coves to anchor in and the seagrass rule that fines you',
+      excerpt: 'The plan half of Ibiza does in summer: crossing to Formentera by boat for its white-sand coves. What the crossing is like, where to anchor, and the Posidonia rule that can cost you thousands.',
+      related: [
+        { href: '/en/boat-rental/coasts/islas-baleares/provinces/baleares/formentera', label: 'Boat rental in Formentera' },
+        { href: '/en/islands', label: 'Beaches by island' },
+      ],
+      body: [
+        { t: 'p', html: 'From the deck, leaving Ibiza southbound, Formentera appears as a low, luminous line over water that pales mile by mile until it’s almost white. A crossing of barely an hour and you understand the myth: ultra-fine sand, pale sandy bottoms that turn the sea an impossible green and, mid-channel, the islet of <strong>S’Espalmador</strong> with its lagoon. No surprise that in summer the channel between the two islands fills with boats: crossing to Formentera by sea is, for many, the best day in the Pityusic Islands.' },
+        { t: 'p', html: 'The classic plan leaves an Ibiza port — Sant Antoni, Ibiza town or Santa Eulària — and anchors off <strong>Ses Illetes</strong> or <strong>Llevant</strong>, the northern beaches of Formentera, inside the Ses Salines Natural Park. It sounds idyllic, and it is. But that same paradise has small print that costs the unwary dearly every summer.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The Ibiza–Formentera crossing is about <strong>10-12 nautical miles</strong> depending on the departure port: short, but open sea, the channel exposed to wind; with a strong easterly or westerly a swell builds and the crossing turns uncomfortable. The key to the day is the anchoring, and here’s the warning many discover with the fine in hand: Formentera’s waters are <strong>Posidonia seagrass meadow, a habitat protected by UNESCO and Natura 2000</strong>. Anchoring on the seagrass is <strong>banned and heavily policed in summer</strong>, with <strong>penalties that can reach several thousand euros</strong>; you must anchor on the sand patches or book one of the <strong>regulated mooring buoys</strong> via the official app, limited and in high demand in August.' },
+        { t: 'p', html: 'The second factor is crowding. Ses Illetes is among the most beautiful beaches in the Mediterranean, and in July and August the anchorage becomes a boat car park; the water is still spectacular, but the calm is gone. And on land, Formentera <strong>caps vehicle access in high season</strong> — all the more reason to arrive by sea, not by car.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'The golden rule is to <strong>book the buoy or know your sand zone before you cast off</strong>, and leave <strong>early</strong>: by mid-morning the Ses Illetes anchorage is full and patrolled. Check the forecast — with a choppy channel the crossing stops being a pleasure — and if you’re not qualified or experienced in open water, <strong>charter with a skipper</strong>: the channel, the currents and the legal sand-anchoring manoeuvre are far easier with someone who does it daily.' },
+        { t: 'p', html: 'Day-changing tricks: rise early and anchor first at <strong>S’Espalmador</strong>, the islet halfway across, usually calm first thing, and save Ses Illetes for once you’re settled in. Bring <strong>everything from the mainland</strong> — water, food, shade — as Formentera’s beach bars are pricey and this is a boat day, not a restaurant one. And respect the buoys: swim zones and entry channels are marked for swimmers’ safety. The less-crowded alternative? Formentera’s south and east coves, less photographed but just as clean.' },
+        { t: 'quote', text: 'You go to Formentera by sea to escape the queues… and come back with a fine if you drop anchor where you shouldn’t. Paradise has rules too.' },
+        { t: 'p', html: 'Because crossing to Formentera by boat is one of those plans that justify the whole trip to Ibiza: the water paling mile by mile, the anchor biting white sand, the swim in a sea that seems lit from below. Do it with the buoy booked, the forecast checked and an early start, and you’ll have the best day in the Pityusics. Do it on a whim in peak August, and you’ll remember it for the queue of boats and the patrol boat’s fine.' },
+      ],
+      faq: [
+        { q: 'How long is the boat trip from Ibiza to Formentera?', a: 'Between 10 and 12 nautical miles depending on the departure port (Sant Antoni, Ibiza town or Santa Eulària): roughly an hour in a leisure boat. It’s open sea: with a strong easterly or westerly the channel chops up and the crossing gets uncomfortable.' },
+        { q: 'Where can you anchor in Formentera?', a: 'Only on sandy bottoms or at the regulated mooring buoys (bookable by app), never on the Posidonia, which is a protected habitat (UNESCO / Natura 2000). Anchoring on the seagrass is banned and heavily policed, with fines that can reach several thousand euros.' },
+        { q: 'Is it better to go to Formentera by boat or ferry?', a: 'With your own or a rented boat you’re free to anchor off Ses Illetes, S’Espalmador and the coves, and you avoid the vehicle cap the island enforces in summer. The ferry is cheaper and faster if you just want to set foot on land, but it ties you to one specific beach.' },
+      ],
+    },
+  },
   // ───── Diario de playas (voz bicéfala) ─────
   {
     slug: 'playa-benijo-tenerife-arena-negra-corrientes',

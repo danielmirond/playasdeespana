@@ -33,6 +33,12 @@ const UA = 'PlayasDeEspana/1.0 (+https://playas-espana.com; fotos cache offline)
 
 const args = process.argv.slice(2)
 const FORCE = args.includes('--force')
+// Modo laxo: prioriza COBERTURA sobre precisión para rellenar las playas en
+// fallback. Amplía el radio geo y acepta foto de playa cercana aunque no lleve
+// el nombre; añade búsquedas por municipio en Flickr/OpenVerse/Wikimedia.
+// Solo afecta a este backfill offline; el runtime (fotos.ts) sigue estricto.
+// Reprocesa también las entradas vacías ([]) del sidecar.
+const LAX = args.includes('--lax')
 const FILTER = (args.find(a => a.startsWith('--filter=')) ?? '').split('=')[1] ?? ''
 const LIMIT = Number((args.find(a => a.startsWith('--limit=')) ?? '').split('=')[1] ?? '0') || 0
 const OFFSET = Number((args.find(a => a.startsWith('--offset=')) ?? '').split('=')[1] ?? '0') || 0
@@ -104,18 +110,19 @@ function extraerFotosDePages(pages) {
 async function wikimediaGeo(lat, lon, nombre) {
   if (lat == null || lon == null) return []
   try {
-    // Término medio: radio 1000m (antes 700) y EXIGIR que el archivo lleve el
-    // nombre de la playa (sin fallback a "foto cercana genérica" que colaba
-    // restaurantes/pueblo/montaña).
-    const params = new URLSearchParams({ action:'query', generator:'geosearch', ggsnamespace:'6', ggscoord:`${lat}|${lon}`, ggsradius:'1000', ggslimit:'40', prop:'imageinfo|pageprops', iiprop:'url|extmetadata|size', iiurlwidth:'1200', format:'json', origin:'*' })
+    // Radio 1000m (término medio) / 1500m (laxo). Se exige nombre en el archivo;
+    // en modo laxo, si no hay match de nombre se aceptan las fotos de PLAYA
+    // cercanas (POSITIVAS) — más cobertura a costa de algo de precisión.
+    const radius = LAX ? '1500' : '1000'
+    const params = new URLSearchParams({ action:'query', generator:'geosearch', ggsnamespace:'6', ggscoord:`${lat}|${lon}`, ggsradius:radius, ggslimit:'40', prop:'imageinfo|pageprops', iiprop:'url|extmetadata|size', iiurlwidth:'1200', format:'json', origin:'*' })
     const res = await fetchT(`https://commons.wikimedia.org/w/api.php?${params}`)
     if (!res.ok) return []
     const data = await res.json()
     const beachish = extraerFotosDePages(Object.values(data.query?.pages ?? {})).filter(f => { try { return POSITIVAS.test(decodeURIComponent(f.url).toLowerCase()) } catch { return false } })
     const tokens = [normalizar(nombre), ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4 && !PALABRAS_GENERICAS.has(t))].filter(Boolean)
-    if (tokens.length === 0) return []
     const conNombre = beachish.filter(f => { try { const url = normalizar(decodeURIComponent(f.url)); return tokens.some(t => t.length >= 4 && url.includes(t)) } catch { return false } })
-    return conNombre.slice(0, 6)
+    if (conNombre.length > 0) return conNombre.slice(0, 6)
+    return LAX ? beachish.slice(0, 6) : []
   } catch { return [] }
 }
 
@@ -157,7 +164,7 @@ async function openverse(nombre, municipio) {
       const res = await fetchT(`https://api.openverse.org/v1/images/?${params}`)
       if (!res.ok) continue
       const data = await res.json()
-      const fotos = (data?.results ?? []).map(r => { const url = r.url; if (!url || typeof url !== 'string') return null; const titulo = (r.title ?? '').toLowerCase(); if (NEGATIVAS.test(titulo) || !POSITIVAS.test(titulo)) return null; const tn = normalizar(titulo); if (!tokens.some(t => t.length >= 4 && tn.includes(t))) return null; return { url, thumb: r.thumbnail ?? url, fuente: 'openverse', autor: r.creator?.slice(0, 60) || undefined } }).filter(Boolean)
+      const fotos = (data?.results ?? []).map(r => { const url = r.url; if (!url || typeof url !== 'string') return null; const titulo = (r.title ?? '').toLowerCase(); if (NEGATIVAS.test(titulo) || !POSITIVAS.test(titulo)) return null; const tn = normalizar(titulo); if (!LAX && !tokens.some(t => t.length >= 4 && tn.includes(t))) return null; return { url, thumb: r.thumbnail ?? url, fuente: 'openverse', autor: r.creator?.slice(0, 60) || undefined } }).filter(Boolean)
       if (fotos.length >= 1) return fotos.slice(0, 6)
     } catch { continue }
   }
@@ -167,13 +174,16 @@ async function openverse(nombre, municipio) {
 async function flickr(nombre, municipio) {
   const nT = normalizar(nombre), mT = normalizar(municipio)
   const tokens = [nT, ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4)].filter(Boolean)
-  for (const tags of [`${nT},${mT},beach`, `${nT},beach`, `${nT},playa`].filter(t => !t.startsWith(',') && !t.endsWith(','))) {
+  // Laxo: añade búsquedas por municipio (acepta foto compartida del municipio).
+  const queries = [`${nT},${mT},beach`, `${nT},beach`, `${nT},playa`]
+  if (LAX && mT) queries.push(`${mT},beach`, `${mT},playa`, `${mT},cala`)
+  for (const tags of queries.filter(t => !t.startsWith(',') && !t.endsWith(','))) {
     try {
       const params = new URLSearchParams({ format:'json', nojsoncallback:'1', tags, tagmode:'all' })
       const res = await fetchT(`https://www.flickr.com/services/feeds/photos_public.gne?${params}`)
       if (!res.ok) continue
       const data = await res.json()
-      const fotos = (data?.items ?? []).map(item => { const titulo = (item.title ?? '').toLowerCase(), tagsStr = (item.tags ?? '').toLowerCase(); if (NEGATIVAS.test(titulo) || NEGATIVAS.test(tagsStr)) return null; if (!POSITIVAS.test(titulo) && !POSITIVAS.test(tagsStr)) return null; const tn = normalizar(titulo), tg = normalizar(tagsStr); if (!tokens.some(t => t.length >= 4 && (tn.includes(t) || tg.includes(t)))) return null; const m = item.media?.m ?? ''; if (!m || !/_m\.(jpg|jpeg|png)/i.test(m)) return null; return { url: m.replace(/_m\.(jpg|jpeg|png)/i, '_c.$1'), thumb: m, fuente: 'flickr', autor: item.author?.replace(/^.*\("(.+)"\)$/, '$1') || undefined } }).filter(Boolean)
+      const fotos = (data?.items ?? []).map(item => { const titulo = (item.title ?? '').toLowerCase(), tagsStr = (item.tags ?? '').toLowerCase(); if (NEGATIVAS.test(titulo) || NEGATIVAS.test(tagsStr)) return null; if (!POSITIVAS.test(titulo) && !POSITIVAS.test(tagsStr)) return null; const tn = normalizar(titulo), tg = normalizar(tagsStr); if (!LAX && !tokens.some(t => t.length >= 4 && (tn.includes(t) || tg.includes(t)))) return null; const m = item.media?.m ?? ''; if (!m || !/_m\.(jpg|jpeg|png)/i.test(m)) return null; return { url: m.replace(/_m\.(jpg|jpeg|png)/i, '_c.$1'), thumb: m, fuente: 'flickr', autor: item.author?.replace(/^.*\("(.+)"\)$/, '$1') || undefined } }).filter(Boolean)
       if (fotos.length >= 2) return fotos.slice(0, 6)
     } catch { continue }
   }
@@ -183,14 +193,16 @@ async function flickr(nombre, municipio) {
 async function wikimediaText(nombre, municipio) {
   const n = nombre.replace(/"/g, ''), m = municipio.replace(/"/g, '')
   const tokens = nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4 && !PALABRAS_GENERICAS.has(t))
-  for (const q of [`"${n}" "${m}"`, `"${n}" ${m} beach`, `"${n}" ${m} playa`, `"${n}" ${m}`]) {
+  const queries = [`"${n}" "${m}"`, `"${n}" ${m} beach`, `"${n}" ${m} playa`, `"${n}" ${m}`]
+  if (LAX && m) queries.push(`"${m}" playa`, `"${m}" beach`)
+  for (const q of queries) {
     try {
       const params = new URLSearchParams({ action:'query', generator:'search', gsrnamespace:'6', gsrsearch:`${q} filetype:bitmap`, gsrlimit:'10', prop:'imageinfo|pageprops', iiprop:'url|extmetadata|size', iiurlwidth:'1200', format:'json', origin:'*' })
       const res = await fetchT(`https://commons.wikimedia.org/w/api.php?${params}`)
       if (!res.ok) continue
       const data = await res.json()
       const raw = extraerFotosDePages(Object.values(data.query?.pages ?? {}))
-      const fotos = tokens.length > 0 ? raw.filter(f => { const fn = normalizar(decodeURIComponent(f.url.split('/').pop() ?? '').replace(/\.(jpe?g|png|webp).*/i, '')); return tokens.some(t => fn.includes(t)) }) : raw
+      const fotos = (LAX || tokens.length === 0) ? raw : raw.filter(f => { const fn = normalizar(decodeURIComponent(f.url.split('/').pop() ?? '').replace(/\.(jpe?g|png|webp).*/i, '')); return tokens.some(t => fn.includes(t)) })
       if (fotos.length >= 2) return fotos.slice(0, 6)
     } catch { continue }
   }
@@ -200,13 +212,17 @@ async function wikimediaText(nombre, municipio) {
 async function pexels(nombre, municipio) {
   if (!PEXELS_KEY) return []
   const tokens = [normalizar(nombre), ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4)].filter(Boolean)
-  if (tokens.length === 0) return []
-  for (const q of [`${nombre} ${municipio} beach`, `${nombre} ${municipio} playa`, `${nombre} beach`]) {
+  if (tokens.length === 0 && !LAX) return []
+  // Laxo: añade queries por municipio y NO exige el nombre (stock genérico de
+  // la zona como último recurso). Solo aporta si nada mejor llenó el hueco.
+  const queries = [`${nombre} ${municipio} beach`, `${nombre} ${municipio} playa`, `${nombre} beach`]
+  if (LAX && municipio) queries.push(`${municipio} beach spain`, `${municipio} playa`)
+  for (const q of queries) {
     try {
       const res = await fetchT(`https://api.pexels.com/v1/search?query=${encodeURIComponent(q)}&per_page=6&orientation=landscape&size=large`, { headers: { Authorization: PEXELS_KEY } })
       if (!res.ok) continue
       const data = await res.json()
-      const fotos = (data?.photos ?? []).map(p => { const url = p.src?.large2x ?? p.src?.large ?? p.src?.original; if (!url) return null; const tn = normalizar(`${p.alt ?? ''} ${p.url ?? ''}`); if (!tokens.some(t => t && tn.includes(t))) return null; return { url, thumb: p.src?.medium ?? p.src?.small, fuente: 'pexels', autor: p.photographer || undefined } }).filter(Boolean)
+      const fotos = (data?.photos ?? []).map(p => { const url = p.src?.large2x ?? p.src?.large ?? p.src?.original; if (!url) return null; const tn = normalizar(`${p.alt ?? ''} ${p.url ?? ''}`); if (!LAX && !tokens.some(t => t && tn.includes(t))) return null; return { url, thumb: p.src?.medium ?? p.src?.small, fuente: 'pexels', autor: p.photographer || undefined } }).filter(Boolean)
       if (fotos.length >= 1) return fotos.slice(0, 6)
     } catch { continue }
   }
@@ -216,13 +232,15 @@ async function pexels(nombre, municipio) {
 async function unsplash(nombre, municipio) {
   if (!UNSPLASH_KEY) return []
   const tokens = [normalizar(nombre), ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4)].filter(Boolean)
-  if (tokens.length === 0) return []
-  for (const q of [`${nombre} ${municipio} beach`, `${nombre} ${municipio} playa`, `${nombre} beach`]) {
+  if (tokens.length === 0 && !LAX) return []
+  const queries = [`${nombre} ${municipio} beach`, `${nombre} ${municipio} playa`, `${nombre} beach`]
+  if (LAX && municipio) queries.push(`${municipio} beach spain`, `${municipio} playa`)
+  for (const q of queries) {
     try {
       const res = await fetchT(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(q)}&per_page=6&orientation=landscape&content_filter=high`, { headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` } })
       if (!res.ok) continue
       const data = await res.json()
-      const fotos = (data.results ?? []).map(p => { const tn = normalizar(`${p.description ?? ''} ${p.alt_description ?? ''} ${(p.tags ?? []).map(t => t?.title ?? '').join(' ')}`); if (!tokens.some(t => t && tn.includes(t))) return null; return { url: p.urls.regular, thumb: p.urls.small, fuente: 'unsplash', autor: p.user?.name || undefined } }).filter(Boolean)
+      const fotos = (data.results ?? []).map(p => { const tn = normalizar(`${p.description ?? ''} ${p.alt_description ?? ''} ${(p.tags ?? []).map(t => t?.title ?? '').join(' ')}`); if (!LAX && !tokens.some(t => t && tn.includes(t))) return null; return { url: p.urls.regular, thumb: p.urls.small, fuente: 'unsplash', autor: p.user?.name || undefined } }).filter(Boolean)
       if (fotos.length >= 1) return fotos.slice(0, 6)
     } catch { continue }
   }
@@ -252,7 +270,14 @@ async function main() {
   let lista = playas.filter(p => p.lat && p.lng && p.slug)
   if (ONLY_SLUG) lista = lista.filter(p => p.slug === ONLY_SLUG)
   if (FILTER === 'bandera') lista = lista.filter(p => p.bandera)
-  if (!FORCE && !ONLY_SLUG) lista = lista.filter(p => !map[p.slug])
+  // Resume normal: salta las ya intentadas (incluidas las vacías []).
+  // Modo laxo: reprocesa las que están en fallback (sin entrada o vacías),
+  // pero NO las que ya tienen foto real.
+  if (!FORCE && !ONLY_SLUG) {
+    lista = LAX
+      ? lista.filter(p => !(map[p.slug]?.length > 0))
+      : lista.filter(p => !map[p.slug])
+  }
   if (OFFSET) lista = lista.slice(OFFSET)
   if (LIMIT) lista = lista.slice(0, LIMIT)
 
