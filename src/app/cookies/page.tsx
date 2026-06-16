@@ -77,9 +77,12 @@ export default function CookiesPage() {
           <ul>
             <li><strong>Google AdSense.</strong> cookies de publicidad personalizadas. Duración: variable. Terceros (Google LLC).</li>
             <li><strong>Cookies de afiliados.</strong> cuando haces clic en un enlace de afiliado (Booking.com, Amazon,
-            Civitatis, Click&Boat, Rentalcars, TheFork, Parclick, Pitchup, Heymondo, IATI, Chapka, Samboat,
+            Civitatis, GetYourGuide, Click&Boat, Rentalcars, TheFork, Parclick, Pitchup, Heymondo, IATI, Chapka, Samboat,
             Nautal, Direct Ferries, Baleària), el proveedor puede instalar cookies de seguimiento para atribuirnos
             la referencia. Cada proveedor tiene su propia política de cookies.</li>
+            <li><strong>GetYourGuide Partner Analytics.</strong> script de medición de GetYourGuide GmbH (Alemania) que
+            se carga en todas las páginas para atribuir las reservas de actividades y excursiones originadas en este
+            sitio. <a href="https://www.getyourguide.com/c/privacy-policy/" target="_blank" rel="noopener noreferrer">Política de privacidad de GetYourGuide</a>.</li>
           </ul>
         </Section>
 
@@ -93,7 +96,7 @@ export default function CookiesPage() {
           <ul>
             <li>Booking.com. hoteles y alojamiento</li>
             <li>Amazon.es. equipo de playa, protectores solares</li>
-            <li>Civitatis. actividades y excursiones</li>
+            <li>Civitatis, GetYourGuide. actividades y excursiones</li>
             <li>Click&Boat, Samboat, Nautal. alquiler de barcos</li>
             <li>Rentalcars. alquiler de coches</li>
             <li>TheFork. reservas de restaurantes</li>
@@ -169,6 +172,7 @@ function CookieTable() {
     { nombre: '_ga, _ga_*',        tipo: 'Analítica', proveedor: 'Google LLC', duracion: '2 años',     finalidad: 'Medir tráfico (GA4)' },
     { nombre: 'IDE, DSID',        tipo: 'Marketing', proveedor: 'Google LLC', duracion: '1 año',      finalidad: 'Publicidad AdSense' },
     { nombre: 'Cookies afiliados', tipo: 'Marketing', proveedor: 'Varios',    duracion: 'Variable',   finalidad: 'Atribución de referencia' },
+    { nombre: 'GetYourGuide PA',   tipo: 'Marketing', proveedor: 'GetYourGuide GmbH', duracion: 'Variable', finalidad: 'Atribución de reservas de actividades' },
   ]
   return (
     <div style={{ overflowX: 'auto', border: '1px solid var(--line)', borderRadius: 6, marginBottom: '1.5rem' }}>
