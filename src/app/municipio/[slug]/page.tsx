@@ -8,6 +8,7 @@ import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './MunicipioPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
+import GygActivities from '@/components/GygActivities'
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -158,6 +159,7 @@ export default async function MunicipioPage({ params }: Props) {
           </Link>
         </div>
       </div>
+      <GygActivities query={`${municipio.nombre}, Spain`} cmp="municipio" />
     </>
   )
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
+import GygActivities from '@/components/GygActivities'
 import { getCalidad } from '@/lib/calidad'
 import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
 import { getVotos } from '@/lib/votos'
@@ -471,6 +472,10 @@ export default async function PlayaPage({ params }: Props) {
         provinciaSlug={provinciaSlug}
         necesidades={necesidadesAsistente}
         videoData={videoData}
+      />
+      <GygActivities
+        query={playa.municipio ? `${playa.municipio}, Spain` : (playa.provincia ? `${playa.provincia}, Spain` : null)}
+        cmp="ficha_playa"
       />
     </>
   )

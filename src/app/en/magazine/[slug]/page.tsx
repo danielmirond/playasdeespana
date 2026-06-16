@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Nav from '@/components/ui/Nav'
+import GygActivities from '@/components/GygActivities'
 import { getArticleBySlug, getAllArticlesEn, CATEGORIES, CATEGORIES_EN, type Block } from '@/lib/magazine'
 
 export const revalidate = 86400
@@ -145,6 +146,7 @@ export default async function ArticlePageEn({ params }: { params: Promise<{ slug
           <Link href="/en/magazine" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>← Back to Magazine</Link>
         </div>
       </main>
+      <GygActivities query={a.gygQuery} cmp="magazine" locale="en" />
     </>
   )
 }

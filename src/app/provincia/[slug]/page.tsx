@@ -9,6 +9,7 @@ import styles from './ProvinciaPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
+import GygActivities from '@/components/GygActivities'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -210,6 +211,7 @@ export default async function ProvinciaPage({ params }: Props) {
           </Link>
         </div>
       </div>
+      <GygActivities query={`${provincia.nombre}, Spain`} cmp="provincia" />
     </>
   )
 }

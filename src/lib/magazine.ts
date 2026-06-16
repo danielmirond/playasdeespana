@@ -50,6 +50,9 @@ export interface Article {
   heroImage?: string
   heroThumb?: string
   heroCredit?: { author?: string; source: string }
+  /** Si se define ("Ciudad, Spain" o destino), la ficha muestra el widget de
+   *  actividades de GetYourGuide de esa zona. Solo en artículos con lugar. */
+  gygQuery?: string
   author: string
   datePublished: string    // ISO
   readingMin: number
@@ -85,6 +88,7 @@ export const ARTICLES: Article[] = [
       'Fondos de roca, una reserva marina con mero y coral rojo, y calas de agua clara. Dónde hacer snorkel de verdad en la Costa Brava, qué viento lo arruina y las normas de las Illes Medes.',
     heroAlt: 'Buceador haciendo snorkel sobre un fondo rocoso de la Costa Brava con peces y agua clara cerca de las Illes Medes',
     heroQuery: 'snorkel,medes,costa-brava,sea',
+    gygQuery: 'Costa Brava, Spain',
     author: 'Equipo Playas de España',
     datePublished: '2026-06-16T13:00:00Z',
     readingMin: 6,
@@ -264,6 +268,7 @@ export const ARTICLES: Article[] = [
       'Las mejores calas del sur de Menorca solo se ven bien desde el agua. La ruta para hacerlas en barco desde Ciutadella: qué orden seguir, el viento que la arruina y la norma de fondeo sobre posidonia que multa.',
     heroAlt: 'Barco fondeado frente a una cala virgen de Menorca, agua clara sobre fondo de arena y pinos en el acantilado',
     heroQuery: 'menorca,cala,boat,balearic',
+    gygQuery: 'Menorca, Spain',
     author: 'Equipo Playas de España',
     datePublished: '2026-06-16T09:00:00Z',
     readingMin: 5,
@@ -323,6 +328,7 @@ export const ARTICLES: Article[] = [
       'El plan que hace medio Ibiza en verano: cruzar a Formentera en barco a por sus calas de arena blanca. Cómo es la travesía, dónde fondear y la regulación de la posidonia que puede costarte miles de euros.',
     heroAlt: 'Barcos fondeados sobre agua clara frente a la playa de Ses Illetes en Formentera, con la arena blanca al fondo',
     heroQuery: 'formentera,beach,boat,balearic',
+    gygQuery: 'Formentera, Spain',
     author: 'Equipo Playas de España',
     datePublished: '2026-06-16T09:30:00Z',
     readingMin: 5,
@@ -742,6 +748,7 @@ export const ARTICLES: Article[] = [
       'De Lloret a las Islas Medes: un itinerario de un día por las calas más bonitas de la Costa Brava, muchas accesibles solo desde el mar.',
     heroAlt: 'Cala escondida entre pinos y acantilados de la Costa Brava',
     heroQuery: 'costa-brava,cove,mediterranean,boat',
+    gygQuery: 'Costa Brava, Spain',
     author: 'Equipo Playas de España',
     datePublished: '2026-06-02T00:00:00Z',
     readingMin: 6,
@@ -1071,6 +1078,7 @@ export const ARTICLES: Article[] = [
       'Mónsul, Los Genoveses, El Playazo: un itinerario por las playas de un parque natural volcánico donde el desierto se asoma al mar.',
     heroAlt: 'Cala de arena dorada entre rocas volcánicas en el Cabo de Gata, Almería',
     heroQuery: 'cabo-de-gata,monsul,almeria,volcanic',
+    gygQuery: 'Cabo de Gata, Spain',
     author: 'Equipo Playas de España',
     datePublished: '2026-06-05T00:00:00Z',
     readingMin: 6,
