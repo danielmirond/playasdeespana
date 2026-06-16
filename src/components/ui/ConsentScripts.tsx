@@ -67,16 +67,15 @@ export default function ConsentScripts() {
         />
       )}
 
-      {/* GetYourGuide Partner Analytics (afiliación). Solo con consentimiento
-          de marketing: es un tracker de conversión de tours/actividades. */}
-      {marketing && (
-        <Script
-          id="gyg-analytics"
-          src="https://widget.getyourguide.com/dist/pa.umd.production.min.js"
-          data-gyg-partner-id="BMIKRAB"
-          strategy="lazyOnload"
-        />
-      )}
+      {/* GetYourGuide Partner Analytics (afiliación) — cargado en TODO el site
+          (decisión de negocio). Necesario para atribuir conversiones de tours.
+          Nota: revisar que la política de cookies lo declare. */}
+      <Script
+        id="gyg-analytics"
+        src="https://widget.getyourguide.com/dist/pa.umd.production.min.js"
+        data-gyg-partner-id="BMIKRAB"
+        strategy="lazyOnload"
+      />
     </>
   )
 }
