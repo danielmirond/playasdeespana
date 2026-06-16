@@ -474,7 +474,13 @@ export default async function PlayaPage({ params }: Props) {
         videoData={videoData}
       />
       <GygActivities
-        query={playa.municipio ? `${playa.municipio}, Spain` : (playa.provincia ? `${playa.provincia}, Spain` : null)}
+        query={(() => {
+          const zona = playa.municipio || playa.provincia
+          if (!zona) return null
+          // Playa de surf → actividad concreta; resto → ciudad (asegura
+          // resultados; en costa, GYG ya prioriza barco/snorkel locales).
+          return playa.actividades?.surf ? `surf ${zona}` : `${zona}, Spain`
+        })()}
         cmp="ficha_playa"
       />
     </>
