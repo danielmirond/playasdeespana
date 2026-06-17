@@ -4,6 +4,7 @@
 // 100% legibilidad. Respeta prefers-reduced-motion (animación pausada).
 import Link from 'next/link'
 import Image from 'next/image'
+import TrustSeal from '@/components/common/TrustSeal'
 import styles from './Hero.module.css'
 
 const CHIPS = [
@@ -85,6 +86,36 @@ export default function Hero() {
           />
           <button type="submit" className={styles.searchBtn}>Buscar</button>
         </form>
+
+        {/* C3 · Sello de confianza junto al buscador */}
+        <div style={{ marginTop: '.75rem' }}>
+          <TrustSeal />
+        </div>
+
+        {/* C6 · Chips de intención comercial (links reales, indexables) */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginTop: '1rem' }}>
+          {[
+            { href: '/alquiler-barco', label: 'Alquilar barco', intent: 'barco', icon: '⛵' },
+            { href: '/alquiler-autocaravana', label: 'Autocaravana', intent: 'camper', icon: '🚐' },
+            { href: '/buceo', label: 'Buceo y actividades', intent: 'actividad', icon: '🤿' },
+          ].map(c => (
+            <Link
+              key={c.href}
+              href={c.href}
+              data-intent={c.intent}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '.4rem',
+                padding: '.5rem .9rem', borderRadius: 999,
+                background: 'color-mix(in srgb, var(--accent) 12%, var(--surface, #faf4e6))',
+                border: '1px solid color-mix(in srgb, var(--accent) 35%, var(--line))',
+                color: 'var(--accent)', fontWeight: 700, fontSize: '.82rem',
+                textDecoration: 'none', whiteSpace: 'nowrap',
+              }}
+            >
+              <span aria-hidden="true">{c.icon}</span>{c.label}
+            </Link>
+          ))}
+        </div>
 
         {/* Quick explore chips */}
         <div className={styles.chips}>

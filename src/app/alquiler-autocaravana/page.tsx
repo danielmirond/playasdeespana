@@ -96,6 +96,10 @@ export default function AutocaravanaHubPage() {
           <a href={camperdaysAwinUrl('playasdeespana_camper_hub_bottom')} target="_blank" rel="noopener noreferrer sponsored" style={{ display: 'inline-block', padding: '.85rem 1.7rem', background: '#fff', color: CTA2, borderRadius: 8, fontWeight: 800, textDecoration: 'none' }}>
             Comparar precios en Camperdays →
           </a>
+          {/* C4 · Transparencia de afiliación */}
+          <p style={{ color: 'rgba(255,255,255,.78)', fontSize: '.78rem', marginTop: '1rem' }}>
+            Mismo precio para ti. Nos ayuda a mantener los datos gratis.
+          </p>
         </section>
       </main>
     </>

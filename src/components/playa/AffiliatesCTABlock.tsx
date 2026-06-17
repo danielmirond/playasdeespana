@@ -189,6 +189,12 @@ export default function AffiliatesCTABlock({ playa, affiliates, locale = 'es' }:
           </a>
         )}
       </div>
+      {/* C4 · Transparencia de afiliación (una vez por bloque) */}
+      <p style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.75rem', lineHeight: 1.5 }}>
+        {es
+          ? 'Mismo precio para ti. Nos ayuda a mantener los datos gratis.'
+          : 'Same price for you. It helps us keep the data free.'}
+      </p>
     </div>
   )
 }

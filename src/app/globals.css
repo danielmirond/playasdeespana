@@ -32,6 +32,10 @@
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes cbSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
+/* TrustSeal "en directo" — pulso solo si el usuario no pide reduced-motion */
+@keyframes trustPulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+@media (prefers-reduced-motion: no-preference) { .trust-dot { animation: trustPulse 1.6s ease-in-out infinite; } }
+
 /* ── Print ──────────────────────────────────────────────────── */
 @media print {
   header, nav, footer, aside, [class*="AdSlot"], [class*="cookieBanner"], [class*="banner"], script { display: none !important; }

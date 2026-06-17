@@ -33,6 +33,7 @@ import { nombreConPlaya } from '@/lib/geo'
 import { generarReporteSistema } from '@/lib/reporteSistema'
 import EstadoHoy from './EstadoHoy'
 import AsistentePlaya from './AsistentePlaya'
+import TrustSeal from '@/components/common/TrustSeal'
 import AffiliatesCTABlock from './AffiliatesCTABlock'
 import OpinionesDestacadas from './OpinionesDestacadas'
 import BeachVideoToggle from './BeachVideoToggle'
@@ -355,6 +356,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             {introTxt}
           </p>
         )}
+
+        {/* C3 · Sello de confianza junto al score (auditoría CRO) */}
+        <div style={{ margin: '0 0 1rem' }}>
+          <TrustSeal locale={locale} />
+        </div>
 
         {/* 2. ESTADO HOY — fusión sistema + chips engagement */}
         <EstadoHoy

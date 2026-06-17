@@ -51,6 +51,8 @@ export default function ConsentScripts() {
                 if (href.includes('parclick')) gtag('event', 'parking_click');
                 if (href.includes('google.com/maps/dir')) gtag('event', 'route_open');
                 if (el.getAttribute('aria-pressed') !== null) gtag('event', 'filter_click', { filter: el.textContent });
+                var intent = el.getAttribute('data-intent');
+                if (intent) gtag('event', 'intent_click', { intent: intent });
               });
             `}
           </Script>
