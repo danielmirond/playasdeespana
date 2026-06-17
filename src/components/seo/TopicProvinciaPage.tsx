@@ -11,6 +11,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
+import GygActivities from '@/components/GygActivities'
 import type { Playa } from '@/types'
 
 export interface TopicConfig {
@@ -35,6 +36,9 @@ export interface TopicConfig {
   relacionados?: Array<{ href: string; label: string }>
   /** Render extra antes del FAQ (CTAs afiliados, etc.) */
   extraSections?: () => React.ReactNode
+  /** Si se define (ej. "submarinismo", "surf"), muestra el widget de
+   *  actividades de GetYourGuide de "{gygActivity} {provincia}". */
+  gygActivity?: string
 }
 
 interface Props {
@@ -202,6 +206,9 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
           </div>
         </section>
       </main>
+      {config.gygActivity && (
+        <GygActivities query={`${config.gygActivity} ${provincia.nombre}`} cmp={`${config.slug}_provincia`} />
+      )}
 
       {/* FAQPage schema */}
       <script

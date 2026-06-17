@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
 
 const CONFIG: TopicConfig = {
   slug: 'kitesurf',
+  gygActivity: 'kitesurf',
   emoji: '🪁',
   color: '#ec4899',
   tituloTopic: 'Kitesurf',

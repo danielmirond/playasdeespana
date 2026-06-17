@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
 
 const CONFIG: TopicConfig = {
   slug: 'clases-surf',
+  gygActivity: 'clases de surf',
   emoji: '🏄',
   color: '#4a7a90',
   tituloTopic: 'Clases de surf',

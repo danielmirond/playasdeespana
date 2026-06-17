@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
 
 const CONFIG: TopicConfig = {
   slug: 'buceo',
+  gygActivity: 'submarinismo',
   emoji: '🤿',
   color: '#0891b2',
   tituloTopic: 'Centros de buceo',

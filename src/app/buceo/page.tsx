@@ -7,6 +7,7 @@ import { getPlayas } from '@/lib/playas'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import GygActivities from '@/components/GygActivities'
 import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 86400
@@ -309,6 +310,7 @@ export default async function BuceoPage() {
         <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/buceo" name="Buceo en España" visible={false} />
         <EnlacesRelacionados topic="buceo" />
       </main>
+      <GygActivities query="submarinismo España" cmp="buceo_hub" title="Bautismos y salidas de buceo" />
 
       <script
         type="application/ld+json"

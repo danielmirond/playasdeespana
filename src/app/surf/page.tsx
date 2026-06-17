@@ -7,6 +7,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
+import GygActivities from '@/components/GygActivities'
 import { getEditorialModified } from '@/lib/dateModified'
 
 export const revalidate = 3600
@@ -207,6 +208,7 @@ export default async function SurfPage() {
         <UpdatedBadge iso={MODIFIED} url="https://playas-espana.com/surf" name="Surf en España" visible={false} />
         <EnlacesRelacionados topic="surf" />
       </main>
+      <GygActivities query="surf España" cmp="surf_hub" title="Clases y campamentos de surf" />
     </>
   )
 }
