@@ -170,4 +170,114 @@ crítico, estética editorial "arena + tinta", monetización por afiliación
 
 ---
 
+# Anexos de detalle
+
+## A. Ficha de playa — orden REAL de módulos (clave para CRO)
+
+Orden vertical actual en móvil (lo que el usuario ve al hacer scroll). Es una
+página **muy densa**; la pregunta CRO es qué sube, qué baja y dónde van los CTAs.
+
+1. **Hero** — foto (o "mar animado" SVG si no hay foto), nombre, **score 0–100**
+   (badge de color), estado del mar, acciones (favorito, compartir).
+2. **Nav interno** (jump links a secciones).
+3. **Estado de hoy** — recomendación + bandera de baño + riesgo de medusas.
+4. **Asistente "¿Qué necesitas hoy?"** — chips de necesidades (sombra, calma…).
+5. **Calidad del agua** (EEA): % muestras, temporada, clasificación Directiva 2006/7/CE.
+6. **Opiniones destacadas + reseñas** (votos de usuarios).
+7. **🟢 Bloque CTA de afiliados** (`AffiliatesCTABlock`) — primer punto comercial fuerte.
+8. **Oleaje** (gráfico) + desplegable: sol, mareas, temperatura agua/aire, sensación,
+   UV, humedad, viento + brújula.
+9. **Surf** (si aplica).
+10. **Cómo llegar**: coche / bus / bici / a pie + datos de acceso y parking + **mapa**.
+11. **Tráfico en tiempo real**.
+12. **Hoteles cercanos** (→ Booking, afiliado) · **AdSlot** (publicidad).
+13. **Ferris** (si es isla) · **Restaurantes** (→ TheFork) · **Campings** (→ Pitchup).
+14. **Centros de buceo / escuelas**.
+15. **Servicios y equipamiento** + ficha técnica (desplegable).
+16. **Texto SEO** + **hubs relacionados** + **"Cosas que hacer cerca"** (GetYourGuide).
+17. (Desktop) **aside** con acciones y CTA de afiliación.
+
+> Hipótesis CRO a validar: el primer CTA comercial llega **después** de calidad
+> del agua y opiniones; ¿debería haber un CTA contextual antes? ¿El score y el
+> "estado de hoy" están bien jerarquizados above-the-fold en móvil?
+
+## B. Inventario de componentes (los relevantes para diseño)
+
+- **Home:** `Hero`, `Buscador`, `Destacadas` (Top/Evita hoy), `TopCercanas`,
+  `ParkingHoy`, `ActividadesHoy`, `MonetizacionBlock`, `BoatRentalCTA`,
+  `MagazineCarrusel`, `Comunidades`.
+- **Ficha:** `FichaHero`, `FichaNav`, `FichaBody`, `EstadoHoy`, `AsistentePlaya`,
+  `PhotoCarousel`, `Opiniones`/`OpinionesDestacadas`, `VotacionPlaya`,
+  `ReportarEstado`, `SurfSection`, `EscuelasSection`, `HotelesCard`,
+  `TraficoSection`, `BeachVideo`, `MapaLeaflet`, `AnimatedSea` (SVG estado del mar).
+- **Afiliación/CTA:** `AffiliatesCTABlock`, `AlquilerBarcoCTA`,
+  `AsideAfiliacionCTA`, `AfiliacionDrawer`, `FerriesCTA`, `GygActivities`, `AdSlot`.
+- **Navegación:** `Nav` (desktop), `MobileNav` (hamburguesa), `Footer`,
+  `CookieBanner`, `InstallPrompt` (PWA).
+
+## C. Monetización — partners y dónde aparecen los CTAs
+
+| Producto | Partner | Red | Dónde aparece |
+|---|---|---|---|
+| Alquiler de barco | SamBoat | Awin | Hub `/alquiler-barco` + costas/localidades, CTA en ficha de playa (calas) |
+| Alquiler autocaravana | Camperdays | Awin | Hub `/alquiler-autocaravana` + ciudades |
+| Hoteles | Booking.com | — | Módulo "hoteles cercanos" en ficha |
+| Actividades/tours | GetYourGuide | partner-id BMIKRAB | Widget "Cosas que hacer cerca" (ficha, municipio, comunidad, provincia, magazine, hubs buceo/surf) |
+| Restaurantes | TheFork | — | Módulo restaurantes en ficha |
+| Campings | Pitchup | — | Módulo campings en ficha |
+| Coche / seguros / Amazon | Rentalcars, Heymondo/IATI, Amazon | — | Páginas de utilidad |
+| Publicidad | Google AdSense | — | AdSlots (con consentimiento) |
+
+> CRO: hay **muchos** partners. Riesgo de dispersión y de "banner blindness".
+> Una recomendación valiosa sería **priorizar 1–2 CTAs por página** según intención.
+
+## D. Fuentes de datos y frecuencia (E-E-A-T, base de la credibilidad)
+
+| Dato | Fuente | Actualización |
+|---|---|---|
+| Inventario playas | MITECO + OpenStreetMap | Manual (script) |
+| Meteo (aire, viento, UV) | Open-Meteo (+ AEMET ref.) | ~cada hora (caché 30 min) |
+| Oleaje y temp. agua | Open-Meteo Marine | ~3–6 h |
+| Sol (amanecer/atardecer) | Sunrise-Sunset.org | 24 h |
+| Calidad del agua | EEA (Agencia Europea Medio Ambiente) | Anual |
+| Bandera Azul | ADEAC | Anual |
+| Medusas / bandera baño | Modelo propio (viento + zona + temp.) | Tiempo real |
+| Mareas | Cálculo astronómico | Tiempo real |
+| Hoteles/restaurantes | Overpass (OSM) + caché | On-demand |
+| Fotos | Wikimedia/Wikipedia/Flickr/Openverse/Pexels/Unsplash | Pre-resueltas (offline) |
+
+El mensaje de marca ("datos oficiales, actualizados cada hora") es un **activo
+de conversión/confianza**: conviene que el diseño lo haga visible sin saturar.
+
+## E. Accesibilidad y rendimiento (restricciones de la auditoría)
+
+- **A11y existente:** skip-link, roles/aria en nav y controles, foco visible,
+  `aria-label` en CTAs e iconos. Pendiente de auditoría formal WCAG AA.
+- **Rendimiento:** terceros diferidos (`lazyOnload`), imágenes con `next/image`
+  donde aplica, `content-visibility:auto` en bloques pesados. **CLS y LCP** son
+  sensibles: cualquier carrusel/hero nuevo debe medirse.
+- **Móvil:** header compacto (logo + buscador + idioma + hamburguesa); la ficha
+  usa **desplegables** (`Collapsible`) para no abrumar.
+
+## F. Voz y contenido (para coherencia editorial)
+
+Voz propia **"rigor de datos contado como un local con buena pluma"**: titulares
+con dato (no clickbait), estructura "bicéfala" (apertura narrativa + cuerpo de
+datos con el *contra* honesto), sin clichés de folleto. Titulares optimizados
+para **Google Discover**. Cualquier microcopy/CTA que proponga la agencia debe
+encajar con este tono (cómplice, honesto, basado en dato).
+
+## G. Hipótesis CRO iniciales (para arrancar el trabajo)
+
+1. La **Home** prioriza descubrimiento por tema, pero el CTA comercial es débil
+   above-the-fold. ¿Un acceso directo a "alquila barco / actividades" desde héroe?
+2. La **ficha** es muy larga; el usuario que busca "ir hoy" quizá no llega al CTA.
+   Probar CTA contextual tras el "estado de hoy".
+3. **Widgets de actividades** (GYG) van below-the-fold; medir si suben con mejor
+   posición/encabezado.
+4. **PWA**: el banner de instalación es nuevo; optimizar momento y copy.
+5. **Confianza**: hacer más visible "datos oficiales / metodología" cerca del score.
+
+---
+
 *Contacto técnico / accesos de staging y analítica: a coordinar.*
