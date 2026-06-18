@@ -482,6 +482,7 @@ export default async function PlayaPage({ params }: Props) {
           return playa.actividades?.surf ? `surf ${zona}` : `${zona}, Spain`
         })()}
         cmp="ficha_playa"
+        id="actividades"
       />
     </>
   )

@@ -15,17 +15,19 @@ export default function GygActivities({
   items = 4,
   locale = 'es',
   title,
+  id,
 }: {
   query?: string | null
   cmp?: string
   items?: number
   locale?: 'es' | 'en'
   title?: string
+  id?: string
 }) {
   if (!query) return null
   const heading = title ?? (locale === 'en' ? 'Things to do nearby' : 'Cosas que hacer cerca')
   return (
-    <section className="cv-auto" style={{ maxWidth: 1000, margin: '2.5rem auto 0', padding: '0 1.5rem' }}>
+    <section id={id} className="cv-auto" style={{ maxWidth: 1000, margin: '2.5rem auto 0', padding: '0 1.5rem', scrollMarginTop: '64px' }}>
       <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem,3vw,1.7rem)', fontWeight: 700, color: 'var(--ink)', margin: '0 0 1rem', letterSpacing: '-.01em' }}>
         {heading} <span aria-hidden="true">🎟️</span>
       </h2>

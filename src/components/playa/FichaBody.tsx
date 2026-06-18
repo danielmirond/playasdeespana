@@ -34,6 +34,8 @@ import { generarReporteSistema } from '@/lib/reporteSistema'
 import EstadoHoy from './EstadoHoy'
 import AsistentePlaya from './AsistentePlaya'
 import TrustSeal from '@/components/common/TrustSeal'
+import ContextualCTA from './ContextualCTA'
+import { flags } from '@/lib/flags'
 import AffiliatesCTABlock from './AffiliatesCTABlock'
 import OpinionesDestacadas from './OpinionesDestacadas'
 import BeachVideoToggle from './BeachVideoToggle'
@@ -376,6 +378,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           })}
           locale={locale}
         />
+
+        {/* C1 · CTA contextual (sube el 1er punto comercial al 3er módulo) */}
+        {flags.contextualCTA && (
+          <ContextualCTA playa={playa} meteo={meteo} locale={locale} />
+        )}
 
         {/* 3. ASISTENTE — qué necesitas hoy */}
         {necesidades && necesidades.length > 0 && (
