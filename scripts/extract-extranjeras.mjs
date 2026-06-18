@@ -29,8 +29,34 @@ const PROV_ES = new Set([
 
 const playas = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'utf-8'))
 
+// Override manual: slugs extranjeros con provincia ES válida PERO coords fuera
+// de España que las reglas geográficas no atrapan limpiamente (p.ej. un lago
+// de Francia importado como "Girona").
+const EXTRA = new Set([
+  'plage-de-montbel', // lago de Montbel, Ariège (Francia), etiquetado Girona
+])
+
+// Detecta coords fuera del territorio español aunque la provincia sea válida.
+// Casos reales del dataset OSM: costa de Argelia etiquetada "Almería", costa
+// portuguesa etiquetada "Huelva", etc.
+function fueraDeEspana(p) {
+  const lat = Number(p?.lat), lng = Number(p?.lng)
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return false
+  // Argelia: la costa española con longitud positiva (Murcia→Baleares) está
+  // toda en lat ≥ 37.4; por debajo de 37.3 con lng>0.2 es norte de África.
+  if (lat < 37.3 && lng > 0.2) return true
+  // Portugal atlántico peninsular: lng < -7.6 en latitud peninsular (36–41.8)
+  // es Portugal (Algarve/Setúbal). OJO: acotado a lat ≥ 36 para NO marcar
+  // Canarias (lat 27–29.5, también a lng < -7.6 pero territorio español).
+  // Galicia (lng < -7.6) queda fuera por lat ≥ 41.8.
+  if (lat >= 36 && lat < 41.8 && lng < -7.6) return true
+  return false
+}
+
 const extranjeras = playas
-  .filter(p => p?.slug && (!p.provincia || !PROV_ES.has(p.provincia)))
+  .filter(p => p?.slug && (
+    !p.provincia || !PROV_ES.has(p.provincia) || fueraDeEspana(p) || EXTRA.has(p.slug)
+  ))
   .map(p => p.slug)
 
 const out = resolve(ROOT, 'src/data/slugs-extranjeras.json')

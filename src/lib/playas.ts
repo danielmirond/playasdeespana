@@ -1,6 +1,12 @@
 // src/lib/playas.ts
 import type { Playa } from '@/types'
 import { cache } from 'react'
+import slugsExtranjeras from '@/data/slugs-extranjeras.json'
+
+// Playas fuera del ámbito (extranjeras/interiores sin costa). El middleware
+// las sirve como 410; aquí las FILTRAMOS de getPlayas para que dejen de
+// enlazarse (listados, sitemap, generateStaticParams, cercanas…).
+const EXCLUIDAS = new Set(slugsExtranjeras as string[])
 
 export function toSlug(str: string): string {
   return (str ?? '')
@@ -26,7 +32,7 @@ export const getPlayas = cache(async (): Promise<Playa[]> => {
     const { default: data } = await import('@/../public/data/playas.json', {
       assert: { type: 'json' },
     })
-    return data as unknown as Playa[]
+    return (data as unknown as Playa[]).filter(p => !EXCLUIDAS.has(p.slug))
   } catch {
     console.warn('[playas] public/data/playas.json no encontrado — ejecuta npm run sync:playas')
     return []
