@@ -4,6 +4,7 @@
 // sin maquetar. Reescrita con estilos en línea + tokens del design system,
 // que renderizan siempre (van en el JS, no dependen de ningún chunk CSS).
 import Nav from '@/components/ui/Nav'
+import NearContext from '@/components/cta/NearContext'
 import Link from 'next/link'
 import { getAllLocalities } from '@/lib/boat-rental-localities'
 import { boatRentalSlug } from '@/lib/boat-rental-helpers'
@@ -83,6 +84,7 @@ export default function BoatRentalHubPage() {
 
       {/* COASTS */}
       <main id="coasts" style={{ maxWidth: 880, margin: '0 auto', padding: '2.5rem 1.5rem 4rem' }}>
+        <NearContext />
         <h2 style={{
           fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700,
           color: 'var(--ink)', margin: '0 0 1.75rem',

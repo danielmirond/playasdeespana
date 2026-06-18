@@ -4,6 +4,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import NearContext from '@/components/cta/NearContext'
 import { getCamperCities, TIPOS_VEHICULO } from '@/lib/autocaravana-localities'
 import { camperdaysAwinUrl } from '@/lib/camperdaysAwinUrl'
 
@@ -47,6 +48,7 @@ export default function AutocaravanaHubPage() {
       </section>
 
       <main style={{ maxWidth: 980, margin: '0 auto', padding: '2.5rem 1.5rem 4rem' }}>
+        <NearContext />
         {/* CIUDADES */}
         <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--ink)', margin: '0 0 .35rem' }}>
           Elige tu ciudad de recogida

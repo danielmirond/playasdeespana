@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import NearContext from '@/components/cta/NearContext'
 import { getPlayas } from '@/lib/playas'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
@@ -99,6 +100,7 @@ export default async function SurfPage() {
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
+        <NearContext />
         <nav style={{
           display: 'flex', alignItems: 'center', gap: '.4rem',
           fontSize: '.75rem', color: 'var(--muted)', marginBottom: '.85rem',
