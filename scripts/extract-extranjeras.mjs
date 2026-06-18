@@ -36,6 +36,12 @@ const EXTRA = new Set([
   'plage-de-montbel', // lago de Montbel, Ariège (Francia), etiquetado Girona
 ])
 
+// Safe-list: playas ESPAÑOLAS reales que las reglas marcan por error (p.ej.
+// provincia con encoding roto que no casa con PROV_ES). Nunca se excluyen.
+const SAFE = new Set([
+  'praia-do-olmo', // Os Olmos, A Coruña (provincia con mojibake "A Coru??a")
+])
+
 // Detecta coords fuera del territorio español aunque la provincia sea válida.
 // Casos reales del dataset OSM: costa de Argelia etiquetada "Almería", costa
 // portuguesa etiquetada "Huelva", etc.
@@ -54,7 +60,7 @@ function fueraDeEspana(p) {
 }
 
 const extranjeras = playas
-  .filter(p => p?.slug && (
+  .filter(p => p?.slug && !SAFE.has(p.slug) && (
     !p.provincia || !PROV_ES.has(p.provincia) || fueraDeEspana(p) || EXTRA.has(p.slug)
   ))
   .map(p => p.slug)
