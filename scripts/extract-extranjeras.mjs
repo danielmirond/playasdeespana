@@ -40,6 +40,16 @@ const EXTRA = new Set([
 // provincia con encoding roto que no casa con PROV_ES). Nunca se excluyen.
 const SAFE = new Set([
   'praia-do-olmo', // Os Olmos, A Coruña (provincia con mojibake "A Coru??a")
+  // Playas de INTERIOR (embalse) reales y gestionadas — Bandera Azul o
+  // socorrismo. Son oficiales y muy buscadas; no se mandan a 410 aunque su
+  // provincia no tenga costa.
+  'virgen-de-la-nueva',          // Madrid · embalse San Juan · Bandera Azul
+  'playa-de-las-moreras',        // Valladolid · socorrismo
+  'playa-isla-del-zujar',        // Badajoz · Bandera Azul
+  'playa-de-campanario',         // Badajoz · Bandera Azul
+  'playa-de-puerto-pena',        // Badajoz · Bandera Azul
+  'playa-hormigonada-de-peloche',// Badajoz · socorrismo
+  'praia-dos-franceses',         // Ourense · Bandera Azul
 ])
 
 // Detecta coords fuera del territorio español aunque la provincia sea válida.
