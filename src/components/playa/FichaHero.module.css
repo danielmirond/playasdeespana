@@ -282,19 +282,30 @@
 
   .stickyMobile {
     display: flex;
-    align-items: center; justify-content: center; gap: .5rem;
+    align-items: stretch;
     position: fixed;
     bottom: 0; left: 0; right: 0;
     z-index: 90;
-    padding: .85rem 1.5rem;
     min-height: 52px;
     background: var(--tinta-900, #1a0f04);
     color: var(--arena-50, #faf4e6);
     font-family: var(--font-sans);
     font-size: .88rem; font-weight: 500;
-    text-decoration: none;
     border-top: 1px solid var(--tinta-700, #3d2a14);
   }
+  .stickyAction, .stickyLink {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center; justify-content: center; gap: .45rem;
+    min-height: 52px; padding: .85rem 1rem;
+    color: var(--arena-50, #faf4e6);
+    background: transparent; border: none;
+    font-family: inherit; font-size: inherit; font-weight: inherit;
+    text-decoration: none; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .stickyAction { border-right: 1px solid var(--tinta-700, #3d2a14); }
+  .stickyAction:active, .stickyLink:active { background: rgba(255,255,255,.06); }
 }
 
 @media (max-width: 380px) {

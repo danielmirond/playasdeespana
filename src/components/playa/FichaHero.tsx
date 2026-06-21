@@ -232,16 +232,29 @@ export default function FichaHero({
         </div>
       </div>
 
-      {/* Sticky CTA mobile */}
-      <a
-        href={mapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.stickyMobile}
-      >
-        <MapPin size={16} weight="fill" aria-hidden="true" />
-        {i18n.como}
-      </a>
+      {/* Sticky bar mobile — interacción (cómo está / valora / informa) +
+          cómo llegar. El primer segmento abre el drawer "¿Cómo está hoy?"
+          (reportar estado + valorar); el evento lo escucha ReportarDrawer. */}
+      <div className={styles.stickyMobile}>
+        <button
+          type="button"
+          className={styles.stickyAction}
+          onClick={() => window.dispatchEvent(new CustomEvent('open-reportar-drawer'))}
+          aria-haspopup="dialog"
+        >
+          <span className={`${styles.dotMini} ${styles[`dot_${dot}`]}`} aria-hidden="true" />
+          {i18n.comoEsta}
+        </button>
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.stickyLink}
+        >
+          <MapPin size={16} weight="fill" aria-hidden="true" />
+          {i18n.como}
+        </a>
+      </div>
     </>
   )
 }
