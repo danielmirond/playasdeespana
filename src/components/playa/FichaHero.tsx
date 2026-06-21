@@ -65,6 +65,23 @@ function reportesActivos(r: ReportesPlaya | null | undefined, locale: 'es' | 'en
   return out
 }
 
+// Estilo de los segmentos de la barra inferior móvil. Inline para no
+// depender del CSS module (icono + texto SIEMPRE en línea y centrados).
+const SEG_STYLE: React.CSSProperties = {
+  flex: '1 1 0',
+  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.45rem',
+  minHeight: 52, padding: '.85rem .75rem',
+  color: 'var(--arena-50, #faf4e6)',
+  background: 'transparent', border: 'none',
+  fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit',
+  textDecoration: 'none', cursor: 'pointer', whiteSpace: 'nowrap',
+  WebkitTapHighlightColor: 'transparent',
+}
+const SEG_STYLE_BTN: React.CSSProperties = {
+  ...SEG_STYLE,
+  borderRight: '1px solid var(--tinta-700, #3d2a14)',
+}
+
 function statusDot(r: ReportesPlaya | null | undefined): 'ok' | 'warn' | 'danger' {
   if (!r || r.total === 0) return 'ok'
   if (r.bandera_roja > 0) return 'danger'
@@ -242,10 +259,11 @@ export default function FichaHero({
         <button
           type="button"
           className={styles.stickyAction}
+          style={SEG_STYLE_BTN}
           onClick={() => window.dispatchEvent(new CustomEvent('open-reportar-drawer'))}
           aria-haspopup="dialog"
         >
-          <Waves size={17} weight="bold" color={dotColorBar} aria-hidden="true" />
+          <Waves size={17} weight="bold" color={dotColorBar} aria-hidden="true" style={{ flexShrink: 0 }} />
           {i18n.comoEsta}
         </button>
         <a
@@ -253,8 +271,9 @@ export default function FichaHero({
           target="_blank"
           rel="noopener noreferrer"
           className={styles.stickyLink}
+          style={SEG_STYLE}
         >
-          <MapPin size={16} weight="fill" aria-hidden="true" />
+          <MapPin size={16} weight="fill" aria-hidden="true" style={{ flexShrink: 0 }} />
           {i18n.como}
         </a>
       </div>
