@@ -14,7 +14,7 @@ import type { ReportesPlaya } from '@/lib/reportes'
 import type { FotoPlaya } from '@/lib/fotos'
 import AnimatedSea from './AnimatedSea'
 import styles from './FichaHero.module.css'
-import { MapPin, Megaphone } from '@phosphor-icons/react'
+import { MapPin, Megaphone, Waves } from '@phosphor-icons/react'
 import { nombreConPlaya } from '@/lib/geo'
 import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 
@@ -86,6 +86,9 @@ export default function FichaHero({
 
   const avisos = reportesActivos(reportes, locale)
   const dot = statusDot(reportes)
+  // Tinte del icono de estado para la barra inferior (fondo oscuro):
+  // tonos brillantes para contraste sobre tinta-900.
+  const dotColorBar = dot === 'danger' ? '#e8755e' : dot === 'warn' ? '#e6b24a' : '#5fbf7f'
   const hasPhoto = !!foto?.url
   // Nombre popular (castellano) si la playa está en idioma cooficial
   // y tiene alias curado (ej. Kontxa Hondartza → "La Concha de San
@@ -242,7 +245,7 @@ export default function FichaHero({
           onClick={() => window.dispatchEvent(new CustomEvent('open-reportar-drawer'))}
           aria-haspopup="dialog"
         >
-          <span className={`${styles.dotMini} ${styles[`dot_${dot}`]}`} aria-hidden="true" />
+          <Waves size={17} weight="bold" color={dotColorBar} aria-hidden="true" />
           {i18n.comoEsta}
         </button>
         <a

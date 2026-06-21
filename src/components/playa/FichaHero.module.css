@@ -292,18 +292,22 @@
     font-family: var(--font-sans);
     font-size: .88rem; font-weight: 500;
     border-top: 1px solid var(--tinta-700, #3d2a14);
+    /* PWA / iOS instalado: respeta la barra de gestos (home indicator). */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .stickyAction, .stickyLink {
     flex: 1 1 0;
     display: flex;
     align-items: center; justify-content: center; gap: .45rem;
-    min-height: 52px; padding: .85rem 1rem;
+    min-height: 52px; padding: .85rem .75rem;
     color: var(--arena-50, #faf4e6);
     background: transparent; border: none;
     font-family: inherit; font-size: inherit; font-weight: inherit;
     text-decoration: none; cursor: pointer;
+    white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
   }
+  .stickyAction svg, .stickyLink svg { flex-shrink: 0; }
   .stickyAction { border-right: 1px solid var(--tinta-700, #3d2a14); }
   .stickyAction:active, .stickyLink:active { background: rgba(255,255,255,.06); }
 }

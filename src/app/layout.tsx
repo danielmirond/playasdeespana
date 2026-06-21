@@ -121,6 +121,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#0369a1',
+  // PWA / iOS instalado: expone env(safe-area-inset-*) para que las barras
+  // fijas (p.ej. la barra inferior de la ficha) respeten notch y home indicator.
+  viewportFit: 'cover',
 }
 
 // Critical CSS inline. renderiza antes del paint inicial
