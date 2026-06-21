@@ -232,6 +232,38 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#7a2818', '#4a1810'],  // --noapto
 }
 
+// ── C5 · PROTOTIPO de reorden de módulos ────────────────────────────
+// La columna principal de la ficha se reordena en tres fases mentales:
+//   1) DECISIÓN  — ¿puedo/quiero ir hoy y estará bien para bañarme?
+//   2) PLAN      — cómo organizo la visita (llegar, comer, dormir, hacer)
+//   3) PROFUNDIDAD — datos, evidencia y exploración para quien quiera más
+// Se activa SOLO con ?orden=v2 (lectura en cliente). Sin el flag, el SSR
+// es byte-idéntico al orden actual de producción → cero riesgo/caché.
+const ORDER_V2: string[] = [
+  // 1 · DECISIÓN
+  'intro', 'trust', 'estado', 'seguridad', 'calidad', 'opiniones-dest', 'cta-ctx',
+  // 2 · PLAN
+  'asistente', 'como-llegar', 'trafico', 'afiliados', 'comer', 'dormir',
+  'campings', 'ferries', 'surf', 'buceo', 'cta-barco', 'ad',
+  // 3 · PROFUNDIDAD
+  'meteo', 'datos', 'fotos', 'video', 'opiniones', 'cercanas',
+  'texto-seo', 'hubs', 'faqs', 'crosslinks',
+]
+
+// Reordena sus hijos por element.key según `order`. Claves ausentes en
+// `order` conservan su posición de origen (sort estable). order=[] → identidad.
+function Reorder({ order, children }: { order: string[]; children: React.ReactNode }) {
+  const arr = (Array.isArray(children) ? children : [children])
+    .flat(Infinity)
+    .filter(Boolean) as React.ReactElement[]
+  const idx = (k: React.Key | null) => {
+    const i = k == null ? -1 : order.indexOf(String(k))
+    return i === -1 ? 1e9 : i
+  }
+  const sorted = [...arr].sort((a, b) => idx(a.key) - idx(b.key))
+  return <>{sorted}</>
+}
+
 export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
@@ -258,6 +290,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   // deadline (1.5s). Cada API tiene KV cache, así que el retry es ms
   // tras la primera petición. Esto permite TTFB sub-segundo en el shell
   // sin perder los datos: simplemente aparecen tras hidratación.
+  // C5 · orden de módulos. v1 = orden actual (SSR). v2 = decisión→plan→
+  // profundidad, activado por ?orden=v2 tras hidratación (prototipo).
+  const [orden, setOrden] = useState<'v1' | 'v2'>('v1')
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('orden') === 'v2') setOrden('v2')
+  }, [])
+
   const [clientRestaurantes, setClientRestaurantes] = useState<Restaurante[]>(restaurantes ?? [])
   const [clientHoteles, setClientHoteles]           = useState<HotelReal[]>(hoteles ?? [])
   const [clientCampings, setClientCampings]         = useState<Camping[]>(campings ?? [])
@@ -336,6 +375,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   return (
     <div className={styles.wrap}>
       <div className={styles.main}>
+        <Reorder order={orden === 'v2' ? ORDER_V2 : []}>
 
         {/* ORDEN ABOVE-THE-FOLD (post critique PR #84):
               1. Intro breve (texto, anchor reading)
@@ -347,7 +387,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
         {/* 1. INTRO BREVE */}
         {introTxt && (
-          <p style={{
+          <p key="intro" style={{
             margin: '0 0 1.5rem',
             padding: 0,
             fontSize: '1rem',
@@ -360,12 +400,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         {/* C3 · Sello de confianza junto al score (auditoría CRO) */}
-        <div style={{ margin: '0 0 1rem' }}>
+        <div key="trust" style={{ margin: '0 0 1rem' }}>
           <TrustSeal locale={locale} />
         </div>
 
         {/* 2. ESTADO HOY — fusión sistema + chips engagement */}
         <EstadoHoy
+          key="estado"
           slug={playa.slug}
           nombre={nombreH}
           reporte={generarReporteSistema({
@@ -381,12 +422,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
         {/* C1 · CTA contextual (sube el 1er punto comercial al 3er módulo) */}
         {flags.contextualCTA && (
-          <ContextualCTA playa={playa} meteo={meteo} locale={locale} />
+          <ContextualCTA key="cta-ctx" playa={playa} meteo={meteo} locale={locale} />
         )}
 
         {/* 3. ASISTENTE — qué necesitas hoy */}
         {necesidades && necesidades.length > 0 && (
           <AsistentePlaya
+            key="asistente"
             necesidades={necesidades}
             nombre={nombreH}
             locale={locale}
@@ -397,7 +439,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             La gente decide '¿me meto o no?' antes que datos meteo
             abstractos. Va junto al estado-hoy. */}
         {(banderaPlaya || medusas) && (
-          <div className={styles.card} id="s-seguridad">
+          <div key="seguridad" className={styles.card} id="s-seguridad">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>{i18n.seguridad(nombreH)}</h2>
               <span className={styles.cardSrc}>{i18n.seguridadSrc}</span>
@@ -437,7 +479,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
         {/* 5. CALIDAD AGUA — movido aquí (PR #86). Junto a seguridad
             porque pertenece al mismo bucket "¿puedo bañarme?". */}
-        <div className={styles.card} id="s-calidad">
+        <div key="calidad" className={styles.card} id="s-calidad">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.calidad(nombreH)}</h2>
             <span className={styles.cardSrc}>{i18n.calidadSrc}</span>
@@ -461,6 +503,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             La sección completa sigue abajo para quien quiera más detalles. */}
         {opinionesIniciales?.items && opinionesIniciales.items.length > 0 && (
           <OpinionesDestacadas
+            key="opiniones-dest"
             opiniones={opinionesIniciales.items}
             locale={locale}
           />
@@ -470,6 +513,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             Versión full con form para nuevas opiniones, paginación, etc.
             Se mantiene al final de la página para quien quiera profundizar. */}
         <Opiniones
+          key="opiniones"
           slug={playa.slug}
           nombre={playa.nombre}
           initial={opinionesIniciales ?? null}
@@ -480,6 +524,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             Reemplaza 7 CTAs dispersos: TheFork, Booking, Civitatis, RentalCars, Pitchup
             con un bloque tabbed que mantiene todos los servicios accesibles. */}
         <AffiliatesCTABlock
+          key="afiliados"
           playa={playa}
           affiliates={{
             booking: BOOKING_AID || undefined,
@@ -497,7 +542,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             sigue activo. */}
 
         {/* OLEAJE + METEO */}
-        <div className={styles.card} id="s-meteo">
+        <div key="meteo" className={styles.card} id="s-meteo">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{locale === 'en' ? <>Waves & <em>wind by hour</em></> : <>Oleaje y <em>viento por horas</em></>}</h2>
             <span className={styles.cardSrc}>{i18n.oleajeSrc}</span>
@@ -637,6 +682,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
         {/* ACTIVIDADES */}
         <SurfSection
+          key="surf"
           playa={playa} olas={meteo.olas} viento={meteo.viento}
           vientoDir={meteo.vientoDireccion} agua={meteo.agua}
           periodo={meteo.periodo} forecast={forecastSurf ?? undefined}
@@ -645,7 +691,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
 
         {/* CÓMO LLEGAR */}
-        <div className={styles.card} id="s-comoLlegar">
+        <div key="como-llegar" className={styles.card} id="s-comoLlegar">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? <>How to <em>get there</em></> : <>Cómo <em>llegar</em></>}</h2>
           </div>
@@ -691,12 +737,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         </div>
 
         {/* TRÁFICO */}
-        <div id="s-trafico">
+        <div key="trafico" id="s-trafico">
           <TraficoSection playa={playa} />
         </div>
 
         {/* RESTAURANTES */}
-        <div className={styles.card} id="s-comer">
+        <div key="comer" className={styles.card} id="s-comer">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.comer(nombreH)}</h2>
             <span className={styles.cardSrc}>
@@ -754,7 +800,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </Collapsible>
           </div>
         </div>
-        <div className={styles.card} id="s-dormir">
+        <div key="dormir" className={styles.card} id="s-dormir">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.dormir(nombreH)}</h2>
             <span className={styles.cardSrc}>{clientHoteles && clientHoteles.length > 0 ? i18n.dormirSrc : ''}</span>
@@ -812,11 +858,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         </div>
 
         {/* FERRY CTA. solo se muestra en Baleares y Canarias */}
-        <FerriesCTA playa={playa} locale={locale} />
+        <FerriesCTA key="ferries" playa={playa} locale={locale} />
 
         {/* CAMPINGS Y AUTOCARAVANAS */}
         {clientCampings && clientCampings.length > 0 && (
-          <div className={styles.card} id="s-campings">
+          <div key="campings" className={styles.card} id="s-campings">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>
                 <Car size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'var(--accent,#6b400a)'}}/>
@@ -894,7 +940,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
         {/* CENTROS DE BUCEO */}
         {clientBuceo && clientBuceo.length > 0 && (
-          <div className={styles.card} id="s-buceo">
+          <div key="buceo" className={styles.card} id="s-buceo">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>
                 <Fish size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'#0891b2'}}/>
@@ -951,13 +997,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         {/* AD. entre hoteles y servicios */}
-        <AdSlot slot="hoteles-servicios" format="horizontal" />
+        <AdSlot key="ad" slot="hoteles-servicios" format="horizontal" />
 
         {/* DATOS DE LA PLAYA (PR #86 - Consolidación de Servicios + Info)
             Unifica servicios & equipamiento con información técnica.
             Antes estaban dispersos en 2 secciones, ahora en 1 para mejor
             escaneo visual y menor fragmentación de contenido. */}
-        <div className={styles.card} id="s-datos">
+        <div key="datos" className={styles.card} id="s-datos">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{locale === 'en' ? <>Beach <em>information</em></> : <>Datos de <em>la playa</em></>}</h2>
           </div>
@@ -1058,7 +1104,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             (top). Antes robaba la atención antes de los datos críticos
             (seguridad, decisión de baño). Ahora va como confirmación
             visual tras todo el contenido de planning. */}
-        <div className={styles.card} id="s-fotos">
+        <div key="fotos" className={styles.card} id="s-fotos">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.galeria(nombreH)}</h2>
             <span className={styles.cardSrc}>{i18n.galSrc}</span>
@@ -1073,12 +1119,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* VÍDEO toggle — movido aquí (PR #86). Click-to-load: no
             carga el iframe hasta que el user pulsa. Wins LCP/INP. */}
         {videoData && (
-          <BeachVideoToggle video={videoData} nombre={nombreH} locale={locale} />
+          <BeachVideoToggle key="video" video={videoData} nombre={nombreH} locale={locale} />
         )}
 
         {/* PLAYAS CERCANAS */}
         {playasCercanas && playasCercanas.length > 0 && (
-          <div className={styles.card} id="s-cercanas">
+          <div key="cercanas" className={styles.card} id="s-cercanas">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>{locale === 'en' ? <>Beaches <em>nearby</em></> : <>Playas <em>cercanas</em></>}</h2>
             </div>
@@ -1094,22 +1140,23 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
         )}
 
-        <TextoSEO playa={playa} locale={locale} />
+        <TextoSEO key="texto-seo" playa={playa} locale={locale} />
 
         {/* CTA alquiler de barco — solo para costas relevantes */}
         {locale === 'es' && debeMostrarCTABarco(playa) && (
-          <AlquilerBarcoCTA variant="card" region={playa.comunidad} />
+          <AlquilerBarcoCTA key="cta-barco" variant="card" region={playa.comunidad} />
         )}
 
         {/* Hubs temáticos relevantes (cross-linking semántico) */}
-        <HubsRelacionados playa={playa} locale={locale} />
+        <HubsRelacionados key="hubs" playa={playa} locale={locale} />
 
         {/* FAQS */}
-        <FaqSection playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} mareasLunar={mareasLunar} locale={locale} />
+        <FaqSection key="faqs" playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} mareasLunar={mareasLunar} locale={locale} />
 
         {/* Cross-links: ruta + top de esta costa */}
-        <CrossLinks playa={playa} locale={locale} />
+        <CrossLinks key="crosslinks" playa={playa} locale={locale} />
 
+        </Reorder>
       </div>
 
       {/* ASIDE */}
