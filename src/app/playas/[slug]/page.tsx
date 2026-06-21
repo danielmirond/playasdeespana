@@ -36,6 +36,7 @@ import Nav from '@/components/ui/Nav'
 import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
+import CercaDeMiFab from '@/components/playa/CercaDeMiFab'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { calcularPlayaScore } from '@/lib/scoring'
@@ -484,6 +485,7 @@ export default async function PlayaPage({ params }: Props) {
         cmp="ficha_playa"
         id="actividades"
       />
+      <CercaDeMiFab locale="es" />
     </>
   )
 }
