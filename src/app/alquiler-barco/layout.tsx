@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import FloatingBoatCTA from '@/components/FloatingBoatCTA'
 
 export const metadata: Metadata = {
   title: 'Alquiler de Barcos en España | Playasdeespana.es',
@@ -13,5 +14,10 @@ export const metadata: Metadata = {
 }
 
 export default function BoatRentalLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      {children}
+      <FloatingBoatCTA />
+    </>
+  )
 }
