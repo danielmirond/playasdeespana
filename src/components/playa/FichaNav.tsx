@@ -4,6 +4,7 @@ import styles from './FichaNav.module.css'
 
 const SECCIONES = {
   es: [
+    { id: 's-webcam',      label: 'Webcam' },
     { id: 's-fotos',       label: 'Fotos' },
     { id: 's-meteo',       label: 'Mar' },
     { id: 's-seguridad',   label: 'Seguridad' },
@@ -19,6 +20,7 @@ const SECCIONES = {
     { id: 's-cercanas',    label: 'Cercanas' },
   ],
   en: [
+    { id: 's-webcam',      label: 'Webcam' },
     { id: 's-fotos',       label: 'Photos' },
     { id: 's-meteo',       label: 'Sea' },
     { id: 's-seguridad',   label: 'Safety' },

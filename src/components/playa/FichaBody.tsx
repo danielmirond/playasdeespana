@@ -39,6 +39,7 @@ import { flags } from '@/lib/flags'
 import AffiliatesCTABlock from './AffiliatesCTABlock'
 import OpinionesDestacadas from './OpinionesDestacadas'
 import BeachVideoToggle from './BeachVideoToggle'
+import WebcamPlaya from './WebcamPlaya'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
@@ -102,6 +103,8 @@ interface Props {
   /** Video YouTube si existe. Se renderiza con BeachVideoToggle
    *  (click-to-load) después del asistente, ya no above-the-fold. */
   videoData?:      import('@/lib/videos').VideoPlaya | null
+  /** Webcams en directo cercanas (Windy). [] si no hay clave o no hay cam. */
+  webcams?:        import('@/lib/webcams').Webcam[]
   locale?:         'es' | 'en'
   /** Slug del municipio si la página existe (ver getMunicipioSlugsSet). */
   municipioSlug?:  string
@@ -241,7 +244,7 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
 // es byte-idéntico al orden actual de producción → cero riesgo/caché.
 const ORDER_V2: string[] = [
   // 1 · DECISIÓN
-  'intro', 'trust', 'estado', 'seguridad', 'calidad', 'opiniones-dest', 'cta-ctx',
+  'intro', 'trust', 'estado', 'webcam', 'seguridad', 'calidad', 'opiniones-dest', 'cta-ctx',
   // 2 · PLAN
   'asistente', 'como-llegar', 'trafico', 'afiliados', 'comer', 'dormir',
   'campings', 'ferries', 'surf', 'buceo', 'cta-barco', 'ad',
@@ -264,7 +267,7 @@ function Reorder({ order, children }: { order: string[]; children: React.ReactNo
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -433,6 +436,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             nombre={nombreH}
             locale={locale}
           />
+        )}
+
+        {/* WEBCAM en directo (Windy) — el "¿cómo está ahora?" definitivo.
+            Gated por WINDY_API_KEY: webcams=[] si no hay clave → no renderiza. */}
+        {webcams && webcams.length > 0 && (
+          <div key="webcam" id="s-webcam">
+            <WebcamPlaya webcams={webcams} nombre={nombreH} locale={locale} />
+          </div>
         )}
 
         {/* 4. SEGURIDAD: BANDERA + MEDUSAS — movido aquí (PR #86)
