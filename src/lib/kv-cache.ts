@@ -72,6 +72,28 @@ export async function kvCached<T>(
   return fresh
 }
 
+/**
+ * Lee de KV SIN computar ni escribir. Devuelve el valor cacheado o null.
+ * Útil en generateMetadata: consulta si un recurso ya está en cache
+ * (poblado por el render + warming) sin disparar la llamada externa cara,
+ * evitando latencia en la metadata.
+ */
+export async function kvPeek<T>(namespace: string, parts: Array<string | number>): Promise<T | null> {
+  const kv = await getKV()
+  if (!kv) return null
+  try {
+    // Timeout duro: nunca bloquear la ruta que llama (p.ej. generateMetadata).
+    // En prod KV responde en ~ms; si por lo que sea tarda, devolvemos null.
+    const cached = await Promise.race([
+      kv.get(makeKey(namespace, parts)) as Promise<T | null>,
+      new Promise<null>(r => setTimeout(() => r(null), 300)),
+    ])
+    return cached ?? null
+  } catch {
+    return null
+  }
+}
+
 function makeKey(namespace: string, parts: Array<string | number>): string {
   const pieces = parts.map(p => {
     if (typeof p === 'number') {

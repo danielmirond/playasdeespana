@@ -17,7 +17,7 @@
 // Clave gratuita: https://api.windy.com/keys
 
 import { fetchWithTimeout } from './fetch-timeout'
-import { kvCached } from './kv-cache'
+import { kvCached, kvPeek } from './kv-cache'
 import { haversine } from './geo'
 
 const WINDY_KEY = process.env.WINDY_API_KEY ?? ''
@@ -85,4 +85,16 @@ async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
 export async function getWebcams(lat: number, lng: number): Promise<Webcam[]> {
   if (!WINDY_KEY) return []
   return kvCached('webcams', [lat, lng], TTL_S, () => fetchWebcams(lat, lng))
+}
+
+/**
+ * ¿Hay webcam cerca? Lectura KV-only (sin llamar a Windy): se usa en
+ * generateMetadata para decidir si el title incluye "webcam" sin añadir
+ * latencia. Devuelve true solo si el KV ya tiene webcams para esa playa
+ * (poblado por el render + warming en visitas previas).
+ */
+export async function hasWebcamNearby(lat: number, lng: number): Promise<boolean> {
+  if (!WINDY_KEY) return false
+  const cached = await kvPeek<Webcam[]>('webcams', [lat, lng])
+  return Array.isArray(cached) && cached.length > 0
 }

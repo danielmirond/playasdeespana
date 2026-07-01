@@ -27,7 +27,7 @@ import type { CentroBuceo } from '@/lib/buceo'
 import { getFotos, refetchAndStoreFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
 import { getVideoYouTube } from '@/lib/videos'
-import { getWebcams } from '@/lib/webcams'
+import { getWebcams, hasWebcamNearby } from '@/lib/webcams'
 import BeachVideoToggle from '@/components/playa/BeachVideoToggle'
 import { getHoteles } from '@/lib/hoteles'
 import { getEscuelas } from '@/lib/escuelas'
@@ -102,7 +102,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Title corto (~50-60 chars) para que Google no lo trunque en SERP.
   // Antes era 134 chars → Google cortaba a "... Parking, hoteles y don..."
   // Estructura: [Nombre] hoy: estado del mar, bandera y servicios
-  const title = `${np} hoy: estado del mar, bandera y servicios`
+  //
+  // Si la playa tiene webcam (lectura KV-only, sin latencia extra), el title
+  // incluye "webcam" para captar la búsqueda "playa X webcam". Solo aparece
+  // cuando el KV ya está poblado (render + warming previos), nunca en falso.
+  const conWebcam = await hasWebcamNearby(playa.lat, playa.lng)
+  const title = conWebcam
+    ? `${np} hoy: webcam, estado del mar y bandera`
+    : `${np} hoy: estado del mar, bandera y servicios`
   // Meta description varía por atributos (bandera azul, actividades,
   // composición, dimensiones). Evita el "duplicate description" de
   // Search Console cuando 2.500 fichas comparten meta description
