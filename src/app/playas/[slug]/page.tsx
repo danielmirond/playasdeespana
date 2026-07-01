@@ -251,6 +251,7 @@ export default async function PlayaPage({ params }: Props) {
   if (needsWarm(campingsResult)) failed.push(['camp',   () => getCampings(playa.lat, playa.lng)])
   if (needsWarm(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng)])
   if (needsWarm(escuelasResult)) failed.push(['esc',    () => getEscuelas(playa.lat, playa.lng)])
+  if (needsWarm(webcamResult))   failed.push(['webcam', () => getWebcams(playa.lat, playa.lng)])
 
   if (failed.length > 0) {
     after(async () => {

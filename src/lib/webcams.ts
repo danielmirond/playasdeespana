@@ -42,7 +42,8 @@ interface WindyWebcam {
   lastUpdatedOn?: string
   location?:      { latitude: number; longitude: number }
   images?:        { current?: { preview?: string; thumbnail?: string } }
-  player?:        { live?: { embed?: string }; day?: { embed?: string } }
+  // player v3: URLs directas por marco temporal (no objetos {embed}).
+  player?:        { live?: string; day?: string; month?: string; year?: string; lifetime?: string }
 }
 
 async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
@@ -68,7 +69,7 @@ async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
           title:       w.title,
           distancia_m: Math.round(haversine(lat, lng, loc.latitude, loc.longitude)),
           thumb:       w.images?.current?.preview ?? w.images?.current?.thumbnail ?? null,
-          embedUrl:    w.player?.live?.embed ?? w.player?.day?.embed ?? null,
+          embedUrl:    w.player?.live ?? w.player?.day ?? null,
           lat:         loc.latitude,
           lon:         loc.longitude,
           lastUpdated: w.lastUpdatedOn,
