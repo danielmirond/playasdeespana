@@ -1,71 +1,90 @@
 'use client'
-
-import { useState, useEffect } from 'react'
-import { X, Anchor } from 'lucide-react'
+// FAB flotante de alquiler de barcos. Tarjeta fija abajo-derecha que aparece
+// en las páginas /alquiler-barco con el enlace de afiliado Awin/SamBoat.
+//
+// El sitio NO usa Tailwind: estilos inline + un <style> con tokens del design
+// system (paleta marina --mar-*, --font-sans) siguiendo el patrón de
+// src/components/playa/CercaDeMiFab.tsx. Se eleva sobre el safe-area inferior.
+// No coincide con el FAB "Playas cerca de mí": ese solo se monta en las fichas
+// (/playas/[slug]) y este solo en /alquiler-barco.
+//
+// La visibilidad se deriva del pathname en el render (no en un useEffect):
+// así pinta correcto desde el primer paint, sin parpadeo y consistente con SSR.
+import { useState } from 'react'
+import { X, Anchor } from '@phosphor-icons/react'
 import { usePathname } from 'next/navigation'
 
+const STYLE = `
+.boatCta{position:fixed;right:16px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:85;
+ width:min(320px,calc(100vw - 32px));
+ background:var(--mar-700,#2d5266);color:#fff;font-family:var(--font-sans);
+ border-radius:var(--r-lg,10px);box-shadow:0 8px 28px rgba(0,0,0,.32);
+ padding:14px 16px;-webkit-tap-highlight-color:transparent;opacity:1}
+.boatCta__row{display:flex;align-items:flex-start;gap:10px}
+.boatCta__icon{flex-shrink:0;margin-top:2px}
+.boatCta__body{flex:1;min-width:0}
+.boatCta__title{font-weight:700;font-size:.9rem;line-height:1.25;margin:0 0 2px}
+.boatCta__sub{font-size:.72rem;line-height:1.3;color:var(--mar-300,#8aa8b8);margin:0 0 10px}
+.boatCta__btn{display:inline-block;background:#fff;color:var(--mar-700,#2d5266);
+ font-size:.78rem;font-weight:700;text-decoration:none;
+ padding:8px 16px;border-radius:var(--r-sm,4px);transition:filter .15s ease}
+.boatCta__btn:hover{filter:brightness(.94)}
+.boatCta__btn:active{transform:scale(.98)}
+.boatCta__close{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
+ width:24px;height:24px;padding:0;border:none;border-radius:999px;cursor:pointer;
+ background:rgba(255,255,255,.12);color:var(--mar-300,#8aa8b8);transition:color .15s ease,background .15s ease}
+.boatCta__close:hover{color:#fff;background:rgba(255,255,255,.22)}
+@keyframes boatCtaIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (max-width:520px){.boatCta{right:12px;left:12px;width:auto}}
+@media (prefers-reduced-motion:reduce){.boatCta{animation:none}}
+`
+
 export default function FloatingBoatCTA() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [coast, setCoast] = useState<string>('')
-  const pathname = usePathname()
+  const [closed, setClosed] = useState(false)
+  const pathname = usePathname() ?? ''
 
-  useEffect(() => {
-    // Only show on boat rental pages
-    if (!pathname.includes('/alquiler-barco')) {
-      setIsVisible(false)
-      return
-    }
+  // Determinar costa a partir de la URL: /alquiler-barco/costas/[coast]/...
+  const coastMatch = pathname.match(/\/alquiler-barco\/costas\/([^/]+)/)
+  let coast: string | null = null
+  if (coastMatch && coastMatch[1]) {
+    const decoded = decodeURIComponent(coastMatch[1]).replace(/-/g, ' ')
+    coast = decoded.charAt(0).toUpperCase() + decoded.slice(1)
+  } else if (pathname === '/alquiler-barco') {
+    coast = 'España'
+  }
 
-    // Extract coast from URL: /alquiler-barco/costas/[coast]/...
-    const match = pathname.match(/\/alquiler-barco\/costas\/([^/]+)/)
-    if (match && match[1]) {
-      const decodedCoast = decodeURIComponent(match[1]).replace(/-/g, ' ')
-      setCoast(decodedCoast.charAt(0).toUpperCase() + decodedCoast.slice(1))
-      setIsVisible(true)
-    } else if (pathname === '/alquiler-barco') {
-      setIsVisible(true)
-      setCoast('España')
-    } else {
-      setIsVisible(false)
-    }
-  }, [pathname])
-
-  if (!isVisible) {
+  if (closed || !coast) {
     return null
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
-      <div className="relative">
-        <div className="bg-blue-600 text-white rounded-lg shadow-lg p-4 max-w-sm">
-          <div className="flex items-start gap-3">
-            <Anchor className="w-5 h-5 flex-shrink-0 mt-0.5" />
-            <div className="flex-1">
-              <p className="font-bold text-sm mb-1">
-                Alquila barco en {coast}
-              </p>
-              <p className="text-xs text-blue-100 mb-3">
-                desde €100/día • Reserva segura con SamBoat
-              </p>
-              <a
-                href="https://www.awin1.com/cread.php?awinmid=32683&awinaffid=playasdeespana&clickref=playasdeespana_floating&ued=https://www.samboat.es"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-white text-blue-600 text-xs font-bold py-2 px-4 rounded hover:bg-gray-100 transition-colors"
-              >
-                Ver Ofertas
-              </a>
-            </div>
-            <button
-              onClick={() => setIsVisible(false)}
-              className="flex-shrink-0 text-blue-200 hover:text-white transition-colors"
-              aria-label="Close"
+    <>
+      <style dangerouslySetInnerHTML={{ __html: STYLE }} />
+      <div className="boatCta" role="complementary" aria-label="Alquiler de barcos">
+        <div className="boatCta__row">
+          <Anchor size={20} weight="fill" className="boatCta__icon" aria-hidden="true" />
+          <div className="boatCta__body">
+            <p className="boatCta__title">Alquila barco en {coast}</p>
+            <p className="boatCta__sub">desde 100&nbsp;€/día · Reserva segura con SamBoat</p>
+            <a
+              className="boatCta__btn"
+              href="https://www.awin1.com/cread.php?awinmid=32683&awinaffid=playasdeespana&clickref=playasdeespana_floating&ued=https://www.samboat.es"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
             >
-              <X className="w-4 h-4" />
-            </button>
+              Ver Ofertas
+            </a>
           </div>
+          <button
+            type="button"
+            className="boatCta__close"
+            onClick={() => setClosed(true)}
+            aria-label="Cerrar"
+          >
+            <X size={14} weight="bold" aria-hidden="true" />
+          </button>
         </div>
       </div>
-    </div>
+    </>
   )
 }
