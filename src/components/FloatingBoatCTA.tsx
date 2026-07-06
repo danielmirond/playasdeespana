@@ -34,9 +34,7 @@ const STYLE = `
  width:24px;height:24px;padding:0;border:none;border-radius:999px;cursor:pointer;
  background:rgba(255,255,255,.12);color:var(--mar-300,#8aa8b8);transition:color .15s ease,background .15s ease}
 .boatCta__close:hover{color:#fff;background:rgba(255,255,255,.22)}
-@keyframes boatCtaIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media (max-width:520px){.boatCta{right:12px;left:12px;width:auto}}
-@media (prefers-reduced-motion:reduce){.boatCta{animation:none}}
 `
 
 export default function FloatingBoatCTA() {
