@@ -79,6 +79,66 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Canarias (voz bicéfala) ─────
+  {
+    slug: 'playa-cofete-fuerteventura-pista-corrientes',
+    category: 'guias',
+    title: 'Playa de Cofete, Fuerteventura: 12 km de arena salvaje, 20 km de pista y un mar en el que casi nadie se baña',
+    excerpt:
+      'Una de las playas más grandiosas de Canarias y de las más peligrosas para el baño. Lo que de verdad necesitas saber de Cofete: se llega por una pista de tierra de unos 20 km (vetada a los coches de alquiler), no tiene servicios y tiene corrientes sin socorrista.',
+    heroAlt: 'Arco interminable de arena dorada de la playa de Cofete con el macizo de Jandía cayendo sobre la orilla, Fuerteventura',
+    heroQuery: 'cofete,fuerteventura,beach,jandia',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-07-06T10:26:59Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/canarias', label: 'Playas de Canarias' },
+      { href: '/islas', label: 'Playas por isla en España' },
+      { href: '/playas-secretas', label: 'Playas y calas poco masificadas' },
+    ],
+    body: [
+      { t: 'p', html: 'A Cofete se sube antes de bajar. Desde Morro Jable, en el extremo sur de Fuerteventura, una pista de tierra trepa en zigzag hasta un collado pelado —la Degollada de Cofete— donde casi todo el mundo detiene el coche por instinto. Al otro lado de la montaña no hay nada construido en kilómetros: solo un arco interminable de arena dorada batido por un Atlántico verde y bravo, con el macizo de Jandía cayendo a plomo sobre la orilla y el Pico de la Zarza, el techo de la isla, vigilando desde arriba. Es una de las panorámicas más rotundas de Canarias, y todavía estás a media hora de pisar la arena.' },
+      { t: 'p', html: 'En mitad de esa inmensidad sin casas asoma una excepción: la <strong>Villa Winter</strong>, un caserón con torreón que mandó levantar en los años cuarenta el ingeniero alemán Gustav Winter, y alrededor del cual creció una leyenda de submarinos y refugios nazis que nadie ha probado jamás. Cerca, un pequeño cementerio marinero recuerda a los náufragos que el mar trajo hasta esta costa. Cofete es eso: belleza enorme con un poso inquietante.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La postal es de las mejores de España; la letra pequeña, de las más serias. Empecemos por el acceso. La playa —unos <strong>12 km de arena salvaje y sin urbanizar</strong> entre Cofete y Barlovento, dentro del <strong>Parque Natural de Jandía</strong>— se alcanza por una <strong>pista de tierra de cerca de 20 km</strong> desde Morro Jable: estrecha, con curvas y firme irregular, fácilmente una hora de trayecto lento. El detalle que arruina muchos viajes: <strong>casi todos los contratos de coche de alquiler prohíben circular por ella</strong>. Si pinchas, rompes los bajos o te quedas tirado ahí abajo, el seguro no te cubre.' },
+      { t: 'p', html: 'El segundo aviso, y el más importante, es el baño. Cofete es la cara de <strong>barlovento</strong> de la isla, expuesta de lleno al oleaje del Atlántico abierto: <strong>corrientes de retorno fuertes y resaca</strong>, sin socorristas y sin vigilancia. No es una exageración de folleto al revés: aquí se han producido ahogamientos, y muchos días el baño está directamente desaconsejado. No es una playa para meterse sin mirar el mar, y desde luego no es para niños pequeños. Lo tercero: <strong>no hay prácticamente nada</strong> —ni chiringuito fiable, ni sombra natural, ni agua potable, ni apenas cobertura—. Lo que no bajes, no lo hay.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'La primera decisión es cómo llegar sin jugártela. Si no conduces un <strong>todoterreno alto y con seguro que lo permita</strong>, olvídate de bajar con tu coche de alquiler: hay <strong>guagua (bus) 4x4 desde Morro Jable</strong> en temporada y excursiones organizadas en vehículos preparados. Es más lento, pero te ahorra el disgusto de una avería en mitad de la nada. Y sal pronto: con luz buena, tiempo para caminar y margen para volver antes de que caiga el sol sobre una pista sin farolas.' },
+      { t: 'p', html: 'La segunda es para qué vas. Cofete está para <strong>caminar, mirar y fotografiar</strong>: el arco infinito de arena, el atardecer encendiendo la montaña, y un cielo sin contaminación lumínica que de noche se llena de estrellas. Para eso es de las mejores de España. Lo que no es es una playa de chapuzón tranquilo: <strong>mira el parte de mar y de viento antes de salir</strong> y, con mar gruesa, ni te acerques a la orilla. ¿Quieres bañarte de verdad? La isla tiene la respuesta en su <strong>otra cara, la de sotavento</strong> —Jandía, Sotavento, Costa Calma, el propio Morro Jable—, con agua mansa y turquesa a media hora en coche por carretera asfaltada. Cofete es para asomarse al océano; sotavento, para nadar en él.' },
+      { t: 'quote', text: 'No es un paraíso para darse un chapuzón: es una de las playas más grandiosas y más peligrosas de España, y conviene saberlo antes de pisar la arena.' },
+      { t: 'p', html: 'Porque Cofete no se mide en lo cómoda que es —no lo es— sino en lo pequeño que te hace sentir. Doce kilómetros de arena sin una sola sombrilla, el viento empujando la espuma, el cementerio y la casa del alemán recortados contra el macizo, y un océano que recuerda, ola tras ola, quién manda aquí. Ve a caminarla, a verla arder al atardecer y a contar estrellas; deja el baño largo para la otra orilla de la isla. Equivócate de expectativa y Cofete te lo hará saber sin pedir permiso: en esta playa el mar no es un decorado.' },
+    ],
+    faq: [
+      { q: '¿Se puede ir a Cofete con un coche de alquiler?', a: 'Por norma, no: la mayoría de las compañías prohíben en el contrato circular por la pista de tierra de unos 20 km que baja desde Morro Jable, y si hay daños o una avería el seguro no cubre. Las alternativas seguras son la guagua (bus) 4x4 desde Morro Jable en temporada o una excursión organizada en todoterreno.' },
+      { q: '¿Es peligroso bañarse en la playa de Cofete?', a: 'Puede serlo. Es la cara de barlovento de la isla, con oleaje fuerte, corrientes de retorno y resaca, y no hay socorristas. Se han registrado ahogamientos. Consulta el estado del mar antes de ir y no te metas con mar gruesa; para un baño tranquilo, ve a las playas de sotavento (Jandía, Sotavento, Costa Calma, Morro Jable).' },
+      { q: '¿Qué es la Villa Winter de Cofete?', a: 'Un caserón con torreón construido en los años cuarenta por el ingeniero alemán Gustav Winter en mitad de la playa. Está envuelto en leyendas —nunca probadas— sobre submarinos y refugios nazis durante la Segunda Guerra Mundial. Hoy es uno de los elementos más fotografiados de Cofete.' },
+    ],
+    en: {
+      title: 'Playa de Cofete, Fuerteventura: 12 km of wild sand, a 20 km dirt track and a sea almost no one swims in',
+      excerpt: 'One of the grandest beaches in the Canaries and one of the most dangerous to swim in. What you actually need to know about Cofete: it’s reached by a roughly 20 km dirt track (off-limits to hire cars), has no facilities and has currents with no lifeguard.',
+      related: [
+        { href: '/en/islands', label: 'Beaches by island' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'You climb to Cofete before you drop down to it. From Morro Jable, at the southern tip of Fuerteventura, a dirt track zigzags up to a bare pass — the Degollada de Cofete — where nearly everyone stops the car on instinct. On the far side of the mountain there is nothing built for kilometres: just an endless arc of golden sand pounded by a green, surly Atlantic, the Jandía massif dropping sheer to the shore and the Pico de la Zarza, the island’s highest point, keeping watch from above. It’s one of the most commanding views in the Canaries, and you’re still half an hour from the sand.' },
+        { t: 'p', html: 'In the middle of all that houseless vastness stands one exception: the <strong>Villa Winter</strong>, a turreted mansion built in the 1940s by the German engineer Gustav Winter, around which grew a legend of submarines and Nazi hideouts that no one has ever proved. Nearby, a small seafarers’ cemetery remembers the shipwrecked the sea washed up on this coast. That’s Cofete: huge beauty with an unsettling undertow.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The postcard is among Spain’s best; the small print is among its most serious. Start with access. The beach — some <strong>12 km of wild, undeveloped sand</strong> between Cofete and Barlovento, inside the <strong>Jandía Natural Park</strong> — is reached by a <strong>dirt track of nearly 20 km</strong> from Morro Jable: narrow, winding, rough underfoot, easily an hour at crawling pace. The detail that ruins many trips: <strong>almost every hire-car contract bans driving it</strong>. Get a puncture, crack the underside or break down down there, and the insurance won’t cover you.' },
+        { t: 'p', html: 'The second warning, and the most important, is the swim. Cofete is the island’s <strong>windward (barlovento)</strong> face, fully exposed to open-Atlantic swell: <strong>strong rip currents and undertow</strong>, no lifeguards, no supervision. This isn’t a brochure in reverse: there have been drownings here, and on many days swimming is flatly inadvisable. It’s not a beach to wade into without reading the sea, and certainly not for small children. Third: there is <strong>almost nothing here</strong> — no reliable beach bar, no natural shade, no drinking water, barely any phone signal. Whatever you don’t carry down, you won’t find.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'The first call is how to get there without a gamble. Unless you’re driving a <strong>high 4x4 with insurance that allows it</strong>, forget taking your hire car down: there’s a <strong>4x4 bus (guagua) from Morro Jable</strong> in season and organised excursions in proper vehicles. It’s slower, but it spares you a breakdown in the middle of nowhere. And set off early: good light, time to walk, and a margin to get back before the sun drops over an unlit track.' },
+        { t: 'p', html: 'The second is what you’re going for. Cofete is for <strong>walking, looking and photographing</strong>: the infinite arc of sand, the sunset setting the mountain alight, and a night sky with no light pollution. For that it’s among the best in Spain. What it isn’t is a beach for a quiet dip: <strong>check the sea and wind forecast before you leave</strong> and, in a heavy sea, don’t go near the water’s edge. Want a proper swim? The island’s answer is on its <strong>other, leeward (sotavento) face</strong> — Jandía, Sotavento, Costa Calma, Morro Jable itself — with calm turquoise water half an hour away on tarmac. Cofete is for facing the ocean; the leeward side is for swimming in it.' },
+        { t: 'quote', text: 'It’s no paradise for a dip: it’s one of the grandest and most dangerous beaches in Spain, and you’d do well to know that before you reach the sand.' },
+        { t: 'p', html: 'Because Cofete isn’t measured in how comfortable it is — it isn’t — but in how small it makes you feel. Twelve kilometres of sand without a single parasol, the wind driving the spray, the cemetery and the German’s house silhouetted against the massif, and an ocean that reminds you, wave after wave, who’s in charge here. Go to walk it, to watch it burn at sunset and to count stars; leave the long swim for the other side of the island. Get your expectations wrong and Cofete will let you know without asking: on this beach the sea is no backdrop.' },
+      ],
+      faq: [
+        { q: 'Can you drive to Cofete in a hire car?', a: 'As a rule, no: most companies ban driving the roughly 20 km dirt track down from Morro Jable in their contracts, and if there’s damage or a breakdown the insurance won’t cover it. The safe alternatives are the 4x4 bus (guagua) from Morro Jable in season or an organised 4x4 excursion.' },
+        { q: 'Is it dangerous to swim at Cofete?', a: 'It can be. It’s the island’s windward side, with strong swell, rip currents and undertow, and there are no lifeguards. Drownings have occurred. Check the sea state before you go and don’t get in when the sea is heavy; for a calm swim, head to the leeward beaches (Jandía, Sotavento, Costa Calma, Morro Jable).' },
+        { q: 'What is the Villa Winter at Cofete?', a: 'A turreted mansion built in the 1940s by the German engineer Gustav Winter in the middle of the beach. It’s wrapped in legends — never proven — about submarines and Nazi hideouts during the Second World War. Today it’s one of the most photographed features of Cofete.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Galicia (voz bicéfala) ─────
   {
     slug: 'playa-catedrales-lugo-marea-reserva',
