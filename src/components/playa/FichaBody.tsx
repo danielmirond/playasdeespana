@@ -235,13 +235,14 @@ const COLORES_CALIDAD: Record<string, [string, string]> = {
   'Deficiente': ['#7a2818', '#4a1810'],  // --noapto
 }
 
-// ── C5 · PROTOTIPO de reorden de módulos ────────────────────────────
-// La columna principal de la ficha se reordena en tres fases mentales:
+// ── C5 · Orden de módulos de la ficha (por defecto) ─────────────────
+// La columna principal se ordena en tres fases mentales:
 //   1) DECISIÓN  — ¿puedo/quiero ir hoy y estará bien para bañarme?
 //   2) PLAN      — cómo organizo la visita (llegar, comer, dormir, hacer)
 //   3) PROFUNDIDAD — datos, evidencia y exploración para quien quiera más
-// Se activa SOLO con ?orden=v2 (lectura en cliente). Sin el flag, el SSR
-// es byte-idéntico al orden actual de producción → cero riesgo/caché.
+// Reorder() ordena de forma determinista en servidor y cliente (mismo
+// output → sin CLS/flash). Antes era un flag ?orden=v2; ahora es el orden
+// por defecto. Para volver al orden de origen: git revert de este cambio.
 const ORDER_V2: string[] = [
   // 1 · DECISIÓN
   'intro', 'trust', 'estado', 'webcam', 'seguridad', 'calidad', 'opiniones-dest', 'cta-ctx',
@@ -293,12 +294,6 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   // deadline (1.5s). Cada API tiene KV cache, así que el retry es ms
   // tras la primera petición. Esto permite TTFB sub-segundo en el shell
   // sin perder los datos: simplemente aparecen tras hidratación.
-  // C5 · orden de módulos. v1 = orden actual (SSR). v2 = decisión→plan→
-  // profundidad, activado por ?orden=v2 tras hidratación (prototipo).
-  const [orden, setOrden] = useState<'v1' | 'v2'>('v1')
-  useEffect(() => {
-    if (new URLSearchParams(window.location.search).get('orden') === 'v2') setOrden('v2')
-  }, [])
 
   const [clientRestaurantes, setClientRestaurantes] = useState<Restaurante[]>(restaurantes ?? [])
   const [clientHoteles, setClientHoteles]           = useState<HotelReal[]>(hoteles ?? [])
@@ -378,7 +373,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   return (
     <div className={styles.wrap}>
       <div className={styles.main}>
-        <Reorder order={orden === 'v2' ? ORDER_V2 : []}>
+        <Reorder order={ORDER_V2}>
 
         {/* ORDEN ABOVE-THE-FOLD (post critique PR #84):
               1. Intro breve (texto, anchor reading)
