@@ -319,6 +319,66 @@ export const ARTICLES: Article[] = [
       ],
     },
   },
+  // ───── Diario de playas · Cantabria (voz bicéfala) ─────
+  {
+    slug: 'playa-oyambre-cantabria-avion-1929',
+    category: 'curiosidades',
+    title: 'Playa de Oyambre, Cantabria: la playa donde aterrizó en 1929 un avión que cruzó el Atlántico sin escalas',
+    excerpt:
+      'Aquí tomó tierra el "Pájaro Amarillo" tras cruzar el Atlántico en 1929. Lo que hay que saber de Oyambre hoy: dunas protegidas y arena de sobra, pero costa abierta, agua fría y corrientes en la ría.',
+    heroAlt: 'Playa de Oyambre en Cantabria con arena amplia, dunas y colinas verdes al fondo bajo cielo nublado',
+    heroQuery: 'oyambre,cantabria,beach,dunes',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-07-06T09:20:28Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/cantabria', label: 'Playas de Cantabria' },
+      { href: '/playas-secretas', label: 'Playas y calas poco conocidas' },
+      { href: '/playas-paradisiacas', label: 'Playas paradisíacas' },
+    ],
+    body: [
+      { t: 'p', html: 'La estampa de Oyambre no cambia mucho desde hace un siglo: una lengua larga de arena bajo colinas de un verde casi irlandés, las dunas peinadas por el viento del Cantábrico y, al fondo, la silueta de los Picos de Europa cuando el día lo permite. Pero hay una mañana de junio de 1929 que aquí no se olvida: la de un avión amarillo saliendo de la bruma y posándose sobre la arena mojada, con el motor ya en las últimas y la gente del pueblo corriendo a ver qué caía del cielo.' },
+      { t: 'p', html: 'Aquel trasto era el <strong>"Pájaro Amarillo"</strong> (<em>L’Oiseau Canari</em>), y acababa de hacer algo que entonces rozaba lo imposible: <strong>cruzar el Atlántico sin escalas</strong>. Se quedó sin combustible y eligió esta playa para no caer al mar. Casi un siglo después, Oyambre sigue siendo eso: una playa grande y salvaje, de parque natural, con más historia y más viento que sombrillas. Conviene saber a qué se viene.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'El hecho es real y está documentado: el <strong>14 de junio de 1929</strong>, la tripulación francesa del <em>Oiseau Canari</em> —Jean Assollant, René Lefèvre y Armand Lotti, más un polizón norteamericano, Arthur Schreiber— completó una de las primeras travesías aéreas del Atlántico <strong>sin escalas del continente americano a Europa</strong>, despegando de Old Orchard (Maine). Sin gasolina para llegar a París, aterrizaron sobre la arena de Oyambre. Hoy un <strong>monumento junto a la playa</strong> lo recuerda. Y el entorno acompaña: Oyambre está dentro del <strong>Parque Natural de Oyambre</strong>, un cordón de dunas, marismas y rías protegido desde 1988.' },
+      { t: 'p', html: 'Ahora la letra pequeña que el folleto se salta: <strong>Oyambre es playa de parque natural, no piscina</strong>. Da al Cantábrico abierto, así que hay <strong>oleaje, corrientes y resacas</strong>, y el agua es <strong>fría</strong> (rara vez cómoda fuera de julio y agosto). Las mareas cantábricas son grandes: con la <strong>marea alta la arena se estrecha</strong> mucho y las bocas de las rías cercanas —la de San Vicente y la de la Rabia— tienen <strong>corrientes peligrosas</strong> que no son para bañarse. Súmale que las <strong>dunas están protegidas</strong> (hay que pisar por las pasarelas, no campo a través), que los <strong>servicios son limitados</strong> y que en agosto el aparcamiento se llena pronto. Es una gran playa; no es una playa fácil.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'La regla de oro aquí es doble: <strong>mira la marea y mira el mar</strong>. Con marea media-baja Oyambre despliega un arenal enorme donde cabe todo el mundo; con marejada de fondo, en cambio, es playa de <strong>surfistas</strong>, no de bañistas tranquilos. Báñate en el <strong>tramo vigilado</strong> y hazle caso a las banderas: la resaca en un día de olas se lleva mar adentro sin avisar, sobre todo cerca de las desembocaduras. Con niños pequeños, ese día, mejor la orilla y el castillo de arena.' },
+      { t: 'p', html: 'Lo demás es disfrutar lo que la hace distinta: ve <strong>fuera de agosto o a primera hora</strong> para tenerla medio vacía y con buena luz, acércate al <strong>monumento del Pájaro Amarillo</strong> para ponerle cara a la historia, y respeta las <strong>pasarelas sobre las dunas</strong> —es lo que mantiene el sitio como es—. El plan redondo la encadena con <strong>San Vicente de la Barquera</strong> y <strong>Comillas</strong>, a un paso, para comer y ver pueblo. ¿Buscas un baño más resguardado y templado? Las <strong>playas de dentro de las rías</strong> y las ensenadas protegidas rompen menos que este frente abierto: Oyambre para el paseo largo y el surf; la ría para chapotear sin sobresaltos.' },
+      { t: 'quote', text: 'No es una "playa virgen" cualquiera: es la pista de aterrizaje accidental de una hazaña de 1929. Y sigue teniendo el mismo carácter que la eligió: mar abierto, viento y ni una concesión al que busca piscina.' },
+      { t: 'p', html: 'Porque a Oyambre no se viene solo a bañarse, sino a pisar un sitio donde el mar, el viento y hasta la historia van a lo suyo. Aquel avión amarillo lo entendió a las malas —se quedó sin cielo y esta arena lo recogió—; tú tienes la ventaja de mirar antes la tabla de mareas y el parte de olas. Acierta con las dos, sube la vista a las colinas verdes y a los Picos al fondo, y entenderás por qué esta playa lleva casi un siglo contando la misma historia. Ven de cualquier manera un día de mar gruesa, y te la contará la resaca.' },
+    ],
+    faq: [
+      { q: '¿Qué avión aterrizó en la playa de Oyambre?', a: 'El "Pájaro Amarillo" (L’Oiseau Canari), que el 14 de junio de 1929 completó una de las primeras travesías aéreas del Atlántico sin escalas del continente americano a Europa. Sin combustible para llegar a París, su tripulación aterrizó sobre la arena de Oyambre. Hoy un monumento junto a la playa lo recuerda.' },
+      { q: '¿Es peligrosa la playa de Oyambre para bañarse?', a: 'Es una playa de costa abierta dentro de un parque natural: tiene oleaje, corrientes y resacas, agua fría y grandes mareas, y las bocas de las rías cercanas tienen corrientes peligrosas. No es una piscina: báñate en el tramo vigilado, respeta las banderas y con niños pequeños quédate en la orilla los días de mar gruesa.' },
+      { q: '¿Cuándo es mejor ir a la playa de Oyambre?', a: 'Con marea media-baja se despliega un arenal enorme; con marejada de fondo es más playa de surf que de baño tranquilo. Ve fuera de agosto o a primera hora para esquivar el gentío y el aparcamiento lleno, y combínala con San Vicente de la Barquera y Comillas, muy cerca.' },
+    ],
+    en: {
+      title: 'Playa de Oyambre, Cantabria: the beach where a plane that had just crossed the Atlantic non-stop landed in 1929',
+      excerpt: 'This is where the "Yellow Bird" touched down after crossing the Atlantic in 1929. What to know about Oyambre today: protected dunes and sand to spare, but open coast, cold water and estuary currents.',
+      related: [
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'Oyambre hasn’t changed much in a century: a long tongue of sand under hills of an almost Irish green, dunes combed by the Cantabrian wind and, in the distance, the outline of the Picos de Europa when the day allows. But there’s a June morning in 1929 that isn’t forgotten here: a yellow plane emerging from the mist and settling onto the wet sand, its engine on its last gasp, the villagers running out to see what had fallen from the sky.' },
+        { t: 'p', html: 'That contraption was the <strong>"Yellow Bird"</strong> (<em>L’Oiseau Canari</em>), and it had just done something that then bordered on the impossible: <strong>crossed the Atlantic non-stop</strong>. Out of fuel, it chose this beach rather than ditch in the sea. Almost a century on, Oyambre is still that: a big, wild, natural-park beach with more history and more wind than parasols. Worth knowing what you’re coming for.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The event is real and documented: on <strong>14 June 1929</strong>, the French crew of the <em>Oiseau Canari</em> — Jean Assollant, René Lefèvre and Armand Lotti, plus an American stowaway, Arthur Schreiber — completed one of the first non-stop transatlantic flights <strong>from the American continent to Europe</strong>, taking off from Old Orchard, Maine. Without the fuel to reach Paris, they landed on the sand at Oyambre. A <strong>monument beside the beach</strong> commemorates it today. And the setting matches: Oyambre lies within the <strong>Oyambre Natural Park</strong>, a belt of dunes, marshes and estuaries protected since 1988.' },
+        { t: 'p', html: 'Now the small print the brochure skips: <strong>Oyambre is a natural-park beach, not a pool</strong>. It faces the open Cantabrian, so there’s <strong>swell, currents and undertow</strong>, and the water is <strong>cold</strong> (rarely comfortable outside July and August). Cantabrian tides are big: at <strong>high tide the sand narrows</strong> sharply, and the mouths of the nearby estuaries — San Vicente and La Rabia — have <strong>dangerous currents</strong> that are not for swimming. Add that the <strong>dunes are protected</strong> (keep to the boardwalks, not across country), that <strong>facilities are limited</strong> and that in August the car park fills early. It’s a great beach; it’s not an easy one.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'The golden rule here is twofold: <strong>watch the tide and watch the sea</strong>. At mid-to-low tide Oyambre unrolls a huge stretch of sand with room for everyone; with a groundswell running, though, it’s a beach for <strong>surfers</strong>, not calm bathers. Swim in the <strong>lifeguarded section</strong> and heed the flags: on a wave day the undertow drags you out without warning, especially near the estuary mouths. With small children, on that kind of day, stick to the shoreline and the sandcastle.' },
+        { t: 'p', html: 'The rest is enjoying what makes it different: go <strong>outside August or first thing</strong> to have it half-empty and well-lit, walk over to the <strong>Yellow Bird monument</strong> to put a face to the story, and respect the <strong>boardwalks over the dunes</strong> — it’s what keeps the place as it is. The perfect plan pairs it with <strong>San Vicente de la Barquera</strong> and <strong>Comillas</strong>, both a short hop away, for lunch and a village. After a more sheltered, milder swim? The <strong>beaches inside the estuaries</strong> and the protected inlets break far less than this open front: Oyambre for the long walk and the surf; the estuary for a splash without surprises.' },
+        { t: 'quote', text: 'It’s not just another "unspoilt beach": it’s the accidental landing strip of a 1929 feat. And it still has the very character that chose it — open sea, wind and not one concession to anyone after a swimming pool.' },
+        { t: 'p', html: 'Because you don’t come to Oyambre only to swim, but to stand somewhere the sea, the wind and even history do as they please. That yellow plane learned it the hard way — it ran out of sky and this sand caught it; you have the advantage of checking the tide table and the surf forecast first. Get both right, lift your eyes to the green hills and the Picos beyond, and you’ll see why this beach has been telling the same story for almost a century. Turn up any old way on a heavy-sea day, and the undertow will tell it to you.' },
+      ],
+      faq: [
+        { q: 'What plane landed on Oyambre beach?', a: 'The "Yellow Bird" (L’Oiseau Canari), which on 14 June 1929 completed one of the first non-stop transatlantic flights from the American continent to Europe. Out of fuel to reach Paris, its crew landed on the sand at Oyambre. A monument beside the beach commemorates it today.' },
+        { q: 'Is Oyambre beach dangerous for swimming?', a: 'It’s an open-coast beach within a natural park: it has swell, currents and undertow, cold water and big tides, and the nearby estuary mouths carry dangerous currents. It’s not a pool: swim in the lifeguarded section, heed the flags, and with small children stay by the shore on heavy-sea days.' },
+        { q: 'When is the best time to visit Oyambre?', a: 'At mid-to-low tide a huge stretch of sand opens up; with a groundswell it’s more a surf beach than one for a calm swim. Go outside August or first thing to dodge the crowds and the full car park, and combine it with San Vicente de la Barquera and Comillas nearby.' },
+      ],
+    },
+  },
   // ───── Snorkel por costas (voz bicéfala · con fuentes) ─────
   {
     slug: 'mejores-playas-snorkel-costa-brava',
