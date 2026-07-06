@@ -10,7 +10,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { getFotos, FOTOS_GENERICAS_POR_ESTADO, type FotoPlaya } from '@/lib/fotos'
+import { getFotos, tieneFotoReal, FOTOS_GENERICAS_POR_ESTADO, type FotoPlaya } from '@/lib/fotos'
 
 interface PlayaInput {
   slug:       string
@@ -52,7 +52,10 @@ export default async function TopBeachCardsConHero({
   locale = 'es',
 }: Props) {
   const beachHref = (slug: string) => locale === 'en' ? `/en/beaches/${slug}` : `/playas/${slug}`
-  const top = playas.slice(0, limit)
+  // NUNCA foto de respaldo en listados: solo playas con FOTO REAL (sidecar).
+  // Sin foto → no aparece. Filtramos antes de cortar a `limit`.
+  const conFoto = await Promise.all(playas.map(p => tieneFotoReal(p.slug)))
+  const top = playas.filter((_, i) => conFoto[i]).slice(0, limit)
 
   // Fetch candidatos en paralelo + dedupe greedy (mismo patrón que home Destacadas).
   // CAUSA RAÍZ de los timeouts SSG: getFotos hace una cascada de hasta 7 APIs
@@ -65,7 +68,7 @@ export default async function TopBeachCardsConHero({
   // playas con foto cacheada salen con foto real; el resto usa el fallback
   // genérico por estado del mar. En runtime/ISR se piden y cachean de verdad.
   const candidatos: FotoPlaya[][] = await Promise.all(
-    top.map(p => getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia))
+    top.map(p => getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia, p.slug))
   )
   const usadas = new Set<string>()
   const fotos: (string | null)[] = top.map((p, i) => {

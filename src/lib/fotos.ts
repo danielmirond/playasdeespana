@@ -29,6 +29,19 @@ async function getSidecar(): Promise<Record<string, FotoPlaya[]> | null> {
   return _sidecar
 }
 
+/**
+ * ¿La playa tiene FOTO REAL pre-resuelta? Consulta solo el sidecar (sin red,
+ * sin KV): O(1) y determinista. Se usa para filtrar LISTADOS: si una playa no
+ * tiene foto real, no debe aparecer con genérica de respaldo — directamente no
+ * se muestra. Devuelve false si no hay entrada o está vacía.
+ */
+export async function tieneFotoReal(slug: string): Promise<boolean> {
+  if (!slug) return false
+  const sidecar = await getSidecar()
+  const pre = sidecar?.[slug]
+  return Array.isArray(pre) && pre.length > 0
+}
+
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
 const PEXELS_KEY   = process.env.PEXELS_API_KEY ?? ''
 

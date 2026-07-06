@@ -11,7 +11,7 @@ import type { Playa } from '@/types'
 import { ESTADOS } from '@/lib/estados'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
 import AnimatedSea from '@/components/playa/AnimatedSea'
-import { getFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
+import { getFotos, tieneFotoReal, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
 import styles from './Destacadas.module.css'
 
 // ── Meteo batch vía Open-Meteo (1 request por API en vez de N) ────
@@ -91,15 +91,20 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
     return { playa: p, meteo: m, ps, estado }
   }).sort((a, b) => b.ps.score - a.ps.score)
 
+  // NUNCA foto de respaldo en listados: solo entran playas con FOTO REAL
+  // (sidecar). Sin foto → no se muestra (ni en Top ni en Evita).
+  const conFoto = await Promise.all(scored.map(s => tieneFotoReal(s.playa.slug)))
+  const scoredFoto = scored.filter((_, i) => conFoto[i])
+
   // "El mar manda": solo entran al Top las que HOY están bien (score alto).
-  // Entre esas, ROTAMOS la selección cada 4h para que la home no muestre
+  // Entre esas, ROTAMOS la selección cada 3h para que la home no muestre
   // siempre las mismas — antes se cogía el top estricto y se repetía.
   const UMBRAL_BUENA = 50
   const MIN_POOL = 16 // pool mínimo del que rotar (garantiza variedad aun con oleaje)
-  const buenas = scored.filter(s => s.ps.score >= UMBRAL_BUENA)
+  const buenas = scoredFoto.filter(s => s.ps.score >= UMBRAL_BUENA)
   // Si hay muchas buenas, rotamos entre TODAS; si hoy hay pocas (día de olas),
   // rotamos entre las MIN_POOL mejores por score para que siga habiendo variedad.
-  const poolTop = buenas.length >= MIN_POOL ? buenas : scored.slice(0, MIN_POOL)
+  const poolTop = buenas.length >= MIN_POOL ? buenas : scoredFoto.slice(0, MIN_POOL)
   const rot = Math.floor(Date.now() / (1000 * 60 * 60 * 3)) // cambia cada 3h
   // Barajado estable por ventana: hash FNV-1a de `slug:rot`. Depende de rot de
   // forma no lineal, así que cada ventana produce un orden realmente distinto
@@ -114,7 +119,7 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
     .sort((a, b) => mix(a.playa.slug) - mix(b.playa.slug)) // barajado real por ventana
     .slice(0, topCount)
     .sort((a, b) => b.ps.score - a.ps.score)               // se muestran ordenadas por score
-  const avoid = scored.filter(s => s.ps.score < 45).slice(-avoidCount).reverse()
+  const avoid = scoredFoto.filter(s => s.ps.score < 45).slice(-avoidCount).reverse()
 
   // Fetch candidatos en paralelo para las playas visibles (top + avoid).
   // Después dedupe greedy: cada card pilla la primera URL no usada por
@@ -128,6 +133,7 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
       item.playa.lat,
       item.playa.lng,
       item.playa.provincia,
+      item.playa.slug,
     ))
   )
 
