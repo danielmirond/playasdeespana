@@ -74,7 +74,7 @@ export default async function HomePage() {
   // de lista. Combinado con la rotación por meteo de Destacadas (cada 4h),
   // la home deja de repetir las mismas playas.
   const ROT_DIA = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
-  const N_CALIDAD = 9 // candidatas de calidad por comunidad (pool amplio → rotación real)
+  const N_CALIDAD = 12 // candidatas de calidad por comunidad (pool amplio → rotación real)
 
   for (const com of COSTERAS) {
     const list = porComunidad.get(com) ?? []

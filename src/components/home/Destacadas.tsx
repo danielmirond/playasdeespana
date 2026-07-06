@@ -94,16 +94,26 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
   // "El mar manda": solo entran al Top las que HOY están bien (score alto).
   // Entre esas, ROTAMOS la selección cada 4h para que la home no muestre
   // siempre las mismas — antes se cogía el top estricto y se repetía.
-  const UMBRAL_BUENA = 55
+  const UMBRAL_BUENA = 50
+  const MIN_POOL = 16 // pool mínimo del que rotar (garantiza variedad aun con oleaje)
   const buenas = scored.filter(s => s.ps.score >= UMBRAL_BUENA)
-  const poolTop = buenas.length >= topCount ? buenas : scored
-  const rot = Math.floor(Date.now() / (1000 * 60 * 60 * 4)) // cambia cada 4h
-  const hash = (slug: string) =>
-    (slug.split('').reduce((s, c) => s + c.charCodeAt(0), 0) * 31 + rot * 17) % 9973
+  // Si hay muchas buenas, rotamos entre TODAS; si hoy hay pocas (día de olas),
+  // rotamos entre las MIN_POOL mejores por score para que siga habiendo variedad.
+  const poolTop = buenas.length >= MIN_POOL ? buenas : scored.slice(0, MIN_POOL)
+  const rot = Math.floor(Date.now() / (1000 * 60 * 60 * 3)) // cambia cada 3h
+  // Barajado estable por ventana: hash FNV-1a de `slug:rot`. Depende de rot de
+  // forma no lineal, así que cada ventana produce un orden realmente distinto
+  // (sumar una constante a todos los hashes NO reordena — bug anterior).
+  const mix = (slug: string) => {
+    let x = 2166136261
+    const s = `${rot}:${slug}`
+    for (let i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 16777619) }
+    return x >>> 0
+  }
   const top = [...poolTop]
-    .sort((a, b) => hash(a.playa.slug) - hash(b.playa.slug)) // barajado estable por ventana
+    .sort((a, b) => mix(a.playa.slug) - mix(b.playa.slug)) // barajado real por ventana
     .slice(0, topCount)
-    .sort((a, b) => b.ps.score - a.ps.score)                 // se muestran ordenadas por score
+    .sort((a, b) => b.ps.score - a.ps.score)               // se muestran ordenadas por score
   const avoid = scored.filter(s => s.ps.score < 45).slice(-avoidCount).reverse()
 
   // Fetch candidatos en paralelo para las playas visibles (top + avoid).
