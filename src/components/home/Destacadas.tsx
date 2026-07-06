@@ -91,7 +91,19 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
     return { playa: p, meteo: m, ps, estado }
   }).sort((a, b) => b.ps.score - a.ps.score)
 
-  const top   = scored.slice(0, topCount)
+  // "El mar manda": solo entran al Top las que HOY están bien (score alto).
+  // Entre esas, ROTAMOS la selección cada 4h para que la home no muestre
+  // siempre las mismas — antes se cogía el top estricto y se repetía.
+  const UMBRAL_BUENA = 55
+  const buenas = scored.filter(s => s.ps.score >= UMBRAL_BUENA)
+  const poolTop = buenas.length >= topCount ? buenas : scored
+  const rot = Math.floor(Date.now() / (1000 * 60 * 60 * 4)) // cambia cada 4h
+  const hash = (slug: string) =>
+    (slug.split('').reduce((s, c) => s + c.charCodeAt(0), 0) * 31 + rot * 17) % 9973
+  const top = [...poolTop]
+    .sort((a, b) => hash(a.playa.slug) - hash(b.playa.slug)) // barajado estable por ventana
+    .slice(0, topCount)
+    .sort((a, b) => b.ps.score - a.ps.score)                 // se muestran ordenadas por score
   const avoid = scored.filter(s => s.ps.score < 45).slice(-avoidCount).reverse()
 
   // Fetch candidatos en paralelo para las playas visibles (top + avoid).

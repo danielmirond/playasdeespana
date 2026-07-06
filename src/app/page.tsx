@@ -69,26 +69,36 @@ export default async function HomePage() {
     'Cataluña', 'Comunitat Valenciana', 'Murcia', 'Andalucía',
     'Islas Baleares', 'Canarias', 'Ceuta', 'Melilla']
 
+  // Rotación diaria del pool: cada día entra un tramo distinto del ranking de
+  // calidad de cada comunidad, para que no compitan SIEMPRE las mismas cabezas
+  // de lista. Combinado con la rotación por meteo de Destacadas (cada 4h),
+  // la home deja de repetir las mismas playas.
+  const ROT_DIA = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
+  const N_CALIDAD = 9 // candidatas de calidad por comunidad (pool amplio → rotación real)
+
   for (const com of COSTERAS) {
     const list = porComunidad.get(com) ?? []
     if (list.length === 0) continue
 
-    // Top 2 por servicios (candidatas a "Top playas hoy")
-    const scored = list.map(p => ({
-      p,
-      pts: (p.bandera ? 3 : 0) + (p.socorrismo ? 2 : 0) + (p.parking ? 1 : 0) + (p.duchas ? 1 : 0),
-    })).sort((a, b) => b.pts - a.pts)
-    candidatas.push(scored[0].p)
+    // Pool de calidad de la comunidad (bandera azul / servicios).
+    const calidad = list
+      .map(p => ({
+        p,
+        pts: (p.bandera ? 3 : 0) + (p.socorrismo ? 2 : 0) + (p.parking ? 1 : 0) + (p.duchas ? 1 : 0),
+      }))
+      .filter(x => x.pts >= 2)
+      .sort((a, b) => b.pts - a.pts)
+      .map(x => x.p)
 
-    const hour = new Date().getHours()
-    const shuffled = list
-      .filter(p => p.slug !== scored[0].p.slug)
-      .sort((a, b) => {
-        const ha = (a.slug.charCodeAt(0) * 31 + hour) % 997
-        const hb = (b.slug.charCodeAt(0) * 31 + hour) % 997
-        return ha - hb
-      })
-    candidatas.push(shuffled[0])
+    const pool = calidad.length ? calidad : list
+    const n = Math.min(N_CALIDAD, pool.length)
+    // Ventana rotatoria: el punto de partida avanza cada día.
+    const start = pool.length > n ? (ROT_DIA * 3) % pool.length : 0
+    for (let k = 0; k < n; k++) candidatas.push(pool[(start + k) % pool.length])
+
+    // 1 de baja calidad (rotatoria) para alimentar "Evita hoy".
+    const malas = list.filter(p => !calidad.includes(p))
+    if (malas.length) candidatas.push(malas[(ROT_DIA + com.length) % malas.length])
   }
 
   return (
