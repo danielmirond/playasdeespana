@@ -1799,6 +1799,65 @@ export const ARTICLES: Article[] = [
       ],
     },
   },
+  {
+    slug: 'bacteria-carnivora-playa-vibrio-que-hay-de-cierto',
+    category: 'curiosidades',
+    title: 'La "bacteria carnívora" de las playas: qué hay de cierto detrás del titular del verano',
+    excerpt:
+      'Cada ola de calor vuelve el mismo titular: una bacteria "carnívora" acecha en el mar. El Vibrio vulnificus existe y conviene conocerlo, pero el riesgo real se parece poco al miedo. Qué es, a quién afecta y las tres reglas que de verdad importan.',
+    heroAlt: 'Agua de mar en calma vista de cerca en la orilla de una playa al atardecer',
+    heroQuery: 'sea,water,surface,closeup,warm',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-07-07T10:00:00Z',
+    readingMin: 5,
+    related: [
+      { href: '/calidad-agua', label: 'Calidad del agua de baño, playa a playa' },
+      { href: '/banderas-hoy', label: 'Banderas en las playas hoy' },
+      { href: '/medusas', label: 'Riesgo de medusas por playa' },
+    ],
+    body: [
+      { t: 'p', html: 'Basta una ola de calor y un par de casos en telediario para que el verano estrene monstruo: la "bacteria carnívora" que vive en el mar. El nombre científico es menos cinematográfico —<strong>Vibrio vulnificus</strong>— y la realidad, bastante más aburrida que el titular: es una bacteria que siempre ha estado ahí, que casi nunca causa problemas y que, cuando los causa, suele ser en personas muy concretas y por vías muy concretas. Conocerla sirve para lo contrario del pánico: para saber qué mirar.' },
+      { t: 'p', html: 'El Vibrio vulnificus vive de forma natural en <strong>aguas costeras templadas y poco saladas</strong>: estuarios, desembocaduras, lagunas litorales. No es un vertido ni una plaga nueva; es fauna microscópica del mar. Lo que sí ha cambiado es la temperatura: la bacteria se multiplica cuando el agua supera los <strong>20 °C</strong> y se encuentra especialmente cómoda por encima de 26 °C. Un Mediterráneo cada vez más cálido —y episodios como los del mar Menor o los veranos récord del Báltico— amplían su temporada y su mapa. Por eso el titular vuelve cada julio.' },
+      { t: 'h2', text: 'Qué hace exactamente (y a quién)', id: 'datos' },
+      { t: 'p', html: 'La palabra "carnívora" viene de su complicación más grave: en casos raros puede causar <strong>fascitis necrotizante</strong>, una infección que destruye tejido y avanza rápido. Pero el matiz importa: la bacteria no ataca a bañistas sanos que nadan. Las dos puertas de entrada documentadas son <strong>heridas abiertas expuestas al agua de mar</strong> —cortes, rozaduras recientes, tatuajes sin cicatrizar— y el <strong>marisco crudo o poco hecho</strong>, sobre todo ostras. Y el perfil de riesgo está muy acotado: personas con <strong>enfermedad hepática</strong>, diabetes, cáncer, inmunosupresión o <strong>edad avanzada</strong>. En una persona sana, con la piel intacta, el problema es rarísimo.' },
+      { t: 'p', html: 'Conviene además ponerle números al miedo. En España los casos documentados son <strong>muy escasos</strong> y la infección sigue siendo rara; lo que vigilan los expertos no es la cifra absoluta, sino la <strong>tendencia</strong>: los veranos más calurosos disparan los casos. El dato que se suele citar en Europa: de una media de unos <strong>126 casos anuales</strong> entre 2014 y 2017 se pasó a <strong>445</strong> en 2018, un verano de ola de calor, casi el triple. No es una epidemia; es un termómetro del mar caliente.' },
+      { t: 'quote', text: 'No se contagia por nadar con la piel sana. El riesgo real vive en el cruce de tres cosas: agua caliente, una herida abierta y una persona vulnerable.' },
+      { t: 'h2', text: 'Las tres reglas que de verdad importan', id: 'local' },
+      { t: 'p', html: 'La prevención es casi decepcionante de lo simple. <strong>Una:</strong> si llevas una herida abierta, un corte reciente, un tatuaje o un piercing sin cicatrizar, cúbrelo con un apósito impermeable antes de bañarte —o ese día evita el agua muy cálida y estancada—. <strong>Dos:</strong> si perteneces a un grupo de riesgo, evita el marisco crudo o poco hecho en verano. <strong>Tres:</strong> si tras un baño una herida se enrojece, hincha y duele de forma desproporcionada en pocas horas, no esperes: acude al médico y menciona que has estado en el mar. En el <em>Vibrio</em>, la rapidez lo cambia todo.' },
+      { t: 'p', html: 'Y un apunte para no mezclar conceptos: la presencia de <em>Vibrio</em> <strong>no la miden</strong> las banderas del socorrista ni los muestreos habituales de <a href="/calidad-agua">calidad del agua</a>, que vigilan la contaminación fecal. Son cosas distintas. Aun así, elegir bien la playa ayuda: consultar el <a href="/banderas-hoy">estado del mar del día</a> y huir de zonas con vertidos o mala renovación del agua es sentido común que reduce cualquier riesgo microbiológico. Traducido: la próxima vez que leas "bacteria carnívora en las playas", ya sabes que hablan de algo real pero raro, que casi nunca infecta a gente sana y que se esquiva con una tirita y no comiendo ostras crudas. El titular buscaba el susto; la realidad pide sentido común.' },
+    ],
+    faq: [
+      { q: '¿Se puede contagiar el Vibrio solo por bañarse en el mar?', a: 'No con la piel sana. El Vibrio vulnificus necesita una puerta de entrada: una herida abierta, un corte, un tatuaje o piercing reciente en contacto con el agua, o el consumo de marisco crudo o poco cocinado (sobre todo ostras). Nadar con la piel intacta no es la vía de contagio.' },
+      { q: '¿Es peligrosa la "bacteria carnívora" para todo el mundo?', a: 'No. En personas sanas la infección es rara y suele ser leve. El riesgo grave se concentra en personas con enfermedad hepática, diabetes, cáncer, inmunosupresión o edad avanzada. Cuando ocurre puede ser serio, por eso conviene proteger las heridas y actuar rápido ante los síntomas.' },
+      { q: '¿Cómo evito el Vibrio en la playa?', a: 'Cubre cualquier herida, corte, tatuaje o piercing reciente con un apósito impermeable antes de bañarte, o evita ese día el agua muy cálida y estancada. Evita el marisco crudo o poco hecho si eres grupo de riesgo. Y si una herida se inflama y duele mucho pocas horas después del baño, acude al médico e indica que estuviste en el mar.' },
+      { q: '¿Las banderas o la calidad del agua avisan del Vibrio?', a: 'No directamente. Las banderas del socorrista informan del estado del mar y los muestreos oficiales de calidad del agua vigilan la contaminación fecal, no el Vibrio. Son controles distintos, pero elegir playas con buena calidad del agua y buena renovación reduce el riesgo microbiológico en general.' },
+    ],
+    en: {
+      title: 'The "flesh-eating bacteria" on the beaches: what’s true behind the summer headline',
+      excerpt: 'Every heatwave brings the same headline: a "flesh-eating" bacteria lurking in the sea. Vibrio vulnificus is real and worth knowing, but the actual risk looks little like the fear. What it is, who it affects and the three rules that really matter.',
+      related: [
+        { href: '/en/blue-flag', label: 'Blue Flag beaches 2026' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'It only takes a heatwave and a couple of cases on the news for summer to unveil its monster: the "flesh-eating bacteria" that lives in the sea. The scientific name is less cinematic —<strong>Vibrio vulnificus</strong>— and the reality far duller than the headline: a bacterium that has always been there, rarely causes problems, and when it does, usually in very specific people through very specific routes. Knowing it is the opposite of panic: it tells you what to watch.' },
+        { t: 'p', html: 'Vibrio vulnificus lives naturally in <strong>warm, low-salinity coastal waters</strong>: estuaries, river mouths, coastal lagoons. It’s not a spill or a new plague; it’s the sea’s microscopic fauna. What has changed is temperature: it multiplies when water tops <strong>20 °C</strong> and is especially at home above 26 °C. An ever-warmer Mediterranean —and episodes like the Mar Menor or record Baltic summers— widen its season and its map. That’s why the headline returns every July.' },
+        { t: 'h2', text: 'What it does, exactly (and to whom)', id: 'facts' },
+        { t: 'p', html: 'The word "flesh-eating" comes from its most severe complication: in rare cases it can cause <strong>necrotising fasciitis</strong>, an infection that destroys tissue and advances fast. But the nuance matters: it doesn’t attack healthy swimmers. The two documented entry points are <strong>open wounds exposed to seawater</strong> —cuts, fresh grazes, unhealed tattoos— and <strong>raw or undercooked shellfish</strong>, especially oysters. And the risk profile is tightly defined: people with <strong>liver disease</strong>, diabetes, cancer, immunosuppression or <strong>advanced age</strong>. In a healthy person with intact skin, the problem is extremely rare.' },
+        { t: 'p', html: 'It’s worth putting numbers to the fear. In Spain documented cases are <strong>very few</strong> and infection remains rare; what experts watch isn’t the absolute figure but the <strong>trend</strong>: hotter summers push cases up. The figure often cited in Europe: from an average of about <strong>126 cases a year</strong> between 2014 and 2017 to <strong>445</strong> in 2018, a heatwave summer, nearly triple. It’s not an epidemic; it’s a thermometer of a warming sea.' },
+        { t: 'quote', text: 'It isn’t caught by swimming with healthy skin. The real risk lives at the crossing of three things: warm water, an open wound and a vulnerable person.' },
+        { t: 'h2', text: 'The three rules that really matter', id: 'local' },
+        { t: 'p', html: 'Prevention is almost disappointingly simple. <strong>One:</strong> if you have an open wound, a recent cut, an unhealed tattoo or piercing, cover it with a waterproof dressing before swimming —or that day skip very warm, stagnant water—. <strong>Two:</strong> if you’re in a risk group, avoid raw or undercooked shellfish in summer. <strong>Three:</strong> if after a swim a wound turns red, swells and hurts out of all proportion within hours, don’t wait: see a doctor and mention you’ve been in the sea. With Vibrio, speed changes everything.' },
+        { t: 'p', html: 'And a note so as not to mix concepts: the presence of <em>Vibrio</em> is <strong>not measured</strong> by lifeguard flags or the usual <a href="/en/blue-flag">water-quality</a> sampling, which monitors faecal contamination. They’re different things. Even so, choosing well helps: checking the sea state of the day and steering clear of spots with discharges or poor water renewal is common sense that cuts any microbiological risk. Translated: next time you read "flesh-eating bacteria on the beaches", you’ll know they mean something real but rare, that almost never infects healthy people and is dodged with a plaster and by not eating raw oysters. The headline wanted the scare; reality asks for common sense.' },
+      ],
+      faq: [
+        { q: 'Can you catch Vibrio just by swimming in the sea?', a: 'Not with healthy skin. Vibrio vulnificus needs a way in: an open wound, a cut, a recent tattoo or piercing in contact with the water, or eating raw or undercooked shellfish (especially oysters). Swimming with intact skin is not the route of infection.' },
+        { q: 'Is the "flesh-eating bacteria" dangerous for everyone?', a: 'No. In healthy people infection is rare and usually mild. Serious risk concentrates in people with liver disease, diabetes, cancer, immunosuppression or advanced age. When it happens it can be serious, so cover wounds and act quickly if symptoms appear.' },
+        { q: 'How do I avoid Vibrio at the beach?', a: 'Cover any wound, cut, recent tattoo or piercing with a waterproof dressing before swimming, or that day avoid very warm, stagnant water. Avoid raw or undercooked shellfish if you are in a risk group. And if a wound becomes inflamed and very painful within hours of a swim, see a doctor and mention you were in the sea.' },
+        { q: 'Do flags or water quality warn about Vibrio?', a: 'Not directly. Lifeguard flags report the sea state and official water-quality sampling monitors faecal contamination, not Vibrio. They are different controls, but choosing beaches with good water quality and renewal reduces microbiological risk overall.' },
+      ],
+    },
+  },
 ]
 
 // Inyecta la foto real (si existe en el sidecar) en cada artículo.
