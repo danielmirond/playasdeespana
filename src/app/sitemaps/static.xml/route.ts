@@ -112,6 +112,7 @@ export async function GET() {
     { es: '/playa-del-dia',          en: null,                     p: '0.6', f: 'daily' },
     { es: '/comparar',               en: null,                     p: '0.6', f: 'weekly' },
     { es: '/calidad-agua',           en: null,                     p: '0.6', f: 'weekly' },
+    { es: '/banderas-negras',        en: null,                     p: '0.7', f: 'weekly' },
     // EEAT + legal
     { es: '/widget',                  en: null,                     p: '0.5', f: 'monthly' },
     { es: '/metodologia',            en: null,                     p: '0.5', f: 'monthly' },
