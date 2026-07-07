@@ -275,6 +275,10 @@ export default async function HomePage() {
           </div>
         </section>
       </main>
+      {/* Widget flotante "¿Me baño hoy?" — script vanilla autocontenido
+          (diseño Claude Design). Se autoinyecta y trae datos reales de
+          /api/bano-hoy. Vanilla → sin depender de la hidratación de React. */}
+      <script src="/bano-hoy.js" defer />
     </>
   )
 }
