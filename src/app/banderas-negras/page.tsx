@@ -198,6 +198,10 @@ export default async function BanderasNegrasPage() {
             <span style={{ display: 'block', fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>Las mejores playas hoy <span aria-hidden="true">→</span></span>
             <span style={{ fontSize: '.74rem', color: 'var(--muted)' }}>Score 0-100 en tiempo real con datos oficiales.</span>
           </Link>
+          <Link href="/banderas-hoy" style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem', textDecoration: 'none' }}>
+            <span style={{ display: 'block', fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>Banderas en las playas hoy <span aria-hidden="true">→</span></span>
+            <span style={{ fontSize: '.74rem', color: 'var(--muted)' }}>Semáforo en vivo por provincias, cada 30 minutos.</span>
+          </Link>
         </div>
       </main>
     </>
