@@ -114,6 +114,7 @@ export async function GET() {
     { es: '/calidad-agua',           en: null,                     p: '0.6', f: 'weekly' },
     { es: '/banderas-negras',        en: null,                     p: '0.7', f: 'weekly' },
     { es: '/banderas-hoy',           en: null,                     p: '0.7', f: 'hourly' },
+    { es: '/temperatura-del-agua',   en: null,                     p: '0.7', f: 'hourly' },
     // EEAT + legal
     { es: '/widget',                  en: null,                     p: '0.5', f: 'monthly' },
     { es: '/metodologia',            en: null,                     p: '0.5', f: 'monthly' },

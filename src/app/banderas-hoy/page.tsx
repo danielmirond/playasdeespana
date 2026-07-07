@@ -239,6 +239,10 @@ export default async function BanderasHoyPage() {
             <span style={{ display: 'block', fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>Calidad del agua <span aria-hidden="true">→</span></span>
             <span style={{ fontSize: '.74rem', color: 'var(--muted)' }}>Muestreos oficiales EEA playa a playa.</span>
           </Link>
+          <Link href="/temperatura-del-agua" style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem', textDecoration: 'none' }}>
+            <span style={{ display: 'block', fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>Temperatura del agua hoy <span aria-hidden="true">→</span></span>
+            <span style={{ fontSize: '.74rem', color: 'var(--muted)' }}>¿Dónde está el mar más cálido para bañarse?</span>
+          </Link>
           <Link href="/prediccion-fin-de-semana" style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem', textDecoration: 'none' }}>
             <span style={{ display: 'block', fontWeight: 700, fontSize: '.88rem', color: 'var(--ink)' }}>Predicción del finde <span aria-hidden="true">→</span></span>
             <span style={{ fontSize: '.74rem', color: 'var(--muted)' }}>¿Qué costa tendrá mejores condiciones?</span>
