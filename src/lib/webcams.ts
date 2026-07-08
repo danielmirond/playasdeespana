@@ -21,8 +21,14 @@ import { kvCached, kvPeek } from './kv-cache'
 import { haversine } from './geo'
 
 const WINDY_KEY = process.env.WINDY_API_KEY ?? ''
-const RADIUS_KM = 25
+const RADIUS_KM = 15 // radio ajustado: una cam de playa relevante está cerca
 const TTL_S = 24 * 3600 // las webcams cercanas cambian poco → 24h
+// Namespace de caché versionado: al cambiar el filtrado (solo beach/coast)
+// bumpeamos la versión para no servir las entradas antiguas sin filtrar.
+const CACHE_NS = 'webcams-v2'
+// Categorías de Windy que consideramos "de playa/costa". Descartamos city,
+// port, mountain, landscape, meteo-solo, etc. (webcams que no miran al mar).
+const CATS_PLAYA = new Set(['beach', 'coast'])
 
 export interface Webcam {
   id:           string
@@ -44,6 +50,7 @@ interface WindyWebcam {
   images?:        { current?: { preview?: string; thumbnail?: string } }
   // player v3: URLs directas por marco temporal (no objetos {embed}).
   player?:        { live?: string; day?: string; month?: string; year?: string; lifetime?: string }
+  categories?:    Array<{ id: string; name?: string }>
 }
 
 async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
@@ -51,7 +58,7 @@ async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
   const url =
     `https://api.windy.com/webcams/api/v3/webcams` +
     `?nearby=${lat},${lng},${RADIUS_KM}` +
-    `&include=images,player,location&limit=8&lang=es`
+    `&include=images,player,location,categories&limit=12&lang=es`
   try {
     const res = await fetchWithTimeout(
       url,
@@ -61,7 +68,8 @@ async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
     if (!res.ok) return []
     const data = (await res.json()) as { webcams?: WindyWebcam[] }
     return (data.webcams ?? [])
-      .filter(w => w.status === 'active' && w.location)
+      // Solo webcams de PLAYA/COSTA (descarta ciudad, puerto, montaña…).
+      .filter(w => w.status === 'active' && w.location && (w.categories ?? []).some(c => CATS_PLAYA.has(c.id)))
       .map(w => {
         const loc = w.location!
         return {
@@ -77,6 +85,7 @@ async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
       })
       .filter(w => !!w.embedUrl)                       // solo reproducibles
       .sort((a, b) => a.distancia_m - b.distancia_m)
+      .slice(0, 8)
   } catch {
     return []
   }
@@ -84,7 +93,7 @@ async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
 
 export async function getWebcams(lat: number, lng: number): Promise<Webcam[]> {
   if (!WINDY_KEY) return []
-  return kvCached('webcams', [lat, lng], TTL_S, () => fetchWebcams(lat, lng))
+  return kvCached(CACHE_NS, [lat, lng], TTL_S, () => fetchWebcams(lat, lng))
 }
 
 /**
@@ -95,6 +104,6 @@ export async function getWebcams(lat: number, lng: number): Promise<Webcam[]> {
  */
 export async function hasWebcamNearby(lat: number, lng: number): Promise<boolean> {
   if (!WINDY_KEY) return false
-  const cached = await kvPeek<Webcam[]>('webcams', [lat, lng])
+  const cached = await kvPeek<Webcam[]>(CACHE_NS, [lat, lng])
   return Array.isArray(cached) && cached.length > 0
 }
