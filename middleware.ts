@@ -8,6 +8,7 @@
 // funcionaba. Se ha fusionado aquí y eliminado el duplicado.
 import { NextRequest, NextResponse } from 'next/server'
 import EXTRANJERAS_ARR from './src/data/slugs-extranjeras.json'
+import DUPLICADOS_MAP from './src/data/duplicados.json'
 
 const SUPPORTED_LOCALES = ['en']
 const DEFAULT_LOCALE    = 'es'
@@ -17,6 +18,11 @@ const DEFAULT_LOCALE    = 'es'
 // que 404) y se dejan de enlazar (getPlayas las filtra).
 const EXTRANJERAS = new Set(EXTRANJERAS_ARR as string[])
 
+// Fichas duplicadas (misma playa importada 2-4 veces, <0.8 km). Se hace 301 a
+// la ficha canónica para consolidar señales y quitar la autocanibalización.
+// Generado por scripts/build-duplicados.mjs (analiza public/data/playas.json).
+const DUPLICADOS = DUPLICADOS_MAP as Record<string, string>
+
 const GONE_HTML =
   '<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>410 Gone</title></head><body style="font-family:Georgia,serif;text-align:center;padding:4rem 2rem;color:#2a1a08;background:#f5ecd5"><h1>410 · Contenido retirado</h1><p>Esta ficha ya no pertenece al ámbito de Playas de España y se ha retirado del catálogo.</p><p><a href="/" style="color:#6b400a">Ir a Playas de España</a></p></body></html>'
 
@@ -24,12 +30,22 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   // 0) 410 Gone para fichas extranjeras/sin costa (ES e EN).
-  const m410 = pathname.match(/^\/(?:playas|en\/beaches)\/([^/?#]+)/)
-  if (m410 && EXTRANJERAS.has(decodeURIComponent(m410[1]))) {
-    return new NextResponse(GONE_HTML, {
-      status: 410,
-      headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Robots-Tag': 'noindex' },
-    })
+  const mFicha = pathname.match(/^\/(playas|en\/beaches)\/([^/?#]+)/)
+  if (mFicha) {
+    const slug = decodeURIComponent(mFicha[2])
+    if (EXTRANJERAS.has(slug)) {
+      return new NextResponse(GONE_HTML, {
+        status: 410,
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Robots-Tag': 'noindex' },
+      })
+    }
+    // 0bis) 301 de ficha duplicada → canónica (misma playa duplicada en dataset).
+    const canon = DUPLICADOS[slug]
+    if (canon) {
+      const url = req.nextUrl.clone()
+      url.pathname = `/${mFicha[1]}/${canon}`
+      return NextResponse.redirect(url, { status: 301 })
+    }
   }
 
   // Redirigir /en/playas/[slug] → /en/beaches/[slug]

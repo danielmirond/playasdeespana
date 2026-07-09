@@ -2,11 +2,16 @@
 import type { Playa } from '@/types'
 import { cache } from 'react'
 import slugsExtranjeras from '@/data/slugs-extranjeras.json'
+import duplicados from '@/data/duplicados.json'
 
-// Playas fuera del ámbito (extranjeras/interiores sin costa). El middleware
-// las sirve como 410; aquí las FILTRAMOS de getPlayas para que dejen de
-// enlazarse (listados, sitemap, generateStaticParams, cercanas…).
-const EXCLUIDAS = new Set(slugsExtranjeras as string[])
+// Playas fuera del ámbito (extranjeras/interiores sin costa) + fichas
+// DUPLICADAS (misma playa importada varias veces; el middleware hace 301 a la
+// canónica). Se FILTRAN de getPlayas para que dejen de enlazarse (listados,
+// sitemap, generateStaticParams, cercanas…) y no autocanibalicen.
+const EXCLUIDAS = new Set<string>([
+  ...(slugsExtranjeras as string[]),
+  ...Object.keys(duplicados as Record<string, string>),
+])
 
 export function toSlug(str: string): string {
   return (str ?? '')
