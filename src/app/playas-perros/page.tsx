@@ -50,6 +50,22 @@ const FAQ = [
     q: '¿Dónde puedo encontrar el reglamento oficial de cada playa?',
     a: 'El reglamento lo publica el ayuntamiento del municipio correspondiente. En cada ficha de playa de este sitio enlazamos a la web municipal y a la ficha MITECO, donde suele estar disponible la ordenanza actualizada. Ante cualquier duda, llama al ayuntamiento antes de desplazarte.',
   },
+  {
+    q: '¿Cuáles son las mejores playas para perros de España?',
+    a: 'Depende de lo que busques. Para arena y espacio, la playa canina de Pinedo (Valencia) y la del Ahorcados en Torrevieja son de las más grandes; en el norte, El Espartal en Asturias y varias del litoral gallego funcionan muy bien fuera de temporada. En este listado puedes filtrar por comunidad y provincia para ver las documentadas cerca de ti, con sus servicios y su estado del mar del día.',
+  },
+  {
+    q: '¿Hay playas donde llevar al perro todo el año?',
+    a: 'Sí. Las playas caninas "oficiales" suelen permitir el acceso durante todo el año, no solo en verano. Fuera de ellas, la mayoría de municipios permiten perros en cualquier playa entre octubre y mayo (fuera de la temporada de baño). En pleno verano, sin embargo, el acceso a las playas no caninas suele estar prohibido de día.',
+  },
+  {
+    q: '¿Multan por llevar el perro a una playa no permitida?',
+    a: 'Sí. Acceder con el perro a una playa donde no está permitido durante la temporada de baño puede acarrear multa, y su cuantía varía mucho según la ordenanza municipal (desde unas decenas hasta varios cientos de euros). No recoger los excrementos o llevar suelta una raza que exige correa también se sanciona. Por eso conviene confirmar la ordenanza antes de ir.',
+  },
+  {
+    q: '¿Qué debo llevar para un día de playa con perro?',
+    a: 'Agua dulce abundante y un bebedero (el agua salada deshidrata y sienta mal), sombra portátil, bolsas para excrementos, correa (y bozal si es raza PPP), una toalla y, si hace mucho calor, ir a primera o última hora para evitar la arena ardiendo y las horas de más gente. Enjuaga al perro con agua dulce al salir para retirar la sal.',
+  },
 ]
 
 export default async function PlayasPerrosPage() {
@@ -165,8 +181,43 @@ export default async function PlayasPerrosPage() {
           </div>
         )}
 
+        {/* Guía editorial (profundidad de tema) */}
+        <section aria-labelledby="guia-title" style={{ marginTop: '2.5rem', maxWidth: 720 }}>
+          <h2 id="guia-title" className={styles.sectionTitle}>Cómo funcionan las playas para perros en España</h2>
+          <div style={{ fontSize: '.95rem', color: 'var(--ink)', lineHeight: 1.7 }}>
+            <p style={{ margin: '0 0 1rem' }}>
+              No existe una norma estatal única: cada ayuntamiento decide si permite perros en su litoral y en qué
+              condiciones. Por eso conviven dos realidades. Están las <strong>playas caninas oficiales</strong>, zonas
+              habilitadas expresamente para que el perro entre y se bañe durante todo el año, normalmente con papeleras
+              de excrementos, ducha y a veces bebederos. Y está el <strong>resto de playas</strong>, donde lo habitual
+              es que el perro solo pueda entrar fuera de la temporada de baño —de forma orientativa, entre octubre y
+              mayo—, mientras que en pleno verano el acceso queda prohibido de día.
+            </p>
+            <p style={{ margin: '0 0 1rem' }}>
+              La densidad de playas caninas cambia mucho según la zona. El litoral mediterráneo —
+              {' '}<Link href="/playas-perros/comunidad/comunitat-valenciana" style={{ color: 'var(--accent)' }}>Comunitat Valenciana</Link>,
+              {' '}<Link href="/playas-perros/comunidad/cataluna" style={{ color: 'var(--accent)' }}>Cataluña</Link> y
+              {' '}<Link href="/playas-perros/comunidad/andalucia" style={{ color: 'var(--accent)' }}>Andalucía</Link>— concentra
+              buena parte de las zonas habilitadas oficiales, muchas de ellas de arena y bien señalizadas. En la
+              cornisa cantábrica y en Galicia el acceso suele ser más estacional que oficial: playas amplias y poco
+              masificadas donde el perro es bienvenido casi todo el año salvo en los meses de más afluencia. Usa el
+              listado por comunidad y provincia de abajo para ver las playas documentadas cerca de ti, con sus
+              servicios y el estado del mar del día.
+            </p>
+            <p style={{ margin: 0 }}>
+              Antes de ir, dos comprobaciones ahorran disgustos: confirmar en la ordenanza municipal que el acceso
+              sigue vigente —cambian de un año a otro— y preparar lo básico para el perro. Agua dulce y bebedero
+              (el agua salada deshidrata), sombra, bolsas para los excrementos, correa y, en razas consideradas
+              potencialmente peligrosas, bozal y seguro. A la vuelta, un enjuague con agua dulce le quita la sal del
+              pelo y las almohadillas. Puedes cruzar esta lista con la de <Link href="/banderas-hoy" style={{ color: 'var(--accent)' }}>banderas
+              de hoy</Link> y la <Link href="/temperatura-del-agua" style={{ color: 'var(--accent)' }}>temperatura del agua</Link> para
+              elegir el mejor día.
+            </p>
+          </div>
+        </section>
+
         {/* Comunidades */}
-        <section aria-labelledby="comunidades-title">
+        <section aria-labelledby="comunidades-title" style={{ marginTop: '2.5rem' }}>
           <h2 id="comunidades-title" className={styles.sectionTitle}>Por comunidad autónoma</h2>
           <div className={styles.linksNav}>
             {stats.comunidades.map(c => (
