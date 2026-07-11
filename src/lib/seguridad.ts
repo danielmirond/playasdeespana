@@ -36,10 +36,14 @@ export function calcularBandera(olas: number, viento: number, vientoRacha: numbe
       labelEn: 'Red flag',
       motivo: olas >= 1.5
         ? `Oleaje fuerte (${olas}m)`
-        : `Viento muy fuerte (${viento} km/h)`,
+        : viento >= 40
+          ? `Viento muy fuerte (${viento} km/h)`
+          : `Rachas muy fuertes (${vientoRacha} km/h)`,
       motivoEn: olas >= 1.5
         ? `Strong waves (${olas}m)`
-        : `Very strong wind (${viento} km/h)`,
+        : viento >= 40
+          ? `Very strong wind (${viento} km/h)`
+          : `Very strong gusts (${vientoRacha} km/h)`,
       hex: '#ef4444',
     }
   }

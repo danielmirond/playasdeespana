@@ -9,7 +9,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import AuthorByline from '@/components/seo/AuthorByline'
 import { getPlayas } from '@/lib/playas'
-import { calcularBandera } from '@/lib/seguridad'
+import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { fetchWithTimeout } from '@/lib/fetch-timeout'
 import type { Playa } from '@/types'
 
@@ -45,11 +45,14 @@ const COSTERAS: Array<{ comunidad: string; provincias: string[] }> = [
 
 const POR_PROVINCIA = 6
 
-interface MeteoBH { olas: number; viento: number; racha: number }
+interface MeteoBH { olas: number; viento: number; racha: number; tempAgua: number | null; vientoDir: string }
 
 // Batch Open-Meteo en trozos de <=50 coordenadas (marine + forecast).
+// Además de oleaje/viento (bandera meteo), traemos SST y dirección de viento
+// para estimar el riesgo de medusas (una roja oficial puede deberse a un bloom
+// de medusas que la bandera meteo no ve).
 async function meteoBatch(coords: { lat: number; lng: number }[]): Promise<MeteoBH[]> {
-  const fb: MeteoBH = { olas: 0.4, viento: 10, racha: 15 }
+  const fb: MeteoBH = { olas: 0.4, viento: 10, racha: 15, tempAgua: null, vientoDir: '' }
   if (!coords.length) return []
   const hora = parseInt(new Intl.DateTimeFormat('es-ES', { hour: 'numeric', hour12: false, timeZone: 'Europe/Madrid' }).format(new Date()), 10) || 12
 
@@ -64,8 +67,8 @@ async function meteoBatch(coords: { lat: number; lng: number }[]): Promise<Meteo
       const [rM, rF] = await Promise.all([
         // 8s: la página es ISR — la regeneración corre en background, así que
         // un timeout generoso no penaliza TTFB y evita caer a fallback en frío.
-        fetchWithTimeout(`https://marine-api.open-meteo.com/v1/marine?latitude=${lats}&longitude=${lngs}&hourly=wave_height&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 1800 } }, 8000),
-        fetchWithTimeout(`https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}&hourly=wind_speed_10m,wind_gusts_10m&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 1800 } }, 8000),
+        fetchWithTimeout(`https://marine-api.open-meteo.com/v1/marine?latitude=${lats}&longitude=${lngs}&hourly=wave_height,sea_surface_temperature&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 1800 } }, 8000),
+        fetchWithTimeout(`https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 1800 } }, 8000),
       ])
       const marine = rM.ok ? await rM.json() : null
       const meteo  = rF.ok ? await rF.json() : null
@@ -73,10 +76,13 @@ async function meteoBatch(coords: { lat: number; lng: number }[]): Promise<Meteo
         const mA = chunk.length === 1 ? marine?.hourly : marine?.[i]?.hourly
         const fA = chunk.length === 1 ? meteo?.hourly : meteo?.[i]?.hourly
         if (!mA && !fA) return fb
+        const sst = mA?.sea_surface_temperature?.[hora]
         return {
-          olas:   parseFloat((mA?.wave_height?.[hora] ?? 0.4).toFixed(1)),
-          viento: Math.round(fA?.wind_speed_10m?.[hora] ?? 10),
-          racha:  Math.round(fA?.wind_gusts_10m?.[hora] ?? 15),
+          olas:     parseFloat((mA?.wave_height?.[hora] ?? 0.4).toFixed(1)),
+          viento:   Math.round(fA?.wind_speed_10m?.[hora] ?? 10),
+          racha:    Math.round(fA?.wind_gusts_10m?.[hora] ?? 15),
+          tempAgua: typeof sst === 'number' ? Math.round(sst) : null,
+          vientoDir: gradosADireccion(fA?.wind_direction_10m?.[hora] ?? null),
         }
       })
     } catch {
@@ -84,6 +90,13 @@ async function meteoBatch(coords: { lat: number; lng: number }[]): Promise<Meteo
     }
   }))
   return results.flat()
+}
+
+// Grados meteorológicos → rumbo de 16 puntos (para estimarMedusas: viento onshore).
+function gradosADireccion(deg: number | null): string {
+  if (deg == null || Number.isNaN(deg)) return ''
+  const dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
+  return dirs[Math.round((((deg % 360) + 360) % 360) / 22.5) % 16]
 }
 
 function topDeProvincia(playas: Playa[], provincia: string): Playa[] {
@@ -98,8 +111,9 @@ function topDeProvincia(playas: Playa[], provincia: string): Playa[] {
 
 const FAQ = [
   { q: '¿Qué significa cada bandera en la playa?', a: 'Verde: baño permitido, condiciones normales. Amarilla: precaución, baño con limitaciones por oleaje o viento moderados. Roja: baño prohibido por condiciones peligrosas. La bandera oficial la iza cada mañana el servicio de socorrismo de la playa.' },
-  { q: '¿Cómo se calcula este semáforo?', a: 'Estimamos la bandera de cada playa con datos de oleaje y viento en tiempo real de modelos oficiales (Open-Meteo), aplicando umbrales de seguridad: roja con olas ≥1,5 m o viento muy fuerte; amarilla con oleaje o viento moderados; verde en calma. Se actualiza cada 30 minutos.' },
-  { q: '¿Esta bandera es la oficial de la playa?', a: 'No. Es una estimación meteorológica orientativa. La bandera oficial y vinculante la decide el socorrista de cada playa según las condiciones locales del momento, y puede diferir de la estimación. Consulta siempre la bandera izada en el puesto de vigilancia.' },
+  { q: '¿Cómo se calcula este semáforo?', a: 'Estimamos la bandera de cada playa con datos de oleaje y viento en tiempo real de modelos oficiales (Open-Meteo), aplicando umbrales de seguridad: roja con olas ≥1,5 m o viento muy fuerte; amarilla con oleaje o viento moderados; verde en calma. Además estimamos el riesgo de medusas con la temperatura del agua y el viento hacia la orilla, y lo marcamos con el icono 🪼. Se actualiza cada 30 minutos.' },
+  { q: '¿Por qué a veces hay bandera roja con el mar en calma?', a: 'Porque una bandera roja oficial no solo se iza por oleaje o viento: también por presencia de medusas, por mala calidad del agua (vertidos, contaminación) o por corrientes peligrosas. Nuestro semáforo estima la bandera con oleaje y viento y añade el riesgo de medusas, pero no detecta vertidos ni decisiones locales del socorrista. Por eso en un día de mar tranquilo con invasión de medusas la playa puede estar en roja aunque aquí la veas en verde.' },
+  { q: '¿Esta bandera es la oficial de la playa?', a: 'No. Es una estimación meteorológica orientativa. La bandera oficial y vinculante la decide el socorrista de cada playa según las condiciones locales del momento (oleaje, corrientes, medusas, calidad del agua), y puede diferir de la estimación. Consulta siempre la bandera izada en el puesto de vigilancia.' },
 ]
 
 const faqSchema = {
@@ -126,15 +140,24 @@ export default async function BanderasHoyPage() {
     const items = g.playas.map(p => {
       const m = meteos[idx++]
       const bandera = calcularBandera(m.olas, m.viento, m.racha)
-      return { p, m, bandera }
+      const medusas = estimarMedusas(p.lat, p.lng, m.tempAgua, m.viento, m.vientoDir)
+      return { p, m, bandera, medusas }
     })
     const counts = { verde: 0, amarilla: 0, roja: 0 }
-    for (const it of items) counts[it.bandera.color as keyof typeof counts]++
-    return { ...g, items, counts }
+    let medusasAlto = 0
+    for (const it of items) {
+      counts[it.bandera.color as keyof typeof counts]++
+      if (it.medusas.nivel === 'alto') medusasAlto++
+    }
+    return { ...g, items, counts, medusasAlto }
   })
 
   const total = { verde: 0, amarilla: 0, roja: 0 }
-  for (const g of grupos) { total.verde += g.counts.verde; total.amarilla += g.counts.amarilla; total.roja += g.counts.roja }
+  let medusasAltoTotal = 0
+  for (const g of grupos) {
+    total.verde += g.counts.verde; total.amarilla += g.counts.amarilla; total.roja += g.counts.roja
+    medusasAltoTotal += g.medusasAlto
+  }
   const nMonitorizadas = total.verde + total.amarilla + total.roja
 
   const actualizado = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' }).format(new Date())
@@ -160,7 +183,7 @@ export default async function BanderasHoyPage() {
         />
         <p data-speakable style={{ fontSize: '.92rem', color: 'var(--muted)', margin: '0 0 1rem', maxWidth: 620, lineHeight: 1.6 }}>
           Estimación de bandera para {nMonitorizadas} playas principales del litoral, calculada con el oleaje y el viento
-          de ahora mismo. Actualizado a las {actualizado} (hora peninsular), se recalcula cada 30 minutos.
+          de ahora mismo, más el riesgo de medusas (🪼). Actualizado a las {actualizado} (hora peninsular), se recalcula cada 30 minutos.
         </p>
 
         {/* Resumen nacional */}
@@ -173,10 +196,21 @@ export default async function BanderasHoyPage() {
               </span>
             </div>
           ))}
+          {medusasAltoTotal > 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', background: 'rgba(168,48,26,.08)', border: '1px solid rgba(168,48,26,.3)', borderRadius: 999, padding: '.45rem .9rem' }}>
+              <span aria-hidden="true">🪼</span>
+              <span style={{ fontSize: '.82rem', color: 'var(--ink)' }}>
+                <strong style={{ fontVariantNumeric: 'tabular-nums' }}>{medusasAltoTotal}</strong> con riesgo alto de medusas
+              </span>
+            </div>
+          )}
         </div>
         <div style={{ background: 'rgba(196,138,30,.08)', border: '1px solid rgba(196,138,30,.3)', borderRadius: 6, padding: '.8rem 1rem', fontSize: '.8rem', color: 'var(--ink)', lineHeight: 1.55, marginBottom: '2.25rem', maxWidth: 640 }}>
-          <strong>Importante:</strong> es una estimación meteorológica orientativa. La bandera oficial la iza el
-          socorrista de cada playa y puede diferir. En cada ficha tienes el detalle de oleaje, viento y avisos.
+          <strong>Importante:</strong> es una estimación meteorológica orientativa (oleaje y viento). La bandera oficial
+          la iza el socorrista de cada playa y puede diferir: una <strong>bandera roja</strong> real también puede
+          deberse a <strong>medusas</strong> o a la <strong>calidad del agua</strong> (vertidos), que esta estimación no
+          detecta. El icono 🪼 marca las playas con riesgo alto de medusas estimado hoy. Consulta siempre la bandera
+          izada en el puesto de vigilancia.
         </div>
 
         {/* Semáforo por comunidad → provincia */}
@@ -197,6 +231,9 @@ export default async function BanderasHoyPage() {
                             <span key={i} title={`${it.p.nombre}: bandera ${it.bandera.color}`} style={{ width: 11, height: 11, borderRadius: '50%', background: it.bandera.hex, display: 'inline-block' }} />
                           ))}
                         </span>
+                        {g.medusasAlto > 0 && (
+                          <span title={`${g.medusasAlto} playa(s) con riesgo alto de medusas`} aria-label={`${g.medusasAlto} con riesgo alto de medusas`} style={{ fontSize: '.78rem' }}>🪼</span>
+                        )}
                         <span aria-hidden="true" style={{ fontSize: '.72rem', color: 'var(--muted)' }}>▾</span>
                       </summary>
                       <div style={{ borderTop: '1px solid var(--line)', padding: '.5rem 1rem .75rem' }}>
@@ -206,6 +243,9 @@ export default async function BanderasHoyPage() {
                             <Link href={`/playas/${it.p.slug}`} style={{ flex: 1, fontSize: '.84rem', fontWeight: 600, color: 'var(--ink)', textDecoration: 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                               {it.p.nombre} <span style={{ fontWeight: 400, color: 'var(--muted)', fontSize: '.74rem' }}>· {it.p.municipio}</span>
                             </Link>
+                            {it.medusas.nivel !== 'bajo' && (
+                              <span title={it.medusas.label} aria-label={it.medusas.label} style={{ fontSize: '.8rem', flexShrink: 0, opacity: it.medusas.nivel === 'alto' ? 1 : 0.55 }}>🪼</span>
+                            )}
                             <span style={{ fontSize: '.7rem', color: 'var(--muted)', flexShrink: 0 }}>{it.m.olas} m · {it.m.viento} km/h</span>
                           </div>
                         ))}
