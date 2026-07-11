@@ -5,7 +5,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import { getCamperCitiesEn, getCamperCity, TIPOS_VEHICULO } from '@/lib/autocaravana-localities'
+import { getCamperCitiesEn, getCamperCity, CITY_COORDS, TIPOS_VEHICULO } from '@/lib/autocaravana-localities'
+import { getPlayasCercaDe } from '@/lib/playas'
 import { camperdaysAwinUrl } from '@/lib/camperdaysAwinUrl'
 
 export const revalidate = 86400
@@ -51,6 +52,10 @@ export default async function CamperCityPageEn({ params }: Props) {
 
   const cta1 = camperdaysAwinUrl(`playasdeespana_camper_en_${c.slug}`, ued(c.camperdaysPath))
   const cta2 = camperdaysAwinUrl(`playasdeespana_camper_en_${c.slug}_bottom`, ued(c.camperdaysPath))
+
+  // Moat: real nearest beaches with parking to the pickup city.
+  const coords = CITY_COORDS[c.slug]
+  const playasCerca = coords ? await getPlayasCercaDe(coords.lat, coords.lng, 8) : []
 
   const faqLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage', inLanguage: 'en',
@@ -122,11 +127,30 @@ export default async function CamperCityPageEn({ params }: Props) {
           </div>
         </section>
 
-        {/* BEACHES + AREAS */}
+        {/* BEACHES + AREAS (real nearest beaches with parking) */}
         <section style={{ marginBottom: '2.5rem', background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 10, padding: '1.25rem 1.4rem' }}>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 700, color: 'var(--ink)', margin: '0 0 .6rem' }}>Beaches &amp; overnight areas nearby</h2>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 700, color: 'var(--ink)', margin: '0 0 .6rem' }}>Beaches with parking closest to {c.ciudad}</h2>
           <p style={{ color: 'var(--muted)', lineHeight: 1.6, margin: '0 0 .5rem' }}>{en.playasNota}</p>
-          <p style={{ color: 'var(--muted)', lineHeight: 1.6, margin: '0 0 .75rem' }}>{en.areasNota}</p>
+          {playasCerca.length > 0 && (
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '.4rem' }}>
+              {playasCerca.map(p => (
+                <li key={p.slug}>
+                  <Link href={`/en/beaches/${p.slug}`} style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '.5rem', background: 'var(--bg, #fff)', border: '1px solid var(--line)', borderRadius: 6, padding: '.5rem .7rem', textDecoration: 'none' }}>
+                    <span style={{ minWidth: 0 }}>
+                      <span style={{ fontWeight: 600, color: 'var(--ink)', fontSize: '.88rem' }}>
+                        {p.bandera && <span title="Blue Flag" aria-label="Blue Flag" style={{ marginRight: '.3rem' }}>🔵</span>}
+                        {p.nombre}
+                      </span>
+                      <span style={{ display: 'block', fontSize: '.74rem', color: 'var(--muted)' }}>{p.municipio} · {p.provincia}</span>
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: '.74rem', color: CTA, whiteSpace: 'nowrap' }}>{Math.round(p.km)} km</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p style={{ color: 'var(--muted)', lineHeight: 1.6, margin: '0 0 .75rem', fontSize: '.9rem' }}>{en.areasNota}</p>
+          <Link href="/playas-autocaravana" style={{ color: CTA, fontWeight: 600, fontSize: '.9rem', textDecoration: 'none' }}>See all motorhome-friendly beaches →</Link>
         </section>
 
         {/* TYPES */}

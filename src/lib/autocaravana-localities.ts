@@ -355,6 +355,26 @@ export const CAMPER_CITIES: CamperCity[] = [
   },
 ]
 
+// Coordenadas de la ciudad de recogida (centroide aprox.). Se usan para listar
+// las playas reales aptas más cercanas (helper getPlayasCercaDe). Las ciudades
+// de interior (Madrid, Zaragoza, Granada, Sevilla) devuelven así la costa más
+// próxima de forma natural, por distancia.
+export const CITY_COORDS: Record<string, { lat: number; lng: number }> = {
+  madrid:    { lat: 40.4168, lng: -3.7038 },
+  barcelona: { lat: 41.3874, lng: 2.1686 },
+  valencia:  { lat: 39.4699, lng: -0.3763 },
+  sevilla:   { lat: 37.3891, lng: -5.9845 },
+  malaga:    { lat: 36.7213, lng: -4.4213 },
+  bilbao:    { lat: 43.2630, lng: -2.9350 },
+  alicante:  { lat: 38.3452, lng: -0.4810 },
+  zaragoza:  { lat: 41.6488, lng: -0.8891 },
+  granada:   { lat: 37.1773, lng: -3.5986 },
+  murcia:    { lat: 37.9922, lng: -1.1307 },
+  asturias:  { lat: 43.3619, lng: -5.8494 },
+  galicia:   { lat: 42.8782, lng: -8.5448 },
+  cantabria: { lat: 43.4623, lng: -3.8100 },
+}
+
 export function getCamperCities(): CamperCity[] {
   return CAMPER_CITIES
 }

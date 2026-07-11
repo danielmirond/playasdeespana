@@ -140,6 +140,48 @@ export const getProvincias = cache(async () => {
 })
 
 // ────────────────────────────────────────────────────────────────────────
+// Helper geográfico: playas más cercanas a un punto. Usado por las páginas de
+// alquiler de autocaravana por ciudad para mostrar playas REALES aptas cerca
+// (con parking = mejor acceso para autocaravana), en vez de un texto genérico.
+
+export interface PlayaCercana {
+  slug: string
+  nombre: string
+  municipio: string
+  provincia: string
+  bandera: boolean
+  km: number
+}
+
+const _haversineKm = (aLat: number, aLng: number, bLat: number, bLng: number): number => {
+  const R = 6371, toRad = (d: number) => (d * Math.PI) / 180
+  const dLat = toRad(bLat - aLat), dLng = toRad(bLng - aLng)
+  const x = Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(aLat)) * Math.cos(toRad(bLat)) * Math.sin(dLng / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(x))
+}
+
+/**
+ * Devuelve las `limit` playas con parking más cercanas a (lat, lng), ordenadas
+ * por distancia. A igualdad de cercanía prioriza bandera azul. Pensado para
+ * enlazar playas reales cerca de una ciudad de recogida de autocaravana.
+ */
+export const getPlayasCercaDe = cache(async (
+  lat: number, lng: number, limit = 8,
+): Promise<PlayaCercana[]> => {
+  const playas = await getPlayas()
+  return playas
+    .filter(p => p.parking && typeof p.lat === 'number' && typeof p.lng === 'number')
+    .map(p => ({
+      slug: p.slug, nombre: p.nombre, municipio: p.municipio,
+      provincia: p.provincia, bandera: !!p.bandera,
+      km: _haversineKm(lat, lng, p.lat, p.lng),
+    }))
+    .sort((a, b) => a.km - b.km || Number(b.bandera) - Number(a.bandera))
+    .slice(0, limit)
+})
+
+// ────────────────────────────────────────────────────────────────────────
 // Helpers para /playas-perros. Filtro por perros:true + agrupaciones por
 // comunidad / provincia / municipio. Se usan en las páginas hijas.
 
