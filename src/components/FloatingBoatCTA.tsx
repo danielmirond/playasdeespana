@@ -46,7 +46,11 @@ export default function FloatingBoatCTA() {
   let coast: string | null = null
   if (coastMatch && coastMatch[1]) {
     const decoded = decodeURIComponent(coastMatch[1]).replace(/-/g, ' ')
-    coast = decoded.charAt(0).toUpperCase() + decoded.slice(1)
+    const minus = new Set(['de', 'del', 'la', 'las', 'los', 'y'])
+    coast = decoded
+      .split(' ')
+      .map((w, i) => (i > 0 && minus.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1)))
+      .join(' ')
   } else if (pathname === '/alquiler-barco') {
     coast = 'España'
   }

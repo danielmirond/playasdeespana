@@ -55,7 +55,7 @@ const slugify = (x: string) =>
 export default function BoatRentalLocalityPage(props: LocalityPageProps) {
   const {
     coast, province, locality, description, beaches, moorings, pricing,
-    regulations, bestSeason, insiderTip, faq, samboatAwinUrl, images,
+    regulations, bestSeason, insiderTip, faq, samboatAwinUrl,
   } = props
 
   const [openFaq, setOpenFaq] = useState<number | null>(0)
@@ -84,10 +84,10 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
-      {/* HERO */}
+      {/* HERO — degradado "profundidad de mar" autónomo (sin imágenes externas). */}
       <section style={{
         position: 'relative',
-        background: `linear-gradient(135deg, rgba(12,74,110,.92), rgba(8,145,178,.85)), url('${images.hero.unsplashUrl}') center/cover`,
+        background: 'radial-gradient(130% 130% at 12% 8%, rgba(8,145,178,.98), rgba(12,74,110,1) 55%, rgba(7,45,68,1))',
         color: '#fff', padding: '4rem 1.5rem',
       }}>
         <div style={{ maxWidth: 880, margin: '0 auto' }}>

@@ -34,7 +34,10 @@ export async function generateMetadata({ params }: { params: Promise<LocalityPag
   return {
     title,
     description,
-    openGraph: { title, description, url: canonical, type: 'website', images: [locality.images.hero.unsplashUrl] },
+    openGraph: {
+      title, description, url: canonical, type: 'website',
+      images: [{ url: `/api/og?playa=${encodeURIComponent(`Alquiler de barcos en ${locality.locality}`)}`, width: 1200, height: 630 }],
+    },
     alternates: { canonical },
   }
 }
