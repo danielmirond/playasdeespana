@@ -79,6 +79,71 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · País Vasco (voz bicéfala) ─────
+  {
+    slug: 'playa-de-laga-ibarrangelu-bizkaia-bandera-roja-ogono',
+    category: 'guias',
+    title: 'Playa de Laga, Bizkaia: bandera roja habitual y corrientes circulares al pie del acantilado de Ogoño (279 m)',
+    excerpt:
+      'La lengua de arena dorada de Ibarrangelu, en la Reserva de la Biosfera de Urdaibai, mira al mar abierto y no perdona: genera corrientes de resaca que giran en corredores hacia fuera, la bandera roja ondea con frecuencia, el agua del Cantábrico se queda fría en pleno agosto y la marea estrecha mucho la arena. El cabo Ogoño le cae encima con 279 metros de acantilado.',
+    heroAlt: 'Playa de arena fina y dorada de Laga, entre dunas y el acantilado verde del cabo Ogoño, abierta al mar Cantábrico, en Ibarrangelu (Bizkaia)',
+    heroQuery: 'laga,urdaibai,bizkaia,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-07-13T11:09:17Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/pais-vasco', label: 'Playas del País Vasco' },
+      { href: '/banderas-azules', label: 'Playas con Bandera Azul' },
+      { href: '/playas-sin-viento', label: 'Playas resguardadas del viento' },
+    ],
+    body: [
+      { t: 'p', html: 'Se baja hacia Laga por una carretera que primero esconde el mar y luego lo suelta de golpe: una lengua de arena rubia encajada entre dos moles de piedra, con el caserío verde de Ibarrangelu a la espalda y el peñón de Ogoño cayendo a plomo sobre el agua. Es de esas playas que el coche encuentra cuesta abajo, cuando ya no esperabas nada, y que obligan a levantar el pie del acelerador para mirar.' },
+      { t: 'p', html: 'A media mañana de agosto huele a mar abierto y a monte húmedo, esa mezcla que solo da la cornisa cantábrica. Los surfistas ya están dentro; las familias extienden la toalla lejos de la orilla, donde el oleaje rompe corto y seco. Laga no es una piscina: es el Cantábrico haciendo lo que sabe hacer.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)' },
+      { t: 'p', html: 'Laga está en <strong>Ibarrangelu (Bizkaia)</strong>, dentro de la <strong>Reserva de la Biosfera de Urdaibai</strong>, declarada por la UNESCO en 1984. Son unos <strong>574 metros de arena fina y dorada</strong>, con un cordón de dunas al fondo y el <strong>cabo Ogoño —279 metros, uno de los acantilados más altos de la costa vasca—</strong> cerrando el flanco sur. Esa pared es a la vez el gancho y el problema: regala sombra a última hora de la tarde, pero también encajona viento y oleaje.' },
+      { t: 'p', html: 'El contra honesto está en el agua. Laga mira al norte, al mar abierto, sin cabo ni isla que la resguarde. El oleaje genera <strong>corrientes circulares que giran en sentidos opuestos</strong> y, donde se encuentran, forman corredores de resaca que empujan mar adentro. No es una rareza puntual: la <strong>bandera roja ondea con frecuencia</strong> y, cuando hay mar, el baño con niños está desaconsejado. Añade el agua del Cantábrico, que en pleno verano se queda en cifras que hacen dudar en la orilla, muy por debajo de las del Mediterráneo.' },
+      { t: 'p', html: 'Y la marea manda. Con la pleamar la franja de arena se estrecha mucho y la gente se apiña contra las dunas, así que conviene mirar la tabla de mareas antes de salir de casa. El <strong>aparcamiento, de pago en temporada</strong>, se llena pronto: a partir de media mañana en julio y agosto, entrar en coche hasta la playa es una lotería.' },
+      { t: 'h2', text: 'El criterio del local' },
+      { t: 'p', html: '<strong>Cuándo SÍ:</strong> primavera y septiembre, con mar de fondo suave, marea bajando y el sol todavía calentando la arena. Entre semana y antes de las once tienes sitio, y el cabo Ogoño de testigo casi para ti.' },
+      { t: 'p', html: '<strong>Cuándo NO:</strong> un día de galerna o de mar del noroeste con dos metros de ola. Ese día Laga es de tablas, no de bañistas, y si ves la bandera roja no es decoración. Tampoco es la playa para meter a críos pequeños si el socorrista lo desaconseja.' },
+      { t: 'p', html: '<strong>El truco:</strong> llega temprano y, si el aparcamiento de abajo está completo, deja el coche arriba y baja andando; el paseo se hace. Si lo tuyo es el baño tranquilo y no el surf, la vecina <strong>Laida</strong> —al otro lado de la ría del Oka, donde la marea baja descubre grandes bancos de arena— perdona mucho más. Y si el noroeste sopla fuerte en toda la costa, tierra adentro por Urdaibai hay planes que no dependen del estado del mar.' },
+      { t: 'quote', text: 'Laga no traiciona a nadie: enseña la bandera roja a la vista de todos. La foto perfecta la pones tú; la resaca la pone el Cantábrico.', cite: 'Criterio Playas de España' },
+      { t: 'p', html: 'Al caer la tarde, cuando la sombra del Ogoño se come la arena y los últimos surfistas salen goteando, Laga se queda callada con el estuario de Urdaibai respirando a un lado. No es una playa cómoda ni pretende serlo. Es un trozo de Cantábrico con nombre propio que se disfruta más cuando se entiende: mirando la marea, respetando la bandera y aceptando que aquí el que decide es el mar.' },
+    ],
+    faq: [
+      { q: '¿Se puede uno bañar con niños en la playa de Laga?', a: 'Con precaución y solo los días de mar en calma. Laga mira al mar abierto y genera corrientes de resaca; la bandera roja ondea con frecuencia y entonces el baño está desaconsejado. Haz caso al socorrista y a la bandera, y vigila la marea, que en pleamar estrecha mucho la arena.' },
+      { q: '¿Dónde se aparca en Laga y es fácil encontrar sitio?', a: 'Hay aparcamiento de pago en temporada junto a la playa, pero se llena pronto: en julio y agosto, a partir de media mañana, entrar en coche es complicado. Lo práctico es llegar temprano o dejar el coche en las bolsas de arriba y bajar andando.' },
+      { q: '¿Qué diferencia hay entre Laga y Laida?', a: 'Están casi enfrente, en Urdaibai. Laga mira al mar abierto, con más ola y corrientes, y es playa de surf. Laida se abre en la desembocadura del Oka y, con la marea baja, descubre enormes bancos de arena y un baño más resguardado. Para un chapuzón tranquilo, Laida; para surf y paisaje bravo, Laga.' },
+    ],
+    en: {
+      title: 'Playa de Laga, Basque Country: red flags are routine beneath the 279-metre Ogoño cliff',
+      excerpt:
+        'The golden dune beach at Ibarrangelu, inside the Urdaibai Biosphere Reserve, looks a picture but faces the open Cantabrian Sea and does not forgive: circular rip currents run seaward, the red flag flies often, the water stays cold in high summer and the tide swallows the sand. Cabo Ogoño towers 279 metres above it.',
+      related: [
+        { href: '/en/magazine', label: 'Magazine' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+      ],
+      body: [
+        { t: 'p', html: 'You drop down to Laga on a road that hides the sea and then hands it over all at once: a tongue of blond sand wedged between two blocks of stone, the green farmhouses of Ibarrangelu at your back and the Ogoño headland falling sheer into the water. It is one of those beaches the car finds on the way downhill, when you were expecting nothing, and that makes you ease off the throttle to look.' },
+        { t: 'p', html: 'On an August mid-morning it smells of open sea and damp hillside, that mix only the Cantabrian coast gives you. The surfers are already in; families lay their towels well back from the shore, where the swell breaks short and hard. Laga is no swimming pool: it is the Cantabrian doing what it does.' },
+        { t: 'h2', text: 'The facts (and what the brochure leaves out)' },
+        { t: 'p', html: 'Laga sits in <strong>Ibarrangelu (Bizkaia)</strong>, inside the <strong>Urdaibai Biosphere Reserve</strong>, designated by UNESCO in 1984. It runs to some <strong>574 metres of fine golden sand</strong>, backed by a belt of dunes, with <strong>Cabo Ogoño —279 metres, one of the highest cliffs on the Basque coast—</strong> closing off its southern flank. That wall is both the draw and the catch: it throws welcome shade late in the day, but it also funnels wind and swell.' },
+        { t: 'p', html: 'The honest downside is in the water. Laga faces north, out to open sea, with no cape or island to shelter it. The swell sets up <strong>circular currents spinning in opposite directions</strong>, and where they meet they form rip corridors that push you offshore. This is not a freak event: the <strong>red flag flies often</strong>, and when there is a sea running, swimming with children is not advised. Add the Cantabrian water, which even in high summer stays at temperatures that make you hesitate at the shoreline, well below the Mediterranean.' },
+        { t: 'p', html: 'And the tide rules. At high water the strip of sand narrows sharply and people crowd against the dunes, so it pays to check the tide table before you leave home. The <strong>car park, paid in season</strong>, fills early: from mid-morning in July and August, driving down to the beach is a lottery.' },
+        { t: 'h2', text: 'A local’s judgement' },
+        { t: 'p', html: '<strong>When to go:</strong> spring and September, with a gentle groundswell, a falling tide and the sun still warming the sand. Midweek and before eleven you will have room, with Cabo Ogoño watching over almost only you.' },
+        { t: 'p', html: '<strong>When not to:</strong> a day of galerna or a north-westerly sea with two-metre waves. On days like that Laga belongs to the boards, not to bathers, and if you see the red flag it is not decoration. Nor is it the beach for small children if the lifeguard advises against it.' },
+        { t: 'p', html: '<strong>The trick:</strong> arrive early and, if the lower car park is full, leave the car up top and walk down; the stroll is easy enough. If you want a calm swim rather than surf, neighbouring <strong>Laida</strong> —across the Oka estuary, where the ebbing tide uncovers huge sandbanks— is far more forgiving. And if the north-westerly is blowing hard along the whole coast, inland Urdaibai has plans that do not depend on the state of the sea.' },
+        { t: 'quote', text: 'Laga betrays no one: it flies the red flag in plain sight. The perfect photo is down to you; the rip current is down to the Cantabrian.', cite: 'Playas de España' },
+        { t: 'p', html: 'As the light fades, when Ogoño’s shadow eats the sand and the last surfers walk out dripping, Laga falls quiet with the Urdaibai estuary breathing off to one side. It is not a comfortable beach and does not pretend to be. It is a piece of the Cantabrian with a name of its own, best enjoyed once you understand it: reading the tide, respecting the flag and accepting that here the sea is the one that decides.' },
+      ],
+      faq: [
+        { q: 'Is Laga safe for swimming with children?', a: 'With care, and only on calm days. Laga faces the open sea and sets up rip currents; the red flag flies often, and when it does, swimming is not advised. Follow the lifeguard and the flag, and watch the tide, which narrows the sand sharply at high water.' },
+        { q: 'Where do you park at Laga, and is it easy?', a: 'There is a paid seasonal car park by the beach, but it fills early: in July and August, from mid-morning, driving down is difficult. The practical move is to arrive early, or leave the car in the upper overflow areas and walk down.' },
+        { q: 'What is the difference between Laga and Laida?', a: 'They sit almost opposite each other in Urdaibai. Laga faces the open sea, with more swell and currents, and is a surf beach. Laida opens at the mouth of the Oka and, at low tide, uncovers vast sandbanks and a more sheltered swim. For a quiet dip, Laida; for surf and wild scenery, Laga.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Andalucía (voz bicéfala) ─────
   {
     slug: 'playa-de-los-muertos-carboneras-agua-profunda-sin-socorrista',
