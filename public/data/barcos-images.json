@@ -1,0 +1,142 @@
+{
+  "mallorca": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Mallorca_Cala_Rajada_Cala_Lliteres.jpg/1920px-Mallorca_Cala_Rajada_Cala_Lliteres.jpg",
+    "width": 1600,
+    "height": 1067,
+    "credit": "Isiwal · CC BY-SA 3.0",
+    "source": "wikimedia"
+  },
+  "ibiza": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Cala_de_Portinatx%2C_Ibiza_%281672186897%29.jpg/1920px-Cala_de_Portinatx%2C_Ibiza_%281672186897%29.jpg",
+    "width": 1600,
+    "height": 1067,
+    "credit": "David de Mallorca · CC BY 2.0",
+    "source": "wikimedia"
+  },
+  "menorca": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Menorca%2C_Cala_Escorxada_%2821109592490%29.jpg",
+    "width": 1920,
+    "height": 1280,
+    "credit": "RD_Elsie from Sansepolcro (AR), Italy · CC BY 2.0",
+    "source": "wikimedia"
+  },
+  "barcelona": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/20180101_Nedadors_a_la_Platja_de_Sant_Sebasti%C3%A0_-_Club_Atl%C3%A8tic_Barceloneta.jpg/1920px-20180101_Nedadors_a_la_Platja_de_Sant_Sebasti%C3%A0_-_Club_Atl%C3%A8tic_Barceloneta.jpg",
+    "width": 1600,
+    "height": 900,
+    "credit": "Jordiferrer · CC BY-SA 4.0",
+    "source": "wikimedia"
+  },
+  "alicante": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Le_port_d%27alicante_-_panoramio_%281%29.jpg/1920px-Le_port_d%27alicante_-_panoramio_%281%29.jpg",
+    "width": 1600,
+    "height": 1200,
+    "credit": "chisloup · CC BY 3.0",
+    "source": "wikimedia"
+  },
+  "valencia": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/El_Grau_Puerto_De_Valencia_%28124798965%29.jpeg",
+    "width": 1920,
+    "height": 1080,
+    "credit": "Adrian R · CC BY 3.0",
+    "source": "wikimedia"
+  },
+  "palma": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Bah%C3%ADa_de_Palma.jpg/1920px-Bah%C3%ADa_de_Palma.jpg",
+    "width": 1600,
+    "height": 895,
+    "credit": "Fernando2787 · CC BY-SA 3.0",
+    "source": "wikimedia"
+  },
+  "alcudia": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Alcudia_beach.jpg",
+    "width": 1920,
+    "height": 1080,
+    "credit": "Liilia Moroz · CC BY-SA 4.0",
+    "source": "wikimedia"
+  },
+  "pollenca": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Platja_port_pollen%C3%A7a_1.JPG/1920px-Platja_port_pollen%C3%A7a_1.JPG",
+    "width": 1600,
+    "height": 1200,
+    "credit": "Antonio De Lorenzo -&gt; Kufoleto · CC BY 2.5",
+    "source": "wikimedia"
+  },
+  "tossa-de-mar": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Tossa_de_Mar_004.JPG/1920px-Tossa_de_Mar_004.JPG",
+    "width": 1600,
+    "height": 1171,
+    "credit": "Georges Jansoone (JoJan) · CC BY 3.0",
+    "source": "wikimedia"
+  },
+  "costa-brava": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Cales_de_Cala_Estreta_%28Costa_Brava%29_-_panoramio.jpg",
+    "width": 1920,
+    "height": 1080,
+    "credit": "klimmanet · CC BY 3.0",
+    "source": "wikimedia"
+  },
+  "lloret-de-mar": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Playa_de_Lloret_de_Mar-2016_%281%29.jpg/1920px-Playa_de_Lloret_de_Mar-2016_%281%29.jpg",
+    "width": 1600,
+    "height": 1063,
+    "credit": "Alberto-g-rovi · CC BY 3.0",
+    "source": "wikimedia"
+  },
+  "tenerife": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Playa_de_Torvoscas_%26_Playa_de_Fa%C3%B1abe.jpg/1920px-Playa_de_Torvoscas_%26_Playa_de_Fa%C3%B1abe.jpg",
+    "width": 1600,
+    "height": 1200,
+    "credit": "kallerna · Public domain",
+    "source": "wikimedia"
+  },
+  "malaga": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/A_chilly_morning_at_Playa_La_Caleta%2C_M%C3%A1laga.jpg",
+    "width": 1727,
+    "height": 1080,
+    "credit": "Alan Grant · CC BY 4.0",
+    "source": "wikimedia"
+  },
+  "marbella": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/%C2%AE_S.D._MALAGA_-_MARBELLA_PLAYA_URBANA_%22LA_FONTANILLA%22_-_panoramio.jpg/1920px-%C2%AE_S.D._MALAGA_-_MARBELLA_PLAYA_URBANA_%22LA_FONTANILLA%22_-_panoramio.jpg",
+    "width": 1600,
+    "height": 1071,
+    "credit": "Concepcion AMAT ORTA… · CC BY 3.0",
+    "source": "wikimedia"
+  },
+  "formentera": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Platja_de_Llevant2373.jpg/1920px-Platja_de_Llevant2373.jpg",
+    "width": 1600,
+    "height": 1200,
+    "credit": "Zavijavah · CC BY-SA 3.0",
+    "source": "wikimedia"
+  },
+  "denia": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Denia_calas.jpg",
+    "width": 1600,
+    "height": 1200,
+    "credit": "No machine-readable author provided. Kasiber assumed (based on copyright claims) · Public domain",
+    "source": "wikimedia"
+  },
+  "javea": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cala_de_la_Granadella_de_X%C3%A0bia%2C_Pa%C3%ADs_Valenci%C3%A0.JPG/1920px-Cala_de_la_Granadella_de_X%C3%A0bia%2C_Pa%C3%ADs_Valenci%C3%A0.JPG",
+    "width": 1600,
+    "height": 1094,
+    "credit": "Joanbanjo · CC BY-SA 3.0",
+    "source": "wikimedia"
+  },
+  "salou": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/PLATJA_DE_LLEVANT_-_SALOU_-_IB-309.JPG/1920px-PLATJA_DE_LLEVANT_-_SALOU_-_IB-309.JPG",
+    "width": 1600,
+    "height": 1200,
+    "credit": "Isidre blanc · CC BY-SA 3.0",
+    "source": "wikimedia"
+  },
+  "tarifa": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Vue_sur_le_port_de_p%C3%AAche_depuis_le_ch%C3%A2teau_de_Guzman_le_Bon.jpg/1920px-Vue_sur_le_port_de_p%C3%AAche_depuis_le_ch%C3%A2teau_de_Guzman_le_Bon.jpg",
+    "width": 1600,
+    "height": 1040,
+    "credit": "Nicolas Vollmer from Munich [Allemagne] · CC BY 2.0",
+    "source": "wikimedia"
+  }
+}

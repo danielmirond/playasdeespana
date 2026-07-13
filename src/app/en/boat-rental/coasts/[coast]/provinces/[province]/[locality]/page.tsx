@@ -1,5 +1,6 @@
 import { getLocalityBySlug } from '@/lib/boat-rental-localities'
 import { samboatAwinUrl } from '@/lib/boat-rental-helpers'
+import { getBoatImage } from '@/lib/boat-images'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -48,11 +49,28 @@ export default async function LocalityPage({ params }: { params: Promise<Localit
 
   const afinityId = process.env.NEXT_PUBLIC_AWIN_AFFID || 'playasdeespana'
   const awinUrl = samboatAwinUrl(afinityId, locality.samboatUrl, `playasdeespana_en_${locality.slug}`)
+  const hero = getBoatImage(locality.slug)
+
+  // Merge beaches + moorings into one card per spot (same dedupe as the ES ficha).
+  const norm = (x: string) => x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim()
+  const moorByName = new Map(locality.moorings.map(m => [norm(m.name), m]))
+  const usados = new Set<string>()
+  const lugares = locality.beaches.map(b => {
+    const m = moorByName.get(norm(b.name))
+    if (m) usados.add(norm(b.name))
+    return { ...b, mooring: m }
+  }) as Array<{ name: string; distance: string; description: string; mooring?: (typeof locality.moorings)[number] }>
+  for (const m of locality.moorings) {
+    if (!usados.has(norm(m.name))) lugares.push({ name: m.name, distance: '', description: m.description, mooring: m })
+  }
 
   return (
     <div className="min-h-screen bg-white">
-      {/* HERO */}
-      <section className="bg-gradient-to-br from-blue-500 via-blue-400 to-cyan-400 py-16 px-4 md:py-24 text-white">
+      {/* HERO — real photo (Wikimedia/Openverse) with gradient for legibility */}
+      <section
+        className="relative bg-gradient-to-br from-blue-500 via-blue-400 to-cyan-400 py-16 px-4 md:py-24 text-white"
+        style={hero ? { background: `linear-gradient(135deg, rgba(12,74,110,.82), rgba(8,145,178,.62)), url('${hero.url}') center/cover` } : undefined}
+      >
         <div className="max-w-4xl mx-auto">
           <nav className="mb-4">
             <Link href="/en/boat-rental" className="text-blue-50 hover:text-white">
@@ -66,36 +84,29 @@ export default async function LocalityPage({ params }: { params: Promise<Localit
             {locality.description}
           </p>
         </div>
+        {hero?.credit && (
+          <span className="absolute right-2 bottom-1 text-[10px] text-white/70" style={{ textShadow: '0 1px 2px rgba(0,0,0,.5)' }}>
+            Photo: {hero.credit} · Wikimedia
+          </span>
+        )}
       </section>
 
       {/* CONTENT */}
       <div className="max-w-4xl mx-auto px-4 py-12">
-        {/* BEACHES */}
+        {/* BEACHES + MOORINGS (merged: most localities repeat the same spot in both lists) */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900">Accessible Beaches by Boat</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-900">Beaches, Coves &amp; Anchorages by Boat</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {locality.beaches.map((beach, idx) => (
+            {lugares.map((l, idx) => (
               <div key={idx} className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-bold text-gray-900 mb-2">{beach.name}</h3>
-                <p className="text-sm text-gray-600 mb-2">{beach.distance}</p>
-                <p className="text-sm text-gray-600">{beach.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* MOORINGS */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900">Recommended Moorings</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {locality.moorings.map((mooring, idx) => (
-              <div key={idx} className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-bold text-gray-900 mb-2">{mooring.name}</h3>
-                <div className="text-sm text-gray-600 space-y-1">
-                  <p>Depth: {mooring.depth}m</p>
-                  <p>Protection: {mooring.protection}</p>
-                  <p>{mooring.description}</p>
-                </div>
+                <h3 className="font-bold text-gray-900 mb-2">{l.name}</h3>
+                {l.distance && <p className="text-sm text-gray-600 mb-2">{l.distance}</p>}
+                <p className="text-sm text-gray-600">{l.description}</p>
+                {l.mooring && (
+                  <p className="text-sm text-gray-600 mt-2 pt-2 border-t border-dashed border-gray-200">
+                    ⚓ Anchorage ~{l.mooring.depth}m · {l.mooring.protection} protection
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -167,7 +178,7 @@ export default async function LocalityPage({ params }: { params: Promise<Localit
           <a
             href={awinUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer sponsored"
             className="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
           >
             Browse Boats on SamBoat →

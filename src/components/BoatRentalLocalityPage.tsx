@@ -41,6 +41,8 @@ interface LocalityPageProps {
   samboatAwinUrl: string
   samboatDeeplink: string
   images: { hero: { unsplashUrl: string; alt: string } }
+  /** Hero real pre-resuelto (Wikimedia/Openverse) con crédito. Si null → degradado. */
+  heroImage?: { url: string; credit: string } | null
 }
 
 const PROTECTION_LABEL: Record<Mooring['protection'], { txt: string; color: string }> = {
@@ -52,11 +54,41 @@ const PROTECTION_LABEL: Record<Mooring['protection'], { txt: string; color: stri
 const slugify = (x: string) =>
   x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-')
 
+// La mayoría de localidades repiten el mismo lugar en `beaches` y `moorings`
+// (p.ej. Cala Mayor como playa Y como fondeo, con descripciones casi iguales).
+// Se fusionan en UNA tarjeta por lugar: datos de playa + datos de fondeo.
+const normName = (x: string) =>
+  x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim()
+
+interface Lugar extends Beach { mooring?: Mooring }
+
+function fusionarLugares(beaches: Beach[], moorings: Mooring[]): Lugar[] {
+  const byName = new Map(moorings.map(m => [normName(m.name), m]))
+  const usados = new Set<string>()
+  const lugares: Lugar[] = beaches.map(b => {
+    const key = normName(b.name)
+    const m = byName.get(key)
+    if (m) usados.add(key)
+    return { ...b, mooring: m }
+  })
+  // Fondeos sin playa equivalente (p.ej. Es Pontás) → tarjeta propia.
+  for (const m of moorings) {
+    if (usados.has(normName(m.name))) continue
+    lugares.push({ name: m.name, distance: '', description: m.description, mooring: m })
+  }
+  return lugares
+}
+
 export default function BoatRentalLocalityPage(props: LocalityPageProps) {
   const {
     coast, province, locality, description, beaches, moorings, pricing,
-    regulations, bestSeason, insiderTip, faq, samboatAwinUrl,
+    regulations, bestSeason, insiderTip, faq, samboatAwinUrl, heroImage,
   } = props
+
+  const lugares = fusionarLugares(beaches, moorings)
+  // La nota bajo los precios ya avisa del +40% en julio-agosto: fuera el
+  // duplicado de la lista de normativa.
+  const normativa = regulations.filter(r => !/temporada alta/i.test(r))
 
   const [openFaq, setOpenFaq] = useState<number | null>(0)
 
@@ -84,10 +116,13 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
-      {/* HERO — degradado "profundidad de mar" autónomo (sin imágenes externas). */}
+      {/* HERO — foto real (Wikimedia/Openverse) con degradado para legibilidad;
+          si no hay foto, degradado marino autónomo. */}
       <section style={{
         position: 'relative',
-        background: 'radial-gradient(130% 130% at 12% 8%, rgba(8,145,178,.98), rgba(12,74,110,1) 55%, rgba(7,45,68,1))',
+        background: heroImage
+          ? `linear-gradient(135deg, rgba(12,74,110,.82), rgba(8,145,178,.62)), url('${heroImage.url}') center/cover`
+          : 'radial-gradient(130% 130% at 12% 8%, rgba(8,145,178,.98), rgba(12,74,110,1) 55%, rgba(7,45,68,1))',
         color: '#fff', padding: '4rem 1.5rem',
       }}>
         <div style={{ maxWidth: 880, margin: '0 auto' }}>
@@ -110,6 +145,11 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
             Ver barcos disponibles en {locality} →
           </a>
         </div>
+        {heroImage?.credit && (
+          <span style={{ position: 'absolute', right: 8, bottom: 6, fontSize: '.62rem', color: 'rgba(255,255,255,.7)', textShadow: '0 1px 2px rgba(0,0,0,.5)' }}>
+            Foto: {heroImage.credit} · Wikimedia
+          </span>
+        )}
       </section>
 
       {/* CONTENIDO */}
@@ -140,38 +180,26 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
           </p>
         </section>
 
-        {/* PLAYAS */}
+        {/* PLAYAS + FONDEOS (fusionados: una tarjeta por lugar) */}
         <section style={{ marginBottom: '3rem' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700, marginBottom: '1.25rem', color: 'var(--ink)' }}>
-            Playas y calas accesibles en barco
+            Playas, calas y fondeos en barco
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: '1rem' }}>
-            {beaches.map((b, i) => (
-              <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 8, padding: '1rem' }}>
-                <div style={{ fontWeight: 700, marginBottom: '.2rem', color: 'var(--ink)' }}>{b.name}</div>
-                <div style={{ fontSize: '.78rem', color: 'var(--accent)', marginBottom: '.4rem' }}>{b.distance}</div>
-                <div style={{ fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.5 }}>{b.description}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* FONDEOS */}
-        <section style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700, marginBottom: '1.25rem', color: 'var(--ink)' }}>
-            Fondeos recomendados
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: '1rem' }}>
-            {moorings.map((m, i) => {
-              const pr = PROTECTION_LABEL[m.protection]
+            {lugares.map((l, i) => {
+              const pr = l.mooring ? PROTECTION_LABEL[l.mooring.protection] : null
               return (
                 <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 8, padding: '1rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '.3rem' }}>
-                    <span style={{ fontWeight: 700, color: 'var(--ink)' }}>{m.name}</span>
-                    <span style={{ fontSize: '.72rem', fontWeight: 700, color: pr.color }}>{pr.txt}</span>
-                  </div>
-                  <div style={{ fontSize: '.78rem', color: 'var(--accent)', marginBottom: '.4rem' }}>Profundidad ~{m.depth} m</div>
-                  <div style={{ fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.5 }}>{m.description}</div>
+                  <div style={{ fontWeight: 700, marginBottom: '.2rem', color: 'var(--ink)' }}>{l.name}</div>
+                  {l.distance && <div style={{ fontSize: '.78rem', color: 'var(--accent)', marginBottom: '.4rem' }}>{l.distance}</div>}
+                  <div style={{ fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.5 }}>{l.description}</div>
+                  {l.mooring && pr && (
+                    <div style={{ display: 'flex', gap: '.5rem', alignItems: 'baseline', marginTop: '.55rem', paddingTop: '.55rem', borderTop: '1px dashed var(--line)', fontSize: '.76rem' }}>
+                      <span aria-hidden="true">⚓</span>
+                      <span style={{ color: 'var(--muted)' }}>Fondeo ~{l.mooring.depth} m</span>
+                      <span style={{ fontWeight: 700, color: pr.color }}>{pr.txt}</span>
+                    </div>
+                  )}
                 </div>
               )
             })}
@@ -196,7 +224,7 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
             Normativa y a tener en cuenta
           </h2>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.6rem' }}>
-            {regulations.map((r, i) => (
+            {normativa.map((r, i) => (
               <li key={i} style={{ display: 'flex', gap: '.6rem', alignItems: 'flex-start', fontSize: '.92rem', color: 'var(--muted)', lineHeight: 1.5 }}>
                 <span style={{ color: 'var(--accent)', fontWeight: 800 }}>›</span>{r}
               </li>

@@ -41,6 +41,10 @@ export default function FloatingBoatCTA() {
   const [closed, setClosed] = useState(false)
   const pathname = usePathname() ?? ''
 
+  // En la ficha de localidad NO se monta: ya tiene dos CTAs propios (hero y
+  // cierre) con clickref de la localidad; un tercer botón flotante era ruido.
+  const esFichaLocalidad = /\/alquiler-barco\/costas\/[^/]+\/provincias\/[^/]+\/[^/]+/.test(pathname)
+
   // Determinar costa a partir de la URL: /alquiler-barco/costas/[coast]/...
   const coastMatch = pathname.match(/\/alquiler-barco\/costas\/([^/]+)/)
   let coast: string | null = null
@@ -55,7 +59,7 @@ export default function FloatingBoatCTA() {
     coast = 'España'
   }
 
-  if (closed || !coast) {
+  if (closed || !coast || esFichaLocalidad) {
     return null
   }
 
