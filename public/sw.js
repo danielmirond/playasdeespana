@@ -4,7 +4,7 @@
 // Estrategia: Network First con fallback a cache para HTML.
 // Assets estáticos: Cache First (CSS, JS, fonts, SVG).
 
-const CACHE_NAME = 'playas-v1'
+const CACHE_NAME = 'playas-v2'
 const STATIC_ASSETS = [
   '/logo.svg',
   '/icon.svg',
@@ -29,6 +29,11 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event
   const url = new URL(request.url)
+
+  // En desarrollo NO interceptamos nada: los chunks de /_next/static/ no
+  // llevan hash de contenido en dev, y servirlos Cache-First hacía que la
+  // hidratación pintara UI vieja sobre HTML nuevo tras cada cambio.
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') return
 
   // Skip non-GET, API calls, and external requests
   if (request.method !== 'GET') return
@@ -73,8 +78,10 @@ self.addEventListener('fetch', (event) => {
         .catch(() => caches.match(request).then(cached => {
           if (cached) return cached
           return caches.match('/').then(home => home || new Response(
-            '<html><body style="font-family:Georgia;text-align:center;padding:4rem 2rem;color:#2a1a08;background:#f5ecd5"><h1>Sin conexión</h1><p>Visita una playa con conexión y su ficha quedará guardada para consultarla offline.</p></body></html>',
-            { headers: { 'Content-Type': 'text/html' } }
+            '<html lang="es"><head><meta charset="utf-8"></head><body style="font-family:Georgia;text-align:center;padding:4rem 2rem;color:#2a1a08;background:#f5ecd5"><h1>Sin conexión</h1><p>Visita una playa con conexión y su ficha quedará guardada para consultarla offline.</p></body></html>',
+            // charset OBLIGATORIO: sin él el navegador decodifica en
+            // windows-1252 y muestra "Sin conexiÃ³n" (mojibake).
+            { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
           ))
         }))
     )

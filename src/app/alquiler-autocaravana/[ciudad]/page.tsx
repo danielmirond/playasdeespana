@@ -123,6 +123,18 @@ export default async function CamperCityPage({ params }: Props) {
           </div>
         </section>
 
+        {/* GUÍA LOCAL: párrafos únicos por ciudad (logística real de
+            recogida, salida, pernocta y temporada). Es el contenido que
+            diferencia esta página de una plantilla. */}
+        {c.guia && c.guia.length > 0 && (
+          <section style={{ marginBottom: '2.5rem', maxWidth: 720 }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--ink)', margin: '0 0 .9rem' }}>Consejos locales para tu ruta desde {c.ciudad}</h2>
+            {c.guia.map((p, i) => (
+              <p key={i} style={{ color: 'var(--ink)', lineHeight: 1.7, fontSize: '.95rem', margin: i === c.guia!.length - 1 ? 0 : '0 0 1rem' }}>{p}</p>
+            ))}
+          </section>
+        )}
+
         {/* FOSO: PLAYAS REALES CERCANAS (con parking) + ÁREAS */}
         <section style={{ marginBottom: '2.5rem', background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 10, padding: '1.25rem 1.4rem' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 700, color: 'var(--ink)', margin: '0 0 .6rem' }}>Playas con parking más cercanas a {c.ciudad}</h2>

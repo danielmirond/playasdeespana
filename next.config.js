@@ -147,6 +147,16 @@ const nextConfig = {
       { source: '/playas-secretas',             destination: '/calas-secretas',     permanent: true },
       { source: '/calas-con-encanto',           destination: '/playas-paradisiacas', permanent: true },
 
+      // Barcos: Barcelona y Valencia estaban bajo costas que no les
+      // corresponden (Costa Brava / Costa Blanca). Corregida la taxonomía,
+      // las URLs canónicas cambian → 301 de las antiguas.
+      { source: '/alquiler-barco/costas/costa-brava/provincias/barcelona/:rest*',  destination: '/alquiler-barco/costas/costa-de-barcelona/provincias/barcelona/:rest*',  permanent: true },
+      { source: '/alquiler-barco/costas/costa-blanca/provincias/valencia/:rest*',  destination: '/alquiler-barco/costas/costa-de-valencia/provincias/valencia/:rest*',  permanent: true },
+      { source: '/alquiler-barco/costas/costa-brava/provincias/barcelona',  destination: '/alquiler-barco/costas/costa-de-barcelona/provincias/barcelona',  permanent: true },
+      { source: '/alquiler-barco/costas/costa-blanca/provincias/valencia',  destination: '/alquiler-barco/costas/costa-de-valencia/provincias/valencia',  permanent: true },
+      { source: '/en/boat-rental/coasts/costa-brava/provinces/barcelona/:rest*', destination: '/en/boat-rental/coasts/costa-de-barcelona/provinces/barcelona/:rest*', permanent: true },
+      { source: '/en/boat-rental/coasts/costa-blanca/provinces/valencia/:rest*', destination: '/en/boat-rental/coasts/costa-de-valencia/provinces/valencia/:rest*', permanent: true },
+
       // Slugs OSM → MITECO canónicos para Bandera Azul (dinámicos, generados
       // por scripts/sync-playas-miteco.js).
       ...loadSlugRedirects(),

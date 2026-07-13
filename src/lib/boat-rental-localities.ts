@@ -67,7 +67,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/mallorca',
     googleTrendsVolume: 77,
     description:
-      'La mayor isla de Baleares ofrece 838 barcos disponibles desde €120/día. Navega por calas escondidas, fondeos naturales y playas de arena blanca.',
+      'La mayor isla de Baleares: calas de agua turquesa, fondeos naturales y puertos en toda la costa. Alquila barco desde €120/día y navega de Cala Lliteres a Es Trenc.',
 
     beaches: [
       {
@@ -94,7 +94,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
       },
       {
         name: 'Sa Calobra',
-        distance: '90 min Costa Brava',
+        distance: '90 min desde Port de Sóller',
         description: 'Cañón marino espectacular, solo accesible en barco'
       }
     ],
@@ -133,7 +133,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     },
 
     regulations: [
-      'AMP Montgrí: No fondear a <60m profundidad',
+      'Posidonia: prohibido fondear sobre praderas en Baleares (Decreto 25/2018) — usa boyas o arena',
       'Pesca prohibida en reserva marina',
       'Temporada alta: Julio-Agosto (40% más caro)',
       'Depósito caución: €500-€1000 típico',
@@ -185,7 +185,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/ibiza',
     googleTrendsVolume: 71,
     description:
-      'Isla cosmopolita con 104 veleros y 317 barcos desde €200/día. Fondeos en Es Vedrà, Cala Salada, y calas nudistas protegidas.',
+      'Es Vedrà, calas protegidas y atardeceres míticos. Alquila barco en Ibiza desde €150/día, con o sin licencia, y fondea en Cala Salada o Cala Conta.',
 
     beaches: [
       {
@@ -304,7 +304,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/menorca',
     googleTrendsVolume: 87,
     description:
-      'Isla UNESCO con 264 barcos desde €110/día. Fondeos en cala Galdana, Son Bou, y calas vírgenes al este.',
+      'Reserva de la Biosfera con las calas más vírgenes de Baleares. Alquila barco desde €110/día y fondea en Cala Galdana, Son Bou o Macarella.',
 
     beaches: [
       {
@@ -416,14 +416,14 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
   },
 
   barcelona: {
-    coast: 'Costa Brava',
+    coast: 'Costa de Barcelona',
     province: 'Barcelona',
     locality: 'Barcelona',
     slug: 'barcelona',
     samboatUrl: '/alquiler-barco/barcelona',
     googleTrendsVolume: 51,
     description:
-      'Ciudad costera cosmopolita. Alquila barcos desde €100/día. Vela por la Montjuïc, playas urbanas, y calas de Sitges/Castelldefels.',
+      'Alquila barco en Barcelona desde €100/día: salidas del Port Olímpic y el Port Vell, costa del Garraf y escapadas a Sitges y Castelldefels.',
 
     beaches: [
       {
@@ -541,7 +541,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/alicante',
     googleTrendsVolume: 25,
     description:
-      'Puerta a Costa Blanca. 35 barcos desde €100/día. Fondeos en Tabarca, Benidorm, y calas de Jávea.',
+      'Puerta sur de la Costa Blanca: la isla de Tabarca, calas de roca y puertos deportivos con recogida fácil. Alquila barco desde €100/día.',
 
     beaches: [
       {
@@ -653,14 +653,14 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
 
   // ===== COSTA BLANCA: VALENCIA =====
   valencia: {
-    coast: 'Costa Blanca',
+    coast: 'Costa de Valencia',
     province: 'Valencia',
     locality: 'Valencia',
     slug: 'valencia',
     samboatUrl: '/alquiler-barco/valencia',
     googleTrendsVolume: 35,
     description:
-      'La capital de la Costa Blanca ofrece 156 barcos desde €95/día. Navega por playas urbanas, islas remotas y lagoons protegidas.',
+      'Salida desde la Marina de València: playas urbanas, la costa de la Albufera y jornadas de vela frente a la ciudad. Alquila barco desde €95/día.',
 
     beaches: [
       {
@@ -779,7 +779,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/mallorca/palma',
     googleTrendsVolume: 35,
     description:
-      'Capital de Mallorca con 312 barcos disponibles desde €115/día. Puerto principal, calas urbanas y acceso a fondeos mediterráneos.',
+      'La bahía de Palma es el gran puerto náutico de Baleares: recogida fácil, calas urbanas y la costa suroeste a un paso. Barcos desde €115/día.',
 
     beaches: [
       {
@@ -896,7 +896,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/mallorca/alcudia',
     googleTrendsVolume: 28,
     description:
-      'Norte de Mallorca con 156 barcos desde €110/día. Bahía protegida, fondeos seguros, playas de familia, parque marino protegido.',
+      'La gran bahía protegida del norte de Mallorca: aguas someras, fondeos seguros y ambiente familiar. Alquila barco desde €110/día.',
 
     beaches: [
       {
@@ -1014,7 +1014,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/mallorca/pollenca',
     googleTrendsVolume: 22,
     description:
-      'Noroeste Mallorca, 89 barcos desde €105/día. Bahía semicerrada, calas pinares, fondeo ultra protegido, poco turismo.',
+      'Bahía semicerrada al pie de la Tramuntana: fondeo resguardado, calas de pinar y poco bullicio. Alquila barco desde €105/día.',
 
     beaches: [
       {
@@ -1133,7 +1133,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/tossa-de-mar',
     googleTrendsVolume: 32,
     description:
-      'Costa Brava centro con 67 barcos desde €120/día. Pueblo amurallado medieval, calas pinares, fondeos seguros, belleza escénica.',
+      'La única villa amurallada frente al mar de la Costa Brava: calas de pinar y fondeos a pie de castillo. Alquila barco desde €120/día.',
 
     beaches: [
       {
@@ -1252,7 +1252,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/costa-brava',
     googleTrendsVolume: 45,
     description:
-      'Costa Brava completa: 400+ barcos desde €100/día. Acantilados espectaculares, calas remotas, snorkel premium, buceo avanzado.',
+      'De Blanes a Cadaqués: acantilados, calas remotas y la mejor agua para snorkel del Mediterráneo catalán. Alquila barco desde €100/día.',
 
     beaches: [
       {
@@ -1373,7 +1373,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/lloret-de-mar',
     googleTrendsVolume: 38,
     description:
-      'Costa Brava norte con 89 barcos desde €125/día. Calas remotas, snorkel clase mundial, acantilados espectaculares, fondeos vírgenes.',
+      'Costa Brava sur: calas encadenadas como Cala Banys y Canyelles a minutos del puerto. Alquila barco desde €125/día.',
 
     beaches: [
       {
@@ -1493,7 +1493,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/tenerife',
     googleTrendsVolume: 45,
     description:
-      'Mayor isla Canarias con 156 barcos desde €130/día. Vistas Teide, calas volcánicas, fondeos en bahías protegidas, aguas cálidas todo año.',
+      'Aguas cálidas todo el año, cetáceos frente a Los Gigantes y calas volcánicas. Alquila barco en Tenerife desde €130/día.',
 
     beaches: [
       {
@@ -1612,7 +1612,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/malaga',
     googleTrendsVolume: 42,
     description:
-      'Puerta Costa del Sol con 234 barcos desde €110/día. Calas mediterráneas, Marbella cercano, fondeos protegidos, clima subtropical.',
+      'Base cómoda de la Costa del Sol: recogida en la ciudad y ruta hacia Nerja o Marbella. Alquila barco desde €110/día.',
 
     beaches: [
       {
@@ -1731,7 +1731,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     samboatUrl: '/alquiler-barco/marbella',
     googleTrendsVolume: 38,
     description:
-      'Resort de lujo Costa del Sol con 156 barcos desde €120/día. Playas exclusivas, fondeos premium, calas rocosas, ambiente sofisticado.',
+      'Puerto Banús y las calas de roca de la Costa del Sol más exclusiva. Alquila barco desde €120/día, con patrón o sin licencia.',
 
     beaches: [
       {

@@ -23,6 +23,10 @@ export interface CamperCity {
   /** Volumen mensual de la mejor keyword "alquiler autocaravana(s) [ciudad]" (Semrush). */
   volMes: number
   intro: string
+  /** Guía local: 2-3 párrafos únicos por ciudad (logística real de recogida,
+   *  salida, pernocta y temporada). Nada de plantilla: cada ciudad cuenta lo
+   *  suyo. Se renderiza como sección "Consejos locales" en la página. */
+  guia?: string[]
   // Precios orientativos €/día por temporada (autocaravana capuchina estándar)
   precios: { baja: string; media: string; alta: string }
   recogida: string        // dónde se recoge (aeropuerto / centro)
@@ -71,6 +75,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Centro peninsular', aeropuerto: 'MAD · Adolfo Suárez Madrid-Barajas', zbe: true,
     camperdaysPath: 'campervans-spain/madrid.html', volMes: 2900,
     intro: 'Madrid es el mayor punto de recogida de autocaravanas y campers de España y el mejor campamento base para salir hacia cualquier costa. Compara precios y recoge en el centro o en Barajas.',
+    guia: [
+      'Madrid tiene una ventaja que ninguna ciudad costera puede ofrecer: eliges costa según el viento. Con la autocaravana recogida un viernes por la tarde, la A-3 te planta en las playas de Valencia en tres horas y media; si el Levante sopla fuerte, giras el plan por la A-5 hacia Cádiz o subes la A-1 al Cantábrico. Los alquileres madrileños lo saben y por eso el parque de vehículos es el mayor de España: conviene reservar con 2-3 meses de antelación para puentes y agosto, pero fuera de pico hay más oferta y mejores precios que en la costa.',
+      'Dos consejos de salida: evita recoger un viernes de operación salida (la M-30 y la A-3 entre las 15h y las 21h añaden dos horas al viaje) y planea la primera noche a una hora de Madrid, no a cinco. Las áreas de la sierra (Buitrago, Rascafría) o los embalses de la A-3 (Alarcón) son primera etapa perfecta: pruebas el vehículo con luz y llegas a la costa descansado.',
+    ],
     precios: { baja: '85-120 €/día', media: '110-150 €/día', alta: '140-210 €/día' },
     recogida: 'Recogida en estaciones del centro y cerca del aeropuerto de Barajas (MAD).',
     rutas: [
@@ -105,6 +113,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Costa Brava / Maresme', aeropuerto: 'BCN · Josep Tarradellas Barcelona-El Prat', zbe: true,
     camperdaysPath: 'campervans-spain/barcelona.html', volMes: 2900,
     intro: 'Barcelona combina alta demanda y una costa espectacular a un paso: la Costa Brava. Compara autocaravanas y campers y sal a descubrir calas en cuestión de minutos.',
+    guia: [
+      'En Barcelona la decisión clave es la dirección: hacia el norte, la Costa Brava concentra las calas y también las áreas más caras y llenas de Cataluña en verano; hacia el sur, el Delta del Ebro ofrece pernocta tranquila y sin masificación a dos horas. Si tu plan es julio o agosto y no has reservado áreas de la Costa Brava, el sur es la jugada inteligente.',
+      'La ZBE de las Rondas no debería preocuparte —los vehículos de alquiler llevan etiqueta C o ECO—, pero sí la hora de salida: cruzar Barcelona un viernes entre las 16h y las 20h puede costarte hora y media. Recoge por la mañana o sal el sábado temprano. Y una particularidad local: muchos municipios costeros catalanes prohíben pernoctar en el paseo marítimo y lo vigilan; usa áreas señalizadas, la multa ronda los 200 €.',
+    ],
     precios: { baja: '90-130 €/día', media: '120-160 €/día', alta: '150-220 €/día' },
     recogida: 'Estaciones en la ciudad y cerca del aeropuerto de El Prat (BCN).',
     rutas: [
@@ -139,6 +151,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Costa de Valencia / Costa Blanca', aeropuerto: 'VLC · Valencia', zbe: false,
     camperdaysPath: 'campervans-spain/valencia.html', volMes: 1900,
     intro: 'Valencia es recogida cómoda, clima ideal y playa a pie de ciudad. Compara autocaravanas y campers para recorrer la Costa Blanca y la Albufera.',
+    guia: [
+      'Valencia es la recogida más cómoda del Mediterráneo para estrenarse: en veinte minutos desde cualquier punto de entrega estás aparcado frente a El Saler, con la Albufera detrás y la ciudad aún visible. Esa primera noche fácil, sin peajes ni puertos de montaña, es oro si nunca has conducido una autocaravana.',
+      'La pernocta dentro del Parque Natural de la Albufera está regulada: no acampes fuera de las áreas habilitadas (El Palmar y El Saler tienen opciones) porque la vigilancia es real en verano. Hacia el sur, la N-332 encadena Cullera, Gandía y Dénia sin un solo peaje; hacia el norte, la costa de Castellón (Benicàssim, Peñíscola) suele tener sitio en áreas cuando la Costa Blanca ya está llena.',
+    ],
     precios: { baja: '80-115 €/día', media: '105-145 €/día', alta: '135-200 €/día' },
     recogida: 'Estaciones en la ciudad y cerca del aeropuerto de Manises (VLC).',
     rutas: [
@@ -167,6 +183,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Andalucía occidental', aeropuerto: 'SVQ · Sevilla', zbe: false,
     camperdaysPath: 'campervans-spain/seville.html', volMes: 1600,
     intro: 'Sevilla es la puerta de Andalucía en autocaravana: Costa de la Luz, Doñana y pueblos blancos a un paso. Compara autocaravanas y campers y diseña tu ruta.',
+    guia: [
+      'Desde Sevilla se sale temprano o se sufre: en julio y agosto el termómetro pasa de 40° a mediodía y la autocaravana estacionada se convierte en un horno. El patrón local es salir al amanecer, hacer los 90 minutos hasta la Costa de la Luz de una tirada y pasar las horas centrales ya en la playa con levante o poniente.',
+      'La Costa de la Luz tiene dos caracteres: con poniente, Conil, El Palmar y Zahara son el paraíso; con levante fuerte, la arena vuela y el día de playa se arruina — mira el viento antes de elegir destino, no después. Las áreas de Conil y El Palmar se llenan a diario en agosto; Barbate y Zahora son el plan B con hueco. Y Doñana merece el desvío: el área de El Rocío al atardecer, con las marismas delante, es de las estampas grandes del sur.',
+    ],
     precios: { baja: '80-115 €/día', media: '105-145 €/día', alta: '135-195 €/día' },
     recogida: 'Estaciones en la ciudad y cerca del aeropuerto de Sevilla (SVQ).',
     rutas: [
@@ -195,6 +215,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Costa del Sol', aeropuerto: 'AGP · Málaga-Costa del Sol', zbe: false,
     camperdaysPath: 'campervans-spain/malaga.html', volMes: 1300,
     intro: 'Málaga y la Costa del Sol son sinónimo de sol, playa y áreas bien preparadas. Compara autocaravanas y campers y recorre la costa de cala en cala.',
+    guia: [
+      'Málaga es la única recogida española pensada para el viajero que aterriza: las estaciones están junto al aeropuerto (AGP) y en una hora desde la cinta de equipajes puedes estar conduciendo por la A-7. Si vienes de fuera, pide la recogida con kit de ropa de cama incluido y haz la primera compra en el Mercadona de El Viso antes de salir — luego la costa es más cara.',
+      'La Costa del Sol es también el gran destino europeo de invierno: de noviembre a marzo las áreas se llenan de matrículas alemanas y nórdicas en larga estancia, así que si tu viaje es invernal reserva área con más antelación que en verano. En temporada alta, huye del tramo Fuengirola-Marbella para pernoctar (saturado y caro) y tira hacia el este: Nerja, La Herradura y la Costa Tropical tienen mejores calas y más sitio.',
+    ],
     precios: { baja: '85-120 €/día', media: '110-150 €/día', alta: '140-205 €/día' },
     recogida: 'Estaciones en la ciudad y junto al aeropuerto de Málaga (AGP).',
     rutas: [
@@ -225,6 +249,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Costa Vasca / Norte', aeropuerto: 'BIO · Bilbao', zbe: true,
     camperdaysPath: 'campervans-spain/northern-spain.html', volMes: 720,
     intro: 'Bilbao es una de las recogidas que más crece y la puerta a la Costa Vasca y la cornisa cantábrica. Compara autocaravanas y campers y recorre el verde norte.',
+    guia: [
+      'El norte se conduce distinto: distancias cortas, curvas y un tiempo que cambia tres veces al día. Desde Bilbao, la costa vasca entera cabe en una hora de radio —Sopelana, Bakio, Mundaka, Lekeitio— y esa es su gran baza: si llueve en Bizkaia, en cuarenta minutos estás probando suerte en Zarautz o San Sebastián.',
+      'Dos realidades locales: los pueblos costeros vascos restringen el aparcamiento de autocaravanas en verano (altura limitada en parkings de playa, vigilancia activa) y las áreas son pequeñas y se llenan pronto — la de Sopelana o la de Getxo a mediodía ya no tienen hueco en agosto. Reserva donde se pueda y llega antes de las 12h donde no. La recompensa: pintxos, playas de surf y el Cantábrico verde que no necesita filtro.',
+    ],
     precios: { baja: '85-120 €/día', media: '110-150 €/día', alta: '140-205 €/día' },
     recogida: 'Estaciones en la ciudad y cerca del aeropuerto de Bilbao (BIO).',
     rutas: [
@@ -244,6 +272,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Costa Blanca', aeropuerto: 'ALC · Alicante-Elche', zbe: false,
     camperdaysPath: null, volMes: 1000,
     intro: 'Alicante y la Costa Blanca: sol casi todo el año, calas y áreas bien preparadas. Compara autocaravanas y campers para tu ruta por el Mediterráneo.',
+    guia: [
+      'Alicante parte la Costa Blanca en dos planes distintos: hacia el norte, las calas de roca y agua transparente (Jávea, Moraira, Calpe) donde las áreas escasean y se reservan; hacia el sur, los arenales infinitos y las salinas (Santa Pola, La Marina, Torrevieja) con más sitio y mejores precios. Elegir dirección antes de recoger el vehículo te ahorra kilómetros en vacío.',
+      'De octubre a abril esta costa es el cuartel de invierno de media Europa: las áreas del sur alicantino funcionan casi como campings de larga estancia, con ambiente propio y tarifas mensuales. En verano la película cambia: julio y agosto saturan todo, y la jugada es pernoctar tierra adentro (Guadalest, el embalse de Amadorio) y bajar a la cala por la mañana temprano, cuando aún hay parking.',
+    ],
     precios: { baja: '80-115 €/día', media: '105-145 €/día', alta: '135-195 €/día' },
     recogida: 'Estaciones en la ciudad y junto al aeropuerto de Alicante-Elche (ALC).',
     rutas: [
@@ -260,6 +292,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Valle del Ebro / acceso Pirineos', aeropuerto: 'ZAZ · Zaragoza', zbe: false,
     camperdaysPath: null, volMes: 1300,
     intro: 'Zaragoza es base estratégica en el centro del cuadrante noreste: Pirineos, costa mediterránea y norte a tiro. Compara autocaravanas y campers.',
+    guia: [
+      'Zaragoza es la base más barata del cuadrante noreste y un secreto logístico: a dos horas del Pirineo, a dos horas y media de la Costa Dorada y con la AP-2/AP-68 ya sin peaje. El mismo alquiler que en Barcelona cuesta menos y sale a carretera abierta sin cruzar ninguna área metropolitana.',
+      'En verano, la ruta lógica es el Pirineo: Ordesa, Benasque y los valles a 20° cuando el Ebro está a 38°. El cierzo es el factor local a respetar — con rachas fuertes en el valle, una autocaravana alta se conduce incómoda por la AP-68; si el parte lo anuncia, elige la salida hacia Huesca. Las áreas pirenaicas (Aínsa, Biescas, Panticosa) son de las mejor equipadas de España y en agosto conviene llegar antes del mediodía.',
+    ],
     precios: { baja: '80-115 €/día', media: '105-145 €/día', alta: '135-195 €/día' },
     recogida: 'Estaciones en la ciudad y cerca del aeropuerto de Zaragoza (ZAZ).',
     rutas: [
@@ -276,6 +312,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Sierra Nevada / Costa Tropical', aeropuerto: 'GRX · Granada-Jaén', zbe: false,
     camperdaysPath: null, volMes: 720,
     intro: 'Granada combina Sierra Nevada y la Costa Tropical en pocos kilómetros. Compara autocaravanas y campers para una ruta de montaña y mar.',
+    guia: [
+      'Granada permite el viaje que ninguna otra ciudad ofrece: desayunar a 1.200 metros con Sierra Nevada delante y comer frente al mar en la Costa Tropical, una hora exacta por la A-44. Esa doble naturaleza marca el equipaje — incluso en pleno agosto, las noches en el altiplano y la Alpujarra refrescan hasta pedir manta.',
+      'La Costa Tropical (Salobreña, Almuñécar, La Herradura) es la gran infravalorada del sur: calas de cantos, agua limpia y áreas con hueco cuando Málaga revienta. Si sigues hacia el este, Cabo de Gata está a dos horas: allí la pernocta libre está prohibida y controlada en verano — usa las áreas de San José o Los Escullos y madruga para las calas, que cierran el acceso en coche a media mañana.',
+    ],
     precios: { baja: '80-115 €/día', media: '105-145 €/día', alta: '135-195 €/día' },
     recogida: 'Estaciones en la ciudad y cerca del aeropuerto de Granada (GRX).',
     rutas: [
@@ -292,6 +332,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Mar Menor / Costa Cálida', aeropuerto: 'RMU · Región de Murcia (Corvera)', zbe: false,
     camperdaysPath: null, volMes: 720,
     intro: 'Murcia es la puerta del Mar Menor y la Costa Cálida, con clima suave todo el año. Compara autocaravanas y campers y disfruta de calas y aguas tranquilas.',
+    guia: [
+      'Murcia es el plan familiar por excelencia: el Mar Menor a media hora, con agua caliente, sin olas y con fondo que cubre a los cincuenta metros — niños pequeños, cero sustos. Las áreas de Los Alcázares y Santiago de la Ribera están pensadas exactamente para ese público y en verano se reservan solas.',
+      'El contraste está a veinte minutos: Calblanque, el parque regional de calas vírgenes junto a Cartagena, restringe el acceso en coche en verano (lanzadera obligatoria en las horas centrales) — ve al amanecer o no vayas en agosto. Y un dato de conducción local: el calor de julio castiga; los desplazamientos largos, mejor a primera hora, y revisa la presión de los neumáticos, que el asfalto murciano en agosto quema.',
+    ],
     precios: { baja: '78-112 €/día', media: '100-140 €/día', alta: '130-190 €/día' },
     recogida: 'Estaciones en la ciudad y junto al aeropuerto de Corvera (RMU).',
     rutas: [
@@ -310,6 +354,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Costa Cantábrica / Picos de Europa', aeropuerto: 'OVD · Asturias', zbe: false,
     camperdaysPath: 'campervans-spain/northern-spain.html', volMes: 1300,
     intro: 'Asturias es el paraíso del autocaravanista: playas salvajes, Picos de Europa y aldeas con encanto. Compara autocaravanas y campers para recorrer el paraíso natural.',
+    guia: [
+      'Asturias es el destino soñado del autocaravanista y el más estricto con la acampada libre: pernoctar (dormir dentro, sin sacar nada) se tolera en muchos aparcamientos, pero acampar fuera de áreas está multado y vigilado, especialmente en las playas estrella como Gulpiyuri o Torimbia. La red de áreas municipales es excelente y barata — úsala.',
+      'El error clásico aquí es el exceso de ambición: las carreteras nacionales asturianas son lentas y hermosas, y 80 kilómetros de costa pueden ser dos horas de volante. Planifica por comarcas (oriente: Llanes-Ribadesella; centro: Gijón-Cudillero; occidente: Luarca-Tapia) en vez de saltar de punta a punta. Junio y septiembre dan los mejores días: luz larga, áreas con hueco y los Picos de Europa sin niebla de valle.',
+    ],
     precios: { baja: '85-120 €/día', media: '110-150 €/día', alta: '140-200 €/día' },
     recogida: 'Recogida en Oviedo/Gijón y cerca del aeropuerto de Asturias (OVD).',
     rutas: [
@@ -326,6 +374,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Rías Baixas y Altas', aeropuerto: 'SCQ · Santiago / LCG · A Coruña / VGO · Vigo', zbe: false,
     camperdaysPath: 'campervans-spain/northern-spain.html', volMes: 880,
     intro: 'Galicia y sus rías: playas de arena blanca como As Catedrais o las Cíes, marisco y Camino de Santiago. Compara autocaravanas y campers para descubrir el noroeste.',
+    guia: [
+      'Galicia engaña en el mapa: las rías multiplican los kilómetros reales y lo que parece un salto de media hora son noventa minutos de curvas. La regla local es elegir una ría por etapa — Arousa, Pontevedra o Vigo — y agotarla, en lugar de perseguir toda la costa en una semana.',
+      'La tradición gallega de áreas portuarias gratuitas o casi (O Grove, Muros, Fisterra) sigue viva y es de lo mejor de viajar aquí, pero en agosto las Rías Baixas se llenan: ten plan B hacia la Costa da Morte, más salvaje y con sitio siempre. Para As Catedrais, recuerda que la visita en marea baja exige reserva previa en verano — mira la tabla de mareas antes de organizar el día, no después.',
+    ],
     precios: { baja: '85-120 €/día', media: '110-150 €/día', alta: '135-195 €/día' },
     recogida: 'Recogida en Santiago, A Coruña o Vigo y sus aeropuertos.',
     rutas: [
@@ -342,6 +394,10 @@ export const CAMPER_CITIES: CamperCity[] = [
     zona: 'Costa Cantábrica', aeropuerto: 'SDR · Santander', zbe: false,
     camperdaysPath: 'campervans-spain/northern-spain.html', volMes: 880,
     intro: 'Cantabria concentra playas, los Picos de Europa y pueblos como Santillana del Mar en poco espacio. Compara autocaravanas y campers para una ruta redonda.',
+    guia: [
+      'Cantabria es la comunidad que se puede viajar entera desde una sola base: de San Vicente de la Barquera a Castro Urdiales hay hora y media, y los Picos de Europa quedan a cuarenta minutos de la costa. Si te agobia mover el campamento cada noche, aquí puedes plantarte en un área céntrica (Santillana, Suances) y radiar.',
+      'Santander y su arco (Somo, Loredo, Langre) concentran la demanda de agosto y los precios; el occidente —Oyambre, Comillas, la ría de la Rabia— da las mismas playas con la mitad de gente. La acampada libre está prohibida y en las playas señeras se vigila; la red de áreas es corta pero suficiente si reservas. Con el sirimiri, la jugada local es girar hacia Fuente Dé: si llueve en la costa, muchas veces los Picos están despejados por el sur.',
+    ],
     precios: { baja: '85-120 €/día', media: '110-150 €/día', alta: '140-200 €/día' },
     recogida: 'Recogida en Santander y cerca del aeropuerto Seve Ballesteros (SDR).',
     rutas: [
