@@ -79,6 +79,66 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Cataluña (voz bicéfala) ─────
+  {
+    slug: 'cala-montjoi-roses-girona-elbulli-cierre-coche-verano',
+    category: 'curiosidades',
+    title: 'Cala Montjoi, Girona: la cala de elBulli cierra al coche de 10:30 a 16:30 en verano',
+    excerpt:
+      'La ensenada del restaurante más influyente del mundo tiene truco: en pleno verano no se entra en coche a media jornada, y no es de arena fina sino de grava y cantos. Cómo pisarla bien.',
+    heroAlt: 'Cala Montjoi en Roses, ensenada de grava entre tres colinas del Cap de Creus con agua transparente y barcos fondeados',
+    heroQuery: 'cala montjoi,roses,cove,costa brava',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-07-13T16:14:27Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/cataluna', label: 'Playas de Cataluña' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+      { href: '/playas-aguas-cristalinas', label: 'Playas de aguas cristalinas' },
+    ],
+    body: [
+      { t: 'p', html: 'Desde Roses, la GI-614 se retuerce hacia el sur durante siete kilómetros entre laderas de pizarra y matorral bajo, con el Mediterráneo que aparece y desaparece a la derecha en cada curva. Al final del descenso, tres colinas se abren y dejan ver una ensenada de agua transparente encajada en el Cap de Creus, el cabo más oriental de la península, donde la roca parece esculpida a golpes de viento. Es Cala Montjoi, y durante casi tres décadas fue el final del camino más famoso de la alta cocina del planeta.' },
+      { t: 'p', html: 'Porque aquí, en una masía a pie de playa, Ferran Adrià convirtió <strong>elBulli</strong> en el restaurante más influyente del mundo antes de cerrarlo en 2011, en la cima de su fama. El local no ha desaparecido: desde 2023 es <strong>elBulli1846</strong>, un espacio-museo de su fundación que se visita con reserva previa. Lo que casi nadie te cuenta es que llegar hasta esta cala en agosto no es tan sencillo como parece en la foto.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Empecemos por la letra pequeña que decide el viaje. Del <strong>15 de julio al 31 de agosto, el Ayuntamiento de Roses cierra el acceso rodado a Cala Montjoi entre las 10:30 y las 16:30</strong>: si no has bajado antes de media mañana, no entras en coche hasta media tarde. El aparcamiento es reducido y se completa temprano, así que la ventana real para llegar con vehículo en pleno verano es estrecha. Fuera de esas fechas y esas horas la carretera está abierta, pero sigue siendo un tramo de siete kilómetros de curvas que conviene tomar con calma.' },
+      { t: 'p', html: 'El segundo aviso es la arena, o más bien su ausencia. Montjoi es una cala de unos <strong>400 metros de grava gruesa mezclada con cantos</strong>, no la arena fina de postal: sin escarpines cuesta caminar hasta el agua y, para tumbarse, se agradece una colchoneta. A cambio, el agua es limpia y clara —la cala está dentro del <strong>Parque Natural del Cap de Creus</strong>, el primer parque marítimo-terrestre de Cataluña— y los fondos rocosos de los extremos dan buen snorkel. No esperes chiringuito de gran playa: los servicios son los de una cala, contados, y en temporada alta conviene bajar con agua y comida.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'La regla cabe en un horario: <strong>o llegas antes de las 10:30, o vas después de las 16:30</strong>, o subes a pie, en bici o en barco. A primera hora tienes la cala tranquila, el aparcamiento libre y la mejor luz. A partir de las cinco de la tarde, cuando reabre la carretera, la ensenada ya mira al oeste y encara uno de los mejores atardeceres del cabo. El mediodía de agosto es justo lo contrario: la hora en que no puedes entrar en coche y en la que más aprieta el sol sobre una playa casi sin sombra.' },
+      { t: 'p', html: 'Hay un detalle que el folleto olvida y que aquí juega a favor: las <strong>tres colinas que cierran la ensenada la resguardan de la tramuntana</strong>, el viento del norte que arruina tantos días en el Empordà. Cuando sopla fuerte y las playas abiertas de Roses se vuelven impracticables, Montjoi aguanta y es uno de los pocos fondeaderos seguros de la zona —de ahí que se llene de barcos—. Si aun así la encuentras a rebosar, sigue la misma carretera un poco más allá hasta <strong>Cala Jóncols</strong>: más remota, con un último tramo de pista peor, pero casi siempre más vacía.' },
+      { t: 'quote', text: 'No es una cala secreta ni un chiringuito perdido: es el patio de mar del restaurante más copiado del mundo, con horario de entrada y suelo de piedras. Saberlo cambia el plan.' },
+      { t: 'p', html: 'Así que Cala Montjoi no se descubre, se agenda. Elige la hora antes que el día, mete los escarpines en la mochila y bájala con la carretera abierta: al fondo te espera el mismo mar transparente que Adrià miraba mientras reinventaba la cocina, tres colinas que paran el viento y una ensenada que, a las siete de la tarde, se pone del color de la piedra dorada. El museo cierra con reserva; el atardecer, no.' },
+    ],
+    faq: [
+      { q: '¿Se puede entrar en coche a Cala Montjoi en verano?', a: 'Del 15 de julio al 31 de agosto el acceso rodado está cerrado entre las 10:30 y las 16:30. Hay que llegar antes de media mañana (el aparcamiento es pequeño y se llena) o esperar a media tarde. También se puede subir a pie, en bici o llegar en barco.' },
+      { q: '¿Se puede visitar elBulli en Cala Montjoi?', a: 'El restaurante de Ferran Adrià cerró en 2011. Desde 2023 el espacio es elBulli1846, un museo de su fundación que se visita con reserva previa; no es un restaurante ni una visita libre.' },
+      { q: '¿Cala Montjoi es de arena?', a: 'No del todo: es una cala de grava gruesa y cantos, no de arena fina. Conviene llevar escarpines para entrar al agua y una colchoneta o esterilla para estar cómodo. El agua, eso sí, es limpia y buena para el snorkel en los extremos rocosos.' },
+    ],
+    en: {
+      title: 'Cala Montjoi, Girona: the cove of elBulli closes to cars from 10.30 to 16.30 in summer',
+      excerpt: 'The cove of the world’s most influential restaurant comes with a catch: in high summer you can’t drive in during the middle of the day, and it’s coarse gravel and pebbles, not fine sand. How to do it right.',
+      related: [
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+        { href: '/en/magazine', label: 'Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'From Roses, the GI-614 twists seven kilometres south through slopes of slate and low scrub, the Mediterranean flashing in and out of view on the right at every bend. At the bottom of the descent three hills part to reveal a cove of clear water wedged into the Cap de Creus, the easternmost cape of the peninsula, where the rock looks carved by the wind. This is Cala Montjoi, and for almost three decades it was the end of the most famous road in the whole of haute cuisine.' },
+        { t: 'p', html: 'Because here, in a farmhouse at the water’s edge, Ferran Adrià turned <strong>elBulli</strong> into the most influential restaurant in the world before closing it in 2011, at the height of its fame. The building hasn’t vanished: since 2023 it has been <strong>elBulli1846</strong>, a museum run by his foundation, visited by prior booking. What almost nobody tells you is that getting to this cove in August is not as simple as the photo suggests.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'Start with the small print that decides the trip. From <strong>15 July to 31 August, Roses council closes road access to Cala Montjoi between 10.30 and 16.30</strong>: if you haven’t driven down by mid-morning, you can’t get in by car until mid-afternoon. The car park is small and fills early, so the real window to arrive with a vehicle in high summer is narrow. Outside those dates and hours the road is open, but it’s still seven kilometres of bends best taken slowly.' },
+        { t: 'p', html: 'The second warning is the sand, or rather the lack of it. Montjoi is a cove of about <strong>400 metres of coarse gravel mixed with pebbles</strong>, not the fine sand of the postcard: without water shoes it’s hard to walk to the water, and for lying down an air bed helps. In return the water is clean and clear — the cove sits inside the <strong>Cap de Creus Natural Park</strong>, Catalonia’s first land-and-sea park — and the rocky ground at either end is good for snorkelling. Don’t expect a big-beach bar: the services are those of a cove, minimal, and in peak season it’s wise to bring water and food.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'The rule fits into a timetable: <strong>either arrive before 10.30, or come after 16.30</strong>, or walk, cycle or come by boat. First thing you get the cove quiet, the car park free and the best light. From five in the afternoon, when the road reopens, the bay already faces west and lines up one of the finest sunsets on the cape. Midday in August is exactly the opposite: the hour when you can’t drive in and when the sun is hardest on a beach with almost no shade.' },
+        { t: 'p', html: 'There’s a detail the brochure forgets that here works in your favour: the <strong>three hills enclosing the cove shelter it from the tramuntana</strong>, the northerly wind that wrecks so many days in the Empordà. When it blows hard and the open beaches of Roses turn unusable, Montjoi holds and is one of the few safe anchorages around — which is why it fills with boats. If you still find it packed, follow the same road a little further to <strong>Cala Jóncols</strong>: more remote, with a rougher final track, but almost always emptier.' },
+        { t: 'quote', text: 'It’s no secret cove or lost beach bar: it’s the sea-facing yard of the most copied restaurant in the world, with opening hours and a floor of stones. Knowing that changes the plan.' },
+        { t: 'p', html: 'So Cala Montjoi isn’t discovered, it’s scheduled. Pick the hour before the day, pack the water shoes and drive down while the road is open: waiting at the far end is the same clear sea Adrià looked at while he reinvented cooking, three hills that stop the wind, and a bay that, at seven in the evening, turns the colour of golden stone. The museum closes by appointment; the sunset doesn’t.' },
+      ],
+      faq: [
+        { q: 'Can you drive into Cala Montjoi in summer?', a: 'From 15 July to 31 August road access is closed between 10.30 and 16.30. You need to arrive before mid-morning (the car park is small and fills up) or wait until mid-afternoon. You can also walk in, cycle or come by boat.' },
+        { q: 'Can you visit elBulli at Cala Montjoi?', a: 'Ferran Adrià’s restaurant closed in 2011. Since 2023 the space has been elBulli1846, a museum run by his foundation, visited by prior booking; it is not a restaurant or a free walk-in.' },
+        { q: 'Is Cala Montjoi sandy?', a: 'Not really: it’s a cove of coarse gravel and pebbles, not fine sand. Bring water shoes to get into the water and an air bed or mat to be comfortable. The water, though, is clean and good for snorkelling at the rocky ends.' },
+      ],
+    },
+  },
   // ───── Diario de playas · País Vasco (voz bicéfala) ─────
   {
     slug: 'playa-de-laga-ibarrangelu-bizkaia-bandera-roja-ogono',
