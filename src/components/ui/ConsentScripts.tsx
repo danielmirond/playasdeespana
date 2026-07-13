@@ -48,6 +48,17 @@ export default function ConsentScripts() {
                 if (href.includes('booking.com') || href.includes('expedia')) gtag('event', 'hotel_click', { provider: href.includes('booking') ? 'booking' : 'expedia' });
                 if (href.includes('civitatis') || href.includes('getyourguide')) gtag('event', 'activity_click', { provider: href.includes('civitatis') ? 'civitatis' : 'gyg' });
                 if (href.includes('thefork') || href.includes('eltenedor')) gtag('event', 'restaurant_click');
+                // Awin (SamBoat barcos + Camperdays autocaravanas): el clickref
+                // codifica la superficie (p.ej. playasdeespana_camper_madrid),
+                // asi que un solo evento permite medir conversion por pagina.
+                if (href.includes('awin1.com')) {
+                  var ref = (href.match(/clickref=([^&]*)/) || [])[1] || '';
+                  var prog = href.includes('camperdays') ? 'camperdays' : (href.includes('samboat') ? 'samboat' : 'awin');
+                  gtag('event', 'affiliate_clickout', { program: prog, clickref: ref, page: location.pathname });
+                }
+                if (href.includes('amazon.') && href.includes('tag=')) {
+                  gtag('event', 'affiliate_clickout', { program: 'amazon', page: location.pathname });
+                }
                 if (href.includes('parclick')) gtag('event', 'parking_click');
                 if (href.includes('google.com/maps/dir')) gtag('event', 'route_open');
                 if (el.getAttribute('aria-pressed') !== null) gtag('event', 'filter_click', { filter: el.textContent });

@@ -33,17 +33,21 @@ export default function MobileNav() {
 
   const closeMenu = () => setIsOpen(false)
 
+  // Mismo orden y etiquetas que la nav de escritorio (auditoría jul-2026):
+  // entra el clúster vivo (Banderas hoy) y los alquileres con etiqueta corta.
   const menuItems = [
     { href: isEn ? '/en' : '/', label: isEn ? 'Home' : 'Inicio' },
     { href: isEn ? '/en/communities' : '/comunidades', label: isEn ? 'Communities' : 'Comunidades' },
-    { href: isEn ? '/en/blue-flag' : '/banderas-azules', label: isEn ? 'Blue Flag' : 'Banderas Azules' },
+    ...(isEn
+      ? [{ href: '/en/blue-flag', label: 'Blue Flag' }]
+      : [{ href: '/banderas-hoy', label: 'Banderas hoy' }]),
+    { href: isEn ? '/en/boat-rental' : '/alquiler-barco', label: isEn ? 'Boats' : 'Barcos' },
+    { href: isEn ? '/en/campervan-rental' : '/alquiler-autocaravana', label: isEn ? 'Campervans' : 'Autocaravanas' },
     ...(isEn ? [] : [
-      { href: '/alquiler-barco', label: 'Alquiler de Barcos' },
       { href: '/playas-perros', label: 'Perros' },
-      { href: '/playas-nudistas', label: 'Nudistas' },
       { href: '/surf', label: 'Surf' },
-      { href: '/rutas', label: 'Rutas' },
     ]),
+    { href: isEn ? '/en/magazine' : '/magazine', label: 'Magazine' },
     { href: '/mapa', label: isEn ? 'Map' : 'Mapa' },
   ]
 

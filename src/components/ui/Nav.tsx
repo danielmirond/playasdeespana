@@ -41,16 +41,19 @@ export default function Nav() {
         <a href="#main-content" className={styles.skipLink}>
           {isEn ? 'Skip to main content' : 'Saltar al contenido principal'}
         </a>
+        {/* 9 ítems de etiqueta corta (auditoría jul-2026): "Alquiler de
+            Barcos" partía en 3 líneas en desktop, y el clúster vivo
+            (banderas-hoy) no tenía hueco pese a ser el diferencial. Banderas
+            Azules, Nudistas y Rutas siguen enlazados desde footer y hubs. */}
         <nav className={styles.links} aria-label={isEn ? 'Main navigation' : 'Navegación principal'}>
           <Link href={isEn ? '/en' : '/'} className={styles.link}>{isEn ? 'Home' : 'Inicio'}</Link>
           <Link href={isEn ? '/en/communities' : '/comunidades'} className={styles.link}>{isEn ? 'Communities' : 'Comunidades'}</Link>
-          <Link href={isEn ? '/en/blue-flag' : '/banderas-azules'} className={styles.link}>{isEn ? 'Blue Flag' : 'Banderas Azules'}</Link>
-          <Link href={isEn ? '/en/boat-rental' : '/alquiler-barco'} className={styles.link}>{isEn ? 'Boat Rental' : 'Alquiler de Barcos'}</Link>
+          {!isEn && <Link href="/banderas-hoy" className={styles.link}>Banderas hoy</Link>}
+          {isEn && <Link href="/en/blue-flag" className={styles.link}>Blue Flag</Link>}
+          <Link href={isEn ? '/en/boat-rental' : '/alquiler-barco'} className={styles.link}>{isEn ? 'Boats' : 'Barcos'}</Link>
           <Link href={isEn ? '/en/campervan-rental' : '/alquiler-autocaravana'} className={styles.link}>{isEn ? 'Campervans' : 'Autocaravanas'}</Link>
           {!isEn && <Link href="/playas-perros" className={styles.link}>Perros</Link>}
-          {!isEn && <Link href="/playas-nudistas" className={styles.link}>Nudistas</Link>}
           {!isEn && <Link href="/surf" className={styles.link}>Surf</Link>}
-          {!isEn && <Link href="/rutas" className={styles.link}>Rutas</Link>}
           <Link href={isEn ? '/en/magazine' : '/magazine'} className={styles.link}>Magazine</Link>
           <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
         </nav>
