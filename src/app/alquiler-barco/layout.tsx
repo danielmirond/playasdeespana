@@ -2,14 +2,13 @@ import type { Metadata } from 'next'
 import FloatingBoatCTA from '@/components/FloatingBoatCTA'
 
 export const metadata: Metadata = {
-  title: 'Alquiler de Barcos en España | Playasdeespana.es',
-  description: 'Alquila barcos en todas las costas españolas. Fondeos seguros, playas hermosas, precios competitivos. Reserva con SamBoat.',
-  keywords: 'alquiler barcos España, alquiler catamaran, alquiler yate, barcos vela',
+  title: 'Alquiler de barcos en España: compara por costa y localidad',
+  description: 'Alquila barco en cualquier costa española: con o sin licencia, con patrón, precios por temporada y calas accesibles solo por mar. Compara en SamBoat.',
   openGraph: {
-    title: 'Alquiler de Barcos en España',
-    description: 'Descubre las mejores ofertas de alquiler de barcos en las costas españolas',
+    title: 'Alquiler de barcos en España',
+    description: 'Compara alquiler de barcos por costa y localidad: precios, fondeos y calas accesibles solo por mar.',
     type: 'website',
-    url: 'https://playasdeespana.es/alquiler-barco',
+    url: 'https://playas-espana.com/alquiler-barco',
   },
 }
 

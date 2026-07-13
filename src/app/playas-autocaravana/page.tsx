@@ -284,7 +284,7 @@ export default async function PlayasAutocaravanaPage() {
               { href: '/rutas',                    label: 'Rutas costeras por España' },
               { href: '/rutas/configurar',         label: 'Configurar mi ruta' },
               { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas' },
-              { href: '/playas-secretas',          label: 'Playas secretas' },
+              { href: '/calas-secretas',           label: 'Calas secretas' },
               { href: '/mapa',                     label: 'Mapa interactivo' },
             ].map(l => (
               <Link

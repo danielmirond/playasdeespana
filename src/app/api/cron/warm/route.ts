@@ -41,8 +41,6 @@ const LANDINGS = [
   '/',
   '/playas-aguas-cristalinas',
   '/playas-paradisiacas',
-  '/calas-con-encanto',
-  '/playas-secretas',
   '/familias',
   '/atardeceres',
   '/playas-perros',
@@ -61,7 +59,6 @@ const LANDINGS = [
   '/seguros-viaje',
   '/metodologia',
   '/comparar',
-  '/alquiler-barco-playa',
   '/hoteles-playa',
 ]
 

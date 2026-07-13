@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { after } from 'next/server'
@@ -487,6 +488,24 @@ export default async function PlayaPage({ params }: Props) {
         videoData={videoData}
         webcams={webcamsData}
       />
+      {/* Interlinking del clúster "vivo" (auditoría jul-2026): cada ficha
+          reparte PageRank a las páginas de estado en tiempo real, que son
+          el diferencial del sitio y viven demasiado colgadas de la home. */}
+      <nav aria-label="Estado del mar en España hoy" style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1.5rem 2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.6rem' }}>
+          {[
+            { href: '/banderas-hoy',            t: 'Banderas en las playas hoy',  d: 'Semáforo por provincias en tiempo real' },
+            { href: '/temperatura-del-agua',    t: 'Temperatura del agua hoy',    d: '¿Dónde está el mar más cálido?' },
+            { href: '/webcams',                 t: 'Webcams de playas en directo', d: 'Mira el mar antes de salir de casa' },
+            { href: '/prediccion-fin-de-semana', t: 'Predicción del finde',       d: '¿Qué costa tendrá mejor tiempo?' },
+          ].map(l => (
+            <Link key={l.href} href={l.href} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.75rem .9rem', textDecoration: 'none' }}>
+              <span style={{ display: 'block', fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)' }}>{l.t} <span aria-hidden="true">→</span></span>
+              <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>{l.d}</span>
+            </Link>
+          ))}
+        </div>
+      </nav>
       <GygActivities
         query={(() => {
           const zona = playa.municipio || playa.provincia

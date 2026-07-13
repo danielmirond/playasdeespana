@@ -93,13 +93,13 @@ export async function GET(req: NextRequest) {
 
   const LANDINGS = [
     '/', '/playas-aguas-cristalinas', '/playas-paradisiacas',
-    '/calas-con-encanto', '/playas-secretas', '/familias',
+    '/calas-secretas', '/familias',
     '/atardeceres', '/playas-perros', '/playas-nudistas',
     '/playas-accesibles', '/banderas-azules', '/playas-sin-viento',
     '/playas-autocaravana', '/islas', '/campings', '/buceo',
     '/surf', '/medusas', '/calidad-agua', '/protectores-solares',
     '/seguros-viaje', '/metodologia', '/comparar', '/rutas',
-    '/alquiler-barco-playa', '/hoteles-playa', '/playas-cerca-de-mi',
+    '/hoteles-playa', '/playas-cerca-de-mi',
   ]
 
   const topPlayas = playas

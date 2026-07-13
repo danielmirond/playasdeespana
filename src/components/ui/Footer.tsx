@@ -62,9 +62,8 @@ export default function Footer({ locale = 'es' }: Props) {
             <FootHeading>{es ? 'Por tipo de playa' : 'By beach type'}</FootHeading>
             <FootList>
               <Link href="/playas-aguas-cristalinas" style={ls}>{es ? 'Playas con aguas cristalinas' : 'Crystal-clear water beaches'}</Link>
-              <Link href="/calas-con-encanto" style={ls}>{es ? 'Calas con encanto' : 'Hidden coves'}</Link>
               <Link href="/playas-paradisiacas" style={ls}>{es ? 'Playas paradisíacas' : 'Paradise beaches'}</Link>
-              <Link href="/playas-secretas" style={ls}>{es ? 'Playas secretas' : 'Secret beaches'}</Link>
+              <Link href="/calas-secretas" style={ls}>{es ? 'Calas secretas' : 'Secret coves'}</Link>
               <Link href="/familias" style={ls}>{es ? 'Playas para familias' : 'Family-friendly beaches'}</Link>
               <Link href="/atardeceres" style={ls}>{es ? 'Playas para ver el atardecer' : 'Sunset beaches'}</Link>
               <Link href="/playas-perros" style={ls}>{es ? 'Playas para perros' : 'Dog-friendly beaches'}</Link>
@@ -82,7 +81,6 @@ export default function Footer({ locale = 'es' }: Props) {
               <Link href="/buceo" style={ls}>{es ? 'Buceo en España' : 'Diving in Spain'}</Link>
               <Link href="/surf" style={ls}>{es ? 'Surf en España' : 'Surf in Spain'}</Link>
               <Link href="/alquiler-barco" style={ls}>{es ? 'Alquiler de barcos' : 'Boat rental'}</Link>
-              <Link href="/alquiler-barco-playa" style={ls}>{es ? 'Alquilar barco con patrón' : 'Skippered boat rental'}</Link>
               <Link href="/playas-autocaravana" style={ls}>{es ? 'Playas para autocaravana' : 'Beaches for campervans'}</Link>
               <Link href="/alquiler-autocaravana" style={ls}>{es ? 'Alquiler de autocaravanas' : 'Campervan rental'}</Link>
               <Link href="/hoteles-playa" style={ls}>{es ? 'Hoteles en la playa' : 'Beach hotels'}</Link>

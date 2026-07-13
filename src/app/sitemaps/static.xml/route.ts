@@ -101,12 +101,9 @@ export async function GET() {
     { es: '/playas-autocaravana',    en: null,                     p: '0.7', f: 'weekly' },
     { es: '/playas-aguas-cristalinas', en: null,                   p: '0.7', f: 'weekly' },
     { es: '/playas-paradisiacas',    en: null,                   p: '0.7', f: 'weekly' },
-    { es: '/calas-con-encanto',      en: null,                   p: '0.7', f: 'weekly' },
     { es: '/protectores-solares',    en: null,                     p: '0.6', f: 'monthly' },
     { es: '/seguros-viaje',          en: null,                     p: '0.6', f: 'monthly' },
-    { es: '/alquiler-barco-playa',   en: null,                     p: '0.6', f: 'monthly' },
     { es: '/familias',               en: null,                     p: '0.6', f: 'weekly' },
-    { es: '/playas-secretas',        en: null,                     p: '0.6', f: 'weekly' },
     { es: '/medusas',                en: null,                     p: '0.6', f: 'weekly' },
     { es: '/islas',                  en: null,                     p: '0.6', f: 'weekly' },
     { es: '/playa-del-dia',          en: null,                     p: '0.6', f: 'daily' },
@@ -152,7 +149,7 @@ export async function GET() {
   // Topic × provincia pages (campings, buceo, clases-surf, etc.)
   const TOPIC_SLUGS = [
     'campings', 'buceo', 'clases-surf', 'kitesurf', 'windsurf',
-    'hoteles-playa', 'chiringuitos', 'alquiler-barco', 'yoga-playa',
+    'hoteles-playa', 'chiringuitos', 'alquiler-barco',
   ]
   const provSlugs = provincias.map(p => p.slug)
   for (const topic of TOPIC_SLUGS) {

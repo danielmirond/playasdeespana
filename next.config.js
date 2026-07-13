@@ -136,6 +136,17 @@ const nextConfig = {
       { source: '/playas/:slug/que-llevar', destination: '/playas/:slug', permanent: true },
       { source: '/en/beaches/:slug/que-llevar', destination: '/en/beaches/:slug', permanent: true },
 
+      // Consolidación jul-2026 (auditoría): páginas que canibalizaban a su
+      // equivalente canónico → 301. Las /guides/ duplicaban 1:1 la intención
+      // de las URLs transaccionales; secretas/bonitas eran clústeres con
+      // títulos intercambiables; barco-playa competía con el hub.
+      { source: '/guides/alquiler-catamaranes', destination: '/alquiler-catamaran', permanent: true },
+      { source: '/guides/yates-lujo-charter',   destination: '/alquiler-yate',      permanent: true },
+      { source: '/guides/veleros-navegacion',   destination: '/alquiler-barco',     permanent: true },
+      { source: '/alquiler-barco-playa',        destination: '/alquiler-barco',     permanent: true },
+      { source: '/playas-secretas',             destination: '/calas-secretas',     permanent: true },
+      { source: '/calas-con-encanto',           destination: '/playas-paradisiacas', permanent: true },
+
       // Slugs OSM → MITECO canónicos para Bandera Azul (dinámicos, generados
       // por scripts/sync-playas-miteco.js).
       ...loadSlugRedirects(),

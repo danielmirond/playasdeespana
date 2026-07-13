@@ -263,7 +263,7 @@ export default async function BuceoPage() {
             { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas' },
             { href: '/protectores-solares',       label: 'Protección solar' },
             { href: '/seguros-viaje',             label: 'Seguros de viaje' },
-            { href: '/alquiler-barco-playa',      label: 'Alquiler de barco' },
+            { href: '/alquiler-barco',            label: 'Alquiler de barco' },
             { href: '/islas',                     label: 'Playas en islas' },
           ].map(l => (
             <Link key={l.href} href={l.href} style={{

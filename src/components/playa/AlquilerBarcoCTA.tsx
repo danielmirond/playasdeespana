@@ -1,5 +1,5 @@
 // src/components/playa/AlquilerBarcoCTA.tsx
-// CTA editorial reutilizable para llevar a /alquiler-barco-playa.
+// CTA editorial reutilizable para llevar al hub /alquiler-barco.
 // Variantes:
 //   - 'card'   → ficha de playa (bloque rectangular dentro del flujo)
 //   - 'banner' → top de páginas temáticas (calas, paradisíacas, islas)
@@ -32,7 +32,7 @@ interface Props {
 
 // Enlazado interno: cada comunidad → su página de COSTA canónica
 // (/alquiler-barco/costas/{slug}), que es la rica (SSG, fondeos, precios,
-// FAQ), en vez de mandar todo a la guía plana /alquiler-barco-playa.
+// FAQ), en vez de mandar todo al hub plano /alquiler-barco.
 // Así las ~2.500 fichas de playa reparten autoridad a las páginas
 // comerciales correctas. Comunidades con una sola costa en el dataset
 // apuntan a ella; el resto (varias costas) cae al hub.

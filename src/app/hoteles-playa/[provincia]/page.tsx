@@ -83,7 +83,7 @@ const CONFIG: TopicConfig = {
   relacionados: [
     { href: '/campings', label: 'Campings cerca de playa' },
     { href: '/seguros-viaje', label: 'Seguros de viaje' },
-    { href: '/alquiler-barco-playa', label: 'Alquiler de barco' },
+    { href: '/alquiler-barco', label: 'Alquiler de barco' },
   ],
   extraSections: () => <ExtraSections provincia="" />,
 }

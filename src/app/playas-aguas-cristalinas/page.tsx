@@ -225,7 +225,7 @@ export default async function Page() {
               { href: '/comunidad/islas-baleares', label: 'Playas de Baleares' },
               { href: '/provincia/almeria',     label: 'Playas de Almería' },
               { href: '/provincia/murcia',      label: 'Playas de Murcia' },
-              { href: '/playas-secretas',       label: 'Playas secretas y poco masificadas' },
+              { href: '/calas-secretas',        label: 'Calas secretas y poco masificadas' },
             ].map(l => (
               <Link
                 key={l.href}

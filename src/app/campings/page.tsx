@@ -232,7 +232,7 @@ export default async function CampingsPage() {
               { href: '/playas-perros',           label: 'Playas para perros' },
               { href: '/familias',                label: 'Playas para familias' },
               { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas' },
-              { href: '/playas-secretas',          label: 'Playas secretas' },
+              { href: '/calas-secretas',           label: 'Calas secretas' },
               { href: '/rutas',                    label: 'Rutas por la costa' },
               { href: '/surf',                     label: 'Surf en España' },
             ].map(l => (

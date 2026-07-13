@@ -29,6 +29,15 @@ const GONE_HTML =
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
+  // 410 Gone para la vertical retirada /yoga-playa (auditoría jul-2026):
+  // plantilla por provincia sin ningún dato real detrás (perfil doorway).
+  if (pathname === '/yoga-playa' || pathname.startsWith('/yoga-playa/')) {
+    return new NextResponse(GONE_HTML, {
+      status: 410,
+      headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Robots-Tag': 'noindex' },
+    })
+  }
+
   // 0) 410 Gone para fichas extranjeras/sin costa (ES e EN).
   const mFicha = pathname.match(/^\/(playas|en\/beaches)\/([^/?#]+)/)
   if (mFicha) {
