@@ -1,0 +1,2747 @@
+{
+  "1-playa-de-luarca": {
+    "codigo": "3303407",
+    "nombre": "Primera y Segunda de Luarca",
+    "distM": 150
+  },
+  "a-area-das-rodas": {
+    "codigo": "3605703",
+    "nombre": "Rodas, Cíes",
+    "distM": 203
+  },
+  "a-marosa-burela": {
+    "codigo": "2790201",
+    "nombre": "A Marosa",
+    "distM": 190
+  },
+  "a-praia-grande": {
+    "codigo": "1504801",
+    "nombre": "Grande de Miño",
+    "distM": 258
+  },
+  "a-rapadoira-foz": {
+    "codigo": "2701901",
+    "nombre": "A Rapadoira",
+    "distM": 103
+  },
+  "abrela-o-vicedo": {
+    "codigo": "2706401",
+    "nombre": "Abrela",
+    "distM": 139
+  },
+  "aguete-marin": {
+    "codigo": "3602601",
+    "nombre": "Aguete",
+    "distM": 257
+  },
+  "aguilar-muros-de-nalon": {
+    "codigo": "3303902",
+    "nombre": "Aguilar",
+    "distM": 152
+  },
+  "altafulla-altafulla": {
+    "codigo": "4301202",
+    "nombre": "Altafulla",
+    "distM": 292
+  },
+  "area-da-concha": {
+    "codigo": "1590101",
+    "nombre": "A Concha, Cariño",
+    "distM": 229
+  },
+  "area-de-bon-bueu": {
+    "codigo": "3600402",
+    "nombre": "Area de Bon",
+    "distM": 184
+  },
+  "area-viveiro": {
+    "codigo": "2706601",
+    "nombre": "Area",
+    "distM": 310
+  },
+  "areas-sanxenxo": {
+    "codigo": "3605102",
+    "nombre": "Areas",
+    "distM": 252
+  },
+  "armintzako-hondartza": {
+    "codigo": "4805601",
+    "nombre": "Armintxekoalde",
+    "distM": 678
+  },
+  "arou-camarinas": {
+    "codigo": "1501602",
+    "nombre": "Arou",
+    "distM": 68
+  },
+  "arrietara": {
+    "codigo": "4808502",
+    "nombre": "Atxabiribil-Arrietara",
+    "distM": 246
+  },
+  "arrigorri-hondartza": {
+    "codigo": "4807301",
+    "nombre": "Arrigorri",
+    "distM": 154
+  },
+  "as-catedrais-ribadeo": {
+    "codigo": "2705101",
+    "nombre": "As Catedrais",
+    "distM": 215
+  },
+  "bajamar-brena-alta": {
+    "codigo": "3800801",
+    "nombre": "Bajamar",
+    "distM": 648
+  },
+  "balanegra-balanegra": {
+    "codigo": "0402901",
+    "nombre": "Berja-Balanegra",
+    "distM": 177
+  },
+  "balares-ponteceso": {
+    "codigo": "1506802",
+    "nombre": "Balarés",
+    "distM": 250
+  },
+  "baltar-sanxenxo": {
+    "codigo": "3605103",
+    "nombre": "Portonovo-Baltar",
+    "distM": 223
+  },
+  "barinatxe": {
+    "codigo": "4804402",
+    "nombre": "Barinatxe-Salvaje",
+    "distM": 253
+  },
+  "barranan-arteixo": {
+    "codigo": "1500501",
+    "nombre": "Barrañán",
+    "distM": 170
+  },
+  "barranco-rubio-orihuela": {
+    "codigo": "0309911",
+    "nombre": "Campoamor / Barranco Rubio",
+    "distM": 91
+  },
+  "bastiagueiro-oleiros": {
+    "codigo": "1505801",
+    "nombre": "Bastiagueiro",
+    "distM": 214
+  },
+  "blanca-puerto-del-rosario": {
+    "codigo": "3501702",
+    "nombre": "Blanca",
+    "distM": 163
+  },
+  "blanes-blanes": {
+    "codigo": "1702303",
+    "nombre": "Blanes",
+    "distM": 196
+  },
+  "burumendi-hondartza": {
+    "codigo": "2005604",
+    "nombre": "Mutriku-Motrico",
+    "distM": 103
+  },
+  "cabanyal-valencia": {
+    "codigo": "4625001",
+    "nombre": "Playa de Levante / Malvarrosa",
+    "distM": 380
+  },
+  "cala-agulla": {
+    "codigo": "0701403",
+    "nombre": "Cala Agulla",
+    "distM": 132
+  },
+  "cala-barques": {
+    "codigo": "0704202",
+    "nombre": "Cala Barques",
+    "distM": 252
+  },
+  "cala-bassa": {
+    "codigo": "0704806",
+    "nombre": "Cala Bassa",
+    "distM": 140
+  },
+  "cala-blanca-2": {
+    "codigo": "0701507",
+    "nombre": "Cala Blanca",
+    "distM": 115
+  },
+  "cala-capitan-orihuela": {
+    "codigo": "0309907",
+    "nombre": "Cala Capitan",
+    "distM": 231
+  },
+  "cala-cortina-cartagena": {
+    "codigo": "3001624",
+    "nombre": "Cala Cortina",
+    "distM": 67
+  },
+  "cala-de-la-barra-gran": {
+    "codigo": "0304707",
+    "nombre": "Cantal Roig",
+    "distM": 204
+  },
+  "cala-de-santandria": {
+    "codigo": "0701506",
+    "nombre": "Cala Santandria",
+    "distM": 185
+  },
+  "cala-de-sestany-den-mas": {
+    "codigo": "0703307",
+    "nombre": "Cala Estany",
+    "distM": 220
+  },
+  "cala-dhort": {
+    "codigo": "0704821",
+    "nombre": "Cala d'Hort",
+    "distM": 209
+  },
+  "cala-domingos-gran": {
+    "codigo": "0703316",
+    "nombre": "Es Domingos Gran",
+    "distM": 155
+  },
+  "cala-encendida": {
+    "codigo": "1101401",
+    "nombre": "Roche",
+    "distM": 989
+  },
+  "cala-formentor-pollenca": {
+    "codigo": "0704208",
+    "nombre": "Cala Formentor",
+    "distM": 244
+  },
+  "cala-galdana-ferreries": {
+    "codigo": "0702302",
+    "nombre": "Cala Galdana",
+    "distM": 237
+  },
+  "cala-grassio": {
+    "codigo": "0704605",
+    "nombre": "Cala Grasió",
+    "distM": 153
+  },
+  "cala-llonga-santa-eulalia-del-rio": {
+    "codigo": "0705418",
+    "nombre": "Cala Llonga",
+    "distM": 164
+  },
+  "cala-major-palma-de-mallorca": {
+    "codigo": "0704001",
+    "nombre": "Cala Major",
+    "distM": 163
+  },
+  "cala-marcal-felanitx": {
+    "codigo": "0702201",
+    "nombre": "Cala Marçal",
+    "distM": 191
+  },
+  "cala-mesquida": {
+    "codigo": "0701401",
+    "nombre": "Cala Mesquida",
+    "distM": 190
+  },
+  "cala-mesquida-2": {
+    "codigo": "0703211",
+    "nombre": "Cala Mesquida",
+    "distM": 213
+  },
+  "cala-millor-sant-llorenc-des-cardassar": {
+    "codigo": "0705101",
+    "nombre": "Cala Millor",
+    "distM": 185
+  },
+  "cala-sant-miquel": {
+    "codigo": "0705005",
+    "nombre": "Port Sant Miquel",
+    "distM": 171
+  },
+  "cala-santanyi": {
+    "codigo": "0705707",
+    "nombre": "Cala Santanyí",
+    "distM": 156
+  },
+  "cala-tirant": {
+    "codigo": "0703706",
+    "nombre": "Tirant",
+    "distM": 1139
+  },
+  "calafell-calafell": {
+    "codigo": "4303703",
+    "nombre": "Calafell",
+    "distM": 258
+  },
+  "camaxe-a-illa-de-arousa": {
+    "codigo": "3690102",
+    "nombre": "Camaxe",
+    "distM": 160
+  },
+  "canelas-sanxenxo": {
+    "codigo": "3605105",
+    "nombre": "Canelas",
+    "distM": 151
+  },
+  "canido-vigo": {
+    "codigo": "3605711",
+    "nombre": "Canido",
+    "distM": 369
+  },
+  "cap-roig-lampolla": {
+    "codigo": "4390602",
+    "nombre": "Cap Roig",
+    "distM": 63
+  },
+  "carabassi-elcheelx": {
+    "codigo": "0306502",
+    "nombre": "Arenales del Sol",
+    "distM": 678
+  },
+  "carvajal-benalmadena": {
+    "codigo": "2902514",
+    "nombre": "Carvajal",
+    "distM": 442
+  },
+  "charco-del-conde": {
+    "codigo": "3804902",
+    "nombre": "Valle Gran Rey",
+    "distM": 267
+  },
+  "coma-ruga-el-vendrell": {
+    "codigo": "4316303",
+    "nombre": "Coma Ruga",
+    "distM": 666
+  },
+  "comillas-comillas": {
+    "codigo": "3902401",
+    "nombre": "Comillas",
+    "distM": 215
+  },
+  "compostela-vilagarcia-de-arousa": {
+    "codigo": "3606001",
+    "nombre": "Compostela",
+    "distM": 335
+  },
+  "concha-de-artedo": {
+    "codigo": "3302120",
+    "nombre": "La Concha de Artedo",
+    "distM": 180
+  },
+  "coroso-ribeira": {
+    "codigo": "1507304",
+    "nombre": "Coroso",
+    "distM": 402
+  },
+  "coto-barreiros": {
+    "codigo": "2700503",
+    "nombre": "San Miguel Reinante/Area Longa",
+    "distM": 371
+  },
+  "cruz-del-mar-chipiona": {
+    "codigo": "1101602",
+    "nombre": "Cruz del Mar",
+    "distM": 25
+  },
+  "cuberris-bareyo": {
+    "codigo": "3901102",
+    "nombre": "Cuberris",
+    "distM": 123
+  },
+  "daimus-daimus": {
+    "codigo": "4611302",
+    "nombre": "Daimús",
+    "distM": 188
+  },
+  "debako-santiago-hondartza": {
+    "codigo": "2002901",
+    "nombre": "Deba-Deva",
+    "distM": 214
+  },
+  "del-parador-castilla-moguer": {
+    "codigo": "2105001",
+    "nombre": "El Parador",
+    "distM": 416
+  },
+  "doninos-ferrol": {
+    "codigo": "1503603",
+    "nombre": "Doniños",
+    "distM": 556
+  },
+  "dunas-de-corralejo": {
+    "codigo": "3501403",
+    "nombre": "Grandes Playas-El Caserón",
+    "distM": 583
+  },
+  "ea-hondartza": {
+    "codigo": "4802802",
+    "nombre": "Ea",
+    "distM": 417
+  },
+  "el-alamillo-mazarron": {
+    "codigo": "3002630",
+    "nombre": "El Alamillo",
+    "distM": 227
+  },
+  "el-albir-lalfas-del-pi": {
+    "codigo": "0301101",
+    "nombre": "Raco de l'Albir",
+    "distM": 86
+  },
+  "el-alicate": {
+    "codigo": "2906921",
+    "nombre": "Alicate - Costa Bella - Pinomar",
+    "distM": 109
+  },
+  "el-arenal-javeaxabia": {
+    "codigo": "0308204",
+    "nombre": "El Arenal",
+    "distM": 108
+  },
+  "el-bogatell-barcelona": {
+    "codigo": "0801903",
+    "nombre": "Del Bogatell",
+    "distM": 349
+  },
+  "el-burrero-ingenio": {
+    "codigo": "3501101",
+    "nombre": "El Burrero",
+    "distM": 86
+  },
+  "el-carregador-alcala-de-xivert": {
+    "codigo": "1200403",
+    "nombre": "El Carregador",
+    "distM": 55
+  },
+  "el-chorrillo-ceuta": {
+    "codigo": "5100108",
+    "nombre": "La Ribera - El Chorrillo",
+    "distM": 313
+  },
+  "el-descargador-mojacar": {
+    "codigo": "0406403",
+    "nombre": "El Descargador",
+    "distM": 410
+  },
+  "el-garbi-sant-carles-de-la-rapita": {
+    "codigo": "4313601",
+    "nombre": "El Garbi",
+    "distM": 270
+  },
+  "el-lance": {
+    "codigo": "1817001",
+    "nombre": "El Lance",
+    "distM": 787
+  },
+  "el-mojon-mazarron": {
+    "codigo": "3002633",
+    "nombre": "Del Mojón",
+    "distM": 118
+  },
+  "el-palmar-vejer-de-la-frontera": {
+    "codigo": "1103901",
+    "nombre": "El Palmar",
+    "distM": 671
+  },
+  "el-port-llanca": {
+    "codigo": "1709203",
+    "nombre": "El Port",
+    "distM": 113
+  },
+  "el-postiguet-alacantalicante": {
+    "codigo": "0301408",
+    "nombre": "El Postiguet",
+    "distM": 134
+  },
+  "el-puertillo-arucas": {
+    "codigo": "3500601",
+    "nombre": "El Puertillo",
+    "distM": 191
+  },
+  "el-reducto-arrecife": {
+    "codigo": "3500403",
+    "nombre": "El Reducto",
+    "distM": 77
+  },
+  "el-socorro-los-realejos": {
+    "codigo": "3803101",
+    "nombre": "El Socorro",
+    "distM": 346
+  },
+  "els-tres-micos-caldes-destrac": {
+    "codigo": "0803201",
+    "nombre": "La Riera - Els Tres Micos",
+    "distM": 110
+  },
+  "empuriabrava-castello-dempuries": {
+    "codigo": "1704702",
+    "nombre": "Empúriabrava",
+    "distM": 206
+  },
+  "es-camp-de-mar": {
+    "codigo": "0700513",
+    "nombre": "Camp de Mar",
+    "distM": 153
+  },
+  "esteiro-xove": {
+    "codigo": "2702501",
+    "nombre": "Esteiro",
+    "distM": 126
+  },
+  "finestrat-finestrat": {
+    "codigo": "0306901",
+    "nombre": "Finestrat / La Cala",
+    "distM": 186
+  },
+  "galeones-rota": {
+    "codigo": "1103006",
+    "nombre": "El Rompidillo - El Chorrillo",
+    "distM": 61
+  },
+  "gandario-bergondo": {
+    "codigo": "1500801",
+    "nombre": "Gandarío",
+    "distM": 90
+  },
+  "gaztetape-hondartza": {
+    "codigo": "2003903",
+    "nombre": "Gaztetape-Gastetape",
+    "distM": 207
+  },
+  "getares-algeciras": {
+    "codigo": "1100402",
+    "nombre": "Getares / San García",
+    "distM": 397
+  },
+  "gorliz": {
+    "codigo": "4801401",
+    "nombre": "Muriola- La Cantera",
+    "distM": 168
+  },
+  "gorrondatxe-azkorri": {
+    "codigo": "4804401",
+    "nombre": "Azkorri-Gorrondatxe",
+    "distM": 1119
+  },
+  "hipodromo-melilla": {
+    "codigo": "5200103",
+    "nombre": "El Hipódromo",
+    "distM": 796
+  },
+  "hondarribiko-hondartza": {
+    "codigo": "2003602",
+    "nombre": "Hondarribia-Fuenterrabía",
+    "distM": 112
+  },
+  "isla-canela-ayamonte": {
+    "codigo": "2101001",
+    "nombre": "Isla Canela",
+    "distM": 169
+  },
+  "islantilla-isla-cristina": {
+    "codigo": "2104205",
+    "nombre": "Islantilla",
+    "distM": 236
+  },
+  "isuntza-hondartza": {
+    "codigo": "4805701",
+    "nombre": "Isuntza",
+    "distM": 15
+  },
+  "itzurun-hondartza": {
+    "codigo": "2008102",
+    "nombre": "Itzurun-San Telmo",
+    "distM": 138
+  },
+  "kontxa-hondartza": {
+    "codigo": "2006904",
+    "nombre": "La Kontxa-La Concha",
+    "distM": 220
+  },
+  "la-ampolla-teulada": {
+    "codigo": "0312803",
+    "nombre": "L'Ampolla",
+    "distM": 165
+  },
+  "la-arena-arnuero-2": {
+    "codigo": "3900602",
+    "nombre": "La Arena",
+    "distM": 471
+  },
+  "la-arena-santiago-del-teide": {
+    "codigo": "3804004",
+    "nombre": "La Arena",
+    "distM": 13
+  },
+  "la-carolina-aguilas": {
+    "codigo": "3000301",
+    "nombre": "La Carolina",
+    "distM": 55
+  },
+  "la-colonia-aguilas": {
+    "codigo": "3000312",
+    "nombre": "La Colonia",
+    "distM": 453
+  },
+  "la-costilla-rota": {
+    "codigo": "1103005",
+    "nombre": "La Costilla",
+    "distM": 232
+  },
+  "la-fontanilla-conil-de-la-frontera": {
+    "codigo": "1101406",
+    "nombre": "La Fontanilla",
+    "distM": 454
+  },
+  "la-fosca-palamos": {
+    "codigo": "1711804",
+    "nombre": "De la Fosca",
+    "distM": 97
+  },
+  "la-fustera-benissa": {
+    "codigo": "0304105",
+    "nombre": "Cala Fustera",
+    "distM": 31
+  },
+  "la-granadella-javeaxabia": {
+    "codigo": "0308211",
+    "nombre": "La Granadella",
+    "distM": 128
+  },
+  "la-marineta-casiana-denia": {
+    "codigo": "0306310",
+    "nombre": "Marineta Cassiana",
+    "distM": 36
+  },
+  "la-mora-tarragona": {
+    "codigo": "4314808",
+    "nombre": "La Mora",
+    "distM": 150
+  },
+  "la-platgeta": {
+    "codigo": "1719902",
+    "nombre": "L'Estartit",
+    "distM": 1038
+  },
+  "la-platja-daro": {
+    "codigo": "1704805",
+    "nombre": "Platja d'Aro",
+    "distM": 399
+  },
+  "la-playa-es-tuya": {
+    "codigo": "3802501",
+    "nombre": "El Caletón",
+    "distM": 242
+  },
+  "la-puntilla-el-puerto-de-santa-maria": {
+    "codigo": "1102704",
+    "nombre": "La Puntilla",
+    "distM": 299
+  },
+  "la-rada": {
+    "codigo": "2905106",
+    "nombre": "La Rada",
+    "distM": 373
+  },
+  "la-restinga-el-pinar-de-el-hierro": {
+    "codigo": "3801311",
+    "nombre": "La Restinga",
+    "distM": 21
+  },
+  "la-roda-altea": {
+    "codigo": "0301809",
+    "nombre": "Cap Blanch",
+    "distM": 182
+  },
+  "la-romanilla-roquetas-de-mar": {
+    "codigo": "0407904",
+    "nombre": "La Romanilla",
+    "distM": 728
+  },
+  "la-roqueta-guardamar-del-segura": {
+    "codigo": "0307605",
+    "nombre": "Centro / La Roqueta",
+    "distM": 419
+  },
+  "la-victoria-cadiz": {
+    "codigo": "1101203",
+    "nombre": "La Victoria",
+    "distM": 809
+  },
+  "laga": {
+    "codigo": "4804802",
+    "nombre": "Laga",
+    "distM": 152
+  },
+  "laida": {
+    "codigo": "4804801",
+    "nombre": "Laida",
+    "distM": 923
+  },
+  "laidatxu": {
+    "codigo": "4806801",
+    "nombre": "Laidatxu",
+    "distM": 1073
+  },
+  "lalguer-lametlla-de-mar": {
+    "codigo": "4301313",
+    "nombre": "L'Alguer",
+    "distM": 131
+  },
+  "lalmadrava-benicasimbenicassim": {
+    "codigo": "1202802",
+    "nombre": "L'Almadrava",
+    "distM": 104
+  },
+  "lapaman-bueu": {
+    "codigo": "3602606",
+    "nombre": "Lapamán",
+    "distM": 303
+  },
+  "larenal-borrianaburriana": {
+    "codigo": "1203201",
+    "nombre": "El Arenal",
+    "distM": 381
+  },
+  "larenal-vandellos-i-lhospitalet-de-linfant": {
+    "codigo": "4316203",
+    "nombre": "L'Arenal",
+    "distM": 514
+  },
+  "larrabassada-tarragona": {
+    "codigo": "4314802",
+    "nombre": "L'Arrabassada",
+    "distM": 182
+  },
+  "las-cucharas-teguise": {
+    "codigo": "3502425",
+    "nombre": "Las Cucharas",
+    "distM": 61
+  },
+  "las-delicias-aguilas": {
+    "codigo": "3000315",
+    "nombre": "Las Delicias",
+    "distM": 120
+  },
+  "las-vistas-arona": {
+    "codigo": "3800603",
+    "nombre": "Las Vistas",
+    "distM": 268
+  },
+  "laxe-laxe": {
+    "codigo": "1504001",
+    "nombre": "Laxe",
+    "distM": 141
+  },
+  "les-avellanes-lampolla": {
+    "codigo": "4390606",
+    "nombre": "D'Avellaners",
+    "distM": 30
+  },
+  "les-cases-chilchesxilxes": {
+    "codigo": "1205301",
+    "nombre": "Las Casas / Les Cases",
+    "distM": 1140
+  },
+  "les-marines-denia": {
+    "codigo": "0306308",
+    "nombre": "Les Boves / Les Marines",
+    "distM": 654
+  },
+  "levante-aguilas": {
+    "codigo": "3000314",
+    "nombre": "Levante",
+    "distM": 24
+  },
+  "levante-almerimar-el-ejido": {
+    "codigo": "0490205",
+    "nombre": "Levante Almerimar",
+    "distM": 528
+  },
+  "limens-cangas": {
+    "codigo": "3600807",
+    "nombre": "Limens",
+    "distM": 307
+  },
+  "llafranc-palafrugell": {
+    "codigo": "1711703",
+    "nombre": "Llafranc",
+    "distM": 90
+  },
+  "los-cancajos-brena-baja": {
+    "codigo": "3800901",
+    "nombre": "Los Cancajos",
+    "distM": 36
+  },
+  "malkorbe-hondartza": {
+    "codigo": "2003904",
+    "nombre": "Malkorbe-Marcorbe",
+    "distM": 148
+  },
+  "mar-serena-pulpi": {
+    "codigo": "0407506",
+    "nombre": "Mar Serena",
+    "distM": 158
+  },
+  "marchamalo-barco-perdido": {
+    "codigo": "3001653",
+    "nombre": "Las Amoladeras",
+    "distM": 89
+  },
+  "marina-de-la-torre-mojacar": {
+    "codigo": "0406401",
+    "nombre": "Marina de la Torre",
+    "distM": 253
+  },
+  "melenara-telde": {
+    "codigo": "3502601",
+    "nombre": "Melenara",
+    "distM": 66
+  },
+  "mera-oleiros": {
+    "codigo": "1505802",
+    "nombre": "Mera",
+    "distM": 64
+  },
+  "mogor-marin": {
+    "codigo": "3602603",
+    "nombre": "Mogor",
+    "distM": 156
+  },
+  "montalvo-sanxenxo": {
+    "codigo": "3605111",
+    "nombre": "Montalvo",
+    "distM": 160
+  },
+  "morro-de-gos-oropesa-del-marorpesa": {
+    "codigo": "1208502",
+    "nombre": "Morro de Gos",
+    "distM": 312
+  },
+  "morrongo-benicarlo": {
+    "codigo": "1202702",
+    "nombre": "El Morrongo",
+    "distM": 175
+  },
+  "o-muino-a-guarda": {
+    "codigo": "3602305",
+    "nombre": "Camposancos",
+    "distM": 72
+  },
+  "o-torno-cervo": {
+    "codigo": "2701302",
+    "nombre": "O Torno",
+    "distM": 324
+  },
+  "ogella-hondartza": {
+    "codigo": "4804901",
+    "nombre": "Ogeia-Ispaster",
+    "distM": 228
+  },
+  "ondarreta": {
+    "codigo": "2006902",
+    "nombre": "Ondarreta-Ondarreta",
+    "distM": 209
+  },
+  "orioko-hondartza": {
+    "codigo": "2006102",
+    "nombre": "La Antilla-San Juan",
+    "distM": 418
+  },
+  "orzan-a-coruna": {
+    "codigo": "1503005",
+    "nombre": "Riazor-Orzán",
+    "distM": 156
+  },
+  "ostende-castro-urdiales": {
+    "codigo": "3902004",
+    "nombre": "Ostende",
+    "distM": 105
+  },
+  "penarronda-tapia-de-casariego": {
+    "codigo": "3301704",
+    "nombre": "Peñarronda",
+    "distM": 236
+  },
+  "perbes-mino": {
+    "codigo": "1504803",
+    "nombre": "Perbes",
+    "distM": 194
+  },
+  "piles-piles": {
+    "codigo": "4619501",
+    "nombre": "Piles",
+    "distM": 470
+  },
+  "platja-cala-sant-vicent": {
+    "codigo": "0705019",
+    "nombre": "Cala San Vicente",
+    "distM": 198
+  },
+  "platja-cala-saona": {
+    "codigo": "0702414",
+    "nombre": "Cala Saona",
+    "distM": 149
+  },
+  "platja-dalcudia": {
+    "codigo": "0700307",
+    "nombre": "Alcúdia",
+    "distM": 710
+  },
+  "platja-de-baix-a-mar": {
+    "codigo": "4315302",
+    "nombre": "Barrio Maritimo/La Paella",
+    "distM": 228
+  },
+  "platja-de-bellreguard": {
+    "codigo": "4604801",
+    "nombre": "Bellreguard",
+    "distM": 494
+  },
+  "platja-de-cala-vedella": {
+    "codigo": "0704817",
+    "nombre": "Cala Vedella",
+    "distM": 178
+  },
+  "platja-de-can-generos": {
+    "codigo": "0706101",
+    "nombre": "Puerto de Sóller",
+    "distM": 226
+  },
+  "platja-de-can-sopa": {
+    "codigo": "1717801",
+    "nombre": "Sant Pere Pescador",
+    "distM": 405
+  },
+  "platja-de-canet": {
+    "codigo": "1201101",
+    "nombre": "Casa Blanca",
+    "distM": 139
+  },
+  "platja-de-canet-2": {
+    "codigo": "0804001",
+    "nombre": "Canet",
+    "distM": 312
+  },
+  "platja-de-cristall-mont-roig-del-camp": {
+    "codigo": "4309211",
+    "nombre": "Cristall",
+    "distM": 706
+  },
+  "platja-de-cunit-llevant-2": {
+    "codigo": "4305101",
+    "nombre": "Cunit",
+    "distM": 192
+  },
+  "platja-de-fenals": {
+    "codigo": "1709509",
+    "nombre": "Fenals",
+    "distM": 251
+  },
+  "platja-de-gava": {
+    "codigo": "0808901",
+    "nombre": "Gavà",
+    "distM": 920
+  },
+  "platja-de-la-barceloneta": {
+    "codigo": "0801905",
+    "nombre": "La Barceloneta",
+    "distM": 910
+  },
+  "platja-de-la-conca": {
+    "codigo": "0811002",
+    "nombre": "Malgrat",
+    "distM": 527
+  },
+  "platja-de-la-devesa": {
+    "codigo": "4625004",
+    "nombre": "La Devesa",
+    "distM": 1164
+  },
+  "platja-de-la-peixerota": {
+    "codigo": "4309201",
+    "nombre": "Peixerota",
+    "distM": 173
+  },
+  "platja-de-la-picordia-2": {
+    "codigo": "0800601",
+    "nombre": "D'Arenys",
+    "distM": 185
+  },
+  "platja-de-la-pineda-2": {
+    "codigo": "4317101",
+    "nombre": "La Pineda",
+    "distM": 135
+  },
+  "platja-de-la-ribera": {
+    "codigo": "1714003",
+    "nombre": "Port de la Selva",
+    "distM": 118
+  },
+  "platja-de-laigua-blanca": {
+    "codigo": "4618103",
+    "nombre": "L'Aigua Blanca",
+    "distM": 363
+  },
+  "platja-de-lalmadrava-3": {
+    "codigo": "0802901",
+    "nombre": "Cabrera",
+    "distM": 328
+  },
+  "platja-de-lalmadrava-4": {
+    "codigo": "0306301",
+    "nombre": "Les Deveses",
+    "distM": 737
+  },
+  "platja-de-les-antines": {
+    "codigo": "4305001",
+    "nombre": "Creixell",
+    "distM": 420
+  },
+  "platja-de-les-barques": {
+    "codigo": "0819703",
+    "nombre": "Sant Andreu de Llavaneres",
+    "distM": 116
+  },
+  "platja-de-les-barques-2": {
+    "codigo": "0812602",
+    "nombre": "Montgat",
+    "distM": 283
+  },
+  "platja-de-les-fonts": {
+    "codigo": "1200402",
+    "nombre": "Las Fuentes",
+    "distM": 169
+  },
+  "platja-de-lestanyol": {
+    "codigo": "0827009",
+    "nombre": "L'Estanyol",
+    "distM": 164
+  },
+  "platja-de-lilla": {
+    "codigo": "4610506",
+    "nombre": "El Raco",
+    "distM": 193
+  },
+  "platja-de-lloret-lloret-de-mar": {
+    "codigo": "1709507",
+    "nombre": "Lloret",
+    "distM": 285
+  },
+  "platja-de-magaluf": {
+    "codigo": "0701105",
+    "nombre": "Magalluf",
+    "distM": 279
+  },
+  "platja-de-masbo-2": {
+    "codigo": "1207703",
+    "nombre": "Masbo",
+    "distM": 250
+  },
+  "platja-de-massamagrell": {
+    "codigo": "4619901",
+    "nombre": "La Pobla de Farnals",
+    "distM": 57
+  },
+  "platja-de-migjorn": {
+    "codigo": "0702413",
+    "nombre": "Playa de Migjorn",
+    "distM": 1154
+  },
+  "platja-de-nules": {
+    "codigo": "1208201",
+    "nombre": "Nules",
+    "distM": 125
+  },
+  "platja-de-palma": {
+    "codigo": "0704007",
+    "nombre": "Playa de Palma",
+    "distM": 664
+  },
+  "platja-de-palmira": {
+    "codigo": "0701102",
+    "nombre": "Palmira",
+    "distM": 643
+  },
+  "platja-de-pals": {
+    "codigo": "1712401",
+    "nombre": "Pals",
+    "distM": 442
+  },
+  "platja-de-ponent": {
+    "codigo": "0303104",
+    "nombre": "Ponent / Playa de Poniente",
+    "distM": 582
+  },
+  "platja-de-ponent-2": {
+    "codigo": "0811801",
+    "nombre": "Ocata",
+    "distM": 141
+  },
+  "platja-de-port-saplaya": {
+    "codigo": "4601301",
+    "nombre": "El Port / Saplaya",
+    "distM": 382
+  },
+  "platja-de-portbou": {
+    "codigo": "1713803",
+    "nombre": "Portbou",
+    "distM": 62
+  },
+  "platja-de-riumar": {
+    "codigo": "4390103",
+    "nombre": "Riomar",
+    "distM": 368
+  },
+  "platja-de-sa-marjal": {
+    "codigo": "0706202",
+    "nombre": "Es Ribell",
+    "distM": 145
+  },
+  "platja-de-sa-riera": {
+    "codigo": "1701303",
+    "nombre": "Sa Riera",
+    "distM": 72
+  },
+  "platja-de-sant-joan": {
+    "codigo": "0301401",
+    "nombre": "Sant Joan / San Juan",
+    "distM": 1055
+  },
+  "platja-de-sant-tomas": {
+    "codigo": "0790202",
+    "nombre": "Sant Tomas",
+    "distM": 193
+  },
+  "platja-de-sant-vicenc": {
+    "codigo": "0826401",
+    "nombre": "Sant Vicenç de Montalt",
+    "distM": 283
+  },
+  "platja-de-santa-eularia": {
+    "codigo": "0705416",
+    "nombre": "Santa Eulària",
+    "distM": 669
+  },
+  "platja-de-santa-margalida": {
+    "codigo": "0705501",
+    "nombre": "C'An Picafort",
+    "distM": 117
+  },
+  "platja-de-santa-ponca": {
+    "codigo": "0701103",
+    "nombre": "Cala Santa Ponça",
+    "distM": 181
+  },
+  "platja-de-ses-figueretes": {
+    "codigo": "0702603",
+    "nombre": "Ses Figueretes",
+    "distM": 187
+  },
+  "platja-de-ses-salines": {
+    "codigo": "0704834",
+    "nombre": "Ses Salines / Mitjon",
+    "distM": 241
+  },
+  "platja-de-ses-salines-2": {
+    "codigo": "0702402",
+    "nombre": "Playa de Llevant",
+    "distM": 380
+  },
+  "platja-de-talamanca": {
+    "codigo": "0702601",
+    "nombre": "Talamanca",
+    "distM": 339
+  },
+  "platja-de-tavernes": {
+    "codigo": "4623801",
+    "nombre": "Tavernes",
+    "distM": 450
+  },
+  "platja-de-torrenostra": {
+    "codigo": "1211701",
+    "nombre": "Norte de Torreblanca",
+    "distM": 268
+  },
+  "platja-del-cap-negret": {
+    "codigo": "0301808",
+    "nombre": "La Roda",
+    "distM": 31
+  },
+  "platja-del-carrerlamar": {
+    "codigo": "0305013",
+    "nombre": "Carrer la Mar",
+    "distM": 33
+  },
+  "platja-del-dosser": {
+    "codigo": "4610502",
+    "nombre": "El Dossel",
+    "distM": 262
+  },
+  "platja-del-mareny-blau": {
+    "codigo": "4623505",
+    "nombre": "Mareny Blau",
+    "distM": 215
+  },
+  "platja-del-morer": {
+    "codigo": "0823504",
+    "nombre": "Sant Pol",
+    "distM": 157
+  },
+  "platja-del-paradis": {
+    "codigo": "0313909",
+    "nombre": "Paradis",
+    "distM": 214
+  },
+  "platja-del-pla-de-la-torre": {
+    "codigo": "1200902",
+    "nombre": "La Torre",
+    "distM": 328
+  },
+  "platja-del-pla-de-los": {
+    "codigo": "0817203",
+    "nombre": "Pla de l'Os",
+    "distM": 606
+  },
+  "platja-del-pont-den-botifarreta": {
+    "codigo": "0801502",
+    "nombre": "Del Centre",
+    "distM": 143
+  },
+  "platja-del-port-de-pollenca": {
+    "codigo": "0704210",
+    "nombre": "Pollença / Llenaire",
+    "distM": 605
+  },
+  "platja-del-port-de-sagunt": {
+    "codigo": "4622003",
+    "nombre": "Port de Sagunt / Sagunt",
+    "distM": 161
+  },
+  "platja-del-saladar": {
+    "codigo": "0301410",
+    "nombre": "Saladar",
+    "distM": 120
+  },
+  "platja-del-saltar": {
+    "codigo": "1715203",
+    "nombre": "De Roses",
+    "distM": 173
+  },
+  "platja-del-tamarit": {
+    "codigo": "0312108",
+    "nombre": "Tamarit",
+    "distM": 804
+  },
+  "platja-del-torrent-de-pareis": {
+    "codigo": "0701906",
+    "nombre": "Sa Calobra",
+    "distM": 426
+  },
+  "platja-del-varador": {
+    "codigo": "0312103",
+    "nombre": "Varador - Calas del Este",
+    "distM": 218
+  },
+  "platja-del-varador-2": {
+    "codigo": "0812103",
+    "nombre": "Varador",
+    "distM": 212
+  },
+  "platja-dels-capellans": {
+    "codigo": "4313105",
+    "nombre": "Roda de Bara",
+    "distM": 311
+  },
+  "platja-dels-eucaliptus": {
+    "codigo": "4301401",
+    "nombre": "Els Eucaliptus",
+    "distM": 859
+  },
+  "platja-dels-morts": {
+    "codigo": "1705402",
+    "nombre": "En Goixa",
+    "distM": 40
+  },
+  "platja-dels-pescadors-3": {
+    "codigo": "0816301",
+    "nombre": "Pineda de Mar",
+    "distM": 130
+  },
+  "platja-dels-riells": {
+    "codigo": "1706209",
+    "nombre": "Riells",
+    "distM": 81
+  },
+  "platja-des-dolc": {
+    "codigo": "0705904",
+    "nombre": "Colonia de Sant Jordi / Ees Dolç",
+    "distM": 152
+  },
+  "platja-des-geperut": {
+    "codigo": "0700506",
+    "nombre": "Sant Elm",
+    "distM": 176
+  },
+  "platja-des-trenc": {
+    "codigo": "0701303",
+    "nombre": "Es Trenc",
+    "distM": 421
+  },
+  "platja-dibersol": {
+    "codigo": "0807401",
+    "nombre": "Llarga",
+    "distM": 65
+  },
+  "platja-es-grau-2": {
+    "codigo": "0703209",
+    "nombre": "Es Grau",
+    "distM": 1078
+  },
+  "platja-gran-3": {
+    "codigo": "1703209",
+    "nombre": "Gran de Cadaqués",
+    "distM": 47
+  },
+  "platja-gran-de-calella": {
+    "codigo": "0803501",
+    "nombre": "Gran - Garbí",
+    "distM": 218
+  },
+  "platja-gran-tossa-de-mar": {
+    "codigo": "1720207",
+    "nombre": "Gran de Tossa",
+    "distM": 160
+  },
+  "platja-nord-de-gandia": {
+    "codigo": "4613102",
+    "nombre": "Norte de Gandia",
+    "distM": 1169
+  },
+  "platja-pau-pi": {
+    "codigo": "4618102",
+    "nombre": "Pau-Pi",
+    "distM": 233
+  },
+  "platja-sud-de-peniscola": {
+    "codigo": "1208901",
+    "nombre": "Playa Norte",
+    "distM": 486
+  },
+  "playa-arenal-de-moris": {
+    "codigo": "3301303",
+    "nombre": "Arenal de Moris",
+    "distM": 125
+  },
+  "playa-arenal-den-castell": {
+    "codigo": "0703710",
+    "nombre": "Arenal d'en Castell",
+    "distM": 562
+  },
+  "playa-banco-del-tabal": {
+    "codigo": "3003531",
+    "nombre": "Banco del Tabal",
+    "distM": 68
+  },
+  "playa-bollullo-2": {
+    "codigo": "3802601",
+    "nombre": "El Bollullo",
+    "distM": 4
+  },
+  "playa-burriana": {
+    "codigo": "2907509",
+    "nombre": "Burriana",
+    "distM": 171
+  },
+  "playa-cala-la-caleta": {
+    "codigo": "0309908",
+    "nombre": "Cala Roig",
+    "distM": 1080
+  },
+  "playa-cantarrijan": {
+    "codigo": "1801701",
+    "nombre": "Cantarriján",
+    "distM": 318
+  },
+  "playa-central": {
+    "codigo": "2104202",
+    "nombre": "Central",
+    "distM": 591
+  },
+  "playa-de-agua-amarga": {
+    "codigo": "0406601",
+    "nombre": "Aguamarga",
+    "distM": 169
+  },
+  "playa-de-ajuy": {
+    "codigo": "3501501",
+    "nombre": "Ajuí",
+    "distM": 251
+  },
+  "playa-de-amadores": {
+    "codigo": "3501202",
+    "nombre": "Amadores",
+    "distM": 70
+  },
+  "playa-de-amio": {
+    "codigo": "3909504",
+    "nombre": "Amio",
+    "distM": 253
+  },
+  "playa-de-arinaga": {
+    "codigo": "3500201",
+    "nombre": "Arinaga",
+    "distM": 249
+  },
+  "playa-de-arnelles": {
+    "codigo": "3301804",
+    "nombre": "Arnielles",
+    "distM": 142
+  },
+  "playa-de-benitez": {
+    "codigo": "5100104",
+    "nombre": "Benítez",
+    "distM": 146
+  },
+  "playa-de-bil-bil": {
+    "codigo": "2902503",
+    "nombre": "Bil-Bil y Arroyo de la Miel",
+    "distM": 71
+  },
+  "playa-de-bolnuevo": {
+    "codigo": "3002618",
+    "nombre": "Bolnuevo",
+    "distM": 80
+  },
+  "playa-de-bolonia": {
+    "codigo": "1103504",
+    "nombre": "Bolonia",
+    "distM": 631
+  },
+  "playa-de-calabardina": {
+    "codigo": "3000327",
+    "nombre": "Calabardina",
+    "distM": 260
+  },
+  "playa-de-calblanque": {
+    "codigo": "3001634",
+    "nombre": "De Calblanque",
+    "distM": 113
+  },
+  "playa-de-cambriles": {
+    "codigo": "1812401",
+    "nombre": "Cambriles",
+    "distM": 154
+  },
+  "playa-de-camposoto": {
+    "codigo": "1103101",
+    "nombre": "Camposoto - El Castillo",
+    "distM": 666
+  },
+  "playa-de-colon": {
+    "codigo": "3003503",
+    "nombre": "De Colón",
+    "distM": 383
+  },
+  "playa-de-costa-calma": {
+    "codigo": "3501507",
+    "nombre": "Costa Calma y Sotavento de Jandía",
+    "distM": 668
+  },
+  "playa-de-cuchia": {
+    "codigo": "3904401",
+    "nombre": "Cuchia-Marzan",
+    "distM": 235
+  },
+  "playa-de-el-dedo": {
+    "codigo": "2906712",
+    "nombre": "El Dedo - El Chanquete",
+    "distM": 54
+  },
+  "playa-de-el-espartal": {
+    "codigo": "3301608",
+    "nombre": "Salinas - San Juan, El Espartal",
+    "distM": 488
+  },
+  "playa-de-el-portil": {
+    "codigo": "2102102",
+    "nombre": "El Portil",
+    "distM": 979
+  },
+  "playa-de-el-portus": {
+    "codigo": "3001619",
+    "nombre": "El Portús",
+    "distM": 90
+  },
+  "playa-de-fanabe": {
+    "codigo": "3800112",
+    "nombre": "Fañabe",
+    "distM": 88
+  },
+  "playa-de-gran-tarajal": {
+    "codigo": "3503001",
+    "nombre": "Gran Tarajal",
+    "distM": 91
+  },
+  "playa-de-guacimeta": {
+    "codigo": "3501801",
+    "nombre": "Honda",
+    "distM": 276
+  },
+  "playa-de-la-aldea-2": {
+    "codigo": "3502001",
+    "nombre": "Puerto La Aldea y La Aldea",
+    "distM": 34
+  },
+  "playa-de-la-antilla": {
+    "codigo": "2104402",
+    "nombre": "Antilla",
+    "distM": 378
+  },
+  "playa-de-la-bajadilla-2": {
+    "codigo": "2906912",
+    "nombre": "La Bajadilla",
+    "distM": 49
+  },
+  "playa-de-la-ballena-2": {
+    "codigo": "1103001",
+    "nombre": "La Ballena",
+    "distM": 798
+  },
+  "playa-de-la-ballenita": {
+    "codigo": "3801005",
+    "nombre": "La Ballenita",
+    "distM": 77
+  },
+  "playa-de-la-cala-la-butibamba": {
+    "codigo": "2907002",
+    "nombre": "La Butibamba",
+    "distM": 182
+  },
+  "playa-de-la-caleta-5": {
+    "codigo": "1101201",
+    "nombre": "La Caleta",
+    "distM": 91
+  },
+  "playa-de-la-casita-azul": {
+    "codigo": "2104203",
+    "nombre": "Del Hoyo",
+    "distM": 1150
+  },
+  "playa-de-la-chapineta": {
+    "codigo": "3001610",
+    "nombre": "La Azohía",
+    "distM": 73
+  },
+  "playa-de-la-charca": {
+    "codigo": "1817304",
+    "nombre": "La Charca-Solamar",
+    "distM": 269
+  },
+  "playa-de-la-concha": {
+    "codigo": "3908503",
+    "nombre": "La Concha",
+    "distM": 78
+  },
+  "playa-de-la-espindola": {
+    "codigo": "3803302",
+    "nombre": "Charco Azul",
+    "distM": 187
+  },
+  "playa-de-la-fossa-calp": {
+    "codigo": "0304704",
+    "nombre": "La Fossa",
+    "distM": 126
+  },
+  "playa-de-la-franca": {
+    "codigo": "3305501",
+    "nombre": "La Franca",
+    "distM": 129
+  },
+  "playa-de-la-galera-2": {
+    "codigo": "0403203",
+    "nombre": "El Lancon",
+    "distM": 822
+  },
+  "playa-de-la-garita-2": {
+    "codigo": "3501017",
+    "nombre": "La Garita",
+    "distM": 962
+  },
+  "playa-de-la-herradura-2": {
+    "codigo": "1801703",
+    "nombre": "La Herradura",
+    "distM": 273
+  },
+  "playa-de-la-isla": {
+    "codigo": "3002626",
+    "nombre": "La Isla",
+    "distM": 95
+  },
+  "playa-de-la-isla-2": {
+    "codigo": "3301903",
+    "nombre": "La Isla",
+    "distM": 157
+  },
+  "playa-de-la-magdalena": {
+    "codigo": "3907511",
+    "nombre": "La Magdalena",
+    "distM": 252
+  },
+  "playa-de-la-malagueta": {
+    "codigo": "2906707",
+    "nombre": "La Malagueta",
+    "distM": 311
+  },
+  "playa-de-la-mamola": {
+    "codigo": "1816201",
+    "nombre": "La Mamola",
+    "distM": 349
+  },
+  "playa-de-la-mata": {
+    "codigo": "0313302",
+    "nombre": "La Mata",
+    "distM": 1049
+  },
+  "playa-de-la-pared": {
+    "codigo": "3501502",
+    "nombre": "La Pared",
+    "distM": 81
+  },
+  "playa-de-la-reya": {
+    "codigo": "3002623",
+    "nombre": "La Reya",
+    "distM": 109
+  },
+  "playa-de-la-ria": {
+    "codigo": "2104101",
+    "nombre": "El Espigón",
+    "distM": 447
+  },
+  "playa-de-la-salve": {
+    "codigo": "3903502",
+    "nombre": "La Salve",
+    "distM": 442
+  },
+  "playa-de-las-aguas-2": {
+    "codigo": "3803401",
+    "nombre": "Las Aguas",
+    "distM": 132
+  },
+  "playa-de-las-camaras": {
+    "codigo": "3303618",
+    "nombre": "Palombina - Las Camaras, Los Frailes",
+    "distM": 86
+  },
+  "playa-de-las-canteras": {
+    "codigo": "3501601",
+    "nombre": "Las Canteras",
+    "distM": 398
+  },
+  "playa-de-las-lindes": {
+    "codigo": "2909103",
+    "nombre": "Ferrara - Las Lindes",
+    "distM": 50
+  },
+  "playa-de-las-nieves-2": {
+    "codigo": "3500101",
+    "nombre": "Las Nieves",
+    "distM": 67
+  },
+  "playa-de-las-teresitas": {
+    "codigo": "3803806",
+    "nombre": "Las Teresitas",
+    "distM": 212
+  },
+  "playa-de-levante-2": {
+    "codigo": "1102205",
+    "nombre": "Levante - La Atunara",
+    "distM": 343
+  },
+  "playa-de-levante-4": {
+    "codigo": "2906906",
+    "nombre": "Rio Verde - Puerto Banús",
+    "distM": 390
+  },
+  "playa-de-levante-benidorm": {
+    "codigo": "0303102",
+    "nombre": "Llevant / Playa de Levante",
+    "distM": 292
+  },
+  "playa-de-levante-salou": {
+    "codigo": "4390502",
+    "nombre": "Llevant",
+    "distM": 369
+  },
+  "playa-de-los-boliches": {
+    "codigo": "2905402",
+    "nombre": "Los Boliches - Las Gaviotas",
+    "distM": 676
+  },
+  "playa-de-los-canos-de-meca": {
+    "codigo": "1100702",
+    "nombre": "Caños de Meca",
+    "distM": 1001
+  },
+  "playa-de-los-cocones": {
+    "codigo": "0403204",
+    "nombre": "Los Barquicos/Los Cocones",
+    "distM": 233
+  },
+  "playa-de-los-enebrales": {
+    "codigo": "2106004",
+    "nombre": "Punta Umbría",
+    "distM": 210
+  },
+  "playa-de-los-lances": {
+    "codigo": "1103506",
+    "nombre": "Los Lances",
+    "distM": 753
+  },
+  "playa-de-los-pocillos": {
+    "codigo": "3502808",
+    "nombre": "Los Pocillos",
+    "distM": 302
+  },
+  "playa-de-los-urrutias": {
+    "codigo": "3001676",
+    "nombre": "Los Urrutias",
+    "distM": 66
+  },
+  "playa-de-luana": {
+    "codigo": "3900101",
+    "nombre": "Luaña-Cobreces",
+    "distM": 210
+  },
+  "playa-de-luanco": {
+    "codigo": "3302509",
+    "nombre": "Santa Marina de Luanco",
+    "distM": 138
+  },
+  "playa-de-luis-siret": {
+    "codigo": "0403510",
+    "nombre": "Villaricos",
+    "distM": 224
+  },
+  "playa-de-maspalomas": {
+    "codigo": "3501901",
+    "nombre": "Maspalomas",
+    "distM": 758
+  },
+  "playa-de-melicena": {
+    "codigo": "1817704",
+    "nombre": "Melicena",
+    "distM": 498
+  },
+  "playa-de-meron": {
+    "codigo": "3908004",
+    "nombre": "El Sable de Merón",
+    "distM": 164
+  },
+  "playa-de-mogro": {
+    "codigo": "3904405",
+    "nombre": "Mogro-Usil",
+    "distM": 118
+  },
+  "playa-de-navia": {
+    "codigo": "3304101",
+    "nombre": "Navia",
+    "distM": 118
+  },
+  "playa-de-nogales": {
+    "codigo": "3800302",
+    "nombre": "Nogales",
+    "distM": 66
+  },
+  "playa-de-orinon": {
+    "codigo": "3902002",
+    "nombre": "Oriñon",
+    "distM": 211
+  },
+  "playa-de-oyambre": {
+    "codigo": "3909101",
+    "nombre": "Oyambre",
+    "distM": 206
+  },
+  "playa-de-palmones": {
+    "codigo": "1100801",
+    "nombre": "Palmones",
+    "distM": 196
+  },
+  "playa-de-permenande": {
+    "codigo": "3302302",
+    "nombre": "Pormenande",
+    "distM": 88
+  },
+  "playa-de-poniente-3": {
+    "codigo": "1102207",
+    "nombre": "Poniente",
+    "distM": 44
+  },
+  "playa-de-poniente-5": {
+    "codigo": "1814002",
+    "nombre": "Pelaillo-Poniente",
+    "distM": 609
+  },
+  "playa-de-puerto-rey": {
+    "codigo": "0410002",
+    "nombre": "Puerto del Rey",
+    "distM": 660
+  },
+  "playa-de-punta-candor": {
+    "codigo": "1103003",
+    "nombre": "Punta Candor",
+    "distM": 1024
+  },
+  "playa-de-puntas-de-calnegre": {
+    "codigo": "3002414",
+    "nombre": "Puntas de Calnegre",
+    "distM": 157
+  },
+  "playa-de-regla": {
+    "codigo": "1101604",
+    "nombre": "Regla",
+    "distM": 439
+  },
+  "playa-de-retamar": {
+    "codigo": "0401310",
+    "nombre": "Retamar",
+    "distM": 447
+  },
+  "playa-de-san-juan-3": {
+    "codigo": "3801905",
+    "nombre": "San Juan",
+    "distM": 26
+  },
+  "playa-de-san-juan-de-la-canal": {
+    "codigo": "3907302",
+    "nombre": "San Juan de la Canal",
+    "distM": 148
+  },
+  "playa-de-san-lorenzo-2": {
+    "codigo": "3302403",
+    "nombre": "San Lorenzo",
+    "distM": 134
+  },
+  "playa-de-san-marcos": {
+    "codigo": "3802201",
+    "nombre": "San Marcos",
+    "distM": 352
+  },
+  "playa-de-san-martin-2": {
+    "codigo": "3907902",
+    "nombre": "San Martín",
+    "distM": 253
+  },
+  "playa-de-san-miguel": {
+    "codigo": "0401304",
+    "nombre": "San Miguel/Las Conchas/Zapillo",
+    "distM": 185
+  },
+  "playa-de-san-pedru-la-ribera": {
+    "codigo": "3302117",
+    "nombre": "San Pedro de Bocamar",
+    "distM": 128
+  },
+  "playa-de-santa-catalina": {
+    "codigo": "1102701",
+    "nombre": "Fuentebravía - Santa Catalina",
+    "distM": 637
+  },
+  "playa-de-santa-marina": {
+    "codigo": "3305602",
+    "nombre": "Santa Marina",
+    "distM": 102
+  },
+  "playa-de-santiago": {
+    "codigo": "3800301",
+    "nombre": "Santiago",
+    "distM": 61
+  },
+  "playa-de-santo-domingo": {
+    "codigo": "3801801",
+    "nombre": "Santo Domingo",
+    "distM": 399
+  },
+  "playa-de-somo": {
+    "codigo": "3906102",
+    "nombre": "Somo-Loredo",
+    "distM": 562
+  },
+  "playa-de-son-xoriguer": {
+    "codigo": "0701509",
+    "nombre": "Son Xoriguer",
+    "distM": 182
+  },
+  "playa-de-tarajales": {
+    "codigo": "3804502",
+    "nombre": "Puerto de Tazacorte",
+    "distM": 100
+  },
+  "playa-de-toro": {
+    "codigo": "3303626",
+    "nombre": "Toró",
+    "distM": 142
+  },
+  "playa-de-torre-del-mar": {
+    "codigo": "2909406",
+    "nombre": "Torre del Mar",
+    "distM": 479
+  },
+  "playa-de-torre-derribada": {
+    "codigo": "3003605",
+    "nombre": "La Torre Derribada",
+    "distM": 271
+  },
+  "playa-de-troya": {
+    "codigo": "3800116",
+    "nombre": "Las Américas",
+    "distM": 65
+  },
+  "playa-de-valdearenas-2": {
+    "codigo": "3905201",
+    "nombre": "Valdearenas",
+    "distM": 885
+  },
+  "playa-de-valdelagrana": {
+    "codigo": "1102705",
+    "nombre": "Valdelagrana",
+    "distM": 398
+  },
+  "playa-de-vallehermoso": {
+    "codigo": "3805004",
+    "nombre": "Vallehermoso",
+    "distM": 16
+  },
+  "playa-de-vega": {
+    "codigo": "3305601",
+    "nombre": "Vega",
+    "distM": 299
+  },
+  "playa-del-bajondillo": {
+    "codigo": "2990102",
+    "nombre": "La Carihuela - El Bajondillo - Playamar",
+    "distM": 229
+  },
+  "playa-del-cabezo": {
+    "codigo": "3802002",
+    "nombre": "El Puertito",
+    "distM": 85
+  },
+  "playa-del-carmen": {
+    "codigo": "1100703",
+    "nombre": "El Carmen",
+    "distM": 527
+  },
+  "playa-del-castillo-3": {
+    "codigo": "3500301",
+    "nombre": "Caleta de Fuste",
+    "distM": 211
+  },
+  "playa-del-charco-2": {
+    "codigo": "0401313",
+    "nombre": "San Miguel de Cabo de Gata",
+    "distM": 363
+  },
+  "playa-del-chatarrero": {
+    "codigo": "3801503",
+    "nombre": "Caletón De Garachico",
+    "distM": 92
+  },
+  "playa-del-faro-2": {
+    "codigo": "3801404",
+    "nombre": "El Faro",
+    "distM": 811
+  },
+  "playa-del-forti-vinaros": {
+    "codigo": "1213810",
+    "nombre": "Forti",
+    "distM": 174
+  },
+  "playa-del-gomero": {
+    "codigo": "3804203",
+    "nombre": "El Gomero",
+    "distM": 72
+  },
+  "playa-del-ingles": {
+    "codigo": "3501902",
+    "nombre": "El Inglés",
+    "distM": 1156
+  },
+  "playa-del-lastre": {
+    "codigo": "3004102",
+    "nombre": "Del Lastre",
+    "distM": 35
+  },
+  "playa-del-marfolin": {
+    "codigo": "3501401",
+    "nombre": "Marfolín",
+    "distM": 297
+  },
+  "playa-del-matorral": {
+    "codigo": "3501506",
+    "nombre": "Butihondo y El Matorral",
+    "distM": 545
+  },
+  "playa-del-medano-el-medano": {
+    "codigo": "3801705",
+    "nombre": "El Médano",
+    "distM": 192
+  },
+  "playa-del-murallon": {
+    "codigo": "3307007",
+    "nombre": "Anguileiro, La Grande / Los Campos",
+    "distM": 66
+  },
+  "playa-del-pueblo": {
+    "codigo": "3503410",
+    "nombre": "Playa Blanca",
+    "distM": 22
+  },
+  "playa-del-rinconcillo": {
+    "codigo": "1100401",
+    "nombre": "El Rinconcillo",
+    "distM": 589
+  },
+  "playa-del-tasarte": {
+    "codigo": "3502002",
+    "nombre": "Tasarte",
+    "distM": 132
+  },
+  "playa-doutur": {
+    "codigo": "3303402",
+    "nombre": "Otur",
+    "distM": 51
+  },
+  "playa-el-galan": {
+    "codigo": "3003526",
+    "nombre": "El Arenal",
+    "distM": 396
+  },
+  "playa-el-poris": {
+    "codigo": "3800504",
+    "nombre": "Poris",
+    "distM": 17
+  },
+  "playa-el-ruso": {
+    "codigo": "0400308",
+    "nombre": "Poniente",
+    "distM": 609
+  },
+  "playa-ensenada-del-esparto-2": {
+    "codigo": "3003509",
+    "nombre": "Mistral",
+    "distM": 418
+  },
+  "playa-galua": {
+    "codigo": "3001655",
+    "nombre": "Barco Perdido, Galúa",
+    "distM": 254
+  },
+  "playa-guasimeta": {
+    "codigo": "3502811",
+    "nombre": "Guacimeta",
+    "distM": 353
+  },
+  "playa-heliopolis-benicasimbenicassim": {
+    "codigo": "1202805",
+    "nombre": "Heliopolis",
+    "distM": 316
+  },
+  "playa-jardin-puerto-de-la-cruz": {
+    "codigo": "3802801",
+    "nombre": "Jardín",
+    "distM": 351
+  },
+  "playa-la-arena": {
+    "codigo": "4807101",
+    "nombre": "Muskiz-La Arena",
+    "distM": 219
+  },
+  "playa-la-hornilla": {
+    "codigo": "3801103",
+    "nombre": "La Hornilla - Los Guanches",
+    "distM": 423
+  },
+  "playa-la-nea": {
+    "codigo": "3803801",
+    "nombre": "La Nea",
+    "distM": 69
+  },
+  "playa-la-playuela": {
+    "codigo": "3003606",
+    "nombre": "Las Salinas",
+    "distM": 453
+  },
+  "playa-la-torrecilla": {
+    "codigo": "2907502",
+    "nombre": "Torrecilla",
+    "distM": 34
+  },
+  "playa-las-charcas": {
+    "codigo": "0390208",
+    "nombre": "Port / El Puerto",
+    "distM": 113
+  },
+  "playa-martianez": {
+    "codigo": "3802804",
+    "nombre": "Martiánez",
+    "distM": 72
+  },
+  "playa-matagorda": {
+    "codigo": "3502809",
+    "nombre": "Matagorda",
+    "distM": 759
+  },
+  "playa-posito-garrucha": {
+    "codigo": "0404901",
+    "nombre": "Garrucha",
+    "distM": 117
+  },
+  "playa-pozo-del-esparto-la-escribania": {
+    "codigo": "0403501",
+    "nombre": "Pozo del Esparto",
+    "distM": 714
+  },
+  "playa-san-felipe": {
+    "codigo": "3502301",
+    "nombre": "San Felipe",
+    "distM": 738
+  },
+  "playa-santa-catalina": {
+    "codigo": "3802101",
+    "nombre": "Hermigua",
+    "distM": 233
+  },
+  "playa-sorraos": {
+    "codigo": "3303614",
+    "nombre": "Xiglu - Barro - Sorraos",
+    "distM": 101
+  },
+  "playa-taurito": {
+    "codigo": "3501201",
+    "nombre": "Taurito",
+    "distM": 86
+  },
+  "playa-victoria": {
+    "codigo": "2908202",
+    "nombre": "Rincón de la Victoria",
+    "distM": 152
+  },
+  "playa-villananitos": {
+    "codigo": "3003602",
+    "nombre": "Villananitos",
+    "distM": 266
+  },
+  "playon-de-bayas-el-sablon": {
+    "codigo": "3306901",
+    "nombre": "Los Quebrantos",
+    "distM": 289
+  },
+  "plentzia": {
+    "codigo": "4807701",
+    "nombre": "Plentzia-Plencia",
+    "distM": 292
+  },
+  "portinatx-playa-porto": {
+    "codigo": "0705016",
+    "nombre": "Portinatx",
+    "distM": 160
+  },
+  "portomaior-bueu": {
+    "codigo": "3600411",
+    "nombre": "Portomaior-Agrelo",
+    "distM": 178
+  },
+  "pozo-izquierdo": {
+    "codigo": "3502201",
+    "nombre": "Pozo Izquierdo, El Arenal",
+    "distM": 291
+  },
+  "pragueira-sanxenxo": {
+    "codigo": "3605110",
+    "nombre": "Maxor",
+    "distM": 363
+  },
+  "praia-america": {
+    "codigo": "3603501",
+    "nombre": "Panxón-América",
+    "distM": 438
+  },
+  "praia-da-aguieira": {
+    "codigo": "1507101",
+    "nombre": "Aguieira",
+    "distM": 107
+  },
+  "praia-da-area-longa": {
+    "codigo": "2701902",
+    "nombre": "Area Longa",
+    "distM": 132
+  },
+  "praia-da-area-longa-3": {
+    "codigo": "2706402",
+    "nombre": "Area Longa",
+    "distM": 184
+  },
+  "praia-da-balea": {
+    "codigo": "2700504",
+    "nombre": "Valea, Benquerencia",
+    "distM": 491
+  },
+  "praia-da-concha-2": {
+    "codigo": "1506101",
+    "nombre": "Espasante",
+    "distM": 293
+  },
+  "praia-da-ermida": {
+    "codigo": "1506803",
+    "nombre": "Hermida",
+    "distM": 113
+  },
+  "praia-da-frouxeira": {
+    "codigo": "1508701",
+    "nombre": "Frouxeira",
+    "distM": 203
+  },
+  "praia-da-ladeira": {
+    "codigo": "3600303",
+    "nombre": "Ladeira, Ramallosa",
+    "distM": 319
+  },
+  "praia-da-ladeira-2": {
+    "codigo": "1507305",
+    "nombre": "Corrubedo",
+    "distM": 681
+  },
+  "praia-da-lagosteira": {
+    "codigo": "1503701",
+    "nombre": "Langosteira",
+    "distM": 356
+  },
+  "praia-da-lanzada-2": {
+    "codigo": "3602201",
+    "nombre": "A Lanzada",
+    "distM": 451
+  },
+  "praia-da-madalena": {
+    "codigo": "1501501",
+    "nombre": "Magdalena, Cabanas",
+    "distM": 444
+  },
+  "praia-da-madalena-2": {
+    "codigo": "1502202",
+    "nombre": "Magdalena",
+    "distM": 306
+  },
+  "praia-da-mexiloeira": {
+    "codigo": "3602209",
+    "nombre": "Mexilloeira",
+    "distM": 223
+  },
+  "praia-da-mourisca-2": {
+    "codigo": "3600408",
+    "nombre": "Mourisca",
+    "distM": 168
+  },
+  "praia-da-punta": {
+    "codigo": "3604501",
+    "nombre": "Cesantes",
+    "distM": 492
+  },
+  "praia-da-xunqueira-2": {
+    "codigo": "3602903",
+    "nombre": "Xunqueira, Moaña",
+    "distM": 190
+  },
+  "praia-das-delicias": {
+    "codigo": "1507507",
+    "nombre": "Sada",
+    "distM": 125
+  },
+  "praia-das-furnas-3": {
+    "codigo": "1507110",
+    "nombre": "As Furnas",
+    "distM": 493
+  },
+  "praia-de-area-da-cruz": {
+    "codigo": "3602202",
+    "nombre": "Area da Cruz",
+    "distM": 212
+  },
+  "praia-de-area-grande": {
+    "codigo": "3602208",
+    "nombre": "Area Grande",
+    "distM": 158
+  },
+  "praia-de-area-longa": {
+    "codigo": "1507111",
+    "nombre": "Baroña",
+    "distM": 78
+  },
+  "praia-de-area-maior-2": {
+    "codigo": "1504302",
+    "nombre": "Maior, Malpica",
+    "distM": 153
+  },
+  "praia-de-area-mean": {
+    "codigo": "3600802",
+    "nombre": "Barra-Nerga",
+    "distM": 203
+  },
+  "praia-de-areabrava": {
+    "codigo": "3600805",
+    "nombre": "Area Brava",
+    "distM": 175
+  },
+  "praia-de-ares": {
+    "codigo": "1500401",
+    "nombre": "Ares",
+    "distM": 131
+  },
+  "praia-de-arneles": {
+    "codigo": "3600808",
+    "nombre": "Vilariño-Arnelas, Hio",
+    "distM": 152
+  },
+  "praia-de-baldaio-as-sainas": {
+    "codigo": "1501902",
+    "nombre": "Razo-Baldaio",
+    "distM": 598
+  },
+  "praia-de-bares": {
+    "codigo": "1504402",
+    "nombre": "Bares",
+    "distM": 218
+  },
+  "praia-de-barizo": {
+    "codigo": "1504303",
+    "nombre": "Barizo",
+    "distM": 49
+  },
+  "praia-de-barrana": {
+    "codigo": "1501101",
+    "nombre": "Barraña",
+    "distM": 566
+  },
+  "praia-de-ber": {
+    "codigo": "1506901",
+    "nombre": "Ber",
+    "distM": 185
+  },
+  "praia-de-boa": {
+    "codigo": "1505701",
+    "nombre": "Boa Grande",
+    "distM": 213
+  },
+  "praia-de-brona": {
+    "codigo": "1506201",
+    "nombre": "Broña",
+    "distM": 250
+  },
+  "praia-de-carnota": {
+    "codigo": "1502001",
+    "nombre": "Carnota",
+    "distM": 370
+  },
+  "praia-de-carregueiros": {
+    "codigo": "1501103",
+    "nombre": "Mañóns",
+    "distM": 71
+  },
+  "praia-de-catro-cordas": {
+    "codigo": "3606102",
+    "nombre": "As Sinas",
+    "distM": 166
+  },
+  "praia-de-chancelas": {
+    "codigo": "3604103",
+    "nombre": "Chancelas",
+    "distM": 197
+  },
+  "praia-de-coira": {
+    "codigo": "1507104",
+    "nombre": "Coira",
+    "distM": 150
+  },
+  "praia-de-covas": {
+    "codigo": "2706602",
+    "nombre": "Covas",
+    "distM": 277
+  },
+  "praia-de-estorde": {
+    "codigo": "1502301",
+    "nombre": "Estorde",
+    "distM": 335
+  },
+  "praia-de-fonte-da-pedra": {
+    "codigo": "1506702",
+    "nombre": "Cabío-Lombiña",
+    "distM": 85
+  },
+  "praia-de-lago": {
+    "codigo": "2702503",
+    "nombre": "Lago",
+    "distM": 44
+  },
+  "praia-de-lourido": {
+    "codigo": "1505205",
+    "nombre": "Lourido",
+    "distM": 130
+  },
+  "praia-de-medron": {
+    "codigo": "1505303",
+    "nombre": "Esteiro",
+    "distM": 135
+  },
+  "praia-de-mellide": {
+    "codigo": "3600419",
+    "nombre": "Melide, Ons",
+    "distM": 187
+  },
+  "praia-de-morouzos": {
+    "codigo": "1506102",
+    "nombre": "Morouzos",
+    "distM": 57
+  },
+  "praia-de-patos": {
+    "codigo": "3603504",
+    "nombre": "Patos",
+    "distM": 549
+  },
+  "praia-de-queiruga": {
+    "codigo": "1507109",
+    "nombre": "Queiruga",
+    "distM": 301
+  },
+  "praia-de-quenxe": {
+    "codigo": "1502802",
+    "nombre": "Quenxe",
+    "distM": 176
+  },
+  "praia-de-rochas-brancas": {
+    "codigo": "2705005",
+    "nombre": "Os Castros",
+    "distM": 519
+  },
+  "praia-de-salseiras": {
+    "codigo": "1504101",
+    "nombre": "Caión",
+    "distM": 135
+  },
+  "praia-de-san-bartolo": {
+    "codigo": "2700501",
+    "nombre": "Altar, San Cosme",
+    "distM": 409
+  },
+  "praia-de-san-francisco": {
+    "codigo": "1505301",
+    "nombre": "San Francisco",
+    "distM": 136
+  },
+  "praia-de-san-pedro-2": {
+    "codigo": "1507506",
+    "nombre": "San Pedro",
+    "distM": 124
+  },
+  "praia-de-san-roman": {
+    "codigo": "2706403",
+    "nombre": "Areagrande, San Roman",
+    "distM": 38
+  },
+  "praia-de-sardineiro": {
+    "codigo": "1503707",
+    "nombre": "Sardiñeiro",
+    "distM": 64
+  },
+  "praia-de-seselle": {
+    "codigo": "1500403",
+    "nombre": "Seselle",
+    "distM": 219
+  },
+  "praia-de-tanxil": {
+    "codigo": "1507202",
+    "nombre": "Tanxil",
+    "distM": 325
+  },
+  "praia-de-vilarino": {
+    "codigo": "3600806",
+    "nombre": "Area Grande",
+    "distM": 234
+  },
+  "praia-de-xilloi": {
+    "codigo": "2706405",
+    "nombre": "Xilloi",
+    "distM": 100
+  },
+  "praia-do-areal": {
+    "codigo": "1506701",
+    "nombre": "Areal",
+    "distM": 182
+  },
+  "praia-do-baluarte-2": {
+    "codigo": "3605702",
+    "nombre": "Bao",
+    "distM": 91
+  },
+  "praia-do-castro-2": {
+    "codigo": "1507302",
+    "nombre": "O Castro, Aguiño",
+    "distM": 303
+  },
+  "praia-do-cocho-das-dornas": {
+    "codigo": "3605701",
+    "nombre": "A Fonte",
+    "distM": 187
+  },
+  "praia-do-ezaro": {
+    "codigo": "1503401",
+    "nombre": "Ezaro",
+    "distM": 221
+  },
+  "praia-do-lago": {
+    "codigo": "1505202",
+    "nombre": "Lago",
+    "distM": 167
+  },
+  "praia-do-terron-2": {
+    "codigo": "3606103",
+    "nombre": "O Terrón",
+    "distM": 191
+  },
+  "praia-do-testal": {
+    "codigo": "1505703",
+    "nombre": "Testal",
+    "distM": 228
+  },
+  "praia-dos-muinos": {
+    "codigo": "1505204",
+    "nombre": "Os Muiños, Area Maior",
+    "distM": 136
+  },
+  "praina-da-mona": {
+    "codigo": "3602902",
+    "nombre": "Tirán",
+    "distM": 69
+  },
+  "prat-den-fores-i-regueral-cambrils": {
+    "codigo": "4303804",
+    "nombre": "Prat d'en Fores i Regueral",
+    "distM": 243
+  },
+  "puerta-del-mar-almunecar": {
+    "codigo": "1801709",
+    "nombre": "Puerta del Mar-Fuentepiedra",
+    "distM": 94
+  },
+  "puerto-naos-los-llanos-de-aridane": {
+    "codigo": "3802403",
+    "nombre": "Puerto Naos",
+    "distM": 53
+  },
+  "punta-prima-sant-lluis": {
+    "codigo": "0705202",
+    "nombre": "Punta Prima",
+    "distM": 133
+  },
+  "ribes-roges-vilanova-i-la-geltru": {
+    "codigo": "0830702",
+    "nombre": "Ribes Roges",
+    "distM": 305
+  },
+  "ris-noja": {
+    "codigo": "3904701",
+    "nombre": "Ris",
+    "distM": 142
+  },
+  "rodeira-cangas": {
+    "codigo": "3600803",
+    "nombre": "Rodeira",
+    "distM": 224
+  },
+  "rodiles-villaviciosa": {
+    "codigo": "3307606",
+    "nombre": "Rodiles",
+    "distM": 88
+  },
+  "sa-coma-sant-llorenc-des-cardassar": {
+    "codigo": "0705104",
+    "nombre": "Sa Coma",
+    "distM": 181
+  },
+  "sabanell-blanes": {
+    "codigo": "1702304",
+    "nombre": "S'Abanell",
+    "distM": 859
+  },
+  "sabinillas-manilva": {
+    "codigo": "2906801",
+    "nombre": "Sabinillas",
+    "distM": 366
+  },
+  "sablera-palmera": {
+    "codigo": "3301403",
+    "nombre": "Candás - La Palmera",
+    "distM": 188
+  },
+  "samarador-santanyi": {
+    "codigo": "0705706",
+    "nombre": "Cala Mondragó",
+    "distM": 122
+  },
+  "samil-vigo": {
+    "codigo": "3605706",
+    "nombre": "Samil",
+    "distM": 313
+  },
+  "san-agustin-san-bartolome-de-tirajana": {
+    "codigo": "3501903",
+    "nombre": "San Agustín",
+    "distM": 236
+  },
+  "san-jose-nijar": {
+    "codigo": "0406614",
+    "nombre": "San José",
+    "distM": 114
+  },
+  "san-miguel-el-ejido": {
+    "codigo": "0490204",
+    "nombre": "San Miguel-Poniente Almerimar",
+    "distM": 943
+  },
+  "san-sebastian-san-sebastian-de-la-gomera": {
+    "codigo": "3803605",
+    "nombre": "San Sebastian",
+    "distM": 441
+  },
+  "san-xurxo-ferrol": {
+    "codigo": "1503608",
+    "nombre": "San Xurxo",
+    "distM": 656
+  },
+  "sant-antoni-calonge": {
+    "codigo": "1703402",
+    "nombre": "Torre Valentina - Sant Antoni",
+    "distM": 470
+  },
+  "sant-antoni-cullera": {
+    "codigo": "4610507",
+    "nombre": "Sant Antoni",
+    "distM": 916
+  },
+  "sant-feliu-sant-feliu-de-guixols": {
+    "codigo": "1716002",
+    "nombre": "Sant Feliu de Guíxols",
+    "distM": 172
+  },
+  "sant-pol-sant-feliu-de-guixols": {
+    "codigo": "1716001",
+    "nombre": "Sant Pol",
+    "distM": 130
+  },
+  "santa-cristina-oleiros": {
+    "codigo": "1505803",
+    "nombre": "Santa Cristina",
+    "distM": 68
+  },
+  "santiago-hondartza": {
+    "codigo": "2008103",
+    "nombre": "Santixo-Santiago",
+    "distM": 118
+  },
+  "sardina-galdar": {
+    "codigo": "3500901",
+    "nombre": "Sardina",
+    "distM": 58
+  },
+  "sarenal-de-san-antonio": {
+    "codigo": "0704608",
+    "nombre": "San Antonio / Es Regueró",
+    "distM": 375
+  },
+  "saturraran": {
+    "codigo": "2005601",
+    "nombre": "Saturraran",
+    "distM": 182
+  },
+  "segunda-playa-de-el-sardinero": {
+    "codigo": "3907506",
+    "nombre": "Sardinero",
+    "distM": 218
+  },
+  "silgar-sanxenxo": {
+    "codigo": "3605117",
+    "nombre": "Silgar",
+    "distM": 224
+  },
+  "sillot": {
+    "codigo": "0703301",
+    "nombre": "S'Illot / Cala Moreira",
+    "distM": 160
+  },
+  "son-bou-alaior": {
+    "codigo": "0700201",
+    "nombre": "Son Bou",
+    "distM": 123
+  },
+  "sotillo-castell-gualchos": {
+    "codigo": "1809302",
+    "nombre": "Sotillo-Castell de Ferro",
+    "distM": 52
+  },
+  "tonako-hondartza": {
+    "codigo": "4807603",
+    "nombre": "San Antonio De Abiña",
+    "distM": 385
+  },
+  "toranda": {
+    "codigo": "3303612",
+    "nombre": "Niembro, Toranda",
+    "distM": 108
+  },
+  "torrenueva-torrenueva-costa": {
+    "codigo": "1814004",
+    "nombre": "Torrenueva",
+    "distM": 190
+  },
+  "urbanizacion-roquetas-de-mar-roquetas-de-mar": {
+    "codigo": "0407906",
+    "nombre": "Urbanización Roquetas del Mar",
+    "distM": 919
+  },
+  "velilla-almunecar": {
+    "codigo": "1801710",
+    "nombre": "Velilla",
+    "distM": 214
+  },
+  "vilafortuny-cambrils": {
+    "codigo": "4303806",
+    "nombre": "Vilafortuny-L'Esquirol",
+    "distM": 518
+  },
+  "waikiki-beach": {
+    "codigo": "3501402",
+    "nombre": "Corralejo",
+    "distM": 134
+  },
+  "xibares": {
+    "codigo": "3301406",
+    "nombre": "Xivares",
+    "distM": 165
+  },
+  "zarauzko-hondartza": {
+    "codigo": "2007901",
+    "nombre": "Zarautz-Zarauz",
+    "distM": 390
+  },
+  "zona-dunar-protegida-reseda-hookeri": {
+    "codigo": "0826101",
+    "nombre": "Santa Susanna",
+    "distM": 240
+  },
+  "zurriola": {
+    "codigo": "2006905",
+    "nombre": "La Zurriola",
+    "distM": 1015
+  }
+}

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
+import { getPrediccionAemet } from '@/lib/aemet'
 import GygActivities from '@/components/GygActivities'
 import { getCalidad } from '@/lib/calidad'
 import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
@@ -199,6 +200,8 @@ export default async function PlayaPage({ params }: Props) {
     getVideoYouTube(playa.nombre, playa.municipio, slug),
     // Webcams en directo (Windy) — gated por WINDY_API_KEY; [] si no hay clave
     getWebcams(playa.lat, playa.lng),
+    // Predicción oficial AEMET — gated por AEMET_API_KEY; null sin key/mapeo
+    getPrediccionAemet(slug),
   ] as const
   const DEADLINE_MS = 1500
   const conDeadline = promesas.map(p =>
@@ -216,7 +219,7 @@ export default async function PlayaPage({ params }: Props) {
     meteoForecast, turbidez,
     restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
     allPlayasResult, municipioSlugsResult,
-    videoResult, webcamResult,
+    videoResult, webcamResult, aemetResult,
   ] = await Promise.all(conDeadline) as any[]
   const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
   const webcamsData = (webcamResult?.status === 'fulfilled' ? webcamResult.value : []).slice(0, 3)
@@ -342,7 +345,36 @@ export default async function PlayaPage({ params }: Props) {
   const dateModified = meteoPlayaData?.timestamp ?? PLAYAS_DATA_MODIFIED
 
   // Sin datos reales de mar Y viento no se puede izar bandera estimada.
-  const banderaPlaya = (datosMar && datosViento) ? calcularBandera(olas, viento, vientoRacha) : undefined
+  const banderaEstimada = (datosMar && datosViento) ? calcularBandera(olas, viento, vientoRacha) : undefined
+
+  // ── Capas "certeras" sobre la estimación meteo (jul-2026) ──────────
+  // 1. AEMET oficial: si prevé oleaje fuerte hoy, mínimo amarilla.
+  // 2. Reportes de bañistas (24 h): si reportan bandera MÁS severa que la
+  //    estimada, manda el reporte. Solo se ELEVA, nunca se rebaja: el
+  //    crowdsourcing no puede poner verde un mar que la meteo marca rojo.
+  const aemetData = aemetResult?.status === 'fulfilled' ? aemetResult.value : null
+  const SEV = { verde: 0, amarilla: 1, roja: 2 } as const
+  let banderaPlaya = banderaEstimada
+  if (aemetData?.hoy?.oleaje === 'fuerte' && (!banderaPlaya || SEV[banderaPlaya.color] < 1)) {
+    banderaPlaya = {
+      color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
+      motivo: 'AEMET prevé oleaje fuerte hoy', motivoEn: 'AEMET forecasts rough sea today',
+      hex: '#f59e0b',
+    }
+  }
+  const repFlag = reportesData
+    ? (reportesData.bandera_roja > 0 ? 'roja' : reportesData.bandera_amarilla > 0 ? 'amarilla' : null)
+    : null
+  if (repFlag && (!banderaPlaya || SEV[repFlag] > SEV[banderaPlaya.color])) {
+    banderaPlaya = {
+      color: repFlag,
+      label: repFlag === 'roja' ? 'Bandera roja' : 'Bandera amarilla',
+      labelEn: repFlag === 'roja' ? 'Red flag' : 'Yellow flag',
+      motivo: 'Izada según bañistas en la playa (últimas 24 h)',
+      motivoEn: 'Flying according to beachgoers (last 24 h)',
+      hex: repFlag === 'roja' ? '#ef4444' : '#f59e0b',
+    }
+  }
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
@@ -499,6 +531,7 @@ export default async function PlayaPage({ params }: Props) {
         meteoForecast={meteoForecastData}
         dateModified={dateModified}
         banderaPlaya={banderaPlaya}
+        aemet={aemetData}
         medusas={medusas}
         mareasLunar={mareasLunar}
         horaIdeal={horaIdeal}

@@ -91,6 +91,8 @@ interface Props {
   meteoForecast?: MeteoForecast[]
   dateModified?:   string
   banderaPlaya?:   BanderaPlaya
+  /** Predicción oficial AEMET del día (null sin API key o sin mapeo). */
+  aemet?:          import('@/lib/aemet').AemetPlaya | null
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
   horaIdeal?:      HoraIdeal
@@ -269,7 +271,7 @@ function Reorder({ order, children }: { order: string[]; children: React.ReactNo
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -445,7 +447,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* 4. SEGURIDAD: BANDERA + MEDUSAS — movido aquí (PR #86)
             La gente decide '¿me meto o no?' antes que datos meteo
             abstractos. Va junto al estado-hoy. */}
-        {(banderaPlaya || medusas) && (
+        {(banderaPlaya || medusas || aemet?.hoy) && (
           <div key="seguridad" className={styles.card} id="s-seguridad">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>{i18n.seguridad(nombreH)}</h2>
@@ -467,6 +469,19 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   <div>
                     <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? medusas.labelEn : medusas.label}</div>
                     <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? medusas.detalleEn : medusas.detalle}</div>
+                  </div>
+                </div>
+              )}
+              {aemet?.hoy && (aemet.hoy.oleaje || aemet.hoy.viento || aemet.hoy.tAgua != null) && (
+                <div style={{ marginTop:'.9rem', paddingTop:'.75rem', borderTop:'1px dashed var(--line)', fontSize:'.78rem', color:'var(--ink)', lineHeight:1.6 }}>
+                  <strong style={{ fontSize:'.72rem', letterSpacing:'.05em', textTransform:'uppercase', color:'var(--muted)' }}>
+                    {locale === 'en' ? 'AEMET official forecast today' : 'Predicción oficial AEMET hoy'}
+                  </strong>
+                  <div>
+                    {aemet.hoy.oleaje && <>{locale === 'en' ? 'Sea' : 'Oleaje'}: <strong>{aemet.hoy.oleaje}</strong></>}
+                    {aemet.hoy.viento && <> · {locale === 'en' ? 'wind' : 'viento'}: <strong>{aemet.hoy.viento}</strong></>}
+                    {aemet.hoy.tAgua != null && <> · {locale === 'en' ? 'water' : 'agua'}: <strong>{aemet.hoy.tAgua}°C</strong></>}
+                    {aemet.hoy.uvMax != null && <> · UV <strong>{aemet.hoy.uvMax}</strong></>}
                   </div>
                 </div>
               )}
