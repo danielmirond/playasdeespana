@@ -1,3 +1,4 @@
+import { BOAT_RENTAL_LOCALITIES } from './boat-rental-localities'
 /**
  * Boat Rental Affiliate Helpers
  * SamBoat integration via Awin
@@ -59,4 +60,41 @@ export const getProvinceSlug = (province: string): string => boatRentalSlug(prov
  */
 export const getBoatRentalCanonical = (coast: string, province: string, locality: string): string => {
   return `https://playas-espana.com/alquiler-barco/costas/${boatRentalSlug(coast)}/provincias/${boatRentalSlug(province)}/${boatRentalSlug(locality)}`
+}
+
+/**
+ * Enlace interno de alquiler de barcos para una FICHA de playa costera.
+ * - Si el municipio de la playa casa con una localidad de barcos → su ficha.
+ * - Si la provincia tiene localidades pero el municipio no casa → hub de la
+ *   costa (siempre correcto; evita enlazar "Mallorca" desde una playa de
+ *   Ibiza).
+ * - Provincia sin oferta → null (la ficha no muestra CTA).
+ */
+export function getBoatLinkForPlaya(
+  provincia: string | undefined,
+  municipio: string | undefined,
+): { label: string; href: string } | null {
+  if (!provincia) return null
+  const norm = (x: string) => (x ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  const PROV_MAP: Record<string, string> = {
+    'islas baleares': 'baleares',
+    'santa cruz de tenerife': 'tenerife',
+    'las palmas': 'tenerife', // sin oferta propia: Canarias → Tenerife (misma costa)
+  }
+  const pn = PROV_MAP[norm(provincia)] ?? norm(provincia)
+  const locs = Object.values(BOAT_RENTAL_LOCALITIES).filter(l => norm(l.province) === pn)
+  if (!locs.length) return null
+
+  const mn = norm(municipio ?? '')
+  const byMuni = mn
+    ? locs.find(l => mn.includes(norm(l.locality)) || norm(l.locality).includes(mn))
+    : undefined
+  if (byMuni) {
+    return {
+      label: byMuni.locality,
+      href: `/alquiler-barco/costas/${boatRentalSlug(byMuni.coast)}/provincias/${boatRentalSlug(byMuni.province)}/${byMuni.slug}`,
+    }
+  }
+  const coast = locs[0].coast
+  return { label: coast, href: `/alquiler-barco/costas/${boatRentalSlug(coast)}` }
 }

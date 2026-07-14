@@ -458,3 +458,8 @@
   .aeQl { font-size: .45rem; }
   .srV { font-size: .72rem; }
 }
+
+/* Acciones del aside: solo escritorio. En móvil duplicaban el "Compartir"
+   del hero y el "Cómo llegar" de la barra inferior (auditoría de ficha). */
+.soloDesktop { display: none; }
+@media (min-width: 900px) { .soloDesktop { display: block; } }

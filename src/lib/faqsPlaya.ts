@@ -16,9 +16,9 @@ export interface FaqItem { q: string; a: string }
 
 export interface FaqCtx {
   playa:        Playa
-  aguaC:        number
-  olasM:        number
-  vientoKmh:    number
+  aguaC:        number | null
+  olasM:        number | null
+  vientoKmh:    number | null
   vientoRacha?: number
   vientoDir?:   string
   banderaPlaya?: BanderaPlaya
@@ -34,12 +34,17 @@ export function generarFaqsPlaya(ctx: FaqCtx): FaqItem[] {
 
   const out: (FaqItem | null)[] = []
 
-  out.push({
-    q: es ? `¿Cómo está el agua en ${n} hoy?` : `How is the water at ${n} today?`,
-    a: es
-      ? `La temperatura del agua en ${n} es de ${aguaC}°C con olas de ${olasM}m.`
-      : `Water temperature at ${n} is ${aguaC}°C with ${olasM}m waves.`,
-  })
+  // Sin dato real NO se afirma nada: esta respuesta va también al FAQPage
+  // schema y una cifra fabricada (18°C con el fallback antiguo) queda
+  // indexada 1h por ISR.
+  if (aguaC != null && olasM != null) {
+    out.push({
+      q: es ? `¿Cómo está el agua en ${n} hoy?` : `How is the water at ${n} today?`,
+      a: es
+        ? `La temperatura del agua en ${n} es de ${aguaC}°C con olas de ${olasM}m.`
+        : `Water temperature at ${n} is ${aguaC}°C with ${olasM}m waves.`,
+    })
+  }
 
   if (banderaPlaya) {
     out.push({
@@ -59,7 +64,7 @@ export function generarFaqsPlaya(ctx: FaqCtx): FaqItem[] {
     })
   }
 
-  out.push({
+  if (vientoKmh != null) out.push({
     q: es ? `¿Cuánto viento hace en ${n}?` : `How windy is it at ${n}?`,
     a: es
       ? `El viento en ${n} es de ${vientoKmh} km/h${vientoRacha !== undefined ? ` con rachas de ${vientoRacha} km/h` : ''}${vientoDir ? ` (dirección ${vientoDir})` : ''}.`

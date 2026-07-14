@@ -53,17 +53,20 @@ export default function PhotoCarousel({ fotos, nombreAlt, locale = 'es' }: Props
     <div className={styles.carousel}>
       {visibles.map(({ f, i }, posicion) => (
         <div key={i} className={styles.carouselSlide}>
+          {/* SIEMPRE thumb + lazy: la galería va below-the-fold. Cargar el
+              original (f.url puede ser un JPG de 3-10 MB de Wikimedia) con
+              eager+fetchPriority=high competía con el LCP del hero y
+              quemaba datos móviles. */}
           <img
-            src={posicion === 0 ? f.url : f.thumb}
+            src={f.thumb}
             alt={`${nombreAlt} - foto ${posicion + 1}`}
-            loading={posicion === 0 ? 'eager' : 'lazy'}
+            loading="lazy"
             decoding="async"
             onError={() => setBroken(prev => {
               const next = new Set(prev)
               next.add(i)
               return next
             })}
-            {...(posicion === 0 ? { fetchPriority: 'high' as const } : {})}
           />
           {posicion === 0 && (
             <div className={styles.gFuente}>

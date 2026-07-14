@@ -65,9 +65,10 @@ const VotacionPlaya = dynamic(() => import('./VotacionPlaya'), {
 })
 
 interface Meteo {
-  agua: number; olas: number; viento: number; vientoRacha: number
-  vientoDireccion: string; uv: number; tempAire: number
-  sensacion: number; humedad: number
+  // null = el fetch cayó y NO hay dato real; la UI muestra "—", nunca inventa.
+  agua: number | null; olas: number | null; viento: number | null; vientoRacha: number
+  vientoDireccion: string; uv: number | null; tempAire: number | null
+  sensacion: number | null; humedad: number
   amanecer?: string; atardecer?: string; estado: string; periodo?: number
 }
 interface OleajeHora { h: string; v: number }
@@ -554,7 +555,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <span className={styles.cardSrc}>{i18n.oleajeSrc}</span>
           </div>
           <div className={styles.cardBody}>
-            <OleajeChart olas={meteo.olas} oleajeHoras={oleajeHoras} nowLabel={i18n.nowLabel} />
+            <OleajeChart olas={meteo.olas ?? 0} oleajeHoras={oleajeHoras} nowLabel={i18n.nowLabel} />
           </div>
 
           <Collapsible maxHeight={0} labelMore={locale === 'en' ? 'Sun, tides, temperature, wind' : 'Sol, mareas, temperatura, viento'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
@@ -632,13 +633,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <div className={styles.tempGrid}>
-              <TempCell icon={<Thermometer size={18} weight="bold" color="var(--accent)"/>} val={`${meteo.tempAire}°C`}   label={i18n.tempAire}/>
-              <TempCell icon={<Drop size={18} weight="bold" color="var(--accent)"/>} val={`${meteo.agua}°C`}       label={i18n.tempAgua}/>
-              <TempCell icon={<Thermometer size={18} weight="light" color="var(--muted)"/>} val={`${meteo.sensacion}°C`}  label={i18n.sensacion}/>
-              <TempCell icon={<Sun size={18} weight="bold" color="var(--accent)"/>} val={`UV ${meteo.uv}`}        label={i18n.indiceUV}/>
+              <TempCell icon={<Thermometer size={18} weight="bold" color="var(--accent)"/>} val={meteo.tempAire != null ? `${meteo.tempAire}°C` : '—'}   label={i18n.tempAire}/>
+              <TempCell icon={<Drop size={18} weight="bold" color="var(--accent)"/>} val={meteo.agua != null ? `${meteo.agua}°C` : '—'}       label={i18n.tempAgua}/>
+              <TempCell icon={<Thermometer size={18} weight="light" color="var(--muted)"/>} val={meteo.sensacion != null ? `${meteo.sensacion}°C` : '—'}  label={i18n.sensacion}/>
+              <TempCell icon={<Sun size={18} weight="bold" color="var(--accent)"/>} val={meteo.uv != null ? `UV ${meteo.uv}` : '—'}        label={i18n.indiceUV}/>
               <TempCell icon={<Gauge size={18} weight="bold" color="var(--accent)"/>} val={`${meteo.humedad}%`}     label={i18n.humedad}/>
             </div>
-            {meteo.uv >= 3 && (
+            {meteo.uv != null && meteo.uv >= 3 && (
               <Link href="/protectores-solares" style={{
                 display: 'flex', alignItems: 'center', gap: '.5rem',
                 marginTop: '.65rem', padding: '.6rem .85rem',
@@ -673,7 +674,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <CompassSVG dir={meteo.vientoDireccion}/>
               <table className={styles.vTable}>
                 <tbody>
-                  <tr><td className={styles.vtK}>{i18n.velocidad}</td><td className={styles.vtV}>{meteo.viento} km/h</td></tr>
+                  <tr><td className={styles.vtK}>{i18n.velocidad}</td><td className={styles.vtV}>{meteo.viento != null ? `${meteo.viento} km/h` : '—'}</td></tr>
                   <tr><td className={styles.vtK}>{i18n.racha}</td><td className={styles.vtV}>{meteo.vientoRacha} km/h</td></tr>
                   <tr><td className={styles.vtK}>{i18n.direccion}</td><td className={styles.vtV}>{meteo.vientoDireccion}</td></tr>
                 </tbody>
@@ -687,13 +688,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             asistente). Ver inicio del return. PR #86 reorganización. */}
 
         {/* ACTIVIDADES */}
-        <SurfSection
+        {meteo.olas != null && meteo.viento != null && <SurfSection
           key="surf"
           playa={playa} olas={meteo.olas} viento={meteo.viento}
-          vientoDir={meteo.vientoDireccion} agua={meteo.agua}
+          vientoDir={meteo.vientoDireccion} agua={meteo.agua ?? 20}
           periodo={meteo.periodo} forecast={forecastSurf ?? undefined}
           turbidez={turbidez} meteo={meteoForecast}
-        />
+        />}
 
 
         {/* CÓMO LLEGAR */}
@@ -1219,7 +1220,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
           </div>
         )}
-        <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} meteo={{ agua: meteo.agua, olas: meteo.olas, viento: meteo.viento }} />
+        <div className={styles.soloDesktop}>
+          <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} meteo={meteo.agua != null && meteo.olas != null && meteo.viento != null ? { agua: meteo.agua, olas: meteo.olas, viento: meteo.viento } : undefined} />
+        </div>
         <VotacionPlaya slug={playa.slug} locale={locale} />
         {/* Mini-CTA "¿Qué llevar?" — sustituye al bloque Amazon de 6 productos
             siempre visible. Abre un drawer con la lista contextual. */}

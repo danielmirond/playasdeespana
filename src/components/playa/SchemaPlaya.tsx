@@ -40,8 +40,8 @@ interface ReviewInput {
 
 interface Props {
   playa:         Playa
-  agua:          number
-  olas:          number
+  agua:          number | null
+  olas:          number | null
   viento?:       number
   uv?:           number | null
   tempAire?:     number
@@ -114,8 +114,8 @@ export default function SchemaPlaya({
     ...(playa.tipo        ? [{ '@type': 'PropertyValue', name: 'Tipo',        value: playa.tipo }] : []),
     ...(calidadNivel      ? [{ '@type': 'PropertyValue', name: 'Calidad del agua (EEA)', value: calidadNivel }] : []),
     // Condiciones actuales como propiedades del Beach
-    { '@type': 'PropertyValue', name: 'Temperatura del agua', value: agua, unitCode: 'CEL', unitText: '°C' },
-    { '@type': 'PropertyValue', name: 'Altura del oleaje',    value: olas, unitCode: 'MTR', unitText: 'metros' },
+    ...(agua != null ? [{ '@type': 'PropertyValue', name: 'Temperatura del agua', value: agua, unitCode: 'CEL', unitText: '°C' }] : []),
+    ...(olas != null ? [{ '@type': 'PropertyValue', name: 'Altura del oleaje',    value: olas, unitCode: 'MTR', unitText: 'metros' }] : []),
     ...(viento != null   ? [{ '@type': 'PropertyValue', name: 'Velocidad del viento', value: viento,   unitCode: 'KMH', unitText: 'km/h' }] : []),
     ...(uv != null       ? [{ '@type': 'PropertyValue', name: 'Índice UV',            value: uv }] : []),
     ...(tempAire != null ? [{ '@type': 'PropertyValue', name: 'Temperatura del aire', value: tempAire, unitCode: 'CEL', unitText: '°C' }] : []),
@@ -293,8 +293,8 @@ export default function SchemaPlaya({
     name:       `Aguas de ${playa.nombre}`,
     isPartOf:   { '@id': `${url}#beach` },
     additionalProperty: [
-      { '@type': 'PropertyValue', name: 'Temperatura', value: agua, unitCode: 'CEL', unitText: '°C' },
-      { '@type': 'PropertyValue', name: 'Altura del oleaje', value: olas, unitCode: 'MTR', unitText: 'metros' },
+      ...(agua != null ? [{ '@type': 'PropertyValue', name: 'Temperatura', value: agua, unitCode: 'CEL', unitText: '°C' }] : []),
+      ...(olas != null ? [{ '@type': 'PropertyValue', name: 'Altura del oleaje', value: olas, unitCode: 'MTR', unitText: 'metros' }] : []),
       ...(calidadNivel ? [{ '@type': 'PropertyValue', name: 'Calidad EEA', value: calidadNivel }] : []),
     ],
   }

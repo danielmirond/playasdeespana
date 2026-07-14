@@ -19,7 +19,7 @@ import { nombreConPlaya } from '@/lib/geo'
 import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 
 interface Meteo {
-  agua: number; olas: number; viento: number
+  agua: number | null; olas: number | null; viento: number | null
   uv: number; tempAire: number; estado: string
 }
 interface Props {
@@ -207,10 +207,15 @@ export default function FichaHero({
               {provinciaHref
                 ? <Link href={provinciaHref} className={styles.metaLink}>{playa.provincia}</Link>
                 : <span>{playa.provincia}</span>}
-              <span className={styles.metaSep} aria-hidden="true">·</span>
-              <span><strong>{meteo.agua}°</strong> {i18n.agua}</span>
-              <span className={styles.metaSep} aria-hidden="true">·</span>
-              <span><strong>{meteo.olas} m</strong> {i18n.olas}</span>
+              {/* Chips solo con dato real: sin fetch no se inventa 18°/0 m */}
+              {meteo.agua != null && (<>
+                <span className={styles.metaSep} aria-hidden="true">·</span>
+                <span><strong>{meteo.agua}°</strong> {i18n.agua}</span>
+              </>)}
+              {meteo.olas != null && (<>
+                <span className={styles.metaSep} aria-hidden="true">·</span>
+                <span><strong>{meteo.olas} m</strong> {i18n.olas}</span>
+              </>)}
               <a href="#s-meteo" className={styles.more}>{i18n.meteoMore}</a>
             </div>
 

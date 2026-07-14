@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
+import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import GygActivities from '@/components/GygActivities'
 import { getCalidad } from '@/lib/calidad'
 import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
@@ -38,7 +39,6 @@ import Nav from '@/components/ui/Nav'
 import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
-import CercaDeMiFab from '@/components/playa/CercaDeMiFab'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { calcularPlayaScore } from '@/lib/scoring'
@@ -219,11 +219,11 @@ export default async function PlayaPage({ params }: Props) {
     videoResult, webcamResult,
   ] = await Promise.all(conDeadline) as any[]
   const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
-  const webcamsData = webcamResult?.status === 'fulfilled' ? webcamResult.value : []
+  const webcamsData = (webcamResult?.status === 'fulfilled' ? webcamResult.value : []).slice(0, 3)
   const reportesData  = reportesResult.status === 'fulfilled'  ? reportesResult.value  : null
   const opinionesData = opinionesResult.status === 'fulfilled' ? opinionesResult.value : null
-  const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
-  const buceoData: CentroBuceo[] = buceoResult.status === 'fulfilled' ? buceoResult.value : []
+  const campingsData: Camping[] = (campingsResult.status === 'fulfilled' ? campingsResult.value : []).slice(0, 4)
+  const buceoData: CentroBuceo[] = (buceoResult.status === 'fulfilled' ? buceoResult.value : []).slice(0, 4)
 
   // Warming post-respuesta: si algún fetch cayó por deadline, lo
   // re-disparamos en background DESPUÉS de devolver el HTML al usuario.
@@ -280,10 +280,10 @@ export default async function PlayaPage({ params }: Props) {
   const mareasData        = mareas.status === 'fulfilled' ? mareas.value : null
   const solData           = sol.status === 'fulfilled' ? sol.value : null
   const meteoPlayaData    = meteoPlaya.status === 'fulfilled' ? meteoPlaya.value : null
-  const restaurantesData  = restaurantes.status === 'fulfilled' ? restaurantes.value : []
-  const fotosData         = fotos.status === 'fulfilled' ? fotos.value : []
-  const hotelesData       = hoteles.status === 'fulfilled' ? hoteles.value : []
-  const escuelasData      = escuelasResult.status === 'fulfilled' ? escuelasResult.value : []
+  const restaurantesData  = (restaurantes.status === 'fulfilled' ? restaurantes.value : []).slice(0, 6)
+  const fotosData         = (fotos.status === 'fulfilled' ? fotos.value : []).slice(0, 8)
+  const hotelesData       = (hoteles.status === 'fulfilled' ? hoteles.value : []).slice(0, 6)
+  const escuelasData      = (escuelasResult.status === 'fulfilled' ? escuelasResult.value : []).slice(0, 4)
   const turbidezData      = turbidez.status === 'fulfilled' ? turbidez.value : null
   const meteoForecastData = meteoForecast.status === 'fulfilled' ? meteoForecast.value : []
 
@@ -297,20 +297,29 @@ export default async function PlayaPage({ params }: Props) {
   const vientoRacha  = meteoPlayaData?.viento_racha ?? 0
   const vientoDirRaw = meteoPlayaData?.viento_dir   ?? 'N'
 
+  // HONESTIDAD DE DATOS: si el fetch de mar o de atmósfera cayó (deadline,
+  // API caída), NO fabricamos valores. Antes agua ?? 18 / olas 0 / viento 0
+  // pintaban "18° agua · 0 m olas", izaban bandera verde, puntuaban 85 y el
+  // FAQ del schema afirmaba temperaturas inventadas — cacheado 1h por ISR.
+  // Ahora: null → la UI muestra "—", y bandera/score/frase/FAQ se omiten.
+  const datosMar    = mareasData !== null
+  const datosViento = meteoPlayaData !== null
+  const datosMeteo  = datosMar || datosViento
+
   const seed      = playa.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
   const estadoKey = calcularEstado({ olas, viento })
   const estado    = ESTADOS[estadoKey]
-  const frase     = getFrase(estadoKey, seed % 3)
+  const frase     = datosMeteo ? getFrase(estadoKey, seed % 3) : 'Actualizando datos del mar…'
 
   const meteo = {
-    agua:            tempAgua ?? 18,
-    olas,
-    viento,
+    agua:            tempAgua,                                    // null si sin dato
+    olas:            datosMar ? olas : null,
+    viento:          datosViento ? viento : null,
     vientoRacha,
     vientoDireccion: vientoDirRaw,
-    uv:              meteoPlayaData?.uv_max ?? 5,
-    tempAire:        meteoPlayaData?.temp_aire ?? 22,
-    sensacion:       meteoPlayaData?.sensacion ?? meteoPlayaData?.temp_aire ?? 20,
+    uv:              meteoPlayaData?.uv_max ?? null,
+    tempAire:        meteoPlayaData?.temp_aire ?? null,
+    sensacion:       meteoPlayaData?.sensacion ?? meteoPlayaData?.temp_aire ?? null,
     humedad:         meteoPlayaData?.humedad ?? 0,
     estado:          estadoKey,
     amanecer:        solData?.amanecer,
@@ -332,7 +341,8 @@ export default async function PlayaPage({ params }: Props) {
   // Evitar `new Date()` por build: Google lo detecta como timestamp spam.
   const dateModified = meteoPlayaData?.timestamp ?? PLAYAS_DATA_MODIFIED
 
-  const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
+  // Sin datos reales de mar Y viento no se puede izar bandera estimada.
+  const banderaPlaya = (datosMar && datosViento) ? calcularBandera(olas, viento, vientoRacha) : undefined
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
@@ -341,25 +351,26 @@ export default async function PlayaPage({ params }: Props) {
   const necesidadesAsistente = await getNecesidades({
     playa,
     meteo: {
-      agua:        meteo.agua,
-      olas:        meteo.olas,
-      viento:      meteo.viento,
+      agua:        meteo.agua ?? 20,
+      olas:        meteo.olas ?? 0.4,
+      viento:      meteo.viento ?? 10,
       vientoRacha: meteo.vientoRacha,
-      uv:          meteo.uv,
-      tempAire:    meteo.tempAire,
+      uv:          meteo.uv ?? 5,
+      tempAire:    meteo.tempAire ?? 22,
     },
     bandera:  banderaPlaya,
     medusas,
     estado:   meteo.estado,
   }).catch(() => [])
 
-  // Score 0-100 en tiempo real
-  const playaScore = calcularPlayaScore(playa, {
-    agua: meteo.agua,
-    olas: meteo.olas,
-    viento: meteo.viento,
-    uv: meteo.uv,
-  })
+  // Score 0-100 en tiempo real — solo si hay meteo real (antes puntuaba 85
+  // "Excelente" sobre un mar en calma fabricado por los fallbacks).
+  const playaScore = datosMeteo ? calcularPlayaScore(playa, {
+    agua: meteo.agua ?? 20,
+    olas: meteo.olas ?? 0.4,
+    viento: meteo.viento ?? 10,
+    uv: meteo.uv ?? 5,
+  }) : undefined
   const horaIdeal = calcularHoraIdeal({
     uv: meteoPlayaData?.uv_max ?? null,
     amanecer: solData?.amanecer,
@@ -389,13 +400,24 @@ export default async function PlayaPage({ params }: Props) {
 
   const preloadFoto = fotoHero?.thumb ?? null
 
+  // CTA contextual de alquiler de barcos: solo en provincias con oferta.
+  // Enlace INTERNO (la página de barcos convierte al afiliado): reparte el
+  // inventario de mayor ticket a las fichas, que son el 90% del sitio.
+  const boatLink = getBoatLinkForPlaya(playa.provincia, playa.municipio)
+
   // Playas cercanas (server-side, sin API extra)
   const allPlayas = allPlayasResult.status === 'fulfilled' ? allPlayasResult.value : []
+  // Solo los 5 campos que renderiza FichaBody: pasar el objeto Playa entero
+  // (descripcion + descripcion_generada) sextuplicaba texto en el payload RSC.
   const playasCercanas = allPlayas
     .filter(p => p.slug !== playa.slug)
-    .map(p => ({ ...p, distKm: haversine(playa.lat, playa.lng, p.lat, p.lng) / 1000 }))
+    .map(p => ({ p, distKm: haversine(playa.lat, playa.lng, p.lat, p.lng) / 1000 }))
     .sort((a, b) => a.distKm - b.distKm)
     .slice(0, 6)
+    .map(({ p, distKm }) => ({
+      slug: p.slug, nombre: p.nombre, municipio: p.municipio,
+      distKm, bandera: !!p.bandera,
+    }))
 
   return (
     <>
@@ -488,6 +510,17 @@ export default async function PlayaPage({ params }: Props) {
         videoData={videoData}
         webcams={webcamsData}
       />
+      {boatLink && (
+        <aside aria-label="Alquiler de barcos" style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1.5rem 1.25rem' }}>
+          <Link href={boatLink.href} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0c4a6e,#0b7285)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none' }}>
+            <span style={{ minWidth: 0 }}>
+              <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontWeight: 800, fontSize: '1.05rem' }}>Ver esta costa desde el mar <span aria-hidden="true">⚓</span></span>
+              <span style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.85)' }}>Alquiler de barcos en {boatLink.label}: sin licencia, con licencia o con patrón.</span>
+            </span>
+            <span style={{ flexShrink: 0, background: '#fff', color: '#0c4a6e', fontWeight: 800, fontSize: '.82rem', borderRadius: 7, padding: '.55rem .9rem', whiteSpace: 'nowrap' }}>Ver barcos →</span>
+          </Link>
+        </aside>
+      )}
       {/* Interlinking del clúster "vivo" (auditoría jul-2026): cada ficha
           reparte PageRank a las páginas de estado en tiempo real, que son
           el diferencial del sitio y viven demasiado colgadas de la home. */}
@@ -517,7 +550,6 @@ export default async function PlayaPage({ params }: Props) {
         cmp="ficha_playa"
         id="actividades"
       />
-      <CercaDeMiFab locale="es" />
     </>
   )
 }
