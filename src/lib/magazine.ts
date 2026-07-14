@@ -79,6 +79,68 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Murcia (voz bicéfala) ─────
+  {
+    slug: 'playa-de-percheles-mazarron-murcia-pista-tierra',
+    category: 'rutas',
+    title: 'Playa de Percheles, Murcia: el agua ronda los 26°C, pero se llega por pista de tierra y sin una sombra',
+    excerpt:
+      'Un tramo de Mediterráneo sin urbanizar en la costa de Mazarrón, con agua templada de junio a octubre. La letra pequeña: se accede por una pista sin asfaltar, no hay sombra natural y en agosto se llena igual.',
+    heroAlt: 'Playa de arena oscura sin edificar en la costa de Mazarrón, con monte bajo detrás y el Mediterráneo en calma',
+    heroQuery: 'percheles,mazarron,murcia,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-07-14T14:49:19Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/murcia', label: 'Playas de Murcia' },
+      { href: '/playas-secretas', label: 'Playas y calas poco conocidas' },
+      { href: '/playas-paradisiacas', label: 'Playas paradisíacas' },
+    ],
+    body: [
+      { t: 'p', html: 'La carretera de la costa de Mazarrón hacia Calnegre no avisa. Un cartel pequeño, un desvío a la derecha y, de pronto, el asfalto se acaba: quedan un par de kilómetros de pista de tierra polvorienta, con baches que hacen chirriar la chapa y un mar que aparece y desaparece entre las lomas peladas del sureste murciano. Cuando por fin se abre el descampado que hace de aparcamiento, abajo espera una franja de arena oscura, sin un solo edificio detrás, con el Mediterráneo tan quieto que parece una balsa. Percheles es de esas playas que se ganan: el precio de entrada es el traqueteo.' },
+      { t: 'p', html: 'No hay paseo marítimo, ni bloques, ni la fila de sombrillas de alquiler de las playas grandes de al lado. Solo monte bajo, algún acantilado bajo del color del óxido y el rumor del agua rompiendo floja sobre la orilla. A media mañana, con el sol todavía de perfil, es uno de los tramos más callados del litoral de Murcia. A las dos de la tarde de un sábado de agosto, ya veremos.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Empecemos por lo que la hace apetecible y es verdad: el agua. El Mediterráneo del suroeste de Murcia es de los más cálidos de la Península; en pleno verano, las series de temperatura del mar (climatología de Open-Meteo para la costa de Mazarrón) lo sitúan <strong>en torno a los 26°C</strong>, y en agosto no es raro rozar los 27-28. Se baña uno sin el respingo del Cantábrico ni del Atlántico gallego: aquí el mar acompaña de junio a octubre.' },
+      { t: 'p', html: 'La letra pequeña empieza en el acceso. A Percheles se llega por una <strong>pista de tierra sin asfaltar</strong> de un par de kilómetros; ni turismo bajo ni prisas, y con lluvia reciente conviene ir con cuidado. Una vez abajo, la segunda pega es la que más duele a mediodía: <strong>no hay apenas sombra natural</strong>. Es una playa abierta, de monte pelado, sin pinar detrás ni chiringuito con toldos donde refugiarse; quien no se lleve sombrilla, se cuece. Los servicios son mínimos y estacionales: no des por hecho ni duchas, ni baños, ni socorrista fuera del pico de verano. Lleva agua, porque no hay dónde comprarla.' },
+      { t: 'p', html: 'Y dos avisos honestos más. Uno: en la orilla suele haber <strong>arribazones de posidonia</strong>, esas alfombras de restos secos de la planta marina que el oleaje deja en la arena. No es suciedad —es una pradera protegida que amortigua el oleaje y frena la erosión de la propia playa—, pero a quien busca la estampa impoluta le chirría. Dos: lo de "cala solitaria" tiene fecha de caducidad. La pista de tierra espanta a mucha gente once meses al año, pero en <strong>agosto</strong> se corre la voz y el descampado se llena; a partir de las once o doce, la sensación de sitio salvaje se diluye entre coches y neveras.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'Cuándo sí: <strong>de mayo a junio y de septiembre a octubre</strong>, con el agua ya caliente y el aparcamiento medio vacío, Percheles cumple lo que promete. Cuándo no: un mediodía de agosto sin sombrilla ni provisiones, o justo después de un temporal de levante, cuando el mar se remueve y la posidonia se amontona en la orilla. El truco de quien va a menudo: <strong>llegar temprano</strong>, antes de las diez, por dos motivos —pillar la poca sombra que dan las rocas del extremo y esquivar el sol a plomo—; y bajar con todo resuelto: nevera, agua de sobra, sombrilla y calzado que aguante la pista y los cantos.' },
+      { t: 'p', html: 'El viento a vigilar es el <strong>levante</strong>: cuando sopla del este, enturbia el baño y empuja medusas hacia la orilla, un patrón que se repite en toda la costa de Murcia. Con poniente o en calma, en cambio, el agua se queda como un plato. ¿La alternativa si Percheles está imposible o no te apetece la pista? A un paso quedan otras calas sin urbanizar del mismo estilo: <strong>Calnegre</strong>, ya en término de Lorca, y las <strong>Cuatro Calas de Águilas</strong> algo más al sur; y para un plan cómodo con servicios, las <strong>gredas de Bolnuevo</strong>, con aparcamiento asfaltado y chiringuitos, aunque cambies soledad por comodidad.' },
+      { t: 'quote', text: 'No es la cala secreta que nadie conoce: es la playa que la pista de tierra protege once meses y el boca a boca invade en agosto. Aquí lo salvaje no es un adorno, es una barrera física —y hasta esa se rinde en verano.' },
+      { t: 'p', html: 'Al final, Percheles es un pacto: das el traqueteo de la pista y renuncias a la sombra y al chiringuito, y a cambio te llevas un tramo de Mediterráneo templado y sin edificar, de esos que en el sureste ya se cuentan con los dedos. Ve fuera de agosto, madruga, carga tu sombrilla y tu agua, y devuelve la playa como la encontraste, posidonia incluida. Llega un domingo de mediodía en pleno verano, sin nada de eso, y entenderás por qué algunos prefieren que la pista siga sin asfaltar.' },
+    ],
+    faq: [
+      { q: '¿Cómo se llega a la playa de Percheles?', a: 'Por la carretera de la costa de Mazarrón en dirección a Calnegre, tomando un desvío que da a una pista de tierra sin asfaltar de un par de kilómetros. El aparcamiento es un descampado; con lluvia reciente conviene circular con precaución.' },
+      { q: '¿Tiene sombra y servicios Percheles?', a: 'No hay sombra natural: es una playa abierta de monte bajo, sin pinar ni arbolado. Los servicios son mínimos y estacionales, así que no des por hecho duchas, baños ni socorrista fuera del pico de verano. Lleva sombrilla, agua y comida.' },
+      { q: '¿Cuál es la mejor época para ir a Percheles?', a: 'De mayo a junio y de septiembre a octubre: el agua ya está caliente (ronda los 26°C en verano) y el aparcamiento está medio vacío. En agosto se masifica pese a la pista de tierra, sobre todo a partir del mediodía.' },
+    ],
+    en: {
+      title: 'Playa de Percheles, Murcia: the sea sits around 26°C, but you reach it down a dirt track with no shade',
+      excerpt: 'An undeveloped stretch of Mediterranean on the Mazarrón coast, with warm water from June to October. The small print: access is by an unpaved track, there is no natural shade and it fills up in August anyway.',
+      related: [
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'The coast road from Mazarrón towards Calnegre gives no warning. A small sign, a turning to the right and then the tarmac simply ends: a couple of kilometres of dusty dirt track remain, potholes rattling the bodywork and a sea that appears and vanishes between the bare hills of south-eastern Murcia. When the clearing that serves as a car park finally opens up, below waits a band of dark sand with not a single building behind it, the Mediterranean so still it looks like a millpond. Percheles is one of those beaches you earn: the entry fee is the rattle.' },
+        { t: 'p', html: 'There is no promenade, no apartment blocks, none of the rows of hired parasols of the big beaches next door. Just scrub, a low rust-coloured cliff or two and the murmur of water breaking gently on the shore. Mid-morning, with the sun still low, it is one of the quietest stretches of the Murcian coast. At two in the afternoon on an August Saturday, we shall see.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'Start with what makes it appealing and is true: the water. The Mediterranean of south-western Murcia is among the warmest in mainland Spain; in high summer, sea-temperature records (Open-Meteo climatology for the Mazarrón coast) put it <strong>at around 26°C</strong>, and in August it often nudges 27-28. You swim without the flinch of the Cantabrian or the Galician Atlantic: here the sea keeps you company from June to October.' },
+        { t: 'p', html: 'The small print begins at the access. Percheles is reached by an <strong>unpaved dirt track</strong> a couple of kilometres long; no low-slung cars, no hurry, and after recent rain it pays to take care. Once down, the second drawback is the one that bites at midday: <strong>there is barely any natural shade</strong>. It is an open beach backed by bare scrub, with no pine wood behind it and no awninged beach bar to hide under; anyone who forgets a parasol will roast. Facilities are minimal and seasonal: don’t count on showers, toilets or a lifeguard outside the peak weeks. Bring water, because there is nowhere to buy it.' },
+        { t: 'p', html: 'Two more honest warnings. One: the shoreline often carries <strong>banks of dried Posidonia</strong>, those mats of dead seagrass the waves leave on the sand. It isn’t dirt — it’s a protected meadow that cushions the swell and slows the beach’s own erosion — but it grates on anyone after a spotless picture. Two: the "lonely cove" label has an expiry date. The dirt track scares plenty of people off for eleven months a year, but in <strong>August</strong> word gets round and the clearing fills; from eleven or midday, the wild-spot feeling dissolves among cars and cool boxes.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'When yes: <strong>May to June and September to October</strong>, with the water already warm and the car park half empty, Percheles delivers what it promises. When no: an August midday with no parasol or supplies, or right after an easterly blow, when the sea churns and the seagrass piles up on the shore. The regulars’ trick: <strong>arrive early</strong>, before ten, for two reasons — to grab what little shade the rocks at the far end throw, and to dodge the vertical sun — and come with everything sorted: cool box, plenty of water, a parasol and footwear that can handle the track and the pebbles.' },
+        { t: 'p', html: 'The wind to watch is the <strong>levante</strong> (easterly): when it blows from the east it muddies the swim and pushes jellyfish towards the shore, a pattern repeated all along the Murcian coast. With a westerly or in calm, by contrast, the water goes flat as a plate. The alternative if Percheles is impossible or the track puts you off? A step away lie other undeveloped coves in the same vein: <strong>Calnegre</strong>, over the line in Lorca, and the <strong>Cuatro Calas of Águilas</strong> a little further south; and for an easy day with facilities, the <strong>Bolnuevo badlands</strong>, with a paved car park and beach bars — though you trade solitude for comfort.' },
+        { t: 'quote', text: 'It isn’t the secret cove nobody knows: it’s the beach the dirt track protects for eleven months and word of mouth overruns in August. Here the wildness isn’t decoration, it’s a physical barrier — and even that gives way in summer.' },
+        { t: 'p', html: 'In the end, Percheles is a bargain: you take the rattle of the track and give up the shade and the beach bar, and in return you get a stretch of warm, unbuilt Mediterranean, the kind you can now count on one hand in the south-east. Go outside August, get up early, carry your own parasol and water, and leave the beach as you found it, seagrass included. Turn up at midday on a summer Sunday with none of that, and you’ll understand why some prefer the track to stay unpaved.' },
+      ],
+      faq: [
+        { q: 'How do you get to Playa de Percheles?', a: 'Via the Mazarrón coast road towards Calnegre, taking a turning onto an unpaved dirt track a couple of kilometres long. The car park is a clearing; after recent rain, drive with care.' },
+        { q: 'Does Percheles have shade and facilities?', a: 'There is no natural shade: it’s an open beach on bare scrubland, with no pine wood or trees. Facilities are minimal and seasonal, so don’t count on showers, toilets or a lifeguard outside the peak of summer. Bring a parasol, water and food.' },
+        { q: 'When is the best time to visit Percheles?', a: 'May to June and September to October: the water is already warm (around 26°C in summer) and the car park is half empty. In August it gets crowded despite the dirt track, especially from midday onwards.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Galicia (voz bicéfala) ─────
   {
     slug: 'playa-a-lanzada-o-grove-pontevedra-corrientes-nortada-nueve-olas',
