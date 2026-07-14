@@ -177,6 +177,7 @@ export async function GET() {
   // Alquiler de barcos — jerarquía canónica costa → provincia → localidad.
   // (Antes el sitemap solo listaba el hub plano; las páginas ricas /costas/**
   // no se enviaban a Google. Se generan desde el dataset → escalan solas.)
+  urls.push(u('/alquiler-barco/sin-licencia', '0.7', 'weekly', today))
   {
     const boatLocs = getAllLocalities()
     const coasts = new Set<string>()

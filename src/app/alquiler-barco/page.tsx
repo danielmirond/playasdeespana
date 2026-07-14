@@ -85,6 +85,16 @@ export default function BoatRentalHubPage() {
       {/* COASTS */}
       <main id="coasts" style={{ maxWidth: 880, margin: '0 auto', padding: '2.5rem 1.5rem 4rem' }}>
         <NearContext />
+        {/* Pilar "sin licencia": la intención transaccional más buscada del
+            clúster; merece hueco arriba del listado de costas. */}
+        <Link href="/alquiler-barco/sin-licencia" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0c4a6e,#0b7285)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none', marginBottom: '2rem' }}>
+          <span style={{ minWidth: 0 }}>
+            <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontWeight: 800, fontSize: '1.05rem' }}>¿Sin título náutico? Puedes alquilar igualmente</span>
+            <span style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.85)' }}>Qué barcos puedes llevar sin licencia, dónde y desde cuánto.</span>
+          </span>
+          <span style={{ flexShrink: 0, background: '#fff', color: '#0c4a6e', fontWeight: 800, fontSize: '.82rem', borderRadius: 7, padding: '.55rem .9rem', whiteSpace: 'nowrap' }}>Ver guía →</span>
+        </Link>
+
         <h2 style={{
           fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700,
           color: 'var(--ink)', margin: '0 0 1.75rem',
