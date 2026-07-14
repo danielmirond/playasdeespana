@@ -23,10 +23,16 @@ export interface MedusasRiesgo {
 
 /**
  * Estima el color de la bandera de baño a partir de oleaje, viento y rachas.
- * Criterios basados en las directrices generales de Protección Civil:
- * - Verde: olas < 0.5m, viento < 20 km/h
- * - Amarilla: olas 0.5-1.5m o viento 20-40 km/h
- * - Roja: olas > 1.5m o viento > 40 km/h o rachas > 60 km/h
+ *
+ * Umbrales recalibrados (jul-2026) tras validar contra datos en vivo: los
+ * antiguos (amarilla con olas ≥0.5 o viento ≥20) marcaban amarilla el ~45%
+ * de las playas en una tarde normal — la brisa térmica de 20-25 km/h y el
+ * mar de 0.5-0.7 m SON un día de playa corriente, no precaución. La roja se
+ * mantiene intacta: en el lado del peligro no se relaja.
+ * - Verde: olas < 0.8 m y viento < 30 km/h (y sin combinación al límite)
+ * - Amarilla: olas ≥0.8 m · viento ≥30 · rachas ≥50 · o mar montándose
+ *   (olas ≥0.6 Y viento ≥25 a la vez)
+ * - Roja: olas ≥1.5 m · viento ≥40 km/h · rachas ≥60 km/h
  */
 export function calcularBandera(olas: number, viento: number, vientoRacha: number): BanderaPlaya {
   if (olas >= 1.5 || viento >= 40 || vientoRacha >= 60) {
@@ -48,17 +54,22 @@ export function calcularBandera(olas: number, viento: number, vientoRacha: numbe
     }
   }
 
-  if (olas >= 0.5 || viento >= 20) {
+  if (olas >= 0.8 || viento >= 30 || vientoRacha >= 50 || (olas >= 0.6 && viento >= 25)) {
+    const porOlas = olas >= 0.8 || (olas >= 0.6 && viento >= 25)
     return {
       color: 'amarilla',
       label: 'Bandera amarilla',
       labelEn: 'Yellow flag',
-      motivo: olas >= 0.5
+      motivo: porOlas
         ? `Oleaje moderado (${olas}m)`
-        : `Viento moderado (${viento} km/h)`,
-      motivoEn: olas >= 0.5
+        : viento >= 30
+          ? `Viento moderado (${viento} km/h)`
+          : `Rachas fuertes (${vientoRacha} km/h)`,
+      motivoEn: porOlas
         ? `Moderate waves (${olas}m)`
-        : `Moderate wind (${viento} km/h)`,
+        : viento >= 30
+          ? `Moderate wind (${viento} km/h)`
+          : `Strong gusts (${vientoRacha} km/h)`,
       hex: '#f59e0b',
     }
   }
