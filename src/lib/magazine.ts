@@ -83,7 +83,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-de-maro-nerja-malaga-cascada-agua-dulce-bajada-pie',
     category: 'rutas',
-    title: 'Playa de Maro, Málaga: una cascada de agua dulce cae junto a la arena, pero se baja a pie y sin una sombra',
+    title: 'Maro (Nerja): una cascada de agua dulce cae sobre la arena y al mar solo se baja a pie',
     excerpt:
       'Una cala de grava bajo los acantilados protegidos de Nerja, con una cascada que resbala por la roca hasta la orilla. La letra pequeña: se baja andando por un sendero, el aparcamiento es de tierra y se llena pronto, y en agosto el hilo de agua va a medio gas.',
     heroAlt: 'Cala de grava encajada entre acantilados en Nerja, con la huerta en terrazas arriba y un chorro de agua dulce cayendo por la pared de roca',
@@ -115,7 +115,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuál es la mejor época para ir a Maro?', a: 'De finales de mayo a junio y en septiembre: el agua ya está templada, la cascada baja con más fuerza que en agosto, el aparcamiento no está colapsado y los kayaks no van en caravana. Ve temprano, antes de las diez, y lleva escarpín para la grava, sombrilla y agua, porque no hay sombra natural.' },
     ],
     en: {
-      title: 'Playa de Maro, Málaga: a freshwater waterfall spills beside the sand, but you walk down and there is no shade',
+      title: 'Maro (Nerja): a freshwater waterfall spills onto the sand, and you can only walk down',
       excerpt: 'A gravel cove beneath the protected cliffs of Nerja, with a waterfall sliding down the rock to the shore. The small print: you reach it on foot, the dirt car park fills early, and in August the famous trickle runs thin.',
       related: [
         { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
@@ -145,7 +145,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-de-percheles-mazarron-murcia-pista-tierra',
     category: 'rutas',
-    title: 'Playa de Percheles, Murcia: el agua ronda los 26°C, pero se llega por pista de tierra y sin una sombra',
+    title: 'Percheles (Mazarrón): agua a 26°C, ni una sombra y una pista de tierra hasta la arena',
     excerpt:
       'Un tramo de Mediterráneo sin urbanizar en la costa de Mazarrón, con agua templada de junio a octubre. La letra pequeña: se accede por una pista sin asfaltar, no hay sombra natural y en agosto se llena igual.',
     heroAlt: 'Playa de arena oscura sin edificar en la costa de Mazarrón, con monte bajo detrás y el Mediterráneo en calma',
@@ -177,7 +177,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuál es la mejor época para ir a Percheles?', a: 'De mayo a junio y de septiembre a octubre: el agua ya está caliente (ronda los 26°C en verano) y el aparcamiento está medio vacío. En agosto se masifica pese a la pista de tierra, sobre todo a partir del mediodía.' },
     ],
     en: {
-      title: 'Playa de Percheles, Murcia: the sea sits around 26°C, but you reach it down a dirt track with no shade',
+      title: 'Percheles (Mazarrón): sea around 26°C, no shade and a dirt track down to the sand',
       excerpt: 'An undeveloped stretch of Mediterranean on the Mazarrón coast, with warm water from June to October. The small print: access is by an unpaved track, there is no natural shade and it fills up in August anyway.',
       related: [
         { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
@@ -207,7 +207,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-a-lanzada-o-grove-pontevedra-corrientes-nortada-nueve-olas',
     category: 'curiosidades',
-    title: 'Playa de A Lanzada, Pontevedra: resaca, nortada y el rito de las nueve olas del último domingo de agosto',
+    title: 'A Lanzada (Pontevedra): nortada, resaca y el rito de las nueve olas de fin de agosto',
     excerpt:
       'La gran playa atlántica de las Rías Baixas no es la piscina de ría que muchos esperan: mar bravo con corrientes de retorno, viento del norte por la tarde y un rito de fertilidad que llena la orilla a finales de agosto. Cómo pisarla con cabeza.',
     heroAlt: 'Playa de A Lanzada entre O Grove y Sanxenxo: largo arenal dorado frente al Atlántico abierto con dunas al fondo y la ermita sobre un promontorio rocoso en el extremo',
@@ -238,7 +238,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuál es la mejor hora para ir a A Lanzada?', a: 'Por la mañana, antes de que arranque la nortada del mediodía y antes de que se llene el aparcamiento. Si por la tarde el viento del norte convierte el arenal en un secador, la alternativa es cruzar a las playas interiores de la ría de O Grove, más resguardadas y con agua más calmada.' },
     ],
     en: {
-      title: 'Playa de A Lanzada, Pontevedra: rip currents, north wind and the ‘nine waves’ fertility rite of late August',
+      title: 'A Lanzada (Pontevedra): north wind, rip currents and the ‘nine waves’ rite of late August',
       excerpt:
         'The great Atlantic beach of the Rías Baixas is not the sheltered ría pool many expect: rough sea with rip currents, an afternoon northerly, and a fertility rite that fills the shoreline in late August. How to do it with your head on.',
       related: [
@@ -328,7 +328,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-de-laga-ibarrangelu-bizkaia-bandera-roja-ogono',
     category: 'guias',
-    title: 'Playa de Laga, Bizkaia: bandera roja habitual y corrientes circulares al pie del acantilado de Ogoño (279 m)',
+    title: 'Playa de Laga (Bizkaia): bandera roja habitual bajo el acantilado de Ogoño (279 m)',
     excerpt:
       'La lengua de arena dorada de Ibarrangelu, en la Reserva de la Biosfera de Urdaibai, mira al mar abierto y no perdona: genera corrientes de resaca que giran en corredores hacia fuera, la bandera roja ondea con frecuencia, el agua del Cantábrico se queda fría en pleno agosto y la marea estrecha mucho la arena. El cabo Ogoño le cae encima con 279 metros de acantilado.',
     heroAlt: 'Playa de arena fina y dorada de Laga, entre dunas y el acantilado verde del cabo Ogoño, abierta al mar Cantábrico, en Ibarrangelu (Bizkaia)',
@@ -361,7 +361,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Qué diferencia hay entre Laga y Laida?', a: 'Están casi enfrente, en Urdaibai. Laga mira al mar abierto, con más ola y corrientes, y es playa de surf. Laida se abre en la desembocadura del Oka y, con la marea baja, descubre enormes bancos de arena y un baño más resguardado. Para un chapuzón tranquilo, Laida; para surf y paisaje bravo, Laga.' },
     ],
     en: {
-      title: 'Playa de Laga, Basque Country: red flags are routine beneath the 279-metre Ogoño cliff',
+      title: 'Playa de Laga (Bizkaia): red flags are routine below the 279 m Ogoño cliff',
       excerpt:
         'The golden dune beach at Ibarrangelu, inside the Urdaibai Biosphere Reserve, looks a picture but faces the open Cantabrian Sea and does not forgive: circular rip currents run seaward, the red flag flies often, the water stays cold in high summer and the tide swallows the sand. Cabo Ogoño towers 279 metres above it.',
       related: [
@@ -393,7 +393,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-de-los-muertos-carboneras-agua-profunda-sin-socorrista',
     category: 'guias',
-    title: 'Playa de los Muertos, Almería: 20 minutos de bajada por el acantilado y un mar que cubre enseguida, sin socorrista',
+    title: 'Playa de los Muertos (Almería): 20 min de bajada, un mar que cubre de golpe y sin socorrista',
     excerpt:
       'La playa de bolos y arena gruesa de Carboneras que encabeza listas de viajeros esconde una letra pequeña dura: no se llega en coche hasta la orilla, hay que bajar 15-20 minutos por un sendero empinado de acantilado, el agua se hace honda a pocos metros, la resaca tira con levante y no tiene socorrista, sombra ni servicios. Su propio nombre viene de las corrientes.',
     heroAlt: 'Playa larga de bolos claros y arena gruesa de la Playa de los Muertos, al pie de un acantilado, con agua turquesa profunda, en Carboneras, Almería',
@@ -425,7 +425,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Es peligroso bañarse en la Playa de los Muertos?', a: 'Hay que tomárselo en serio: el fondo se hace hondo a pocos metros de la orilla, con levante aparece resaca que tira hacia fuera y no hay socorrista ni vigilancia. Es agua limpia y estupenda para quien nada bien y va con el mar en calma, pero no es una playa mansa de orilla larga; con oleaje o con niños pequeños conviene una alternativa como Agua Amarga.' },
     ],
     en: {
-      title: 'Playa de los Muertos, Almería: a 20-minute cliff descent, water that drops off fast and no lifeguard',
+      title: 'Playa de los Muertos (Almería): a 20-min cliff descent, water that drops off fast, no lifeguard',
       excerpt: 'The pebble-and-coarse-sand beach near Carboneras that tops travellers’ lists comes with hard small print: you can’t drive to the shore, it’s a steep 15-20 minute walk down a cliff path, the water deepens within a few metres, the undertow pulls when the levante blows, and there is no lifeguard, no shade and no services. Even the name comes from the currents.',
       related: [
         { href: '/en/magazine', label: 'More from the Magazine' },
@@ -455,7 +455,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'calo-des-moro-mallorca-40-metros-bajada',
     category: 'guias',
-    title: 'Caló des Moro, Mallorca: 40 metros de arena y una bajada a gatas que frena a medio Instagram',
+    title: 'Caló des Moro (Mallorca): 40 m de arena y una bajada a gatas que frena a mucha gente',
     excerpt:
       'Una de las calas más fotografiadas del sureste de Mallorca, con una letra pequeña dura: mide unos 40 metros, se llega tras 20-25 minutos a pie y una bajada final tan empinada que hay que usar las manos, no tiene aparcamiento cerca ni sombra ni socorrista, y en agosto el acceso se regula con lanzadera.',
     heroAlt: 'Cala diminuta de arena blanca de Caló des Moro encajada entre acantilados de pino y roca, en el municipio de Santanyí, sureste de Mallorca',
@@ -486,7 +486,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuál es la mejor hora para ir a Caló des Moro?', a: 'A primerísima hora de la mañana, prácticamente al amanecer: es una cala minúscula (unos 40 metros) que se satura enseguida. En julio y agosto el aparcamiento se llena a media mañana y la cala se masifica; si puedes, ve en mayo, junio o septiembre y entre semana. Como alternativa cómoda tienes Cala Llombards, al lado.' },
     ],
     en: {
-      title: 'Caló des Moro, Mallorca: 40 metres of sand and a scramble down that half of Instagram never finishes',
+      title: 'Caló des Moro (Mallorca): 40 m of sand and a scramble down that stops many short',
       excerpt: 'One of the most photographed coves in south-east Mallorca, with hard small print: it is barely 40 metres long, reached after a 20-25 minute walk and a final descent so steep you need your hands, with no parking nearby, no shade and no lifeguard — and in August access is capped with a shuttle bus.',
       related: [
         { href: '/en/magazine', label: 'More from the Magazine' },
@@ -515,7 +515,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-del-silencio-cudillero-escalera-acantilado',
     category: 'guias',
-    title: 'Playa del Silencio, Asturias: al mar solo se baja por una escalera tallada en el acantilado y abajo no hay servicios',
+    title: 'Playa del Silencio (Asturias): al mar solo se baja por una escalera tallada en la roca',
     excerpt:
       'Uno de los anfiteatros de roca más fotografiados del Cantábrico, con una letra pequeña dura: no hay carretera hasta la arena, se baja por una larga escalera de piedra pegada al acantilado, es de cantos y no de arena fina, y abajo no hay chiringuito, socorrista ni sombra.',
     heroAlt: 'Anfiteatro de acantilados verdes cerrando la playa del Silencio, con los islotes de los Carreiros emergiendo del mar Cantábrico frente a la orilla de cantos, Cudillero, Asturias',
@@ -546,7 +546,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Se puede uno bañar bien en la playa del Silencio?', a: 'Es Cantábrico abierto, con agua fría incluso en verano y expuesto al oleaje del noroeste, y no hay socorrista. Con mar en calma y marea baja el baño es posible con cuidado por las piedras; con mar de fondo o corrientes es peligroso y no hay vigilancia. Consulta siempre el estado de la mar antes de bajar.' },
     ],
     en: {
-      title: 'Playa del Silencio, Asturias: the only way down to the sea is a stairway cut into the cliff — and there is nothing at the bottom',
+      title: 'Playa del Silencio (Asturias): the only way to the sea is a stairway cut into the cliff',
       excerpt: 'One of the most photographed rock amphitheatres on the Cantabrian coast, with hard small print: no road reaches the sand, you descend a long stone stairway pinned to the cliff, it is shingle rather than fine sand, and there is no beach bar, lifeguard or shade at the bottom.',
       related: [
         { href: '/en/magazine', label: 'More from the Magazine' },
@@ -575,7 +575,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-cofete-fuerteventura-pista-corrientes',
     category: 'guias',
-    title: 'Playa de Cofete, Fuerteventura: 12 km de arena salvaje, 20 km de pista y un mar en el que casi nadie se baña',
+    title: 'Playa de Cofete (Fuerteventura): 12 km de arena salvaje tras 20 km de pista de tierra',
     excerpt:
       'Una de las playas más grandiosas de Canarias y de las más peligrosas para el baño. Lo que de verdad necesitas saber de Cofete: se llega por una pista de tierra de unos 20 km (vetada a los coches de alquiler), no tiene servicios y tiene corrientes sin socorrista.',
     heroAlt: 'Arco interminable de arena dorada de la playa de Cofete con el macizo de Jandía cayendo sobre la orilla, Fuerteventura',
@@ -606,7 +606,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Qué es la Villa Winter de Cofete?', a: 'Un caserón con torreón construido en los años cuarenta por el ingeniero alemán Gustav Winter en mitad de la playa. Está envuelto en leyendas —nunca probadas— sobre submarinos y refugios nazis durante la Segunda Guerra Mundial. Hoy es uno de los elementos más fotografiados de Cofete.' },
     ],
     en: {
-      title: 'Playa de Cofete, Fuerteventura: 12 km of wild sand, a 20 km dirt track and a sea almost no one swims in',
+      title: 'Playa de Cofete (Fuerteventura): 12 km of wild sand after a 20 km dirt track',
       excerpt: 'One of the grandest beaches in the Canaries and one of the most dangerous to swim in. What you actually need to know about Cofete: it’s reached by a roughly 20 km dirt track (off-limits to hire cars), has no facilities and has currents with no lifeguard.',
       related: [
         { href: '/en/islands', label: 'Beaches by island' },
@@ -635,7 +635,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-catedrales-lugo-marea-reserva',
     category: 'guias',
-    title: 'Playa de las Catedrales, Lugo: solo la ves con marea baja y en verano necesitas reserva gratis para entrar',
+    title: 'Playa de las Catedrales (Lugo): sin marea baja no hay arcos, y en verano necesitas reserva',
     excerpt:
       'Los arcos de roca solo asoman con la marea baja; con la alta, el mar lo tapa todo. Y en Semana Santa y verano hace falta reserva gratuita previa. Cómo visitar bien las Catedrales sin llevarte el chasco de la marea.',
     heroAlt: 'Arcos y contrafuertes de roca de la Playa de las Catedrales en Ribadeo, Lugo, sobre la arena mojada durante la marea baja',
@@ -666,7 +666,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Se puede uno bañar en la Playa de las Catedrales?', a: 'No es una playa pensada para el baño tranquilo: agua fría del Cantábrico, oleaje habitual y rocas resbaladizas por las algas. Es una visita para caminar y ver las formaciones con marea baja, con calzado de suela agarrada y respetando las banderas y la subida de la marea.' },
     ],
     en: {
-      title: 'Playa de las Catedrales, Lugo: only visible at low tide, and in summer you need a free permit to get in',
+      title: 'Playa de las Catedrales (Lugo): no low tide, no arches — and in summer you need a booking',
       excerpt: 'The rock arches only show at low tide; at high tide the sea hides everything. And in Easter week and summer you need a free advance booking. How to visit the Catedrales without the tide ruining your trip.',
       related: [
         { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
@@ -755,7 +755,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'cala-del-moraig-benitatxell-rio-dulce-cantos',
     category: 'curiosidades',
-    title: 'Cala del Moraig, Alicante: una cala de cantos con un río de agua dulce que brota del fondo del mar (y ni sombra ni aparcamiento fácil)',
+    title: 'Cala del Moraig (Alicante): un río de agua dulce brota del fondo del mar, entre cantos',
     excerpt:
       'Al pie de un acantilado vertical, una cueva submarina —la Cova dels Arcs— por la que aflora un río de agua dulce bajo el mar. Lo que hay que saber del Moraig, en Benitatxell: es de cantos, no de arena, apenas tiene sombra y en verano el acceso está limitado.',
     heroAlt: 'Cala del Moraig en El Poble Nou de Benitatxell, Alicante, con playa de cantos al pie de un acantilado vertical y agua clara sobre fondo rocoso',
@@ -787,7 +787,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Se puede aparcar y bajar en coche a la Cala del Moraig en verano?', a: 'No siempre. La bajada es estrecha y el aparcamiento escaso, y en verano el ayuntamiento de Benitatxell regula y limita el acceso rodado en las horas punta. Lo mejor es llegar a primera hora o fuera de julio y agosto y consultar antes las normas de acceso de la temporada.' },
     ],
     en: {
-      title: 'Cala del Moraig, Alicante: a pebble cove with a freshwater river welling up from the seabed — and no shade or easy parking',
+      title: 'Cala del Moraig (Alicante): a freshwater river wells up from the seabed, over pebbles',
       excerpt: 'At the foot of a sheer cliff, an underwater cave — the Cova dels Arcs — where a freshwater river surfaces beneath the sea. What to know about the Moraig, in Benitatxell: it’s pebbles, not sand, has almost no shade, and access is capped in summer.',
       related: [
         { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
@@ -816,7 +816,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-itzurun-zumaia-flysch-marea',
     category: 'curiosidades',
-    title: 'Playa de Itzurun, Zumaia: 50 millones de años de acantilado y la marea que se lleva la arena',
+    title: 'Playa de Itzurun (Zumaia): 50 millones de años de flysch y una marea que se lleva la arena',
     excerpt:
       'Los acantilados de flysch de Zumaia guardan más de 50 millones de años de historia de la Tierra, incluida la capa de la extinción de los dinosaurios. Lo que no te cuentan de Itzurun: con marea alta casi no hay arena, el suelo es roca y el agua es Cantábrico frío.',
     heroAlt: 'Acantilados de flysch de la playa de Itzurun en Zumaia, con estratos de roca casi verticales sobre la arena oscura y el mar Cantábrico',
@@ -848,7 +848,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Está fría el agua y tiene servicios?', a: 'El agua es del Cantábrico: fría, rara vez por encima de 20-21°C en agosto, con oleaje y corrientes. A diferencia de una cala salvaje, Itzurun sí tiene servicios: está junto al pueblo, con socorrista en temporada, duchas y accesos cercanos.' },
     ],
     en: {
-      title: 'Playa de Itzurun, Zumaia: 50 million years of cliff and the tide that takes the sand away',
+      title: 'Playa de Itzurun (Zumaia): 50 million years of flysch, and a tide that takes the sand',
       excerpt: 'The flysch cliffs of Zumaia hold more than 50 million years of Earth’s history, including the layer that marks the dinosaurs’ extinction. What they don’t tell you about Itzurun: at high tide there’s barely any sand, the ground is rock, and the water is cold Cantabrian sea.',
       related: [
         { href: '/en/communities/pais-vasco', label: 'Beaches of the Basque Country' },
@@ -878,7 +878,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-de-las-teresitas-tenerife-arena-sahara',
     category: 'curiosidades',
-    title: 'Playa de las Teresitas, Tenerife: 270.000 toneladas de arena del Sáhara y un dique que le quitó las olas',
+    title: 'Playa de las Teresitas (Tenerife): 270.000 t de arena del Sáhara y un dique sin olas',
     excerpt:
       'La media luna dorada de Tenerife no es natural: la arena se trajo en barco del Sáhara en 1973 y un dique de casi un kilómetro le corta el oleaje. Calma perfecta para el baño en familia, pero sin olas y con un lleno de santacruceros los fines de semana.',
     heroAlt: 'Playa de las Teresitas en San Andrés, Tenerife: media luna de arena dorada con palmeras y el macizo de Anaga al fondo, agua en calma tras el dique',
@@ -909,7 +909,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuándo ir a las Teresitas para evitar aglomeraciones?', a: 'Entre semana y a primera hora de la mañana. Es la playa de Santa Cruz de Tenerife, a un cuarto de hora, y los fines de semana y festivos de verano se llena; el aparcamiento se satura pronto. Si vas sin coche, hay guaguas frecuentes desde la capital.' },
     ],
     en: {
-      title: 'Playa de las Teresitas, Tenerife: 270,000 tonnes of Sahara sand and a breakwater that took its waves away',
+      title: 'Playa de las Teresitas (Tenerife): 270,000 t of Sahara sand and a breakwater with no waves',
       excerpt: 'Tenerife’s golden crescent isn’t natural: the sand was shipped from the Sahara in 1973 and a near-kilometre breakwater kills the swell. Perfect calm for a family swim, but no waves and packed with locals at weekends.',
       related: [
         { href: '/en/islands', label: 'Beaches by island' },
@@ -998,7 +998,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-liencres-cantabria-dunas-corrientes-pas',
     category: 'guias',
-    title: 'Playa de Liencres, Cantabria: dunas vivas, pinar y las corrientes del río Pas que mandan en el baño',
+    title: 'Playa de Liencres (Cantabria): dunas vivas, pinar y las corrientes del Pas que mandan',
     excerpt:
       'Un parque natural de dunas móviles y pinar en la desembocadura del Pas, con casi dos kilómetros de arena. La pega: es mar abierto del Cantábrico, frío y ventoso, y las corrientes junto a la ría obligan a nadar donde marca la bandera.',
     heroAlt: 'Playa de Valdearenas en Liencres, Cantabria, con dunas cubiertas de vegetación, pinar al fondo y el mar Cantábrico rompiendo en una jornada de viento',
@@ -1029,7 +1029,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Dónde puedo bañarme más tranquilo cerca de Liencres?', a: 'Si buscas agua más mansa, la ría de Mogro al otro lado de la desembocadura y las playas interiores de bahía son más resguardadas que el arenal expuesto de Valdearenas. Liencres compensa como plan de naturaleza: pinar, dunas y los miradores sobre los Urros y la playa de la Arnía.' },
     ],
     en: {
-      title: 'Playa de Liencres, Cantabria: living dunes, a pine forest and the river Pas currents that rule the swim',
+      title: 'Playa de Liencres (Cantabria): living dunes, pines and the river Pas currents that rule',
       excerpt: 'A natural park of shifting dunes and pine forest at the mouth of the river Pas, with nearly two kilometres of sand. The catch: it’s open Cantabrian sea, cold and windy, and the currents by the estuary mean you swim where the flag says.',
       related: [
         { href: '/en/magazine', label: 'More from the Magazine' },
@@ -1058,7 +1058,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-oyambre-cantabria-avion-1929',
     category: 'curiosidades',
-    title: 'Playa de Oyambre, Cantabria: la playa donde aterrizó en 1929 un avión que cruzó el Atlántico sin escalas',
+    title: 'Playa de Oyambre (Cantabria): aquí aterrizó en 1929 un avión recién llegado del Atlántico',
     excerpt:
       'Aquí tomó tierra el "Pájaro Amarillo" tras cruzar el Atlántico en 1929. Lo que hay que saber de Oyambre hoy: dunas protegidas y arena de sobra, pero costa abierta, agua fría y corrientes en la ría.',
     heroAlt: 'Playa de Oyambre en Cantabria con arena amplia, dunas y colinas verdes al fondo bajo cielo nublado',
@@ -1089,7 +1089,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuándo es mejor ir a la playa de Oyambre?', a: 'Con marea media-baja se despliega un arenal enorme; con marejada de fondo es más playa de surf que de baño tranquilo. Ve fuera de agosto o a primera hora para esquivar el gentío y el aparcamiento lleno, y combínala con San Vicente de la Barquera y Comillas, muy cerca.' },
     ],
     en: {
-      title: 'Playa de Oyambre, Cantabria: the beach where a plane that had just crossed the Atlantic non-stop landed in 1929',
+      title: 'Playa de Oyambre (Cantabria): where a transatlantic plane landed in 1929',
       excerpt: 'This is where the "Yellow Bird" touched down after crossing the Atlantic in 1929. What to know about Oyambre today: protected dunes and sand to spare, but open coast, cold water and estuary currents.',
       related: [
         { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
@@ -1118,7 +1118,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'mejores-playas-snorkel-costa-brava',
     category: 'guias',
-    title: 'Las mejores playas para snorkel en la Costa Brava: dónde ver mero y coral (y la reserva a la que solo entras con guía)',
+    title: 'Snorkel en la Costa Brava: dónde ver mero y coral (y la reserva de solo con guía)',
     excerpt:
       'Fondos de roca, una reserva marina con mero y coral rojo, y calas de agua clara. Dónde hacer snorkel de verdad en la Costa Brava, qué viento lo arruina y las normas de las Illes Medes.',
     heroAlt: 'Buceador haciendo snorkel sobre un fondo rocoso de la Costa Brava con peces y agua clara cerca de las Illes Medes',
@@ -1150,7 +1150,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Qué viento estropea el snorkel en la Costa Brava?', a: 'El levante y el garbí (vientos del este/sureste) levantan marejada y enturbian el agua, hundiendo la visibilidad. Lo ideal es mar en calma; revisa el parte la noche antes y lleva escarpines, porque el fondo es de roca y erizos.' },
     ],
     en: {
-      title: 'The best snorkelling beaches on the Costa Brava: where to see grouper and coral (and the reserve you only enter with a guide)',
+      title: 'Snorkelling the Costa Brava: where to see grouper and coral, and the guide-only reserve',
       excerpt: 'Rocky seabeds, a marine reserve with grouper and red coral, and clear-water coves. Where to really snorkel on the Costa Brava, which wind ruins it, and the Medes Islands rules.',
       related: [
         { href: '/en/boat-rental/coasts/costa-brava/provinces/girona/estartit', label: 'Boat rental in l’Estartit' },
@@ -1179,7 +1179,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'que-hacer-picadura-medusa-mitos',
     category: 'guias',
-    title: 'Qué hacer si te pica una medusa: los pasos correctos (y por qué la orina y el vinagre no siempre valen)',
+    title: 'Picadura de medusa: los pasos que funcionan (y por qué la orina y el vinagre fallan)',
     excerpt:
       'Agua de mar sí, agua dulce no, orina nunca. La guía de primeros auxilios ante una picadura de medusa, con los pasos que de verdad funcionan y los mitos que pueden empeorarla.',
     heroAlt: 'Medusa Pelagia noctiluca translúcida con tonos violáceos flotando en agua de mar iluminada por el sol',
@@ -1210,7 +1210,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuándo hay que ir al médico por una picadura de medusa?', a: 'Si aparece dificultad para respirar, hinchazón que se extiende, mareo o signos de alergia; si la picadura es extensa o en cara/genitales; o si afecta a niños pequeños, mayores o personas con problemas de salud. En esos casos, atención médica o 112.' },
     ],
     en: {
-      title: 'What to do if a jellyfish stings you: the steps that work (and why urine and vinegar don’t always)',
+      title: 'Jellyfish sting: the steps that actually work (and why urine and vinegar often don’t)',
       excerpt: 'Seawater yes, fresh water no, urine never. The first-aid guide for a jellyfish sting, with the steps that actually work and the myths that can make it worse.',
       related: [
         { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
@@ -1298,7 +1298,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'ruta-barco-calas-menorca-fondear',
     category: 'rutas',
-    title: 'Menorca en barco: la ruta de calas vírgenes a las que no llega la carretera (y dónde fondear sin multa)',
+    title: 'Menorca en barco: calas vírgenes sin carretera y dónde fondear sin multa',
     excerpt:
       'Las mejores calas del sur de Menorca solo se ven bien desde el agua. La ruta para hacerlas en barco desde Ciutadella: qué orden seguir, el viento que la arruina y la norma de fondeo sobre posidonia que multa.',
     heroAlt: 'Barco fondeado frente a una cala virgen de Menorca, agua clara sobre fondo de arena y pinos en el acantilado',
@@ -1330,7 +1330,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Necesito título para alquilar el barco?', a: 'Depende de la potencia y eslora; muchas embarcaciones pequeñas se pueden llevar sin titulación, pero si no navegas habitualmente lo más cómodo y seguro en Menorca es alquilar con patrón, por los fondeos sobre arena y el tráfico de verano.' },
     ],
     en: {
-      title: 'Menorca by boat: the route to wild coves the road can’t reach (and where to anchor without a fine)',
+      title: 'Menorca by boat: wild coves the road can’t reach, and where to anchor without a fine',
       excerpt: 'Menorca’s best southern coves only look their best from the water. The boat route from Ciutadella: the order to follow, the wind that ruins it, and the seagrass anchoring rule that fines you.',
       related: [
         { href: '/en/boat-rental/coasts/islas-baleares/provinces/baleares/menorca', label: 'Boat rental in Menorca' },
@@ -1419,7 +1419,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-benijo-tenerife-arena-negra-corrientes',
     category: 'curiosidades',
-    title: 'Playa de Benijo, Tenerife: arena negra y los roques de postal, pero el baño es para valientes',
+    title: 'Playa de Benijo (Tenerife): arena negra y roques famosos, pero el baño es para valientes',
     excerpt:
       'El final salvaje de Anaga: arena volcánica negra y dos roques en el agua. Lo que necesitas saber antes de ir: corrientes fuertes, sin socorrista y la marea decide cuánta playa hay.',
     heroAlt: 'Playa de Benijo en Tenerife, arena negra volcánica con los roques recortados sobre el Atlántico al atardecer',
@@ -1450,7 +1450,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Tiene servicios y aparcamiento?', a: 'Pocos: un par de restaurantes arriba y un aparcamiento pequeño al final de una carretera estrecha que se llena en fin de semana. No hay sombra ni socorrismo. Lleva agua, comida, calzado y chanclas (la arena negra quema).' },
     ],
     en: {
-      title: 'Playa de Benijo, Tenerife: black sand and postcard sea stacks — but swimming is for the brave',
+      title: 'Playa de Benijo (Tenerife): black sand and famous sea stacks, but the swim is for the brave',
       excerpt: 'The wild end of Anaga: black volcanic sand and two sea stacks. What to know before you go: strong currents, no lifeguard, and the tide decides how much beach there is.',
       related: [
         { href: '/en/islands', label: 'Beaches by island' },
@@ -1478,7 +1478,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'cala-macarelleta-menorca-acceso-verano',
     category: 'guias',
-    title: 'Cala Macarelleta, Menorca: la cala de las fotos a la que en agosto no puedes llegar en coche',
+    title: 'Cala Macarelleta (Menorca): en agosto no puedes llegar en coche a la cala de las fotos',
     excerpt:
       'Arena fina y agua de un verde imposible en el sur de Menorca. La letra pequeña: en verano el coche está prohibido, no hay servicios y a mediodía está a rebosar. Cómo y cuándo ir.',
     heroAlt: 'Cala Macarelleta en Menorca, pequeña ensenada de arena blanca y agua verde turquesa entre pinos y acantilados',
@@ -1509,7 +1509,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuándo es mejor ir?', a: 'Mayo, junio y septiembre dan el mejor equilibrio de agua cálida y poca gente. En julio y agosto, llega antes de las 10h o a última hora de la tarde. Con viento del sur (migjorn) el agua se enturbia; entonces mejor una cala del norte.' },
     ],
     en: {
-      title: 'Cala Macarelleta, Menorca: the postcard cove you can’t reach by car in August',
+      title: 'Cala Macarelleta (Menorca): in August you can’t reach the postcard cove by car',
       excerpt: 'Fine sand and impossibly green water in southern Menorca. The small print: in summer cars are banned, there are no services and by midday it’s packed. How and when to go.',
       related: [
         { href: '/en/islands', label: 'Beaches by island' },
@@ -1597,7 +1597,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'cala-granadella-xabia-guia-honesta',
     category: 'curiosidades',
-    title: 'Cala Granadella, Xàbia: la "mejor playa de España" que conviene saber pisar',
+    title: 'Cala Granadella (Xàbia): la "mejor playa de España" es de cantos, no de arena',
     excerpt:
       'Premiada, fotografiada y masificada. Lo que de verdad necesitas saber de la Granadella: cantos (no arena), aforo en verano y el mejor snorkel de la Costa Blanca.',
     heroAlt: 'Cala Granadella en Xàbia, herradura entre acantilados y pinos sobre agua transparente',
@@ -1628,7 +1628,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Cuándo está mejor el agua para snorkel?', a: 'Con mar en calma. El viento de levante (este) levanta marejada y enturbia los fondos rocosos; revisa el parte. Mayo, junio y septiembre suelen dar el mejor equilibrio de agua clara y poca gente.' },
     ],
     en: {
-      title: 'Cala Granadella, Xàbia: the "best beach in Spain" you need to know how to visit',
+      title: 'Cala Granadella (Xàbia): the "best beach in Spain" is pebbles, not sand',
       excerpt: 'Award-winning, photographed and overcrowded. What you actually need to know about Granadella: pebbles (not sand), summer capacity limits and the best snorkelling on the Costa Blanca.',
       related: [
         { href: '/en/boat-rental/coasts/costa-blanca/provinces/alicante/javea', label: 'Boat rental in Xàbia' },
@@ -1717,7 +1717,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-rodas-islas-cies-permiso',
     category: 'guias',
-    title: 'Playa de Rodas, Islas Cíes: la "mejor playa del mundo" a la que no puedes llegar sin permiso',
+    title: 'Playa de Rodas (Cíes): la "mejor playa del mundo" no se pisa sin permiso previo',
     excerpt:
       'Un arco de arena blanca entre dos islas, agua de color caribeño y agua a 18°C. Cómo se llega de verdad a Cíes: el permiso obligatorio de la Xunta, el aforo y el barco que solo navega con buen tiempo.',
     heroAlt: 'Arco de arena blanca de la playa de Rodas uniendo dos islas de las Cíes sobre agua turquesa',
@@ -1748,7 +1748,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Está fría el agua en las Cíes?', a: 'Sí. Es Atlántico abierto: el agua rara vez supera los 18-19°C, incluso en agosto. El entorno es espectacular, pero el baño es frío y el tiempo, cambiante: elige un día de buen pronóstico.' },
     ],
     en: {
-      title: 'Playa de Rodas, Cíes Islands: the "best beach in the world" you can’t reach without a permit',
+      title: 'Playa de Rodas (Cíes): the "best beach in the world" you can’t set foot on without a permit',
       excerpt: 'An arc of white sand linking two islands, Caribbean-coloured water and a sea at 18°C. How you actually get to Cíes: the compulsory Xunta permit, the daily cap and a ferry that only sails in good weather.',
       related: [
         { href: '/en/islands', label: 'Beaches by island' },
@@ -2053,7 +2053,7 @@ export const ARTICLES: Article[] = [
   {
     slug: 'playa-murcia-esculturas-arena-erosion',
     category: 'curiosidades',
-    title: 'La playa de Murcia con esculturas de arena que talló el viento: parecen de otro planeta',
+    title: 'Las gredas de Bolnuevo (Murcia): esculturas que el viento talló junto a la playa',
     excerpt:
       'En Bolnuevo, junto a Mazarrón, la erosión ha modelado durante miles de años unas formas que parecen sacadas de un decorado de ciencia ficción.',
     heroAlt: 'Formaciones erosionadas de arenisca dorada junto al mar en Bolnuevo, Murcia',
@@ -2081,7 +2081,7 @@ export const ARTICLES: Article[] = [
       { q: '¿Se puede uno bañar allí?', a: 'Sí: junto a las gredas hay una playa amplia de arena oscura y aguas tranquilas, con servicios en el paseo de Bolnuevo.' },
     ],
     en: {
-      title: 'The Murcia beach with sand sculptures carved by the wind: they look from another planet',
+      title: 'The Bolnuevo mudstone (Murcia): wind-carved rock formations right by the beach',
       excerpt: 'At Bolnuevo, near Mazarrón, erosion has shaped formations over thousands of years that look straight out of a science-fiction set.',
       related: [
         { href: '/en/communities/murcia', label: 'Beaches of Murcia' },

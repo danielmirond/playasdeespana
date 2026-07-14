@@ -116,18 +116,32 @@ decir: **la substancia tiene que igualar al gancho** — exactamente nuestra reg
 Nada de ocultar; al revés, el dato concreto ES el gancho.
 
 ### Reglas duras de titulado Discover
-- **El dato clave en los primeros ~60 caracteres** (es lo que se ve en el feed).
-- **Siempre la entidad**: nombre de la playa/cala + provincia o comunidad. Discover
-  ama las entidades reconocibles.
-- **Un dato concreto y verificable** en el titular (°C, distancia, marea, viento,
-  "mejor playa 2014", aforo). El dato sustituye a la intriga.
+- **El NOMBRE de la playa es obligatorio y va en los primeros ~40 caracteres.**
+  Regla dura, sin excepción: es la entidad que Discover premia y el activo SEO.
+  Nunca lo sustituyas por el municipio ("la cala de Nerja") ni por una perífrasis
+  ("la playa de Murcia con…"): el topónimo propio —Maro, Percheles, Bolnuevo—
+  tiene que aparecer, y pronto.
+- **El prefijo `Playa de X, Provincia:` deja de ser obligatorio.** Da consistencia
+  pero, repetido en todas las piezas, cansa el feed (fatiga de patrón del mismo
+  dominio) y retrasa el gancho. Alterna moldes, todos con el nombre presente:
+  - **Nombre delante:** `Maro (Nerja): [gancho + contra]` (entidad en el carácter 0).
+  - **Gancho delante, nombre pronto:** `Agua a 26°C y ni una sombra en Percheles
+    (Mazarrón): pista de tierra hasta la arena`.
+  El municipio/provincia entre paréntesis **acompaña** al nombre, no lo sustituye.
+- **Tope ~90 caracteres.** En el feed móvil se trunca con "…" y lo que se cae es el
+  final —justo donde va el CONTRA, el alma de la voz—. Dato **y** contra tienen que
+  caber en lo visible. Si no caben los dos, prioriza y recorta, no alargues.
+- **El dato/gancho, cuanto antes** (idealmente en los primeros ~40, junto al nombre):
+  °C, distancia, marea, viento, "mejor playa 2014", aforo. El dato sustituye a la
+  intriga.
 - **Nunca ocultes** la información necesaria para entender el artículo.
-- **Rota el vocabulario.** Usa los moldes de abajo pero **cambiando verbos y
-  adjetivos** (banco de sinónimos) para que no parezcan plantilla: Discover
-  penaliza lo repetitivo y nosotros queremos voz propia.
-- **Cero clichés §5** (joya escondida, paraíso, parece el Caribe…). Si un molde
-  Discover usa "secreto/oculto", **subviértelo** ("la 'cala secreta' que ya conoce
-  medio Instagram").
+- **Prohibida la repetición léxica entre piezas.** No repitas el mismo cierre en dos
+  titulares ("sin una sombra", "que decide tu día", "pero el baño es para valientes"):
+  delata plantilla y Discover penaliza lo repetitivo del mismo dominio. Rota también
+  verbos y adjetivos con el banco de sinónimos.
+- **Cero clichés §5** (joya escondida, paraíso, parece el Caribe, de postal…). Si un
+  molde Discover usa "secreto/oculto", **subviértelo** ("la 'cala secreta' que ya
+  conoce medio Instagram").
 
 ### Moldes Discover adaptados a playas (con dato, no intriga)
 | Molde Discover | Adaptación nuestra (ejemplo con dato) |
