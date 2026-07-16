@@ -85,16 +85,20 @@ export async function getPrediccionAemet(slug: string): Promise<AemetPlaya | nul
   try {
     return await kvCached<AemetPlaya | null>('aemet-playa-v1', [entry.codigo], 3 * 3600, async () => {
       // Paso 1: el endpoint devuelve la URL real de los datos.
+      // OJO: nada de cache:'no-store' aquí — dentro de una página ISR
+      // estática convierte la ruta en dinámica en runtime y Next lanza
+      // "Page changed from static to dynamic" (500 en todas las fichas
+      // SSG). Cazado en E2E local antes de llegar a producción.
       const r1 = await fetchWithTimeout(`${BASE}/${entry.codigo}`, {
         headers: { api_key: API_KEY, Accept: 'application/json' },
-        cache: 'no-store',
+        next: { revalidate: 3 * 3600 },
       }, 6000)
       if (!r1.ok) return null
       const meta = await r1.json() as { estado?: number; datos?: string }
       if (!meta?.datos) return null
 
       // Paso 2: los datos reales (JSON en latin1 la mayoría de las veces).
-      const r2 = await fetchWithTimeout(meta.datos, { cache: 'no-store' }, 6000)
+      const r2 = await fetchWithTimeout(meta.datos, { next: { revalidate: 3 * 3600 } }, 6000)
       if (!r2.ok) return null
       const buf = await r2.arrayBuffer()
       let arr: unknown
