@@ -43,6 +43,8 @@ interface LocalityPageProps {
   images: { hero: { unsplashUrl: string; alt: string } }
   /** Hero real pre-resuelto (Wikimedia/Openverse) con crédito. Si null → degradado. */
   heroImage?: { url: string; credit: string } | null
+  /** nombreCala → slug de nuestra ficha de playa (matching server-side). */
+  beachLinks?: Record<string, string>
 }
 
 const PROTECTION_LABEL: Record<Mooring['protection'], { txt: string; color: string }> = {
@@ -83,6 +85,7 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
   const {
     coast, province, locality, description, beaches, moorings, pricing,
     regulations, bestSeason, insiderTip, faq, samboatAwinUrl, heroImage,
+    beachLinks = {},
   } = props
 
   const lugares = fusionarLugares(beaches, moorings)
@@ -190,7 +193,11 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
               const pr = l.mooring ? PROTECTION_LABEL[l.mooring.protection] : null
               return (
                 <div key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 8, padding: '1rem' }}>
-                  <div style={{ fontWeight: 700, marginBottom: '.2rem', color: 'var(--ink)' }}>{l.name}</div>
+                  <div style={{ fontWeight: 700, marginBottom: '.2rem', color: 'var(--ink)' }}>
+                    {beachLinks[l.name]
+                      ? <Link href={`/playas/${beachLinks[l.name]}`} style={{ color: 'var(--ink)', textDecorationColor: 'var(--accent)' }}>{l.name}</Link>
+                      : l.name}
+                  </div>
                   {l.distance && <div style={{ fontSize: '.78rem', color: 'var(--accent)', marginBottom: '.4rem' }}>{l.distance}</div>}
                   <div style={{ fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.5 }}>{l.description}</div>
                   {l.mooring && pr && (

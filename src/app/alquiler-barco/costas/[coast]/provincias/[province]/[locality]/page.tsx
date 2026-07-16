@@ -1,5 +1,6 @@
 import { getLocalityBySlug, getAllLocalities } from '@/lib/boat-rental-localities'
-import { samboatAwinUrl, getBoatRentalCanonical, boatRentalSlug } from '@/lib/boat-rental-helpers'
+import { samboatAwinUrl, getBoatRentalCanonical, boatRentalSlug, matchBeachSlugs } from '@/lib/boat-rental-helpers'
+import { getPlayas } from '@/lib/playas'
 import { getBoatImage } from '@/lib/boat-images'
 import BoatRentalLocalityPage from '@/components/BoatRentalLocalityPage'
 import { notFound } from 'next/navigation'
@@ -53,9 +54,16 @@ export default async function LocalityPage({ params }: { params: Promise<Localit
   const awinUrl = samboatAwinUrl(afinityId, locality.samboatUrl, `playasdeespana_${locality.slug}`)
   const hero = getBoatImage(locality.slug)
 
+  // Enlazar las calas listadas con nuestras fichas de playa (matching
+  // conservador por nombre dentro de la provincia — antes eran texto plano).
+  const playas = await getPlayas()
+  const nombres = [...locality.beaches.map(b => b.name), ...locality.moorings.map(m => m.name)]
+  const beachLinks = matchBeachSlugs(locality.province, nombres, playas)
+
   return (
     <BoatRentalLocalityPage
       heroImage={hero ? { url: hero.url, credit: hero.credit } : null}
+      beachLinks={beachLinks}
       coast={locality.coast}
       province={locality.province}
       locality={locality.locality}

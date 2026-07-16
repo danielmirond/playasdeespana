@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import EnlacesGeoHubs from '@/components/seo/EnlacesGeoHubs'
 import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './MunicipioPage.module.css'
@@ -158,6 +159,9 @@ export default async function MunicipioPage({ params }: Props) {
             ← Ver todas las playas de {municipio.provincia}
           </Link>
         </div>
+      </div>
+      <div style={{ padding: '0 1.5rem' }}>
+        <EnlacesGeoHubs nombre={municipio.nombre} />
       </div>
       <GygActivities query={`${municipio.nombre}, Spain`} cmp="municipio" />
     </>

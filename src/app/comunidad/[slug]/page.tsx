@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import EnlacesGeoHubs from '@/components/seo/EnlacesGeoHubs'
 import { getPlayas, getPlayasByComunidad, getComunidades, getMunicipios } from '@/lib/playas'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './ComunidadPage.module.css'
@@ -226,6 +227,9 @@ export default async function ComunidadPage({ params }: Props) {
             </div>
           </div>
         )}
+      </div>
+      <div style={{ padding: '0 1.5rem' }}>
+        <EnlacesGeoHubs nombre={comunidad.nombre} />
       </div>
       <GygActivities query={`${comunidad.nombre}, Spain`} cmp="comunidad" />
     </>

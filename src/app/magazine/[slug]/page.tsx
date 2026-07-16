@@ -5,6 +5,7 @@ import Nav from '@/components/ui/Nav'
 import GygActivities from '@/components/GygActivities'
 import AuthorByline from '@/components/seo/AuthorByline'
 import { getArticleBySlug, getAllArticles, CATEGORIES, type Block } from '@/lib/magazine'
+import { getPlayas } from '@/lib/playas'
 
 export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -73,6 +74,38 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params
   const a = getArticleBySlug(slug)
   if (!a) notFound()
+
+  // ── Playas mencionadas → enlaces a ficha (enlazado interno global) ──
+  // Matching conservador: nombre completo normalizado, o núcleo ≥8 chars
+  // (evita falsos positivos tipo "Levante" = viento). Máx. 6.
+  const _norm = (x: string) => x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  const _core = (x: string) => _norm(x).replace(/\b(playa|platja|praia|cala|calo|hondartza|de|del|de la|la|el|les|los|las|d')\b/g, ' ').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()
+  const _texto = _norm([a.title, a.excerpt, ...a.body.map(b =>
+    b.t === 'p' ? b.html : b.t === 'h2' ? b.text : b.t === 'ul' ? b.items.join(' ') : b.t === 'quote' ? b.text : ''
+  )].join(' ').replace(/<[^>]+>/g, ' '))
+  const _todas = await getPlayas()
+  // Palabras tan comunes que un núcleo compuesto SOLO por ellas no
+  // identifica una playa ("pequeña", "amarilla", "palmeras"… aparecen en
+  // cualquier texto). Esos nombres solo casan por nombre completo.
+  const _COMUNES = new Set(['pequena', 'pequeno', 'grande', 'chica', 'chico', 'amarilla', 'blanca', 'negra', 'roja', 'verde', 'dorada', 'nueva', 'vieja', 'nova', 'vella', 'palmeras', 'arena', 'arenas', 'piedras', 'salinas', 'norte', 'sur', 'este', 'oeste', 'levante', 'poniente', 'honda', 'larga', 'llarga', 'gran', 'mar', 'sol', 'costa', 'puerto', 'port', 'torre', 'iglesia', 'castillo', 'rio', 'central', 'pequenas', 'grandes', 'chicas', 'amarillas', 'blancas', 'negras', 'rojas', 'verdes', 'doradas', 'nuevas', 'viejas', 'casas', 'torres', 'puertos', 'rios', 'castillos', 'playitas', 'caletas', 'caleta', 'ensenada', 'muelle', 'faro', 'arenal', 'arenales', 'playazo', 'bassa', 'racó', 'raco'])
+  const _seen = new Set<string>()
+  const playasMencionadas = _todas
+    .filter(pl => {
+      const full = _norm(pl.nombre)
+      const core = _core(pl.nombre)
+      const coreEsPropio = core.length >= 8 && core.split(' ').some(t => t.length >= 4 && !_COMUNES.has(t))
+      // La vía de nombre completo también exige nombre "propio": sin esto,
+      // una playa llamada a secas "Casas Blancas" casa con cualquier texto
+      // que describa un pueblo de casas blancas.
+      const tieneGenerico = /\b(playa|platja|praia|cala|calo|hondartza)\b/.test(full)
+      const hit = (full.length >= 8 && (tieneGenerico || coreEsPropio) && _texto.includes(full)) || (coreEsPropio && _texto.includes(core))
+      if (!hit || _seen.has(pl.slug)) return false
+      _seen.add(pl.slug)
+      return true
+    })
+    .sort((x, y) => y.nombre.length - x.nombre.length)
+    .slice(0, 6)
+
 
   const cat = CATEGORIES[a.category]
   const url = `${BASE}/magazine/${a.slug}`
@@ -163,6 +196,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   <summary style={{ fontWeight: 700, color: 'var(--ink)', cursor: 'pointer', fontSize: '.95rem' }}>{f.q}</summary>
                   <p style={{ margin: '.6rem 0 0', color: 'var(--muted)', lineHeight: 1.6, fontSize: '.9rem' }}>{f.a}</p>
                 </details>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {playasMencionadas.length > 0 && (
+          <section style={{ marginTop: '2.75rem', borderTop: '1px solid var(--line)', paddingTop: '1.5rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 800, color: 'var(--ink)', margin: '0 0 .85rem' }}>Playas mencionadas en este artículo</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.55rem' }}>
+              {playasMencionadas.map(pl => (
+                <Link key={pl.slug} href={`/playas/${pl.slug}`} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.65rem .85rem', textDecoration: 'none' }}>
+                  <span style={{ display: 'block', fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)' }}>{pl.nombre} <span aria-hidden="true">→</span></span>
+                  <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>{pl.municipio} · {pl.provincia}</span>
+                </Link>
               ))}
             </div>
           </section>

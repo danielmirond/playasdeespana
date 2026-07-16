@@ -98,3 +98,44 @@ export function getBoatLinkForPlaya(
   const coast = locs[0].coast
   return { label: coast, href: `/alquiler-barco/costas/${boatRentalSlug(coast)}` }
 }
+
+
+/**
+ * Matching de las calas/playas listadas en una ficha de barcos contra
+ * nuestras fichas de playa. Conservador: solo enlaza con igualdad
+ * normalizada o contención con ≥6 caracteres, dentro de la(s) provincia(s)
+ * equivalentes del dataset. Devuelve { nombreCala: slugNuestro }.
+ */
+export function matchBeachSlugs(
+  province: string,
+  beachNames: string[],
+  playas: Array<{ slug: string; nombre: string; provincia: string }>,
+): Record<string, string> {
+  const norm = (x: string) => (x ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/\b(playa|platja|praia|cala|calo|caló|es|sa|ses|de|del|de la|la|el|les|los|las|d')\b/g, ' ')
+    .replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()
+  const PROVS: Record<string, string[]> = {
+    baleares: ['baleares', 'islas baleares'],
+    tenerife: ['santa cruz de tenerife'],
+  }
+  const pn = (province ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  const targets = new Set(PROVS[pn] ?? [pn])
+  const pool = playas.filter(pl => targets.has((pl.provincia ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')))
+
+  const out: Record<string, string> = {}
+  for (const name of beachNames) {
+    const n = norm(name)
+    if (n.length < 4) continue
+    let best: { slug: string; score: number } | null = null
+    for (const pl of pool) {
+      const m = norm(pl.nombre)
+      if (!m) continue
+      let score = 0
+      if (m === n) score = 3
+      else if ((m.includes(n) && n.length >= 6) || (n.includes(m) && m.length >= 6)) score = 2
+      if (score > (best?.score ?? 0)) best = { slug: pl.slug, score }
+    }
+    if (best) out[name] = best.slug
+  }
+  return out
+}
