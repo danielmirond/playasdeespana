@@ -355,6 +355,19 @@ export default async function PlayaPage({ params }: Props) {
   const aemetData = aemetResult?.status === 'fulfilled' ? aemetResult.value : null
   const SEV = { verde: 0, amarilla: 1, roja: 2 } as const
   let banderaPlaya = banderaEstimada
+
+  // Si la estimación meteo no pudo calcularse (fetch caído) pero AEMET SÍ
+  // respondió, derivamos la bandera del dato oficial: débil → verde,
+  // moderado/fuerte → amarilla. Mejor una bandera oficial que ninguna.
+  if (!banderaPlaya && aemetData?.hoy?.oleaje) {
+    const o = aemetData.hoy.oleaje
+    banderaPlaya = o === 'débil'
+      ? { color: 'verde', label: 'Bandera verde', labelEn: 'Green flag',
+          motivo: 'AEMET prevé oleaje débil hoy', motivoEn: 'AEMET forecasts calm sea today', hex: '#22c55e' }
+      : { color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
+          motivo: `AEMET prevé oleaje ${o} hoy`, motivoEn: `AEMET forecasts ${o === 'fuerte' ? 'rough' : 'moderate'} sea today`, hex: '#f59e0b' }
+  }
+  // Con estimación propia presente, AEMET solo ELEVA (oleaje fuerte → amarilla mín.)
   if (aemetData?.hoy?.oleaje === 'fuerte' && (!banderaPlaya || SEV[banderaPlaya.color] < 1)) {
     banderaPlaya = {
       color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
