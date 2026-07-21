@@ -26,6 +26,7 @@ const OVERPASS_MIRRORS = [
   'https://overpass-api.de/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',
   'https://overpass.private.coffee/api/interpreter',
+  'https://overpass.osm.ch/api/interpreter',
 ]
 
 export interface OverpassOptions {
@@ -63,7 +64,10 @@ export async function queryOverpass(
         signal: controller.signal,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'User-Agent': 'playas-espana.com/1.0',
+          // Accept explícito: el Apache de overpass-api.de devuelve 406
+          // (content negotiation) a peticiones sin Accept compatible.
+          'Accept': 'application/json',
+          'User-Agent': 'PlayasEspana/1.0 (playas-espana.com; hola@playas-espana.com)',
         },
         next: { revalidate },
       } as RequestInit & { next: { revalidate: number } })
@@ -83,7 +87,10 @@ export async function queryOverpass(
       return data.elements
     } catch (err) {
       clearTimeout(timer)
-      const reason = (err as Error)?.name === 'AbortError' ? `timeout ${timeoutPerAttempt}ms` : (err as Error)?.message ?? 'unknown'
+      const cause = (err as { cause?: { message?: string; code?: string } })?.cause
+      const reason = (err as Error)?.name === 'AbortError'
+        ? `timeout ${timeoutPerAttempt}ms`
+        : `${(err as Error)?.message ?? 'unknown'}${cause ? ` (cause: ${cause.code ?? ''} ${cause.message ?? ''})` : ''}`
       console.warn(`[overpass:${label}] ${host} → ${reason}, trying next mirror`)
       continue
     }

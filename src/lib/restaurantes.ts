@@ -7,6 +7,7 @@ import type { Restaurante } from '@/types'
 import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
+import { IS_BUILD } from './buildGuard'
 
 // Radio razonable para playas: hasta 3 km cubre el paseo marítimo y zonas
 // limítrofes, sin hacer la query tan grande que Overpass tarde 15 s.
@@ -22,16 +23,20 @@ function tipoDesdeAmenity(amenity: string): string {
 const KV_TTL_RESTAURANTES = 3 * 24 * 3600
 
 export function getRestaurantes(lat: number, lon: number): Promise<Restaurante[]> {
-  // TEMP: Disable during build due to Overpass API overload
-  return Promise.resolve([])
-  // return kvCached('restaurantes', [lat, lon], KV_TTL_RESTAURANTES, () => fetchRestaurantesFromOverpass(lat, lon))
+  // Sin red durante `next build` (SSG masivo machacaba Overpass); en
+  // runtime (ISR, API routes, warming) se pide y cachea con normalidad.
+  // Antes había un "TEMP: disable" incondicional que apagó estos datos
+  // TAMBIÉN en producción — por eso las fichas decían "no se encontraron
+  // restaurantes/hoteles" en pleno Cabanyal.
+  if (IS_BUILD) return Promise.resolve([])
+  return kvCached('restaurantes', [lat, lon], KV_TTL_RESTAURANTES, () => fetchRestaurantesFromOverpass(lat, lon))
 }
 
 async function fetchRestaurantesFromOverpass(lat: number, lon: number): Promise<Restaurante[]> {
   // Query compacta: restaurantes, bares, cafés como nodos dentro del radio.
-  // [out:json][timeout:1] limita el tiempo interno de Overpass a 3 s,
+  // [out:json][timeout:5] limita el tiempo interno de Overpass a 3 s,
   // complementa nuestro timeout por intento de 6 s en el cliente.
-  const query = `[out:json][timeout:1];
+  const query = `[out:json][timeout:5];
 (
   node["amenity"="restaurant"](around:${RADIUS_M},${lat},${lon});
   node["amenity"="bar"](around:${RADIUS_M},${lat},${lon});
@@ -40,7 +45,6 @@ async function fetchRestaurantesFromOverpass(lat: number, lon: number): Promise<
 out body 30;`
 
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 2000, // Reducido para build
     revalidate: 86400,
     label: 'restaurantes',
   })

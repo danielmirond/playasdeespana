@@ -8,6 +8,7 @@
 import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
+import { IS_BUILD } from './buildGuard'
 
 const RADIUS_M = 10000
 
@@ -76,16 +77,20 @@ function extraerServicios(tags: Record<string, string>): string[] {
 const KV_TTL_CAMPINGS = 7 * 24 * 3600
 
 export function getCampings(lat: number, lon: number): Promise<Camping[]> {
-  // TEMP: Disable during build due to Overpass API overload
-  return Promise.resolve([])
-  // return kvCached('campings', [lat, lon], KV_TTL_CAMPINGS, () => fetchCampingsFromOverpass(lat, lon))
+  // Sin red durante `next build` (SSG masivo machacaba Overpass); en
+  // runtime (ISR, API routes, warming) se pide y cachea con normalidad.
+  // Antes había un "TEMP: disable" incondicional que apagó estos datos
+  // TAMBIÉN en producción — por eso las fichas decían "no se encontraron
+  // restaurantes/hoteles" en pleno Cabanyal.
+  if (IS_BUILD) return Promise.resolve([])
+  return kvCached('campings', [lat, lon], KV_TTL_CAMPINGS, () => fetchCampingsFromOverpass(lat, lon))
 }
 
 async function fetchCampingsFromOverpass(lat: number, lon: number): Promise<Camping[]> {
   // Nodes + ways (camping grandes suelen estar mapeados como área). `out center`
   // nos da lat/lon del centro para los ways. Limitamos a 40 resultados para
   // evitar JSON enorme de Overpass.
-  const query = `[out:json][timeout:1];
+  const query = `[out:json][timeout:5];
 (
   node["tourism"="camp_site"](around:${RADIUS_M},${lat},${lon});
   node["tourism"="caravan_site"](around:${RADIUS_M},${lat},${lon});
@@ -95,7 +100,6 @@ async function fetchCampingsFromOverpass(lat: number, lon: number): Promise<Camp
 out center body 40;`
 
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 2000, // Reducido de 7s: 3 mirrors × 2s = 6s máx durante build
     revalidate: 86400,
     label: 'campings',
   })
@@ -185,14 +189,12 @@ export async function getCampingsEnBbox(
   playas: Array<{ slug: string; nombre: string; municipio: string; lat: number; lng: number }>,
   options: { revalidate?: number; max?: number } = {}
 ): Promise<CampingConPlaya[]> {
-  // TEMP: Disable during build due to Overpass API overload
-  return []
-  // if (playas.length === 0) return []
+  if (IS_BUILD || playas.length === 0) return []
   const bbox = bboxFromPoints(playas)
   // Overpass bbox: south,west,north,east
   const bboxStr = `${bbox.minLat},${bbox.minLng},${bbox.maxLat},${bbox.maxLng}`
 
-  const query = `[out:json][timeout:1];
+  const query = `[out:json][timeout:5];
 (
   node["tourism"="camp_site"](${bboxStr});
   node["tourism"="caravan_site"](${bboxStr});
@@ -203,7 +205,6 @@ out center body 200;`
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 2000, // Reducido para build
     revalidate: options.revalidate ?? 7 * 86400,
     label: 'campings-bbox',
   })

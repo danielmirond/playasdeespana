@@ -66,7 +66,7 @@ async function fetchEscuelasUncached(lat: number, lng: number, radio = 5000): Pr
   if (foursquare.length >= 2) return foursquare
   try {
     const query = `
-      [out:json][timeout:1];
+      [out:json][timeout:5];
       (
         node["sport"~"surf|scuba_diving|kitesurfing|windsurfing|kayak|paddleboarding|snorkeling|yoga|water_sports"](around:${radio},${lat},${lng});
         node["leisure"="sports_centre"]["sport"~"surf|diving|kite|wind|kayak|paddle|water"](around:${radio},${lat},${lng});

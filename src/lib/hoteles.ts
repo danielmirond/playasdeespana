@@ -7,6 +7,7 @@
 import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
+import { IS_BUILD } from './buildGuard'
 
 const RADIUS_M = 5000
 
@@ -47,16 +48,20 @@ function inferirPrecio(estrellas: number): string {
 const KV_TTL_HOTELES = 7 * 24 * 3600
 
 export function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
-  // TEMP: Disable during build due to Overpass API overload
-  return Promise.resolve([])
-  // return kvCached('hoteles', [lat, lon], KV_TTL_HOTELES, () => fetchHotelesFromOverpass(lat, lon))
+  // Sin red durante `next build` (SSG masivo machacaba Overpass); en
+  // runtime (ISR, API routes, warming) se pide y cachea con normalidad.
+  // Antes había un "TEMP: disable" incondicional que apagó estos datos
+  // TAMBIÉN en producción — por eso las fichas decían "no se encontraron
+  // restaurantes/hoteles" en pleno Cabanyal.
+  if (IS_BUILD) return Promise.resolve([])
+  return kvCached('hoteles', [lat, lon], KV_TTL_HOTELES, () => fetchHotelesFromOverpass(lat, lon))
 }
 
 async function fetchHotelesFromOverpass(lat: number, lon: number): Promise<HotelReal[]> {
   // Query solo con nodos. Incluye ways solo para hoteles (los edificios
   // grandes vienen como ways en OSM), con `out center` para conseguir
   // las coordenadas centrales.
-  const query = `[out:json][timeout:1];
+  const query = `[out:json][timeout:5];
 (
   node["tourism"="hotel"](around:${RADIUS_M},${lat},${lon});
   node["tourism"="hostel"](around:${RADIUS_M},${lat},${lon});
@@ -66,7 +71,6 @@ async function fetchHotelesFromOverpass(lat: number, lon: number): Promise<Hotel
 out center body 40;`
 
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 2000, // Reducido para build
     revalidate: 86400,
     label: 'hoteles',
   })

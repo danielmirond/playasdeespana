@@ -4,6 +4,7 @@
 import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
+import { IS_BUILD } from './buildGuard'
 
 const RADIUS_M = 15000 // 15 km: centros de buceo están más dispersos
 
@@ -64,13 +65,17 @@ function extraerServicios(tags: Record<string, string>): string[] {
 const KV_TTL_BUCEO = 7 * 24 * 3600
 
 export function getCentrosBuceo(lat: number, lon: number): Promise<CentroBuceo[]> {
-  // TEMP: Disable during build due to Overpass API overload
-  return Promise.resolve([])
-  // return kvCached('buceo', [lat, lon], KV_TTL_BUCEO, () => fetchCentrosBuceoFromOverpass(lat, lon))
+  // Sin red durante `next build` (SSG masivo machacaba Overpass); en
+  // runtime (ISR, API routes, warming) se pide y cachea con normalidad.
+  // Antes había un "TEMP: disable" incondicional que apagó estos datos
+  // TAMBIÉN en producción — por eso las fichas decían "no se encontraron
+  // restaurantes/hoteles" en pleno Cabanyal.
+  if (IS_BUILD) return Promise.resolve([])
+  return kvCached('buceo', [lat, lon], KV_TTL_BUCEO, () => fetchCentrosBuceoFromOverpass(lat, lon))
 }
 
 async function fetchCentrosBuceoFromOverpass(lat: number, lon: number): Promise<CentroBuceo[]> {
-  const query = `[out:json][timeout:1];
+  const query = `[out:json][timeout:5];
 (
   node["sport"="scuba_diving"](around:${RADIUS_M},${lat},${lon});
   node["amenity"="diving_school"](around:${RADIUS_M},${lat},${lon});
@@ -82,7 +87,6 @@ async function fetchCentrosBuceoFromOverpass(lat: number, lon: number): Promise<
 out center body 30;`
 
   const elements = await queryOverpass(query, {
-    timeoutPerAttempt: 2000, // Reducido de 7s: 3 mirrors × 2s = 6s máx durante build
     revalidate: 86400,
     label: 'buceo',
   })

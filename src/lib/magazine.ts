@@ -79,6 +79,73 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Illa Roja (voz bicéfala) ─────
+  {
+    slug: 'illa-roja-begur-girona-islote-nudista-cami-ronda',
+    category: 'rutas',
+    title: 'Illa Roja (Begur): islote de roca roja y tradición nudista, sin carretera hasta la cala',
+    excerpt:
+      'Entre Sa Riera y el Racó, Illa Roja debe su nombre a un islote de roca rojiza clavado frente a la arena. La letra pequeña: es pequeña, de tradición nudista, sin servicios en la propia cala y solo se llega andando por el camí de ronda; con tramuntana, el mar se pica y el baño se complica.',
+    heroAlt:
+      'Cala de Illa Roja (Begur), Costa Brava: pequeño arenal entre pinos y roca, con el islote de roca rojiza que le da nombre emergiendo del agua a pocos metros de la orilla',
+    heroQuery: 'illa roja,begur,girona,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-07-21T16:28:41Z',
+    readingMin: 5,
+    related: [
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+      { href: '/comunidad/cataluna', label: 'Playas de Cataluña' },
+      { href: '/alquiler-barco/costas/costa-brava/provincias/girona/estartit', label: 'Alquiler de barco en l’Estartit' },
+    ],
+    body: [
+      { t: 'p', html: 'Se llega andando, y eso ya lo dice casi todo. Desde el aparcamiento de Sa Riera, el camí de ronda se descuelga entre pinos y agaves siguiendo la línea de la costa: sube, baja, dobla un recodo — y de pronto, ahí abajo, un peñasco de roca rojiza clavado en el agua parte en dos la vista. Ese islote le da el nombre y le da el carácter. Illa Roja no es una playa a la que se aparca; es una playa a la que se camina.' },
+      { t: 'p', html: 'Es una de esas calas del Baix Empordà que la Costa Brava guarda entre cabo y cabo, con la arena fina apretada entre la roca y el pinar y el rumor del mar rebotando contra las paredes. A media mañana de agosto tiene el aire de un sitio que se ha ganado quien está: los que han hecho los quince minutos a pie, tendidos sin ropa sobre la toalla — porque aquí, y conviene saberlo de antemano, la tradición es nudista.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Illa Roja está en el término de <strong>Begur</strong>, encajada entre la <strong>Platja de Sa Riera</strong> al norte y la <strong>Platja del Racó</strong>. No tiene carretera propia: se accede <strong>a pie por el camí de ronda</strong>, el sendero litoral que enlaza las calas del municipio, en un paseo de <strong>entre diez y quince minutos</strong> desde Sa Riera (o bajando desde el camping que hay sobre ella). Ese filtro explica por qué, pese a su fama, nunca verás aquí la marea humana de un arenal urbano.' },
+      { t: 'p', html: 'El agua acompaña: las playas de Begur figuran, temporada tras temporada, con calidad <strong>"excelente" en los informes de la Agencia Europea de Medio Ambiente</strong>, la nota más alta de la escala. Pero la calidad del baño no es solo el agua. El contra empieza aquí: Illa Roja es <strong>pequeña</strong> y <strong>no tiene servicios en la propia cala</strong> — ni chiringuito, ni socorrista fijo, ni duchas —, y la sombra depende del pino que pilles y de la hora. Todo lo que traigas es todo lo que vas a tener.' },
+      { t: 'p', html: 'El otro aviso es el viento. Esta es la costa de la <strong>tramuntana</strong>, el viento del norte que baja seco y con fuerza sobre el Empordà: cuando sopla, pica el mar, levanta la arena y convierte una cala recogida en un lugar incómodo. No estropea el día siempre, pero conviene mirar el parte antes de subir el coche hasta Begur. Y una nota más para quien venga con niños o sin contexto: la <strong>tradición nudista</strong> no es una anécdota, es la norma social de la cala; llegar sabiéndolo evita el mal trago.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> A primera hora, entre semana y con el mar en calma. La cala mira más o menos al este, así que recibe el sol de la mañana de lleno y a mediodía sigue luminosa; ir temprano te da la arena medio vacía, el agua plana y el aparcamiento de Sa Riera todavía con huecos — que en pleno agosto es medio milagro.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Un fin de semana de agosto a mediodía, con tramuntana anunciada, o si buscas una playa con servicios, chiringuito y acceso rodado para montar el día con la familia y la nevera. Para eso, la de al lado: <strong>Sa Riera</strong> es más grande, tiene arena, servicios y suele lucir bandera azul — el precio es que también tiene mucha más gente.' },
+      { t: 'p', html: 'El truco del que va a menudo: <strong>aparca en Sa Riera a primera hora</strong> (el parking se paga en verano y se llena pronto), calza algo cómodo para el camí de ronda — nada de chanclas finas, hay tramos de roca y tierra — y baja con agua y sombra propia. Y si Illa Roja está llena o el viento la ha estropeado, el mismo sendero sigue hacia otras calas del cabo: la costa de Begur está hecha de eslabones, y casi siempre hay uno más tranquilo a diez minutos andando.' },
+      { t: 'quote', text: 'No es una "cala secreta": está en todas las guías y en medio Instagram. Lo que sigue siendo verdad es que, para pisarla, hay que dejar el coche arriba y andar — y eso, en la Costa Brava de agosto, ya es un filtro.' },
+      { t: 'p', html: 'Al caer la tarde, cuando el sol se va por detrás del pinar y la luz se pone del color del propio islote, la cala se vacía casi entera. Quedan cuatro siluetas recogiendo la toalla, el rojo de la roca encendiéndose un último momento sobre el agua y el camí de ronda esperando arriba, en cuesta, para devolverte al mundo con carretera. Illa Roja no te lo pone fácil, y ahí está justo la parte buena.' },
+    ],
+    faq: [
+      { q: '¿Cómo se llega a Illa Roja?', a: 'A pie por el camí de ronda desde Sa Riera (unos 10-15 minutos), o bajando desde el camping que hay sobre la cala. No hay carretera ni aparcamiento en la propia playa: se deja el coche arriba, en Sa Riera, y se camina.' },
+      { q: '¿Illa Roja es una playa nudista?', a: 'Sí, es una de las calas de tradición nudista de la Costa Brava. Conviene saberlo antes de ir, sobre todo si vas con niños o esperas una playa convencional.' },
+      { q: '¿Tiene servicios como chiringuito, socorrista o duchas?', a: 'No en la propia cala. Para servicios, la vecina Sa Riera es más grande y está equipada. En Illa Roja lleva tu agua, comida y sombra: no hay nada montado.' },
+    ],
+    en: {
+      title: 'Illa Roja (Begur): a red rock islet, a nudist tradition and no road down to the cove',
+      excerpt:
+        'Between Sa Riera and el Racó, Illa Roja takes its name from a reddish rock islet planted just off the sand. The small print: it is small, nudist by tradition, has no services on the cove itself and can only be reached on foot along the camí de ronda; when the tramuntana blows, the sea turns choppy.',
+      related: [
+        { href: '/en/boat-rental/coasts/costa-brava/provinces/girona/estartit', label: 'Boat rental in l’Estartit' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+        { href: '/en/magazine', label: 'Beach magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'You get there on foot, and that already tells you most of what you need to know. From the Sa Riera car park, the camí de ronda drops down through pines and agaves, tracing the coastline: up, down, round a bend — and then, below you, a lump of reddish rock planted in the water splits the view in two. That islet gives the cove its name and its character. Illa Roja isn’t a beach you park at; it’s a beach you walk to.' },
+        { t: 'p', html: 'It’s one of those Baix Empordà coves the Costa Brava keeps tucked between headlands, with fine sand pinched between rock and pinewood and the sea murmuring off the walls. On an August mid-morning it has the air of a place earned by whoever is there: the ones who did the fifteen-minute walk, lying towel-down without clothes — because here, and it’s worth knowing in advance, the tradition is nudist.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'Illa Roja sits within <strong>Begur</strong>, wedged between <strong>Platja de Sa Riera</strong> to the north and <strong>Platja del Racó</strong>. It has no road of its own: access is <strong>on foot along the camí de ronda</strong>, the coastal path that links the town’s coves, a walk of <strong>ten to fifteen minutes</strong> from Sa Riera (or down from the campsite above it). That filter is why, for all its fame, you’ll never see the human tide of an urban beach here.' },
+        { t: 'p', html: 'The water backs it up: Begur’s beaches are rated <strong>"excellent" year after year in European Environment Agency reports</strong>, the top mark on the scale. But bathing quality isn’t only about the water. The catch starts here: Illa Roja is <strong>small</strong> and has <strong>no services on the cove itself</strong> — no beach bar, no permanent lifeguard, no showers — and shade depends on which pine you grab and the time of day. Whatever you bring is all you’ll have.' },
+        { t: 'p', html: 'The other warning is the wind. This is <strong>tramuntana</strong> country, the northerly that comes down dry and hard over the Empordà: when it blows it chops the sea, lifts the sand and turns a sheltered cove into an uncomfortable spot. It doesn’t ruin every day, but check the forecast before you drive up to Begur. And one more note for anyone arriving with children or without context: the <strong>nudist tradition</strong> isn’t a footnote, it’s the social norm of the cove; turning up aware of it saves an awkward moment.' },
+        { t: 'h2', text: 'The local’s verdict', id: 'verdict' },
+        { t: 'p', html: '<strong>When to go?</strong> Early, midweek, with a calm sea. The cove faces roughly east, so it gets the full morning sun and stays bright at midday; going early means half-empty sand, flat water and a Sa Riera car park with spaces still — which in high August is half a miracle.' },
+        { t: 'p', html: '<strong>When not to?</strong> An August weekend at midday, with tramuntana forecast, or if you want a beach with services, a bar and drive-up access to set up the day with the family and the cool box. For that, the one next door: <strong>Sa Riera</strong> is bigger, has sand, services and often flies a blue flag — the price is a lot more people.' },
+        { t: 'p', html: 'The regular’s trick: <strong>park at Sa Riera early</strong> (the car park is paid in summer and fills fast), wear something sensible for the camí de ronda — no flimsy flip-flops, there are stretches of rock and dirt — and go down with your own water and shade. And if Illa Roja is full or the wind has spoiled it, the same path carries on to other coves on the headland: the Begur coast is a chain of links, and there’s almost always a quieter one ten minutes’ walk away.' },
+        { t: 'quote', text: 'It’s no "secret cove": it’s in every guidebook and half of Instagram. What’s still true is that, to set foot on it, you have to leave the car up top and walk — and on the August Costa Brava, that alone is a filter.' },
+        { t: 'p', html: 'As the afternoon fades, when the sun slips behind the pinewood and the light turns the colour of the islet itself, the cove empties almost entirely. Four silhouettes are left folding towels, the red of the rock flaring one last time over the water, and the camí de ronda waiting up top, uphill, to hand you back to the world with roads. Illa Roja doesn’t make it easy, and that’s exactly the good part.' },
+      ],
+      faq: [
+        { q: 'How do you get to Illa Roja?', a: 'On foot along the camí de ronda from Sa Riera (about 10-15 minutes), or down from the campsite above the cove. There is no road or car park at the beach itself: you leave the car up at Sa Riera and walk.' },
+        { q: 'Is Illa Roja a nudist beach?', a: 'Yes, it is one of the Costa Brava’s traditionally nudist coves. Worth knowing before you go, especially if you’re bringing children or expecting a conventional beach.' },
+        { q: 'Does it have facilities like a beach bar, lifeguard or showers?', a: 'Not on the cove itself. For services, neighbouring Sa Riera is bigger and equipped. At Illa Roja bring your own water, food and shade: there’s nothing set up.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Langre (voz bicéfala) ─────
   {
     slug: 'playa-langre-ribamontan-cantabria-escalera-acantilado-marea',
