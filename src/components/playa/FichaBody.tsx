@@ -768,7 +768,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.comer(nombreH)}</h2>
             <span className={styles.cardSrc}>
-              {restList ? i18n.comerSrcOSM : ''}
+              {restList ? (restList[0]?.source === 'google' ? 'Google Places' : i18n.comerSrcOSM) : ''}
             </span>
           </div>
           <div className={styles.cardBody}>
@@ -825,7 +825,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <div key="dormir" className={styles.card} id="s-dormir">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.dormir(nombreH)}</h2>
-            <span className={styles.cardSrc}>{clientHoteles && clientHoteles.length > 0 ? i18n.dormirSrc : ''}</span>
+            <span className={styles.cardSrc}>{clientHoteles && clientHoteles.length > 0 ? (clientHoteles[0]?.source === 'google' ? 'Google Places' : i18n.dormirSrc) : ''}</span>
           </div>
           <div className={styles.cardBody}>
             <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>

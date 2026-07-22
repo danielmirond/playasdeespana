@@ -121,7 +121,7 @@ export interface Restaurante {
   lat?:        number
   lon?:        number
   googleId?:   string
-  source?:     'osm'
+  source?:     'osm' | 'google'
 }
 
 export interface Hotel {

@@ -8,6 +8,7 @@ import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
 import { IS_BUILD } from './buildGuard'
+import { placesNearby } from './google-places'
 
 const RADIUS_M = 5000
 
@@ -23,7 +24,7 @@ export interface HotelReal {
   website?:    string | null
   telefono?:   string | null
   googleId:    string
-  source:      'osm'
+  source:      'osm' | 'google'
 }
 
 function inferirEstrellas(tags: Record<string, string>): number {
@@ -47,13 +48,20 @@ function inferirPrecio(estrellas: number): string {
 // TTL de cache: hoteles cambian poco (raramente abren/cierran). 7 días.
 const KV_TTL_HOTELES = 7 * 24 * 3600
 
-export function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
-  // Sin red durante `next build` (SSG masivo machacaba Overpass); en
-  // runtime (ISR, API routes, warming) se pide y cachea con normalidad.
-  // Antes había un "TEMP: disable" incondicional que apagó estos datos
-  // TAMBIÉN en producción — por eso las fichas decían "no se encontraron
-  // restaurantes/hoteles" en pleno Cabanyal.
-  if (IS_BUILD) return Promise.resolve([])
+export async function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
+  // Sin red durante `next build`; en runtime, Google Places (valoraciones
+  // reales, gated por key y presupuesto) y si no, Overpass/OSM.
+  if (IS_BUILD) return []
+  const g = await placesNearby(lat, lon, ['lodging'], RADIUS_M, 6)
+  if (g && g.length) {
+    return g.map((p): HotelReal => ({
+      id: p.googleId, nombre: p.nombre, estrellas: 0,
+      distancia_m: Math.round(haversine(lat, lon, p.lat, p.lon)),
+      rating: p.rating, reseñas: p.reseñas, precio: p.precio,
+      foto: null, website: null, telefono: null,
+      googleId: p.googleId, source: 'google',
+    })).sort((a, b) => a.distancia_m - b.distancia_m)
+  }
   return kvCached('hoteles', [lat, lon], KV_TTL_HOTELES, () => fetchHotelesFromOverpass(lat, lon))
 }
 
