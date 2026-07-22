@@ -3,6 +3,13 @@ import { useEffect, useRef, useState } from 'react'
 import type { Playa } from '@/types'
 
 interface Props {
+  /** Zoom con rueda desde el primer momento. Solo para /mapa (experiencia
+   *  de mapa a pantalla completa). En páginas de contenido queda false:
+   *  un mapa embebido que captura la rueda es una trampa de scroll en
+   *  desktop — el usuario baja por la página, el cursor entra en el mapa
+   *  y la página deja de hacer scroll. Con false, la rueda se activa al
+   *  hacer clic en el mapa y se desactiva al sacar el cursor. */
+  wheelZoom?: boolean
   playas?:    Playa[]
   height?:    string
   comunidad?: string
@@ -43,7 +50,7 @@ const PNOA_ATTRIB = '© <a href="https://pnoa.ign.es/" target="_blank" rel="noop
 
 type BaseMap = 'osm' | 'aerial'
 
-export default function MapaPlayas({ playas: playasProp, height = '500px', comunidad, provincia }: Props) {
+export default function MapaPlayas({ playas: playasProp, height = '500px', comunidad, provincia, wheelZoom = false }: Props) {
   const mapRef     = useRef<HTMLDivElement>(null)
   const mapObj     = useRef<any>(null)
   const circleRef  = useRef<any>(null)
@@ -92,8 +99,15 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
     if (!leafletReady || !mapRef.current || mapObj.current || playas.length === 0) return
     const L = (window as any).L
 
-    const map = L.map(mapRef.current, { zoomControl: true, preferCanvas: true }).setView([40.4, -3.7], 6)
+    const map = L.map(mapRef.current, { zoomControl: true, preferCanvas: true, scrollWheelZoom: wheelZoom }).setView([40.4, -3.7], 6)
     mapObj.current = map
+
+    // Patrón clic-para-zoom en embeds: la rueda solo controla el mapa tras
+    // una interacción deliberada, y se devuelve a la página al salir.
+    if (!wheelZoom) {
+      map.on('click', () => map.scrollWheelZoom.enable())
+      map.on('mouseout', () => map.scrollWheelZoom.disable())
+    }
 
     // Dos base layers: OSM (por defecto) y PNOA ortofoto IGN. Solo una está
     // montada en el mapa a la vez; el toggle las intercambia.

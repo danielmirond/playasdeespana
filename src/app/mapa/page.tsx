@@ -26,7 +26,7 @@ export default function MapaPage() {
         </div>
       </div>
       <div className={styles.mapaWrap}>
-        <MapaPlayas height="calc(100vh - 160px)" />
+        <MapaPlayas height="calc(100vh - 160px)" wheelZoom />
       </div>
     </>
   )
