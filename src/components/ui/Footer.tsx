@@ -7,7 +7,6 @@
 //   4. E-E-A-T: atribución visible a fuentes oficiales + última sincro.
 
 import Link from 'next/link'
-import { getPlayasDataModified } from '@/lib/dateModified'
 
 interface Props {
   locale?: 'es' | 'en'
@@ -15,7 +14,6 @@ interface Props {
 
 export default function Footer({ locale = 'es' }: Props) {
   const es = locale === 'es'
-  const dataModified = getPlayasDataModified()
 
   return (
     <footer style={{
@@ -52,8 +50,8 @@ export default function Footer({ locale = 'es' }: Props) {
               margin: 0,
             }}>
               {es
-                ? 'Estado del mar y guía de las 5.000+ playas españolas, actualizado cada hora con datos oficiales (MITECO, EEA, AEMET).'
-                : '5,000+ Spanish beaches with real-time conditions, updated hourly from official sources.'}
+                ? 'Estado del mar y guía de más de 4.500 playas españolas, actualizado cada hora con datos oficiales (MITECO, EEA, AEMET).'
+                : '4,500+ Spanish beaches with real-time conditions, updated hourly from official sources.'}
             </p>
           </div>
 
@@ -186,8 +184,6 @@ export default function Footer({ locale = 'es' }: Props) {
                   <a href="https://www.miteco.gob.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>MITECO</a>
                   {' 2018 (última edición publicada) · Calidad del agua: '}
                   <a href="https://www.eea.europa.eu/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>EEA</a>
-                  {' '}
-                  <time dateTime={dataModified}>{new Date(dataModified).getFullYear()}</time>
                 </>
               : <>Real-time weather ·{' '}
                   <a href="https://www.aemet.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>AEMET</a>
@@ -197,8 +193,6 @@ export default function Footer({ locale = 'es' }: Props) {
                   <a href="https://www.miteco.gob.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>MITECO</a>
                   {' 2018 dataset · Water quality: '}
                   <a href="https://www.eea.europa.eu/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>EEA</a>
-                  {' '}
-                  <time dateTime={dataModified}>{new Date(dataModified).getFullYear()}</time>
                 </>
             }
           </p>
@@ -218,7 +212,7 @@ export default function Footer({ locale = 'es' }: Props) {
           lineHeight:     1.5,
         }}>
           <div>
-            © {new Date(dataModified).getFullYear()} Playas de España ·{' '}
+            © {new Date().getFullYear()} Playas de España ·{' '}
             <Link href="/metodologia" style={{ color: 'inherit' }}>{es ? 'Metodología' : 'Methodology'}</Link>
             {' · '}
             <Link href="/aviso-legal" style={{ color: 'inherit' }}>{es ? 'Aviso legal' : 'Legal'}</Link>

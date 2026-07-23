@@ -11,7 +11,9 @@
     "validate:miteco": "node scripts/validate-miteco-merge.js",
     "sync:playas-miteco": "node scripts/sync-playas-miteco.js",
     "sync:calidad": "node scripts/sync-calidad-agua.js",
-    "sync:bandera-azul": "node scripts/sync-bandera-azul.js"
+    "sync:bandera-azul": "node scripts/sync-bandera-azul.js",
+    "prebuild": "node scripts/write-build-info.mjs",
+    "predev": "node scripts/write-build-info.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

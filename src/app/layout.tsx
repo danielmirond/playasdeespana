@@ -32,7 +32,7 @@ const WEBSITE_SCHEMA = {
   name:       'Playas de España',
   alternateName: ['playas-espana.com', 'Playas España'],
   description:
-    'Estado del mar y guía de las 5.000+ playas españolas. Datos oficiales de MITECO, EEA y AEMET actualizados cada hora.',
+    'Estado del mar y guía de más de 4.500 playas españolas. Datos oficiales de MITECO, EEA y AEMET actualizados cada hora.',
   inLanguage: 'es-ES',
   publisher:  { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
   potentialAction: {

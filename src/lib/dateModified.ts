@@ -19,6 +19,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { execSync } from 'node:child_process'
+import { BUILD_ISO } from './build-info'
+
+// Los checkouts de Vercel fijan el mtime de TODOS los archivos a una época
+// fake (2018-10-20) y el clone shallow hace fallar el git log por archivo.
+// Cualquier fecha anterior a esto es basura de plataforma, no una fecha real
+// del contenido → se sustituye por la fecha del build (write-build-info.mjs).
+const MIN_FECHA_CREIBLE = '2020-01-01'
 
 const ROOT = process.cwd()
 
@@ -47,17 +54,18 @@ export function getFileLastModified(relativePath: string): string {
     // git no disponible (Vercel build con shallow clone puede fallar): ok
   }
 
-  // 2. fs mtime
+  // 2. fs mtime — solo si es creíble (ver MIN_FECHA_CREIBLE arriba)
   try {
     const stat = fs.statSync(abs)
     const iso = stat.mtime.toISOString()
-    cache.set(relativePath, iso)
-    return iso
+    const creible = iso >= MIN_FECHA_CREIBLE ? iso : BUILD_ISO
+    cache.set(relativePath, creible)
+    return creible
   } catch {
-    // 3. fallback: build time
-    const iso = new Date().toISOString()
-    cache.set(relativePath, iso)
-    return iso
+    // 3. fallback: fecha real del build (estable durante todo el deploy,
+    // NO new Date() por request — eso es timestamp spam para Google)
+    cache.set(relativePath, BUILD_ISO)
+    return BUILD_ISO
   }
 }
 
