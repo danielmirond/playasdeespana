@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
   const coords = parseCoords(sp.get('lat'), sp.get('lon') ?? sp.get('lng'))
   if (!coords) return NextResponse.json({ escuelas: [] })
 
-  const escuelas = await getEscuelas(coords.lat, coords.lon)
+  const escuelas = await getEscuelas(coords.lat, coords.lon, 5000, { google: sp.get('g') === '1' })
   return NextResponse.json({ escuelas }, {
     headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=172800' },
   })

@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   const coords = parseCoords(sp.get('lat'), sp.get('lon') ?? sp.get('lng'))
   if (!coords) return NextResponse.json({ centros: [] })
 
-  const centros = await getCentrosBuceo(coords.lat, coords.lon)
+  const centros = await getCentrosBuceo(coords.lat, coords.lon, { google: sp.get('g') === '1' })
   return NextResponse.json({ centros }, {
     headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=172800' },
   })

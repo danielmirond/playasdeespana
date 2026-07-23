@@ -65,12 +65,13 @@ function distancia(lat1: number, lng1: number, lat2: number, lng2: number): numb
 // TTL: escuelas de surf/kite/etc cambian lento. 5 días.
 const KV_TTL_ESCUELAS = 5 * 24 * 3600
 
-export async function getEscuelas(lat: number, lng: number, radio = 5000): Promise<Escuela[]> {
+export async function getEscuelas(lat: number, lng: number, radio = 5000, opts: { google?: boolean } = {}): Promise<Escuela[]> {
   if (IS_BUILD) return []
-  // Google Places (Text Search) primero: valoraciones reales y cobertura muy
-  // superior a OSM/Foursquare para escuelas de surf/kite. Fallback: cadena
-  // Foursquare → Overpass de siempre.
-  const g = await placesText('escuela de surf kitesurf paddle', lat, lng, radio, 5)
+  // Google Places (Text Search) SOLO donde hay spot real (playa con surf/
+  // kite/windsurf según el dataset): en una cala familiar sin olas la
+  // "escuela de surf más cercana" a 40 km es ruido y gasta presupuesto.
+  // Fallback siempre: cadena Foursquare → Overpass de siempre.
+  const g = opts.google ? await placesText('escuela de surf kitesurf paddle', lat, lng, radio, 5) : null
   if (g && g.length) {
     return g.map((p, i): Escuela => ({
       id: i + 1,

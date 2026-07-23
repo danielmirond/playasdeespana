@@ -13,6 +13,7 @@ import {
 import { getRutas, COSTAS } from '@/lib/rutas'
 import { getCamperCities } from '@/lib/autocaravana-localities'
 import { getAllLocalities } from '@/lib/boat-rental-localities'
+import yogaEstudios from '@/data/yoga-estudios.json'
 import { boatRentalSlug } from '@/lib/boat-rental-helpers'
 import { getAllArticles, CATEGORIES } from '@/lib/magazine'
 import { TIPOS } from '@/lib/tiposQueLlevar'
@@ -178,6 +179,13 @@ export async function GET() {
   // (Antes el sitemap solo listaba el hub plano; las páginas ricas /costas/**
   // no se enviaban a Google. Se generan desde el dataset → escalan solas.)
   urls.push(u('/alquiler-barco/sin-licencia', '0.7', 'weekly', today))
+
+  // Yoga y pilates — vertical con establecimientos reales (sidecar Google
+  // Places con gate de calidad). Hub + provincias publicables.
+  urls.push(u('/yoga-playa', '0.6', 'weekly', today))
+  for (const slug of Object.keys(yogaEstudios as Record<string, unknown>)) {
+    urls.push(u(`/yoga-playa/${slug}`, '0.5', 'weekly', today))
+  }
   {
     const boatLocs = getAllLocalities()
     const coasts = new Set<string>()

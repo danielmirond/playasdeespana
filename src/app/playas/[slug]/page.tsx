@@ -191,8 +191,8 @@ export default async function PlayaPage({ params }: Props) {
     getRestaurantes(playa.lat, playa.lng),
     getHoteles(playa.lat, playa.lng),
     getCampings(playa.lat, playa.lng),
-    getCentrosBuceo(playa.lat, playa.lng),
-    getEscuelas(playa.lat, playa.lng),
+    getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true }),
+    getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true }),
     // Datos del filesystem (rápidos)
     getPlayas(),
     getMunicipioSlugsSet(),
@@ -260,8 +260,8 @@ export default async function PlayaPage({ params }: Props) {
   if (needsWarm(restaurantes))   failed.push(['rest',   () => getRestaurantes(playa.lat, playa.lng)])
   if (needsWarm(hoteles))        failed.push(['hot',    () => getHoteles(playa.lat, playa.lng)])
   if (needsWarm(campingsResult)) failed.push(['camp',   () => getCampings(playa.lat, playa.lng)])
-  if (needsWarm(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng)])
-  if (needsWarm(escuelasResult)) failed.push(['esc',    () => getEscuelas(playa.lat, playa.lng)])
+  if (needsWarm(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })])
+  if (needsWarm(escuelasResult)) failed.push(['esc',    () => getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true })])
   if (needsWarm(webcamResult))   failed.push(['webcam', () => getWebcams(playa.lat, playa.lng)])
 
   if (failed.length > 0) {

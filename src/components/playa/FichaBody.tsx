@@ -314,7 +314,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
     const ac = new AbortController()
     setLoadingCercanos(true)
 
-    const url = (p: string) => `${p}?lat=${playa.lat}&lon=${playa.lng}`
+    const act = playa.actividades ?? {}
+    const gFlag = (p: string) =>
+      (p === '/api/buceo'    && (act.buceo || act.snorkel)) ||
+      (p === '/api/escuelas' && (act.surf || act.windsurf || act.kite)) ? '&g=1' : ''
+    const url = (p: string) => `${p}?lat=${playa.lat}&lon=${playa.lng}${gFlag(p)}`
     const promises: Promise<any>[] = []
 
     if (needsRest) {

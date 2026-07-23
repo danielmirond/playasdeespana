@@ -68,9 +68,11 @@ function extraerServicios(tags: Record<string, string>): string[] {
 // TTL: centros de buceo abren/cierran lentamente. 7 días.
 const KV_TTL_BUCEO = 7 * 24 * 3600
 
-export async function getCentrosBuceo(lat: number, lon: number): Promise<CentroBuceo[]> {
+export async function getCentrosBuceo(lat: number, lon: number, opts: { google?: boolean } = {}): Promise<CentroBuceo[]> {
   if (IS_BUILD) return []
-  const g = await placesText('centro de buceo', lat, lon, RADIUS_M, 4)
+  // Google solo donde el dataset marca buceo/snorkel: ahí los centros y
+  // salidas de inmersión son contenido; en el resto, ruido y presupuesto.
+  const g = opts.google ? await placesText('centro de buceo inmersiones', lat, lon, RADIUS_M, 6) : null
   if (g && g.length) {
     return g.map((p): CentroBuceo => ({
       id: p.googleId, nombre: p.nombre, tipo: 'Centro de buceo',
