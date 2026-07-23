@@ -79,6 +79,11 @@ export async function placesNearby(
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            // La key está restringida por referrer HTTP a www.playas-espana.com
+            // (defensa anti-filtración). Las llamadas server-side no llevan
+            // referer, así que lo enviamos nosotros — es nuestra key y nuestro
+            // dominio; Google valida el header tal cual llega.
+            'Referer': 'https://www.playas-espana.com/',
             'X-Goog-Api-Key': API_KEY,
             // Solo campos de SKU Pro — añadir website/phone/horarios aquí
             // salta a SKU Enterprise y rompe el presupuesto.
@@ -108,6 +113,70 @@ export async function placesNearby(
             reseñas: p.userRatingCount ?? 0,
             precio: PRECIO[p.priceLevel] ?? '€€',
             tipo: TIPO[p.primaryType] ?? TIPO[includedTypes[0]] ?? 'Restaurante',
+            lat: p.location?.latitude ?? lat,
+            lon: p.location?.longitude ?? lon,
+          }))
+      },
+    )
+  } catch {
+    return null
+  }
+}
+
+
+/**
+ * Text Search (New) — para categorías sin tipo propio en Nearby
+ * ("centro de buceo", "escuela de surf"). Misma SKU Pro, mismo
+ * presupuesto mensual y misma cache de 30 días.
+ */
+export async function placesText(
+  textQuery: string,
+  lat: number,
+  lon: number,
+  radiusM: number,
+  maxResults = 6,
+): Promise<GPlace[] | null> {
+  if (!API_KEY) return null
+
+  try {
+    return await kvCached<GPlace[] | null>(
+      'gplaces-txt-v1',
+      [textQuery.replace(/\s+/g, '-'), lat.toFixed(4), lon.toFixed(4)],
+      30 * 24 * 3600,
+      async () => {
+        if (!(await dentroDePresupuesto())) return null
+
+        const res = await fetchWithTimeout('https://places.googleapis.com/v1/places:searchText', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referer': 'https://www.playas-espana.com/',
+            'X-Goog-Api-Key': API_KEY,
+            'X-Goog-FieldMask': 'places.id,places.displayName,places.rating,places.userRatingCount,places.priceLevel,places.primaryType,places.location',
+          },
+          body: JSON.stringify({
+            textQuery,
+            maxResultCount: Math.min(maxResults, 20),
+            locationBias: {
+              circle: { center: { latitude: lat, longitude: lon }, radius: Math.min(radiusM, 50000) },
+            },
+          }),
+          next: { revalidate: 30 * 24 * 3600 },
+        }, 6000)
+
+        if (!res.ok) return null
+        const data = await res.json() as { places?: Array<Record<string, any>> }
+        if (!Array.isArray(data.places)) return null
+
+        return data.places
+          .filter(p => p.id && p.displayName?.text)
+          .map((p): GPlace => ({
+            googleId: p.id,
+            nombre: p.displayName.text,
+            rating: typeof p.rating === 'number' ? Math.round(p.rating * 10) / 10 : 0,
+            reseñas: p.userRatingCount ?? 0,
+            precio: PRECIO[p.priceLevel] ?? '€€',
+            tipo: TIPO[p.primaryType] ?? 'Centro',
             lat: p.location?.latitude ?? lat,
             lon: p.location?.longitude ?? lon,
           }))

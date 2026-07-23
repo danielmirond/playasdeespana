@@ -2,6 +2,15 @@
 // Escuelas de deportes acuáticos via OpenStreetMap Overpass API
 import { fetchWithTimeout } from './fetch-timeout'
 import { kvCached } from './kv-cache'
+import { placesText } from './google-places'
+
+const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+  const R = 6371000, r = (d: number) => (d * Math.PI) / 180
+  const dLat = r(lat2 - lat1), dLon = r(lon2 - lon1)
+  const x = Math.sin(dLat / 2) ** 2 + Math.cos(r(lat1)) * Math.cos(r(lat2)) * Math.sin(dLon / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(x))
+}
+import { IS_BUILD } from './buildGuard'
 
 export interface Escuela {
   id:        number
@@ -56,7 +65,21 @@ function distancia(lat1: number, lng1: number, lat2: number, lng2: number): numb
 // TTL: escuelas de surf/kite/etc cambian lento. 5 días.
 const KV_TTL_ESCUELAS = 5 * 24 * 3600
 
-export function getEscuelas(lat: number, lng: number, radio = 5000): Promise<Escuela[]> {
+export async function getEscuelas(lat: number, lng: number, radio = 5000): Promise<Escuela[]> {
+  if (IS_BUILD) return []
+  // Google Places (Text Search) primero: valoraciones reales y cobertura muy
+  // superior a OSM/Foursquare para escuelas de surf/kite. Fallback: cadena
+  // Foursquare → Overpass de siempre.
+  const g = await placesText('escuela de surf kitesurf paddle', lat, lng, radio, 5)
+  if (g && g.length) {
+    return g.map((p, i): Escuela => ({
+      id: i + 1,
+      nombre: p.nombre,
+      tipo: p.tipo === 'Centro' ? 'Escuela de surf' : p.tipo,
+      lat: p.lat, lng: p.lon,
+      distancia_m: Math.round(haversine(lat, lng, p.lat, p.lon)),
+    })).sort((a, b) => (a.distancia_m ?? 0) - (b.distancia_m ?? 0))
+  }
   return kvCached('escuelas', [lat, lng, radio], KV_TTL_ESCUELAS, () => fetchEscuelasUncached(lat, lng, radio))
 }
 

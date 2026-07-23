@@ -5,6 +5,7 @@ import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
 import { IS_BUILD } from './buildGuard'
+import { placesText } from './google-places'
 
 const RADIUS_M = 15000 // 15 km: centros de buceo están más dispersos
 
@@ -21,7 +22,10 @@ export interface CentroBuceo {
   email?:       string | null
   lat:          number
   lon:          number
-  source:       'osm'
+  source:       'osm' | 'google'
+  rating?:      number
+  reseñas?:     number
+  googleId?:    string
 }
 
 function detectarCertificacion(tags: Record<string, string>): string | undefined {
@@ -64,13 +68,18 @@ function extraerServicios(tags: Record<string, string>): string[] {
 // TTL: centros de buceo abren/cierran lentamente. 7 días.
 const KV_TTL_BUCEO = 7 * 24 * 3600
 
-export function getCentrosBuceo(lat: number, lon: number): Promise<CentroBuceo[]> {
-  // Sin red durante `next build` (SSG masivo machacaba Overpass); en
-  // runtime (ISR, API routes, warming) se pide y cachea con normalidad.
-  // Antes había un "TEMP: disable" incondicional que apagó estos datos
-  // TAMBIÉN en producción — por eso las fichas decían "no se encontraron
-  // restaurantes/hoteles" en pleno Cabanyal.
-  if (IS_BUILD) return Promise.resolve([])
+export async function getCentrosBuceo(lat: number, lon: number): Promise<CentroBuceo[]> {
+  if (IS_BUILD) return []
+  const g = await placesText('centro de buceo', lat, lon, RADIUS_M, 4)
+  if (g && g.length) {
+    return g.map((p): CentroBuceo => ({
+      id: p.googleId, nombre: p.nombre, tipo: 'Centro de buceo',
+      distancia_m: Math.round(haversine(lat, lon, p.lat, p.lon)),
+      servicios: [], website: null, telefono: null, email: null,
+      lat: p.lat, lon: p.lon, source: 'google',
+      rating: p.rating, reseñas: p.reseñas, googleId: p.googleId,
+    })).sort((a, b) => a.distancia_m - b.distancia_m)
+  }
   return kvCached('buceo', [lat, lon], KV_TTL_BUCEO, () => fetchCentrosBuceoFromOverpass(lat, lon))
 }
 
