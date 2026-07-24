@@ -6,6 +6,7 @@ import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/p
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { getPrediccionAemet } from '@/lib/aemet'
 import { getBanderaCat } from '@/lib/banderas-cat'
+import { getBoyaCercana } from '@/lib/boyas'
 import GygActivities from '@/components/GygActivities'
 import { getCalidad } from '@/lib/calidad'
 import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
@@ -206,6 +207,8 @@ export default async function PlayaPage({ params }: Props) {
     // Bandera OFICIAL izada (solo Cataluña, dataset Transparència) — null
     // fuera del mapeo; 1 llamada SODA compartida vía KV para toda la costa
     getBanderaCat(slug),
+    // Boya de Puertos del Estado más cercana (≤60 km) — dato MEDIDO
+    getBoyaCercana(playa.lat, playa.lng),
   ] as const
   const DEADLINE_MS = 1500
   const conDeadline = promesas.map(p =>
@@ -223,7 +226,7 @@ export default async function PlayaPage({ params }: Props) {
     meteoForecast, turbidez,
     restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
     allPlayasResult, municipioSlugsResult,
-    videoResult, webcamResult, aemetResult, banderaCatResult,
+    videoResult, webcamResult, aemetResult, banderaCatResult, boyaResult,
   ] = await Promise.all(conDeadline) as any[]
   const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
   const webcamsData = (webcamResult?.status === 'fulfilled' ? webcamResult.value : []).slice(0, 3)
@@ -386,6 +389,9 @@ export default async function PlayaPage({ params }: Props) {
   // la mañana, conservan su derecho a ELEVARLA más abajo.
   const oficialCat = banderaCatResult?.status === 'fulfilled' ? banderaCatResult.value : null
   if (oficialCat?.bandera) banderaPlaya = oficialCat.bandera
+
+  // Boya de Puertos del Estado: dato MEDIDO (sensor físico), solo display.
+  const boyaData = boyaResult?.status === 'fulfilled' ? boyaResult.value : null
 
   const repFlag = reportesData
     ? (reportesData.bandera_roja > 0 ? 'roja' : reportesData.bandera_amarilla > 0 ? 'amarilla' : null)
@@ -559,6 +565,7 @@ export default async function PlayaPage({ params }: Props) {
         dateModified={dateModified}
         banderaPlaya={banderaPlaya}
         aemet={aemetData}
+        boya={boyaData}
         medusas={medusas}
         mareasLunar={mareasLunar}
         horaIdeal={horaIdeal}

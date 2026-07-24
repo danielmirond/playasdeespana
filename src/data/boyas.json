@@ -1,0 +1,306 @@
+[
+ {
+  "id": 1101,
+  "n": "Pasaia II",
+  "la": 43.3629,
+  "lo": -1.8889,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1103,
+  "n": "Costera de Bilbao II",
+  "la": 43.397,
+  "lo": -3.13,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1117,
+  "n": "Gijon",
+  "la": 43.615,
+  "lo": -5.664,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1135,
+  "n": "Costera de Abra-Zierbena",
+  "la": 43.367,
+  "lo": -3.0697,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1239,
+  "n": "Langosteira II",
+  "la": 43.3479,
+  "lo": -8.5625,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1315,
+  "n": "Sevilla-Guadalquivir",
+  "la": 36.763,
+  "lo": -6.447,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1414,
+  "n": "Las Palmas Este",
+  "la": 28.05,
+  "lo": -15.39,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1421,
+  "n": "Santa Cruz de Tenerife",
+  "la": 28.46,
+  "lo": -16.23,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1500,
+  "n": "Tarifa",
+  "la": 36,
+  "lo": -5.59,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1504,
+  "n": "Algeciras-Pta. Carnero",
+  "la": 36.0662,
+  "lo": -5.4158,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1512,
+  "n": "Ceuta",
+  "la": 35.903,
+  "lo": -5.33,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1514,
+  "n": "Málaga",
+  "la": 36.6575,
+  "lo": -4.415,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1560,
+  "n": "Melilla",
+  "la": 35.327,
+  "lo": -2.944,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1712,
+  "n": "Tarragona",
+  "la": 41.07,
+  "lo": 1.19,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 1731,
+  "n": "Barcelona II",
+  "la": 41.32,
+  "lo": 2.2,
+  "red": "REDCOS",
+  "t": true
+ },
+ {
+  "id": 2136,
+  "n": "Bilbao-Vizcaya",
+  "la": 43.63,
+  "lo": -3.03,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2242,
+  "n": "Cabo de Peñas",
+  "la": 43.75,
+  "lo": -6.18,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2244,
+  "n": "Estaca de Bares",
+  "la": 44.12,
+  "lo": -7.68,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2246,
+  "n": "Villano-Sisargas",
+  "la": 43.5,
+  "lo": -9.21,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2248,
+  "n": "Cabo Silleiro",
+  "la": 42.12,
+  "lo": -9.43,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2342,
+  "n": "Golfo de Cádiz",
+  "la": 36.49,
+  "lo": -6.96,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2442,
+  "n": "Gran Canaria",
+  "la": 28.2,
+  "lo": -15.8,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2446,
+  "n": "Tenerife Sur",
+  "la": 28,
+  "lo": -16.61,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2548,
+  "n": "Cabo de Gata",
+  "la": 36.57,
+  "lo": -2.34,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2610,
+  "n": "Cabo de Palos",
+  "la": 37.65,
+  "lo": -0.31,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2630,
+  "n": "Valencia",
+  "la": 39.51,
+  "lo": 0.2,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2720,
+  "n": "Tarragona",
+  "la": 40.69,
+  "lo": 1.47,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2798,
+  "n": "Cabo Begur",
+  "la": 41.9,
+  "lo": 3.65,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2801,
+  "n": "Bahía de Palma SOCIB",
+  "la": 39.4928,
+  "lo": 2.7004,
+  "red": "",
+  "t": false
+ },
+ {
+  "id": 2820,
+  "n": "Dragonera",
+  "la": 39.5633,
+  "lo": 2.0967,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 2838,
+  "n": "Mahón",
+  "la": 39.71,
+  "lo": 4.42,
+  "red": "REDEXT",
+  "t": true
+ },
+ {
+  "id": 12115,
+  "n": "MONICAN02-IHP",
+  "la": 39.75,
+  "lo": -9.1917,
+  "red": "",
+  "t": true
+ },
+ {
+  "id": 22091,
+  "n": "M2 E of Lambay-MI",
+  "la": 53.47,
+  "lo": -5.42,
+  "red": "",
+  "t": true
+ },
+ {
+  "id": 22092,
+  "n": "M3 SW of Mizen Head-MI",
+  "la": 51.22,
+  "lo": -10.55,
+  "red": "",
+  "t": true
+ },
+ {
+  "id": 22094,
+  "n": "M5 South East-MI",
+  "la": 51.69,
+  "lo": -6.7,
+  "red": "",
+  "t": true
+ },
+ {
+  "id": 22095,
+  "n": "M6-MI",
+  "la": 53.06,
+  "lo": -15.92,
+  "red": "",
+  "t": false
+ },
+ {
+  "id": 32107,
+  "n": "Barco Seven Stones-UKMO",
+  "la": 50.1,
+  "lo": -6.1,
+  "red": "",
+  "t": true
+ },
+ {
+  "id": 32304,
+  "n": "Barco Sandettie-UKMO",
+  "la": 51.1,
+  "lo": 1.8,
+  "red": "",
+  "t": true
+ }
+]
