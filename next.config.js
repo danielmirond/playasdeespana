@@ -1,3 +1,16 @@
+
+// Generar src/lib/build-info.ts al cargar la config (inicio de CUALQUIER
+// build o arranque). No dependemos del hook npm "prebuild": el build
+// command de Vercel es `next build` a secas y se lo salta — eso tuvo los
+// deploys rotos 24h con module-not-found (jul-2026). El try/catch cubre
+// el filesystem de solo lectura de las lambdas en runtime.
+try {
+  require('fs').writeFileSync(
+    require('path').join(__dirname, 'src/lib/build-info.ts'),
+    `// GENERADO por next.config.js en cada build. No editar.\nexport const BUILD_ISO = '${new Date().toISOString()}'\n`,
+  )
+} catch { /* runtime lambda: solo lectura, el módulo ya va en el bundle */ }
+
 const fs = require('node:fs')
 const path = require('node:path')
 
