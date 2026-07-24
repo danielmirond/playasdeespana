@@ -79,6 +79,66 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Torimbia (voz bicéfala) ─────
+  {
+    slug: 'playa-de-torimbia-llanes-asturias-bajada-pie',
+    category: 'curiosidades',
+    title: 'Torimbia (Llanes): a la arena solo se baja a pie y no hay ni chiringuito ni socorrista',
+    excerpt:
+      'Una concha casi perfecta de arena rubia, sin un solo edificio detrás y con tradición nudista. Lo que de verdad debes saber de Torimbia: el coche se queda arriba, no hay servicios y el Cantábrico ronda los 20°C.',
+    heroAlt: 'Playa de Torimbia en Llanes, concha de arena rubia entre acantilados verdes abierta al Cantábrico, sin edificaciones',
+    heroQuery: 'torimbia,llanes,asturias,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-07-23T19:32:18Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/asturias', label: 'Playas de Asturias' },
+      { href: '/playas-secretas', label: 'Playas y calas poco conocidas' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+    ],
+    body: [
+      { t: 'p', html: 'Llegas en coche hasta lo alto de la loma, dejas el aparcamiento entre prados y, cuando crees que ya estás, descubres que no. Torimbia no se ve desde arriba del todo: se intuye. Un sendero de tierra baja serpenteando por la ladera y, a media bajada, el paisaje se abre de golpe y aparece ella entera: una herradura de arena rubia encajada entre dos acantilados verdes, con el Cantábrico entrando limpio y ni una sola construcción a la espalda. Solo hierba, roca y mar.' },
+      { t: 'p', html: 'Es una de las estampas más puras del oriente asturiano, y también una de las menos domesticadas. Aquí no hay paseo marítimo, ni bloques de apartamentos, ni un chiringuito del que salga música. Lo que hay es una playa que sigue pareciéndose a la que encontraron los primeros bañistas hace décadas, protegida dentro del <strong>Paisaje Protegido de la Costa Oriental de Asturias</strong>. Y esa misma pureza es la que le pone condiciones a quien la visita.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La postal es cierta; la letra pequeña empieza en el aparcamiento. Lo primero que casi nadie te avisa: <strong>a la arena solo se llega andando</strong>. Desde lo alto hay una bajada a pie de unos diez o quince minutos por una senda de tierra con desnivel; se hace bien de ida, pero la vuelta es cuesta arriba, con el sol de frente y las cosas a cuestas. No es apta para sillas de ruedas ni cómoda con carrito o con niños muy pequeños, y con lluvia reciente la senda resbala.' },
+      { t: 'p', html: 'Lo segundo, lo que sorprende al que llega buscando una playa de servicios: <strong>aquí no hay prácticamente nada</strong>. Ni chiringuito, ni duchas, ni papeleras, ni vigilancia garantizada en temporada. No tiene —ni puede tener— <strong>Bandera Azul</strong>, porque ese distintivo exige servicios e instalaciones que Torimbia, por definición, no ofrece. Súmale que es una playa <strong>abierta al mar abierto</strong>: con mar de fondo del noroeste entra oleaje serio y hay corrientes, así que en días de marejada no es un baño para confiarse. El agua es <strong>Atlántico frío</strong>, que en pleno agosto rara vez pasa de 19-20°C, y de sombra natural, cero. Un último apunte para que nadie se lleve un susto: Torimbia es, por tradición, una <strong>playa nudista</strong>; hoy convive gente con y sin ropa, pero el nudismo forma parte de su carácter.' },
+      { t: 'h2', text: 'El criterio del local', id: 'local' },
+      { t: 'p', html: 'Dicho todo lo anterior, merece muchísimo la pena si la pisas con cabeza. La regla de oro es <strong>ir temprano y fuera del pico de agosto</strong>: el aparcamiento de arriba es limitado y en un día grande de verano se llena a media mañana, y cuando se llena te toca dejar el coche lejos y sumar caminata. En junio, la primera quincena de julio y sobre todo en septiembre tienes la concha medio vacía, mejor luz y el mismo mar. A primera hora de la mañana, incluso en agosto, la bajas casi para ti.' },
+      { t: 'p', html: 'El otro factor es el mar, y conviene mirarlo antes de salir: revisa el <strong>parte de oleaje y viento</strong> (Aemet, Open-Meteo o cualquier app de olas), porque un día de mar de fondo del noroeste convierte el baño en algo solo para quien nada bien. Llévate <strong>todo de casa</strong> —agua, comida, sombrilla y la basura de vuelta—, calza algo agarrado para la senda y no bajes con más peso del que quieras subir. ¿El plan redondo? Si buscas servicios cerca, la vecina <strong>playa de San Antolín</strong> o el arenal de <strong>Barro</strong> tienen aparcamiento fácil, chiringuito y socorrista; deja Torimbia para el atardecer, que mira al oeste y se despide con el sol cayendo justo sobre el agua.' },
+      { t: 'quote', text: 'No es una playa salvaje que nadie conozca: es una concha famosa a la que, sencillamente, hay que ganarse bajando a pie. Quien busca aparcar al lado del agua se equivoca de playa.' },
+      { t: 'p', html: 'Porque Torimbia no se mide en servicios ni en comodidad, sino en lo que ya casi no queda: una playa grande sin nada detrás, donde el único ruido es el del Cantábrico rompiendo contra la arena. Baja temprano, mira el parte, súbete tu basura y quédate al atardecer, y entenderás por qué media Asturias la defiende tal y como está. Llega a mediodía en agosto esperando chiringuito, y solo verás una cuesta y una playa que no te prometió nada de eso.' },
+    ],
+    faq: [
+      { q: '¿Se puede llegar en coche hasta la playa de Torimbia?', a: 'No. El coche se queda en el aparcamiento de lo alto de la loma y a la arena se baja a pie por una senda de tierra con desnivel, de unos diez a quince minutos. La vuelta es cuesta arriba. No es accesible para sillas de ruedas ni cómoda con carrito.' },
+      { q: '¿Torimbia es una playa nudista?', a: 'Por tradición sí: es una de las playas nudistas clásicas del oriente de Asturias. Hoy conviven bañistas con y sin ropa, pero el nudismo forma parte de su carácter, algo a tener en cuenta si vas en familia.' },
+      { q: '¿Qué servicios tiene Torimbia?', a: 'Prácticamente ninguno: no hay chiringuito, duchas, papeleras ni vigilancia garantizada, y no tiene Bandera Azul porque no cuenta con instalaciones. Lleva agua, comida y sombra, y devuelve tu basura. Si quieres servicios, las cercanas San Antolín o Barro los tienen.' },
+    ],
+    en: {
+      title: 'Torimbia (Llanes): the only way to the sand is on foot — and there’s no bar or lifeguard',
+      excerpt: 'An almost perfect shell of blonde sand, with not a single building behind it and a nudist tradition. What you actually need to know about Torimbia: the car stays up top, there are no services and the Cantabrian sea hovers around 20°C.',
+      related: [
+        { href: '/en/crystal-clear-water-beaches', label: 'Crystal-clear water beaches' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'You drive up to the top of the ridge, leave the car among the meadows and, just when you think you’ve arrived, you realise you haven’t. Torimbia isn’t fully visible from above: you sense it. A dirt path drops down the hillside and, halfway down, the view suddenly opens and there it is, whole: a horseshoe of blonde sand wedged between two green cliffs, the Cantabrian rolling in clean and not a single building behind it. Just grass, rock and sea.' },
+        { t: 'p', html: 'It’s one of the purest sights in eastern Asturias, and one of the least tamed. There’s no promenade here, no blocks of flats, no beach bar pumping out music. What there is, is a beach that still looks much as the first bathers found it decades ago, protected within the <strong>Protected Landscape of the Eastern Asturian Coast</strong>. And that same purity is exactly what sets conditions for anyone who visits.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The postcard is real; the small print begins at the car park. The first thing almost nobody warns you about: <strong>the only way to the sand is on foot</strong>. From the top it’s a ten-to-fifteen-minute walk down a sloping dirt path; fine on the way in, but the way back is uphill, sun in your face, everything on your shoulders. It’s not suitable for wheelchairs, nor comfortable with a pushchair or very small children, and after recent rain the path is slippery.' },
+        { t: 'p', html: 'Second, the part that surprises anyone expecting a full-service beach: <strong>there’s essentially nothing here</strong>. No beach bar, no showers, no bins, no guaranteed lifeguard in season. It has no <strong>Blue Flag</strong> — and can’t — because that award demands the services and facilities Torimbia, by its very nature, doesn’t offer. Add that it’s <strong>open to the open sea</strong>: a north-westerly ground swell brings serious waves and there are currents, so on choppy days this is no swim to take lightly. The water is <strong>cold Atlantic</strong>, rarely above 19-20°C even in high August, and natural shade is nil. One last note so no one gets a surprise: Torimbia is, by tradition, a <strong>nudist beach</strong>; today clothed and unclothed bathers share it, but nudism is part of its character.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: 'All that said, it’s hugely worth it if you time it well. The golden rule is <strong>go early and outside the August peak</strong>: the car park up top is limited and on a big summer day it fills by mid-morning — once it’s full you park far off and add more walking. In June, the first half of July and above all in September you get the shell half-empty, better light and the same sea. First thing in the morning, even in August, you can have it almost to yourself.' },
+        { t: 'p', html: 'The other factor is the sea, worth checking before you set off: look at the <strong>swell and wind forecast</strong> (Aemet, Open-Meteo or any surf app), because a day of north-westerly ground swell turns the swim into something only strong swimmers should attempt. Bring <strong>everything from home</strong> — water, food, a parasol and your rubbish back out — wear something with grip for the path, and don’t carry down more than you want to carry up. The perfect plan? If you want services nearby, the neighbouring <strong>Playa de San Antolín</strong> or the beach at <strong>Barro</strong> have easy parking, a beach bar and a lifeguard; save Torimbia for sunset, as it faces west and signs off with the sun dropping straight onto the water.' },
+        { t: 'quote', text: 'It’s not a wild beach no one knows: it’s a famous shell you simply have to earn on foot. Anyone hoping to park beside the water has come to the wrong beach.' },
+        { t: 'p', html: 'Because Torimbia isn’t measured in services or in comfort, but in what has almost vanished: a big beach with nothing behind it, where the only sound is the Cantabrian breaking on the sand. Go down early, check the forecast, carry your rubbish back up and stay for sunset, and you’ll understand why half of Asturias defends it exactly as it is. Turn up at midday in August expecting a beach bar, and all you’ll find is a hill and a beach that never promised you any of that.' },
+      ],
+      faq: [
+        { q: 'Can you drive down to Torimbia beach?', a: 'No. The car stays at the car park on top of the ridge and you walk down to the sand along a sloping dirt path, about ten to fifteen minutes. The way back is uphill. It’s not wheelchair-accessible nor comfortable with a pushchair.' },
+        { q: 'Is Torimbia a nudist beach?', a: 'By tradition, yes: it’s one of the classic nudist beaches of eastern Asturias. Today clothed and unclothed bathers share it, but nudism is part of its character — worth bearing in mind if you go as a family.' },
+        { q: 'What facilities does Torimbia have?', a: 'Almost none: no beach bar, showers, bins or guaranteed lifeguard, and no Blue Flag because it has no facilities. Bring water, food and shade, and take your rubbish back. If you want services, nearby San Antolín or Barro have them.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Cuesta Maneli (voz bicéfala) ─────
   {
     slug: 'playa-cuesta-maneli-donana-huelva-pasarela-acantilado-asperillo',
