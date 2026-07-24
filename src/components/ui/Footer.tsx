@@ -82,6 +82,7 @@ export default function Footer({ locale = 'es' }: Props) {
               <Link href="/playas-autocaravana" style={ls}>{es ? 'Playas para autocaravana' : 'Beaches for campervans'}</Link>
               <Link href="/alquiler-autocaravana" style={ls}>{es ? 'Alquiler de autocaravanas' : 'Campervan rental'}</Link>
               <Link href="/hoteles-playa" style={ls}>{es ? 'Hoteles en la playa' : 'Beach hotels'}</Link>
+              <Link href="/chiringuitos" style={ls}>{es ? 'Chiringuitos de playa' : 'Beach bars'}</Link>
               <Link href="/yoga-playa" style={ls}>{es ? 'Yoga y pilates en la playa' : 'Beach yoga & pilates'}</Link>
               <Link href="/protectores-solares" style={ls}>{es ? 'Protectores solares' : 'Sunscreens'}</Link>
               <Link href="/seguros-viaje" style={ls}>{es ? 'Seguros de viaje' : 'Travel insurance'}</Link>
@@ -115,6 +116,7 @@ export default function Footer({ locale = 'es' }: Props) {
               <Link href="/comparar" style={ls}>{es ? 'Comparar playas' : 'Compare beaches'}</Link>
               <Link href="/rutas" style={ls}>{es ? 'Rutas costeras por España' : 'Coastal routes in Spain'}</Link>
               <Link href="/playas-cerca-de-mi" style={ls}>{es ? 'Playas cerca de mí' : 'Beaches near me'}</Link>
+              <Link href="/playas-cerca-de" style={ls}>{es ? 'Playas cerca de tu ciudad' : 'Beaches near your city'}</Link>
             </FootList>
           </div>
 

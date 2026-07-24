@@ -14,6 +14,8 @@ import { getRutas, COSTAS } from '@/lib/rutas'
 import { getCamperCities } from '@/lib/autocaravana-localities'
 import { getAllLocalities } from '@/lib/boat-rental-localities'
 import yogaEstudios from '@/data/yoga-estudios.json'
+import chiringuitos from '@/data/chiringuitos.json'
+import { CIUDADES_INTERIOR } from '@/data/ciudades-interior'
 import { boatRentalSlug } from '@/lib/boat-rental-helpers'
 import { getAllArticles, CATEGORIES } from '@/lib/magazine'
 import { TIPOS } from '@/lib/tiposQueLlevar'
@@ -150,7 +152,7 @@ export async function GET() {
   // Topic × provincia pages (campings, buceo, clases-surf, etc.)
   const TOPIC_SLUGS = [
     'campings', 'buceo', 'clases-surf', 'kitesurf', 'windsurf',
-    'hoteles-playa', 'chiringuitos', 'alquiler-barco',
+    'hoteles-playa', 'alquiler-barco',
   ]
   const provSlugs = provincias.map(p => p.slug)
   for (const topic of TOPIC_SLUGS) {
@@ -185,6 +187,12 @@ export async function GET() {
   urls.push(u('/yoga-playa', '0.6', 'weekly', today))
   for (const slug of Object.keys(yogaEstudios as Record<string, unknown>)) {
     urls.push(u(`/yoga-playa/${slug}`, '0.5', 'weekly', today))
+  }
+  urls.push(u('/playas-cerca-de', '0.6', 'weekly', today))
+  for (const c of CIUDADES_INTERIOR) urls.push(u(`/playas-cerca-de/${c.slug}`, '0.6', 'weekly', today))
+  urls.push(u('/chiringuitos', '0.7', 'weekly', today))
+  for (const slug of Object.keys(chiringuitos as Record<string, unknown>)) {
+    urls.push(u(`/chiringuitos/${slug}`, '0.6', 'weekly', today))
   }
   {
     const boatLocs = getAllLocalities()
