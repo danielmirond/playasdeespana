@@ -5,6 +5,7 @@ import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
 import { IS_BUILD } from './buildGuard'
+import { osmBuceo } from './osm-pois'
 import { placesText } from './google-places'
 
 const RADIUS_M = 15000 // 15 km: centros de buceo están más dispersos
@@ -82,6 +83,8 @@ export async function getCentrosBuceo(lat: number, lon: number, opts: { google?:
       rating: p.rating, reseñas: p.reseñas, googleId: p.googleId,
     })).sort((a, b) => a.distancia_m - b.distancia_m)
   }
+  const osm = await osmBuceo(lat, lon)
+  if (osm && osm.length) return osm
   return kvCached('buceo', [lat, lon], KV_TTL_BUCEO, () => fetchCentrosBuceoFromOverpass(lat, lon))
 }
 

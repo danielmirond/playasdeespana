@@ -8,6 +8,7 @@ import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
 import { IS_BUILD } from './buildGuard'
+import { osmHoteles } from './osm-pois'
 import { placesNearby } from './google-places'
 
 const RADIUS_M = 5000
@@ -62,6 +63,8 @@ export async function getHoteles(lat: number, lon: number): Promise<HotelReal[]>
       googleId: p.googleId, source: 'google',
     })).sort((a, b) => a.distancia_m - b.distancia_m)
   }
+  const osm = await osmHoteles(lat, lon)
+  if (osm && osm.length) return osm
   return kvCached('hoteles', [lat, lon], KV_TTL_HOTELES, () => fetchHotelesFromOverpass(lat, lon))
 }
 

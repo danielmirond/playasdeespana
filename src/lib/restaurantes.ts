@@ -8,6 +8,7 @@ import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
 import { IS_BUILD } from './buildGuard'
+import { osmRestaurantes } from './osm-pois'
 import { placesNearby } from './google-places'
 
 // Radio razonable para playas: hasta 3 km cubre el paseo marítimo y zonas
@@ -37,6 +38,11 @@ export async function getRestaurantes(lat: number, lon: number): Promise<Restaur
       lat: p.lat, lon: p.lon, googleId: p.googleId, source: 'google',
     })).sort((a, b) => a.distancia_m - b.distancia_m)
   }
+  // Sidecar OSM offline (Geofabrik): instantáneo y sin depender de que
+  // Overpass acepte IPs de Vercel. Overpass queda como último recurso
+  // para zonas fuera del sidecar.
+  const osm = await osmRestaurantes(lat, lon)
+  if (osm && osm.length) return osm
   return kvCached('restaurantes', [lat, lon], KV_TTL_RESTAURANTES, () => fetchRestaurantesFromOverpass(lat, lon))
 }
 

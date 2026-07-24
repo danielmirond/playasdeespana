@@ -9,6 +9,7 @@ import { haversine } from './geo'
 import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
 import { IS_BUILD } from './buildGuard'
+import { osmCampings } from './osm-pois'
 
 const RADIUS_M = 10000
 
@@ -76,13 +77,15 @@ function extraerServicios(tags: Record<string, string>): string[] {
 // TTL: campings cambian poco. 7 días.
 const KV_TTL_CAMPINGS = 7 * 24 * 3600
 
-export function getCampings(lat: number, lon: number): Promise<Camping[]> {
+export async function getCampings(lat: number, lon: number): Promise<Camping[]> {
   // Sin red durante `next build` (SSG masivo machacaba Overpass); en
   // runtime (ISR, API routes, warming) se pide y cachea con normalidad.
   // Antes había un "TEMP: disable" incondicional que apagó estos datos
   // TAMBIÉN en producción — por eso las fichas decían "no se encontraron
   // restaurantes/hoteles" en pleno Cabanyal.
-  if (IS_BUILD) return Promise.resolve([])
+  if (IS_BUILD) return []
+  const osm = await osmCampings(lat, lon)
+  if (osm && osm.length) return osm
   return kvCached('campings', [lat, lon], KV_TTL_CAMPINGS, () => fetchCampingsFromOverpass(lat, lon))
 }
 
