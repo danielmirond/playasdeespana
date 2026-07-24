@@ -40,8 +40,11 @@ const TIPO: Record<string, string> = {
   lodging: 'Hotel', hotel: 'Hotel', hostel: 'Hostal', guest_house: 'Casa de huéspedes',
 }
 
-// Contador mensual en KV (fail-open: si KV no está, se permite la llamada —
-// el propio kvCached tampoco cachearía, escenario solo de dev local).
+// Contador mensual en KV — FAIL-CLOSED (lección de los 231 € de julio):
+// si KV falla, falla también la caché de 30 días, que es exactamente el
+// escenario en el que cada render dispararía llamadas nuevas. Antes era
+// fail-open y esa correlación (sin caché + sin contador) dejó el gasto
+// sin techo. Sin contador verificable → NO se llama a Google, punto.
 async function dentroDePresupuesto(): Promise<boolean> {
   try {
     const { kv } = await import('@vercel/kv')
@@ -50,7 +53,7 @@ async function dentroDePresupuesto(): Promise<boolean> {
     if (n === 1) await kv.expire(`gplaces:budget:${mes}`, 35 * 24 * 3600)
     return n <= BUDGET_MENSUAL
   } catch {
-    return true
+    return false
   }
 }
 
@@ -65,14 +68,15 @@ export async function placesNearby(
   radiusM: number,
   maxResults = 8,
 ): Promise<GPlace[] | null> {
-  if (!API_KEY) return null
-
   try {
     return await kvCached<GPlace[] | null>(
       'gplaces-v1',
       [includedTypes[0], lat.toFixed(4), lon.toFixed(4)],
       30 * 24 * 3600, // TOS Google: máximo 30 días de cache
       async () => {
+        // Sin key NO hay llamada nueva, pero el hit de caché de arriba
+        // sigue sirviendo los datos ya pagados (emergencia jul-2026).
+        if (!API_KEY) return null
         if (!(await dentroDePresupuesto())) return null
 
         const res = await fetchWithTimeout('https://places.googleapis.com/v1/places:searchNearby', {
@@ -136,14 +140,13 @@ export async function placesText(
   radiusM: number,
   maxResults = 6,
 ): Promise<GPlace[] | null> {
-  if (!API_KEY) return null
-
   try {
     return await kvCached<GPlace[] | null>(
       'gplaces-txt-v1',
       [textQuery.replace(/\s+/g, '-'), lat.toFixed(4), lon.toFixed(4)],
       30 * 24 * 3600,
       async () => {
+        if (!API_KEY) return null
         if (!(await dentroDePresupuesto())) return null
 
         const res = await fetchWithTimeout('https://places.googleapis.com/v1/places:searchText', {
