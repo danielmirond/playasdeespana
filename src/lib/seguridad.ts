@@ -19,6 +19,8 @@ export interface MedusasRiesgo {
   detalle:  string
   detalleEn: string
   hex:      string
+  /** true si viene de avistamiento oficial (socorrismo), no de estimación */
+  oficial?: boolean
 }
 
 /**

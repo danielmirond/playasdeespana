@@ -491,9 +491,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               )}
               {medusas && (
                 <div style={{ fontSize:'.68rem', color:'var(--muted)', marginTop:'.85rem', lineHeight:1.5 }}>
-                  {locale === 'en'
-                    ? 'Estimate from a weather model (water temperature, wind and season), not real-time sightings. '
-                    : 'Estimación por modelo meteorológico (temperatura del agua, viento y estación), no avistamientos en tiempo real. '}
+                  {medusas.oficial
+                    ? (locale === 'en'
+                      ? 'Reported today by the official lifeguard service (Generalitat de Catalunya). '
+                      : 'Reportado hoy por el servicio oficial de socorrismo (Generalitat de Catalunya). ')
+                    : (locale === 'en'
+                      ? 'Estimate from a weather model (water temperature, wind and season), not real-time sightings. '
+                      : 'Estimación por modelo meteorológico (temperatura del agua, viento y estación), no avistamientos en tiempo real. ')}
                   <Link href="/medusas" style={{ color:'var(--accent)', fontWeight:600 }}>
                     {locale === 'en' ? 'Jellyfish season in Spain →' : 'Temporada de medusas en España →'}
                   </Link>

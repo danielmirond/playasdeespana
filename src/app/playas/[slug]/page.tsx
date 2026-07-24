@@ -5,6 +5,7 @@ import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { getPrediccionAemet } from '@/lib/aemet'
+import { getBanderaCat } from '@/lib/banderas-cat'
 import GygActivities from '@/components/GygActivities'
 import { getCalidad } from '@/lib/calidad'
 import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
@@ -202,6 +203,9 @@ export default async function PlayaPage({ params }: Props) {
     getWebcams(playa.lat, playa.lng),
     // Predicción oficial AEMET — gated por AEMET_API_KEY; null sin key/mapeo
     getPrediccionAemet(slug),
+    // Bandera OFICIAL izada (solo Cataluña, dataset Transparència) — null
+    // fuera del mapeo; 1 llamada SODA compartida vía KV para toda la costa
+    getBanderaCat(slug),
   ] as const
   const DEADLINE_MS = 1500
   const conDeadline = promesas.map(p =>
@@ -219,7 +223,7 @@ export default async function PlayaPage({ params }: Props) {
     meteoForecast, turbidez,
     restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
     allPlayasResult, municipioSlugsResult,
-    videoResult, webcamResult, aemetResult,
+    videoResult, webcamResult, aemetResult, banderaCatResult,
   ] = await Promise.all(conDeadline) as any[]
   const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
   const webcamsData = (webcamResult?.status === 'fulfilled' ? webcamResult.value : []).slice(0, 3)
@@ -375,6 +379,14 @@ export default async function PlayaPage({ params }: Props) {
       hex: '#f59e0b',
     }
   }
+  // Bandera OFICIAL izada (Cataluña): es la bandera física del mástil,
+  // reportada hoy por el propio socorrismo → REEMPLAZA a estimación y
+  // AEMET, incluso a la baja (una verde oficial desactiva una amarilla
+  // estimada). Los reportes de bañistas, más recientes que el parte de
+  // la mañana, conservan su derecho a ELEVARLA más abajo.
+  const oficialCat = banderaCatResult?.status === 'fulfilled' ? banderaCatResult.value : null
+  if (oficialCat?.bandera) banderaPlaya = oficialCat.bandera
+
   const repFlag = reportesData
     ? (reportesData.bandera_roja > 0 ? 'roja' : reportesData.bandera_amarilla > 0 ? 'amarilla' : null)
     : null
@@ -388,7 +400,9 @@ export default async function PlayaPage({ params }: Props) {
       hex: repFlag === 'roja' ? '#ef4444' : '#f59e0b',
     }
   }
-  const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
+  // Medusas: el avistamiento oficial del socorrismo (especie + cantidad)
+  // manda sobre nuestra estimación estacional.
+  const medusas = oficialCat?.medusas ?? estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
   // Asistente "qué necesitas hoy" — reglas + IA opcional + cache 24h.
