@@ -212,7 +212,7 @@ export default function TraficoSection({ playa }: Props) {
       {/* CABECERA */}
       <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line,#e8dcc8)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)' }}><Car size={16} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:6}}/> Tráfico, afluencia y donde aparcar, parking cerca</span>
+          <h2 style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)', margin: 0, fontFamily: 'inherit' }}><Car size={16} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:6}}/> Dónde aparcar en {playa.nombre}: parking, tráfico y afluencia</h2>
           <span style={{ fontSize:'.75rem', color: 'var(--muted,#5a3d12)' }}>Tiempo real</span>
         </div>
         <div
@@ -323,7 +323,7 @@ export default function TraficoSection({ playa }: Props) {
               </div>
             )}
 
-            <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>Tráfico, afluencia y donde aparcar, parking cerca</div>
+            <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>Dónde aparcar en {playa.nombre}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={btnStyle('#6b400a', '#fff')}>
                 <Car size={16} weight='bold'/> En coche. abrir en Google Maps

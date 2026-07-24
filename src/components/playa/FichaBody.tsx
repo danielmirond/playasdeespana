@@ -570,7 +570,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* OLEAJE + METEO */}
         <div key="meteo" className={styles.card} id="s-meteo">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Waves & <em>wind by hour</em></> : <>Oleaje y <em>viento por horas</em></>}</h2>
+            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Waves & <em>wind by hour</em> at {nombreH}</> : <>Oleaje y <em>viento por horas</em> en {nombreH}</>}</h2>
             <span className={styles.cardSrc}>{i18n.oleajeSrc}</span>
           </div>
           <div className={styles.cardBody}>
@@ -719,7 +719,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* CÓMO LLEGAR */}
         <div key="como-llegar" className={styles.card} id="s-comoLlegar">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? <>How to <em>get there</em></> : <>Cómo <em>llegar</em></>}</h2>
+            <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? <>How to <em>get to</em> {nombreH}</> : <>Cómo <em>llegar</em> a {nombreH}</>}</h2>
           </div>
           <div className={styles.cardBody}>
             <Collapsible maxHeight={160} labelMore={locale === 'en' ? 'Show all options' : 'Ver todas las opciones'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
@@ -766,6 +766,31 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <div key="trafico" id="s-trafico">
           <TraficoSection playa={playa} />
         </div>
+
+        {/* MASIFICACIÓN + MEJOR HORA — H2 con nombre (long-tail "mejor hora
+            playa X"). El dato ya existía (horaIdeal) pero vivía en el aside
+            como etiqueta sin heading rastreable. */}
+        {horaIdeal && (
+          <div key="mejor-hora" className={styles.card} id="s-mejor-hora">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{locale === 'en' ? <>Crowds & <em>best time</em> to visit {nombreH}</> : <>Masificación y <em>mejor hora</em> para ir a {nombreH}</>}</h2>
+              <span className={styles.cardSrc}>{locale === 'en' ? 'UV · light · tides' : 'UV · luz · mareas'}</span>
+            </div>
+            <div className={styles.cardBody}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '.9rem', flexWrap: 'wrap' }}>
+                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.9rem', fontWeight: 800, color: 'var(--ink)' }}>{horaIdeal.franja}</span>
+                <span style={{ fontSize: '.84rem', color: 'var(--muted)', lineHeight: 1.5 }}>{locale === 'en' ? horaIdeal.razonEn : horaIdeal.razon}</span>
+              </div>
+              {playa.parking && (
+                <p style={{ fontSize: '.8rem', color: 'var(--muted)', lineHeight: 1.55, margin: '.7rem 0 0' }}>
+                  {locale === 'en'
+                    ? `${nombreH} has nearby parking — in high season it fills up before midday, so aim for the early slot.`
+                    : `${nombreH} tiene aparcamiento cercano — en temporada alta se llena antes del mediodía; apunta a la franja temprana para no dar vueltas.`}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* RESTAURANTES */}
         <div key="comer" className={styles.card} id="s-comer">
@@ -1031,7 +1056,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             escaneo visual y menor fragmentación de contenido. */}
         <div key="datos" className={styles.card} id="s-datos">
           <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>{locale === 'en' ? <>Beach <em>information</em></> : <>Datos de <em>la playa</em></>}</h2>
+            <h2 className={styles.cardTitle}>{locale === 'en' ? <>About <em>{nombreH}</em></> : <>Características de <em>{nombreH}</em></>}</h2>
           </div>
           <div className={styles.cardBody}>
             {/* Subsección: Servicios & Equipamiento */}
@@ -1152,7 +1177,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {playasCercanas && playasCercanas.length > 0 && (
           <div key="cercanas" className={styles.card} id="s-cercanas">
             <div className={styles.cardHead}>
-              <h2 className={styles.cardTitle}>{locale === 'en' ? <>Beaches <em>nearby</em></> : <>Playas <em>cercanas</em></>}</h2>
+              <h2 className={styles.cardTitle}>{locale === 'en' ? <>Beaches <em>near</em> {nombreH}</> : <>Playas <em>cercanas</em> a {nombreH}</>}</h2>
             </div>
             <div className={styles.carousel}>
               {playasCercanas.map(pc => (
