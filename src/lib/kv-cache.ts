@@ -65,8 +65,20 @@ export async function kvCached<T>(
 
   // Persistir solo si hay datos útiles (evita cachear arrays vacíos
   // por timeouts puntuales — la próxima petición reintenta).
+  //
+  // AWAIT OBLIGATORIO (lección de los 231 € de Places, jul-2026): el set
+  // fire-and-forget muere cuando la lambda responde y congela — en
+  // producción la caché NUNCA se escribía, así que cada petición
+  // recomputaba (y en Places, pagaba). Los ~10 ms del await son el seguro
+  // más barato del proyecto. Timeout de 1.5s para no colgar la respuesta
+  // si KV se degrada.
   if (kv && isUsefulResult(fresh)) {
-    kv.set(key, fresh, { ex: ttlSeconds }).catch(() => {})
+    try {
+      await Promise.race([
+        kv.set(key, fresh, { ex: ttlSeconds }),
+        new Promise(r => setTimeout(r, 1500)),
+      ])
+    } catch { /* KV degradado: servimos fresh igualmente */ }
   }
 
   return fresh
