@@ -55,10 +55,15 @@ export const getMareas = cache((lat: number, lng: number): Promise<MarineData | 
 
 async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData | null> {
   try {
-    // Una sola llamada combinando oleaje + SST
+    // Una sola llamada combinando oleaje + SST.
+    // OJO (jul-2026): Open-Meteo ELIMINÓ `wave_height_min` del daily y la
+    // API pasó a responder 400 a todo el sitio (sin bandera, sin
+    // temperatura del agua, sin forecast). El mínimo diario se calcula
+    // ahora desde el hourly (abajo). No añadir variables daily sin
+    // probarlas: un solo nombre inválido tumba la petición entera.
     const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
       + `&hourly=wave_height,wave_period,wind_wave_height,sea_surface_temperature`
-      + `&daily=wave_height_max,wave_height_min,wind_speed_10m_max`
+      + `&daily=wave_height_max,wind_speed_10m_max`
       + `&wind_speed_unit=kmh&forecast_days=7&timezone=Europe%2FMadrid`
 
     const res = await fetchWithTimeout(url, { next: { revalidate: 3600 } })
@@ -74,8 +79,14 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
 
     const dias      = marine.daily?.time ?? []
     const olasMax   = marine.daily?.wave_height_max ?? []
-    const olasMin   = marine.daily?.wave_height_min ?? []
     const vientoMax = marine.daily?.wind_speed_10m_max ?? []
+
+    // Mínimo diario desde el hourly (wave_height_min ya no existe en la
+    // API): 24 valores por día, timezone Madrid ya aplicado en la query.
+    const minDia = (i: number): number => {
+      const tramo = oleaje.slice(i * 24, (i + 1) * 24).filter((v: number) => v != null)
+      return tramo.length ? Math.min(...tramo) : 0
+    }
 
     const DIAS = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb']
     const forecast: ForecastDay[] = dias.slice(0, 5).map((fecha: string, i: number) => {
@@ -85,7 +96,7 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
       return {
         fecha:      `${DIAS[d.getDay()]} ${d.getDate()}`,
         olas_max:   om,
-        olas_min:   parseFloat((olasMin[i] ?? 0).toFixed(1)),
+        olas_min:   parseFloat(minDia(i).toFixed(1)),
         viento_max: vm,
         temp_agua:  tempAgua ?? 18,
         periodo:    parseFloat((periodo[ahora] ?? 8).toFixed(0)),
