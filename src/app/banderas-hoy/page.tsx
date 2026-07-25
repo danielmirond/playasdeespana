@@ -18,7 +18,7 @@ export const revalidate = 1800
 const BASE = 'https://playas-espana.com'
 
 export const metadata: Metadata = {
-  title: 'Banderas en las playas hoy | Semáforo por provincias',
+  title: '¿Qué bandera hay hoy en la playa? Semáforo en tiempo real',
   description: 'Semáforo de banderas en las playas de España hoy: estimación verde, amarilla o roja por oleaje y viento en tiempo real, provincia a provincia, actualizada cada 30 minutos.',
   alternates: { canonical: '/banderas-hoy' },
   openGraph: {
@@ -110,6 +110,7 @@ function topDeProvincia(playas: Playa[], provincia: string): Playa[] {
 }
 
 const FAQ = [
+  { q: '¿Qué bandera hay en la playa hoy?', a: 'Depende de cada playa: la bandera se decide cada mañana según el oleaje, el viento y las condiciones locales. En este semáforo ves la estimación de hoy para las principales playas del litoral, actualizada cada 30 minutos, y desde cada provincia puedes entrar a la ficha de tu playa para ver su bandera, la temperatura del agua y el estado del mar. En las playas de Cataluña mostramos además la bandera oficial izada que reporta el propio socorrismo.' },
   { q: '¿Qué significa cada bandera en la playa?', a: 'Verde: baño permitido, condiciones normales. Amarilla: precaución, baño con limitaciones por oleaje o viento moderados. Roja: baño prohibido por condiciones peligrosas. La bandera oficial la iza cada mañana el servicio de socorrismo de la playa.' },
   { q: '¿Cómo se calcula este semáforo?', a: 'Estimamos la bandera de cada playa con datos de oleaje y viento en tiempo real de modelos oficiales (Open-Meteo), aplicando umbrales de seguridad: roja con olas ≥1,5 m o viento muy fuerte; amarilla con oleaje o viento moderados; verde en calma. Además estimamos el riesgo de medusas con la temperatura del agua y el viento hacia la orilla, y lo marcamos con el icono 🪼. Se actualiza cada 30 minutos.' },
   { q: '¿Por qué a veces hay bandera roja con el mar en calma?', a: 'Porque una bandera roja oficial no solo se iza por oleaje o viento: también por presencia de medusas, por mala calidad del agua (vertidos, contaminación) o por corrientes peligrosas. Nuestro semáforo estima la bandera con oleaje y viento y añade el riesgo de medusas, pero no detecta vertidos ni decisiones locales del socorrista. Por eso en un día de mar tranquilo con invasión de medusas la playa puede estar en roja aunque aquí la veas en verde.' },

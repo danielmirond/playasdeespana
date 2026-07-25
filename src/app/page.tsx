@@ -228,6 +228,48 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* Impulso SEO: fichas en striking distance (GSC jul-2026) —
+            página 1 baja con miles de impresiones. Enlace desde la página
+            de más autoridad del sitio para empujarlas a top 5. Lista
+            curada en base a datos, no rotativa. */}
+        <section aria-labelledby="h2-buscadas" style={{
+          maxWidth: 1000, margin: '0 auto', padding: '2.5rem 1.5rem 0',
+        }}>
+          <h2 id="h2-buscadas" style={{
+            fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.45rem, 3.2vw, 1.9rem)',
+            fontWeight: 700, color: 'var(--ink)', margin: '0 0 1rem',
+            letterSpacing: '-.015em', lineHeight: 1.1,
+          }}>
+            Las playas que <em style={{ fontWeight: 500, color: 'var(--accent)' }}>más buscáis</em>
+          </h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+            {[
+              { slug: 'cala-formentor-pollenca', label: 'Cala Formentor', loc: 'Mallorca' },
+              { slug: 'playa-de-covachos', label: 'Playa de Covachos', loc: 'Cantabria' },
+              { slug: 'playa-del-bunker-2', label: 'Playa del Búnker', loc: 'Tarifa' },
+              { slug: 'cala-fria', label: 'Cala Fría', loc: 'Cabo de Palos' },
+              { slug: 'playa-de-veneguera', label: 'Veneguera', loc: 'Gran Canaria' },
+              { slug: 'arrigunaga-getxo', label: 'Arrigunaga', loc: 'Getxo' },
+              { slug: 'cala-del-enebro', label: 'Cala del Enebro', loc: 'Conil' },
+              { slug: 'playa-de-la-almadraba', label: 'La Almadraba de Monteleva', loc: 'Cabo de Gata' },
+              { slug: 'el-bancalet-de-larena-2', label: "Bancal de l'Arena", loc: 'Santa Pola' },
+              { slug: 'cala-sorbas', label: 'Cala Sorbas', loc: 'Almería' },
+              { slug: 'platja-de-foios', label: 'Platja de Foios', loc: 'Valencia' },
+              { slug: 'praia-fluvial-de-breia', label: 'Praia de Breia', loc: 'Pontevedra' },
+            ].map(p => (
+              <Link key={p.slug} href={`/playas/${p.slug}`} style={{
+                display: 'inline-flex', alignItems: 'baseline', gap: '.35rem',
+                padding: '.5rem .8rem', background: 'var(--card-bg)',
+                border: '1px solid var(--line)', borderRadius: 999,
+                textDecoration: 'none', fontSize: '.85rem',
+              }}>
+                <span style={{ fontWeight: 700, color: 'var(--ink)' }}>{p.label}</span>
+                <span style={{ fontSize: '.7rem', color: 'var(--muted)' }}>{p.loc}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* EEAT · Por qué confiar en nuestros datos */}
         <section aria-labelledby="eeat-title" style={{
           maxWidth: 1000, margin: '3rem auto 0', padding: '2.5rem 1.5rem 0',

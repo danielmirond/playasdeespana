@@ -21,6 +21,7 @@ import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { descripcionPlaya, introBrevePlaya } from '@/lib/copyPlaya'
+import DESCRIPCIONES_IMPULSO from '@/data/descripciones-impulso.json'
 import { getNecesidades } from '@/lib/asistentePlaya'
 import { nombreMostrado } from '@/lib/nombres-populares'
 import { estimarMareas } from '@/lib/mareas-lunar'
@@ -119,7 +120,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // composición, dimensiones). Evita el "duplicate description" de
   // Search Console cuando 2.500 fichas comparten meta description
   // idéntica salvo el nombre.
-  const description = descripcionPlaya(playa, np)
+  //
+  // Para las fichas en "striking distance" (GSC jul-2026: página 1 baja
+  // con miles de impresiones y CTR ~0) hay descriptions escritas A MANO
+  // en descripciones-impulso.json — ganchos únicos por playa, no plantilla.
+  const description = (DESCRIPCIONES_IMPULSO as Record<string, string>)[slug]
+    ?? descripcionPlaya(playa, np)
 
   const ogImage = new URL(`${BASE}/api/og`)
   ogImage.searchParams.set('playa', np)
