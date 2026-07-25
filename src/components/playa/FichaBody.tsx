@@ -94,6 +94,7 @@ interface Props {
   /** Predicción oficial AEMET del día (null sin API key o sin mapeo). */
   aemet?:          import('@/lib/aemet').AemetPlaya | null
   boya?:           import('@/lib/boyas').DatosBoya | null
+  chiringuitos?:   import('@/lib/chiringuitos-playa').ChiringuitoCerca[]
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
   horaIdeal?:      HoraIdeal
@@ -134,6 +135,8 @@ const T = {
     calidad:(n:string)=>`Calidad del agua en ${n}`, calidadSrc:'EEA · 2006/7/CE',
     muestras:'Muestras conformes', temporada:'Temporada', clasificacion:'Clasificación',
     comer:(n:string)=>`Restaurantes cerca de ${n}`, comerSrcOSM:'OpenStreetMap · 800m', resenas:'reseñas',
+    chiringuitos:(n:string)=>`Chiringuitos en ${n}`, chiringuitosSrc:'Google Places',
+    chiringuitosTodos:(p:string)=>`Todos los chiringuitos de ${p} →`,
     dormir:(n:string)=>`Hoteles cerca de ${n}`, dormirSrc:'OpenStreetMap · 2km',
     servicios:(n:string)=>`Servicios en ${n}`, serviciosSrc:'MITECO',
     info:(n:string)=>`Información de ${n}`, infoSrc:'MITECO 2024',
@@ -189,6 +192,8 @@ const T = {
     calidad:(n:string)=>`Water quality at ${n}`, calidadSrc:'EEA · 2006/7/CE',
     muestras:'Compliant samples', temporada:'Season', clasificacion:'Classification',
     comer:(n:string)=>`Restaurants near ${n}`, comerSrcOSM:'OpenStreetMap · 800m', resenas:'reviews',
+    chiringuitos:(n:string)=>`Beach bars at ${n}`, chiringuitosSrc:'Google Places',
+    chiringuitosTodos:(p:string)=>`All beach bars in ${p} →`,
     dormir:(n:string)=>`Hotels near ${n}`, dormirSrc:'OpenStreetMap · 2km',
     servicios:(n:string)=>`Facilities at ${n}`, serviciosSrc:'MITECO',
     info:(n:string)=>`Information about ${n}`, infoSrc:'MITECO 2024',
@@ -272,7 +277,7 @@ function Reorder({ order, children }: { order: string[]; children: React.ReactNo
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -872,6 +877,47 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </Collapsible>
           </div>
         </div>
+        {/* CHIRINGUITOS — sidecar Google Places (cosecha jul-2026), solo
+            si hay alguno a ≤1 km. Rating y reseñas reales, cosa que el
+            bloque OSM de arriba no tiene. */}
+        {chiringuitos && chiringuitos.length > 0 && (
+          <div key="chiringuitos" className={styles.card} id="s-chiringuitos">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{i18n.chiringuitos(nombreH)}</h2>
+              <span className={styles.cardSrc}>{i18n.chiringuitosSrc}</span>
+            </div>
+            <div className={styles.cardBody}>
+              <div className={styles.list}>
+                {chiringuitos.map(c => {
+                  const mapsUrl = `https://www.google.com/maps/place/?q=place_id:${c.googleId}`
+                  return (
+                    <div key={c.googleId} className={styles.listItem}>
+                      <SunHorizon size={16} weight='bold' style={{color:'var(--accent,#6b400a)'}}/>
+                      <div className={styles.listInfo}>
+                        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
+                          <div className={styles.listNombre}>{c.nombre}</div>
+                        </a>
+                        <div className={styles.listMeta}>
+                          {c.distancia_m}m
+                          {c.reseñas > 0 && <span style={{ color:'#5a3d12' }}> · {c.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} {i18n.resenas}</span>}
+                        </div>
+                      </div>
+                      <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:'4px', flexShrink:0 }}>
+                        {c.rating > 0 && <span className={styles.rating}>{c.rating}</span>}
+                        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', color:'#6b400a', fontWeight:600, textDecoration:'none' }}>Ver →</a>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+              <div style={{ marginTop:'.75rem' }}>
+                <Link href={`/chiringuitos/${chiringuitos[0].provSlug}`} style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
+                  {i18n.chiringuitosTodos(chiringuitos[0].provincia)}
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
         <div key="dormir" className={styles.card} id="s-dormir">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.dormir(nombreH)}</h2>

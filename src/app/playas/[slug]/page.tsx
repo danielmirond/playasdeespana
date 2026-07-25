@@ -7,6 +7,7 @@ import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { getPrediccionAemet } from '@/lib/aemet'
 import { getBanderaCat } from '@/lib/banderas-cat'
 import { getBoyaCercana } from '@/lib/boyas'
+import { getChiringuitosPlaya } from '@/lib/chiringuitos-playa'
 import GygActivities from '@/components/GygActivities'
 import { getCalidad } from '@/lib/calidad'
 import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
@@ -393,6 +394,9 @@ export default async function PlayaPage({ params }: Props) {
   // Boya de Puertos del Estado: dato MEDIDO (sensor físico), solo display.
   const boyaData = boyaResult?.status === 'fulfilled' ? boyaResult.value : null
 
+  // Chiringuitos: sidecar Google Places en memoria, sin red ni deadline.
+  const chiringuitos = getChiringuitosPlaya(playa.lat, playa.lng)
+
   const repFlag = reportesData
     ? (reportesData.bandera_roja > 0 ? 'roja' : reportesData.bandera_amarilla > 0 ? 'amarilla' : null)
     : null
@@ -566,6 +570,7 @@ export default async function PlayaPage({ params }: Props) {
         banderaPlaya={banderaPlaya}
         aemet={aemetData}
         boya={boyaData}
+        chiringuitos={chiringuitos}
         medusas={medusas}
         mareasLunar={mareasLunar}
         horaIdeal={horaIdeal}
