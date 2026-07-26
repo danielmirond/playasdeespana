@@ -57,7 +57,7 @@ function u(path: string, priority: string, freq: string, today: string, opts: Ur
     xml += `
     <xhtml:link rel="alternate" hreflang="es" href="${BASE}${path}" />
     <xhtml:link rel="alternate" hreflang="en" href="${BASE}${o.hreflangEn}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE}${o.hreflangEn}" />`
+    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE}${path}" />`
   }
   xml += `
     <image:image>

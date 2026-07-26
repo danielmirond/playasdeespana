@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: { locale: 'en_GB' },
     alternates: {
       canonical: `/en/provinces/${slug}`,
-      languages: { 'es': `/provincia/${slug}`, 'en': `/en/provinces/${slug}` },
+      languages: { 'es': `/provincia/${slug}`, 'en': `/en/provinces/${slug}`, 'x-default': `/provincia/${slug}` },
     },
   }
 }

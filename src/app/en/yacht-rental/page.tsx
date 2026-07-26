@@ -13,7 +13,7 @@ export const revalidate = 86400
 export const metadata: Metadata = {
   title: 'Yacht rental in Spain: prices by destination | Playas de España',
   description: 'Real comparison of yacht rental in Ibiza, Mallorca, Menorca, Tenerife, Marbella and Costa Brava. Weekly prices, coves only reachable by sea, and the best season.',
-  alternates: { canonical: '/en/yacht-rental', languages: { es: '/alquiler-yate', en: '/en/yacht-rental' } },
+  alternates: { canonical: '/en/yacht-rental', languages: { es: '/alquiler-yate', en: '/en/yacht-rental', 'x-default': '/alquiler-yate' } },
   openGraph: { title: 'Yacht rental in Spain: prices by destination', description: 'Real comparison across Spain’s 6 premium yacht destinations.', url: `${BASE}/en/yacht-rental`, type: 'website' },
 }
 

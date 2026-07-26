@@ -62,9 +62,28 @@ export default async function MunicipioPage({ params }: Props) {
   const buenas = playasConEstado.filter(p => p.estadoKey === 'CALMA' || p.estadoKey === 'BUENA').length
   const conBandera = playas.filter(p => p.bandera).length
 
+  // Respuesta directa a "¿X tiene playa?" — query-pregunta real detectada
+  // en GSC (jul-2026, p.ej. "foios tiene playa": 487 imp sin clicks).
+  // La redacción varía con los datos para no sonar a plantilla.
+  const topPlaya = [...playas]
+    .sort((a, b) => ((b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0)) - ((a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0)))[0]
+  const respuestaTienePlaya = playas.length === 1
+    ? `Sí, ${municipio.nombre} tiene una playa: ${topPlaya.nombre}. En su ficha ves la bandera, la temperatura del agua y el oleaje de hoy, actualizados cada hora.`
+    : `Sí — ${municipio.nombre} tiene ${playas.length} playas en su litoral${conBandera > 0 ? `, ${conBandera} de ellas con Bandera Azul` : ''}. ${topPlaya ? `La más completa por servicios es ${topPlaya.nombre}.` : ''} Abajo tienes el estado del mar de todas, actualizado cada hora.`
+  const faqTienePlaya = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [{
+      '@type': 'Question',
+      name: `¿Tiene playa ${municipio.nombre}?`,
+      acceptedAnswer: { '@type': 'Answer', text: respuestaTienePlaya },
+    }],
+  }
+
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqTienePlaya) }} />
 
       <div className={styles.hero}>
         <div className={styles.heroInner}>
@@ -88,6 +107,16 @@ export default async function MunicipioPage({ params }: Props) {
       </div>
 
       <div className={styles.wrap}>
+        {/* Respuesta directa "¿tiene playa?" — respaldada por el FAQPage
+            de arriba (regla de la casa: el schema dice lo que se ve) */}
+        <p data-speakable style={{
+          fontSize: '.95rem', color: 'var(--muted)', lineHeight: 1.65,
+          maxWidth: 640, margin: '0 0 2rem',
+        }}>
+          <strong style={{ color: 'var(--ink)' }}>¿Tiene playa {municipio.nombre}?</strong>{' '}
+          {respuestaTienePlaya}
+        </p>
+
         {/* TOP 6 con hero foto: mejor scoring del municipio */}
         {playas.length >= 6 && (
           <section aria-labelledby="top-muni" style={{ marginBottom: '2.5rem' }}>

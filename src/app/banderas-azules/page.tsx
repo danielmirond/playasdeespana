@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     languages: {
       'es':        '/banderas-azules',
       'en':        '/en/blue-flag',
-      'x-default': '/en/blue-flag',
+      'x-default': '/banderas-azules',
     },
   },
   openGraph: {

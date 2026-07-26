@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: `All beaches in ${m.nombre} (${m.provincia}). Real-time sea conditions, water temperature and facilities.`,
     alternates: {
       canonical: `/en/towns/${slug}`,
-      languages: { 'es': `/municipio/${slug}`, 'en': `/en/towns/${slug}` },
+      languages: { 'es': `/municipio/${slug}`, 'en': `/en/towns/${slug}`, 'x-default': `/municipio/${slug}` },
     },
   }
 }

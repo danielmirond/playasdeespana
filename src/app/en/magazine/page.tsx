@@ -9,7 +9,7 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 export const metadata: Metadata = {
   title: 'Magazine | Routes, curiosities and food of the Spanish coast',
   description: 'The Playas de España magazine: coastal routes, beach curiosities, where to eat by the sea and practical guides to enjoy the beach.',
-  alternates: { canonical: '/en/magazine', languages: { es: '/magazine', en: '/en/magazine' } },
+  alternates: { canonical: '/en/magazine', languages: { es: '/magazine', en: '/en/magazine', 'x-default': '/magazine' } },
   openGraph: {
     type: 'website',
     url: `${BASE}/en/magazine`,

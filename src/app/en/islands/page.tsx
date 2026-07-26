@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: 'Beaches by island | Mallorca, Tenerife, Ibiza, Fuerteventura & more',
   description: 'Beaches of Spain’s islands: the Balearics (Mallorca, Menorca, Ibiza, Formentera) and the Canaries (Tenerife, Gran Canaria, Lanzarote, Fuerteventura).',
   openGraph: { type: 'website', images: [{ url: '/api/og?playa=Beaches%20by%20island%20in%20Spain', width: 1200, height: 630 }] },
-  alternates: { canonical: '/en/islands', languages: { es: '/islas', en: '/en/islands' } },
+  alternates: { canonical: '/en/islands', languages: { es: '/islas', en: '/en/islands', 'x-default': '/islas' } },
 }
 
 const FAQ = [

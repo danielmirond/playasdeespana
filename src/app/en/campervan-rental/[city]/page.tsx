@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Campervan & motorhome rental in ${c.ciudad} | Compare prices`,
     description: `Rent a motorhome or campervan in ${c.ciudad} (${c.zona}). Compare prices by season, pickup at ${c.aeropuerto}, overnight areas and beaches you can park at nearby.`,
-    alternates: { canonical: `/en/campervan-rental/${c.slug}`, languages: { es: `/alquiler-autocaravana/${c.slug}`, en: `/en/campervan-rental/${c.slug}` } },
+    alternates: { canonical: `/en/campervan-rental/${c.slug}`, languages: { es: `/alquiler-autocaravana/${c.slug}`, en: `/en/campervan-rental/${c.slug}`, 'x-default': `/alquiler-autocaravana/${c.slug}` } },
     openGraph: { title: `Campervan & motorhome rental in ${c.ciudad}`, url: `${BASE}/en/campervan-rental/${c.slug}`, type: 'article' },
   }
 }

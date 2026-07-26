@@ -29,7 +29,7 @@ const CTA2 = '#0c4a6e'
 export const metadata: Metadata = {
   title: 'Campervan & motorhome rental in Spain | Compare prices',
   description: 'Compare campervan and motorhome rental in Spain by pickup city: Madrid, Barcelona, Valencia, Seville, Málaga. Prices by season, overnight areas and beaches you can park at.',
-  alternates: { canonical: '/en/campervan-rental', languages: { es: '/alquiler-autocaravana', en: '/en/campervan-rental' } },
+  alternates: { canonical: '/en/campervan-rental', languages: { es: '/alquiler-autocaravana', en: '/en/campervan-rental', 'x-default': '/alquiler-autocaravana' } },
   openGraph: { title: 'Campervan & motorhome rental in Spain', url: `${BASE}/en/campervan-rental`, type: 'website' },
 }
 

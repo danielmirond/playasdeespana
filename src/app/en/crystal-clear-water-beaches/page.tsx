@@ -18,7 +18,7 @@ const MODIFIED = getEditorialModified('src/app/playas-aguas-cristalinas/page.tsx
 export const metadata: Metadata = {
   title: 'Crystal-clear water beaches in Spain | The most transparent',
   description: 'Discover Spain’s clearest, most transparent beaches: the Canaries, Balearics, Almería and Menorca. Rankings by water visibility, EEA quality and Blue Flag.',
-  alternates: { canonical: '/en/crystal-clear-water-beaches', languages: { es: '/playas-aguas-cristalinas', en: '/en/crystal-clear-water-beaches' } },
+  alternates: { canonical: '/en/crystal-clear-water-beaches', languages: { es: '/playas-aguas-cristalinas', en: '/en/crystal-clear-water-beaches', 'x-default': '/playas-aguas-cristalinas' } },
   openGraph: { title: 'Crystal-clear water beaches in Spain', description: 'Spain’s most transparent beaches: ranked by water visibility, EEA quality and Blue Flag.', url: `${BASE}/en/crystal-clear-water-beaches`, type: 'article', images: [{ url: '/api/og?playa=Crystal-clear%20water%20beaches%20in%20Spain', width: 1200, height: 630 }] },
   robots: { index: true, follow: true },
 }

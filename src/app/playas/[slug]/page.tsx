@@ -164,7 +164,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       languages: {
         'es':        `/playas/${slug}`,
         'en':        `/en/beaches/${slug}`,
-        'x-default': `/en/beaches/${slug}`,
+        'x-default': `/playas/${slug}`,
       },
     },
   }

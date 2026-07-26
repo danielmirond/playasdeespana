@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${a.en.title} | Playas de España Magazine`,
     description: a.en.excerpt,
-    alternates: { canonical: `/en/magazine/${a.slug}`, languages: { es: `/magazine/${a.slug}`, en: `/en/magazine/${a.slug}` } },
+    alternates: { canonical: `/en/magazine/${a.slug}`, languages: { es: `/magazine/${a.slug}`, en: `/en/magazine/${a.slug}`, 'x-default': `/magazine/${a.slug}` } },
     openGraph: { title: a.en.title, description: a.en.excerpt, url, type: 'article', publishedTime: a.datePublished, images: [{ url: og, width: 1200, height: 630 }] },
     twitter: { card: 'summary_large_image', title: a.en.title, description: a.en.excerpt, images: [og] },
   }

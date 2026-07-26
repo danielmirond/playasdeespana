@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     languages: {
       'es':        '/',
       'en':        '/en',
-      'x-default': '/en',  // Tráfico fuera de España → versión EN.
+      'x-default': '/',    // ES es el default: queries en ca/gl/eu caían a EN (GSC jul-2026).
     },
   },
   openGraph: {

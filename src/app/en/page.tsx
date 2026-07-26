@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: en.meta.description,
   alternates: {
     canonical: 'https://playas-espana.com/en',
-    languages: { 'es': 'https://playas-espana.com', 'en': 'https://playas-espana.com/en' },
+    languages: {  'es': 'https://playas-espana.com', 'en': 'https://playas-espana.com/en', 'x-default': 'https://playas-espana.com' },
   },
   openGraph: {
     title: en.meta.og_title,

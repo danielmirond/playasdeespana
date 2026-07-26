@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: 'All Blue Flag certified beaches in Spain. Water quality, facilities and real-time sea conditions.',
   alternates: {
     canonical: '/en/blue-flag',
-    languages: { 'es': '/banderas-azules', 'en': '/en/blue-flag' },
+    languages: {  'es': '/banderas-azules', 'en': '/en/blue-flag', 'x-default': '/banderas-azules' },
   },
 }
 

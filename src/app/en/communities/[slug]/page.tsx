@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: { locale: 'en_GB' },
     alternates: {
       canonical: `/en/communities/${slug}`,
-      languages: { 'es': `/comunidad/${slug}`, 'en': `/en/communities/${slug}` },
+      languages: { 'es': `/comunidad/${slug}`, 'en': `/en/communities/${slug}`, 'x-default': `/comunidad/${slug}` },
     },
   }
 }

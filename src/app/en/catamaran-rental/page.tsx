@@ -12,7 +12,7 @@ export const revalidate = 86400
 export const metadata: Metadata = {
   title: 'Catamaran rental in Spain: day & week prices | Playas de España',
   description: 'Catamaran by destination: Mallorca, Ibiza, Menorca, Costa Brava, Barcelona, Marbella. Real prices, anchorages reachable only by sea and the best season.',
-  alternates: { canonical: '/en/catamaran-rental', languages: { es: '/alquiler-catamaran', en: '/en/catamaran-rental' } },
+  alternates: { canonical: '/en/catamaran-rental', languages: { es: '/alquiler-catamaran', en: '/en/catamaran-rental', 'x-default': '/alquiler-catamaran' } },
   openGraph: { title: 'Catamaran rental in Spain', description: 'A comparison by destination: prices, anchorages and seasons.', url: `${BASE}/en/catamaran-rental`, type: 'website' },
 }
 

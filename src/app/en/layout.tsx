@@ -3,7 +3,7 @@ import HtmlLangSetter from '@/components/ui/HtmlLangSetter'
 
 export const metadata: Metadata = {
   alternates: {
-    languages: { 'es': 'https://playas-espana.com', 'en': 'https://playas-espana.com/en' },
+    languages: {  'es': 'https://playas-espana.com', 'en': 'https://playas-espana.com/en', 'x-default': 'https://playas-espana.com' },
   },
 }
 
