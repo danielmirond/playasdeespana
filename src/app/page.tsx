@@ -201,6 +201,7 @@ export default async function HomePage() {
             gap: '.75rem',
           }}>
             {[
+              { href: '/mejores-playas', label: 'Las 100 mejores de 2026', count: 100 },
               { href: '/playas-perros', label: 'Playas para perros', count: playas.filter(p => p.perros).length },
               { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas', count: playas.filter(p => p.composicion?.toLowerCase().includes('arena')).length || 612 },
               { href: '/surf', label: 'Mejores para surf', count: 148 },

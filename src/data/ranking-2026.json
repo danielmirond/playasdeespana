@@ -1,0 +1,3477 @@
+{
+ "temporada": 2026,
+ "generado": "2026-07-26",
+ "pesos": {
+  "entorno": 30,
+  "servicios": 35,
+  "distintivos": 25,
+  "experiencia": 10,
+  "nota": "Bandera Negra de Ecologistas en Acción resta 25 puntos"
+ },
+ "top100": [
+  {
+   "slug": "a-praia-nova",
+   "nombre": "A Praia Nova",
+   "municipio": "Cangas",
+   "provincia": "Pontevedra",
+   "comunidad": "Galicia",
+   "score": 85,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 85
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 1
+  },
+  {
+   "slug": "doninos-ferrol",
+   "nombre": "Doniños",
+   "municipio": "Ferrol",
+   "provincia": "A Coruña",
+   "comunidad": "Galicia",
+   "score": 85,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 85
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 2
+  },
+  {
+   "slug": "nerga-cangas",
+   "nombre": "Nerga",
+   "municipio": "Cangas",
+   "provincia": "Pontevedra",
+   "comunidad": "Galicia",
+   "score": 85,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 85
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 3
+  },
+  {
+   "slug": "praia-da-area-pequena",
+   "nombre": "Praia da Area Pequena",
+   "municipio": "Ferrol",
+   "provincia": "A Coruña",
+   "comunidad": "Galicia",
+   "score": 85,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 85
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 4
+  },
+  {
+   "slug": "praia-de-morouzos",
+   "nombre": "Morouzos",
+   "municipio": "Ortigueira",
+   "provincia": "A Coruña",
+   "comunidad": "Galicia",
+   "score": 85,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 85
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 5
+  },
+  {
+   "slug": "praia-do-outeiro-2",
+   "nombre": "Praia do Outeiro",
+   "municipio": "Ferrol",
+   "provincia": "A Coruña",
+   "comunidad": "Galicia",
+   "score": 85,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 85
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 6
+  },
+  {
+   "slug": "area-viveiro",
+   "nombre": "Area",
+   "municipio": "Viveiro",
+   "provincia": "Lugo",
+   "comunidad": "Galicia",
+   "score": 83,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 83
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 7
+  },
+  {
+   "slug": "larbre-del-gos-valencia",
+   "nombre": "L'Arbre del Gos",
+   "municipio": "Valencia",
+   "provincia": "Valencia",
+   "comunidad": "Comunitat Valenciana",
+   "score": 83,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 83
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 8
+  },
+  {
+   "slug": "llas-foz",
+   "nombre": "Llás",
+   "municipio": "Foz",
+   "provincia": "Lugo",
+   "comunidad": "Galicia",
+   "score": 83,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 83
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 9
+  },
+  {
+   "slug": "platja-de-la-creu",
+   "nombre": "Platja de la Creu",
+   "municipio": "València",
+   "provincia": "Valencia",
+   "comunidad": "Comunitat Valenciana",
+   "score": 83,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 83
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 10
+  },
+  {
+   "slug": "platja-de-lahuir",
+   "nombre": "L'Ahuir",
+   "municipio": "Gandia",
+   "provincia": "Valencia",
+   "comunidad": "Comunitat Valenciana",
+   "score": 83,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 27,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 83
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 11
+  },
+  {
+   "slug": "platja-de-pinedo",
+   "nombre": "Platja de Pinedo",
+   "municipio": "València",
+   "provincia": "Valencia",
+   "comunidad": "Comunitat Valenciana",
+   "score": 83,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 83
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 12
+  },
+  {
+   "slug": "praia-da-arnela-4",
+   "nombre": "Praia da Arnela",
+   "municipio": "Viveiro",
+   "provincia": "Lugo",
+   "comunidad": "Galicia",
+   "score": 83,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 83
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 13
+  },
+  {
+   "slug": "razo-carballo",
+   "nombre": "Razo",
+   "municipio": "Carballo",
+   "provincia": "A Coruña",
+   "comunidad": "Galicia",
+   "score": 83,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 83
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 14
+  },
+  {
+   "slug": "abrela-o-vicedo",
+   "nombre": "Abrela",
+   "municipio": "O Vicedo",
+   "provincia": "Lugo",
+   "comunidad": "Galicia",
+   "score": 81,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 15
+  },
+  {
+   "slug": "area-de-bon-bueu",
+   "nombre": "Area de Bon",
+   "municipio": "Bueu",
+   "provincia": "Pontevedra",
+   "comunidad": "Galicia",
+   "score": 81,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 16
+  },
+  {
+   "slug": "barranan-arteixo",
+   "nombre": "Barrañán",
+   "municipio": "Arteixo",
+   "provincia": "A Coruña",
+   "comunidad": "Galicia",
+   "score": 81,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 17
+  },
+  {
+   "slug": "berria-santona",
+   "nombre": "Berria",
+   "municipio": "Santoña",
+   "provincia": "Cantabria",
+   "comunidad": "Cantabria",
+   "score": 81,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 18
+  },
+  {
+   "slug": "camaron-chipiona",
+   "nombre": "Camarón",
+   "municipio": "Chipiona",
+   "provincia": "Cádiz",
+   "comunidad": "Andalucía",
+   "score": 81,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 19
+  },
+  {
+   "slug": "la-garrofera-valencia",
+   "nombre": "La Garrofera",
+   "municipio": "Valencia",
+   "provincia": "Valencia",
+   "comunidad": "Comunitat Valenciana",
+   "score": 81,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 20
+  },
+  {
+   "slug": "la-savinosa-tarragona",
+   "nombre": "La Savinosa",
+   "municipio": "Tarragona",
+   "provincia": "Tarragona",
+   "comunidad": "Cataluña",
+   "score": 81,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 21
+  },
+  {
+   "slug": "melide-cangas",
+   "nombre": "Melide",
+   "municipio": "Cangas",
+   "provincia": "Pontevedra",
+   "comunidad": "Galicia",
+   "score": 81,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 22
+  },
+  {
+   "slug": "platja-del-serradal",
+   "nombre": "El Serradal",
+   "municipio": "Castellón de la Plana/Castelló de la Plana",
+   "provincia": "Castellón",
+   "comunidad": "Comunitat Valenciana",
+   "score": 81,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 23
+  },
+  {
+   "slug": "playa-de-las-tres-piedras",
+   "nombre": "Playa de las Tres Piedras",
+   "municipio": "Chipiona",
+   "provincia": "Cádiz",
+   "comunidad": "Andalucía",
+   "score": 81,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 24
+  },
+  {
+   "slug": "praia-da-arbosa-2",
+   "nombre": "Praia da Arbosa",
+   "municipio": "La Coruña",
+   "provincia": "A Coruña",
+   "comunidad": "Galicia",
+   "score": 81,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 27,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 25
+  },
+  {
+   "slug": "praia-de-rebentons",
+   "nombre": "Praia de Rebentóns",
+   "municipio": "Bueu",
+   "provincia": "Pontevedra",
+   "comunidad": "Galicia",
+   "score": 81,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 26
+  },
+  {
+   "slug": "praia-dos-cacheiros",
+   "nombre": "Praia dos Cacheiros",
+   "municipio": "Arteixo",
+   "provincia": "A Coruña",
+   "comunidad": "Galicia",
+   "score": 81,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 27,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 27
+  },
+  {
+   "slug": "tamarit-tarragona",
+   "nombre": "Tamarit",
+   "municipio": "Tarragona",
+   "provincia": "Tarragona",
+   "comunidad": "Cataluña",
+   "score": 81,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 81
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 28
+  },
+  {
+   "slug": "as-illas-ribadeo",
+   "nombre": "As Illas",
+   "municipio": "Ribadeo",
+   "provincia": "Lugo",
+   "comunidad": "Galicia",
+   "score": 79,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 27,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 29
+  },
+  {
+   "slug": "cala-perdiu",
+   "nombre": "Cala Perdiu",
+   "municipio": "Vandellòs i l\"Hospitalet de l\"Infant",
+   "provincia": "Tarragona",
+   "comunidad": "Cataluña",
+   "score": 79,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 25,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 30
+  },
+  {
+   "slug": "cuberris-bareyo",
+   "nombre": "Cuberris",
+   "municipio": "Bareyo",
+   "provincia": "Cantabria",
+   "comunidad": "Cantabria",
+   "score": 79,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 31
+  },
+  {
+   "slug": "el-carregador-alcala-de-xivert",
+   "nombre": "El Carregador",
+   "municipio": "Alcalà de Xivert",
+   "provincia": "Castellón",
+   "comunidad": "Comunitat Valenciana",
+   "score": 79,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 32
+  },
+  {
+   "slug": "el-saler-valencia",
+   "nombre": "El Saler",
+   "municipio": "Valencia",
+   "provincia": "Valencia",
+   "comunidad": "Comunitat Valenciana",
+   "score": 79,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 0,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 33
+  },
+  {
+   "slug": "el-torn-vandellos-i-lhospitalet-de-linfant",
+   "nombre": "El Torn",
+   "municipio": "Vandellòs i l'Hospitalet de l'Infant",
+   "provincia": "Tarragona",
+   "comunidad": "Cataluña",
+   "score": 79,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 25,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 34
+  },
+  {
+   "slug": "islantilla-isla-cristina",
+   "nombre": "Islantilla",
+   "municipio": "Isla Cristina",
+   "provincia": "Huelva",
+   "comunidad": "Andalucía",
+   "score": 79,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 35
+  },
+  {
+   "slug": "la-llosa-plana",
+   "nombre": "La Llosa Plana",
+   "municipio": "Bajo Campo",
+   "provincia": "Tarragona",
+   "comunidad": "Cataluña",
+   "score": 79,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 25,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 36
+  },
+  {
+   "slug": "o-coidal-de-seborollo",
+   "nombre": "O Coidal de Seborollo",
+   "municipio": "Ribadeo",
+   "provincia": "Lugo",
+   "comunidad": "Galicia",
+   "score": 79,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 27,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 37
+  },
+  {
+   "slug": "o-muino-a-guarda",
+   "nombre": "O Muiño",
+   "municipio": "A Guarda",
+   "provincia": "Pontevedra",
+   "comunidad": "Galicia",
+   "score": 79,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 38
+  },
+  {
+   "slug": "platja-de-la-creu-2",
+   "nombre": "Platja de la Creu",
+   "municipio": "València",
+   "provincia": "Valencia",
+   "comunidad": "Comunitat Valenciana",
+   "score": 79,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 0,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 39
+  },
+  {
+   "slug": "platja-de-sant-jordi-2",
+   "nombre": "Sant Jordi",
+   "municipio": "L'Ametlla de Mar",
+   "provincia": "Tarragona",
+   "comunidad": "Cataluña",
+   "score": 79,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 40
+  },
+  {
+   "slug": "playa-de-cueva",
+   "nombre": "Playa de Cueva",
+   "municipio": "Valdés",
+   "provincia": "Asturias",
+   "comunidad": "Asturias",
+   "score": 79,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 41
+  },
+  {
+   "slug": "playa-de-la-cala-el-torreon",
+   "nombre": "Playa de La Cala - El Torreón",
+   "municipio": "Mijas",
+   "provincia": "Málaga",
+   "comunidad": "Andalucía",
+   "score": 79,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 42
+  },
+  {
+   "slug": "praia-do-corveiro-2",
+   "nombre": "Praia do Corveiro",
+   "municipio": "Viveiro",
+   "provincia": "Lugo",
+   "comunidad": "Galicia",
+   "score": 79,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 43
+  },
+  {
+   "slug": "praia-do-puntal",
+   "nombre": "Praia do Puntal",
+   "municipio": "A Guarda",
+   "provincia": "Pontevedra",
+   "comunidad": "Galicia",
+   "score": 79,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 79
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 44
+  },
+  {
+   "slug": "bajamar-brena-alta",
+   "nombre": "Bajamar",
+   "municipio": "Breña Alta",
+   "provincia": "Santa Cruz de Tenerife",
+   "comunidad": "Canarias",
+   "score": 77,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 0,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 45
+  },
+  {
+   "slug": "carabassi-elcheelx",
+   "nombre": "Carabassí",
+   "municipio": "Elche/Elx",
+   "provincia": "Alicante",
+   "comunidad": "Comunitat Valenciana",
+   "score": 77,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 29,
+    "distintivos": 18,
+    "experiencia": 4,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 46
+  },
+  {
+   "slug": "el-pinar-castellon-de-la-planacastello-de-la-plana",
+   "nombre": "El Pinar",
+   "municipio": "Castellón de la Plana/Castelló de la Plana",
+   "provincia": "Castellón",
+   "comunidad": "Comunitat Valenciana",
+   "score": 77,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 47
+  },
+  {
+   "slug": "mar-serena-pulpi",
+   "nombre": "Mar Serena",
+   "municipio": "Pulpí",
+   "provincia": "Almería",
+   "comunidad": "Andalucía",
+   "score": 77,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 48
+  },
+  {
+   "slug": "os-castros-ribadeo",
+   "nombre": "Os Castros",
+   "municipio": "Ribadeo",
+   "provincia": "Lugo",
+   "comunidad": "Galicia",
+   "score": 77,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 27,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 49
+  },
+  {
+   "slug": "platja-dels-arenals-del-sol",
+   "nombre": "Platja dels Arenals del Sol",
+   "municipio": "Elx/Elche",
+   "provincia": "Alicante",
+   "comunidad": "Comunitat Valenciana",
+   "score": 77,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 29,
+    "distintivos": 18,
+    "experiencia": 4,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 50
+  },
+  {
+   "slug": "playa-casablanca-almenara",
+   "nombre": "Playa Casablanca",
+   "municipio": "Almenara",
+   "provincia": "Castellón",
+   "comunidad": "Comunitat Valenciana",
+   "score": 77,
+   "ejes": {
+    "entorno": 20,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 4,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 51
+  },
+  {
+   "slug": "playa-el-chaparral-el-chaparral",
+   "nombre": "El Chaparral",
+   "municipio": "Mijas",
+   "provincia": "Málaga",
+   "comunidad": "Andalucía",
+   "score": 77,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 27,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 52
+  },
+  {
+   "slug": "playa-el-playazo-2",
+   "nombre": "El Playazo",
+   "municipio": "Vera",
+   "provincia": "Almería",
+   "comunidad": "Andalucía",
+   "score": 77,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 53
+  },
+  {
+   "slug": "praia-da-ladeira",
+   "nombre": "Ladeira",
+   "municipio": "Baiona",
+   "provincia": "Pontevedra",
+   "comunidad": "Galicia",
+   "score": 77,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 4,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 54
+  },
+  {
+   "slug": "rodiles-villaviciosa",
+   "nombre": "Rodiles",
+   "municipio": "Villaviciosa",
+   "provincia": "Asturias",
+   "comunidad": "Asturias",
+   "score": 77,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 55
+  },
+  {
+   "slug": "xeraco-xeraco",
+   "nombre": "Xeraco",
+   "municipio": "Xeraco",
+   "provincia": "Valencia",
+   "comunidad": "Comunitat Valenciana",
+   "score": 77,
+   "ejes": {
+    "entorno": 20,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 77
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 56
+  },
+  {
+   "slug": "son-bou-2",
+   "nombre": "Son Bou",
+   "municipio": "Alaior",
+   "provincia": "Baleares",
+   "comunidad": "Islas Baleares",
+   "score": 76,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 30,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 76
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 57
+  },
+  {
+   "slug": "son-bou-alaior",
+   "nombre": "Son Bou",
+   "municipio": "Alaior",
+   "provincia": "Baleares",
+   "comunidad": "Islas Baleares",
+   "score": 76,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 30,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 76
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 58
+  },
+  {
+   "slug": "arenal-bol-calp",
+   "nombre": "Arenal-Bol",
+   "municipio": "Calp",
+   "provincia": "Alicante",
+   "comunidad": "Comunitat Valenciana",
+   "score": 75,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 59
+  },
+  {
+   "slug": "cala-baladrar",
+   "nombre": "El Baladrar",
+   "municipio": "Benissa",
+   "provincia": "Alicante",
+   "comunidad": "Comunitat Valenciana",
+   "score": 75,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 23,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 60
+  },
+  {
+   "slug": "calnegre-lorca",
+   "nombre": "Calnegre",
+   "municipio": "Lorca",
+   "provincia": "Murcia",
+   "comunidad": "Murcia",
+   "score": 75,
+   "ejes": {
+    "entorno": 28,
+    "servicios": 23,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 61
+  },
+  {
+   "slug": "canyelles-lloret-de-mar",
+   "nombre": "Canyelles",
+   "municipio": "Lloret de Mar",
+   "provincia": "Girona",
+   "comunidad": "Cataluña",
+   "score": 75,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 29,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 62
+  },
+  {
+   "slug": "la-romana-alcala-de-xivert",
+   "nombre": "La Romana",
+   "municipio": "Alcalà de Xivert",
+   "provincia": "Castellón",
+   "comunidad": "Comunitat Valenciana",
+   "score": 75,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 4,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 63
+  },
+  {
+   "slug": "las-salinas-roquetas-de-mar",
+   "nombre": "Las Salinas",
+   "municipio": "Roquetas de Mar",
+   "provincia": "Almería",
+   "comunidad": "Andalucía",
+   "score": 75,
+   "ejes": {
+    "entorno": 20,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 64
+  },
+  {
+   "slug": "platja-del-bol",
+   "nombre": "Platja del Bol",
+   "municipio": "Calp",
+   "provincia": "Alicante",
+   "comunidad": "Comunitat Valenciana",
+   "score": 75,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 8,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 65
+  },
+  {
+   "slug": "playa-bahinas",
+   "nombre": "Bahínas",
+   "municipio": "Castrillón",
+   "provincia": "Asturias",
+   "comunidad": "Asturias",
+   "score": 75,
+   "ejes": {
+    "entorno": 20,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 66
+  },
+  {
+   "slug": "playa-de-el-puerto",
+   "nombre": "Playa de El Puerto",
+   "municipio": "Castrillón",
+   "provincia": "Asturias",
+   "comunidad": "Asturias",
+   "score": 75,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 67
+  },
+  {
+   "slug": "playa-de-meron",
+   "nombre": "Playa de Merón",
+   "municipio": "San Vicente de la Barquera",
+   "provincia": "Cantabria",
+   "comunidad": "Cantabria",
+   "score": 75,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 68
+  },
+  {
+   "slug": "playa-de-navia",
+   "nombre": "Navia",
+   "municipio": "Navia",
+   "provincia": "Asturias",
+   "comunidad": "Asturias",
+   "score": 75,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 69
+  },
+  {
+   "slug": "playa-de-orinon",
+   "nombre": "Oriñón",
+   "municipio": "Castro-Urdiales",
+   "provincia": "Cantabria",
+   "comunidad": "Cantabria",
+   "score": 75,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 70
+  },
+  {
+   "slug": "sa-coma-sant-llorenc-des-cardassar",
+   "nombre": "Sa Coma",
+   "municipio": "Sant Llorenç des Cardassar",
+   "provincia": "Baleares",
+   "comunidad": "Islas Baleares",
+   "score": 75,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 71
+  },
+  {
+   "slug": "san-miguel-el-ejido",
+   "nombre": "San Miguel",
+   "municipio": "El Ejido",
+   "provincia": "Almería",
+   "comunidad": "Andalucía",
+   "score": 75,
+   "ejes": {
+    "entorno": 20,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 72
+  },
+  {
+   "slug": "santa-maria-del-mar-castrillon",
+   "nombre": "Santa María del Mar",
+   "municipio": "Castrillón",
+   "provincia": "Asturias",
+   "comunidad": "Asturias",
+   "score": 75,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 75
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 73
+  },
+  {
+   "slug": "el-charco-verde-los-llanos-de-aridane",
+   "nombre": "El Charco Verde",
+   "municipio": "Los Llanos de Aridane",
+   "provincia": "Santa Cruz de Tenerife",
+   "comunidad": "Canarias",
+   "score": 74,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 30,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 74
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 74
+  },
+  {
+   "slug": "playa-de-san-juan",
+   "nombre": "Playa de San Juan",
+   "municipio": "Guía de Isora",
+   "provincia": "Santa Cruz de Tenerife",
+   "comunidad": "Canarias",
+   "score": 74,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 26,
+    "distintivos": 18,
+    "experiencia": 4,
+    "total": 74
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 75
+  },
+  {
+   "slug": "playa-de-san-juan-3",
+   "nombre": "San Juan",
+   "municipio": "Guía de Isora",
+   "provincia": "Santa Cruz de Tenerife",
+   "comunidad": "Canarias",
+   "score": 74,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 26,
+    "distintivos": 18,
+    "experiencia": 4,
+    "total": 74
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 76
+  },
+  {
+   "slug": "aguilar-muros-de-nalon",
+   "nombre": "Aguilar",
+   "municipio": "Muros de Nalón",
+   "provincia": "Asturias",
+   "comunidad": "Asturias",
+   "score": 73,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 77
+  },
+  {
+   "slug": "arnao-castropol",
+   "nombre": "Arnao",
+   "municipio": "Castropol",
+   "provincia": "Asturias",
+   "comunidad": "Asturias",
+   "score": 73,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 78
+  },
+  {
+   "slug": "blanca-tias",
+   "nombre": "Blanca",
+   "municipio": "Tías",
+   "provincia": "Las Palmas",
+   "comunidad": "Canarias",
+   "score": 73,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 79
+  },
+  {
+   "slug": "cala-la-invencible",
+   "nombre": "Cala La Invencible",
+   "municipio": "Pulpí",
+   "provincia": "Almería",
+   "comunidad": "Andalucía",
+   "score": 73,
+   "ejes": {
+    "entorno": 14,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 80
+  },
+  {
+   "slug": "calipso-pulpi",
+   "nombre": "Calipso",
+   "municipio": "Pulpí",
+   "provincia": "Almería",
+   "comunidad": "Andalucía",
+   "score": 73,
+   "ejes": {
+    "entorno": 14,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 81
+  },
+  {
+   "slug": "el-bombo-mijas",
+   "nombre": "El Bombo",
+   "municipio": "Mijas",
+   "provincia": "Málaga",
+   "comunidad": "Andalucía",
+   "score": 73,
+   "ejes": {
+    "entorno": 14,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 82
+  },
+  {
+   "slug": "la-fustera-benissa",
+   "nombre": "La Fustera",
+   "municipio": "Benissa",
+   "provincia": "Alicante",
+   "comunidad": "Comunitat Valenciana",
+   "score": 73,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 83
+  },
+  {
+   "slug": "los-cancajos-brena-baja",
+   "nombre": "Los Cancajos",
+   "municipio": "Breña Baja",
+   "provincia": "Santa Cruz de Tenerife",
+   "comunidad": "Canarias",
+   "score": 73,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 0,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 84
+  },
+  {
+   "slug": "playa-de-la-calilla",
+   "nombre": "Playa de La Calilla",
+   "municipio": "Níjar",
+   "provincia": "Almería",
+   "comunidad": "Andalucía",
+   "score": 73,
+   "ejes": {
+    "entorno": 14,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 85
+  },
+  {
+   "slug": "playa-de-la-mata",
+   "nombre": "La Mata",
+   "municipio": "Torrevieja",
+   "provincia": "Alicante",
+   "comunidad": "Comunitat Valenciana",
+   "score": 73,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 86
+  },
+  {
+   "slug": "playa-de-las-marinas-bolaga",
+   "nombre": "Las Marinas-Bolaga",
+   "municipio": "Vera",
+   "provincia": "Almería",
+   "comunidad": "Andalucía",
+   "score": 73,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 35,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 87
+  },
+  {
+   "slug": "playa-de-los-guinchos",
+   "nombre": "Playa de Los Guinchos",
+   "municipio": "Breña Baja",
+   "provincia": "Santa Cruz de Tenerife",
+   "comunidad": "Canarias",
+   "score": 73,
+   "ejes": {
+    "entorno": 22,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 0,
+    "total": 73
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 88
+  },
+  {
+   "slug": "platja-dels-vivers",
+   "nombre": "Los Viveros",
+   "municipio": "Guardamar del Segura",
+   "provincia": "Alicante",
+   "comunidad": "Comunitat Valenciana",
+   "score": 72,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 22,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 72
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 89
+  },
+  {
+   "slug": "cala-millor-sant-llorenc-des-cardassar",
+   "nombre": "Cala Millor",
+   "municipio": "Sant Llorenç des Cardassar",
+   "provincia": "Baleares",
+   "comunidad": "Islas Baleares",
+   "score": 71,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 71
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 90
+  },
+  {
+   "slug": "el-francas-el-vendrell",
+   "nombre": "El Francàs",
+   "municipio": "El Vendrell",
+   "provincia": "Tarragona",
+   "comunidad": "Cataluña",
+   "score": 71,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 71
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 91
+  },
+  {
+   "slug": "el-sable-suances",
+   "nombre": "El Sable",
+   "municipio": "Suances",
+   "provincia": "Cantabria",
+   "comunidad": "Cantabria",
+   "score": 71,
+   "ejes": {
+    "entorno": 14,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 71
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "socorrismo",
+    "accesible PMR",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 92
+  },
+  {
+   "slug": "la-arena-arnuero-2",
+   "nombre": "La Arena",
+   "municipio": "Arnuero",
+   "provincia": "Cantabria",
+   "comunidad": "Cantabria",
+   "score": 71,
+   "ejes": {
+    "entorno": 20,
+    "servicios": 27,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 71
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 93
+  },
+  {
+   "slug": "la-restinga-el-pinar-de-el-hierro",
+   "nombre": "La Restinga",
+   "municipio": "El Pinar de El Hierro",
+   "provincia": "Santa Cruz de Tenerife",
+   "comunidad": "Canarias",
+   "score": 71,
+   "ejes": {
+    "entorno": 20,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 0,
+    "total": 71
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 94
+  },
+  {
+   "slug": "larenal-borrianaburriana",
+   "nombre": "L'Arenal",
+   "municipio": "Borriana/Burriana",
+   "provincia": "Castellón",
+   "comunidad": "Comunitat Valenciana",
+   "score": 71,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 31,
+    "distintivos": 18,
+    "experiencia": 4,
+    "total": 71
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 95
+  },
+  {
+   "slug": "playa-cuarezo",
+   "nombre": "Playa Cuarezo",
+   "municipio": "Noja",
+   "provincia": "Cantabria",
+   "comunidad": "Cantabria",
+   "score": 71,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 71
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 96
+  },
+  {
+   "slug": "playa-de-pena-pombera",
+   "nombre": "Playa de Peña Pombera",
+   "municipio": "Noja",
+   "provincia": "Cantabria",
+   "comunidad": "Cantabria",
+   "score": 71,
+   "ejes": {
+    "entorno": 18,
+    "servicios": 33,
+    "distintivos": 18,
+    "experiencia": 2,
+    "total": 71
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 97
+  },
+  {
+   "slug": "platja-de-can-camins-2",
+   "nombre": "Platja Equipada",
+   "municipio": "El Prat de Llobregat",
+   "provincia": "Barcelona",
+   "comunidad": "Cataluña",
+   "score": 71,
+   "ejes": {
+    "entorno": 30,
+    "servicios": 35,
+    "distintivos": 0,
+    "experiencia": 6,
+    "total": 71
+   },
+   "razones": [
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 98
+  },
+  {
+   "slug": "bahia-de-timijiraque",
+   "nombre": "Timijiraque",
+   "municipio": "Valverde",
+   "provincia": "Santa Cruz de Tenerife",
+   "comunidad": "Canarias",
+   "score": 70,
+   "ejes": {
+    "entorno": 24,
+    "servicios": 28,
+    "distintivos": 18,
+    "experiencia": 0,
+    "total": 70
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "accesible PMR"
+   ],
+   "pos": 99
+  },
+  {
+   "slug": "la-carolina-aguilas",
+   "nombre": "La Carolina",
+   "municipio": "Águilas",
+   "provincia": "Murcia",
+   "comunidad": "Murcia",
+   "score": 70,
+   "ejes": {
+    "entorno": 26,
+    "servicios": 20,
+    "distintivos": 18,
+    "experiencia": 6,
+    "total": 70
+   },
+   "razones": [
+    "Bandera Azul 2026",
+    "espacio natural protegido",
+    "socorrismo",
+    "chiringuitos y oferta a pie de playa"
+   ],
+   "pos": 100
+  }
+ ],
+ "provincias": {
+  "Pontevedra": [
+   {
+    "slug": "a-praia-nova",
+    "nombre": "A Praia Nova",
+    "municipio": "Cangas",
+    "score": 85
+   },
+   {
+    "slug": "nerga-cangas",
+    "nombre": "Nerga",
+    "municipio": "Cangas",
+    "score": 85
+   },
+   {
+    "slug": "area-de-bon-bueu",
+    "nombre": "Area de Bon",
+    "municipio": "Bueu",
+    "score": 81
+   },
+   {
+    "slug": "melide-cangas",
+    "nombre": "Melide",
+    "municipio": "Cangas",
+    "score": 81
+   },
+   {
+    "slug": "praia-das-margaridas-5",
+    "nombre": "Praia das Margaridas",
+    "municipio": "Cangas",
+    "score": 81
+   }
+  ],
+  "A Coruña": [
+   {
+    "slug": "doninos-ferrol",
+    "nombre": "Doniños",
+    "municipio": "Ferrol",
+    "score": 85
+   },
+   {
+    "slug": "praia-da-area-pequena",
+    "nombre": "Praia da Area Pequena",
+    "municipio": "Ferrol",
+    "score": 85
+   },
+   {
+    "slug": "praia-de-morouzos",
+    "nombre": "Morouzos",
+    "municipio": "Ortigueira",
+    "score": 85
+   },
+   {
+    "slug": "praia-do-outeiro-2",
+    "nombre": "Praia do Outeiro",
+    "municipio": "Ferrol",
+    "score": 85
+   },
+   {
+    "slug": "razo-carballo",
+    "nombre": "Razo",
+    "municipio": "Carballo",
+    "score": 83
+   }
+  ],
+  "Lugo": [
+   {
+    "slug": "area-viveiro",
+    "nombre": "Area",
+    "municipio": "Viveiro",
+    "score": 83
+   },
+   {
+    "slug": "llas-foz",
+    "nombre": "Llás",
+    "municipio": "Foz",
+    "score": 83
+   },
+   {
+    "slug": "praia-da-arnela-4",
+    "nombre": "Praia da Arnela",
+    "municipio": "Viveiro",
+    "score": 83
+   },
+   {
+    "slug": "abrela-o-vicedo",
+    "nombre": "Abrela",
+    "municipio": "O Vicedo",
+    "score": 81
+   },
+   {
+    "slug": "as-illas-ribadeo",
+    "nombre": "As Illas",
+    "municipio": "Ribadeo",
+    "score": 79
+   }
+  ],
+  "Valencia": [
+   {
+    "slug": "larbre-del-gos-valencia",
+    "nombre": "L'Arbre del Gos",
+    "municipio": "Valencia",
+    "score": 83
+   },
+   {
+    "slug": "platja-de-la-creu",
+    "nombre": "Platja de la Creu",
+    "municipio": "València",
+    "score": 83
+   },
+   {
+    "slug": "platja-de-lahuir",
+    "nombre": "L'Ahuir",
+    "municipio": "Gandia",
+    "score": 83
+   },
+   {
+    "slug": "platja-de-pinedo",
+    "nombre": "Platja de Pinedo",
+    "municipio": "València",
+    "score": 83
+   },
+   {
+    "slug": "la-garrofera-valencia",
+    "nombre": "La Garrofera",
+    "municipio": "Valencia",
+    "score": 81
+   }
+  ],
+  "Cantabria": [
+   {
+    "slug": "berria-santona",
+    "nombre": "Berria",
+    "municipio": "Santoña",
+    "score": 81
+   },
+   {
+    "slug": "cuberris-bareyo",
+    "nombre": "Cuberris",
+    "municipio": "Bareyo",
+    "score": 79
+   },
+   {
+    "slug": "playa-de-meron",
+    "nombre": "Playa de Merón",
+    "municipio": "San Vicente de la Barquera",
+    "score": 75
+   },
+   {
+    "slug": "playa-de-orinon",
+    "nombre": "Oriñón",
+    "municipio": "Castro-Urdiales",
+    "score": 75
+   },
+   {
+    "slug": "el-sable-suances",
+    "nombre": "El Sable",
+    "municipio": "Suances",
+    "score": 71
+   }
+  ],
+  "Cádiz": [
+   {
+    "slug": "camaron-chipiona",
+    "nombre": "Camarón",
+    "municipio": "Chipiona",
+    "score": 81
+   },
+   {
+    "slug": "playa-de-las-tres-piedras",
+    "nombre": "Playa de las Tres Piedras",
+    "municipio": "Chipiona",
+    "score": 81
+   },
+   {
+    "slug": "el-palmar-vejer-de-la-frontera",
+    "nombre": "El Palmar",
+    "municipio": "Vejer de la Frontera",
+    "score": 67
+   },
+   {
+    "slug": "puntalillo-rota",
+    "nombre": "Puntalillo",
+    "municipio": "Rota",
+    "score": 67
+   },
+   {
+    "slug": "la-fontanilla-conil-de-la-frontera",
+    "nombre": "La Fontanilla",
+    "municipio": "Conil de la Frontera",
+    "score": 65
+   }
+  ],
+  "Tarragona": [
+   {
+    "slug": "la-savinosa-tarragona",
+    "nombre": "La Savinosa",
+    "municipio": "Tarragona",
+    "score": 81
+   },
+   {
+    "slug": "tamarit-tarragona",
+    "nombre": "Tamarit",
+    "municipio": "Tarragona",
+    "score": 81
+   },
+   {
+    "slug": "cala-perdiu",
+    "nombre": "Cala Perdiu",
+    "municipio": "Vandellòs i l\"Hospitalet de l\"Infant",
+    "score": 79
+   },
+   {
+    "slug": "el-torn-vandellos-i-lhospitalet-de-linfant",
+    "nombre": "El Torn",
+    "municipio": "Vandellòs i l'Hospitalet de l'Infant",
+    "score": 79
+   },
+   {
+    "slug": "la-llosa-plana",
+    "nombre": "La Llosa Plana",
+    "municipio": "Bajo Campo",
+    "score": 79
+   }
+  ],
+  "Castellón": [
+   {
+    "slug": "platja-del-serradal",
+    "nombre": "El Serradal",
+    "municipio": "Castellón de la Plana/Castelló de la Plana",
+    "score": 81
+   },
+   {
+    "slug": "el-carregador-alcala-de-xivert",
+    "nombre": "El Carregador",
+    "municipio": "Alcalà de Xivert",
+    "score": 79
+   },
+   {
+    "slug": "el-pinar-castellon-de-la-planacastello-de-la-plana",
+    "nombre": "El Pinar",
+    "municipio": "Castellón de la Plana/Castelló de la Plana",
+    "score": 77
+   },
+   {
+    "slug": "playa-casablanca-almenara",
+    "nombre": "Playa Casablanca",
+    "municipio": "Almenara",
+    "score": 77
+   },
+   {
+    "slug": "la-romana-alcala-de-xivert",
+    "nombre": "La Romana",
+    "municipio": "Alcalà de Xivert",
+    "score": 75
+   }
+  ],
+  "Huelva": [
+   {
+    "slug": "islantilla-isla-cristina",
+    "nombre": "Islantilla",
+    "municipio": "Isla Cristina",
+    "score": 79
+   },
+   {
+    "slug": "playa-de-la-redondela",
+    "nombre": "Redondela",
+    "municipio": "Isla Cristina",
+    "score": 69
+   },
+   {
+    "slug": "playa-de-la-casita-azul",
+    "nombre": "Playa de la Casita Azul",
+    "municipio": "Isla Cristina",
+    "score": 67
+   },
+   {
+    "slug": "playa-de-la-chancla",
+    "nombre": "Playa de la Chancla",
+    "municipio": "Isla Cristina",
+    "score": 65
+   },
+   {
+    "slug": "playa-de-urbasur",
+    "nombre": "Urbasur",
+    "municipio": "Isla Cristina",
+    "score": 65
+   }
+  ],
+  "Asturias": [
+   {
+    "slug": "playa-de-cueva",
+    "nombre": "Playa de Cueva",
+    "municipio": "Valdés",
+    "score": 79
+   },
+   {
+    "slug": "rodiles-villaviciosa",
+    "nombre": "Rodiles",
+    "municipio": "Villaviciosa",
+    "score": 77
+   },
+   {
+    "slug": "playa-bahinas",
+    "nombre": "Bahínas",
+    "municipio": "Castrillón",
+    "score": 75
+   },
+   {
+    "slug": "playa-de-el-puerto",
+    "nombre": "Playa de El Puerto",
+    "municipio": "Castrillón",
+    "score": 75
+   },
+   {
+    "slug": "playa-de-navia",
+    "nombre": "Navia",
+    "municipio": "Navia",
+    "score": 75
+   }
+  ],
+  "Málaga": [
+   {
+    "slug": "playa-de-la-cala-el-torreon",
+    "nombre": "Playa de La Cala - El Torreón",
+    "municipio": "Mijas",
+    "score": 79
+   },
+   {
+    "slug": "playa-el-chaparral-el-chaparral",
+    "nombre": "El Chaparral",
+    "municipio": "Mijas",
+    "score": 77
+   },
+   {
+    "slug": "el-bombo-mijas",
+    "nombre": "El Bombo",
+    "municipio": "Mijas",
+    "score": 73
+   },
+   {
+    "slug": "playa-de-calahonda-riviera",
+    "nombre": "Playa de Calahonda - Riviera",
+    "municipio": "Mijas",
+    "score": 73
+   },
+   {
+    "slug": "playa-de-calahonda-rocas-del-mar",
+    "nombre": "Playa de Calahonda - Rocas del Mar",
+    "municipio": "Mijas",
+    "score": 73
+   }
+  ],
+  "Santa Cruz de Tenerife": [
+   {
+    "slug": "bajamar-brena-alta",
+    "nombre": "Bajamar",
+    "municipio": "Breña Alta",
+    "score": 77
+   },
+   {
+    "slug": "el-charco-verde-los-llanos-de-aridane",
+    "nombre": "El Charco Verde",
+    "municipio": "Los Llanos de Aridane",
+    "score": 74
+   },
+   {
+    "slug": "playa-de-san-juan",
+    "nombre": "Playa de San Juan",
+    "municipio": "Guía de Isora",
+    "score": 74
+   },
+   {
+    "slug": "playa-de-san-juan-3",
+    "nombre": "San Juan",
+    "municipio": "Guía de Isora",
+    "score": 74
+   },
+   {
+    "slug": "los-cancajos-brena-baja",
+    "nombre": "Los Cancajos",
+    "municipio": "Breña Baja",
+    "score": 73
+   }
+  ],
+  "Alicante": [
+   {
+    "slug": "carabassi-elcheelx",
+    "nombre": "Carabassí",
+    "municipio": "Elche/Elx",
+    "score": 77
+   },
+   {
+    "slug": "platja-dels-arenals-del-sol",
+    "nombre": "Platja dels Arenals del Sol",
+    "municipio": "Elx/Elche",
+    "score": 77
+   },
+   {
+    "slug": "arenal-bol-calp",
+    "nombre": "Arenal-Bol",
+    "municipio": "Calp",
+    "score": 75
+   },
+   {
+    "slug": "cala-baladrar",
+    "nombre": "El Baladrar",
+    "municipio": "Benissa",
+    "score": 75
+   },
+   {
+    "slug": "platja-del-bol",
+    "nombre": "Platja del Bol",
+    "municipio": "Calp",
+    "score": 75
+   }
+  ],
+  "Almería": [
+   {
+    "slug": "mar-serena-pulpi",
+    "nombre": "Mar Serena",
+    "municipio": "Pulpí",
+    "score": 77
+   },
+   {
+    "slug": "playa-el-playazo-2",
+    "nombre": "El Playazo",
+    "municipio": "Vera",
+    "score": 77
+   },
+   {
+    "slug": "las-salinas-roquetas-de-mar",
+    "nombre": "Las Salinas",
+    "municipio": "Roquetas de Mar",
+    "score": 75
+   },
+   {
+    "slug": "san-miguel-el-ejido",
+    "nombre": "San Miguel",
+    "municipio": "El Ejido",
+    "score": 75
+   },
+   {
+    "slug": "cala-la-invencible",
+    "nombre": "Cala La Invencible",
+    "municipio": "Pulpí",
+    "score": 73
+   }
+  ],
+  "Baleares": [
+   {
+    "slug": "son-bou-2",
+    "nombre": "Son Bou",
+    "municipio": "Alaior",
+    "score": 76
+   },
+   {
+    "slug": "son-bou-alaior",
+    "nombre": "Son Bou",
+    "municipio": "Alaior",
+    "score": 76
+   },
+   {
+    "slug": "sa-coma-sant-llorenc-des-cardassar",
+    "nombre": "Sa Coma",
+    "municipio": "Sant Llorenç des Cardassar",
+    "score": 75
+   },
+   {
+    "slug": "cala-millor-sant-llorenc-des-cardassar",
+    "nombre": "Cala Millor",
+    "municipio": "Sant Llorenç des Cardassar",
+    "score": 71
+   },
+   {
+    "slug": "sa-barca-trencada",
+    "nombre": "sa Barca Trencada",
+    "municipio": "Santanyí",
+    "score": 67
+   }
+  ],
+  "Murcia": [
+   {
+    "slug": "calnegre-lorca",
+    "nombre": "Calnegre",
+    "municipio": "Lorca",
+    "score": 75
+   },
+   {
+    "slug": "la-carolina-aguilas",
+    "nombre": "La Carolina",
+    "municipio": "Águilas",
+    "score": 70
+   },
+   {
+    "slug": "la-higuerica-aguilas",
+    "nombre": "La Higuerica",
+    "municipio": "Águilas",
+    "score": 70
+   },
+   {
+    "slug": "playa-de-calblanque",
+    "nombre": "Calblanque",
+    "municipio": "Cartagena",
+    "score": 70
+   },
+   {
+    "slug": "cala-del-barco",
+    "nombre": "Cala del Barco",
+    "municipio": "Cartagena",
+    "score": 67
+   }
+  ],
+  "Girona": [
+   {
+    "slug": "canyelles-lloret-de-mar",
+    "nombre": "Canyelles",
+    "municipio": "Lloret de Mar",
+    "score": 75
+   },
+   {
+    "slug": "platja-de-port-daro-punta-prima",
+    "nombre": "Platja de Port d'Aro (Punta Prima)",
+    "municipio": "Castell d\"Aro, Platja d\"Aro i s\"Agaró",
+    "score": 69
+   },
+   {
+    "slug": "platja-llarga-2",
+    "nombre": "Platja Llarga",
+    "municipio": "Castell d\"Aro, Platja d\"Aro i s\"Agaró",
+    "score": 69
+   },
+   {
+    "slug": "sa-conca-castell-platja-daro",
+    "nombre": "Sa Conca",
+    "municipio": "Castell-Platja d'Aro",
+    "score": 69
+   },
+   {
+    "slug": "la-fosca-palamos",
+    "nombre": "La Fosca",
+    "municipio": "Palamós",
+    "score": 67
+   }
+  ],
+  "Las Palmas": [
+   {
+    "slug": "blanca-tias",
+    "nombre": "Blanca",
+    "municipio": "Tías",
+    "score": 73
+   },
+   {
+    "slug": "pila-de-la-barrilla-tias",
+    "nombre": "Pila de la Barrilla",
+    "municipio": "Tías",
+    "score": 69
+   },
+   {
+    "slug": "blanca-puerto-del-rosario",
+    "nombre": "Blanca",
+    "municipio": "Puerto del Rosario",
+    "score": 63
+   },
+   {
+    "slug": "las-meloneras-san-bartolome-de-tirajana",
+    "nombre": "Las Meloneras",
+    "municipio": "San Bartolomé de Tirajana",
+    "score": 63
+   },
+   {
+    "slug": "playa-de-los-pozos",
+    "nombre": "Playa de Los Pozos",
+    "municipio": "Puerto del Rosario",
+    "score": 63
+   }
+  ],
+  "Barcelona": [
+   {
+    "slug": "platja-de-can-camins-2",
+    "nombre": "Platja Equipada",
+    "municipio": "El Prat de Llobregat",
+    "score": 71
+   },
+   {
+    "slug": "platja-naturista",
+    "nombre": "Platja Naturista",
+    "municipio": "El Prat de Llobregat",
+    "score": 69
+   },
+   {
+    "slug": "platja-de-la-mar-bella",
+    "nombre": "La Mar Bella",
+    "municipio": "Barcelona",
+    "score": 63
+   },
+   {
+    "slug": "aiguadolc-sitges",
+    "nombre": "Aiguadolç",
+    "municipio": "Sitges",
+    "score": 61
+   },
+   {
+    "slug": "els-tres-micos-caldes-destrac",
+    "nombre": "Els Tres Micos",
+    "municipio": "Caldes d'Estrac",
+    "score": 61
+   }
+  ],
+  "Bizkaia": [
+   {
+    "slug": "arrigunaga-getxo",
+    "nombre": "Arrigunaga",
+    "municipio": "Getxo",
+    "score": 65
+   },
+   {
+    "slug": "portuzarra-hondartza",
+    "nombre": "Portuzarra hondartza",
+    "municipio": "Getxo",
+    "score": 65
+   },
+   {
+    "slug": "laga",
+    "nombre": "Laga",
+    "municipio": "Ibarrangelu",
+    "score": 65
+   },
+   {
+    "slug": "cala-del-socorro",
+    "nombre": "Cala del Socorro",
+    "municipio": "Muskiz",
+    "score": 63
+   },
+   {
+    "slug": "cala-del-vivero",
+    "nombre": "Cala del Vivero",
+    "municipio": "Zierbena",
+    "score": 63
+   }
+  ],
+  "Granada": [
+   {
+    "slug": "playa-de-poniente-5",
+    "nombre": "Poniente",
+    "municipio": "Motril",
+    "score": 65
+   },
+   {
+    "slug": "san-cristobal-almunecar",
+    "nombre": "San Cristóbal",
+    "municipio": "Almuñécar",
+    "score": 65
+   },
+   {
+    "slug": "puerta-del-mar-almunecar",
+    "nombre": "Puerta del Mar",
+    "municipio": "Almuñécar",
+    "score": 63
+   },
+   {
+    "slug": "velilla-almunecar",
+    "nombre": "Velilla",
+    "municipio": "Almuñécar",
+    "score": 63
+   },
+   {
+    "slug": "playa-de-la-herradura-2",
+    "nombre": "La Herradura",
+    "municipio": "Almuñécar",
+    "score": 59
+   }
+  ],
+  "Ceuta": [
+   {
+    "slug": "el-chorrillo-ceuta",
+    "nombre": "El Chorrillo",
+    "municipio": "Ceuta",
+    "score": 57
+   },
+   {
+    "slug": "la-ribera-ceuta",
+    "nombre": "La Ribera",
+    "municipio": "Ceuta",
+    "score": 55
+   },
+   {
+    "slug": "playa-de-benitez",
+    "nombre": "Benítez (primer tramo)",
+    "municipio": "Ceuta",
+    "score": 35
+   },
+   {
+    "slug": "playa-del-trampolin",
+    "nombre": "Playa del Trampolin",
+    "municipio": "Ceuta",
+    "score": 35
+   },
+   {
+    "slug": "playa-de-tramaguera",
+    "nombre": "Tramaguera",
+    "municipio": "Ceuta",
+    "score": 29
+   }
+  ],
+  "Gipuzkoa": [
+   {
+    "slug": "itzurun-hondartza",
+    "nombre": "Itzurun",
+    "municipio": "Zumaia",
+    "score": 57
+   },
+   {
+    "slug": "saturraran",
+    "nombre": "Saturrarán",
+    "municipio": "Mutriku",
+    "score": 57
+   },
+   {
+    "slug": "saturraran-naturista",
+    "nombre": "Saturraran naturista",
+    "municipio": "Mutriku",
+    "score": 57
+   },
+   {
+    "slug": "santiago-hondartza",
+    "nombre": "Santiago",
+    "municipio": "Zumaia",
+    "score": 55
+   },
+   {
+    "slug": "ondarbeltz-hondartza",
+    "nombre": "Ondarbeltz",
+    "municipio": "Mutriku",
+    "score": 51
+   }
+  ],
+  "Melilla": [
+   {
+    "slug": "la-hipica-melilla",
+    "nombre": "La Hípica",
+    "municipio": "Melilla",
+    "score": 55
+   },
+   {
+    "slug": "los-carabos-melilla",
+    "nombre": "Los Cárabos",
+    "municipio": "Melilla",
+    "score": 55
+   },
+   {
+    "slug": "hipodromo-melilla",
+    "nombre": "Hipódromo",
+    "municipio": "Melilla",
+    "score": 53
+   },
+   {
+    "slug": "san-lorenzo-melilla",
+    "nombre": "San Lorenzo",
+    "municipio": "Melilla",
+    "score": 53
+   },
+   {
+    "slug": "playa-de-horcas-coloradas",
+    "nombre": "Horcas Coloradas",
+    "municipio": "Melilla",
+    "score": 37
+   }
+  ],
+  "A Coru��a": [
+   {
+    "slug": "praia-do-olmo",
+    "nombre": "Os Olmos",
+    "municipio": "Ferrol",
+    "score": 24
+   }
+  ],
+  "Ourense": [
+   {
+    "slug": "praia-dos-franceses",
+    "nombre": "Praia dos Franceses",
+    "municipio": "A Veiga",
+    "score": 20
+   },
+   {
+    "slug": "o-inquiau",
+    "nombre": "O Inquiau",
+    "municipio": "A Arnoia",
+    "score": 2
+   },
+   {
+    "slug": "praia-do-coinedo",
+    "nombre": "Praia do Coiñedo",
+    "municipio": "La Veiga",
+    "score": 2
+   },
+   {
+    "slug": "praia-fluvial-de-chandrexa-de-queixa",
+    "nombre": "Praia Fluvial de Chandrexa de Queixa",
+    "municipio": "Comarca de Tierra de Trives",
+    "score": 2
+   }
+  ],
+  "Madrid": [
+   {
+    "slug": "virgen-de-la-nueva",
+    "nombre": "Virgen de la Nueva",
+    "municipio": "San Martín de Valdeiglesias",
+    "score": 20
+   },
+   {
+    "slug": "cala-tiburon",
+    "nombre": "Cala Tiburón",
+    "municipio": "Sierra Oeste",
+    "score": 2
+   },
+   {
+    "slug": "playa-de-la-pavera",
+    "nombre": "Playa de \"La Pavera\"",
+    "municipio": "Aranjuez",
+    "score": 2
+   },
+   {
+    "slug": "playa-nudista",
+    "nombre": "Playa nudista",
+    "municipio": "Sierra Oeste",
+    "score": 2
+   },
+   {
+    "slug": "zona-de-bano-la-puente",
+    "nombre": "Zona de Baño La Puente",
+    "municipio": "Fresnedillas de la Oliva",
+    "score": 2
+   }
+  ],
+  "Badajoz": [
+   {
+    "slug": "playa-de-campanario",
+    "nombre": "Playa de Campanario",
+    "municipio": "Campanario",
+    "score": 18
+   },
+   {
+    "slug": "playa-de-puerto-pena",
+    "nombre": "Playa de Puerto Peña",
+    "municipio": "Talarrubias",
+    "score": 18
+   },
+   {
+    "slug": "playa-isla-del-zujar",
+    "nombre": "Playa Isla del Zújar",
+    "municipio": "Castuera",
+    "score": 18
+   },
+   {
+    "slug": "playa-hormigonada-de-peloche",
+    "nombre": "Playa hormigonada de Peloche",
+    "municipio": "Herrera del Duque",
+    "score": 12
+   },
+   {
+    "slug": "playa-2",
+    "nombre": "Playa",
+    "municipio": "Puebla de la Calzada",
+    "score": 2
+   }
+  ],
+  "Islas Baleares": [
+   {
+    "slug": "platja-de-cala-roja",
+    "nombre": "Platja de Cala Roja",
+    "municipio": "Cala Tirant",
+    "score": 14
+   },
+   {
+    "slug": "platja-de-ferragut",
+    "nombre": "Platja de Ferragut",
+    "municipio": "Cala Tirant",
+    "score": 14
+   },
+   {
+    "slug": "cala-ses-salines",
+    "nombre": "Cala Ses Salines",
+    "municipio": "Ibiza",
+    "score": 6
+   },
+   {
+    "slug": "platja-de-cala-llucalari",
+    "nombre": "Platja de Cala Llucalari",
+    "municipio": "Área Metropolitana de Mahón",
+    "score": 6
+   },
+   {
+    "slug": "platja-de-can-curt",
+    "nombre": "platja de Can Curt",
+    "municipio": "Migjorn",
+    "score": 6
+   }
+  ],
+  "Valladolid": [
+   {
+    "slug": "playa-de-las-moreras",
+    "nombre": "Playa de las Moreras",
+    "municipio": "Valladolid",
+    "score": 14
+   },
+   {
+    "slug": "playa-de-la-juderia",
+    "nombre": "Playa de la Judería",
+    "municipio": "Peñafiel",
+    "score": 2
+   },
+   {
+    "slug": "playa-fluvial-la-barca",
+    "nombre": "Playa fluvial La Barca",
+    "municipio": "Quintanilla de Arriba",
+    "score": 2
+   }
+  ],
+  "Toledo": [
+   {
+    "slug": "playa-de-los-arenales",
+    "nombre": "Playa de los Arenales",
+    "municipio": "Talavera de la Reina",
+    "score": 8
+   },
+   {
+    "slug": "playa-de-san-juan-2",
+    "nombre": "Playa de San Juan",
+    "municipio": "Escalona",
+    "score": 0
+   }
+  ],
+  "Navarra": [
+   {
+    "slug": "artziko-hondartza",
+    "nombre": "Artziko hondartza",
+    "municipio": "Arce/Artzi",
+    "score": 2
+   },
+   {
+    "slug": "embarcadero-2",
+    "nombre": "Embarcadero",
+    "municipio": "Guesálaz/Gesalatz",
+    "score": 2
+   },
+   {
+    "slug": "ibai-hondartza",
+    "nombre": "Ibai-hondartza",
+    "municipio": "Esteribar",
+    "score": 2
+   },
+   {
+    "slug": "nagoreko-hondartza",
+    "nombre": "Nagoreko hondartza",
+    "municipio": "Auñamendi",
+    "score": 2
+   },
+   {
+    "slug": "nagoreko-hondartza-2",
+    "nombre": "Nagoreko hondartza",
+    "municipio": "Arce/Artzi",
+    "score": 2
+   }
+  ],
+  "Guadalajara": [
+   {
+    "slug": "el-empalme-trillo",
+    "nombre": "El Empalme",
+    "municipio": "Trillo",
+    "score": 2
+   }
+  ],
+  "Salamanca": [
+   {
+    "slug": "el-rocoso",
+    "nombre": "El Rocoso",
+    "municipio": "Los Arribes",
+    "score": 2
+   },
+   {
+    "slug": "playa-del-rostro",
+    "nombre": "Playa del Rostro",
+    "municipio": "Los Arribes",
+    "score": 2
+   },
+   {
+    "slug": "playa-fluvial-de-vilvestre",
+    "nombre": "Playa fluvial de Vilvestre",
+    "municipio": "Los Arribes",
+    "score": 2
+   },
+   {
+    "slug": "parque-de-merendas-playa-fluvial",
+    "nombre": "Parque de Merendas - Playa Fluvial",
+    "municipio": "El Abadengo",
+    "score": 0
+   }
+  ],
+  "Zamora": [
+   {
+    "slug": "el-valle",
+    "nombre": "El Valle",
+    "municipio": "La Carballeda",
+    "score": 2
+   },
+   {
+    "slug": "la-alameda",
+    "nombre": "La Alameda",
+    "municipio": "Mombuey",
+    "score": 2
+   },
+   {
+    "slug": "la-sienra",
+    "nombre": "La Sienra",
+    "municipio": "La Carballeda",
+    "score": 2
+   },
+   {
+    "slug": "playa-custa-llago",
+    "nombre": "Playa Custa Llago",
+    "municipio": "Galende",
+    "score": 2
+   },
+   {
+    "slug": "playa-de-los-enanos",
+    "nombre": "Playa de «los Enanos»",
+    "municipio": "Galende",
+    "score": 2
+   }
+  ],
+  "Albacete": [
+   {
+    "slug": "la-playeta-2",
+    "nombre": "La Playeta",
+    "municipio": "Alcalá del Júcar",
+    "score": 2
+   },
+   {
+    "slug": "plaza-de-toros",
+    "nombre": "Plaza de Toros",
+    "municipio": "Cenizate",
+    "score": 0
+   }
+  ],
+  "Cuenca": [
+   {
+    "slug": "la-playeta-3",
+    "nombre": "La Playeta",
+    "municipio": "Cañamares",
+    "score": 2
+   },
+   {
+    "slug": "playa-artificial",
+    "nombre": "playa artificial",
+    "municipio": "Cuenca",
+    "score": 2
+   },
+   {
+    "slug": "playa-chica-6",
+    "nombre": "Playa Chica",
+    "municipio": "La Alcarria",
+    "score": 2
+   },
+   {
+    "slug": "playa-de-bolarque",
+    "nombre": "Playa de Bolarque",
+    "municipio": "La Alcarria",
+    "score": 2
+   },
+   {
+    "slug": "playa-de-cueva-tomas",
+    "nombre": "Playa de Cueva Tomás",
+    "municipio": "Arandilla del Arroyo",
+    "score": 2
+   }
+  ],
+  "Lleida": [
+   {
+    "slug": "moll-sortida-barques-raffting",
+    "nombre": "Moll sortida barques Raffting",
+    "municipio": "Llavorsí",
+    "score": 2
+   }
+  ],
+  "La Rioja": [
+   {
+    "slug": "parque-la-playa",
+    "nombre": "Parque La Playa",
+    "municipio": "Logroño",
+    "score": 2
+   },
+   {
+    "slug": "playa-cretacica",
+    "nombre": "Playa Cretácica",
+    "municipio": "Enciso",
+    "score": 2
+   },
+   {
+    "slug": "playa-fluvial-5",
+    "nombre": "Playa fluvial",
+    "municipio": "Cihuri",
+    "score": 2
+   },
+   {
+    "slug": "playa-fluvial-rio-najerilla",
+    "nombre": "Playa fluvial Río Najerilla",
+    "municipio": "Nájera",
+    "score": 2
+   },
+   {
+    "slug": "poza-de-viguera",
+    "nombre": "Poza de Viguera",
+    "municipio": "Viguera",
+    "score": 2
+   }
+  ],
+  "Burgos": [
+   {
+    "slug": "playa-de-arija",
+    "nombre": "Playa de Arija",
+    "municipio": "Arija",
+    "score": 2
+   },
+   {
+    "slug": "playa-de-fuente-prior",
+    "nombre": "Playa de Fuente Prior",
+    "municipio": "Burgos",
+    "score": 2
+   }
+  ],
+  "Córdoba": [
+   {
+    "slug": "playa-de-valdearenas",
+    "nombre": "Playa de Valdearenas",
+    "municipio": "Subbética",
+    "score": 2
+   }
+  ],
+  "Palencia": [
+   {
+    "slug": "playa-del-embalse-de-aguilar",
+    "nombre": "Playa del embalse de Aguilar",
+    "municipio": "Valdivia",
+    "score": 2
+   }
+  ],
+  "Segovia": [
+   {
+    "slug": "playa-del-lago-alonso",
+    "nombre": "Playa del lago Alonso",
+    "municipio": "Segovia",
+    "score": 2
+   },
+   {
+    "slug": "playita-del-duraton",
+    "nombre": "Playita del Duratón",
+    "municipio": "Carrascal del Río",
+    "score": 2
+   },
+   {
+    "slug": "playa-del-piron",
+    "nombre": "Playa del Pirón",
+    "municipio": "Sotosalbos",
+    "score": 0
+   }
+  ],
+  "León": [
+   {
+    "slug": "playa-fluvial-3",
+    "nombre": "Playa Fluvial",
+    "municipio": "El Bierzo",
+    "score": 2
+   },
+   {
+    "slug": "playa-fluvial-de-san-justo-de-la-vega",
+    "nombre": "Playa fluvial de San Justo de la Vega",
+    "municipio": "Astorga",
+    "score": 2
+   },
+   {
+    "slug": "praia-do-azibo",
+    "nombre": "Praia do Azibo",
+    "municipio": "União das freguesias de Podence e Santa Combinha",
+    "score": 0
+   },
+   {
+    "slug": "praia-flubial",
+    "nombre": "Praia Flubial",
+    "municipio": "São Martinho Da Angueira",
+    "score": 0
+   },
+   {
+    "slug": "praia-fluvial-da-fraga-da-pegada",
+    "nombre": "Praia Fluvial da Fraga da Pegada",
+    "municipio": "União das freguesias de Podence e Santa Combinha",
+    "score": 0
+   }
+  ],
+  "Ávila": [
+   {
+    "slug": "playa-fluvial-de-el-molino",
+    "nombre": "Playa Fluvial de El Molino",
+    "municipio": "Navamures",
+    "score": 2
+   },
+   {
+    "slug": "playa-fluvial-de-tormellas",
+    "nombre": "Playa Fluvial de Tormellas",
+    "municipio": "Tormellas",
+    "score": 2
+   },
+   {
+    "slug": "playa-fluvial-del-molino",
+    "nombre": "Playa Fluvial del Molino",
+    "municipio": "Tormellas",
+    "score": 2
+   }
+  ],
+  "Zaragoza": [
+   {
+    "slug": "playa-fluvial-del-huerva",
+    "nombre": "Playa Fluvial del Huerva",
+    "municipio": "Zaragoza",
+    "score": 2
+   },
+   {
+    "slug": "playas-del-ebro",
+    "nombre": "Playas del Ebro",
+    "municipio": "Zaragoza",
+    "score": 2
+   }
+  ],
+  "Cáceres": [
+   {
+    "slug": "playa-fluvial-la-isla",
+    "nombre": "Playa Fluvial La Isla",
+    "municipio": "Coria",
+    "score": 2
+   }
+  ],
+  "Soria": [
+   {
+    "slug": "playa-pita",
+    "nombre": "Playa Pita",
+    "municipio": "Soria",
+    "score": 2
+   },
+   {
+    "slug": "playa-de-kaa",
+    "nombre": "Playa de Kaa",
+    "municipio": "Santa Inés",
+    "score": 0
+   }
+  ],
+  "Ciudad Real": [
+   {
+    "slug": "playas-del-vicario",
+    "nombre": "Playas del Vicario",
+    "municipio": "Campo de Calatrava",
+    "score": 2
+   }
+  ]
+ }
+}
