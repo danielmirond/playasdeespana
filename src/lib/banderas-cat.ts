@@ -143,6 +143,7 @@ function parseMedusas(raw: string): MedusasRiesgo | null {
     detalleEn: `Official lifeguard sighting today: ${partesEn.join('; ')}.`,
     hex: peorNivel === 'alto' ? '#ef4444' : '#f59e0b',
     oficial: true,
+    fuente: 'socorrismo',
   }
 }
 

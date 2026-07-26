@@ -416,9 +416,28 @@ export default async function PlayaPage({ params }: Props) {
       hex: repFlag === 'roja' ? '#ef4444' : '#f59e0b',
     }
   }
-  // Medusas: el avistamiento oficial del socorrismo (especie + cantidad)
-  // manda sobre nuestra estimación estacional.
-  const medusas = oficialCat?.medusas ?? estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
+  // Medusas — cascada de tres niveles, espejo de la de banderas:
+  //   1. Avistamiento OFICIAL del socorrismo (Cataluña, con especie)
+  //   2. Reportes de bañistas de las últimas 24 h ("he visto medusas")
+  //   3. Estimación estacional por modelo (fallback)
+  let medusas = oficialCat?.medusas ?? null
+  if (!medusas && reportesData && reportesData.medusas > 0) {
+    const n = reportesData.medusas
+    medusas = {
+      nivel: n >= 3 ? 'alto' : 'medio',
+      label: n >= 3 ? 'Medusas: varios avistamientos' : 'Medusas avistadas',
+      labelEn: n >= 3 ? 'Jellyfish: multiple sightings' : 'Jellyfish sighted',
+      detalle: n === 1
+        ? 'Un bañista ha reportado medusas en esta playa en las últimas 24 horas.'
+        : `${n} bañistas han reportado medusas en esta playa en las últimas 24 horas.`,
+      detalleEn: n === 1
+        ? 'One beachgoer reported jellyfish at this beach in the last 24 hours.'
+        : `${n} beachgoers reported jellyfish at this beach in the last 24 hours.`,
+      hex: n >= 3 ? '#ef4444' : '#f59e0b',
+      fuente: 'banistas',
+    }
+  }
+  if (!medusas) medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
   // Asistente "qué necesitas hoy" — reglas + IA opcional + cache 24h.

@@ -21,6 +21,8 @@ export interface MedusasRiesgo {
   hex:      string
   /** true si viene de avistamiento oficial (socorrismo), no de estimación */
   oficial?: boolean
+  /** origen del dato — decide el disclaimer de la ficha */
+  fuente?: 'socorrismo' | 'banistas'
 }
 
 /**
