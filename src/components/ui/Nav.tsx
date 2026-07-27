@@ -54,6 +54,7 @@ export default function Nav() {
           <Link href={isEn ? '/en/campervan-rental' : '/alquiler-autocaravana'} className={styles.link}>{isEn ? 'Campervans' : 'Autocaravanas'}</Link>
           {!isEn && <Link href="/playas-perros" className={styles.link}>Perros</Link>}
           {!isEn && <Link href="/surf" className={styles.link}>Surf</Link>}
+          {!isEn && <Link href="/mi-cuaderno" className={styles.link}>Mi cuaderno</Link>}
           <Link href={isEn ? '/en/magazine' : '/magazine'} className={styles.link}>Magazine</Link>
           <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
         </nav>

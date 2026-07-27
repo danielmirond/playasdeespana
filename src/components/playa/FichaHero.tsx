@@ -223,6 +223,9 @@ export default function FichaHero({
               <FichaHeroActions
                 slug={playa.slug}
                 nombre={playa.nombre}
+                municipio={playa.municipio}
+                provincia={playa.provincia}
+                comunidad={playa.comunidad}
                 meteo={meteo}
                 scoreLabel={playaScore?.label}
                 theme={hasPhoto ? 'light' : 'dark'}

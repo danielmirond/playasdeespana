@@ -1,10 +1,15 @@
 'use client'
-import { CheckCircle, Heart } from '@phosphor-icons/react'
+import { CheckCircle, Heart, MapPin } from '@phosphor-icons/react'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { estuveEn, marcarVisita, borrarVisita } from '@/lib/cuaderno'
 
 interface Props {
   slug:       string
   nombre:     string
+  municipio?: string
+  provincia?: string
+  comunidad?: string
   meteo?:     { agua: number; olas: number; viento: number }
   scoreLabel?: string
   /** 'light' = texto/borde blanco (sobre foto). 'dark' = texto/borde
@@ -14,9 +19,11 @@ interface Props {
 
 const KEY = 'playas_favoritas'
 
-export default function FichaHeroActions({ slug, nombre, meteo, scoreLabel, theme = 'dark' }: Props) {
+export default function FichaHeroActions({ slug, nombre, municipio = '', provincia = '', comunidad = '', meteo, scoreLabel, theme = 'dark' }: Props) {
   const [fav, setFav] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [estuve, setEstuve] = useState(false)
+  const [recienMarcada, setRecienMarcada] = useState(false)
   const isLight = theme === 'light'
 
   useEffect(() => {
@@ -24,7 +31,26 @@ export default function FichaHeroActions({ slug, nombre, meteo, scoreLabel, them
       const favs: string[] = JSON.parse(localStorage.getItem(KEY) ?? '[]')
       setFav(favs.includes(slug))
     } catch {}
+    setEstuve(estuveEn(slug))
   }, [slug])
+
+  function toggleEstuve() {
+    if (estuve) {
+      borrarVisita(slug)
+      setEstuve(false)
+      setRecienMarcada(false)
+      return
+    }
+    marcarVisita(slug, { n: nombre, m: municipio, p: provincia, c: comunidad })
+    setEstuve(true)
+    setRecienMarcada(true)  // enseña el enlace al cuaderno justo tras marcar
+    // Contador social anónimo — el localStorage evita dobles votos.
+    fetch('/api/estuve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug }),
+    }).catch(() => {})
+  }
 
   function toggleFav() {
     try {
@@ -91,6 +117,20 @@ export default function FichaHeroActions({ slug, nombre, meteo, scoreLabel, them
         <Heart size={15} weight={fav ? 'fill' : 'regular'} color="currentColor"/> {fav ? 'Guardada' : 'Guardar'}
       </button>
       <button
+        onClick={toggleEstuve}
+        title={estuve ? 'Quitar de mi cuaderno de playas' : 'Marcar en mi cuaderno de playas'}
+        style={{
+          ...base,
+          color:       estuve ? favColor : muted,
+          background:  estuve ? favBg    : 'transparent',
+          borderColor: estuve ? favBd    : mutedBd,
+        }}
+        onMouseEnter={e => { if (!estuve) e.currentTarget.style.background = hoverBg }}
+        onMouseLeave={e => { if (!estuve) e.currentTarget.style.background = 'transparent' }}
+      >
+        <MapPin size={15} weight={estuve ? 'fill' : 'regular'} color="currentColor"/> {estuve ? 'Estuviste aquí' : 'Estuve aquí'}
+      </button>
+      <button
         onClick={compartir}
         style={{
           ...base,
@@ -102,6 +142,16 @@ export default function FichaHeroActions({ slug, nombre, meteo, scoreLabel, them
       >
         {copied ? <><CheckCircle size={15} weight="bold" color="currentColor"/> Copiado</> : '↗ Compartir'}
       </button>
+      {recienMarcada && (
+        <Link href="/mi-cuaderno" style={{
+          ...base,
+          color: isLight ? '#fff' : 'var(--accent)',
+          borderColor: isLight ? 'rgba(255,255,255,.55)' : 'var(--accent)',
+          textDecoration: 'none',
+        }}>
+          Ver mi cuaderno →
+        </Link>
+      )}
     </div>
   )
 }
