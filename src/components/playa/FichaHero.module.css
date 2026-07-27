@@ -22,14 +22,21 @@
 /* ── Foto a sangre + gradiente ───────────────────────────────────── */
 .photoLayer { position: absolute; inset: 0; z-index: 0; }
 .photoImg { object-fit: cover; object-position: center 55%; }
+/* El bloque editorial (H1 + score + datos + botonera) ocupa la mitad
+   inferior, así que ahí la foto debe pasar a fondo, no competir: con el
+   degradado antiguo (transparente hasta el 32%, .85 solo al final) las
+   fotos de alto contraste — casetas de colores, arena clara — se comían
+   el score y el subtítulo. Ahora la opacidad crece antes y termina casi
+   opaca. */
 .photoGradient {
   position: absolute; inset: 0;
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, .5)  0%,
-    rgba(0, 0, 0, 0)   22%,
-    rgba(0, 0, 0, 0)   32%,
-    rgba(0, 0, 0, .85) 100%
+    rgba(0, 0, 0, .12) 20%,
+    rgba(0, 0, 0, .38) 45%,
+    rgba(0, 0, 0, .72) 68%,
+    rgba(0, 0, 0, .92) 100%
   );
   z-index: 1;
 }

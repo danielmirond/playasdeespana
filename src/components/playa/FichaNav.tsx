@@ -54,6 +54,9 @@ export default function FichaNav({ locale = 'es' }: { locale?: 'es' | 'en' }) {
   const navRef = useRef<HTMLElement>(null)
   const allSecciones = SECCIONES[locale]
   const [visibles, setVisibles] = useState<typeof allSecciones>([])
+  // La máscara de desvanecido anuncia que hay más pestañas a la derecha;
+  // al llegar al final sobra (si no, la última pestaña se ve a medias).
+  const [enElFinal, setEnElFinal] = useState(false)
 
   useEffect(() => {
     const present = allSecciones.filter(s => document.getElementById(s.id))
@@ -92,10 +95,25 @@ export default function FichaNav({ locale = 'es' }: { locale?: 'es' | 'en' }) {
     return () => obs.disconnect()
   }, [visibles])
 
+  useEffect(() => {
+    const el = navRef.current
+    if (!el || visibles.length === 0) return
+    const check = () => {
+      setEnElFinal(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4)
+    }
+    check()
+    el.addEventListener('scroll', check, { passive: true })
+    window.addEventListener('resize', check)
+    return () => {
+      el.removeEventListener('scroll', check)
+      window.removeEventListener('resize', check)
+    }
+  }, [visibles])
+
   if (visibles.length === 0) return null
 
   return (
-    <nav className={styles.nav} ref={navRef} id="ficha-nav">
+    <nav className={`${styles.nav} ${enElFinal ? styles.navEnd : ''}`} ref={navRef} id="ficha-nav">
       {visibles.map((s, i) => (
         <button
           key={s.id}

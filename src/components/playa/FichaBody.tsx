@@ -1320,8 +1320,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.aeFrase}><em>{locale === 'en' ? estado.fraseEn : estado.frase}</em></div>
           <div className={styles.aePill}><span className={styles.aeDot} style={{ background: estado.dot }}/>{i18n.actualizado} · <time dateTime={dateModified}>{formatTime(dateModified, locale)}</time></div>
         </div>
+        {/* soloDesktop: en móvil el aside cae al flujo principal y este
+            resumen repetía el mismo 11:00-14:00 que la sección
+            "Masificación y mejor hora" un par de scrolls más abajo —
+            además con otra gramática de cabecera (antetítulo en
+            versalitas vs H2 serif). En desktop vive en la columna
+            sticky, donde sí aporta. */}
         {horaIdeal && (
-          <div style={{
+          <div className={styles.soloDesktop} style={{
             background: 'linear-gradient(160deg, rgba(245,158,11,.08), rgba(107,64,10,.06))',
             border: '1px solid rgba(107,64,10,.25)',
             borderRadius: 6, padding: '.85rem 1rem',
