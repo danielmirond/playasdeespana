@@ -90,6 +90,10 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
     background:    'transparent',
     transition:    'border-color .15s, background .15s, color .15s',
     letterSpacing: '.01em',
+    // Píldoras siempre a una línea: con 3 botones en 375px, "Estuve
+    // aquí" partía en dos líneas y desigualaba las alturas. El wrap lo
+    // hace el contenedor (flexWrap), no el texto.
+    whiteSpace:    'nowrap',
   }
 
   // Colores adaptativos por tema. light = texto blanco sobre foto;
@@ -102,7 +106,7 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
   const favBd    = isLight ? 'rgba(255,182,168,.55)' : 'rgba(122,40,24,.3)'
 
   return (
-    <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-start', margin: '4px 0 0' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'flex-start', margin: '4px 0 0' }}>
       <button
         onClick={toggleFav}
         style={{

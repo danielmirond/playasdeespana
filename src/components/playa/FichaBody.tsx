@@ -256,7 +256,7 @@ const ORDER_V2: string[] = [
   // 1 · DECISIÓN
   'intro', 'trust', 'estado', 'webcam', 'seguridad', 'calidad', 'opiniones-dest', 'cta-ctx',
   // 2 · PLAN
-  'asistente', 'como-llegar', 'trafico', 'afiliados', 'comer', 'dormir',
+  'asistente', 'como-llegar', 'trafico', 'mejor-hora', 'afiliados', 'comer', 'chiringuitos', 'dormir',
   'campings', 'ferries', 'surf', 'buceo', 'cta-barco', 'ad',
   // 3 · PROFUNDIDAD
   'meteo', 'datos', 'fotos', 'video', 'opiniones', 'cercanas',
@@ -946,8 +946,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
                         <div className={styles.listNombre}>{h.nombre}</div>
                       </a>
-                      <div className={styles.hotelStars}>{'★'.repeat(Math.min(h.estrellas,5))}{'☆'.repeat(Math.max(0,5-h.estrellas))}</div>
-                      <div className={styles.listMeta}>{h.distancia_m}m{h.rating > 0 && <span> · {h.rating} <Star size={12} weight="fill" color="#f5a623" style={{verticalAlign:'middle'}}/> ({h.reseñas?.toLocaleString(locale === 'en' ? 'en' : 'es')})</span>}{h.precio && <span> · {h.precio}</span>}</div>
+                      {/* Sin categoría conocida (OSM sin tag stars) no pintamos
+                          5 estrellas vacías: era ruido visual en móvil. */}
+                      {h.estrellas > 0 && <div className={styles.hotelStars}>{'★'.repeat(Math.min(h.estrellas,5))}{'☆'.repeat(Math.max(0,5-h.estrellas))}</div>}
+                      <div className={styles.listMeta}>{h.distancia_m}m{h.rating > 0 && <span> · <Star size={12} weight="fill" color="#f5a623" style={{verticalAlign:'middle'}}/> {h.reseñas > 0 ? `${h.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} ${i18n.resenas}` : ''}</span>}{h.precio && <span> · {h.precio}</span>}</div>
                       {(h.website || h.telefono) && (
                         <div style={{ display:'flex', gap:'8px', marginTop:'6px' }}>
                           {h.website && <a href={h.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', background:'#6b400a', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
