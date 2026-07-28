@@ -39,6 +39,13 @@
   });
   if (!secs.length) return;
 
+  // Renumerar lo que queda visible: si la playa no tiene chiringuitos, el
+  // índice no debe saltar del 07 al 09 ni desmentir al contador.
+  secs.forEach(function (s, i) {
+    var num = s.a.querySelector('span');
+    if (num) num.textContent = String(i + 1).padStart(2, '0');
+  });
+
   var total = String(secs.length).padStart(2, '0');
   var actual = -1;
 
