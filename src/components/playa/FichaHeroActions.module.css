@@ -1,0 +1,20 @@
+/* FichaHeroActions — jerarquía de acciones del hero (propuesta 2026 §5.2).
+   "Tres acciones al mismo nivel" → una primaria visible + overflow.
+   En móvil, donde el pliegue es oro, solo se ve "Guardar"; "Estuve aquí"
+   y "Compartir" viven tras el botón "···". En escritorio hay sitio y las
+   tres se muestran de una. */
+
+.fila { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 0; }
+
+/* El disparador del overflow solo existe en móvil */
+.overflowBtn { display: none !important; }
+
+/* !important porque los botones llevan display:inline-flex en el style
+   inline (objeto `base` compartido) y la especificidad de una clase no
+   gana a un estilo en línea. */
+@media (max-width: 800px) {
+  .overflowBtn { display: inline-flex !important; }
+  /* Secundarias plegadas hasta que se abre el overflow */
+  .secundaria { display: none !important; }
+  .fila[data-overflow='true'] .secundaria { display: inline-flex !important; }
+}

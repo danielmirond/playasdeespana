@@ -167,6 +167,13 @@
   font-variant-numeric: tabular-nums;
 }
 .heroPainted .metaLine strong { color: var(--ink); }
+.metaGeo { display: contents; }
+@media (max-width: 800px) { .metaGeo { display: none; } }
+
+/* La cifra dentro del metaLine ya no usa el serif grande del sistema:
+   la lleva .dato, que además aporta el trazo de certeza. */
+.metaLine .dato { font-size: 1.25rem; font-weight: 700; margin-right: .12rem; }
+
 .metaSep { color: rgba(255, 255, 255, .35); }
 .heroPainted .metaSep { color: var(--line); }
 .metaLink {

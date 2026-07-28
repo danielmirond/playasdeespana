@@ -107,6 +107,10 @@ export default function FichaHero({
   // tonos brillantes para contraste sobre tinta-900.
   const dotColorBar = dot === 'danger' ? '#e8755e' : dot === 'warn' ? '#e6b24a' : '#5fbf7f'
   const hasPhoto = !!foto?.url
+  // Agua y olas del hero salen SIEMPRE del modelo de Open-Meteo: el dato
+  // medido por boya vive, con su trazo sólido, en la tarjeta de seguridad.
+  // No mentimos el grado de confianza por quedar mejor.
+  const certMeteo = 'estimado'
   // Nombre popular (castellano) si la playa está en idioma cooficial
   // y tiene alias curado (ej. Kontxa Hondartza → "La Concha de San
   // Sebastián"). El campo `popular` ya contiene el nombre completo
@@ -199,22 +203,34 @@ export default function FichaHero({
               </span>
             </div>
 
+            {/* Metadatos: cinco → tres en móvil (propuesta 2026 §5.2).
+                Municipio y provincia ya están en las migas y se repiten en
+                la primera tarjeta; en el hero solo queda lo del DÍA —
+                agua, olas y el enlace a meteo. Cada medición lleva su
+                trazo de certeza: sobre foto pasa a blanco, porque ahí el
+                color no distingue pero el patrón sí. */}
             <div className={styles.metaLine}>
-              {municipioHref
-                ? <Link href={municipioHref} className={styles.metaLink}>{playa.municipio}</Link>
-                : <span>{playa.municipio}</span>}
-              <span className={styles.metaSep} aria-hidden="true">·</span>
-              {provinciaHref
-                ? <Link href={provinciaHref} className={styles.metaLink}>{playa.provincia}</Link>
-                : <span>{playa.provincia}</span>}
-              {/* Chips solo con dato real: sin fetch no se inventa 18°/0 m */}
-              {meteo.agua != null && (<>
+              <span className={styles.metaGeo}>
+                {municipioHref
+                  ? <Link href={municipioHref} className={styles.metaLink}>{playa.municipio}</Link>
+                  : <span>{playa.municipio}</span>}
                 <span className={styles.metaSep} aria-hidden="true">·</span>
-                <span><strong>{meteo.agua}°</strong> {i18n.agua}</span>
-              </>)}
+                {provinciaHref
+                  ? <Link href={provinciaHref} className={styles.metaLink}>{playa.provincia}</Link>
+                  : <span>{playa.provincia}</span>}
+                <span className={styles.metaSep} aria-hidden="true">·</span>
+              </span>
+              {/* Chips solo con dato real: sin fetch no se inventa 18°/0 m */}
+              {meteo.agua != null && (
+                <span>
+                  <strong className={hasPhoto ? 'dato dato-ondark' : 'dato'} data-cert={certMeteo}>{meteo.agua}°</strong> {i18n.agua}
+                </span>
+              )}
               {meteo.olas != null && (<>
                 <span className={styles.metaSep} aria-hidden="true">·</span>
-                <span><strong>{meteo.olas} m</strong> {i18n.olas}</span>
+                <span>
+                  <strong className={hasPhoto ? 'dato dato-ondark' : 'dato'} data-cert={certMeteo}>{meteo.olas} m</strong> {i18n.olas}
+                </span>
               </>)}
               <a href="#s-meteo" className={styles.more}>{i18n.meteoMore}</a>
             </div>

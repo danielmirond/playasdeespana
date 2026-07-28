@@ -3,6 +3,7 @@ import { CheckCircle, Heart, MapPin } from '@phosphor-icons/react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { estuveEn, marcarVisita, borrarVisita } from '@/lib/cuaderno'
+import styles from './FichaHeroActions.module.css'
 
 interface Props {
   slug:       string
@@ -24,6 +25,9 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
   const [copied, setCopied] = useState(false)
   const [estuve, setEstuve] = useState(false)
   const [recienMarcada, setRecienMarcada] = useState(false)
+  // Overflow de acciones secundarias (propuesta 2026 §5.2): en móvil solo
+  // se ve la primaria; "Estuve aquí" y "Compartir" viven tras el "···".
+  const [overflow, setOverflow] = useState(false)
   const isLight = theme === 'light'
 
   useEffect(() => {
@@ -106,7 +110,7 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
   const favBd    = isLight ? 'rgba(255,182,168,.55)' : 'rgba(122,40,24,.3)'
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'flex-start', margin: '4px 0 0' }}>
+    <div className={styles.fila} data-overflow={String(overflow)}>
       <button
         onClick={toggleFav}
         style={{
@@ -121,7 +125,17 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
         <Heart size={15} weight={fav ? 'fill' : 'regular'} color="currentColor"/> {fav ? 'Guardada' : 'Guardar'}
       </button>
       <button
+        onClick={() => setOverflow(o => !o)}
+        className={styles.overflowBtn}
+        aria-expanded={overflow}
+        aria-label={overflow ? 'Menos acciones' : 'Más acciones'}
+        style={{ ...base, color: muted, borderColor: mutedBd, padding: '8px 14px', minWidth: 44 }}
+      >
+        <span style={{ fontSize: '1.05rem', lineHeight: .6 }} aria-hidden="true">···</span>
+      </button>
+      <button
         onClick={toggleEstuve}
+        className={styles.secundaria}
         title={estuve ? 'Quitar de mi cuaderno de playas' : 'Marcar en mi cuaderno de playas'}
         style={{
           ...base,
@@ -136,6 +150,7 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
       </button>
       <button
         onClick={compartir}
+        className={styles.secundaria}
         style={{
           ...base,
           color:       muted,
