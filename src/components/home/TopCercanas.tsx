@@ -7,7 +7,8 @@
 // Al clicar: pide ubicación → carga playas → meteo → score → render.
 // Si falla → muestra error con retry. Nunca se queda en loading eterno.
 
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
+import { readConsent } from '@/components/ui/CookieBanner'
 import Link from 'next/link'
 import type { Playa } from '@/types'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
@@ -56,6 +57,9 @@ type Estado = 'button' | 'loading' | 'ready' | 'error'
 
 export default function TopCercanas() {
   const [estado, setEstado] = useState<Estado>('button')
+  // Invitación a aceptar la cercanía. Solo aparece si el permiso está sin
+  // decidir; nunca si ya se concedió (cargamos directos) ni si se denegó.
+  const [invitar, setInvitar] = useState(false)
   const [results, setResults] = useState<ScoredNearby[]>([])
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null)
   const [errorMsg, setErrorMsg] = useState('')
@@ -133,6 +137,30 @@ export default function TopCercanas() {
     }
   }, [])
 
+  // Al entrar: si el usuario YA concedió la ubicación en otra visita, no
+  // hay nada que preguntar — cargamos su playa más cercana directamente y
+  // el bloque aparece resuelto en lo alto de la home. Si nunca lo ha
+  // decidido, ofrecemos la invitación (nuestra, no el diálogo del
+  // navegador: ese solo salta cuando el usuario toca). Si lo denegó, no
+  // insistimos.
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !navigator.permissions?.query) return
+    let vivo = true
+    navigator.permissions.query({ name: 'geolocation' as PermissionName }).then(p => {
+      if (!vivo) return
+      if (p.state === 'granted') { doLoad(); return }
+      if (p.state !== 'prompt') return
+      // No apilamos dos capas: la invitación espera a que el banner de
+      // cookies esté resuelto.
+      const puede = () => readConsent() !== null
+      if (puede()) { setInvitar(true); return }
+      const alResolver = () => { if (puede()) setInvitar(true) }
+      window.addEventListener('cookie-consent-change', alResolver)
+      return () => window.removeEventListener('cookie-consent-change', alResolver)
+    }).catch(() => {})
+    return () => { vivo = false }
+  }, [doLoad])
+
   // Button state. big, centered, breathes
   if (estado === 'button') {
     return (
@@ -141,6 +169,56 @@ export default function TopCercanas() {
         textAlign: 'center',
         contain: 'layout style',
       }}>
+        {/* Invitación a aceptar la cercanía. No es un modal: no bloquea
+            la página ni empuja el contenido (va fija abajo), para no
+            castigar CLS ni tapar la home nada más entrar. El diálogo del
+            navegador solo salta al tocar "Ver mi playa". */}
+        {invitar && (
+          <div role="dialog" aria-label="Ver tu playa más cercana" style={{
+            position: 'fixed', left: 12, right: 12,
+            bottom: 'calc(12px + env(safe-area-inset-bottom, 0px))',
+            zIndex: 92, maxWidth: 520, margin: '0 auto',
+            display: 'flex', alignItems: 'center', gap: '.75rem',
+            padding: '.85rem 1rem',
+            background: 'var(--ink)', color: 'var(--surface)',
+            borderRadius: 'var(--r-md, 6px)',
+            boxShadow: '0 10px 30px rgba(42,26,8,.24)',
+            textAlign: 'left',
+          }}>
+            <MapPin size={20} weight="fill" aria-hidden="true" style={{ flexShrink: 0, opacity: .9 }} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.92rem' }}>
+                ¿Vemos tu playa más cercana?
+              </div>
+              <div style={{ fontSize: '.72rem', opacity: .85, marginTop: '.1rem' }}>
+                Tu ubicación no sale de tu dispositivo.
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => { setInvitar(false); doLoad() }}
+              style={{
+                flexShrink: 0, minHeight: 38, padding: '.4rem .9rem',
+                background: 'var(--surface)', color: 'var(--ink)',
+                border: 'none', borderRadius: 999,
+                fontFamily: 'var(--font-sans)', fontSize: '.8rem', fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              Ver mi playa
+            </button>
+            <button
+              type="button"
+              onClick={() => setInvitar(false)}
+              aria-label="Ahora no"
+              style={{
+                flexShrink: 0, width: 30, height: 30,
+                background: 'transparent', color: 'inherit',
+                border: 'none', opacity: .7, fontSize: '1.05rem', cursor: 'pointer',
+              }}
+            >×</button>
+          </div>
+        )}
         <button
           type="button"
           onClick={doLoad}
