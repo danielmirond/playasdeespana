@@ -30,11 +30,9 @@
 .item:hover { color: var(--accent); }
 .active { color: var(--accent) !important; border-bottom-color: var(--accent); font-weight: 600; }
 
-@media (max-width: 640px) {
-  .nav { padding: 0 1rem; }
-  .item { padding: .6rem .8rem; font-size: .68rem; }
-}
-@media (max-width: 380px) {
-  .nav { padding: 0 .75rem; }
-  .item { padding: .5rem .6rem; font-size: .62rem; }
+/* En móvil esta barra desaparece: su función (saltar entre secciones) la
+   asume el índice de la píldora contextual, que además no ocupa cromado
+   fijo permanente. Propuesta de diseño 2026 §5.1 — de 316px a 64px. */
+@media (max-width: 800px) {
+  .nav { display: none; }
 }

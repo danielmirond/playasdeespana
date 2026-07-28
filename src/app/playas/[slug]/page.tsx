@@ -43,6 +43,7 @@ import type { HotelReal } from '@/lib/hoteles'
 import Nav from '@/components/ui/Nav'
 import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
+import PildoraContextual from '@/components/playa/PildoraContextual'
 import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
@@ -582,6 +583,9 @@ export default async function PlayaPage({ params }: Props) {
           above-the-fold y mejora LCP/INP — el critique de diseño
           (PR #84) destacó que el video estaba robando atención
           antes del contenido textual concreto. */}
+      {/* Barra de secciones: en móvil la sustituye el índice de la
+          píldora contextual (propuesta 2026 §5.1), así que se oculta por
+          CSS bajo 800px y solo sirve al escritorio. */}
       <FichaNav />
       <FichaBody
         playa={playa}
@@ -655,6 +659,10 @@ export default async function PlayaPage({ params }: Props) {
         cmp="ficha_playa"
         id="actividades"
       />
+      {/* Arquitectura C de la propuesta 2026: un solo elemento fijo en
+          móvil (64px) en lugar de nav + secciones + acciones (316px). */}
+      <PildoraContextual lat={playa.lat} lng={playa.lng} />
+      <script src="/pildora.js" defer />
     </>
   )
 }

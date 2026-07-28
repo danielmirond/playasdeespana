@@ -260,7 +260,11 @@
 }
 
 /* ── Sticky CTA mobile (existente) ──────────────────────────────── */
-.stickyMobile { display: none; }
+/* La barra inferior de acciones queda RETIRADA: sus dos funciones
+   ("cómo está hoy" / "cómo llegar") viven ahora en la mitad derecha de
+   la píldora contextual, que las ofrece según dónde estés en la ficha.
+   Propuesta de diseño 2026 §5.1. */
+.stickyMobile { display: none !important; }
 
 /* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 800px) {
@@ -271,7 +275,7 @@
 
 @media (max-width: 520px) {
   .heroPhoto { min-height: 440px; }
-  .heroPainted { padding: 1rem .85rem 1.25rem; padding-bottom: calc(1.25rem + 56px); }
+  .heroPainted { padding: 1rem .85rem 1.25rem; }
   .bcInner, .inner, .avisosInner { padding: 0 .85rem; }
   .bcTop { padding: 1rem 0; }
   .bcInner { font-size: .65rem; }

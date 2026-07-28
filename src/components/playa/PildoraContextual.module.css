@@ -1,0 +1,140 @@
+/* PildoraContextual — arquitectura C de la propuesta de diseño 2026 (§5.1).
+   Un solo elemento fijo sustituye a la barra de secciones sticky y a la
+   barra de acciones inferior: de 316px de cromado (39% del viewport) a
+   64px (8%). A la izquierda, el índice con la sección actual; a la
+   derecha, la acción que toca según dónde estés.
+   Solo móvil: en escritorio hay sitio de sobra y manda el aside. */
+
+.wrap { display: none; }
+
+@media (max-width: 800px) {
+  /* El wrap ES la píldora: barra fija con dos mitades. */
+  .wrap {
+    display: flex;
+    align-items: stretch;
+    position: fixed;
+    left: 12px; right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    z-index: 95;
+    height: 52px;
+    background: var(--surface, #fffdf8);
+    border: 1px solid var(--line-strong, rgba(42,26,8,.28));
+    border-radius: var(--r-pill, 999px);
+    box-shadow: 0 12px 32px rgba(42,26,8,.16);
+    /* Aparece cuando el hero deja de estar en pantalla: al aterrizar, la
+       respuesta a "¿me baño hoy?" no compite con nada. */
+    opacity: 0;
+    transform: translateY(76px);
+    transition: opacity 200ms ease, transform 240ms ease;
+    pointer-events: none;
+  }
+  :global(body[data-pildora='on']) .wrap {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  /* Con el panel abierto quitamos el transform: si no, el <details>
+     crearía bloque contenedor y la hoja fija se posicionaría (y
+     recortaría) contra la píldora en vez de contra el viewport. */
+  .wrap:has(> .panel[open]) { transform: none; }
+
+  /* ── Izquierda: índice + sección actual (es el <summary>) ─────── */
+  .panel { flex: 1; min-width: 0; display: flex; }
+  .pillLeft {
+    display: flex; align-items: center; gap: .5rem;
+    flex: 1; min-width: 0;
+    padding: 0 .9rem;
+    border-radius: var(--r-pill) 0 0 var(--r-pill);
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pillLeft::-webkit-details-marker { display: none; }
+  .pillLeft::marker { content: ''; }
+  .pillLeft:active { background: rgba(42,26,8,.05); }
+
+  .glifo { font-size: .8rem; color: var(--muted); flex-shrink: 0; }
+  .indiceTxt { min-width: 0; }
+  .contador {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .5rem; letter-spacing: .08em;
+    color: var(--muted);
+  }
+  .seccion {
+    display: block;
+    font-size: .82rem; font-weight: 500;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ── Derecha: acción contextual ───────────────────────────────── */
+  .accion {
+    display: flex; align-items: center; gap: .45rem;
+    padding: 0 1.05rem;
+    background: var(--ink, #2a1a08); color: var(--surface, #fffdf8);
+    border-radius: 0 var(--r-pill) var(--r-pill) 0;
+    font-family: var(--font-sans); font-size: .82rem; font-weight: 600;
+    border: none; text-decoration: none; white-space: nowrap;
+    flex-shrink: 0; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .accion:active { opacity: .85; }
+  /* Ofrece siempre la crítica que NO estás mirando: arriba "cómo está
+     hoy"; pasada la mitad de la ficha, "cómo llegar". */
+  .accionLlegar { display: none; }
+  :global(body[data-ctx='llegar']) .accionEstado { display: none; }
+  :global(body[data-ctx='llegar']) .accionLlegar { display: flex; }
+
+  /* ── Panel de secciones: <details> puro, cero JavaScript ──────── */
+  /* Por encima de la nav superior del sitio (z-index 100): un panel
+     modal que deja asomar el logo no se lee como modal. */
+  .velo {
+    position: fixed; inset: 0; z-index: 110;
+    background: rgba(26,15,4,.42);
+  }
+  .hoja {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 111;
+    max-height: 68vh; overflow-y: auto;
+    background: var(--surface, #fffdf8);
+    border-top: 1px solid var(--line-strong, rgba(42,26,8,.28));
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -10px 30px rgba(42,26,8,.16);
+    padding-bottom: calc(.5rem + env(safe-area-inset-bottom, 0px));
+    animation: subir 240ms ease;
+  }
+  @keyframes subir { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hoja { animation: none; }
+    .wrap { transition: none; }
+  }
+
+  .hojaHead {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .85rem 1rem .5rem;
+  }
+  .hojaTitulo {
+    font-family: var(--font-sans);
+    font-size: .62rem; font-weight: 500;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .item {
+    display: flex; align-items: center; gap: .65rem;
+    width: 100%; min-height: 44px;
+    padding: 0 1rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-sans); font-size: .88rem;
+    color: var(--ink-soft, #5a3d12);
+    text-align: left; text-decoration: none;
+  }
+  .item:active { background: var(--surface-2, #f5ede0); }
+  .itemActivo { color: var(--ink); font-weight: 600; background: var(--surface-2, #f5ede0); }
+  .itemNum {
+    font-family: var(--font-mono);
+    font-size: .58rem; color: var(--muted);
+    width: 1.1rem; flex-shrink: 0;
+  }
+}
