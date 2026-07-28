@@ -114,7 +114,60 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
 
   // "Cómo está hoy" reutiliza el drawer de reportar que ya existe.
-  if (btnEst) btnEst.addEventListener('click', function () {
-    window.dispatchEvent(new CustomEvent('open-reportar-drawer'));
+  // (Hay más de un disparador: la píldora, el aviso de presencia…)
+  [].slice.call(document.querySelectorAll('[data-pildora-estado]')).forEach(function (b) {
+    b.addEventListener('click', function () {
+      window.dispatchEvent(new CustomEvent('open-reportar-drawer'));
+    });
+  });
+
+  /* ── ¿Está el usuario EN la playa? ────────────────────────────────
+   * Si lo está, "cómo llegar" sobra y lo útil es que cuente cómo está:
+   * quien pisa la arena es el reportero ideal, y de ahí sale el dato de
+   * bandera y medusas.
+   *
+   * Dos reglas innegociables:
+   *  · No se pide permiso nuevo. Solo se mira la posición si el usuario
+   *    YA concedió la ubicación antes (permissions.query). Preguntar sin
+   *    que lo haya pedido quema el permiso, y en iOS no se recupera.
+   *  · La posición NO sale del dispositivo. La distancia se calcula aquí
+   *    y lo único que queda es un atributo en el <body>. Al servidor no
+   *    viaja ninguna coordenada, como promete la FAQ del sitio.
+   */
+  var RADIO_M = 300;
+  var pLat = parseFloat(wrap.getAttribute('data-lat'));
+  var pLng = parseFloat(wrap.getAttribute('data-lng'));
+
+  function distanciaM(la1, lo1, la2, lo2) {
+    var R = 6371000, r = function (d) { return d * Math.PI / 180; };
+    var dLa = r(la2 - la1), dLo = r(lo2 - lo1);
+    var x = Math.sin(dLa / 2) * Math.sin(dLa / 2) +
+            Math.cos(r(la1)) * Math.cos(r(la2)) * Math.sin(dLo / 2) * Math.sin(dLo / 2);
+    return 2 * R * Math.asin(Math.sqrt(x));
+  }
+
+  function comprobarPresencia() {
+    if (!isFinite(pLat) || !isFinite(pLng) || !navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var c = pos.coords;
+      // Una lectura imprecisa (torre de móvil, ±2 km) diría "estás en la
+      // playa" desde el sofá. Sin GPS decente, no afirmamos nada.
+      if (c.accuracy > 200) return;
+      var d = distanciaM(c.latitude, c.longitude, pLat, pLng);
+      body.setAttribute('data-enplaya', d <= RADIO_M ? 'si' : 'no');
+    }, function () { /* denegado o sin señal: se queda como está */ },
+      { enableHighAccuracy: true, timeout: 8000, maximumAge: 120000 });
+  }
+
+  if (navigator.permissions && navigator.permissions.query) {
+    navigator.permissions.query({ name: 'geolocation' }).then(function (p) {
+      if (p.state === 'granted') comprobarPresencia();
+      // Si lo concede más tarde (desde "playas cerca de mí"), reaccionamos
+      p.onchange = function () { if (p.state === 'granted') comprobarPresencia(); };
+    }).catch(function () {});
+  }
+  // Al volver a la pestaña puede haber cambiado de sitio (o haber llegado).
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && body.getAttribute('data-enplaya') !== 'si') comprobarPresencia();
   });
 })();

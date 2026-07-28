@@ -138,3 +138,51 @@
     width: 1.1rem; flex-shrink: 0;
   }
 }
+
+/* ── Presencia en la playa (jul-2026) ─────────────────────────────────
+   Cuando el propio dispositivo calcula que la playa está a menos de
+   300 m, "cómo llegar" deja de tener sentido y lo útil es contar cómo
+   está. La posición NUNCA sale del dispositivo: el script solo escribe
+   body[data-enplaya='si'].
+   Fuera del media query para que las reglas existan siempre. */
+.accionReportar { display: none !important; }
+
+@media (max-width: 800px) {
+  body[data-enplaya='si'] .accionEstado,
+  body[data-enplaya='si'] .accionLlegar { display: none !important; }
+  body[data-enplaya='si'] .accionReportar { display: flex !important; }
+
+  /* Aviso de presencia: una tira sobre la píldora, no un modal. */
+  .aviso {
+    position: fixed;
+    left: 12px; right: 12px;
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    z-index: 95;
+    display: none;
+    align-items: center; gap: .6rem;
+    padding: .6rem .85rem;
+    background: var(--ink, #2a1a08);
+    color: var(--surface, #fffdf8);
+    border-radius: var(--r-md, 6px);
+    box-shadow: 0 8px 24px rgba(42,26,8,.22);
+    font-family: var(--font-sans);
+    animation: avisoEntra 260ms ease;
+  }
+  body[data-enplaya='si'] .aviso { display: flex; }
+  @keyframes avisoEntra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .aviso { animation: none; } }
+
+  .avisoTxt { flex: 1; min-width: 0; font-size: .82rem; }
+  .avisoTxt strong { font-family: var(--font-serif); font-weight: 700; }
+  .avisoCta {
+    flex-shrink: 0;
+    padding: .4rem .8rem;
+    min-height: 36px;
+    border: 1px solid rgba(255,255,255,.5);
+    border-radius: var(--r-pill, 999px);
+    background: transparent; color: inherit;
+    font-family: inherit; font-size: .78rem; font-weight: 600;
+    cursor: pointer;
+  }
+  .avisoCta:active { background: rgba(255,255,255,.14); }
+}

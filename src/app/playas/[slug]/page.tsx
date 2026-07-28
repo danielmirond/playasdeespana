@@ -661,7 +661,7 @@ export default async function PlayaPage({ params }: Props) {
       />
       {/* Arquitectura C de la propuesta 2026: un solo elemento fijo en
           móvil (64px) en lugar de nav + secciones + acciones (316px). */}
-      <PildoraContextual lat={playa.lat} lng={playa.lng} />
+      <PildoraContextual lat={playa.lat} lng={playa.lng} nombre={playa.nombre} />
       <script src="/pildora.js" defer />
     </>
   )

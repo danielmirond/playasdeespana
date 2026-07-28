@@ -15,7 +15,7 @@
 //     acciones se ve lo decide un script vanilla (public/pildora.js) que
 //     solo escribe atributos data- en el <body>. El CSS hace el resto.
 // Es un server component: no lleva 'use client'.
-import { MapPin, Waves } from '@phosphor-icons/react/dist/ssr'
+import { MapPin, Waves, Megaphone } from '@phosphor-icons/react/dist/ssr'
 import styles from './PildoraContextual.module.css'
 
 interface Seccion { id: string; t: string }
@@ -66,16 +66,18 @@ const SECCIONES: Record<'es' | 'en', Seccion[]> = {
 interface Props {
   lat: number
   lng: number
+  /** Para el aviso "Estás en X": sin nombre no se anuncia nada */
+  nombre?: string
   locale?: 'es' | 'en'
 }
 
-export default function PildoraContextual({ lat, lng, locale = 'es' }: Props) {
+export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es' }: Props) {
   const es = locale === 'es'
   const secciones = SECCIONES[locale]
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
 
   return (
-    <div className={styles.wrap} id="pildora">
+    <div className={styles.wrap} id="pildora" data-lat={lat} data-lng={lng}>
       <details className={styles.panel} id="pildora-panel">
         <summary className={styles.pillLeft} aria-label={es ? 'Índice de secciones' : 'Section index'}>
           <span className={styles.glifo} aria-hidden="true">☰</span>
@@ -105,6 +107,20 @@ export default function PildoraContextual({ lat, lng, locale = 'es' }: Props) {
         </nav>
       </details>
 
+      {/* Aviso de presencia. Se pinta siempre y el CSS lo muestra solo
+          cuando body[data-enplaya='si']. Quien está en la arena es el
+          reportero ideal: es donde nace el dato de bandera y medusas. */}
+      {nombre && (
+        <div className={styles.aviso} data-pildora-aviso role="status">
+          <span className={styles.avisoTxt}>
+            {es ? <>Estás en <strong>{nombre}</strong></> : <>You are at <strong>{nombre}</strong></>}
+          </span>
+          <button type="button" className={styles.avisoCta} data-pildora-estado>
+            {es ? '¿Cómo está hoy?' : 'How is it today?'}
+          </button>
+        </div>
+      )}
+
       {/* Acción contextual: las dos conviven en el DOM y conmutan por CSS
           según el atributo data-ctx del body. Sin re-render. */}
       <button
@@ -125,6 +141,18 @@ export default function PildoraContextual({ lat, lng, locale = 'es' }: Props) {
         <MapPin size={15} weight="fill" aria-hidden="true" />
         {es ? 'Cómo llegar' : 'Directions'}
       </a>
+      {/* Estando en la arena, "cómo llegar" sobra: lo útil es contar cómo
+          está. Esta acción sustituye a las otras dos cuando el propio
+          dispositivo detecta que la playa está a menos de 300 m. */}
+      <button
+        type="button"
+        className={`${styles.accion} ${styles.accionReportar}`}
+        data-pildora-estado
+        aria-haspopup="dialog"
+      >
+        <Megaphone size={15} weight="bold" aria-hidden="true" />
+        {es ? 'Reportar cómo está' : 'Report conditions'}
+      </button>
     </div>
   )
 }
