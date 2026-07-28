@@ -40,7 +40,7 @@ import AffiliatesCTABlock from './AffiliatesCTABlock'
 import OpinionesDestacadas from './OpinionesDestacadas'
 import BeachVideoToggle from './BeachVideoToggle'
 import WebcamPlaya from './WebcamPlaya'
-import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge } from '@phosphor-icons/react'
+import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge, Martini } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
@@ -259,7 +259,7 @@ const ORDER_V2: string[] = [
   'asistente', 'como-llegar', 'trafico', 'mejor-hora', 'afiliados', 'comer', 'chiringuitos', 'dormir',
   'campings', 'ferries', 'surf', 'buceo', 'cta-barco', 'ad',
   // 3 · PROFUNDIDAD
-  'meteo', 'datos', 'fotos', 'video', 'opiniones', 'cercanas',
+  'meteo', 'datos', 'fotos', 'video', 'opiniones', 'votacion', 'cercanas',
   'texto-seo', 'hubs', 'faqs', 'crosslinks',
 ]
 
@@ -576,6 +576,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           locale={locale}
         />
 
+        {/* Pedir la valoración DESPUÉS de haber dado algo: antes vivía en
+            el aside y en móvil (donde el aside cae al flujo) aparecía a
+            dos scrolls del hero, con cinco estrellas vacías y un "sé el
+            primero en valorarla" antes de que el usuario hubiera visto
+            fotos ni opiniones. Aquí llega cuando ya ha leído a otros. */}
+        <VotacionPlaya key="votacion" slug={playa.slug} locale={locale} />
+
         {/* BLOQUE UNIFICADO DE CTAs AFILIADOS (PR #86 - Consolidación)
             Reemplaza 7 CTAs dispersos: TheFork, Booking, Civitatis, RentalCars, Pitchup
             con un bloque tabbed que mantiene todos los servicios accesibles. */}
@@ -855,9 +862,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                         </div>
                       )}
                     </div>
+                    {/* Sin "Ver →": el nombre ya abre el mismo Google Maps
+                        y tener dos enlaces idénticos por fila era ruido. */}
                     <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:'4px', flexShrink:0 }}>
                       {r.rating > 0 && <span className={styles.rating}>{r.rating}</span>}
-                      <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', color:'#6b400a', fontWeight:600, textDecoration:'none' }}>Ver →</a>
                     </div>
                   </div>
                 )
@@ -896,7 +904,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   const mapsUrl = `https://www.google.com/maps/place/?q=place_id:${c.googleId}`
                   return (
                     <div key={c.googleId} className={styles.listItem}>
-                      <SunHorizon size={16} weight='bold' style={{color:'var(--accent,#6b400a)'}}/>
+                      {/* Martini, no SunHorizon: el atardecer no dice
+                          "chiringuito" y se confundía con el bloque de
+                          amanecer/atardecer de más arriba. */}
+                      <Martini size={16} weight='bold' style={{color:'var(--accent,#6b400a)'}}/>
                       <div className={styles.listInfo}>
                         <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
                           <div className={styles.listNombre}>{c.nombre}</div>
@@ -908,7 +919,6 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       </div>
                       <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:'4px', flexShrink:0 }}>
                         {c.rating > 0 && <span className={styles.rating}>{c.rating}</span>}
-                        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', color:'#6b400a', fontWeight:600, textDecoration:'none' }}>Ver →</a>
                       </div>
                     </div>
                   )
@@ -1346,7 +1356,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <div className={styles.soloDesktop}>
           <FichaAsideActions nombre={playa.nombre} lat={playa.lat} lng={playa.lng} slug={playa.slug} meteo={meteo.agua != null && meteo.olas != null && meteo.viento != null ? { agua: meteo.agua, olas: meteo.olas, viento: meteo.viento } : undefined} />
         </div>
-        <VotacionPlaya slug={playa.slug} locale={locale} />
+        {/* La votación se movió al flujo principal, tras las opiniones:
+            aquí, con el aside cayendo al flujo en móvil, pedía valorar
+            antes de haber dado nada. */}
         {/* Mini-CTA "¿Qué llevar?" — sustituye al bloque Amazon de 6 productos
             siempre visible. Abre un drawer con la lista contextual. */}
         <AsideAfiliacionCTA
