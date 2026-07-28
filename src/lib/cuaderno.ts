@@ -50,7 +50,9 @@ export function borrarVisita(slug: string): Cuaderno {
 
 export interface Insignia {
   id: string
-  emoji: string
+  /** Numeral romano = cuántas hacen falta. Da aire de sello oficial y
+   *  escala sin dibujar un icono nuevo por hito (propuesta 2026 §5.5). */
+  numeral: string
   nombre: string
   descripcion: string
   /** null = conseguida; si no, texto de qué falta */
@@ -89,43 +91,43 @@ export function calcularInsignias(cuaderno: Cuaderno, reportes: { total: number;
     falta <= 0 ? null : `te faltan ${falta} ${unidad}`
 
   return [
-    { id: 'primera-arena', emoji: '🏖️', nombre: 'Primera arena',
+    { id: 'primera-arena', numeral: 'I', nombre: 'Primera arena',
       descripcion: 'Tu primera playa en el cuaderno',
       progreso: n >= 1 ? null : 'marca tu primera playa' },
-    { id: 'explorador', emoji: '🗺️', nombre: 'Pie de playa',
+    { id: 'explorador', numeral: 'V', nombre: 'Pie de playa',
       descripcion: '5 playas visitadas',
       progreso: conteo(5 - n, n === 4 ? 'playa' : 'playas') },
-    { id: 'rumbo-fijo', emoji: '🧭', nombre: 'Rumbo fijo',
+    { id: 'rumbo-fijo', numeral: 'XV', nombre: 'Rumbo fijo',
       descripcion: '15 playas visitadas',
       progreso: conteo(15 - n, 'playas') },
-    { id: 'lobo-de-mar', emoji: '🌊', nombre: 'Lobo de mar',
+    { id: 'lobo-de-mar', numeral: 'XXX', nombre: 'Lobo de mar',
       descripcion: '30 playas visitadas',
       progreso: conteo(30 - n, 'playas') },
-    { id: 'leyenda', emoji: '👑', nombre: 'Leyenda del litoral',
+    { id: 'leyenda', numeral: 'LXXV', nombre: 'Leyenda del litoral',
       descripcion: '75 playas visitadas',
       progreso: conteo(75 - n, 'playas') },
-    { id: 'tres-provincias', emoji: '📍', nombre: 'Sin fronteras',
+    { id: 'tres-provincias', numeral: 'III', nombre: 'Sin fronteras',
       descripcion: 'Playas de 3 provincias distintas',
       progreso: conteo(3 - provincias.size, 'provincias') },
-    { id: 'vuelta-espana', emoji: '🚩', nombre: 'Vuelta a España',
+    { id: 'vuelta-espana', numeral: 'V', nombre: 'Vuelta a España',
       descripcion: 'Playas de 5 comunidades distintas',
       progreso: conteo(5 - comunidades.size, 'comunidades') },
-    { id: 'dos-mares', emoji: '⚓', nombre: 'Dos mares',
+    { id: 'dos-mares', numeral: 'II', nombre: 'Dos mares',
       descripcion: 'Has pisado el Cantábrico y el Mediterráneo',
       progreso: tieneNorte && tieneMed ? null : tieneNorte ? 'te falta el Mediterráneo' : tieneMed ? 'te falta el norte' : 'te faltan los dos mares' },
-    { id: 'isleno', emoji: '🏝️', nombre: 'Isleño',
+    { id: 'isleno', numeral: '∞', nombre: 'Isleño',
       descripcion: 'Una playa de Baleares o Canarias',
       progreso: nIslas >= 1 ? null : 'te falta pisar una isla' },
-    { id: 'cazador-top', emoji: '🏆', nombre: 'Cazador del top',
+    { id: 'cazador-top', numeral: 'I', nombre: 'Cazador del top',
       descripcion: 'Una playa del top 100 de España 2026',
       progreso: nTop >= 1 ? null : 'visita una del ranking' },
-    { id: 'coleccionista-top', emoji: '💎', nombre: 'Coleccionista',
+    { id: 'coleccionista-top', numeral: 'X', nombre: 'Coleccionista',
       descripcion: '10 playas del top 100 de España 2026',
       progreso: conteo(10 - nTop, 'del top 100') },
-    { id: 'vigia', emoji: '🔭', nombre: 'Vigía',
+    { id: 'vigia', numeral: 'I', nombre: 'Vigía',
       descripcion: 'Tu primer reporte de estado de una playa',
       progreso: reportes.total >= 1 ? null : 'envía un reporte desde una ficha' },
-    { id: 'centinela', emoji: '🪼', nombre: 'Centinela de medusas',
+    { id: 'centinela', numeral: 'I', nombre: 'Centinela de medusas',
       descripcion: 'Avisaste de medusas a otros bañistas',
       progreso: reportes.medusas >= 1 ? null : 'reporta medusas cuando las veas' },
   ]

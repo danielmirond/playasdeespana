@@ -5,6 +5,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { leerCuaderno, borrarVisita, calcularInsignias, contarReportesLocales, type Cuaderno } from '@/lib/cuaderno'
+import Sello, { Insignia } from '@/components/cuaderno/Sello'
 import ranking from '@/data/ranking-2026.json'
 
 const TOP100 = new Set((ranking.top100 as Array<{ slug: string }>).map(p => p.slug))
@@ -67,33 +68,57 @@ export default function CuadernoClient() {
         ↗ Compartir mi cuaderno
       </button>
 
+      {/* Hoja de sellos — el cuaderno propiamente dicho */}
+      {n > 0 && (
+        <>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '.9rem' }}>
+            Tus sellos
+          </h2>
+          <div style={{
+            padding: '1.25rem .75rem 1rem',
+            background: 'var(--surface-2, #f5ede0)',
+            border: '1px solid var(--line)',
+            borderRadius: 'var(--r-sm, 4px)',
+            // pauta de cuaderno
+            backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 27px, rgba(42,26,8,0.05) 27px 28px)',
+            marginBottom: '2.5rem',
+          }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
+              {visitas.map(([slug, v], i) => (
+                <Sello
+                  key={slug}
+                  nombre={v.n}
+                  provincia={v.p}
+                  fecha={new Date(v.ts).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '·')}
+                  size={96}
+                  tono={i % 2 ? 'accent' : 'ink'}
+                  rot={((i * 37) % 9) - 4}
+                />
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
       {/* Insignias */}
       <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '.9rem' }}>
         Insignias
       </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '.6rem', marginBottom: '2.5rem' }}>
-        {insignias.map(i => {
-          const ok = i.progreso === null
-          return (
-            <div key={i.id} style={{
-              background: 'var(--card-bg)', border: '1px solid',
-              borderColor: ok ? 'var(--accent)' : 'var(--line)',
-              borderRadius: 6, padding: '.8rem .95rem',
-              opacity: ok ? 1 : .55,
-            }}>
-              <div style={{ fontSize: '1.5rem', filter: ok ? 'none' : 'grayscale(1)' }} aria-hidden>{i.emoji}</div>
-              <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', margin: '.25rem 0 .1rem' }}>{i.nombre}</div>
-              <div style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.45 }}>
-                {i.descripcion}{!ok && <> · <em>{i.progreso}</em></>}
-              </div>
-            </div>
-          )
-        })}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.6rem', marginBottom: '2.5rem' }}>
+        {insignias.map(i => (
+          <Insignia
+            key={i.id}
+            numeral={i.numeral}
+            titulo={i.nombre}
+            detalle={i.progreso === null ? i.descripcion : i.progreso}
+            conseguida={i.progreso === null}
+          />
+        ))}
       </div>
 
       {/* Visitas */}
       <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '.9rem' }}>
-        Tus playas
+        Registro
       </h2>
       {n === 0 ? (
         <div style={{ background: 'var(--card-bg)', border: '1px dashed var(--line)', borderRadius: 6, padding: '2rem 1.5rem', textAlign: 'center' }}>
@@ -112,7 +137,14 @@ export default function CuadernoClient() {
               <Link href={`/playas/${slug}`} style={{ flex: 1, textDecoration: 'none' }}>
                 <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.95rem', color: 'var(--ink)' }}>{v.n}</span>
                 <span style={{ fontSize: '.75rem', color: 'var(--muted)' }}> · {v.m}{v.p ? `, ${v.p}` : ''}</span>
-                {TOP100.has(slug) && <span style={{ fontSize: '.7rem', marginLeft: '.35rem' }} title="Top 100 España 2026">🏆</span>}
+                {TOP100.has(slug) && (
+                  <span title="Top 100 de España 2026" style={{
+                    fontFamily: 'var(--font-mono)', fontSize: '.56rem', letterSpacing: '.08em',
+                    color: 'var(--sello-accent, #6b400a)', border: '1px solid currentColor',
+                    borderRadius: 'var(--r-sello, 3px)', padding: '.05rem .28rem', marginLeft: '.4rem',
+                    verticalAlign: 'middle',
+                  }}>TOP 100</span>
+                )}
               </Link>
               <span style={{ fontSize: '.68rem', color: 'var(--muted)', flexShrink: 0 }}>
                 {new Date(v.ts).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}
