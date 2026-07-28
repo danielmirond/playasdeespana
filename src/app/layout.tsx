@@ -154,7 +154,19 @@ const CRITICAL_CSS = `
 /* Fonts */
 --font-serif:var(--font-playfair,'Playfair Display',Georgia,serif);--font-sans:var(--font-dm-sans,'DM Sans',system-ui,sans-serif);--font-mono:var(--font-mono,'JetBrains Mono',ui-monospace,monospace);
 /* Radii. editorial discreto */
---r-xs:2px;--r-sm:4px;--r-md:6px;--r-lg:10px;--r-xl:16px;--r-pill:999px;
+--r-xs:2px;--r-sm:4px;--r-md:6px;--r-lg:10px;--r-xl:16px;--r-pill:999px;--r-sello:3px;
+/* Certeza del dato (propuesta de diseño 2026, §5.4). Cuatro grados de
+   confianza y una ausencia. El color solo matiza: el peso lo lleva el
+   TRAZO del subrayado, para que se lea en monocromo y sobre fotografía. */
+--cert-medido:#2d5266;--cert-oficial:#3d6b1f;--cert-reportado:#c48a1e;--cert-estimado:#7a6850;--cert-sindato:#a89880;
+--cert-rule-medido:2px solid var(--cert-medido);--cert-rule-oficial:1.5px solid var(--cert-oficial);
+--cert-rule-reportado:1.5px dotted var(--cert-reportado);--cert-rule-estimado:1px dashed var(--cert-estimado);
+--cert-bg-medido:rgba(45,82,102,.08);--cert-bg-oficial:rgba(61,107,31,.08);
+--cert-bg-reportado:rgba(196,138,30,.10);--cert-bg-estimado:rgba(122,104,80,.07);
+/* Cifra destacada: score y mediciones son voz de medio → serif */
+--fs-score:68px;--fs-score-sm:34px;--fs-medicion:26px;
+/* Objetivos táctiles */
+--touch-min:44px;--touch-comfy:48px;
 /* Shadows. muy sutiles */
 --shadow-sm:0 1px 0 rgba(42,26,8,.06),0 1px 2px rgba(42,26,8,.04);
 --shadow-md:0 2px 4px rgba(42,26,8,.06),0 4px 12px rgba(42,26,8,.05);

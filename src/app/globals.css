@@ -75,3 +75,49 @@
 .score-bueno  { border-color: var(--sea-calma,#5a8a7a); color: var(--sea-calma,#5a8a7a); }
 .score-aviso  { border-color: var(--sea-aviso,#c48a1e); color: var(--sea-aviso,#c48a1e); }
 .score-peligro { border-color: var(--sea-peligro,#7a2818); color: var(--sea-peligro,#7a2818); }
+
+/* ── Lenguaje de certeza del dato (propuesta 2026 §5.4) ──────
+   Cuatro grados de confianza y una ausencia. Regla: el color solo
+   matiza; el peso lo lleva el TRAZO del subrayado, para que la
+   gramática funcione en monocromo, sobre fotografía y a 375px.
+   El componente de servidor solo pinta data-cert: cero JS. */
+.dato {
+  font-family: var(--font-serif); font-weight: 700; line-height: 1;
+  display: inline-block; padding-bottom: 3px;
+  font-variant-numeric: tabular-nums;
+}
+.dato[data-cert="medido"]    { border-bottom: var(--cert-rule-medido); }
+.dato[data-cert="oficial"]   { border-bottom: var(--cert-rule-oficial); }
+.dato[data-cert="reportado"] { border-bottom: var(--cert-rule-reportado); }
+.dato[data-cert="estimado"]  { border-bottom: var(--cert-rule-estimado); color: var(--ink-soft); }
+/* Sin dato: "—" en peso normal, sin subrayado y sin conclusión */
+.dato[data-cert="sindato"]   { border-bottom: 0; color: var(--cert-sindato); font-weight: 400; }
+/* Sobre foto el trazo se hace blanco: el color ya no distingue, el patrón sí */
+.dato-ondark, .dato-ondark[data-cert] { color: #fff; border-bottom-color: rgba(255,255,255,.65); }
+
+.dato-u {
+  font-family: var(--font-sans); font-size: .42em; font-weight: 400;
+  color: var(--muted); margin-left: 2px;
+}
+
+/* Insignia de fuente — vive en el hueco derecho del cardHead, que ya
+   es la firma del sitio ("cada bloque dice de dónde viene su dato") */
+.cert-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.cert-badge[data-cert="medido"]    { color: var(--cert-medido);    background: var(--cert-bg-medido); }
+.cert-badge[data-cert="oficial"]   { color: var(--cert-oficial);   background: var(--cert-bg-oficial); }
+.cert-badge[data-cert="reportado"] { color: var(--cert-reportado); background: var(--cert-bg-reportado); }
+.cert-badge[data-cert="estimado"]  { color: var(--cert-estimado);  background: var(--cert-bg-estimado); }
+.cert-badge[data-cert="sindato"]   { color: var(--cert-sindato);   background: transparent; }
+
+/* El glifo: relleno = sensor físico, hueco = modelo. Legible en monocromo */
+.cert-glyph { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.cert-badge[data-cert="medido"]    .cert-glyph { background: currentColor; }
+.cert-badge[data-cert="oficial"]   .cert-glyph { background: currentColor; box-shadow: inset 0 0 0 1.5px var(--surface); }
+.cert-badge[data-cert="reportado"] .cert-glyph { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
+.cert-badge[data-cert="estimado"]  .cert-glyph { background: transparent; box-shadow: inset 0 0 0 1px currentColor; opacity: .6; }
+.cert-badge[data-cert="sindato"]   .cert-glyph { background: transparent; box-shadow: inset 0 0 0 1px currentColor; opacity: .4; }

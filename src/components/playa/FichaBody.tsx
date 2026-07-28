@@ -6,6 +6,7 @@ import type { FotoPlaya } from '@/lib/fotos'
 import type { HotelReal } from '@/lib/hoteles'
 import type { Camping } from '@/lib/campings'
 import type { CentroBuceo } from '@/lib/buceo'
+import { Dato, CertBadge, type Certeza } from './Certeza'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
@@ -94,6 +95,8 @@ interface Props {
   /** Predicción oficial AEMET del día (null sin API key o sin mapeo). */
   aemet?:          import('@/lib/aemet').AemetPlaya | null
   boya?:           import('@/lib/boyas').DatosBoya | null
+  /** Capa que ganó la cascada de bandera — decide la insignia de fuente */
+  certBandera?:    Certeza
   chiringuitos?:   import('@/lib/chiringuitos-playa').ChiringuitoCerca[]
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
@@ -277,7 +280,7 @@ function Reorder({ order, children }: { order: string[]; children: React.ReactNo
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -461,7 +464,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div key="seguridad" className={styles.card} id="s-seguridad">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>{i18n.seguridad(nombreH)}</h2>
-              <span className={styles.cardSrc}>{i18n.seguridadSrc}</span>
+              {/* Insignia de fuente (propuesta 2026 §5.4): el hueco derecho
+                  del cardHead ya es donde el sitio dice de dónde viene cada
+                  bloque. El grado lo marca la capa que ganó la cascada. */}
+              <CertBadge cert={certBandera} locale={locale}>
+                {certBandera === 'oficial' ? (locale === 'en' ? 'LIFEGUARD' : 'SOCORRISMO')
+                  : certBandera === 'reportado' ? (locale === 'en' ? 'BEACHGOERS 24H' : 'BAÑISTAS 24H')
+                  : (locale === 'en' ? 'MODEL' : 'MODELO')}
+              </CertBadge>
             </div>
             <div className={styles.cardBody}>
               {banderaPlaya && (
@@ -482,19 +492,34 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   </div>
                 </div>
               )}
+              {/* BOYA — el único dato MEDIDO por un sensor físico de toda
+                  la ficha. La propuesta 2026 le da tira de métricas propia
+                  con el trazo sólido de "medido" bajo cada cifra. */}
               {boya && boya.hm0 != null && (
-                <div style={{ marginTop:'.9rem', paddingTop:'.75rem', borderTop:'1px dashed var(--line)', fontSize:'.78rem', color:'var(--ink)', lineHeight:1.6 }}>
-                  <strong style={{ fontSize:'.72rem', letterSpacing:'.05em', textTransform:'uppercase', color:'var(--muted)' }}>
-                    {locale === 'en'
-                      ? `Measured by the ${boya.nombre} buoy (${boya.distanciaKm} km away)`
-                      : `Medido por la boya ${boya.nombre} (a ${boya.distanciaKm} km)`}
-                  </strong>
-                  <div>
-                    {locale === 'en' ? 'Waves' : 'Olas'}: <strong>{boya.hm0.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 })} m</strong>
-                    {boya.hmax != null && <> ({locale === 'en' ? 'max' : 'máx'} {boya.hmax.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 })} m)</>}
-                    {boya.tp != null && <> · {locale === 'en' ? 'period' : 'periodo'}: <strong>{Math.round(boya.tp)} s</strong></>}
-                    {boya.tAgua != null && <> · {locale === 'en' ? 'water' : 'agua'}: <strong>{boya.tAgua.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 })}°C</strong></>}
-                    <span style={{ color:'var(--muted)' }}> · {boya.hora} · Puertos del Estado</span>
+                <div style={{ marginTop:'.9rem', paddingTop:'.75rem', borderTop:'1px dashed var(--line)' }}>
+                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:'.5rem', marginBottom:'.6rem', flexWrap:'wrap' }}>
+                    <strong style={{ fontSize:'.72rem', letterSpacing:'.05em', textTransform:'uppercase', color:'var(--muted)' }}>
+                      {locale === 'en' ? 'Measured by a buoy' : 'Medido por boya'}
+                    </strong>
+                    <CertBadge cert="medido" locale={locale}>
+                      {`${boya.nombre} · ${boya.distanciaKm} km`}
+                    </CertBadge>
+                  </div>
+                  <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(84px, 1fr))', gap:'.75rem' }}>
+                    {[
+                      { l: locale === 'en' ? 'Waves' : 'Olas', v: boya.hm0.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: 'm' },
+                      ...(boya.tAgua != null ? [{ l: locale === 'en' ? 'Water' : 'Agua', v: boya.tAgua.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: '°C' }] : []),
+                      ...(boya.tp != null ? [{ l: locale === 'en' ? 'Period' : 'Periodo', v: String(Math.round(boya.tp)), u: 's' }] : []),
+                      ...(boya.hmax != null ? [{ l: locale === 'en' ? 'Max wave' : 'Ola máx', v: boya.hmax.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: 'm' }] : []),
+                    ].map(m => (
+                      <div key={m.l}>
+                        <div style={{ fontFamily:'var(--font-mono)', fontSize:'.6rem', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--muted)', marginBottom:'.3rem' }}>{m.l}</div>
+                        <Dato v={m.v} u={m.u} cert="medido" size={22}/>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', marginTop:'.6rem' }}>
+                    {boya.hora} · Puertos del Estado
                   </div>
                 </div>
               )}

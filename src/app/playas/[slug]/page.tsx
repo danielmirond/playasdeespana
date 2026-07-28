@@ -369,6 +369,10 @@ export default async function PlayaPage({ params }: Props) {
   const aemetData = aemetResult?.status === 'fulfilled' ? aemetResult.value : null
   const SEV = { verde: 0, amarilla: 1, roja: 2 } as const
   let banderaPlaya = banderaEstimada
+  // Qué capa acaba ganando la cascada: alimenta la insignia de fuente de
+  // la ficha (gramática de certeza, propuesta de diseño 2026 §5.4).
+  let certBandera: 'oficial' | 'reportado' | 'estimado' | 'sindato' =
+    banderaEstimada ? 'estimado' : 'sindato'
 
   // Si la estimación meteo no pudo calcularse (fetch caído) pero AEMET SÍ
   // respondió, derivamos la bandera del dato oficial: débil → verde,
@@ -380,6 +384,7 @@ export default async function PlayaPage({ params }: Props) {
           motivo: 'AEMET prevé oleaje débil hoy', motivoEn: 'AEMET forecasts calm sea today', hex: '#22c55e' }
       : { color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
           motivo: `AEMET prevé oleaje ${o} hoy`, motivoEn: `AEMET forecasts ${o === 'fuerte' ? 'rough' : 'moderate'} sea today`, hex: '#f59e0b' }
+    certBandera = 'oficial'
   }
   // Con estimación propia presente, AEMET solo ELEVA (oleaje fuerte → amarilla mín.)
   if (aemetData?.hoy?.oleaje === 'fuerte' && (!banderaPlaya || SEV[banderaPlaya.color] < 1)) {
@@ -388,6 +393,7 @@ export default async function PlayaPage({ params }: Props) {
       motivo: 'AEMET prevé oleaje fuerte hoy', motivoEn: 'AEMET forecasts rough sea today',
       hex: '#f59e0b',
     }
+    certBandera = 'oficial'
   }
   // Bandera OFICIAL izada (Cataluña): es la bandera física del mástil,
   // reportada hoy por el propio socorrismo → REEMPLAZA a estimación y
@@ -395,7 +401,7 @@ export default async function PlayaPage({ params }: Props) {
   // estimada). Los reportes de bañistas, más recientes que el parte de
   // la mañana, conservan su derecho a ELEVARLA más abajo.
   const oficialCat = banderaCatResult?.status === 'fulfilled' ? banderaCatResult.value : null
-  if (oficialCat?.bandera) banderaPlaya = oficialCat.bandera
+  if (oficialCat?.bandera) { banderaPlaya = oficialCat.bandera; certBandera = 'oficial' }
 
   // Boya de Puertos del Estado: dato MEDIDO (sensor físico), solo display.
   const boyaData = boyaResult?.status === 'fulfilled' ? boyaResult.value : null
@@ -415,6 +421,7 @@ export default async function PlayaPage({ params }: Props) {
       motivoEn: 'Flying according to beachgoers (last 24 h)',
       hex: repFlag === 'roja' ? '#ef4444' : '#f59e0b',
     }
+    certBandera = 'reportado'
   }
   // Medusas — cascada de tres niveles, espejo de la de banderas:
   //   1. Avistamiento OFICIAL del socorrismo (Cataluña, con especie)
@@ -595,6 +602,7 @@ export default async function PlayaPage({ params }: Props) {
         banderaPlaya={banderaPlaya}
         aemet={aemetData}
         boya={boyaData}
+        certBandera={certBandera}
         chiringuitos={chiringuitos}
         medusas={medusas}
         mareasLunar={mareasLunar}
