@@ -1,0 +1,97 @@
+/* ListaPOI — sistema unificado de tarjetas de listado (propuesta 2026 §5.3).
+   Una rejilla de tres columnas resuelve los cinco listados de la ficha:
+   [ medio opcional ] [ nombre + metadatos ] [ nota / distancia ] */
+
+.lista { display: flex; flex-direction: column; }
+
+.fila {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .75rem;
+  align-items: center;
+  min-height: var(--touch-min, 44px);
+  padding: .75rem .9rem;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Sin ranura de medio la fila colapsa a dos columnas */
+.fila[data-medio='no'] { grid-template-columns: minmax(0, 1fr) auto; }
+.fila:first-child { border-top: none; }
+.fila:hover { background: var(--surface-2, #f5ede0); }
+
+/* ── Ranura de medio: foto O icono, nunca las dos ───────────────── */
+.foto {
+  width: 48px; height: 48px; flex-shrink: 0;
+  border-radius: var(--r-sm, 4px);
+  border: 1px solid var(--line);
+  background-color: var(--surface-2, #f5ede0);
+  background-size: cover;
+  background-position: center;
+}
+.icono {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: var(--r-sm, 4px);
+  border: 1px solid var(--line);
+  background: var(--surface-2, #f5ede0);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-soft, #5a3d12);
+}
+
+/* ── Nombre y metadatos ─────────────────────────────────────────── */
+.info { min-width: 0; }
+.nombre {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.meta {
+  display: block;
+  font-size: .78rem;
+  color: var(--muted);
+  margin-top: .12rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── Columna derecha: nota sobre distancia, siempre alineadas ───── */
+.derecha {
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: .18rem; flex-shrink: 0;
+}
+.nota { display: flex; align-items: baseline; gap: .25rem; }
+/* La nota es dato REPORTADO por terceros (Google): trazo punteado, la
+   misma gramática de certeza que el resto de la ficha. */
+.notaCifra {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--ink);
+  border-bottom: var(--cert-rule-reportado, 1.5px dotted #c48a1e);
+  padding-bottom: 1px;
+  font-variant-numeric: tabular-nums;
+}
+.notaResenas {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  color: var(--muted);
+}
+.distancia {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .fila { padding: .65rem .75rem; gap: .6rem; }
+  .foto { width: 40px; height: 40px; }
+  .icono { width: 34px; height: 34px; }
+  .nombre { font-size: .92rem; }
+  .meta { font-size: .72rem; }
+}

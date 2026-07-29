@@ -7,6 +7,7 @@ import type { HotelReal } from '@/lib/hoteles'
 import type { Camping } from '@/lib/campings'
 import type { CentroBuceo } from '@/lib/buceo'
 import { Dato, CertBadge, type Certeza } from './Certeza'
+import ListaPOI from './ListaPOI'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
@@ -863,55 +864,43 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </span>
           </div>
           <div className={styles.cardBody}>
-            <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
-            <div className={styles.list}>
-              {restList ? restList.slice(0, 5).map((r: any) => {
-                const mapsUrl = r.googleId ? `https://www.google.com/maps/place/?q=place_id:${r.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(r.nombre)}`
-                return (
-                  <div key={r.id ?? r.nombre} className={styles.listItem}>
-                    <ForkKnife size={16} weight='bold' style={{color:'var(--accent,#6b400a)'}}/> 
-                    <div className={styles.listInfo}>
-                      <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
-                        <div className={styles.listNombre}>{r.nombre}</div>
-                      </a>
-                      <div className={styles.listMeta}>
-                        {r.tipo} · {r.distancia_m}m · {r.precio}
-                        {r.reseñas > 0 && <span style={{ color:'#5a3d12' }}> · {r.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} {i18n.resenas}</span>}
-                        {r.horario && <span style={{ color: r.horario === 'Abierto ahora' ? '#3d6b1f' : '#7a2818', marginLeft:'6px' }}>· {r.horario}</span>}
-                      </div>
-                      {r.resena && <div style={{ fontSize:'.75rem', color:'#6b5a3e', fontStyle:'italic', marginTop:'4px', lineHeight:'1.4' }}>"{r.resena}"</div>}
-                      {(r.website || r.telefono) && (
-                        <div style={{ display:'flex', gap:'8px', marginTop:'6px', flexWrap:'wrap' }}>
-                          {r.website && <a href={r.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', background:'#6b400a', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
-                          {r.telefono && <a href={`tel:${r.telefono}`} style={{ fontSize:'.75rem', background:'rgba(107,64,10,.12)', color:'#6b400a', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(107,64,10,.3)' }}>{r.telefono}</a>}
-                        </div>
-                      )}
-                    </div>
-                    {/* Sin "Ver →": el nombre ya abre el mismo Google Maps
-                        y tener dos enlaces idénticos por fila era ruido. */}
-                    <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:'4px', flexShrink:0 }}>
-                      {r.rating > 0 && <span className={styles.rating}>{r.rating}</span>}
-                    </div>
-                  </div>
-                )
-              }) : loadingCercanos ? (
-                <div role="status" aria-live="polite" style={{ padding:'1rem 0', textAlign:'center' }}>
-                  <p style={{ fontSize:'.82rem', color:'var(--muted)' }}>
-                    {locale === 'en' ? 'Loading nearby restaurants…' : 'Buscando restaurantes cercanos…'}
-                  </p>
-                </div>
-              ) : (
-                <div style={{ padding:'1rem 0', textAlign:'center' }}>
-                  <p style={{ fontSize:'.82rem', color:'var(--muted)', marginBottom:'.75rem' }}>
-                    {locale === 'en' ? 'No restaurants found nearby' : 'No se encontraron restaurantes cercanos'}
-                  </p>
-                  <a href={`https://www.google.com/maps/search/restaurantes/@${playa.lat},${playa.lng},15z`} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
-                    {locale === 'en' ? 'Search on Google Maps →' : 'Buscar en Google Maps →'}
-                  </a>
-                </div>
-              )}
-            </div>
-            </Collapsible>
+            {restList ? (
+              <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
+                <ListaPOI
+                  variante="photo"
+                  locale={locale}
+                  iconoFallback={<ForkKnife size={18} weight="bold" />}
+                  items={restList.slice(0, 6).map((r: any) => ({
+                    id: String(r.id ?? r.nombre),
+                    nombre: r.nombre,
+                    meta: [r.tipo, r.precio, r.horario].filter(Boolean).join(' · '),
+                    distancia: `${r.distancia_m} m`,
+                    rating: r.rating,
+                    reseñas: r.reseñas,
+                    foto: r.foto,
+                    href: r.googleId
+                      ? `https://www.google.com/maps/place/?q=place_id:${r.googleId}`
+                      : `https://www.google.com/maps/search/${encodeURIComponent(r.nombre)}`,
+                    externo: true,
+                  }))}
+                />
+              </Collapsible>
+            ) : loadingCercanos ? (
+              <div role="status" aria-live="polite" style={{ padding:'1rem 0', textAlign:'center' }}>
+                <p style={{ fontSize:'.82rem', color:'var(--muted)' }}>
+                  {locale === 'en' ? 'Loading nearby restaurants…' : 'Buscando restaurantes cercanos…'}
+                </p>
+              </div>
+            ) : (
+              <div style={{ padding:'1rem 0', textAlign:'center' }}>
+                <p style={{ fontSize:'.82rem', color:'var(--muted)', marginBottom:'.75rem' }}>
+                  {locale === 'en' ? 'No restaurants found nearby' : 'No se encontraron restaurantes cercanos'}
+                </p>
+                <a href={`https://www.google.com/maps/search/restaurantes/@${playa.lat},${playa.lng},15z`} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
+                  {locale === 'en' ? 'Search on Google Maps →' : 'Buscar en Google Maps →'}
+                </a>
+              </div>
+            )}
           </div>
         </div>
         {/* CHIRINGUITOS — sidecar Google Places (cosecha jul-2026), solo
@@ -924,31 +913,23 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <span className={styles.cardSrc}>{i18n.chiringuitosSrc}</span>
             </div>
             <div className={styles.cardBody}>
-              <div className={styles.list}>
-                {chiringuitos.map(c => {
-                  const mapsUrl = `https://www.google.com/maps/place/?q=place_id:${c.googleId}`
-                  return (
-                    <div key={c.googleId} className={styles.listItem}>
-                      {/* Martini, no SunHorizon: el atardecer no dice
-                          "chiringuito" y se confundía con el bloque de
-                          amanecer/atardecer de más arriba. */}
-                      <Martini size={16} weight='bold' style={{color:'var(--accent,#6b400a)'}}/>
-                      <div className={styles.listInfo}>
-                        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
-                          <div className={styles.listNombre}>{c.nombre}</div>
-                        </a>
-                        <div className={styles.listMeta}>
-                          {c.distancia_m}m
-                          {c.reseñas > 0 && <span style={{ color:'#5a3d12' }}> · {c.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} {i18n.resenas}</span>}
-                        </div>
-                      </div>
-                      <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:'4px', flexShrink:0 }}>
-                        {c.rating > 0 && <span className={styles.rating}>{c.rating}</span>}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+              {/* variante rating: aquí la nota ES el criterio y la foto no
+                  aporta nada — un chiringuito se elige por reseñas. */}
+              <ListaPOI
+                variante="rating"
+                locale={locale}
+                items={chiringuitos.map(c => ({
+                  id: c.googleId,
+                  nombre: c.nombre,
+                  meta: c.reseñas > 0
+                    ? `${c.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} ${i18n.resenas}`
+                    : undefined,
+                  distancia: `${c.distancia_m} m`,
+                  rating: c.rating,
+                  href: `https://www.google.com/maps/place/?q=place_id:${c.googleId}`,
+                  externo: true,
+                }))}
+              />
               <div style={{ marginTop:'.75rem' }}>
                 <Link href={`/chiringuitos/${chiringuitos[0].provSlug}`} style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
                   {i18n.chiringuitosTodos(chiringuitos[0].provincia)}
@@ -963,56 +944,48 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <span className={styles.cardSrc}>{clientHoteles && clientHoteles.length > 0 ? (clientHoteles[0]?.source === 'google' ? 'Google Places' : i18n.dormirSrc) : ''}</span>
           </div>
           <div className={styles.cardBody}>
-            <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
-            <div className={styles.list}>
-              {clientHoteles && clientHoteles.length > 0 ? clientHoteles.map((h: any) => {
-                const mapsUrl = h.googleId ? `https://www.google.com/maps/place/?q=place_id:${h.googleId}` : `https://www.google.com/maps/search/${encodeURIComponent(h.nombre)}`
-                return (
-                  <div key={h.id} className={styles.hotelItem}>
-                    <div
-                      className={styles.hotelFoto}
-                      role={h.foto ? 'img' : undefined}
-                      aria-label={h.foto ? (locale === 'en' ? `Photo of ${h.nombre}` : `Foto de ${h.nombre}`) : undefined}
-                      style={h.foto ? { backgroundImage:`url(${h.foto})`, backgroundSize:'cover', backgroundPosition:'center' } : {}}
-                    >
-                      {!h.foto && <Bed size={22} color='var(--muted,#5a3d12)' aria-hidden="true"/>}
-                    </div>
-                    <div className={styles.listInfo}>
-                      <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none', color:'inherit' }}>
-                        <div className={styles.listNombre}>{h.nombre}</div>
-                      </a>
-                      {/* Sin categoría conocida (OSM sin tag stars) no pintamos
-                          5 estrellas vacías: era ruido visual en móvil. */}
-                      {h.estrellas > 0 && <div className={styles.hotelStars}>{'★'.repeat(Math.min(h.estrellas,5))}{'☆'.repeat(Math.max(0,5-h.estrellas))}</div>}
-                      <div className={styles.listMeta}>{h.distancia_m}m{h.rating > 0 && <span> · <Star size={12} weight="fill" color="#f5a623" style={{verticalAlign:'middle'}}/> {h.reseñas > 0 ? `${h.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} ${i18n.resenas}` : ''}</span>}{h.precio && <span> · {h.precio}</span>}</div>
-                      {(h.website || h.telefono) && (
-                        <div style={{ display:'flex', gap:'8px', marginTop:'6px' }}>
-                          {h.website && <a href={h.website} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.75rem', background:'#6b400a', color:'#fff', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600 }}>Web</a>}
-                          {h.telefono && <a href={`tel:${h.telefono}`} style={{ fontSize:'.75rem', background:'rgba(107,64,10,.12)', color:'#6b400a', padding:'3px 8px', borderRadius:'4px', textDecoration:'none', fontWeight:600, border:'1px solid rgba(107,64,10,.3)' }}>{h.telefono}</a>}
-                        </div>
-                      )}
-                    </div>
-                    {h.rating > 0 && <span className={styles.rating}>{h.rating}</span>}
-                  </div>
-                )
-              }) : loadingCercanos ? (
-                <div role="status" aria-live="polite" style={{ padding:'1rem 0', textAlign:'center' }}>
-                  <p style={{ fontSize:'.82rem', color:'var(--muted)' }}>
-                    {locale === 'en' ? 'Loading nearby hotels…' : 'Buscando hoteles cercanos…'}
-                  </p>
-                </div>
-              ) : (
-                <div style={{ padding:'1rem 0', textAlign:'center' }}>
-                  <p style={{ fontSize:'.82rem', color:'var(--muted)', marginBottom:'.75rem' }}>
-                    {locale === 'en' ? 'No hotels found nearby' : 'No se encontraron hoteles cercanos'}
-                  </p>
-                  <a href={`https://www.google.com/maps/search/hoteles/@${playa.lat},${playa.lng},14z`} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
-                    {locale === 'en' ? 'Search on Google Maps →' : 'Buscar en Google Maps →'}
-                  </a>
-                </div>
-              )}
-            </div>
-            </Collapsible>
+            {clientHoteles && clientHoteles.length > 0 ? (
+              <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
+                <ListaPOI
+                  variante="photo"
+                  locale={locale}
+                  iconoFallback={<Bed size={18} weight="bold" />}
+                  items={clientHoteles.map((h: any) => ({
+                    id: String(h.id ?? h.nombre),
+                    nombre: h.nombre,
+                    // Las estrellas solo si OSM/Places las conocen: dato
+                    // estructural ausente se OMITE, no se pinta "—".
+                    meta: [
+                      h.estrellas > 0 ? '★'.repeat(Math.min(h.estrellas, 5)) : null,
+                      h.precio,
+                    ].filter(Boolean).join(' · ') || undefined,
+                    distancia: h.distancia_m >= 1000 ? `${(h.distancia_m / 1000).toFixed(1)} km` : `${h.distancia_m} m`,
+                    rating: h.rating,
+                    reseñas: h.reseñas,
+                    foto: h.foto,
+                    href: h.googleId
+                      ? `https://www.google.com/maps/place/?q=place_id:${h.googleId}`
+                      : `https://www.google.com/maps/search/${encodeURIComponent(h.nombre)}`,
+                    externo: true,
+                  }))}
+                />
+              </Collapsible>
+            ) : loadingCercanos ? (
+              <div role="status" aria-live="polite" style={{ padding:'1rem 0', textAlign:'center' }}>
+                <p style={{ fontSize:'.82rem', color:'var(--muted)' }}>
+                  {locale === 'en' ? 'Loading nearby hotels…' : 'Buscando hoteles cercanos…'}
+                </p>
+              </div>
+            ) : (
+              <div style={{ padding:'1rem 0', textAlign:'center' }}>
+                <p style={{ fontSize:'.82rem', color:'var(--muted)', marginBottom:'.75rem' }}>
+                  {locale === 'en' ? 'No hotels found nearby' : 'No se encontraron hoteles cercanos'}
+                </p>
+                <a href={`https://www.google.com/maps/search/hoteles/@${playa.lat},${playa.lng},14z`} target="_blank" rel="noopener noreferrer" style={{ fontSize:'.78rem', color:'var(--accent)', fontWeight:600, textDecoration:'none' }}>
+                  {locale === 'en' ? 'Search on Google Maps →' : 'Buscar en Google Maps →'}
+                </a>
+              </div>
+            )}
           </div>
         </div>
 
@@ -1030,69 +1003,27 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <span className={styles.cardSrc}>OpenStreetMap</span>
             </div>
             <div className={styles.cardBody}>
-              <div className={styles.list}>
-                {clientCampings.map(c => {
-                  const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(c.nombre)}/@${c.lat},${c.lon},15z`
-                  return (
-                    <div key={c.id} className={styles.listItem}>
-                      <div style={{
-                        width: 44, height: 44, borderRadius: 4, flexShrink: 0,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        background: 'rgba(61,107,31,.1)', color: '#3d6b1f', fontSize: '1.5rem',
-                      }} aria-hidden="true">⛺</div>
-                      <div className={styles.listInfo}>
-                        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                          <div className={styles.listNombre}>{c.nombre}</div>
-                        </a>
-                        <div style={{ fontSize: '.66rem', color: '#3d6b1f', fontWeight: 700, marginTop: '.1rem' }}>
-                          {c.tipo}
-                          {c.categoria > 0 && (
-                            <span style={{ marginLeft: '.35rem', color: 'var(--muted,#5a3d12)' }}>
-                              · {'★'.repeat(Math.min(c.categoria, 5))}
-                            </span>
-                          )}
-                        </div>
-                        <div className={styles.listMeta}>
-                          {c.distancia_m >= 1000 ? `${(c.distancia_m/1000).toFixed(1)} km` : `${c.distancia_m} m`}
-                          {c.autocaravanas && <span> · {locale === 'en' ? 'Motorhomes' : 'Autocaravanas'}</span>}
-                          {c.tiendas && <span> · {locale === 'en' ? 'Tents' : 'Tiendas'}</span>}
-                          {c.bungalows && <span> · {locale === 'en' ? 'Bungalows' : 'Bungalows'}</span>}
-                          {c.perros && <span> · {locale === 'en' ? 'Dog-friendly' : 'Admite perros'}</span>}
-                        </div>
-                        {c.servicios.length > 0 && (
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginTop: '.35rem' }}>
-                            {c.servicios.slice(0, 5).map(s => (
-                              <span key={s} style={{
-                                fontSize: '.62rem', padding: '.1rem .4rem',
-                                background: 'rgba(107,64,10,.08)',
-                                color: '#4a2c05',
-                                borderRadius: 4, fontWeight: 500,
-                              }}>{s}</span>
-                            ))}
-                          </div>
-                        )}
-                        {(c.website || c.telefono) && (
-                          <div style={{ display: 'flex', gap: '.5rem', marginTop: '.5rem', flexWrap: 'wrap' }}>
-                            {c.website && (
-                              <a href={c.website} target="_blank" rel="noopener noreferrer"
-                                style={{ fontSize: '.7rem', background: '#3d6b1f', color: '#fff', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600 }}>
-                                Web
-                              </a>
-                            )}
-                            {c.telefono && (
-                              <a href={`tel:${c.telefono}`}
-                                style={{ fontSize: '.7rem', background: 'rgba(61,107,31,.1)', color: '#166534', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600, border: '1px solid rgba(34,197,94,.3)' }}>
-                                {c.telefono}
-                              </a>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-
+              {/* variante icon: un camping es una decisión funcional —
+                  el icono identifica la categoría y la foto no aporta. */}
+              <ListaPOI
+                variante="icon"
+                locale={locale}
+                items={clientCampings.map(c => ({
+                  id: String(c.id),
+                  nombre: c.nombre,
+                  meta: [
+                    c.tipo,
+                    c.categoria > 0 ? '★'.repeat(Math.min(c.categoria, 5)) : null,
+                    c.autocaravanas ? (locale === 'en' ? 'Motorhomes' : 'Autocaravanas') : null,
+                    c.tiendas ? (locale === 'en' ? 'Tents' : 'Tiendas') : null,
+                    c.perros ? (locale === 'en' ? 'Dog-friendly' : 'Admite perros') : null,
+                  ].filter(Boolean).join(' · '),
+                  distancia: c.distancia_m >= 1000 ? `${(c.distancia_m / 1000).toFixed(1)} km` : `${c.distancia_m} m`,
+                  icono: <Car size={18} weight="bold" />,
+                  href: `https://www.google.com/maps/search/${encodeURIComponent(c.nombre)}/@${c.lat},${c.lon},15z`,
+                  externo: true,
+                }))}
+              />
             </div>
           </div>
         )}
@@ -1108,49 +1039,21 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <span className={styles.cardSrc}>OpenStreetMap</span>
             </div>
             <div className={styles.cardBody}>
-              <div className={styles.list}>
-                {clientBuceo.map(c => {
-                  const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(c.nombre)}/@${c.lat},${c.lon},15z`
-                  return (
-                    <div key={c.id} className={styles.listItem}>
-                      <div style={{
-                        width: 44, height: 44, borderRadius: 4, flexShrink: 0,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        background: 'rgba(8,145,178,.12)', color: '#0891b2', fontSize: '1.3rem',
-                      }} aria-hidden="true"><Fish size={22} weight="bold" /></div>
-                      <div className={styles.listInfo}>
-                        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                          <div className={styles.listNombre}>{c.nombre}</div>
-                        </a>
-                        <div style={{ fontSize: '.66rem', color: '#0891b2', fontWeight: 700, marginTop: '.1rem' }}>
-                          {c.tipo}
-                          {c.certificacion && <span style={{ marginLeft: '.35rem', background: '#0891b222', padding: '.1rem .35rem', borderRadius: 4, fontSize: '.6rem' }}>{c.certificacion}</span>}
-                        </div>
-                        <div className={styles.listMeta}>
-                          {c.distancia_m >= 1000 ? `${(c.distancia_m/1000).toFixed(1)} km` : `${c.distancia_m} m`}
-                        </div>
-                        {c.servicios.length > 0 && (
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginTop: '.35rem' }}>
-                            {c.servicios.slice(0, 4).map(s => (
-                              <span key={s} style={{
-                                fontSize: '.62rem', padding: '.1rem .4rem',
-                                background: 'rgba(8,145,178,.08)', color: '#0e7490',
-                                borderRadius: 4, fontWeight: 500,
-                              }}>{s}</span>
-                            ))}
-                          </div>
-                        )}
-                        {(c.website || c.telefono) && (
-                          <div style={{ display: 'flex', gap: '.5rem', marginTop: '.5rem', flexWrap: 'wrap' }}>
-                            {c.website && <a href={c.website} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.7rem', background: '#0891b2', color: '#fff', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600 }}>Web</a>}
-                            {c.telefono && <a href={`tel:${c.telefono}`} style={{ fontSize: '.7rem', background: 'rgba(8,145,178,.12)', color: '#0e7490', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600, border: '1px solid rgba(8,145,178,.3)' }}>{c.telefono}</a>}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+              {/* variante plain: aquí solo hay nombre, tipo y distancia —
+                  sin nota de terceros ni foto que aporte. */}
+              <ListaPOI
+                variante="plain"
+                locale={locale}
+                items={clientBuceo.map(c => ({
+                  id: String(c.id),
+                  nombre: c.nombre,
+                  meta: [c.tipo, c.certificacion, ...c.servicios.slice(0, 2)]
+                    .filter(Boolean).join(' · '),
+                  distancia: c.distancia_m >= 1000 ? `${(c.distancia_m / 1000).toFixed(1)} km` : `${c.distancia_m} m`,
+                  href: `https://www.google.com/maps/search/${encodeURIComponent(c.nombre)}/@${c.lat},${c.lon},15z`,
+                  externo: true,
+                }))}
+              />
             </div>
           </div>
         )}
