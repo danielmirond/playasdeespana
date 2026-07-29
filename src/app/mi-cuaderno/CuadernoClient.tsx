@@ -33,10 +33,33 @@ export default function CuadernoClient() {
   const comunidades = new Set(visitas.map(([, v]) => v.c).filter(Boolean)).size
   const conseguidas = insignias.filter(i => i.progreso === null)
 
+  // La imagen compartible se genera en el borde con los datos del
+  // cuaderno en la query: el cuaderno vive en localStorage, así que el
+  // servidor no puede saberlos de otra forma. Solo viajan los que ya se
+  // van a ver impresos — nombre, provincia y fecha del sello.
+  function urlImagen(): string {
+    const p = new URLSearchParams()
+    p.set('n', String(n))
+    p.set('c', String(comunidades))
+    p.set('p', String(provincias))
+    const fechas = visitas.map(([, v]) => v.ts).sort((a, b) => a - b)
+    if (fechas.length) {
+      const fmt = (t: number) => new Date(t).toLocaleDateString('es-ES', { month: 'short', year: '2-digit' }).replace('.', '')
+      const desde = fmt(fechas[0]), hasta = fmt(fechas[fechas.length - 1])
+      p.set('t', desde === hasta ? desde : `${desde} – ${hasta}`)
+    }
+    // Los seis sellos más recientes: es lo que cabe en la hoja
+    for (const [, v] of visitas.slice(0, 6)) {
+      const f = new Date(v.ts).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '·')
+      p.append('s', `${v.n}|${v.p}|${f}`)
+    }
+    return `https://playas-espana.com/api/og/cuaderno?${p.toString()}`
+  }
+
   function compartir() {
     const texto = n === 0
-      ? 'Estoy empezando mi cuaderno de playas de España 🏖️'
-      : `Llevo ${n} playa${n === 1 ? '' : 's'} de España en mi cuaderno 🏖️ (${provincias} provincia${provincias === 1 ? '' : 's'}) y ${conseguidas.length} insignia${conseguidas.length === 1 ? '' : 's'}. ¿Cuántas llevas tú?`
+      ? 'Estoy empezando mi cuaderno de playas de España'
+      : `Llevo ${n} playa${n === 1 ? '' : 's'} de España en mi cuaderno (${provincias} provincia${provincias === 1 ? '' : 's'}) y ${conseguidas.length} insignia${conseguidas.length === 1 ? '' : 's'}. ¿Cuántas llevas tú?`
     const url = 'https://playas-espana.com/mi-cuaderno'
     if (navigator.share) navigator.share({ title: 'Mi cuaderno de playas', text: texto, url }).catch(() => {})
     else navigator.clipboard?.writeText(`${texto}\n${url}`).catch(() => {})
@@ -67,6 +90,22 @@ export default function CuadernoClient() {
       }}>
         ↗ Compartir mi cuaderno
       </button>
+      {n > 0 && (
+        <a
+          href={urlImagen()}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '.4rem',
+            padding: '.6rem 1.2rem', borderRadius: 99,
+            border: '1px solid var(--line-strong)', color: 'var(--ink)',
+            fontWeight: 600, fontSize: '.85rem', textDecoration: 'none',
+            marginLeft: '.5rem', marginBottom: '2.5rem',
+          }}
+        >
+          Descargar imagen
+        </a>
+      )}
 
       {/* Hoja de sellos — el cuaderno propiamente dicho */}
       {n > 0 && (
