@@ -59,7 +59,7 @@ const PEXELS_KEY   = process.env.PEXELS_API_KEY ?? ''
 export interface FotoPlaya {
   url:    string
   thumb:  string
-  fuente: 'unsplash' | 'wikimedia' | 'flickr' | 'openverse' | 'pexels'
+  fuente: 'unsplash' | 'wikimedia' | 'flickr' | 'openverse' | 'pexels' | 'generica'
   autor?: string
 }
 
@@ -1020,6 +1020,7 @@ function cacheKeyLegacy(lat: number, lon: number): string {
 
 async function getFotosUncached(
   nombre: string, municipio: string, lat: number, lon: number, provincia: string,
+  estado?: string,
 ): Promise<FotoPlaya[]> {
   // CAUSA RAÍZ de los timeouts SSG en Vercel: esta cascada de hasta 7 APIs
   // externas, con la caché KV fría durante `next build`, superaba los 60s por
@@ -1096,6 +1097,18 @@ async function getFotosUncached(
   if (combinadas.length < 6) agregar(flickr)
   if (combinadas.length < 6) agregar(pexels)
   if (combinadas.length < 6) agregar(unsplash)
+
+  // ÚLTIMO ESCALÓN: genérica bonita por estado del mar. Endurecer la
+  // validación deja playas sin foto verificable, y una ficha desnuda no
+  // ayuda a nadie. Pero se marca `fuente: 'generica'` para que quien la
+  // pinte sepa que NO es esta playa: nada de alt diciendo "Playa X", ni
+  // usarla en listados donde el usuario compara. Es ambiente, no dato —
+  // la misma regla que rige el resto del sitio.
+  if (combinadas.length === 0) {
+    for (const url of poolFor(estado)) {
+      combinadas.push({ url, thumb: url, fuente: 'generica' })
+    }
+  }
 
   return combinadas.slice(0, 6)
 }
