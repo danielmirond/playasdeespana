@@ -134,6 +134,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (playa.bandera) ogImage.searchParams.set('azul', 'true')
   ogImage.searchParams.set('comunidad', playa.comunidad)
   if (cal?.nivel) ogImage.searchParams.set('calidad', cal.nivel)
+  // Foto real en la tarjeta social. getFotos es offline-first (sidecar
+  // pre-resuelto sin red ni KV) y el cuerpo de la página ya la pide, así
+  // que aquí no añade coste. Si no hay foto resuelta, la OG cae a la
+  // ilustración de siempre.
+  try {
+    const fotos = await getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia, slug)
+    const url = fotos?.[0]?.url
+    if (url && url.startsWith('https://')) ogImage.searchParams.set('foto', url)
+  } catch { /* sin foto, la OG se dibuja igual */ }
 
   const ogUrl = ogImage.toString()
 
@@ -428,6 +437,23 @@ export default async function PlayaPage({ params }: Props) {
   //   1. Avistamiento OFICIAL del socorrismo (Cataluña, con especie)
   //   2. Reportes de bañistas de las últimas 24 h ("he visto medusas")
   //   3. Estimación estacional por modelo (fallback)
+  // Viento reportado por bañistas: el botón "mucho viento" existía desde
+  // el principio, pero sus votos solo pintaban un chip en el hero y no
+  // llegaban a la tarjeta de seguridad, donde sí llegan bandera y
+  // medusas. Un aviso de viento en la playa es tan accionable como los
+  // otros dos — sobre todo con sombrilla.
+  const vientoReportado = reportesData && reportesData.mucho_viento > 0
+    ? {
+        n: reportesData.mucho_viento,
+        detalle: reportesData.mucho_viento === 1
+          ? 'Un bañista avisa de mucho viento en esta playa (últimas 24 h).'
+          : `${reportesData.mucho_viento} bañistas avisan de mucho viento en esta playa (últimas 24 h).`,
+        detalleEn: reportesData.mucho_viento === 1
+          ? 'One beachgoer reports strong wind at this beach (last 24 h).'
+          : `${reportesData.mucho_viento} beachgoers report strong wind at this beach (last 24 h).`,
+      }
+    : null
+
   let medusas = oficialCat?.medusas ?? null
   if (!medusas && reportesData && reportesData.medusas > 0) {
     const n = reportesData.medusas
@@ -607,6 +633,7 @@ export default async function PlayaPage({ params }: Props) {
         aemet={aemetData}
         boya={boyaData}
         certBandera={certBandera}
+        vientoReportado={vientoReportado}
         chiringuitos={chiringuitos}
         medusas={medusas}
         mareasLunar={mareasLunar}

@@ -47,6 +47,14 @@ export async function GET(req: NextRequest) {
   const calidad   = sp.get('calidad')
   const scoreStr  = sp.get('score')
   const azul      = sp.get('azul') === 'true'
+  // Foto real de la playa. Con foto, la tarjeta social gana muchísimo:
+  // la ilustración abstracta queda como respaldo para las fichas sin
+  // imagen. Solo aceptamos https, para no inyectar orígenes raros.
+  const fotoRaw   = sp.get('foto')
+  const foto      = fotoRaw && /^https:\/\//.test(fotoRaw) ? fotoRaw : null
+  // Sobre foto el texto va en blanco con sombra; sin foto, tinta sobre arena.
+  const tinta     = foto ? '#ffffff' : '#2a1a08'
+  const sombra    = foto ? '0 2px 14px rgba(0,0,0,0.45)' : undefined
 
   const score = scoreStr ? parseInt(scoreStr, 10) : null
   const verdict = score != null ? verdictFor(score) : verdictFromCalidad(calidad)
@@ -67,6 +75,16 @@ export async function GET(req: NextRequest) {
     playa.length > 14 ? 98 :
                         110
 
+  // El título está posicionado en absoluto y envuelve según su largo, así
+  // que el antetítulo y el score no pueden vivir en un `top` fijo: con un
+  // nombre de dos líneas se los comía. Estimamos las líneas por ancho de
+  // caja (720px) y bajamos ambos bloques lo que haga falta.
+  const porLinea   = Math.max(8, Math.floor(720 / (titleSize * 0.48)))
+  const lineas     = Math.max(1, Math.ceil(playa.length / porLinea))
+  const finTitulo  = 224 + lineas * titleSize * 1.02
+  const topEyebrow = Math.round(finTitulo + 26)
+  const topScore   = Math.round(finTitulo + 56)
+
   return new ImageResponse(
     (
       <div
@@ -81,8 +99,21 @@ export async function GET(req: NextRequest) {
           overflow: 'hidden',
         }}
       >
-        {/* Decoración: playa ilustrada abstracta a la derecha */}
-        <div style={{
+        {/* Foto real a sangre + degradado editorial. Mismo criterio que
+            el hero de la ficha: la foto es el gancho, el degradado
+            protege la legibilidad del texto. */}
+        {foto && (
+          <div style={{ position: 'absolute', top: 0, left: 0, width: 1200, height: 630, display: 'flex' }}>
+            <img src={foto} width={1200} height={630} style={{ objectFit: 'cover' }} alt="" />
+            <div style={{
+              position: 'absolute', top: 0, left: 0, width: 1200, height: 630, display: 'flex',
+              background: 'linear-gradient(90deg, rgba(26,15,4,0.96) 0%, rgba(26,15,4,0.93) 38%, rgba(26,15,4,0.72) 66%, rgba(26,15,4,0.42) 100%)',
+            }}/>
+          </div>
+        )}
+
+        {/* Decoración: playa ilustrada abstracta a la derecha. Solo sin foto. */}
+        {!foto && <div style={{
           position: 'absolute',
           right: 0, top: 0,
           width: 540, height: 360,
@@ -105,7 +136,7 @@ export async function GET(req: NextRequest) {
             <circle cx="240" cy="18" r="6" fill="#f5ecd5" stroke="#2a1a08" strokeWidth="1.5"/>
             <circle cx="240" cy="18" r="2" fill="#6b400a"/>
           </svg>
-        </div>
+        </div>}
 
         {/* Logo arriba-izquierda */}
         <div style={{
@@ -122,7 +153,8 @@ export async function GET(req: NextRequest) {
             fontStyle: 'italic',
             fontSize: 30,
             fontWeight: 700,
-            color: '#2a1a08',
+            color: tinta,
+            textShadow: sombra,
             display: 'flex',
           }}>playas de España</span>
         </div>
@@ -153,7 +185,7 @@ export async function GET(req: NextRequest) {
             fontWeight: 500,
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            color: '#7a6858',
+            color: foto ? 'rgba(255,255,255,0.82)' : '#7a6858',
           }}>
             {municipio}
           </div>
@@ -167,7 +199,8 @@ export async function GET(req: NextRequest) {
           fontFamily: 'Georgia, serif',
           fontSize: titleSize,
           fontWeight: 700,
-          color: '#2a1a08',
+          color: tinta,
+          textShadow: sombra,
           lineHeight: 1.02,
           letterSpacing: '-0.02em',
           display: 'flex',
@@ -178,14 +211,14 @@ export async function GET(req: NextRequest) {
         {/* Eyebrow ESTADO DEL MAR · HOY */}
         <div style={{
           position: 'absolute',
-          left: 56, top: showScore ? 380 : 370,
+          left: 56, top: topEyebrow,
           display: 'flex',
           fontFamily: 'system-ui, sans-serif',
           fontSize: 15,
           fontWeight: 500,
           letterSpacing: '0.16em',
           textTransform: 'uppercase',
-          color: '#7a6858',
+          color: foto ? 'rgba(255,255,255,0.82)' : '#7a6858',
         }}>
           Estado del mar · Hoy
         </div>
@@ -193,7 +226,7 @@ export async function GET(req: NextRequest) {
         {/* Score + verdict */}
         <div style={{
           position: 'absolute',
-          left: 56, top: 410,
+          left: 56, top: topScore,
           display: 'flex',
           alignItems: 'baseline',
           gap: 20,
@@ -204,7 +237,8 @@ export async function GET(req: NextRequest) {
                 fontFamily: 'Georgia, serif',
                 fontSize: 140,
                 fontWeight: 700,
-                color: '#2a1a08',
+                color: tinta,
+                textShadow: sombra,
                 lineHeight: 1,
                 letterSpacing: '-0.02em',
                 display: 'flex',
@@ -213,7 +247,7 @@ export async function GET(req: NextRequest) {
                 fontFamily: 'system-ui, sans-serif',
                 fontSize: 26,
                 fontWeight: 500,
-                color: '#7a6858',
+                color: foto ? 'rgba(255,255,255,0.82)' : '#7a6858',
                 display: 'flex',
               }}>/100</span>
             </>

@@ -98,6 +98,8 @@ interface Props {
   boya?:           import('@/lib/boyas').DatosBoya | null
   /** Capa que ganó la cascada de bandera — decide la insignia de fuente */
   certBandera?:    Certeza
+  /** Avisos de viento de bañistas en las últimas 24 h */
+  vientoReportado?: { n: number; detalle: string; detalleEn: string } | null
   chiringuitos?:   import('@/lib/chiringuitos-playa').ChiringuitoCerca[]
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
@@ -281,7 +283,7 @@ function Reorder({ order, children }: { order: string[]; children: React.ReactNo
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', vientoReportado, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -493,6 +495,24 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   </div>
                 </div>
               )}
+              {/* VIENTO REPORTADO — misma gramática que bandera y medusas:
+                  es dato de bañistas, así que trazo punteado. */}
+              {vientoReportado && (
+                <div style={{ display:'flex', alignItems:'center', gap:'.75rem', marginTop:'1rem' }}>
+                  <div style={{ width:28, height:28, borderRadius:'50%', background:'var(--cert-reportado, #c48a1e)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden>
+                    <Wind size={16} weight="bold" color="#fff"/>
+                  </div>
+                  <div>
+                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>
+                      {locale === 'en' ? 'Strong wind reported' : 'Viento fuerte reportado'}
+                    </div>
+                    <div style={{ fontSize:'.72rem', color:'var(--muted)', marginTop:'.1rem' }}>
+                      {locale === 'en' ? vientoReportado.detalleEn : vientoReportado.detalle}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* BOYA — el único dato MEDIDO por un sensor físico de toda
                   la ficha. La propuesta 2026 le da tira de métricas propia
                   con el trazo sólido de "medido" bajo cada cifra. */}
