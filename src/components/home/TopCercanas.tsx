@@ -9,6 +9,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { readConsent } from '@/components/ui/CookieBanner'
+import TarjetaPlaya from '@/components/ui/TarjetaPlaya'
 import Link from 'next/link'
 import type { Playa } from '@/types'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
@@ -60,6 +61,10 @@ export default function TopCercanas() {
   // Invitación a aceptar la cercanía. Solo aparece si el permiso está sin
   // decidir; nunca si ya se concedió (cargamos directos) ni si se denegó.
   const [invitar, setInvitar] = useState(false)
+  // Miniaturas: la tarjeta compartida es photo-led, pero aquí NO se puede
+  // descartar una playa por no tener foto — es la más cercana. Se piden
+  // aparte y el hueco degrada a bloque de color si no llegan.
+  const [thumbs, setThumbs] = useState<Record<string, string>>({})
   const [results, setResults] = useState<ScoredNearby[]>([])
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null)
   const [errorMsg, setErrorMsg] = useState('')
@@ -125,6 +130,19 @@ export default function TopCercanas() {
 
       setResults(scored)
       setEstado('ready')
+
+      // Miniaturas en segundo plano: la tarjeta ya se ve sin ellas, así
+      // que no bloquean nada. Si alguna no llega, ese hueco degrada a
+      // bloque de color y la playa sigue apareciendo.
+      scored.forEach(x => {
+        fetch(`/api/fotos?slug=${encodeURIComponent(x.playa.slug)}`, { signal: ac.signal })
+          .then(res => (res.ok ? res.json() : null))
+          .then(d => {
+            const t = d?.fotos?.[0]?.thumb ?? d?.fotos?.[0]?.url
+            if (t) setThumbs(prev => ({ ...prev, [x.playa.slug]: t }))
+          })
+          .catch(() => {})
+      })
     } catch (err) {
       if (ac.signal.aborted) return
       const msg = (err as Error)?.message ?? ''
@@ -344,63 +362,24 @@ export default function TopCercanas() {
         gap: '.65rem',
       }}>
         {results.map((r, i) => (
-          <Link
+          <TarjetaPlaya
             key={r.playa.slug}
-            href={`/playas/${r.playa.slug}`}
-            style={{
-              display: 'flex', flexDirection: 'column',
-              background: 'var(--card-bg)', border: '1px solid var(--line)',
-              borderRadius: 6, padding: '1rem 1.1rem',
-              textDecoration: 'none', transition: 'border-color .15s',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.4rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-                <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, fontSize: '1.05rem', color: 'var(--ink)', letterSpacing: '-.01em' }}>n°{i + 1}</span>
-                <span style={{
-                  background: r.ps.color, color: 'var(--arena-50,#faf4e6)',
-                  fontFamily: 'var(--font-serif)', fontWeight: 700,
-                  fontSize: '.92rem', width: 36, height: 36, borderRadius: '50%',
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                  fontVariantNumeric: 'tabular-nums',
-                }}>
-                  {r.ps.score}
-                </span>
-                <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, fontSize: '.95rem', color: r.ps.color }}>{r.ps.label}</span>
-              </div>
-              <span style={{
-                fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-                fontSize: '.7rem', fontWeight: 500,
-                color: 'var(--muted)', background: 'var(--metric-bg)',
-                border: '1px solid var(--line)', padding: '.15rem .5rem',
-                borderRadius: 100, fontVariantNumeric: 'tabular-nums',
-                letterSpacing: '.04em',
-              }}>
-                {r.distKm < 1 ? `${Math.round(r.distKm * 1000)}m` : `${r.distKm.toFixed(1)}km`}
-              </span>
-            </div>
-
-            <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem', color: 'var(--ink)', lineHeight: 1.15, marginBottom: '.2rem' }}>{r.playa.nombre}</div>
-            <div style={{ fontSize: '.74rem', color: 'var(--muted)', marginBottom: '.4rem' }}>{r.playa.municipio} · {r.playa.provincia}</div>
-
-            {r.ps.factors.length > 0 && (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.25rem', marginBottom: '.4rem' }}>
-                {r.ps.factors.map(f => (
-                  <span key={f.icon} style={{
-                    fontSize: '.68rem', fontWeight: 700, color: f.color,
-                    background: `${f.color}12`, border: `1px solid ${f.color}30`,
-                    padding: '.15rem .4rem', borderRadius: 6, whiteSpace: 'nowrap',
-                  }}>{f.label}</span>
-                ))}
-              </div>
-            )}
-
-            <div style={{ display: 'flex', gap: '.6rem', fontSize: '.74rem', color: 'var(--muted)', marginTop: 'auto' }}>
-              <span><strong style={{ color: 'var(--ink)' }}>{r.meteo.agua}°C</strong> agua</span>
-              <span><strong style={{ color: 'var(--ink)' }}>{r.meteo.olas}m</strong> olas</span>
-              <span><strong style={{ color: 'var(--ink)' }}>{r.meteo.viento}</strong> km/h</span>
-            </div>
-          </Link>
+            slug={r.playa.slug}
+            nombre={r.playa.nombre}
+            meta={`${r.playa.municipio} · ${r.playa.provincia}`}
+            foto={thumbs[r.playa.slug] ?? null}
+            rank={i + 1}
+            score={r.ps.score}
+            scoreColor={r.ps.color}
+            veredicto={r.ps.label}
+            bandera={r.playa.bandera}
+            distintivo={r.distKm < 1 ? `${Math.round(r.distKm * 1000)} m` : `${r.distKm.toFixed(1)} km`}
+            datos={[
+              { v: `${r.meteo.agua}°`, l: 'agua' },
+              { v: `${r.meteo.olas} m`, l: 'olas' },
+              { v: String(r.meteo.viento), l: 'km/h' },
+            ]}
+          />
         ))}
       </div>
     </section>

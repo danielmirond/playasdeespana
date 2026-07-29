@@ -158,7 +158,7 @@ const CRITICAL_CSS = `
 /* Certeza del dato (propuesta de diseño 2026, §5.4). Cuatro grados de
    confianza y una ausencia. El color solo matiza: el peso lo lleva el
    TRAZO del subrayado, para que se lea en monocromo y sobre fotografía. */
---cert-medido:#2d5266;--cert-oficial:#3d6b1f;--cert-reportado:#c48a1e;--cert-estimado:#7a6850;--cert-sindato:#a89880;
+--cert-medido:#2d5266;--cert-oficial:#3d6b1f;--cert-reportado:#8a5f0a;--cert-estimado:#7a6850;--cert-sindato:#7a6b55;
 --cert-rule-medido:2px solid var(--cert-medido);--cert-rule-oficial:1.5px solid var(--cert-oficial);
 --cert-rule-reportado:1.5px dotted var(--cert-reportado);--cert-rule-estimado:1px dashed var(--cert-estimado);
 --cert-bg-medido:rgba(45,82,102,.08);--cert-bg-oficial:rgba(61,107,31,.08);
