@@ -35,6 +35,17 @@ async function getSidecar(): Promise<Record<string, FotoPlaya[]> | null> {
  * tiene foto real, no debe aparecer con genérica de respaldo — directamente no
  * se muestra. Devuelve false si no hay entrada o está vacía.
  */
+// Palabras que NO identifican una playa: son el sustantivo genérico del
+// accidente costero en las cuatro lenguas. Si se aceptan como "token del
+// nombre", cualquier foto del mundo etiquetada "praia" o "beach" pasa la
+// validación — así acabamos sirviendo playas de Sudáfrica en Galicia.
+const GENERICOS_TOPONIMO = new Set([
+  'playa', 'playas', 'praia', 'praias', 'platja', 'platges', 'platgeta',
+  'hondartza', 'cala', 'calas', 'cales', 'caleta', 'caletas', 'arenal',
+  'punta', 'illa', 'isla', 'islas', 'illas', 'area', 'areal', 'ensenada',
+  'beach', 'plage', 'costa', 'puerto', 'porto', 'rincon', 'playita',
+])
+
 export async function tieneFotoReal(slug: string): Promise<boolean> {
   if (!slug) return false
   const sidecar = await getSidecar()
@@ -566,7 +577,10 @@ async function getFotosUnsplash(nombre: string, municipio: string): Promise<Foto
     .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
   const tokensNombre = [
     normalizar(nombre),
-    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
+    // Solo palabras DISTINTIVAS: "Praia do Con" identifica por "con", no
+    // por "praia". Sin este filtro, el genérico valida cualquier playa.
+    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar)
+      .filter(t => t.length >= 4 && !GENERICOS_TOPONIMO.has(t)),
   ].filter(Boolean)
   if (tokensNombre.length === 0) return []
 
@@ -633,7 +647,10 @@ async function getFotosOpenVerse(nombre: string, municipio: string): Promise<Fot
     .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
   const tokensNombre = [
     normalizar(nombre),
-    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
+    // Solo palabras DISTINTIVAS: "Praia do Con" identifica por "con", no
+    // por "praia". Sin este filtro, el genérico valida cualquier playa.
+    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar)
+      .filter(t => t.length >= 4 && !GENERICOS_TOPONIMO.has(t)),
   ].filter(Boolean)
 
   for (const q of queries) {
@@ -697,7 +714,10 @@ async function getFotosPexels(nombre: string, municipio: string): Promise<FotoPl
     .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '')
   const tokensNombre = [
     normalizar(nombre),
-    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4),
+    // Solo palabras DISTINTIVAS: "Praia do Con" identifica por "con", no
+    // por "praia". Sin este filtro, el genérico valida cualquier playa.
+    ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar)
+      .filter(t => t.length >= 4 && !GENERICOS_TOPONIMO.has(t)),
   ].filter(Boolean)
   if (tokensNombre.length === 0) return []
 
@@ -1049,19 +1069,31 @@ async function getFotosUncached(
     }
   }
 
-  // Prioridad:
-  //   1. Wikimedia geo (700m) — la más precisa cuando hay matches
-  //   2. Wikipedia lead-image — foto canónica del artículo si la playa
-  //      tiene Wiki (la mejor "una sola foto" para playas conocidas)
-  //   3. OpenVerse — agregador CC (Wikimedia + Flickr + más)
-  //   4. Flickr — feed público con tags
-  //   5. Wikimedia text — búsqueda textual en Commons
-  //   6-7. Pexels, Unsplash — stock filtrado por nombre
+  // Prioridad (jul-2026: TODA Wikimedia va delante).
+  //
+  // Antes, la búsqueda TEXTUAL de Commons iba por detrás de Flickr, y el
+  // resultado es que el 67% de las fotos principales acababan siendo del
+  // feed público de Flickr: fotos sin título, validadas solo por que una
+  // palabra del nombre aparezca en sus etiquetas. Como los nombres traen
+  // genéricos ("Praia do Con", "la Caleta"), colaba cualquier playa del
+  // mundo — llegamos a servir las casetas de Muizenberg, en Sudáfrica,
+  // para una playa de A Coruña.
+  //
+  // Commons viene con nombre verificable (Beach_in_Getxo.jpg) y licencia
+  // clara. Aunque cubra menos, una foto correcta vale más que seis
+  // dudosas: la promesa del sitio es que el dato es de fiar.
+  //
+  //   1. Wikimedia geo (700m) — la más precisa
+  //   2. Wikipedia lead-image — foto canónica del artículo
+  //   3. Wikimedia text — búsqueda textual en Commons
+  //   4. OpenVerse — agregador CC (incluye Wikimedia)
+  //   5. Flickr — feed público con tags, ya solo de relleno
+  //   6-7. Pexels, Unsplash — stock; nunca son ESTA playa
   agregar(wikiGeo)
   if (combinadas.length < 6) agregar(wikiLead)
+  if (combinadas.length < 6) agregar(wikiText)
   if (combinadas.length < 6) agregar(openverse)
   if (combinadas.length < 6) agregar(flickr)
-  if (combinadas.length < 6) agregar(wikiText)
   if (combinadas.length < 6) agregar(pexels)
   if (combinadas.length < 6) agregar(unsplash)
 
