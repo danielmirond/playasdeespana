@@ -134,12 +134,29 @@ export default function TopCercanas() {
       // Miniaturas en segundo plano: la tarjeta ya se ve sin ellas, así
       // que no bloquean nada. Si alguna no llega, ese hueco degrada a
       // bloque de color y la playa sigue apareciendo.
+      // DEDUPE. El sidecar de fotos asigna imágenes por municipio, así que
+      // 5.075 playas comparten solo ~2.757 fotos distintas (una llega a
+      // estar en 76 playas). Y las playas "cerca de mí" son del MISMO
+      // municipio por definición: coger siempre fotos[0] las pintaba todas
+      // idénticas. Se recorre la lista de candidatas y se elige la primera
+      // que nadie haya usado ya, igual que hace TopBeachCardsConHero.
       scored.forEach(x => {
         fetch(`/api/fotos?slug=${encodeURIComponent(x.playa.slug)}`, { signal: ac.signal })
           .then(res => (res.ok ? res.json() : null))
           .then(d => {
-            const t = d?.fotos?.[0]?.thumb ?? d?.fotos?.[0]?.url
-            if (t) setThumbs(prev => ({ ...prev, [x.playa.slug]: t }))
+            const cands: string[] = (d?.fotos ?? [])
+              .map((f: { thumb?: string; url?: string }) => f?.thumb ?? f?.url)
+              .filter(Boolean)
+            if (!cands.length) return
+            setThumbs(prev => {
+              if (prev[x.playa.slug]) return prev
+              const usadas = new Set(Object.values(prev))
+              const libre = cands.find(u => !usadas.has(u))
+              // Si TODAS sus candidatas están cogidas, mejor sin foto que
+              // repetir: dos tarjetas iguales confunden más que un hueco.
+              if (!libre) return prev
+              return { ...prev, [x.playa.slug]: libre }
+            })
           })
           .catch(() => {})
       })
