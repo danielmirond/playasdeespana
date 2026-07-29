@@ -769,7 +769,7 @@ async function getFotosPexels(nombre: string, municipio: string): Promise<FotoPl
 // Flickr — feed público sin API key (usando tags)
 // Limitación: no soporta geosearch, solo filtrado por tags
 // Devuelve hasta 20 fotos públicas recientes con esos tags
-async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPlaya[]> {
+async function getFotosFlickr(nombre: string, municipio: string, provincia = ''): Promise<FotoPlaya[]> {
   // Normalizar: tags en Flickr no admiten tildes ni espacios
   const normalizar = (s: string) => s
     .toLowerCase()
@@ -779,6 +779,14 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
 
   const nombreTag = normalizar(nombre)
   const municipioTag = normalizar(municipio)
+  // ANCLA GEOGRÁFICA: la foto tiene que decir DÓNDE está, no solo cómo se
+  // llama. Sin esto, "praia" o un topónimo repetido en medio mundo cuela
+  // playas ajenas — así acabamos sirviendo Sudáfrica en Galicia.
+  const anclasLugar = [
+    municipioTag,
+    normalizar(provincia),
+    'espana', 'spain',
+  ].filter(t => t && t.length >= 4)
 
   // Tokens del nombre para filtrar resultados de queries genéricas.
   // Ej: 'kontxahondartza' → ['kontxa','hondartza','concha']
@@ -843,10 +851,22 @@ async function getFotosFlickr(nombre: string, municipio: string): Promise<FotoPl
           if (requiereNombre) {
             const tituloNorm = normalizar(titulo)
             const tagsNorm   = normalizar(tagsStr)
-            const matchToken = tokensNombre.some(t =>
-              t.length >= 4 && (tituloNorm.includes(t) || tagsNorm.includes(t))
-            )
-            if (!matchToken) return null
+            const texto      = tituloNorm + ' ' + tagsNorm
+
+            // 1) Token DISTINTIVO del nombre (los genéricos de topónimo
+            //    ya se filtraron antes: "praia" o "cala" no valen).
+            const tokenNombre = tokensNombre.find(t => t.length >= 4 && texto.includes(t))
+            if (!tokenNombre) return null
+
+            // 2) Ancla geográfica: municipio, provincia o España. Es la
+            //    diferencia entre "una playa que se llama parecido" y
+            //    "esta playa". La muestra real lo respalda: las fotos de
+            //    Zurriola vienen etiquetadas con donostia y surf.
+            const tieneAncla = anclasLugar.some(a => texto.includes(a))
+
+            // 3) Sin ancla solo pasa un nombre RARO (≥7 letras). "Zurriola"
+            //    o "Gorrondatxe" identifican solos; "area" o "roca", no.
+            if (!tieneAncla && tokenNombre.length < 7) return null
           }
           // item.media.m es el thumbnail de tamaño M (240px). Subimos a _c
           // (800px, disponible desde 2012) en vez de _b (1024px) porque
@@ -1045,7 +1065,7 @@ async function getFotosUncached(
     getFotosWikimediaGeo(lat, lon, nombre),
     getFotosWikipediaLeadImage(nombre, municipio, lat, lon),
     getFotosOpenVerse(nombre, municipio),
-    getFotosFlickr(nombre, municipio),
+    getFotosFlickr(nombre, municipio, provincia),
     getFotosWikimediaText(nombre, municipio),
     getFotosPexels(nombre, municipio),
     getFotosUnsplash(nombre, municipio),
