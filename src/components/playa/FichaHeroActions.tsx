@@ -28,6 +28,10 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
   // Overflow de acciones secundarias (propuesta 2026 §5.2): en móvil solo
   // se ve la primaria; "Estuve aquí" y "Compartir" viven tras el "···".
   const [overflow, setOverflow] = useState(false)
+  // Onboarding mínimo: la PRIMERA vez el overflow va etiquetado ("Más"),
+  // porque tres puntos a secas no dicen que ahí viven "Estuve aquí" y
+  // "Compartir". Al usarlo una vez, pasa a ser el "···" discreto.
+  const [primeraVez, setPrimeraVez] = useState(false)
   const isLight = theme === 'light'
 
   useEffect(() => {
@@ -36,6 +40,7 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
       setFav(favs.includes(slug))
     } catch {}
     setEstuve(estuveEn(slug))
+    try { setPrimeraVez(!localStorage.getItem('overflow_visto')) } catch {}
   }, [slug])
 
   function toggleEstuve() {
@@ -125,13 +130,20 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
         <Heart size={15} weight={fav ? 'fill' : 'regular'} color="currentColor"/> {fav ? 'Guardada' : 'Guardar'}
       </button>
       <button
-        onClick={() => setOverflow(o => !o)}
+        onClick={() => {
+          setOverflow(o => !o)
+          if (primeraVez) {
+            setPrimeraVez(false)
+            try { localStorage.setItem('overflow_visto', '1') } catch {}
+          }
+        }}
         className={styles.overflowBtn}
         aria-expanded={overflow}
         aria-label={overflow ? 'Menos acciones' : 'Más acciones'}
         style={{ ...base, color: muted, borderColor: mutedBd, padding: '8px 14px', minWidth: 44 }}
       >
         <span style={{ fontSize: '1.05rem', lineHeight: .6 }} aria-hidden="true">···</span>
+        {primeraVez && !overflow && <span style={{ marginLeft: 4 }}>Más</span>}
       </button>
       <button
         onClick={toggleEstuve}

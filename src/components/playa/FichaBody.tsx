@@ -8,6 +8,7 @@ import type { Camping } from '@/lib/campings'
 import type { CentroBuceo } from '@/lib/buceo'
 import { Dato, CertBadge, type Certeza } from './Certeza'
 import ListaPOI from './ListaPOI'
+import CuadernoCTA from './CuadernoCTA'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
@@ -265,7 +266,7 @@ const ORDER_V2: string[] = [
   'asistente', 'como-llegar', 'trafico', 'mejor-hora', 'afiliados', 'comer', 'chiringuitos', 'dormir',
   'campings', 'ferries', 'surf', 'buceo', 'cta-barco', 'ad',
   // 3 · PROFUNDIDAD
-  'meteo', 'datos', 'fotos', 'video', 'opiniones', 'votacion', 'cercanas',
+  'meteo', 'datos', 'fotos', 'video', 'opiniones', 'votacion', 'cuaderno-cta', 'cercanas',
   'texto-seo', 'hubs', 'faqs', 'crosslinks',
 ]
 
@@ -628,6 +629,21 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             primero en valorarla" antes de que el usuario hubiera visto
             fotos ni opiniones. Aquí llega cuando ya ha leído a otros. */}
         <VotacionPlaya key="votacion" slug={playa.slug} locale={locale} />
+
+        {/* Puerta de entrada al cuaderno. El hero pliega "Estuve aquí" en
+            el menú "···" para dejar una sola acción primaria, pero la
+            acción tiene que REAPARECER aquí: nadie descubre un producto
+            que solo vive detrás de tres puntos. Y aquí, tras leer la
+            ficha entera, es cuando pedirla tiene sentido. */}
+        <CuadernoCTA
+          key="cuaderno-cta"
+          slug={playa.slug}
+          nombre={playa.nombre}
+          municipio={playa.municipio}
+          provincia={playa.provincia}
+          comunidad={playa.comunidad}
+          locale={locale}
+        />
 
         {/* BLOQUE UNIFICADO DE CTAs AFILIADOS (PR #86 - Consolidación)
             Reemplaza 7 CTAs dispersos: TheFork, Booking, Civitatis, RentalCars, Pitchup
