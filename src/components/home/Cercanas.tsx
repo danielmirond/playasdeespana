@@ -75,9 +75,9 @@ export default function Cercanas({ locale = 'es' }: Props) {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
           </svg>
-          {locale === 'en' ? 'Use my location' : 'Usar mi ubicación'}
+          {locale === 'en' ? 'Enable location' : 'Activar ubicación'}
         </button>
-        <p className={styles.ctaHint}>{locale === 'en' ? 'Only used to calculate distances, never stored.' : 'Solo se usa para calcular distancias, no se guarda.'}</p>
+        <p className={styles.ctaHint}>{locale === 'en' ? 'Your location never leaves your device.' : 'Tu ubicación no sale de tu dispositivo.'}</p>
       </div>
     </section>
   )

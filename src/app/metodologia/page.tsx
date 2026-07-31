@@ -9,6 +9,7 @@ import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import AuthorByline from '@/components/seo/AuthorByline'
 import { getFileLastModified } from '@/lib/dateModified'
 import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
+import { PLAYAS_APROX } from '@/lib/playas'
 
 export const revalidate = 604800
 
@@ -134,7 +135,7 @@ export default function MetodologiaPage() {
     },
   }
 
-  // Dataset schema. Declara el dataset de las 5.000+ playas para que
+  // Dataset schema. Declara el dataset de playas para que
   // aparezca en Google Dataset Search (datasetsearch.research.google.com).
   // Importante para autoridad temática y para investigadores que pueden
   // citar el dataset, generando backlinks de alto valor.
@@ -145,8 +146,8 @@ export default function MetodologiaPage() {
     name:         'Playas de España: estado del mar, calidad del agua y servicios',
     alternateName: 'Spanish beaches dataset (sea conditions, water quality, services)',
     description:
-      'Dataset agregado de las 5.000+ playas españolas con datos en tiempo real ' +
-      '(temperatura del agua, oleaje, viento, UV) y datos estructurales ' +
+      `Dataset agregado de ${PLAYAS_APROX} playas españolas con condiciones ` +
+      'actualizadas cada hora (temperatura del agua, oleaje, viento, UV) y datos estructurales ' +
       '(servicios, accesibilidad, Bandera Azul, calidad EEA, geolocalización). ' +
       'Recopilado de fuentes oficiales: MITECO, EEA Bathing Water, AEMET, ' +
       'Open-Meteo, ADEAC, OpenStreetMap, IGN.',

@@ -46,6 +46,9 @@ export default function MobileNav() {
     ...(isEn ? [] : [
       { href: '/playas-perros', label: 'Perros' },
       { href: '/surf', label: 'Surf' },
+      // Mi cuaderno faltaba aquí y sí estaba en escritorio: con ~90% del
+      // tráfico en móvil, el producto de retención era invisible en el menú.
+      { href: '/mi-cuaderno', label: 'Mi cuaderno' },
     ]),
     { href: isEn ? '/en/magazine' : '/magazine', label: 'Magazine' },
     { href: '/mapa', label: isEn ? 'Map' : 'Mapa' },

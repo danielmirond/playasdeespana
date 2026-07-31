@@ -8,7 +8,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import { getPlayas, getComunidades } from '@/lib/playas'
+import { getPlayas, getComunidades, PLAYAS_APROX } from '@/lib/playas'
 import GeolocateCTA from './GeolocateCTA'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
@@ -39,7 +39,7 @@ const COSTERAS = [
 const FAQ = [
   {
     q: '¿Cómo encuentro la playa más cercana?',
-    a: 'Pulsa el botón "Activar ubicación". Tu navegador te pedirá permiso para compartir tu posición una sola vez. Calculamos la distancia en línea recta a las 5.000+ playas del catálogo y te mostramos las más próximas ordenadas por cercanía y score. No guardamos tu ubicación en ningún servidor.',
+    a: `Pulsa el botón "Activar ubicación". Tu navegador te pedirá permiso para compartir tu posición una sola vez. Calculamos la distancia en línea recta a las ${PLAYAS_APROX} playas del catálogo y te mostramos las más próximas ordenadas por cercanía y score. Tu ubicación no sale de tu dispositivo: el cálculo ocurre en tu navegador y no se guarda en ningún servidor.`,
   },
   {
     q: '¿Qué precisión tiene la búsqueda por GPS?',
@@ -248,7 +248,7 @@ export default async function PlayasCercaDeMiPage() {
               {
                 n: '02',
                 titulo: 'Cálculo de distancia',
-                texto: 'Medimos la distancia en línea recta desde tu posición a las más de 5.000 playas del catálogo oficial (MITECO). Se ordenan de más cercana a más lejana al instante.',
+                texto: `Medimos la distancia en línea recta desde tu posición a las ${PLAYAS_APROX} playas del catálogo (MITECO, OpenStreetMap y CartoCiudad). Se ordenan de más cercana a más lejana al instante.`,
               },
               {
                 n: '03',

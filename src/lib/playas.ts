@@ -44,8 +44,32 @@ export const getPlayas = cache(async (): Promise<Playa[]> => {
   }
 })
 
+/**
+ * Nº real de playas con ficha. Úsalo SIEMPRE que la página ya cargue el
+ * catálogo; el copy no debe llevar cifras a mano.
+ */
+export const getTotalPlayas = cache(async (): Promise<number> => {
+  const playas = await getPlayas()
+  return playas.length
+})
+
+/**
+ * Cifra para los sitios donde no se puede await: `metadata` estática,
+ * manifest, 404. Es un suelo deliberado — hoy hay 4.491 fichas, así que
+ * "más de 4.400" es cierto y sigue siéndolo si el catálogo encoge un poco.
+ *
+ * REGLA: esta cifra se redondea SIEMPRE hacia abajo a la centena. Escribir
+ * "más de 4.500" con 4.491 fichas es mentira por 9 playas, y en un sitio
+ * cuyo argumento es la fiabilidad del dato eso cuesta más que las 9 playas.
+ * Al resincronizar el catálogo, comprobar `getTotalPlayas()` y ajustar.
+ */
+export const PLAYAS_APROX = 'más de 4.400'
+
+/** La misma cifra a principio de frase. */
+export const PLAYAS_APROX_CAP = 'Más de 4.400'
+
 // Index slug → Playa precomputado en la primera invocación. O(1) lookup
-// frente al find lineal sobre 5000+ playas (sub-ms vs ~5ms cada vez,
+// frente al find lineal sobre 4500+ playas (sub-ms vs ~5ms cada vez,
 // pero la ficha llama a getPlayaBySlug en metadata + render).
 const _slugIndex = cache(async (): Promise<Map<string, Playa>> => {
   const playas = await getPlayas()

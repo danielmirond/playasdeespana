@@ -125,7 +125,7 @@ export default function CuadernoCTA({ slug, nombre, municipio = '', provincia = 
           >
             {estuve
               ? (es ? 'Ver mi cuaderno →' : 'Open my notebook →')
-              : (es ? 'Qué es el cuaderno' : 'What is the notebook')}
+              : (es ? '¿Qué es el cuaderno?' : 'What is the notebook?')}
           </Link>
         </div>
       </div>

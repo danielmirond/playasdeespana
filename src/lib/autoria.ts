@@ -29,6 +29,8 @@ export interface AutorPlayasEspana {
   knowsAbout?:   string[]
 }
 
+import { PLAYAS_APROX } from '@/lib/playas'
+
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
 /**
@@ -43,7 +45,7 @@ export const AUTOR_PLAYAS_ESPANA: AutorPlayasEspana = {
   url:         BASE,
   logo:        `${BASE}/logo.png`,
   description:
-    'Proyecto editorial independiente que reúne datos oficiales de las 5.000+ playas de España (MITECO, EEA, AEMET) en fichas accionables con estado del mar, oleaje y servicios en tiempo real.',
+    `Proyecto editorial independiente que reúne datos oficiales de ${PLAYAS_APROX} playas de España (MITECO, EEA, AEMET) en fichas accionables con oleaje y estado del mar actualizados cada hora, y datos de servicios de fuente oficial.`,
   sameAs: [
     // Añadir aquí los perfiles oficiales según se vayan creando.
     // 'https://twitter.com/playasespana',

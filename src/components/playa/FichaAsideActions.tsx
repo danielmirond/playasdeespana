@@ -57,7 +57,7 @@ export default function FichaAsideActions({ lat, lng, nombre, slug, meteo, score
         <MapPin size={14} weight="bold" color="currentColor"/> Ver en Google Maps
       </button>
       <button onClick={compartir} style={btn}>
-        {copied ? <><CheckCircle size={14} weight="bold" color="currentColor"/> Enlace copiado</> : '↗ Compartir playa'}
+        {copied ? <><CheckCircle size={14} weight="bold" color="currentColor"/> Copiado</> : '↗ Compartir'}
       </button>
     </div>
   )

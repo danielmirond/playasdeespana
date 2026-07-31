@@ -8,7 +8,13 @@
 //   5. Favoritas + Cercanas (client blocks)
 //   6. Hub SEO: comunidades + banderas + perros + nudistas
 import type { Metadata } from 'next'
-import { getPlayasDataModified } from '@/lib/dateModified'
+import { getPlayasDataModified, getFileLastModified } from '@/lib/dateModified'
+
+// La fecha estaba a mano ("abril 2026") y envejecía sola. Ahora sale del
+// mtime real de la página de metodología: si el método no cambia, la fecha
+// tampoco — que es justo lo que declara.
+const revisionMetodo = new Date(getFileLastModified('src/app/metodologia/page.tsx'))
+  .toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })
 import { Suspense } from 'react'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -23,13 +29,13 @@ import ParkingHoy from '@/components/home/ParkingHoy'
 import MonetizacionBlock from '@/components/home/MonetizacionBlock'
 import BoatRentalCTA from '@/components/home/BoatRentalCTA'
 import MagazineCarrusel from '@/components/home/MagazineCarrusel'
-import { getPlayas, getComunidades } from '@/lib/playas'
+import { getPlayas, getComunidades, PLAYAS_APROX } from '@/lib/playas'
 
 export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Playas de España | ¿A qué playa voy hoy?',
-  description: 'Estado del mar en tiempo real en más de 4.500 playas de España. Temperatura del agua, oleaje, viento y servicios. Datos actualizados cada hora.',
+  description: `Estado del mar en ${PLAYAS_APROX} playas de España. Temperatura del agua, oleaje, viento y servicios. Condiciones actualizadas cada hora.`,
   alternates: {
     canonical: '/',
     languages: {
@@ -40,7 +46,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Playas de España | ¿A qué playa voy hoy?',
-    description: 'Consulta el estado del mar en más de 4.500 playas españolas.',
+    description: `Consulta el estado del mar en ${PLAYAS_APROX} playas españolas.`,
     url: 'https://playas-espana.com',
     images: [{ url: '/api/og?playa=Playas+de+España', width: 1200, height: 630 }],
   },
@@ -149,7 +155,7 @@ export default async function HomePage() {
         name: 'Playas de España | ¿A qué playa voy hoy?',
         inLanguage: 'es',
         dateModified: getPlayasDataModified(),
-        description: 'Estado del mar en tiempo real en más de 4.500 playas de España: temperatura del agua, oleaje, viento, banderas y servicios.',
+        description: `Estado del mar en ${playas.length.toLocaleString('es')} playas de España: temperatura del agua, oleaje, viento, banderas y servicios.`,
       }) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         '@context': 'https://schema.org',
@@ -369,7 +375,7 @@ export default async function HomePage() {
             <span style={{ color: 'var(--muted)', fontSize: '.78rem' }}>
               Última revisión del método:{' '}
               <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)' }}>
-                abril 2026
+                {revisionMetodo}
               </span>
             </span>
           </div>

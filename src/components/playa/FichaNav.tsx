@@ -2,18 +2,21 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './FichaNav.module.css'
 
+// Las etiquetas ES deben ser un prefijo reconocible del título largo que usa
+// PildoraContextual para la MISMA sección: el usuario ve los dos índices y
+// "Seguridad" aquí junto a "Bandera y medusas" allí parecen sitios distintos.
 const SECCIONES = {
   es: [
     { id: 's-webcam',      label: 'Webcam' },
-    { id: 's-seguridad',   label: 'Seguridad' },
+    { id: 's-seguridad',   label: 'Bandera' },
     { id: 's-calidad',     label: 'Calidad' },
     { id: 's-comoLlegar',  label: 'Llegar' },
     { id: 's-trafico',     label: 'Parking' },
-    { id: 's-comer',       label: 'Comer' },
-    { id: 's-dormir',      label: 'Dormir' },
+    { id: 's-comer',       label: 'Restaurantes' },
+    { id: 's-dormir',      label: 'Hoteles' },
     { id: 's-campings',    label: 'Campings' },
     { id: 's-buceo',       label: 'Buceo' },
-    { id: 's-meteo',       label: 'Mar' },
+    { id: 's-meteo',       label: 'Oleaje' },
     { id: 's-datos',       label: 'Datos' },
     { id: 's-fotos',       label: 'Fotos' },
     { id: 's-opiniones',   label: 'Opiniones' },

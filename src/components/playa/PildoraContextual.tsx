@@ -130,7 +130,7 @@ export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es'
         aria-haspopup="dialog"
       >
         <Waves size={15} weight="bold" aria-hidden="true" />
-        {es ? 'Cómo está hoy' : 'State today'}
+        {es ? '¿Cómo está hoy?' : 'How is it today?'}
       </button>
       <a
         href={mapsUrl}

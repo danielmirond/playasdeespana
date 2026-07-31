@@ -207,7 +207,7 @@ export default function TopCercanas() {
         {/* Invitación a aceptar la cercanía. No es un modal: no bloquea
             la página ni empuja el contenido (va fija abajo), para no
             castigar CLS ni tapar la home nada más entrar. El diálogo del
-            navegador solo salta al tocar "Ver mi playa". */}
+            navegador solo salta al tocar "Activar ubicación". */}
         {invitar && (
           <div role="dialog" aria-label="Ver tu playa más cercana" style={{
             position: 'fixed', left: 12, right: 12,
@@ -240,7 +240,7 @@ export default function TopCercanas() {
                 cursor: 'pointer',
               }}
             >
-              Ver mi playa
+              Activar ubicación
             </button>
             <button
               type="button"
@@ -284,7 +284,7 @@ export default function TopCercanas() {
               ¿Qué playa me queda cerca?
             </div>
             <div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.7)', marginTop: '.2rem' }}>
-              Activa tu ubicación · score en tiempo real
+              Activa tu ubicación · score actualizado cada hora
             </div>
           </div>
         </button>

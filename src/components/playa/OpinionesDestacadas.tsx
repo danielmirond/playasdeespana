@@ -36,7 +36,7 @@ export default function OpinionesDestacadas({ opiniones, locale = 'es' }: Props)
   return (
     <div className={styles.card}>
       <div className={styles.cardHead}>
-        <h2 className={styles.cardTitle}>{es ? '💬 Opiniones de visitantes' : '💬 Visitor reviews'}</h2>
+        <h2 className={styles.cardTitle}>{es ? 'Opiniones de visitantes' : 'Visitor reviews'}</h2>
       </div>
       <div className={styles.cardBody}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

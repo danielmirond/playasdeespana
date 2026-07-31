@@ -90,7 +90,7 @@ export default function GeolocateCTA() {
         fontSize: '.68rem', color: 'var(--muted)',
         letterSpacing: '.04em', marginTop: '.1rem',
       }}>
-        Sin registro · sin guardar tu ubicación · funciona en móvil y escritorio
+        Sin registro · tu ubicación no sale de tu dispositivo · funciona en móvil y escritorio
       </p>
 
       <style>{`

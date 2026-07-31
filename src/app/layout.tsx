@@ -7,6 +7,7 @@ import NavigationProgress from '@/components/ui/NavigationProgress'
 import MobileNav from '@/components/ui/MobileNav'
 import Footer from '@/components/ui/Footer'
 import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
+import { PLAYAS_APROX } from '@/lib/playas'
 import './globals.css'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -32,7 +33,7 @@ const WEBSITE_SCHEMA = {
   name:       'Playas de España',
   alternateName: ['playas-espana.com', 'Playas España'],
   description:
-    'Estado del mar y guía de más de 4.500 playas españolas. Datos oficiales de MITECO, EEA y AEMET actualizados cada hora.',
+    `Estado del mar y guía de ${PLAYAS_APROX} playas españolas. Oleaje, viento y temperatura del agua actualizados cada hora (AEMET, Open-Meteo); datos físicos y calidad del agua de MITECO y la EEA.`,
   inLanguage: 'es-ES',
   publisher:  { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
   potentialAction: {
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
     default: 'Playas de España. Estado del mar en tiempo real',
     template: '%s · Playas de España',
   },
-  description: 'Temperatura del agua, oleaje, calidad y servicios de las 5.611 playas españolas. Datos Open-Meteo y EEA actualizados cada hora.',
+  description: `Temperatura del agua, oleaje, calidad y servicios de ${PLAYAS_APROX} playas españolas. Estado del mar actualizado cada hora con Open-Meteo; calidad del agua según la EEA.`,
   keywords: ['playas españa', 'estado del mar', 'temperatura agua', 'oleaje', 'calidad agua playa', 'banderas azules'],
   openGraph: {
     type: 'website',

@@ -3,10 +3,11 @@ import type { Metadata } from 'next'
 import Nav from '@/components/ui/Nav'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import styles from './MapaPage.module.css'
+import { PLAYAS_APROX } from '@/lib/playas'
 
 export const metadata: Metadata = {
   title: 'Mapa de playas de España | Busca por zona, bandera y servicios',
-  description: 'Mapa interactivo con más de 4.500 playas de España. Filtra por estado del mar, bandera azul y servicios, y encuentra playas cerca de ti.',
+  description: `Mapa interactivo con ${PLAYAS_APROX} playas de España. Filtra por estado del mar, bandera azul y servicios, y encuentra playas cerca de ti.`,
   alternates: { canonical: '/mapa' },
   openGraph: {
     type:  'website',
@@ -22,7 +23,7 @@ export default function MapaPage() {
       <div className={styles.hero}>
         <div className={styles.heroInner}>
           <h1 className={styles.titulo}>Mapa de playas</h1>
-          <p className={styles.subtitulo}>Más de 4.500 playas · España · Estado en tiempo real</p>
+          <p className={styles.subtitulo}>España · {PLAYAS_APROX} playas · estado del mar cada hora</p>
         </div>
       </div>
       <div className={styles.mapaWrap}>

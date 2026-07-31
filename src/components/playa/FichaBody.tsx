@@ -160,9 +160,9 @@ const T = {
       { key:'telefonos',  label:'Teléfonos' }, { key:'oficina_turismo', label:'Oficina turismo' },
       { key:'zona_infantil',  label:'Zona infantil' },
       { key:'zona_deportiva', label:'Zona deportiva' },
-      { key:'alquiler_sombrillas', label:'Alq. sombrillas' },
-      { key:'alquiler_hamacas',    label:'Alq. hamacas' },
-      { key:'alquiler_nautico',    label:'Alq. náutico' },
+      { key:'alquiler_sombrillas', label:'Alquiler de sombrillas' },
+      { key:'alquiler_hamacas',    label:'Alquiler de hamacas' },
+      { key:'alquiler_nautico',    label:'Alquiler náutico' },
       { key:'club_nautico',  label:'Club náutico' },
       { key:'establecimientos', label:'Bares/restaurantes' },
       { key:'autobus',    label:'Autobús' },
@@ -709,7 +709,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       borderRadius:'4px', padding:'.55rem .5rem',
                     }}>
                       <div style={{ fontSize:'.72rem', color:'var(--muted)', fontWeight:600, textTransform:'uppercase', letterSpacing:'.04em' }}>
-                        {m.tipo === 'pleamar' ? (locale === 'en' ? '▲ High' : '▲ Plea.') : (locale === 'en' ? '▼ Low' : '▼ Baja.')}
+                        {m.tipo === 'pleamar' ? (locale === 'en' ? '▲ High' : '▲ Pleamar') : (locale === 'en' ? '▼ Low' : '▼ Bajamar')}
                       </div>
                       <div style={{ fontSize:'1.05rem', fontWeight:800, color:'var(--ink)', marginTop:'.15rem' }}>{m.hora}</div>
                       <div style={{ fontSize:'.72rem', color:'var(--muted)' }}>{m.altura}m</div>
@@ -821,10 +821,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <h2 className={styles.cardTitle}><Car size={16} weight='bold' style={{marginRight:'.35rem',verticalAlign:'middle'}}/>{locale === 'en' ? <>How to <em>get to</em> {nombreH}</> : <>Cómo <em>llegar</em> a {nombreH}</>}</h2>
           </div>
           <div className={styles.cardBody}>
-            <Collapsible maxHeight={160} labelMore={locale === 'en' ? 'Show all options' : 'Ver todas las opciones'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
+            <Collapsible maxHeight={160} labelMore={locale === 'en' ? 'Show all' : 'Ver todo'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent,#6b400a)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
-                <Car size={18} weight='bold'/> {locale === 'en' ? 'By car. open in Google Maps' : 'En coche. abrir en Google Maps'}
+                <Car size={18} weight='bold'/> {locale === 'en' ? 'By car · open in Google Maps' : 'En coche · abrir en Google Maps'}
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
                 <Bus size={18} weight='bold'/> {locale === 'en' ? 'By public transport' : 'En transporte público'}
@@ -901,7 +901,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             {restList ? (
-              <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
+              <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todo'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
                 <ListaPOI
                   variante="photo"
                   locale={locale}
@@ -981,7 +981,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             {clientHoteles && clientHoteles.length > 0 ? (
-              <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
+              <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todo'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
                 <ListaPOI
                   variante="photo"
                   locale={locale}
@@ -1109,7 +1109,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             {/* Subsección: Servicios & Equipamiento */}
             <div>
               <div style={{ fontSize: '.82rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.03em', marginBottom: '.75rem' }}>
-                {locale === 'en' ? 'Facilities & Services' : 'Servicios y Equipamiento'}
+                {locale === 'en' ? 'Facilities and services' : 'Servicios y equipamiento'}
               </div>
               <div className={styles.srvGrid}>
                 {i18n.SERVICIOS.map(s => {
@@ -1122,9 +1122,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <div style={{ height: '1rem' }}/>
 
             {/* Subsección: Información Técnica (Collapsible) */}
-            <Collapsible maxHeight={180} labelMore={locale === 'en' ? 'Show all details' : 'Ver todos los datos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
+            <Collapsible maxHeight={180} labelMore={locale === 'en' ? 'Show all' : 'Ver todo'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
               <div style={{ fontSize: '.82rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.03em', marginBottom: '.75rem' }}>
-                {locale === 'en' ? 'Technical Details' : 'Información Técnica'}
+                {locale === 'en' ? 'Technical details' : 'Información técnica'}
               </div>
               {playa.longitud    && <DataRow k={i18n.longitud}     v={`${playa.longitud} m`}/>}
               {playa.anchura     && <DataRow k={i18n.anchura}      v={`${playa.anchura} m`}/>}

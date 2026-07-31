@@ -53,7 +53,7 @@ export default function AffiliatesCTABlock({ playa, affiliates, locale = 'es' }:
   return (
     <div className={styles.card} style={{ marginTop: '1.5rem' }}>
       <div className={styles.cardHead}>
-        <h2 className={styles.cardTitle}>{es ? '🎯 Reserva ahora' : '🎯 Book now'}</h2>
+        <h2 className={styles.cardTitle}>{es ? 'Reserva ahora' : 'Book now'}</h2>
         <span className={styles.cardSrc} style={{ fontSize: '.7rem', opacity: 0.7 }}>
           {es ? 'Enlaces afiliados' : 'Affiliate links'}
         </span>

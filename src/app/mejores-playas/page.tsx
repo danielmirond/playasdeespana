@@ -11,6 +11,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import ranking from '@/data/ranking-2026.json'
+import { PLAYAS_APROX } from '@/lib/playas'
 
 export const revalidate = 86400
 
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
 const FAQ = [
   {
     q: '¿Cómo se elige la mejor playa de España en este ranking?',
-    a: `Cada una de las ${(5098).toLocaleString('es')} playas del inventario oficial MITECO recibe una puntuación 0-100 en cuatro ejes: entorno natural (30 puntos: espacio protegido, grado de urbanización, vegetación, ocupación), seguridad y servicios (35: socorrismo, accesibilidad, duchas, parking…), distintivos y calidad del agua (25: Bandera Azul 2026, calidad EEA; una Bandera Negra de Ecologistas en Acción resta 25) y experiencia (10: chiringuitos, webcam, spots de surf o buceo, alojamiento cercano). Sin jurado, sin votos y sin patrocinios: solo datos públicos.`,
+    a: `Cada una de las ${PLAYAS_APROX} playas del catálogo (MITECO, OpenStreetMap y CartoCiudad) recibe una puntuación 0-100 en cuatro ejes: entorno natural (30 puntos: espacio protegido, grado de urbanización, vegetación, ocupación), seguridad y servicios (35: socorrismo, accesibilidad, duchas, parking…), distintivos y calidad del agua (25: Bandera Azul 2026, calidad EEA; una Bandera Negra de Ecologistas en Acción resta 25) y experiencia (10: chiringuitos, webcam, spots de surf o buceo, alojamiento cercano). Sin jurado, sin votos y sin patrocinios: solo datos públicos.`,
   },
   {
     q: '¿Por qué no está mi playa favorita?',
@@ -99,8 +100,8 @@ export default function MejoresPlayasPage() {
           Las 100 mejores playas de España, <em style={{ fontWeight: 500, color: 'var(--accent)' }}>según los datos</em>
         </h1>
         <p style={{ fontSize: '.95rem', color: 'var(--muted)', lineHeight: 1.65, maxWidth: 680, marginBottom: '1.5rem' }}>
-          Sin jurado, sin votos de influencers y sin patrocinios: las {(5098).toLocaleString('es')} playas del
-          inventario oficial puntuadas 0-100 con datos públicos — entorno natural, seguridad y servicios,
+          Sin jurado, sin votos de influencers y sin patrocinios: {PLAYAS_APROX} playas del
+          catálogo puntuadas 0-100 con datos públicos — entorno natural, seguridad y servicios,
           Bandera Azul y calidad del agua, y oferta a pie de arena. El mismo criterio para la cala gallega
           y para el arenal mediterráneo. Abajo, el top 5 de cada provincia.
         </p>
@@ -165,7 +166,7 @@ export default function MejoresPlayasPage() {
               <div key={prov} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.9rem 1.05rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '.5rem' }}>
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '.98rem', fontWeight: 700, color: 'var(--ink)', margin: 0 }}>{prov}</h3>
-                  <Link href={`/mejores-playas/${toSlug(prov)}`} style={{ fontSize: '.68rem', color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>Ver top 20 →</Link>
+                  <Link href={`/mejores-playas/${toSlug(prov)}`} style={{ fontSize: '.68rem', color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>Ver ranking →</Link>
                 </div>
                 <ol style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: '.8rem', lineHeight: 1.9 }}>
                   {PROVINCIAS[prov].map((p, i) => (

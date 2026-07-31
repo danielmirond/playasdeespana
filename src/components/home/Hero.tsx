@@ -3,6 +3,7 @@
 // como atmósfera de fondo. ~42% opacidad, gradiente diagonal mantiene
 // 100% legibilidad. Respeta prefers-reduced-motion (animación pausada).
 import Link from 'next/link'
+import { PLAYAS_APROX_CAP } from '@/lib/playas'
 import Image from 'next/image'
 import TrustSeal from '@/components/common/TrustSeal'
 import styles from './Hero.module.css'
@@ -60,7 +61,7 @@ export default function Hero() {
       <div className={styles.inner}>
         <p className={styles.kicker}>
           <span className={styles.kickerDot}/>
-          Datos en tiempo real · actualizado cada hora
+          Estado del mar · actualizado cada hora
         </p>
 
         <h1 className={styles.title}>
@@ -68,7 +69,7 @@ export default function Hero() {
           <em>para bañarse</em>
         </h1>
         <p className={styles.sub}>
-          Cinco mil playas del litoral español, con una puntuación de 0 a 100
+          {PLAYAS_APROX_CAP} playas del litoral español, con una puntuación de 0 a 100
           recalculada cada hora a partir de datos oficiales de MITECO, EEA y AEMET.
         </p>
 
