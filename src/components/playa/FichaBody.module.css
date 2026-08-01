@@ -96,6 +96,75 @@
   position: relative;
 }
 .cercanaCard:hover { border-color: var(--accent); }
+
+/* ── Pestañas Cercanas / Parecidas, solo con CSS ──────────────────────────
+   Sin JS a propósito: la hidratación de este repo no es de fiar (FichaNav
+   no llega a montarse nunca), y una pestaña que no responde es peor que no
+   tenerla. Radio oculto + selector de hermano hace todo el trabajo. */
+.tabRadio {
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0;
+  /* NO usamos display:none ni visibility:hidden: eliminarían el foco de
+     teclado y las flechas dejarían de cambiar de pestaña. */
+}
+.tabBar {
+  display: flex;
+  gap: .4rem;
+  padding: 0 1.1rem .75rem;
+}
+.tabLabel {
+  font-family: var(--font-sans);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .38rem .85rem;
+  min-height: var(--touch-min, 44px);
+  display: inline-flex; align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: color .15s, border-color .15s, background .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.tabLabel:hover { border-color: var(--accent); color: var(--ink); }
+
+/* Estado activo. Van por CLASE, no por id: CSS Modules también renombra los
+   selectores de id, y entonces no casarían con el id literal del JSX. */
+.tabRadioCerca:checked     ~ .tabBar .tabLabel:nth-of-type(1),
+.tabRadioParecidas:checked ~ .tabBar .tabLabel:nth-of-type(2) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+/* El foco tiene que verse aunque el input esté oculto: lo pintamos sobre
+   la etiqueta, que es lo que el usuario ve. */
+.tabRadioCerca:focus-visible     ~ .tabBar .tabLabel:nth-of-type(1),
+.tabRadioParecidas:focus-visible ~ .tabBar .tabLabel:nth-of-type(2) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tabPanel { display: none; }
+/* Sin pestañas (playa sin parecidas) solo existe el panel de cercanas, y
+   entonces se muestra siempre. */
+.tabs > .tabPanelCerca:first-child { display: block; }
+.tabRadioCerca:checked     ~ .tabPanelCerca,
+.tabRadioParecidas:checked ~ .tabPanelParecidas { display: block; }
+
+.tabNota {
+  font-size: .72rem;
+  color: var(--muted);
+  margin: .6rem 1.1rem 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 520px) {
+  .tabBar { padding: 0 .85rem .6rem; }
+  .tabNota { margin: .5rem .85rem 0; }
+}
 .cercanaNombre { font-size: .85rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
 .cercanaMeta { font-size: .74rem; color: var(--muted); margin-top: .2rem; }
 .cercanaBadge {

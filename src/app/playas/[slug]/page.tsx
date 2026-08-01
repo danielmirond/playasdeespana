@@ -43,6 +43,7 @@ import type { HotelReal } from '@/lib/hoteles'
 import Nav from '@/components/ui/Nav'
 import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
+import { getSimilares } from '@/lib/similares'
 import PildoraContextual from '@/components/playa/PildoraContextual'
 import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
@@ -547,6 +548,10 @@ export default async function PlayaPage({ params }: Props) {
       distKm, bandera: !!p.bandera,
     }))
 
+  // Parecidas: lectura de sidecar, sin cómputo por petición. Vacío para las
+  // playas sin campos del MITECO → la pestaña no se pinta.
+  const playasSimilares = await getSimilares(playa.slug, 6)
+
   return (
     <>
       {preloadFoto && <link rel="preload" as="image" href={preloadFoto} />}
@@ -639,6 +644,7 @@ export default async function PlayaPage({ params }: Props) {
         mareasLunar={mareasLunar}
         horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
+        playasSimilares={playasSimilares}
         opinionesIniciales={opinionesData}
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}

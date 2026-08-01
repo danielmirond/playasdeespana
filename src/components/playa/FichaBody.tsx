@@ -106,6 +106,7 @@ interface Props {
   mareasLunar?:    MareasDia
   horaIdeal?:      HoraIdeal
   playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean }[]
+  playasSimilares?: { slug: string; nombre: string; municipio: string; provincia: string; score: number; porQue: string[]; bandera?: boolean }[]
   /** Agregado de opiniones server-side para SSR + JSON-LD. */
   opinionesIniciales?: import('@/lib/opiniones').OpinionesAgregadas | null
   /** Necesidades generadas por el asistente (reglas + IA opcional).
@@ -284,7 +285,7 @@ function Reorder({ order, children }: { order: string[]; children: React.ReactNo
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', vientoReportado, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', vientoReportado, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, playasSimilares, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -292,6 +293,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   // del hero (que usa el mismo nombre). Antes, el H1 era "La Concha"
   // pero los H2 seguian con "Kontxa hondartza" \u2014 schizofrenia visible.
   const nombreH = locale === 'es' ? nombreMostrado(playa.slug, playa.nombre) : playa.nombre
+  // Las ~1.050 playas que solo vienen de OSM no tienen campos de carácter
+  // del MITECO: no hay con qué compararlas, así que no se pinta la pestaña.
+  const hayParecidas = !!playasSimilares?.length
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const amazonProductos = getProductosParaPlaya(playa, meteo.estado)
@@ -1224,16 +1228,67 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {playasCercanas && playasCercanas.length > 0 && (
           <div key="cercanas" className={styles.card} id="s-cercanas">
             <div className={styles.cardHead}>
-              <h2 className={styles.cardTitle}>{locale === 'en' ? <>Beaches <em>near</em> {nombreH}</> : <>Playas <em>cercanas</em> a {nombreH}</>}</h2>
+              <h2 className={styles.cardTitle}>
+                {hayParecidas
+                  ? (locale === 'en' ? <>Other <em>beaches</em></> : <>Otras <em>playas</em></>)
+                  : (locale === 'en' ? <>Beaches <em>near</em> {nombreH}</> : <>Playas <em>cercanas</em> a {nombreH}</>)}
+              </h2>
             </div>
-            <div className={styles.carousel}>
-              {playasCercanas.map(pc => (
-                <Link key={pc.slug} href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${pc.slug}`} className={styles.cercanaCard} prefetch={true}>
-                  <div className={styles.cercanaNombre}>{pc.nombre}</div>
-                  <div className={styles.cercanaMeta}>{pc.municipio} · {pc.distKm < 10 ? pc.distKm.toFixed(1) : Math.round(pc.distKm)} km</div>
-                  {pc.bandera && <span className={styles.cercanaBadge}><Flag size={12} weight="fill" color="var(--accent)"/></span>}
-                </Link>
-              ))}
+
+            {/* Pestañas SOLO con CSS (radio + selector de hermano). En este
+                repo la hidratación es frágil —FichaNav no llega a pintarse
+                nunca— así que un tab con useState sería una ruleta. Esto
+                funciona con el HTML del servidor y sin una línea de JS. */}
+            <div className={styles.tabs}>
+              {hayParecidas && (
+                <>
+                  <input type="radio" name="tab-otras" id="tab-otras-cerca" defaultChecked className={`${styles.tabRadio} ${styles.tabRadioCerca}`} />
+                  <input type="radio" name="tab-otras" id="tab-otras-parecidas" className={`${styles.tabRadio} ${styles.tabRadioParecidas}`} />
+                  <div className={styles.tabBar} role="group" aria-label={locale === 'en' ? 'Sort other beaches' : 'Ordenar otras playas'}>
+                    <label htmlFor="tab-otras-cerca" className={styles.tabLabel}>
+                      {locale === 'en' ? 'Nearby' : 'Cercanas'}
+                    </label>
+                    <label htmlFor="tab-otras-parecidas" className={styles.tabLabel}>
+                      {locale === 'en' ? 'Similar' : 'Parecidas'}
+                    </label>
+                  </div>
+                </>
+              )}
+
+              <div className={`${styles.tabPanel} ${styles.tabPanelCerca}`}>
+                <div className={styles.carousel}>
+                  {playasCercanas.map(pc => (
+                    <Link key={pc.slug} href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${pc.slug}`} className={styles.cercanaCard} prefetch={true}>
+                      <div className={styles.cercanaNombre}>{pc.nombre}</div>
+                      <div className={styles.cercanaMeta}>{pc.municipio} · {pc.distKm < 10 ? pc.distKm.toFixed(1) : Math.round(pc.distKm)} km</div>
+                      {pc.bandera && <span className={styles.cercanaBadge}><Flag size={12} weight="fill" color="var(--accent)"/></span>}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {hayParecidas && (
+                <div className={`${styles.tabPanel} ${styles.tabPanelParecidas}`}>
+                  <div className={styles.carousel}>
+                    {playasSimilares!.map(ps => (
+                      <Link key={ps.slug} href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${ps.slug}`} className={styles.cercanaCard} prefetch={true}>
+                        <div className={styles.cercanaNombre}>{ps.nombre}</div>
+                        {/* El porqué del parecido, no una cifra de similitud:
+                            un 92 no significa nada para quien lee. */}
+                        <div className={styles.cercanaMeta}>
+                          {ps.porQue.length ? ps.porQue.join(' · ') : ps.municipio}
+                        </div>
+                        {ps.bandera && <span className={styles.cercanaBadge}><Flag size={12} weight="fill" color="var(--accent)"/></span>}
+                      </Link>
+                    ))}
+                  </div>
+                  <p className={styles.tabNota}>
+                    {locale === 'en'
+                      ? 'Matched on setting, size, services and activities.'
+                      : 'Se parecen en entorno, tamaño, servicios y actividades.'}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}

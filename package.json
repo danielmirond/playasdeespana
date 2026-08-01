@@ -11,6 +11,7 @@
     "validate:miteco": "node scripts/validate-miteco-merge.js",
     "sync:playas-miteco": "node scripts/sync-playas-miteco.js",
     "sync:calidad": "node scripts/sync-calidad-agua.js",
+    "build:similares": "node scripts/build-similares.mjs",
     "sync:bandera-azul": "node scripts/sync-bandera-azul.js",
     "prebuild": "node scripts/write-build-info.mjs",
     "predev": "node scripts/write-build-info.mjs"
