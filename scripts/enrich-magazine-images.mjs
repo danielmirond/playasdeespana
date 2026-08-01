@@ -286,13 +286,26 @@ async function unsplash(nombre, municipio) {
 }
 
 // Cascada con prioridad idéntica a fotos.ts (primera fuente no vacía gana).
+//
+// wikimediaText va TERCERA, como en fotos.ts. Estaba quinta, detrás de
+// Flickr, y el comentario ya decía "idéntica a fotos.ts" cuando no lo era.
+// El coste real: el artículo de Playa de Nogales (31-jul-2026) se ilustró
+// con una foto de Flickr marcada "All rights reserved" existiendo en
+// Commons "Playa de Nogales, La Palma, overview.jpg" en CC0, con el
+// topónimo exacto en el nombre del fichero.
+//
+// Ojo con Flickr: photos_public.gne es el feed público y NO admite filtro
+// de licencia, así que lo que devuelve puede ser "todos los derechos
+// reservados". Por eso va detrás de todas las fuentes que sí garantizan
+// licencia libre (Commons, OpenVerse), y por eso conviene revisar a mano
+// lo que salga de ahí antes de publicarlo.
 async function resolverFoto(nombre, municipio, lat, lon) {
   const fuentes = [
     () => wikimediaGeo(lat, lon, nombre),
     () => wikipediaLead(nombre, municipio, lat, lon),
+    () => wikimediaText(nombre, municipio),
     () => openverse(nombre, municipio),
     () => flickr(nombre, municipio),
-    () => wikimediaText(nombre, municipio),
     () => pexels(nombre, municipio),
     () => unsplash(nombre, municipio),
   ]
