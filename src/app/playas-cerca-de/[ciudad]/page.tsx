@@ -12,6 +12,7 @@ import EnlacesGeoHubs from '@/components/seo/EnlacesGeoHubs'
 import { getPlayasCercaDe } from '@/lib/playas'
 import { CIUDADES_INTERIOR, getCiudadInterior } from '@/data/ciudades-interior'
 import { getCamperCity } from '@/lib/autocaravana-localities'
+import { getRutasDe } from '@/lib/rutas-coche'
 
 export const revalidate = 86400
 
@@ -38,8 +39,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-// Estimación honesta de coche: distancia en línea recta × factor de
-// carretera (1,25) a 100 km/h de media. La página lo declara como estimado.
+/** Minutos medidos por carretera → "1 h 45" / "50 min". */
+function formatoMin(min: number): string {
+  const h = Math.floor(min / 60), m = min % 60
+  if (h === 0) return `${m} min`
+  return m > 0 ? `${h} h ${m} min` : `${h} h`
+}
+
+// Respaldo para las playas sin ruta medida: distancia en línea recta ×
+// factor de carretera (1,25) a 100 km/h. La página declara cuál es cuál.
 function tiempoCoche(kmRecta: number): string {
   const h = (kmRecta * 1.25) / 100
   const horas = Math.floor(h)
@@ -54,6 +62,9 @@ export default async function PlayasCercaDeCiudadPage({ params }: Props) {
   if (!c) notFound()
 
   const playas = await getPlayasCercaDe(c.lat, c.lng, 12)
+  // Tiempos medidos por carretera (scripts/harvest-rutas.mjs). {} si esta
+  // ciudad no se cosechó: entonces cada fila cae a la estimación.
+  const rutas = await getRutasDe(c.slug)
   const camper = getCamperCity(ciudad)
 
   const itemList = {
@@ -104,15 +115,33 @@ export default async function PlayasCercaDeCiudadPage({ params }: Props) {
                 </span>
                 <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>{p.municipio} · {p.provincia}</span>
               </span>
-              <span style={{ textAlign: 'right', flexShrink: 0 }}>
-                <span style={{ display: 'block', fontFamily: 'var(--font-mono, monospace)', fontSize: '.78rem', fontWeight: 700, color: 'var(--accent)' }}>{Math.round(p.km)} km</span>
-                <span style={{ fontSize: '.68rem', color: 'var(--muted)' }}>{tiempoCoche(p.km)}</span>
-              </span>
+              {/* Ruta medida por carretera si la tenemos; si no, la
+                  estimación de siempre. El trazo del subrayado dice cuál
+                  de las dos estás leyendo — la misma gramática de la ficha. */}
+              {(() => {
+                const r = rutas[p.slug]
+                return (
+                  <span style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <span style={{ display: 'block', fontFamily: 'var(--font-mono, monospace)', fontSize: '.78rem', fontWeight: 700, color: 'var(--accent)' }}>
+                      {r ? r.km : Math.round(p.km)} km
+                    </span>
+                    <span style={{
+                      fontSize: '.68rem', color: 'var(--muted)',
+                      borderBottom: r ? 'var(--cert-rule-medido)' : 'var(--cert-rule-estimado)',
+                      paddingBottom: 1,
+                    }} title={r ? 'Tiempo real por carretera (OSRM, sin tráfico)' : 'Estimación por distancia'}>
+                      {r ? formatoMin(r.min) : tiempoCoche(p.km)}
+                    </span>
+                  </span>
+                )
+              })()}
             </Link>
           ))}
         </div>
         <p style={{ fontSize: '.72rem', color: 'var(--muted)', margin: '.8rem 0 0' }}>
-          Distancia en línea recta; el tiempo en coche es estimado (factor de carretera). Solo playas con parking.
+          Kilómetros y tiempo <strong>por carretera</strong> (OpenStreetMap/OSRM, sin tráfico) donde el
+          subrayado es continuo. Donde es discontinuo, no hay ruta medida y la cifra es una estimación por
+          distancia. Solo playas con parking.
         </p>
 
         {/* Cross a autocaravana si la ciudad tiene página de alquiler */}
