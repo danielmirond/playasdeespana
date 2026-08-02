@@ -830,6 +830,31 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent,#6b400a)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
                 <Car size={18} weight='bold'/> {locale === 'en' ? 'By car · open in Google Maps' : 'En coche · abrir en Google Maps'}
               </a>
+
+              {/* Elegir app de navegación. Google Maps sigue siendo el botón
+                  principal por ser el universal, pero en iPhone mucha gente
+                  usa Apple Maps y forzarles a Google es fricción gratuita.
+                  Y es la única vía por la que esto llega a CarPlay o Android
+                  Auto: quien navega es su app, no nosotros.
+
+                  Sin detección de plataforma a propósito: aquí la hidratación
+                  no es de fiar, y tres enlaces servidos siempre funcionan.
+                  maps.apple.com abre la app en Apple y una web en el resto. */}
+              <div style={{ display:'flex', alignItems:'center', gap:'.5rem', flexWrap:'wrap',
+                fontSize:'.76rem', color:'var(--muted)', marginTop:'-.25rem' }}>
+                <span>{locale === 'en' ? 'Prefer another app?' : '¿Prefieres otra app?'}</span>
+                <a href={`https://maps.apple.com/?daddr=${playa.lat},${playa.lng}&dirflg=d`}
+                   target="_blank" rel="noopener noreferrer"
+                   style={{ color:'var(--accent)', fontWeight:600, textDecoration:'underline', textUnderlineOffset:'2px' }}>
+                  Apple Maps
+                </a>
+                <span aria-hidden="true">·</span>
+                <a href={`https://waze.com/ul?ll=${playa.lat},${playa.lng}&navigate=yes`}
+                   target="_blank" rel="noopener noreferrer"
+                   style={{ color:'var(--accent)', fontWeight:600, textDecoration:'underline', textUnderlineOffset:'2px' }}>
+                  Waze
+                </a>
+              </div>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
                 <Bus size={18} weight='bold'/> {locale === 'en' ? 'By public transport' : 'En transporte público'}
               </a>
