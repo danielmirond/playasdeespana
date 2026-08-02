@@ -9,7 +9,8 @@ import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
 import { IS_BUILD } from './buildGuard'
 import { osmHoteles } from './osm-pois'
-import { placesNearby } from './google-places'
+import { placesNearby, type GPlace } from './google-places'
+import { placesDelSidecar } from './gplaces-sidecar'
 
 const RADIUS_M = 5000
 
@@ -49,20 +50,25 @@ function inferirPrecio(estrellas: number): string {
 // TTL de cache: hoteles cambian poco (raramente abren/cierran). 7 días.
 const KV_TTL_HOTELES = 7 * 24 * 3600
 
+const desdeGoogle = (g: GPlace[], lat: number, lon: number): HotelReal[] =>
+  g.map((p): HotelReal => ({
+    id: p.googleId, nombre: p.nombre, estrellas: 0,
+    distancia_m: Math.round(haversine(lat, lon, p.lat, p.lon)),
+    rating: p.rating, reseñas: p.reseñas, precio: p.precio,
+    foto: null, website: null, telefono: null,
+    googleId: p.googleId, source: 'google',
+  })).sort((a, b) => a.distancia_m - b.distancia_m)
+
 export async function getHoteles(lat: number, lon: number): Promise<HotelReal[]> {
+  // 1 · Sidecar de Places, ya pagado y congelado. Ver restaurantes.ts.
+  const sc = await placesDelSidecar('lodging', lat, lon)
+  if (sc && sc.length) return desdeGoogle(sc, lat, lon)
+
   // Sin red durante `next build`; en runtime, Google Places (valoraciones
   // reales, gated por key y presupuesto) y si no, Overpass/OSM.
   if (IS_BUILD) return []
   const g = await placesNearby(lat, lon, ['lodging'], RADIUS_M, 6)
-  if (g && g.length) {
-    return g.map((p): HotelReal => ({
-      id: p.googleId, nombre: p.nombre, estrellas: 0,
-      distancia_m: Math.round(haversine(lat, lon, p.lat, p.lon)),
-      rating: p.rating, reseñas: p.reseñas, precio: p.precio,
-      foto: null, website: null, telefono: null,
-      googleId: p.googleId, source: 'google',
-    })).sort((a, b) => a.distancia_m - b.distancia_m)
-  }
+  if (g && g.length) return desdeGoogle(g, lat, lon)
   const osm = await osmHoteles(lat, lon)
   if (osm && osm.length) return osm
   return kvCached('hoteles', [lat, lon], KV_TTL_HOTELES, () => fetchHotelesFromOverpass(lat, lon))
