@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!c) return {}
   return {
     title: `Playas cerca de ${c.ciudad}: cuáles elegir y cómo llegar`,
-    description: `Las playas más cercanas a ${c.ciudad} ordenadas por distancia real, con tiempo estimado en coche, estado del mar en tiempo real y los corredores que usa la gente de ${c.ciudad} para escaparse al mar.`,
+    description: `Las playas más cercanas a ${c.ciudad} con el tiempo real en coche por carretera, estado del mar actualizado cada hora y los corredores que usa la gente de ${c.ciudad} para escaparse al mar.`,
     alternates: { canonical: `/playas-cerca-de/${ciudad}` },
     openGraph: {
       type: 'article', url: `${BASE}/playas-cerca-de/${ciudad}`,
