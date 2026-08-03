@@ -250,9 +250,22 @@ export default function FichaHero({
           </div>
         </div>
 
-        {hasPhoto && foto?.autor && (
+        {/* Atribución. CC BY y CC BY-SA no se cumplen con el nombre del
+            autor: piden licencia y enlace a la página de origen. Antes solo
+            poníamos "Foto: autor · fuente", que no bastaba. */}
+        {hasPhoto && (foto?.autor || foto?.licencia) && (
           <span className={styles.fotoCredito}>
-            Foto: {foto.autor} · {foto.fuente}
+            Foto: {foto.autor ?? foto.fuente}
+            {foto.licencia && <> · {foto.licencia}</>}
+            {foto.origen && (
+              <>
+                {' · '}
+                <a href={foto.origen} target="_blank" rel="noopener noreferrer nofollow"
+                   style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '2px' }}>
+                  origen
+                </a>
+              </>
+            )}
           </span>
         )}
       </section>

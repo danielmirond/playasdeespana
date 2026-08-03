@@ -28,3 +28,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# Volcado parcial de la re-cosecha de fotos (reanudable, no versionable)
+public/data/*.parcial

@@ -61,6 +61,10 @@ export interface FotoPlaya {
   thumb:  string
   fuente: 'unsplash' | 'wikimedia' | 'flickr' | 'openverse' | 'pexels' | 'generica'
   autor?: string
+  /** Licencia declarada en origen ("CC BY-SA 4.0", "Public domain"…). */
+  licencia?: string
+  /** Página de origen. CC BY y CC BY-SA exigen enlazarla, no basta el nombre. */
+  origen?: string
 }
 
 // Palabras negativas que descartamos de títulos / nombres de archivo.
