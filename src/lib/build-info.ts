@@ -1,2 +1,2 @@
 // GENERADO por next.config.js en cada build. No editar.
-export const BUILD_ISO = '2026-08-04T17:39:44.951Z'
+export const BUILD_ISO = '2026-08-04T17:46:28.833Z'

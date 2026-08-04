@@ -203,14 +203,18 @@
 }
 
 /* ── Tira de avisos (fila independiente bajo el hero) ───────────── */
+/* La banda es un lavado del color del propio estado sobre el fondo de la
+   página, no tres tintes escritos a mano. Así el aviso se tiñe del verde,
+   el ámbar o el rojo que mande el sistema activo, y sobre papel Litoral
+   sale frío en vez del verde menta que arrastraba de Arena. */
 .avisosStrip {
-  background: #fff8eb;
+  background: color-mix(in srgb, var(--aceptable) 8%, var(--bg));
   border-bottom: 1px solid var(--line);
   padding: .85rem 0;
 }
-.avisosStrip[data-state="ok"]     { background: #f0f6f0; }
-.avisosStrip[data-state="warn"]   { background: #fff8eb; }
-.avisosStrip[data-state="danger"] { background: #fbeee8; }
+.avisosStrip[data-state="ok"]     { background: color-mix(in srgb, var(--excelente) 7%, var(--bg)); }
+.avisosStrip[data-state="warn"]   { background: color-mix(in srgb, var(--aceptable) 8%, var(--bg)); }
+.avisosStrip[data-state="danger"] { background: color-mix(in srgb, var(--noapto) 8%, var(--bg)); }
 
 .avisosInner {
   max-width: 1080px;
@@ -226,9 +230,17 @@
   flex-shrink: 0;
   animation: pulseDot 2.4s ease-in-out infinite;
 }
-.dot_ok      { background: var(--ok, #2c6b3f);     box-shadow: 0 0 0 4px rgba(44, 107, 63, .16); }
-.dot_warn    { background: var(--warn, var(--aceptable));   box-shadow: 0 0 0 4px rgba(196, 138, 30, .16); }
-.dot_danger  { background: var(--danger, #a8301a); box-shadow: 0 0 0 4px rgba(168, 48, 26, .16); }
+/* --ok, --warn y --danger no están definidos en ningún sistema: estas tres
+   reglas caían siempre al respaldo, que era Arena escrita a mano. Los
+   nombres que sí existen en los dos son los del veredicto. */
+/* Sin box-shadow aquí: pulseDot lo anima al 100% del ciclo, así que
+   cualquier valor que se declare en estas tres reglas no llega a verse.
+   El keyframe pinta el halo con currentColor, de modo que lo que hay que
+   fijar es el color del texto — el punto es sólido y no lo usa para nada
+   más. Antes nadie lo fijaba y el halo salía en la tinta heredada. */
+.dot_ok      { background: var(--excelente); color: var(--excelente); }
+.dot_warn    { background: var(--aceptable); color: var(--aceptable); }
+.dot_danger  { background: var(--noapto);    color: var(--noapto); }
 
 .statusTxt {
   flex: 1; min-width: 200px;
@@ -262,7 +274,7 @@
 
 /* ── Animations ──────────────────────────────────────────────────── */
 @keyframes pulseDot {
-  0%, 100% { box-shadow: 0 0 0 4px currentColor; opacity: 1; }
+  0%, 100% { box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 22%, transparent); opacity: 1; }
   50%      { box-shadow: 0 0 0 8px transparent;   opacity: .6; }
 }
 

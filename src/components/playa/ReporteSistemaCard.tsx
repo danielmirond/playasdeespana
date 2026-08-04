@@ -17,9 +17,9 @@ interface Props {
 }
 
 const COLORES_SEV = {
-  ok:     { dot: 'var(--excelente)', bg: '#f5fbed' },
-  warn:   { dot: 'var(--aceptable)', bg: '#fcf6e6' },
-  danger: { dot: 'var(--noapto)', bg: '#fbeee8' },
+  ok:     { dot: 'var(--excelente)', bg: 'color-mix(in srgb, var(--excelente) 7%, var(--bg))' },
+  warn:   { dot: 'var(--aceptable)', bg: 'color-mix(in srgb, var(--aceptable) 8%, var(--bg))' },
+  danger: { dot: 'var(--noapto)', bg: 'color-mix(in srgb, var(--noapto) 8%, var(--bg))' },
 }
 
 export default function ReporteSistemaCard({ reporte, locale = 'es' }: Props) {
