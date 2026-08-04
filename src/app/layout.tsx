@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import { Playfair_Display, DM_Sans, JetBrains_Mono, Literata, Schibsted_Grotesk } from 'next/font/google'
+import { LITORAL_CSS_MIN } from '@/styles/litoral'
+import { getFlags, flagsAttr, tieneFlag } from '@/lib/flags'
 import InstallPrompt from '@/components/pwa/InstallPrompt'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ConsentScripts from '@/components/ui/ConsentScripts'
@@ -62,10 +64,33 @@ const dmSans = DM_Sans({
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-mono',
+  // Antes era '--font-mono', que chocaba con el token --font-mono de la hoja
+  // y producía `--font-mono: var(--font-mono, …)` — autorreferencia inválida
+  // que caía al nombre de familia literal. Ahora la fuente y el token tienen
+  // nombres distintos y ambas hojas la referencian igual.
+  variable: '--font-jetbrains',
   display: 'swap',
   weight: ['400'],
 })
+
+// ——— Sistema Litoral ———————————————————————————————————————
+// Literata es VARIABLE (200–900) con itálica real y cifras tabulares: se
+// sirve el archivo variable, no instancias estáticas, porque el sistema usa
+// 400 de cuerpo, 500 de display y 700 de énfasis. Sin rango variable harían
+// falta tres ficheros y la negrita sintética que el handoff prohíbe.
+const literata = Literata({
+  subsets: ['latin'],
+  variable: '--font-literata',
+  display: 'swap',
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+})
+const schibsted = Schibsted_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-schibsted',
+  display: 'swap',
+})
+// JetBrains lo comparten las dos hojas vía --font-jetbrains.
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'),
@@ -152,7 +177,7 @@ const CRITICAL_CSS = `
 /* Compat */
 --calma:var(--sea-calma);--buena:var(--sea-buena);--aviso:var(--sea-aviso);--peligro:var(--sea-peligro);--surf:var(--sea-surf);--viento:var(--sea-viento);
 /* Fonts */
---font-serif:var(--font-playfair,'Playfair Display',Georgia,serif);--font-sans:var(--font-dm-sans,'DM Sans',system-ui,sans-serif);--font-mono:var(--font-mono,'JetBrains Mono',ui-monospace,monospace);
+--font-serif:var(--font-playfair,'Playfair Display',Georgia,serif);--font-sans:var(--font-dm-sans,'DM Sans',system-ui,sans-serif);--font-mono:var(--font-jetbrains,'JetBrains Mono',ui-monospace,monospace);
 /* Radii. editorial discreto */
 --r-xs:2px;--r-sm:4px;--r-md:6px;--r-lg:10px;--r-xl:16px;--r-pill:999px;--r-sello:3px;
 /* Certeza del dato (propuesta de diseño 2026, §5.4). Cuatro grados de
@@ -216,15 +241,28 @@ h1,h2,h3,h4,h5,h6{scroll-margin-top:80px;line-height:1.12;letter-spacing:-.01em;
 `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // La decisión de flag se toma AQUÍ, en servidor, y se pinta en <html>.
+  // Nunca un swap en cliente: produce FOUC y parte de la sesión se mediría
+  // con un sistema y parte con el otro.
+  const flags = flagsAttr()
+  const litoral = tieneFlag('ds_litoral_tokens')
+  // Solo se cargan las fuentes del sistema activo: servir las cuatro
+  // familias para usar dos es peso muerto en un sitio 90% móvil.
+  const fuentes = litoral
+    ? `${literata.variable} ${schibsted.variable} ${jetbrainsMono.variable}`
+    : `${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`
+
   return (
-    <html lang="es" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
+    <html lang="es" className={fuentes} {...(flags ? { 'data-flags': flags } : {})}>
       <head>
         {/* Verificación de sitio Impact.com (afiliación). Usa atributo `value`
             (no `content`), por eso va como tag literal y no vía Metadata API. */}
         <meta name="impact-site-verification" {...{ value: 'a656d2a6-4ace-403d-84f9-172e9b6c8da0' }} />
 
-        {/* Critical CSS inline. paint inmediato sin esperar CSS externo */}
-        <style dangerouslySetInnerHTML={{ __html: CRITICAL_CSS }} />
+        {/* Critical CSS inline: paint inmediato sin esperar CSS externo.
+            Una hoja U OTRA, nunca las dos — Litoral sustituye a Arena, no se
+            apila sobre ella. Solo existe un juego de tokens a la vez. */}
+        <style dangerouslySetInnerHTML={{ __html: litoral ? LITORAL_CSS_MIN : CRITICAL_CSS }} />
 
         {/* Preload del logo · está en el LCP del nav, eliminar el round-trip */}
         <link rel="preload" as="image" href="/logo.svg" fetchPriority="high" />

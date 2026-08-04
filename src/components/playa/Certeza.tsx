@@ -47,8 +47,22 @@ export function Dato({ v, u, cert, size = 26, onDark, title }: DatoProps) {
       style={{ fontSize: size }}
       title={title}
     >
-      {vacio ? '—' : v}
-      {!vacio && u && <span className="dato-u">{u}</span>}
+      {vacio ? (
+        // «Sin dato» es un estado de primera clase, no un hueco (Litoral).
+        // Con palabras y en contraste AA: un "—" obliga a interpretar, y
+        // quien usa lector de pantalla no oye nada útil. El tamaño baja
+        // porque son letras donde había una cifra.
+        <span className="dato-vacio" style={{ fontSize: Math.round(size * 0.52) }}>sin dato</span>
+      ) : (
+        <>
+          {/* .num/.num-live: Literata tabular en 700. Al ser tabulares nada
+              baila cuando el valor se actualiza en vivo. Bajo Arena estas
+              clases no existen y la cifra hereda, así que el mismo
+              componente sirve a las dos hojas. */}
+          <span className="num num-live">{v}</span>
+          {u && <span className="dato-u num-unit">{u}</span>}
+        </>
+      )}
     </span>
   )
 }

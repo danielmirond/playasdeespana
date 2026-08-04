@@ -39,6 +39,7 @@ import AsistentePlaya from './AsistentePlaya'
 import TrustSeal from '@/components/common/TrustSeal'
 import ContextualCTA from './ContextualCTA'
 import { flags } from '@/lib/flags'
+import { hayBanderaRoja, ordenBanderaRoja, BLOQUES_DUROS } from '@/lib/bandera-roja'
 import AffiliatesCTABlock from './AffiliatesCTABlock'
 import OpinionesDestacadas from './OpinionesDestacadas'
 import BeachVideoToggle from './BeachVideoToggle'
@@ -272,10 +273,14 @@ const ORDER_V2: string[] = [
 
 // Reordena sus hijos por element.key según `order`. Claves ausentes en
 // `order` conservan su posición de origen (sort estable). order=[] → identidad.
-function Reorder({ order, children }: { order: string[]; children: React.ReactNode }) {
+function Reorder({ order, quitar, children }: { order: string[]; quitar?: ReadonlySet<string>; children: React.ReactNode }) {
   const arr = (Array.isArray(children) ? children : [children])
     .flat(Infinity)
-    .filter(Boolean) as React.ReactElement[]
+    .filter(Boolean)
+    // `quitar` no oculta: descarta. Un bloque con display:none sigue en el
+    // DOM, sigue contando impresiones y sigue estando para quien lea el
+    // HTML. Con bandera roja tiene que no existir.
+    .filter(el => !quitar || !quitar.has(String((el as React.ReactElement).key ?? ''))) as React.ReactElement[]
   const idx = (k: React.Key | null) => {
     const i = k == null ? -1 : order.indexOf(String(k))
     return i === -1 ? 1e9 : i
@@ -292,6 +297,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   // del hero (que usa el mismo nombre). Antes, el H1 era "La Concha"
   // pero los H2 seguian con "Kontxa hondartza" \u2014 schizofrenia visible.
   const nombreH = locale === 'es' ? nombreMostrado(playa.slug, playa.nombre) : playa.nombre
+  // Bandera roja: no se monetiza un día peligroso. Lo que mete al usuario en
+  // el agua no se renderiza; lo que es comercio legítimo baja por debajo del
+  // texto largo y pierde la urgencia. El criterio vive en lib/bandera-roja.
+  const rojo = hayBanderaRoja(banderaPlaya)
+  const ordenSecciones = rojo ? ordenBanderaRoja(ORDER_V2) : ORDER_V2
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const amazonProductos = getProductosParaPlaya(playa, meteo.estado)
@@ -393,7 +403,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   return (
     <div className={styles.wrap}>
       <div className={styles.main}>
-        <Reorder order={ORDER_V2}>
+        <Reorder order={ordenSecciones} quitar={rojo ? BLOQUES_DUROS : undefined}>
 
         {/* ORDEN ABOVE-THE-FOLD (post critique PR #84):
               1. Intro breve (texto, anchor reading)
