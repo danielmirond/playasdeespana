@@ -18,14 +18,25 @@ export interface EstadoConfig {
   tileBgDark:string
 }
 
+import { tinte } from './tinte'
+
+// El color de cada estado ya vivía en los tokens --sea-*, con exactamente
+// los mismos valores: este archivo era una segunda copia que había que
+// acordarse de sincronizar. Ahora apunta al token, así que bajo Litoral el
+// mar se pinta con su paleta sin tocar nada aquí.
+//
+// text, ringBg, ringColor y las teselas siguen en hex: son tintes
+// decorativos de cada estado, sin token propio en ninguno de los dos
+// sistemas. Darles uno es una decisión de diseño, no de limpieza.
+
 export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
   CALMA: {
     label:     'CALMA',
     labelEn:   'CALM',
     frase:     'El mar te espera',
     fraseEn:   'The sea is waiting for you',
-    dot:       '#5a8a7a',
-    bg:        'rgba(90,138,122,.1)',
+    dot:       'var(--sea-calma)',
+    bg:        tinte('var(--sea-calma)', 10),
     text:      '#3a6a5a',
     ringBg:    '#f0e6d0',
     ringColor: '#c4904a',
@@ -39,8 +50,8 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     labelEn:   'GOOD',
     frase:     'Condiciones ideales',
     fraseEn:   'Ideal conditions',
-    dot:       '#3d6b1f',
-    bg:        'rgba(61,107,31,.1)',
+    dot:       'var(--sea-buena)',
+    bg:        tinte('var(--sea-buena)', 10),
     text:      '#2a4a14',
     ringBg:    '#f0ece0',
     ringColor: '#8a7a40',
@@ -54,8 +65,8 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     labelEn:   'WARNING',
     frase:     'Entra con precaución',
     fraseEn:   'Enter with caution',
-    dot:       '#c48a1e',
-    bg:        'rgba(196,138,30,.1)',
+    dot:       'var(--sea-aviso)',
+    bg:        tinte('var(--sea-aviso)', 10),
     text:      '#7a4a08',
     ringBg:    '#f8f0e0',
     ringColor: '#c89040',
@@ -69,8 +80,8 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     labelEn:   'DANGER',
     frase:     'No recomendado el baño',
     fraseEn:   'Swimming not recommended',
-    dot:       '#7a2818',
-    bg:        'rgba(122,40,24,.08)',
+    dot:       'var(--sea-peligro)',
+    bg:        tinte('var(--sea-peligro)', 10),
     text:      '#4a1810',
     ringBg:    '#f8ece8',
     ringColor: '#a04040',
@@ -84,8 +95,8 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     labelEn:   'SURF',
     frase:     'Olas para los valientes',
     fraseEn:   'Waves for the brave',
-    dot:       '#2d5266',
-    bg:        'rgba(45,82,102,.1)',
+    dot:       'var(--sea-surf)',
+    bg:        tinte('var(--sea-surf)', 10),
     text:      '#1a3a4a',
     ringBg:    '#e8f0f4',
     ringColor: '#2d5266',
@@ -99,8 +110,8 @@ export const ESTADOS: Record<EstadoBano, EstadoConfig> = {
     labelEn:   'WINDY',
     frase:     'Cometas y kitesurf',
     fraseEn:   'Kites and kitesurfing',
-    dot:       '#7a7a7a',
-    bg:        'rgba(122,122,122,.08)',
+    dot:       'var(--sea-viento)',
+    bg:        tinte('var(--sea-viento)', 10),
     text:      '#5a5a5a',
     ringBg:    '#f0ede8',
     ringColor: '#8a8a8a',

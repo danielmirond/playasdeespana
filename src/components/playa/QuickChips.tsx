@@ -13,6 +13,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Fish, Waves, Car, CheckCircle, Person, Dog } from '@phosphor-icons/react'
 import type { TipoBinario } from '@/lib/reportes'
+import { tinte } from '@/lib/tinte'
 
 interface ChipDef {
   tipo:  TipoBinario | 'agua_cristalina' | 'apto_ninos' | 'perros_ok'
@@ -123,7 +124,7 @@ export default function QuickChips({ slug, locale = 'es', inlineMode = false }: 
               // Touch target 44px (iOS HIG) — antes era ~32px.
               padding: '.65rem 1rem',
               minHeight: 44,
-              background: isVoted ? `${c.color}22` : '#fff',
+              background: isVoted ? tinte(c.color, 13) : 'var(--card-bg)',
               border: `1px solid ${isVoted ? c.color : 'var(--line)'}`,
               borderRadius: 100,
               fontSize: '.85rem',

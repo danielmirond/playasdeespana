@@ -5,6 +5,7 @@ import Link from 'next/link'
 import type { Playa } from '@/types'
 import { ESTADOS } from '@/lib/estados'
 import styles from './Cercanas.module.css'
+import { tinte } from '@/lib/tinte'
 
 interface PlayaConDist extends Playa { distKm: number }
 
@@ -125,7 +126,7 @@ export default function Cercanas({ locale = 'es' }: Props) {
               <div className={styles.cardBot}>
                 {m ? (
                   <>
-                    <span className={styles.pill} style={{ background: estColor + '22', color: estColor, border: `1px solid ${estColor}44` }}>
+                    <span className={styles.pill} style={{ background: tinte(estColor, 13), color: estColor, border: `1px solid ${tinte(estColor, 27)}` }}>
                       <span className={styles.pillDot} style={{ background: estColor }}/>
                       {estLabel}
                     </span>

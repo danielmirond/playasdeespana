@@ -5,6 +5,7 @@ import Link from 'next/link'
 import type { Playa } from '@/types'
 import { ESTADOS } from '@/lib/estados'
 import styles from './Favoritas.module.css'
+import { tinte } from '@/lib/tinte'
 
 const KEY = 'playas_favoritas'
 
@@ -112,7 +113,7 @@ export default function Favoritas({ locale = 'es' }: Props) {
                     <div className={styles.lugar}>{p.municipio} · {p.provincia}</div>
                   </div>
                   {m && (
-                    <span className={styles.pill} style={{ background: estColor + '22', color: estColor, border: `1px solid ${estColor}44` }}>
+                    <span className={styles.pill} style={{ background: tinte(estColor, 13), color: estColor, border: `1px solid ${tinte(estColor, 27)}` }}>
                       <span className={styles.pillDot} style={{ background: estColor }}/>
                       {estLabel}
                     </span>

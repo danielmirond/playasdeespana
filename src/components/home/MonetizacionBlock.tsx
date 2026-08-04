@@ -5,6 +5,7 @@
 // necesito complementos (hotel, coche, actividad)".
 import Link from 'next/link'
 import { Bed, ForkKnife, MapTrifold, Ticket } from '@phosphor-icons/react/dist/ssr'
+import { tinte } from '@/lib/tinte'
 
 interface Props {
   locale?: 'es' | 'en'
@@ -102,7 +103,7 @@ export default function MonetizacionBlock({ locale = 'es' }: Props) {
             >
               <div style={{
                 width: 42, height: 42, borderRadius: 4,
-                background: `${c.color}12`, border: `1px solid ${c.color}25`,
+                background: tinte(c.color, 7), border: `1px solid ${tinte(c.color, 15)}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,
               }}>
@@ -119,7 +120,7 @@ export default function MonetizacionBlock({ locale = 'es' }: Props) {
               {c.tag && (
                 <span style={{
                   fontSize: '.65rem', fontWeight: 700, color: c.color,
-                  background: `${c.color}10`, padding: '.15rem .35rem',
+                  background: tinte(c.color, 6), padding: '.15rem .35rem',
                   borderRadius: 4, flexShrink: 0,
                 }}>
                   {c.tag}

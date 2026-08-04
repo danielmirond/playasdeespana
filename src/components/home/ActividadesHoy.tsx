@@ -7,6 +7,7 @@
 import Link from 'next/link'
 import type { Playa } from '@/types'
 import { Waves, Eyeglasses, Boat, Wind } from '@phosphor-icons/react/dist/ssr'
+import { tinte } from '@/lib/tinte'
 
 interface Props {
   playas: Playa[]
@@ -103,7 +104,7 @@ export default function ActividadesHoy({ playas, locale = 'es' }: Props) {
               }}>
                 <div style={{
                   width: 36, height: 36, borderRadius: 4,
-                  background: `${g.color}14`, border: `1px solid ${g.color}30`,
+                  background: tinte(g.color, 8), border: `1px solid ${tinte(g.color, 19)}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0,
                 }}>

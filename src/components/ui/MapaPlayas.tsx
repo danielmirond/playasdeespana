@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import type { Playa } from '@/types'
+import { tinte } from '@/lib/tinte'
 
 interface Props {
   /** Zoom con rueda desde el primer momento. Solo para /mapa (experiencia
@@ -154,7 +155,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
               <div style="font-family:var(--font-serif,Georgia,serif);font-style:italic;font-weight:700;font-size:1rem;line-height:1.1;margin-bottom:.25rem;letter-spacing:-.01em">${p.nombre}</div>
               <div style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.7rem;color:var(--cert-estimado);margin-bottom:.5rem;letter-spacing:.04em">${p.municipio ?? ''} · ${p.provincia ?? ''}</div>
               <div style="display:flex;gap:.3rem;margin-bottom:.55rem;align-items:center">
-                <span style="background:${color}14;color:${color};border:1px solid ${color}44;padding:2px 7px;border-radius:100px;font-size:.7rem;font-weight:500">${estado}</span>
+                <span style="background:${tinte(color, 8)};color:${color};border:1px solid ${tinte(color, 27)};padding:2px 7px;border-radius:100px;font-size:.7rem;font-weight:500">${estado}</span>
                 <span style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.68rem;color:var(--cert-estimado)">${olas}m · ${viento}km/h</span>
               </div>
               <a href="/playas/${p.slug}" style="display:block;text-align:center;background:var(--terra-800);color:white;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">Ver playa →</a>

@@ -8,6 +8,7 @@ import Nav from '@/components/ui/Nav'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import AuthorByline from '@/components/seo/AuthorByline'
 import { getFileLastModified } from '@/lib/dateModified'
+import { tinte } from '@/lib/tinte'
 
 export const revalidate = 604800 // 7 días. contenido evergreen
 
@@ -158,7 +159,7 @@ export default function ProtectoresSolaresPage() {
               { uv: '11+',  nivel: 'Extremo',     spf: 'SPF 50+ (reaplicar cada 60 min)', color: '#7c3aed' },
             ].map(r => (
               <div key={r.uv} style={{
-                borderLeft: `4px solid ${r.color}`, background: `${r.color}08`,
+                borderLeft: `4px solid ${r.color}`, background: tinte(r.color, 3),
                 borderRadius: '0 4px 4px 0', padding: '.65rem .8rem',
               }}>
                 <div style={{ fontWeight: 800, fontSize: '.88rem', color: r.color }}>UV {r.uv}</div>
@@ -198,8 +199,8 @@ export default function ProtectoresSolaresPage() {
                   {p.badge && (
                     <span style={{
                       fontSize: '.62rem', fontWeight: 700, padding: '.15rem .5rem',
-                      borderRadius: 100, background: `${p.badgeColor}18`, color: p.badgeColor,
-                      border: `1px solid ${p.badgeColor}44`,
+                      borderRadius: 100, background: tinte(p.badgeColor, 9), color: p.badgeColor,
+                      border: `1px solid ${tinte(p.badgeColor, 27)}`,
                     }}>{p.badge}</span>
                   )}
                 </div>

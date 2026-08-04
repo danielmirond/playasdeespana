@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import type { Playa } from '@/types'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
+import { tinte } from '@/lib/tinte'
 
 interface BeachData {
   playa: Playa
@@ -125,7 +126,7 @@ export default function ComparadorPlayas() {
                 {s.ps.factors.map(f => (
                   <span key={f.icon} style={{
                     fontSize: '.68rem', fontWeight: 700, color: f.color,
-                    background: `${f.color}12`, border: `1px solid ${f.color}30`,
+                    background: tinte(f.color, 7), border: `1px solid ${tinte(f.color, 19)}`,
                     padding: '.15rem .4rem', borderRadius: 6,
                   }}>{f.label}</span>
                 ))}

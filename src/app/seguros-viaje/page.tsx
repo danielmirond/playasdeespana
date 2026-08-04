@@ -7,6 +7,7 @@ import Nav from '@/components/ui/Nav'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
 import AuthorByline from '@/components/seo/AuthorByline'
 import { getFileLastModified } from '@/lib/dateModified'
+import { tinte } from '@/lib/tinte'
 
 export const revalidate = 604800
 
@@ -156,7 +157,7 @@ export default function SegurosViajePage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem', marginBottom: '2.5rem' }}>
             {disponibles.map(s => (
               <div key={s.marca} style={{
-                background: 'var(--card-bg)', border: `2px solid ${s.color}22`,
+                background: 'var(--card-bg)', border: `2px solid ${tinte(s.color, 13)}`,
                 borderRadius: 6, padding: '1.25rem',
                 display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap',
               }}>
@@ -165,8 +166,8 @@ export default function SegurosViajePage() {
                     <span style={{ fontWeight: 700, fontSize: '1.1rem', color: s.color }}>{s.marca}</span>
                     <span style={{
                       fontSize: '.65rem', fontWeight: 700, padding: '.2rem .5rem',
-                      background: `${s.color}14`, color: s.color, borderRadius: 100,
-                      border: `1px solid ${s.color}44`,
+                      background: tinte(s.color, 8), color: s.color, borderRadius: 100,
+                      border: `1px solid ${tinte(s.color, 27)}`,
                     }}>{s.descuento}</span>
                   </div>
                   <div style={{ fontSize: '.75rem', color: 'var(--muted)', marginBottom: '.35rem' }}>

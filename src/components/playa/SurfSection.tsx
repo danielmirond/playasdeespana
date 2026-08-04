@@ -5,6 +5,7 @@ import { Boat, Drop, Eye, Fish, PersonSimpleSwim, Sun, Waves, Wind } from '@phos
 
 import type { Playa } from '@/types'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
+import { tinte } from '@/lib/tinte'
 
 interface MeteoDay {
   temp_max: number; temp_min: number
@@ -112,7 +113,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
           display: 'flex', gap: '1rem', alignItems: 'center',
           padding: '.75rem 1rem', borderRadius: '6px',
           background: estadoInfo.bg, marginBottom: '1.25rem',
-          border: `1px solid ${estadoInfo.color}22`,
+          border: `1px solid ${tinte(estadoInfo.color, 13)}`,
         }}>
           <div style={{ fontSize: '2rem', display:'flex', alignItems:'center' }}><Waves size={28} weight="bold" color={estadoInfo.color}/></div>
           <div style={{ flex: 1 }}>
@@ -177,13 +178,13 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
           ].map(act => (
             <div key={act.label} style={{
               padding: '.7rem .85rem', borderRadius: '4px',
-              background: act.score >= 3 ? `${act.color}10` : 'rgba(0,0,0,.02)',
-              border: `1px solid ${act.score >= 3 ? act.color + '30' : 'var(--line)'}`,
+              background: act.score >= 3 ? tinte(act.color, 6) : 'rgba(0,0,0,.02)',
+              border: `1px solid ${act.score >= 3 ? tinte(act.color, 19) : 'var(--line)'}`,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '.35rem' }}>
                 <span style={{ fontSize: '1.1rem' }}>{act.icon}</span>
                 {act.disponible && (
-                  <span style={{ fontSize:'.72rem', fontWeight: 700, color: act.color, background: act.color + '18', padding: '1px 5px', borderRadius: '100px' }}>OSM</span>
+                  <span style={{ fontSize:'.72rem', fontWeight: 700, color: act.color, background: tinte(act.color, 9), padding: '1px 5px', borderRadius: '100px' }}>OSM</span>
                 )}
               </div>
               <div style={{ fontWeight: 700, fontSize: '.75rem', color: 'var(--ink)', marginBottom: '.2rem' }}>{act.label}</div>
@@ -197,7 +198,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
         {turbidez && (
           <div style={{
             padding: '.75rem 1rem', borderRadius: '4px', marginBottom: '1.25rem',
-            background: turbidez.color + '10', border: `1px solid ${turbidez.color}30`,
+            background: tinte(turbidez.color, 6), border: `1px solid ${tinte(turbidez.color, 19)}`,
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem' }}>
               <span style={{ fontSize: '1.3rem', display:'flex', alignItems:'center' }}><Eye size={22} weight="bold" color={turbidez.color}/></span>

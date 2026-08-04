@@ -4,6 +4,7 @@ import {
   Fish, Flag, Car, CheckCircle, Warning, Waves, Wind, Star, Users, Sparkle,
 } from '@phosphor-icons/react'
 import type { TipoBinario, TipoRating, ReportesPlaya } from '@/lib/reportes'
+import { tinte } from '@/lib/tinte'
 
 interface Props {
   slug: string
@@ -222,8 +223,8 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                 display: 'flex', alignItems: 'center', gap: '.5rem',
                 width: '100%', padding: '.55rem .8rem',
                 borderRadius: 4,
-                border: done ? `1px solid ${o.color}66` : '1px solid var(--line)',
-                background: done ? `${o.color}14` : 'transparent',
+                border: done ? `1px solid ${tinte(o.color, 40)}` : '1px solid var(--line)',
+                background: done ? tinte(o.color, 8) : 'transparent',
                 cursor: done ? 'default' : 'pointer',
                 fontSize: '.82rem', fontWeight: 500,
                 fontFamily: 'var(--font-sans, system-ui)',
@@ -240,7 +241,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
               {count > 0 && (
                 <span style={{
                   fontSize: '.74rem', fontWeight: 700, color: o.color,
-                  background: `${o.color}18`, padding: '.15rem .5rem',
+                  background: tinte(o.color, 9), padding: '.15rem .5rem',
                   borderRadius: 99, minWidth: '1.6rem', textAlign: 'center',
                 }}>
                   {count}
@@ -280,7 +281,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                   <span style={{
                     marginLeft: 'auto',
                     fontSize: '.78rem', fontWeight: 700, color: r.color,
-                    background: `${r.color}14`, padding: '.15rem .5rem',
+                    background: tinte(r.color, 8), padding: '.15rem .5rem',
                     borderRadius: 99,
                   }}>
                     {avg.toFixed(1)} <span style={{ opacity: .6 }}>/ 5</span>
@@ -306,7 +307,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                       style={{
                         width: 36, height: 36, borderRadius: 4,
                         border: '1px solid var(--line)',
-                        background: active ? `${r.color}14` : 'transparent',
+                        background: active ? tinte(r.color, 8) : 'transparent',
                         cursor: done ? 'default' : 'pointer',
                         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                         transition: 'all .15s',

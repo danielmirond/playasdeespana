@@ -4,6 +4,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPlayaBySlug } from '@/lib/playas'
 import { calcularPlayaScore, type MeteoInput } from '@/lib/scoring'
+import { aHex } from '@/lib/scoring'
 
 export const revalidate = 3600
 
@@ -48,7 +49,9 @@ export async function GET(req: NextRequest) {
     provincia: playa.provincia,
     score: ps.score,
     label: ps.label,
-    color: ps.color,
+    // El widget se inyecta en páginas de terceros: allí no existen nuestras
+    // variables, así que el color viaja resuelto a hex.
+    color: aHex(ps.color),
     agua: meteo.agua,
     olas: meteo.olas,
     viento: meteo.viento,

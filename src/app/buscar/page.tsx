@@ -7,6 +7,7 @@ import Nav from '@/components/ui/Nav'
 import type { Playa } from '@/types'
 import { calcularPlayaScore, type PlayaScore, type MeteoInput } from '@/lib/scoring'
 import styles from './buscar.module.css'
+import { tinte } from '@/lib/tinte'
 
 const FILTROS = [
   { key: 'bandera',    label: 'Bandera Azul' },
@@ -328,7 +329,7 @@ function BuscarContent() {
                           {ps.factors.slice(0, 3).map(f => (
                             <span key={f.icon} style={{
                               fontSize: '.62rem', fontWeight: 700, color: f.color,
-                              background: `${f.color}12`, border: `1px solid ${f.color}30`,
+                              background: tinte(f.color, 7), border: `1px solid ${tinte(f.color, 19)}`,
                               padding: '.1rem .3rem', borderRadius: 4,
                             }}>{f.label}</span>
                           ))}

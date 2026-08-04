@@ -12,6 +12,34 @@
 
 import type { Playa } from '@/types'
 
+// La escala de veredicto se nombra por rol, no por tono. Los cinco nombres
+// existen en los dos sistemas visuales — Arena los define con sus hex y
+// Litoral los realias a --score-* —, así que la misma puntuación se pinta
+// verde oliva o verde apagado sin que este archivo se entere.
+//
+// TONO_HEX conserva el literal porque el widget embebible viaja a páginas
+// de terceros, donde nuestras variables no existen. Es el único consumidor.
+const TONO = {
+  excelente: 'var(--excelente)',
+  muybueno:  'var(--muybueno)',
+  aceptable: 'var(--aceptable)',
+  limitado:  'var(--limitado)',
+  noapto:    'var(--noapto)',
+} as const
+
+export const TONO_HEX = {
+  'var(--excelente)': '#3d6b1f',
+  'var(--muybueno)':  '#7a8a30',
+  'var(--aceptable)': '#c48a1e',
+  'var(--limitado)':  '#a04818',
+  'var(--noapto)':    '#7a2818',
+} as const
+
+/** Traduce un color de token a hex. Para superficies sin nuestros tokens. */
+export const aHex = (color: string): string =>
+  (TONO_HEX as Record<string, string>)[color] ?? color
+
+
 export interface MeteoInput {
   agua:    number   // °C
   olas:    number   // m
@@ -157,42 +185,42 @@ export function calcularPlayaScore(playa: Playa, meteo: MeteoInput): PlayaScore 
 
   let label: string, labelEn: string, emoji: string, color: string
   if (score >= 85) {
-    label = 'Excelente'; labelEn = 'Excellent'; emoji = '🟢'; color = '#3d6b1f'
+    label = 'Excelente'; labelEn = 'Excellent'; emoji = '🟢'; color = TONO.excelente
   } else if (score >= 70) {
-    label = 'Muy buena'; labelEn = 'Very good'; emoji = '🟢'; color = '#7a8a30'
+    label = 'Muy buena'; labelEn = 'Very good'; emoji = '🟢'; color = TONO.muybueno
   } else if (score >= 50) {
-    label = 'Aceptable'; labelEn = 'Fair'; emoji = '🟡'; color = '#c48a1e'
+    label = 'Aceptable'; labelEn = 'Fair'; emoji = '🟡'; color = TONO.aceptable
   } else if (score >= 30) {
-    label = 'Limitada'; labelEn = 'Limited'; emoji = '🟠'; color = '#a04818'
+    label = 'Limitada'; labelEn = 'Limited'; emoji = '🟠'; color = TONO.limitado
   } else {
-    label = 'No apta'; labelEn = 'Poor'; emoji = '🔴'; color = '#7a2818'
+    label = 'No apta'; labelEn = 'Poor'; emoji = '🔴'; color = TONO.noapto
   }
 
   const factors: Factor[] = []
 
-  if (meteo.viento <= 10)      factors.push({ label: 'Sin viento',     labelEn: 'No wind',      color: '#3d6b1f', icon: 'wind' })
-  else if (meteo.viento <= 20) factors.push({ label: 'Brisa suave',    labelEn: 'Light breeze',  color: '#7a8a30', icon: 'wind' })
-  else if (meteo.viento <= 35) factors.push({ label: 'Viento fuerte',  labelEn: 'Strong wind',   color: '#a04818', icon: 'wind' })
-  else                         factors.push({ label: 'Viento extremo', labelEn: 'Extreme wind',  color: '#7a2818', icon: 'wind' })
+  if (meteo.viento <= 10)      factors.push({ label: 'Sin viento',     labelEn: 'No wind',      color: TONO.excelente, icon: 'wind' })
+  else if (meteo.viento <= 20) factors.push({ label: 'Brisa suave',    labelEn: 'Light breeze',  color: TONO.muybueno, icon: 'wind' })
+  else if (meteo.viento <= 35) factors.push({ label: 'Viento fuerte',  labelEn: 'Strong wind',   color: TONO.limitado, icon: 'wind' })
+  else                         factors.push({ label: 'Viento extremo', labelEn: 'Extreme wind',  color: TONO.noapto, icon: 'wind' })
 
-  if (meteo.olas <= 0.3)       factors.push({ label: 'Mar calmo',      labelEn: 'Calm sea',      color: '#3d6b1f', icon: 'waves' })
-  else if (meteo.olas <= 1.0)  factors.push({ label: 'Oleaje moderado',labelEn: 'Moderate waves', color: '#c48a1e', icon: 'waves' })
-  else if (meteo.olas <= 2.0)  factors.push({ label: 'Mar agitado',    labelEn: 'Rough sea',     color: '#a04818', icon: 'waves' })
-  else                         factors.push({ label: 'Mar muy agitado',labelEn: 'Very rough',    color: '#7a2818', icon: 'waves' })
+  if (meteo.olas <= 0.3)       factors.push({ label: 'Mar calmo',      labelEn: 'Calm sea',      color: TONO.excelente, icon: 'waves' })
+  else if (meteo.olas <= 1.0)  factors.push({ label: 'Oleaje moderado',labelEn: 'Moderate waves', color: TONO.aceptable, icon: 'waves' })
+  else if (meteo.olas <= 2.0)  factors.push({ label: 'Mar agitado',    labelEn: 'Rough sea',     color: TONO.limitado, icon: 'waves' })
+  else                         factors.push({ label: 'Mar muy agitado',labelEn: 'Very rough',    color: TONO.noapto, icon: 'waves' })
 
   if (playa.parking) {
     const g = (playa.grado_ocupacion ?? '').toLowerCase()
-    if (g.includes('bajo'))       factors.push({ label: 'Fácil aparcar',    labelEn: 'Easy parking',  color: '#3d6b1f', icon: 'parking' })
-    else if (g.includes('medio')) factors.push({ label: 'Parking disponible',labelEn: 'Parking available', color: '#c48a1e', icon: 'parking' })
-    else if (g.includes('alto'))  factors.push({ label: 'Difícil aparcar',  labelEn: 'Hard to park',  color: '#7a2818', icon: 'parking' })
-    else                          factors.push({ label: 'Con parking',      labelEn: 'Has parking',   color: '#3d6b1f', icon: 'parking' })
+    if (g.includes('bajo'))       factors.push({ label: 'Fácil aparcar',    labelEn: 'Easy parking',  color: TONO.excelente, icon: 'parking' })
+    else if (g.includes('medio')) factors.push({ label: 'Parking disponible',labelEn: 'Parking available', color: TONO.aceptable, icon: 'parking' })
+    else if (g.includes('alto'))  factors.push({ label: 'Difícil aparcar',  labelEn: 'Hard to park',  color: TONO.noapto, icon: 'parking' })
+    else                          factors.push({ label: 'Con parking',      labelEn: 'Has parking',   color: TONO.excelente, icon: 'parking' })
   } else {
-    factors.push({ label: 'Sin parking',   labelEn: 'No parking',   color: '#a04818', icon: 'parking' })
+    factors.push({ label: 'Sin parking',   labelEn: 'No parking',   color: TONO.limitado, icon: 'parking' })
   }
 
   // UV
-  if (meteo.uv >= 8)           factors.push({ label: 'UV muy alto',    labelEn: 'Very high UV',  color: '#7a2818', icon: 'sun' })
-  else if (meteo.uv >= 6)      factors.push({ label: 'UV alto',        labelEn: 'High UV',       color: '#a04818', icon: 'sun' })
+  if (meteo.uv >= 8)           factors.push({ label: 'UV muy alto',    labelEn: 'Very high UV',  color: TONO.noapto, icon: 'sun' })
+  else if (meteo.uv >= 6)      factors.push({ label: 'UV alto',        labelEn: 'High UV',       color: TONO.limitado, icon: 'sun' })
 
   return {
     score,
