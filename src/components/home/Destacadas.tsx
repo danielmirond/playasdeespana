@@ -243,7 +243,7 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
       {avoid.length > 0 && (
         <section className={styles.section} style={{ marginTop: '2.5rem' }}>
           <div className={styles.hd}>
-            <span className={styles.hdTitle} style={{ color: 'var(--sea-peligro,#7a2818)' }}>
+            <span className={styles.hdTitle} style={{ color: 'var(--sea-peligro)' }}>
               {locale === 'en' ? 'Avoid today' : 'Evita hoy'}
             </span>
             <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>

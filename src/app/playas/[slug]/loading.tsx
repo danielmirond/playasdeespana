@@ -25,7 +25,7 @@ export default function LoadingPlaya() {
       <section style={{
         minHeight: 520, padding: '1.5rem 1.5rem 2.5rem',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        textAlign: 'center', background: 'var(--bg, #f0e6d0)',
+        textAlign: 'center', background: 'var(--bg)',
       }}>
         {/* Breadcrumb */}
         <div style={{ alignSelf: 'flex-start', marginBottom: '1.25rem' }}>

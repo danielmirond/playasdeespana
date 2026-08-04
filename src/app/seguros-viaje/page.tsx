@@ -45,7 +45,7 @@ interface Seguro {
 const SEGUROS: Seguro[] = [
   {
     marca:    'Heymondo',
-    color:    '#4a7a90',
+    color:    'var(--mar-500)',
     aff:      HEYMONDO_AFF,
     url:      (aff) => `https://www.heymondo.es/?agencyid=${aff}`,
     descuento: '5% de descuento aplicado',

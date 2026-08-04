@@ -65,7 +65,7 @@ const AsideAfiliacionCTA = dynamic(() => import('./AsideAfiliacionCTA'), { ssr: 
 const Opiniones = dynamic(() => import('./Opiniones'))
 const VotacionPlaya = dynamic(() => import('./VotacionPlaya'), {
   ssr: false,
-  loading: () => <div style={{ height: 148, borderRadius: 6, border: '1px solid var(--line,#e8dcc8)', background: 'var(--card-bg,#faf6ef)' }} />,
+  loading: () => <div style={{ height: 148, borderRadius: 6, border: '1px solid var(--line)', background: 'var(--card-bg)' }} />,
 })
 
 interface Meteo {
@@ -246,10 +246,10 @@ const T = {
 // Dot, texto → mismo color brand. "Buena" EEA usa --muybueno (no azul, que
 // por regla brand sólo aparece en contexto marino no-verdict).
 const COLORES_CALIDAD: Record<string, [string, string]> = {
-  'Excelente':  ['#3d6b1f', '#2a4a14'],  // --excelente
-  'Buena':      ['#7a8a30', '#4a5a20'],  // --muybueno
-  'Suficiente': ['#c48a1e', '#7a4008'],  // --aceptable
-  'Deficiente': ['#7a2818', '#4a1810'],  // --noapto
+  'Excelente':  ['var(--excelente)', '#2a4a14'],  // --excelente
+  'Buena':      ['var(--muybueno)', '#4a5a20'],  // --muybueno
+  'Suficiente': ['var(--aceptable)', '#7a4008'],  // --aceptable
+  'Deficiente': ['var(--noapto)', '#4a1810'],  // --noapto
 }
 
 // ── C5 · Orden de módulos de la ficha (por defecto) ─────────────────
@@ -420,7 +420,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             padding: 0,
             fontSize: '1rem',
             lineHeight: 1.65,
-            color: 'var(--ink, #2a1a08)',
+            color: 'var(--ink)',
             fontWeight: 400,
           }}>
             {introTxt}
@@ -510,7 +510,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   es dato de bañistas, así que trazo punteado. */}
               {vientoReportado && (
                 <div style={{ display:'flex', alignItems:'center', gap:'.75rem', marginTop:'1rem' }}>
-                  <div style={{ width:28, height:28, borderRadius:'50%', background:'var(--cert-reportado, #c48a1e)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden>
+                  <div style={{ width:28, height:28, borderRadius:'50%', background:'var(--cert-reportado)', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden>
                     <Wind size={16} weight="bold" color="#fff"/>
                   </div>
                   <div>
@@ -728,7 +728,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 </div>
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:'.72rem', color:'var(--muted)' }}>
                   <span>{i18n.coeficiente}: <strong style={{ color:'var(--ink)' }}>{mareasLunar.coeficiente}</strong></span>
-                  <span style={{ color: mareasLunar.tipo === 'vivas' ? '#4a7a90' : mareasLunar.tipo === 'muertas' ? '#c48a1e' : 'var(--muted)', fontWeight:600 }}>
+                  <span style={{ color: mareasLunar.tipo === 'vivas' ? 'var(--mar-500)' : mareasLunar.tipo === 'muertas' ? 'var(--aceptable)' : 'var(--muted)', fontWeight:600 }}>
                     {mareasLunar.tipo === 'vivas' ? i18n.vivas : mareasLunar.tipo === 'muertas' ? i18n.muertas : i18n.mediasLabel}
                   </span>
                 </div>
@@ -776,9 +776,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 borderRadius: 4, textDecoration: 'none', color: 'var(--ink)',
                 fontSize: '.82rem', lineHeight: 1.4,
               }}>
-                <Sun size={16} weight="bold" color={meteo.uv >= 8 ? '#7a2818' : meteo.uv >= 6 ? '#a04818' : '#c48a1e'} aria-hidden="true" style={{ flexShrink: 0 }} />
+                <Sun size={16} weight="bold" color={meteo.uv >= 8 ? 'var(--noapto)' : meteo.uv >= 6 ? 'var(--limitado)' : 'var(--aceptable)'} aria-hidden="true" style={{ flexShrink: 0 }} />
                 <span>
-                  <strong style={{ color: meteo.uv >= 8 ? '#7a2818' : meteo.uv >= 6 ? '#a04818' : '#c48a1e' }}>
+                  <strong style={{ color: meteo.uv >= 8 ? 'var(--noapto)' : meteo.uv >= 6 ? 'var(--limitado)' : 'var(--aceptable)' }}>
                     {meteo.uv >= 8 ? (locale === 'en' ? 'Very high UV' : 'UV muy alto') : meteo.uv >= 6 ? (locale === 'en' ? 'High UV' : 'UV alto') : (locale === 'en' ? 'Moderate UV' : 'UV moderado')}
                     {'. '}
                     {meteo.uv >= 6 ? 'SPF 50+' : 'SPF 30+'}
@@ -833,16 +833,16 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.cardBody}>
             <Collapsible maxHeight={160} labelMore={locale === 'en' ? 'Show all options' : 'Ver todas las opciones'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent,#6b400a)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'.9rem' }}>
                 <Car size={18} weight='bold'/> {locale === 'en' ? 'By car. open in Google Maps' : 'En coche. abrir en Google Maps'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2)', color:'var(--accent)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line)' }}>
                 <Bus size={18} weight='bold'/> {locale === 'en' ? 'By public transport' : 'En transporte público'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=bicycling`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=bicycling`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2)', color:'var(--accent)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line)' }}>
                 <Bicycle size={18} weight='bold'/> {locale === 'en' ? 'By bike' : 'En bicicleta'}
               </a>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2,#f5ede0)', color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line,#e8dcc8)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2)', color:'var(--accent)', textDecoration:'none', fontWeight:600, fontSize:'.9rem', border:'1px solid var(--line)' }}>
                 <Person size={18} weight='bold'/> {locale === 'en' ? 'Walking' : 'A pie'}
               </a>
             </div>
@@ -1043,7 +1043,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div key="campings" className={styles.card} id="s-campings">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>
-                <Car size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'var(--accent,#6b400a)'}}/>
+                <Car size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'var(--accent)'}}/>
                 {locale === 'en' ? <>Campsites <em>nearby</em></> : <><em>Campings</em> y autocaravanas</>}
               </h2>
               <span className={styles.cardSrc}>OpenStreetMap</span>
@@ -1183,7 +1183,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     <div style={{ marginTop:'.65rem', display:'flex', gap:'.5rem', flexWrap:'wrap' }}>
                       <a href={`tel:${playa.hospital_tel}`} style={{
                         display:'inline-flex', alignItems:'center',
-                        background:'#7a2818', color:'#fff',
+                        background:'var(--noapto)', color:'#fff',
                         padding:'.4rem .85rem', borderRadius:'8px',
                         textDecoration:'none', fontSize:'.72rem', fontWeight:700,
                       }}>
@@ -1191,7 +1191,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       </a>
                       <a href="tel:112" style={{
                         display:'inline-flex', alignItems:'center',
-                        background:'rgba(122,40,24,.1)', color:'#7a2818',
+                        background:'rgba(122,40,24,.1)', color:'var(--noapto)',
                         border:'1px solid rgba(239,68,68,.3)',
                         padding:'.4rem .85rem', borderRadius:'8px',
                         textDecoration:'none', fontSize:'.72rem', fontWeight:700,
@@ -1316,7 +1316,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             border: '1px solid rgba(107,64,10,.25)',
             borderRadius: 6, padding: '.85rem 1rem',
           }}>
-            <div style={{ fontSize:'.72rem', fontWeight: 700, color: 'var(--accent,#6b400a)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+            <div style={{ fontSize:'.72rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
               {locale === 'en' ? 'Best time to go' : 'Mejor hora para ir'}
             </div>
             <div style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--ink)', margin: '.3rem 0 .2rem', fontFamily: 'var(--font-serif)' }}>
@@ -1386,7 +1386,7 @@ function FaqSection({ playa, meteo, banderaPlaya, medusas, mareasLunar, locale =
       </div>
       <div className={styles.cardBody}>
         {faqs.map((faq, i) => (
-          <details key={i} style={{ borderBottom: i < faqs.length - 1 ? '1px solid var(--line,#e8dcc8)' : 'none', padding: '.65rem 0' }}>
+          <details key={i} style={{ borderBottom: i < faqs.length - 1 ? '1px solid var(--line)' : 'none', padding: '.65rem 0' }}>
             <summary style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               {faq.q}
               <span style={{ color: 'var(--muted)', fontSize:'.75rem', flexShrink: 0, marginLeft: '.5rem' }}>+</span>
@@ -1415,7 +1415,7 @@ function TempCell({ icon, val, label }: { icon: React.ReactNode; val:string; lab
 
 function DataRow({ k, v, mono, href }: { k:string; v:string; mono?:boolean; href?:string }) {
   const val = href
-    ? <Link href={href} style={{ color:'var(--accent,#6b400a)', textDecoration:'none', fontWeight:600 }}>{v}</Link>
+    ? <Link href={href} style={{ color:'var(--accent)', textDecoration:'none', fontWeight:600 }}>{v}</Link>
     : v
   return <div className={styles.dataRow}><span className={styles.drK}>{k}</span><span className={`${styles.drV} ${mono ? styles.drMono : ''}`}>{val}</span></div>
 }
@@ -1433,7 +1433,7 @@ function CompassSVG({ dir }: { dir: string }) {
       <line x1="41" y1="14" x2="41" y2="68" stroke="rgba(180,130,60,.12)" strokeWidth="1"/>
       <line x1="14" y1="41" x2="68" y2="41" stroke="rgba(180,130,60,.12)" strokeWidth="1"/>
       <g transform={`rotate(${angle},41,41)`}>
-        <polygon points="41,14 37,44 41,38 45,44" fill="#6b400a"/>
+        <polygon points="41,14 37,44 41,38 45,44" fill="var(--terra-800)"/>
         <polygon points="41,68 37,38 41,44 45,38" fill="rgba(107,64,10,.25)"/>
       </g>
     </svg>
@@ -1454,7 +1454,7 @@ function OleajeChart({ olas, oleajeHoras, nowLabel = 'Ahora' }: { olas: number; 
     <div className={styles.oleajeWrap}>
       {datos.map((d, i) => {
         const pct = mx > 0 ? Math.max(14, (d.v / mx) * 70) : 14
-        const col = d.v > 1.5 ? '#c44a1a' : d.v > .8 ? '#e8a030' : '#a8c8e0'
+        const col = d.v > 1.5 ? '#c44a1a' : d.v > .8 ? 'var(--accent2)' : '#a8c8e0'
         return (
           <div key={i} className={styles.ocCol}>
             <div className={styles.ocBar} style={{ height: pct, background: col, opacity: i === 0 ? 1 : .55 }}/>

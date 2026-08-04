@@ -34,11 +34,11 @@ const faqSchema = {
 
 export default function Page() {
   const meses = [
-    {mes:'Ene-Mar',riesgo:'Bajo',color:'#3d6b1f',desc:'Agua fría, pocas medusas en todas las costas.'},
-    {mes:'Abr-May',riesgo:'Medio',color:'#c48a1e',desc:'Empieza a subir en Mediterráneo. Atlántico bajo.'},
-    {mes:'Jun-Jul',riesgo:'Alto',color:'#a04818',desc:'Pico en Mediterráneo y Canarias. Carabelas en Atlántico sur.'},
-    {mes:'Ago-Sep',riesgo:'Muy alto',color:'#7a2818',desc:'Máxima concentración en Mediterráneo. Reducción en Atlántico norte.'},
-    {mes:'Oct-Dic',riesgo:'Bajo',color:'#3d6b1f',desc:'Agua se enfría, las medusas desaparecen gradualmente.'},
+    {mes:'Ene-Mar',riesgo:'Bajo',color:'var(--excelente)',desc:'Agua fría, pocas medusas en todas las costas.'},
+    {mes:'Abr-May',riesgo:'Medio',color:'var(--aceptable)',desc:'Empieza a subir en Mediterráneo. Atlántico bajo.'},
+    {mes:'Jun-Jul',riesgo:'Alto',color:'var(--limitado)',desc:'Pico en Mediterráneo y Canarias. Carabelas en Atlántico sur.'},
+    {mes:'Ago-Sep',riesgo:'Muy alto',color:'var(--noapto)',desc:'Máxima concentración en Mediterráneo. Reducción en Atlántico norte.'},
+    {mes:'Oct-Dic',riesgo:'Bajo',color:'var(--excelente)',desc:'Agua se enfría, las medusas desaparecen gradualmente.'},
   ]
   return (<><Nav /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /><main style={{maxWidth:800,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
     <h1 style={{fontFamily:'var(--font-serif)',fontSize:'clamp(1.6rem,4vw,2.4rem)',fontWeight:900,color:'var(--ink)',marginBottom:'.25rem'}}>Temporada de medusas en España <span aria-hidden="true">🪼</span></h1>

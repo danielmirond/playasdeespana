@@ -45,8 +45,8 @@ export default function OpinionesDestacadas({ opiniones, locale = 'es' }: Props)
               key={op.id}
               style={{
                 padding: '0.85rem 1rem',
-                background: 'var(--card-bg2, #f5ede0)',
-                borderLeft: '3px solid var(--accent, #d48a1a)',
+                background: 'var(--card-bg2)',
+                borderLeft: '3px solid var(--accent)',
                 borderRadius: 4,
               }}
             >
@@ -60,7 +60,7 @@ export default function OpinionesDestacadas({ opiniones, locale = 'es' }: Props)
                 <p
                   style={{
                     fontSize: '.8rem',
-                    color: 'var(--muted, #5a3d12)',
+                    color: 'var(--muted)',
                     margin: 0,
                     lineHeight: 1.5,
                     fontStyle: 'italic',

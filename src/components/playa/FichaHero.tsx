@@ -71,7 +71,7 @@ const SEG_STYLE: React.CSSProperties = {
   flex: '1 1 0',
   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.45rem',
   minHeight: 52, padding: '.85rem .75rem',
-  color: 'var(--arena-50, #faf4e6)',
+  color: 'var(--arena-50)',
   background: 'transparent', border: 'none',
   fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit',
   textDecoration: 'none', cursor: 'pointer', whiteSpace: 'nowrap',
@@ -79,7 +79,7 @@ const SEG_STYLE: React.CSSProperties = {
 }
 const SEG_STYLE_BTN: React.CSSProperties = {
   ...SEG_STYLE,
-  borderRight: '1px solid var(--tinta-700, #3d2a14)',
+  borderRight: '1px solid var(--tinta-700)',
 }
 
 function statusDot(r: ReportesPlaya | null | undefined): 'ok' | 'warn' | 'danger' {

@@ -61,8 +61,8 @@
 }
 .kickerDot {
   width: 6px; height: 6px; border-radius: 50%;
-  background: var(--sea-calma, #5a8a7a);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sea-calma, #5a8a7a) 20%, transparent);
+  background: var(--sea-calma, var(--calma));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sea-calma, var(--calma)) 20%, transparent);
   animation: pulse 2.2s infinite; flex-shrink: 0;
 }
 @keyframes pulse {
@@ -93,7 +93,7 @@
 .searchBar {
   display: flex; align-items: center; gap: .75rem;
   padding: .35rem .35rem .35rem 1.1rem;
-  background: var(--surface, #faf4e6);
+  background: var(--surface, var(--surface));
   border: 1px solid var(--line-strong);
   border-radius: var(--r-sm, 4px);
   max-width: 640px;
@@ -107,7 +107,7 @@
 }
 .searchInput::placeholder { color: var(--muted); }
 .searchBtn {
-  background: var(--accent); color: var(--arena-50, #faf4e6);
+  background: var(--accent); color: var(--arena-50, var(--surface));
   padding: .65rem 1.15rem; border-radius: var(--r-sm, 4px);
   font-size: .82rem; font-weight: 700;
   font-family: inherit; border: none; cursor: pointer;

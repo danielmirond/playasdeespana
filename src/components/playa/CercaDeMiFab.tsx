@@ -16,7 +16,7 @@ interface Props {
 const STYLE = `
 .cdmFab{position:fixed;right:16px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:85;
  display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.1rem;border:none;border-radius:999px;cursor:pointer;
- background:var(--mar-700,#2d5266);color:#fff;font-family:var(--font-sans);font-size:.85rem;font-weight:700;letter-spacing:.01em;
+ background:var(--mar-700);color:#fff;font-family:var(--font-sans);font-size:.85rem;font-weight:700;letter-spacing:.01em;
  box-shadow:0 6px 22px rgba(0,0,0,.30);-webkit-tap-highlight-color:transparent;
  animation:cdmPulse 2.8s ease-in-out infinite;}
 .cdmFab:hover{filter:brightness(1.08)}

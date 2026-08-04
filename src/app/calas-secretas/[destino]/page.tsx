@@ -153,7 +153,7 @@ export default async function CalasSecretasPage({ params }: Props) {
         <section style={{
           margin: '0 0 2.5rem',
           padding: '1rem 1.25rem',
-          background: 'var(--card-bg, #faf6ef)',
+          background: 'var(--card-bg)',
           borderLeft: '3px solid var(--accent)',
           borderRadius: 4,
           fontSize: '.88rem',
@@ -226,7 +226,7 @@ export default async function CalasSecretasPage({ params }: Props) {
         {/* CTA BARCO (si aplica) */}
         {ctaBoatUrl && destBoat && (
           <section style={{
-            background: 'linear-gradient(135deg, #a04818 0%, #7a2818 100%)',
+            background: 'linear-gradient(135deg, var(--limitado) 0%, var(--noapto) 100%)',
             color: '#fff',
             padding: '1.8rem 1.5rem',
             borderRadius: 10,
@@ -245,7 +245,7 @@ export default async function CalasSecretasPage({ params }: Props) {
               style={{
                 display: 'inline-block',
                 padding: '.75rem 1.4rem',
-                background: '#fff', color: '#7a2818',
+                background: '#fff', color: 'var(--noapto)',
                 textDecoration: 'none', borderRadius: 6,
                 fontWeight: 700, fontSize: '.92rem',
               }}

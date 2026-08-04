@@ -42,11 +42,11 @@ export default function BeachVideoToggle({ video, nombre, locale = 'es' }: Props
         width: '100%',
         margin: '0 0 1.5rem',
         padding: '.85rem 1rem',
-        background: 'var(--card-bg, #faf6ef)',
-        border: '1px solid var(--line, #e8dcc8)',
+        background: 'var(--card-bg)',
+        border: '1px solid var(--line)',
         borderRadius: 8,
         fontSize: '.92rem',
-        color: 'var(--ink, #2a1a08)',
+        color: 'var(--ink)',
         cursor: 'pointer',
         textAlign: 'left',
         minHeight: 44,
@@ -71,11 +71,11 @@ export default function BeachVideoToggle({ video, nombre, locale = 'es' }: Props
         <span style={{ display: 'block', fontWeight: 600, lineHeight: 1.2 }}>
           {es ? `Ver ${nombre} desde el cielo` : `See ${nombre} from above`}
         </span>
-        <span style={{ display: 'block', fontSize: '.72rem', color: 'var(--muted, #5a3d12)', marginTop: 2 }}>
+        <span style={{ display: 'block', fontSize: '.72rem', color: 'var(--muted)', marginTop: 2 }}>
           {video.channelTitle ? (es ? `${video.channelTitle} · vía YouTube` : `${video.channelTitle} · via YouTube`) : 'YouTube'}
         </span>
       </span>
-      <span aria-hidden="true" style={{ color: 'var(--muted, #5a3d12)', fontSize: '.78rem' }}>
+      <span aria-hidden="true" style={{ color: 'var(--muted)', fontSize: '.78rem' }}>
         {es ? 'Reproducir ▶' : 'Play ▶'}
       </span>
     </button>

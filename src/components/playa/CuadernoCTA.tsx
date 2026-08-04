@@ -62,7 +62,7 @@ export default function CuadernoCTA({ slug, nombre, municipio = '', provincia = 
       style={{
         display: 'flex', alignItems: 'center', gap: '1.1rem', flexWrap: 'wrap',
         padding: '1.15rem 1.25rem',
-        background: 'var(--surface-2, #f5ede0)',
+        background: 'var(--surface-2)',
         border: '1px solid var(--line)',
         borderRadius: 'var(--r-sm, 4px)',
         backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 27px, rgba(42,26,8,0.05) 27px 28px)',

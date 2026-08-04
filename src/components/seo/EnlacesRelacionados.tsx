@@ -34,7 +34,7 @@ export default function EnlacesRelacionados({ topic, limit = 8, variant = 'cards
         <h2 id={`enl-${topic}`} style={{
           fontSize: '1.1rem',
           fontWeight: 800,
-          color: 'var(--ink, #2a1a08)',
+          color: 'var(--ink)',
           marginBottom: '.85rem',
         }}>
           Continúa por aquí
@@ -44,9 +44,9 @@ export default function EnlacesRelacionados({ topic, limit = 8, variant = 'cards
             <Link key={e.href} href={e.href} style={{
               padding: '.5rem 1rem',
               borderRadius: 99,
-              background: 'var(--card-bg, #faf6ef)',
-              border: '1px solid var(--line, #e8dcc8)',
-              color: 'var(--ink, #2a1a08)',
+              background: 'var(--card-bg)',
+              border: '1px solid var(--line)',
+              color: 'var(--ink)',
               fontSize: '.85rem',
               textDecoration: 'none',
             }}>
@@ -64,7 +64,7 @@ export default function EnlacesRelacionados({ topic, limit = 8, variant = 'cards
         fontFamily: 'var(--font-serif)',
         fontSize: '1.45rem',
         fontWeight: 700,
-        color: 'var(--ink, #2a1a08)',
+        color: 'var(--ink)',
         marginBottom: '1.25rem',
         letterSpacing: '-.01em',
       }}>
@@ -79,7 +79,7 @@ export default function EnlacesRelacionados({ topic, limit = 8, variant = 'cards
             fontWeight: 600,
             letterSpacing: '.12em',
             textTransform: 'uppercase',
-            color: 'var(--muted, #5a3d12)',
+            color: 'var(--muted)',
             marginBottom: '.65rem',
           }}>
             {KIND_LABELS[kind]}
@@ -93,11 +93,11 @@ export default function EnlacesRelacionados({ topic, limit = 8, variant = 'cards
               <Link key={e.href} href={e.href} style={{
                 display: 'block',
                 padding: '.85rem 1rem',
-                background: 'var(--card-bg, #faf6ef)',
-                border: '1px solid var(--line, #e8dcc8)',
+                background: 'var(--card-bg)',
+                border: '1px solid var(--line)',
                 borderRadius: 8,
                 textDecoration: 'none',
-                color: 'var(--ink, #2a1a08)',
+                color: 'var(--ink)',
                 transition: 'border-color .15s, transform .15s',
               }}>
                 <div style={{
@@ -112,7 +112,7 @@ export default function EnlacesRelacionados({ topic, limit = 8, variant = 'cards
                 {e.desc && (
                   <div style={{
                     fontSize: '.74rem',
-                    color: 'var(--muted, #5a3d12)',
+                    color: 'var(--muted)',
                     lineHeight: 1.4,
                   }}>
                     {e.desc}

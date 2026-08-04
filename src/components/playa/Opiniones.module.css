@@ -18,10 +18,10 @@
   font-size: clamp(1.4rem, 2.5vw, 1.85rem);
   font-weight: 700;
   letter-spacing: -.01em;
-  color: var(--ink, #2a1a08);
+  color: var(--ink, var(--ink));
   margin: 0;
 }
-.title em { font-style: italic; color: var(--accent, #6b400a); font-weight: 400; }
+.title em { font-style: italic; color: var(--accent, var(--terra-800)); font-weight: 400; }
 .kicker {
   font-family: var(--font-mono, monospace);
   font-size: .72rem;
@@ -47,7 +47,7 @@
 .bigNum {
   font-family: var(--font-serif, Georgia, serif);
   font-size: 3rem; font-weight: 700; line-height: 1;
-  color: var(--ink, #2a1a08);
+  color: var(--ink, var(--ink));
   font-variant-numeric: tabular-nums;
 }
 .histogram {
@@ -116,14 +116,14 @@
   padding: .6rem .75rem;
   border-radius: 4px;
   font: inherit;
-  color: var(--ink, #2a1a08);
+  color: var(--ink, var(--ink));
   font-family: var(--font-sans, system-ui);
   font-size: .85rem;
   transition: border-color .15s;
 }
 .input:focus, .textarea:focus {
   outline: none;
-  border-color: var(--accent, #6b400a);
+  border-color: var(--accent, var(--terra-800));
 }
 .textarea { resize: vertical; min-height: 2.4rem; line-height: 1.5; }
 
@@ -134,8 +134,8 @@
 }
 .submit {
   margin-left: auto;
-  background: var(--ink, #2a1a08);
-  color: var(--bg, #faf4e6);
+  background: var(--ink, var(--ink));
+  color: var(--bg, var(--surface));
   border: 0;
   padding: .65rem 1.5rem;
   border-radius: 99px;
@@ -177,7 +177,7 @@
   width: 36px; height: 36px;
   border-radius: 50%;
   background: var(--metric-bg, #f0e6d0);
-  color: var(--accent, #6b400a);
+  color: var(--accent, var(--terra-800));
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-serif, Georgia, serif);
   font-size: 1rem; font-style: italic; font-weight: 700;
@@ -195,13 +195,13 @@
   color: var(--muted, #5a3d12);
   flex-wrap: wrap;
 }
-.revName { color: var(--ink, #2a1a08); font-weight: 700; text-transform: none; letter-spacing: 0; font-family: var(--font-sans, system-ui); font-size: .82rem; }
+.revName { color: var(--ink, var(--ink)); font-weight: 700; text-transform: none; letter-spacing: 0; font-family: var(--font-sans, system-ui); font-size: .82rem; }
 .revStars { display: inline-flex; }
 .revTexto {
   margin: 0;
   font-size: .92rem;
   line-height: 1.55;
-  color: var(--ink, #2a1a08);
+  color: var(--ink, var(--ink));
 }
 
 /* ── Empty + more ────────────────────────────────────────────────── */
@@ -225,7 +225,7 @@
   font-size: .72rem;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--accent, #6b400a);
+  color: var(--accent, var(--terra-800));
   cursor: pointer;
   padding: .5rem 1rem;
 }

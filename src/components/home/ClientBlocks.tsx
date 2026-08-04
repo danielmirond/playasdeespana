@@ -8,14 +8,14 @@ function Placeholder() {
     }}>
       <div style={{
         height: 42,
-        borderBottom: '1px solid var(--line, #e8dcc8)',
+        borderBottom: '1px solid var(--line)',
         marginBottom: '.85rem',
       }} />
       <div style={{
         height: 80,
         borderRadius: 6,
-        background: 'var(--metric-bg, #f5ede0)',
-        border: '1px solid var(--line, #e8dcc8)',
+        background: 'var(--metric-bg)',
+        border: '1px solid var(--line)',
       }} />
     </div>
   )

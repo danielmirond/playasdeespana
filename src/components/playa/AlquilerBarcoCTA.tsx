@@ -56,7 +56,7 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
   if (variant === 'inline') {
     return (
       <Link href={href} style={{
-        color: 'var(--accent, #6b400a)',
+        color: 'var(--accent)',
         textDecoration: 'underline',
         textUnderlineOffset: 3,
       }}>
@@ -75,14 +75,14 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
           gap: '1rem',
           padding: '1rem 1.25rem',
           background: 'linear-gradient(110deg, rgba(10,110,140,.08) 0%, rgba(196,138,30,.06) 100%)',
-          border: '1px solid var(--line, #e8dcc8)',
+          border: '1px solid var(--line)',
           borderRadius: 8,
           textDecoration: 'none',
-          color: 'var(--ink, #2a1a08)',
+          color: 'var(--ink)',
           margin: '1rem 0',
         }}
       >
-        <Sailboat size={28} color="var(--accent, #6b400a)" />
+        <Sailboat size={28} color="var(--accent)" />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
             fontFamily: 'var(--font-serif, Georgia, serif)',
@@ -97,12 +97,12 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
             fontFamily: 'var(--font-mono, monospace)',
             fontSize: '.7rem',
             letterSpacing: '.04em',
-            color: 'var(--muted, #5a3d12)',
+            color: 'var(--muted)',
           }}>
             Alquila un barco con o sin patrón · Click&Boat, Samboat, Nautal comparados
           </div>
         </div>
-        <ArrowRight size={18} color="var(--accent, #6b400a)" />
+        <ArrowRight size={18} color="var(--accent)" />
       </Link>
     )
   }
@@ -114,17 +114,17 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
       style={{
         display: 'block',
         padding: '1.15rem 1.25rem',
-        background: 'var(--card-bg, #faf6ef)',
-        border: '1px solid var(--line, #e8dcc8)',
+        background: 'var(--card-bg)',
+        border: '1px solid var(--line)',
         borderRadius: 8,
         textDecoration: 'none',
-        color: 'var(--ink, #2a1a08)',
+        color: 'var(--ink)',
         margin: '1.25rem 0',
         transition: 'border-color .15s, transform .15s',
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '.85rem', marginBottom: '.5rem' }}>
-        <Sailboat size={22} color="var(--accent, #6b400a)" />
+        <Sailboat size={22} color="var(--accent)" />
         <h3 style={{
           margin: 0,
           fontFamily: 'var(--font-serif, Georgia, serif)',
@@ -139,7 +139,7 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
         margin: '0 0 .65rem',
         fontSize: '.92rem',
         lineHeight: 1.55,
-        color: 'var(--ink, #2a1a08)',
+        color: 'var(--ink)',
       }}>
         {destacar
           ? `Las calas más bonitas de la zona (${destacar}) son accesibles solo por mar. Alquilar un barco para el día abre rincones que desde tierra no ves.`
@@ -153,7 +153,7 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
         fontSize: '.72rem',
         letterSpacing: '.06em',
         textTransform: 'uppercase',
-        color: 'var(--accent, #6b400a)',
+        color: 'var(--accent)',
         fontWeight: 600,
       }}>
         Comparar plataformas

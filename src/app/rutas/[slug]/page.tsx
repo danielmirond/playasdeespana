@@ -142,7 +142,7 @@ export default async function RutaPage({ params }: Props) {
 
         <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
           {ruta.paradas.map((p, i) => {
-            const sc = p.score >= 75 ? '#3d6b1f' : p.score >= 55 ? '#c48a1e' : p.score >= 35 ? '#a04818' : '#7a2818'
+            const sc = p.score >= 75 ? 'var(--excelente)' : p.score >= 55 ? 'var(--aceptable)' : p.score >= 35 ? 'var(--limitado)' : 'var(--noapto)'
             return (
               <li key={p.playa.slug} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0, width: 36 }}>

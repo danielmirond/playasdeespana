@@ -115,7 +115,7 @@ export default async function BuceoPage() {
               background: 'var(--card-bg)', border: '1px solid var(--line)',
               borderRadius: 6, padding: '.75rem', textAlign: 'center',
             }}>
-              <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--accent,#6b400a)' }}>{s.val}</div>
+              <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--accent)' }}>{s.val}</div>
               <div style={{ fontSize: '.65rem', color: 'var(--muted)', marginTop: '.15rem', textTransform: 'uppercase', letterSpacing: '.06em' }}>{s.label}</div>
             </div>
           ))}
@@ -139,7 +139,7 @@ export default async function BuceoPage() {
             >
               <span style={{
                 flexShrink: 0, width: 30, height: 30, borderRadius: '50%',
-                background: i < 3 ? 'linear-gradient(135deg, #0891b2, #4a7a90)' : 'rgba(8,145,178,.12)',
+                background: i < 3 ? 'linear-gradient(135deg, #0891b2, var(--mar-500))' : 'rgba(8,145,178,.12)',
                 color: i < 3 ? '#fff' : '#0e7490',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '.78rem', fontWeight: 800,
@@ -231,7 +231,7 @@ export default async function BuceoPage() {
         {/* Civitatis CTA */}
         {CIVITATIS_AFF && (
           <div style={{
-            background: 'linear-gradient(135deg, #0891b2, #4a7a90)',
+            background: 'linear-gradient(135deg, #0891b2, var(--mar-500))',
             borderRadius: 6, padding: '1.1rem 1.25rem', marginBottom: '2rem',
             display: 'flex', alignItems: 'center', gap: '.85rem', flexWrap: 'wrap',
           }}>

@@ -151,7 +151,7 @@ export default async function PrediccionFinDeSemanaPage() {
             }}>
               <div style={{
                 width: 4, flexShrink: 0,
-                background: bestScore >= 80 ? '#3d6b1f' : bestScore >= 60 ? '#7a8a30' : '#c48a1e',
+                background: bestScore >= 80 ? 'var(--excelente)' : bestScore >= 60 ? 'var(--muybueno)' : 'var(--aceptable)',
               }} />
               <div style={{ flex: 1, padding: '.85rem 1rem', minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '.4rem' }}>
@@ -164,7 +164,7 @@ export default async function PrediccionFinDeSemanaPage() {
                       <div style={{
                         fontFamily: 'var(--font-serif)', fontStyle: 'italic',
                         fontWeight: 400, fontSize: '.85rem',
-                        color: bestScore >= 80 ? '#3d6b1f' : bestScore >= 60 ? '#7a8a30' : '#c48a1e',
+                        color: bestScore >= 80 ? 'var(--excelente)' : bestScore >= 60 ? 'var(--muybueno)' : 'var(--aceptable)',
                       }}>
                         Mejor: {bestDay.dia}
                       </div>

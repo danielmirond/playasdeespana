@@ -9,7 +9,7 @@ import Drawer from '@/components/ui/Drawer'
 
 const ReportarEstado = dynamic(() => import('./ReportarEstado'), {
   ssr: false,
-  loading: () => <div style={{ padding: '1rem 0', fontFamily: 'var(--font-mono, monospace)', fontSize: '.78rem', color: 'var(--muted, #5a3d12)' }}>Cargando…</div>,
+  loading: () => <div style={{ padding: '1rem 0', fontFamily: 'var(--font-mono, monospace)', fontSize: '.78rem', color: 'var(--muted)' }}>Cargando…</div>,
 })
 
 interface Props {
@@ -57,7 +57,7 @@ export default function ReportarDrawer({ slug, locale = 'es' }: Props) {
         margin: '0 0 1rem',
         fontFamily: 'var(--font-mono, monospace)',
         fontSize: '.78rem',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
         lineHeight: 1.5,
       }}>
         {locale === 'en'

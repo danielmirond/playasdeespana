@@ -150,8 +150,8 @@ export default function CookieBanner() {
         maxWidth: 540,
         marginLeft: 'auto',
         marginRight: 'auto',
-        background: 'var(--card-bg, #faf6ef)',
-        border: '1px solid var(--line, #e8dcc8)',
+        background: 'var(--card-bg)',
+        border: '1px solid var(--line)',
         borderRadius: 6,
         padding: '.85rem 1rem',
         zIndex: 9999,
@@ -181,11 +181,11 @@ export default function CookieBanner() {
 
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '.6rem', paddingRight: '2rem' }}>
-        <ShieldCheck size={18} weight="bold" color="var(--accent,#6b400a)" aria-hidden="true" style={{ flexShrink: 0, marginTop: 2 }} />
+        <ShieldCheck size={18} weight="bold" color="var(--accent)" aria-hidden="true" style={{ flexShrink: 0, marginTop: 2 }} />
         <p style={{ margin: 0, fontSize: '.82rem', lineHeight: 1.55, color: '#4a3520' }}>
-          <strong style={{ color: '#2a1a08' }}>{i18n.titulo}.</strong>{' '}
+          <strong style={{ color: 'var(--ink)' }}>{i18n.titulo}.</strong>{' '}
           {i18n.texto}{' '}
-          <Link href={locale === 'en' ? '/en/cookies' : '/cookies'} style={{ color: '#6b400a', textDecoration: 'underline' }}>
+          <Link href={locale === 'en' ? '/en/cookies' : '/cookies'} style={{ color: 'var(--terra-800)', textDecoration: 'underline' }}>
             {i18n.politica}
           </Link>
         </p>
@@ -214,14 +214,14 @@ export default function CookieBanner() {
             <button
               type="button"
               onClick={() => accept(false, false)}
-              style={{ ...btnBase, border: '1px solid #6b400a', background: 'transparent', color: '#6b400a' }}
+              style={{ ...btnBase, border: '1px solid var(--terra-800)', background: 'transparent', color: 'var(--terra-800)' }}
             >
               {i18n.rechazar}
             </button>
             <button
               type="button"
               onClick={() => accept(true, true)}
-              style={{ ...btnBase, border: 'none', background: '#6b400a', color: '#fff' }}
+              style={{ ...btnBase, border: 'none', background: 'var(--terra-800)', color: '#fff' }}
             >
               {i18n.aceptarTodo}
             </button>
@@ -231,14 +231,14 @@ export default function CookieBanner() {
             <button
               type="button"
               onClick={() => accept(false, false)}
-              style={{ ...btnBase, border: '1px solid #6b400a', background: 'transparent', color: '#6b400a', marginRight: 'auto' }}
+              style={{ ...btnBase, border: '1px solid var(--terra-800)', background: 'transparent', color: 'var(--terra-800)', marginRight: 'auto' }}
             >
               {i18n.rechazar}
             </button>
             <button
               type="button"
               onClick={() => accept(analiticas, marketing)}
-              style={{ ...btnBase, border: 'none', background: '#6b400a', color: '#fff' }}
+              style={{ ...btnBase, border: 'none', background: 'var(--terra-800)', color: '#fff' }}
             >
               {i18n.guardar}
             </button>
@@ -267,10 +267,10 @@ function Toggle({ checked, disabled, onChange, label, desc }: {
         checked={checked}
         disabled={disabled}
         onChange={e => onChange?.(e.target.checked)}
-        style={{ accentColor: '#6b400a', width: 18, height: 18, flexShrink: 0 }}
+        style={{ accentColor: 'var(--terra-800)', width: 18, height: 18, flexShrink: 0 }}
       />
       <div>
-        <div style={{ fontWeight: 700, color: '#2a1a08' }}>{label}</div>
+        <div style={{ fontWeight: 700, color: 'var(--ink)' }}>{label}</div>
         <div style={{ fontSize: '.7rem', color: '#8a7560', lineHeight: 1.4 }}>{desc}</div>
       </div>
     </label>

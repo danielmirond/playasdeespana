@@ -26,7 +26,7 @@ export default function TrustSeal({ locale = 'es' }: { locale?: 'es' | 'en' }) {
       <span
         className="trust-dot"
         aria-hidden="true"
-        style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--excelente, #3d6b1f)', flex: '0 0 auto' }}
+        style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--excelente)', flex: '0 0 auto' }}
       />
       <span>{text}</span>
     </Link>

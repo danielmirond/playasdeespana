@@ -115,10 +115,10 @@ function calcAfluencia(
 }
 
 function nivelAfluencia(pct: number): { label: string; color: string; bg: string } {
-  if (pct >= 85) return { label: 'Llena',          color: '#7a2818', bg: 'rgba(122,40,24,.06)' }
-  if (pct >= 65) return { label: 'Muy concurrida', color: '#c48a1e', bg: 'rgba(196,138,30,.06)' }
-  if (pct >= 40) return { label: 'Concurrida',     color: '#4a7a90', bg: 'rgba(74,122,144,.08)' }
-  if (pct >= 15) return { label: 'Tranquila',      color: '#3d6b1f', bg: 'rgba(61,107,31,.06)' }
+  if (pct >= 85) return { label: 'Llena',          color: 'var(--noapto)', bg: 'rgba(122,40,24,.06)' }
+  if (pct >= 65) return { label: 'Muy concurrida', color: 'var(--aceptable)', bg: 'rgba(196,138,30,.06)' }
+  if (pct >= 40) return { label: 'Concurrida',     color: 'var(--mar-500)', bg: 'rgba(74,122,144,.08)' }
+  if (pct >= 15) return { label: 'Tranquila',      color: 'var(--excelente)', bg: 'rgba(61,107,31,.06)' }
   return               { label: 'Vacía',           color: '#9ca3af', bg: '#f9fafb' }
 }
 
@@ -145,8 +145,8 @@ async function fetchTrafico(lat: number, lng: number): Promise<TraficoData | nul
     const nivel: TraficoData['nivel'] =
       fluidez >= 80 ? 'Libre' : fluidez >= 55 ? 'Fluido' : fluidez >= 30 ? 'Denso' : 'Colapso'
     const color =
-      nivel === 'Libre' ? '#3d6b1f' : nivel === 'Fluido' ? '#4a7a90' :
-      nivel === 'Denso' ? '#c48a1e' : '#7a2818'
+      nivel === 'Libre' ? 'var(--excelente)' : nivel === 'Fluido' ? 'var(--mar-500)' :
+      nivel === 'Denso' ? 'var(--aceptable)' : 'var(--noapto)'
     return { fluidez, velocidad: seg.currentSpeed, velocidadRef: seg.freeFlowSpeed, nivel, color }
   } catch { return null }
 }
@@ -205,15 +205,15 @@ export default function TraficoSection({ playa }: Props) {
 
   return (
     <div style={{
-      background: 'var(--card-bg,#faf6ef)', border: '1px solid var(--line,#e8dcc8)',
+      background: 'var(--card-bg)', border: '1px solid var(--line)',
       borderRadius: '4px', overflow: 'hidden',
     }} id="s-trafico">
 
       {/* CABECERA */}
-      <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line,#e8dcc8)' }}>
+      <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h2 style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)', margin: 0, fontFamily: 'inherit' }}><Car size={16} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:6}}/> Dónde aparcar en {playa.nombre}: parking, tráfico y afluencia</h2>
-          <span style={{ fontSize:'.75rem', color: 'var(--muted,#5a3d12)' }}>Tiempo real</span>
+          <h2 style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink)', margin: 0, fontFamily: 'inherit' }}><Car size={16} weight="bold" color="var(--accent)" style={{verticalAlign:'middle',marginRight:6}}/> Dónde aparcar en {playa.nombre}: parking, tráfico y afluencia</h2>
+          <span style={{ fontSize:'.75rem', color: 'var(--muted)' }}>Tiempo real</span>
         </div>
         <div
           role="tablist"
@@ -233,9 +233,9 @@ export default function TraficoSection({ playa }: Props) {
               style={{
                 fontSize:'.72rem', fontWeight: 700, padding: '.22rem .65rem',
                 borderRadius: '100px', border: '1px solid',
-                borderColor: tabActivo === tab ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
+                borderColor: tabActivo === tab ? 'var(--accent)' : 'var(--line)',
                 background: tabActivo === tab ? 'rgba(107,64,10,.1)' : 'transparent',
-                color: tabActivo === tab ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)',
+                color: tabActivo === tab ? 'var(--accent)' : 'var(--muted)',
                 cursor: 'pointer', textTransform: 'capitalize',
               }}
             >
@@ -257,12 +257,12 @@ export default function TraficoSection({ playa }: Props) {
             }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '1.6rem', fontWeight: 700, color: nivelAhora.color, lineHeight: 1 }}>{ahoraData.pct}%</div>
-                <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', marginTop: '.1rem' }}>ocupación</div>
+                <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.1rem' }}>ocupación</div>
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '.85rem', color: nivelAhora.color }}>{nivelAhora.label}</div>
-                <div style={{ fontSize: '.72rem', color: 'var(--muted,#5a3d12)', marginTop: '.15rem' }}>
-                  Mejor hora hoy: <strong style={{ color: 'var(--accent,#6b400a)' }}>{mejorHora.label}</strong> ({mejorHora.pct}% ocupación)
+                <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.15rem' }}>
+                  Mejor hora hoy: <strong style={{ color: 'var(--accent)' }}>{mejorHora.label}</strong> ({mejorHora.pct}% ocupación)
                 </div>
               </div>
             </div>
@@ -273,17 +273,17 @@ export default function TraficoSection({ playa }: Props) {
                 return (
                   <div key={h.h} title={`${h.label}: ${h.pct}%`} style={{
                     flex: 1, height: `${Math.max(6, h.pct * 0.58)}px`,
-                    background: h.esAhora ? 'var(--accent,#6b400a)' : n.color,
+                    background: h.esAhora ? 'var(--accent)' : n.color,
                     borderRadius: '3px 3px 0 0', opacity: h.esAhora ? 1 : 0.55,
                     cursor: 'default', transition: 'height .2s',
                   }} />
                 )
               })}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize:'.72rem', color: 'var(--muted,#5a3d12)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize:'.72rem', color: 'var(--muted)' }}>
               <span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>11pm</span>
             </div>
-            <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', marginTop: '.5rem', fontStyle: 'italic' }}>
+            <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.5rem', fontStyle: 'italic' }}>
               {etiquetaTemporada(mes, zona)} · {dia === 0 || dia === 6 ? 'Fin de semana' : 'Día laborable'}
               {esUrbana ? ' · Playa urbana' : ''}
               {esFestivo(now) ? ' · Festivo' : ''}
@@ -295,7 +295,7 @@ export default function TraficoSection({ playa }: Props) {
         {tabActivo === 'trafico' && (
           <div role="tabpanel" id="tabpanel-trafico" aria-labelledby="tab-trafico">
             {loadingT ? (
-              <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--muted,#5a3d12)', fontSize: '.8rem' }}>Consultando tráfico…</div>
+              <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--muted)', fontSize: '.8rem' }}>Consultando tráfico…</div>
             ) : trafico ? (
               <div style={{
                 display: 'flex', alignItems: 'center', gap: '1rem',
@@ -304,43 +304,43 @@ export default function TraficoSection({ playa }: Props) {
               }}>
                 <div style={{ textAlign: 'center', minWidth: '60px' }}>
                   <div style={{ fontSize: '1.5rem', fontWeight: 700, color: trafico.color, lineHeight: 1 }}>{trafico.velocidad}</div>
-                  <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)' }}>km/h actual</div>
+                  <div style={{ fontSize:'.72rem', color: 'var(--muted)' }}>km/h actual</div>
                 </div>
                 <div>
                   <div style={{ fontWeight: 700, fontSize: '.85rem', color: trafico.color }}>{trafico.nivel}</div>
-                  <div style={{ fontSize:'.75rem', color: 'var(--muted,#5a3d12)', marginTop: '.15rem' }}>
+                  <div style={{ fontSize:'.75rem', color: 'var(--muted)', marginTop: '.15rem' }}>
                     Velocidad libre: {trafico.velocidadRef} km/h · Fluidez: {trafico.fluidez}%
                   </div>
                 </div>
-                <div style={{ marginLeft: 'auto', fontSize:'.72rem', color: 'var(--muted,#5a3d12)' }}>TomTom</div>
+                <div style={{ marginLeft: 'auto', fontSize:'.72rem', color: 'var(--muted)' }}>TomTom</div>
               </div>
             ) : (
               <div style={{
                 padding: '.75rem 1rem', borderRadius: '4px',
                 background: 'rgba(61,107,31,.07)', marginBottom: '1rem', fontSize: '.8rem', color: '#2a4a14',
               }}>
-                <span style={{ display:'inline-block', width:8, height:8, borderRadius:'50%', background:'#3d6b1f', marginRight:6, verticalAlign:'middle' }}/> Sin datos de tráfico disponibles
+                <span style={{ display:'inline-block', width:8, height:8, borderRadius:'50%', background:'var(--excelente)', marginRight:6, verticalAlign:'middle' }}/> Sin datos de tráfico disponibles
               </div>
             )}
 
-            <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>Dónde aparcar en {playa.nombre}</div>
+            <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink)', marginBottom: '.6rem' }}>Dónde aparcar en {playa.nombre}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={btnStyle('#6b400a', '#fff')}>
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={btnStyle('var(--terra-800)', '#fff')}>
                 <Car size={16} weight='bold'/> En coche. abrir en Google Maps
               </a>
-              <a href={gmTransit} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', '#6b400a', true)}>
+              <a href={gmTransit} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', 'var(--terra-800)', true)}>
                 <Bus size={16} weight='bold'/> En transporte público
               </a>
-              <a href={gmBike} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', '#6b400a', true)}>
+              <a href={gmBike} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', 'var(--terra-800)', true)}>
                 <Bicycle size={16} weight='bold'/> En bicicleta
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`}
-                 target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', '#6b400a', true)}>
+                 target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', 'var(--terra-800)', true)}>
                 <Person size={16} weight='bold'/> A pie
               </a>
             </div>
 
-            <div style={{ marginTop: '1rem', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--line,#e8dcc8)' }}>
+            <div style={{ marginTop: '1rem', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--line)' }}>
               <iframe
                 src={``}
                 width="100%" height="200" style={{ border: 'none', display: 'block' }}
@@ -354,7 +354,7 @@ export default function TraficoSection({ playa }: Props) {
         {tabActivo === 'parking' && (
           <div role="tabpanel" id="tabpanel-parking" aria-labelledby="tab-parking">
             {loadingP ? (
-              <div style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--muted,#5a3d12)', fontSize: '.8rem' }}>
+              <div style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--muted)', fontSize: '.8rem' }}>
                 <div style={{ width: '24px', height: '24px', borderRadius: '50%', border: '3px solid var(--line)', borderTopColor: 'var(--accent)', animation: 'spin .7s linear infinite', margin: '0 auto .5rem' }}/>
                 Buscando aparcamientos cercanos…
               </div>
@@ -364,11 +364,11 @@ export default function TraficoSection({ playa }: Props) {
                   <a key={i}
                      href={p.googleId ? `https://www.google.com/maps/place/?q=place_id:${p.googleId}` : `https://www.google.com/maps/search/parking+near+${playa.lat},${playa.lng}`}
                      target="_blank" rel="noopener noreferrer"
-                     style={{ display: 'flex', alignItems: 'center', gap: '.75rem', padding: '.65rem .85rem', borderRadius: '10px', background: 'rgba(107,64,10,.05)', border: '1px solid var(--line,#e8dcc8)', textDecoration: 'none', color: 'inherit' }}>
-                    <Park size={22} weight='bold' color='var(--accent,#6b400a)'/>
+                     style={{ display: 'flex', alignItems: 'center', gap: '.75rem', padding: '.65rem .85rem', borderRadius: '10px', background: 'rgba(107,64,10,.05)', border: '1px solid var(--line)', textDecoration: 'none', color: 'inherit' }}>
+                    <Park size={22} weight='bold' color='var(--accent)'/>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '.4rem' }}>
-                        <div style={{ fontWeight: 600, fontSize: '.8rem', color: 'var(--ink,#2a1a08)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.nombre}</div>
+                        <div style={{ fontWeight: 600, fontSize: '.8rem', color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.nombre}</div>
                         {p.abierto !== null && (
                           <span style={{ fontSize:'.72rem', fontWeight: 700, flexShrink: 0,
                             color: p.abierto ? '#16a34a' : '#dc2626',
@@ -378,25 +378,25 @@ export default function TraficoSection({ playa }: Props) {
                           </span>
                         )}
                       </div>
-                      <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', marginTop: '.1rem' }}>
+                      <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.1rem' }}>
                         {p.distancia}m · {p.precio ?? 'Precio n/d'}
                         {p.rating && <span> · <Star size={12} weight='fill' color='#f5a623'/>{p.rating}</span>}
                       </div>
-                      {p.direccion && <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', marginTop: '.05rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.direccion}</div>}
+                      {p.direccion && <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.05rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.direccion}</div>}
                     </div>
-                    <span style={{ fontSize:'.75rem', color: 'var(--accent,#6b400a)', fontWeight: 600, flexShrink: 0 }}>Ver →</span>
+                    <span style={{ fontSize:'.75rem', color: 'var(--accent)', fontWeight: 600, flexShrink: 0 }}>Ver →</span>
                   </a>
                 ))}
               </div>
             ) : (
-              <div style={{ textAlign: 'center', padding: '1rem', fontSize: '.8rem', color: 'var(--muted,#5a3d12)' }}>
+              <div style={{ textAlign: 'center', padding: '1rem', fontSize: '.8rem', color: 'var(--muted)' }}>
                 No se encontraron aparcamientos cercanos
               </div>
             )}
 
             <a href={`https://www.google.com/maps/search/parking+near+${playa.lat},${playa.lng}`}
                target="_blank" rel="noopener noreferrer"
-               style={{ ...btnStyle('rgba(107,64,10,.1)', '#6b400a', true), display: 'block', textAlign: 'center', marginTop: '.75rem', textDecoration: 'none' }}>
+               style={{ ...btnStyle('rgba(107,64,10,.1)', 'var(--terra-800)', true), display: 'block', textAlign: 'center', marginTop: '.75rem', textDecoration: 'none' }}>
               Ver todos los aparcamientos en Google Maps →
             </a>
             {PARCLICK_AFF && (

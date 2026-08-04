@@ -175,7 +175,7 @@ export default function Opiniones({ slug, nombre, initial, locale = 'es' }: Prop
                 <Star
                   size={22}
                   weight={(hover ? n <= hover : n <= rating) ? 'fill' : 'regular'}
-                  color={(hover ? n <= hover : n <= rating) ? '#d4a900' : 'var(--muted, #5a3d12)'}
+                  color={(hover ? n <= hover : n <= rating) ? '#d4a900' : 'var(--muted)'}
                   aria-hidden="true"
                 />
               </button>

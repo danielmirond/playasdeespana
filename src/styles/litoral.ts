@@ -144,14 +144,58 @@ export const LITORAL_CSS = `
   --touch-min: 44px; --touch-comfy: 48px;
   --vp-judge: 375px; --vp-wide: 430px; --vp-desk: 1024px;
 
-  /* Compatibilidad con componentes existentes que aún nombran tokens Arena.
-     Se borran cuando el flag se consolide y se limpie la rama muerta. */
+  /* ——— Compatibilidad ————————————————————————————————————
+     Componentes que aún nombran tokens Arena. Se mapean por ROL, no por
+     parecido de tono: --mar-700 era el azul de «hay un sensor detrás», y en
+     Litoral ese papel lo hace --cert-medido. Traducir por color en vez de
+     por función es como acaba un sistema con dos azules que no significan
+     nada. Se borran al consolidar el flag y limpiar la rama muerta. */
   --line: var(--rule);
   --line-strong: var(--rule-strong);
   --card-bg: var(--surface);
   --card-bg2: var(--surface-2);
+  --metric-bg: var(--surface);
   --muted: var(--ink-mute);
   --arena-50: var(--paper-0);
+  --arena-100: var(--paper-2);
+  --tinta-700: var(--ink-700);
+  --tinta-900: var(--ink-900);
+  --excelente: var(--score-excellent);
+  --mar-700: var(--cert-medido);       /* el azul del sensor */
+  --mar-300: var(--ink-300);           /* era decorativo, sigue siéndolo */
+  --accent-soft: var(--surface-2);     /* fondo tenue, no acento: Litoral no tiene acento */
+  --sello-accent: var(--bronce);       /* el sello es el único material de color */
+  --sello-ink: var(--ink-900);         /* el bronce rellena; el rótulo va en tinta */
+  /* Texto sobre la foto del hero. Es un caso que Litoral no contempla —su
+     hero apila media y nombre en vez de superponerlos—, así que aquí manda
+     su regla de fondo: la interacción y el énfasis no llevan color. Sobre
+     la foto, papel. El dorado de Arena queda en Arena. */
+  --on-media: var(--paper-0);
+  --terra-800: var(--accent);          /* el «acento» de Arena; en Litoral es tinta */
+  --terra-700: var(--accent-2);
+  --tinta-800: var(--ink-900);
+  --tinta-600: var(--ink-700);
+  --tinta-500: var(--ink-500);
+  --accent2: var(--accent-2);
+  --ring: var(--ink);
+  --mar-500: var(--cert-medido);
+  --arena-200: var(--paper-1);
+  --arena-300: var(--paper-3);
+
+  /* Nombres de estado de Arena → escala de Litoral. Mismo papel semántico:
+     puntuación y estado del mar. Aquí traducir por rol es lo correcto,
+     porque el rol es idéntico y solo cambia el tono. */
+  --excelente: var(--score-excellent);
+  --muybueno:  var(--score-good);
+  --aceptable: var(--score-mid);
+  --limitado:  var(--score-low);
+  --noapto:    var(--score-danger);
+  --calma:   var(--sea-calma);
+  --buena:   var(--sea-buena);
+  --aviso:   var(--sea-aviso);
+  --surf:    var(--sea-surf);
+  --viento:  var(--sea-viento);
+  --peligro: var(--sea-peligro);
 }
 
 /* ——— Modo oscuro ——————————————————————————————————————— */

@@ -115,7 +115,7 @@ export default function CuadernoClient() {
           </h2>
           <div style={{
             padding: '1.25rem .75rem 1rem',
-            background: 'var(--surface-2, #f5ede0)',
+            background: 'var(--surface-2)',
             border: '1px solid var(--line)',
             borderRadius: 'var(--r-sm, 4px)',
             // pauta de cuaderno
@@ -179,7 +179,7 @@ export default function CuadernoClient() {
                 {TOP100.has(slug) && (
                   <span title="Top 100 de España 2026" style={{
                     fontFamily: 'var(--font-mono)', fontSize: '.56rem', letterSpacing: '.08em',
-                    color: 'var(--sello-accent, #6b400a)', border: '1px solid currentColor',
+                    color: 'var(--sello-accent)', border: '1px solid currentColor',
                     borderRadius: 'var(--r-sello, 3px)', padding: '.05rem .28rem', marginLeft: '.4rem',
                     verticalAlign: 'middle',
                   }}>TOP 100</span>

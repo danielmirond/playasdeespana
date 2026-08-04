@@ -147,7 +147,7 @@ export default function LandingDestino({ tipo, destino }: Props) {
             alignItems: 'center',
             gap: '.5rem',
             padding: '.85rem 1.5rem',
-            background: '#a04818',
+            background: 'var(--limitado)',
             color: '#fff',
             textDecoration: 'none',
             borderRadius: 6,
@@ -163,7 +163,7 @@ export default function LandingDestino({ tipo, destino }: Props) {
       <section style={{
         margin: '0 0 2.5rem',
         padding: '1rem 1.25rem',
-        background: 'var(--card-bg, #faf6ef)',
+        background: 'var(--card-bg)',
         borderLeft: '3px solid var(--accent)',
         borderRadius: 4,
         fontSize: '.92rem',
@@ -228,7 +228,7 @@ export default function LandingDestino({ tipo, destino }: Props) {
 
       {/* CTA FINAL */}
       <section style={{
-        background: 'linear-gradient(135deg, #a04818 0%, #7a2818 100%)',
+        background: 'linear-gradient(135deg, var(--limitado) 0%, var(--noapto) 100%)',
         color: '#fff',
         padding: '2rem 1.5rem',
         borderRadius: 10,
@@ -249,7 +249,7 @@ export default function LandingDestino({ tipo, destino }: Props) {
             display: 'inline-block',
             padding: '.85rem 1.75rem',
             background: '#fff',
-            color: '#7a2818',
+            color: 'var(--noapto)',
             textDecoration: 'none',
             borderRadius: 6,
             fontWeight: 700,

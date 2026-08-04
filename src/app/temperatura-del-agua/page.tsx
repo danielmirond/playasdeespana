@@ -80,9 +80,9 @@ function topDeProvincia(playas: Playa[], provincia: string): Playa[] {
 function tempColor(t: number): string {
   if (t >= 24) return '#a8301a' // muy cálida
   if (t >= 21) return '#c47a1e' // cálida, apetece
-  if (t >= 18) return '#7a8a30' // templada
+  if (t >= 18) return 'var(--muybueno)' // templada
   if (t >= 15) return '#2d6b8a' // fresca
-  return '#2d5266'              // fría
+  return 'var(--cert-medido)'              // fría
 }
 function tempLabel(t: number): string {
   if (t >= 24) return 'muy cálida'

@@ -37,10 +37,10 @@ function urlAmazon(n: Necesidad): string {
 // es un aviso. Ahora la prioridad se comunica solo con el color del
 // numerito que precede al título.
 const COLOR_PRIORIDAD: Record<Necesidad['prioridad'], string> = {
-  critica: '#7a2818',
-  alta:    '#c48a1e',
-  media:   '#4a7a90',
-  baja:    '#7a8a30',
+  critica: 'var(--noapto)',
+  alta:    'var(--aceptable)',
+  media:   'var(--mar-500)',
+  baja:    'var(--muybueno)',
 }
 
 export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: Props) {
@@ -54,7 +54,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
         margin: '0 0 1.5rem',
         padding: '1.1rem 1.1rem 1.25rem',
         background: '#fff',
-        border: '1px solid var(--line, #e8dcc8)',
+        border: '1px solid var(--line)',
         borderRadius: 10,
       }}
     >
@@ -64,7 +64,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
         fontWeight: 600,
         letterSpacing: '.14em',
         textTransform: 'uppercase',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
         marginBottom: '.3rem',
       }}>
         {es ? 'Asistente · hoy' : 'Assistant · today'}
@@ -76,7 +76,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
           fontFamily: 'var(--font-serif)',
           fontSize: '1.15rem',
           fontWeight: 700,
-          color: 'var(--ink, #2a1a08)',
+          color: 'var(--ink)',
           margin: '0 0 .9rem',
           lineHeight: 1.25,
         }}
@@ -97,8 +97,8 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
       }}>
         {necesidades.map((n, idx) => (
           <li key={n.id} style={{
-            background: 'var(--card-bg, #faf6ef)',
-            border: '1px solid var(--line, #e8dcc8)',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--line)',
             borderRadius: 6,
             padding: '.7rem .85rem',
             display: 'flex',
@@ -125,7 +125,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
                 {idx + 1}
               </span>
               {n.icono && <span style={{ fontSize: '1.05rem' }} aria-hidden="true">{n.icono}</span>}
-              <span style={{ fontWeight: 700, fontSize: '.93rem', color: 'var(--ink, #2a1a08)' }}>
+              <span style={{ fontWeight: 700, fontSize: '.93rem', color: 'var(--ink)' }}>
                 {n.titulo}
               </span>
             </div>
@@ -133,7 +133,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
             <p style={{
               margin: 0,
               fontSize: '.8rem',
-              color: 'var(--muted, #5a3d12)',
+              color: 'var(--muted)',
               lineHeight: 1.5,
             }}>
               {n.porQue}
@@ -163,7 +163,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
       <p style={{
         margin: '1rem 0 0',
         fontSize: '.7rem',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
         fontStyle: 'italic',
         lineHeight: 1.4,
       }}>

@@ -40,11 +40,11 @@ const CHIPS: Array<{
   color: string
 }> = [
   { display: 'medusas',          backendTipo: 'medusas',          icon: Fish,          label: 'Hay medusas',      color: '#e879a0' },
-  { display: 'mucho_oleaje',     backendTipo: 'mucho_oleaje',     icon: Waves,         label: 'Oleaje fuerte',    color: '#4a7a90' },
-  { display: 'parking_dificil',  backendTipo: 'parking_dificil',  icon: Car,           label: 'Parking difícil',  color: '#a04818' },
-  { display: 'agua_cristalina',  backendTipo: 'bandera_verde',    icon: CheckCircle,   label: 'Agua cristalina',  color: '#3d6b1f' },
-  { display: 'apto_ninos',       backendTipo: 'bandera_verde',    icon: Person,        label: 'Apta para niños',  color: '#7a8a30' },
-  { display: 'perros_ok',        backendTipo: 'bandera_verde',    icon: Dog,           label: 'Perros bienvenidos', color: '#c48a1e' },
+  { display: 'mucho_oleaje',     backendTipo: 'mucho_oleaje',     icon: Waves,         label: 'Oleaje fuerte',    color: 'var(--mar-500)' },
+  { display: 'parking_dificil',  backendTipo: 'parking_dificil',  icon: Car,           label: 'Parking difícil',  color: 'var(--limitado)' },
+  { display: 'agua_cristalina',  backendTipo: 'bandera_verde',    icon: CheckCircle,   label: 'Agua cristalina',  color: 'var(--excelente)' },
+  { display: 'apto_ninos',       backendTipo: 'bandera_verde',    icon: Person,        label: 'Apta para niños',  color: 'var(--muybueno)' },
+  { display: 'perros_ok',        backendTipo: 'bandera_verde',    icon: Dog,           label: 'Perros bienvenidos', color: 'var(--aceptable)' },
 ]
 
 function lsKey(slug: string, tipo: string) {
@@ -124,11 +124,11 @@ export default function QuickChips({ slug, locale = 'es', inlineMode = false }: 
               padding: '.65rem 1rem',
               minHeight: 44,
               background: isVoted ? `${c.color}22` : '#fff',
-              border: `1px solid ${isVoted ? c.color : 'var(--line, #e8dcc8)'}`,
+              border: `1px solid ${isVoted ? c.color : 'var(--line)'}`,
               borderRadius: 100,
               fontSize: '.85rem',
               fontWeight: 500,
-              color: isVoted ? c.color : 'var(--ink, #2a1a08)',
+              color: isVoted ? c.color : 'var(--ink)',
               cursor: isVoted ? 'default' : 'pointer',
               opacity: isSending ? 0.6 : 1,
               transition: 'all .15s ease',
@@ -155,7 +155,7 @@ export default function QuickChips({ slug, locale = 'es', inlineMode = false }: 
         margin: '0 0 1.5rem',
         padding: '1rem 1.1rem',
         background: 'linear-gradient(135deg, #faf6ef 0%, #f0e6d0 100%)',
-        border: '1px solid var(--line, #e8dcc8)',
+        border: '1px solid var(--line)',
         borderRadius: 8,
       }}
     >
@@ -165,7 +165,7 @@ export default function QuickChips({ slug, locale = 'es', inlineMode = false }: 
         fontWeight: 600,
         letterSpacing: '.12em',
         textTransform: 'uppercase',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
         marginBottom: '.55rem',
       }}>
         {es ? '¿Cómo está hoy? · 1 tap' : 'How is it today? · 1 tap'}
@@ -174,7 +174,7 @@ export default function QuickChips({ slug, locale = 'es', inlineMode = false }: 
       <div style={{
         marginTop: '.6rem',
         fontSize: '.7rem',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
         fontStyle: 'italic',
       }}>
         {es

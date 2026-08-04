@@ -216,7 +216,7 @@ function CampingCard({ c }: { c: CampingConPlaya }) {
       {c.playa && (
         <div style={{ fontSize: '.85rem', color: 'var(--muted)' }}>
           A {(c.distancia_m / 1000).toFixed(1)} km de{' '}
-          <Link href={`/playas/${c.playa.slug}`} style={{ color: 'var(--accent, #6b400a)', fontWeight: 600 }}>
+          <Link href={`/playas/${c.playa.slug}`} style={{ color: 'var(--accent)', fontWeight: 600 }}>
             {c.playa.nombre}
           </Link>
           {' '}({c.playa.municipio})
@@ -240,7 +240,7 @@ function CampingCard({ c }: { c: CampingConPlaya }) {
         <div style={{ marginTop: '.35rem', display: 'flex', gap: '.85rem', flexWrap: 'wrap', fontSize: '.78rem' }}>
           {c.website && (
             <a href={c.website} target="_blank" rel="noopener noreferrer nofollow"
-              style={{ color: 'var(--accent, #6b400a)', textDecoration: 'underline' }}>
+              style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
               Web →
             </a>
           )}

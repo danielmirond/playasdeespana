@@ -44,7 +44,7 @@ export default function UpdatedBadge({
           className={className}
           style={{
             fontSize:   '.72rem',
-            color:      'var(--muted, #5a3d12)',
+            color:      'var(--muted)',
             fontFamily: 'var(--font-mono, monospace)',
             letterSpacing: '.05em',
           }}

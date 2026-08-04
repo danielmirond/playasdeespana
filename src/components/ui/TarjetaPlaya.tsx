@@ -36,7 +36,7 @@ export interface TarjetaPlayaProps {
 }
 
 export default function TarjetaPlaya({
-  slug, nombre, meta, foto, rank, score, scoreColor = 'var(--accent, #6b400a)',
+  slug, nombre, meta, foto, rank, score, scoreColor = 'var(--accent)',
   veredicto, bandera, datos, distintivo, locale = 'es',
 }: TarjetaPlayaProps) {
   const href = locale === 'en' ? `/en/beaches/${slug}` : `/playas/${slug}`
@@ -47,8 +47,8 @@ export default function TarjetaPlaya({
       prefetch={false}
       style={{
         display: 'flex', flexDirection: 'column',
-        background: 'var(--card-bg, #faf6ef)',
-        border: '1px solid var(--line, #e8dcc8)',
+        background: 'var(--card-bg)',
+        border: '1px solid var(--line)',
         borderRadius: 8, overflow: 'hidden',
         textDecoration: 'none', color: 'inherit',
         transition: 'border-color .15s, transform .15s',
@@ -57,7 +57,7 @@ export default function TarjetaPlaya({
     >
       <div style={{
         position: 'relative', aspectRatio: '3 / 2',
-        background: 'var(--metric-bg, #f0e6d0)', overflow: 'hidden',
+        background: 'var(--metric-bg)', overflow: 'hidden',
       }}>
         {foto && (
           // eslint-disable-next-line @next/next/no-img-element
@@ -77,7 +77,7 @@ export default function TarjetaPlaya({
           <span style={{
             position: 'absolute', top: 10, left: 10, zIndex: 2,
             fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-            fontSize: '1.35rem', color: 'var(--arena-50, #faf4e6)',
+            fontSize: '1.35rem', color: 'var(--arena-50)',
             textShadow: '0 1px 8px rgba(0,0,0,.6)',
             lineHeight: 1, letterSpacing: '-.02em',
           }}>nº{rank}</span>
@@ -88,7 +88,7 @@ export default function TarjetaPlaya({
         {distintivo && (
           <span style={{
             position: 'absolute', bottom: 10, left: 10, zIndex: 2,
-            background: 'var(--arena-50, #faf4e6)', color: 'var(--ink, #2a1a08)',
+            background: 'var(--arena-50)', color: 'var(--ink)',
             padding: '3px 9px', borderRadius: 999,
             fontFamily: 'var(--font-mono, monospace)', fontSize: '.68rem',
             fontWeight: 600, fontVariantNumeric: 'tabular-nums',
@@ -98,7 +98,7 @@ export default function TarjetaPlaya({
         {score !== undefined && (
           <span style={{
             position: 'absolute', top: 10, right: 10, zIndex: 2,
-            background: 'var(--arena-50, #faf4e6)',
+            background: 'var(--arena-50)',
             padding: '4px 10px', borderRadius: 999,
             fontFamily: 'var(--font-serif)', fontWeight: 700,
             fontSize: '.85rem', color: scoreColor,

@@ -152,7 +152,7 @@ export default async function BanderasNegrasPage() {
                       </div>
                       {alts && (
                         <div style={{ marginTop: '.5rem', fontSize: '.76rem', color: 'var(--muted)', lineHeight: 1.5 }}>
-                          <span style={{ fontWeight: 700, color: '#3d6b1f' }}>Alternativas limpias cerca:</span>{' '}
+                          <span style={{ fontWeight: 700, color: 'var(--excelente)' }}>Alternativas limpias cerca:</span>{' '}
                           {alts.map((a, j) => (
                             <span key={a.slug}>
                               <Link href={`/playas/${a.slug}`} style={{ color: 'var(--accent)', fontWeight: 600 }}>{a.nombre}</Link>

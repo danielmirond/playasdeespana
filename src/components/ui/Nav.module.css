@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   padding: .6rem 1rem;
-  background: var(--accent, #6b400a);
+  background: var(--accent, var(--terra-800));
   color: #fff;
   font-size: .8rem;
   font-weight: 700;
@@ -58,7 +58,7 @@
 .iconBtn:focus-visible,
 .langBtn:focus-visible,
 .logo:focus-visible {
-  outline: 2px solid var(--accent, #6b400a);
+  outline: 2px solid var(--accent, var(--terra-800));
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -114,7 +114,7 @@
   align-items: center;
   gap: .15rem;
   margin-left: .5rem;
-  background: var(--card-bg2, #f5ede0);
+  background: var(--card-bg2, var(--card-bg2));
   border: 1px solid var(--line, #e8dcc8);
   border-radius: 4px;
   padding: .15rem;
@@ -138,10 +138,10 @@
 }
 
 .langBtn:hover {
-  color: var(--ink, #2a1a08);
+  color: var(--ink, var(--ink));
 }
 
 .langActive {
-  background: var(--accent, #6b400a);
+  background: var(--accent, var(--terra-800));
   color: #fff !important;
 }

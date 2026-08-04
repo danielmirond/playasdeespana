@@ -23,13 +23,13 @@ interface BinarioDef {
 
 const BINARIOS: BinarioDef[] = [
   { tipo: 'medusas',          icon: Fish,    es: 'He visto medusas',      en: 'Jellyfish spotted',  color: '#e879a0' },
-  { tipo: 'bandera_verde',    icon: Flag,    es: 'Bandera verde',         en: 'Green flag',         color: '#3d6b1f' },
-  { tipo: 'bandera_amarilla', icon: Flag,    es: 'Bandera amarilla',      en: 'Yellow flag',        color: '#c48a1e' },
-  { tipo: 'bandera_roja',     icon: Flag,    es: 'Bandera roja',          en: 'Red flag',           color: '#7a2818' },
-  { tipo: 'parking_dificil',  icon: Car,     es: 'Difícil aparcar',       en: 'Hard to park',       color: '#a04818' },
+  { tipo: 'bandera_verde',    icon: Flag,    es: 'Bandera verde',         en: 'Green flag',         color: 'var(--excelente)' },
+  { tipo: 'bandera_amarilla', icon: Flag,    es: 'Bandera amarilla',      en: 'Yellow flag',        color: 'var(--aceptable)' },
+  { tipo: 'bandera_roja',     icon: Flag,    es: 'Bandera roja',          en: 'Red flag',           color: 'var(--noapto)' },
+  { tipo: 'parking_dificil',  icon: Car,     es: 'Difícil aparcar',       en: 'Hard to park',       color: 'var(--limitado)' },
   { tipo: 'acceso_roto',      icon: Warning, es: 'Acceso roto',           en: 'Broken access',      color: '#dc2626' },
-  { tipo: 'mucho_oleaje',     icon: Waves,   es: 'Mucho oleaje',          en: 'Heavy swell',        color: '#4a7a90' },
-  { tipo: 'mucho_viento',     icon: Wind,    es: 'Mucho viento',          en: 'Windy',              color: '#c48a1e' },
+  { tipo: 'mucho_oleaje',     icon: Waves,   es: 'Mucho oleaje',          en: 'Heavy swell',        color: 'var(--mar-500)' },
+  { tipo: 'mucho_viento',     icon: Wind,    es: 'Mucho viento',          en: 'Windy',              color: 'var(--aceptable)' },
 ]
 
 // ── Catálogo de ratings ──────────────────────────────────────────────
@@ -51,7 +51,7 @@ const RATINGS: RatingDef[] = [
     es: 'Limpieza', en: 'Cleanliness',
     esLow: 'Sucia', esHigh: 'Muy limpia',
     enLow: 'Dirty', enHigh: 'Very clean',
-    color: '#4a7a90',
+    color: 'var(--mar-500)',
   },
   {
     tipo: 'afluencia', icon: Users,
@@ -182,21 +182,21 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
 
   return (
     <div style={{
-      background: 'var(--card-bg, #faf6ef)',
-      border: '1px solid var(--line, #e8dcc8)',
+      background: 'var(--card-bg)',
+      border: '1px solid var(--line)',
       borderRadius: 6,
       overflow: 'hidden',
     }}>
       {/* Header */}
       <div style={{
         padding: '.55rem .9rem',
-        borderBottom: '1px solid var(--line, #e8dcc8)',
+        borderBottom: '1px solid var(--line)',
         fontFamily: 'var(--font-sans)',
         fontSize: '.7rem',
         fontWeight: 500,
         letterSpacing: '.14em',
         textTransform: 'uppercase',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
       }}>
         {es ? '¿Qué ves en la playa?' : 'What do you see?'}
       </div>
@@ -222,12 +222,12 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                 display: 'flex', alignItems: 'center', gap: '.5rem',
                 width: '100%', padding: '.55rem .8rem',
                 borderRadius: 4,
-                border: done ? `1px solid ${o.color}66` : '1px solid var(--line, #e8dcc8)',
+                border: done ? `1px solid ${o.color}66` : '1px solid var(--line)',
                 background: done ? `${o.color}14` : 'transparent',
                 cursor: done ? 'default' : 'pointer',
                 fontSize: '.82rem', fontWeight: 500,
                 fontFamily: 'var(--font-sans, system-ui)',
-                color: done ? o.color : 'var(--ink, #2a1a08)',
+                color: done ? o.color : 'var(--ink)',
                 transition: 'border-color .15s, background .15s',
                 opacity: sending === o.tipo ? 0.6 : 1,
                 minHeight: 44,
@@ -252,7 +252,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
       </div>
 
       {/* Separator */}
-      <div style={{ height: 1, background: 'var(--line, #e8dcc8)' }} aria-hidden="true" />
+      <div style={{ height: 1, background: 'var(--line)' }} aria-hidden="true" />
 
       {/* Ratings 1-5 */}
       <div role="group" aria-label={es ? 'Valoración del estado' : 'Rate the state'} style={{ padding: '.6rem .7rem', display: 'flex', flexDirection: 'column', gap: '.85rem' }}>
@@ -271,7 +271,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
             <fieldset key={r.tipo} style={{ border: 'none', padding: 0, margin: 0 }}>
               <legend style={{
                 display: 'flex', alignItems: 'center', gap: '.45rem',
-                fontSize: '.82rem', fontWeight: 700, color: 'var(--ink, #2a1a08)',
+                fontSize: '.82rem', fontWeight: 700, color: 'var(--ink)',
                 marginBottom: '.35rem',
               }}>
                 <Icon size={15} weight="bold" color={r.color} aria-hidden="true" />
@@ -305,7 +305,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                       aria-label={`${label}: ${n} ${es ? (n === 1 ? 'estrella' : 'estrellas') : (n === 1 ? 'star' : 'stars')}`}
                       style={{
                         width: 36, height: 36, borderRadius: 4,
-                        border: '1px solid var(--line, #e8dcc8)',
+                        border: '1px solid var(--line)',
                         background: active ? `${r.color}14` : 'transparent',
                         cursor: done ? 'default' : 'pointer',
                         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
@@ -316,7 +316,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                       <Star
                         size={18}
                         weight={active ? 'fill' : 'bold'}
-                        color={active ? r.color : 'var(--muted, #5a3d12)'}
+                        color={active ? r.color : 'var(--muted)'}
                         aria-hidden="true"
                       />
                     </button>
@@ -324,7 +324,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
                 })}
                 {count > 0 && (
                   <span style={{
-                    fontSize: '.72rem', color: 'var(--muted, #5a3d12)',
+                    fontSize: '.72rem', color: 'var(--muted)',
                     marginLeft: '.3rem',
                   }}>
                     {count} {es ? (count === 1 ? 'voto' : 'votos') : (count === 1 ? 'vote' : 'votes')}
@@ -335,7 +335,7 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
               {/* Low/high labels */}
               <div style={{
                 display: 'flex', justifyContent: 'space-between',
-                fontSize: '.68rem', color: 'var(--muted, #5a3d12)',
+                fontSize: '.68rem', color: 'var(--muted)',
                 marginTop: '.25rem',
                 maxWidth: 210,
               }}>
@@ -352,9 +352,9 @@ export default function ReportarEstado({ slug, locale = 'es' }: Props) {
         <div style={{
           padding: '.4rem .9rem .55rem',
           fontSize: '.72rem',
-          color: 'var(--muted, #5a3d12)',
+          color: 'var(--muted)',
           textAlign: 'center',
-          borderTop: '1px solid var(--line, #e8dcc8)',
+          borderTop: '1px solid var(--line)',
         }}>
           {es
             ? `${reportes.total} ${reportes.total === 1 ? 'reporte' : 'reportes'} en las últimas 24 h`

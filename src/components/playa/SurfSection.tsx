@@ -26,11 +26,11 @@ interface Props {
 
 const ESTADO_SURF: Record<string, { label: string; color: string; bg: string; desc: string }> = {
   CALMA:   { label: 'Plana',    color: '#9ca3af', bg: '#f9fafb', desc: 'Mar en calma. no apto surf' },
-  BUENA:   { label: 'Suave',    color: '#4a7a90', bg: 'rgba(74,122,144,.08)', desc: 'Olas pequeñas. ideal principiantes' },
-  AVISO:   { label: 'Mediana',  color: '#c48a1e', bg: 'rgba(196,138,30,.06)', desc: 'Buenas condiciones. nivel medio' },
-  SURF:    { label: 'Potente',  color: '#4a7a90', bg: 'rgba(74,122,144,.06)', desc: 'Excelente para surf. nivel avanzado' },
-  VIENTO:  { label: 'Ventosa',  color: '#c48a1e', bg: 'rgba(196,138,30,.08)', desc: 'Viento fuerte. ideal kitesurf/windsurf' },
-  PELIGRO: { label: 'Peligrosa',color: '#7a2818', bg: 'rgba(122,40,24,.06)', desc: 'Mar peligroso. no recomendado' },
+  BUENA:   { label: 'Suave',    color: 'var(--mar-500)', bg: 'rgba(74,122,144,.08)', desc: 'Olas pequeñas. ideal principiantes' },
+  AVISO:   { label: 'Mediana',  color: 'var(--aceptable)', bg: 'rgba(196,138,30,.06)', desc: 'Buenas condiciones. nivel medio' },
+  SURF:    { label: 'Potente',  color: 'var(--mar-500)', bg: 'rgba(74,122,144,.06)', desc: 'Excelente para surf. nivel avanzado' },
+  VIENTO:  { label: 'Ventosa',  color: 'var(--aceptable)', bg: 'rgba(196,138,30,.08)', desc: 'Viento fuerte. ideal kitesurf/windsurf' },
+  PELIGRO: { label: 'Peligrosa',color: 'var(--noapto)', bg: 'rgba(122,40,24,.06)', desc: 'Mar peligroso. no recomendado' },
 }
 
 function calcEstado(olas: number, viento: number): string {
@@ -49,7 +49,7 @@ function ScoreBar({ val, max = 5, color }: { val: number; max?: number; color: s
       {Array.from({ length: max }, (_, i) => (
         <div key={i} style={{
           width: 14, height: 6, borderRadius: 3,
-          background: i < val ? color : 'var(--line,#e8dcc8)',
+          background: i < val ? color : 'var(--line)',
         }} />
       ))}
     </div>
@@ -89,16 +89,16 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
 
   return (
     <div style={{
-      background: 'var(--card-bg,#faf6ef)', border: '1px solid var(--line,#e8dcc8)',
+      background: 'var(--card-bg)', border: '1px solid var(--line)',
       borderRadius: '6px', overflow: 'hidden',
     }} id="s-actividades">
 
       {/* CABECERA */}
-      <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line,#e8dcc8)' }}>
+      <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink,#2a1a08)' }}><Waves size={16} weight="bold" color="var(--accent,#6b400a)" style={{verticalAlign:'middle',marginRight:6}}/> Actividades acuáticas</span>
+          <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink)' }}><Waves size={16} weight="bold" color="var(--accent)" style={{verticalAlign:'middle',marginRight:6}}/> Actividades acuáticas</span>
           {tieneSpot && (
-            <span style={{ fontSize:'.72rem', fontWeight: 700, padding: '.15rem .55rem', borderRadius: '100px', background: 'rgba(74,122,144,.13)', color: '#4a7a90', border: '1px solid rgba(74,122,144,.27)' }}>
+            <span style={{ fontSize:'.72rem', fontWeight: 700, padding: '.15rem .55rem', borderRadius: '100px', background: 'rgba(74,122,144,.13)', color: 'var(--mar-500)', border: '1px solid rgba(74,122,144,.27)' }}>
               Spot verificado OSM
             </span>
           )}
@@ -120,9 +120,9 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
               <span style={{ fontSize: '1.4rem', fontWeight: 700, color: estadoInfo.color, lineHeight: 1 }}>{olas}m</span>
               <span style={{ fontSize: '.75rem', fontWeight: 700, color: estadoInfo.color }}>{estadoInfo.label}</span>
             </div>
-            <div style={{ fontSize: '.72rem', color: 'var(--muted,#5a3d12)' }}>{estadoInfo.desc}</div>
+            <div style={{ fontSize: '.72rem', color: 'var(--muted)' }}>{estadoInfo.desc}</div>
           </div>
-          <div style={{ textAlign: 'right', fontSize:'.75rem', color: 'var(--muted,#5a3d12)' }}>
+          <div style={{ textAlign: 'right', fontSize:'.75rem', color: 'var(--muted)' }}>
             <div>Periodo: <strong>{periodo}s</strong></div>
             <div><Wind size={12} weight="bold" style={{verticalAlign:'middle',marginRight:2}}/> {viento}km/h {vientoDir}</div>
             <div><Drop size={12} weight='fill'/> {agua}°C</div>
@@ -135,7 +135,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {
               icon: <PersonSimpleSwim size={18}/>, label: 'Surf',
               score: scoreSurf(olas, viento),
-              color: '#4a7a90',
+              color: 'var(--mar-500)',
               datos: `${olas}m · ${periodo}s · ${viento}km/h`,
               disponible: playa.actividades?.surf,
             },
@@ -156,7 +156,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {
               icon: <Eye size={18} weight="bold"/>, label: 'Snorkel',
               score: scoreSnorkel(olas, turbidez),
-              color: '#3d6b1f',
+              color: 'var(--excelente)',
               datos: turbidez ? `${turbidez.visibilidad_m}m visibilidad` : olas < 0.5 ? 'Agua tranquila' : 'Algo de oleaje',
               disponible: playa.actividades?.snorkel,
             },
@@ -170,7 +170,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {
               icon: <Boat size={18} weight="bold"/>, label: 'Kayak',
               score: olas < 0.5 && viento < 20 ? 5 : olas < 1 && viento < 30 ? 3 : 1,
-              color: '#c48a1e',
+              color: 'var(--aceptable)',
               datos: olas < 0.5 && viento < 20 ? 'Condiciones ideales' : olas < 1 ? 'Aceptable' : 'Mar movido',
               disponible: playa.actividades?.kayak,
             },
@@ -178,7 +178,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             <div key={act.label} style={{
               padding: '.7rem .85rem', borderRadius: '4px',
               background: act.score >= 3 ? `${act.color}10` : 'rgba(0,0,0,.02)',
-              border: `1px solid ${act.score >= 3 ? act.color + '30' : 'var(--line,#e8dcc8)'}`,
+              border: `1px solid ${act.score >= 3 ? act.color + '30' : 'var(--line)'}`,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '.35rem' }}>
                 <span style={{ fontSize: '1.1rem' }}>{act.icon}</span>
@@ -186,9 +186,9 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                   <span style={{ fontSize:'.72rem', fontWeight: 700, color: act.color, background: act.color + '18', padding: '1px 5px', borderRadius: '100px' }}>OSM</span>
                 )}
               </div>
-              <div style={{ fontWeight: 700, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.2rem' }}>{act.label}</div>
+              <div style={{ fontWeight: 700, fontSize: '.75rem', color: 'var(--ink)', marginBottom: '.2rem' }}>{act.label}</div>
               <ScoreBar val={act.score} color={act.color} />
-              <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', marginTop: '.3rem', lineHeight: 1.3 }}>{act.datos}</div>
+              <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.3rem', lineHeight: 1.3 }}>{act.datos}</div>
             </div>
           ))}
         </div>
@@ -205,12 +205,12 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                 <div style={{ fontWeight: 700, fontSize: '.8rem', color: turbidez.color, marginBottom: '.15rem' }}>
                   Visibilidad subacuática: {turbidez.nivel}
                 </div>
-                <div style={{ display: 'flex', gap: '1rem', fontSize:'.75rem', color: 'var(--muted,#5a3d12)' }}>
+                <div style={{ display: 'flex', gap: '1rem', fontSize:'.75rem', color: 'var(--muted)' }}>
                   <span>{turbidez.visibilidad_m}m de visibilidad</span>
                   <span>Clorofila: {turbidez.clorofila.toFixed(2)} mg/m³</span>
                 </div>
               </div>
-              <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', fontStyle: 'italic' }}>Est.</div>
+              <div style={{ fontSize:'.72rem', color: 'var(--muted)', fontStyle: 'italic' }}>Est.</div>
             </div>
           </div>
         )}
@@ -218,7 +218,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
         {/* FORECAST 5 DÍAS. olas + lluvia combinados */}
         {(forecast?.length || meteo?.length) && (
           <div>
-            <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink,#2a1a08)', marginBottom: '.6rem' }}>
+            <div style={{ fontWeight: 600, fontSize: '.75rem', color: 'var(--ink)', marginBottom: '.6rem' }}>
               Previsión 5 días
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '.4rem' }}>
@@ -232,9 +232,9 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                   <div key={i} style={{
                     padding: '.6rem .4rem', borderRadius: '10px', textAlign: 'center',
                     background: i === 0 ? est.bg : 'rgba(0,0,0,.02)',
-                    border: `1px solid ${i === 0 ? est.color + '40' : 'var(--line,#e8dcc8)'}`,
+                    border: `1px solid ${i === 0 ? est.color + '40' : 'var(--line)'}`,
                   }}>
-                    <div style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', fontWeight: 600, marginBottom: '.2rem' }}>
+                    <div style={{ fontSize:'.72rem', color: 'var(--muted)', fontWeight: 600, marginBottom: '.2rem' }}>
                       {i === 0 ? 'Hoy' : d?.fecha ?? (() => {
                         const dd = new Date(); dd.setDate(dd.getDate() + i)
                         return ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'][dd.getDay()] + ' ' + dd.getDate()
@@ -242,12 +242,12 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                     </div>
                     {/* Icono meteo si hay lluvia, sino icono surf */}
                     <div style={{ fontSize: '1.1rem', marginBottom: '.1rem' }}>
-                      {m?.icono ?? (d?.estado === 'SURF' ? <Waves size={18} weight="bold" color="#4a7a90"/> : d?.estado === 'PELIGRO' ? <Wind size={18} weight="bold" color="#7a2818"/> : <Sun size={18} weight="bold" color="#f5be40"/>)}
+                      {m?.icono ?? (d?.estado === 'SURF' ? <Waves size={18} weight="bold" color="var(--mar-500)"/> : d?.estado === 'PELIGRO' ? <Wind size={18} weight="bold" color="var(--noapto)"/> : <Sun size={18} weight="bold" color="#f5be40"/>)}
                     </div>
                     {/* Temperaturas */}
                     {m && (
-                      <div style={{ fontSize:'.72rem', color: 'var(--ink,#2a1a08)', fontWeight: 600, marginBottom: '.1rem' }}>
-                        {m.temp_max}° <span style={{ color:'var(--muted,#5a3d12)', fontWeight:400 }}>{m.temp_min}°</span>
+                      <div style={{ fontSize:'.72rem', color: 'var(--ink)', fontWeight: 600, marginBottom: '.1rem' }}>
+                        {m.temp_max}° <span style={{ color:'var(--muted)', fontWeight:400 }}>{m.temp_min}°</span>
                       </div>
                     )}
                     {/* Olas */}
@@ -256,7 +256,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                     {m && (
                       <div style={{
                         fontSize:'.72rem', marginTop: '.2rem', fontWeight: 600,
-                        color: llueve ? '#4a7a90' : 'var(--muted,#5a3d12)',
+                        color: llueve ? 'var(--mar-500)' : 'var(--muted)',
                       }}>
                         {llueve ? `${probLluvia}%` : m.lluvia_mm > 0 ? `${m.lluvia_mm}mm` : 'Seco'}
                       </div>
@@ -275,9 +275,9 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {process.env.NEXT_PUBLIC_AMAZON_TAG && (
               <>
                 <AffPill href={`https://www.amazon.es/s?k=crema+solar+50+playa&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Crema solar SPF50" bg="#ff9900" />
-                <AffPill href={`https://www.amazon.es/s?k=neopreno+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Neoprenos" bg="#4a7a90" />
-                <AffPill href={`https://www.amazon.es/s?k=tabla+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Tablas de surf" bg="#4a7a90" />
-                <AffPill href={`https://www.amazon.es/s?k=kayak+hinchable&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Kayaks" bg="#3d6b1f" />
+                <AffPill href={`https://www.amazon.es/s?k=neopreno+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Neoprenos" bg="var(--mar-500)" />
+                <AffPill href={`https://www.amazon.es/s?k=tabla+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Tablas de surf" bg="var(--mar-500)" />
+                <AffPill href={`https://www.amazon.es/s?k=kayak+hinchable&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Kayaks" bg="var(--excelente)" />
               </>
             )}
           </div>

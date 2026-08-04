@@ -24,19 +24,19 @@ export default function AsideAfiliacionCTA({ nombre, count, locale = 'es' }: Pro
         display: 'flex', alignItems: 'center', gap: '.7rem',
         width: '100%', padding: '.85rem 1rem',
         borderRadius: 6,
-        border: '1px solid var(--line, #e8dcc8)',
-        background: 'var(--card-bg, #faf6ef)',
+        border: '1px solid var(--line)',
+        background: 'var(--card-bg)',
         cursor: 'pointer',
         textAlign: 'left',
         font: 'inherit', color: 'inherit',
         transition: 'border-color .15s, background .15s, transform .15s',
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.borderColor = 'var(--accent, #6b400a)'
+        e.currentTarget.style.borderColor = 'var(--accent)'
         e.currentTarget.style.transform = 'translateX(-2px)'
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.borderColor = 'var(--line, #e8dcc8)'
+        e.currentTarget.style.borderColor = 'var(--line)'
         e.currentTarget.style.transform = 'translateX(0)'
       }}
       aria-haspopup="dialog"
@@ -44,7 +44,7 @@ export default function AsideAfiliacionCTA({ nombre, count, locale = 'es' }: Pro
       <span style={{
         width: 38, height: 38, borderRadius: 6,
         background: 'rgba(196, 138, 30, .12)',
-        color: 'var(--accent, #6b400a)',
+        color: 'var(--accent)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         flexShrink: 0,
       }}>
@@ -57,7 +57,7 @@ export default function AsideAfiliacionCTA({ nombre, count, locale = 'es' }: Pro
           fontStyle: 'italic',
           fontSize: '1rem',
           fontWeight: 400,
-          color: 'var(--ink, #2a1a08)',
+          color: 'var(--ink)',
           lineHeight: 1.2,
         }}>
           {es ? `¿Qué llevar a ${nombre}?` : `What to bring to ${nombre}?`}
@@ -69,14 +69,14 @@ export default function AsideAfiliacionCTA({ nombre, count, locale = 'es' }: Pro
           fontSize: '.65rem',
           letterSpacing: '.08em',
           textTransform: 'uppercase',
-          color: 'var(--muted, #5a3d12)',
+          color: 'var(--muted)',
         }}>
           {es
             ? `${count} ${count === 1 ? 'imprescindible' : 'imprescindibles'}`
             : `${count} ${count === 1 ? 'essential' : 'essentials'}`}
         </span>
       </span>
-      <ArrowRight size={16} weight="bold" color="var(--muted, #5a3d12)" aria-hidden="true" />
+      <ArrowRight size={16} weight="bold" color="var(--muted)" aria-hidden="true" />
     </button>
   )
 }

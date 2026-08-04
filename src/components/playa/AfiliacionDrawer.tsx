@@ -53,7 +53,7 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
         margin: '0 0 1.25rem',
         fontFamily: 'var(--font-mono, monospace)',
         fontSize: '.78rem',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
         lineHeight: 1.55,
       }}>
         {es
@@ -67,7 +67,7 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
             key={p.asin}
             style={{
               padding: '.85rem 0',
-              borderTop: i === 0 ? '0' : '1px solid var(--line, #e8dcc8)',
+              borderTop: i === 0 ? '0' : '1px solid var(--line)',
             }}
           >
             <a
@@ -81,8 +81,8 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
             >
               <span style={{
                 width: 56, height: 56, borderRadius: 6,
-                background: 'var(--metric-bg, #f0e6d0)',
-                color: 'var(--accent, #6b400a)',
+                background: 'var(--metric-bg)',
+                color: 'var(--accent)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: 'var(--font-serif, Georgia, serif)',
                 fontSize: '1.05rem', fontWeight: 700,
@@ -96,7 +96,7 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
                   fontFamily: 'var(--font-serif, Georgia, serif)',
                   fontWeight: 700,
                   fontSize: '.95rem',
-                  color: 'var(--ink, #2a1a08)',
+                  color: 'var(--ink)',
                   lineHeight: 1.3,
                 }}>
                   {p.nombre}
@@ -106,13 +106,13 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
                   marginTop: '.2rem',
                   fontFamily: 'var(--font-mono, monospace)',
                   fontSize: '.7rem',
-                  color: 'var(--muted, #5a3d12)',
+                  color: 'var(--muted)',
                   letterSpacing: '.04em',
                 }}>
                   {p.precio} € · {p.categoria}
                 </span>
               </span>
-              <span aria-hidden="true" style={{ color: 'var(--accent, #6b400a)', fontWeight: 700 }}>→</span>
+              <span aria-hidden="true" style={{ color: 'var(--accent)', fontWeight: 700 }}>→</span>
             </a>
           </li>
         ))}
@@ -122,14 +122,14 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
         <div style={{
           marginTop: '1.25rem',
           padding: '1rem 0 0',
-          borderTop: '1px solid var(--line, #e8dcc8)',
+          borderTop: '1px solid var(--line)',
         }}>
           <div style={{
             fontFamily: 'var(--font-mono, monospace)',
             fontSize: '.7rem',
             letterSpacing: '.08em',
             textTransform: 'uppercase',
-            color: 'var(--muted, #5a3d12)',
+            color: 'var(--muted)',
             marginBottom: '.65rem',
           }}>
             {es ? 'Guías relacionadas' : 'Related guides'}
@@ -142,10 +142,10 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
                 style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                   padding: '.75rem 1rem',
-                  border: '1px solid var(--accent, #6b400a)',
+                  border: '1px solid var(--accent)',
                   borderRadius: 6,
                   background: 'rgba(196, 138, 30, .08)',
-                  color: 'var(--accent, #6b400a)',
+                  color: 'var(--accent)',
                   textDecoration: 'none',
                   fontFamily: 'var(--font-serif, Georgia, serif)',
                   fontStyle: 'italic',
@@ -167,10 +167,10 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
       <p style={{
         margin: '1rem 0 0',
         paddingTop: '1rem',
-        borderTop: '1px solid var(--line, #e8dcc8)',
+        borderTop: '1px solid var(--line)',
         fontFamily: 'var(--font-mono, monospace)',
         fontSize: '.62rem',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
         opacity: .7,
         lineHeight: 1.5,
       }}>

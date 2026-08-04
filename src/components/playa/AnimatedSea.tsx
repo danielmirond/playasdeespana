@@ -173,15 +173,15 @@ const SCENES: Record<string, (p: { color: string; tint: string }) => React.JSX.E
 }
 
 const COLORS: Record<string, string> = {
-  CALMA: '#5a8a7a', BUENA: '#3d6b1f', AVISO: '#c48a1e',
-  SURF: '#2d5266', VIENTO: '#7a7a7a', PELIGRO: '#7a2818',
-  calma: '#5a8a7a', buena: '#3d6b1f', aviso: '#c48a1e',
-  surf: '#2d5266', viento: '#7a7a7a', peligro: '#7a2818',
+  CALMA: 'var(--calma)', BUENA: 'var(--excelente)', AVISO: 'var(--aceptable)',
+  SURF: 'var(--cert-medido)', VIENTO: 'var(--viento)', PELIGRO: 'var(--noapto)',
+  calma: 'var(--calma)', buena: 'var(--excelente)', aviso: 'var(--aceptable)',
+  surf: 'var(--cert-medido)', viento: 'var(--viento)', peligro: 'var(--noapto)',
 }
 
 export default function AnimatedSea({ estado, color, tint = 'transparent', className }: Props) {
   const Scene = SCENES[estado] ?? Calma
-  const c = color ?? COLORS[estado] ?? '#5a8a7a'
+  const c = color ?? COLORS[estado] ?? 'var(--calma)'
   return (
     <div className={className} style={{ width: '100%', height: '100%' }}>
       <Scene color={c} tint={tint} />

@@ -17,9 +17,9 @@ interface Props {
 }
 
 const COLORES_SEV = {
-  ok:     { dot: '#3d6b1f', bg: '#f5fbed' },
-  warn:   { dot: '#c48a1e', bg: '#fcf6e6' },
-  danger: { dot: '#7a2818', bg: '#fbeee8' },
+  ok:     { dot: 'var(--excelente)', bg: '#f5fbed' },
+  warn:   { dot: 'var(--aceptable)', bg: '#fcf6e6' },
+  danger: { dot: 'var(--noapto)', bg: '#fbeee8' },
 }
 
 export default function ReporteSistemaCard({ reporte, locale = 'es' }: Props) {
@@ -33,7 +33,7 @@ export default function ReporteSistemaCard({ reporte, locale = 'es' }: Props) {
         gap: '.7rem',
         padding: '.7rem .9rem',
         background: col.bg,
-        border: '1px solid var(--line, #e8dcc8)',
+        border: '1px solid var(--line)',
         borderLeft: `3px solid ${col.dot}`,
         borderRadius: 6,
         marginBottom: '.6rem',
@@ -66,15 +66,15 @@ export default function ReporteSistemaCard({ reporte, locale = 'es' }: Props) {
             }}>
               {es ? 'Sistema' : 'System'}
             </span>
-            <span style={{ fontSize: '.7rem', color: 'var(--muted, #5a3d12)' }}>
+            <span style={{ fontSize: '.7rem', color: 'var(--muted)' }}>
               {tiempoRelativo(reporte.ts)}
             </span>
           </div>
         </div>
-        <div style={{ fontWeight: 600, fontSize: '.95rem', color: 'var(--ink, #2a1a08)', lineHeight: 1.3 }}>
+        <div style={{ fontWeight: 600, fontSize: '.95rem', color: 'var(--ink)', lineHeight: 1.3 }}>
           {reporte.titulo}
         </div>
-        <div style={{ fontSize: '.82rem', color: 'var(--muted, #5a3d12)', marginTop: '.2rem' }}>
+        <div style={{ fontSize: '.82rem', color: 'var(--muted)', marginTop: '.2rem' }}>
           {reporte.detalle}
         </div>
       </div>

@@ -19,9 +19,9 @@ export default function Footer({ locale = 'es' }: Props) {
     <footer style={{
       marginTop: '4rem',
       padding: '3rem 1.5rem 2rem',
-      borderTop: '1px solid var(--line, #e8dcc8)',
-      background: 'var(--card-bg, #faf6ef)',
-      color: 'var(--ink, #2a1a08)',
+      borderTop: '1px solid var(--line)',
+      background: 'var(--card-bg)',
+      color: 'var(--ink)',
     }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div style={{
@@ -38,14 +38,14 @@ export default function Footer({ locale = 'es' }: Props) {
               fontStyle: 'italic',
               fontSize: '1.15rem',
               fontWeight: 500,
-              color: 'var(--ink, #2a1a08)',
+              color: 'var(--ink)',
               marginBottom: '.5rem',
             }}>
               Playas de España
             </div>
             <p style={{
               fontSize: '.78rem',
-              color: 'var(--muted, #5a3d12)',
+              color: 'var(--muted)',
               lineHeight: 1.55,
               margin: 0,
             }}>
@@ -135,13 +135,13 @@ export default function Footer({ locale = 'es' }: Props) {
 
         {/* Bloque E-E-A-T: atribución visible + última sincro */}
         <div style={{
-          background:    'var(--bg, #fffaf0)',
-          border:        '1px solid var(--line, #e8dcc8)',
+          background:    'var(--bg)',
+          border:        '1px solid var(--line)',
           borderRadius:  6,
           padding:       '1rem 1.15rem',
           marginBottom:  '1.5rem',
           fontSize:      '.78rem',
-          color:         'var(--ink, #2a1a08)',
+          color:         'var(--ink)',
           lineHeight:    1.55,
         }}>
           <div style={{
@@ -150,7 +150,7 @@ export default function Footer({ locale = 'es' }: Props) {
             fontWeight:    600,
             letterSpacing: '.12em',
             textTransform: 'uppercase',
-            color:         'var(--muted, #5a3d12)',
+            color:         'var(--muted)',
             marginBottom:  '.5rem',
           }}>
             {es ? 'Datos oficiales' : 'Official data sources'}
@@ -176,7 +176,7 @@ export default function Footer({ locale = 'es' }: Props) {
               dataset nuevo desde 2018 y (b) los datos meteo SÍ se refrescan
               cada hora. Separar las dos cosas evita el claim engañoso
               "actualizado cada hora" + "hace 8 años" en la misma página. */}
-          <p style={{ margin: 0, fontSize: '.72rem', color: 'var(--muted, #5a3d12)' }}>
+          <p style={{ margin: 0, fontSize: '.72rem', color: 'var(--muted)' }}>
             {es
               ? <>Meteo en tiempo real ·{' '}
                   <a href="https://www.aemet.es/" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit' }}>AEMET</a>
@@ -203,14 +203,14 @@ export default function Footer({ locale = 'es' }: Props) {
         {/* Bottom row: copyright + disclosure */}
         <div style={{
           paddingTop:     '1.5rem',
-          borderTop:      '1px solid var(--line, #e8dcc8)',
+          borderTop:      '1px solid var(--line)',
           display:        'flex',
           flexWrap:       'wrap',
           gap:            '1rem',
           justifyContent: 'space-between',
           alignItems:     'flex-start',
           fontSize:       '.72rem',
-          color:          'var(--muted, #5a3d12)',
+          color:          'var(--muted)',
           lineHeight:     1.5,
         }}>
           <div>
@@ -242,7 +242,7 @@ function FootHeading({ children }: { children: React.ReactNode }) {
       fontWeight: 600,
       letterSpacing: '.12em',
       textTransform: 'uppercase',
-      color: 'var(--ink, #2a1a08)',
+      color: 'var(--ink)',
       margin: '0 0 .85rem',
     }}>
       {children}
@@ -260,7 +260,7 @@ function FootList({ children }: { children: React.ReactNode }) {
 
 const ls: React.CSSProperties = {
   fontSize: '.82rem',
-  color: 'var(--muted, #5a3d12)',
+  color: 'var(--muted)',
   textDecoration: 'none',
   transition: 'color .15s',
 }

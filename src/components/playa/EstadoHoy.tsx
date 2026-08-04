@@ -22,9 +22,9 @@ interface Props {
 }
 
 const COLOR_SEV: Record<ReporteSistema['severidad'], string> = {
-  ok:     '#3d6b1f',
-  warn:   '#c48a1e',
-  danger: '#7a2818',
+  ok:     'var(--excelente)',
+  warn:   'var(--aceptable)',
+  danger: 'var(--noapto)',
 }
 
 export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Props) {
@@ -38,7 +38,7 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
       style={{
         margin: '0 0 1.5rem',
         background: 'linear-gradient(135deg, #faf6ef 0%, #f0e6d0 100%)',
-        border: '1px solid var(--line, #e8dcc8)',
+        border: '1px solid var(--line)',
         borderRadius: 10,
         overflow: 'hidden',
       }}
@@ -51,7 +51,7 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
           fontWeight: 600,
           letterSpacing: '.14em',
           textTransform: 'uppercase',
-          color: 'var(--muted, #5a3d12)',
+          color: 'var(--muted)',
           marginBottom: '.25rem',
         }}>
           {es ? 'Estado actual' : 'Current state'}
@@ -62,7 +62,7 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
             fontFamily: 'var(--font-serif)',
             fontSize: '1.15rem',
             fontWeight: 700,
-            color: 'var(--ink, #2a1a08)',
+            color: 'var(--ink)',
             margin: '0 0 .65rem',
             lineHeight: 1.25,
           }}
@@ -81,7 +81,7 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
               alignItems: 'center',
               gap: '.5rem',
               background: '#fff',
-              border: '1px solid var(--line, #e8dcc8)',
+              border: '1px solid var(--line)',
               borderRadius: 100,
               padding: '.4rem .8rem',
               fontSize: '.82rem',
@@ -97,17 +97,17 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
                 flexShrink: 0,
               }}
             />
-            <span style={{ fontWeight: 600, color: 'var(--ink, #2a1a08)' }}>
+            <span style={{ fontWeight: 600, color: 'var(--ink)' }}>
               {reporte.titulo}
             </span>
-            <span style={{ color: 'var(--muted, #5a3d12)', fontSize: '.76rem' }}>
+            <span style={{ color: 'var(--muted)', fontSize: '.76rem' }}>
               · {reporte.detalle}
             </span>
             <span
               style={{
                 marginLeft: 'auto',
                 fontSize: '.68rem',
-                color: 'var(--muted, #5a3d12)',
+                color: 'var(--muted)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '.25rem',
@@ -123,11 +123,11 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
       {/* Bottom: chips separados por línea fina */}
       <div style={{
         padding: '.75rem 1.1rem 1.1rem',
-        borderTop: '1px dashed var(--line, #e8dcc8)',
+        borderTop: '1px dashed var(--line)',
       }}>
         <div style={{
           fontSize: '.72rem',
-          color: 'var(--muted, #5a3d12)',
+          color: 'var(--muted)',
           marginBottom: '.55rem',
           lineHeight: 1.4,
         }}>

@@ -100,8 +100,8 @@ export default function HubsRelacionados({ playa, locale = 'es' }: Props) {
     <nav
       aria-label={es ? 'Páginas relacionadas' : 'Related pages'}
       style={{
-        background: 'var(--card-bg, #faf6ef)',
-        border: '1px solid var(--line, #e8dcc8)',
+        background: 'var(--card-bg)',
+        border: '1px solid var(--line)',
         borderRadius: 6,
         padding: '1rem 1.15rem',
       }}
@@ -112,7 +112,7 @@ export default function HubsRelacionados({ playa, locale = 'es' }: Props) {
         fontWeight: 500,
         letterSpacing: '.14em',
         textTransform: 'uppercase',
-        color: 'var(--muted, #5a3d12)',
+        color: 'var(--muted)',
         marginBottom: '.75rem',
       }}>
         {es ? 'Explora más' : 'Explore more'}

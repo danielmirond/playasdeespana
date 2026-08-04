@@ -24,7 +24,7 @@ export default function LoadingHome() {
       <section style={{
         minHeight: 460, padding: '3rem 1.5rem 2.5rem',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        textAlign: 'center', background: 'var(--bg, #f0e6d0)',
+        textAlign: 'center', background: 'var(--bg)',
         position: 'relative', overflow: 'hidden',
       }}>
         <Bone w={280} h={52} r={6} />

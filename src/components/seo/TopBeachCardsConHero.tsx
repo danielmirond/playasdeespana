@@ -47,7 +47,7 @@ export default async function TopBeachCardsConHero({
   playas,
   limit = 10,
   eyebrow,
-  scoreColor = 'var(--accent, #6b400a)',
+  scoreColor = 'var(--accent)',
   metaFormat = 'mun-prov',
   locale = 'es',
 }: Props) {
@@ -98,7 +98,7 @@ export default async function TopBeachCardsConHero({
           fontWeight: 600,
           letterSpacing: '.12em',
           textTransform: 'uppercase',
-          color: 'var(--muted, #5a3d12)',
+          color: 'var(--muted)',
           marginBottom: '.85rem',
         }}>
           {eyebrow}
@@ -126,8 +126,8 @@ export default async function TopBeachCardsConHero({
                 prefetch={false}
                 style={{
                   display: 'block',
-                  background: 'var(--card-bg, #faf6ef)',
-                  border: '1px solid var(--line, #e8dcc8)',
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--line)',
                   borderRadius: 8,
                   overflow: 'hidden',
                   textDecoration: 'none',
@@ -136,7 +136,7 @@ export default async function TopBeachCardsConHero({
                 }}
               >
                 {/* Vis 3:2 con foto */}
-                <div style={{ position: 'relative', aspectRatio: '3 / 2', background: 'var(--metric-bg, #f0e6d0)', overflow: 'hidden' }}>
+                <div style={{ position: 'relative', aspectRatio: '3 / 2', background: 'var(--metric-bg)', overflow: 'hidden' }}>
                   {foto ? (
                     <Image
                       src={foto}
@@ -156,7 +156,7 @@ export default async function TopBeachCardsConHero({
                     position: 'absolute', top: 10, left: 10, zIndex: 2,
                     fontFamily: 'var(--font-serif)',
                     fontSize: '1.35rem', fontStyle: 'italic',
-                    color: 'var(--arena-50, #faf4e6)',
+                    color: 'var(--arena-50)',
                     textShadow: '0 1px 8px rgba(0,0,0,.5)',
                     lineHeight: 1, letterSpacing: '-.02em',
                   }}>
@@ -166,7 +166,7 @@ export default async function TopBeachCardsConHero({
                   {p.score !== undefined && (
                     <span style={{
                       position: 'absolute', top: 10, right: 10, zIndex: 2,
-                      background: 'var(--arena-50, #faf4e6)',
+                      background: 'var(--arena-50)',
                       padding: '4px 10px', borderRadius: 999,
                       fontFamily: 'var(--font-serif)', fontWeight: 700,
                       fontSize: '.85rem', color: scoreColor,
@@ -191,7 +191,7 @@ export default async function TopBeachCardsConHero({
                     fontFamily: 'var(--font-serif)',
                     fontWeight: 700,
                     fontSize: '1rem',
-                    color: 'var(--ink, #2a1a08)',
+                    color: 'var(--ink)',
                     lineHeight: 1.2,
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -201,7 +201,7 @@ export default async function TopBeachCardsConHero({
                   </div>
                   <div style={{
                     fontSize: '.74rem',
-                    color: 'var(--muted, #5a3d12)',
+                    color: 'var(--muted)',
                     marginTop: '.2rem',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',

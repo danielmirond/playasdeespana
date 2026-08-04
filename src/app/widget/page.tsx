@@ -85,15 +85,15 @@ export default function WidgetPage() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 10,
                 padding: '10px 14px',
-                background: '#faf4e6', border: '1px solid #e5d6b4', borderRadius: 6,
-                fontFamily: 'Georgia, serif', textDecoration: 'none', color: '#2a1a08',
+                background: 'var(--surface)', border: '1px solid #e5d6b4', borderRadius: 6,
+                fontFamily: 'Georgia, serif', textDecoration: 'none', color: 'var(--ink)',
                 maxWidth: 360,
               }}
             >
               <div style={{
                 width: 40, height: 40, borderRadius: '50%',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: '#3d6b1f', color: '#fff', fontWeight: 700, fontSize: 15,
+                background: 'var(--excelente)', color: '#fff', fontWeight: 700, fontSize: 15,
                 flexShrink: 0,
               }}>
                 87
@@ -129,15 +129,15 @@ export default function WidgetPage() {
           </p>
 
           <pre style={{
-            background: 'var(--tinta-900, #1a0f04)',
-            color: 'var(--arena-50, #faf4e6)',
+            background: 'var(--tinta-900)',
+            color: 'var(--arena-50)',
             padding: '1.25rem 1.5rem',
             borderRadius: 6,
             fontSize: '.82rem',
             lineHeight: 1.65,
             overflow: 'auto',
             fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-            border: '1px solid var(--tinta-700, #3d2a14)',
+            border: '1px solid var(--tinta-700)',
           }}>
             {SNIPPET}
           </pre>
@@ -206,7 +206,7 @@ Response:
   "municipio": "San Sebastián",
   "score": 87,
   "label": "Excelente",
-  "color": "#3d6b1f",
+  "color": "var(--excelente)",
   "agua": 19,
   "olas": 0.3,
   "viento": 12,

@@ -45,9 +45,9 @@ export default function FichaAsideActions({ lat, lng, nombre, slug, meteo, score
     fontSize:      '.82rem',
     fontWeight:    500,
     cursor:        'pointer',
-    border:        '1px solid var(--line, #e8dcc8)',
-    background:    'var(--card-bg, #faf6ef)',
-    color:         'var(--accent, #6b400a)',
+    border:        '1px solid var(--line)',
+    background:    'var(--card-bg)',
+    color:         'var(--accent)',
     transition:    'border-color .15s, background .15s',
   }
 

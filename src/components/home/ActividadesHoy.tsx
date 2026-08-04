@@ -29,28 +29,28 @@ const ACTIVIDADES: Actividad[] = [
     icon: Waves,
     desc: 'Playas con oleaje para surfear',
     descEn: 'Beaches with rideable waves',
-    color: '#2d5266',
+    color: 'var(--cert-medido)',
   },
   {
     key: 'snorkel', label: 'Snorkel', labelEn: 'Snorkel',
     icon: Eyeglasses,
     desc: 'Calas con buena visibilidad para buceo libre',
     descEn: 'Coves with good visibility for free diving',
-    color: '#5a8a7a',
+    color: 'var(--calma)',
   },
   {
     key: 'kayak', label: 'Kayak / Paddle', labelEn: 'Kayak / Paddle',
     icon: Boat,
     desc: 'Playas con aguas calmadas para remar',
     descEn: 'Calm waters for paddling',
-    color: '#4a7a90',
+    color: 'var(--mar-500)',
   },
   {
     key: 'windsurf', label: 'Windsurf / Kite', labelEn: 'Windsurf / Kite',
     icon: Wind,
     desc: 'Spots con viento para deportes de vela',
     descEn: 'Windy spots for sailing sports',
-    color: '#7a7a7a',
+    color: 'var(--viento)',
   },
 ]
 

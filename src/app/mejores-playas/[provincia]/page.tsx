@@ -135,7 +135,7 @@ export default async function MejoresPlayasProvinciaPage({ params }: Props) {
                 <div style={{ display: 'flex', gap: '.25rem', flexShrink: 0, flexWrap: 'wrap' }}>
                   {p.bandera && <span style={{ fontSize: '.6rem', fontWeight: 500, color: 'var(--accent)', background: 'color-mix(in srgb, var(--accent) 10%, var(--card-bg))', padding: '.12rem .35rem', borderRadius: 100 }}>B. Azul</span>}
                   {p.socorrismo && <span style={{ fontSize: '.6rem', fontWeight: 500, color: 'var(--muted)', background: 'var(--metric-bg)', border: '1px solid var(--line)', padding: '.12rem .35rem', borderRadius: 100 }}>Socorr.</span>}
-                  {p.accesible && <span style={{ fontSize: '.6rem', fontWeight: 500, color: '#3d6b1f', background: 'rgba(61,107,31,.08)', padding: '.12rem .35rem', borderRadius: 100 }}>PMR</span>}
+                  {p.accesible && <span style={{ fontSize: '.6rem', fontWeight: 500, color: 'var(--excelente)', background: 'rgba(61,107,31,.08)', padding: '.12rem .35rem', borderRadius: 100 }}>PMR</span>}
                 </div>
               </Link>
             </li>

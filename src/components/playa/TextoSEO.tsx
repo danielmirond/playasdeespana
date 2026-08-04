@@ -33,8 +33,8 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
 
   return (
     <details style={{
-      background: 'var(--card-bg,#faf6ef)',
-      border: '1px solid var(--line,#e8dcc8)',
+      background: 'var(--card-bg)',
+      border: '1px solid var(--line)',
       borderRadius: '20px',
       overflow: 'hidden',
       marginBottom: '1rem',
@@ -43,7 +43,7 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
         padding: '1rem 1.25rem',
         fontWeight: 700,
         fontSize: '.9rem',
-        color: 'var(--ink,#2a1a08)',
+        color: 'var(--ink)',
         cursor: 'pointer',
         listStyle: 'none',
         display: 'flex',
@@ -52,7 +52,7 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
         userSelect: 'none',
       }}>
         <span>{titulo}</span>
-        <span style={{ fontSize: '.75rem', color: 'var(--muted,#5a3d12)', fontWeight: 400 }}>
+        <span style={{ fontSize: '.75rem', color: 'var(--muted)', fontWeight: 400 }}>
           {subtitulo}
         </span>
       </summary>
@@ -61,15 +61,15 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
         padding: '0 1.25rem 1.25rem',
         fontSize: '.85rem',
         lineHeight: '1.7',
-        color: 'var(--ink,#2a1a08)',
-        borderTop: '1px solid var(--line,#e8dcc8)',
+        color: 'var(--ink)',
+        borderTop: '1px solid var(--line)',
         paddingTop: '1rem',
       }}>
         {playa.descripcion && (
-          <p style={{ margin: '0 0 .9rem', fontStyle: 'italic', color: 'var(--muted,#5a3d12)', borderLeft: '3px solid var(--accent,#6b400a)', paddingLeft: '.85rem' }}>
+          <p style={{ margin: '0 0 .9rem', fontStyle: 'italic', color: 'var(--muted)', borderLeft: '3px solid var(--accent)', paddingLeft: '.85rem' }}>
             {playa.descripcion}
             {playa.nombres_alt && (
-              <span style={{ display: 'block', marginTop: '.35rem', fontSize: '.75rem', color: 'var(--muted,#5a3d12)' }}>
+              <span style={{ display: 'block', marginTop: '.35rem', fontSize: '.75rem', color: 'var(--muted)' }}>
                 {locale === 'en' ? 'Also known as' : 'También conocida como'}: {playa.nombres_alt}
               </span>
             )}
@@ -80,9 +80,9 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
         <div style={{
           marginTop: '1rem',
           paddingTop: '1rem',
-          borderTop: '1px solid var(--line,#e8dcc8)',
+          borderTop: '1px solid var(--line)',
           fontSize: '.72rem',
-          color: 'var(--muted,#5a3d12)',
+          color: 'var(--muted)',
           display: 'flex',
           flexWrap: 'wrap',
           gap: '.35rem',
@@ -90,7 +90,7 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
           {tags.map((tag, i) => (
             <span key={i} style={{
               background: 'rgba(107,64,10,.08)',
-              border: '1px solid var(--line,#e8dcc8)',
+              border: '1px solid var(--line)',
               borderRadius: '100px',
               padding: '.15rem .5rem',
             }}>

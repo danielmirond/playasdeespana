@@ -23,14 +23,14 @@ export default function HeroEn() {
           <rect x="0"  y="138" width="220" height="22" rx="0" fill="#c4884a" opacity=".7"/>
           <path d="M5,122 C25,114 48,124 72,118 C96,112 118,124 144,118 C166,113 190,121 215,117" fill="none" stroke="#a8cce0" strokeWidth="2" strokeLinecap="round" opacity=".5"/>
           <path d="M0,132 C28,124 58,134 90,127 C122,120 155,132 190,126 L220,125 L220,142 L0,142Z" fill="#a8cce0" opacity=".12"/>
-          <path d="M76,120 A34,34 0 0,1 144,120" fill="#e8a030" opacity=".9"/>
-          <circle cx="110" cy="120" r="24" fill="#e8a030"/>
+          <path d="M76,120 A34,34 0 0,1 144,120" fill="var(--accent2)" opacity=".9"/>
+          <circle cx="110" cy="120" r="24" fill="var(--accent2)"/>
           <circle cx="110" cy="120" r="18" fill="#f5be40"/>
-          <line x1="110" y1="78"  x2="110" y2="88"  stroke="#e8a030" strokeWidth="2.5" strokeLinecap="round"/>
-          <line x1="82"  y1="86"  x2="87"  y2="94"  stroke="#e8a030" strokeWidth="2"   strokeLinecap="round" opacity=".8"/>
-          <line x1="138" y1="86"  x2="133" y2="94"  stroke="#e8a030" strokeWidth="2"   strokeLinecap="round" opacity=".8"/>
-          <line x1="68"  y1="105" x2="77"  y2="108" stroke="#e8a030" strokeWidth="1.5" strokeLinecap="round" opacity=".55"/>
-          <line x1="152" y1="105" x2="143" y2="108" stroke="#e8a030" strokeWidth="1.5" strokeLinecap="round" opacity=".55"/>
+          <line x1="110" y1="78"  x2="110" y2="88"  stroke="var(--accent2)" strokeWidth="2.5" strokeLinecap="round"/>
+          <line x1="82"  y1="86"  x2="87"  y2="94"  stroke="var(--accent2)" strokeWidth="2"   strokeLinecap="round" opacity=".8"/>
+          <line x1="138" y1="86"  x2="133" y2="94"  stroke="var(--accent2)" strokeWidth="2"   strokeLinecap="round" opacity=".8"/>
+          <line x1="68"  y1="105" x2="77"  y2="108" stroke="var(--accent2)" strokeWidth="1.5" strokeLinecap="round" opacity=".55"/>
+          <line x1="152" y1="105" x2="143" y2="108" stroke="var(--accent2)" strokeWidth="1.5" strokeLinecap="round" opacity=".55"/>
         </svg>
       </div>
 

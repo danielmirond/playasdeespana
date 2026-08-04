@@ -14,7 +14,7 @@ export default function ContextualCTA({
   locale?: 'es' | 'en'
 }) {
   const cta = pickContextualCTA(playa, meteo, locale)
-  const bg = cta.tone === 'mar' ? 'var(--mar-700, #2d5266)' : 'var(--accent, #6b400a)'
+  const bg = cta.tone === 'mar' ? 'var(--mar-700)' : 'var(--accent)'
   return (
     <Link
       href={cta.href}
@@ -23,7 +23,7 @@ export default function ContextualCTA({
       aria-label={cta.title}
       style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem',
-        background: bg, color: 'var(--arena-100, #f5ecd5)',
+        background: bg, color: 'var(--arena-100)',
         borderRadius: 10, padding: '0.95rem 1.2rem', minHeight: 44,
         textDecoration: 'none', boxShadow: 'var(--shadow-sm)', margin: '0 0 1.25rem',
       }}

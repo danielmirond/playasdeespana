@@ -44,7 +44,7 @@
   padding: 1rem 1.15rem;
   border-radius: var(--r-sm, 4px);
   border: 1px solid var(--line);
-  background: var(--surface, #faf4e6);
+  background: var(--surface, var(--surface));
   text-decoration: none;
   transition: border-color .15s, transform .15s;
 }

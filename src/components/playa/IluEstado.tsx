@@ -10,12 +10,12 @@ interface Props {
 }
 
 const COLORS: Record<string, string> = {
-  CALMA:   '#3d6b1f',
-  BUENA:   '#7a8a30',
-  AVISO:   '#c48a1e',
-  SURF:    '#4a7a90',
-  VIENTO:  '#7a7a7a',
-  PELIGRO: '#7a2818',
+  CALMA:   'var(--excelente)',
+  BUENA:   'var(--muybueno)',
+  AVISO:   'var(--aceptable)',
+  SURF:    'var(--mar-500)',
+  VIENTO:  'var(--viento)',
+  PELIGRO: 'var(--noapto)',
 }
 
 const ANIM_CSS = `

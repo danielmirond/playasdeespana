@@ -135,7 +135,7 @@ export default async function PlayasSinVientoPage() {
                 }}>
                   <span style={{
                     fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-                    fontSize: '.85rem', fontWeight: 500, color: '#3d6b1f',
+                    fontSize: '.85rem', fontWeight: 500, color: 'var(--excelente)',
                     width: 55, textAlign: 'right', flexShrink: 0,
                     fontVariantNumeric: 'tabular-nums',
                   }}>
@@ -169,7 +169,7 @@ export default async function PlayasSinVientoPage() {
                 }}>
                   <span style={{
                     fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-                    fontSize: '.82rem', fontWeight: 500, color: '#c48a1e',
+                    fontSize: '.82rem', fontWeight: 500, color: 'var(--aceptable)',
                     width: 55, textAlign: 'right', flexShrink: 0,
                   }}>
                     {p.viento} km/h

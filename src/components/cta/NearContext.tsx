@@ -22,7 +22,7 @@ function Inner({ locale = 'es' }: { locale?: 'es' | 'en' }) {
       style={{
         display: 'inline-flex', alignItems: 'center', gap: '.4rem',
         margin: '0 0 1rem', padding: '.4rem .8rem', borderRadius: 999,
-        background: 'var(--card-bg, #faf4e6)', border: '1px solid var(--line)',
+        background: 'var(--card-bg)', border: '1px solid var(--line)',
         color: 'var(--accent)', fontWeight: 600, fontSize: '.82rem', textDecoration: 'none',
       }}
     >

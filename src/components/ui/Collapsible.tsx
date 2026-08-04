@@ -74,7 +74,7 @@ export default function Collapsible({
             // Corte limpio entre tarjetas → el degradado ya no tiene que
             // "tapar" media ficha; 48px basta para señalar que hay más.
             height: 48,
-            background: 'linear-gradient(to bottom, transparent, var(--card-bg, #faf6ef) 90%)',
+            background: 'linear-gradient(to bottom, transparent, var(--card-bg) 90%)',
             pointerEvents: 'none',
           }}
         />

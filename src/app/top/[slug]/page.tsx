@@ -223,7 +223,7 @@ export default async function TopCostaPage({ params }: Props) {
 
         <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '.6rem' }}>
           {costaPlayas.map(({ p, score }, i) => {
-            const sc = score >= 75 ? '#3d6b1f' : score >= 55 ? '#c48a1e' : score >= 35 ? '#a04818' : '#7a2818'
+            const sc = score >= 75 ? 'var(--excelente)' : score >= 55 ? 'var(--aceptable)' : score >= 35 ? 'var(--limitado)' : 'var(--noapto)'
             return (
               <li key={p.slug}>
                 <Link href={`/playas/${p.slug}`} style={{

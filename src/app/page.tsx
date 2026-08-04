@@ -215,7 +215,7 @@ export default async function HomePage() {
               <Link key={item.href} href={item.href} style={{
                 display: 'flex', alignItems: 'center', gap: '1rem',
                 padding: '1.15rem 1.25rem',
-                background: 'var(--surface, #faf4e6)', border: '1px solid var(--line)',
+                background: 'var(--surface)', border: '1px solid var(--line)',
                 borderRadius: 'var(--r-sm, 4px)', textDecoration: 'none',
                 transition: 'border-color .15s, transform .15s',
               }}>

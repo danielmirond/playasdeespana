@@ -183,7 +183,7 @@ export default async function CampingsPage() {
                         href={`/playas/${p.slug}`}
                         style={{
                           display: 'flex', alignItems: 'center', gap: '.45rem',
-                          fontSize: '.78rem', color: 'var(--accent, #6b400a)',
+                          fontSize: '.78rem', color: 'var(--accent)',
                           textDecoration: 'none', fontWeight: 500,
                         }}
                       >

@@ -79,7 +79,7 @@ export default function AuthorByline({
           alignItems: 'center',
           gap:        '.5rem',
           fontSize:   '.78rem',
-          color:      'var(--muted, #5a3d12)',
+          color:      'var(--muted)',
           margin:     '.25rem 0 1.25rem',
           flexWrap:   'wrap',
         }}>
@@ -89,15 +89,15 @@ export default function AuthorByline({
           <Link
             href={BYLINE_HREF}
             style={{
-              color:          'var(--ink, #2a1a08)',
+              color:          'var(--ink)',
               textDecoration: 'none',
               fontWeight:     600,
-              borderBottom:   '1px solid var(--line, #e8dcc8)',
+              borderBottom:   '1px solid var(--line)',
             }}
           >
             {BYLINE_LABEL}
           </Link>
-          <span style={{ color: 'var(--line, #e8dcc8)' }}>·</span>
+          <span style={{ color: 'var(--line)' }}>·</span>
           <time
             dateTime={dateModified}
             style={{

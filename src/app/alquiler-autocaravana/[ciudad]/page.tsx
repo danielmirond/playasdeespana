@@ -143,7 +143,7 @@ export default async function CamperCityPage({ params }: Props) {
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '.4rem' }}>
               {playasCerca.map(p => (
                 <li key={p.slug}>
-                  <Link href={`/playas/${p.slug}`} style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '.5rem', background: 'var(--bg, #fff)', border: '1px solid var(--line)', borderRadius: 6, padding: '.5rem .7rem', textDecoration: 'none' }}>
+                  <Link href={`/playas/${p.slug}`} style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '.5rem', background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.5rem .7rem', textDecoration: 'none' }}>
                     <span style={{ minWidth: 0 }}>
                       <span style={{ fontWeight: 600, color: 'var(--ink)', fontSize: '.88rem' }}>
                         {p.bandera && <span title="Bandera azul" aria-label="Bandera azul" style={{ marginRight: '.3rem' }}>🔵</span>}

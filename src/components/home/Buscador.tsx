@@ -175,8 +175,8 @@ export default function Buscador({ locale = 'es' }: Props) {
               top:        'calc(100% + 4px)',
               left:       0,
               right:      0,
-              background: 'var(--card-bg, #faf6ef)',
-              border:     '1px solid var(--line, #e8dcc8)',
+              background: 'var(--card-bg)',
+              border:     '1px solid var(--line)',
               borderRadius: 6,
               boxShadow:  '0 8px 24px rgba(0,0,0,.12)',
               listStyle:  'none',
@@ -196,12 +196,12 @@ export default function Buscador({ locale = 'es' }: Props) {
                     display:        'block',
                     padding:        '.5rem 1rem',
                     textDecoration: 'none',
-                    color:          'var(--ink, #2a1a08)',
-                    background:     highlighted === i ? 'color-mix(in srgb, var(--accent, #6b400a) 8%, transparent)' : 'transparent',
+                    color:          'var(--ink)',
+                    background:     highlighted === i ? 'color-mix(in srgb, var(--accent) 8%, transparent)' : 'transparent',
                   }}
                 >
                   <div style={{ fontWeight: 600, fontSize: '.9rem' }}>{r.nombre}</div>
-                  <div style={{ fontSize: '.75rem', color: 'var(--muted, #5a3d12)' }}>
+                  <div style={{ fontSize: '.75rem', color: 'var(--muted)' }}>
                     {r.municipio} · {r.provincia}
                   </div>
                 </Link>

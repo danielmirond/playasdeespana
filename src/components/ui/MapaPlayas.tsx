@@ -17,12 +17,12 @@ interface Props {
 }
 
 const ESTADO_COLORES: Record<string, string> = {
-  CALMA:   '#3d6b1f',
-  BUENA:   '#7a8a30',
-  AVISO:   '#c48a1e',
-  PELIGRO: '#7a2818',
-  SURF:    '#4a7a90',
-  VIENTO:  '#c48a1e',
+  CALMA:   'var(--excelente)',
+  BUENA:   'var(--muybueno)',
+  AVISO:   'var(--aceptable)',
+  PELIGRO: 'var(--noapto)',
+  SURF:    'var(--mar-500)',
+  VIENTO:  'var(--aceptable)',
 }
 
 function calcEstado(playa: Playa): string {
@@ -129,7 +129,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
       if (circleRef.current) circleRef.current.remove()
       circleRef.current = L.circle([e.latlng.lat, e.latlng.lng], {
         radius: (map as any)._radioKm * 1000,
-        color: '#6b400a', fillColor: '#6b400a', fillOpacity: 0.08,
+        color: 'var(--terra-800)', fillColor: 'var(--terra-800)', fillOpacity: 0.08,
         weight: 2, dashArray: '6 4'
       }).addTo(map)
     })
@@ -150,14 +150,14 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
         })
         const marker = L.marker([p.lat, p.lng], { icon })
           .bindPopup(`
-            <div style="font-family:var(--font-sans,system-ui);min-width:170px;color:#2a1a08">
+            <div style="font-family:var(--font-sans,system-ui);min-width:170px;color:var(--ink)">
               <div style="font-family:var(--font-serif,Georgia,serif);font-style:italic;font-weight:700;font-size:1rem;line-height:1.1;margin-bottom:.25rem;letter-spacing:-.01em">${p.nombre}</div>
               <div style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.7rem;color:#7a6858;margin-bottom:.5rem;letter-spacing:.04em">${p.municipio ?? ''} · ${p.provincia ?? ''}</div>
               <div style="display:flex;gap:.3rem;margin-bottom:.55rem;align-items:center">
                 <span style="background:${color}14;color:${color};border:1px solid ${color}44;padding:2px 7px;border-radius:100px;font-size:.7rem;font-weight:500">${estado}</span>
                 <span style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.68rem;color:#7a6858">${olas}m · ${viento}km/h</span>
               </div>
-              <a href="/playas/${p.slug}" style="display:block;text-align:center;background:#6b400a;color:white;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">Ver playa →</a>
+              <a href="/playas/${p.slug}" style="display:block;text-align:center;background:var(--terra-800);color:white;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">Ver playa →</a>
             </div>
           `, { maxWidth: 220 })
           .addTo(map)
@@ -178,7 +178,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
           const { latitude, longitude } = pos.coords
           map.flyTo([latitude, longitude], 11, { duration: 1.5 })
           const userIcon = L.divIcon({
-            html: `<div style="width:14px;height:14px;border-radius:50%;background:#6b400a;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,.3)"></div>`,
+            html: `<div style="width:14px;height:14px;border-radius:50%;background:var(--terra-800);border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,.3)"></div>`,
             className: '', iconSize: [14, 14], iconAnchor: [7, 7],
           })
           L.marker([latitude, longitude], { icon: userIcon })
@@ -217,10 +217,10 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: '.4rem', flexWrap: 'wrap',
-        padding: '.6rem 1rem', background: 'var(--card-bg,#faf6ef)',
-        borderBottom: '1px solid var(--line,#e8dcc8)',
+        padding: '.6rem 1rem', background: 'var(--card-bg)',
+        borderBottom: '1px solid var(--line)',
       }}>
-        <span style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.06em' }}>Estado</span>
+        <span style={{ fontSize:'.72rem', color: 'var(--muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.06em' }}>Estado</span>
         {estados.map(e => (
           <button
             key={e}
@@ -230,15 +230,15 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-label={e === 'TODOS' ? 'Mostrar todas las playas' : `Filtrar por estado ${e.toLowerCase()}`}
             style={{
               fontSize:'.72rem', fontWeight: 700, padding: '.2rem .55rem', borderRadius: '100px', border: '1px solid',
-              borderColor: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#6b400a)') : 'var(--line,#e8dcc8)',
-              background: filtro === e ? ((ESTADO_COLORES[e] ?? '#6b400a') + '18') : 'transparent',
-              color: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent,#6b400a)') : 'var(--muted,#5a3d12)',
+              borderColor: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent)') : 'var(--line)',
+              background: filtro === e ? ((ESTADO_COLORES[e] ?? 'var(--terra-800)') + '18') : 'transparent',
+              color: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent)') : 'var(--muted)',
               cursor: 'pointer',
             }}
           >{e}</button>
         ))}
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '.4rem' }}>
-          {loading && <span style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)' }}>Cargando…</span>}
+          {loading && <span style={{ fontSize:'.72rem', color: 'var(--muted)' }}>Cargando…</span>}
           {/* Centrar en mi ubicación */}
           <button
             type="button"
@@ -253,9 +253,9 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-label="Centrar en mi ubicación"
             style={{
               fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px',
-              border: '1px solid var(--line,#e8dcc8)',
+              border: '1px solid var(--line)',
               background: 'transparent',
-              color: 'var(--accent,#6b400a)', cursor: 'pointer',
+              color: 'var(--accent)', cursor: 'pointer',
               minHeight: '44px', display: 'flex', alignItems: 'center', gap: '.3rem',
             }}
           >
@@ -267,7 +267,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-label="Cambiar tipo de mapa"
             style={{
               display: 'flex', alignItems: 'center',
-              border: '1px solid var(--line,#e8dcc8)',
+              border: '1px solid var(--line)',
               borderRadius: '100px', padding: '2px', gap: '2px',
             }}
           >
@@ -279,8 +279,8 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
               style={{
                 fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px',
                 border: 'none',
-                background: baseMap === 'osm' ? 'var(--accent,#6b400a)' : 'transparent',
-                color: baseMap === 'osm' ? '#fff' : 'var(--muted,#5a3d12)',
+                background: baseMap === 'osm' ? 'var(--accent)' : 'transparent',
+                color: baseMap === 'osm' ? '#fff' : 'var(--muted)',
                 cursor: 'pointer', minHeight: '44px',
               }}
             >Mapa</button>
@@ -292,8 +292,8 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
               style={{
                 fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px',
                 border: 'none',
-                background: baseMap === 'aerial' ? 'var(--accent,#6b400a)' : 'transparent',
-                color: baseMap === 'aerial' ? '#fff' : 'var(--muted,#5a3d12)',
+                background: baseMap === 'aerial' ? 'var(--accent)' : 'transparent',
+                color: baseMap === 'aerial' ? '#fff' : 'var(--muted)',
                 cursor: 'pointer', minHeight: '44px',
               }}
             >Aérea</button>
@@ -305,9 +305,9 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             aria-label={modoRadio ? 'Ocultar filtro de radio' : 'Mostrar filtro de radio de búsqueda'}
             style={{
               fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px', border: '1px solid',
-              borderColor: modoRadio ? 'var(--accent,#6b400a)' : 'var(--line,#e8dcc8)',
+              borderColor: modoRadio ? 'var(--accent)' : 'var(--line)',
               background: modoRadio ? 'rgba(107,64,10,.1)' : 'transparent',
-              color: modoRadio ? 'var(--accent,#6b400a)' : 'var(--muted,#5a3d12)', cursor: 'pointer',
+              color: modoRadio ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer',
               minHeight: '44px',
             }}
           >Radio</button>
@@ -322,9 +322,9 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
                 value={radio}
                 onChange={e => setRadio(+e.target.value)}
                 aria-valuetext={`${radio} kilómetros`}
-                style={{ width: '70px', accentColor: 'var(--accent,#6b400a)' }}
+                style={{ width: '70px', accentColor: 'var(--accent)' }}
               />
-              <span aria-live="polite" style={{ fontSize:'.72rem', color: 'var(--muted,#5a3d12)', minWidth: '30px' }}>{radio}km</span>
+              <span aria-live="polite" style={{ fontSize:'.72rem', color: 'var(--muted)', minWidth: '30px' }}>{radio}km</span>
             </div>
           )}
         </div>
@@ -342,8 +342,8 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--accent,#6b400a)', marginBottom: '.4rem' }} aria-hidden="true">~</div>
-              <div style={{ fontSize: '.8rem', color: 'var(--ink,#2a1a08)', fontWeight: 600 }}>Cargando playas…</div>
+              <div style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '.4rem' }} aria-hidden="true">~</div>
+              <div style={{ fontSize: '.8rem', color: 'var(--ink)', fontWeight: 600 }}>Cargando playas…</div>
             </div>
           </div>
         )}
@@ -365,8 +365,8 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
 
       <div style={{
         display: 'flex', gap: '.6rem', flexWrap: 'wrap', padding: '.4rem 1rem',
-        background: 'var(--card-bg,#faf6ef)', borderTop: '1px solid var(--line,#e8dcc8)',
-        fontSize:'.72rem', color: 'var(--muted,#5a3d12)',
+        background: 'var(--card-bg)', borderTop: '1px solid var(--line)',
+        fontSize:'.72rem', color: 'var(--muted)',
       }}>
         {Object.entries(ESTADO_COLORES).map(([e, c]) => (
           <span key={e} style={{ display: 'flex', alignItems: 'center', gap: '.2rem' }}>
@@ -375,7 +375,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
           </span>
         ))}
         <span style={{ marginLeft: 'auto' }}>{playas.length.toLocaleString('es')} playas</span>
-        {modoRadio && <span style={{ color: 'var(--accent,#6b400a)' }}>· Clic en el mapa para ver radio</span>}
+        {modoRadio && <span style={{ color: 'var(--accent)' }}>· Clic en el mapa para ver radio</span>}
       </div>
     </div>
   )

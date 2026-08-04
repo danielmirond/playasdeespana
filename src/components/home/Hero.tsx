@@ -106,7 +106,7 @@ export default function Hero() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '.4rem',
                 padding: '.5rem .9rem', borderRadius: 999,
-                background: 'color-mix(in srgb, var(--accent) 12%, var(--surface, #faf4e6))',
+                background: 'color-mix(in srgb, var(--accent) 12%, var(--surface))',
                 border: '1px solid color-mix(in srgb, var(--accent) 35%, var(--line))',
                 color: 'var(--accent)', fontWeight: 700, fontSize: '.82rem',
                 textDecoration: 'none', whiteSpace: 'nowrap',

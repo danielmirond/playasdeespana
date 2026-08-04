@@ -103,7 +103,7 @@ export default function CalasSecretasMaster() {
           </div>
         </section>
 
-        <section style={{ marginBottom: '2.5rem', background: 'var(--card-bg, #faf6ef)', padding: '1.5rem 1.5rem', borderRadius: 8 }}>
+        <section style={{ marginBottom: '2.5rem', background: 'var(--card-bg)', padding: '1.5rem 1.5rem', borderRadius: 8 }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '.75rem', color: 'var(--ink)' }}>
             ¿Qué hace que una cala sea "secreta"?
           </h2>

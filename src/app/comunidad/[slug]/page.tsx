@@ -145,7 +145,7 @@ export default async function ComunidadPage({ params }: Props) {
             <section aria-labelledby="top-com" style={{ marginBottom: '2.5rem' }}>
               <h2 id="top-com" style={{
                 fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-                color: 'var(--ink, #2a1a08)', marginBottom: '1rem',
+                color: 'var(--ink)', marginBottom: '1rem',
               }}>
                 Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>en {comunidad.nombre}</em>
               </h2>

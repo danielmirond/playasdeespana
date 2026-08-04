@@ -127,7 +127,7 @@ export default async function ProvinciaPage({ params }: Props) {
             <section aria-labelledby="top-prov" style={{ marginBottom: '2.5rem' }}>
               <h2 id="top-prov" style={{
                 fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-                color: 'var(--ink, #2a1a08)', marginBottom: '1rem',
+                color: 'var(--ink)', marginBottom: '1rem',
               }}>
                 Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>en {provincia.nombre}</em>
               </h2>

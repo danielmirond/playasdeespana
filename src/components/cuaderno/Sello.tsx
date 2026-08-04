@@ -43,7 +43,7 @@ function glifoDe(nombre: string): string {
 
 export default function Sello({ nombre, provincia = '', fecha, size = 108, tono = 'ink', rot = -4 }: Props) {
   const r = size / 2
-  const col = tono === 'accent' ? 'var(--sello-accent, #6b400a)' : 'var(--sello-ink, #2a1a08)'
+  const col = tono === 'accent' ? 'var(--sello-accent)' : 'var(--sello-ink)'
   // El arco necesita un id único por sello dentro de la página
   const uid = `sl-${nombre.replace(/\W/g, '')}-${fecha.replace(/\W/g, '')}-${size}`
   const glifo = glifoDe(nombre)
@@ -100,7 +100,7 @@ export default function Sello({ nombre, provincia = '', fecha, size = 108, tono 
       aria-label={`Sello de ${nombre}${provincia ? `, ${provincia}` : ''}, ${fecha}`}
       style={{ opacity: 0.88, mixBlendMode: 'multiply', transform: `rotate(${rot}deg)` }}
     >
-      <Pasada dx={1.5} dy={1.5} op={0.35} c="var(--sello-accent, #6b400a)" />
+      <Pasada dx={1.5} dy={1.5} op={0.35} c="var(--sello-accent)" />
       <Pasada c={col} />
     </svg>
   )
@@ -126,7 +126,7 @@ export function Insignia({ numeral, titulo, detalle, conseguida, ancho = 132 }: 
       width: ancho, padding: '12px 10px 11px', textAlign: 'center',
       border: `1px solid ${conseguida ? 'var(--line-strong)' : 'var(--line)'}`,
       borderRadius: 'var(--r-sello, 3px)',
-      background: conseguida ? 'var(--surface-2, #f5ede0)' : 'transparent',
+      background: conseguida ? 'var(--surface-2)' : 'transparent',
       opacity: conseguida ? 1 : 0.5,
       position: 'relative',
     }}>
@@ -134,7 +134,7 @@ export function Insignia({ numeral, titulo, detalle, conseguida, ancho = 132 }: 
       <span aria-hidden="true" style={{ position: 'absolute', inset: 3, border: '0.5px solid var(--line)', borderRadius: 2, pointerEvents: 'none' }} />
       <div style={{
         fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: 22, lineHeight: 1,
-        color: conseguida ? 'var(--sello-accent, #6b400a)' : 'var(--muted)',
+        color: conseguida ? 'var(--sello-accent)' : 'var(--muted)',
       }}>{numeral}</div>
       <div style={{ fontFamily: 'var(--font-serif)', fontSize: 12.5, fontWeight: 700, marginTop: 6, color: 'var(--ink)' }}>{titulo}</div>
       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 8, color: 'var(--muted)', marginTop: 4, lineHeight: 1.35 }}>{detalle}</div>

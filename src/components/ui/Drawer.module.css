@@ -44,7 +44,7 @@
   font-weight: 700;
   margin: 0;
   letter-spacing: -.01em;
-  color: var(--ink, #2a1a08);
+  color: var(--ink, var(--ink));
 }
 
 .close {
@@ -59,7 +59,7 @@
   border-radius: 4px;
   transition: color .15s, background .15s;
 }
-.close:hover { color: var(--ink, #2a1a08); background: rgba(0, 0, 0, .05); }
+.close:hover { color: var(--ink, var(--ink)); background: rgba(0, 0, 0, .05); }
 
 .body {
   flex: 1;

@@ -63,21 +63,21 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
 
   return (
     <div style={{
-      background: 'var(--card-bg, #faf6ef)',
-      border: '1px solid var(--line, #e8dcc8)',
+      background: 'var(--card-bg)',
+      border: '1px solid var(--line)',
       borderRadius: 6,
       overflow: 'hidden',
     }}>
       {/* Header */}
       <div style={{
         padding: '.55rem .9rem',
-        borderBottom: '1px solid var(--line, #e8dcc8)',
+        borderBottom: '1px solid var(--line)',
         fontFamily: 'var(--font-sans)',
         fontSize: '.68rem',
         fontWeight: 500,
         letterSpacing: '.14em',
         textTransform: 'uppercase',
-        color: 'var(--muted, #8a7560)',
+        color: 'var(--muted)',
       }}>
         {miVoto !== null
           ? (es ? 'Tu valoración' : 'Your rating')
@@ -133,13 +133,13 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
         {data && data.votos > 0 ? (
           <div style={{
             fontSize: '.75rem',
-            color: 'var(--muted, #8a7560)',
+            color: 'var(--muted)',
             textAlign: 'center',
             lineHeight: 1.3,
             fontVariantNumeric: 'tabular-nums',
           }}>
             <span style={{
-              color: 'var(--ink, #2a1a08)', fontWeight: 700,
+              color: 'var(--ink)', fontWeight: 700,
               fontFamily: 'var(--font-serif)', fontSize: '.9rem',
             }}>{data.media.toFixed(1)}</span>
             <span style={{ color: '#f5a623' }}> ★</span>
@@ -152,7 +152,7 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
               : (es ? 'valoraciones' : 'ratings')}
           </div>
         ) : (
-          <div style={{ fontSize: '.7rem', color: 'var(--muted, #8a7560)', textAlign: 'center' }}>
+          <div style={{ fontSize: '.7rem', color: 'var(--muted)', textAlign: 'center' }}>
             {es ? 'Sé el primero en valorarla' : 'Be the first to rate it'}
           </div>
         )}
@@ -164,7 +164,7 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
             aria-atomic="true"
             style={{
               fontSize: '.65rem',
-              color: '#3d6b1f',
+              color: 'var(--excelente)',
               fontWeight: 600,
               marginTop: 2,
             }}

@@ -46,7 +46,7 @@ const PRODUCTOS: Producto[] = [
     puntos: ['Textura ultraligera', 'No deja residuo blanco', 'Apto rostro y cuerpo'],
     query: 'ISDIN+Fusion+Water+SPF50',
     badge: 'Top ventas',
-    badgeColor: '#c48a1e',
+    badgeColor: 'var(--aceptable)',
   },
   {
     nombre: 'Hawaiian Tropic Silk Hydration SPF50',
@@ -62,7 +62,7 @@ const PRODUCTOS: Producto[] = [
     puntos: ['Formato familiar 400ml', 'Resistente al agua', 'Absorción rápida'],
     query: 'Nivea+Sun+proteccion+hidratacion+SPF50',
     badge: 'Mejor precio',
-    badgeColor: '#3d6b1f',
+    badgeColor: 'var(--excelente)',
   },
   {
     nombre: 'La Roche-Posay Anthelios UVMune 400 SPF50+',
@@ -78,7 +78,7 @@ const PRODUCTOS: Producto[] = [
     puntos: ['Hipoalergénico', 'Sin parabenos', 'Resistente al agua, arena y cloro'],
     query: 'Garnier+Delial+ninos+sensitive+SPF50',
     badge: 'Niños',
-    badgeColor: '#4a7a90',
+    badgeColor: 'var(--mar-500)',
   },
   {
     nombre: 'Avène Solar Spray SPF50+ 200ml',
@@ -151,10 +151,10 @@ export default function ProtectoresSolaresPage() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '.5rem' }}>
             {[
-              { uv: '1-2',  nivel: 'Bajo',      spf: 'SPF 15-20', color: '#3d6b1f' },
-              { uv: '3-5',  nivel: 'Moderado',   spf: 'SPF 30',    color: '#c48a1e' },
-              { uv: '6-7',  nivel: 'Alto',        spf: 'SPF 50',    color: '#a04818' },
-              { uv: '8-10', nivel: 'Muy alto',    spf: 'SPF 50+',   color: '#7a2818' },
+              { uv: '1-2',  nivel: 'Bajo',      spf: 'SPF 15-20', color: 'var(--excelente)' },
+              { uv: '3-5',  nivel: 'Moderado',   spf: 'SPF 30',    color: 'var(--aceptable)' },
+              { uv: '6-7',  nivel: 'Alto',        spf: 'SPF 50',    color: 'var(--limitado)' },
+              { uv: '8-10', nivel: 'Muy alto',    spf: 'SPF 50+',   color: 'var(--noapto)' },
               { uv: '11+',  nivel: 'Extremo',     spf: 'SPF 50+ (reaplicar cada 60 min)', color: '#7c3aed' },
             ].map(r => (
               <div key={r.uv} style={{
@@ -203,7 +203,7 @@ export default function ProtectoresSolaresPage() {
                     }}>{p.badge}</span>
                   )}
                 </div>
-                <div style={{ fontSize: '.78rem', color: 'var(--accent, #6b400a)', fontWeight: 600, marginBottom: '.35rem' }}>
+                <div style={{ fontSize: '.78rem', color: 'var(--accent)', fontWeight: 600, marginBottom: '.35rem' }}>
                   {p.categoria} · SPF {p.spf}
                 </div>
                 <ul style={{ fontSize: '.82rem', color: 'var(--muted)', paddingLeft: '1rem', lineHeight: 1.7, margin: 0 }}>

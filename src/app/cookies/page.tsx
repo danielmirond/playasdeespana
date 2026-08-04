@@ -159,7 +159,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
         section li { margin-bottom: .35rem; }
         section p { margin-bottom: .65rem; }
         section code { background: rgba(107,64,10,.08); padding: .1rem .35rem; borderRadius: 4; fontSize: .82rem; }
-        section a { color: var(--accent, #6b400a); text-decoration: underline; }
+        section a { color: var(--accent); text-decoration: underline; }
       `}</style>
     </section>
   )

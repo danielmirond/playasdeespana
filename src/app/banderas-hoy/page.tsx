@@ -123,7 +123,7 @@ const faqSchema = {
   mainEntity: FAQ.map(i => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })),
 }
 
-const HEX = { verde: '#3d6b1f', amarilla: '#c48a1e', roja: '#a8301a' } as const
+const HEX = { verde: 'var(--excelente)', amarilla: 'var(--aceptable)', roja: '#a8301a' } as const
 
 export default async function BanderasHoyPage() {
   const playas = await getPlayas()
