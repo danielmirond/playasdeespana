@@ -232,7 +232,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             style={{
               fontSize:'.72rem', fontWeight: 700, padding: '.2rem .55rem', borderRadius: '100px', border: '1px solid',
               borderColor: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent)') : 'var(--line)',
-              background: filtro === e ? ((ESTADO_COLORES[e] ?? 'var(--terra-800)') + '18') : 'transparent',
+              background: filtro === e ? (tinte((ESTADO_COLORES[e] ?? 'var(--terra-800)'), 9)) : 'transparent',
               color: filtro === e ? (ESTADO_COLORES[e] ?? 'var(--accent)') : 'var(--muted)',
               cursor: 'pointer',
             }}

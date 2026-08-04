@@ -8,6 +8,7 @@ import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from '@/app/municipio/[slug]/MunicipioPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
+import { tinte } from '@/lib/tinte'
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -141,7 +142,7 @@ export default async function TownPageEn({ params }: Props) {
                 <span>{p.olas}m</span>
                 <span>{p.viento}km/h</span>
               </div>
-              <div className={styles.rowEstado} style={{ background: p.estado.bg, borderColor: p.estado.dot + '55' }}>
+              <div className={styles.rowEstado} style={{ background: p.estado.bg, borderColor: tinte(p.estado.dot, 33) }}>
                 <span className={styles.rowDot} style={{ background: p.estado.dot }}/>
                 <span style={{ color: p.estado.text }}>{p.estado.labelEn ?? p.estado.label}</span>
               </div>

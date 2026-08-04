@@ -5,6 +5,7 @@ import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
 import { getRutas, COSTAS, type Ruta } from '@/lib/rutas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
+import { tinte } from '@/lib/tinte'
 
 export const revalidate = 86400
 
@@ -190,7 +191,7 @@ export default async function RutasPage() {
                         <span key={p.playa.slug} style={{
                           fontSize: '.72rem', fontWeight: 600,
                           color: r.costa.color === '#f8fafc' ? 'var(--accent)' : r.costa.color,
-                          background: `${r.costa.color === '#f8fafc' ? 'var(--accent)' : r.costa.color}12`,
+                          background: tinte(r.costa.color === '#f8fafc' ? 'var(--accent)' : r.costa.color, 7),
                           padding: '.15rem .4rem', borderRadius: 4,
                         }}>
                           {i + 1}. {p.playa.nombre}

@@ -11,6 +11,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import GygActivities from '@/components/GygActivities'
+import { tinte } from '@/lib/tinte'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -175,7 +176,7 @@ export default async function ProvinciaPage({ params }: Props) {
                 <span>{p.olas}m</span>
                 <span>{p.viento}km/h</span>
               </div>
-              <div className={styles.rowEstado} style={{ background: p.estado.bg, borderColor: p.estado.dot + '55' }}>
+              <div className={styles.rowEstado} style={{ background: p.estado.bg, borderColor: tinte(p.estado.dot, 33) }}>
                 <span className={styles.rowDot} style={{ background: p.estado.dot }}/>
                 <span style={{ color: p.estado.text }}>{p.estado.label}</span>
               </div>

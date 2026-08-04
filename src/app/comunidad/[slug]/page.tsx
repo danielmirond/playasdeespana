@@ -11,6 +11,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import GygActivities from '@/components/GygActivities'
+import { tinte } from '@/lib/tinte'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -184,7 +185,7 @@ export default async function ComunidadPage({ params }: Props) {
               <div className={styles.playasGrid}>
                 {pls.map(p => (
                   <Link key={p.slug} href={`/playas/${p.slug}`} className={styles.playaCard}>
-                    <div className={styles.pcEstado} style={{ background: p.estado.bg, borderColor: p.estado.dot + '44' }}>
+                    <div className={styles.pcEstado} style={{ background: p.estado.bg, borderColor: tinte(p.estado.dot, 27) }}>
                       <span className={styles.pcDot} style={{ background: p.estado.dot }}/>
                       <span className={styles.pcLabel} style={{ color: p.estado.text }}>{p.estado.label}</span>
                     </div>

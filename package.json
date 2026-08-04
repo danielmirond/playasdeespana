@@ -12,7 +12,8 @@
     "sync:playas-miteco": "node scripts/sync-playas-miteco.js",
     "sync:calidad": "node scripts/sync-calidad-agua.js",
     "sync:bandera-azul": "node scripts/sync-bandera-azul.js",
-    "prebuild": "node scripts/write-build-info.mjs",
+    "check:color": "node scripts/check-color-concat.mjs",
+    "prebuild": "node scripts/write-build-info.mjs && node scripts/check-color-concat.mjs",
     "predev": "node scripts/write-build-info.mjs"
   },
   "dependencies": {

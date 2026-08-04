@@ -233,7 +233,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                   <div key={i} style={{
                     padding: '.6rem .4rem', borderRadius: '10px', textAlign: 'center',
                     background: i === 0 ? est.bg : 'rgba(0,0,0,.02)',
-                    border: `1px solid ${i === 0 ? est.color + '40' : 'var(--line)'}`,
+                    border: `1px solid ${i === 0 ? tinte(est.color, 25) : 'var(--line)'}`,
                   }}>
                     <div style={{ fontSize:'.72rem', color: 'var(--muted)', fontWeight: 600, marginBottom: '.2rem' }}>
                       {i === 0 ? 'Hoy' : d?.fecha ?? (() => {

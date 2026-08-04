@@ -10,6 +10,7 @@
 import { Cpu } from '@phosphor-icons/react/dist/ssr'
 import type { ReporteSistema } from '@/lib/reporteSistema'
 import { tiempoRelativo } from '@/lib/reporteSistema'
+import { tinte } from '@/lib/tinte'
 
 interface Props {
   reporte: ReporteSistema
@@ -49,7 +50,7 @@ export default function ReporteSistemaCard({ reporte, locale = 'es' }: Props) {
           width: 28, height: 28,
           borderRadius: '50%',
           background: '#fff',
-          border: `1px solid ${col.dot}55`,
+          border: `1px solid ${tinte(col.dot, 33)}`,
         }}
       >
         <Cpu size={16} color={col.dot} weight="bold" />
@@ -60,7 +61,7 @@ export default function ReporteSistemaCard({ reporte, locale = 'es' }: Props) {
             <span style={{
               fontSize: '.65rem', fontWeight: 700,
               padding: '.12rem .45rem',
-              background: '#fff', border: `1px solid ${col.dot}55`,
+              background: '#fff', border: `1px solid ${tinte(col.dot, 33)}`,
               borderRadius: 100, color: col.dot,
               letterSpacing: '.04em', textTransform: 'uppercase',
             }}>

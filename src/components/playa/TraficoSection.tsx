@@ -6,6 +6,7 @@ import MapaLeaflet from '@/components/ui/MapaLeafletWrapper'
 // src/components/playa/TraficoSection.tsx
 import { useEffect, useState } from 'react'
 import type { Playa } from '@/types'
+import { tinte } from '@/lib/tinte'
 
 interface Props { playa: Playa }
 
@@ -300,7 +301,7 @@ export default function TraficoSection({ playa }: Props) {
               <div style={{
                 display: 'flex', alignItems: 'center', gap: '1rem',
                 padding: '.75rem 1rem', borderRadius: '4px',
-                background: trafico.color + '12', marginBottom: '1rem',
+                background: tinte(trafico.color, 7), marginBottom: '1rem',
               }}>
                 <div style={{ textAlign: 'center', minWidth: '60px' }}>
                   <div style={{ fontSize: '1.5rem', fontWeight: 700, color: trafico.color, lineHeight: 1 }}>{trafico.velocidad}</div>
