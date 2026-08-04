@@ -7,7 +7,7 @@ export default function LoadingHome() {
       <div style={{
         position: 'sticky', top: 0, zIndex: 100, height: 52,
         background: 'color-mix(in srgb, var(--bg) 88%, transparent)', 
-        borderBottom: '1px solid rgba(180,130,60,.18)',
+        borderBottom: '1px solid var(--line)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 2rem',
       }}>
@@ -43,14 +43,14 @@ export default function LoadingHome() {
 
       {/* Destacadas */}
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '0 2rem 2.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid rgba(180,130,60,.18)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid var(--line)' }}>
           <Bone w={160} h={16} r={4} />
           <Bone w={80} h={14} r={4} />
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 12 }}>
           {[...Array(8)].map((_, i) => (
             <div key={i} style={{
-              background: 'rgba(255,255,255,.5)', border: '1px solid rgba(180,130,60,.18)',
+              background: 'color-mix(in srgb, var(--card-bg) 70%, transparent)', border: '1px solid var(--line)',
               borderRadius: 6, padding: '1rem',
             }}>
               <Bone w={0} h={18} r={4} style={{ width: '80%' }} />
@@ -78,7 +78,7 @@ function Bone({ w, h, r = 6, style }: { w: number; h: number; r?: number; style?
   return (
     <div style={{
       width: w || undefined, height: h, borderRadius: r,
-      background: 'linear-gradient(90deg, rgba(180,130,60,.08) 0%, rgba(180,130,60,.16) 50%, rgba(180,130,60,.08) 100%)',
+      background: 'linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 0%, color-mix(in srgb, var(--ink) 10%, transparent) 50%, color-mix(in srgb, var(--ink) 5%, transparent) 100%)',
       backgroundSize: '800px 100%',
       animation: 'shimmer 1.5s ease-in-out infinite',
       ...style,

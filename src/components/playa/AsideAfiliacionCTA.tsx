@@ -43,7 +43,7 @@ export default function AsideAfiliacionCTA({ nombre, count, locale = 'es' }: Pro
     >
       <span style={{
         width: 38, height: 38, borderRadius: 6,
-        background: 'rgba(196, 138, 30, .12)',
+        background: 'color-mix(in srgb, var(--aceptable) 12%, transparent)',
         color: 'var(--accent)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         flexShrink: 0,

@@ -73,7 +73,7 @@
   cursor: pointer; transition: border-color .15s, background .15s, color .15s;
   line-height: 1;
 }
-.btnQuitar:hover { background: rgba(122,40,24,.12); color: var(--noapto); }
+.btnQuitar:hover { background: color-mix(in srgb, var(--noapto) 12%, transparent); color: var(--noapto); }
 
 /* BtnFavorita — reutilizable en ficha */
 .btnFav {
@@ -82,7 +82,7 @@
   transition: border-color .15s, background .15s, color .15s; line-height: 1;
   padding: .2rem .35rem; border-radius: 4px;
 }
-.btnFav:hover   { color: var(--noapto); background: rgba(122,40,24,.08); }
+.btnFav:hover   { color: var(--noapto); background: color-mix(in srgb, var(--noapto) 8%, transparent); }
 .btnFavOn       { color: var(--noapto); }
 
 @media (max-width: 700px) {

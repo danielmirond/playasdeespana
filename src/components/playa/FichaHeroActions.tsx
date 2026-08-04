@@ -111,8 +111,8 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
   const mutedBd  = isLight ? 'rgba(255,255,255,.55)' : 'rgba(138,117,96,.4)'
   const hoverBg  = isLight ? 'rgba(255,255,255,.14)' : 'rgba(0,0,0,.04)'
   const favColor = isLight ? '#ffb6a8'               : 'var(--noapto)'
-  const favBg    = isLight ? 'rgba(255,182,168,.18)' : 'rgba(122,40,24,.08)'
-  const favBd    = isLight ? 'rgba(255,182,168,.55)' : 'rgba(122,40,24,.3)'
+  const favBg    = isLight ? 'rgba(255,182,168,.18)' : 'color-mix(in srgb, var(--noapto) 8%, transparent)'
+  const favBd    = isLight ? 'rgba(255,182,168,.55)' : 'color-mix(in srgb, var(--noapto) 30%, transparent)'
 
   return (
     <div className={styles.fila} data-overflow={String(overflow)}>

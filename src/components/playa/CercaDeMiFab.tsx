@@ -22,7 +22,7 @@ const STYLE = `
 .cdmFab:hover{filter:brightness(1.08)}
 .cdmFab:active{transform:scale(.97)}
 .cdmFab svg{flex-shrink:0}
-@keyframes cdmPulse{0%,100%{box-shadow:0 6px 22px rgba(0,0,0,.30)}50%{box-shadow:0 6px 22px rgba(0,0,0,.30),0 0 0 9px rgba(45,82,102,.16)}}
+@keyframes cdmPulse{0%,100%{box-shadow:0 6px 22px rgba(0,0,0,.30)}50%{box-shadow:0 6px 22px rgba(0,0,0,.30),0 0 0 9px color-mix(in srgb, var(--sea-surf) 16%, transparent)}}
 @media (max-width:520px){.cdmFab{bottom:calc(68px + env(safe-area-inset-bottom,0px));font-size:.8rem;padding:.6rem .95rem}}
 @media (prefers-reduced-motion:reduce){.cdmFab{animation:none}}
 `

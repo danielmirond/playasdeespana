@@ -126,8 +126,8 @@ export default function LandingDestino({ tipo, destino }: Props) {
         {precio && (
           <div style={{
             display: 'inline-block',
-            background: 'rgba(196,138,30,.1)',
-            border: '1px solid rgba(196,138,30,.3)',
+            background: 'color-mix(in srgb, var(--aceptable) 10%, transparent)',
+            border: '1px solid color-mix(in srgb, var(--aceptable) 30%, transparent)',
             padding: '.45rem .85rem',
             borderRadius: 100,
             fontSize: '.85rem',

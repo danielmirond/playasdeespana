@@ -8,7 +8,7 @@ export default function LoadingPlaya() {
       <div style={{
         position: 'sticky', top: 0, zIndex: 100, height: 52,
         background: 'color-mix(in srgb, var(--bg) 88%, transparent)', 
-        borderBottom: '1px solid rgba(180,130,60,.18)',
+        borderBottom: '1px solid var(--line)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 2rem',
       }}>
@@ -50,7 +50,7 @@ export default function LoadingPlaya() {
         <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)',
           width: '100%', maxWidth: 500, marginTop: 24,
-          background: 'rgba(255,255,255,.55)', border: '1px solid rgba(180,130,60,.18)',
+          background: 'color-mix(in srgb, var(--card-bg) 70%, transparent)', border: '1px solid var(--line)',
           borderRadius: 6, overflow: 'hidden',
         }}>
           {[...Array(5)].map((_, i) => (
@@ -67,7 +67,7 @@ export default function LoadingPlaya() {
       <div style={{
         position: 'sticky', top: 52, zIndex: 50,
         background: 'color-mix(in srgb, var(--bg) 92%, transparent)', 
-        borderBottom: '1px solid rgba(180,130,60,.18)',
+        borderBottom: '1px solid var(--line)',
         padding: '0 1rem', display: 'flex', gap: 4, overflowX: 'auto',
         height: 44, alignItems: 'center',
       }}>
@@ -97,15 +97,15 @@ export default function LoadingPlaya() {
         {/* Aside */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
           <div style={{
-            background: 'rgba(255,255,255,.5)', border: '1px solid rgba(180,130,60,.18)',
+            background: 'color-mix(in srgb, var(--card-bg) 70%, transparent)', border: '1px solid var(--line)',
             borderRadius: 6, padding: '1rem', textAlign: 'center',
           }}>
             <Bone w={60} h={60} r={30} style={{ margin: '0 auto 8px' }} />
             <Bone w={100} h={24} r={6} style={{ margin: '0 auto 6px' }} />
             <Bone w={140} h={12} r={4} style={{ margin: '0 auto 12px' }} />
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: 'rgba(180,130,60,.18)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: 'var(--line)' }}>
               {[...Array(4)].map((_, i) => (
-                <div key={i} style={{ background: 'rgba(255,255,255,.55)', padding: '0.55rem 0.35rem', textAlign: 'center' }}>
+                <div key={i} style={{ background: 'color-mix(in srgb, var(--card-bg) 70%, transparent)', padding: '0.55rem 0.35rem', textAlign: 'center' }}>
                   <Bone w={40} h={16} r={4} style={{ margin: '0 auto 4px' }} />
                   <Bone w={28} h={8} r={3} style={{ margin: '0 auto' }} />
                 </div>
@@ -133,7 +133,7 @@ function Bone({ w, h, r = 6, style }: { w: number; h: number; r?: number; style?
   return (
     <div style={{
       width: w, height: h, borderRadius: r,
-      background: 'linear-gradient(90deg, rgba(180,130,60,.08) 0%, rgba(180,130,60,.16) 50%, rgba(180,130,60,.08) 100%)',
+      background: 'linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 0%, color-mix(in srgb, var(--ink) 10%, transparent) 50%, color-mix(in srgb, var(--ink) 5%, transparent) 100%)',
       backgroundSize: '800px 100%',
       animation: 'shimmer 1.5s ease-in-out infinite',
       ...style,
@@ -144,8 +144,8 @@ function Bone({ w, h, r = 6, style }: { w: number; h: number; r?: number; style?
 function SkeletonCard({ h }: { h: number }) {
   return (
     <div style={{
-      background: 'rgba(255,255,255,.5)',
-      border: '1px solid rgba(180,130,60,.18)',
+      background: 'color-mix(in srgb, var(--card-bg) 70%, transparent)',
+      border: '1px solid var(--line)',
       borderRadius: 6, marginBottom: '.85rem',
       overflow: 'hidden',
     }}>

@@ -116,10 +116,10 @@ function calcAfluencia(
 }
 
 function nivelAfluencia(pct: number): { label: string; color: string; bg: string } {
-  if (pct >= 85) return { label: 'Llena',          color: 'var(--noapto)', bg: 'rgba(122,40,24,.06)' }
-  if (pct >= 65) return { label: 'Muy concurrida', color: 'var(--aceptable)', bg: 'rgba(196,138,30,.06)' }
+  if (pct >= 85) return { label: 'Llena',          color: 'var(--noapto)', bg: 'color-mix(in srgb, var(--noapto) 6%, transparent)' }
+  if (pct >= 65) return { label: 'Muy concurrida', color: 'var(--aceptable)', bg: 'color-mix(in srgb, var(--aceptable) 6%, transparent)' }
   if (pct >= 40) return { label: 'Concurrida',     color: 'var(--mar-500)', bg: 'rgba(74,122,144,.08)' }
-  if (pct >= 15) return { label: 'Tranquila',      color: 'var(--excelente)', bg: 'rgba(61,107,31,.06)' }
+  if (pct >= 15) return { label: 'Tranquila',      color: 'var(--excelente)', bg: 'color-mix(in srgb, var(--excelente) 6%, transparent)' }
   return               { label: 'Vacía',           color: '#9ca3af', bg: '#f9fafb' }
 }
 
@@ -318,7 +318,7 @@ export default function TraficoSection({ playa }: Props) {
             ) : (
               <div style={{
                 padding: '.75rem 1rem', borderRadius: '4px',
-                background: 'rgba(61,107,31,.07)', marginBottom: '1rem', fontSize: '.8rem', color: '#2a4a14',
+                background: 'color-mix(in srgb, var(--excelente) 7%, transparent)', marginBottom: '1rem', fontSize: '.8rem', color: '#2a4a14',
               }}>
                 <span style={{ display:'inline-block', width:8, height:8, borderRadius:'50%', background:'var(--excelente)', marginRight:6, verticalAlign:'middle' }}/> Sin datos de tráfico disponibles
               </div>

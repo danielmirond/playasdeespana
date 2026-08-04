@@ -100,7 +100,7 @@ export default async function BanderasNegrasPage() {
           puntos más castigados por los vertidos, la contaminación y la mala gestión ambiental. Esta es la lista de 2026,
           cruzada con nuestras fichas para que sepas qué playas están afectadas y qué alternativas limpias tienes cerca.
         </p>
-        <div style={{ background: 'rgba(196,138,30,.08)', border: '1px solid rgba(196,138,30,.3)', borderRadius: 6, padding: '.85rem 1rem', fontSize: '.82rem', color: 'var(--ink)', lineHeight: 1.55, marginBottom: '2rem', maxWidth: 640 }}>
+        <div style={{ background: 'color-mix(in srgb, var(--aceptable) 8%, transparent)', border: '1px solid color-mix(in srgb, var(--aceptable) 30%, transparent)', borderRadius: 6, padding: '.85rem 1rem', fontSize: '.82rem', color: 'var(--ink)', lineHeight: 1.55, marginBottom: '2rem', maxWidth: 640 }}>
           <strong>Ojo:</strong> una bandera negra es una <em>denuncia ambiental</em>, no una prohibición de baño ni una medición
           del agua de ese día. La aptitud para el baño la marcan los <Link href="/calidad-agua" style={{ color: 'var(--accent)', fontWeight: 600 }}>muestreos oficiales de calidad del agua</Link> y
           la bandera del socorrista.

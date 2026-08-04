@@ -228,11 +228,11 @@ function CampingCard({ c }: { c: CampingConPlaya }) {
           {c.servicios.slice(0, 8).map(s => (
             <span key={s} style={{
               fontSize: '.7rem', padding: '.15rem .55rem', borderRadius: 99,
-              background: 'rgba(61,107,31,.08)', color: 'var(--ink)',
+              background: 'color-mix(in srgb, var(--excelente) 8%, transparent)', color: 'var(--ink)',
             }}>{s}</span>
           ))}
-          {c.bungalows && <span style={{ fontSize: '.7rem', padding: '.15rem .55rem', borderRadius: 99, background: 'rgba(196,138,30,.1)' }}>Bungalows</span>}
-          {c.perros === true && <span style={{ fontSize: '.7rem', padding: '.15rem .55rem', borderRadius: 99, background: 'rgba(122,40,24,.08)' }}>Perros 🐕</span>}
+          {c.bungalows && <span style={{ fontSize: '.7rem', padding: '.15rem .55rem', borderRadius: 99, background: 'color-mix(in srgb, var(--aceptable) 10%, transparent)' }}>Bungalows</span>}
+          {c.perros === true && <span style={{ fontSize: '.7rem', padding: '.15rem .55rem', borderRadius: 99, background: 'color-mix(in srgb, var(--noapto) 8%, transparent)' }}>Perros 🐕</span>}
         </div>
       )}
 

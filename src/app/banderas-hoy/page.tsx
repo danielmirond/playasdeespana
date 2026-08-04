@@ -206,7 +206,7 @@ export default async function BanderasHoyPage() {
             </div>
           )}
         </div>
-        <div style={{ background: 'rgba(196,138,30,.08)', border: '1px solid rgba(196,138,30,.3)', borderRadius: 6, padding: '.8rem 1rem', fontSize: '.8rem', color: 'var(--ink)', lineHeight: 1.55, marginBottom: '2.25rem', maxWidth: 640 }}>
+        <div style={{ background: 'color-mix(in srgb, var(--aceptable) 8%, transparent)', border: '1px solid color-mix(in srgb, var(--aceptable) 30%, transparent)', borderRadius: 6, padding: '.8rem 1rem', fontSize: '.8rem', color: 'var(--ink)', lineHeight: 1.55, marginBottom: '2.25rem', maxWidth: 640 }}>
           <strong>Importante:</strong> es una estimación meteorológica orientativa (oleaje y viento). La bandera oficial
           la iza el socorrista de cada playa y puede diferir: una <strong>bandera roja</strong> real también puede
           deberse a <strong>medusas</strong> o a la <strong>calidad del agua</strong> (vertidos), que esta estimación no

@@ -46,6 +46,7 @@ import BeachVideoToggle from './BeachVideoToggle'
 import WebcamPlaya from './WebcamPlaya'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge, Martini } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
+import { tinte } from '@/lib/tinte'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
 const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
@@ -714,8 +715,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   {mareasLunar.mareas.map((m, i) => (
                     <div key={i} style={{
                       flex:'1 1 auto', minWidth:'70px', textAlign:'center',
-                      background: m.tipo === 'pleamar' ? 'rgba(59,130,246,.08)' : 'rgba(245,158,11,.08)',
-                      border: `1px solid ${m.tipo === 'pleamar' ? 'rgba(59,130,246,.2)' : 'rgba(245,158,11,.2)'}`,
+                      // Pleamar y bajamar no son bueno y malo: son dos
+                      // estados del mismo ciclo. Los distingue el tono del
+                      // mar frente al de la arena, no un semáforo prestado
+                      // de Tailwind.
+                      background: tinte(m.tipo === 'pleamar' ? 'var(--sea-surf)' : 'var(--aceptable)', 8),
+                      border: `1px solid ${tinte(m.tipo === 'pleamar' ? 'var(--sea-surf)' : 'var(--aceptable)', 20)}`,
                       borderRadius:'4px', padding:'.55rem .5rem',
                     }}>
                       <div style={{ fontSize:'.72rem', color:'var(--muted)', fontWeight:600, textTransform:'uppercase', letterSpacing:'.04em' }}>
@@ -771,8 +776,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <Link href="/protectores-solares" style={{
                 display: 'flex', alignItems: 'center', gap: '.5rem',
                 marginTop: '.65rem', padding: '.6rem .85rem',
-                background: meteo.uv >= 8 ? 'rgba(122,40,24,.06)' : meteo.uv >= 6 ? 'rgba(160,72,24,.06)' : 'rgba(196,138,30,.06)',
-                border: `1px solid ${meteo.uv >= 8 ? 'rgba(122,40,24,.2)' : meteo.uv >= 6 ? 'rgba(160,72,24,.2)' : 'rgba(196,138,30,.2)'}`,
+                background: meteo.uv >= 8 ? 'color-mix(in srgb, var(--noapto) 6%, transparent)' : meteo.uv >= 6 ? 'color-mix(in srgb, var(--limitado) 6%, transparent)' : 'color-mix(in srgb, var(--aceptable) 6%, transparent)',
+                border: `1px solid ${meteo.uv >= 8 ? 'color-mix(in srgb, var(--noapto) 20%, transparent)' : meteo.uv >= 6 ? 'color-mix(in srgb, var(--limitado) 20%, transparent)' : 'color-mix(in srgb, var(--aceptable) 20%, transparent)'}`,
                 borderRadius: 4, textDecoration: 'none', color: 'var(--ink)',
                 fontSize: '.82rem', lineHeight: 1.4,
               }}>
@@ -1191,7 +1196,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       </a>
                       <a href="tel:112" style={{
                         display:'inline-flex', alignItems:'center',
-                        background:'rgba(122,40,24,.1)', color:'var(--noapto)',
+                        background:'color-mix(in srgb, var(--noapto) 10%, transparent)', color:'var(--noapto)',
                         border:'1px solid rgba(239,68,68,.3)',
                         padding:'.4rem .85rem', borderRadius:'8px',
                         textDecoration:'none', fontSize:'.72rem', fontWeight:700,
@@ -1312,7 +1317,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             sticky, donde sí aporta. */}
         {horaIdeal && (
           <div className={styles.soloDesktop} style={{
-            background: 'linear-gradient(160deg, rgba(245,158,11,.08), color-mix(in srgb, var(--accent) 6%, transparent))',
+            background: `linear-gradient(160deg, ${tinte('var(--aceptable)', 8)}, color-mix(in srgb, var(--accent) 6%, transparent))`,
             border: '1px solid color-mix(in srgb, var(--accent) 25%, transparent)',
             borderRadius: 6, padding: '.85rem 1rem',
           }}>

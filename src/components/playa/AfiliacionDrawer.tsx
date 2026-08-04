@@ -144,7 +144,7 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
                   padding: '.75rem 1rem',
                   border: '1px solid var(--accent)',
                   borderRadius: 6,
-                  background: 'rgba(196, 138, 30, .08)',
+                  background: 'color-mix(in srgb, var(--aceptable) 8%, transparent)',
                   color: 'var(--accent)',
                   textDecoration: 'none',
                   fontFamily: 'var(--font-serif, Georgia, serif)',

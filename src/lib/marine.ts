@@ -171,7 +171,13 @@ function estimarTurbidez(lat: number, lng: number): TurbidezData {
 
   const turbidez = Math.max(0, Math.min(1, 1 - visibilidad / 30))
   const nivel    = visibilidad >= 15 ? 'Excelente' : visibilidad >= 10 ? 'Buena' : visibilidad >= 5 ? 'Regular' : 'Mala'
-  const color    = nivel === 'Excelente' ? '#22c55e' : nivel === 'Buena' ? '#3b82f6' : nivel === 'Regular' ? '#f59e0b' : '#ef4444'
+  // Cuatro niveles, la misma escala de veredicto que el resto del sitio.
+  // Antes eran verde, azul, ámbar y rojo de Tailwind: una paleta ajena que
+  // bajo Litoral cantaba entre datos apagados.
+  const color    = nivel === 'Excelente' ? 'var(--excelente)'
+                 : nivel === 'Buena'     ? 'var(--muybueno)'
+                 : nivel === 'Regular'   ? 'var(--aceptable)'
+                 :                         'var(--noapto)'
 
   return { visibilidad_m: visibilidad, turbidez, clorofila, nivel, color }
 }

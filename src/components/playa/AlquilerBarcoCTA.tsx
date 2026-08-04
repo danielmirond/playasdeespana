@@ -74,7 +74,7 @@ export default function AlquilerBarcoCTA({ variant = 'card', destacar, region }:
           alignItems: 'center',
           gap: '1rem',
           padding: '1rem 1.25rem',
-          background: 'linear-gradient(110deg, rgba(10,110,140,.08) 0%, rgba(196,138,30,.06) 100%)',
+          background: 'linear-gradient(110deg, rgba(10,110,140,.08) 0%, color-mix(in srgb, var(--aceptable) 6%, transparent) 100%)',
           border: '1px solid var(--line)',
           borderRadius: 8,
           textDecoration: 'none',

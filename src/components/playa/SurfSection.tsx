@@ -28,10 +28,10 @@ interface Props {
 const ESTADO_SURF: Record<string, { label: string; color: string; bg: string; desc: string }> = {
   CALMA:   { label: 'Plana',    color: '#9ca3af', bg: '#f9fafb', desc: 'Mar en calma. no apto surf' },
   BUENA:   { label: 'Suave',    color: 'var(--mar-500)', bg: 'rgba(74,122,144,.08)', desc: 'Olas pequeñas. ideal principiantes' },
-  AVISO:   { label: 'Mediana',  color: 'var(--aceptable)', bg: 'rgba(196,138,30,.06)', desc: 'Buenas condiciones. nivel medio' },
+  AVISO:   { label: 'Mediana',  color: 'var(--aceptable)', bg: 'color-mix(in srgb, var(--aceptable) 6%, transparent)', desc: 'Buenas condiciones. nivel medio' },
   SURF:    { label: 'Potente',  color: 'var(--mar-500)', bg: 'rgba(74,122,144,.06)', desc: 'Excelente para surf. nivel avanzado' },
-  VIENTO:  { label: 'Ventosa',  color: 'var(--aceptable)', bg: 'rgba(196,138,30,.08)', desc: 'Viento fuerte. ideal kitesurf/windsurf' },
-  PELIGRO: { label: 'Peligrosa',color: 'var(--noapto)', bg: 'rgba(122,40,24,.06)', desc: 'Mar peligroso. no recomendado' },
+  VIENTO:  { label: 'Ventosa',  color: 'var(--aceptable)', bg: 'color-mix(in srgb, var(--aceptable) 8%, transparent)', desc: 'Viento fuerte. ideal kitesurf/windsurf' },
+  PELIGRO: { label: 'Peligrosa',color: 'var(--noapto)', bg: 'color-mix(in srgb, var(--noapto) 6%, transparent)', desc: 'Mar peligroso. no recomendado' },
 }
 
 function calcEstado(olas: number, viento: number): string {
