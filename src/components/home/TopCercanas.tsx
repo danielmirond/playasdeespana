@@ -217,7 +217,7 @@ export default function TopCercanas() {
             padding: '.85rem 1rem',
             background: 'var(--ink)', color: 'var(--surface)',
             borderRadius: 'var(--r-md, 6px)',
-            boxShadow: '0 10px 30px rgba(42,26,8,.24)',
+            boxShadow: '0 10px 30px color-mix(in srgb, var(--ink) 24%, transparent)',
             textAlign: 'left',
           }}>
             <MapPin size={20} weight="fill" aria-hidden="true" style={{ flexShrink: 0, opacity: .9 }} />

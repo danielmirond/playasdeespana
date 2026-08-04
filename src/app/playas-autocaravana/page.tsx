@@ -292,9 +292,9 @@ export default async function PlayasAutocaravanaPage() {
                 href={l.href}
                 style={{
                   display: 'inline-flex', padding: '.45rem .85rem',
-                  background: 'rgba(107,64,10,.14)', color: '#4a2c05',
+                  background: 'color-mix(in srgb, var(--accent) 14%, transparent)', color: 'var(--accent-2)',
                   borderRadius: 100, fontSize: '.78rem', fontWeight: 600,
-                  textDecoration: 'none', border: '1px solid rgba(107,64,10,.3)',
+                  textDecoration: 'none', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)',
                 }}
               >
                 {l.label} →

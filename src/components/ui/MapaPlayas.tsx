@@ -140,7 +140,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
       const items = f === 'TODOS' ? playas : playas.filter(p => calcEstado(p) === f)
       items.forEach(p => {
         const estado = calcEstado(p)
-        const color  = ESTADO_COLORES[estado] ?? '#5a3d12'
+        const color  = ESTADO_COLORES[estado] ?? 'var(--ink-soft)'
         const seed   = p.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
         const olas   = parseFloat(((seed % 15) / 10).toFixed(1))
         const viento = 5 + (seed % 30)
@@ -152,10 +152,10 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
           .bindPopup(`
             <div style="font-family:var(--font-sans,system-ui);min-width:170px;color:var(--ink)">
               <div style="font-family:var(--font-serif,Georgia,serif);font-style:italic;font-weight:700;font-size:1rem;line-height:1.1;margin-bottom:.25rem;letter-spacing:-.01em">${p.nombre}</div>
-              <div style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.7rem;color:#7a6858;margin-bottom:.5rem;letter-spacing:.04em">${p.municipio ?? ''} · ${p.provincia ?? ''}</div>
+              <div style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.7rem;color:var(--cert-estimado);margin-bottom:.5rem;letter-spacing:.04em">${p.municipio ?? ''} · ${p.provincia ?? ''}</div>
               <div style="display:flex;gap:.3rem;margin-bottom:.55rem;align-items:center">
                 <span style="background:${color}14;color:${color};border:1px solid ${color}44;padding:2px 7px;border-radius:100px;font-size:.7rem;font-weight:500">${estado}</span>
-                <span style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.68rem;color:#7a6858">${olas}m · ${viento}km/h</span>
+                <span style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.68rem;color:var(--cert-estimado)">${olas}m · ${viento}km/h</span>
               </div>
               <a href="/playas/${p.slug}" style="display:block;text-align:center;background:var(--terra-800);color:white;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">Ver playa →</a>
             </div>
@@ -306,7 +306,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             style={{
               fontSize:'.72rem', fontWeight: 700, padding: '.35rem .7rem', borderRadius: '100px', border: '1px solid',
               borderColor: modoRadio ? 'var(--accent)' : 'var(--line)',
-              background: modoRadio ? 'rgba(107,64,10,.1)' : 'transparent',
+              background: modoRadio ? 'color-mix(in srgb, var(--accent) 10%, transparent)' : 'transparent',
               color: modoRadio ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer',
               minHeight: '44px',
             }}
@@ -338,7 +338,7 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
             style={{
               position: 'absolute', inset: 0, zIndex: 999,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              background: 'rgba(240,230,208,.8)',
+              background: 'color-mix(in srgb, var(--bg) 80%, transparent)',
             }}
           >
             <div style={{ textAlign: 'center' }}>

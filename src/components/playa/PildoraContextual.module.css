@@ -18,9 +18,9 @@
     z-index: 95;
     height: 52px;
     background: var(--surface, #fffdf8);
-    border: 1px solid var(--line-strong, rgba(42,26,8,.28));
+    border: 1px solid var(--line-strong, color-mix(in srgb, var(--ink) 28%, transparent));
     border-radius: var(--r-pill, 999px);
-    box-shadow: 0 12px 32px rgba(42,26,8,.16);
+    box-shadow: 0 12px 32px color-mix(in srgb, var(--ink) 16%, transparent);
     /* Aparece cuando el hero deja de estar en pantalla: al aterrizar, la
        respuesta a "¿me baño hoy?" no compite con nada. */
     opacity: 0;
@@ -52,7 +52,7 @@
   }
   .pillLeft::-webkit-details-marker { display: none; }
   .pillLeft::marker { content: ''; }
-  .pillLeft:active { background: rgba(42,26,8,.05); }
+  .pillLeft:active { background: color-mix(in srgb, var(--ink) 5%, transparent); }
 
   .glifo { font-size: .8rem; color: var(--muted); flex-shrink: 0; }
   .indiceTxt { min-width: 0; }
@@ -91,7 +91,7 @@
      modal que deja asomar el logo no se lee como modal. */
   .velo {
     position: fixed; inset: 0; z-index: 110;
-    background: rgba(26,15,4,.42);
+    background: color-mix(in srgb, var(--ink) 42%, transparent);
   }
   .hoja {
     position: fixed;
@@ -99,9 +99,9 @@
     z-index: 111;
     max-height: 68vh; overflow-y: auto;
     background: var(--surface, #fffdf8);
-    border-top: 1px solid var(--line-strong, rgba(42,26,8,.28));
+    border-top: 1px solid var(--line-strong, color-mix(in srgb, var(--ink) 28%, transparent));
     border-radius: 16px 16px 0 0;
-    box-shadow: 0 -10px 30px rgba(42,26,8,.16);
+    box-shadow: 0 -10px 30px color-mix(in srgb, var(--ink) 16%, transparent);
     padding-bottom: calc(.5rem + env(safe-area-inset-bottom, 0px));
     animation: subir 240ms ease;
   }
@@ -127,7 +127,7 @@
     padding: 0 1rem;
     border-top: 1px solid var(--line);
     font-family: var(--font-sans); font-size: .88rem;
-    color: var(--ink-soft, #5a3d12);
+    color: var(--ink-soft, var(--ink-soft));
     text-align: left; text-decoration: none;
   }
   .item:active { background: var(--surface-2, var(--card-bg2)); }
@@ -164,7 +164,7 @@
     background: var(--ink, var(--ink));
     color: var(--surface, #fffdf8);
     border-radius: var(--r-md, 6px);
-    box-shadow: 0 8px 24px rgba(42,26,8,.22);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--ink) 22%, transparent);
     font-family: var(--font-sans);
     animation: avisoEntra 260ms ease;
   }

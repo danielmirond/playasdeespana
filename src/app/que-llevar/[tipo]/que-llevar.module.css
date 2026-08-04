@@ -13,11 +13,11 @@
   font-family: var(--font-mono, monospace);
   font-size: .72rem; font-weight: 500;
   letter-spacing: .06em; text-transform: uppercase;
-  color: var(--muted, #5a3d12);
+  color: var(--muted, var(--ink-soft));
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
-.bc a { color: var(--muted, #5a3d12); text-decoration: none; }
+.bc a { color: var(--muted, var(--ink-soft)); text-decoration: none; }
 .bc a:hover { color: var(--accent, var(--terra-800)); }
 .bc span[aria-current] { color: var(--ink, var(--ink)); }
 .bc span:not([aria-current]) { opacity: .5; }
@@ -50,7 +50,7 @@
 .section {
   margin: 2.5rem 0;
   padding-top: 2.5rem;
-  border-top: 1px solid var(--line, #e8dcc8);
+  border-top: 1px solid var(--line, var(--line));
 }
 .section:first-of-type { border-top: 0; padding-top: 0; }
 
@@ -81,7 +81,7 @@
   gap: 1rem 1.15rem;
   align-items: center;
   padding: 1.25rem 0;
-  border-top: 1px solid var(--line, #e8dcc8);
+  border-top: 1px solid var(--line, var(--line));
 }
 .prod:first-child { border-top: 0; padding-top: .25rem; }
 
@@ -115,7 +115,7 @@
   display: flex; gap: .5rem;
   font-family: var(--font-mono, monospace);
   font-size: .7rem;
-  color: var(--muted, #5a3d12);
+  color: var(--muted, var(--ink-soft));
   letter-spacing: .04em;
 }
 .prodSep { opacity: .5; }
@@ -144,7 +144,7 @@
 .disclose {
   font-family: var(--font-mono, monospace);
   font-size: .65rem;
-  color: var(--muted, #5a3d12);
+  color: var(--muted, var(--ink-soft));
   opacity: .7;
   line-height: 1.5;
   margin: 1rem 0 0;
@@ -175,10 +175,10 @@
 /* FAQs */
 .faqs {
   display: flex; flex-direction: column;
-  border-top: 1px solid var(--line, #e8dcc8);
+  border-top: 1px solid var(--line, var(--line));
 }
 .faq {
-  border-bottom: 1px solid var(--line, #e8dcc8);
+  border-bottom: 1px solid var(--line, var(--line));
   padding: 1rem 0;
 }
 .faq summary {
@@ -193,7 +193,7 @@
   content: '+';
   font-family: var(--font-mono, monospace);
   font-weight: 400;
-  color: var(--muted, #5a3d12);
+  color: var(--muted, var(--ink-soft));
   margin-left: 1rem;
 }
 .faq[open] summary::after { content: '−'; }
@@ -215,7 +215,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.15rem;
-  border: 1px solid var(--line, #e8dcc8);
+  border: 1px solid var(--line, var(--line));
   border-radius: 8px;
   text-decoration: none;
   color: var(--ink, var(--ink));
@@ -232,7 +232,7 @@
   font-weight: 500;
 }
 .otraArrow {
-  color: var(--muted, #5a3d12);
+  color: var(--muted, var(--ink-soft));
 }
 
 @media (max-width: 640px) {

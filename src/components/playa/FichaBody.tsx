@@ -309,7 +309,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const horasLuz = solData?.horas_luz ?? '–'
 
   const nivelCalidad          = calidad?.nivel ?? 'Excelente'
-  const [dotColor, textColor] = COLORES_CALIDAD[nivelCalidad] ?? ['#5a3d12', '#5a3d12']
+  const [dotColor, textColor] = COLORES_CALIDAD[nivelCalidad] ?? ['var(--ink-soft)', 'var(--ink-soft)']
   const pctCalidad            = calidad?.porcentaje ?? 99
   const temporadaCalidad      = calidad?.temporada ?? 2024
 
@@ -849,7 +849,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
             {/* Detalles oficiales de acceso (MITECO) */}
             {(playa.forma_acceso || playa.carretera || playa.autobus_tipo || playa.parking_tipo || playa.parking_plazas || playa.tipo_paseo || playa.puerto_deportivo) && (
-              <div style={{ marginTop: '1rem', padding: '.85rem 1rem', background: 'rgba(107,64,10,.05)', border: '1px solid var(--line)', borderRadius: '4px' }}>
+              <div style={{ marginTop: '1rem', padding: '.85rem 1rem', background: 'color-mix(in srgb, var(--accent) 5%, transparent)', border: '1px solid var(--line)', borderRadius: '4px' }}>
                 {playa.forma_acceso    && <DataRow k={i18n.forma_acceso}   v={playa.forma_acceso}/>}
                 {playa.carretera       && <DataRow k={i18n.carretera}      v={playa.carretera}/>}
                 {playa.autobus_tipo    && <DataRow k={locale === 'en' ? 'Bus type' : 'Tipo de autobús'} v={playa.autobus_tipo}/>}
@@ -1312,8 +1312,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             sticky, donde sí aporta. */}
         {horaIdeal && (
           <div className={styles.soloDesktop} style={{
-            background: 'linear-gradient(160deg, rgba(245,158,11,.08), rgba(107,64,10,.06))',
-            border: '1px solid rgba(107,64,10,.25)',
+            background: 'linear-gradient(160deg, rgba(245,158,11,.08), color-mix(in srgb, var(--accent) 6%, transparent))',
+            border: '1px solid color-mix(in srgb, var(--accent) 25%, transparent)',
             borderRadius: 6, padding: '.85rem 1rem',
           }}>
             <div style={{ fontSize:'.72rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
@@ -1426,15 +1426,15 @@ function CompassSVG({ dir }: { dir: string }) {
   return (
     <svg width="82" height="82" viewBox="0 0 82 82" style={{ flexShrink:0 }} role="img" aria-label={`Viento dirección ${dir}`}>
       <circle cx="41" cy="41" r="37" fill="rgba(255,255,255,.45)" stroke="rgba(180,130,60,.2)" strokeWidth="1.5"/>
-      <text x="41" y="10" textAnchor="middle" fontSize="8" fill="#5a3d12" fontFamily="sans-serif" fontWeight="600">N</text>
-      <text x="72" y="44" textAnchor="middle" fontSize="8" fill="#5a3d12" fontFamily="sans-serif">E</text>
-      <text x="41" y="77" textAnchor="middle" fontSize="8" fill="#5a3d12" fontFamily="sans-serif">S</text>
-      <text x="10" y="44" textAnchor="middle" fontSize="8" fill="#5a3d12" fontFamily="sans-serif">O</text>
+      <text x="41" y="10" textAnchor="middle" fontSize="8" fill="var(--ink-soft)" fontFamily="sans-serif" fontWeight="600">N</text>
+      <text x="72" y="44" textAnchor="middle" fontSize="8" fill="var(--ink-soft)" fontFamily="sans-serif">E</text>
+      <text x="41" y="77" textAnchor="middle" fontSize="8" fill="var(--ink-soft)" fontFamily="sans-serif">S</text>
+      <text x="10" y="44" textAnchor="middle" fontSize="8" fill="var(--ink-soft)" fontFamily="sans-serif">O</text>
       <line x1="41" y1="14" x2="41" y2="68" stroke="rgba(180,130,60,.12)" strokeWidth="1"/>
       <line x1="14" y1="41" x2="68" y2="41" stroke="rgba(180,130,60,.12)" strokeWidth="1"/>
       <g transform={`rotate(${angle},41,41)`}>
         <polygon points="41,14 37,44 41,38 45,44" fill="var(--terra-800)"/>
-        <polygon points="41,68 37,38 41,44 45,38" fill="rgba(107,64,10,.25)"/>
+        <polygon points="41,68 37,38 41,44 45,38" fill="color-mix(in srgb, var(--accent) 25%, transparent)"/>
       </g>
     </svg>
   )

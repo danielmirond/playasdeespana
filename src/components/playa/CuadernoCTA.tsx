@@ -65,7 +65,7 @@ export default function CuadernoCTA({ slug, nombre, municipio = '', provincia = 
         background: 'var(--surface-2)',
         border: '1px solid var(--line)',
         borderRadius: 'var(--r-sm, 4px)',
-        backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 27px, rgba(42,26,8,0.05) 27px 28px)',
+        backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 27px, color-mix(in srgb, var(--ink) 5%, transparent) 27px 28px)',
       }}
     >
       {/* El sello de ESTA playa: enseña el premio en vez de describirlo */}

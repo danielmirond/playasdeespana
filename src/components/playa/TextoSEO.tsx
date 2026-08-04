@@ -89,7 +89,7 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
         }}>
           {tags.map((tag, i) => (
             <span key={i} style={{
-              background: 'rgba(107,64,10,.08)',
+              background: 'color-mix(in srgb, var(--accent) 8%, transparent)',
               border: '1px solid var(--line)',
               borderRadius: '100px',
               padding: '.15rem .5rem',

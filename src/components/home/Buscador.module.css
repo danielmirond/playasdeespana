@@ -23,8 +23,8 @@
   transition: border-color .2s, box-shadow .2s;
 }
 .box:focus-within {
-  border-color: rgba(107,64,10,.5);
-  box-shadow: 0 0 0 4px rgba(107,64,10,.08);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
 .icon { color: var(--muted); flex-shrink: 0; }
@@ -67,7 +67,7 @@
   font-size: .75rem;
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgba(107,64,10,.3);
+  text-decoration-color: color-mix(in srgb, var(--accent) 30%, transparent);
   transition: text-decoration-color .15s;
   padding: 0;
 }
@@ -104,7 +104,7 @@
   transition: border-color .15s, background .15s, color .15s;
   white-space: nowrap;
 }
-.chip:hover { border-color: rgba(107,64,10,.4); color: var(--accent); }
+.chip:hover { border-color: color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); }
 .chipOn { background: var(--accent); border-color: var(--accent); color: white; }
 
 @media (max-width: 640px) {

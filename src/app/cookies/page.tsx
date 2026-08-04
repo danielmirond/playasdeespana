@@ -158,7 +158,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
         section ul { padding-left: 1.2rem; margin: .5rem 0; }
         section li { margin-bottom: .35rem; }
         section p { margin-bottom: .65rem; }
-        section code { background: rgba(107,64,10,.08); padding: .1rem .35rem; borderRadius: 4; fontSize: .82rem; }
+        section code { background: color-mix(in srgb, var(--accent) 8%, transparent); padding: .1rem .35rem; borderRadius: 4; fontSize: .82rem; }
         section a { color: var(--accent); text-decoration: underline; }
       `}</style>
     </section>
@@ -178,7 +178,7 @@ function CookieTable() {
     <div style={{ overflowX: 'auto', border: '1px solid var(--line)', borderRadius: 6, marginBottom: '1.5rem' }}>
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.82rem' }}>
         <thead>
-          <tr style={{ background: 'rgba(107,64,10,.08)' }}>
+          <tr style={{ background: 'color-mix(in srgb, var(--accent) 8%, transparent)' }}>
             {['Cookie', 'Tipo', 'Proveedor', 'Duración', 'Finalidad'].map(h => (
               <th key={h} style={{ padding: '.55rem .75rem', textAlign: 'left', fontWeight: 700, color: 'var(--ink)', whiteSpace: 'nowrap' }}>{h}</th>
             ))}

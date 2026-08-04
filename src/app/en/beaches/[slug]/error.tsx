@@ -5,7 +5,7 @@ export default function BeachError({ reset }: { reset: () => void }) {
   return (
     <main role="main" style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center' }}>
       <h1 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--terra-800)' }}>Could not load beach data</h1>
-      <p style={{ color: '#5a3d12', marginBottom: '1.5rem', maxWidth: '440px' }}>The beach may be unavailable or there is a temporary issue with weather data.</p>
+      <p style={{ color: 'var(--ink-soft)', marginBottom: '1.5rem', maxWidth: '440px' }}>The beach may be unavailable or there is a temporary issue with weather data.</p>
       <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
         <button type="button" onClick={reset} aria-label="Retry loading beach" style={{ background: 'var(--terra-800)', color: '#fff', border: 'none', borderRadius: '4px', padding: '.75rem 1.5rem', fontSize: '1rem', cursor: 'pointer', minHeight: '44px' }}>
           Retry

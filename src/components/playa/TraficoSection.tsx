@@ -234,7 +234,7 @@ export default function TraficoSection({ playa }: Props) {
                 fontSize:'.72rem', fontWeight: 700, padding: '.22rem .65rem',
                 borderRadius: '100px', border: '1px solid',
                 borderColor: tabActivo === tab ? 'var(--accent)' : 'var(--line)',
-                background: tabActivo === tab ? 'rgba(107,64,10,.1)' : 'transparent',
+                background: tabActivo === tab ? 'color-mix(in srgb, var(--accent) 10%, transparent)' : 'transparent',
                 color: tabActivo === tab ? 'var(--accent)' : 'var(--muted)',
                 cursor: 'pointer', textTransform: 'capitalize',
               }}
@@ -328,14 +328,14 @@ export default function TraficoSection({ playa }: Props) {
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" style={btnStyle('var(--terra-800)', '#fff')}>
                 <Car size={16} weight='bold'/> En coche. abrir en Google Maps
               </a>
-              <a href={gmTransit} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', 'var(--terra-800)', true)}>
+              <a href={gmTransit} target="_blank" rel="noopener noreferrer" style={btnStyle('color-mix(in srgb, var(--accent) 10%, transparent)', 'var(--terra-800)', true)}>
                 <Bus size={16} weight='bold'/> En transporte público
               </a>
-              <a href={gmBike} target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', 'var(--terra-800)', true)}>
+              <a href={gmBike} target="_blank" rel="noopener noreferrer" style={btnStyle('color-mix(in srgb, var(--accent) 10%, transparent)', 'var(--terra-800)', true)}>
                 <Bicycle size={16} weight='bold'/> En bicicleta
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=walking`}
-                 target="_blank" rel="noopener noreferrer" style={btnStyle('rgba(107,64,10,.1)', 'var(--terra-800)', true)}>
+                 target="_blank" rel="noopener noreferrer" style={btnStyle('color-mix(in srgb, var(--accent) 10%, transparent)', 'var(--terra-800)', true)}>
                 <Person size={16} weight='bold'/> A pie
               </a>
             </div>
@@ -364,7 +364,7 @@ export default function TraficoSection({ playa }: Props) {
                   <a key={i}
                      href={p.googleId ? `https://www.google.com/maps/place/?q=place_id:${p.googleId}` : `https://www.google.com/maps/search/parking+near+${playa.lat},${playa.lng}`}
                      target="_blank" rel="noopener noreferrer"
-                     style={{ display: 'flex', alignItems: 'center', gap: '.75rem', padding: '.65rem .85rem', borderRadius: '10px', background: 'rgba(107,64,10,.05)', border: '1px solid var(--line)', textDecoration: 'none', color: 'inherit' }}>
+                     style={{ display: 'flex', alignItems: 'center', gap: '.75rem', padding: '.65rem .85rem', borderRadius: '10px', background: 'color-mix(in srgb, var(--accent) 5%, transparent)', border: '1px solid var(--line)', textDecoration: 'none', color: 'inherit' }}>
                     <Park size={22} weight='bold' color='var(--accent)'/>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '.4rem' }}>
@@ -396,7 +396,7 @@ export default function TraficoSection({ playa }: Props) {
 
             <a href={`https://www.google.com/maps/search/parking+near+${playa.lat},${playa.lng}`}
                target="_blank" rel="noopener noreferrer"
-               style={{ ...btnStyle('rgba(107,64,10,.1)', 'var(--terra-800)', true), display: 'block', textAlign: 'center', marginTop: '.75rem', textDecoration: 'none' }}>
+               style={{ ...btnStyle('color-mix(in srgb, var(--accent) 10%, transparent)', 'var(--terra-800)', true), display: 'block', textAlign: 'center', marginTop: '.75rem', textDecoration: 'none' }}>
               Ver todos los aparcamientos en Google Maps →
             </a>
             {PARCLICK_AFF && (
@@ -417,7 +417,7 @@ export default function TraficoSection({ playa }: Props) {
 function btnStyle(bg: string, color: string, outline = false): React.CSSProperties {
   return {
     display: 'block', padding: '.55rem .85rem',
-    borderRadius: '4px', border: outline ? `1px solid rgba(107,64,10,.25)` : 'none',
+    borderRadius: '4px', border: outline ? `1px solid color-mix(in srgb, var(--accent) 25%, transparent)` : 'none',
     background: bg, color, fontSize: '.75rem', fontWeight: 600,
     textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
   }

@@ -269,7 +269,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <style dangerouslySetInnerHTML={{ __html: litoral ? LITORAL_CSS_MIN : CRITICAL_CSS }} />
 
         {/* Preload del logo · está en el LCP del nav, eliminar el round-trip */}
-        <link rel="preload" as="image" href="/logo.svg" fetchPriority="high" />
 
         {/* Preconnect/DNS prefetch. Elimina RTT para APIs externas críticas
             que se llaman casi siempre desde el render server-side de la

@@ -84,7 +84,7 @@ export default async function RutasPage() {
             padding: '.75rem 1.25rem', borderRadius: 6,
             fontSize: '.92rem', fontWeight: 800, textDecoration: 'none',
             minHeight: 44, marginBottom: '2.5rem',
-            boxShadow: '0 4px 14px rgba(107,64,10,.2)',
+            boxShadow: '0 4px 14px color-mix(in srgb, var(--accent) 20%, transparent)',
           }}
         >
           🛣️ Configura tu propia ruta

@@ -200,7 +200,7 @@ export default function SegurosViajePage() {
         <div style={{ overflowX: 'auto', marginBottom: '2rem', border: '1px solid var(--line)', borderRadius: 4 }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.85rem' }}>
             <thead>
-              <tr style={{ background: 'rgba(107,64,10,.08)' }}>
+              <tr style={{ background: 'color-mix(in srgb, var(--accent) 8%, transparent)' }}>
                 <th style={{ padding: '.6rem .85rem', textAlign: 'left', fontWeight: 700, color: 'var(--ink)' }}>Cobertura</th>
                 <th style={{ padding: '.6rem .85rem', textAlign: 'left', fontWeight: 700, color: 'var(--ink)' }}>Mínimo</th>
                 <th style={{ padding: '.6rem .85rem', textAlign: 'left', fontWeight: 700, color: 'var(--ink)' }}>Recomendado</th>

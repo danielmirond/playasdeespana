@@ -142,8 +142,8 @@ export default function PrivacidadPage() {
 
         <Section title="Más información">
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginTop: '.5rem' }}>
-            <Link href="/aviso-legal" style={{ display: 'inline-flex', padding: '.45rem .85rem', background: 'rgba(107,64,10,.14)', color: '#4a2c05', borderRadius: 100, fontSize: '.78rem', fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(107,64,10,.3)' }}>Aviso legal →</Link>
-            <Link href="/cookies" style={{ display: 'inline-flex', padding: '.45rem .85rem', background: 'rgba(107,64,10,.14)', color: '#4a2c05', borderRadius: 100, fontSize: '.78rem', fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(107,64,10,.3)' }}>Política de cookies →</Link>
+            <Link href="/aviso-legal" style={{ display: 'inline-flex', padding: '.45rem .85rem', background: 'color-mix(in srgb, var(--accent) 14%, transparent)', color: 'var(--accent-2)', borderRadius: 100, fontSize: '.78rem', fontWeight: 600, textDecoration: 'none', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)' }}>Aviso legal →</Link>
+            <Link href="/cookies" style={{ display: 'inline-flex', padding: '.45rem .85rem', background: 'color-mix(in srgb, var(--accent) 14%, transparent)', color: 'var(--accent-2)', borderRadius: 100, fontSize: '.78rem', fontWeight: 600, textDecoration: 'none', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)' }}>Política de cookies →</Link>
           </div>
         </Section>
       </main>
@@ -162,7 +162,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
         section ul { padding-left: 1.2rem; margin: .5rem 0; }
         section li { margin-bottom: .35rem; }
         section p { margin-bottom: .65rem; }
-        section code { background: rgba(107,64,10,.08); padding: .1rem .35rem; borderRadius: 4; fontSize: .82rem; }
+        section code { background: color-mix(in srgb, var(--accent) 8%, transparent); padding: .1rem .35rem; borderRadius: 4; fontSize: .82rem; }
         section a { color: var(--accent); text-decoration: underline; }
       `}</style>
     </section>

@@ -16,7 +16,7 @@
   position: fixed;
   top: 0; right: 0; bottom: 0;
   background: var(--card-bg, #faf6ef);
-  border-left: 1px solid var(--line, #e8dcc8);
+  border-left: 1px solid var(--line, var(--line));
   box-shadow: -20px 0 60px rgba(0, 0, 0, .12);
   z-index: 101;
   display: flex;
@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.1rem 1.25rem 1rem;
-  border-bottom: 1px solid var(--line, #e8dcc8);
+  border-bottom: 1px solid var(--line, var(--line));
   flex-shrink: 0;
 }
 
@@ -52,7 +52,7 @@
   border: 0;
   padding: .35rem;
   cursor: pointer;
-  color: var(--muted, #5a3d12);
+  color: var(--muted, var(--ink-soft));
   display: inline-flex;
   align-items: center;
   justify-content: center;

@@ -99,7 +99,7 @@ export default async function RutaPage({ params }: Props) {
               background: 'var(--accent)', color: '#fff',
               padding: '.75rem 1.25rem', borderRadius: 6,
               fontSize: '.92rem', fontWeight: 800, textDecoration: 'none',
-              minHeight: 44, boxShadow: '0 4px 14px rgba(107,64,10,.2)',
+              minHeight: 44, boxShadow: '0 4px 14px color-mix(in srgb, var(--accent) 20%, transparent)',
             }}
           >
             🗺️ Abrir en Google Maps

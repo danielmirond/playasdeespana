@@ -20,7 +20,7 @@ function Stars({ value, size = 14 }: { value: number; size?: number }) {
           key={n}
           size={size}
           weight={n <= Math.round(value) ? 'fill' : 'regular'}
-          color={n <= Math.round(value) ? '#f5a623' : '#e8dcc8'}
+          color={n <= Math.round(value) ? '#f5a623' : 'var(--line)'}
         />
       ))}
     </div>

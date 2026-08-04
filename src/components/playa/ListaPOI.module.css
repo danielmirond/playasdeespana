@@ -36,7 +36,7 @@
   border: 1px solid var(--line);
   background: var(--surface-2, var(--card-bg2));
   display: flex; align-items: center; justify-content: center;
-  color: var(--ink-soft, #5a3d12);
+  color: var(--ink-soft, var(--ink-soft));
 }
 
 /* ── Nombre y metadatos ─────────────────────────────────────────── */

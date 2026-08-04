@@ -119,7 +119,7 @@ export default function CuadernoClient() {
             border: '1px solid var(--line)',
             borderRadius: 'var(--r-sm, 4px)',
             // pauta de cuaderno
-            backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 27px, rgba(42,26,8,0.05) 27px 28px)',
+            backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 27px, color-mix(in srgb, var(--ink) 5%, transparent) 27px 28px)',
             marginBottom: '2.5rem',
           }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>

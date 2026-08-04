@@ -91,7 +91,7 @@ export default function InstallPrompt() {
       position: 'fixed', left: '50%', transform: 'translateX(-50%)', bottom: 'calc(env(safe-area-inset-bottom, 0px) + 14px)',
       zIndex: 1200, width: 'min(440px, calc(100vw - 24px))',
       background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 12,
-      boxShadow: 'var(--shadow-lg, 0 8px 24px rgba(42,26,8,.18))',
+      boxShadow: 'var(--shadow-lg, 0 8px 24px color-mix(in srgb, var(--ink) 18%, transparent))',
       padding: '.9rem 1rem', display: 'flex', alignItems: 'center', gap: '.85rem',
     }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}

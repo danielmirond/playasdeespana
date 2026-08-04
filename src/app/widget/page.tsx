@@ -100,8 +100,8 @@ export default function WidgetPage() {
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: 700, fontSize: 14, lineHeight: 1.2 }}>Playa de la Concha</div>
-                <div style={{ fontSize: 11, color: '#7a6858', marginTop: 2 }}>San Sebastián · Gipuzkoa</div>
-                <div style={{ fontSize: 11, color: '#7a6858', marginTop: 3, fontFamily: 'ui-monospace, monospace' }}>19°C · 0.3m olas · 12km/h</div>
+                <div style={{ fontSize: 11, color: 'var(--cert-estimado)', marginTop: 2 }}>San Sebastián · Gipuzkoa</div>
+                <div style={{ fontSize: 11, color: 'var(--cert-estimado)', marginTop: 3, fontFamily: 'ui-monospace, monospace' }}>19°C · 0.3m olas · 12km/h</div>
                 <div style={{ fontSize: 9, color: '#a89880', marginTop: 4, letterSpacing: '.08em', textTransform: 'uppercase' }}>playas-espana.com</div>
               </div>
             </a>

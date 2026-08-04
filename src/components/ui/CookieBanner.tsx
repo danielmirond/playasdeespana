@@ -207,7 +207,7 @@ export default function CookieBanner() {
             <button
               type="button"
               onClick={() => setShowDetails(true)}
-              style={{ ...btnBase, border: 'none', background: 'transparent', color: '#5a3d12', marginRight: 'auto', textDecoration: 'underline' }}
+              style={{ ...btnBase, border: 'none', background: 'transparent', color: 'var(--ink-soft)', marginRight: 'auto', textDecoration: 'underline' }}
             >
               {i18n.configurar}
             </button>

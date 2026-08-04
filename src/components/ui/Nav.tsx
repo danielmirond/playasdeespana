@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import styles from './Nav.module.css'
+import Logo from './Logo'
 
 function getLangUrl(pathname: string, targetLocale: 'es' | 'en'): string {
   const isEn = pathname.startsWith('/en')
@@ -59,7 +60,9 @@ export default function Nav() {
           <Link href="/mapa" className={styles.link}>{isEn ? 'Map' : 'Mapa'}</Link>
         </nav>
         <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label={isEn ? 'Playas de España. Home' : 'Playas de España. Inicio'}>
-          <img src="/logo.svg" alt="Playas de España" width={140} height={36} fetchPriority="high" decoding="async" style={{ display:'block', height: 36, width: 'auto' }} />
+          {/* SVG en línea, no <img>: así el lockup hereda --font-serif y
+              --accent y cambia con el sistema. Ver components/ui/Logo. */}
+          <Logo size={36} titulo={null} />
         </Link>
         <div className={styles.right}>
           <Link href="/buscar" className={styles.iconBtn} aria-label={isEn ? 'Search' : 'Buscar'}>
