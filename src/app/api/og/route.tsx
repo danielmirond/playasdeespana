@@ -11,29 +11,34 @@
 
 import { ImageResponse } from 'next/og'
 import { NextRequest } from 'next/server'
+import { paletaOG } from '@/lib/paleta-og'
 
 export const runtime = 'edge'
 
-// Colores semánticos por score (brand book semantic palette)
+// Satori no resuelve var(): necesita valores. La paleta entera se elige
+// según el flag en lib/paleta-og, así el sistema sigue mandando en vez de
+// quedar hex sueltos por la ruta.
 function verdictFor(score: number | null): { label: string; color: string } {
-  if (score === null) return { label: '',            color: '#7a6858' }
-  if (score >= 85)    return { label: 'excelente',   color: '#3d6b1f' }
-  if (score >= 70)    return { label: 'muy bueno',   color: '#7a8a30' }
-  if (score >= 50)    return { label: 'aceptable',   color: '#c48a1e' }
-  if (score >= 30)    return { label: 'limitado',    color: '#a04818' }
-  return                     { label: 'no apto',     color: '#7a2818' }
+  const s = paletaOG().score
+  if (score === null) return { label: '',            color: s.sindato }
+  if (score >= 85)    return { label: 'excelente',   color: s.excelente }
+  if (score >= 70)    return { label: 'muy bueno',   color: s.muybueno }
+  if (score >= 50)    return { label: 'aceptable',   color: s.aceptable }
+  if (score >= 30)    return { label: 'limitado',    color: s.limitado }
+  return                     { label: 'no apto',     color: s.noapto }
 }
 
 // Si el caller pasa "calidad" string la convertimos a verdict
 function verdictFromCalidad(calidad: string | null): { label: string; color: string } {
-  if (!calidad) return { label: '', color: '#7a6858' }
+  const s = paletaOG().score
+  if (!calidad) return { label: '', color: s.sindato }
   const map: Record<string, { label: string; color: string }> = {
-    'Excelente':  { label: 'excelente',   color: '#3d6b1f' },
-    'Buena':      { label: 'muy bueno',   color: '#7a8a30' },
-    'Suficiente': { label: 'aceptable',   color: '#c48a1e' },
-    'Deficiente': { label: 'no apto',     color: '#7a2818' },
+    'Excelente':  { label: 'excelente',   color: s.excelente },
+    'Buena':      { label: 'muy bueno',   color: s.muybueno },
+    'Suficiente': { label: 'aceptable',   color: s.aceptable },
+    'Deficiente': { label: 'no apto',     color: s.noapto },
   }
-  return map[calidad] ?? { label: '', color: '#7a6858' }
+  return map[calidad] ?? { label: '', color: s.sindato }
 }
 
 export async function GET(req: NextRequest) {
@@ -53,8 +58,13 @@ export async function GET(req: NextRequest) {
   const fotoRaw   = sp.get('foto')
   const foto      = fotoRaw && /^https:\/\//.test(fotoRaw) ? fotoRaw : null
   // Sobre foto el texto va en blanco con sombra; sin foto, tinta sobre arena.
-  const tinta     = foto ? '#ffffff' : '#2a1a08'
-  const sombra    = foto ? '0 2px 14px rgba(0,0,0,0.45)' : undefined
+  const pal       = paletaOG()
+  const tinta     = foto ? pal.onPhoto : pal.ink
+  // Satori no tolera `textShadow: undefined` — llama a .toString() sobre el
+  // valor y revienta con «failed to pipe response». Por eso la sombra se
+  // esparce como objeto: sin foto la propiedad no llega a existir. Era la
+  // causa de que toda tarjeta social sin foto devolviera 500.
+  const sombra    = foto ? { textShadow: '0 2px 14px rgba(0,0,0,0.45)' } : {}
 
   const score = scoreStr ? parseInt(scoreStr, 10) : null
   const verdict = score != null ? verdictFor(score) : verdictFromCalidad(calidad)
@@ -75,15 +85,12 @@ export async function GET(req: NextRequest) {
     playa.length > 14 ? 98 :
                         110
 
-  // El título está posicionado en absoluto y envuelve según su largo, así
-  // que el antetítulo y el score no pueden vivir en un `top` fijo: con un
-  // nombre de dos líneas se los comía. Estimamos las líneas por ancho de
-  // caja (720px) y bajamos ambos bloques lo que haga falta.
-  const porLinea   = Math.max(8, Math.floor(720 / (titleSize * 0.48)))
-  const lineas     = Math.max(1, Math.ceil(playa.length / porLinea))
-  const finTitulo  = 224 + lineas * titleSize * 1.02
-  const topEyebrow = Math.round(finTitulo + 26)
-  const topScore   = Math.round(finTitulo + 56)
+  // La columna de texto es flex, no absoluta. Antes se estimaba a mano
+  // cuántas líneas ocuparía el título (caracteres por línea × alto de
+  // línea) para colocar el score en un `top` calculado; con dos líneas el
+  // score se salía de los 630 px y la fila de datos se le montaba encima.
+  // Un flex column que se centra en el hueco disponible lo resuelve sin
+  // adivinar nada.
 
   return new ImageResponse(
     (
@@ -94,8 +101,8 @@ export async function GET(req: NextRequest) {
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
-          background: '#f5ecd5',          // arena-100
-          fontFamily: 'Georgia, serif',
+          background: pal.bg,
+          fontFamily: pal.serif,
           overflow: 'hidden',
         }}
       >
@@ -123,7 +130,7 @@ export async function GET(req: NextRequest) {
           <div style={{
             position: 'absolute', left: 60, top: 40,
             width: 480, height: 200,
-            background: 'linear-gradient(180deg, #a8b8c4 0%, #c8c090 60%, #b8a06a 100%)',
+            background: `linear-gradient(180deg, ${pal.ilustracion[0]} 0%, ${pal.ilustracion[1]} 60%, ${pal.ilustracion[2]} 100%)`,
             borderRadius: '2px',
             display: 'flex',
           }}/>
@@ -131,10 +138,10 @@ export async function GET(req: NextRequest) {
           <svg viewBox="0 0 480 60" width="480" height="60"
                style={{ position: 'absolute', left: 60, top: 200, display: 'block' }}>
             <path d="M0,20 Q120,5 240,20 T480,20"
-                  fill="none" stroke="#2a1a08" strokeWidth="1.5"/>
+                  fill="none" stroke={pal.ink} strokeWidth="1.5"/>
             {/* Pin decorativo */}
-            <circle cx="240" cy="18" r="6" fill="#f5ecd5" stroke="#2a1a08" strokeWidth="1.5"/>
-            <circle cx="240" cy="18" r="2" fill="#6b400a"/>
+            <circle cx="240" cy="18" r="6" fill={pal.bg} stroke={pal.ink} strokeWidth="1.5"/>
+            <circle cx="240" cy="18" r="2" fill={pal.accent}/>
           </svg>
         </div>}
 
@@ -145,16 +152,16 @@ export async function GET(req: NextRequest) {
         }}>
           {/* Ondita ≈ */}
           <svg viewBox="0 0 40 20" width="36" height="18" style={{ display: 'block' }}>
-            <path d="M2 8 Q8 4 14 8 T26 8 T38 8" fill="none" stroke="#6b400a" strokeWidth="1.8" strokeLinecap="round"/>
-            <path d="M2 14 Q8 10 14 14 T26 14 T38 14" fill="none" stroke="#6b400a" strokeWidth="1.8" strokeLinecap="round"/>
+            <path d="M2 8 Q8 4 14 8 T26 8 T38 8" fill="none" stroke={pal.accent} strokeWidth="1.8" strokeLinecap="round"/>
+            <path d="M2 14 Q8 10 14 14 T26 14 T38 14" fill="none" stroke={pal.accent} strokeWidth="1.8" strokeLinecap="round"/>
           </svg>
           <span style={{
-            fontFamily: 'Georgia, serif',
+            fontFamily: pal.serif,
             fontStyle: 'italic',
             fontSize: 30,
             fontWeight: 700,
             color: tinta,
-            textShadow: sombra,
+            ...sombra,
             display: 'flex',
           }}>playas de España</span>
         </div>
@@ -174,93 +181,92 @@ export async function GET(req: NextRequest) {
           </div>
         )}
 
-        {/* Eyebrow: municipio · provincia */}
-        {municipio && (
+        {/* Columna editorial: antetítulo, nombre, estado y score. */}
+        <div style={{
+          position: 'absolute',
+          left: 56, top: 128, width: 660, bottom: 104,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}>
+          {municipio && (
+            <div style={{
+              display: 'flex',
+              fontFamily: 'system-ui, sans-serif',
+              fontSize: 18,
+              fontWeight: 500,
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              color: foto ? 'rgba(255,255,255,0.82)' : pal.inkMute,
+              marginBottom: 14,
+            }}>
+              {municipio}
+            </div>
+          )}
+
           <div style={{
-            position: 'absolute',
-            left: 56, top: 190,
+            fontFamily: pal.serif,
+            fontSize: titleSize,
+            fontWeight: 700,
+            color: tinta,
+            ...sombra,
+            lineHeight: 1.02,
+            letterSpacing: '-0.02em',
             display: 'flex',
+          }}>
+            {playa}
+          </div>
+
+          <div style={{
+            display: 'flex',
+            marginTop: 26,
             fontFamily: 'system-ui, sans-serif',
-            fontSize: 18,
+            fontSize: 15,
             fontWeight: 500,
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            color: foto ? 'rgba(255,255,255,0.82)' : '#7a6858',
+            color: foto ? 'rgba(255,255,255,0.82)' : pal.inkMute,
           }}>
-            {municipio}
+            Estado del mar · Hoy
           </div>
-        )}
 
-        {/* Título. nombre playa en Playfair-style */}
-        <div style={{
-          position: 'absolute',
-          left: 56, top: 224,
-          maxWidth: 720,
-          fontFamily: 'Georgia, serif',
-          fontSize: titleSize,
-          fontWeight: 700,
-          color: tinta,
-          textShadow: sombra,
-          lineHeight: 1.02,
-          letterSpacing: '-0.02em',
-          display: 'flex',
-        }}>
-          {playa}
-        </div>
-
-        {/* Eyebrow ESTADO DEL MAR · HOY */}
-        <div style={{
-          position: 'absolute',
-          left: 56, top: topEyebrow,
-          display: 'flex',
-          fontFamily: 'system-ui, sans-serif',
-          fontSize: 15,
-          fontWeight: 500,
-          letterSpacing: '0.16em',
-          textTransform: 'uppercase',
-          color: foto ? 'rgba(255,255,255,0.82)' : '#7a6858',
-        }}>
-          Estado del mar · Hoy
-        </div>
-
-        {/* Score + verdict */}
-        <div style={{
-          position: 'absolute',
-          left: 56, top: topScore,
-          display: 'flex',
-          alignItems: 'baseline',
-          gap: 20,
-        }}>
-          {showScore && (
-            <>
-              <span style={{
-                fontFamily: 'Georgia, serif',
-                fontSize: 140,
-                fontWeight: 700,
-                color: tinta,
-                textShadow: sombra,
-                lineHeight: 1,
-                letterSpacing: '-0.02em',
-                display: 'flex',
-              }}>{score}</span>
-              <span style={{
-                fontFamily: 'system-ui, sans-serif',
-                fontSize: 26,
-                fontWeight: 500,
-                color: foto ? 'rgba(255,255,255,0.82)' : '#7a6858',
-                display: 'flex',
-              }}>/100</span>
-            </>
-          )}
-          <span style={{
-            fontFamily: 'Georgia, serif',
-            fontStyle: 'italic',
-            fontSize: 46,
-            fontWeight: 400,
-            color: verdict.color,
+          <div style={{
             display: 'flex',
-            marginLeft: showScore ? 12 : 0,
-          }}>{verdict.label}</span>
+            alignItems: 'baseline',
+            gap: 20,
+            marginTop: 6,
+          }}>
+            {showScore && (
+              <>
+                <span style={{
+                  fontFamily: pal.serif,
+                  fontSize: 128,
+                  fontWeight: 700,
+                  color: tinta,
+                  ...sombra,
+                  lineHeight: 1.08,
+                  letterSpacing: '-0.02em',
+                  display: 'flex',
+                }}>{score}</span>
+                <span style={{
+                  fontFamily: 'system-ui, sans-serif',
+                  fontSize: 26,
+                  fontWeight: 500,
+                  color: foto ? 'rgba(255,255,255,0.82)' : pal.inkMute,
+                  display: 'flex',
+                }}>/100</span>
+              </>
+            )}
+            <span style={{
+              fontFamily: pal.serif,
+              fontStyle: 'italic',
+              fontSize: 46,
+              fontWeight: 400,
+              color: verdict.color,
+              display: 'flex',
+              marginLeft: showScore ? 12 : 0,
+            }}>{verdict.label}</span>
+          </div>
         </div>
 
         {/* Data row (agua · oleaje · viento) */}
@@ -273,7 +279,7 @@ export async function GET(req: NextRequest) {
             fontFamily: 'system-ui, sans-serif',
             fontSize: 18,
             fontWeight: 400,
-            color: '#524030',
+            color: pal.inkSoft,
           }}>
             {dataRow.map((s, i) => (
               <span key={i} style={{ display: 'flex' }}>{s}</span>
@@ -286,7 +292,7 @@ export async function GET(req: NextRequest) {
           position: 'absolute',
           bottom: 0, left: 0, right: 0,
           height: 8,
-          background: '#6b400a',
+          background: pal.accent,
           display: 'flex',
         }}/>
       </div>

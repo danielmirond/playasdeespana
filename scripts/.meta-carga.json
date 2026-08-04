@@ -1,0 +1,62 @@
+{
+ "fecha": "2026-08-02T09:48:57.980Z",
+ "dia": 40,
+ "dias": 31,
+ "estructura": "pequeno",
+ "campanas": {
+  "ago26_meta_conversion": "1001",
+  "ago26_meta_retargeting": "1002"
+ },
+ "conjuntos": {
+  "amplio_nacional": "1003",
+  "visito_no_sello": "1004"
+ },
+ "anuncios": [
+  {
+   "nombre": "C2_balde_h1_916_v1",
+   "id": "1006",
+   "nuevo": true
+  },
+  {
+   "nombre": "C2_balde_h1_45_v1",
+   "id": "1008",
+   "nuevo": true
+  },
+  {
+   "nombre": "C2_balde_h2_916_v1",
+   "id": "1010",
+   "nuevo": true
+  },
+  {
+   "nombre": "C2_balde_h2_45_v1",
+   "id": "1012",
+   "nuevo": true
+  },
+  {
+   "nombre": "C2_balde_h3_916_v1",
+   "id": "1014",
+   "nuevo": true
+  },
+  {
+   "nombre": "C2_balde_h3_45_v1",
+   "id": "1016",
+   "nuevo": true
+  },
+  {
+   "nombre": "C3_cuaderno_h1_916_v1",
+   "id": "1018",
+   "nuevo": true
+  },
+  {
+   "nombre": "C3_cuaderno_h2_916_v1",
+   "id": "1020",
+   "nuevo": true
+  },
+  {
+   "nombre": "C3_cuaderno_h3_916_v1",
+   "id": "1022",
+   "nuevo": true
+  }
+ ],
+ "omitidos": []
+}
