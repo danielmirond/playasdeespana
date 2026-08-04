@@ -37,7 +37,10 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
       aria-labelledby="estado-hoy-titulo"
       style={{
         margin: '0 0 1.5rem',
-        background: 'linear-gradient(135deg, #faf6ef 0%, #f0e6d0 100%)',
+        // El degradado se declara una vez y da dos resultados: en Arena los
+        // dos tonos de tarjeta son arena cálida y se nota; en Litoral son
+        // papel sobre papel y la caja queda plana, que es lo que pide.
+        background: 'linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg2) 100%)',
         border: '1px solid var(--line)',
         borderRadius: 10,
         overflow: 'hidden',
@@ -80,7 +83,7 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
               display: 'inline-flex',
               alignItems: 'center',
               gap: '.5rem',
-              background: '#fff',
+              background: 'var(--card-bg)',
               border: '1px solid var(--line)',
               borderRadius: 100,
               padding: '.4rem .8rem',
@@ -123,7 +126,10 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
       {/* Bottom: chips separados por línea fina */}
       <div style={{
         padding: '.75rem 1.1rem 1.1rem',
-        borderTop: '1px dashed var(--line)',
+        // Sólido, no discontinuo: en este sistema el trazo discontinuo
+        // significa «dato estimado». Un separador decorativo con ese trazo
+        // dice algo que no quiere decir.
+        borderTop: '1px solid var(--line)',
       }}>
         <div style={{
           fontSize: '.72rem',
