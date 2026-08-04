@@ -19,11 +19,14 @@ export const LITORAL_CSS = `
      Blanco cálido apagado, no brillante. La diferencia entre niveles es
      mínima: el contraste vive en la tinta, no en el escalonado de fondos. */
   --paper-0: #fffefc;   /* tarjeta */
-  --paper-1: #f2efe8;   /* fondo del documento — un punto más hundido que
-                           el original #f7f5f1, para que la tarjeta blanca
-                           se despegue sin necesidad de borde ni sombra */
-  --paper-2: #efece5;   /* hundida */
-  --paper-3: #e5e1d7;   /* bandas, pies, zócalos */
+  --paper-1: #ede9e0;   /* fondo del documento */
+  --paper-2: #e4dfd4;   /* hundida */
+  --paper-3: #d8d3c6;   /* bandas, pies, zócalos */
+  /* El fondo baja dos puntos desde el #f7f5f1 original: con la tarjeta en
+     #fffefc, ~6% de luminancia de diferencia basta para que flote sin
+     borde ni sombra. Los otros dos niveles bajan con él por obligación,
+     no por gusto: si --paper-1 se hunde y los demás no, la «hundida»
+     acaba siendo más clara que el fondo y la escala se invierte. */
 
   --ink-900: #12110e;   /* casi negra y aún cálida · 17,3:1 sobre papel */
   --ink-700: #3d3a33;
