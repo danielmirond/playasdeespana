@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, DM_Sans, JetBrains_Mono, Literata, Schibsted_Grotesk } from 'next/font/google'
-import { LITORAL_CSS_MIN } from '@/styles/litoral'
+import { LITORAL_CSS_MIN, TIPO_LITORAL_CSS } from '@/styles/litoral'
 import { getFlags, flagsAttr, tieneFlag } from '@/lib/flags'
 import InstallPrompt from '@/components/pwa/InstallPrompt'
 import CookieBanner from '@/components/ui/CookieBanner'
@@ -250,9 +250,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   // con un sistema y parte con el otro.
   const flags = flagsAttr()
   const litoral = tieneFlag('ds_litoral_tokens')
-  // Solo se cargan las fuentes del sistema activo: servir las cuatro
-  // familias para usar dos es peso muerto en un sitio 90% móvil.
-  const fuentes = litoral
+  // Las fuentes las manda ds_litoral_type, NO ds_litoral_tokens. El manual
+  // pide que el cambio tipográfico pueda medirse solo —Literata sobre el
+  // sistema Arena— y con las dos cosas en el mismo flag ese A/B no existe.
+  // Las cuatro combinaciones son legítimas y cada una carga lo suyo: servir
+  // las cuatro familias para usar dos es peso muerto en un sitio 90% móvil.
+  const tipoLitoral = tieneFlag('ds_litoral_type')
+  const fuentes = tipoLitoral
     ? `${literata.variable} ${schibsted.variable} ${jetbrainsMono.variable}`
     : `${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`
 
@@ -267,6 +271,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Una hoja U OTRA, nunca las dos — Litoral sustituye a Arena, no se
             apila sobre ella. Solo existe un juego de tokens a la vez. */}
         <style dangerouslySetInnerHTML={{ __html: litoral ? LITORAL_CSS_MIN : CRITICAL_CSS }} />
+        {/* C2 va detrás de la hoja base, sea cual sea: así Literata puede
+            medirse sola sobre Arena. Gana por especificidad — un atributo
+            en <html> pesa más que :root. */}
+        {tipoLitoral && <style dangerouslySetInnerHTML={{ __html: TIPO_LITORAL_CSS }} />}
 
         {/* Preload del logo · está en el LCP del nav, eliminar el round-trip */}
 

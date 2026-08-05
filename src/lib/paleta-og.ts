@@ -50,6 +50,18 @@ const LITORAL: PaletaOG = {
   serif: 'Literata, Georgia, serif',
 }
 
-/** La paleta del sistema activo. Se resuelve en servidor, como los flags. */
-export const paletaOG = (): PaletaOG =>
-  tieneFlag('ds_litoral_tokens') ? LITORAL : ARENA
+/**
+ * La paleta del sistema activo. Se resuelve en servidor, como los flags.
+ *
+ * El color lo manda ds_litoral_tokens y la familia ds_litoral_type, por
+ * separado: son dos flags distintos y el manual pide poder medir la
+ * tipografía sola. Antes bastaba con tokens para las dos cosas, y con el
+ * tipo apagado la tarjeta social anunciaba Literata mientras el sitio
+ * servía Playfair.
+ */
+export const paletaOG = (): PaletaOG => {
+  const base = tieneFlag('ds_litoral_tokens') ? LITORAL : ARENA
+  return tieneFlag('ds_litoral_type')
+    ? { ...base, serif: 'Literata, Georgia, serif' }
+    : { ...base, serif: 'Playfair Display, Georgia, serif' }
+}

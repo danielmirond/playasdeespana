@@ -46,12 +46,18 @@ export const LITORAL_CSS = `
   --ink-soft:  var(--ink-700);
   --ink-mute:  var(--ink-500);
 
-  /* ——— Interacción sin color ————————————————————————————
-     Un acento saturado lee «aviso» y «utilidad»; la tinta lee «no necesito
-     llamarte la atención». El token existe para poder reintroducir un
-     acento algún día sin reescribir componentes. */
-  --accent:   var(--ink-900);
-  --accent-2: var(--ink-700);
+  /* ——— Acento ————————————————————————————————————————
+     El valor por defecto MANTIENE color. La interacción en tinta es C3, y
+     C3 tiene su propio flag porque es el cambio con riesgo de afordancia:
+     el manual pide encenderlo una semana después que el resto y apagarlo
+     si el CTR de afiliación cae más de un 10 %. Soldarlo a los tokens
+     dejaría ese rollback sin palanca.
+     Este es el acento de Arena, deliberadamente: así el A/B compara
+     «interacción con color» contra «interacción en tinta» y no mete de
+     paso un tono nuevo que nadie ha decidido. Ver el bloque
+     [data-flags~="ds_sin_acento"] al final de la hoja. */
+  --accent:   #6b400a;
+  --accent-2: #85560f;
 
   /* ——— El único material de color ———————————————————————
      Bronce. EN EXCLUSIVA para el sello del cuaderno: el momento en que el
@@ -103,8 +109,17 @@ export const LITORAL_CSS = `
      Literata: serif de lectura variable (200–900), itálica real, cifras
      tabulares y eje de tamaño óptico. Una sola familia para TODOS los
      numerales del producto: al ser tabulares, nada baila al actualizarse. */
-  --font-serif: var(--font-literata), Georgia, serif;
-  --font-sans:  var(--font-schibsted), system-ui, sans-serif;
+  /* Las familias NO se declaran aquí. C2 es su propio flag, y el manual
+     pide expresamente que pueda ir solo —Literata sobre Arena— para medir
+     la tipografía sin el cambio de color de por medio. Si la hoja de
+     tokens las fijara, ese A/B sería imposible.
+     Viven en el bloque [data-flags~="ds_litoral_type"] del final, que se
+     aplica esté o no activa esta hoja.
+     El respaldo son las familias de Arena, por el mismo motivo que el
+     acento: con los tokens encendidos y el tipo apagado hay que enseñar
+     algo, y ese algo debe ser el sistema anterior — no una a medias. */
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans:  var(--font-dm-sans), system-ui, sans-serif;
   --font-mono:  var(--font-jetbrains), ui-monospace, monospace;
 
   /* Literata en 400 tiene voz de cuerpo, no de titular. */
@@ -360,6 +375,24 @@ img, svg { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ═══ C3 · ds_sin_acento — la interacción pierde el color ═══════════
+   Un acento saturado lee «aviso» y «utilidad»; la tinta lee «no necesito
+   llamarte la atención». Va como override sobre el atributo que el
+   servidor pinta en <html>, no dentro de :root, para que se pueda
+   encender y apagar sin tocar la hoja ni los componentes.
+
+   El manual lo pide así por una razón concreta: es el único cambio de
+   Litoral con hipótesis de conversión negativa. Si el CTR de afiliación
+   cae, se apaga esto y se queda todo lo demás. */
+[data-flags~="ds_sin_acento"] {
+  --accent:   var(--ink-900);
+  --accent-2: var(--ink-700);
+}
+/* No hace falta variante oscura: --accent apunta a var(--ink-900), que es
+   una referencia, y el bloque [data-theme="dark"] ya reescribe --ink-900 a
+   #f5f2eb. La tinta se invierte sola y el acento con ella. */
+
 `
 
 /**
@@ -374,3 +407,17 @@ export const LITORAL_CSS_MIN = LITORAL_CSS
   .replace(/\s*\n\s*/g, '')
   .replace(/\s{2,}/g, ' ')
   .trim()
+
+
+/**
+ * C2 · ds_litoral_type, como hoja aparte.
+ *
+ * No puede vivir dentro de LITORAL_CSS: esa hoja solo se sirve cuando
+ * ds_litoral_tokens está encendido, y el manual pide expresamente que la
+ * tipografía pueda medirse SOLA, Literata sobre el sistema Arena. Metida
+ * ahí dentro, ese A/B sería inalcanzable.
+ *
+ * Va después de la hoja base sea cual sea, y gana por especificidad: un
+ * atributo en <html> pesa más que :root.
+ */
+export const TIPO_LITORAL_CSS = `[data-flags~="ds_litoral_type"]{--font-serif:var(--font-literata),Georgia,serif;--font-sans:var(--font-schibsted),system-ui,sans-serif}`
