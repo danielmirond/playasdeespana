@@ -2,7 +2,7 @@
   {
     "nombre": "Playa Llevante",
     "municipio": "Es Pujols",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 38.737793,
     "lng": 1.444424,
@@ -1129,7 +1129,7 @@
   {
     "nombre": "sa Cala de s'Art",
     "municipio": "El Toro",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.472857,
     "lng": 2.487281,
@@ -2274,7 +2274,7 @@
   {
     "nombre": "Playa de Ancón Chico",
     "municipio": "Isla de la Gomera",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.217145,
     "lng": -17.267356,
@@ -2429,7 +2429,7 @@
   {
     "nombre": "Las Salinas",
     "municipio": "Isla de la Gomera",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.069688,
     "lng": -17.318406,
@@ -2460,7 +2460,7 @@
   {
     "nombre": "La Raja",
     "municipio": "Isla de la Gomera",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.185735,
     "lng": -17.328907,
@@ -2491,7 +2491,7 @@
   {
     "nombre": "Playa del Remo",
     "municipio": "Isla de la Gomera",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.209235,
     "lng": -17.289937,
@@ -3104,7 +3104,7 @@
   {
     "nombre": "Atlantis",
     "municipio": "Ibiza",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 38.872543,
     "lng": 1.230607,
@@ -4707,7 +4707,7 @@
   {
     "nombre": "Baños de Baelo",
     "municipio": "Campo de Gibraltar",
-    "provincia": "Málaga",
+    "provincia": "Cádiz",
     "comunidad": "Andalucía",
     "lat": 36.068548,
     "lng": -5.74057,
@@ -4769,7 +4769,7 @@
   {
     "nombre": "Macar de Calesmorts",
     "municipio": "Cala Tirant",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.054472,
     "lng": 4.046933,
@@ -18765,7 +18765,7 @@
   {
     "nombre": "Praia do Seixo",
     "municipio": "Noya",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.624836,
     "lng": -9.049399,
@@ -18796,7 +18796,7 @@
   {
     "nombre": "Praia da Sarrosa",
     "municipio": "Noya",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.623735,
     "lng": -9.05172,
@@ -19179,7 +19179,7 @@
   {
     "nombre": "Praia do Caudeliño",
     "municipio": "Finisterre",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.934549,
     "lng": -9.171242,
@@ -37907,7 +37907,7 @@
   {
     "nombre": "platja de Can Curt",
     "municipio": "Migjorn",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.312243,
     "lng": 3.005974,
@@ -38489,7 +38489,7 @@
   {
     "nombre": "Son Bou",
     "municipio": "Torresolí",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.904946,
     "lng": 4.059869,
@@ -38586,7 +38586,7 @@
   {
     "nombre": "Praia da Lagosteira",
     "municipio": "Escaselas",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.920567,
     "lng": -9.257438,
@@ -39271,7 +39271,7 @@
   {
     "nombre": "Praia de Areas Longas",
     "municipio": "Moreno",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.633127,
     "lng": -9.044742,
@@ -52121,7 +52121,7 @@
   {
     "nombre": "Platja es Grau",
     "municipio": "Es Grau",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.952094,
     "lng": 4.264247,
@@ -52392,7 +52392,7 @@
   {
     "nombre": "s'Alga",
     "municipio": "La Savina",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 38.779,
     "lng": 1.428135,
@@ -62462,7 +62462,7 @@
   {
     "nombre": "Caleta des Capellans",
     "municipio": "Raiguer",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.871534,
     "lng": 3.159293,
@@ -62493,7 +62493,7 @@
   {
     "nombre": "Cala Bóquer",
     "municipio": "Port de Pollença",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.929065,
     "lng": 3.094684,
@@ -62728,7 +62728,7 @@
   {
     "nombre": "Playa de Bolonia",
     "municipio": "El Lentiscal",
-    "provincia": "Málaga",
+    "provincia": "Cádiz",
     "comunidad": "Andalucía",
     "lat": 36.082154,
     "lng": -5.772806,
@@ -66891,7 +66891,7 @@
   {
     "nombre": "es Talaier",
     "municipio": "Área Metropolitana de Ciutadella",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.926986,
     "lng": 3.902992,
@@ -67125,7 +67125,7 @@
   {
     "nombre": "Platja de Cala Roja",
     "municipio": "Cala Tirant",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.062188,
     "lng": 4.077009,
@@ -67291,7 +67291,7 @@
   {
     "nombre": "Cala Fustam",
     "municipio": "Área Metropolitana de Mahón",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.926225,
     "lng": 4.000891,
@@ -67666,7 +67666,7 @@
   {
     "nombre": "Cala Cabra Salada",
     "municipio": "Área Metropolitana de Mahón",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.05549,
     "lng": 4.143179,
@@ -67697,7 +67697,7 @@
   {
     "nombre": "S'Arenalet (Fornells)",
     "municipio": "Área Metropolitana de Mahón",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.056869,
     "lng": 4.141096,
@@ -67728,7 +67728,7 @@
   {
     "nombre": "Caló Verd",
     "municipio": "Área Metropolitana de Mahón",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.044408,
     "lng": 4.162684,
@@ -67759,7 +67759,7 @@
   {
     "nombre": "En Peuada",
     "municipio": "Área Metropolitana de Mahón",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.04296,
     "lng": 4.141311,
@@ -67790,7 +67790,7 @@
   {
     "nombre": "Macar de Cala Pudenta",
     "municipio": "Área Metropolitana de Mahón",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.043506,
     "lng": 4.158963,
@@ -67821,7 +67821,7 @@
   {
     "nombre": "es Pou de s'Albufereta",
     "municipio": "Fornells",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.048562,
     "lng": 4.142433,
@@ -67919,7 +67919,7 @@
   {
     "nombre": "macar Reial",
     "municipio": "Maó",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.008077,
     "lng": 4.210735,
@@ -68870,7 +68870,7 @@
   {
     "nombre": "sa Bombarda",
     "municipio": "Área Metropolitana de Ciutadella",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.053551,
     "lng": 3.969241,
@@ -70975,7 +70975,7 @@
   {
     "nombre": "Es Comú",
     "municipio": "Ca'n Picafort",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.78025,
     "lng": 3.138023,
@@ -72787,7 +72787,7 @@
   {
     "nombre": "Platja des Bot",
     "municipio": "Área Metropolitana de Ciutadella",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.049326,
     "lng": 3.924522,
@@ -76258,7 +76258,7 @@
   {
     "nombre": "Playa de las Calcosas",
     "municipio": "Isla de el Hierro",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 27.697719,
     "lng": -17.959416,
@@ -82134,7 +82134,7 @@
   {
     "nombre": "Playa del Barranco de Erques",
     "municipio": "Isora",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.156792,
     "lng": -16.801617,
@@ -85454,7 +85454,7 @@
   {
     "nombre": "Playa de Iguala",
     "municipio": "La Dama",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.05915,
     "lng": -17.316041,
@@ -86740,7 +86740,7 @@
   {
     "nombre": "Platja es Trenc",
     "municipio": "Sant Tomas",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.921318,
     "lng": 4.0224,
@@ -88693,7 +88693,7 @@
   {
     "nombre": "Praia de Canido",
     "municipio": "Noya",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.622372,
     "lng": -9.053094,
@@ -100678,7 +100678,7 @@
   {
     "nombre": "Playa de Valdevaqueros",
     "municipio": "Valdevaqueros",
-    "provincia": "Málaga",
+    "provincia": "Cádiz",
     "comunidad": "Andalucía",
     "lat": 36.063092,
     "lng": -5.683815,
@@ -101073,7 +101073,7 @@
   {
     "nombre": "Font de Cala Bóquer",
     "municipio": "Port de Pollença",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.927858,
     "lng": 3.097396,
@@ -101748,7 +101748,7 @@
   {
     "nombre": "Cala Nadja",
     "municipio": "Ibiza",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.096632,
     "lng": 1.553246,
@@ -102498,7 +102498,7 @@
   {
     "nombre": "Playa Zapata",
     "municipio": "Abona",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.215334,
     "lng": -16.417541,
@@ -120559,7 +120559,7 @@
   {
     "nombre": "Praia de Río Azor",
     "municipio": "Barbanza",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.569704,
     "lng": -8.968527,
@@ -132147,7 +132147,7 @@
   {
     "nombre": "Praia de Lago",
     "municipio": "Camariñas",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 43.131537,
     "lng": -9.198358,
@@ -136070,7 +136070,7 @@
   {
     "nombre": "Praia das Maceiras",
     "municipio": "Bergantiños",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 43.227759,
     "lng": -8.946827,
@@ -140353,7 +140353,7 @@
   {
     "nombre": "S'Arenal d'en Moro",
     "municipio": "Es Grau",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.963656,
     "lng": 4.274704,
@@ -140811,7 +140811,7 @@
   {
     "nombre": "Playa de Castello",
     "municipio": "La Caridad",
-    "provincia": "Lugo",
+    "provincia": "Asturias",
     "comunidad": "Galicia",
     "lat": 43.55473,
     "lng": -6.81063,
@@ -145319,7 +145319,7 @@
   {
     "nombre": "Na Patana",
     "municipio": "Llano de Mallorca",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.757587,
     "lng": 3.175197,
@@ -145350,7 +145350,7 @@
   {
     "nombre": "Praia do Porto de Abaixo",
     "municipio": "Barbanza",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.539919,
     "lng": -9.034652,
@@ -154069,7 +154069,7 @@
   {
     "nombre": "Cala Ses Salines",
     "municipio": "Ibiza",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 38.835657,
     "lng": 1.400584,
@@ -156617,7 +156617,7 @@
   {
     "nombre": "Praia de Carreiroa",
     "municipio": "Muros",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.861103,
     "lng": -9.143357,
@@ -157172,7 +157172,7 @@
   {
     "nombre": "Callao Largo",
     "municipio": "Las Rosas",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.200551,
     "lng": -17.233349,
@@ -157466,7 +157466,7 @@
   {
     "nombre": "Praia do Cotarín",
     "municipio": "Noya",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.783378,
     "lng": -8.952881,
@@ -157564,7 +157564,7 @@
   {
     "nombre": "Praia Bitureira",
     "municipio": "Noya",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.798987,
     "lng": -8.925214,
@@ -157595,7 +157595,7 @@
   {
     "nombre": "Praia do Prado das Vellas",
     "municipio": "Noya",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.742371,
     "lng": -8.984904,
@@ -157657,7 +157657,7 @@
   {
     "nombre": "Playa de Erese",
     "municipio": "Antoncojo",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.024594,
     "lng": -17.234637,
@@ -157957,7 +157957,7 @@
   {
     "nombre": "Playa de Heredia",
     "municipio": "Taguluche",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.126792,
     "lng": -17.342776,
@@ -158082,7 +158082,7 @@
   {
     "nombre": "Playa del Arguamul",
     "municipio": "Arguamul",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.207029,
     "lng": -17.294947,
@@ -165311,7 +165311,7 @@
   {
     "nombre": "Praia do Castrillón",
     "municipio": "Bergantiños",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 43.212012,
     "lng": -9.033593,
@@ -167699,7 +167699,7 @@
   {
     "nombre": "Praia da Catía",
     "municipio": "Noya",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.618883,
     "lng": -9.057634,
@@ -172089,7 +172089,7 @@
   {
     "nombre": "Praia do Queimado",
     "municipio": "Suegos",
-    "provincia": "A Coruña",
+    "provincia": "Lugo",
     "comunidad": "Galicia",
     "lat": 43.69859,
     "lng": -7.605843,
@@ -173340,7 +173340,7 @@
   {
     "nombre": "Platja de Cala Llucalari",
     "municipio": "Área Metropolitana de Mahón",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.891252,
     "lng": 4.081956,
@@ -174262,7 +174262,7 @@
   {
     "nombre": "platja dels Secs",
     "municipio": "Port d'Alcúdia",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.840046,
     "lng": 3.174968,
@@ -182055,7 +182055,7 @@
   {
     "nombre": "Praia do Fornelo",
     "municipio": "O Pindo",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.895217,
     "lng": -9.141912,
@@ -184648,7 +184648,7 @@
   {
     "nombre": "Mitjaneta",
     "municipio": "Cala Galdana",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.933751,
     "lng": 3.97046,
@@ -188474,7 +188474,7 @@
   {
     "nombre": "Playa de Castilla",
     "municipio": "Sanlúcar de Barrameda",
-    "provincia": "Huelva",
+    "provincia": "Cádiz",
     "comunidad": "Andalucía",
     "lat": 36.868488,
     "lng": -6.427555,
@@ -188505,7 +188505,7 @@
   {
     "nombre": "Playa del Inglesito",
     "municipio": "Sanlúcar de Barrameda",
-    "provincia": "Huelva",
+    "provincia": "Cádiz",
     "comunidad": "Andalucía",
     "lat": 36.826292,
     "lng": -6.405483,
@@ -190404,7 +190404,7 @@
   {
     "nombre": "Cala Moragues",
     "municipio": "S'Almudaina",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.058691,
     "lng": 4.007221,
@@ -190435,7 +190435,7 @@
   {
     "nombre": "Pla de Mar",
     "municipio": "S'Almudaina",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.052835,
     "lng": 3.973676,
@@ -191735,7 +191735,7 @@
   {
     "nombre": "platja del Dofí",
     "municipio": "Colònia de Sant Jordi",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.312162,
     "lng": 3.009773,
@@ -194619,7 +194619,7 @@
   {
     "nombre": "Playa de Miguel",
     "municipio": "Taibique",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 27.690504,
     "lng": -17.962867,
@@ -197406,7 +197406,7 @@
   {
     "nombre": "platja Petita",
     "municipio": "S'Estany den Mas",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.498324,
     "lng": 3.296698,
@@ -197437,7 +197437,7 @@
   {
     "nombre": "caló de sa Bassa Blanca",
     "municipio": "Alcúdia",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.842113,
     "lng": 3.178754,
@@ -199414,7 +199414,7 @@
   {
     "nombre": "Platja des Codolar",
     "municipio": "Sant Francesc de s'Estany",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 38.865209,
     "lng": 1.352356,
@@ -199866,7 +199866,7 @@
   {
     "nombre": "Es Portitxol",
     "municipio": "Port de Sant Miquel",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.074404,
     "lng": 1.398088,
@@ -200154,7 +200154,7 @@
   {
     "nombre": "Platja de Ferragut",
     "municipio": "Cala Tirant",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.058882,
     "lng": 4.074205,
@@ -200316,7 +200316,7 @@
   {
     "nombre": "Praia da Furna",
     "municipio": "Areos",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.594563,
     "lng": -8.921799,
@@ -200347,7 +200347,7 @@
   {
     "nombre": "Praia da Ladiña",
     "municipio": "Areos",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.593035,
     "lng": -8.920636,
@@ -204193,7 +204193,7 @@
   {
     "nombre": "Praia do Portiño",
     "municipio": "O Pindo",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.892784,
     "lng": -9.141227,
@@ -204656,7 +204656,7 @@
   {
     "nombre": "Praia de Porto Negros",
     "municipio": "Quilmas",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.867655,
     "lng": -9.14611,
@@ -205013,7 +205013,7 @@
   {
     "nombre": "Praia do Porto dos Robalos",
     "municipio": "Lira",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.801959,
     "lng": -9.143815,
@@ -207369,7 +207369,7 @@
   {
     "nombre": "Arenal d'en Moro",
     "municipio": "Poblat talaiòtic de Sa Torreta",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.992193,
     "lng": 4.254948,
@@ -207535,7 +207535,7 @@
   {
     "nombre": "es Aloquets",
     "municipio": "S'Almudaina",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.052158,
     "lng": 3.981373,
@@ -207566,7 +207566,7 @@
   {
     "nombre": "es Rinconot",
     "municipio": "S'Almudaina",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.058215,
     "lng": 4.000158,
@@ -207597,7 +207597,7 @@
   {
     "nombre": "Raconada de Son Vell",
     "municipio": "Son Xoriguer",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.922529,
     "lng": 3.863302,
@@ -207628,7 +207628,7 @@
   {
     "nombre": "Platja d'Atalis",
     "municipio": "Torresolí",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.907183,
     "lng": 4.0537,
@@ -207659,7 +207659,7 @@
   {
     "nombre": "Racó de sa Barra",
     "municipio": "Torre Saura",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.925241,
     "lng": 3.904851,
@@ -207690,7 +207690,7 @@
   {
     "nombre": "es Escalons",
     "municipio": "Torre Saura",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.923879,
     "lng": 3.884705,
@@ -217643,7 +217643,7 @@
   {
     "nombre": "platja de sa Clota",
     "municipio": "Es Port",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.643372,
     "lng": 2.436836,
@@ -217674,7 +217674,7 @@
   {
     "nombre": "platjola de sa Figuera",
     "municipio": "Es Port",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.646116,
     "lng": 2.444952,
@@ -217705,7 +217705,7 @@
   {
     "nombre": "Platja de Can Pruaga",
     "municipio": "Es Port",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.648639,
     "lng": 2.450509,
@@ -222097,7 +222097,7 @@
   {
     "nombre": "Praia da Lagoa",
     "municipio": "Casal Novo",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 42.563117,
     "lng": -9.038008,
@@ -222704,7 +222704,7 @@
   {
     "nombre": "Playa de Tejeda",
     "municipio": "Sabinosa",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 27.697342,
     "lng": -18.07826,
@@ -231069,7 +231069,7 @@
   {
     "nombre": "Platja de Can Camins",
     "municipio": "El Prat de Llobregat",
-    "provincia": "Tarragona",
+    "provincia": "Barcelona",
     "comunidad": "Cataluña",
     "lat": 41.282408,
     "lng": 2.091405,
@@ -231311,7 +231311,7 @@
   {
     "nombre": "Platja des Comte",
     "municipio": "Son Xoriguer",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.923658,
     "lng": 3.868785,
@@ -231412,7 +231412,7 @@
   {
     "nombre": "Bellavista",
     "municipio": "Torre Saura",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.926754,
     "lng": 3.896652,
@@ -231443,7 +231443,7 @@
   {
     "nombre": "Es Banyul",
     "municipio": "Torre Saura",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.927628,
     "lng": 3.892194,
@@ -231609,7 +231609,7 @@
   {
     "nombre": "Calesmorts",
     "municipio": "Cala Tirant",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.052677,
     "lng": 4.049385,
@@ -231709,7 +231709,7 @@
   {
     "nombre": "Salairò",
     "municipio": "Cala Tirant",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.054308,
     "lng": 4.043864,
@@ -231740,7 +231740,7 @@
   {
     "nombre": "Cala Carabó",
     "municipio": "Cala Morell",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.059006,
     "lng": 3.930459,
@@ -231976,7 +231976,7 @@
   {
     "nombre": "Cala Mica",
     "municipio": "Cala Tirant",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.056385,
     "lng": 4.066153,
@@ -232214,7 +232214,7 @@
   {
     "nombre": "Cala Escorxada",
     "municipio": "Sant Tomas",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.925319,
     "lng": 4.0048,
@@ -232525,7 +232525,7 @@
   {
     "nombre": "Cala Rotja",
     "municipio": "Ses Salines",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.032698,
     "lng": 4.133861,
@@ -232626,7 +232626,7 @@
   {
     "nombre": "Cala Pudent",
     "municipio": "Son Parc",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.045277,
     "lng": 4.158587,
@@ -232657,7 +232657,7 @@
   {
     "nombre": "Cala en Tosqueta",
     "municipio": "Son Parc",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.05854,
     "lng": 4.16662,
@@ -232822,7 +232822,7 @@
   {
     "nombre": "Platja des Sivinar",
     "municipio": "Port d'Addaia",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.999869,
     "lng": 4.216553,
@@ -236059,7 +236059,7 @@
   {
     "nombre": "Playa de los Cardones",
     "municipio": "Taibique",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 27.706808,
     "lng": -17.958867,
@@ -236090,7 +236090,7 @@
   {
     "nombre": "Playa de las Calcosas",
     "municipio": "Taibique",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 27.70087,
     "lng": -17.959658,
@@ -236673,7 +236673,7 @@
   {
     "nombre": "Playa de Anosma",
     "municipio": "Roque Bermejo",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.562623,
     "lng": -16.125564,
@@ -236837,7 +236837,7 @@
   {
     "nombre": "Playa de Ijuana",
     "municipio": "San Andrés",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.545533,
     "lng": -16.127478,
@@ -236935,7 +236935,7 @@
   {
     "nombre": "Playa de Las Breñas",
     "municipio": "Roque Bermejo",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.587628,
     "lng": -16.155103,
@@ -237188,7 +237188,7 @@
   {
     "nombre": "Playa de la Fajana",
     "municipio": "Las Carboneras",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.57195,
     "lng": -16.275424,
@@ -237287,7 +237287,7 @@
   {
     "nombre": "Playa del Garajao",
     "municipio": "Las Carboneras",
-    "provincia": "Las Palmas",
+    "provincia": "Santa Cruz de Tenerife",
     "comunidad": "Canarias",
     "lat": 28.571454,
     "lng": -16.277165,
@@ -242023,7 +242023,7 @@
   {
     "nombre": "Platja de Rafalell",
     "municipio": "Vistabella Rafalell",
-    "provincia": "Castellón",
+    "provincia": "Valencia",
     "comunidad": "Comunitat Valenciana",
     "lat": 39.554074,
     "lng": -0.291292,
@@ -244115,7 +244115,7 @@
   {
     "nombre": "Platja de Palma",
     "municipio": "Les Maravelles",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.517797,
     "lng": 2.736283,
@@ -245034,7 +245034,7 @@
   {
     "nombre": "S’Arenal de Sa Canova",
     "municipio": "Son Serra de Marina",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.730453,
     "lng": 3.246592,
@@ -245719,7 +245719,7 @@
   {
     "nombre": "Platja de ses Salines",
     "municipio": "La Savina",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 38.751774,
     "lng": 1.437656,
@@ -245750,7 +245750,7 @@
   {
     "nombre": "Platja de ses Salines",
     "municipio": "La Savina",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 38.742635,
     "lng": 1.441092,
@@ -252294,7 +252294,7 @@
   {
     "nombre": "sa Platgeta",
     "municipio": "Palma",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 39.144355,
     "lng": 2.937,
@@ -260660,7 +260660,7 @@
   {
     "nombre": "Cala Joana",
     "municipio": "Rosamar",
-    "provincia": "Tarragona",
+    "provincia": "Girona",
     "comunidad": "Cataluña",
     "lat": 41.76275,
     "lng": 2.994496,
@@ -269273,7 +269273,7 @@
   {
     "nombre": "Platja de la Roberta",
     "municipio": "Barcelona",
-    "provincia": "Tarragona",
+    "provincia": "Barcelona",
     "comunidad": "Cataluña",
     "lat": 41.281201,
     "lng": 2.088315,
@@ -270519,7 +270519,7 @@
   {
     "nombre": "Platja de La Ricarda Ca l'Arana",
     "municipio": "Barcelona",
-    "provincia": "Tarragona",
+    "provincia": "Barcelona",
     "comunidad": "Cataluña",
     "lat": 41.294989,
     "lng": 2.122206,
@@ -273433,7 +273433,7 @@
   {
     "nombre": "Platja de la Pineda de Viladecans",
     "municipio": "Castelldefels",
-    "provincia": "Tarragona",
+    "provincia": "Barcelona",
     "comunidad": "Cataluña",
     "lat": 41.273131,
     "lng": 2.058021,
@@ -276087,7 +276087,7 @@
   {
     "nombre": "Platja des Tancat",
     "municipio": "Cala Morell",
-    "provincia": "Islas Baleares",
+    "provincia": "Baleares",
     "comunidad": "Islas Baleares",
     "lat": 40.046123,
     "lng": 3.92229,
@@ -285808,7 +285808,7 @@
   {
     "nombre": "Praia de Riocovo",
     "municipio": "Gondomil",
-    "provincia": "Pontevedra",
+    "provincia": "A Coruña",
     "comunidad": "Galicia",
     "lat": 43.254078,
     "lng": -8.949927,

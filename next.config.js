@@ -146,6 +146,14 @@ const nextConfig = {
       // Páginas /playas/[slug]/que-llevar antiguas (una por playa, thin
       // content) → ficha principal de la playa. Las nuevas guías están
       // en /que-llevar/[tipo] y se enlazan desde la ficha.
+      // El dataset traía «Baleares» e «Islas Baleares» como si fueran dos
+      // provincias, y cada una tenía su hub vivo y en el sitemap: 348
+      // playas en uno y 66 en el otro, con el enlazado interno partido en
+      // dos. Unificado el campo, este hub se queda a cero. Estaba
+      // indexado, así que se manda con un 301 en vez de dejarlo servir
+      // una página vacía con noindex.
+      { source: '/provincia/islas-baleares', destination: '/provincia/baleares', permanent: true },
+      { source: '/en/provinces/islas-baleares', destination: '/en/provinces/baleares', permanent: true },
       { source: '/playas/:slug/que-llevar', destination: '/playas/:slug', permanent: true },
       { source: '/en/beaches/:slug/que-llevar', destination: '/en/beaches/:slug', permanent: true },
 
