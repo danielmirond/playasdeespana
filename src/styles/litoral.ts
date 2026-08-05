@@ -30,7 +30,12 @@ export const LITORAL_CSS = `
 
   --ink-900: #12110e;   /* casi negra y aún cálida · 17,3:1 sobre papel */
   --ink-700: #3d3a33;
-  --ink-500: #6e6a5f;   /* 5,4:1 sobre tarjeta */
+  --ink-500: #666257;   /* Era #6e6a5f, medido 5,4:1 sobre la tarjeta. Al
+                           bajar el fondo dos puntos ese mismo gris caía a
+                           4,46:1 sobre --paper-1 y a 4,06:1 sobre la
+                           superficie hundida: por debajo de AA justo en el
+                           texto secundario, que además es el de 11-14px.
+                           Ahora 5,0 / 4,6 / 6,0 sobre los tres papeles. */
   --ink-300: #a39d90;   /* DECORATIVO · 2,5:1 · nunca bajo texto */
 
   --bg:        var(--paper-1);
