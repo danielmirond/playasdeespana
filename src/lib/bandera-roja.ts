@@ -24,6 +24,22 @@
 import type { BanderaPlaya } from './seguridad'
 
 /** ¿Hay bandera roja hoy, venga de donde venga la cascada? */
+/**
+ * ATENCIÓN al alcance de la regla.
+ *
+ * BLOQUES_DUROS lo aplica el <Reorder> de FichaBody, que solo puede filtrar
+ * a SUS PROPIOS HIJOS. Cualquier bloque de monetización que se renderice
+ * fuera de ese árbol — hermano de <FichaBody> en la page, dentro del
+ * <aside>, o en una plantilla futura — no lo alcanza y sobrevive al aviso.
+ *
+ * Pasó de verdad: el CTA de alquiler de barcos vivía en playas/[slug]/page
+ * como hermano de la ficha y siguió vendiendo travesías en día de bandera
+ * roja durante toda la vida de la regla. Se detectó forzando la bandera y
+ * comprobando el HTML, no leyendo el código: en el código las dos mitades
+ * parecen correctas por separado.
+ *
+ * Si añades monetización fuera del Reorder, llama a hayBanderaRoja() ahí.
+ */
 export function hayBanderaRoja(b: BanderaPlaya | null | undefined): boolean {
   return b?.color === 'roja'
 }

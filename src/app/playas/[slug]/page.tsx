@@ -49,6 +49,7 @@ import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { calcularPlayaScore } from '@/lib/scoring'
 import { getPlayasDataModified } from '@/lib/dateModified'
+import { hayBanderaRoja } from '@/lib/bandera-roja'
 
 // Mtime real del dataset MITECO. Reemplaza al fallback `new Date()` que
 // Google detecta como timestamp-spam (lastSignificantUpdate del leak).
@@ -646,7 +647,12 @@ export default async function PlayaPage({ params }: Props) {
         videoData={videoData}
         webcams={webcamsData}
       />
-      {boatLink && (
+      {/* El alquiler de barcos es bloque DURO: mete al usuario en el agua.
+          Vive aquí, hermano de <FichaBody>, así que el Reorder que aplica
+          la regla dentro de la ficha no lo alcanza — de ahí que hasta
+          ahora sobreviviera a la bandera roja. La comprobación tiene que
+          repetirse en cada superficie de monetización que quede fuera. */}
+      {boatLink && !hayBanderaRoja(banderaPlaya) && (
         <aside aria-label="Alquiler de barcos" style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1.5rem 1.25rem' }}>
           <Link href={boatLink.href} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0c4a6e,#0b7285)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none' }}>
             <span style={{ minWidth: 0 }}>
