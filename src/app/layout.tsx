@@ -193,6 +193,17 @@ const CRITICAL_CSS = `
 --cert-bg-medido:rgba(45,82,102,.08);--cert-bg-oficial:rgba(61,107,31,.08);
 --cert-bg-reportado:rgba(196,138,30,.10);--cert-bg-estimado:rgba(122,104,80,.07);
 /* Cifra destacada: score y mediciones son voz de medio → serif */
+/* Escala de texto. Existía solo en Litoral, así que los componentes
+   escribían el tamaño a mano y cambiar uno cambiaba los dos sistemas.
+   Con los mismos nombres en las dos hojas, var(--fs-sm) significa «el
+   pequeño de este sistema» y cada uno trae el suyo. (Sin comillas
+   invertidas en este comentario: está dentro de un template literal y
+   lo cerrarían.)
+   Los números coinciden porque ya coincidían: Arena tiene el cuerpo en
+   15px y usa 11, 17 y 26 por la casa. No es una escala nueva, es la que
+   había sin nombrar. */
+--fs-xs:11px;--fs-sm:13px;--fs-base:15px;--fs-md:17px;--fs-lg:20px;
+--fs-xl:26px;--fs-2xl:34px;--fs-3xl:46px;
 --fs-score:68px;--fs-score-sm:34px;--fs-medicion:26px;
 /* Objetivos táctiles */
 --touch-min:44px;--touch-comfy:48px;
