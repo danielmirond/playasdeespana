@@ -1,15 +1,25 @@
-/* Rejilla de mediciones — 2×2 a 375px.
-   Dos columnas fijas, no auto-fit: el handoff pide 2×2 en el viewport de
-   juicio, y un auto-fit las pondría en fila cuando quepan, que es
-   justamente donde dejan de leerse como una tabla de cuatro datos. */
+/* Rejilla de mediciones — 2×2 a 375px, cuatro en fila en escritorio.
+   El handoff especifica el móvil, que es donde se juzga. Pero la ficha
+   también se ve en ancho, y con dos columnas sin tope la rejilla llegaba
+   a 1.016px: celdas de 508 para una cifra de 23. Dejaba de leerse como
+   una tabla de cuatro datos y pasaba a dos bandas casi vacías. Se vio en
+   el Preview, no en local — a 375 el problema no existe.
+
+   Arriba de 700 las cuatro caben en fila, que es la lectura correcta:
+   siguen siendo cuatro medidas comparables, no dos filas de dos. */
 
 .rejilla {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
   margin: 1.1rem 0 1.25rem;
+  max-width: 620px;
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
+}
+
+@media (min-width: 700px) {
+  .rejilla { grid-template-columns: repeat(4, 1fr); max-width: 720px; }
 }
 
 /* El filete lo dan los propios bordes de celda, no un gap coloreado: así
