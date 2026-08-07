@@ -9,6 +9,7 @@ import styles from '@/app/comunidad/[slug]/ComunidadPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import { tinte } from '@/lib/tinte'
+import SeaIcon from '@/components/ui/SeaIcon'
 
 export const maxDuration = 60
 
@@ -148,7 +149,7 @@ export default async function CommunitiesPageEn({ params }: Props) {
                 {pls.map(p => (
                   <Link key={p.slug} href={`/en/beaches/${p.slug}`} className={styles.playaCard}>
                     <div className={styles.pcEstado} style={{ background: p.estado.bg, borderColor: tinte(p.estado.dot, 27) }}>
-                      <span className={styles.pcDot} style={{ background: p.estado.dot }}/>
+                      <SeaIcon estado={p.estadoKey} size={15} color={p.estado.dot} />
                       <span className={styles.pcLabel} style={{ color: p.estado.text }}>{p.estado.label}</span>
                     </div>
                     <div className={styles.pcNombre}>{p.nombre}</div>

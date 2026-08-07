@@ -12,6 +12,7 @@ import SchemaItemList from '@/components/seo/SchemaItemList'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import GygActivities from '@/components/GygActivities'
 import { tinte } from '@/lib/tinte'
+import SeaIcon from '@/components/ui/SeaIcon'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -186,7 +187,7 @@ export default async function ComunidadPage({ params }: Props) {
                 {pls.map(p => (
                   <Link key={p.slug} href={`/playas/${p.slug}`} className={styles.playaCard}>
                     <div className={styles.pcEstado} style={{ background: p.estado.bg, borderColor: tinte(p.estado.dot, 27) }}>
-                      <span className={styles.pcDot} style={{ background: p.estado.dot }}/>
+                      <SeaIcon estado={p.estadoKey} size={15} color={p.estado.dot} />
                       <span className={styles.pcLabel} style={{ color: p.estado.text }}>{p.estado.label}</span>
                     </div>
                     <div className={styles.pcNombre}>{p.nombre}</div>

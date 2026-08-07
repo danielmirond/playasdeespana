@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Playa } from '@/types'
 import { tinte } from '@/lib/tinte'
+import SeaIcon from '@/components/ui/SeaIcon'
+import type { EstadoBano } from '@/types'
 
 interface Props {
   /** Zoom con rueda desde el primer momento. Solo para /mapa (experiencia
@@ -371,7 +373,10 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
       }}>
         {Object.entries(ESTADO_COLORES).map(([e, c]) => (
           <span key={e} style={{ display: 'flex', alignItems: 'center', gap: '.2rem' }}>
-            <span style={{ width: 7, height: 7, borderRadius: '50%', background: c, display: 'inline-block' }} />
+            {/* La clave del mapa es justo donde un punto de color no sirve:
+                si no distingues los tonos, la leyenda no te explica nada.
+                El icono dibuja el estado. */}
+            <SeaIcon estado={e as EstadoBano} size={14} color={c} />
             {e}
           </span>
         ))}

@@ -11,6 +11,7 @@ import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import GygActivities from '@/components/GygActivities'
 import { tinte } from '@/lib/tinte'
+import SeaIcon from '@/components/ui/SeaIcon'
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -176,7 +177,7 @@ export default async function MunicipioPage({ params }: Props) {
                 <span>{p.viento}km/h</span>
               </div>
               <div className={styles.rowEstado} style={{ background: p.estado.bg, borderColor: tinte(p.estado.dot, 33) }}>
-                <span className={styles.rowDot} style={{ background: p.estado.dot }}/>
+                <SeaIcon estado={p.estadoKey} size={15} color={p.estado.dot} />
                 <span style={{ color: p.estado.text }}>{p.estado.label}</span>
               </div>
               <span className={styles.rowArrow}>→</span>
