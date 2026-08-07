@@ -1141,17 +1141,17 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.03em', marginBottom: '.75rem' }}>
                 {locale === 'en' ? 'Technical Details' : 'Información Técnica'}
               </div>
-              {playa.longitud    && <DataRow k={i18n.longitud}     v={`${playa.longitud} m`}/>}
-              {playa.anchura     && <DataRow k={i18n.anchura}      v={`${playa.anchura} m`}/>}
-              {playa.composicion && <DataRow k={i18n.composicion}  v={playa.composicion}/>}
-              {playa.tipo        && <DataRow k={i18n.tipo}         v={playa.tipo}/>}
-              {playa.grado_ocupacion && <DataRow k={i18n.grado_ocupacion} v={playa.grado_ocupacion}/>}
-              {playa.grado_urbano    && <DataRow k={i18n.grado_urbano}    v={playa.grado_urbano}/>}
-              {playa.fachada_litoral && <DataRow k={i18n.fachada_litoral} v={playa.fachada_litoral}/>}
-              {playa.condiciones     && <DataRow k={i18n.condiciones}     v={playa.condiciones}/>}
-              {playa.vegetacion      && <DataRow k={i18n.vegetacion}      v={locale === 'en' ? 'Yes' : 'Sí'}/>}
-              {playa.zona_fondeo     && <DataRow k={i18n.zona_fondeo}     v={locale === 'en' ? 'Yes' : 'Sí'}/>}
-              {playa.espacio_protegido && <DataRow k={i18n.espacio_protegido} v={locale === 'en' ? 'Yes' : 'Sí'}/>}
+              {playa.longitud    && <DataRow k={i18n.longitud}     v={`${playa.longitud} m`} cert="oficial"/>}
+              {playa.anchura     && <DataRow k={i18n.anchura}      v={`${playa.anchura} m`} cert="oficial"/>}
+              {playa.composicion && <DataRow k={i18n.composicion}  v={playa.composicion} cert="oficial"/>}
+              {playa.tipo        && <DataRow k={i18n.tipo}         v={playa.tipo} cert="oficial"/>}
+              {playa.grado_ocupacion && <DataRow k={i18n.grado_ocupacion} v={playa.grado_ocupacion} cert="oficial"/>}
+              {playa.grado_urbano    && <DataRow k={i18n.grado_urbano}    v={playa.grado_urbano} cert="oficial"/>}
+              {playa.fachada_litoral && <DataRow k={i18n.fachada_litoral} v={playa.fachada_litoral} cert="oficial"/>}
+              {playa.condiciones     && <DataRow k={i18n.condiciones}     v={playa.condiciones} cert="oficial"/>}
+              {playa.vegetacion      && <DataRow k={i18n.vegetacion}      v={locale === 'en' ? 'Yes' : 'Sí'} cert="oficial"/>}
+              {playa.zona_fondeo     && <DataRow k={i18n.zona_fondeo}     v={locale === 'en' ? 'Yes' : 'Sí'} cert="oficial"/>}
+              {playa.espacio_protegido && <DataRow k={i18n.espacio_protegido} v={locale === 'en' ? 'Yes' : 'Sí'} cert="oficial"/>}
               <DataRow
                 k={i18n.municipio}
                 v={playa.municipio}
@@ -1418,10 +1418,25 @@ function TempCell({ icon, val, label }: { icon: React.ReactNode; val:string; lab
   return <div className={styles.tempCell}><span className={styles.tcIcon}>{icon}</span><div><span className={styles.tcV}>{val}</span><span className={styles.tcL}>{label}</span></div></div>
 }
 
-function DataRow({ k, v, mono, href }: { k:string; v:string; mono?:boolean; href?:string }) {
+/**
+ * Fila de la ficha técnica. 29 usos: es la cifra que más se repite del
+ * sitio después del score.
+ *
+ * `cert` es opcional a propósito. Sin ella la fila se comporta como
+ * siempre, así que añadirla no toca las 29 de golpe. Con ella, el valor
+ * pasa por el mismo `.dato[data-cert]` que el resto del sistema y lleva
+ * su trazo: el usuario ve de un vistazo que la longitud de la playa es
+ * un dato OFICIAL —lo es— y no una medición de hoy.
+ *
+ * Es la diferencia entre afirmar y citar. El producto tenía la gramática
+ * construida y la usaba en una sola cifra de toda la ficha.
+ */
+function DataRow({ k, v, mono, href, cert }: { k:string; v:string; mono?:boolean; href?:string; cert?:Certeza }) {
   const val = href
     ? <Link href={href} style={{ color:'var(--accent)', textDecoration:'none', fontWeight:600 }}>{v}</Link>
-    : v
+    : cert
+      ? <span className="dato" data-cert={cert}>{v}</span>
+      : v
   return <div className={styles.dataRow}><span className={styles.drK}>{k}</span><span className={`${styles.drV} ${mono ? styles.drMono : ''}`}>{val}</span></div>
 }
 

@@ -46,6 +46,11 @@ export default function MobileNav() {
     ...(isEn ? [] : [
       { href: '/playas-perros', label: 'Perros' },
       { href: '/surf', label: 'Surf' },
+      // El cuaderno estaba solo en el menú de escritorio. Es el producto de
+      // retención y `sellar_playa` es EL evento de conversión del plan de
+      // medios — invisible para el 90 % del tráfico, que es móvil. La
+      // ausencia no parecía un fallo porque en escritorio se ve bien.
+      { href: '/mi-cuaderno', label: 'Mi cuaderno' },
     ]),
     { href: isEn ? '/en/magazine' : '/magazine', label: 'Magazine' },
     { href: '/mapa', label: isEn ? 'Map' : 'Mapa' },
