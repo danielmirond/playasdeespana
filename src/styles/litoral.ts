@@ -80,7 +80,12 @@ export const LITORAL_CSS = `
   --cert-oficial:      #2f6b39;   /* AEMET, socorrismo */
   --cert-reportado:    #9a7433;   /* bañistas · 3,9:1 → trazo y cifra ≥18,66px en 700 */
   --cert-estimado:     #6e6a5f;   /* modelo propio */
-  --cert-sindato:      #6e6a5f;   /* ausencia · estado de 1.ª clase */
+  --cert-sindato:      #666257;   /* ausencia · estado de 1.ª clase.
+       Era #6e6a5f, y el manual lo describe como «contraste real AA» —
+       que es justo lo que dejó de ser al bajar el fondo dos puntos:
+       4,46:1 sobre --paper-1 y 4,06 sobre la hundida. Un estado de
+       primera clase que no se lee es un hueco con más letras. Mismo
+       valor que --ink-500, por el mismo motivo y en el mismo sitio. */
   --cert-sindato-tint: #cdc8bb;   /* decorativo · NUNCA bajo texto */
 
   --trazo-medido:    2px solid;

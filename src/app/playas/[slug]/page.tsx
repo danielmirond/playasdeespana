@@ -50,6 +50,7 @@ import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { calcularPlayaScore } from '@/lib/scoring'
 import { getPlayasDataModified } from '@/lib/dateModified'
 import { hayBanderaRoja } from '@/lib/bandera-roja'
+import { dsVariant } from '@/lib/flags'
 
 // Mtime real del dataset MITECO. Reemplaza al fallback `new Date()` que
 // Google detecta como timestamp-spam (lastSignificantUpdate del leak).
@@ -604,6 +605,7 @@ export default async function PlayaPage({ params }: Props) {
         reportes={reportesData}
         foto={fotoHero ?? null}
         banderaPlaya={banderaPlaya}
+        variante={dsVariant()}
       />
       {/* BeachVideo se renderiza ahora dentro de FichaBody como
           BeachVideoToggle (click-to-load) tras el bloque asistente

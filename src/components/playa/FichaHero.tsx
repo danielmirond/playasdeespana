@@ -19,6 +19,7 @@ import { nombreConPlaya } from '@/lib/geo'
 import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 import { hayBanderaRoja } from '@/lib/bandera-roja'
 import type { BanderaPlaya } from '@/lib/seguridad'
+import RejillaMediciones from './RejillaMediciones'
 
 interface Meteo {
   agua: number | null; olas: number | null; viento: number | null
@@ -37,18 +38,25 @@ interface Props {
   foto?:          FotoPlaya | null
   /** La bandera vigente. Con roja, el hero cambia de forma — ver abajo. */
   banderaPlaya?:  BanderaPlaya | null
+  /**
+   * Qué sistema visual está activo. Llega como prop y no se lee aquí
+   * porque este componente es de cliente y los flags se resuelven en
+   * servidor: leerlos aquí obligaría a exponerlos al bundle con
+   * NEXT_PUBLIC_, y a que el cliente pudiera discrepar del servidor.
+   */
+  variante?:      'litoral' | 'arena'
 }
 
 const t = {
   es: {
-    inicio: 'Inicio', agua: 'agua', olas: 'olas',
+    inicio: 'Inicio', agua: 'agua', olas: 'olas', viento: 'viento', uv: 'UV',
     como: 'Cómo llegar', meteoMore: '+ meteo',
     comunidadBase: (s: string) => `/comunidad/${s}`,
     comoEsta: 'Cómo está hoy', avisar: 'Avisar',
     sinAvisos: 'Sin avisos',
   },
   en: {
-    inicio: 'Home', agua: 'water', olas: 'waves',
+    inicio: 'Home', agua: 'water', olas: 'waves', viento: 'wind', uv: 'UV',
     como: 'Directions', meteoMore: '+ weather',
     comunidadBase: (s: string) => `/en/communities/${s}`,
     comoEsta: 'Status today', avisar: 'Report',
@@ -96,6 +104,7 @@ function statusDot(r: ReportesPlaya | null | undefined): 'ok' | 'warn' | 'danger
 export default function FichaHero({
   playa, meteo, estado, frase, locale = 'es',
   municipioSlug, provinciaSlug, playaScore, reportes, foto, banderaPlaya,
+  variante = 'arena',
 }: Props) {
   const i18n = t[locale]
   // El criterio vive en lib/bandera-roja, no aquí: es el mismo que decide
@@ -248,13 +257,17 @@ export default function FichaHero({
                   : <span>{playa.provincia}</span>}
                 <span className={styles.metaSep} aria-hidden="true">·</span>
               </span>
-              {/* Chips solo con dato real: sin fetch no se inventa 18°/0 m */}
-              {meteo.agua != null && (
+              {/* Chips solo con dato real: sin fetch no se inventa 18°/0 m.
+                  Bajo Litoral las mediciones salen de la línea de metadatos
+                  y pasan a la rejilla 2×2 de abajo, que es donde el sistema
+                  las quiere: con etiqueta, trazo de certeza y antigüedad.
+                  Aquí se quedan solo la geografía y el enlace a meteo. */}
+              {variante === 'arena' && meteo.agua != null && (
                 <span>
                   <strong className={hasPhoto ? 'dato dato-ondark' : 'dato'} data-cert={certMeteo}>{meteo.agua}°</strong> {i18n.agua}
                 </span>
               )}
-              {meteo.olas != null && (<>
+              {variante === 'arena' && meteo.olas != null && (<>
                 <span className={styles.metaSep} aria-hidden="true">·</span>
                 <span>
                   <strong className={hasPhoto ? 'dato dato-ondark' : 'dato'} data-cert={certMeteo}>{meteo.olas} m</strong> {i18n.olas}
@@ -262,6 +275,23 @@ export default function FichaHero({
               </>)}
               <a href="#s-meteo" className={styles.more}>{i18n.meteoMore}</a>
             </div>
+
+            {/* Rejilla 2×2. Solo bajo Litoral: en Arena las dos mediciones
+                siguen en la línea de arriba y meter aquí una malla sería
+                duplicarlas. La certeza es la misma para las cuatro porque
+                salen del mismo fetch de meteo; cuando cada una tenga su
+                procedencia, este es el sitio donde se nota. */}
+            {variante === 'litoral' && (
+              <RejillaMediciones
+                onDark={hasPhoto}
+                mediciones={[
+                  { etiqueta: i18n.agua,   valor: meteo.agua ?? null,   unidad: '°',    cert: certMeteo },
+                  { etiqueta: i18n.olas,   valor: meteo.olas ?? null,   unidad: 'm',    cert: certMeteo },
+                  { etiqueta: i18n.viento, valor: meteo.viento ?? null, unidad: 'km/h', cert: certMeteo },
+                  { etiqueta: i18n.uv,     valor: meteo.uv ?? null,     unidad: '',     cert: certMeteo },
+                ]}
+              />
+            )}
 
             <div className={styles.actions}>
               <FichaHeroActions

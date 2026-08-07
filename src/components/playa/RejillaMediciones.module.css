@@ -1,0 +1,61 @@
+/* Rejilla de mediciones — 2×2 a 375px.
+   Dos columnas fijas, no auto-fit: el handoff pide 2×2 en el viewport de
+   juicio, y un auto-fit las pondría en fila cuando quepan, que es
+   justamente donde dejan de leerse como una tabla de cuatro datos. */
+
+.rejilla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 1.1rem 0 1.25rem;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+/* El filete lo dan los propios bordes de celda, no un gap coloreado: así
+   la rejilla es una malla continua y no cuatro cajas sueltas. */
+.celda {
+  display: flex;
+  flex-direction: column;
+  gap: .18rem;
+  padding: .7rem .85rem .75rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+
+/* .eyebrow del sistema: 10px, 500, 0.22em, versalitas. El tracking ancho
+   es lo que la separa de la cifra sin necesitar otro color ni un filete. */
+.etiqueta {
+  font-family: var(--font-sans, system-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  line-height: 1.2;
+}
+
+/* Mono y muy pequeña, debajo de la cifra. Es metadato del dato, no dato:
+   tiene que poder ignorarse de un vistazo y estar ahí cuando se busca. */
+.antiguedad {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 8.5px;
+  letter-spacing: .04em;
+  color: var(--ink-mute);
+  line-height: 1.3;
+}
+
+/* Sobre foto. El modificador va en la propia rejilla, no en un ancestro:
+   la primera versión escribía `.onDark .rejilla` esperando que alguien
+   pusiera la clase más arriba, y no la ponía nadie — la malla quedaba con
+   --line sobre una foto oscura, o sea invisible. Se vio en la captura,
+   no en el código. */
+.rejilla.onDark,
+.rejilla.onDark .celda {
+  border-color: rgba(255, 255, 255, .26);
+}
+.rejilla.onDark .etiqueta,
+.rejilla.onDark .antiguedad {
+  color: rgba(255, 255, 255, .74);
+}
