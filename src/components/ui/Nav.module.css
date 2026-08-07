@@ -91,7 +91,7 @@
   color: var(--accent);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   /* La hamburguesa es fixed en top-left (12px + 44px = 56px). En móvil usamos
      grid de 2 columnas: logo a la izquierda (tras reservar el hueco de la
      hamburguesa) y acciones a la derecha. Así nada se pisa. */

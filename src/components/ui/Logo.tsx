@@ -30,7 +30,13 @@ export default function Logo({ size = 36, titulo = 'Playas de España' }: Props)
       role={titulo ? 'img' : 'presentation'}
       aria-label={titulo ?? undefined}
       aria-hidden={titulo ? undefined : true}
-      style={{ display: 'block', height: size, width: 'auto' }}
+      // Sin `width: auto`. El estilo en línea pisa al atributo width, y un
+      // SVG sin ancho declarado dentro de una rejilla apretada colapsa a
+      // cero — que es lo que pasó: el logo desaparecía de la cabecera y
+      // arrastraba fuera de pantalla al buscador y al selector de idioma.
+      // El <img> que había antes traía dimensiones intrínsecas y no sufría
+      // esto; al dibujarlo en línea hay que declararlas.
+      style={{ display: 'block', height: size, flexShrink: 0 }}
     >
       {titulo && <title>{titulo}</title>}
 
