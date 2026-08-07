@@ -40,7 +40,19 @@ import type { BanderaPlaya } from './seguridad'
  *
  * Si añades monetización fuera del Reorder, llama a hayBanderaRoja() ahí.
  */
-export function hayBanderaRoja(b: BanderaPlaya | null | undefined): boolean {
+/**
+ * Devuelve un type guard, no un boolean, a propósito.
+ *
+ * Con `boolean` el consumidor sabe que hay bandera roja pero TypeScript no,
+ * así que acaba escribiendo `banderaPlaya!.motivo` — una aserción que dice
+ * «confía en mí». Estrellé el build comprobando esta rama y el error fue
+ * exactamente ese: «Cannot read properties of undefined (reading 'motivo')».
+ * En producción no puede pasar porque la función solo da true cuando hay
+ * objeto, pero el `!` no lo sabía: lo garantizaba el humano.
+ *
+ * Con `b is BanderaPlaya` lo garantiza el compilador y el `!` sobra.
+ */
+export function hayBanderaRoja(b: BanderaPlaya | null | undefined): b is BanderaPlaya {
   return b?.color === 'roja'
 }
 

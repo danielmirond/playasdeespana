@@ -118,10 +118,14 @@
   flex-wrap: wrap;
 }
 .scoreNum {
+  /* El tamaño sale del token, no de un clamp escrito a ojo. El clamp
+     anterior daba 41,6px a 375 —el viewport en el que se juzga— cuando el
+     sistema pide 76. Cada sistema trae el suyo: Litoral 76, Arena 68.
+     El clamp se queda solo como techo en pantallas anchas. */
   font-family: var(--font-serif); font-weight: 500;
-  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-size: var(--fs-score, 68px);
   line-height: .92;
-  letter-spacing: -.02em;
+  letter-spacing: -.042em;
   color: #fff;
   font-variant-numeric: tabular-nums;
   min-width: 1.4em;
@@ -300,8 +304,15 @@
   .bcInner { font-size: .65rem; }
   .nombre { font-size: clamp(1.85rem, 8vw, 2.4rem); margin-bottom: .85rem; }
   .scoreLine { gap: .65rem; }
-  .scoreNum { font-size: 2.4rem; }
-  .verdictTxt { font-size: 1.15rem; }
+  /* Arena encoge el score en móvil; Litoral hace lo contrario — 76px ES
+     el tamaño de los 375px en los que se juzga la pantalla, no un tamaño
+     de escritorio que se reduce. Se condiciona al flag en vez de elegir
+     uno de los dos, porque los dos tienen razón en su sistema. */
+  html:not([data-flags~="ds_litoral_tokens"]) .scoreNum { font-size: 2.4rem; }
+  html:not([data-flags~="ds_litoral_tokens"]) .verdictTxt { font-size: 1.15rem; }
+  /* Litoral: el veredicto acompaña al 76 del score, no se encoge con él.
+     28px es lo que pide el sistema a 375. */
+  html[data-flags~="ds_litoral_tokens"] .verdictTxt { font-size: 28px; }
   .verdictSub { font-size: .78rem; }
   .metaLine { font-size: .72rem; gap: .55rem; }
   .metaLine strong { font-size: .92rem; }
@@ -345,9 +356,52 @@
 @media (max-width: 380px) {
   .heroPhoto { min-height: 400px; }
   .nombre { font-size: 1.7rem; }
-  .scoreNum { font-size: 2.1rem; }
+  html:not([data-flags~="ds_litoral_tokens"]) .scoreNum { font-size: 2.1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dotMini, .avisarCTA { animation: none !important; transition: none !important; }
 }
+
+
+/* ── Bandera roja: el hero cambia de forma ─────────────────────────
+   No hay score. En su lugar una prohibición, que se lee de un vistazo y
+   no admite regateo. El borde de 1,5px es del mismo color que el texto:
+   el aviso se delimita, no se decora.
+
+   Sobre foto el rojo del sistema no se lee, así que la caja se apoya en
+   un fondo oscuro y el texto pasa a claro — el borde mantiene el color y
+   sigue diciendo de qué se trata. */
+.noBanyo {
+  display: inline-flex;
+  flex-direction: column;
+  gap: .3rem;
+  align-self: flex-start;
+  padding: .7rem 1rem .8rem;
+  margin-bottom: .85rem;
+  border: 1.5px solid var(--noapto);
+  border-radius: var(--r-md, 5px);
+  background: color-mix(in srgb, var(--noapto) 12%, rgba(0,0,0,.55));
+  max-width: 32ch;
+}
+.heroPainted .noBanyo {
+  background: color-mix(in srgb, var(--noapto) 8%, var(--card-bg));
+}
+
+.noBanyoTitulo {
+  display: flex; align-items: center; gap: .45rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.15;
+  color: #fff;
+}
+.heroPainted .noBanyoTitulo { color: var(--noapto); }
+
+.noBanyoMotivo {
+  font-family: var(--font-sans, system-ui);
+  font-size: .82rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,.86);
+}
+.heroPainted .noBanyoMotivo { color: var(--ink-soft); }

@@ -14,9 +14,11 @@ import type { ReportesPlaya } from '@/lib/reportes'
 import type { FotoPlaya } from '@/lib/fotos'
 import AnimatedSea from './AnimatedSea'
 import styles from './FichaHero.module.css'
-import { MapPin, Megaphone, Waves } from '@phosphor-icons/react'
+import { Flag, MapPin, Megaphone, Waves } from '@phosphor-icons/react'
 import { nombreConPlaya } from '@/lib/geo'
 import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
+import { hayBanderaRoja } from '@/lib/bandera-roja'
+import type { BanderaPlaya } from '@/lib/seguridad'
 
 interface Meteo {
   agua: number | null; olas: number | null; viento: number | null
@@ -33,6 +35,8 @@ interface Props {
   playaScore?:    PlayaScore
   reportes?:      ReportesPlaya | null
   foto?:          FotoPlaya | null
+  /** La bandera vigente. Con roja, el hero cambia de forma — ver abajo. */
+  banderaPlaya?:  BanderaPlaya | null
 }
 
 const t = {
@@ -91,9 +95,12 @@ function statusDot(r: ReportesPlaya | null | undefined): 'ok' | 'warn' | 'danger
 
 export default function FichaHero({
   playa, meteo, estado, frase, locale = 'es',
-  municipioSlug, provinciaSlug, playaScore, reportes, foto,
+  municipioSlug, provinciaSlug, playaScore, reportes, foto, banderaPlaya,
 }: Props) {
   const i18n = t[locale]
+  // El criterio vive en lib/bandera-roja, no aquí: es el mismo que decide
+  // qué bloques de afiliación se retiran en FichaBody, y tiene que ser uno.
+  const rojo = hayBanderaRoja(banderaPlaya)   // type guard: dentro, no es null
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const homeHref = locale === 'en' ? '/en' : '/'
   const comunidadSlug = slug(playa.comunidad)
@@ -186,22 +193,43 @@ export default function FichaHero({
               </p>
             )}
 
-            <div className={styles.scoreLine}>
-              {playaScore && (
-                <span className={styles.scoreNum} aria-label={`Puntuación ${playaScore.score} sobre 100`}>
-                  {playaScore.score}
+            {/* Bifurcación del hero. Con bandera roja el score NO se
+                renderiza: ni pequeño, ni en rojo, ni degradado. Una cifra
+                invita a negociar con una prohibición —«23, bueno, tampoco
+                es 5»—, y una bandera roja es binaria. La pantalla también.
+
+                El alcance es este hero y solo este: en una tarjeta de
+                ranking o de «cerca de aquí» el 23 sí se pinta, porque ahí
+                la cifra sirve para comparar y no está sustituyendo a una
+                prohibición. */}
+            {rojo ? (
+              <div className={styles.noBanyo} role="alert">
+                <span className={styles.noBanyoTitulo}>
+                  <Flag size={19} weight="fill" aria-hidden="true" />
+                  {locale === 'en' ? 'Do not swim' : 'No te bañes'}
                 </span>
-              )}
-              <span
-                className={styles.verdictTxt}
-                style={!hasPhoto ? { color: playaScore?.color ?? estado.dot } : undefined}
-              >
-                {playaScore
-                  ? (locale === 'en' ? playaScore.labelEn : playaScore.label)
-                  : (locale === 'en' ? estado.labelEn : estado.label)}
-                <span className={styles.verdictSub}>{frase}</span>
-              </span>
-            </div>
+                <span className={styles.noBanyoMotivo}>
+                  {locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}
+                </span>
+              </div>
+            ) : (
+              <div className={styles.scoreLine}>
+                {playaScore && (
+                  <span className={styles.scoreNum} aria-label={`Puntuación ${playaScore.score} sobre 100`}>
+                    {playaScore.score}
+                  </span>
+                )}
+                <span
+                  className={styles.verdictTxt}
+                  style={!hasPhoto ? { color: playaScore?.color ?? estado.dot } : undefined}
+                >
+                  {playaScore
+                    ? (locale === 'en' ? playaScore.labelEn : playaScore.label)
+                    : (locale === 'en' ? estado.labelEn : estado.label)}
+                  <span className={styles.verdictSub}>{frase}</span>
+                </span>
+              </div>
+            )}
 
             {/* Metadatos: cinco → tres en móvil (propuesta 2026 §5.2).
                 Municipio y provincia ya están en las migas y se repiten en

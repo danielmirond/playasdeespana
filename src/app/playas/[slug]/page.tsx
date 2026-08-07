@@ -603,6 +603,7 @@ export default async function PlayaPage({ params }: Props) {
         playaScore={playaScore}
         reportes={reportesData}
         foto={fotoHero ?? null}
+        banderaPlaya={banderaPlaya}
       />
       {/* BeachVideo se renderiza ahora dentro de FichaBody como
           BeachVideoToggle (click-to-load) tras el bloque asistente
