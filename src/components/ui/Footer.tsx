@@ -50,8 +50,8 @@ export default function Footer({ locale = 'es' }: Props) {
               margin: 0,
             }}>
               {es
-                ? 'Estado del mar y guía de más de 4.500 playas españolas, actualizado cada hora con datos oficiales (MITECO, EEA, AEMET).'
-                : '4,500+ Spanish beaches with real-time conditions, updated hourly from official sources.'}
+                ? 'Estado del mar y guía de más de 4.400 playas españolas, actualizado cada hora con datos oficiales (MITECO, EEA, AEMET).'
+                : '4,400+ Spanish beaches with real-time conditions, updated hourly from official sources.'}
             </p>
           </div>
 

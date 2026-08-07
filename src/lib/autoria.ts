@@ -43,7 +43,7 @@ export const AUTOR_PLAYAS_ESPANA: AutorPlayasEspana = {
   url:         BASE,
   logo:        `${BASE}/logo.png`,
   description:
-    'Proyecto editorial independiente que reúne datos oficiales de las 5.000+ playas de España (MITECO, EEA, AEMET) en fichas accionables con estado del mar, oleaje y servicios en tiempo real.',
+    'Proyecto editorial independiente que reúne datos oficiales de las más de 4.400 playas de España (MITECO, EEA, AEMET) en fichas accionables con estado del mar, oleaje y servicios en tiempo real.',
   sameAs: [
     // Añadir aquí los perfiles oficiales según se vayan creando.
     // 'https://twitter.com/playasespana',

@@ -3,6 +3,7 @@ import type { Playa } from '@/types'
 import { cache } from 'react'
 import slugsExtranjeras from '@/data/slugs-extranjeras.json'
 import duplicados from '@/data/duplicados.json'
+import playasJson from '@/../public/data/playas.json'
 
 // Playas fuera del ámbito (extranjeras/interiores sin costa) + fichas
 // DUPLICADAS (misma playa importada varias veces; el middleware hace 301 a la
@@ -12,6 +13,34 @@ const EXCLUIDAS = new Set<string>([
   ...(slugsExtranjeras as string[]),
   ...Object.keys(duplicados as Record<string, string>),
 ])
+
+/**
+ * Playas con ficha. La cifra que puede decirse en voz alta.
+ *
+ * Existe porque el sitio se contradecía a sí mismo justo donde vende su
+ * credibilidad: 4.500 en la home, 5.611 en el layout, «Cinco mil» en el
+ * H1, 5.000+ en la metodología. Ninguna era esta.
+ *
+ * 5.098 registros brutos − 523 extranjeras − 84 duplicadas = 4.491.
+ * El bruto NO se publica: mide el fichero, no las páginas.
+ *
+ * Donde la página ya carga las playas, usa `playas.length`. Esta
+ * constante es para los metadatos y sitios estáticos, donde no hay
+ * conteo a mano. Y si no cabe la cifra exacta, «más de 4.400» — nunca
+ * «más de 4.500», que es falso por nueve.
+ */
+export const TOTAL_PLAYAS =
+  (playasJson as unknown as Playa[]).filter(p => !EXCLUIDAS.has(p.slug)).length
+
+/**
+ * La misma cifra, con el punto de millar puesto a mano.
+ *
+ * `toLocaleString('es-ES')` depende de los datos ICU con los que se haya
+ * compilado Node, y en este entorno devolvía «4491» pelado. Un separador
+ * que aparece o no según dónde se construya no sirve para una cifra que
+ * es el argumento de venta del sitio.
+ */
+export const TOTAL_PLAYAS_TXT = String(TOTAL_PLAYAS).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
 export function toSlug(str: string): string {
   return (str ?? '')

@@ -134,7 +134,7 @@ export default function MetodologiaPage() {
     },
   }
 
-  // Dataset schema. Declara el dataset de las 5.000+ playas para que
+  // Dataset schema. Declara el dataset de las más de 4.400 playas para que
   // aparezca en Google Dataset Search (datasetsearch.research.google.com).
   // Importante para autoridad temática y para investigadores que pueden
   // citar el dataset, generando backlinks de alto valor.
@@ -145,7 +145,7 @@ export default function MetodologiaPage() {
     name:         'Playas de España: estado del mar, calidad del agua y servicios',
     alternateName: 'Spanish beaches dataset (sea conditions, water quality, services)',
     description:
-      'Dataset agregado de las 5.000+ playas españolas con datos en tiempo real ' +
+      'Dataset agregado de las más de 4.400 playas españolas con datos en tiempo real ' +
       '(temperatura del agua, oleaje, viento, UV) y datos estructurales ' +
       '(servicios, accesibilidad, Bandera Azul, calidad EEA, geolocalización). ' +
       'Recopilado de fuentes oficiales: MITECO, EEA Bathing Water, AEMET, ' +

@@ -29,7 +29,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Playas de España | ¿A qué playa voy hoy?',
-  description: 'Estado del mar en tiempo real en más de 4.500 playas de España. Temperatura del agua, oleaje, viento y servicios. Datos actualizados cada hora.',
+  description: 'Estado del mar en tiempo real en más de 4.400 playas de España. Temperatura del agua, oleaje, viento y servicios. Datos actualizados cada hora.',
   alternates: {
     canonical: '/',
     languages: {
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Playas de España | ¿A qué playa voy hoy?',
-    description: 'Consulta el estado del mar en más de 4.500 playas españolas.',
+    description: 'Consulta el estado del mar en más de 4.400 playas españolas.',
     url: 'https://playas-espana.com',
     images: [{ url: '/api/og?playa=Playas+de+España', width: 1200, height: 630 }],
   },
@@ -149,7 +149,7 @@ export default async function HomePage() {
         name: 'Playas de España | ¿A qué playa voy hoy?',
         inLanguage: 'es',
         dateModified: getPlayasDataModified(),
-        description: 'Estado del mar en tiempo real en más de 4.500 playas de España: temperatura del agua, oleaje, viento, banderas y servicios.',
+        description: 'Estado del mar en tiempo real en más de 4.400 playas de España: temperatura del agua, oleaje, viento, banderas y servicios.',
       }) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         '@context': 'https://schema.org',

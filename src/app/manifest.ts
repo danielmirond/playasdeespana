@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Playas de España — ¿A qué playa voy hoy?',
     short_name: 'Playas',
     description:
-      'Estado del mar en tiempo real de más de 5.000 playas de España: temperatura del agua, oleaje, viento, medusas y calidad del agua. Datos oficiales actualizados cada hora.',
+      'Estado del mar en tiempo real de más de 4.400 playas de España: temperatura del agua, oleaje, viento, medusas y calidad del agua. Datos oficiales actualizados cada hora.',
     id: '/',
     start_url: '/?utm_source=pwa',
     scope: '/',

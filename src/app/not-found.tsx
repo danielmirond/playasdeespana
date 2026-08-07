@@ -20,7 +20,7 @@ export default function NotFound() {
         </h1>
         <p style={{ fontSize: '.95rem', color: 'var(--muted)', maxWidth: 420, marginBottom: '2rem', lineHeight: 1.6 }}>
           La página que buscas no existe o ha cambiado de dirección.
-          Pero hay más de 5.000 playas esperándote.
+          Pero hay más de 4.400 playas esperándote.
         </p>
         <div style={{ display: 'flex', gap: '.55rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <Link href="/" style={{

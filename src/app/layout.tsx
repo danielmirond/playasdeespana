@@ -34,7 +34,7 @@ const WEBSITE_SCHEMA = {
   name:       'Playas de España',
   alternateName: ['playas-espana.com', 'Playas España'],
   description:
-    'Estado del mar y guía de más de 4.500 playas españolas. Datos oficiales de MITECO, EEA y AEMET actualizados cada hora.',
+    'Estado del mar y guía de más de 4.400 playas españolas. Datos oficiales de MITECO, EEA y AEMET actualizados cada hora.',
   inLanguage: 'es-ES',
   publisher:  { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
   potentialAction: {
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
     default: 'Playas de España. Estado del mar en tiempo real',
     template: '%s · Playas de España',
   },
-  description: 'Temperatura del agua, oleaje, calidad y servicios de las 5.611 playas españolas. Datos Open-Meteo y EEA actualizados cada hora.',
+  description: 'Temperatura del agua, oleaje, calidad y servicios de las más de 4.400 playas españolas. Datos Open-Meteo y EEA actualizados cada hora.',
   keywords: ['playas españa', 'estado del mar', 'temperatura agua', 'oleaje', 'calidad agua playa', 'banderas azules'],
   openGraph: {
     type: 'website',

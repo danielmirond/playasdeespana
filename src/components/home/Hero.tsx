@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import TrustSeal from '@/components/common/TrustSeal'
 import styles from './Hero.module.css'
+import { TOTAL_PLAYAS_TXT } from '@/lib/playas'
 
 const CHIPS = [
   { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas' },
@@ -68,7 +69,12 @@ export default function Hero() {
           <em>para bañarse</em>
         </h1>
         <p className={styles.sub}>
-          Cinco mil playas del litoral español, con una puntuación de 0 a 100
+          {/* La cifra exacta, no una redonda hacia arriba. Es la primera
+              frase del sitio y decía «cinco mil» sobre 4.491: una
+              exageración del 11 % justo delante de la promesa de que el
+              dato es de fiar. Sale de la constante, así que el próximo
+              sync del dataset la mueve sola. */}
+          {TOTAL_PLAYAS_TXT} playas del litoral español, con una puntuación de 0 a 100
           recalculada cada hora a partir de datos oficiales de MITECO, EEA y AEMET.
         </p>
 

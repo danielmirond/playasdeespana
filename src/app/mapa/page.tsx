@@ -6,7 +6,7 @@ import styles from './MapaPage.module.css'
 
 export const metadata: Metadata = {
   title: 'Mapa de playas de España | Busca por zona, bandera y servicios',
-  description: 'Mapa interactivo con más de 4.500 playas de España. Filtra por estado del mar, bandera azul y servicios, y encuentra playas cerca de ti.',
+  description: 'Mapa interactivo con más de 4.400 playas de España. Filtra por estado del mar, bandera azul y servicios, y encuentra playas cerca de ti.',
   alternates: { canonical: '/mapa' },
   openGraph: {
     type:  'website',
@@ -22,7 +22,7 @@ export default function MapaPage() {
       <div className={styles.hero}>
         <div className={styles.heroInner}>
           <h1 className={styles.titulo}>Mapa de playas</h1>
-          <p className={styles.subtitulo}>Más de 4.500 playas · España · Estado en tiempo real</p>
+          <p className={styles.subtitulo}>Más de 4.400 playas · España · Estado en tiempo real</p>
         </div>
       </div>
       <div className={styles.mapaWrap}>

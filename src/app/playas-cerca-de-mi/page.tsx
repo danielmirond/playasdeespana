@@ -248,7 +248,7 @@ export default async function PlayasCercaDeMiPage() {
               {
                 n: '02',
                 titulo: 'Cálculo de distancia',
-                texto: 'Medimos la distancia en línea recta desde tu posición a las más de 5.000 playas del catálogo oficial (MITECO). Se ordenan de más cercana a más lejana al instante.',
+                texto: 'Medimos la distancia en línea recta desde tu posición a las más de 4.400 playas del catálogo oficial (MITECO). Se ordenan de más cercana a más lejana al instante.',
               },
               {
                 n: '03',
