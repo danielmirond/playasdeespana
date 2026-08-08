@@ -114,6 +114,14 @@ export async function GET() {
     { es: '/calidad-agua',           en: null,                     p: '0.6', f: 'weekly' },
     { es: '/banderas-negras',        en: null,                     p: '0.7', f: 'weekly' },
     { es: '/banderas-hoy',           en: null,                     p: '0.7', f: 'hourly' },
+    // Las cinco zonas con demanda medida. Se listan a mano y no en bucle
+    // sobre ZONAS para que añadir una zona sea una decisión consciente:
+    // la lista corta es el punto, no un accidente.
+    { es: '/banderas-hoy/tarragona', en: null,                     p: '0.6', f: 'hourly' },
+    { es: '/banderas-hoy/valencia',  en: null,                     p: '0.6', f: 'hourly' },
+    { es: '/banderas-hoy/cataluna',  en: null,                     p: '0.6', f: 'hourly' },
+    { es: '/banderas-hoy/barcelona', en: null,                     p: '0.6', f: 'hourly' },
+    { es: '/banderas-hoy/cantabria', en: null,                     p: '0.6', f: 'hourly' },
     { es: '/temperatura-del-agua',   en: null,                     p: '0.7', f: 'hourly' },
     { es: '/webcams',                en: null,                     p: '0.7', f: 'weekly' },
     // EEAT + legal

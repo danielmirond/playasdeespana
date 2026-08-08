@@ -10,7 +10,10 @@ import Nav from '@/components/ui/Nav'
 import AuthorByline from '@/components/seo/AuthorByline'
 import { getPlayas } from '@/lib/playas'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
-import { fetchWithTimeout } from '@/lib/fetch-timeout'
+// El motor del semáforo vive en lib/banderas desde que hay páginas por
+// zona: duplicar el batch de Open-Meteo eran dos sitios donde ajustar
+// timeouts y umbrales, y que se desincronicen es cuestión de tiempo.
+import { COSTERAS, meteoBatch, topDeProvincia, ZONAS } from '@/lib/banderas'
 import type { Playa } from '@/types'
 
 export const revalidate = 1800
@@ -27,87 +30,8 @@ export const metadata: Metadata = {
   },
 }
 
-// Provincias costeras tal y como aparecen en el dataset. 'Islas Baleares' se
-// normaliza a 'Baleares' (el dataset tiene ambas etiquetas).
-const COSTERAS: Array<{ comunidad: string; provincias: string[] }> = [
-  { comunidad: 'Galicia',              provincias: ['A Coruña', 'Lugo', 'Pontevedra'] },
-  { comunidad: 'Asturias',             provincias: ['Asturias'] },
-  { comunidad: 'Cantabria',            provincias: ['Cantabria'] },
-  { comunidad: 'País Vasco',           provincias: ['Bizkaia', 'Gipuzkoa'] },
-  { comunidad: 'Cataluña',             provincias: ['Girona', 'Barcelona', 'Tarragona'] },
-  { comunidad: 'Comunitat Valenciana', provincias: ['Castellón', 'Valencia', 'Alicante'] },
-  { comunidad: 'Murcia',               provincias: ['Murcia'] },
-  { comunidad: 'Andalucía',            provincias: ['Huelva', 'Cádiz', 'Málaga', 'Granada', 'Almería'] },
-  { comunidad: 'Islas Baleares',       provincias: ['Baleares'] },
-  { comunidad: 'Canarias',             provincias: ['Las Palmas', 'Santa Cruz de Tenerife'] },
-  { comunidad: 'Ceuta y Melilla',      provincias: ['Ceuta', 'Melilla'] },
-]
 
 const POR_PROVINCIA = 6
-
-interface MeteoBH { olas: number; viento: number; racha: number; tempAgua: number | null; vientoDir: string }
-
-// Batch Open-Meteo en trozos de <=50 coordenadas (marine + forecast).
-// Además de oleaje/viento (bandera meteo), traemos SST y dirección de viento
-// para estimar el riesgo de medusas (una roja oficial puede deberse a un bloom
-// de medusas que la bandera meteo no ve).
-async function meteoBatch(coords: { lat: number; lng: number }[]): Promise<MeteoBH[]> {
-  const fb: MeteoBH = { olas: 0.4, viento: 10, racha: 15, tempAgua: null, vientoDir: '' }
-  if (!coords.length) return []
-  const hora = parseInt(new Intl.DateTimeFormat('es-ES', { hour: 'numeric', hour12: false, timeZone: 'Europe/Madrid' }).format(new Date()), 10) || 12
-
-  const CHUNK = 50
-  const chunks: { lat: number; lng: number }[][] = []
-  for (let i = 0; i < coords.length; i += CHUNK) chunks.push(coords.slice(i, i + CHUNK))
-
-  const results = await Promise.all(chunks.map(async chunk => {
-    const lats = chunk.map(c => c.lat.toFixed(4)).join(',')
-    const lngs = chunk.map(c => c.lng.toFixed(4)).join(',')
-    try {
-      const [rM, rF] = await Promise.all([
-        // 8s: la página es ISR — la regeneración corre en background, así que
-        // un timeout generoso no penaliza TTFB y evita caer a fallback en frío.
-        fetchWithTimeout(`https://marine-api.open-meteo.com/v1/marine?latitude=${lats}&longitude=${lngs}&hourly=wave_height,sea_surface_temperature&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 1800 } }, 8000),
-        fetchWithTimeout(`https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 1800 } }, 8000),
-      ])
-      const marine = rM.ok ? await rM.json() : null
-      const meteo  = rF.ok ? await rF.json() : null
-      return chunk.map((_, i) => {
-        const mA = chunk.length === 1 ? marine?.hourly : marine?.[i]?.hourly
-        const fA = chunk.length === 1 ? meteo?.hourly : meteo?.[i]?.hourly
-        if (!mA && !fA) return fb
-        const sst = mA?.sea_surface_temperature?.[hora]
-        return {
-          olas:     parseFloat((mA?.wave_height?.[hora] ?? 0.4).toFixed(1)),
-          viento:   Math.round(fA?.wind_speed_10m?.[hora] ?? 10),
-          racha:    Math.round(fA?.wind_gusts_10m?.[hora] ?? 15),
-          tempAgua: typeof sst === 'number' ? Math.round(sst) : null,
-          vientoDir: gradosADireccion(fA?.wind_direction_10m?.[hora] ?? null),
-        }
-      })
-    } catch {
-      return chunk.map(() => fb)
-    }
-  }))
-  return results.flat()
-}
-
-// Grados meteorológicos → rumbo de 16 puntos (para estimarMedusas: viento onshore).
-function gradosADireccion(deg: number | null): string {
-  if (deg == null || Number.isNaN(deg)) return ''
-  const dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
-  return dirs[Math.round((((deg % 360) + 360) % 360) / 22.5) % 16]
-}
-
-function topDeProvincia(playas: Playa[], provincia: string): Playa[] {
-  const nombres = provincia === 'Baleares' ? ['Baleares', 'Islas Baleares'] : [provincia]
-  return playas
-    .filter(p => nombres.includes(p.provincia) && p.lat && p.lng)
-    .map(p => ({ p, pts: (p.bandera ? 3 : 0) + (p.socorrismo ? 2 : 0) + (p.duchas ? 1 : 0) + (p.parking ? 1 : 0) }))
-    .sort((a, b) => b.pts - a.pts)
-    .slice(0, POR_PROVINCIA)
-    .map(x => x.p)
-}
 
 const FAQ = [
   { q: '¿Qué bandera hay en la playa hoy?', a: 'Depende de cada playa: la bandera se decide cada mañana según el oleaje, el viento y las condiciones locales. En este semáforo ves la estimación de hoy para las principales playas del litoral, actualizada cada 30 minutos, y desde cada provincia puedes entrar a la ficha de tu playa para ver su bandera, la temperatura del agua y el estado del mar. En las playas de Cataluña mostramos además la bandera oficial izada que reporta el propio socorrismo.' },
@@ -131,7 +55,7 @@ export default async function BanderasHoyPage() {
   // Selección top-6 por provincia y meteo en batch (una sola pasada).
   const porProvincia: Array<{ comunidad: string; provincia: string; playas: Playa[] }> = []
   for (const c of COSTERAS) for (const prov of c.provincias) {
-    porProvincia.push({ comunidad: c.comunidad, provincia: prov, playas: topDeProvincia(playas, prov) })
+    porProvincia.push({ comunidad: c.comunidad, provincia: prov, playas: topDeProvincia(playas, prov, POR_PROVINCIA) })
   }
   const flat = porProvincia.flatMap(g => g.playas)
   const meteos = await meteoBatch(flat.map(p => ({ lat: p.lat, lng: p.lng })))
@@ -213,6 +137,19 @@ export default async function BanderasHoyPage() {
           detecta. El icono 🪼 marca las playas con riesgo alto de medusas estimado hoy. Consulta siempre la bandera
           izada en el puesto de vigilancia.
         </div>
+
+        {/* Zonas con página propia. Va ANTES del listado, no en el pie:
+            son las cinco con demanda medida en Search Console y el hub es
+            su única fuente de enlaces internos. Enterradas abajo tardarían
+            meses en descubrirse. */}
+        <nav aria-label="Banderas por zona" style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', alignItems: 'center', marginBottom: '2rem' }}>
+          <span style={{ fontSize: '.78rem', color: 'var(--muted)' }}>Ver por zona:</span>
+          {ZONAS.map(z => (
+            <Link key={z.slug} href={`/banderas-hoy/${z.slug}`} style={{ fontSize: '.82rem', color: 'var(--accent)', textDecoration: 'none', border: '1px solid var(--line)', borderRadius: 999, padding: '.35rem .8rem' }}>
+              {z.nombre}
+            </Link>
+          ))}
+        </nav>
 
         {/* Semáforo por comunidad → provincia */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.9rem' }}>
