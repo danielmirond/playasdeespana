@@ -26,6 +26,7 @@ import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
 import { calcularPlayaScore } from '@/lib/scoring'
+import { dsVariant } from '@/lib/flags'
 
 export const revalidate = 3600
 export const maxDuration = 25
@@ -208,6 +209,10 @@ export default async function BeachPageEn({ params }: Props) {
         })}
       />
       <Nav />
+      {/* banderaPlaya y variante no se pasaban en la versión inglesa. Sin
+          bandera no había regla de bandera roja: el hero inglés pintaba el
+          score con el mar cerrado, que es justo lo que el manual prohíbe.
+          Y sin variante se quedaba sin la rejilla 2×2 de la española. */}
       <FichaHero
         playa={playa}
         meteo={meteo}
@@ -217,6 +222,8 @@ export default async function BeachPageEn({ params }: Props) {
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
         playaScore={playaScore}
+        banderaPlaya={banderaPlaya}
+        variante={dsVariant()}
       />
       <FichaNav locale="en" />
       <FichaBody locale="en"
