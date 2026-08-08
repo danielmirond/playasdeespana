@@ -4,6 +4,16 @@ import type { Playa } from '@/types'
 import { tinte } from '@/lib/tinte'
 import SeaIcon from '@/components/ui/SeaIcon'
 import type { EstadoBano } from '@/types'
+import slugsExtranjeras from '@/data/slugs-extranjeras.json'
+import duplicados from '@/data/duplicados.json'
+
+// Las mismas exclusiones que aplica lib/playas, aquí porque la carga es
+// de cliente. Son ~600 slugs cortos: pesa poco y evita que el mapa
+// contradiga al resto del sitio.
+const EXCLUIDAS = new Set<string>([
+  ...(slugsExtranjeras as string[]),
+  ...Object.keys(duplicados as Record<string, string>),
+])
 
 interface Props {
   /** Zoom con rueda desde el primer momento. Solo para /mapa (experiencia
@@ -74,9 +84,16 @@ export default function MapaPlayas({ playas: playasProp, height = '500px', comun
     fetch('/data/playas.json')
       .then(r => r.json())
       .then((data: Playa[]) => {
-        let filtradas = data
-        if (comunidad) filtradas = data.filter(p => toSlug(p.comunidad ?? '') === toSlug(comunidad))
-        if (provincia) filtradas = data.filter(p => toSlug(p.provincia ?? '') === toSlug(provincia))
+        // El mapa pedía el JSON bruto y se saltaba las exclusiones de
+        // getPlayas: pintaba los 5.098 registros, extranjeras incluidas.
+        // Había marcadores en la costa argelina, en el Languedoc y en
+        // Gibraltar, en un mapa titulado «Playas de España» que además
+        // decía «Más de 4.400» debajo. Era el único sitio del producto
+        // donde el filtro no llegaba, precisamente porque la carga es de
+        // cliente y no pasa por getPlayas.
+        let filtradas = data.filter(p => !EXCLUIDAS.has(p.slug))
+        if (comunidad) filtradas = filtradas.filter(p => toSlug(p.comunidad ?? '') === toSlug(comunidad))
+        if (provincia) filtradas = filtradas.filter(p => toSlug(p.provincia ?? '') === toSlug(provincia))
         setPlayas(filtradas)
         setLoading(false)
       })
