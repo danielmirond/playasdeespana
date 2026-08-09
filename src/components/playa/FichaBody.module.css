@@ -94,13 +94,39 @@
   text-decoration: none;
   transition: border-color .15s;
   position: relative;
+  /* Recorta la foto a sangre contra el radio de la tarjeta. Sin esto
+     las esquinas superiores de la imagen sobresalen del borde. */
+  overflow: hidden;
 }
 .cercanaCard:hover { border-color: var(--accent); }
 .cercanaNombre { font-size: .85rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
 .cercanaMeta { font-size: .74rem; color: var(--muted); margin-top: .2rem; }
+/* La foto de la playa cercana. Va a sangre contra los tres bordes de
+   arriba —de ahí los márgenes negativos, que compensan el padding de la
+   tarjeta— porque una foto con marco por los cuatro lados parece un
+   adjunto y no la playa.
+   Altura fija: las fuentes devuelven proporciones dispares y con altura
+   libre el carrusel quedaba en dientes de sierra. object-fit recorta,
+   que en una foto de playa es inofensivo: el interés está en el centro. */
+.cercanaFoto {
+  display: block;
+  width: calc(100% + 2rem);
+  height: 104px;
+  margin: -.85rem -1rem .6rem;
+  object-fit: cover;
+  background: var(--card-bg2);
+}
+
 .cercanaBadge {
   position: absolute; top: .5rem; right: .6rem;
   font-size: .75rem;
+  /* Sobre la foto, la banderita en color de acento se perdía contra
+     cualquier zona clara. El disco no es decoración: es lo que la hace
+     legible sobre una imagen que no controlamos. */
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--card-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
 }
 
 .gFuente {

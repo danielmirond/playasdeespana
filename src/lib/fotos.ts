@@ -53,6 +53,26 @@ export async function tieneFotoReal(slug: string): Promise<boolean> {
   return Array.isArray(pre) && pre.length > 0
 }
 
+/**
+ * El thumb pre-resuelto de una playa, o null. Solo sidecar: sin red, sin
+ * KV, sin cascada. O(1) y determinista, que es lo que hace falta cuando
+ * se pintan seis playas de golpe dentro de otra ficha.
+ *
+ * Excluye las genéricas a propósito. El último escalón de la cascada
+ * mete una foto de ambiente por estado del mar marcada `generica`, y
+ * está marcada justamente para esto: sirve de fondo en una ficha, pero
+ * no en un listado donde el usuario compara playas, porque ahí la foto
+ * se lee como si fuera ESA playa. Sin foto real, la tarjeta va sin foto.
+ */
+export async function getFotoThumbSidecar(slug: string): Promise<string | null> {
+  if (!slug) return null
+  const sidecar = await getSidecar()
+  const pre = sidecar?.[slug]
+  if (!Array.isArray(pre)) return null
+  const real = pre.find(f => f?.fuente !== 'generica' && (f?.thumb || f?.url))
+  return real ? (real.thumb || real.url) : null
+}
+
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
 const PEXELS_KEY   = process.env.PEXELS_API_KEY ?? ''
 

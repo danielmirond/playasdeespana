@@ -107,7 +107,7 @@ interface Props {
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
   horaIdeal?:      HoraIdeal
-  playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean }[]
+  playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean; foto?: string }[]
   /** Agregado de opiniones server-side para SSR + JSON-LD. */
   opinionesIniciales?: import('@/lib/opiniones').OpinionesAgregadas | null
   /** Necesidades generadas por el asistente (reglas + IA opcional).
@@ -1244,6 +1244,23 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <div className={styles.carousel}>
               {playasCercanas.map(pc => (
                 <Link key={pc.slug} href={`${locale === 'en' ? '/en/beaches' : '/playas'}/${pc.slug}`} className={styles.cercanaCard} prefetch={true}>
+                  {/* Foto solo si es la de ESA playa (el sidecar ya excluye
+                      las genéricas). Sin foto, la tarjeta queda como estaba:
+                      un hueco gris diría «cargando» y un icono de relleno
+                      diría «foto no disponible», y ninguna de las dos cosas
+                      es verdad — simplemente esta playa no tiene foto.
+                      alt="" porque el nombre va escrito justo debajo: con
+                      alt repetido, un lector de pantalla lo dice dos veces. */}
+                  {pc.foto && (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      className={styles.cercanaFoto}
+                      src={pc.foto}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                   <div className={styles.cercanaNombre}>{pc.nombre}</div>
                   <div className={styles.cercanaMeta}>{pc.municipio} · {pc.distKm < 10 ? pc.distKm.toFixed(1) : Math.round(pc.distKm)} km</div>
                   {pc.bandera && <span className={styles.cercanaBadge}><Flag size={12} weight="fill" color="var(--accent)"/></span>}

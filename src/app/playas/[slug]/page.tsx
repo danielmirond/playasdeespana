@@ -31,7 +31,7 @@ import { getCampings } from '@/lib/campings'
 import type { Camping } from '@/lib/campings'
 import { getCentrosBuceo } from '@/lib/buceo'
 import type { CentroBuceo } from '@/lib/buceo'
-import { getFotos, refetchAndStoreFotos, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
+import { getFotos, refetchAndStoreFotos, getFotoThumbSidecar, FOTOS_GENERICAS_POR_ESTADO } from '@/lib/fotos'
 import type { FotoPlaya } from '@/lib/fotos'
 import { getVideoYouTube } from '@/lib/videos'
 import { getWebcams, hasWebcamNearby } from '@/lib/webcams'
@@ -537,17 +537,57 @@ export default async function PlayaPage({ params }: Props) {
 
   // Playas cercanas (server-side, sin API extra)
   const allPlayas = allPlayasResult.status === 'fulfilled' ? allPlayasResult.value : []
-  // Solo los 5 campos que renderiza FichaBody: pasar el objeto Playa entero
-  // (descripcion + descripcion_generada) sextuplicaba texto en el payload RSC.
-  const playasCercanas = allPlayas
+  const cercanasBase = allPlayas
     .filter(p => p.slug !== playa.slug)
     .map(p => ({ p, distKm: haversine(playa.lat, playa.lng, p.lat, p.lng) / 1000 }))
     .sort((a, b) => a.distKm - b.distKm)
     .slice(0, 6)
-    .map(({ p, distKm }) => ({
-      slug: p.slug, nombre: p.nombre, municipio: p.municipio,
-      distKm, bandera: !!p.bandera,
-    }))
+
+  // La foto de cada playa cercana, si la hay.
+  //
+  // Sale del sidecar y solo del sidecar: es un Map en memoria, así que
+  // las seis búsquedas son O(1) y no añaden ni una petición al render de
+  // esta ficha. Nada de getFotoThumb() aquí — ese entra en la cascada de
+  // siete APIs y multiplicaría por seis el trabajo de una página que ya
+  // va justa de presupuesto en SSG.
+  //
+  // Es la MISMA foto que verá al entrar en esa playa —su portada—, que es
+  // lo que hace que la tarjeta sirva: reconoces el sitio antes de hacer
+  // clic. Las que no tengan foto real se quedan como estaban, sin hueco
+  // ni marcador: una tarjeta de texto al lado de otras con foto se lee
+  // como «esta playa no tiene foto», que es exactamente el caso.
+  const fotosCercanasRaw = await Promise.all(
+    cercanasBase.map(({ p }) => getFotoThumbSidecar(p.slug)),
+  )
+
+  // Una foto, una playa — dentro de este carrusel.
+  //
+  // El 58 % de las playas comparten su foto principal con alguna otra, y
+  // hay una que es la principal de 76: el emparejamiento se apoya mucho
+  // en Flickr, donde un reportaje de un fotógrafo cubre media comarca.
+  // Las cercanas son el peor sitio posible para eso, porque son vecinas
+  // del mismo municipio y por tanto las más propensas a caer en el mismo
+  // reportaje. Dos tarjetas contiguas con la misma imagen no es un fallo
+  // estético: demuestra a la vista que la foto no es de esa playa.
+  //
+  // Se cae del lado de enseñar de menos. Gana la primera —que es la más
+  // cercana— y la siguiente se queda sin foto, no con otra peor: la
+  // segunda candidata del sidecar suele ser del mismo set y arrastra el
+  // mismo problema. La tarjeta sigue ahí, con su nombre y su distancia.
+  const usadas = new Set<string>()
+  const fotosCercanas = fotosCercanasRaw.map(f => {
+    if (!f || usadas.has(f)) return null
+    usadas.add(f)
+    return f
+  })
+
+  // Solo los campos que renderiza FichaBody: pasar el objeto Playa entero
+  // (descripcion + descripcion_generada) sextuplicaba texto en el payload RSC.
+  const playasCercanas = cercanasBase.map(({ p, distKm }, i) => ({
+    slug: p.slug, nombre: p.nombre, municipio: p.municipio,
+    distKm, bandera: !!p.bandera,
+    foto: fotosCercanas[i] ?? undefined,
+  }))
 
   return (
     <>
