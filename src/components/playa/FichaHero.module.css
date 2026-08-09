@@ -15,6 +15,9 @@
 
 /* Cuando hay foto: 600px desktop, ~480 mobile, contenido inferior */
 .heroPhoto { min-height: 600px; color: #fff; }
+/* La rejilla 2×2 solo existe bajo Litoral y añade ~134px al contenido del
+   hero. En Arena esta altura extra sería hueco vacío. */
+html[data-flags~="ds_litoral_tokens"] .heroPhoto { min-height: 660px; }
 
 /* Cuando no hay foto: hero pintado con AnimatedSea sutil al fondo */
 .heroPainted { padding: 1.75rem 2rem 1.5rem; min-height: 360px; }
@@ -63,6 +66,12 @@
   position: absolute; top: 0; left: 0; right: 0;
   z-index: 3;
   padding: 1.25rem 0;
+  /* Alto declarado: al ir en absolute no ocupa flujo, y el contenido del
+     hero arrancaba en el mismo y=0. En producción se veía la miga escrita
+     encima del H1 — 50px de solape, medido. El contenido reserva este
+     mismo alto más abajo. */
+  height: 49px;
+  box-sizing: border-box;
 }
 .heroPainted .bcTop { position: static; padding: 0 0 1rem; }
 
@@ -86,8 +95,16 @@
 .heroPainted .bcInner span[aria-current] { color: var(--ink); }
 
 /* ── Contenido editorial en overlay inferior ────────────────────── */
+/* Anclado abajo, pero con techo. Sin el `top`, el contenido crece hacia
+   arriba sin límite y se monta sobre la miga de pan: al añadir la rejilla
+   2×2 (134px) el H1 acabó escrito encima del breadcrumb — 50px de solape,
+   medido en producción. Con `top` y justify-content:flex-end sigue pegado
+   abajo, pero nunca invade la cabecera; si no cupiera, se apila hacia
+   abajo, que se ve raro pero se lee. */
 .contentBottom {
   position: absolute; left: 0; right: 0; bottom: 0;
+  top: 49px;                       /* el alto declarado de .bcTop */
+  display: flex; flex-direction: column; justify-content: flex-end;
   z-index: 2;
   padding: 0 0 2rem;
 }
@@ -292,12 +309,14 @@
 /* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 800px) {
   .heroPhoto { min-height: 520px; }
+  html[data-flags~="ds_litoral_tokens"] .heroPhoto { min-height: 620px; }
   .heroPainted { padding: 1.25rem 1.25rem 1.5rem; }
   .bcInner, .inner, .avisosInner { padding: 0 1.25rem; }
 }
 
 @media (max-width: 520px) {
   .heroPhoto { min-height: 440px; }
+  html[data-flags~="ds_litoral_tokens"] .heroPhoto { min-height: 600px; }
   .heroPainted { padding: 1rem .85rem 1.25rem; }
   .bcInner, .inner, .avisosInner { padding: 0 .85rem; }
   .bcTop { padding: 1rem 0; }
