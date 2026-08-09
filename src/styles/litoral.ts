@@ -28,7 +28,13 @@ export const LITORAL_CSS = `
      no por gusto: si --paper-1 se hunde y los demás no, la «hundida»
      acaba siendo más clara que el fondo y la escala se invierte. */
 
-  --ink-900: #12110e;   /* casi negra y aún cálida · 17,3:1 sobre papel */
+  --ink-900: #12110e;   /* casi negra y aún cálida.
+       DESVIACIÓN DECLARADA: el manual dice 17,3:1 y esa cifra era cierta
+       sobre el papel original (#f7f5f1). Sobre el fondo actual (#ede9e0,
+       dos puntos más hundido por decisión de producto) da 15,6:1, medido.
+       Sigue muy por encima de AAA, que pide 7. Se anota porque el zip ya
+       no describe el sitio y quien lo consulte dentro de seis meses leerá
+       una cifra que no es. */
   --ink-700: #3d3a33;
   --ink-500: #666257;   /* Era #6e6a5f, medido 5,4:1 sobre la tarjeta. Al
                            bajar el fondo dos puntos ese mismo gris caía a
@@ -200,6 +206,10 @@ export const LITORAL_CSS = `
      hero apila media y nombre en vez de superponerlos—, así que aquí manda
      su regla de fondo: la interacción y el énfasis no llevan color. Sobre
      la foto, papel. El dorado de Arena queda en Arena. */
+  /* Texto sobre un relleno de acento (botones llenos). No sirve
+     --on-media: en Arena ese token es oro (#ffd66e) para texto sobre
+     fotografía, y en un botón terracota dejaría letra dorada. */
+  --on-accent: var(--paper-0);
   --on-media: var(--paper-0);
   --terra-800: var(--accent);          /* el «acento» de Arena; en Litoral es tinta */
   --terra-700: var(--accent-2);

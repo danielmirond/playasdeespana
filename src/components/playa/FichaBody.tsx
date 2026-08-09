@@ -419,7 +419,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <p key="intro" style={{
             margin: '0 0 1.5rem',
             padding: 0,
-            fontSize: '1rem',
+            fontSize: 'var(--fs-md)',
             lineHeight: 1.65,
             color: 'var(--ink)',
             fontWeight: 400,
@@ -493,7 +493,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 <div style={{ display:'flex', alignItems:'center', gap:'.75rem', marginBottom: medusas ? '1rem' : 0 }}>
                   <div style={{ width:28, height:28, borderRadius:'50%', background:banderaPlaya.hex, flexShrink:0 }} aria-hidden />
                   <div>
-                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label}</div>
+                    <div style={{ fontWeight:700, fontSize: 'var(--fs-base)', color:'var(--ink)' }}>{locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label}</div>
                     <div style={{ fontSize:'var(--fs-xs)', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}</div>
                   </div>
                 </div>
@@ -502,7 +502,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 <div style={{ display:'flex', alignItems:'center', gap:'.75rem' }}>
                   <div style={{ width:28, height:28, borderRadius:'50%', background:medusas.hex, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden><Fish size={16} weight="bold" color="#fff"/></div>
                   <div>
-                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>{locale === 'en' ? medusas.labelEn : medusas.label}</div>
+                    <div style={{ fontWeight:700, fontSize: 'var(--fs-base)', color:'var(--ink)' }}>{locale === 'en' ? medusas.labelEn : medusas.label}</div>
                     <div style={{ fontSize:'var(--fs-xs)', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? medusas.detalleEn : medusas.detalle}</div>
                   </div>
                 </div>
@@ -515,7 +515,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     <Wind size={16} weight="bold" color="#fff"/>
                   </div>
                   <div>
-                    <div style={{ fontWeight:700, fontSize:'.88rem', color:'var(--ink)' }}>
+                    <div style={{ fontWeight:700, fontSize: 'var(--fs-base)', color:'var(--ink)' }}>
                       {locale === 'en' ? 'Strong wind reported' : 'Viento fuerte reportado'}
                     </div>
                     <div style={{ fontSize:'var(--fs-xs)', color:'var(--muted)', marginTop:'.1rem' }}>
@@ -546,12 +546,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       ...(boya.hmax != null ? [{ l: locale === 'en' ? 'Max wave' : 'Ola máx', v: boya.hmax.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: 'm' }] : []),
                     ].map(m => (
                       <div key={m.l}>
-                        <div style={{ fontFamily:'var(--font-mono)', fontSize:'.6rem', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--muted)', marginBottom:'.3rem' }}>{m.l}</div>
+                        <div style={{ fontFamily:'var(--font-mono)', fontSize: 'var(--fs-xs)', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--muted)', marginBottom:'.3rem' }}>{m.l}</div>
                         <Dato v={m.v} u={m.u} cert="medido" size={22}/>
                       </div>
                     ))}
                   </div>
-                  <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', marginTop:'.6rem' }}>
+                  <div style={{ fontFamily:'var(--font-mono)', fontSize: 'var(--fs-xs)', color:'var(--muted)', marginTop:'.6rem' }}>
                     {boya.hora} · Puertos del Estado
                   </div>
                 </div>
@@ -570,7 +570,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 </div>
               )}
               {medusas && (
-                <div style={{ fontSize:'.68rem', color:'var(--muted)', marginTop:'.85rem', lineHeight:1.5 }}>
+                <div style={{ fontSize: 'var(--fs-xs)', color:'var(--muted)', marginTop:'.85rem', lineHeight:1.5 }}>
                   {medusas.fuente === 'socorrismo'
                     ? (locale === 'en'
                       ? 'Reported today by the official lifeguard service (Generalitat de Catalunya). '
@@ -726,7 +726,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       <div style={{ fontSize:'var(--fs-xs)', color:'var(--muted)', fontWeight:600, textTransform:'uppercase', letterSpacing:'.04em' }}>
                         {m.tipo === 'pleamar' ? (locale === 'en' ? '▲ High' : '▲ Plea.') : (locale === 'en' ? '▼ Low' : '▼ Baja.')}
                       </div>
-                      <div style={{ fontSize:'1.05rem', fontWeight:800, color:'var(--ink)', marginTop:'.15rem' }}>{m.hora}</div>
+                      <div style={{ fontSize: 'var(--fs-md)', fontWeight:800, color:'var(--ink)', marginTop:'.15rem' }}>{m.hora}</div>
                       <div style={{ fontSize:'var(--fs-xs)', color:'var(--muted)' }}>{m.altura}m</div>
                     </div>
                   ))}
@@ -838,7 +838,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.cardBody}>
             <Collapsible maxHeight={160} labelMore={locale === 'en' ? 'Show all options' : 'Ver todas las opciones'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent)', color:'#fff', textDecoration:'none', fontWeight:600, fontSize:'var(--fs-base)' }}>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=driving`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--accent)', color:'var(--on-accent)', textDecoration:'none', fontWeight:600, fontSize:'var(--fs-base)' }}>
                 <Car size={18} weight='bold'/> {locale === 'en' ? 'By car. open in Google Maps' : 'En coche. abrir en Google Maps'}
               </a>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${playa.lat},${playa.lng}&travelmode=transit`} target="_blank" rel="noopener noreferrer" style={{ display:'flex', alignItems:'center', gap:'.75rem', padding:'.9rem 1.1rem', borderRadius:'4px', background:'var(--card-bg2)', color:'var(--accent)', textDecoration:'none', fontWeight:600, fontSize:'var(--fs-base)', border:'1px solid var(--line)' }}>
@@ -892,11 +892,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
             <div className={styles.cardBody}>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '.9rem', flexWrap: 'wrap' }}>
-                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.9rem', fontWeight: 800, color: 'var(--ink)' }}>{horaIdeal.franja}</span>
-                <span style={{ fontSize: '.84rem', color: 'var(--muted)', lineHeight: 1.5 }}>{locale === 'en' ? horaIdeal.razonEn : horaIdeal.razon}</span>
+                <span style={{ fontFamily: 'var(--font-serif)', fontSize: 'var(--fs-xl)', fontWeight: 800, color: 'var(--ink)' }}>{horaIdeal.franja}</span>
+                <span style={{ fontSize: 'var(--fs-sm)', color: 'var(--muted)', lineHeight: 1.5 }}>{locale === 'en' ? horaIdeal.razonEn : horaIdeal.razon}</span>
               </div>
               {playa.parking && (
-                <p style={{ fontSize: '.8rem', color: 'var(--muted)', lineHeight: 1.55, margin: '.7rem 0 0' }}>
+                <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--muted)', lineHeight: 1.55, margin: '.7rem 0 0' }}>
                   {locale === 'en'
                     ? `${nombreH} has nearby parking — in high season it fills up before midday, so aim for the early slot.`
                     : `${nombreH} tiene aparcamiento cercano — en temporada alta se llena antes del mediodía; apunta a la franja temprana para no dar vueltas.`}
@@ -1324,7 +1324,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <div style={{ fontSize:'var(--fs-xs)', fontWeight: 700, color: 'var(--accent)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
               {locale === 'en' ? 'Best time to go' : 'Mejor hora para ir'}
             </div>
-            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--ink)', margin: '.3rem 0 .2rem', fontFamily: 'var(--font-serif)' }}>
+            <div style={{ fontSize: 'var(--fs-lg)', fontWeight: 800, color: 'var(--ink)', margin: '.3rem 0 .2rem', fontFamily: 'var(--font-serif)' }}>
               {horaIdeal.franja}
             </div>
             <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--muted)', lineHeight: 1.4 }}>
@@ -1392,9 +1392,9 @@ function FaqSection({ playa, meteo, banderaPlaya, medusas, mareasLunar, locale =
       <div className={styles.cardBody}>
         {faqs.map((faq, i) => (
           <details key={i} style={{ borderBottom: i < faqs.length - 1 ? '1px solid var(--line)' : 'none', padding: '.65rem 0' }}>
-            <summary style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <summary style={{ fontWeight: 700, fontSize: 'var(--fs-sm)', color: 'var(--ink)', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               {faq.q}
-              <span style={{ color: 'var(--muted)', fontSize:'.75rem', flexShrink: 0, marginLeft: '.5rem' }}>+</span>
+              <span style={{ color: 'var(--muted)', fontSize: 'var(--fs-sm)', flexShrink: 0, marginLeft: '.5rem' }}>+</span>
             </summary>
             <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.4rem' }}>{faq.a}</p>
           </details>
@@ -1532,9 +1532,9 @@ function CrossLinks({ playa, locale = 'es' }: { playa: Playa; locale?: 'es' | 'e
           border: '1px solid var(--line)', textDecoration: 'none',
           transition: 'all .15s',
         }}>
-          <span style={{ fontSize: '1rem' }} aria-hidden="true">🛣️</span>
+          <span style={{ fontSize: 'var(--fs-md)' }} aria-hidden="true">🛣️</span>
           <div style={{ flex: 1 }}>
-            <div style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)' }}>
+            <div style={{ fontWeight: 700, fontSize: 'var(--fs-sm)', color: 'var(--ink)' }}>
               {es ? `Ruta por la ${costa.nombre}` : `${costa.nombre} Route`}
             </div>
             <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--muted)' }}>
@@ -1549,9 +1549,9 @@ function CrossLinks({ playa, locale = 'es' }: { playa: Playa; locale?: 'es' | 'e
           border: '1px solid var(--line)', textDecoration: 'none',
           transition: 'all .15s',
         }}>
-          <span style={{ fontSize: '1rem' }} aria-hidden="true">🏆</span>
+          <span style={{ fontSize: 'var(--fs-md)' }} aria-hidden="true">🏆</span>
           <div style={{ flex: 1 }}>
-            <div style={{ fontWeight: 700, fontSize: '.85rem', color: 'var(--ink)' }}>
+            <div style={{ fontWeight: 700, fontSize: 'var(--fs-sm)', color: 'var(--ink)' }}>
               {es ? `Top 10 ${costa.nombre}` : `Top 10 ${costa.nombre}`}
             </div>
             <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--muted)' }}>

@@ -177,7 +177,7 @@ const CRITICAL_CSS = `
 /* Cuatro tokens que solo existían como fallback dentro de los componentes.
    Declararlos aquí es lo que permite quitarles el hex: sin esto, al
    limpiarlo la propiedad quedaría inválida y el navegador la ignoraría. */
---card-bg2:#f5ede0;--accent-soft:#fdecd6;--on-media:#ffd66e;--sello-accent:var(--terra-800);--sello-ink:var(--tinta-800);
+--card-bg2:#f5ede0;--accent-soft:#fdecd6;--on-accent:#fff;--on-media:#ffd66e;--sello-accent:var(--terra-800);--sello-ink:var(--tinta-800);
 /* Compat */
 --calma:var(--sea-calma);--buena:var(--sea-buena);--aviso:var(--sea-aviso);--peligro:var(--sea-peligro);--surf:var(--sea-surf);--viento:var(--sea-viento);
 /* Fonts */
