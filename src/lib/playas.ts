@@ -21,8 +21,17 @@ const EXCLUIDAS = new Set<string>([
  * credibilidad: 4.500 en la home, 5.611 en el layout, «Cinco mil» en el
  * H1, 5.000+ en la metodología. Ninguna era esta.
  *
- * 5.098 registros brutos − 523 extranjeras − 84 duplicadas = 4.491.
+ * 5.098 registros brutos − 588 extranjeras − 83 duplicadas = 4.427.
  * El bruto NO se publica: mide el fichero, no las páginas.
+ *
+ * Las extranjeras eran 523 hasta que Search Console enseñó 62 páginas
+ * indexadas fuera de España: playas argelinas de Mostaganem colgando de
+ * Almería, el Languedoc francés de Girona y el embalse de Alqueva de
+ * Huelva. El detector las encuentra por distancia a la costa validada
+ * (>40 km) más los municipios de la orilla africana. Ojo con ese
+ * criterio: marca también las fluviales españolas de interior —Terra de
+ * Lemos, Arcos de la Frontera, Cangas del Narcea—, que se conservan a
+ * mano. Sin costa cerca no significa fuera de España.
  *
  * Donde la página ya carga las playas, usa `playas.length`. Esta
  * constante es para los metadatos y sitios estáticos, donde no hay
@@ -120,21 +129,38 @@ export const getComunidades = cache(async () => {
 
 export const getMunicipios = cache(async (minPlayas = 4) => {
   const playas = await getPlayas()
-  const mapa = new Map<string, { count: number; provincia: string; comunidad: string }>()
+  // Se agrupa por SLUG, no por el nombre tal cual viene.
+  //
+  // El dataset trae el mismo municipio escrito de varias formas —«El
+  // Campello» y «el Campello», «Valencia» y «València»— y agrupar por
+  // nombre los trataba como municipios distintos. Dos consecuencias, y
+  // la segunda es la mala: /municipio/valencia salía dos veces en el
+  // sitemap, y el recuento iba partido entre variantes, así que un
+  // municipio con playas de sobra podía caer bajo minPlayas y quedarse
+  // sin página. getPlayasByMunicipio ya filtraba por slug (abajo), o sea
+  // que la página fusionaba lo que este conteo separaba.
+  //
+  // Del nombre visible se queda la grafía más frecuente en los datos.
+  const mapa = new Map<string, {
+    count: number; provincia: string; comunidad: string; grafias: Map<string, number>
+  }>()
   for (const p of playas) {
-    const key = p.municipio
+    const key = toSlug(p.municipio)
     const cur = mapa.get(key)
+    const grafias = cur?.grafias ?? new Map<string, number>()
+    grafias.set(p.municipio, (grafias.get(p.municipio) ?? 0) + 1)
     mapa.set(key, {
       count: (cur?.count ?? 0) + 1,
       provincia: p.provincia,
       comunidad: p.comunidad,
+      grafias,
     })
   }
   return Array.from(mapa.entries())
     .filter(([, v]) => v.count >= minPlayas)
-    .map(([nombre, { count, provincia, comunidad }]) => ({
-      nombre,
-      slug: toSlug(nombre),
+    .map(([slug, { count, provincia, comunidad, grafias }]) => ({
+      nombre: [...grafias.entries()].sort((a, b) => b[1] - a[1])[0][0],
+      slug,
       provincia,
       provinciaSlug: toSlug(provincia),
       comunidad,

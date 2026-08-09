@@ -133,10 +133,15 @@ export async function GET() {
   ]
   for (const pg of pages) urls.push(u(pg.es, pg.p, pg.f, today, pg.en ?? undefined))
 
-  // All beach pages
-  for (const p of playas) {
-    urls.push(u(`/playas/${p.slug}`, '0.7', 'daily', today, `/en/beaches/${p.slug}`))
-  }
+  // Las fichas NO van aquí. Viven en /sitemaps/playas/[n], que es quien
+  // las pagina y —lo importante— quien aplica esIndexable.
+  //
+  // Este bucle estaba declarando las 4.427 una segunda vez, sin filtro:
+  // cada ficha aparecía en dos sitemaps y las 10 que el sitemap de playas
+  // descarta por score bajo volvían a entrar por aquí. Justo lo contrario
+  // de lo que se busca con un sitemap, que es decir qué merece rastreo.
+  //
+  // `playas` sigue cargándose: getRutas() lo necesita.
 
   // Comunidades / provincias / municipios
   for (const c of comunidades) urls.push(u(`/comunidad/${c.slug}`, '0.8', 'weekly', today, `/en/communities/${c.slug}`))
