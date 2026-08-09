@@ -144,7 +144,14 @@ export default function FichaHero({
     <>
       <section
         className={`${styles.hero} ${hasPhoto ? styles.heroPhoto : styles.heroPainted}`}
-        style={{ '--hero-bg': estado.tileBg, '--hero-bg-dark': estado.tileBgDark } as React.CSSProperties}
+        style={{
+          '--hero-bg': estado.tileBg,
+          '--hero-bg-dark': estado.tileBgDark,
+          // C7: el tinte multiply toma el color del estado del mar, no un
+          // tono decorativo. Así la misma playa se ve distinta en calma
+          // que en temporal, y eso es información.
+          '--hero-estado': estado.dot,
+        } as React.CSSProperties}
       >
         {/* Capa de fondo: foto real o SVG editorial como fallback */}
         {hasPhoto ? (
@@ -160,6 +167,13 @@ export default function FichaHero({
               sizes="100vw"
               className={styles.photoImg}
             />
+            {/* C7. Siempre en el DOM; quien decide si pintan es el CSS,
+                según el flag en <html>. Este componente es de cliente y no
+                puede leer flags — y el manual pide justamente eso: «hacerlo
+                por data-flags en CSS donde sea posible». Sin el flag las dos
+                capas son transparentes y no cuestan nada. */}
+            <div className={styles.photoTint} />
+            <div className={styles.photoVineta} />
             <div className={styles.photoGradient} />
           </div>
         ) : (

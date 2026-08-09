@@ -25,6 +25,55 @@ html[data-flags~="ds_litoral_tokens"] .heroPhoto { min-height: 660px; }
 /* ── Foto a sangre + gradiente ───────────────────────────────────── */
 .photoLayer { position: absolute; inset: 0; z-index: 0; }
 .photoImg { object-fit: cover; object-position: center 55%; }
+
+/* ── C7 · tratamiento de foto ─────────────────────────────────────
+   «Nunca foto limpia sin tratamiento», dice el manual, y hasta ahora la
+   foto iba a pelo con un degradado negro encima haciendo el trabajo sucio
+   de la legibilidad. Eso funcionaba a base de tapar; C7 funciona bajando
+   el volumen de la imagen para que no compita con el texto.
+
+   Tres capas, en este orden:
+     1 · el filtro apaga la foto (satura menos, contrasta menos)
+     2 · el color del estado del mar en multiply al 16 % la unifica con
+         el resto de la ficha — la misma playa se ve distinta un día de
+         calma que uno de temporal, que es información, no decoración
+     3 · la viñeta cierra los bordes y empuja la mirada al centro
+
+   Va detrás de su propio flag porque el manual le da uno
+   (media_foto_duotone) y porque es reversible sin tocar componentes. */
+html[data-flags~="media_foto_duotone"] .photoImg {
+  filter: saturate(.72) contrast(.96);
+}
+/* Con la foto apagada y la viñeta puesta, el degradado puede aflojar: el
+   .92 final existía para rescatar fotos de alto contraste que ahora ya
+   llegan bajadas. Aflojar aquí es lo que devuelve la foto a la vista. */
+html[data-flags~="media_foto_duotone"] .photoGradient {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, .42)  0%,
+    rgba(0, 0, 0, .10) 22%,
+    rgba(0, 0, 0, .30) 48%,
+    rgba(0, 0, 0, .60) 70%,
+    rgba(0, 0, 0, .82) 100%
+  );
+}
+.photoTint,
+.photoVineta {
+  position: absolute; inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Inertes por defecto: existen en el DOM pero no pintan nada hasta que
+     el flag las enciende. Así el componente no necesita saber de flags. */
+  background: none;
+}
+html[data-flags~="media_foto_duotone"] .photoTint {
+  background: var(--hero-estado, transparent);
+  mix-blend-mode: multiply;
+  opacity: .16;
+}
+html[data-flags~="media_foto_duotone"] .photoVineta {
+  background: radial-gradient(120% 90% at 50% 38%, transparent 42%, rgba(0,0,0,.42) 100%);
+}
 /* El bloque editorial (H1 + score + datos + botonera) ocupa la mitad
    inferior, así que ahí la foto debe pasar a fondo, no competir: con el
    degradado antiguo (transparente hasta el 32%, .85 solo al final) las
