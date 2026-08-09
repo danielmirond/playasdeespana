@@ -338,6 +338,20 @@ img, svg { display: block; max-width: 100%; }
 .dato[data-cert="sindato"]   { border-bottom: none; padding-bottom: 0; }
 .dato-vacio { font-family: var(--font-sans); color: var(--cert-sindato); letter-spacing: .01em; }
 
+/* Sobre foto, el trazo en blanco.
+   Va aquí y no en globals.css por orden de cascada: las cuatro reglas de
+   arriba se cargan DESPUÉS de globals y su atajo \`border-bottom\` reponía
+   el color de certeza, así que el blanco de .dato-ondark no llegaba nunca.
+   Medido en la ficha de Formentor: rgb(31,79,109) —azul oscuro— a 2px
+   sobre agua en sombra. El trazo es la señal de certeza; si no se ve, la
+   señal no existe.
+
+   Solo se toca el COLOR: el ancho y el patrón (2px sólido medido, 1.5
+   sólido oficial, 1.5 punteado reportado, 1px discontinuo estimado) son
+   lo que distingue un origen de otro, y en monocromo tienen que seguir
+   distinguiéndose. Por eso border-bottom-color y no el atajo. */
+.dato-ondark[data-cert] { border-bottom-color: rgba(255, 255, 255, .72); }
+
 /* ——— Insignia de fuente ————————————————————————————————
    Vive en el hueco derecho de la cabecera de tarjeta, nunca pegada a la
    cifra: competiría con ella. */

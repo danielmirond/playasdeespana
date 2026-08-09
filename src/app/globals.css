@@ -94,6 +94,21 @@
 .dato[data-cert="sindato"]   { border-bottom: 0; color: var(--cert-sindato); font-weight: 400; }
 /* Sobre foto el trazo se hace blanco: el color ya no distingue, el patrón sí */
 .dato-ondark, .dato-ondark[data-cert] { color: #fff; border-bottom-color: rgba(255,255,255,.65); }
+/* …y la cifra con él.
+   La regla de arriba pinta el contenedor, y hasta Litoral eso bastaba
+   porque el número heredaba. Litoral le da familia propia a las cifras
+   con `.num { color: var(--ink) }`, y una clase gana a la herencia
+   siempre: sobre la foto de Formentor el 29,7 salía en tinta oscura
+   sobre agua oscura mientras el «°» de al lado se veía blanco —la
+   unidad usa otra clase—, que es la pista de que esto era especificidad
+   y no un token mal puesto. Se sube a `.dato-ondark .num` (0,2,0) para
+   ganarle a `.num` (0,1,0). */
+.dato-ondark .num,
+.dato-ondark .dato-u,
+.dato-ondark .num-unit,
+.dato-ondark .dato-vacio { color: #fff; }
+.dato-ondark .dato-u,
+.dato-ondark .num-unit { color: rgba(255,255,255,.78); }
 
 .dato-u {
   font-family: var(--font-sans); font-size: .42em; font-weight: 400;
