@@ -66,43 +66,57 @@ async function fetchT(url, opts = {}, timeoutMs = 8000, tries = 3) {
   throw new Error('max retries')
 }
 
+const VETADAS = JSON.parse(await readFile(resolve(ROOT, 'src/data/fotos-vetadas.json'), 'utf8'))
+
 const NEGATIVAS = new RegExp('\\b(' +
   'map|mapa|plan(o|os)?|logo|flag|bandera|diagram|diagrama|coat|escudo|sign|placa|coordinate|rotulo|icon|chart|grafic|' +
   'iglesia|church|ermita|capilla|basilica|catedral|cathedral|convento|monasterio|monastery|abadia|abbey|santuario|' +
   'monumento|monument|estatua|statue|busto|bust|escultura|sculpture|museo|museum|ayuntamiento|edificio|building|fachada|facade|' +
   'castillo|castle|fortaleza|fortress|alcazaba|alcazar|tower|cementerio|cemetery|tumba|tomb|necropolis|' +
   'street(view)?|streetview|mapillary|panoramio|driving|coche|car|vehiculo|vehicle|camion|truck|bus|train|aerial|drone|' +
-  'interior(_de)?|tanque|tank|militar|military|ejercito|army|guerra|war|soldado|soldier|arma|weapon|cuartel|barracks|maniobra|training_exercise|' +
-  'motocross|motorbike|motorcycle|motocicleta|moto_|enduro|carrera|race|racing|carreras|competicion|maraton|marathon|futbol|football|baloncesto|basketball|tenis|tennis|golf|' +
+  'interior([ _]de)?|tanque|tank|militar|military|ejercito|army|guerra|war|soldado|soldier|arma|weapon|cuartel|barracks|maniobra|training[ _]exercise|' +
+  'motocross|motorbike|motorcycle|motocicleta|moto[ _]|enduro|carrera|race|racing|carreras|competicion|maraton|marathon|futbol|football|baloncesto|basketball|tenis|tennis|golf|' +
   'concierto|concert|festival|fiesta|party|disco|nightclub|fabrica|factory|industrial|silo|chimenea|chimney|grua|crane|' +
-  'retrato|portrait|selfie|autorretrato|self_portrait|posing|posando|modelo|model|models|modelos|modeling|fashion|moda|' +
+  'retrato|portrait|selfie|autorretrato|self[ _]portrait|posing|posando|modelo|model|models|modelos|modeling|fashion|moda|' +
   'family|familia|wedding|boda|novio|novia|bride|groom|niño|niños|nina|ninas|kid|kids|child|children|baby|bebe|toddler|' +
   'gente|people|crowd|multitud|grupo|group|equipo|team|bañista|bañistas|bather|bathers|swimmer|swimmers|' +
-  'sunbather|tomando_el_sol|tumbado|tumbada|broncear|tanning|beachgoer|beachgoers|turista|tourist|visitante|visitor|' +
+  'sunbather|tomando[ _]el[ _]sol|tumbado|tumbada|broncear|tanning|beachgoer|beachgoers|turista|tourist|visitante|visitor|' +
   'amigos|friends|pareja|couple|abrazo|hug|kissing|besando|bikini|swimsuit|topless|nudista|nudist|naked|nude|desnudo|desnuda|' +
-  'parking_lot|garaje|garage|hotel(?!_playa)|restaurante(?!_playa)' +
+  'parking[ _]lot|garaje|garage|hotel(?![ _]playa)|restaurante(?![ _]playa)' +
   ')\\b', 'i')
 const POSITIVAS = new RegExp('\\b(' +
-  'beach|playa(?!_de_aparcamiento)|platja|praia|costa|coast|shore|orilla|ribera|litoral|seaside|seafront|' +
+  'beach|playa(?![ _]de[ _]aparcamiento)|platja|praia|costa|coast|shore|orilla|ribera|litoral|seaside|seafront|' +
   'mar|sea|ocean|oceano|bahia|bay|ensenada|cala|caleta|arena|sand|sandy|duna|dune|guijarro|pebble|rocosa|' +
-  'acantilado|cliff|escarpado|rompiente|cantera|paseo_maritimo|chiringuito|sombrilla|umbrella|hamaca|paseo|' +
+  'acantilado|cliff|escarpado|rompiente|cantera|paseo[ _]maritimo|chiringuito|sombrilla|umbrella|hamaca|paseo|' +
   'surf|surfing|kitesurf|windsurf|snorkel|paddle|kayak|atardecer|sunset|amanecer|sunrise|horizonte|horizon|' +
   'panoramica|panorama|vista|view' +
   ')\\b', 'i')
 const PALABRAS_GENERICAS = new Set(['playa','playas','platja','platges','praia','praias','cala','caleta','calas','beach','beaches','plage','plages','punta','puntas','acces','access','area','pequena','grande','principal','islas','isla','illa','illes','illas','mar','sea','costa','east','oeste','norte','sur'])
+
+// Separadores → espacio ANTES de aplicar las dos listas.
+//
+// Ambas usan \b, y en una regex el guion bajo es carácter de PALABRA:
+// \bmap\b no casa dentro de Relief_map_of_Spain_Asturien.png. Como los
+// nombres de Wikimedia llevan guiones bajos siempre, la lista negra
+// entera (mapas, iglesias, museos, castillos, estatuas, vehículos)
+// estaba inerte contra la fuente en la que más se confía. Se detectó en
+// los datos: ese mapa en relieve era la foto de 18 playas de Asturias.
+const separables = (s) => (s ?? '').replace(/[_\-.\/+]+/g, ' ')
+const esNegativa = (s) => NEGATIVAS.test(separables(s))
+const esPositiva = (s) => POSITIVAS.test(separables(s))
 
 function extraerFotosDePages(pages) {
   return pages.map((p) => {
     const ii = p.imageinfo?.[0]
     if (!ii?.thumburl) return null
     const titulo = (p.title ?? '').toLowerCase()
-    if (NEGATIVAS.test(titulo)) return null
+    if (esNegativa(titulo)) return null
     const ext = ii.url?.split('.').pop()?.toLowerCase()
     if (!['jpg','jpeg','png','webp'].includes(ext ?? '')) return null
     try { const u = new URL(ii.thumburl); if (!u.hostname?.includes('wikimedia.org')) return null; if (!/\.(jpg|jpeg|png|webp)(\?|$)/i.test(ii.thumburl)) return null } catch { return null }
     const w = ii.width ?? 0, h = ii.height ?? 0
     if (w > 0 && h > 0) { if (w < 500) return null; const r = w / h; if (r < 0.7 || r > 3) return null }
-    const score = POSITIVAS.test(titulo) ? 1 : 0
+    const score = esPositiva(titulo) ? 1 : 0
     return { score, url: ii.thumburl, thumb: ii.thumburl, fuente: 'wikimedia', autor: ii.extmetadata?.Artist?.value?.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').slice(0, 60) || undefined }
   }).filter(Boolean).sort((a, b) => b.score - a.score).map(({ score, ...r }) => r)
 }
@@ -118,7 +132,7 @@ async function wikimediaGeo(lat, lon, nombre) {
     const res = await fetchT(`https://commons.wikimedia.org/w/api.php?${params}`)
     if (!res.ok) return []
     const data = await res.json()
-    const beachish = extraerFotosDePages(Object.values(data.query?.pages ?? {})).filter(f => { try { return POSITIVAS.test(decodeURIComponent(f.url).toLowerCase()) } catch { return false } })
+    const beachish = extraerFotosDePages(Object.values(data.query?.pages ?? {})).filter(f => { try { return esPositiva(decodeURIComponent(f.url).toLowerCase()) } catch { return false } })
     const tokens = [normalizar(nombre), ...nombre.toLowerCase().split(/[\s-]+/).map(normalizar).filter(t => t.length >= 4 && !PALABRAS_GENERICAS.has(t))].filter(Boolean)
     const conNombre = beachish.filter(f => { try { const url = normalizar(decodeURIComponent(f.url)); return tokens.some(t => t.length >= 4 && url.includes(t)) } catch { return false } })
     if (conNombre.length > 0) return conNombre.slice(0, 6)
@@ -142,7 +156,7 @@ async function wikipediaLead(nombre, municipio, lat, lon) {
         .filter(p => !p?.pageprops?.disambiguation)
         .filter(p => typeof p?.original?.source === 'string')
         .filter(p => /\.(jpe?g|png|webp)(\?|$)/i.test(p.original.source))
-        .filter(p => { const fn = decodeURIComponent(p.original.source.split('/').pop() ?? '').toLowerCase(); if (NEGATIVAS.test(fn)) return false; return !palabras(fn.replace(/\.(jpe?g|png|webp).*/i, '')).some(w => NEGT.test(w)) })
+        .filter(p => { const fn = decodeURIComponent(p.original.source.split('/').pop() ?? '').toLowerCase(); if (esNegativa(fn)) return false; return !palabras(fn.replace(/\.(jpe?g|png|webp).*/i, '')).some(w => NEGT.test(w)) })
         .filter(p => !palabras(p.title ?? '').some(w => NEGT.test(w)))
         .filter(p => tokensDisc.some(t => palabras(p.title ?? '').includes(t)))
         .filter(p => { const tw = palabras(p.title ?? ''); if (tw.some(w => MARC.test(w))) return true; const flat = tw.join(''); if (tokensDisc.some(t => t === flat)) return true; return flat === normalizar(nombre) })
@@ -164,7 +178,7 @@ async function openverse(nombre, municipio) {
       const res = await fetchT(`https://api.openverse.org/v1/images/?${params}`)
       if (!res.ok) continue
       const data = await res.json()
-      const fotos = (data?.results ?? []).map(r => { const url = r.url; if (!url || typeof url !== 'string') return null; const titulo = (r.title ?? '').toLowerCase(); if (NEGATIVAS.test(titulo) || !POSITIVAS.test(titulo)) return null; const tn = normalizar(titulo); if (!LAX && !tokens.some(t => t.length >= 4 && tn.includes(t))) return null; return { url, thumb: r.thumbnail ?? url, fuente: 'openverse', autor: r.creator?.slice(0, 60) || undefined } }).filter(Boolean)
+      const fotos = (data?.results ?? []).map(r => { const url = r.url; if (!url || typeof url !== 'string') return null; const titulo = (r.title ?? '').toLowerCase(); if (esNegativa(titulo) || !esPositiva(titulo)) return null; const tn = normalizar(titulo); if (!LAX && !tokens.some(t => t.length >= 4 && tn.includes(t))) return null; return { url, thumb: r.thumbnail ?? url, fuente: 'openverse', autor: r.creator?.slice(0, 60) || undefined } }).filter(Boolean)
       if (fotos.length >= 1) return fotos.slice(0, 6)
     } catch { continue }
   }
@@ -183,7 +197,7 @@ async function flickr(nombre, municipio) {
       const res = await fetchT(`https://www.flickr.com/services/feeds/photos_public.gne?${params}`)
       if (!res.ok) continue
       const data = await res.json()
-      const fotos = (data?.items ?? []).map(item => { const titulo = (item.title ?? '').toLowerCase(), tagsStr = (item.tags ?? '').toLowerCase(); if (NEGATIVAS.test(titulo) || NEGATIVAS.test(tagsStr)) return null; if (!POSITIVAS.test(titulo) && !POSITIVAS.test(tagsStr)) return null; const tn = normalizar(titulo), tg = normalizar(tagsStr); if (!LAX && !tokens.some(t => t.length >= 4 && (tn.includes(t) || tg.includes(t)))) return null; const m = item.media?.m ?? ''; if (!m || !/_m\.(jpg|jpeg|png)/i.test(m)) return null; return { url: m.replace(/_m\.(jpg|jpeg|png)/i, '_c.$1'), thumb: m, fuente: 'flickr', autor: item.author?.replace(/^.*\("(.+)"\)$/, '$1') || undefined } }).filter(Boolean)
+      const fotos = (data?.items ?? []).map(item => { const titulo = (item.title ?? '').toLowerCase(), tagsStr = (item.tags ?? '').toLowerCase(); if (esNegativa(titulo) || esNegativa(tagsStr)) return null; if (!esPositiva(titulo) && !esPositiva(tagsStr)) return null; const tn = normalizar(titulo), tg = normalizar(tagsStr); if (!LAX && !tokens.some(t => t.length >= 4 && (tn.includes(t) || tg.includes(t)))) return null; const m = item.media?.m ?? ''; if (!m || !/_m\.(jpg|jpeg|png)/i.test(m)) return null; return { url: m.replace(/_m\.(jpg|jpeg|png)/i, '_c.$1'), thumb: m, fuente: 'flickr', autor: item.author?.replace(/^.*\("(.+)"\)$/, '$1') || undefined } }).filter(Boolean)
       if (fotos.length >= 2) return fotos.slice(0, 6)
     } catch { continue }
   }
@@ -257,7 +271,10 @@ async function cascada(nombre, municipio, lat, lon) {
   ])
   const vistas = new Set(), out = []
   for (const grupo of [geo, lead, ov, fl, txt, px, un]) {
-    for (const f of grupo) { if (vistas.has(f.url)) continue; vistas.add(f.url); out.push(f); if (out.length >= 6) return out }
+    // VETADAS: imágenes descartadas mirándolas, no leyendo su texto. El
+    // filtro automático puntúa título/archivo/etiquetas y estas lo pasan
+    // con nota siendo un gato, un mapa o unos rascacielos.
+    for (const f of grupo) { if (VETADAS[f.url]) continue; if (vistas.has(f.url)) continue; vistas.add(f.url); out.push(f); if (out.length >= 6) return out }
   }
   return out
 }

@@ -9,6 +9,19 @@
 //   7. Unsplash: búsqueda con nombre + municipio (requiere UNSPLASH_ACCESS_KEY)
 import { fetchWithTimeout } from './fetch-timeout'
 import { IS_BUILD } from './buildGuard'
+// Fotos vetadas a mano: URL → qué es en realidad.
+//
+// El filtro automático puntúa texto (título, nombre de archivo, etiquetas)
+// y hay imágenes que lo pasan porque su texto es impecable y su CONTENIDO
+// no. Estas se comprobaron mirándolas: un gato, un mapa en relieve, unas
+// cañas, varios rascacielos. Cada una era la foto principal de entre 13 y
+// 29 playas —el emparejamiento se apoya en Flickr, donde un reportaje
+// cubre media comarca—, así que once URLs limpian 242 páginas.
+//
+// El motivo se guarda con la URL a propósito: dentro de un año nadie
+// recuerda por qué se vetó un id opaco de Flickr, y sin motivo esta lista
+// se vuelve intocable.
+import VETADAS from '@/data/fotos-vetadas.json'
 // Fotos pre-resueltas offline por scripts/enrich-playas-images.mjs (misma
 // cascada, pero ejecutada una vez con timeouts largos y User-Agent → sin
 // rate limit ni dependencia de KV). Mapa slug → FotoPlaya[]. Si una playa
@@ -22,7 +35,18 @@ async function getSidecar(): Promise<Record<string, FotoPlaya[]> | null> {
     const { default: data } = await import('@/../public/data/playas-images.json', {
       assert: { type: 'json' },
     })
-    _sidecar = data as unknown as Record<string, FotoPlaya[]>
+    const crudo = data as unknown as Record<string, FotoPlaya[]>
+    // Veto aplicado UNA vez, al cargar: así lo respetan todos los que
+    // leen el sidecar (getFotos, tieneFotoReal, getFotoThumbSidecar) sin
+    // que ninguno tenga que acordarse. Una playa que se queda sin
+    // candidatas cae al escalón siguiente, como si nunca hubiera tenido.
+    const vetadas = new Set(Object.keys(VETADAS))
+    _sidecar = Object.fromEntries(
+      Object.entries(crudo).map(([slug, fotos]) => [
+        slug,
+        Array.isArray(fotos) ? fotos.filter(f => !vetadas.has(f?.url)) : fotos,
+      ]),
+    )
   } catch {
     _sidecar = null
   }
@@ -106,12 +130,12 @@ const NEGATIVAS = new RegExp(
   'street(view)?|streetview|mapillary|panoramio|driving|coche|car|' +
   'vehiculo|vehicle|camion|truck|bus|train|aerial|drone|' +
   // Interiores y detalles arquitectónicos
-  'interior(_de)?|fachada|' +
+  'interior([ _]de)?|fachada|' +
   // Militar / vehículos pesados
   'tanque|tank|militar|military|ejercito|army|guerra|war|soldado|soldier|' +
-  'arma|weapon|cuartel|barracks|maniobra|training_exercise|' +
+  'arma|weapon|cuartel|barracks|maniobra|training[ _]exercise|' +
   // Eventos deportivos no costeros
-  'motocross|motorbike|motorcycle|motocicleta|moto_|enduro|' +
+  'motocross|motorbike|motorcycle|motocicleta|moto[ _]|enduro|' +
   'carrera|race|racing|carreras|competicion|maraton|marathon|' +
   'futbol|football|baloncesto|basketball|tenis|tennis|golf|' +
   // Conciertos / festivales / fiestas
@@ -119,18 +143,18 @@ const NEGATIVAS = new RegExp(
   // Industrial / no recreativo
   'fabrica|factory|industrial|silo|chimenea|chimney|grua|crane|' +
   // Personas en primer plano (queremos paisaje, no retratos)
-  'retrato|portrait|selfie|autorretrato|self_portrait|posing|posando|' +
+  'retrato|portrait|selfie|autorretrato|self[ _]portrait|posing|posando|' +
   'modelo|model|models|modelos|modeling|fashion|moda|' +
   'family|familia|wedding|boda|novio|novia|bride|groom|' +
   'niño|niños|nina|ninas|kid|kids|child|children|baby|bebe|toddler|' +
   'gente|people|crowd|multitud|grupo|group|equipo|team|' +
   'bañista|bañistas|bather|bathers|swimmer|swimmers|' +
-  'sunbather|tomando_el_sol|tumbado|tumbada|broncear|tanning|' +
+  'sunbather|tomando[ _]el[ _]sol|tumbado|tumbada|broncear|tanning|' +
   'beachgoer|beachgoers|turista|tourist|visitante|visitor|' +
   'amigos|friends|pareja|couple|abrazo|hug|kissing|besando|' +
   'bikini|swimsuit|topless|nudista|nudist|naked|nude|desnudo|desnuda|' +
   // Otros típicos falsos positivos
-  'parking_lot|garaje|garage|hotel(?!_playa)|restaurante(?!_playa)' +
+  'parking[ _]lot|garaje|garage|hotel(?![ _]playa)|restaurante(?![ _]playa)' +
   ')\\b',
   'i'
 )
@@ -141,13 +165,13 @@ const NEGATIVAS = new RegExp(
 const POSITIVAS = new RegExp(
   '\\b(' +
   // Términos directos
-  'beach|playa(?!_de_aparcamiento)|platja|praia|' +
+  'beach|playa(?![ _]de[ _]aparcamiento)|platja|praia|' +
   // Geografía costera
   'costa|coast|shore|orilla|ribera|litoral|seaside|seafront|' +
   'mar|sea|ocean|oceano|bahia|bay|ensenada|cala|caleta|' +
   // Elementos típicos de playa
   'arena|sand|sandy|duna|dune|guijarro|pebble|rocosa|' +
-  'acantilado|cliff|escarpado|rompiente|cantera|paseo_maritimo|' +
+  'acantilado|cliff|escarpado|rompiente|cantera|paseo[ _]maritimo|' +
   // Elementos visibles (sin personas en primer plano)
   'chiringuito|sombrilla|umbrella|hamaca|paseo|' +
   // Actividades como signal de contexto playero (la mayoría muestran
@@ -162,13 +186,38 @@ const POSITIVAS = new RegExp(
   'i'
 )
 
+/**
+ * Separadores → espacio, antes de aplicar NEGATIVAS/POSITIVAS.
+ *
+ * Las dos listas se apoyan en `\b`, y en una expresión regular `_` es un
+ * carácter de PALABRA. O sea que `\bmap\b` no casa dentro de
+ * `Relief_map_of_Spain_Asturien.png`: entre `f` y `m` no hay frontera de
+ * palabra. Y los nombres de archivo de Wikimedia usan guiones bajos
+ * SIEMPRE, así que la lista negra entera —mapas, iglesias, museos,
+ * castillos, estatuas, vehículos— estaba inerte justo contra la fuente
+ * en la que más se confía.
+ *
+ * Se vio en los datos antes que en el código: esa misma imagen, un mapa
+ * en relieve de España, era la foto de 18 playas de Asturias.
+ *
+ * Los puntos y las barras entran también: el test se aplica a veces
+ * sobre URLs enteras, no solo sobre el nombre del archivo.
+ */
+const separables = (s: string): string => (s ?? '').replace(/[_\-.\/+]+/g, ' ')
+
+/** ¿El texto cae en la lista negra? Tolerante a guiones bajos. */
+export const esNegativa = (s: string): boolean => NEGATIVAS.test(separables(s))
+
+/** ¿El texto menciona algo de playa? Tolerante a guiones bajos. */
+export const esPositiva = (s: string): boolean => POSITIVAS.test(separables(s))
+
 function extraerFotosDePages(pages: any[]): FotoPlaya[] {
   return pages
     .map((p: any) => {
       const ii = p.imageinfo?.[0]
       if (!ii?.thumburl) return null
       const titulo = (p.title ?? '').toLowerCase()
-      if (NEGATIVAS.test(titulo)) return null
+      if (esNegativa(titulo)) return null
       const ext = ii.url?.split('.').pop()?.toLowerCase()
       if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext ?? '')) return null
 
@@ -193,7 +242,7 @@ function extraerFotosDePages(pages: any[]): FotoPlaya[] {
         const ratio = w / h
         if (ratio < 0.7 || ratio > 3) return null
       }
-      const score = POSITIVAS.test(titulo) ? 1 : 0
+      const score = esPositiva(titulo) ? 1 : 0
       // Wikimedia devuelve un thumb a 800px (iiurlwidth). Usamos esa misma
       // URL para ambos tamaños: evita falsos 404 que aparecían antes por
       // intentar reconstruir un /300px-/ que no siempre existe (imágenes
@@ -249,7 +298,7 @@ async function getFotosWikimediaGeo(lat: number, lon: number, nombre?: string): 
     const fotos = extraerFotosDePages(pages)
     const beachish = fotos.filter(f => {
       try {
-        return POSITIVAS.test(decodeURIComponent(f.url).toLowerCase())
+        return esPositiva(decodeURIComponent(f.url).toLowerCase())
       } catch { return false }
     })
 
@@ -419,7 +468,7 @@ async function getFotosWikipediaLeadImage(
         // (mairie, ayuntamiento...).
         .filter((p) => {
           const filename = decodeURIComponent(p.original.source.split('/').pop() ?? '').toLowerCase()
-          if (NEGATIVAS.test(filename)) return false
+          if (esNegativa(filename)) return false
           // Word-level check del filename para mairie/ayuntamiento/...
           const fnPalabras = palabras(filename.replace(/\.(jpe?g|png|webp).*/i, ''))
           if (fnPalabras.some(w => NEGATIVAS_TITULO_EXTRA.test(w))) return false
@@ -699,8 +748,8 @@ async function getFotosOpenVerse(nombre: string, municipio: string): Promise<Fot
         const thumb = r.thumbnail ?? r.url
         if (!url || typeof url !== 'string') return null
         const titulo = (r.title ?? '').toLowerCase()
-        if (NEGATIVAS.test(titulo)) return null
-        if (!POSITIVAS.test(titulo)) return null
+        if (esNegativa(titulo)) return null
+        if (!esPositiva(titulo)) return null
         // Exigir que el título mencione un token del nombre concreto.
         // Evita que dos playas del mismo municipio compartan foto si
         // la query devuelve algo genérico.
@@ -859,11 +908,11 @@ async function getFotosFlickr(nombre: string, municipio: string, provincia = '')
           // título limpio pero tags 'ejercito soldado guerra playa' que
           // delatan el contenido. Sin esto pasaba el filtro porque
           // 'playa' está en tags (POSITIVAS match).
-          if (NEGATIVAS.test(titulo) || NEGATIVAS.test(tagsStr)) return null
+          if (esNegativa(titulo) || esNegativa(tagsStr)) return null
           // Modo estricto: Flickr devuelve muchas fotos con título críptico
           // (DSC_1234, IMG_001). Aceptamos si título O tags incluyen
           // POSITIVAS (descarta DSC_xxxx con tags neutros).
-          if (!POSITIVAS.test(titulo) && !POSITIVAS.test(tagsStr)) return null
+          if (!esPositiva(titulo) && !esPositiva(tagsStr)) return null
           // Si la query era genérica (solo municipio), exigimos que el
           // título o los tags mencionen el nombre concreto de la playa.
           // Evita que dos playas del mismo municipio compartan foto:
@@ -1103,6 +1152,10 @@ async function getFotosUncached(
 
   const agregar = (fotos: FotoPlaya[]) => {
     for (const f of fotos) {
+      // El veto también aquí: si no, una playa sin sidecar cae a la
+      // cascada y vuelve a recoger la misma imagen que acabamos de
+      // prohibir. Filtrar solo al leer el sidecar dejaba esa puerta.
+      if (f.url in VETADAS) continue
       if (vistas.has(f.url)) continue
       vistas.add(f.url)
       combinadas.push(f)
