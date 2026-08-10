@@ -141,7 +141,15 @@ export default function TopCercanas() {
       // idénticas. Se recorre la lista de candidatas y se elige la primera
       // que nadie haya usado ya, igual que hace TopBeachCardsConHero.
       scored.forEach(x => {
-        fetch(`/api/fotos?slug=${encodeURIComponent(x.playa.slug)}`, { signal: ac.signal })
+        // El `v` no lo lee nadie en el servidor: existe para cambiar la
+        // clave del CDN. La respuesta de esta ruta se cachea con
+        // s-maxage=86400 y stale-while-revalidate=604800, así que cuando
+        // devolvió basura —la ruta ignoraba el slug y todas las playas
+        // compartían una única entrada— esa basura se quedaba servida
+        // hasta una semana DESPUÉS de arreglar el código. Subir el número
+        // estrena clave y la respuesta correcta entra al instante.
+        // Súbelo si vuelve a cachearse algo que no debía.
+        fetch(`/api/fotos?slug=${encodeURIComponent(x.playa.slug)}&v=2`, { signal: ac.signal })
           .then(res => (res.ok ? res.json() : null))
           .then(d => {
             const cands: string[] = (d?.fotos ?? [])
