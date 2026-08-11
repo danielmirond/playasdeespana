@@ -146,14 +146,65 @@ export const ZONAS: Array<{
   tipo: 'provincia' | 'comunidad'
   /** Provincias del dataset que agrupa. */
   provincias: string[]
-  /** Impresiones medidas mar–ago 2026, para saber contra qué comparamos. */
+  /**
+   * De dónde sale la demanda de esta zona. Se anota SIEMPRE, porque de
+   * aquí depende cómo se juzgue después:
+   *
+   * `gsc`         impresiones medidas en Search Console mar–ago 2026.
+   *               Se comparan contra su propio número.
+   * `sugerencias` el autocompletado de Google la propone al teclear
+   *               «banderas hoy». Hay volumen detrás, sin cifra exacta.
+   * `cobertura`   ninguna señal propia; entra por completar el mapa de
+   *               la costa. Es la apuesta, y conviene saber cuál es:
+   *               este sitio ya tiene 171 páginas de municipio con 7
+   *               clics y 186 de accesibles con 3. Multiplicar
+   *               geografía por sistema no le ha funcionado nunca.
+   */
+  evidencia: 'gsc' | 'sugerencias' | 'cobertura'
+  /** Impresiones medidas mar–ago 2026. 0 si la evidencia no es GSC. */
   impresiones: number
 }> = [
-  { slug: 'tarragona', nombre: 'Tarragona', tipo: 'provincia', provincias: ['Tarragona'], impresiones: 425 },
-  { slug: 'valencia',  nombre: 'Valencia',  tipo: 'provincia', provincias: ['Valencia'],  impresiones: 238 },
-  { slug: 'cataluna',  nombre: 'Cataluña',  tipo: 'comunidad', provincias: ['Girona', 'Barcelona', 'Tarragona'], impresiones: 184 },
-  { slug: 'barcelona', nombre: 'Barcelona', tipo: 'provincia', provincias: ['Barcelona'], impresiones: 93 },
-  { slug: 'cantabria', nombre: 'Cantabria', tipo: 'comunidad', provincias: ['Cantabria'], impresiones: 64 },
+  { slug: 'tarragona', nombre: 'Tarragona', tipo: 'provincia', provincias: ['Tarragona'], evidencia: 'gsc', impresiones: 425 },
+  { slug: 'valencia',  nombre: 'Valencia',  tipo: 'provincia', provincias: ['Valencia'],  evidencia: 'gsc', impresiones: 238 },
+  { slug: 'cataluna',  nombre: 'Cataluña',  tipo: 'comunidad', provincias: ['Girona', 'Barcelona', 'Tarragona'], evidencia: 'gsc', impresiones: 184 },
+  { slug: 'barcelona', nombre: 'Barcelona', tipo: 'provincia', provincias: ['Barcelona'], evidencia: 'gsc', impresiones: 93 },
+  { slug: 'cantabria', nombre: 'Cantabria', tipo: 'comunidad', provincias: ['Cantabria'], evidencia: 'gsc', impresiones: 64 },
+
+  // Segunda tanda (11-08-2026): la costa por provincias.
+  //
+  // Cuatro de estas —Bizkaia, Asturias, Alicante y Málaga— las propone
+  // el autocompletado de Google al teclear «banderas hoy», y una
+  // sugerencia solo aparece si hay volumen detrás. El resto entra por
+  // cobertura, sin señal propia.
+  //
+  // Lo que NO justifica esta tanda: que las cinco de arriba funcionen.
+  // Se publicaron el 8 de agosto y tres días no dicen nada en SEO.
+  //
+  // Ceuta (13 playas) y Melilla (6) se quedan fuera: no dan para una
+  // página que se sostenga.
+  //
+  // La Manga del Mar Menor tiene demanda propia en el autocompletado
+  // pero es una localidad, no una provincia: una franja de 20 km
+  // repartida entre Cartagena y San Javier, que necesita recorte por
+  // coordenadas. Queda para cuando se baje de nivel.
+  { slug: 'a-coruna',    nombre: 'A Coruña',    tipo: 'provincia', provincias: ['A Coruña'],    evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'lugo',        nombre: 'Lugo',        tipo: 'provincia', provincias: ['Lugo'],        evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'pontevedra',  nombre: 'Pontevedra',  tipo: 'provincia', provincias: ['Pontevedra'],  evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'asturias',    nombre: 'Asturias',    tipo: 'comunidad', provincias: ['Asturias'],    evidencia: 'sugerencias', impresiones: 0 },
+  { slug: 'bizkaia',     nombre: 'Bizkaia',     tipo: 'provincia', provincias: ['Bizkaia'],     evidencia: 'sugerencias', impresiones: 0 },
+  { slug: 'gipuzkoa',    nombre: 'Gipuzkoa',    tipo: 'provincia', provincias: ['Gipuzkoa'],    evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'girona',      nombre: 'Girona',      tipo: 'provincia', provincias: ['Girona'],      evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'castellon',   nombre: 'Castellón',   tipo: 'provincia', provincias: ['Castellón'],   evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'alicante',    nombre: 'Alicante',    tipo: 'provincia', provincias: ['Alicante'],    evidencia: 'sugerencias', impresiones: 0 },
+  { slug: 'murcia',      nombre: 'Murcia',      tipo: 'comunidad', provincias: ['Murcia'],      evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'huelva',      nombre: 'Huelva',      tipo: 'provincia', provincias: ['Huelva'],      evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'cadiz',       nombre: 'Cádiz',       tipo: 'provincia', provincias: ['Cádiz'],       evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'malaga',      nombre: 'Málaga',      tipo: 'provincia', provincias: ['Málaga'],      evidencia: 'sugerencias', impresiones: 0 },
+  { slug: 'granada',     nombre: 'Granada',     tipo: 'provincia', provincias: ['Granada'],     evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'almeria',     nombre: 'Almería',     tipo: 'provincia', provincias: ['Almería'],     evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'baleares',    nombre: 'Baleares',    tipo: 'comunidad', provincias: ['Baleares'],    evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'las-palmas',  nombre: 'Las Palmas',  tipo: 'provincia', provincias: ['Las Palmas'],  evidencia: 'cobertura',   impresiones: 0 },
+  { slug: 'tenerife',    nombre: 'Santa Cruz de Tenerife', tipo: 'provincia', provincias: ['Santa Cruz de Tenerife'], evidencia: 'cobertura', impresiones: 0 },
 ]
 
 export const zonaPorSlug = (slug: string) => ZONAS.find(z => z.slug === slug)
