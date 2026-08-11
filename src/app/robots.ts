@@ -34,6 +34,27 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: ['GPTBot', 'CCBot', 'ClaudeBot', 'anthropic-ai', 'Google-Extended'],
         disallow: '/',
       },
+      {
+        // Rastreadores de auditoría y de bases de datos de enlaces.
+        //
+        // Motivo: coste, no SEO. La ficha /playas/[slug] tarda ~19,7 s de
+        // p95 porque llama en petición a overpass, youtube, pexels y
+        // wikimedia; con ISR, cada rastreo de una página caducada dispara
+        // una regeneración que se paga en GB-hora. Una alerta de Vercel
+        // atribuyó un pico de duración a tráfico mezclado de ISPs móviles
+        // españoles y SiteAuditBot. Estos bots recorren las 4.427 fichas
+        // sin aportar posicionamiento: no son buscadores.
+        //
+        // NO se bloquea nada que envíe usuarios. Google, Bing, Yandex y
+        // los buscadores siguen con acceso completo.
+        userAgent: [
+          'SemrushBot', 'SiteAuditBot', 'SplitSignalBot',
+          'AhrefsBot', 'AhrefsSiteAudit',
+          'DotBot', 'rogerbot', 'MJ12bot', 'BLEXBot',
+          'DataForSeoBot', 'Barkrowler', 'SeekportBot', 'serpstatbot',
+        ],
+        disallow: '/',
+      },
     ],
     sitemap: `${BASE}/sitemap-index.xml`,
     host: BASE,

@@ -1230,6 +1230,27 @@ export async function getFotos(
     const sidecar = await getSidecar()
     const pre = sidecar?.[slug]
     if (pre && Array.isArray(pre) && pre.length > 0) return pre
+
+    // Entrada PRESENTE pero vacía = ya se buscó y no hay. No es lo mismo
+    // que no estar: si la playa tiene clave en el sidecar, el trabajo
+    // offline ya se hizo y repetirlo en caliente no va a encontrar nada
+    // nuevo. Se corta aquí y el llamante cae a la genérica por estado.
+    //
+    // Antes se confundían los dos casos y una entrada vacía disparaba la
+    // cascada de siete APIs externas en CADA regeneración ISR. Con 23
+    // vacías pasaba desapercibido; al depurar el sidecar pasaron a 762 y
+    // eso son 762 páginas martilleando pexels, wikimedia y compañía —dos
+    // de los proveedores que ya aparecen lentos o con 429 en las alertas
+    // de duración de la ruta—. El sidecar se regenera con el script, que
+    // es donde esa búsqueda debe ocurrir: con timeouts largos, pausas y
+    // una sola vez.
+    // Se devuelve el MISMO respaldo que daba la cascada en su último
+    // escalón, no un array vacío: cortar por lo sano dejaría estas
+    // fichas sin ninguna imagen, y la genérica marcada es lo que ya
+    // servían antes. Cambia el coste, no lo que ve nadie.
+    if (Array.isArray(pre)) {
+      return poolFor(undefined).map(url => ({ url, thumb: url, fuente: 'generica' as const }))
+    }
   }
 
   const key       = cacheKey(nombre, lat, lon)
