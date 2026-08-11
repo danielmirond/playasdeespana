@@ -275,6 +275,36 @@ export default async function PlayaPage({ params }: Props) {
     return false
   }
 
+  /**
+   * Igual que needsWarm, pero para listas donde VACÍO ES UNA RESPUESTA.
+   *
+   * Un array vacío significa dos cosas que el código no distingue: «la
+   * consulta falló» y «aquí no hay nada». Para restaurantes, hoteles,
+   * campings, buceo, escuelas o webcams, la segunda es lo normal: una
+   * cala gallega sin un bar en cinco kilómetros devuelve [] y seguirá
+   * devolviéndolo siempre.
+   *
+   * Tratarlo como fallo salía caro. El warming de after() se factura
+   * como duración de la función —el usuario ya tiene su página, servida
+   * con el deadline de 1.500 ms—, así que esas fichas reintentaban las
+   * seis fuentes en CADA regeneración ISR, con Overpass entre ellas,
+   * buscando algo que no existe. Es la explicación de los ~19,7 s de p95
+   * que Vercel marca como crónicos en esta ruta: no es lentitud de cara
+   * al usuario, es trabajo posterior que no termina nunca.
+   *
+   * Un fallo real no se pierde: la siguiente revalidación lo reintenta.
+   * Lo que se deja de hacer es insistir dentro de la misma invocación.
+   *
+   * Se mantiene el comportamiento antiguo donde vacío SÍ es sospechoso:
+   * meteo, mareas y sol siempre traen datos, y fotos tiene su propio
+   * camino de reintento.
+   */
+  const needsWarmLista = (r: any): boolean => {
+    if (!r || r.status === 'rejected') return true
+    const v = r.value
+    return v === null || v === undefined
+  }
+
   const failed: Array<[string, () => Promise<unknown>]> = []
   if (needsWarm(meteoPlaya))     failed.push(['meteo',  () => getMeteoPlaya(playa.lat, playa.lng)])
   if (needsWarm(mareas))         failed.push(['mareas', () => getMareas(playa.lat, playa.lng)])
@@ -283,12 +313,12 @@ export default async function PlayaPage({ params }: Props) {
   // el negative marker que se puede haber escrito al caer en deadline).
   // Así garantizamos un segundo intento real sin restricciones de tiempo.
   if (needsWarm(fotos))          failed.push(['fotos',  () => refetchAndStoreFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia)])
-  if (needsWarm(restaurantes))   failed.push(['rest',   () => getRestaurantes(playa.lat, playa.lng)])
-  if (needsWarm(hoteles))        failed.push(['hot',    () => getHoteles(playa.lat, playa.lng)])
-  if (needsWarm(campingsResult)) failed.push(['camp',   () => getCampings(playa.lat, playa.lng)])
-  if (needsWarm(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })])
-  if (needsWarm(escuelasResult)) failed.push(['esc',    () => getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true })])
-  if (needsWarm(webcamResult))   failed.push(['webcam', () => getWebcams(playa.lat, playa.lng)])
+  if (needsWarmLista(restaurantes))   failed.push(['rest',   () => getRestaurantes(playa.lat, playa.lng)])
+  if (needsWarmLista(hoteles))        failed.push(['hot',    () => getHoteles(playa.lat, playa.lng)])
+  if (needsWarmLista(campingsResult)) failed.push(['camp',   () => getCampings(playa.lat, playa.lng)])
+  if (needsWarmLista(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })])
+  if (needsWarmLista(escuelasResult)) failed.push(['esc',    () => getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true })])
+  if (needsWarmLista(webcamResult))   failed.push(['webcam', () => getWebcams(playa.lat, playa.lng)])
 
   if (failed.length > 0) {
     after(async () => {
