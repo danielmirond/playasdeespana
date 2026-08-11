@@ -20,6 +20,7 @@ import { boatRentalSlug } from '@/lib/boat-rental-helpers'
 import { getAllArticles, CATEGORIES } from '@/lib/magazine'
 import { TIPOS } from '@/lib/tiposQueLlevar'
 import { getPlayasDataModified } from '@/lib/dateModified'
+import { ZONAS } from '@/lib/banderas'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -114,14 +115,7 @@ export async function GET() {
     { es: '/calidad-agua',           en: null,                     p: '0.6', f: 'weekly' },
     { es: '/banderas-negras',        en: null,                     p: '0.7', f: 'weekly' },
     { es: '/banderas-hoy',           en: null,                     p: '0.7', f: 'hourly' },
-    // Las cinco zonas con demanda medida. Se listan a mano y no en bucle
-    // sobre ZONAS para que añadir una zona sea una decisión consciente:
-    // la lista corta es el punto, no un accidente.
-    { es: '/banderas-hoy/tarragona', en: null,                     p: '0.6', f: 'hourly' },
-    { es: '/banderas-hoy/valencia',  en: null,                     p: '0.6', f: 'hourly' },
-    { es: '/banderas-hoy/cataluna',  en: null,                     p: '0.6', f: 'hourly' },
-    { es: '/banderas-hoy/barcelona', en: null,                     p: '0.6', f: 'hourly' },
-    { es: '/banderas-hoy/cantabria', en: null,                     p: '0.6', f: 'hourly' },
+    // Las zonas de banderas NO van aquí: se derivan de ZONAS más abajo.
     { es: '/temperatura-del-agua',   en: null,                     p: '0.7', f: 'hourly' },
     { es: '/webcams',                en: null,                     p: '0.7', f: 'weekly' },
     // EEAT + legal
@@ -132,6 +126,20 @@ export async function GET() {
     { es: '/cookies',                en: null,                     p: '0.3', f: 'yearly' },
   ]
   for (const pg of pages) urls.push(u(pg.es, pg.p, pg.f, today, pg.en ?? undefined))
+
+  // Zonas del semáforo de banderas, derivadas de ZONAS.
+  //
+  // Antes se listaban a mano, y a propósito: la idea era que añadir una
+  // zona costara un gesto deliberado en vez de salir sola en un bucle.
+  // Buena intención, mal sitio. Al pasar de 5 zonas a 23 el sitemap
+  // siguió anunciando cinco y dieciocho páginas quedaron sin declarar
+  // —nadie se acordó de la segunda lista—.
+  //
+  // El freno no se pierde, cambia de sitio: vive en ZONAS, donde cada
+  // entrada tiene que declarar su `evidencia` (gsc, sugerencias o
+  // cobertura). Ahí es donde se decide si una zona existe; aquí solo se
+  // anuncia lo que existe.
+  for (const z of ZONAS) urls.push(u(`/banderas-hoy/${z.slug}`, '0.6', 'hourly', today))
 
   // Las fichas NO van aquí. Viven en /sitemaps/playas/[n], que es quien
   // las pagina y —lo importante— quien aplica esIndexable.
