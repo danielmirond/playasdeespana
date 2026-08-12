@@ -36,6 +36,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = canonicalDeProvincia(slug)
   const duplicada = canonical !== `/provincia/${slug}`
 
+  // Once capitales se llaman igual que su provincia. Cuando pasa, esta
+  // página dice «la provincia de Cádiz» y la del municipio «Cádiz
+  // capital»: el contenido ya era distinto —121 playas frente a 10—,
+  // lo que faltaba era decirlo. Ver lib/geo-duplicadas.
+  const municipios = await getMunicipios()
+  const homonima = municipios.some(m => m.slug === slug)
+  const comoSeLlama = homonima ? `la provincia de ${p.nombre}` : p.nombre
+
   return {
     // El title también cambia cuando cede: dejarlo idéntico al de
     // comunidad sería pedirle a Google que elija entre dos cosas
@@ -43,9 +51,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // lo que sí aporta —el desglose por municipios— en lugar de repetir
     // la promesa de la otra.
     title: duplicada
-      ? `Playas de ${p.nombre}: listado por municipios`
-      : `Playas de ${p.nombre} hoy: mapa, banderas y estado del mar`,
-    description: `Las mejores playas de ${p.nombre}, ${p.comunidad}. Estado del mar y condiciones en tiempo real.`,
+      ? `Playas de ${comoSeLlama}: listado por municipios`
+      : `Playas de ${comoSeLlama} hoy: mapa, banderas y estado del mar`,
+    description: `Las mejores playas de ${comoSeLlama}, ${p.comunidad}. Estado del mar y condiciones en tiempo real.`,
     alternates: {
       canonical,
       // Faltaba el hreflang. /en/provinces sí apuntaba aquí, así que la
@@ -70,6 +78,12 @@ export default async function ProvinciaPage({ params }: Props) {
     getMunicipios(),
   ])
   const municipios = allMunicipios.filter(m => m.provinciaSlug === slug)
+
+  // «la provincia de Cádiz» cuando la capital se llama igual: el H1
+  // tiene que decir lo mismo que el title. Si no, quien llega desde la
+  // SERP no sabe si está en la provincia o en la ciudad.
+  const homonima = allMunicipios.some(m => m.slug === slug)
+  const nombreH1 = homonima ? `la provincia de ${provincia.nombre}` : provincia.nombre
 
   const playasConEstado = playas.map(p => {
     const seed = p.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
@@ -119,7 +133,7 @@ export default async function ProvinciaPage({ params }: Props) {
               H1 decía únicamente el topónimo. Cuando divergen, Google
               tiende a reescribir el title usando el H1, y «Barcelona» a
               secas no compite por «playas de Barcelona». */}
-          <h1 className={styles.titulo}>Playas de {provincia.nombre}</h1>
+          <h1 className={styles.titulo}>Playas de {nombreH1}</h1>
           <p className={styles.subtitulo}>{provincia.comunidad} · España</p>
           <div className={styles.chips}>
             <span className={styles.chip}>{provincia.count} playas</span>

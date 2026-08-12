@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import EnlacesGeoHubs from '@/components/seo/EnlacesGeoHubs'
-import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
+import { getMunicipios, getPlayasByMunicipio, getProvincias } from '@/lib/playas'
+import { esCapitalHomonima } from '@/lib/geo-duplicadas'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './MunicipioPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
@@ -34,9 +35,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const municipios = await getMunicipios()
   const m = municipios.find(x => x.slug === slug)
   if (!m) return {}
+  // Once capitales se llaman igual que su provincia (Cádiz, Málaga,
+  // Barcelona…). El contenido es distinto —la provincia de Cádiz tiene
+  // 121 playas y la ciudad 10— pero ambas se presentaban con el mismo
+  // H1 y titles casi calcados. Se desambigua diciendo «capital», que es
+  // como la gente lo escribe al buscar. Ver lib/geo-duplicadas.
+  const provincias = await getProvincias()
+  const homonima = esCapitalHomonima(slug, provincias.map(p => p.slug))
+  const comoSeLlama = homonima ? `${m.nombre} capital` : m.nombre
+
   return {
-    title: `Playas de ${m.nombre} hoy: cuál elegir, banderas y servicios`,
-    description: `Todas las playas de ${m.nombre} (${m.provincia}). Estado del mar, temperatura del agua y servicios en tiempo real.`,
+    title: `Playas de ${comoSeLlama} hoy: cuál elegir, banderas y servicios`,
+    description: `Todas las playas de ${comoSeLlama} (${m.provincia}). Estado del mar, temperatura del agua y servicios en tiempo real.`,
     alternates: {
       canonical: `/municipio/${slug}`,
       languages: { 'es': `/municipio/${slug}`, 'en': `/en/towns/${slug}` },
@@ -51,6 +61,13 @@ export default async function MunicipioPage({ params }: Props) {
   if (!municipio) notFound()
 
   const playas = await getPlayasByMunicipio(slug)
+
+  // «Cádiz capital» cuando la ciudad se llama igual que su provincia:
+  // el H1 tiene que decir lo mismo que el title, o el usuario que llega
+  // desde la SERP no sabe en cuál de las dos páginas ha caído.
+  const provinciasTodas = await getProvincias()
+  const esCapital = esCapitalHomonima(slug, provinciasTodas.map(x => x.slug))
+  const nombreH1 = esCapital ? `${municipio.nombre} capital` : municipio.nombre
 
   const playasConEstado = playas.map(p => {
     const seed = p.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
@@ -98,7 +115,7 @@ export default async function MunicipioPage({ params }: Props) {
             <span aria-hidden="true">›</span>
             <span aria-current="page">{municipio.nombre}</span>
           </nav>
-          <h1 className={styles.titulo}>Playas de {municipio.nombre}</h1>
+          <h1 className={styles.titulo}>Playas de {nombreH1}</h1>
           <p className={styles.subtitulo}>{municipio.provincia} · {municipio.comunidad}</p>
           <div className={styles.chips}>
             <span className={styles.chip}>{municipio.count} playas</span>

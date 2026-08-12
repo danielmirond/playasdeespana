@@ -64,3 +64,34 @@ export function canonicalDeProvincia(slugProvincia: string): string {
 /** ¿Esta provincia es en realidad una comunidad uniprovincial? */
 export const esProvinciaDuplicada = (slug: string): boolean =>
   slug in PROVINCIA_A_COMUNIDAD
+
+/* ── Cuando la capital se llama igual que la provincia ──────────────
+ *
+ * Once slugs son a la vez provincia y municipio: Cádiz, Barcelona,
+ * Valencia, Málaga, Almería, Tarragona, A Coruña, Pontevedra, Santa
+ * Cruz de Tenerife, Ceuta y Melilla. En todos, el municipio es la
+ * capital.
+ *
+ * Aquí el contenido SÍ es distinto —la provincia de Cádiz tiene 121
+ * playas y la ciudad 10—, así que no hay nada que consolidar. El
+ * problema es que ambas se presentaban igual: H1 «Playas de Cádiz» en
+ * las dos y titles casi calcados. Ni el usuario ni Google podían saber
+ * cuál es cuál.
+ *
+ * Se desambigua con las dos formas que la gente escribe de verdad:
+ * «playas de la provincia de Cádiz» y «playas de Cádiz capital».
+ *
+ * La colisión NO se guarda en una lista: se detecta cruzando los slugs
+ * de provincia con los de municipio en cada render. Una lista a mano
+ * envejece —ya nos pasó con las zonas del sitemap, que se quedaron en
+ * cinco cuando eran veintitrés— y esta se puede derivar del dato.
+ */
+
+/** ¿El nombre de este municipio choca con el de su provincia? */
+export function esCapitalHomonima(
+  slugMunicipio: string,
+  slugsProvincia: Iterable<string>,
+): boolean {
+  for (const s of slugsProvincia) if (s === slugMunicipio) return true
+  return false
+}
