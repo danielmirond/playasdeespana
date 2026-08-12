@@ -1,5 +1,6 @@
 // src/app/en/provinces/[slug]/page.tsx
 import type { Metadata } from 'next'
+import { PROVINCIA_A_COMUNIDAD } from '@/lib/geo-duplicadas'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -23,13 +24,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const provincias = await getProvincias()
   const p = provincias.find(x => x.slug === slug)
   if (!p) return {}
+  // Mismo duplicado que en español: en las comunidades uniprovinciales
+  // esta página y la de comunidad son idénticas. Cede la canonical.
+  const comunidad = PROVINCIA_A_COMUNIDAD[slug]
+  const canonical = comunidad ? `/en/communities/${comunidad}` : `/en/provinces/${slug}`
+  const esEs = comunidad ? `/comunidad/${comunidad}` : `/provincia/${slug}`
+
   return {
-    title: `Beaches in ${p.nombre} | ${p.count} beaches`,
+    title: comunidad
+      ? `Beaches in ${p.nombre} by town`
+      : `Beaches in ${p.nombre} | ${p.count} beaches`,
     description: `The best beaches in ${p.nombre}, ${p.comunidad}, Spain. Real-time sea conditions, water temperature and beach facilities.`,
     openGraph: { locale: 'en_GB' },
     alternates: {
-      canonical: `/en/provinces/${slug}`,
-      languages: { 'es': `/provincia/${slug}`, 'en': `/en/provinces/${slug}`, 'x-default': `/provincia/${slug}` },
+      canonical,
+      // Los hreflang apuntan al par CANÓNICO, no a esta URL: mandar a
+      // Google a una página que a su vez cede la canonical es darle
+      // trabajo para nada.
+      languages: { 'es': esEs, 'en': canonical, 'x-default': esEs },
     },
   }
 }

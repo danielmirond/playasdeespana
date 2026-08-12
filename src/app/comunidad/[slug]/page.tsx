@@ -35,7 +35,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Playas de ${c.nombre} hoy: mapa, banderas y estado del mar`,
     description: `Descubre las ${c.count} mejores playas de ${c.nombre}. Estado del mar, temperatura del agua y servicios en tiempo real.`,
-    alternates: { canonical: `/comunidad/${slug}` },
+    alternates: {
+      canonical: `/comunidad/${slug}`,
+      // Faltaba por completo. /en/communities/[slug] sí apuntaba aquí,
+      // así que la relación era unidireccional: Google solo tiene en
+      // cuenta un par de hreflang cuando las dos partes se reconocen, y
+      // descartaba el par entero.
+      //
+      // Importa más desde que esta página recoge la canonical de las
+      // provincias uniprovinciales (ver lib/geo-duplicadas): es la URL
+      // que se queda con la señal, y tenía que declarar su par.
+      languages: {
+        es: `/comunidad/${slug}`,
+        en: `/en/communities/${slug}`,
+        'x-default': `/comunidad/${slug}`,
+      },
+    },
   }
 }
 

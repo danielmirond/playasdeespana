@@ -10,6 +10,7 @@ import styles from './ProvinciaPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
+import { canonicalDeProvincia } from '@/lib/geo-duplicadas'
 import GygActivities from '@/components/GygActivities'
 import { tinte } from '@/lib/tinte'
 import SeaIcon from '@/components/ui/SeaIcon'
@@ -29,10 +30,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const provincias = await getProvincias()
   const p = provincias.find(x => x.slug === slug)
   if (!p) return {}
+  // En las comunidades uniprovinciales esta página es idéntica a la de
+  // comunidad —misma lista de playas, mismo title— así que cede la
+  // canonical en vez de competir consigo misma. Ver lib/geo-duplicadas.
+  const canonical = canonicalDeProvincia(slug)
+  const duplicada = canonical !== `/provincia/${slug}`
+
   return {
-    title: `Playas de ${p.nombre} hoy: mapa, banderas y estado del mar`,
+    // El title también cambia cuando cede: dejarlo idéntico al de
+    // comunidad sería pedirle a Google que elija entre dos cosas
+    // iguales y confiar en que acierte. Aquí la página se presenta por
+    // lo que sí aporta —el desglose por municipios— en lugar de repetir
+    // la promesa de la otra.
+    title: duplicada
+      ? `Playas de ${p.nombre}: listado por municipios`
+      : `Playas de ${p.nombre} hoy: mapa, banderas y estado del mar`,
     description: `Las mejores playas de ${p.nombre}, ${p.comunidad}. Estado del mar y condiciones en tiempo real.`,
-    alternates: { canonical: `/provincia/${slug}` },
+    alternates: {
+      canonical,
+      // Faltaba el hreflang. /en/provinces sí apuntaba aquí, así que la
+      // relación era unidireccional y Google descarta esos pares
+      // enteros: solo los tiene en cuenta cuando ambas partes se
+      // reconocen. Apuntan al par CANÓNICO, no a esta URL.
+      languages: duplicada
+        ? { es: canonical, en: `/en/communities/${canonical.split('/').pop()}`, 'x-default': canonical }
+        : { es: `/provincia/${slug}`, en: `/en/provinces/${slug}`, 'x-default': `/provincia/${slug}` },
+    },
   }
 }
 
@@ -92,7 +115,11 @@ export default async function ProvinciaPage({ params }: Props) {
             <span aria-hidden="true">›</span>
             <span aria-current="page">{provincia.nombre}</span>
           </nav>
-          <h1 className={styles.titulo}>{provincia.nombre}</h1>
+          {/* «Playas de X», no solo «X»: el title promete playas y el
+              H1 decía únicamente el topónimo. Cuando divergen, Google
+              tiende a reescribir el title usando el H1, y «Barcelona» a
+              secas no compite por «playas de Barcelona». */}
+          <h1 className={styles.titulo}>Playas de {provincia.nombre}</h1>
           <p className={styles.subtitulo}>{provincia.comunidad} · España</p>
           <div className={styles.chips}>
             <span className={styles.chip}>{provincia.count} playas</span>
