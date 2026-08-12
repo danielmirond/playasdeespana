@@ -21,40 +21,73 @@
   var wrap = document.getElementById('pildora');
   if (!wrap) return;
 
-  var panel  = document.getElementById('pildora-panel');
-  var elSec  = wrap.querySelector('[data-pildora-seccion]');
-  var elCont = wrap.querySelector('[data-pildora-contador]');
-  var velo   = wrap.querySelector('[data-pildora-velo]');
-  var btnEst = wrap.querySelector('[data-pildora-estado]');
-  var items  = [].slice.call(wrap.querySelectorAll('[data-pildora-item]'));
-  var body   = document.body;
+  var body = document.body;
+
+  /* ── Nada de nodos cacheados ──────────────────────────────────────
+   * Este script vive dentro de un árbol que React posee y puede
+   * reemplazar entero: le basta con un fallo de hidratación para
+   * descartar el DOM del servidor y repintarlo desde cero.
+   *
+   * Cuando eso pasaba, las referencias que guardábamos aquí arriba
+   * (elSec, elCont, secs[i].el) quedaban apuntando a nodos huérfanos.
+   * El script seguía funcionando y seguía escribiendo... en elementos
+   * que ya no estaban en la página. La píldora se congelaba en el HTML
+   * del servidor —«01 / 18 Webcam» para siempre— y no había ningún
+   * error en consola que lo delatara: fallaba en silencio.
+   *
+   * Se arreglaron los dos mismatches que lo provocaban, pero la
+   * fragilidad era del diseño, no de aquel bug concreto. Ahora los
+   * nodos se resuelven en cada medición: cuesta un querySelector por
+   * frame de scroll y a cambio el script sobrevive a que React
+   * reconstruya lo que quiera, cuando quiera.
+   */
+  function vivo() {
+    var w = document.getElementById('pildora');
+    if (!w) return null;
+    return {
+      wrap:  w,
+      sec:   w.querySelector('[data-pildora-seccion]'),
+      cont:  w.querySelector('[data-pildora-contador]'),
+      velo:  w.querySelector('[data-pildora-velo]'),
+      items: [].slice.call(w.querySelectorAll('[data-pildora-item]')),
+    };
+  }
+
+  var ini = vivo();
+  if (!ini || !ini.items.length) return;
 
   // Solo las secciones que existen en ESTA ficha (no todas las playas
-  // tienen chiringuitos, webcam o campings).
-  var secs = [];
-  items.forEach(function (a) {
-    var el = document.getElementById(a.getAttribute('data-pildora-item'));
-    if (el) secs.push({ el: el, a: a, label: a.textContent.replace(/^\s*\d+\s*/, '').trim() });
-    else a.style.display = 'none';   // el índice no ofrece lo que no hay
-  });
-  if (!secs.length) return;
+  // tienen chiringuitos, webcam o campings). Se recalcula en cada
+  // medición por lo mismo: el conjunto puede cambiar bajo los pies.
+  function seccionesVivas(v) {
+    var out = [];
+    v.items.forEach(function (a) {
+      var id = a.getAttribute('data-pildora-item');
+      var el = document.getElementById(id);
+      if (el) out.push({ el: el, a: a, id: id, label: a.textContent.replace(/^\s*\d+\s*/, '').trim() });
+      else a.style.display = 'none';   // el índice no ofrece lo que no hay
+    });
+    // Renumerar lo que queda visible: si la playa no tiene chiringuitos,
+    // el índice no debe saltar del 07 al 09 ni desmentir al contador.
+    out.forEach(function (s, i) {
+      var num = s.a.querySelector('span');
+      var txt = String(i + 1).padStart(2, '0');
+      if (num && num.textContent !== txt) num.textContent = txt;
+    });
+    return out;
+  }
 
-  // Renumerar lo que queda visible: si la playa no tiene chiringuitos, el
-  // índice no debe saltar del 07 al 09 ni desmentir al contador.
-  secs.forEach(function (s, i) {
-    var num = s.a.querySelector('span');
-    if (num) num.textContent = String(i + 1).padStart(2, '0');
-  });
-
-  var total = String(secs.length).padStart(2, '0');
-  var actual = -1;
-
-  function pinta(i) {
-    if (i === actual || !secs[i]) return;
-    actual = i;
-    if (elSec)  elSec.textContent  = secs[i].label;
-    if (elCont) elCont.textContent = String(i + 1).padStart(2, '0') + ' / ' + total;
-    items.forEach(function (a) { a.removeAttribute('aria-current'); });
+  function pinta(v, secs, i) {
+    if (!secs[i]) return;
+    var total = String(secs.length).padStart(2, '0');
+    var etiqueta = secs[i].label;
+    var contador = String(i + 1).padStart(2, '0') + ' / ' + total;
+    // Se compara contra lo que hay ESCRITO, no contra un índice que
+    // recordemos: si React revirtió el texto, hay que reescribirlo
+    // aunque la sección activa no haya cambiado.
+    if (v.sec  && v.sec.textContent  !== etiqueta) v.sec.textContent  = etiqueta;
+    if (v.cont && v.cont.textContent !== contador) v.cont.textContent = contador;
+    v.items.forEach(function (a) { a.removeAttribute('aria-current'); });
     secs[i].a.setAttribute('aria-current', 'location');
   }
 
@@ -71,6 +104,11 @@
 
   function medir() {
     pendiente = false;
+    var v = vivo();
+    if (!v) return;               // la píldora ya no está: nada que hacer
+    var secs = seccionesVivas(v);
+    if (!secs.length) return;
+
     var vh = window.innerHeight;
     var y  = scrollY();
 
@@ -81,7 +119,7 @@
     for (var i = 0; i < secs.length; i++) {
       if (secs[i].el.getBoundingClientRect().top <= linea) idx = i; else break;
     }
-    pinta(idx);
+    pinta(v, secs, idx);
 
     // La píldora entra cuando el hero deja de mandar: al aterrizar, la
     // respuesta a "¿me baño hoy?" no compite con nada.
@@ -108,18 +146,26 @@
   window.addEventListener('load', medir);
 
   // Cerrar el panel: al tocar el velo, al elegir sección o con Escape.
-  function cerrar() { if (panel) panel.open = false; }
-  if (velo) velo.addEventListener('click', cerrar);
-  items.forEach(function (a) { a.addEventListener('click', cerrar); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
-
-  // "Cómo está hoy" reutiliza el drawer de reportar que ya existe.
-  // (Hay más de un disparador: la píldora, el aviso de presencia…)
-  [].slice.call(document.querySelectorAll('[data-pildora-estado]')).forEach(function (b) {
-    b.addEventListener('click', function () {
+  //
+  // Delegado en document, no atado a cada nodo, por la misma razón que
+  // todo lo de arriba: los oyentes puestos sobre elementos concretos se
+  // pierden si React los reemplaza, y entonces el panel deja de cerrarse
+  // sin que nadie se entere. Un solo oyente en la raíz no se pierde.
+  function cerrar() {
+    var p = document.getElementById('pildora-panel');
+    if (p) p.open = false;
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+    if (t.closest('[data-pildora-velo]') || t.closest('[data-pildora-item]')) cerrar();
+    // "Cómo está hoy" reutiliza el drawer de reportar que ya existe.
+    // (Hay más de un disparador: la píldora, el aviso de presencia…)
+    if (t.closest('[data-pildora-estado]')) {
       window.dispatchEvent(new CustomEvent('open-reportar-drawer'));
-    });
+    }
   });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
 
   /* ── ¿Está el usuario EN la playa? ────────────────────────────────
    * Si lo está, "cómo llegar" sobra y lo útil es que cuente cómo está:

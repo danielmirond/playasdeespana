@@ -531,12 +531,30 @@ export default async function PlayaPage({ params }: Props) {
     viento: meteo.viento ?? 10,
     uv: meteo.uv ?? 5,
   }) : undefined
+  // Qué día es hoy, en hora peninsular y decidido AQUÍ, en el servidor.
+  //
+  // Vercel corre en UTC, así que `new Date().getMonth()` a secas da el
+  // mes equivocado durante las primeras horas del día y el día
+  // equivocado en el cambio de mes. Y lo que es peor: TraficoSection
+  // hacía ese mismo cálculo en su propio render siendo un componente
+  // que se renderiza en las dos partes, con lo que servidor y navegador
+  // llegaban a conclusiones distintas y rompían la hidratación de la
+  // ficha entera —de ahí que la píldora contextual se quedara clavada—.
+  //
+  // Calculado una vez aquí y pasado como prop, los dos lados dicen lo
+  // mismo por construcción, que es lo único que la hidratación acepta.
+  const fmtMadrid = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit',
+  })
+  const hoyMadridISO = fmtMadrid.format(new Date())        // YYYY-MM-DD
+  const mesMadrid = Number(hoyMadridISO.slice(5, 7))
+
   const horaIdeal = calcularHoraIdeal({
     uv: meteoPlayaData?.uv_max ?? null,
     amanecer: solData?.amanecer,
     atardecer: solData?.atardecer,
     mareas: mareasLunar,
-    mes: new Date().getMonth() + 1,
+    mes: mesMadrid,
   })
 
   const calidad = calidadResult.status === 'fulfilled' ? calidadResult.value : null
@@ -719,6 +737,7 @@ export default async function PlayaPage({ params }: Props) {
         necesidades={necesidadesAsistente}
         videoData={videoData}
         webcams={webcamsData}
+        hoyISO={hoyMadridISO}
       />
       {/* El alquiler de barcos es bloque DURO: mete al usuario en el agua.
           Vive aquí, hermano de <FichaBody>, así que el Reorder que aplica

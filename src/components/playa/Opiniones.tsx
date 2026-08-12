@@ -258,11 +258,29 @@ function Stars({ value, size = 14 }: { value: number; size?: number }) {
   )
 }
 
+/**
+ * Meses abreviados a mano, sin Intl.
+ *
+ * `toLocaleDateString(…, { month: 'short' })` depende de los datos ICU
+ * con los que se haya compilado cada entorno, y el de Node no coincide
+ * con el del navegador: «sept» / «sept.» / «set.» para el mismo mes. En
+ * un componente que se renderiza en los dos lados, eso es un mismatch
+ * de hidratación garantizado en toda ficha con opiniones.
+ *
+ * Es el mismo motivo por el que el conteo de playas se formatea a mano
+ * en lib/playas: un formato que cambia según dónde se compile no sirve.
+ */
+const MESES_CORTOS: Record<'es' | 'en', string[]> = {
+  es: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+}
+
 function Review({ op, locale }: { op: OpinionPublica; locale: 'es' | 'en' }) {
   const isoDate = new Date(op.ts).toISOString()
-  const dateLabel = new Date(op.ts).toLocaleDateString(locale === 'en' ? 'en-GB' : 'es-ES', {
-    month: 'short', year: 'numeric',
-  })
+  // UTC en los dos lados: getMonth() local daría meses distintos según
+  // la zona del visitante en las opiniones de fin de mes.
+  const d = new Date(op.ts)
+  const dateLabel = `${MESES_CORTOS[locale][d.getUTCMonth()]} ${d.getUTCFullYear()}`
   const initial = op.alias.charAt(0).toUpperCase()
   // itemScope + itemProp microdata redundante con el JSON-LD por si Google
   // intenta validar consistencia HTML↔schema (Review schema requiere

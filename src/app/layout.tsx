@@ -346,7 +346,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Service Worker registration. offline beach fichas */}
         <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js')` }} />
       </head>
-      <body>
+      {/* suppressHydrationWarning en el <body>, y solo aquí.
+          public/pildora.js se carga con `defer`, o sea que corre ANTES
+          de que React hidrate, y escribe dos atributos en el body:
+          data-pildora (si la píldora se ve) y data-ctx (si toca
+          "cómo llegar" o "cómo está"). React llega después, encuentra
+          atributos que él no puso y aborta la hidratación.
+          Es el mismo patrón que los scripts de tema que escriben
+          data-theme antes de pintar, y la salida documentada de React
+          es esta. Solo silencia el <body>: cualquier mismatch dentro
+          del árbol se sigue viendo.
+          Ojo, no es cosmético: al abortar, React repinta el árbol
+          entero y se lleva por delante lo que el script había hecho
+          —así se quedó la píldora congelada en «01 / 18 Webcam»—. */}
+      <body suppressHydrationWarning>
         {/* Organization + WebSite globales referenciables por @id */}
         <script
           type="application/ld+json"

@@ -8,7 +8,23 @@ import { useEffect, useState } from 'react'
 import type { Playa } from '@/types'
 import { tinte } from '@/lib/tinte'
 
-interface Props { playa: Playa }
+interface Props {
+  playa: Playa
+  /**
+   * El día de HOY en hora peninsular, decidido por el servidor, como
+   * `YYYY-MM-DD`.
+   *
+   * Viene como prop en vez de calcularse aquí porque este componente se
+   * renderiza en las dos partes: al hacerlo con `new Date()` daba una
+   * respuesta en Vercel (UTC) y otra en el navegador (Madrid), y eso
+   * rompía la hidratación de la ficha entera.
+   *
+   * Una sola fecha en vez de día y mes sueltos: de ella salen el día de
+   * la semana, el mes y si es festivo, y así no pueden descuadrarse
+   * entre sí.
+   */
+  hoyISO: string
+}
 
 interface TraficoData {
   fluidez:     number
@@ -95,6 +111,14 @@ function calcAfluencia(
   hora: number,
   diaSemana: number,
   mes: number,
+  /**
+   * El día de hoy, recibido de fuera. Antes se hacía `new Date()` aquí
+   * dentro, y como esta función se llama en el render de las 24 barras,
+   * servidor y cliente podían estar en días distintos —UTC frente a
+   * Madrid, o un HTML de ISR cacheado de ayer— y las barras salían con
+   * valores diferentes a cada lado. Recibirlo obliga a que sea el mismo.
+   */
+  hoy: Date,
   comunidad?: string,
   esUrbana?: boolean,
 ): number {
@@ -106,7 +130,6 @@ function calcAfluencia(
   const esFinDeSemana = diaSemana === 0 || diaSemana === 6
   if (esFinDeSemana) base *= 1.30
 
-  const hoy = new Date()
   if (esFestivo(hoy))              base *= 1.25
   if (esPuente(diaSemana, hoy))    base *= 1.15
   if (esUrbana) base *= esFinDeSemana ? 1.10 : 1.20
@@ -162,11 +185,29 @@ async function fetchParkings(lat: number, lng: number): Promise<Parking[]> {
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 
-export default function TraficoSection({ playa }: Props) {
-  const now        = new Date()
-  const horaActual = now.getHours()
-  const dia        = now.getDay()
-  const mes        = now.getMonth() + 1
+export default function TraficoSection({ playa, hoyISO }: Props) {
+  // Mediodía UTC a propósito: con la fecha ya resuelta en Madrid, las
+  // 12:00 caen en el mismo día natural en cualquier zona razonable, así
+  // que los getters locales de esFestivo() no se van al día anterior.
+  const hoy = new Date(hoyISO + 'T12:00:00Z')
+  const dia = hoy.getUTCDay()
+  const mes = hoy.getUTCMonth() + 1
+
+  /**
+   * «Hoy» y «ahora» son dos cosas distintas y solo una depende del
+   * reloj del visitante.
+   *
+   * `dia` y `mes` vienen del servidor (props): alimentan las 24 barras
+   * de afluencia, así que el gráfico va en el HTML servido y cliente y
+   * servidor coinciden por construcción.
+   *
+   * La hora, en cambio, no puede pintarse en servidor: la página está
+   * cacheada hasta una hora, así que cualquier «son las X» del HTML
+   * llega caducada. Se resuelve tras montar; hasta entonces el gráfico
+   * se ve entero, solo sin el resalte de la hora en curso.
+   */
+  const [horaActual, setHoraActual] = useState<number | null>(null)
+  useEffect(() => { setHoraActual(new Date().getHours()) }, [])
 
   const zona = ZONA[playa.comunidad ?? ''] ?? 'med'
 
@@ -178,12 +219,15 @@ export default function TraficoSection({ playa }: Props) {
   const horas = Array.from({ length: 24 }, (_, h) => ({
     h,
     label: h === 0 ? '12am' : h < 12 ? `${h}am` : h === 12 ? '12pm' : `${h - 12}pm`,
-    pct: calcAfluencia(h, dia, mes, playa.comunidad, esUrbana),
+    pct: calcAfluencia(h, dia, mes, hoy, playa.comunidad, esUrbana),
     esAhora: h === horaActual,
   }))
 
-  const ahoraData  = horas[horaActual]
-  const nivelAhora = nivelAfluencia(ahoraData.pct)
+  // Nulos hasta que el cliente sepa la hora. Quien los use tiene que
+  // contemplarlo: en el primer render, y para quien no ejecute JS, no
+  // hay «ahora» que enseñar.
+  const ahoraData  = horaActual === null ? null : horas[horaActual]
+  const nivelAhora = ahoraData ? nivelAfluencia(ahoraData.pct) : null
 
   const mejorHora = horas
     .filter(h => h.h >= 7 && h.h <= 20)
@@ -251,17 +295,35 @@ export default function TraficoSection({ playa }: Props) {
         {/* TAB AFLUENCIA */}
         {tabActivo === 'afluencia' && (
           <div role="tabpanel" id="tabpanel-afluencia" aria-labelledby="tab-afluencia">
+            {/* La ocupación «ahora» depende del reloj del visitante, así
+                que no existe hasta que monta. El bloque se pinta igual y
+                con la misma altura —minHeight— para que aparecer no
+                desplace nada: el CLS de esta ficha es 0 y sigue así.
+                «Mejor hora hoy» no depende de la hora, solo del día, y
+                por eso se ve desde el HTML servido. */}
             <div style={{
               display: 'flex', alignItems: 'center', gap: '1rem',
               padding: '.75rem 1rem', borderRadius: '4px',
-              background: nivelAhora.bg, marginBottom: '1rem',
+              minHeight: '3.4rem',
+              background: nivelAhora ? nivelAhora.bg : 'var(--card-bg2, rgba(0,0,0,.03))',
+              marginBottom: '1rem',
             }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '1.6rem', fontWeight: 700, color: nivelAhora.color, lineHeight: 1 }}>{ahoraData.pct}%</div>
+                <div style={{
+                  fontSize: '1.6rem', fontWeight: 700, lineHeight: 1,
+                  color: nivelAhora ? nivelAhora.color : 'var(--muted)',
+                }}>
+                  {ahoraData ? `${ahoraData.pct}%` : '—'}
+                </div>
                 <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.1rem' }}>ocupación</div>
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '.85rem', color: nivelAhora.color }}>{nivelAhora.label}</div>
+                <div style={{
+                  fontWeight: 700, fontSize: '.85rem',
+                  color: nivelAhora ? nivelAhora.color : 'var(--muted)',
+                }}>
+                  {nivelAhora ? nivelAhora.label : 'A esta hora'}
+                </div>
                 <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.15rem' }}>
                   Mejor hora hoy: <strong style={{ color: 'var(--accent)' }}>{mejorHora.label}</strong> ({mejorHora.pct}% ocupación)
                 </div>
@@ -287,7 +349,7 @@ export default function TraficoSection({ playa }: Props) {
             <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.5rem', fontStyle: 'italic' }}>
               {etiquetaTemporada(mes, zona)} · {dia === 0 || dia === 6 ? 'Fin de semana' : 'Día laborable'}
               {esUrbana ? ' · Playa urbana' : ''}
-              {esFestivo(now) ? ' · Festivo' : ''}
+              {esFestivo(hoy) ? ' · Festivo' : ''}
             </div>
           </div>
         )}

@@ -20,6 +20,8 @@ interface Props {
   vientoDir:  string
   agua:       number
   periodo?:   number
+  /** Hoy en hora peninsular (YYYY-MM-DD), decidido por el servidor. */
+  hoyISO?:    string
   forecast?:  ForecastDay[]
   turbidez?:  TurbidezData | null
   meteo?:     MeteoDay[]
@@ -81,7 +83,7 @@ function scoreSnorkel(olas: number, turbidez?: TurbidezData | null): number {
   return Math.min(5, score)
 }
 
-export default function SurfSection({ playa, olas, viento, vientoDir, agua, periodo = 8, forecast, turbidez, meteo }: Props) {
+export default function SurfSection({ playa, olas, viento, vientoDir, agua, periodo = 8, forecast, turbidez, meteo, hoyISO }: Props) {
   const estado     = calcEstado(olas, viento)
   const estadoInfo = ESTADO_SURF[estado] ?? ESTADO_SURF.CALMA
   const tieneSpot  = playa.actividades?.surf ?? false
@@ -236,9 +238,17 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                     border: `1px solid ${i === 0 ? tinte(est.color, 25) : 'var(--line)'}`,
                   }}>
                     <div style={{ fontSize:'.72rem', color: 'var(--muted)', fontWeight: 600, marginBottom: '.2rem' }}>
+                      {/* Respaldo cuando el forecast no trae fecha. Se
+                          calcula desde hoyISO —que decide el servidor—
+                          y no con new Date(): este componente se
+                          renderiza en las dos partes, y un «Mié 13» en
+                          el HTML frente a un «Jue 14» en el navegador
+                          rompe la hidratación de la ficha entera. */}
                       {i === 0 ? 'Hoy' : d?.fecha ?? (() => {
-                        const dd = new Date(); dd.setDate(dd.getDate() + i)
-                        return ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'][dd.getDay()] + ' ' + dd.getDate()
+                        if (!hoyISO) return ''
+                        const dd = new Date(hoyISO + 'T12:00:00Z')
+                        dd.setUTCDate(dd.getUTCDate() + i)
+                        return DIAS_ES[dd.getUTCDay()] + ' ' + dd.getUTCDate()
                       })()}
                     </div>
                     {/* Icono meteo si hay lluvia, sino icono surf */}

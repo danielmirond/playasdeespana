@@ -47,6 +47,7 @@ import WebcamPlaya from './WebcamPlaya'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge, Martini } from '@phosphor-icons/react'
 import AdSlot from '@/components/ui/AdSlot'
 import { tinte } from '@/lib/tinte'
+import { miles } from '@/lib/miles'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
 const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
@@ -124,6 +125,25 @@ interface Props {
   municipioSlug?:  string
   /** Slug de la provincia si la página existe. */
   provinciaSlug?:  string
+  /**
+   * Qué día es hoy, decidido por el SERVIDOR y en hora peninsular.
+   *
+   * TraficoSection lo necesita para estimar la afluencia por hora, y lo
+   * calculaba con `new Date()` en su propio render. Como es un
+   * componente cliente que TAMBIÉN se renderiza en servidor, eso daba
+   * dos respuestas distintas —Vercel corre en UTC, el visitante está en
+   * Madrid— y rompía la hidratación en cada ficha.
+   *
+   * Fijar la zona horaria dentro del componente no bastaría: la página
+   * es ISR con una hora de caducidad, así que el HTML cacheado puede
+   * ser de ayer aunque el reloj coincida. Viniendo del servidor como
+   * prop, cliente y servidor dicen lo mismo por construcción.
+   *
+   * Formato `YYYY-MM-DD`. Una sola fecha en vez de día y mes sueltos:
+   * de ella salen el día de la semana, el mes y si es festivo, y así no
+   * pueden descuadrarse entre sí.
+   */
+  hoyISO:          string
 }
 
 const T = {
@@ -290,7 +310,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', vientoReportado, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', vientoReportado, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -826,7 +846,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           playa={playa} olas={meteo.olas} viento={meteo.viento}
           vientoDir={meteo.vientoDireccion} agua={meteo.agua ?? 20}
           periodo={meteo.periodo} forecast={forecastSurf ?? undefined}
-          turbidez={turbidez} meteo={meteoForecast}
+          turbidez={turbidez} meteo={meteoForecast} hoyISO={hoyISO}
         />}
 
 
@@ -877,8 +897,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         </div>
 
         {/* TRÁFICO */}
-        <div key="trafico" id="s-trafico">
-          <TraficoSection playa={playa} />
+        {/* El id vive en la raíz de TraficoSection, no aquí: este div
+            existe solo para dar la `key` a Reorder. Llevaba también
+            id="s-trafico" y eran DOS elementos con el mismo id —HTML
+            inválido—, así que cualquier índice apuntaba al envoltorio
+            vacío en vez de a la sección. */}
+        <div key="trafico">
+          <TraficoSection playa={playa} hoyISO={hoyISO} />
         </div>
 
         {/* MASIFICACIÓN + MEJOR HORA — H2 con nombre (long-tail "mejor hora
@@ -972,8 +997,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 items={chiringuitos.map(c => ({
                   id: c.googleId,
                   nombre: c.nombre,
+                  // miles() y no toLocaleString: el ICU de Node no pone
+                  // el separador y el del navegador sí, y un restaurante
+                  // con 1.200 reseñas bastaba para romper la hidratación.
                   meta: c.reseñas > 0
-                    ? `${c.reseñas.toLocaleString(locale === 'en' ? 'en' : 'es')} ${i18n.resenas}`
+                    ? `${miles(c.reseñas)} ${i18n.resenas}`
                     : undefined,
                   distancia: `${c.distancia_m} m`,
                   rating: c.rating,
@@ -1421,13 +1449,43 @@ function FaqSection({ playa, meteo, banderaPlaya, medusas, mareasLunar, locale =
   )
 }
 
+/**
+ * Fecha y hora corta, sin depender de ICU.
+ *
+ * `toLocaleString(…, { month: 'short' })` sale distinto según los datos
+ * ICU con los que se haya compilado cada entorno. Medido en el Node de
+ * este proyecto: «15 sept,» — el navegador escribe otra cosa. Como este
+ * componente se renderiza en las dos partes, esa diferencia rompe la
+ * hidratación de la ficha entera.
+ *
+ * No es la primera vez que ICU muerde aquí: `TOTAL_PLAYAS_TXT` en
+ * lib/playas ya formatea los miles a mano porque
+ * `(4491).toLocaleString('es-ES')` devolvía «4491» pelado en este mismo
+ * Node. La regla del sitio es no depender de un formato que cambia
+ * según dónde se ejecute.
+ *
+ * La hora sí se pide a Intl, pero solo `hour`/`minute` con zona fijada:
+ * ahí no hay nombres que traducir, solo dígitos.
+ */
+const MESES_ABREV: Record<'es' | 'en', string[]> = {
+  es: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+}
+
 function formatTime(iso?: string, locale: string = 'es'): string {
   if (!iso) return ''
   try {
-    return new Date(iso).toLocaleString(locale === 'en' ? 'en-GB' : 'es-ES', {
-      day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
+    const d = new Date(iso)
+    if (Number.isNaN(d.getTime())) return ''
+    // Partes en hora peninsular, sin nombres: día, mes y hora numéricos.
+    const partes = new Intl.DateTimeFormat('en-GB', {
       timeZone: 'Europe/Madrid',
-    })
+      day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,
+    }).formatToParts(d)
+    const p = (t: string) => partes.find(x => x.type === t)?.value ?? ''
+    const dia = String(Number(p('day')))
+    const mes = MESES_ABREV[locale === 'en' ? 'en' : 'es'][Number(p('month')) - 1]
+    return `${dia} ${mes}, ${p('hour')}:${p('minute')}`
   } catch { return '' }
 }
 

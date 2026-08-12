@@ -157,12 +157,22 @@ export default async function BeachPageEn({ params }: Props) {
   const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
+
+  // Qué día es hoy, en hora peninsular y decidido aquí, en el servidor.
+  // Mismo motivo que en la ficha en español: TraficoSection se renderiza
+  // en las dos partes y calcularlo por su cuenta daba UTC en Vercel y
+  // hora local en el navegador, rompiendo la hidratación. Las playas son
+  // las mismas aunque la página esté en inglés.
+  const hoyMadridISO = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date())                                  // YYYY-MM-DD
+
   const horaIdeal = calcularHoraIdeal({
     uv: meteoPlayaData?.uv_max ?? null,
     amanecer: solData?.amanecer,
     atardecer: solData?.atardecer,
     mareas: mareasLunar,
-    mes: new Date().getMonth() + 1,
+    mes: Number(hoyMadridISO.slice(5, 7)),
   })
 
   const calidad = calidadResult.status === 'fulfilled' ? calidadResult.value : null
@@ -248,6 +258,7 @@ export default async function BeachPageEn({ params }: Props) {
         playasCercanas={playasCercanas}
         municipioSlug={municipioSlugProp}
         provinciaSlug={provinciaSlug}
+        hoyISO={hoyMadridISO}
       />
     </>
   )

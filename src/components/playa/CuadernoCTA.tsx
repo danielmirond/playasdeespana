@@ -53,7 +53,26 @@ export default function CuadernoCTA({ slug, nombre, municipio = '', provincia = 
   // Se pinta el estado "sin sellar" desde el servidor y el cliente solo
   // lo MEJORA cuando descubre que la playa ya está en el cuaderno.
 
-  const fechaHoy = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '·')
+  /**
+   * La fecha del sello, después de montar.
+   *
+   * Se calculaba en el render con toLocaleDateString y sin `timeZone`:
+   * el servidor la formateaba en UTC y el navegador en la hora del
+   * visitante, así que de madrugada salían días distintos y la
+   * hidratación de la ficha se rompía. Era una de las dos causas del
+   * React #418 que dejaba la píldora contextual congelada.
+   *
+   * Es decoración —la fecha del sello del cuaderno—, no tiene valor SEO
+   * y no merece pasarla como prop desde el servidor. Basta con no
+   * pintarla hasta que haya un reloj de verdad. El hueco se reserva en
+   * el marcado para que aparecer no mueva nada.
+   */
+  const [fechaHoy, setFechaHoy] = useState('')
+  useEffect(() => {
+    setFechaHoy(new Date().toLocaleDateString('es-ES', {
+      day: '2-digit', month: '2-digit', year: '2-digit',
+    }).replace(/\//g, '·'))
+  }, [])
 
   return (
     <section
