@@ -45,7 +45,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
   const np = nombreConPlaya(playa.nombre)
-  const title = `How is ${playa.nombre} today | Flag, conditions, wind and water temperature - Parking, hotels and where to eat nearby`
+  // Este title medía 135 caracteres servidos y Google enseñaba menos de
+  // la mitad: se cortaba en «…conditions, wind and w». Es exactamente el
+  // title largo que la versión española corrigió hace tiempo, y que aquí
+  // nunca se portó.
+  //
+  // La estructura ahora imita a la española, que sí rinde: el nombre
+  // primero —es lo que se busca— y después qué encuentras. Y sin «How
+  // is», que gastaba siete caracteres antes del topónimo.
+  //
+  // 46 caracteres con un nombre típico, dentro del corte incluso con
+  // nombres largos.
+  const title = `${playa.nombre} today: sea, flag and facilities`
   const description = `Sea conditions at ${np} today. Water temperature, waves, wind, flag, jellyfish and facilities. Nearby parking, hotels and restaurants.`
 
   const ogImage = new URL(`${BASE}/api/og`)
@@ -58,7 +69,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogUrl = ogImage.toString()
 
   return {
-    title,
+    // absolute: sin la marca del layout, igual que en la ficha en
+    // español. En una ficha la marca no llega a verse y solo gasta 19
+    // caracteres. En OG sí se queda: al compartir no hay corte y aporta
+    // contexto.
+    title: { absolute: title },
     description,
     openGraph: {
       title,

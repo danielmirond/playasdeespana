@@ -112,6 +112,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Antes era 134 chars → Google cortaba a "... Parking, hoteles y don..."
   // Estructura: [Nombre] hoy: estado del mar, bandera y servicios
   //
+  // OJO: esos ~50-60 son del literal. El layout añade la plantilla de
+  // marca —' · Playas de España', 19 caracteres— y lo servido eran 83.
+  // Por eso el title se declara ABSOLUTE más abajo: en una ficha la
+  // marca nunca llega a verse (Google corta sobre los 60), así que solo
+  // gastaba caracteres. Quitarla devuelve 19 sin tocar la redacción,
+  // que es justo lo que interesa: los titles de ficha ya rinden en
+  // Search Console y no hay motivo para reescribirlos.
+  //
   // Si la playa tiene webcam (lectura KV-only, sin latencia extra), el title
   // incluye "webcam" para captar la búsqueda "playa X webcam". Solo aparece
   // cuando el KV ya está poblado (render + warming previos), nunca en falso.
@@ -154,7 +162,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const indexable = esIndexable(playa)
 
   return {
-    title,
+    // absolute: sin la marca del layout. Ver el comentario de arriba.
+    // El title de OG y Twitter sigue llevándola (más abajo): ahí no hay
+    // límite de 60 caracteres y la marca sí aporta contexto al
+    // compartir.
+    title: { absolute: title },
     description,
     robots: indexable
       ? { index: true, follow: true }
