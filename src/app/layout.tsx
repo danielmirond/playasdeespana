@@ -5,6 +5,8 @@ import { getFlags, flagsAttr, tieneFlag } from '@/lib/flags'
 import InstallPrompt from '@/components/pwa/InstallPrompt'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ConsentScripts from '@/components/ui/ConsentScripts'
+import GAPageViews from '@/components/ui/GAPageViews'
+import { Suspense } from 'react'
 import NavigationProgress from '@/components/ui/NavigationProgress'
 import MobileNav from '@/components/ui/MobileNav'
 import Footer from '@/components/ui/Footer'
@@ -373,8 +375,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MobileNav />
         {children}
         <Footer />
-        {/* GA4 + AdSense. cargados condicionalmente por consentimiento */}
+        {/* GA4 con Consent Mode v2 + AdSense y GetYourGuide tras permiso */}
         <ConsentScripts />
+        {/* La vista de página en cada navegación de cliente. El App
+            Router no recarga, así que sin esto solo se contaba la
+            primera página de cada visita. Va en Suspense porque
+            useSearchParams obliga: sin él, toda la página pasaría a
+            renderizado dinámico y perderíamos el ISR. */}
+        <Suspense fallback={null}>
+          <GAPageViews />
+        </Suspense>
         <CookieBanner />
         <InstallPrompt />
       </body>
