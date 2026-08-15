@@ -13,7 +13,7 @@
     "sync:calidad": "node scripts/sync-calidad-agua.js",
     "sync:bandera-azul": "node scripts/sync-bandera-azul.js",
     "check:color": "node scripts/check-color-concat.mjs",
-    "prebuild": "node scripts/write-build-info.mjs && node scripts/check-color-concat.mjs",
+    "prebuild": "node scripts/write-build-info.mjs && node scripts/check-color-concat.mjs && node scripts/check-mojibake.mjs",
     "predev": "node scripts/write-build-info.mjs"
   },
   "dependencies": {

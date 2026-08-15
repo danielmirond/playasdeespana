@@ -2,6 +2,7 @@
 import { cache } from 'react'
 import { fetchWithTimeout } from './fetch-timeout'
 import { kvCached } from './kv-cache'
+import { zonaHoraria, zonaHorariaParam } from './zona-horaria'
 
 
 export interface MarineData {
@@ -64,7 +65,7 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
     const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
       + `&hourly=wave_height,wave_period,wind_wave_height,sea_surface_temperature`
       + `&daily=wave_height_max,wind_speed_10m_max`
-      + `&wind_speed_unit=kmh&forecast_days=7&timezone=Europe%2FMadrid`
+      + `&wind_speed_unit=kmh&forecast_days=7&timezone=${zonaHorariaParam(lat, lng)}`
 
     const res = await fetchWithTimeout(url, { next: { revalidate: 3600 } })
     if (!res.ok) return null
@@ -134,7 +135,7 @@ async function fetchSolUncached(lat: number, lng: number, fecha: string): Promis
     if (data.status !== 'OK') return null
 
     const fmt = (iso: string) => new Date(iso).toLocaleTimeString('es-ES', {
-      hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid'
+      hour: '2-digit', minute: '2-digit', timeZone: zonaHoraria(lat, lng)
     })
     const luz = data.results.day_length
     return {

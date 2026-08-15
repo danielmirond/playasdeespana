@@ -4,6 +4,7 @@ import { cache } from 'react'
 import { gradosADireccion } from './geo'
 import { fetchWithTimeout } from './fetch-timeout'
 import { kvCached } from './kv-cache'
+import { zonaHoraria, zonaHorariaParam } from './zona-horaria'
 
 export interface MeteoPlaya {
   temp_aire:      number
@@ -62,7 +63,7 @@ async function fetchMeteoUncached(lat: number, lng: number): Promise<MeteoRaw | 
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}`
       + `&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index`
       + `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,cloudcover_mean,weathercode`
-      + `&wind_speed_unit=kmh&forecast_days=5&timezone=Europe%2FMadrid`
+      + `&wind_speed_unit=kmh&forecast_days=5&timezone=${zonaHorariaParam(lat, lng)}`
 
     const res = await fetchWithTimeout(url, { next: { revalidate: 3600 } })
     if (!res.ok) return null

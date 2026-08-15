@@ -48,6 +48,7 @@ import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, 
 import AdSlot from '@/components/ui/AdSlot'
 import { tinte } from '@/lib/tinte'
 import { miles } from '@/lib/miles'
+import { zonaHoraria } from '@/lib/zona-horaria'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
 const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
@@ -1352,7 +1353,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.aeIlu}><IluEstado estado={meteo.estado} size="sm" animated/></div>
           <div className={styles.aeEstado} style={{ color: estado.dot }}>{locale === 'en' ? estado.labelEn : estado.label}</div>
           <div className={styles.aeFrase}><em>{locale === 'en' ? estado.fraseEn : estado.frase}</em></div>
-          <div className={styles.aePill}><span className={styles.aeDot} style={{ background: estado.dot }}/>{i18n.actualizado} · <time dateTime={dateModified}>{formatTime(dateModified, locale)}</time></div>
+          <div className={styles.aePill}><span className={styles.aeDot} style={{ background: estado.dot }}/>{i18n.actualizado} · <time dateTime={dateModified}>{formatTime(dateModified, locale, zonaHoraria(playa.lat, playa.lng))}</time></div>
         </div>
         {/* soloDesktop: en móvil el aside cae al flujo principal y este
             resumen repetía el mismo 11:00-14:00 que la sección
@@ -1472,14 +1473,16 @@ const MESES_ABREV: Record<'es' | 'en', string[]> = {
   en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 }
 
-function formatTime(iso?: string, locale: string = 'es'): string {
+function formatTime(iso?: string, locale: string = 'es', tz = 'Europe/Madrid'): string {
   if (!iso) return ''
   try {
     const d = new Date(iso)
     if (Number.isNaN(d.getTime())) return ''
-    // Partes en hora peninsular, sin nombres: día, mes y hora numéricos.
+    // Partes en la hora de LA PLAYA, sin nombres. Canarias va una
+    // hora por detrás y este sello acompaña a datos de la propia
+    // ficha: ponerlo en hora peninsular allí desmiente al dato.
     const partes = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/Madrid',
+      timeZone: tz,
       day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,
     }).formatToParts(d)
     const p = (t: string) => partes.find(x => x.type === t)?.value ?? ''
