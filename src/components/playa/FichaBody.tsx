@@ -49,6 +49,7 @@ import AdSlot from '@/components/ui/AdSlot'
 import { tinte } from '@/lib/tinte'
 import { miles } from '@/lib/miles'
 import { zonaHoraria } from '@/lib/zona-horaria'
+import GygActivities from '@/components/GygActivities'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
 const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
@@ -286,10 +287,10 @@ const ORDER_V2: string[] = [
   // 1 · DECISIÓN
   'intro', 'trust', 'estado', 'webcam', 'seguridad', 'calidad', 'opiniones-dest', 'cta-ctx',
   // 2 · PLAN
-  'asistente', 'como-llegar', 'trafico', 'mejor-hora', 'afiliados', 'comer', 'chiringuitos', 'dormir',
+  'asistente', 'como-llegar', 'trafico', 'actividades-gyg', 'mejor-hora', 'afiliados', 'comer', 'chiringuitos', 'dormir',
   'campings', 'ferries', 'surf', 'buceo', 'cta-barco', 'ad',
   // 3 · PROFUNDIDAD
-  'meteo', 'datos', 'fotos', 'video', 'opiniones', 'votacion', 'cuaderno-cta', 'cercanas',
+  'meteo', 'datos', 'fotos', 'video', 'opiniones', 'votacion', 'asistente-generico', 'cuaderno-cta', 'cercanas',
   'texto-seo', 'hubs', 'faqs', 'crosslinks',
 ]
 
@@ -327,6 +328,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const i18n     = T[locale]
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const amazonProductos = getProductosParaPlaya(playa, meteo.estado)
+
+  // Lo que responde a una medición de hoy va arriba; lo demás, al final.
+  const necesidadesDeHoy    = (necesidades ?? []).filter(n => n.prioridad === 'critica' || n.prioridad === 'alta')
+  const necesidadesGenerales = (necesidades ?? []).filter(n => n.prioridad === 'media'   || n.prioridad === 'baja')
   const tiposGuia       = getTiposParaPlaya(playa)
   const horasLuz = solData?.horas_luz ?? '–'
 
@@ -475,11 +480,21 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <ContextualCTA key="cta-ctx" playa={playa} meteo={meteo} locale={locale} />
         )}
 
-        {/* 3. ASISTENTE — qué necesitas hoy */}
-        {necesidades && necesidades.length > 0 && (
+        {/* 3. ASISTENTE — solo lo que dispara un dato de HOY.
+            Antes salían aquí los cuatro o cinco productos juntos, y una
+            auditoría midió que los tres primeros enlaces de Amazon
+            aparecían al 26% de la ficha. De esos tres, solo el protector
+            solar estaba justificado —«índice UV de 8 (extremo)»—; la
+            toalla y la botella son de siempre, no de hoy.
+            La prioridad ya existía en el dato (critica/alta/media/baja),
+            solo que nadie la usaba para decidir la posición: critica y
+            alta responden a una medición, media y baja no. Las segundas
+            bajan al final, donde siguen estando pero sin ocupar el sitio
+            de la decisión. */}
+        {necesidadesDeHoy.length > 0 && (
           <AsistentePlaya
             key="asistente"
-            necesidades={necesidades}
+            necesidades={necesidadesDeHoy}
             nombre={nombreH}
             locale={locale}
           />
@@ -667,6 +682,21 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             acción tiene que REAPARECER aquí: nadie descubre un producto
             que solo vive detrás de tres puntos. Y aquí, tras leer la
             ficha entera, es cuando pedirla tiene sentido. */}
+        {/* Lo genérico —toalla, botella, palas—, al final. Sigue
+            disponible, pero ya no compite con la respuesta a «¿voy o
+            no?». La clave va registrada en ORDER_V2: Reorder ordena con
+            indexOf, que devuelve -1 para lo desconocido, así que un
+            bloque sin registrar acabaría EL PRIMERO de la ficha. */}
+        {necesidadesGenerales.length > 0 && (
+          <AsistentePlaya
+            key="asistente-generico"
+            necesidades={necesidadesGenerales}
+            nombre={nombreH}
+            locale={locale}
+            variante="generico"
+          />
+        )}
+
         <CuadernoCTA
           key="cuaderno-cta"
           slug={playa.slug}
@@ -906,6 +936,24 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <div key="trafico">
           <TraficoSection playa={playa} hoyISO={hoyISO} />
         </div>
+
+        {/* QUÉ HACER ALLÍ — detrás de «cómo llegar» y parking.
+            Estaba al final de la ficha, al 60% del documento y después
+            incluso de las FAQ, mientras restaurantes y hoteles ocupaban
+            el 31-33%. Quien ya sabe cómo llegar es justo quien se
+            pregunta qué hacer al llegar; enterrarlo tras las preguntas
+            frecuentes lo condenaba a no verse.
+            El widget decide solo si hay oferta: donde no la hay, no
+            pinta nada, así que subirlo no mete relleno en las calas
+            sin excursiones. */}
+        <GygActivities
+          key="actividades-gyg"
+          query={playa.actividades?.surf
+            ? `surf ${playa.municipio || playa.provincia}`
+            : `${playa.municipio || playa.provincia}, Spain`}
+          cmp="ficha_playa"
+          id="actividades"
+        />
 
         {/* MASIFICACIÓN + MEJOR HORA — H2 con nombre (long-tail "mejor hora
             playa X"). El dato ya existía (horaIdeal) pero vivía en el aside

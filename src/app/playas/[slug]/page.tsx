@@ -8,7 +8,6 @@ import { getPrediccionAemet } from '@/lib/aemet'
 import { getBanderaCat } from '@/lib/banderas-cat'
 import { getBoyaCercana } from '@/lib/boyas'
 import { getChiringuitosPlaya } from '@/lib/chiringuitos-playa'
-import GygActivities from '@/components/GygActivities'
 import { getCalidad } from '@/lib/calidad'
 import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
 import { getVotos } from '@/lib/votos'
@@ -785,17 +784,10 @@ export default async function PlayaPage({ params }: Props) {
           ))}
         </div>
       </nav>
-      <GygActivities
-        query={(() => {
-          const zona = playa.municipio || playa.provincia
-          if (!zona) return null
-          // Playa de surf → actividad concreta; resto → ciudad (asegura
-          // resultados; en costa, GYG ya prioriza barco/snorkel locales).
-          return playa.actividades?.surf ? `surf ${zona}` : `${zona}, Spain`
-        })()}
-        cmp="ficha_playa"
-        id="actividades"
-      />
+      {/* GygActivities ya NO se pinta aquí: vive dentro de FichaBody, en
+          el orden, detrás de «cómo llegar» y parking. Aquí quedaba al
+          final del documento —tras las FAQ— y además fuera del sistema
+          de orden, así que ninguna reordenación lo alcanzaba. */}
       {/* Arquitectura C de la propuesta 2026: un solo elemento fijo en
           móvil (64px) en lugar de nav + secciones + acciones (316px). */}
       <PildoraContextual lat={playa.lat} lng={playa.lng} nombre={playa.nombre} />

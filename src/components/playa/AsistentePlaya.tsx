@@ -21,6 +21,18 @@ interface Props {
   necesidades: Necesidad[]
   nombre:      string
   locale?:     'es' | 'en'
+  /**
+   * `condiciones` (por defecto) es el bloque de arriba: solo lo que
+   * dispara un dato de hoy —SPF50 con UV 8, vinagre con riesgo de
+   * medusas—. Se gana el sitio porque responde a algo medido.
+   *
+   * `generico` es el de abajo: toalla, botella, palas. Útil, pero no
+   * depende de las condiciones, y mezclado con lo anterior contagiaba
+   * al conjunto un aire de escaparate. Una auditoría externa lo señaló
+   * y tenía razón: los tres primeros productos salían al 26% de la
+   * ficha y solo uno estaba justificado por un dato.
+   */
+  variante?:   'condiciones' | 'generico'
 }
 
 const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? 'nuus-21'
@@ -43,13 +55,17 @@ const COLOR_PRIORIDAD: Record<Necesidad['prioridad'], string> = {
   baja:    'var(--muybueno)',
 }
 
-export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: Props) {
+export default function AsistentePlaya({ necesidades, nombre, locale = 'es', variante = 'condiciones' }: Props) {
   if (necesidades.length === 0) return null
   const es = locale === 'es'
+  const generico = variante === 'generico'
+  // Ids distintos por variante: las dos instancias conviven en la misma
+  // página y repetir el id sería HTML inválido.
+  const idTitulo = generico ? 'asistente-generico-titulo' : 'asistente-titulo'
 
   return (
     <section
-      aria-labelledby="asistente-titulo"
+      aria-labelledby={idTitulo}
       style={{
         margin: '0 0 1.5rem',
         padding: '1.1rem 1.1rem 1.25rem',
@@ -67,11 +83,13 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
         color: 'var(--muted)',
         marginBottom: '.3rem',
       }}>
-        {es ? 'Asistente · hoy' : 'Assistant · today'}
+        {generico
+          ? (es ? 'Para el día' : 'For the day')
+          : (es ? 'Asistente · hoy' : 'Assistant · today')}
       </div>
 
       <h2
-        id="asistente-titulo"
+        id={idTitulo}
         style={{
           fontFamily: 'var(--font-serif)',
           fontSize: '1.15rem',
@@ -81,9 +99,13 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es' }: P
           lineHeight: 1.25,
         }}
       >
-        {es
-          ? <>Esto necesitas para <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> con estas condiciones</>
-          : <>This is what you need for <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> in these conditions</>
+        {generico
+          ? (es
+              ? <>Lo de siempre para un día de playa</>
+              : <>The usual for a day at the beach</>)
+          : (es
+              ? <>Esto necesitas para <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> con estas condiciones</>
+              : <>This is what you need for <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em> in these conditions</>)
         }
       </h2>
 
