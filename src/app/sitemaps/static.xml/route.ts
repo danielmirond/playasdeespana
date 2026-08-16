@@ -19,7 +19,6 @@ import { CIUDADES_INTERIOR } from '@/data/ciudades-interior'
 import { boatRentalSlug } from '@/lib/boat-rental-helpers'
 import { getAllArticles, CATEGORIES } from '@/lib/magazine'
 import { TIPOS } from '@/lib/tiposQueLlevar'
-import { getPlayasDataModified } from '@/lib/dateModified'
 import { ZONAS } from '@/lib/banderas'
 
 export const revalidate = 604800
@@ -42,18 +41,24 @@ interface UrlOpts {
   caption?:    string
 }
 
-function u(path: string, priority: string, freq: string, today: string, opts: UrlOpts | string = {}) {
+function u(path: string, priority: string, freq: string, today: string | null, opts: UrlOpts | string = {}) {
   // Backwards-compat: si el 5º arg es un string, lo tratamos como hreflangEn.
   const o: UrlOpts = typeof opts === 'string' ? { hreflangEn: opts } : opts
   const derived = path.replace(/^\//, '').replace(/-/g, ' ').replace(/\//g, ' · ') || 'Playas de España'
   const ogLabel = o.ogLabel ?? derived
   const caption = o.caption ?? `Información de ${ogLabel} en Playas de España`
 
+  // lastmod SOLO cuando la fecha es de verdad de esta URL.
+  //
+  // Antes todas —incluidas /aviso-legal y /privacidad— llevaban el mtime
+  // del dataset de playas, que no tiene nada que ver con ellas. Un
+  // lastmod que no se corresponde con cambios reales enseña a Google a
+  // ignorarlo, y entonces deja de servir también donde sí es cierto.
+  // Los artículos del magazine sí tienen fecha propia y la conservan.
   let xml = `  <url>
-    <loc>${BASE}${path}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${freq}</changefreq>
-    <priority>${priority}</priority>`
+    <loc>${BASE}${path}</loc>`
+  if (today) xml += `
+    <lastmod>${today}</lastmod>`
   if (o.hreflangEn) {
     xml += `
     <xhtml:link rel="alternate" hreflang="es" href="${BASE}${path}" />
@@ -78,7 +83,7 @@ export async function GET() {
     getPerrosStats(), getNudistasStats(), getAccesiblesStats(), getRutas(playas),
   ])
   // lastmod real del dataset (no fecha de build).
-  const today = getPlayasDataModified().split('T')[0]
+  const today: string | null = null   // ver el comentario de u()
   const urls: string[] = []
 
   // Static pages (ES + EN)
@@ -233,7 +238,8 @@ export async function GET() {
   // Magazine — índice, categorías y artículos
   urls.push(u('/magazine', '0.7', 'weekly', today))
   for (const c of Object.keys(CATEGORIES)) urls.push(u(`/magazine/categoria/${c}`, '0.6', 'weekly', today))
-  for (const a of getAllArticles()) urls.push(u(`/magazine/${a.slug}`, '0.6', 'monthly', today))
+  // Los artículos SÍ: datePublished es una fecha real y por artículo.
+  for (const a of getAllArticles()) urls.push(u(`/magazine/${a.slug}`, '0.6', 'monthly', a.datePublished.split('T')[0]))
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"

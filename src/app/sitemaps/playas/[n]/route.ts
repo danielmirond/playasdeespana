@@ -2,12 +2,10 @@
 // Sitemap por chunks de 1000 fichas. Incluye:
 //   - <xhtml:link hreflang> para alternate ES/EN
 //   - <image:image> con la OG image dinámica (Google Imágenes / image sitemap)
-//   - lastmod = mtime real del dataset MITECO (no `new Date()` por build,
-//     que Google detecta como timestamp spam — Content Warehouse leak).
+//   - SIN lastmod, changefreq ni priority: ver el porqué más abajo.
 
 import { NextResponse } from 'next/server'
 import { getPlayas } from '@/lib/playas'
-import { getPlayasDataModified } from '@/lib/dateModified'
 import { esIndexable } from '@/lib/calidad-indexacion'
 
 export const revalidate = 86400
@@ -33,8 +31,27 @@ export async function GET(_req: Request, context: any) {
   const slice  = playas.slice((n - 1) * CHUNK, n * CHUNK)
   if (!slice.length) return new NextResponse('Not found', { status: 404 })
 
-  // mtime real del dataset (no fecha de build, que Google detecta como spam).
-  const lastmod = getPlayasDataModified().split('T')[0]
+  // Sin lastmod, a propósito.
+  //
+  // Se emitía el mtime del dataset, que es honesto en intención pero
+  // inútil como señal: sale la MISMA fecha en las 4.375 fichas, y cambia
+  // de golpe en todas cada vez que se toca el JSON —una corrección de
+  // una tilde ponía «modificado hoy» en el sitio entero—. Google ignora
+  // el lastmod cuando comprueba que no se corresponde con cambios
+  // reales, y a partir de ahí lo ignora también donde sí es cierto.
+  //
+  // Lo que de verdad cambia cada hora es el dato meteorológico, y eso no
+  // es «modificación de contenido» a efectos de rastreo: si lo fuera,
+  // habría que declarar 4.375 URLs modificadas cada hora, que es
+  // justamente la señal que hace que dejen de creerte.
+  //
+  // Mientras no haya fecha de cambio POR FICHA, omitirlo es más honesto
+  // que emitir una común. El magazine sí conserva su lastmod porque ahí
+  // la fecha es real y por artículo.
+  //
+  // Fuera también changefreq y priority: Google lleva años diciendo que
+  // no los usa, y `hourly` en 4.375 URLs solo repetía la promesa que el
+  // lastmod ya estaba incumpliendo.
 
   const urls = slice.map((p: any) => {
     // OG image dinámica generada en /api/og?slug=X. Siempre devuelve algo.
@@ -46,9 +63,6 @@ export async function GET(_req: Request, context: any) {
 
     return `  <url>
     <loc>${BASE}/playas/${p.slug}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>${p.bandera ? '0.9' : '0.7'}</priority>
     <xhtml:link rel="alternate" hreflang="es" href="${BASE}/playas/${p.slug}"/>
     <xhtml:link rel="alternate" hreflang="en" href="${BASE}/en/beaches/${p.slug}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${BASE}/playas/${p.slug}"/>

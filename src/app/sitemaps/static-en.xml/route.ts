@@ -29,8 +29,6 @@ export async function GET() {
     urls.push(`  <url>
     <loc>${BASE}${p.url}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>${p.freq}</changefreq>
-    <priority>${p.priority}</priority>
   </url>`)
   }
 
@@ -39,8 +37,6 @@ export async function GET() {
     urls.push(`  <url>
     <loc>${BASE}/en/communities/${c.slug}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>`)
   }
 
@@ -49,8 +45,6 @@ export async function GET() {
     urls.push(`  <url>
     <loc>${BASE}/en/provinces/${p.slug}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>`)
   }
 
@@ -59,8 +53,6 @@ export async function GET() {
     urls.push(`  <url>
     <loc>${BASE}/en/towns/${m.slug}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
   </url>`)
   }
 
@@ -69,8 +61,6 @@ export async function GET() {
     urls.push(`  <url>
     <loc>${BASE}${p}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>`)
   }
 
@@ -88,24 +78,18 @@ export async function GET() {
       urls.push(`  <url>
     <loc>${BASE}/en/boat-rental/coasts/${cs}/provinces/${ps}/${l.slug}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
   </url>`)
     }
     for (const cs of coasts) {
       urls.push(`  <url>
     <loc>${BASE}/en/boat-rental/coasts/${cs}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>`)
     }
     for (const cp of provinces) {
       urls.push(`  <url>
     <loc>${BASE}/en/boat-rental/coasts/${cp.split('/')[0]}/provinces/${cp.split('/')[1]}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
   </url>`)
     }
   }
@@ -114,8 +98,6 @@ export async function GET() {
     urls.push(`  <url>
     <loc>${BASE}/en/campervan-rental/${c.slug}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
   </url>`)
   }
 
@@ -124,8 +106,6 @@ export async function GET() {
     urls.push(`  <url>
     <loc>${BASE}${p}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>`)
   }
 
@@ -139,8 +119,6 @@ export async function GET() {
     urls.push(`  <url>
     <loc>${BASE}${p.url}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>${p.freq}</changefreq>
-    <priority>${p.priority}</priority>
   </url>`)
   }
 

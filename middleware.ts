@@ -29,6 +29,27 @@ const GONE_HTML =
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
+  // 0pre) Dos URLs que enseñaban la respuesta equivocada.
+  //
+  // /sitemap.xml devolvía 404: es la ruta que todo el mundo prueba por
+  // convención —y la que teclea cualquiera que audite el sitio— aunque
+  // el índice viva en /sitemap-index.xml. Un 404 ahí parece un sitio sin
+  // sitemap.
+  //
+  // /index respondía 200 con la home entera y canonical a «/»: una copia
+  // de la portada bajo otra URL. El canonical lo salva a medias, pero un
+  // 301 lo cierra del todo y no gasta rastreo.
+  if (pathname === '/sitemap.xml') {
+    const url = req.nextUrl.clone()
+    url.pathname = '/sitemap-index.xml'
+    return NextResponse.redirect(url, { status: 301 })
+  }
+  if (pathname === '/index' || pathname === '/index.html') {
+    const url = req.nextUrl.clone()
+    url.pathname = '/'
+    return NextResponse.redirect(url, { status: 301 })
+  }
+
   // 0) 410 Gone para fichas extranjeras/sin costa (ES e EN).
   const mFicha = pathname.match(/^\/(playas|en\/beaches)\/([^/?#]+)/)
   if (mFicha) {
@@ -103,5 +124,12 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|api|favicon|og-default|data|.*\\..*).*)'],
+  matcher: [
+    '/((?!_next|api|favicon|og-default|data|.*\\..*).*)',
+    // El patrón de arriba descarta TODO lo que lleve un punto, así que
+    // /sitemap.xml e /index.html quedaban fuera del middleware y sus
+    // redirecciones no llegaban a ejecutarse nunca. Van explícitas.
+    '/sitemap.xml',
+    '/index.html',
+  ],
 }
