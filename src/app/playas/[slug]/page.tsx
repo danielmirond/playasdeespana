@@ -8,6 +8,7 @@ import { getPrediccionAemet } from '@/lib/aemet'
 import { getBanderaCat, tieneBanderaCat } from '@/lib/banderas-cat'
 import { getBanderaCan, tieneBanderaCan } from '@/lib/banderas-can'
 import { getBanderaAnd, tieneBanderaAnd } from '@/lib/banderas-and'
+import { getBanderaBiz, tieneBanderaBiz } from '@/lib/banderas-biz'
 import { esUsoProhibido } from '@/lib/playas-prohibidas'
 import { getBoyaCercana } from '@/lib/boyas'
 import { getChiringuitosPlaya } from '@/lib/chiringuitos-playa'
@@ -250,6 +251,9 @@ export default async function PlayaPage({ params }: Props) {
     // habría evitado que La Misericordia dijera "BUENA" el 15-ago-2026 con
     // el baño prohibido por E. coli.
     getBanderaAnd(slug),
+    // Bandera OFICIAL izada (Bizkaia). Aporta el estado cerrada/precintada,
+    // que va aparte del color: una playa puede estar precintada sin bandera.
+    getBanderaBiz(slug),
     // Boya de Puertos del Estado más cercana (≤60 km) — dato MEDIDO
     getBoyaCercana(playa.lat, playa.lng),
   ] as const
@@ -269,7 +273,7 @@ export default async function PlayaPage({ params }: Props) {
     meteoForecast, turbidez,
     restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
     allPlayasResult, municipioSlugsResult,
-    videoResult, webcamResult, aemetResult, banderaCatResult, banderaCanResult, banderaAndResult, boyaResult,
+    videoResult, webcamResult, aemetResult, banderaCatResult, banderaCanResult, banderaAndResult, banderaBizResult, boyaResult,
   ] = await Promise.all(conDeadline) as any[]
   const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
   const webcamsData = (webcamResult?.status === 'fulfilled' ? webcamResult.value : []).slice(0, 3)
@@ -360,6 +364,7 @@ export default async function PlayaPage({ params }: Props) {
   if (tieneBanderaCat(slug) && needsWarm(banderaCatResult)) failed.push(['bandCat', () => getBanderaCat(slug)])
   if (tieneBanderaCan(slug) && needsWarm(banderaCanResult)) failed.push(['bandCan', () => getBanderaCan(slug)])
   if (tieneBanderaAnd(slug) && needsWarm(banderaAndResult)) failed.push(['bandAnd', () => getBanderaAnd(slug)])
+  if (tieneBanderaBiz(slug) && needsWarm(banderaBizResult)) failed.push(['bandBiz', () => getBanderaBiz(slug)])
 
   if (failed.length > 0) {
     after(async () => {
@@ -497,8 +502,14 @@ export default async function PlayaPage({ params }: Props) {
   // Bandera OFICIAL izada (Andalucía). Las tres autonómicas son excluyentes
   // por geografía —ninguna playa está en Cataluña, Canarias y Andalucía a la
   // vez—, así que el orden entre ellas es indiferente.
+  const oficialBiz = banderaBizResult?.status === 'fulfilled' ? banderaBizResult.value : null
   const oficialAnd = banderaAndResult?.status === 'fulfilled' ? banderaAndResult.value : null
   if (oficialAnd?.bandera) { banderaPlaya = oficialAnd.bandera; certBandera = 'oficial' }
+
+  // Bandera OFICIAL izada (Bizkaia). Su adaptador ya resuelve el estado
+  // "cerrada/precintada" a roja antes de devolverla, así que aquí no hay
+  // caso especial: si viene bandera, manda.
+  if (oficialBiz?.bandera) { banderaPlaya = oficialBiz.bandera; certBandera = 'oficial' }
   // "Cerrada" es un estado aparte del color: la Junta puede darla cerrada sin
   // bandera roja. Si lo está, se fuerza roja — cerrada es más grave que
   // cualquier color, y callarlo es el fallo que nos trajo hasta aquí.
@@ -517,7 +528,8 @@ export default async function PlayaPage({ params }: Props) {
   const oficialFallo =
     (tieneBanderaCat(slug) && !oficialCat) ||
     (tieneBanderaCan(slug) && !oficialCan) ||
-    (tieneBanderaAnd(slug) && !oficialAnd)
+    (tieneBanderaAnd(slug) && !oficialAnd) ||
+    (tieneBanderaBiz(slug) && !oficialBiz)
   if (oficialFallo && certBandera !== 'oficial') {
     banderaPlaya = undefined
     certBandera = 'sindato'

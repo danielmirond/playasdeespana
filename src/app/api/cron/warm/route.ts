@@ -31,6 +31,7 @@ import { refetchAndStoreFotos } from '@/lib/fotos'
 import { getBanderaCat } from '@/lib/banderas-cat'
 import { getBanderaCan } from '@/lib/banderas-can'
 import { getBanderaAnd } from '@/lib/banderas-and'
+import { getBanderaBiz } from '@/lib/banderas-biz'
 
 export const runtime  = 'nodejs'
 export const dynamic  = 'force-dynamic'  // siempre recalcular, no cachear el cron
@@ -151,12 +152,13 @@ export async function GET(req: NextRequest) {
   // Se piden por una playa cualquiera de cada comunidad: lo que interesa
   // es el efecto colateral de poblar el snapshot compartido.
   try {
-    const [cat, can, and] = await Promise.allSettled([
+    const [cat, can, and, biz] = await Promise.allSettled([
       getBanderaCat('platja-de-la-barceloneta'),
       getBanderaCan('playa-de-las-canteras'),
       getBanderaAnd('playa-de-la-misericordia'),
+      getBanderaBiz('ereaga-getxo'),
     ])
-    buckets.banderas = summarise('banderas', [cat, can, and].map(r => ({
+    buckets.banderas = summarise('banderas', [cat, can, and, biz].map(r => ({
       url: 'snapshot', ok: r.status === 'fulfilled', status: r.status === 'fulfilled' ? 200 : 0, ms: 0,
     })))
   } catch { /* el warming nunca debe tumbar el cron */ }
