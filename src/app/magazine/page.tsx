@@ -6,6 +6,15 @@ import { getAllArticles, CATEGORIES, type Article } from '@/lib/magazine'
 export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+
+/** «16 ago 2026» — sin Intl, que difiere entre Node y el navegador. */
+function fechaCorta(iso: string): string {
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  return `${d.getUTCDate()} ${MESES[d.getUTCMonth()]} ${d.getUTCFullYear()}`
+}
+
 export const metadata: Metadata = {
   title: 'Magazine | Rutas, curiosidades y gastronomía de playa',
   description: 'El magazine de Playas de España: rutas costeras, curiosidades del litoral, dónde comer junto al mar y guías prácticas para disfrutar la playa.',
@@ -31,7 +40,19 @@ function Card({ a }: { a: Article }) {
         <span style={{ fontSize: '.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.05em', color: 'var(--accent)' }}>{cat.label}</span>
         <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--ink)', margin: '.35rem 0 .4rem', lineHeight: 1.25 }}>{a.title}</h2>
         <p style={{ fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.5, margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.excerpt}</p>
-        <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.7rem' }}>{a.readingMin} min</div>
+        {/* Fecha además del tiempo de lectura. El índice solo decía
+            «7 min», así que no se veía si un artículo era de esta
+            semana o del año pasado —y en un sitio de datos de hoy, eso
+            es justo lo que el lector necesita para fiarse—.
+            Formateada a mano, sin toLocaleDateString: el ICU de Node y
+            el del navegador no coinciden en los meses abreviados y esto
+            se renderiza en las dos partes. Ya rompió la hidratación de
+            la ficha una vez. */}
+        <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.7rem', display: 'flex', gap: '.4rem' }}>
+          <time dateTime={a.datePublished}>{fechaCorta(a.datePublished)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{a.readingMin} min</span>
+        </div>
       </div>
     </Link>
   )

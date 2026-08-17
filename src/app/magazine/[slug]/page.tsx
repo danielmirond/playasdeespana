@@ -6,6 +6,7 @@ import GygActivities from '@/components/GygActivities'
 import AuthorByline from '@/components/seo/AuthorByline'
 import { getArticleBySlug, getAllArticles, CATEGORIES, type Block } from '@/lib/magazine'
 import { getPlayas } from '@/lib/playas'
+import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
 
 export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -111,20 +112,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const url = `${BASE}/magazine/${a.slug}`
   const og = a.heroImage ?? `${BASE}/api/og?playa=${encodeURIComponent(a.title)}`
 
-  const ld = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: a.title,
-    description: a.excerpt,
-    // Discover requiere imagen grande (≥1200px) en el Article schema.
-    image: [og],
-    datePublished: a.datePublished,
-    dateModified: a.datePublished,
-    author: { '@type': 'Organization', name: 'Playas de España' },
-    publisher: { '@type': 'Organization', name: 'Playas de España', url: BASE },
-    mainEntityOfPage: url,
-    articleSection: cat.label,
-  }
+  // El Article lo emite AuthorByline (ver más abajo): había dos en
+  // la misma página, con el mismo headline, y sobra uno.
   const faqLd = a.faq && a.faq.length > 0 ? {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: a.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
@@ -141,7 +130,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <Nav />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
@@ -160,6 +148,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </h1>
         <p style={{ fontSize: '1.05rem', lineHeight: 1.6, color: 'var(--muted)', margin: '0 0 1rem' }}>{a.excerpt}</p>
 
+        {/* Este es el ÚNICO Article de la página. Antes había dos: el
+            de este componente y otro inline más abajo, los dos con el
+            mismo headline. Dos nodos Article para una sola página es
+            pedirle a Google que elija, y el de aquí es el completo
+            —lleva speakable y el author con @id estable—, solo le
+            faltaba la imagen. Discover exige imagen grande en el
+            Article, así que se le pasa. */}
         <AuthorByline
           headline={a.title}
           url={url}
@@ -167,6 +162,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           datePublished={a.datePublished}
           description={a.excerpt}
           articleSection={cat.label}
+          image={og}
         />
         <div style={{ fontSize: '.78rem', color: 'var(--muted)', margin: '.5rem 0 2rem' }}>{a.readingMin} min de lectura</div>
 
