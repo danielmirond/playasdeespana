@@ -1,8 +1,26 @@
 // src/lib/amazon-productos.ts
 // Catálogo de productos Amazon afiliados organizados por contexto de playa.
-// Tag: nuus-21
 
-export const AMAZON_TAG = 'nuus-21'
+/**
+ * El tag de afiliado, en un solo sitio.
+ *
+ * Estaba escrito a fuego aquí y, a la vez, leído de la variable de
+ * entorno en AsistentePlaya: dos fuentes para el mismo dato, que es
+ * como acaban divergiendo. Ahora manda la variable y este valor es solo
+ * el respaldo.
+ *
+ * OJO CON EL `||`, no es un descuido: con `??` una variable definida
+ * pero VACÍA —que es como estaba en .env.local— pasa el filtro y deja
+ * `tag=` en todos los enlaces. Eso no da error en ningún sitio: la
+ * página funciona, los enlaces llevan a Amazon y sencillamente no se
+ * cobra ni un céntimo. Con `||` la cadena vacía cae al respaldo.
+ *
+ * PENDIENTE, y no lo puede hacer el código: `nuus-21` es el tag de otro
+ * proyecto. Mientras se comparta, no hay forma de saber qué convierte
+ * en este sitio. Hay que crear un tag propio en Amazon Afiliados y
+ * ponerlo en NEXT_PUBLIC_AMAZON_TAG (Vercel y .env.local).
+ */
+export const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG || 'nuus-21'
 
 export interface ProductoAmazon {
   asin: string

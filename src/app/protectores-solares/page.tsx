@@ -13,7 +13,9 @@ import { tinte } from '@/lib/tinte'
 export const revalidate = 604800 // 7 días. contenido evergreen
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
-const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
+// Desde la fuente única. Antes era `?? ''`, que con la variable sin
+// definir dejaba `tag=` en los enlaces: sin error y sin comisión.
+import { AMAZON_TAG } from '@/lib/amazon-productos'
 const MODIFIED = getFileLastModified('src/app/protectores-solares/page.tsx')
 
 export const metadata: Metadata = {

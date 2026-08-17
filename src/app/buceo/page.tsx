@@ -13,7 +13,9 @@ import { getEditorialModified } from '@/lib/dateModified'
 export const revalidate = 86400
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
-const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? ''
+// Desde la fuente única. Antes era `?? ''`, que con la variable sin
+// definir dejaba `tag=` en los enlaces: sin error y sin comisión.
+import { AMAZON_TAG } from '@/lib/amazon-productos'
 const CIVITATIS_AFF = process.env.NEXT_PUBLIC_CIVITATIS_AFF ?? ''
 
 const MODIFIED = getEditorialModified('src/app/buceo/page.tsx', ['public/data/playas.json'])

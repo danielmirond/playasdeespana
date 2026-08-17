@@ -35,7 +35,10 @@ interface Props {
   variante?:   'condiciones' | 'generico'
 }
 
-const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? 'nuus-21'
+// Reexportado desde lib/amazon-productos para no tener dos fuentes del
+// mismo tag. El `??` de antes dejaba pasar la cadena vacía y ponía
+// `tag=` en los enlaces: sin error visible y sin comisión.
+import { AMAZON_TAG } from '@/lib/amazon-productos'
 
 function urlAmazon(n: Necesidad): string {
   if (n.asin) {

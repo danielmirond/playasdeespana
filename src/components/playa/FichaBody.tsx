@@ -1248,7 +1248,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 v={playa.comunidad}
                 href={locale === 'en' ? `/en/communities/${slug(playa.comunidad)}` : `/comunidad/${slug(playa.comunidad)}`}
               />
-              <DataRow k={i18n.coordenadas} v={`${playa.lat}° N, ${playa.lng}° E`} mono/>
+              {/* El hemisferio se deduce del signo, no se da por hecho.
+                  Estaba escrito «N, E» fijo, así que toda la costa
+                  atlántica y Canarias mostraban «-13.839299° E» — una
+                  longitud negativa es Oeste, y el signo y la letra se
+                  contradecían en la misma línea. Se muestra el valor
+                  absoluto con la letra que le toca, que es como se
+                  escriben las coordenadas fuera de una hoja de cálculo. */}
+              <DataRow k={i18n.coordenadas} v={coordenadasTxt(playa.lat, playa.lng, locale)} mono/>
               {playa.web_ayuntamiento && (
                 <DataRow k={i18n.webAyuntamiento} v={i18n.verSitio} href={playa.web_ayuntamiento}/>
               )}
@@ -1516,6 +1523,20 @@ function FaqSection({ playa, meteo, banderaPlaya, medusas, mareasLunar, locale =
  * La hora sí se pide a Intl, pero solo `hour`/`minute` con zona fijada:
  * ahí no hay nombres que traducir, solo dígitos.
  */
+/**
+ * Coordenadas con el hemisferio que les corresponde.
+ *
+ * En español el punto cardinal de longitud oeste es «O»; en inglés,
+ * «W». Usar «W» en la versión española es un anglicismo silencioso que
+ * se cuela en fichas de datos por copiar el formato inglés.
+ */
+function coordenadasTxt(lat: number, lng: number, locale: string): string {
+  const es = locale !== 'en'
+  const ns = lat >= 0 ? 'N' : 'S'
+  const eo = lng >= 0 ? 'E' : (es ? 'O' : 'W')
+  return `${Math.abs(lat).toFixed(6)}° ${ns}, ${Math.abs(lng).toFixed(6)}° ${eo}`
+}
+
 const MESES_ABREV: Record<'es' | 'en', string[]> = {
   es: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
   en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],

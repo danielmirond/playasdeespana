@@ -29,10 +29,36 @@ export default function robots(): MetadataRoute.Robots {
         allow: ['/api/og', '/sitemaps/'],
       },
       {
-        // No entrenar LLMs ajenos con nuestro contenido (decisión editorial).
-        // Si en el futuro hay acuerdo, eliminar esta regla.
-        userAgent: ['GPTBot', 'CCBot', 'ClaudeBot', 'anthropic-ai', 'Google-Extended'],
+        // ENTRENAMIENTO: bloqueado (decisión editorial). Estos rastreadores
+        // se llevan el contenido para entrenar modelos y no devuelven nada.
+        // Si algún día hay acuerdo, se quita el agente de esta lista.
+        userAgent: [
+          'GPTBot', 'CCBot', 'ClaudeBot', 'anthropic-ai', 'Google-Extended',
+          'Applebot-Extended', 'Bytespider', 'Meta-ExternalAgent',
+        ],
         disallow: '/',
+      },
+      {
+        // CITACIÓN Y BÚSQUEDA: permitido, y escrito aunque sea redundante.
+        //
+        // La regla `*` de arriba ya los deja pasar —no bloquear es
+        // permitir—, así que esto no cambia nada hoy. Está para que se
+        // vea la diferencia: entrenar con el contenido y citarlo no son
+        // lo mismo, y estos SÍ mandan visitas.
+        //
+        // Sin declararlo, el próximo que amplíe la lista de arriba se
+        // los lleva por delante pensando que «los bots de IA» son una
+        // sola cosa. Un sitio con datos horarios es candidato natural a
+        // que le pregunten «¿hay medusas hoy en X?» y le citen.
+        userAgent: [
+          'OAI-SearchBot',      // índice de búsqueda de ChatGPT
+          'ChatGPT-User',       // fetch a petición de un usuario
+          'Claude-SearchBot',
+          'Claude-User',
+          'PerplexityBot',
+          'Applebot',           // Siri y Spotlight (distinto de -Extended)
+        ],
+        allow: '/',
       },
       {
         // Rastreadores de auditoría y de bases de datos de enlaces.
