@@ -1,0 +1,178 @@
+{
+ "playa-fea": {
+  "nombre": "Playa Fea",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-san-borondon": {
+  "nombre": "Playa San Borondón",
+  "municipio": "Telde"
+ },
+ "playa-de-zapata": {
+  "nombre": "Playa Zapata",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-las-brenas": {
+  "nombre": "Playa del Fuentecillo",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-las-brujas": {
+  "nombre": "Playa La Bruja",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-roque-bermejo": {
+  "nombre": "Playa del Roque",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-castro": {
+  "nombre": "Playa de Castro",
+  "municipio": "Los Realejos"
+ },
+ "playa-de-igueste": {
+  "nombre": "Playa El Llano",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-los-barqueros": {
+  "nombre": "Los Barqueros",
+  "municipio": "Buenavista del Norte"
+ },
+ "playa-de-la-cueva-del-agua": {
+  "nombre": "Playa El Balayo",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-bocabarranco": {
+  "nombre": "Playa de Jinamar",
+  "municipio": "Telde"
+ },
+ "playa-la-hornilla": {
+  "nombre": "El Pozo",
+  "municipio": "Candelaria"
+ },
+ "playa-del-verodal": {
+  "nombre": "El Verodal",
+  "municipio": "La Frontera"
+ },
+ "playa-de-las-aguas": {
+  "nombre": "Playa Las Aguas",
+  "municipio": "Garachico"
+ },
+ "playa-las-coloradas": {
+  "nombre": "Las Coloradas",
+  "municipio": "Pájara"
+ },
+ "playa-de-tachero": {
+  "nombre": "Playa Tachero",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-casas-blancas": {
+  "nombre": "Playa de Casas Blancas",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "melenara-telde": {
+  "nombre": "Charca de los Pérez",
+  "municipio": "Telde"
+ },
+ "playa-los-patos": {
+  "nombre": "Playa los Patos",
+  "municipio": "La Orotava"
+ },
+ "playa-de-los-troches": {
+  "nombre": "Playa de Troche",
+  "municipio": "San Cristóbal de La Laguna"
+ },
+ "playa-de-la-fajana": {
+  "nombre": "Playa La Fajana",
+  "municipio": "Los Realejos"
+ },
+ "playa-de-los-roques": {
+  "nombre": "Playa de Los Roques",
+  "municipio": "Los Realejos"
+ },
+ "playa-de-fabian": {
+  "nombre": "Playa de Fabián",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-ijuana": {
+  "nombre": "Playa Ijuana",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-san-marcos": {
+  "nombre": "San Marcos",
+  "municipio": "Agulo"
+ },
+ "playa-de-la-zamora-grande": {
+  "nombre": "La Zamora",
+  "municipio": "Fuencaliente de la Palma"
+ },
+ "playa-de-bujaren": {
+  "nombre": "Playa de Bujarén",
+  "municipio": "Garafía"
+ },
+ "playa-de-los-palos": {
+  "nombre": "Playa Chica",
+  "municipio": "Telde"
+ },
+ "playa-de-masca": {
+  "nombre": "Masca",
+  "municipio": "Buenavista del Norte"
+ },
+ "caleta-de-negros": {
+  "nombre": "Playa del Parque",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-del-muerto": {
+  "nombre": "Playa del Recanto",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-samarines": {
+  "nombre": "Playa de Samarines",
+  "municipio": "Candelaria"
+ },
+ "playita-del-burro": {
+  "nombre": "Playa El Burro",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-tamadite": {
+  "nombre": "Playas de Tamadite",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-toscalitos": {
+  "nombre": "Playa de Los Toscalitos",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playa-de-anosma": {
+  "nombre": "Playa de Anosma",
+  "municipio": "Santa Cruz de Tenerife"
+ },
+ "playita-del-pescante-de-agulo": {
+  "nombre": "Pescante de Agulo",
+  "municipio": "Agulo"
+ },
+ "playa-de-santo-domingo": {
+  "nombre": "Santo Domingo",
+  "municipio": "La Guancha"
+ },
+ "playa-de-silva": {
+  "nombre": "Playa de Silva",
+  "municipio": "Telde"
+ },
+ "playa-de-los-roques-2": {
+  "nombre": "Los Roques",
+  "municipio": "San Juan de la Rambla"
+ },
+ "radazul": {
+  "nombre": "Playa de Tabaiba I y II",
+  "municipio": "El Rosario"
+ },
+ "playa-de-san-cristobal": {
+  "nombre": "Playa de San Cristóbal",
+  "municipio": "Las Palmas de Gran Canaria"
+ },
+ "el-duque-norte": {
+  "nombre": "El Beril. Duque Norte",
+  "municipio": "Adeje"
+ },
+ "playa-de-chimisay": {
+  "nombre": "Playa de Chimisay",
+  "municipio": "Arafo"
+ }
+}

@@ -104,6 +104,11 @@ interface Props {
   boya?:           import('@/lib/boyas').DatosBoya | null
   /** Capa que ganó la cascada de bandera — decide la insignia de fuente */
   certBandera?:    Certeza
+  /**
+   * Baño prohibido de forma permanente (catálogo oficial), distinto de
+   * la bandera del día: el mar puede estar en calma y seguir prohibido.
+   */
+  usoProhibido?: boolean
   /** Avisos de viento de bañistas en las últimas 24 h */
   vientoReportado?: { n: number; detalle: string; detalleEn: string } | null
   chiringuitos?:   import('@/lib/chiringuitos-playa').ChiringuitoCerca[]
@@ -312,7 +317,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', vientoReportado, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -525,6 +530,31 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               </CertBadge>
             </div>
             <div className={styles.cardBody}>
+              {/* Prohibición PERMANENTE de baño (clasificación oficial del
+                  catálogo, no bandera del día). Va lo primero y no depende
+                  de que hoy haya parte: el mar puede estar en calma y el
+                  baño seguir prohibido, que es justo la confusión que esta
+                  ficha tiene que deshacer. */}
+              {usoProhibido && (
+                <div role="alert" style={{
+                  display: 'flex', gap: '.7rem', alignItems: 'flex-start',
+                  padding: '.75rem .85rem', marginBottom: '1rem',
+                  borderLeft: '3px solid #c0272d', borderRadius: 2,
+                  background: 'color-mix(in srgb, #c0272d 8%, transparent)',
+                }}>
+                  <Flag size={18} weight="fill" color="#c0272d" aria-hidden style={{ flexShrink: 0, marginTop: 2 }} />
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 'var(--fs-base)', color: 'var(--ink)' }}>
+                      {locale === 'en' ? 'Swimming is prohibited here' : 'El baño está prohibido en esta playa'}
+                    </div>
+                    <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--muted)', marginTop: '.15rem' }}>
+                      {locale === 'en'
+                        ? 'Permanent classification: "restricted use" in the official beach register. It does not depend on today’s conditions.'
+                        : 'Clasificación permanente como «uso prohibido» en el catálogo oficial de playas. No depende de las condiciones de hoy.'}
+                    </div>
+                  </div>
+                </div>
+              )}
               {banderaPlaya && (
                 <div style={{ display:'flex', alignItems:'center', gap:'.75rem', marginBottom: medusas ? '1rem' : 0 }}>
                   <div style={{ width:28, height:28, borderRadius:'50%', background:banderaPlaya.hex, flexShrink:0 }} aria-hidden />

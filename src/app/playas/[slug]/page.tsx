@@ -5,7 +5,10 @@ import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { getPrediccionAemet } from '@/lib/aemet'
-import { getBanderaCat } from '@/lib/banderas-cat'
+import { getBanderaCat, tieneBanderaCat } from '@/lib/banderas-cat'
+import { getBanderaCan, tieneBanderaCan } from '@/lib/banderas-can'
+import { getBanderaAnd, tieneBanderaAnd } from '@/lib/banderas-and'
+import { esUsoProhibido } from '@/lib/playas-prohibidas'
 import { getBoyaCercana } from '@/lib/boyas'
 import { getChiringuitosPlaya } from '@/lib/chiringuitos-playa'
 import { getCalidad } from '@/lib/calidad'
@@ -237,6 +240,16 @@ export default async function PlayaPage({ params }: Props) {
     // Bandera OFICIAL izada (solo Cataluña, dataset Transparència) — null
     // fuera del mapeo; 1 llamada SODA compartida vía KV para toda la costa
     getBanderaCat(slug),
+    // Bandera OFICIAL izada (Canarias, socorrismo DGSE) — null fuera del
+    // mapeo; 1 llamada REST compartida vía KV para las 7 islas. Es la única
+    // fuente de España que dice POR QUÉ está izada (corrientes,
+    // desprendimientos, oleaje), y el motivo va a la ficha.
+    getBanderaCan(slug),
+    // Bandera OFICIAL izada (Andalucía, Junta) — 506 playas de las 5
+    // provincias en 1 llamada. Sin motivo y sin timestamp, pero es la que
+    // habría evitado que La Misericordia dijera "BUENA" el 15-ago-2026 con
+    // el baño prohibido por E. coli.
+    getBanderaAnd(slug),
     // Boya de Puertos del Estado más cercana (≤60 km) — dato MEDIDO
     getBoyaCercana(playa.lat, playa.lng),
   ] as const
@@ -256,7 +269,7 @@ export default async function PlayaPage({ params }: Props) {
     meteoForecast, turbidez,
     restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
     allPlayasResult, municipioSlugsResult,
-    videoResult, webcamResult, aemetResult, banderaCatResult, boyaResult,
+    videoResult, webcamResult, aemetResult, banderaCatResult, banderaCanResult, banderaAndResult, boyaResult,
   ] = await Promise.all(conDeadline) as any[]
   const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
   const webcamsData = (webcamResult?.status === 'fulfilled' ? webcamResult.value : []).slice(0, 3)
@@ -330,6 +343,23 @@ export default async function PlayaPage({ params }: Props) {
   if (needsWarmLista(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })])
   if (needsWarmLista(escuelasResult)) failed.push(['esc',    () => getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true })])
   if (needsWarmLista(webcamResult))   failed.push(['webcam', () => getWebcams(playa.lat, playa.lng)])
+  // Banderas oficiales: SOLO si esta playa está mapeada a la fuente.
+  //
+  // El gate no es cosmético. `null` es la respuesta legítima y masiva de
+  // estos adaptadores —"esta playa no está en el dataset"—, y la devuelven
+  // las ~4.000 fichas que no son catalanas, canarias ni andaluzas. Sin la
+  // guarda `tiene*`, needsWarm las daría todas por fallidas y cada
+  // regeneración ISR del país entero reintentaría tres APIs para no
+  // encontrar nada: exactamente la patología que describe el bloque de
+  // arriba sobre el p95.
+  //
+  // Con la guarda, el warming solo corre donde el dato existe y no llegó a
+  // tiempo. Merece la pena porque el snapshot es de comunidad entera: un
+  // solo warming deja KV poblado para las 325 fichas andaluzas o las 412
+  // canarias, no solo para esta.
+  if (tieneBanderaCat(slug) && needsWarm(banderaCatResult)) failed.push(['bandCat', () => getBanderaCat(slug)])
+  if (tieneBanderaCan(slug) && needsWarm(banderaCanResult)) failed.push(['bandCan', () => getBanderaCan(slug)])
+  if (tieneBanderaAnd(slug) && needsWarm(banderaAndResult)) failed.push(['bandAnd', () => getBanderaAnd(slug)])
 
   if (failed.length > 0) {
     after(async () => {
@@ -455,6 +485,52 @@ export default async function PlayaPage({ params }: Props) {
   // la mañana, conservan su derecho a ELEVARLA más abajo.
   const oficialCat = banderaCatResult?.status === 'fulfilled' ? banderaCatResult.value : null
   if (oficialCat?.bandera) { banderaPlaya = oficialCat.bandera; certBandera = 'oficial' }
+
+  // Bandera OFICIAL izada (Canarias): misma autoridad que la catalana —es el
+  // mástil, no una previsión— con dos diferencias que se notan en la ficha.
+  // La primera es que trae el motivo. La segunda es que una ficha puede
+  // agrupar varios tramos con bandera propia (Las Canteras son 7 sectores):
+  // el adaptador ya devuelve la PEOR del grupo, aquí no hay que decidir nada.
+  const oficialCan = banderaCanResult?.status === 'fulfilled' ? banderaCanResult.value : null
+  if (oficialCan?.bandera) { banderaPlaya = oficialCan.bandera; certBandera = 'oficial' }
+
+  // Bandera OFICIAL izada (Andalucía). Las tres autonómicas son excluyentes
+  // por geografía —ninguna playa está en Cataluña, Canarias y Andalucía a la
+  // vez—, así que el orden entre ellas es indiferente.
+  const oficialAnd = banderaAndResult?.status === 'fulfilled' ? banderaAndResult.value : null
+  if (oficialAnd?.bandera) { banderaPlaya = oficialAnd.bandera; certBandera = 'oficial' }
+  // "Cerrada" es un estado aparte del color: la Junta puede darla cerrada sin
+  // bandera roja. Si lo está, se fuerza roja — cerrada es más grave que
+  // cualquier color, y callarlo es el fallo que nos trajo hasta aquí.
+  // Si SABEMOS que esta playa tiene bandera oficial y no hemos podido
+  // leerla, no se adivina: se dice que no hay dato.
+  //
+  // Es el mismo error de origen visto desde el otro lado. Estas tres
+  // fuentes pueden caer por el deadline de 1.500 ms en la primera
+  // renderización en frío, y la ISR congelaría ese resultado una hora. Si
+  // en ese hueco enseñáramos la estimación, una playa oficialmente en roja
+  // por contaminación —agua en calma, viento flojo— se publicaría en verde
+  // durante una hora. Preferimos el hueco: "sin dato" es una respuesta
+  // honesta, "apto para el baño" cuando no lo sabemos no lo es.
+  //
+  // El warming de after() repuebla KV para que la siguiente lo tenga.
+  const oficialFallo =
+    (tieneBanderaCat(slug) && !oficialCat) ||
+    (tieneBanderaCan(slug) && !oficialCan) ||
+    (tieneBanderaAnd(slug) && !oficialAnd)
+  if (oficialFallo && certBandera !== 'oficial') {
+    banderaPlaya = undefined
+    certBandera = 'sindato'
+  }
+
+  if (oficialAnd?.cerrada && banderaPlaya?.color !== 'roja') {
+    banderaPlaya = {
+      color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
+      motivo: 'Playa cerrada hoy por la autoridad competente (Junta de Andalucía)',
+      motivoEn: 'Beach closed today by the authorities', hex: '#ef4444',
+    }
+    certBandera = 'oficial'
+  }
 
   // Boya de Puertos del Estado: dato MEDIDO (sensor físico), solo display.
   const boyaData = boyaResult?.status === 'fulfilled' ? boyaResult.value : null
@@ -704,6 +780,7 @@ export default async function PlayaPage({ params }: Props) {
         reportes={reportesData}
         foto={fotoHero ?? null}
         banderaPlaya={banderaPlaya}
+        certBandera={certBandera}
         variante={dsVariant()}
       />
       {/* BeachVideo se renderiza ahora dentro de FichaBody como
@@ -736,6 +813,7 @@ export default async function PlayaPage({ params }: Props) {
         aemet={aemetData}
         boya={boyaData}
         certBandera={certBandera}
+        usoProhibido={esUsoProhibido(slug)}
         vientoReportado={vientoReportado}
         chiringuitos={chiringuitos}
         medusas={medusas}

@@ -1,0 +1,997 @@
+{
+ "playa-de-agua-amarga": [
+  16206
+ ],
+ "playa-de-la-caleta": [
+  16207
+ ],
+ "costa-del-sol-2": [
+  16208
+ ],
+ "levante-almerimar-el-ejido": [
+  16209
+ ],
+ "poniente-almerimar-el-ejido": [
+  16210
+ ],
+ "playa-del-corralete": [
+  16211
+ ],
+ "playa-del-arroyo-de-la-miel-y-los-melilleros": [
+  16212
+ ],
+ "playa-bonita": [
+  16214,
+  30428
+ ],
+ "playa-de-la-chincheta": [
+  16218
+ ],
+ "playa-de-los-banos-del-carmen": [
+  16223
+ ],
+ "playa-barranco-de-enmedio": [
+  16224
+ ],
+ "balanegra-balanegra": [
+  16226
+ ],
+ "playa-de-bil-bil": [
+  16227
+ ],
+ "playa-burriana": [
+  16230
+ ],
+ "playa-de-cabria": [
+  16231
+ ],
+ "cala-arena": [
+  16232
+ ],
+ "cala-peineta": [
+  16234,
+  30476
+ ],
+ "cala-carbon": [
+  16235
+ ],
+ "cala-chica-2": [
+  16237
+ ],
+ "cala-chilches": [
+  16238
+ ],
+ "cala-cristal": [
+  16239
+ ],
+ "cala-la-invencible": [
+  16240,
+  30452,
+  30453
+ ],
+ "cala-de-enmedio": [
+  16241
+ ],
+ "cala-de-los-dolores": [
+  16242
+ ],
+ "cala-de-la-media-luna": [
+  16243
+ ],
+ "cala-de-la-polacra": [
+  16244
+ ],
+ "cala-de-los-amarillos": [
+  16246
+ ],
+ "playa-de-monsul": [
+  16247
+ ],
+ "cala-del-aceite": [
+  16248
+ ],
+ "playa-del-canuelo": [
+  16249
+ ],
+ "cala-del-carnaje": [
+  16250
+ ],
+ "cala-del-cuervo": [
+  16251
+ ],
+ "cala-del-pino": [
+  16253,
+  33833
+ ],
+ "cala-del-plomo": [
+  16254
+ ],
+ "cala-higuera": [
+  16255
+ ],
+ "cala-la-invencible-2": [
+  16256
+ ],
+ "cala-panizo": [
+  16258
+ ],
+ "cala-principe": [
+  16259
+ ],
+ "cala-raja": [
+  16260
+ ],
+ "cala-de-san-pedro": [
+  16261
+ ],
+ "playa-calabajio": [
+  16262
+ ],
+ "playa-de-calahonda-calahonda": [
+  16264
+ ],
+ "playa-calahonda": [
+  16265
+ ],
+ "calipso-pulpi": [
+  16270
+ ],
+ "playa-de-cambriles": [
+  16272
+ ],
+ "playa-de-guadalmar": [
+  16274
+ ],
+ "playa-de-guadalupe": [
+  16277
+ ],
+ "playa-cantarrijan": [
+  16278
+ ],
+ "playa-carabeo": [
+  16279
+ ],
+ "carvajal-benalmadena": [
+  16281,
+  16551
+ ],
+ "playa-de-la-fontanilla": [
+  16282
+ ],
+ "playa-de-macenas": [
+  16286
+ ],
+ "playa-de-castilnovo": [
+  16287
+ ],
+ "playa-central": [
+  16289
+ ],
+ "playa-de-la-cortadura": [
+  16294
+ ],
+ "playa-canina-ventura-del-mar": [
+  16295
+ ],
+ "playa-de-costacabana": [
+  16297
+ ],
+ "playa-de-cotobro": [
+  16298
+ ],
+ "cruz-del-mar-chipiona": [
+  16299
+ ],
+ "playa-del-curumbico": [
+  16301
+ ],
+ "playa-del-hoyo-3": [
+  16302
+ ],
+ "playa-del-algarrobico": [
+  16303
+ ],
+ "el-alicate": [
+  16304
+ ],
+ "playa-del-ancon-2": [
+  16306
+ ],
+ "playa-del-arco": [
+  16307
+ ],
+ "playa-del-lido": [
+  16308
+ ],
+ "el-bombo-mijas": [
+  16310
+ ],
+ "playa-de-la-atunara": [
+  16311
+ ],
+ "el-cable-marbella": [
+  16312
+ ],
+ "cala-el-pargo": [
+  16314,
+  30444
+ ],
+ "playa-el-calon": [
+  16315
+ ],
+ "cala-del-cambron": [
+  16316
+ ],
+ "playa-de-el-candado": [
+  16317
+ ],
+ "lance-nuevo-mojacar": [
+  16318,
+  30274
+ ],
+ "playa-del-cenicero": [
+  16322
+ ],
+ "playa-el-chaparral-el-chaparral": [
+  16323
+ ],
+ "playa-del-chorrillo-3": [
+  16325
+ ],
+ "playa-del-cristo": [
+  16326
+ ],
+ "playa-de-el-dedo": [
+  16328
+ ],
+ "el-descargador-mojacar": [
+  16329
+ ],
+ "playa-mati": [
+  16330
+ ],
+ "aguamarga-nijar": [
+  16331
+ ],
+ "el-faro-marbella": [
+  16332
+ ],
+ "el-lance": [
+  16334
+ ],
+ "playa-del-morche": [
+  16336
+ ],
+ "playa-del-muerto-2": [
+  16337
+ ],
+ "el-palmer": [
+  16340
+ ],
+ "playa-de-el-palo": [
+  16341
+ ],
+ "del-parador-castilla-moguer": [
+  16342
+ ],
+ "playa-el-penoncillo": [
+  16343
+ ],
+ "playa-el-playazo": [
+  16346
+ ],
+ "playa-del-chorrillo-2": [
+  16350
+ ],
+ "playa-el-ruso": [
+  16351,
+  16425
+ ],
+ "playa-del-saladillo": [
+  16352
+ ],
+ "playa-el-salon": [
+  16353
+ ],
+ "cala-de-bordenares": [
+  16354,
+  16597
+ ],
+ "playa-de-la-fabrica": [
+  16357
+ ],
+ "playa-fuente-del-gallo": [
+  16360
+ ],
+ "fuentebravia-el-puerto-de-santa-maria": [
+  16361
+ ],
+ "playa-de-garrucha": [
+  16362
+ ],
+ "getares-algeciras": [
+  16363
+ ],
+ "granada-motril": [
+  16364
+ ],
+ "playa-campo-de-golf": [
+  16366
+ ],
+ "playa-de-los-roncalillo": [
+  16369
+ ],
+ "playa-de-la-yerbabuena": [
+  16371
+ ],
+ "isla-canela-ayamonte": [
+  16373
+ ],
+ "islantilla-isla-cristina": [
+  16374
+ ],
+ "playa-bahia-de-marbella": [
+  16375,
+  16468
+ ],
+ "playa-de-la-antilla": [
+  16380
+ ],
+ "playa-de-la-arana": [
+  16381
+ ],
+ "playa-de-levante-2": [
+  16383
+ ],
+ "la-bajadilla-roquetas-de-mar": [
+  16384
+ ],
+ "playa-de-la-bajadilla-2": [
+  16385
+ ],
+ "playa-de-la-ballena-2": [
+  16386
+ ],
+ "playa-de-la-cala-el-torreon": [
+  16389
+ ],
+ "la-cachucha": [
+  16390
+ ],
+ "playa-de-la-caleta-5": [
+  16391
+ ],
+ "playa-de-la-caleta-3": [
+  16392
+ ],
+ "playa-de-la-caleta-4": [
+  16394
+ ],
+ "playa-la-caletilla": [
+  16395
+ ],
+ "playa-de-la-calita": [
+  16396
+ ],
+ "playa-de-la-carihuela": [
+  16399
+ ],
+ "playa-de-las-palmeras": [
+  16400
+ ],
+ "la-casita-azul-isla-cristina": [
+  16401
+ ],
+ "playa-de-salomar": [
+  16402
+ ],
+ "la-costilla-rota": [
+  16404
+ ],
+ "la-duquesa": [
+  16405
+ ],
+ "playa-bellavista": [
+  16406
+ ],
+ "playa-de-la-fabriquilla": [
+  16407
+ ],
+ "la-fontanilla-conil-de-la-frontera": [
+  16408
+ ],
+ "playa-de-la-galera-2": [
+  16409
+ ],
+ "cala-de-la-garrofa": [
+  16410
+ ],
+ "playa-de-la-guardia": [
+  16412
+ ],
+ "playa-de-puente-mayorga-campamento": [
+  16414
+ ],
+ "playa-de-la-herradura-2": [
+  16415
+ ],
+ "playas-de-la-jara": [
+  16416
+ ],
+ "playa-de-la-pela": [
+  16417
+ ],
+ "playa-de-la-malagueta": [
+  16419
+ ],
+ "playa-de-la-mamola": [
+  16420
+ ],
+ "playa-de-los-enebrales": [
+  16421
+ ],
+ "playa-de-la-misericordia": [
+  16422
+ ],
+ "la-puntilla-el-puerto-de-santa-maria": [
+  16426
+ ],
+ "la-rada": [
+  16428
+ ],
+ "playa-de-regla": [
+  16429
+ ],
+ "la-rijana": [
+  16430
+ ],
+ "la-romanilla-roquetas-de-mar": [
+  16431
+ ],
+ "playa-de-rumina": [
+  16432
+ ],
+ "playa-la-torrecilla": [
+  16433
+ ],
+ "playa-de-venus": [
+  16434
+ ],
+ "la-victoria-cadiz": [
+  16436
+ ],
+ "playa-de-las-alberquillas": [
+  16437,
+  30403
+ ],
+ "playa-de-las-canas": [
+  16441
+ ],
+ "playa-de-las-canteras-2": [
+  16443
+ ],
+ "playa-de-artola": [
+  16444
+ ],
+ "cala-de-la-granatilla": [
+  16446
+ ],
+ "playa-de-las-marinas-bolaga": [
+  16447
+ ],
+ "las-marinicas-carboneras": [
+  16448
+ ],
+ "playa-de-las-negras": [
+  16449
+ ],
+ "las-olas": [
+  16450
+ ],
+ "las-salinas-roquetas-de-mar": [
+  16452
+ ],
+ "playa-las-viborillas": [
+  16453
+ ],
+ "playa-de-la-yuca": [
+  16454
+ ],
+ "sancti-petri-chiclana-de-la-frontera": [
+  16455
+ ],
+ "playa-de-los-cocones": [
+  16461
+ ],
+ "los-bateles-conil-de-la-frontera": [
+  16462
+ ],
+ "playa-de-los-boliches": [
+  16464
+ ],
+ "playa-de-los-genoveses": [
+  16465
+ ],
+ "playa-de-los-muertos": [
+  16469
+ ],
+ "playa-la-entrevista": [
+  16470
+ ],
+ "playa-los-yesos": [
+  16473
+ ],
+ "malapesquera-benalmadena": [
+  16474,
+  16545
+ ],
+ "mar-rabiosa-pulpi": [
+  16475,
+  33885
+ ],
+ "mar-serena-pulpi": [
+  16476
+ ],
+ "marina-de-la-torre-mojacar": [
+  16477
+ ],
+ "playa-de-maro": [
+  16478
+ ],
+ "playa-de-melicena": [
+  16481
+ ],
+ "playa-de-mezquitilla": [
+  16482
+ ],
+ "playa-de-nagueles": [
+  16485
+ ],
+ "playa-del-carmen": [
+  16486
+ ],
+ "nueva-almeria-almeria": [
+  16487
+ ],
+ "playas-del-duque": [
+  16488
+ ],
+ "playa-de-palmones": [
+  16491
+ ],
+ "playa-de-pedregalejo": [
+  16492
+ ],
+ "playa-de-poniente-5": [
+  16493
+ ],
+ "playa-del-penon-blanco": [
+  16495
+ ],
+ "cala-del-penon-cortado": [
+  16496
+ ],
+ "playa-del-penon-del-cuervo": [
+  16497
+ ],
+ "playa-chica-9": [
+  16502
+ ],
+ "playa-el-calacile": [
+  16503
+ ],
+ "playa-de-santa-barbara": [
+  16505
+ ],
+ "censo-adra": [
+  16507
+ ],
+ "playa-de-poniente-3": [
+  16508
+ ],
+ "playa-de-vilches": [
+  16509,
+  33865
+ ],
+ "playa-del-playazo-de-rodalquilar": [
+  16511
+ ],
+ "playazo-de-villaricos": [
+  16512
+ ],
+ "playa-pozo-del-esparto-la-escribania": [
+  16513
+ ],
+ "playa-de-el-pozuelo": [
+  16514
+ ],
+ "playa-del-pozuelo": [
+  16515
+ ],
+ "puerta-del-mar-almunecar": [
+  16516
+ ],
+ "playa-de-puerto-rey": [
+  16517
+ ],
+ "playa-de-punta-candor": [
+  16518
+ ],
+ "playa-de-punta-plata": [
+  16519
+ ],
+ "punta-del-moral-ayamonte": [
+  16521
+ ],
+ "playa-de-quitapellejos": [
+  16523
+ ],
+ "playa-de-los-monteros": [
+  16525
+ ],
+ "playa-de-la-redondela": [
+  16526
+ ],
+ "playa-victoria": [
+  16528
+ ],
+ "playa-punta-del-rio": [
+  16534
+ ],
+ "playa-de-san-andres": [
+  16535
+ ],
+ "san-cristobal-almunecar": [
+  16536
+ ],
+ "playa-del-castillo": [
+  16537
+ ],
+ "san-jose-nijar": [
+  16538
+ ],
+ "playa-de-el-zapillo": [
+  16540,
+  33945
+ ],
+ "san-pedro-de-alcantara-marbella": [
+  16542
+ ],
+ "cala-de-san-telmo": [
+  16543
+ ],
+ "playa-de-santa-catalina": [
+  16546
+ ],
+ "santa-maria-del-mar-cadiz": [
+  16547
+ ],
+ "playa-serena-roquetas-de-mar": [
+  16548
+ ],
+ "sotillo-castell-gualchos": [
+  16549
+ ],
+ "playa-del-tesorillo": [
+  16552
+ ],
+ "playa-de-torreblanca": [
+  16555
+ ],
+ "playa-de-torregarcia": [
+  16557
+ ],
+ "playa-del-canon": [
+  16560
+ ],
+ "playa-de-torre-vigia": [
+  16562,
+  30430
+ ],
+ "urbanizacion-roquetas-de-mar-roquetas-de-mar": [
+  16563
+ ],
+ "playa-de-valdelagrana": [
+  16564
+ ],
+ "velilla-almunecar": [
+  16567
+ ],
+ "puntalillo-rota": [
+  16570
+ ],
+ "playa-del-padron": [
+  16571
+ ],
+ "la-muralla-el-puerto-de-santa-maria": [
+  16572
+ ],
+ "cala-del-bergantin": [
+  16574
+ ],
+ "playa-benalnatura": [
+  16575
+ ],
+ "salduna": [
+  16577
+ ],
+ "playa-del-angel": [
+  16579
+ ],
+ "playa-de-la-ministra": [
+  16581
+ ],
+ "playa-de-la-ministra-2": [
+  16582
+ ],
+ "playa-del-conchal": [
+  16583
+ ],
+ "playa-de-la-media-luneta": [
+  16584
+ ],
+ "playa-de-urbasur": [
+  16585
+ ],
+ "playa-de-la-casita-azul": [
+  16586
+ ],
+ "playa-de-la-gaviota": [
+  16587
+ ],
+ "playa-de-santana": [
+  16588
+ ],
+ "el-rincon-de-la-china": [
+  16589
+ ],
+ "la-veintiuna": [
+  16590
+ ],
+ "cala-de-las-conchas": [
+  16593
+ ],
+ "playa-de-la-caseria": [
+  16598
+ ],
+ "galeones-rota": [
+  16604
+ ],
+ "fuente-de-la-salud-benalmadena": [
+  16606
+ ],
+ "playa-de-santa-pura": [
+  28611
+ ],
+ "sirena-loca": [
+  28726
+ ],
+ "playa-del-corral": [
+  28727
+ ],
+ "playa-de-la-barbacoa": [
+  30312
+ ],
+ "la-rana": [
+  30313
+ ],
+ "playa-del-charcon-el-charcon": [
+  30404
+ ],
+ "playa-el-ejido": [
+  30405
+ ],
+ "playa-del-faro-el-faro": [
+  30406
+ ],
+ "playa-el-chucho": [
+  30407
+ ],
+ "dunas-de-san-anton": [
+  30409
+ ],
+ "playa-de-las-doradas": [
+  30410
+ ],
+ "ventanicas-mojacar": [
+  30414
+ ],
+ "venta-del-bancal-mojacar": [
+  30415
+ ],
+ "playa-de-calahonda": [
+  30418
+ ],
+ "play-costa-natura-nudist": [
+  30420
+ ],
+ "playa-de-las-verdas": [
+  30427
+ ],
+ "playa-de-arroyo-hondo": [
+  30429
+ ],
+ "playa-del-parque-litoral": [
+  30433
+ ],
+ "playa-de-san-bruno": [
+  30437
+ ],
+ "playa-de-los-haraganes": [
+  30438
+ ],
+ "playa-de-los-corrales": [
+  30449
+ ],
+ "playa-la-carolina": [
+  30451
+ ],
+ "cala-del-tio-juan-medina": [
+  30459
+ ],
+ "cala-el-aspero": [
+  30460
+ ],
+ "cala-del-frailecillo": [
+  30461
+ ],
+ "cala-del-pato": [
+  30462
+ ],
+ "cala-melchor": [
+  30465
+ ],
+ "cala-sudario": [
+  30466
+ ],
+ "playa-de-guadalobon": [
+  30468
+ ],
+ "playa-sacaba-beach": [
+  30469
+ ],
+ "playa-de-el-chinarral": [
+  30470
+ ],
+ "cala-marques": [
+  30471
+ ],
+ "cala-de-punta-negra": [
+  30473
+ ],
+ "cala-tomate": [
+  30474
+ ],
+ "cala-palmito": [
+  30475
+ ],
+ "cala-montoya": [
+  30477,
+  30480
+ ],
+ "cala-chica": [
+  30478
+ ],
+ "cala-de-los-toros": [
+  30479
+ ],
+ "playa-cueva-del-lobo": [
+  30481
+ ],
+ "playa-del-cantal": [
+  30482
+ ],
+ "playa-del-palmeral": [
+  30483
+ ],
+ "playa-de-vista-de-los-angeles": [
+  30484
+ ],
+ "piedra-de-villazar-mojacar": [
+  30485
+ ],
+ "cala-sorbas": [
+  30486
+ ],
+ "cala-los-mendrugos": [
+  30488
+ ],
+ "cala-verde": [
+  30489
+ ],
+ "playa-de-luis-siret": [
+  30490
+ ],
+ "playa-rocas-del-cura": [
+  30506
+ ],
+ "cala-barranco-de-maro": [
+  33806
+ ],
+ "cala-de-las-doncellas": [
+  33867,
+  33869
+ ],
+ "playa-piedra-de-tarzan": [
+  33868
+ ],
+ "cala-mal-paso": [
+  33874
+ ],
+ "cala-mochuela": [
+  33876
+ ],
+ "cala-arena-2": [
+  33892
+ ],
+ "playa-de-las-salinicas": [
+  33894
+ ],
+ "playa-de-la-ria": [
+  33899
+ ],
+ "playa-de-ciparsa": [
+  33925
+ ],
+ "playa-de-las-dunas": [
+  33930
+ ],
+ "playa-del-vigia": [
+  33932
+ ],
+ "playa-canina-arroyo-totalan": [
+  33939
+ ],
+ "playa-faro-de-trafalgar": [
+  33941
+ ],
+ "playa-el-perulejo": [
+  33946
+ ],
+ "playa-fuente-las-cabras": [
+  33947
+ ],
+ "playa-la-mena": [
+  33948
+ ],
+ "playa-de-la-chancla": [
+  33949
+ ],
+ "playa-de-la-gola-2": [
+  33950
+ ],
+ "playa-las-escalicas": [
+  33951
+ ],
+ "playa-el-playazo-garrucha": [
+  33953
+ ],
+ "playa-posito-garrucha": [
+  33955
+ ],
+ "santa-ana-benalmadena": [
+  33958,
+  33959
+ ],
+ "playa-carabeillo": [
+  33966
+ ],
+ "playa-de-san-miguel": [
+  33967
+ ],
+ "cala-del-puntalejo": [
+  33973
+ ],
+ "cala-del-enebro": [
+  33974
+ ],
+ "cala-encendida": [
+  33975
+ ],
+ "torrenueva-torrenueva-costa": [
+  33995
+ ],
+ "playa-de-la-joya": [
+  33996
+ ]
+}

@@ -51,8 +51,19 @@ import type { BanderaPlaya } from './seguridad'
  * objeto, pero el `!` no lo sabía: lo garantizaba el humano.
  *
  * Con `b is BanderaPlaya` lo garantiza el compilador y el `!` sobra.
+ *
+ * Se afina a `& { color: 'roja' }` (ago-2026). Con el guard anterior, en la
+ * rama ELSE TypeScript estrechaba la bandera a `never`: si «hay bandera
+ * roja» es falso, deducía que no hay bandera en absoluto. Eso hacía
+ * imposible pintar la amarilla o la verde en el hero sin un `as`, que es
+ * justo la aserción de «confía en mí» que este guard existe para evitar.
+ *
+ * El añadido no debilita nada: la rama true sigue garantizando el objeto y
+ * ahora también su color.
  */
-export function hayBanderaRoja(b: BanderaPlaya | null | undefined): b is BanderaPlaya {
+export function hayBanderaRoja(
+  b: BanderaPlaya | null | undefined,
+): b is BanderaPlaya & { color: 'roja' } {
   return b?.color === 'roja'
 }
 

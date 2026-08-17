@@ -26,7 +26,23 @@ export interface MedusasRiesgo {
 }
 
 /**
- * Estima el color de la bandera de baño a partir de oleaje, viento y rachas.
+ * Estima el estado del mar a partir de oleaje, viento y rachas.
+ *
+ * LAS ETIQUETAS DESCRIBEN EL MAR, NO CONCEDEN PERMISO (ago-2026). Antes la
+ * verde devolvía «Bandera verde · Mar en calma, apto para el baño». Las dos
+ * mitades eran falsas: nadie había izado nada —lo calculaba este modelo— y
+ * «apto para el baño» es una autorización que no nos corresponde dar.
+ *
+ * Costó caro. El 15 de agosto de 2026 el Ayuntamiento de Málaga prohibió el
+ * baño en seis playas por E. coli tras unos aliviaderos. La Misericordia,
+ * Sacaba y San Andrés aparecían en la ficha como «BUENA», porque el agua
+ * contaminada estaba en calma: este modelo ve oleaje y viento, y no puede
+ * ver bacterias, vertidos, medusas ni un cierre municipal.
+ *
+ * De ahí la regla: esta función habla del mar («Mar en calma») y solo una
+ * fuente oficial dice «bandera». Las que sí izan mástil —Cataluña,
+ * Canarias, Andalucía, AEMET— construyen sus propias etiquetas diciendo
+ * «Bandera X», y esas sí se lo han ganado.
  *
  * Umbrales recalibrados (jul-2026) tras validar contra datos en vivo: los
  * antiguos (amarilla con olas ≥0.5 o viento ≥20) marcaban amarilla el ~45%
@@ -42,8 +58,8 @@ export function calcularBandera(olas: number, viento: number, vientoRacha: numbe
   if (olas >= 1.5 || viento >= 40 || vientoRacha >= 60) {
     return {
       color: 'roja',
-      label: 'Bandera roja',
-      labelEn: 'Red flag',
+      label: 'Mar peligroso',
+      labelEn: 'Dangerous sea',
       motivo: olas >= 1.5
         ? `Oleaje fuerte (${olas}m)`
         : viento >= 40
@@ -62,8 +78,8 @@ export function calcularBandera(olas: number, viento: number, vientoRacha: numbe
     const porOlas = olas >= 0.8 || (olas >= 0.6 && viento >= 25)
     return {
       color: 'amarilla',
-      label: 'Bandera amarilla',
-      labelEn: 'Yellow flag',
+      label: 'Mar con precaución',
+      labelEn: 'Sea: use caution',
       motivo: porOlas
         ? `Oleaje moderado (${olas}m)`
         : viento >= 30
@@ -80,10 +96,10 @@ export function calcularBandera(olas: number, viento: number, vientoRacha: numbe
 
   return {
     color: 'verde',
-    label: 'Bandera verde',
-    labelEn: 'Green flag',
-    motivo: 'Mar en calma, apto para el baño',
-    motivoEn: 'Calm sea, safe for swimming',
+    label: 'Mar en calma',
+    labelEn: 'Calm sea',
+    motivo: 'Estimación propia a partir de oleaje y viento, no hay parte oficial',
+    motivoEn: 'Our own estimate from waves and wind; no official report',
     hex: '#22c55e',
   }
 }

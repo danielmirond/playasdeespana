@@ -28,6 +28,9 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { getPlayas, getComunidades, getProvincias } from '@/lib/playas'
 import { refetchAndStoreFotos } from '@/lib/fotos'
+import { getBanderaCat } from '@/lib/banderas-cat'
+import { getBanderaCan } from '@/lib/banderas-can'
+import { getBanderaAnd } from '@/lib/banderas-and'
 
 export const runtime  = 'nodejs'
 export const dynamic  = 'force-dynamic'  // siempre recalcular, no cachear el cron
@@ -134,6 +137,29 @@ export async function GET(req: NextRequest) {
 
   const t0 = Date.now()
   const buckets: Record<string, ReturnType<typeof summarise>> = {}
+
+  // ─── BANDERAS OFICIALES ────────────────────────────────────────
+  // Tres llamadas que dejan KV poblado para 1.400 fichas: el snapshot de
+  // cada fuente es de comunidad entera, no por playa.
+  //
+  // Corre en TODOS los slices, a propósito. La ficha resuelve estas
+  // fuentes con un deadline de 1.500 ms y, en frío, la primera
+  // renderización lo pierde: entonces la ficha dice "sin dato" —no
+  // adivina— y la ISR congela ese hueco una hora. Precalentar aquí es lo
+  // que evita que a nadie le toque el hueco.
+  //
+  // Se piden por una playa cualquiera de cada comunidad: lo que interesa
+  // es el efecto colateral de poblar el snapshot compartido.
+  try {
+    const [cat, can, and] = await Promise.allSettled([
+      getBanderaCat('platja-de-la-barceloneta'),
+      getBanderaCan('playa-de-las-canteras'),
+      getBanderaAnd('playa-de-la-misericordia'),
+    ])
+    buckets.banderas = summarise('banderas', [cat, can, and].map(r => ({
+      url: 'snapshot', ok: r.status === 'fulfilled', status: r.status === 'fulfilled' ? 200 : 0, ms: 0,
+    })))
+  } catch { /* el warming nunca debe tumbar el cron */ }
 
   // ─── LANDINGS ──────────────────────────────────────────────────
   if (slice === 'landings' || slice === 'all') {

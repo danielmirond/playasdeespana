@@ -39,6 +39,18 @@ interface Props {
   /** La bandera vigente. Con roja, el hero cambia de forma — ver abajo. */
   banderaPlaya?:  BanderaPlaya | null
   /**
+   * De dónde sale esa bandera. El hero la usa para decidir el PESO del
+   * icono, no su color: rellena si la izó alguien (socorrismo, AEMET),
+   * hueca si la ha deducido nuestro modelo del oleaje y el viento.
+   *
+   * Es la misma convención que el resto de la ficha —«glifo relleno =
+   * sensor, hueco = modelo», globals.css— y aquí importa más que en
+   * ningún otro sitio: una bandera de color en el hero se lee como
+   * veredicto, y un veredicto que en realidad es una estimación es
+   * exactamente el error que este trabajo vino a corregir.
+   */
+  certBandera?:   'medido' | 'oficial' | 'reportado' | 'estimado' | 'sindato'
+  /**
    * Qué sistema visual está activo. Llega como prop y no se lee aquí
    * porque este componente es de cliente y los flags se resuelven en
    * servidor: leerlos aquí obligaría a exponerlos al bundle con
@@ -104,6 +116,7 @@ function statusDot(r: ReportesPlaya | null | undefined): 'ok' | 'warn' | 'danger
 export default function FichaHero({
   playa, meteo, estado, frase, locale = 'es',
   municipioSlug, provinciaSlug, playaScore, reportes, foto, banderaPlaya,
+  certBandera = 'estimado',
   variante = 'arena',
 }: Props) {
   const i18n = t[locale]
@@ -237,6 +250,37 @@ export default function FichaHero({
               </div>
             ) : (
               <div className={styles.scoreLine}>
+                {/* Bandera del día, discreta, junto al score.
+                    La roja no pasa por aquí: tiene su propio bloque
+                    arriba, y repetirla la abarataría.
+
+                    Dos reglas la gobiernan:
+                    · El COLOR dice qué bandera ondea.
+                    · El PESO dice quién lo dice. Rellena = la izó alguien;
+                      hueca = la ha deducido nuestro modelo. Sin esa
+                      distinción, un icono de color convierte una
+                      estimación en un permiso, que es justo lo que hacía
+                      la ficha cuando decía "BUENA" en una playa con el
+                      baño prohibido por E. coli.
+                    · Y si no hay dato, no hay icono. Un hueco es honesto. */}
+                {banderaPlaya && certBandera !== 'sindato' && (
+                  <span
+                    className={styles.banderaIcono}
+                    style={{ color: banderaPlaya.hex }}
+                    title={locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}
+                  >
+                    <Flag
+                      size={17}
+                      weight={certBandera === 'oficial' || certBandera === 'medido' ? 'fill' : 'regular'}
+                      aria-hidden="true"
+                    />
+                    <span className={styles.banderaSr}>
+                      {locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label}
+                      {' — '}
+                      {locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}
+                    </span>
+                  </span>
+                )}
                 {playaScore && (
                   <span className={styles.scoreNum} aria-label={`Puntuación ${playaScore.score} sobre 100`}>
                     {playaScore.score}

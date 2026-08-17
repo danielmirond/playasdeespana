@@ -183,6 +183,29 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
   margin-bottom: .85rem;
   flex-wrap: wrap;
 }
+/* Bandera del día junto al score. Deliberadamente pequeña: acompaña al
+   veredicto, no compite con él. Se centra en vez de alinearse a la base,
+   porque la línea la marca un número de 68-76px y a esa base el icono
+   quedaría flotando solo.
+
+   El color lo pone el componente (es el de la bandera); aquí solo la
+   forma. La sombra es la del resto del overlay: sobre una foto clara, un
+   icono amarillo sin sombra desaparece. */
+.banderaIcono {
+  display: inline-flex;
+  align-self: center;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.55));
+}
+/* Texto solo para lectores de pantalla: el icono va aria-hidden, así que
+   la bandera y su motivo tienen que llegar por aquí. Sin esto, quien
+   navega con lector se queda sin la única información de seguridad que
+   hay en el hero. El proyecto no tiene utilidad .sr-only global; se copia
+   el patrón de buscar.module.css. */
+.banderaSr {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
 .scoreNum {
   /* El tamaño sale del token, no de un clamp escrito a ojo. El clamp
      anterior daba 41,6px a 375 —el viewport en el que se juzga— cuando el

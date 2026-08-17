@@ -9,6 +9,11 @@ import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
+import type { BanderaPlaya } from '@/lib/seguridad'
+import { getBanderaCat, tieneBanderaCat } from '@/lib/banderas-cat'
+import { getBanderaCan, tieneBanderaCan } from '@/lib/banderas-can'
+import { getBanderaAnd, tieneBanderaAnd } from '@/lib/banderas-and'
+import { esUsoProhibido } from '@/lib/playas-prohibidas'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
 import { calcularHoraIdeal } from '@/lib/hora-ideal'
@@ -99,7 +104,8 @@ export default async function BeachPageEn({ params }: Props) {
   const playa = await getPlayaBySlug(slug)
   if (!playa) notFound()
 
-  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult] = await Promise.allSettled([
+  const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult,
+    banderaCatResult, banderaCanResult, banderaAndResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -114,6 +120,15 @@ export default async function BeachPageEn({ params }: Props) {
     getVotos(slug),
     getCampings(playa.lat, playa.lng),
     getCentrosBuceo(playa.lat, playa.lng),
+    // Banderas OFICIALES. Faltaban aquí: esta página calculaba la bandera
+    // con calcularBandera y punto, sin ninguna capa oficial encima. Es
+    // decir, el 15-ago-2026 la ficha inglesa de La Misericordia decía
+    // "Green flag — Calm sea, safe for swimming" mientras el ayuntamiento
+    // tenía el baño prohibido por E. coli. Un turista extranjero es
+    // justamente quien menos posibilidades tiene de leer el aviso local.
+    getBanderaCat(slug),
+    getBanderaCan(slug),
+    getBanderaAnd(slug),
   ])
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
   const buceoData: CentroBuceo[] = buceoResult.status === 'fulfilled' ? buceoResult.value : []
@@ -169,7 +184,30 @@ export default async function BeachPageEn({ params }: Props) {
   const dateModified = meteoPlayaData?.timestamp ?? new Date().toISOString()
 
   const playaScore = calcularPlayaScore(playa, { agua: meteo.agua, olas: meteo.olas, viento: meteo.viento, uv: meteo.uv })
-  const banderaPlaya = calcularBandera(olas, viento, vientoRacha)
+  // Misma cascada y mismas reglas que la ficha en español: la bandera
+  // oficial izada REEMPLAZA a la estimación, y si sabemos que hay fuente
+  // oficial pero no hemos podido leerla no se adivina.
+  let banderaPlaya: BanderaPlaya | undefined = calcularBandera(olas, viento, vientoRacha)
+  let certBandera: 'oficial' | 'reportado' | 'estimado' | 'sindato' = 'estimado'
+  const oficialCat = banderaCatResult.status === 'fulfilled' ? banderaCatResult.value : null
+  const oficialCan = banderaCanResult.status === 'fulfilled' ? banderaCanResult.value : null
+  const oficialAnd = banderaAndResult.status === 'fulfilled' ? banderaAndResult.value : null
+  if (oficialCat?.bandera) { banderaPlaya = oficialCat.bandera; certBandera = 'oficial' }
+  if (oficialCan?.bandera) { banderaPlaya = oficialCan.bandera; certBandera = 'oficial' }
+  if (oficialAnd?.bandera) { banderaPlaya = oficialAnd.bandera; certBandera = 'oficial' }
+  const oficialFallo =
+    (tieneBanderaCat(slug) && !oficialCat) ||
+    (tieneBanderaCan(slug) && !oficialCan) ||
+    (tieneBanderaAnd(slug) && !oficialAnd)
+  if (oficialFallo && certBandera !== 'oficial') { banderaPlaya = undefined; certBandera = 'sindato' }
+  if (oficialAnd?.cerrada && banderaPlaya?.color !== 'roja') {
+    banderaPlaya = {
+      color: 'roja', label: 'Red flag', labelEn: 'Red flag',
+      motivo: 'Beach closed today by the authorities',
+      motivoEn: 'Beach closed today by the authorities', hex: '#ef4444',
+    }
+    certBandera = 'oficial'
+  }
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
 
@@ -248,6 +286,7 @@ export default async function BeachPageEn({ params }: Props) {
         provinciaSlug={provinciaSlug}
         playaScore={playaScore}
         banderaPlaya={banderaPlaya}
+        certBandera={certBandera}
         variante={dsVariant()}
       />
       <FichaNav locale="en" />
@@ -267,6 +306,8 @@ export default async function BeachPageEn({ params }: Props) {
         meteoForecast={meteoForecastData}
         dateModified={dateModified}
         banderaPlaya={banderaPlaya}
+        certBandera={certBandera}
+        usoProhibido={esUsoProhibido(slug)}
         medusas={medusas}
         mareasLunar={mareasLunar}
         horaIdeal={horaIdeal}
