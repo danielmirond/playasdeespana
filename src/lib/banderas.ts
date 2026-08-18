@@ -21,6 +21,8 @@ import { getBanderaAnd, tieneBanderaAnd } from './banderas-and'
 import { getBanderaBiz, tieneBanderaBiz } from './banderas-biz'
 import { getBanderaGip, tieneBanderaGip } from './banderas-gip'
 import { getBanderaSb, tieneBanderaSb } from './banderas-sb'
+import { getBanderaFerrol, tieneBanderaFerrol } from './banderas-ferrol'
+import { getBanderaGijon, tieneBanderaGijon } from './banderas-gijon'
 import { fetchWithTimeout } from './fetch-timeout'
 import type { Playa } from '@/types'
 
@@ -150,6 +152,8 @@ export async function conBanderas(playas: Playa[]) {
       if (tieneBanderaBiz(p.slug)) return (await getBanderaBiz(p.slug))?.bandera ?? null
       if (tieneBanderaGip(p.slug)) return (await getBanderaGip(p.slug))?.bandera ?? null
       if (tieneBanderaSb(p.slug)) return (await getBanderaSb(p.slug))?.bandera ?? null
+      if (tieneBanderaFerrol(p.slug)) return (await getBanderaFerrol(p.slug))?.bandera ?? null
+      if (tieneBanderaGijon(p.slug)) return (await getBanderaGijon(p.slug))?.bandera ?? null
       if (tieneBanderaAnd(p.slug)) {
         const o = await getBanderaAnd(p.slug)
         if (o?.cerrada) {
