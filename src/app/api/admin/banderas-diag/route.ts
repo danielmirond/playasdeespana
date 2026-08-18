@@ -16,6 +16,7 @@
 // No expone datos: solo metadatos de la petición.
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
+import { getConIzenpe } from '@/lib/banderas-biz'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -68,6 +69,25 @@ export async function GET(req: NextRequest) {
       }
     }
   }))
+
+  // El camino REAL que usa el adaptador: node:https con la raíz de Izenpe
+  // pasada solo en esta conexión. Los `bizkaia*` de arriba usan fetch pelado
+  // a propósito y son el control: deben seguir fallando.
+  let conCA: Record<string, unknown>
+  const t0 = Date.now()
+  try {
+    const xml = await getConIzenpe('https://apps.bizkaia.eus/HKDE000M/rest/situacion', 8000)
+    conCA = { origen: 'bizkaia-con-ca-izenpe', ok: true, bytes: xml.length, ms: Date.now() - t0 }
+  } catch (e) {
+    const err = e as Error & { cause?: { message?: string; code?: string }; code?: string }
+    conCA = {
+      origen: 'bizkaia-con-ca-izenpe', ok: false, ms: Date.now() - t0,
+      error: err.name, mensaje: err.message,
+      codigo: err.code ?? null,
+      causa: err.cause?.code ?? err.cause?.message ?? null,
+    }
+  }
+  resultados.push(conCA as never)
 
   return NextResponse.json({
     region: process.env.VERCEL_REGION ?? null,

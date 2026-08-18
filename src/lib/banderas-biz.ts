@@ -174,7 +174,7 @@ const IZENPE_ROOT = [
  * opciones de TLS por petición sin traerse undici como dependencia, y no
  * merece una dependencia nueva por un certificado.
  */
-function getConIzenpe(url: string, timeoutMs: number): Promise<string> {
+export function getConIzenpe(url: string, timeoutMs: number): Promise<string> {
   return new Promise((resolve, reject) => {
     import('node:https').then(https => {
       const req = https.get(url, {
