@@ -2,7 +2,6 @@
   "buildCommand": "next build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-
   "crons": [
     {
       "path": "/api/cron/sync-playas",
@@ -23,18 +22,23 @@
     {
       "path": "/api/cron/warm?slice=top",
       "schedule": "45 */12 * * *"
+    },
+    {
+      "path": "/api/cron/vigia",
+      "schedule": "0 17 * * *"
     }
   ],
-
   "env": {
     "NEXT_PUBLIC_BASE_URL": "https://playas-espana.com"
   },
-
   "headers": [
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "https://playas-espana.com" }
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://playas-espana.com"
+        }
       ]
     }
   ]
