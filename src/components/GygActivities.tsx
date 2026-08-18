@@ -12,7 +12,7 @@ const PARTNER_ID = 'BMIKRAB'
 export default function GygActivities({
   query,
   cmp = 'site',
-  items = 4,
+  items = 3,
   locale = 'es',
   title,
   id,
@@ -28,8 +28,15 @@ export default function GygActivities({
   const heading = title ?? (locale === 'en' ? 'Things to do nearby' : 'Cosas que hacer cerca')
   return (
     <section id={id} className="cv-auto" style={{ maxWidth: 1000, margin: '2.5rem auto 0', padding: '0 1.5rem', scrollMarginTop: '64px' }}>
-      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem,3vw,1.7rem)', fontWeight: 700, color: 'var(--ink)', margin: '0 0 1rem', letterSpacing: '-.01em' }}>
-        {heading} <span aria-hidden="true">🎟️</span>
+      {/* Tratamiento deliberadamente MENOR que el de las secciones de
+          contenido (ago-2026). Antes compartía rango visual con «Seguridad»
+          o «Cómo llegar» —serif de hasta 1,7rem en peso 700— y llevaba un
+          🎟️ que anunciaba «aquí se venden entradas» antes de que nadie
+          leyera el titular. Un bloque patrocinado que se disfraza de sección
+          editorial es peor negocio a la larga que uno que se presenta como
+          lo que es: esto no es un dato de la playa, es una oferta. */}
+      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 600, color: 'var(--ink-soft, var(--muted))', margin: '0 0 .85rem', letterSpacing: '-.005em' }}>
+        {heading}
       </h2>
       <div
         data-gyg-widget="auto"

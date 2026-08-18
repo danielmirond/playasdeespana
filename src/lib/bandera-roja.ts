@@ -87,6 +87,18 @@ export const BLOQUES_DUROS = new Set([
  */
 export const BLOQUES_BLANDOS = new Set([
   'dormir', 'campings', 'ferries', 'trafico', 'comer', 'asistente',
+  // `actividades-gyg` (excursiones de pago) se añade en ago-2026. Estaba en
+  // NINGUNA de las dos listas, así que en una playa con el baño prohibido
+  // era el único bloque comercial que sobrevivía intacto y en su posición
+  // —justo detrás de «cómo llegar»—, mientras se retiraban el CTA de barco,
+  // los productos de Amazon, buceo, surf y los chiringuitos. El bloque más
+  // llamativo era el único que no se enteraba del aviso.
+  //
+  // Blando y no duro a propósito: con la playa cerrada, «qué hacer cerca»
+  // es de lo más útil que puede haber en la página, y quitarlo perjudica a
+  // quien ya ha llegado hasta allí. Lo que no puede es competir por atención
+  // con el aviso, así que baja bajo el texto largo y pierde el imperativo.
+  'actividades-gyg',
 ])
 
 /**
