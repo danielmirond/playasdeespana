@@ -976,6 +976,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             El widget decide solo si hay oferta: donde no la hay, no
             pinta nada, así que subirlo no mete relleno en las calas
             sin excursiones. */}
+        {/* La variante del banner de repuesto se decide AQUÍ, en servidor,
+            porque elegirla en cliente haría que el primer render difiera
+            del servidor. Criterio, siguiendo las audiencias del brief:
+              · A4 «Surf y deportes» → si la playa es de agua, la promo de
+                actividades es lo más parecido a lo que el widget ofrecía.
+              · UV alto → el protector gana a cualquier excursión cuando
+                hay un 9 sobre la cabeza.
+              · resto → el cuaderno, que es la conversión principal. */}
         <GygActivities
           key="actividades-gyg"
           query={playa.actividades?.surf
@@ -983,6 +991,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             : `${playa.municipio || playa.provincia}, Spain`}
           cmp="ficha_playa"
           id="actividades"
+          municipioSlug={municipioSlug}
+          variante={
+            (playa.actividades?.surf || playa.actividades?.buceo
+              || playa.actividades?.snorkel || playa.actividades?.windsurf
+              || playa.actividades?.kite)
+              ? 'actividades'
+              : (meteo?.uv ?? 0) >= 8 ? 'piel' : 'cuaderno'
+          }
         />
 
         {/* MASIFICACIÓN + MEJOR HORA — H2 con nombre (long-tail "mejor hora
