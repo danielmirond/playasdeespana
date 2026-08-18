@@ -5,9 +5,13 @@
  },
  "platja-del-montcaio": {
   "m": "guardamar-del-segura",
+  "l": "1803"
+ },
+ "la-roqueta-guardamar-del-segura": {
+  "m": "guardamar-del-segura",
   "l": "1860"
  },
- "platja-de-leixidor": {
+ "platja-de-les-ortigues": {
   "m": "guardamar-del-segura",
   "l": "1877"
  },
@@ -18,6 +22,10 @@
  "malvarrosa-valencia": {
   "m": "valencia",
   "l": "1894"
+ },
+ "platja-del-perellonet-recati": {
+  "m": "valencia",
+  "l": "1807"
  },
  "platja-de-pinedo": {
   "m": "valencia",
@@ -35,11 +43,19 @@
   "m": "denia",
   "l": "1839"
  },
+ "les-bovetes-2": {
+  "m": "denia",
+  "l": "1872"
+ },
+ "les-marines-denia": {
+  "m": "denia",
+  "l": "1876"
+ },
  "la-marineta-casiana-denia": {
   "m": "denia",
   "l": "1853"
  },
- "platja-dels-molins": {
+ "els-molins": {
   "m": "denia",
   "l": "1910"
  },
@@ -59,6 +75,10 @@
   "m": "torrevieja",
   "l": "3817"
  },
+ "playa-de-la-mata": {
+  "m": "torrevieja",
+  "l": "1854"
+ },
  "playa-de-los-locos": {
   "m": "torrevieja",
   "l": "1816"
@@ -71,7 +91,7 @@
   "m": "torrevieja",
   "l": "1795"
  },
- "platja-del-bol": {
+ "arenal-bol-calp": {
   "m": "calpe",
   "l": "1785"
  },
@@ -154,6 +174,10 @@
  "platja-sud-de-peniscola": {
   "m": "peniscola",
   "l": "1960"
+ },
+ "playa-casablanca-almenara": {
+  "m": "almenara",
+  "l": "1925"
  },
  "pucol-pucol": {
   "m": "puçol",
@@ -255,6 +279,10 @@
   "m": "palma-de-mallorca",
   "l": "2214"
  },
+ "platja-de-palma": {
+  "m": "palma-de-mallorca",
+  "l": "2276"
+ },
  "platja-des-portitxolet": {
   "m": "palma-de-mallorca",
   "l": "3775"
@@ -291,7 +319,7 @@
   "m": "pollensa",
   "l": "2147"
  },
- "cala-carbo": {
+ "cala-molins": {
   "m": "pollensa",
   "l": "3467"
  },
@@ -302,6 +330,10 @@
  "cala-llombards-santanyi": {
   "m": "santanyi",
   "l": "2100"
+ },
+ "cala-santanyi": {
+  "m": "santanyi",
+  "l": "2202"
  },
  "sa-font-de-nalis-santanyi": {
   "m": "santanyi",
@@ -319,17 +351,25 @@
   "m": "campos",
   "l": "2321"
  },
- "platja-des-freu": {
+ "platja-de-ses-covetes": {
   "m": "campos",
   "l": "2329"
  },
- "platja-estanys": {
+ "platja-des-freu": {
   "m": "campos",
-  "l": "3505"
+  "l": "3506"
  },
  "platja-des-dolc": {
   "m": "ses-salines",
   "l": "2234"
+ },
+ "es-port-ses-salines": {
+  "m": "ses-salines",
+  "l": "2244"
+ },
+ "platja-estanys": {
+  "m": "ses-salines",
+  "l": "3663"
  },
  "platja-des-coto": {
   "m": "ses-salines",
@@ -337,7 +377,11 @@
  },
  "es-comu": {
   "m": "muro",
-  "l": "2263"
+  "l": "3771"
+ },
+ "platja-de-muro": {
+  "m": "muro",
+  "l": "3772"
  },
  "cala-ferrera-felanitx": {
   "m": "felanitx",
@@ -350,6 +394,10 @@
  "cala-sa-nau": {
   "m": "felanitx",
   "l": "3484"
+ },
+ "platja-dalcudia": {
+  "m": "alcudia",
+  "l": "2009"
  },
  "platja-de-sa-font-de-sant-joan": {
   "m": "alcudia",
@@ -370,6 +418,10 @@
  "platja-de-na-marins": {
   "m": "son-servera",
   "l": "2029"
+ },
+ "cala-millor-sant-llorenc-des-cardassar": {
+  "m": "son-servera",
+  "l": "2116"
  },
  "platja-de-sa-marjal": {
   "m": "son-servera",
@@ -463,6 +515,10 @@
   "m": "sant-josep-de-sa-talaia",
   "l": "2163"
  },
+ "platja-den-bossa": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2219"
+ },
  "platja-des-cavallet": {
   "m": "sant-josep-de-sa-talaia",
   "l": "2229"
@@ -497,7 +553,7 @@
  },
  "calo-des-moro-2": {
   "m": "sant-antoni-de-portmany",
-  "l": "2246"
+  "l": "2195"
  },
  "sarenal-de-san-antonio": {
   "m": "sant-antoni-de-portmany",
@@ -651,9 +707,17 @@
   "m": "es-migjorn-gran",
   "l": "2319"
  },
+ "playa-de-la-barraca-quemada": {
+  "m": "san-pedro-del-pinatar",
+  "l": "2449"
+ },
  "el-mojon-san-pedro-del-pinatar": {
   "m": "san-pedro-del-pinatar",
   "l": "2422"
+ },
+ "playa-la-mota": {
+  "m": "san-pedro-del-pinatar",
+  "l": "2471"
  },
  "playa-la-puntica": {
   "m": "san-pedro-del-pinatar",
@@ -663,7 +727,7 @@
   "m": "san-pedro-del-pinatar",
   "l": "2473"
  },
- "playa-de-la-llana": {
+ "playa-de-punta-de-algas": {
   "m": "san-pedro-del-pinatar",
   "l": "2469"
  },
@@ -671,7 +735,7 @@
   "m": "san-pedro-del-pinatar",
   "l": "2548"
  },
- "playa-las-charcas": {
+ "playa-villananitos": {
   "m": "san-pedro-del-pinatar",
   "l": "2549"
  },

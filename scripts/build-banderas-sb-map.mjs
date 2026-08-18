@@ -8,8 +8,22 @@
 // embebido en el HTML como `window.SB_MARKERS`. No existe endpoint global ni
 // sitemap, así que la lista de municipios se mantiene aquí.
 //
-// A diferencia de Bizkaia y Gipuzkoa, aquí SÍ hay coordenadas, así que el
-// emparejamiento es automático y por distancia, nunca por nombre.
+// Aquí SÍ hay coordenadas, pero la distancia SOLA no basta y esto costó un
+// error real: en Guardamar las playas son tramos contiguos de un mismo
+// arenal, y la ficha más cercana no es la que corresponde. SafeBeach sitúa
+// «Montcaió» a 401 m de nuestra ficha de Montcaió (fuera de umbral) y «La
+// Roqueta» a 168 m de esa MISMA ficha. Por pura cercanía, la bandera de La
+// Roqueta se publicaba en Montcaió y La Roqueta se quedaba sin ninguna.
+//
+// Así que el criterio es: primero el NOMBRE, y la distancia como control de
+// cordura. Suena contrario a la regla del proyecto —"coordenadas, jamás
+// nombres"— pero no lo es: aquí el nombre se usa DENTRO de un municipio ya
+// acotado y con la distancia validando el resultado. Lo que la regla prohíbe
+// es casar por nombre contra las 4.400 fichas del país, donde 550 nombres se
+// repiten. Dentro de Calvià no hay dos «Santa Ponça».
+//
+// Y el emparejamiento es UNO A UNO: una ficha nuestra no puede recibir dos
+// playas de SafeBeach.
 //
 // El mapa se guarda como slug → { m: municipio, l: localizador } para que el
 // runtime solo pida la página del municipio de esa playa, no las 44.
@@ -44,6 +58,21 @@ const MUNICIPIOS = [
   // Asturias (dados de alta, pocas playas)
   'castropol', 'coana',
 ]
+
+// Normaliza para comparar: sin acentos, sin artículos, sin «platja/playa».
+const norm = s => (s || '').toLowerCase()
+  .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/\b(platja|playa|plage|de|del|la|el|los|las|els|les|d|s)\b/g, ' ')
+  .replace(/[^a-z0-9]+/g, ' ').trim()
+
+// 0 = nombres iguales · 1 = uno contiene al otro · 2 = distintos
+const parecido = (a, b) => {
+  const x = norm(a), y = norm(b)
+  if (!x || !y) return 2
+  if (x === y) return 0
+  if (x.includes(y) || y.includes(x)) return 1
+  return 2
+}
 
 const hav = (lat1, lon1, lat2, lon2) => {
   const R = 6371000, r = d => d * Math.PI / 180
@@ -82,17 +111,25 @@ async function main() {
       const la = parseFloat(sb.lat), lo = parseFloat(sb.lng)
       if (!Number.isFinite(la) || !Number.isFinite(lo)) continue
       totalSB++
-      let best = null, bestD = Infinity
-      for (const p of playas) {
-        const d = hav(la, lo, p.lat, p.lng)
-        if (d < bestD) { bestD = d; best = p }
-      }
-      if (!best || bestD > MAX_DIST_M) { sinFicha++; continue }
-      const prev = audit.find(a => a.slug === best.slug)
-      if (prev && prev.d <= bestD) continue
+      // Candidatas: cualquiera a menos de 3 km, que en un municipio costero
+      // acota a su tramo de costa. Se ordena por parecido de nombre y, a
+      // igualdad, por distancia.
+      const cands = playas
+        .map(p => ({ p, d: hav(la, lo, p.lat, p.lng), n: parecido(sb.nombre, p.nombre) }))
+        .filter(c => c.d <= 3000)
+        .sort((a, b) => a.n - b.n || a.d - b.d)
+      // Umbral según la confianza del nombre: si coincide, se admite lejos
+      // (son tramos largos y cada catálogo pone el centroide donde quiere);
+      // si no coincide, hay que estar encima.
+      const ok = cands.find(c => c.d <= (c.n === 0 ? 2000 : c.n === 1 ? 1200 : MAX_DIST_M))
+      if (!ok) { sinFicha++; continue }
+      const prev = audit.find(a => a.slug === ok.p.slug)
+      // Uno a uno: si ya estaba tomada, gana quien tenga mejor nombre y,
+      // a igualdad, quien esté más cerca.
+      if (prev && (prev.n < ok.n || (prev.n === ok.n && prev.d <= ok.d))) { sinFicha++; continue }
       if (prev) { delete map[prev.slug]; audit.splice(audit.indexOf(prev), 1) }
-      map[best.slug] = { m: muni, l: String(sb.localizador) }
-      audit.push({ slug: best.slug, d: Math.round(bestD), suya: sb.nombre, nuestra: best.nombre, muni })
+      map[ok.p.slug] = { m: muni, l: String(sb.localizador) }
+      audit.push({ slug: ok.p.slug, d: Math.round(ok.d), n: ok.n, suya: sb.nombre, nuestra: ok.p.nombre, muni })
       casadas++
     }
     console.log(`  ${muni.padEnd(26)} http=${http} playas=${String(ps.length).padStart(2)} casadas=${casadas}`)
@@ -101,9 +138,15 @@ async function main() {
 
   writeFileSync(OUT, JSON.stringify(map, null, 1) + '\n')
   console.log(`\nSafeBeach: ${totalSB} playas · casadas ${Object.keys(map).length} · sin ficha nuestra ${sinFicha}`)
-  audit.sort((a, b) => b.d - a.d)
-  console.log('\nlas 12 más lejanas (revisar a ojo):')
-  for (const a of audit.slice(0, 12)) {
+  const porNombre = audit.filter(a => a.n === 0).length
+  const parcial = audit.filter(a => a.n === 1).length
+  const soloDist = audit.filter(a => a.n === 2).length
+  console.log(`  nombre exacto ${porNombre} · nombre parcial ${parcial} · solo distancia ${soloDist}`)
+  // Las que se casaron SOLO por distancia son las que pueden estar mal:
+  // es el caso de los tramos contiguos. Se listan todas para revisar.
+  const dudosas = audit.filter(a => a.n === 2).sort((a, b) => b.d - a.d)
+  console.log(`\nlas ${Math.min(15, dudosas.length)} casadas solo por cercanía (nombres distintos — revisar):`)
+  for (const a of dudosas.slice(0, 15)) {
     console.log(` ${String(a.d).padStart(4)}m · ${a.suya.slice(0, 26).padEnd(28)} → ${a.nuestra.slice(0, 24).padEnd(26)} [${a.muni}]`)
   }
 }
