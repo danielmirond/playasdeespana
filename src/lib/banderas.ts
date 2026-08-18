@@ -172,8 +172,13 @@ export async function conBanderas(playas: Playa[]) {
     // Si la playa tiene fuente oficial y hoy no ha llegado, NO se estima:
     // misma regla que la ficha. Mejor un hueco que un verde inventado
     // sobre una playa con el baño prohibido.
+    // MISMO criterio que `oficialFallo` en la ficha. Si divergen, el listado
+    // y la ficha vuelven a contradecirse, que es el fallo que este módulo
+    // vino a arreglar. SafeBeach y Gijón quedan fuera aquí también: en ellas
+    // no tener parte es lo normal fuera del horario de socorrismo.
     const tieneFuente = tieneBanderaCat(p.slug) || tieneBanderaCan(p.slug)
       || tieneBanderaBiz(p.slug) || tieneBanderaGip(p.slug) || tieneBanderaAnd(p.slug)
+      || tieneBanderaFerrol(p.slug)
     const bandera = oficial ?? (tieneFuente ? null : calcularBandera(m.olas, m.viento, m.racha))
     return {
       p, m,

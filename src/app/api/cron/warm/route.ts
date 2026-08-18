@@ -33,6 +33,8 @@ import { getBanderaCan } from '@/lib/banderas-can'
 import { getBanderaAnd } from '@/lib/banderas-and'
 import { getBanderaBiz } from '@/lib/banderas-biz'
 import { getBanderaGip } from '@/lib/banderas-gip'
+import { getBanderaFerrol } from '@/lib/banderas-ferrol'
+import { getBanderaGijon } from '@/lib/banderas-gijon'
 
 export const runtime  = 'nodejs'
 export const dynamic  = 'force-dynamic'  // siempre recalcular, no cachear el cron
@@ -141,7 +143,7 @@ export async function GET(req: NextRequest) {
   const buckets: Record<string, ReturnType<typeof summarise>> = {}
 
   // ─── BANDERAS OFICIALES ────────────────────────────────────────
-  // Tres llamadas que dejan KV poblado para 1.400 fichas: el snapshot de
+  // Siete llamadas que dejan KV poblado para ~1.450 fichas: el snapshot de
   // cada fuente es de comunidad entera, no por playa.
   //
   // Corre en TODOS los slices, a propósito. La ficha resuelve estas
@@ -153,14 +155,19 @@ export async function GET(req: NextRequest) {
   // Se piden por una playa cualquiera de cada comunidad: lo que interesa
   // es el efecto colateral de poblar el snapshot compartido.
   try {
-    const [cat, can, and, biz, gip] = await Promise.allSettled([
+    const [cat, can, and, biz, gip, fer, gij] = await Promise.allSettled([
       getBanderaCat('platja-de-la-barceloneta'),
       getBanderaCan('playa-de-las-canteras'),
       getBanderaAnd('playa-de-la-misericordia'),
       getBanderaBiz('ereaga-getxo'),
       getBanderaGip('zurriola'),
+      getBanderaFerrol('praia-de-caranza'),
+      getBanderaGijon('playa-de-san-lorenzo-2'),
+      // SafeBeach no se precalienta: su snapshot es POR MUNICIPIO y son 44.
+      // Precalentarlos todos sería 44 peticiones cada seis horas a una
+      // empresa privada que nos deja usar su dato por cortesía.
     ])
-    buckets.banderas = summarise('banderas', [cat, can, and, biz, gip].map(r => ({
+    buckets.banderas = summarise('banderas', [cat, can, and, biz, gip, fer, gij].map(r => ({
       url: 'snapshot', ok: r.status === 'fulfilled', status: r.status === 'fulfilled' ? 200 : 0, ms: 0,
     })))
   } catch { /* el warming nunca debe tumbar el cron */ }

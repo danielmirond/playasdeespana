@@ -377,6 +377,8 @@ export default async function PlayaPage({ params }: Props) {
   if (tieneBanderaAnd(slug) && needsWarm(banderaAndResult)) failed.push(['bandAnd', () => getBanderaAnd(slug)])
   if (tieneBanderaBiz(slug) && needsWarm(banderaBizResult)) failed.push(['bandBiz', () => getBanderaBiz(slug)])
   if (tieneBanderaGip(slug) && needsWarm(banderaGipResult)) failed.push(['bandGip', () => getBanderaGip(slug)])
+  if (tieneBanderaFerrol(slug) && needsWarm(banderaFerResult)) failed.push(['bandFer', () => getBanderaFerrol(slug)])
+  if (tieneBanderaGijon(slug) && needsWarm(banderaGijResult)) failed.push(['bandGij', () => getBanderaGijon(slug)])
 
   if (failed.length > 0) {
     after(async () => {
@@ -545,12 +547,25 @@ export default async function PlayaPage({ params }: Props) {
   // honesta, "apto para el baño" cuando no lo sabemos no lo es.
   //
   // El warming de after() repuebla KV para que la siguiente lo tenga.
+  //
+  // QUIÉN ENTRA AQUÍ Y QUIÉN NO, que es una decisión y no un olvido:
+  //
+  // Entran las administraciones con parte diario. Si su feed no responde,
+  // no adivinamos.
+  //
+  // NO entran SafeBeach ni Gijón, porque en ellas devolver null es el
+  // estado NORMAL: SafeBeach viene en gris fuera del horario de socorrismo
+  // —verificado a las 09:17 con Guardamar y Valencia en gris cuando la
+  // tarde anterior tenían bandera— y Gijón tiene `bandera: null` en todas
+  // sus zonas buena parte del día. Aplicarles la regla dejaría Baleares,
+  // Levante y Gijón en blanco cada noche, que es ruido, no seguridad.
   const oficialFallo =
     (tieneBanderaCat(slug) && !oficialCat) ||
     (tieneBanderaCan(slug) && !oficialCan) ||
     (tieneBanderaAnd(slug) && !oficialAnd) ||
     (tieneBanderaBiz(slug) && !oficialBiz) ||
-    (tieneBanderaGip(slug) && !oficialGip)
+    (tieneBanderaGip(slug) && !oficialGip) ||
+    (tieneBanderaFerrol(slug) && !oficialFer)
   if (oficialFallo && certBandera !== 'oficial') {
     banderaPlaya = undefined
     certBandera = 'sindato'

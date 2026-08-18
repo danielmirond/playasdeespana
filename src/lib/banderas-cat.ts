@@ -77,11 +77,28 @@ interface FilaDia { b: string; m: string; med: string; t: string; hora: string }
 
 // Snapshot del día: codiplatja → última fila reportada. Una llamada SODA
 // para todo Cataluña, compartida por todas las fichas vía KV (TTL 30 min).
+// Memo de proceso DELANTE de KV, igual que las otras siete fuentes.
+//
+// Faltaba aquí por ser la primera que se escribió, y se notó: en un build
+// sin KV, cada una de las ~670 fichas catalanas pagaba su propia llamada a
+// SODA contra el deadline de 1.500 ms, mientras el resto de comunidades
+// compartían una. En producción KV lo tapaba, así que el síntoma solo
+// aparecía en local — y apareció al repasar las ocho fuentes a la vez.
+let _snap: { hoy: string; p: Promise<Record<string, FilaDia>> } | null = null
+
 async function getSnapshot(): Promise<Record<string, FilaDia>> {
   // Fecha de HOY en Madrid con el formato del dataset (DD/MM/YYYY).
   const hoy = new Intl.DateTimeFormat('es-ES', {
     timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', year: 'numeric',
   }).format(new Date())
+  if (_snap?.hoy === hoy) return _snap.p
+  const p = cargar(hoy)
+  _snap = { hoy, p }
+  p.catch(() => { if (_snap?.p === p) _snap = null })
+  return p
+}
+
+async function cargar(hoy: string): Promise<Record<string, FilaDia>> {
   return kvCached('banderas-cat', [hoy.replace(/\//g, '-')], 1800, async () => {
     const url = 'https://analisi.transparenciacatalunya.cat/resource/4baz-cjv2.json?'
       + new URLSearchParams({

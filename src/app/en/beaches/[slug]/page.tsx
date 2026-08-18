@@ -220,12 +220,25 @@ export default async function BeachPageEn({ params }: Props) {
   if (oficialSb?.bandera) { banderaPlaya = oficialSb.bandera; certBandera = 'oficial' }
   if (oficialFer?.bandera) { banderaPlaya = oficialFer.bandera; certBandera = 'oficial' }
   if (oficialGij?.bandera) { banderaPlaya = oficialGij.bandera; certBandera = 'oficial' }
+  //
+  // QUIÉN ENTRA AQUÍ Y QUIÉN NO, que es una decisión y no un olvido:
+  //
+  // Entran las administraciones con parte diario. Si su feed no responde,
+  // no adivinamos.
+  //
+  // NO entran SafeBeach ni Gijón, porque en ellas devolver null es el
+  // estado NORMAL: SafeBeach viene en gris fuera del horario de socorrismo
+  // —verificado a las 09:17 con Guardamar y Valencia en gris cuando la
+  // tarde anterior tenían bandera— y Gijón tiene `bandera: null` en todas
+  // sus zonas buena parte del día. Aplicarles la regla dejaría Baleares,
+  // Levante y Gijón en blanco cada noche, que es ruido, no seguridad.
   const oficialFallo =
     (tieneBanderaCat(slug) && !oficialCat) ||
     (tieneBanderaCan(slug) && !oficialCan) ||
     (tieneBanderaAnd(slug) && !oficialAnd) ||
     (tieneBanderaBiz(slug) && !oficialBiz) ||
-    (tieneBanderaGip(slug) && !oficialGip)
+    (tieneBanderaGip(slug) && !oficialGip) ||
+    (tieneBanderaFerrol(slug) && !oficialFer)
   if (oficialFallo && certBandera !== 'oficial') { banderaPlaya = undefined; certBandera = 'sindato' }
   if (oficialAnd?.cerrada && banderaPlaya?.color !== 'roja') {
     banderaPlaya = {
