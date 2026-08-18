@@ -1,0 +1,690 @@
+{
+ "platja-del-camp": {
+  "m": "guardamar-del-segura",
+  "l": "1790"
+ },
+ "platja-del-montcaio": {
+  "m": "guardamar-del-segura",
+  "l": "1860"
+ },
+ "platja-de-leixidor": {
+  "m": "guardamar-del-segura",
+  "l": "1877"
+ },
+ "platja-centre": {
+  "m": "guardamar-del-segura",
+  "l": "1926"
+ },
+ "malvarrosa-valencia": {
+  "m": "valencia",
+  "l": "1894"
+ },
+ "platja-de-pinedo": {
+  "m": "valencia",
+  "l": "1923"
+ },
+ "la-garrofera-valencia": {
+  "m": "valencia",
+  "l": "1817"
+ },
+ "xeraco-xeraco": {
+  "m": "xeraco",
+  "l": "2007"
+ },
+ "platja-de-lalmadrava-4": {
+  "m": "denia",
+  "l": "1839"
+ },
+ "la-marineta-casiana-denia": {
+  "m": "denia",
+  "l": "1853"
+ },
+ "platja-dels-molins": {
+  "m": "denia",
+  "l": "1910"
+ },
+ "punta-del-raset-denia": {
+  "m": "denia",
+  "l": "3482"
+ },
+ "cala-de-cabo-cervera-torrevieja": {
+  "m": "torrevieja",
+  "l": "1703"
+ },
+ "cala-de-las-piteras-torrevieja": {
+  "m": "torrevieja",
+  "l": "1713"
+ },
+ "platja-del-cura": {
+  "m": "torrevieja",
+  "l": "3817"
+ },
+ "playa-de-los-locos": {
+  "m": "torrevieja",
+  "l": "1816"
+ },
+ "playa-de-los-naufragos": {
+  "m": "torrevieja",
+  "l": "1942"
+ },
+ "el-cura-torrevieja": {
+  "m": "torrevieja",
+  "l": "1795"
+ },
+ "platja-del-bol": {
+  "m": "calpe",
+  "l": "1785"
+ },
+ "platja-de-la-calalga-calp": {
+  "m": "calpe",
+  "l": "1698"
+ },
+ "cantal-roig-calp": {
+  "m": "calpe",
+  "l": "1762"
+ },
+ "cala-del-morello": {
+  "m": "calpe",
+  "l": "1912"
+ },
+ "playa-de-la-fossa-calp": {
+  "m": "calpe",
+  "l": "1932"
+ },
+ "cala-les-urques": {
+  "m": "calpe",
+  "l": "1969"
+ },
+ "cala-el-raco": {
+  "m": "calpe",
+  "l": "1738"
+ },
+ "platja-de-bega-de-mar": {
+  "m": "sueca",
+  "l": "1687"
+ },
+ "platja-de-sos": {
+  "m": "sueca",
+  "l": "3669"
+ },
+ "platja-de-les-palmeres": {
+  "m": "sueca",
+  "l": "1878"
+ },
+ "platja-del-mareny-blau": {
+  "m": "sueca",
+  "l": "1899"
+ },
+ "platja-de-motilla": {
+  "m": "sueca",
+  "l": "3668"
+ },
+ "platja-del-port-de-sagunt": {
+  "m": "sagunto",
+  "l": "1962"
+ },
+ "el-portet-teulada": {
+  "m": "teulada",
+  "l": "1810"
+ },
+ "la-ampolla-teulada": {
+  "m": "teulada",
+  "l": "1840"
+ },
+ "platja-de-les-platgetes": {
+  "m": "teulada",
+  "l": "1879"
+ },
+ "cala-advocat": {
+  "m": "benissa",
+  "l": "99003296"
+ },
+ "cala-baladrar": {
+  "m": "benissa",
+  "l": "1787"
+ },
+ "la-fustera-benissa": {
+  "m": "benissa",
+  "l": "1845"
+ },
+ "platja-nord-de-peniscola": {
+  "m": "peniscola",
+  "l": "1957"
+ },
+ "platja-sud-de-peniscola": {
+  "m": "peniscola",
+  "l": "1960"
+ },
+ "pucol-pucol": {
+  "m": "puçol",
+  "l": "1968"
+ },
+ "platja-de-santa-ponca": {
+  "m": "calvia",
+  "l": "2050"
+ },
+ "platja-de-magaluf": {
+  "m": "calvia",
+  "l": "2262"
+ },
+ "platja-de-loratori": {
+  "m": "calvia",
+  "l": "2265"
+ },
+ "platja-de-la-romana": {
+  "m": "calvia",
+  "l": "2266"
+ },
+ "platja-de-na-nadala": {
+  "m": "calvia",
+  "l": "2267"
+ },
+ "platja-de-porto-novo-o-des-carregador": {
+  "m": "calvia",
+  "l": "3477"
+ },
+ "platja-del-toro": {
+  "m": "calvia",
+  "l": "3478"
+ },
+ "platja-de-son-maties": {
+  "m": "calvia",
+  "l": "3479"
+ },
+ "platja-gran-de-tora": {
+  "m": "calvia",
+  "l": "3480"
+ },
+ "cala-comtesa": {
+  "m": "calvia",
+  "l": "3498"
+ },
+ "cala-xinxell": {
+  "m": "calvia",
+  "l": "3499"
+ },
+ "platja-dilletes": {
+  "m": "calvia",
+  "l": "3718"
+ },
+ "platja-de-palmira": {
+  "m": "calvia",
+  "l": "3719"
+ },
+ "cala-portals-vells": {
+  "m": "calvia",
+  "l": "3721"
+ },
+ "cala-anguila": {
+  "m": "manacor",
+  "l": "2018"
+ },
+ "cala-domingos-gran": {
+  "m": "manacor",
+  "l": "2060"
+ },
+ "cala-de-sestany-den-mas": {
+  "m": "manacor",
+  "l": "2075"
+ },
+ "cala-mendia": {
+  "m": "manacor",
+  "l": "2107"
+ },
+ "sillot": {
+  "m": "manacor",
+  "l": "2123"
+ },
+ "cala-domingos-petit": {
+  "m": "manacor",
+  "l": "2158"
+ },
+ "platja-de-can-pastilla": {
+  "m": "palma-de-mallorca",
+  "l": "2074"
+ },
+ "cala-major-palma-de-mallorca": {
+  "m": "palma-de-mallorca",
+  "l": "2106"
+ },
+ "platja-de-can-pere-antoni": {
+  "m": "palma-de-mallorca",
+  "l": "2205"
+ },
+ "platja-de-ciutat-jardi": {
+  "m": "palma-de-mallorca",
+  "l": "2214"
+ },
+ "platja-des-portitxolet": {
+  "m": "palma-de-mallorca",
+  "l": "3775"
+ },
+ "cala-agulla": {
+  "m": "capdepera",
+  "l": "2016"
+ },
+ "cala-gat-cala-ratjada": {
+  "m": "capdepera",
+  "l": "2090"
+ },
+ "cala-mesquida": {
+  "m": "capdepera",
+  "l": "2114"
+ },
+ "platja-de-canyamel": {
+  "m": "capdepera",
+  "l": "2208"
+ },
+ "cala-de-sa-font": {
+  "m": "capdepera",
+  "l": "2305"
+ },
+ "son-moll": {
+  "m": "capdepera",
+  "l": "2343"
+ },
+ "cala-formentor-pollenca": {
+  "m": "pollensa",
+  "l": "2083"
+ },
+ "cala-barques": {
+  "m": "pollensa",
+  "l": "2147"
+ },
+ "cala-carbo": {
+  "m": "pollensa",
+  "l": "3467"
+ },
+ "cala-gran-santanyi": {
+  "m": "santanyi",
+  "l": "2093"
+ },
+ "cala-llombards-santanyi": {
+  "m": "santanyi",
+  "l": "2100"
+ },
+ "sa-font-de-nalis-santanyi": {
+  "m": "santanyi",
+  "l": "2304"
+ },
+ "samarador-santanyi": {
+  "m": "santanyi",
+  "l": "2312"
+ },
+ "platja-des-trenc": {
+  "m": "campos",
+  "l": "2254"
+ },
+ "platja-de-sarenal-de-sa-rapita": {
+  "m": "campos",
+  "l": "2321"
+ },
+ "platja-des-freu": {
+  "m": "campos",
+  "l": "2329"
+ },
+ "platja-estanys": {
+  "m": "campos",
+  "l": "3505"
+ },
+ "platja-des-dolc": {
+  "m": "ses-salines",
+  "l": "2234"
+ },
+ "platja-des-coto": {
+  "m": "ses-salines",
+  "l": "3685"
+ },
+ "es-comu": {
+  "m": "muro",
+  "l": "2263"
+ },
+ "cala-ferrera-felanitx": {
+  "m": "felanitx",
+  "l": "2080"
+ },
+ "cala-marcal-felanitx": {
+  "m": "felanitx",
+  "l": "2108"
+ },
+ "cala-sa-nau": {
+  "m": "felanitx",
+  "l": "3484"
+ },
+ "platja-de-sa-font-de-sant-joan": {
+  "m": "alcudia",
+  "l": "2316"
+ },
+ "platja-de-sa-font-de-sant-pere": {
+  "m": "alcudia",
+  "l": "2318"
+ },
+ "cala-torta": {
+  "m": "arta",
+  "l": "2156"
+ },
+ "platja-colonia-de-sant-pere": {
+  "m": "arta",
+  "l": "3662"
+ },
+ "platja-de-na-marins": {
+  "m": "son-servera",
+  "l": "2029"
+ },
+ "platja-de-sa-marjal": {
+  "m": "son-servera",
+  "l": "2250"
+ },
+ "es-camp-de-mar": {
+  "m": "andratx",
+  "l": "2203"
+ },
+ "platja-des-geperut": {
+  "m": "andratx",
+  "l": "2315"
+ },
+ "platja-de-cala-pi": {
+  "m": "llucmajor",
+  "l": "2134"
+ },
+ "platja-den-repic": {
+  "m": "soller",
+  "l": "2220"
+ },
+ "platja-des-traves": {
+  "m": "soller",
+  "l": "2289"
+ },
+ "aigues-blanques": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2048"
+ },
+ "cala-de-boix": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2028"
+ },
+ "es-figueral-santa-eulalia-del-rio": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2236"
+ },
+ "cala-llenya-santa-eulalia-del-rio": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2098"
+ },
+ "cala-llonga-santa-eulalia-del-rio": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2101"
+ },
+ "platja-de-cala-martina": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2091"
+ },
+ "cala-nova": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2130"
+ },
+ "cala-pada": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2132"
+ },
+ "platja-es-canar": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2225"
+ },
+ "platja-des-niu-blau": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2242"
+ },
+ "santa-eularia-santa-eulalia-del-rio": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2251"
+ },
+ "platja-de-santa-eularia": {
+  "m": "santa-eulalia-del-rio",
+  "l": "2320"
+ },
+ "cala-bassa": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2021"
+ },
+ "platges-de-comte": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2043"
+ },
+ "cala-dhort": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2059"
+ },
+ "cala-tarida": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2154"
+ },
+ "platja-de-cala-vedella": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2163"
+ },
+ "platja-des-cavallet": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2229"
+ },
+ "platja-port-des-torrent": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2252"
+ },
+ "cala-des-jondal": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2259"
+ },
+ "platja-den-serral": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2269"
+ },
+ "platja-de-ses-salines": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "2334"
+ },
+ "es-bol-nou": {
+  "m": "sant-josep-de-sa-talaia",
+  "l": "3792"
+ },
+ "cala-grassio": {
+  "m": "sant-antoni-de-portmany",
+  "l": "2092"
+ },
+ "cala-salada": {
+  "m": "sant-antoni-de-portmany",
+  "l": "2142"
+ },
+ "calo-des-moro-2": {
+  "m": "sant-antoni-de-portmany",
+  "l": "2246"
+ },
+ "sarenal-de-san-antonio": {
+  "m": "sant-antoni-de-portmany",
+  "l": "2313"
+ },
+ "platja-cala-saona": {
+  "m": "formentera",
+  "l": "2149"
+ },
+ "platja-des-copinyar": {
+  "m": "formentera",
+  "l": "2218"
+ },
+ "platja-des-pujols": {
+  "m": "formentera",
+  "l": "2247"
+ },
+ "playa-llevante": {
+  "m": "formentera",
+  "l": "2271"
+ },
+ "platja-de-silleta": {
+  "m": "formentera",
+  "l": "2332"
+ },
+ "platja-cala-sant-vicent": {
+  "m": "sant-joan-de-labritja",
+  "l": "2145"
+ },
+ "port-de-benirras-sant-joan-de-labritja": {
+  "m": "sant-joan-de-labritja",
+  "l": "2280"
+ },
+ "cala-sant-miquel": {
+  "m": "sant-joan-de-labritja",
+  "l": "2283"
+ },
+ "portinatx-sarenal-gros": {
+  "m": "sant-joan-de-labritja",
+  "l": "2324"
+ },
+ "platja-de-ses-figueretes": {
+  "m": "ibiza",
+  "l": "2331"
+ },
+ "platja-de-talamanca": {
+  "m": "ibiza",
+  "l": "2348"
+ },
+ "platja-des-tancat": {
+  "m": "ciutadella",
+  "l": "2010"
+ },
+ "cala-blanca-2": {
+  "m": "ciutadella",
+  "l": "2026"
+ },
+ "cala-macarella": {
+  "m": "ciutadella",
+  "l": "2103"
+ },
+ "cala-de-santandria": {
+  "m": "ciutadella",
+  "l": "2148"
+ },
+ "cala-en-turqueta": {
+  "m": "ciutadella",
+  "l": "2161"
+ },
+ "cala-en-blanes": {
+  "m": "ciutadella",
+  "l": "2170"
+ },
+ "cala-en-bosch": {
+  "m": "ciutadella",
+  "l": "2171"
+ },
+ "sa-platja-gran": {
+  "m": "ciutadella",
+  "l": "2216"
+ },
+ "sa-caleta": {
+  "m": "ciutadella",
+  "l": "2298"
+ },
+ "bellavista": {
+  "m": "ciutadella",
+  "l": "2345"
+ },
+ "playa-de-son-xoriguer": {
+  "m": "ciutadella",
+  "l": "2347"
+ },
+ "playa-arenal-den-castell": {
+  "m": "es-mercadal",
+  "l": "2012"
+ },
+ "arenal-de-son-saura": {
+  "m": "es-mercadal",
+  "l": "2011"
+ },
+ "cala-pregonda": {
+  "m": "es-mercadal",
+  "l": "2136"
+ },
+ "platja-de-cavalleria": {
+  "m": "es-mercadal",
+  "l": "2213"
+ },
+ "cala-tirant": {
+  "m": "es-mercadal",
+  "l": "2349"
+ },
+ "calan-porter-alaior": {
+  "m": "alaior",
+  "l": "2172"
+ },
+ "son-bou-2": {
+  "m": "alaior",
+  "l": "2341"
+ },
+ "cala-galdana-ferreries": {
+  "m": "ferreries",
+  "l": "2086"
+ },
+ "cala-mitjana-2": {
+  "m": "ferreries",
+  "l": "2118"
+ },
+ "cala-mesquida-2": {
+  "m": "mao",
+  "l": "2113"
+ },
+ "platja-es-grau": {
+  "m": "mao",
+  "l": "2237"
+ },
+ "cala-binibequer": {
+  "m": "sant-lluis",
+  "l": "2013"
+ },
+ "punta-prima-sant-lluis": {
+  "m": "sant-lluis",
+  "l": "2292"
+ },
+ "platja-de-san-adeodato": {
+  "m": "es-migjorn-gran",
+  "l": "2314"
+ },
+ "platja-de-sant-tomas": {
+  "m": "es-migjorn-gran",
+  "l": "2319"
+ },
+ "el-mojon-san-pedro-del-pinatar": {
+  "m": "san-pedro-del-pinatar",
+  "l": "2422"
+ },
+ "playa-la-puntica": {
+  "m": "san-pedro-del-pinatar",
+  "l": "2574"
+ },
+ "playa-la-playuela": {
+  "m": "san-pedro-del-pinatar",
+  "l": "2473"
+ },
+ "playa-de-la-llana": {
+  "m": "san-pedro-del-pinatar",
+  "l": "2469"
+ },
+ "playa-de-torre-derribada": {
+  "m": "san-pedro-del-pinatar",
+  "l": "2548"
+ },
+ "playa-las-charcas": {
+  "m": "san-pedro-del-pinatar",
+  "l": "2549"
+ },
+ "arnao-castropol": {
+  "m": "castropol",
+  "l": "34"
+ },
+ "penarronda-tapia-de-casariego": {
+  "m": "castropol",
+  "l": "153"
+ },
+ "playa-de-arnelles": {
+  "m": "coana",
+  "l": "36"
+ }
+}

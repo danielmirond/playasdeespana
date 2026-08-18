@@ -10,6 +10,7 @@ import { getBanderaCan, tieneBanderaCan } from '@/lib/banderas-can'
 import { getBanderaAnd, tieneBanderaAnd } from '@/lib/banderas-and'
 import { getBanderaBiz, tieneBanderaBiz } from '@/lib/banderas-biz'
 import { getBanderaGip, tieneBanderaGip } from '@/lib/banderas-gip'
+import { getBanderaSb, tieneBanderaSb } from '@/lib/banderas-sb'
 import { esUsoProhibido } from '@/lib/playas-prohibidas'
 import { getBoyaCercana } from '@/lib/boyas'
 import { getChiringuitosPlaya } from '@/lib/chiringuitos-playa'
@@ -257,6 +258,8 @@ export default async function PlayaPage({ params }: Props) {
     getBanderaBiz(slug),
     // Bandera OFICIAL izada (Gipuzkoa, KostaSystem de la Diputación).
     getBanderaGip(slug),
+    // Bandera izada en municipios con SafeBeach (Levante, Baleares, Murcia).
+    getBanderaSb(slug),
     // Boya de Puertos del Estado más cercana (≤60 km) — dato MEDIDO
     getBoyaCercana(playa.lat, playa.lng),
   ] as const
@@ -276,7 +279,7 @@ export default async function PlayaPage({ params }: Props) {
     meteoForecast, turbidez,
     restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
     allPlayasResult, municipioSlugsResult,
-    videoResult, webcamResult, aemetResult, banderaCatResult, banderaCanResult, banderaAndResult, banderaBizResult, banderaGipResult, boyaResult,
+    videoResult, webcamResult, aemetResult, banderaCatResult, banderaCanResult, banderaAndResult, banderaBizResult, banderaGipResult, banderaSbResult, boyaResult,
   ] = await Promise.all(conDeadline) as any[]
   const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
   const webcamsData = (webcamResult?.status === 'fulfilled' ? webcamResult.value : []).slice(0, 3)
@@ -506,6 +509,7 @@ export default async function PlayaPage({ params }: Props) {
   // Bandera OFICIAL izada (Andalucía). Las tres autonómicas son excluyentes
   // por geografía —ninguna playa está en Cataluña, Canarias y Andalucía a la
   // vez—, así que el orden entre ellas es indiferente.
+  const oficialSb = banderaSbResult?.status === 'fulfilled' ? banderaSbResult.value : null
   const oficialGip = banderaGipResult?.status === 'fulfilled' ? banderaGipResult.value : null
   const oficialBiz = banderaBizResult?.status === 'fulfilled' ? banderaBizResult.value : null
   const oficialAnd = banderaAndResult?.status === 'fulfilled' ? banderaAndResult.value : null
@@ -516,6 +520,7 @@ export default async function PlayaPage({ params }: Props) {
   // caso especial: si viene bandera, manda.
   if (oficialBiz?.bandera) { banderaPlaya = oficialBiz.bandera; certBandera = 'oficial' }
   if (oficialGip?.bandera) { banderaPlaya = oficialGip.bandera; certBandera = 'oficial' }
+  if (oficialSb?.bandera) { banderaPlaya = oficialSb.bandera; certBandera = 'oficial' }
   // "Cerrada" es un estado aparte del color: la Junta puede darla cerrada sin
   // bandera roja. Si lo está, se fuerza roja — cerrada es más grave que
   // cualquier color, y callarlo es el fallo que nos trajo hasta aquí.

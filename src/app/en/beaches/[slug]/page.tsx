@@ -15,6 +15,7 @@ import { getBanderaCan, tieneBanderaCan } from '@/lib/banderas-can'
 import { getBanderaAnd, tieneBanderaAnd } from '@/lib/banderas-and'
 import { getBanderaBiz, tieneBanderaBiz } from '@/lib/banderas-biz'
 import { getBanderaGip, tieneBanderaGip } from '@/lib/banderas-gip'
+import { getBanderaSb, tieneBanderaSb } from '@/lib/banderas-sb'
 import { esUsoProhibido } from '@/lib/playas-prohibidas'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
@@ -107,7 +108,7 @@ export default async function BeachPageEn({ params }: Props) {
   if (!playa) notFound()
 
   const [mareas, sol, meteoPlayaResult, restaurantes, fotos, hoteles, turbidez, meteoForecast, calidadResult, allPlayasResult, municipioSlugsResult, votosResult, campingsResult, buceoResult,
-    banderaCatResult, banderaCanResult, banderaAndResult, banderaBizResult, banderaGipResult] = await Promise.allSettled([
+    banderaCatResult, banderaCanResult, banderaAndResult, banderaBizResult, banderaGipResult, banderaSbResult] = await Promise.allSettled([
     getMareas(playa.lat, playa.lng),
     getSol(playa.lat, playa.lng),
     getMeteoPlaya(playa.lat, playa.lng),
@@ -136,6 +137,8 @@ export default async function BeachPageEn({ params }: Props) {
     getBanderaBiz(slug),
     // Bandera OFICIAL izada (Gipuzkoa, KostaSystem de la Diputación).
     getBanderaGip(slug),
+    // Bandera izada en municipios con SafeBeach (Levante, Baleares, Murcia).
+    getBanderaSb(slug),
   ])
   const campingsData: Camping[] = campingsResult.status === 'fulfilled' ? campingsResult.value : []
   const buceoData: CentroBuceo[] = buceoResult.status === 'fulfilled' ? buceoResult.value : []
@@ -198,6 +201,7 @@ export default async function BeachPageEn({ params }: Props) {
   let certBandera: 'oficial' | 'reportado' | 'estimado' | 'sindato' = 'estimado'
   const oficialCat = banderaCatResult.status === 'fulfilled' ? banderaCatResult.value : null
   const oficialCan = banderaCanResult.status === 'fulfilled' ? banderaCanResult.value : null
+  const oficialSb = banderaSbResult?.status === 'fulfilled' ? banderaSbResult.value : null
   const oficialGip = banderaGipResult?.status === 'fulfilled' ? banderaGipResult.value : null
   const oficialBiz = banderaBizResult?.status === 'fulfilled' ? banderaBizResult.value : null
   const oficialAnd = banderaAndResult.status === 'fulfilled' ? banderaAndResult.value : null
@@ -206,6 +210,7 @@ export default async function BeachPageEn({ params }: Props) {
   if (oficialAnd?.bandera) { banderaPlaya = oficialAnd.bandera; certBandera = 'oficial' }
   if (oficialBiz?.bandera) { banderaPlaya = oficialBiz.bandera; certBandera = 'oficial' }
   if (oficialGip?.bandera) { banderaPlaya = oficialGip.bandera; certBandera = 'oficial' }
+  if (oficialSb?.bandera) { banderaPlaya = oficialSb.bandera; certBandera = 'oficial' }
   const oficialFallo =
     (tieneBanderaCat(slug) && !oficialCat) ||
     (tieneBanderaCan(slug) && !oficialCan) ||
