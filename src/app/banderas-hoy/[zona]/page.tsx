@@ -84,7 +84,9 @@ export default async function BanderasZonaPage({ params }: { params: Promise<{ z
     const cuenta = { verde: 0, amarilla: 0, roja: 0 }
     let medusasAlto = 0
     for (const it of items) {
-      cuenta[it.bandera.color as keyof typeof cuenta]++
+      // bandera puede ser null: playa con fuente oficial cuyo parte de hoy
+      // no ha llegado. No se cuenta, en vez de engordar el de verdes.
+      if (it.bandera) cuenta[it.bandera.color as keyof typeof cuenta]++
       if (it.medusas.nivel === 'alto') medusasAlto++
     }
     return { ...g, items, cuenta, medusasAlto }
@@ -180,7 +182,7 @@ export default async function BanderasZonaPage({ params }: { params: Promise<{ z
             <div style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.25rem 1rem .5rem' }}>
               {g.items.map(it => (
                 <div key={it.p.slug} style={{ display: 'flex', alignItems: 'center', gap: '.6rem', padding: '.5rem 0', borderBottom: '1px solid var(--line)' }}>
-                  <span style={{ width: 10, height: 10, borderRadius: '50%', background: it.bandera.hex, flexShrink: 0 }} aria-hidden="true" />
+                  <span style={{ width: 10, height: 10, borderRadius: '50%', background: it.bandera?.hex ?? 'transparent', border: it.bandera ? undefined : '1.5px dashed #9aa3a6', flexShrink: 0 }} aria-hidden="true" />
                   <Link href={`/playas/${it.p.slug}`} style={{ flex: 1, fontSize: '.86rem', fontWeight: 600, color: 'var(--ink)', textDecoration: 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {it.p.nombre} <span style={{ fontWeight: 400, color: 'var(--muted)', fontSize: '.74rem' }}>· {it.p.municipio}</span>
                   </Link>

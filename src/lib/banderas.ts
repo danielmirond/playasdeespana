@@ -15,6 +15,10 @@
 // al 5,88 % en posición 7,6.
 
 import { calcularBandera, estimarMedusas } from './seguridad'
+import { getBanderaCat, tieneBanderaCat } from './banderas-cat'
+import { getBanderaCan, tieneBanderaCan } from './banderas-can'
+import { getBanderaAnd, tieneBanderaAnd } from './banderas-and'
+import { getBanderaBiz, tieneBanderaBiz } from './banderas-biz'
 import { fetchWithTimeout } from './fetch-timeout'
 import type { Playa } from '@/types'
 
@@ -115,14 +119,58 @@ export async function meteoBatch(coords: { lat: number; lng: number }[]): Promis
   return results.flat()
 }
 
-/** Playa + su meteo + bandera estimada + riesgo de medusas. */
+/**
+ * Playa + su meteo + bandera + riesgo de medusas.
+ *
+ * La bandera pasa por la MISMA cascada oficial que la ficha (ago-2026).
+ * Antes solo estimaba con oleaje y viento, y el resultado era que
+ * /banderas-hoy/malaga pintaba La Misericordia con «0,4 m · 7 km/h» —mar
+ * en calma— el mismo día en que su ficha decía «No te bañes» porque la
+ * Junta la tenía en roja por E. coli. El sitio se contradecía consigo
+ * mismo, y encima en la página que rankea para «banderas playas hoy».
+ *
+ * Coste: una llamada por comunidad, no por playa. Los adaptadores
+ * comparten snapshot vía KV y memo de proceso, así que un listado de 200
+ * playas andaluzas sigue haciendo UNA petición a la Junta.
+ *
+ * `cert` viaja con cada fila para que el listado pueda distinguir lo izado
+ * de lo estimado, igual que hace la ficha.
+ */
 export async function conBanderas(playas: Playa[]) {
   const meteos = await meteoBatch(playas.map(p => ({ lat: p.lat, lng: p.lng })))
+  const oficiales = await Promise.all(playas.map(async p => {
+    // Cada playa está como mucho en una comunidad, así que solo se
+    // consulta el adaptador que le corresponde: los `tiene*` son lookups
+    // en memoria contra el mapa, sin red.
+    try {
+      if (tieneBanderaCat(p.slug)) return (await getBanderaCat(p.slug))?.bandera ?? null
+      if (tieneBanderaCan(p.slug)) return (await getBanderaCan(p.slug))?.bandera ?? null
+      if (tieneBanderaBiz(p.slug)) return (await getBanderaBiz(p.slug))?.bandera ?? null
+      if (tieneBanderaAnd(p.slug)) {
+        const o = await getBanderaAnd(p.slug)
+        if (o?.cerrada) {
+          return { color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
+            motivo: 'Playa cerrada hoy por la autoridad competente',
+            motivoEn: 'Beach closed today by the authorities', hex: '#ef4444' } as const
+        }
+        return o?.bandera ?? null
+      }
+    } catch { /* una fuente caída no puede tumbar el listado entero */ }
+    return null
+  }))
   return playas.map((p, i) => {
     const m = meteos[i]
+    const oficial = oficiales[i]
+    // Si la playa tiene fuente oficial y hoy no ha llegado, NO se estima:
+    // misma regla que la ficha. Mejor un hueco que un verde inventado
+    // sobre una playa con el baño prohibido.
+    const tieneFuente = tieneBanderaCat(p.slug) || tieneBanderaCan(p.slug)
+      || tieneBanderaBiz(p.slug) || tieneBanderaAnd(p.slug)
+    const bandera = oficial ?? (tieneFuente ? null : calcularBandera(m.olas, m.viento, m.racha))
     return {
       p, m,
-      bandera: calcularBandera(m.olas, m.viento, m.racha),
+      bandera,
+      cert: (oficial ? 'oficial' : bandera ? 'estimado' : 'sindato') as 'oficial' | 'estimado' | 'sindato',
       medusas: estimarMedusas(p.lat, p.lng, m.tempAgua, m.viento, m.vientoDir),
     }
   })

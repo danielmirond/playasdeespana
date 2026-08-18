@@ -9,11 +9,11 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import AuthorByline from '@/components/seo/AuthorByline'
 import { getPlayas } from '@/lib/playas'
-import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
+import { estimarMedusas } from '@/lib/seguridad'
 // El motor del semáforo vive en lib/banderas desde que hay páginas por
 // zona: duplicar el batch de Open-Meteo eran dos sitios donde ajustar
 // timeouts y umbrales, y que se desincronicen es cuestión de tiempo.
-import { COSTERAS, meteoBatch, topDeProvincia, ZONAS } from '@/lib/banderas'
+import { COSTERAS, conBanderas, topDeProvincia, ZONAS } from '@/lib/banderas'
 import type { Playa } from '@/types'
 
 export const revalidate = 1800
@@ -58,20 +58,25 @@ export default async function BanderasHoyPage() {
     porProvincia.push({ comunidad: c.comunidad, provincia: prov, playas: topDeProvincia(playas, prov, POR_PROVINCIA) })
   }
   const flat = porProvincia.flatMap(g => g.playas)
-  const meteos = await meteoBatch(flat.map(p => ({ lat: p.lat, lng: p.lng })))
+  // conBanderas, no calcularBandera a pelo: incluye la cascada oficial
+  // (Cataluña, Canarias, Andalucía, Bizkaia). Cuando esta página estimaba
+  // por su cuenta, pintaba La Misericordia en calma el mismo día que su
+  // ficha decía «No te bañes» — el sitio contradiciéndose a sí mismo.
+  const conB = await conBanderas(flat)
 
   let idx = 0
   const grupos = porProvincia.map(g => {
-    const items = g.playas.map(p => {
-      const m = meteos[idx++]
-      const bandera = calcularBandera(m.olas, m.viento, m.racha)
-      const medusas = estimarMedusas(p.lat, p.lng, m.tempAgua, m.viento, m.vientoDir)
-      return { p, m, bandera, medusas }
+    const items = g.playas.map(() => {
+      const { p, m, bandera, medusas, cert } = conB[idx++]
+      return { p, m, bandera, medusas, cert }
     })
     const counts = { verde: 0, amarilla: 0, roja: 0 }
     let medusasAlto = 0
     for (const it of items) {
-      counts[it.bandera.color as keyof typeof counts]++
+      // `bandera` puede ser null: playa con fuente oficial cuyo parte de
+      // hoy no ha llegado. No se cuenta en ningún color en vez de
+      // engordar el de verdes.
+      if (it.bandera) counts[it.bandera.color as keyof typeof counts]++
       if (it.medusas.nivel === 'alto') medusasAlto++
     }
     return { ...g, items, counts, medusasAlto }
@@ -166,7 +171,7 @@ export default async function BanderasHoyPage() {
                         <span style={{ fontWeight: 800, fontSize: '.92rem', color: 'var(--ink)', flex: 1 }}>{g.provincia}</span>
                         <span style={{ display: 'inline-flex', gap: '.35rem', alignItems: 'center' }} aria-label={`${g.counts.verde} verdes, ${g.counts.amarilla} amarillas, ${g.counts.roja} rojas`}>
                           {g.items.map((it, i) => (
-                            <span key={i} title={`${it.p.nombre}: bandera ${it.bandera.color}`} style={{ width: 11, height: 11, borderRadius: '50%', background: it.bandera.hex, display: 'inline-block' }} />
+                            <span key={i} title={it.bandera ? `${it.p.nombre}: bandera ${it.bandera.color}` : `${it.p.nombre}: sin parte oficial hoy`} style={{ width: 11, height: 11, borderRadius: '50%', background: it.bandera?.hex ?? 'transparent', border: it.bandera ? undefined : '1.5px dashed #9aa3a6', display: 'inline-block' }} />
                           ))}
                         </span>
                         {g.medusasAlto > 0 && (
@@ -177,7 +182,7 @@ export default async function BanderasHoyPage() {
                       <div style={{ borderTop: '1px solid var(--line)', padding: '.5rem 1rem .75rem' }}>
                         {g.items.map(it => (
                           <div key={it.p.slug} style={{ display: 'flex', alignItems: 'center', gap: '.6rem', padding: '.45rem 0', borderBottom: '1px dashed var(--line)' }}>
-                            <span style={{ width: 10, height: 10, borderRadius: '50%', background: it.bandera.hex, flexShrink: 0 }} aria-hidden="true" />
+                            <span style={{ width: 10, height: 10, borderRadius: '50%', background: it.bandera?.hex ?? 'transparent', border: it.bandera ? undefined : '1.5px dashed #9aa3a6', flexShrink: 0 }} aria-hidden="true" />
                             <Link href={`/playas/${it.p.slug}`} style={{ flex: 1, fontSize: '.84rem', fontWeight: 600, color: 'var(--ink)', textDecoration: 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                               {it.p.nombre} <span style={{ fontWeight: 400, color: 'var(--muted)', fontSize: '.74rem' }}>· {it.p.municipio}</span>
                             </Link>
