@@ -19,6 +19,7 @@ import { getBanderaCat, tieneBanderaCat } from './banderas-cat'
 import { getBanderaCan, tieneBanderaCan } from './banderas-can'
 import { getBanderaAnd, tieneBanderaAnd } from './banderas-and'
 import { getBanderaBiz, tieneBanderaBiz } from './banderas-biz'
+import { getBanderaGip, tieneBanderaGip } from './banderas-gip'
 import { fetchWithTimeout } from './fetch-timeout'
 import type { Playa } from '@/types'
 
@@ -146,6 +147,7 @@ export async function conBanderas(playas: Playa[]) {
       if (tieneBanderaCat(p.slug)) return (await getBanderaCat(p.slug))?.bandera ?? null
       if (tieneBanderaCan(p.slug)) return (await getBanderaCan(p.slug))?.bandera ?? null
       if (tieneBanderaBiz(p.slug)) return (await getBanderaBiz(p.slug))?.bandera ?? null
+      if (tieneBanderaGip(p.slug)) return (await getBanderaGip(p.slug))?.bandera ?? null
       if (tieneBanderaAnd(p.slug)) {
         const o = await getBanderaAnd(p.slug)
         if (o?.cerrada) {
@@ -165,7 +167,7 @@ export async function conBanderas(playas: Playa[]) {
     // misma regla que la ficha. Mejor un hueco que un verde inventado
     // sobre una playa con el baño prohibido.
     const tieneFuente = tieneBanderaCat(p.slug) || tieneBanderaCan(p.slug)
-      || tieneBanderaBiz(p.slug) || tieneBanderaAnd(p.slug)
+      || tieneBanderaBiz(p.slug) || tieneBanderaGip(p.slug) || tieneBanderaAnd(p.slug)
     const bandera = oficial ?? (tieneFuente ? null : calcularBandera(m.olas, m.viento, m.racha))
     return {
       p, m,

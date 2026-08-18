@@ -110,15 +110,97 @@ async function getSnapshot(): Promise<Record<string, FilaBiz>> {
   return p
 }
 
+// ── Raíz de Izenpe, la CA del Gobierno Vasco ─────────────────────────
+//
+// POR QUÉ ESTÁ ESTO AQUÍ. El feed de la Diputación se sirve con un
+// certificado emitido por Izenpe. Node 20 lleva esa raíz en su almacén;
+// **el Node 24 que corre en Vercel ya no**. Resultado: funcionaba en local
+// y en producción fallaba con SELF_SIGNED_CERT_IN_CHAIN, dejando las 22
+// fichas de Bizkaia sin bandera. Diagnosticado con /api/admin/banderas-diag,
+// no adivinado.
+//
+// Detalle que conviene conocer: el servidor sirve en su cadena una raíz
+// Izenpe.com DISTINTA (SHA-256 23:80:42:03…) de la que publica el programa
+// de CA de Mozilla (25:30:CC:8E…). Aquí se usa la de Mozilla, verificada
+// por huella, y se comprobó con `openssl verify` que el intermedio del
+// servidor encadena correctamente con ella.
+//
+// LO QUE ESTO NO HACE: no desactiva la verificación TLS y no toca el
+// almacén global. La CA se pasa SOLO en esta petición, así que ningún otro
+// fetch del proyecto se ve afectado. Si el certificado del servidor deja de
+// encadenar con esta raíz, la petición falla —como debe— y la ficha dice
+// "sin dato".
+//
+// Alternativa preferible a medio plazo: pedir a la Diputación que sirva la
+// cadena con una CA de uso general. Mientras tanto, esto.
+const IZENPE_ROOT = [
+  '-----BEGIN CERTIFICATE-----',
+  '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',
+  '1V4tC5h9Pmzb/CaIxw==',
+  '-----END CERTIFICATE-----',
+].join('\n')
+
+/**
+ * GET con la raíz de Izenpe añadida SOLO a esta conexión.
+ *
+ * Se usa `node:https` en vez de `fetch` porque fetch no deja pasar
+ * opciones de TLS por petición sin traerse undici como dependencia, y no
+ * merece una dependencia nueva por un certificado.
+ */
+function getConIzenpe(url: string, timeoutMs: number): Promise<string> {
+  return new Promise((resolve, reject) => {
+    import('node:https').then(https => {
+      const req = https.get(url, {
+        ca: IZENPE_ROOT,
+        headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' },
+        timeout: timeoutMs,
+      }, res => {
+        if (!res.statusCode || res.statusCode < 200 || res.statusCode >= 300) {
+          res.resume()
+          reject(new Error(`HTTP ${res.statusCode}`))
+          return
+        }
+        let body = ''
+        res.setEncoding('utf8')
+        res.on('data', c => { body += c })
+        res.on('end', () => resolve(body))
+      })
+      req.on('timeout', () => { req.destroy(new Error('timeout')) })
+      req.on('error', reject)
+    }).catch(reject)
+  })
+}
+
 async function cargar(hoy: string): Promise<Record<string, FilaBiz>> {
   return kvCached('banderas-biz', [hoy], 900, async () => {
-    const res = await fetch(URL_FEED, {
-      signal: AbortSignal.timeout(4000),
-      headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' },
-      next: { revalidate: 900 },
-    })
-    if (!res.ok) return {}
-    const xml = await res.text()
+    const xml = await getConIzenpe(URL_FEED, 4000)
     const out: Record<string, FilaBiz> = {}
     for (const bloque of xml.match(/<SITUACION_PLAYA>[\s\S]*?<\/SITUACION_PLAYA>/g) ?? []) {
       const nombre = campo(bloque, 'HONDARTZA-PLAYA')
