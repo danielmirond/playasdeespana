@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import EnlacesGeoHubs from '@/components/seo/EnlacesGeoHubs'
-import { getPlayas, getPlayasByProvincia, getProvincias, getMunicipios } from '@/lib/playas'
+import { getPlayas, getPlayasByProvincia, getProvincias, getMunicipios, toSlug } from '@/lib/playas'
+import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './ProvinciaPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
@@ -78,6 +79,27 @@ export default async function ProvinciaPage({ params }: Props) {
     getMunicipios(),
   ])
   const municipios = allMunicipios.filter(m => m.provinciaSlug === slug)
+
+  // Índice COMPLETO por municipio, a partir de las playas de la provincia:
+  // incluye los que no llegan al mínimo de 4 para tener página.
+  const conPagina = new Set(municipios.map(m => m.slug))
+  const porMuni = new Map<string, { slug: string; nombre: string; playas: typeof playas }>()
+  for (const p of playas) {
+    const ms = toSlug(p.municipio)
+    const cur = porMuni.get(ms) ?? { slug: ms, nombre: p.municipio, playas: [] }
+    cur.playas.push(p)
+    porMuni.set(ms, cur)
+  }
+  const indiceMunicipios = [...porMuni.values()]
+    .map(m => ({
+      slug: m.slug,
+      nombre: municipios.find(x => x.slug === m.slug)?.nombre ?? m.nombre,
+      count: m.playas.length,
+      playas: m.playas,
+      tienePagina: conPagina.has(m.slug),
+      mareas: conPagina.has(m.slug) && tieneMareas(m.slug) && ubicacionMareas(m.slug)?.zona !== 'mediterraneo',
+    }))
+    .sort((a, b) => b.count - a.count || a.nombre.localeCompare(b.nombre, 'es'))
 
   // «la provincia de Cádiz» cuando la capital se llama igual: el H1
   // tiene que decir lo mismo que el title. Si no, quien llega desde la
@@ -195,8 +217,58 @@ export default async function ProvinciaPage({ params }: Props) {
           <MapaPlayas playas={playas} height="360px" />
         </div>
 
-        {/* LISTA PLAYAS */}
+        {/* ÍNDICE POR MUNICIPIO
+            Antes era «Municipios con más playas», al 92 % de la página y
+            solo con los municipios que tienen página propia (≥4 playas):
+            en Cádiz, 13 de 30. El title promete «listado por municipios» y
+            el listado era lo último que se veía. Ahora va aquí —tras el
+            mapa, antes de las playas sueltas— porque la navegación natural
+            de una provincia es elegir municipio, no playa. Y están TODOS:
+            los que tienen página, enlazados; los que no, con sus playas
+            desplegadas. Quien busca «playas de Zahara» no sabe que la regla
+            del sitio es «mínimo cuatro». */}
         <div className={styles.listaHead}>
+          <h2 className={styles.listaTitulo}>Playas por municipio</h2>
+          <span className={styles.listaCount}>{indiceMunicipios.length} municipios</span>
+        </div>
+        <div className={styles.lista}>
+          {indiceMunicipios.map(m => (
+            <div key={m.slug} className={styles.row} style={{ flexWrap: 'wrap', alignItems: 'center', cursor: 'default', transform: 'none' }}>
+              <div className={styles.rowInfo}>
+                <div className={styles.rowNombre}>
+                  {m.tienePagina
+                    ? <Link href={`/municipio/${m.slug}`} style={{ color: 'inherit' }}>{m.nombre}</Link>
+                    : m.nombre}
+                </div>
+                <div className={styles.rowMeta}>
+                  {m.count} {m.count === 1 ? 'playa' : 'playas'}
+                  {/* Sin página propia: las playas van aquí mismo, que es
+                      lo que quien busca ese municipio viene a ver. */}
+                  {!m.tienePagina && (
+                    <> · {m.playas.map((pl, i) => (
+                      <span key={pl.slug}>{i > 0 && ', '}<Link href={`/playas/${pl.slug}`} style={{ color: 'var(--ink)' }}>{pl.nombre}</Link></span>
+                    ))}</>
+                  )}
+                </div>
+              </div>
+              {/* Mareas: solo donde la marea es un dato —Atlántico,
+                  Cantábrico y Canarias— y el municipio tiene tabla. En el
+                  Mediterráneo sería un enlace a «aquí la marea son 25 cm». */}
+              {m.mareas && (
+                <Link href={`/municipio/${m.slug}/tabla-de-mareas`} className={styles.rowMeta}
+                  style={{ color: 'var(--ink)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: 'auto' }}>
+                  mareas →
+                </Link>
+              )}
+              {m.tienePagina && (
+                <Link href={`/municipio/${m.slug}`} className={styles.rowArrow} aria-label={`Playas de ${m.nombre}`}>→</Link>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* LISTA PLAYAS */}
+        <div className={styles.listaHead} style={{ marginTop: '2.5rem' }}>
           <h2 className={styles.listaTitulo}>Todas las playas</h2>
           <span className={styles.listaCount}>{playas.length} resultados</span>
         </div>
@@ -226,27 +298,6 @@ export default async function ProvinciaPage({ params }: Props) {
             </Link>
           ))}
         </div>
-
-        {/* MUNICIPIOS CON MÁS PLAYAS */}
-        {municipios.length > 0 && (
-          <>
-            <div className={styles.listaHead} style={{ marginTop: '2.5rem' }}>
-              <h2 className={styles.listaTitulo}>Municipios con más playas</h2>
-              <span className={styles.listaCount}>{municipios.length} municipios</span>
-            </div>
-            <div className={styles.lista}>
-              {municipios.map(m => (
-                <Link key={m.slug} href={`/municipio/${m.slug}`} className={styles.row}>
-                  <div className={styles.rowInfo}>
-                    <div className={styles.rowNombre}>{m.nombre}</div>
-                    <div className={styles.rowMeta}>{m.count} playas</div>
-                  </div>
-                  <span className={styles.rowArrow}>→</span>
-                </Link>
-              ))}
-            </div>
-          </>
-        )}
 
         {/* OTRAS PROVINCIAS DE LA COMUNIDAD */}
         <div className={styles.masLink}>
