@@ -324,6 +324,12 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
   padding: 0 2rem;
   display: flex; align-items: center; gap: 1rem;
   flex-wrap: wrap;
+  /* Altura reservada: la tira cambia de contenido DESPUÉS de montar —si ya
+     contestaste en las últimas 24 h, la pregunta se sustituye por un
+     «gracias» de una línea— y sin reserva eso encoge la tira y desplaza
+     todo lo de abajo. Está justo bajo el hero, o sea siempre en pantalla:
+     es CLS del que cuenta. Se reserva la altura del estado MÁS ALTO. */
+  min-height: 44px;
 }
 
 .dotMini {
@@ -537,7 +543,9 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
 @media (max-width: 520px) {
   /* A 375 no caben tres píldoras y el texto en la misma línea: la
      pregunta arriba, las respuestas debajo. Siguen siendo una pulsación. */
-  .avisosInner { flex-wrap: wrap; }
+  /* En móvil el estado alto es: pregunta en dos líneas + fila de botones
+     de 40px. Se reserva eso para que el «gracias» no encoja la tira. */
+  .avisosInner { flex-wrap: wrap; min-height: 92px; align-content: center; }
   .respuestas { margin-left: 0; width: 100%; }
   .respuestaBtn { flex: 1 1 0; justify-content: center; min-height: 40px; }
 }

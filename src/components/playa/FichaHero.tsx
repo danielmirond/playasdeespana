@@ -125,11 +125,35 @@ const SEG_STYLE_BTN: React.CSSProperties = {
   borderRight: '1px solid var(--tinta-700)',
 }
 
-function statusDot(r: ReportesPlaya | null | undefined): 'ok' | 'warn' | 'danger' {
-  if (!r || r.total === 0) return 'ok'
-  if (r.bandera_roja > 0) return 'danger'
-  if (r.medusas > 0 || r.mucho_oleaje > 0 || r.bandera_amarilla > 0) return 'warn'
-  return 'ok'
+/**
+ * El punto de la tira. Mira la BANDERA primero y los reportes después.
+ *
+ * Antes solo miraba los reportes, y el resultado era que La Misericordia
+ * —con bandera roja oficial de la Junta y un «No te bañes» a dos dedos—
+ * lucía el punto verde, porque nadie había reportado nada. Dos elementos
+ * de la misma tira contándose cosas distintas.
+ *
+ * Los reportes conservan su papel: solo pueden ELEVAR. Un aviso de medusas
+ * sobre una verde oficial la pone en amarillo; nunca al revés.
+ */
+function statusDot(
+  r: ReportesPlaya | null | undefined,
+  bandera?: BanderaPlaya | null,
+  medusas?: MedusasRiesgo | null,
+): 'ok' | 'warn' | 'danger' {
+  const nivel = (v: 'ok' | 'warn' | 'danger') => ({ ok: 0, warn: 1, danger: 2 }[v])
+  let out: 'ok' | 'warn' | 'danger' = 'ok'
+  const sube = (v: 'ok' | 'warn' | 'danger') => { if (nivel(v) > nivel(out)) out = v }
+
+  if (bandera?.color === 'roja')     sube('danger')
+  if (bandera?.color === 'amarilla') sube('warn')
+  // Las medusas solo cuentan a partir de medio, igual que el icono del hero.
+  if (medusas && medusas.nivel !== 'bajo') sube('warn')
+  if (r && r.total > 0) {
+    if (r.bandera_roja > 0) sube('danger')
+    if (r.medusas > 0 || r.mucho_oleaje > 0 || r.bandera_amarilla > 0) sube('warn')
+  }
+  return out
 }
 
 export default function FichaHero({
@@ -152,7 +176,7 @@ export default function FichaHero({
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${playa.lat},${playa.lng}`
 
   const avisos = reportesActivos(reportes, locale)
-  const dot = statusDot(reportes)
+  const dot = statusDot(reportes, banderaPlaya, medusas)
   // Tinte del icono de estado para la barra inferior (fondo oscuro):
   // tonos brillantes para contraste sobre tinta-900.
   const dotColorBar = dot === 'danger' ? '#e8755e' : dot === 'warn' ? '#e6b24a' : '#5fbf7f'
