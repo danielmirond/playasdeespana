@@ -39,7 +39,7 @@ let _kv: KV | null | undefined
  * caché, pero sin coste. Un fallo transitorio de KV YA configurado no
  * pasa por aquí — lo siguen absorbiendo los try/catch de abajo.
  */
-async function getKV(): Promise<KV | null> {
+export async function getKV(): Promise<KV | null> {
   if (_kv !== undefined) return _kv
   try {
     const mod = await (import("@vercel/kv") as Promise<{ kv: KV }>)

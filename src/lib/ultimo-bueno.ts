@@ -18,19 +18,23 @@
 //
 // Y el llamador recibe SIEMPRE la edad, para poder decirla. Un dato viejo
 // que dice su edad es información; uno que la calla, un engaño.
-import { kvCached } from './kv-cache'
+// getKV se IMPORTA, ya no se duplica.
+//
+// Este fichero tenía su propia copia, y la copia se quedó sin la corrección
+// que sí recibió la de kv-cache: `import('@vercel/kv')` siempre resuelve
+// —el paquete comprueba las variables de entorno al LLAMAR, no al
+// cargarse—, así que sin KV quedaba un objeto que parecía válido y lanzaba
+// en cada operación. Aquí eso costaba caro: el `Promise.race` de 1.200 ms
+// de abajo se pagaba ENTERO, y como las siete fuentes de bandera pasan por
+// aquí dentro de una carrera con plazo de 1.500 ms, eran siete promesas
+// ocupando la carrera casi completa y estorbando a la meteo, que compite en
+// la misma tanda.
+//
+// Dos copias del mismo ayudante con el mismo fallo es justo cómo se llega
+// a esto, así que ahora hay una.
+import { kvCached, getKV } from './kv-cache'
 
 const TOPE_MS = 6 * 60 * 60 * 1000
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type KV = { get: (k: string) => Promise<any>; set: (k: string, v: any, o?: any) => Promise<any> }
-let _kv: KV | null | undefined
-async function getKV(): Promise<KV | null> {
-  if (_kv !== undefined) return _kv
-  try { _kv = (await (import('@vercel/kv') as Promise<{ kv: KV }>)).kv }
-  catch { _kv = null }
-  return _kv
-}
 
 export interface ConEdad<T> {
   datos: T
