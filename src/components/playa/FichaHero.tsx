@@ -20,6 +20,7 @@ import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 import { hayBanderaRoja } from '@/lib/bandera-roja'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
 import RejillaMediciones from './RejillaMediciones'
+import PreguntaDelDia from './PreguntaDelDia'
 
 interface Meteo {
   agua: number | null; olas: number | null; viento: number | null
@@ -61,6 +62,13 @@ interface Props {
    * dos cosas es.
    */
   medusas?:       MedusasRiesgo | null
+  /**
+   * ¿Esta playa está mapeada a alguna fuente oficial de bandera? Decide
+   * QUÉ se le pregunta al usuario en la tira: donde no hay fuente —y hay
+   * comunidades enteras sin ella— su reporte es el único dato que esa
+   * playa va a tener, y la petición se escribe en consecuencia.
+   */
+  hayFuenteOficial?: boolean
   /**
    * Qué sistema visual está activo. Llega como prop y no se lee aquí
    * porque este componente es de cliente y los flags se resuelven en
@@ -129,6 +137,7 @@ export default function FichaHero({
   municipioSlug, provinciaSlug, playaScore, reportes, foto, banderaPlaya,
   certBandera = 'estimado',
   medusas,
+  hayFuenteOficial,
   variante = 'arena',
 }: Props) {
   const i18n = t[locale]
@@ -404,18 +413,15 @@ export default function FichaHero({
       <div className={styles.avisosStrip} data-state={dot}>
         <div className={styles.avisosInner}>
           <span className={`${styles.dotMini} ${styles[`dot_${dot}`]}`} aria-hidden="true" />
-          <span className={styles.statusTxt}>
-            <strong>{i18n.comoEsta}:</strong>{' '}
-            {avisos.length > 0 ? avisos.join(' · ') : i18n.sinAvisos}
-          </span>
-          <button
-            type="button"
-            className={styles.avisarCTA}
-            onClick={() => window.dispatchEvent(new CustomEvent('open-reportar-drawer'))}
-          >
-            <Megaphone size={17} weight="bold" aria-hidden="true" />
-            {i18n.avisar}
-          </button>
+          <PreguntaDelDia
+            slug={playa.slug}
+            nombre={nombreH1}
+            locale={locale}
+            avisos={avisos}
+            hayFuenteOficial={!!hayFuenteOficial}
+            hayParteHoy={certBandera === 'oficial'}
+            banderaTxt={banderaPlaya ? (locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label) : null}
+          />
         </div>
       </div>
 

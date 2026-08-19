@@ -509,3 +509,35 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
   color: rgba(255,255,255,.86);
 }
 .heroPainted .noBanyoMotivo { color: var(--ink-soft); }
+
+
+/* ── La pregunta del día ───────────────────────────────────────────────
+   Sustituye al «sin avisos» + «Avisar». Las respuestas son botones de una
+   pulsación, deliberadamente discretos: la agresividad de este CTA está en
+   que la pregunta sea pertinente, no en el color. Un botón llamativo
+   pegado a información de seguridad compite con ella, y ahí no queremos
+   ganar. */
+.respuestas { display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; margin-left: auto; }
+.respuestaBtn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  min-height: 34px; padding: .3rem .6rem;
+  border: 1px solid currentColor; border-radius: 999px;
+  background: transparent; cursor: pointer;
+  font: inherit; font-size: .78rem; font-weight: 600;
+  white-space: nowrap;
+}
+.respuestaBtn:disabled { opacity: .5; cursor: default; }
+.respuestaBtn:hover:not(:disabled) { background: color-mix(in srgb, currentColor 10%, transparent); }
+.masAvisos {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 34px; min-height: 34px;
+  border: 1px solid var(--rule, rgba(0,0,0,.18)); border-radius: 999px;
+  background: transparent; color: var(--muted); cursor: pointer;
+}
+@media (max-width: 520px) {
+  /* A 375 no caben tres píldoras y el texto en la misma línea: la
+     pregunta arriba, las respuestas debajo. Siguen siendo una pulsación. */
+  .avisosInner { flex-wrap: wrap; }
+  .respuestas { margin-left: 0; width: 100%; }
+  .respuestaBtn { flex: 1 1 0; justify-content: center; min-height: 40px; }
+}

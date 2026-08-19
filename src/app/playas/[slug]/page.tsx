@@ -830,6 +830,11 @@ export default async function PlayaPage({ params }: Props) {
         banderaPlaya={banderaPlaya}
         certBandera={certBandera}
         medusas={medusas}
+        hayFuenteOficial={
+          tieneBanderaCat(slug) || tieneBanderaCan(slug) || tieneBanderaAnd(slug) ||
+          tieneBanderaBiz(slug) || tieneBanderaGip(slug) || tieneBanderaSb(slug) ||
+          tieneBanderaFerrol(slug) || tieneBanderaGijon(slug)
+        }
         variante={dsVariant()}
       />
       {/* BeachVideo se renderiza ahora dentro de FichaBody como
