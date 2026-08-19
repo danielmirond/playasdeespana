@@ -829,6 +829,7 @@ export default async function PlayaPage({ params }: Props) {
         foto={fotoHero ?? null}
         banderaPlaya={banderaPlaya}
         certBandera={certBandera}
+        medusas={medusas}
         variante={dsVariant()}
       />
       {/* BeachVideo se renderiza ahora dentro de FichaBody como

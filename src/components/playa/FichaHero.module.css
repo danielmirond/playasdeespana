@@ -417,7 +417,11 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
   .metaLine { font-size: .72rem; gap: .55rem; }
   .metaLine strong { font-size: .92rem; }
   .more { margin-left: 0; }
-  .contentBottom { padding-bottom: 1.25rem; }
+  /* 2rem y no 1,25: con las tres acciones a la vista, la fila de botones
+     acababa a 432 px y el crédito de la foto empezaba a 431 — se pisaban
+     por 1 px, medido a 375. Los 12 px extra dejan un hueco legible entre
+     el botón y el «Foto: …» sin tocar el crédito, que va anclado abajo. */
+  .contentBottom { padding-bottom: 2rem; }
   .statusTxt { font-size: .72rem; min-width: 0; }
   .avisarCTA { font-size: .78rem; padding: .5rem 1rem; }
 

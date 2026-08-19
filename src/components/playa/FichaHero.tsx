@@ -14,11 +14,11 @@ import type { ReportesPlaya } from '@/lib/reportes'
 import type { FotoPlaya } from '@/lib/fotos'
 import AnimatedSea from './AnimatedSea'
 import styles from './FichaHero.module.css'
-import { Flag, MapPin, Megaphone, Waves } from '@phosphor-icons/react'
+import { Fish, Flag, MapPin, Megaphone, Waves } from '@phosphor-icons/react'
 import { nombreConPlaya } from '@/lib/geo'
 import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 import { hayBanderaRoja } from '@/lib/bandera-roja'
-import type { BanderaPlaya } from '@/lib/seguridad'
+import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
 import RejillaMediciones from './RejillaMediciones'
 
 interface Meteo {
@@ -50,6 +50,17 @@ interface Props {
    * exactamente el error que este trabajo vino a corregir.
    */
   certBandera?:   'medido' | 'oficial' | 'reportado' | 'estimado' | 'sindato'
+  /**
+   * Riesgo de medusas del día. Solo se pinta a partir de MEDIO: en verano
+   * casi toda playa da «bajo», y un icono que sale siempre no informa de
+   * nada — se convierte en decoración y deja de mirarse.
+   *
+   * El peso sigue la misma convención que la bandera: relleno si lo avistó
+   * el socorrismo, hueco si lo deduce nuestro modelo de temperatura del
+   * agua y viento. Es un aviso serio y conviene que se note cuál de las
+   * dos cosas es.
+   */
+  medusas?:       MedusasRiesgo | null
   /**
    * Qué sistema visual está activo. Llega como prop y no se lee aquí
    * porque este componente es de cliente y los flags se resuelven en
@@ -117,6 +128,7 @@ export default function FichaHero({
   playa, meteo, estado, frase, locale = 'es',
   municipioSlug, provinciaSlug, playaScore, reportes, foto, banderaPlaya,
   certBandera = 'estimado',
+  medusas,
   variante = 'arena',
 }: Props) {
   const i18n = t[locale]
@@ -278,6 +290,21 @@ export default function FichaHero({
                       {locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label}
                       {' — '}
                       {locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}
+                    </span>
+                  </span>
+                )}
+                {/* Medusas, al lado de la bandera y con su misma gramática.
+                    A partir de riesgo MEDIO: el «bajo» de julio lo tiene
+                    casi toda playa y un icono permanente deja de leerse. */}
+                {medusas && medusas.nivel !== 'bajo' && (
+                  <span
+                    className={styles.banderaIcono}
+                    style={{ color: medusas.hex }}
+                    title={locale === 'en' ? medusas.detalleEn : medusas.detalle}
+                  >
+                    <Fish size="1em" weight={medusas.oficial ? 'fill' : 'regular'} aria-hidden="true" />
+                    <span className={styles.banderaSr}>
+                      {locale === 'en' ? medusas.labelEn : medusas.label}
                     </span>
                   </span>
                 )}
