@@ -1,0 +1,92 @@
+// src/lib/ultimo-bueno.ts — El último parte bueno, para no dejar huecos.
+//
+// EL PROBLEMA. Las fuentes de bandera se resuelven con un plazo de 1.500 ms
+// y, en frío, la primera renderización lo pierde. Entonces la ficha dice
+// «sin bandera» —que es honesto— y la ISR congela ese hueco una hora. El
+// dato existía y estaba a un segundo de distancia: simplemente no llegó.
+//
+// LA SOLUCIÓN, y su límite. Cada carga con éxito deja una copia en una
+// clave de vida larga. Si la siguiente lectura falla, se sirve esa copia.
+// Lo que se arrastra es de hace minutos, no de hace días.
+//
+// POR QUÉ HAY UN TOPE DE EDAD Y NO ES NEGOCIABLE. Arrastrar sin límite
+// convierte un fallo de red en una mentira: una bandera verde de ayer
+// publicada hoy es exactamente el fallo que este proyecto vino a corregir,
+// y la app oficial de Gipuzkoa hace justo esto —pinta gris cuando el parte
+// no es de hoy—. El tope son 6 horas: cubre de sobra un fallo puntual y una
+// mañana fría, y no llega nunca a cruzar de un día de playa al siguiente.
+//
+// Y el llamador recibe SIEMPRE la edad, para poder decirla. Un dato viejo
+// que dice su edad es información; uno que la calla, un engaño.
+import { kvCached } from './kv-cache'
+
+const TOPE_MS = 6 * 60 * 60 * 1000
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type KV = { get: (k: string) => Promise<any>; set: (k: string, v: any, o?: any) => Promise<any> }
+let _kv: KV | null | undefined
+async function getKV(): Promise<KV | null> {
+  if (_kv !== undefined) return _kv
+  try { _kv = (await (import('@vercel/kv') as Promise<{ kv: KV }>)).kv }
+  catch { _kv = null }
+  return _kv
+}
+
+export interface ConEdad<T> {
+  datos: T
+  /** Milisegundos desde que se leyó de la fuente. 0 = recién traído. */
+  edadMs: number
+}
+
+/**
+ * Igual que kvCached, pero si la carga falla o vuelve vacía, sirve la
+ * última que salió bien —siempre que no pase del tope de edad.
+ *
+ * `vacio` decide qué cuenta como «no ha traído nada»: cada fuente sabe si
+ * un objeto sin claves es una respuesta legítima o un fallo.
+ */
+export async function cargarConUltimoBueno<T>(
+  ns: string,
+  partes: string[],
+  ttl: number,
+  cargar: () => Promise<T>,
+  vacio: (v: T) => boolean,
+): Promise<ConEdad<T>> {
+  const claveUltimo = `ultimo:${ns}`
+  try {
+    const fresco = await kvCached(ns, partes, ttl, cargar)
+    if (!vacio(fresco)) {
+      const kv = await getKV()
+      if (kv) {
+        // AWAIT, nunca fire-and-forget: en serverless un set sin esperar
+        // muere con la respuesta y la copia no se escribe jamás.
+        await Promise.race([
+          kv.set(claveUltimo, { t: Date.now(), d: fresco }, { ex: 60 * 60 * 12 }),
+          new Promise(r => setTimeout(r, 1200)),
+        ]).catch(() => {})
+      }
+      return { datos: fresco, edadMs: 0 }
+    }
+  } catch { /* seguimos al respaldo */ }
+
+  try {
+    const kv = await getKV()
+    if (!kv) throw new Error('sin kv')
+    const guardado = await kv.get(claveUltimo) as { t: number; d: T } | null
+    if (!guardado?.t) throw new Error('sin copia')
+    const edadMs = Date.now() - guardado.t
+    if (edadMs > TOPE_MS) throw new Error('demasiado viejo')
+    return { datos: guardado.d, edadMs }
+  } catch {
+    return { datos: {} as T, edadMs: 0 }
+  }
+}
+
+/** Texto para que la ficha diga la edad en vez de callarla. */
+export function textoEdad(edadMs: number, locale: 'es' | 'en' = 'es'): string | null {
+  if (edadMs < 60_000) return null              // recién traído: no se dice nada
+  const min = Math.round(edadMs / 60_000)
+  if (min < 60) return locale === 'en' ? `${min} min ago` : `hace ${min} min`
+  const h = Math.round(min / 60)
+  return locale === 'en' ? `${h} h ago` : `hace ${h} h`
+}

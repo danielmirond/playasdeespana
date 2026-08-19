@@ -22,6 +22,7 @@
 // Atribución visible y caché para no martillear.
 import type { BanderaPlaya, MedusasRiesgo } from './seguridad'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBueno } from './ultimo-bueno'
 
 // id KostaSystem → slug nuestro. Escrito a mano, como Bizkaia y por lo
 // mismo: aquí no hay coordenadas.
@@ -87,7 +88,7 @@ async function getSnapshot(): Promise<Record<string, FilaGip>> {
 }
 
 async function cargar(hoy: string): Promise<Record<string, FilaGip>> {
-  return kvCached('banderas-gip', [hoy], 900, async () => {
+  const { datos } = await cargarConUltimoBueno('banderas-gip', [hoy], 900, async () => {
     const res = await fetch(URL_FEED, {
       signal: AbortSignal.timeout(4000),
       headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' },
@@ -108,7 +109,8 @@ async function cargar(hoy: string): Promise<Record<string, FilaGip>> {
       }
     }
     return out
-  })
+  }, v => !v || Object.keys(v as object).length === 0)
+  return datos
 }
 
 /** Estado oficial de HOY. null si no está mapeada o el parte no es de hoy. */

@@ -36,6 +36,7 @@
 // precio de no tener coordenadas, y es preferible a acertar por casualidad.
 import type { BanderaPlaya, MedusasRiesgo } from './seguridad'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBueno } from './ultimo-bueno'
 
 /** Nombre en el feed de la Diputación → slug nuestro. 22 comprobadas. */
 const MAPA: Record<string, string> = {
@@ -199,7 +200,7 @@ export function getConIzenpe(url: string, timeoutMs: number): Promise<string> {
 }
 
 async function cargar(hoy: string): Promise<Record<string, FilaBiz>> {
-  return kvCached('banderas-biz', [hoy], 900, async () => {
+  const { datos } = await cargarConUltimoBueno('banderas-biz', [hoy], 900, async () => {
     const xml = await getConIzenpe(URL_FEED, 4000)
     const out: Record<string, FilaBiz> = {}
     for (const bloque of xml.match(/<SITUACION_PLAYA>[\s\S]*?<\/SITUACION_PLAYA>/g) ?? []) {
@@ -215,7 +216,8 @@ async function cargar(hoy: string): Promise<Record<string, FilaBiz>> {
       }
     }
     return out
-  })
+  }, v => !v || Object.keys(v as object).length === 0)
+  return datos
 }
 
 /**

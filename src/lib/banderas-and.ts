@@ -33,6 +33,7 @@
 // Atribución visible en la ficha.
 import type { BanderaPlaya } from './seguridad'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBueno } from './ultimo-bueno'
 import mapa from '@/data/banderas-and-map.json'
 
 const MAPA = mapa as Record<string, number[]>  // slug → ids de la Junta
@@ -94,7 +95,7 @@ async function getSnapshot(): Promise<Record<number, FilaAnd>> {
 }
 
 async function cargar(hoy: string): Promise<Record<number, FilaAnd>> {
-  return kvCached('banderas-and', [hoy], 900, async () => {
+  const { datos } = await cargarConUltimoBueno('banderas-and', [hoy], 900, async () => {
     const res = await fetch(API, {
       method: 'POST',
       signal: AbortSignal.timeout(4000),
@@ -123,7 +124,8 @@ async function cargar(hoy: string): Promise<Record<number, FilaAnd>> {
       }
     }
     return out
-  })
+  }, v => !v || Object.keys(v as object).length === 0)
+  return datos
 }
 
 /**

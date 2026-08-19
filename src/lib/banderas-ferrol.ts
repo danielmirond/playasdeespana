@@ -22,6 +22,7 @@
 // Licencia: no declarada (My Maps público del Concello de Ferrol).
 import type { BanderaPlaya } from './seguridad'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBueno } from './ultimo-bueno'
 import mapa from '@/data/banderas-ferrol-map.json'
 
 const MAPA = mapa as Record<string, string>          // nombre en el KML → slug
@@ -60,7 +61,7 @@ async function getSnapshot() {
 }
 
 async function cargar(hoy: string) {
-  return kvCached('banderas-ferrol', [hoy], 900, async () => {
+  const { datos } = await cargarConUltimoBueno('banderas-ferrol', [hoy], 900, async () => {
     const res = await fetch(URL_KML, {
       signal: AbortSignal.timeout(4000),
       headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' },
@@ -82,7 +83,8 @@ async function cargar(hoy: string) {
       }
     }
     return out
-  })
+  }, v => !v || Object.keys(v as object).length === 0)
+  return datos
 }
 
 export async function getBanderaFerrol(slug: string): Promise<EstadoOficialFerrol | null> {

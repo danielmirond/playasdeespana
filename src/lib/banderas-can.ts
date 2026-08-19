@@ -25,6 +25,7 @@
 // en la ficha y el User-Agent nos identifica.
 import type { BanderaPlaya } from './seguridad'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBueno } from './ultimo-bueno'
 import mapa from '@/data/banderas-can-map.json'
 
 const MAPA = mapa as Record<string, number[]>  // slug → ids DGSE (puede haber varios tramos)
@@ -92,7 +93,7 @@ async function getSnapshot(): Promise<Record<number, FilaFlag>> {
 }
 
 async function cargar(hoy: string): Promise<Record<number, FilaFlag>> {
-  return kvCached('banderas-can', [hoy], 900, async () => {
+  const { datos } = await cargarConUltimoBueno('banderas-can', [hoy], 900, async () => {
     const res = await fetch(`${API}/flags`, {
       signal: AbortSignal.timeout(4000),
       headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' },
@@ -128,7 +129,8 @@ async function cargar(hoy: string): Promise<Record<number, FilaFlag>> {
       }
     }
     return out
-  })
+  }, v => !v || Object.keys(v as object).length === 0)
+  return datos
 }
 
 /**

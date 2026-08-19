@@ -18,6 +18,7 @@
 // recientes que el parte de la mañana), nunca rebajarla.
 import type { BanderaPlaya, MedusasRiesgo } from './seguridad'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBueno } from './ultimo-bueno'
 import mapa from '@/data/banderas-cat-map.json'
 
 const MAPA = mapa as Record<string, string>  // slug → codiplatja
@@ -99,7 +100,7 @@ async function getSnapshot(): Promise<Record<string, FilaDia>> {
 }
 
 async function cargar(hoy: string): Promise<Record<string, FilaDia>> {
-  return kvCached('banderas-cat', [hoy.replace(/\//g, '-')], 1800, async () => {
+  const { datos } = await cargarConUltimoBueno('banderas-cat', [hoy.replace(/\//g, '-')], 1800, async () => {
     const url = 'https://analisi.transparenciacatalunya.cat/resource/4baz-cjv2.json?'
       + new URLSearchParams({
         $select: 'codiplatja,estat_bandera,estat_motiubandera,estat_meduses,estat_temperatura,estat_data',
@@ -125,7 +126,8 @@ async function cargar(hoy: string): Promise<Record<string, FilaDia>> {
       }
     }
     return out
-  })
+  }, v => !v || Object.keys(v as object).length === 0)
+  return datos
 }
 
 function traducirMotivo(raw: string): [string, string] | null {

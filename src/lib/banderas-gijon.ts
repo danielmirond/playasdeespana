@@ -22,6 +22,7 @@
 // sus zonas. Misma regla que Las Canteras en Canarias.
 import type { BanderaPlaya } from './seguridad'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBueno } from './ultimo-bueno'
 import mapa from '@/data/banderas-gijon-map.json'
 
 const MAPA = mapa as Record<string, string>          // nombre en la API → slug
@@ -64,7 +65,7 @@ function colorDe(v: unknown): 'verde' | 'amarilla' | 'roja' | null {
 }
 
 async function cargar(hoy: string) {
-  return kvCached('banderas-gijon', [hoy], 900, async () => {
+  const { datos } = await cargarConUltimoBueno('banderas-gijon', [hoy], 900, async () => {
     const res = await fetch(URL_API, {
       signal: AbortSignal.timeout(4000),
       headers: {
@@ -91,7 +92,8 @@ async function cargar(hoy: string) {
       out[nombre] = { color: peor, zonas: n }
     }
     return out
-  })
+  }, v => !v || Object.keys(v as object).length === 0)
+  return datos
 }
 
 export async function getBanderaGijon(slug: string): Promise<EstadoOficialGijon | null> {
