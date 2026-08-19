@@ -11,6 +11,7 @@ import styles from './MunicipioPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import GygActivities from '@/components/GygActivities'
+import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tinte } from '@/lib/tinte'
 import SeaIcon from '@/components/ui/SeaIcon'
 
@@ -135,6 +136,19 @@ export default async function MunicipioPage({ params }: Props) {
           <strong style={{ color: 'var(--ink)' }}>¿Tiene playa {municipio.nombre}?</strong>{' '}
           {respuestaTienePlaya}
         </p>
+
+        {/* Enlace a la tabla de mareas. Solo donde la marea significa algo:
+            en el Mediterráneo son 25 cm y mandar ahí a alguien que busca
+            playas no aporta; la página existe igualmente para quien la
+            busque directamente. */}
+        {tieneMareas(slug) && ubicacionMareas(slug)?.zona !== 'mediterraneo' && (
+          <p style={{ margin: '-1rem 0 2rem', fontSize: '.92rem' }}>
+            <Link href={`/municipio/${slug}/tabla-de-mareas`} style={{ color: 'var(--ink)', fontWeight: 600 }}>
+              Tabla de mareas de {municipio.nombre} →
+            </Link>{' '}
+            <span style={{ color: 'var(--muted)' }}>pleamar y bajamar de hoy, mañana y pasado, según Puertos del Estado.</span>
+          </p>
+        )}
 
         {/* TOP 6 con hero foto: mejor scoring del municipio */}
         {playas.length >= 6 && (

@@ -1,0 +1,6365 @@
+{
+ "es-pujols": {
+  "id": 18110,
+  "nombre": "La Savina (Formentera)",
+  "tipo": "Puerto",
+  "d": 2330,
+  "zona": "mediterraneo",
+  "municipio": "Es Pujols",
+  "provincia": "Baleares"
+ },
+ "estepona": {
+  "id": 35115,
+  "nombre": "El Padron (Estepona)",
+  "tipo": "Playa",
+  "d": 1043,
+  "zona": "mediterraneo",
+  "municipio": "Estepona",
+  "provincia": "Málaga"
+ },
+ "marbella": {
+  "id": 25202,
+  "nombre": "Marbella",
+  "tipo": "Localidad",
+  "d": 1797,
+  "zona": "mediterraneo",
+  "municipio": "Marbella",
+  "provincia": "Málaga"
+ },
+ "torrox": {
+  "id": 35222,
+  "nombre": "El Morche(Torrox)",
+  "tipo": "Playa",
+  "d": 2768,
+  "zona": "mediterraneo",
+  "municipio": "Torrox",
+  "provincia": "Málaga"
+ },
+ "palma-de-mallorca": {
+  "id": 38116,
+  "nombre": "El Arenal (Llucmajor)",
+  "tipo": "Playa",
+  "d": 9884,
+  "zona": "mediterraneo",
+  "municipio": "Palma de Mallorca",
+  "provincia": "Baleares"
+ },
+ "san-pedro-del-pinatar": {
+  "id": 26110,
+  "nombre": "Dehesa de Campoamor",
+  "tipo": "Localidad",
+  "d": 9392,
+  "zona": "mediterraneo",
+  "municipio": "San Pedro del Pinatar",
+  "provincia": "Murcia"
+ },
+ "la-oliva": {
+  "id": 24211,
+  "nombre": "Corralejo",
+  "tipo": "Localidad",
+  "d": 7659,
+  "zona": "canarias",
+  "municipio": "La Oliva",
+  "provincia": "Las Palmas"
+ },
+ "hondarribia": {
+  "id": 21102,
+  "nombre": "Hondarribia",
+  "tipo": "Localidad",
+  "d": 2575,
+  "zona": "cantabrico",
+  "municipio": "Hondarribia",
+  "provincia": "Gipuzkoa"
+ },
+ "el-toro": {
+  "id": 38109,
+  "nombre": "Cala Vinyes (Calvi&agrave;)",
+  "tipo": "Playa",
+  "d": 4897,
+  "zona": "mediterraneo",
+  "municipio": "El Toro",
+  "provincia": "Baleares"
+ },
+ "vinaros": {
+  "id": 16250,
+  "nombre": "Vinaroz",
+  "tipo": "Puerto",
+  "d": 3135,
+  "zona": "mediterraneo",
+  "municipio": "Vinaròs",
+  "provincia": "Castellón"
+ },
+ "muros-de-nalon": {
+  "id": 32105,
+  "nombre": "Aguilar (Muros de Nalon)",
+  "tipo": "Playa",
+  "d": 1475,
+  "zona": "cantabrico",
+  "municipio": "Muros de Nalón",
+  "provincia": "Asturias"
+ },
+ "calvia": {
+  "id": 38109,
+  "nombre": "Cala Vinyes (Calvi&agrave;)",
+  "tipo": "Playa",
+  "d": 2324,
+  "zona": "mediterraneo",
+  "municipio": "Calvià",
+  "provincia": "Baleares"
+ },
+ "arta": {
+  "id": 38218,
+  "nombre": "Cala Mesquida (Capdepera)",
+  "tipo": "Playa",
+  "d": 7458,
+  "zona": "mediterraneo",
+  "municipio": "Artà",
+  "provincia": "Baleares"
+ },
+ "alboraya": {
+  "id": 36228,
+  "nombre": "Malvarrosa (Valencia)",
+  "tipo": "Playa",
+  "d": 2476,
+  "zona": "mediterraneo",
+  "municipio": "Alboraya",
+  "provincia": "Valencia"
+ },
+ "mendexa": {
+  "id": 21111,
+  "nombre": "Lekeito",
+  "tipo": "Localidad",
+  "d": 1473,
+  "zona": "cantabrico",
+  "municipio": "Mendexa",
+  "provincia": "Bizkaia"
+ },
+ "villajoyosala-vila-joiosa": {
+  "id": 26116,
+  "nombre": "Villajoyosa",
+  "tipo": "Localidad",
+  "d": 1504,
+  "zona": "mediterraneo",
+  "municipio": "Villajoyosa/La Vila Joiosa",
+  "provincia": "Alicante"
+ },
+ "comarca-vaqueira": {
+  "id": 32108,
+  "nombre": "Cadavedo (Valdes)",
+  "tipo": "Playa",
+  "d": 6874,
+  "zona": "cantabrico",
+  "municipio": "Comarca Vaqueira",
+  "provincia": "Asturias"
+ },
+ "teguise": {
+  "id": 34228,
+  "nombre": "Caleta de Famara",
+  "tipo": "Playa",
+  "d": 3616,
+  "zona": "canarias",
+  "municipio": "Teguise",
+  "provincia": "Las Palmas"
+ },
+ "ares": {
+  "id": 22111,
+  "nombre": "Ares",
+  "tipo": "Localidad",
+  "d": 581,
+  "zona": "cantabrico",
+  "municipio": "Ares",
+  "provincia": "A Coruña"
+ },
+ "sant-pere-pescador": {
+  "id": 37241,
+  "nombre": "Sant Pere Pescador",
+  "tipo": "Playa",
+  "d": 640,
+  "zona": "mediterraneo",
+  "municipio": "Sant Pere Pescador",
+  "provincia": "Girona"
+ },
+ "isla-de-la-gomera": {
+  "id": 24116,
+  "nombre": "Agulo",
+  "tipo": "Localidad",
+  "d": 5365,
+  "zona": "canarias",
+  "municipio": "Isla de la Gomera",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "los-silos": {
+  "id": 24106,
+  "nombre": "Garachico",
+  "tipo": "Localidad",
+  "d": 4013,
+  "zona": "canarias",
+  "municipio": "Los Silos",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "adeje": {
+  "id": 34106,
+  "nombre": "Troya (Adeje)",
+  "tipo": "Playa",
+  "d": 3676,
+  "zona": "canarias",
+  "municipio": "Adeje",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "a-laracha": {
+  "id": 32168,
+  "nombre": "Caion-Salseiras",
+  "tipo": "Playa",
+  "d": 292,
+  "zona": "cantabrico",
+  "municipio": "A Laracha",
+  "provincia": "A Coruña"
+ },
+ "granadilla-de-abona": {
+  "id": 24112,
+  "nombre": "Medano",
+  "tipo": "Localidad",
+  "d": 1554,
+  "zona": "canarias",
+  "municipio": "Granadilla de Abona",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "oliva": {
+  "id": 36206,
+  "nombre": "Aigua Blanca (Denia)",
+  "tipo": "Playa",
+  "d": 1749,
+  "zona": "mediterraneo",
+  "municipio": "Oliva",
+  "provincia": "Valencia"
+ },
+ "ibiza": {
+  "id": 18120,
+  "nombre": "Ibiza",
+  "tipo": "Puerto",
+  "d": 5141,
+  "zona": "mediterraneo",
+  "municipio": "Ibiza",
+  "provincia": "Baleares"
+ },
+ "mijas": {
+  "id": 35206,
+  "nombre": "La Butibamba/La Cala (Mijas)",
+  "tipo": "Playa",
+  "d": 506,
+  "zona": "mediterraneo",
+  "municipio": "Mijas",
+  "provincia": "Málaga"
+ },
+ "sanlucar-de-barrameda": {
+  "id": 13130,
+  "nombre": "Chipiona-Sevilla",
+  "tipo": "Puerto",
+  "d": 5703,
+  "zona": "atlantico",
+  "municipio": "Sanlúcar de Barrameda",
+  "provincia": "Cádiz"
+ },
+ "guia-de-isora": {
+  "id": 24108,
+  "nombre": "Playa de San Juan (Tenerife)",
+  "tipo": "Localidad",
+  "d": 1328,
+  "zona": "canarias",
+  "municipio": "Guía de Isora",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "valverde": {
+  "id": 14120,
+  "nombre": "La Estaca (El Hierro)",
+  "tipo": "Puerto",
+  "d": 5593,
+  "zona": "canarias",
+  "municipio": "Valverde",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "la-marina-occidental": {
+  "id": 12120,
+  "nombre": "San Cibrao",
+  "tipo": "Puerto",
+  "d": 4400,
+  "zona": "cantabrico",
+  "municipio": "La Mariña Occidental",
+  "provincia": "Lugo"
+ },
+ "pajara": {
+  "id": 24214,
+  "nombre": "Costa Calma",
+  "tipo": "Localidad",
+  "d": 9863,
+  "zona": "canarias",
+  "municipio": "Pájara",
+  "provincia": "Las Palmas"
+ },
+ "roda-de-bera": {
+  "id": 37130,
+  "nombre": "Costa Daurada (Roda del Bara)",
+  "tipo": "Playa",
+  "d": 495,
+  "zona": "mediterraneo",
+  "municipio": "Roda de Berà",
+  "provincia": "Tarragona"
+ },
+ "maxorata": {
+  "id": 24211,
+  "nombre": "Corralejo",
+  "tipo": "Localidad",
+  "d": 7521,
+  "zona": "canarias",
+  "municipio": "Maxorata",
+  "provincia": "Las Palmas"
+ },
+ "figueiroa": {
+  "id": 32142,
+  "nombre": "Morouzos/Cabalar (Ortigueira)",
+  "tipo": "Playa",
+  "d": 976,
+  "zona": "cantabrico",
+  "municipio": "Figueiroa",
+  "provincia": "A Coruña"
+ },
+ "ea": {
+  "id": 31110,
+  "nombre": "Ea",
+  "tipo": "Playa",
+  "d": 373,
+  "zona": "cantabrico",
+  "municipio": "Ea",
+  "provincia": "Bizkaia"
+ },
+ "alacantalicante": {
+  "id": 16130,
+  "nombre": "Alicante",
+  "tipo": "Puerto",
+  "d": 3731,
+  "zona": "mediterraneo",
+  "municipio": "Alacant/Alicante",
+  "provincia": "Alicante"
+ },
+ "vandellos-i-lhospitalet-de-linfant": {
+  "id": 37111,
+  "nombre": "Del Torn (L'Hospitalet de L'Infant)",
+  "tipo": "Playa",
+  "d": 180,
+  "zona": "mediterraneo",
+  "municipio": "Vandellòs i l\"Hospitalet de l\"Infant",
+  "provincia": "Tarragona"
+ },
+ "el-bajo-ebro": {
+  "id": 37103,
+  "nombre": "Cap Roig (L'Ampolla)",
+  "tipo": "Playa",
+  "d": 4591,
+  "zona": "mediterraneo",
+  "municipio": "El Bajo Ebro",
+  "provincia": "Tarragona"
+ },
+ "torroella-de-montgri": {
+  "id": 37239,
+  "nombre": "L'Estartit (Torroella de Montgri)",
+  "tipo": "Playa",
+  "d": 429,
+  "zona": "mediterraneo",
+  "municipio": "Torroella de Montgrí",
+  "provincia": "Girona"
+ },
+ "alto-ampurdan": {
+  "id": 27133,
+  "nombre": "Roses",
+  "tipo": "Localidad",
+  "d": 1760,
+  "zona": "mediterraneo",
+  "municipio": "Alto Ampurdán",
+  "provincia": "Girona"
+ },
+ "corcubion": {
+  "id": 32202,
+  "nombre": "Estorde (Cee)",
+  "tipo": "Playa",
+  "d": 2887,
+  "zona": "atlantico",
+  "municipio": "Corcubión",
+  "provincia": "A Coruña"
+ },
+ "vilanova-i-la-geltru": {
+  "id": 27108,
+  "nombre": "Vilanova i la Geltru",
+  "tipo": "Localidad",
+  "d": 1483,
+  "zona": "mediterraneo",
+  "municipio": "Vilanova i la Geltrú",
+  "provincia": "Barcelona"
+ },
+ "campo-de-gibraltar": {
+  "id": 35100,
+  "nombre": "Bolonia (Tarifa)",
+  "tipo": "Playa",
+  "d": 1395,
+  "zona": "mediterraneo",
+  "municipio": "Campo de Gibraltar",
+  "provincia": "Cádiz"
+ },
+ "cala-tirant": {
+  "id": 38236,
+  "nombre": "Tirant (Es Mercadal)",
+  "tipo": "Playa",
+  "d": 3868,
+  "zona": "mediterraneo",
+  "municipio": "Cala Tirant",
+  "provincia": "Baleares"
+ },
+ "sanxenxo": {
+  "id": 22205,
+  "nombre": "Sanxenxo",
+  "tipo": "Localidad",
+  "d": 735,
+  "zona": "atlantico",
+  "municipio": "Sanxenxo",
+  "provincia": "Pontevedra"
+ },
+ "hendaya": {
+  "id": 21102,
+  "nombre": "Hondarribia",
+  "tipo": "Localidad",
+  "d": 3441,
+  "zona": "cantabrico",
+  "municipio": "Hendaya",
+  "provincia": "Gipuzkoa"
+ },
+ "valle-de-guimar": {
+  "id": 24113,
+  "nombre": "Candelaria",
+  "tipo": "Localidad",
+  "d": 5806,
+  "zona": "canarias",
+  "municipio": "Valle de Güímar",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "monte-gordo": {
+  "id": 33101,
+  "nombre": "Punta del Caiman (Isla Cristina)",
+  "tipo": "Playa",
+  "d": 11852,
+  "zona": "atlantico",
+  "municipio": "Monte Gordo",
+  "provincia": "Huelva"
+ },
+ "urola-costa": {
+  "id": 21105,
+  "nombre": "Zarautz",
+  "tipo": "Localidad",
+  "d": 1286,
+  "zona": "cantabrico",
+  "municipio": "Urola Costa",
+  "provincia": "Gipuzkoa"
+ },
+ "porto-do-son": {
+  "id": 22116,
+  "nombre": "Porto do Son",
+  "tipo": "Localidad",
+  "d": 1669,
+  "zona": "atlantico",
+  "municipio": "Porto do Son",
+  "provincia": "A Coruña"
+ },
+ "vilagarcia-de-arousa": {
+  "id": 12210,
+  "nombre": "Vilagarcia de Arousa",
+  "tipo": "Puerto",
+  "d": 1069,
+  "zona": "atlantico",
+  "municipio": "Vilagarcía de Arousa",
+  "provincia": "Pontevedra"
+ },
+ "la-janda": {
+  "id": 23111,
+  "nombre": "Conil de la Frontera",
+  "tipo": "Localidad",
+  "d": 2068,
+  "zona": "atlantico",
+  "municipio": "La Janda",
+  "provincia": "Cádiz"
+ },
+ "barbate": {
+  "id": 23112,
+  "nombre": "Barbate",
+  "tipo": "Localidad",
+  "d": 5500,
+  "zona": "atlantico",
+  "municipio": "Barbate",
+  "provincia": "Cádiz"
+ },
+ "santa-susanna": {
+  "id": 27122,
+  "nombre": "Pineda de Mar",
+  "tipo": "Localidad",
+  "d": 2689,
+  "zona": "mediterraneo",
+  "municipio": "Santa Susanna",
+  "provincia": "Barcelona"
+ },
+ "sitges": {
+  "id": 27109,
+  "nombre": "Sitges",
+  "tipo": "Localidad",
+  "d": 619,
+  "zona": "mediterraneo",
+  "municipio": "Sitges",
+  "provincia": "Barcelona"
+ },
+ "garachico": {
+  "id": 24106,
+  "nombre": "Garachico",
+  "tipo": "Localidad",
+  "d": 105,
+  "zona": "canarias",
+  "municipio": "Garachico",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "hermigua": {
+  "id": 24116,
+  "nombre": "Agulo",
+  "tipo": "Localidad",
+  "d": 2909,
+  "zona": "canarias",
+  "municipio": "Hermigua",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "benicarlo": {
+  "id": 26213,
+  "nombre": "Benicarlo",
+  "tipo": "Localidad",
+  "d": 419,
+  "zona": "mediterraneo",
+  "municipio": "Benicarló",
+  "provincia": "Castellón"
+ },
+ "jandia": {
+  "id": 24214,
+  "nombre": "Costa Calma",
+  "tipo": "Localidad",
+  "d": 1963,
+  "zona": "canarias",
+  "municipio": "Jandía",
+  "provincia": "Las Palmas"
+ },
+ "isla-de-la-palma": {
+  "id": 24126,
+  "nombre": "San Andres y Sauces",
+  "tipo": "Localidad",
+  "d": 10205,
+  "zona": "canarias",
+  "municipio": "Isla de la Palma",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "boiro": {
+  "id": 22118,
+  "nombre": "Boiro",
+  "tipo": "Localidad",
+  "d": 2723,
+  "zona": "atlantico",
+  "municipio": "Boiro",
+  "provincia": "A Coruña"
+ },
+ "cangas": {
+  "id": 22208,
+  "nombre": "Cangas",
+  "tipo": "Localidad",
+  "d": 3082,
+  "zona": "atlantico",
+  "municipio": "Cangas",
+  "provincia": "Pontevedra"
+ },
+ "o-grove": {
+  "id": 22204,
+  "nombre": "O Grove",
+  "tipo": "Localidad",
+  "d": 3697,
+  "zona": "atlantico",
+  "municipio": "O Grove",
+  "provincia": "Pontevedra"
+ },
+ "denia": {
+  "id": 26202,
+  "nombre": "Denia",
+  "tipo": "Localidad",
+  "d": 2963,
+  "zona": "mediterraneo",
+  "municipio": "Dénia",
+  "provincia": "Alicante"
+ },
+ "o-vicedo": {
+  "id": 22106,
+  "nombre": "O Vicedo",
+  "tipo": "Localidad",
+  "d": 1647,
+  "zona": "cantabrico",
+  "municipio": "O Vicedo",
+  "provincia": "Lugo"
+ },
+ "llucmajor": {
+  "id": 38116,
+  "nombre": "El Arenal (Llucmajor)",
+  "tipo": "Playa",
+  "d": 7204,
+  "zona": "mediterraneo",
+  "municipio": "Llucmajor",
+  "provincia": "Baleares"
+ },
+ "balares": {
+  "id": 32173,
+  "nombre": "Laxe",
+  "tipo": "Playa",
+  "d": 5331,
+  "zona": "cantabrico",
+  "municipio": "Balarés",
+  "provincia": "A Coruña"
+ },
+ "barreiros": {
+  "id": 32120,
+  "nombre": "Longara (Barreiros)",
+  "tipo": "Playa",
+  "d": 893,
+  "zona": "cantabrico",
+  "municipio": "Barreiros",
+  "provincia": "Lugo"
+ },
+ "mazagon": {
+  "id": 13120,
+  "nombre": "Huelva",
+  "tipo": "Puerto",
+  "d": 2757,
+  "zona": "atlantico",
+  "municipio": "Mazagón",
+  "provincia": "Huelva"
+ },
+ "laguna-de-el-portil": {
+  "id": 33104,
+  "nombre": "El Portil (Punta Umbria)",
+  "tipo": "Playa",
+  "d": 319,
+  "zona": "atlantico",
+  "municipio": "Laguna de El Portil",
+  "provincia": "Huelva"
+ },
+ "palafrugell": {
+  "id": 27129,
+  "nombre": "Calella de Palafrugell",
+  "tipo": "Localidad",
+  "d": 1530,
+  "zona": "mediterraneo",
+  "municipio": "Palafrugell",
+  "provincia": "Girona"
+ },
+ "fisterra": {
+  "id": 22115,
+  "nombre": "Fisterra",
+  "tipo": "Localidad",
+  "d": 2443,
+  "zona": "atlantico",
+  "municipio": "Fisterra",
+  "provincia": "A Coruña"
+ },
+ "a-illa-de-arousa": {
+  "id": 32223,
+  "nombre": "Area de Secada (A Illa de Arousa)",
+  "tipo": "Playa",
+  "d": 2197,
+  "zona": "atlantico",
+  "municipio": "A Illa de Arousa",
+  "provincia": "Pontevedra"
+ },
+ "pontevedra": {
+  "id": 22207,
+  "nombre": "Pontevedra",
+  "tipo": "Localidad",
+  "d": 1741,
+  "zona": "atlantico",
+  "municipio": "Pontevedra",
+  "provincia": "Pontevedra"
+ },
+ "vilanova-de-arousa": {
+  "id": 22202,
+  "nombre": "Vilanova de Arousa",
+  "tipo": "Localidad",
+  "d": 485,
+  "zona": "atlantico",
+  "municipio": "Vilanova de Arousa",
+  "provincia": "Pontevedra"
+ },
+ "cambados": {
+  "id": 22203,
+  "nombre": "Cambados",
+  "tipo": "Localidad",
+  "d": 2567,
+  "zona": "atlantico",
+  "municipio": "Cambados",
+  "provincia": "Pontevedra"
+ },
+ "barbanza": {
+  "id": 32211,
+  "nombre": "O Castro (Ribeira)",
+  "tipo": "Playa",
+  "d": 1022,
+  "zona": "atlantico",
+  "municipio": "Barbanza",
+  "provincia": "A Coruña"
+ },
+ "comarca-este": {
+  "id": 14240,
+  "nombre": "Arinaga (Gran Canaria)",
+  "tipo": "Puerto",
+  "d": 4019,
+  "zona": "canarias",
+  "municipio": "Comarca Este",
+  "provincia": "Las Palmas"
+ },
+ "salnes": {
+  "id": 12210,
+  "nombre": "Vilagarcia de Arousa",
+  "tipo": "Puerto",
+  "d": 2169,
+  "zona": "atlantico",
+  "municipio": "Salnés",
+  "provincia": "Pontevedra"
+ },
+ "os-campos": {
+  "id": 32225,
+  "nombre": "Area Grande (O Grove)",
+  "tipo": "Playa",
+  "d": 1197,
+  "zona": "atlantico",
+  "municipio": "Os Campos",
+  "provincia": "Pontevedra"
+ },
+ "as-quintans": {
+  "id": 22203,
+  "nombre": "Cambados",
+  "tipo": "Localidad",
+  "d": 2335,
+  "zona": "atlantico",
+  "municipio": "As Quintáns",
+  "provincia": "Pontevedra"
+ },
+ "marin": {
+  "id": 32265,
+  "nombre": "Aguete (Marin)",
+  "tipo": "Playa",
+  "d": 229,
+  "zona": "atlantico",
+  "municipio": "Marín",
+  "provincia": "Pontevedra"
+ },
+ "comarca-de-el-morrazo": {
+  "id": 32240,
+  "nombre": "Lago (Bueu)",
+  "tipo": "Playa",
+  "d": 2801,
+  "zona": "atlantico",
+  "municipio": "Comarca de El Morrazo",
+  "provincia": "Pontevedra"
+ },
+ "redondela": {
+  "id": 12230,
+  "nombre": "Vigo",
+  "tipo": "Puerto",
+  "d": 10875,
+  "zona": "atlantico",
+  "municipio": "Redondela",
+  "provincia": "Pontevedra"
+ },
+ "bueu": {
+  "id": 32240,
+  "nombre": "Lago (Bueu)",
+  "tipo": "Playa",
+  "d": 2444,
+  "zona": "atlantico",
+  "municipio": "Bueu",
+  "provincia": "Pontevedra"
+ },
+ "moana": {
+  "id": 12230,
+  "nombre": "Vigo",
+  "tipo": "Puerto",
+  "d": 5057,
+  "zona": "atlantico",
+  "municipio": "Moaña",
+  "provincia": "Pontevedra"
+ },
+ "vilaboa": {
+  "id": 12220,
+  "nombre": "Marin",
+  "tipo": "Puerto",
+  "d": 10368,
+  "zona": "atlantico",
+  "municipio": "Vilaboa",
+  "provincia": "Pontevedra"
+ },
+ "larache": {
+  "id": 12220,
+  "nombre": "Marin",
+  "tipo": "Puerto",
+  "d": 9645,
+  "zona": "atlantico",
+  "municipio": "Larache",
+  "provincia": "Pontevedra"
+ },
+ "poio": {
+  "id": 12220,
+  "nombre": "Marin",
+  "tipo": "Puerto",
+  "d": 2785,
+  "zona": "atlantico",
+  "municipio": "Poio",
+  "provincia": "Pontevedra"
+ },
+ "rianxo": {
+  "id": 12210,
+  "nombre": "Vilagarcia de Arousa",
+  "tipo": "Puerto",
+  "d": 5864,
+  "zona": "atlantico",
+  "municipio": "Rianxo",
+  "provincia": "A Coruña"
+ },
+ "brion": {
+  "id": 12210,
+  "nombre": "Vilagarcia de Arousa",
+  "tipo": "Puerto",
+  "d": 4351,
+  "zona": "atlantico",
+  "municipio": "Brión",
+  "provincia": "A Coruña"
+ },
+ "foz": {
+  "id": 32127,
+  "nombre": "Arealonga (Foz)",
+  "tipo": "Playa",
+  "d": 336,
+  "zona": "cantabrico",
+  "municipio": "Foz",
+  "provincia": "Lugo"
+ },
+ "fuencaliente-de-la-palma": {
+  "id": 24123,
+  "nombre": "Casas del Morron",
+  "tipo": "Localidad",
+  "d": 1745,
+  "zona": "canarias",
+  "municipio": "Fuencaliente de la Palma",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "el-port-de-la-selva": {
+  "id": 37248,
+  "nombre": "El Port de la Selva",
+  "tipo": "Playa",
+  "d": 786,
+  "zona": "mediterraneo",
+  "municipio": "El Port de la Selva",
+  "provincia": "Girona"
+ },
+ "noya": {
+  "id": 22116,
+  "nombre": "Porto do Son",
+  "tipo": "Localidad",
+  "d": 5352,
+  "zona": "atlantico",
+  "municipio": "Noya",
+  "provincia": "A Coruña"
+ },
+ "ferrol": {
+  "id": 32148,
+  "nombre": "Ponzos (Ferrol)",
+  "tipo": "Playa",
+  "d": 2792,
+  "zona": "cantabrico",
+  "municipio": "Ferrol",
+  "provincia": "A Coruña"
+ },
+ "cedeira": {
+  "id": 22109,
+  "nombre": "Cedeira",
+  "tipo": "Localidad",
+  "d": 779,
+  "zona": "cantabrico",
+  "municipio": "Cedeira",
+  "provincia": "A Coruña"
+ },
+ "la-matanza-de-acentejo": {
+  "id": 24103,
+  "nombre": "Puerto de la Madera",
+  "tipo": "Localidad",
+  "d": 6200,
+  "zona": "canarias",
+  "municipio": "La Matanza de Acentejo",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "finisterre": {
+  "id": 32174,
+  "nombre": "Lourido (Muxia)",
+  "tipo": "Playa",
+  "d": 6598,
+  "zona": "cantabrico",
+  "municipio": "Finisterre",
+  "provincia": "A Coruña"
+ },
+ "muros": {
+  "id": 22116,
+  "nombre": "Porto do Son",
+  "tipo": "Localidad",
+  "d": 6664,
+  "zona": "atlantico",
+  "municipio": "Muros",
+  "provincia": "A Coruña"
+ },
+ "el-campello": {
+  "id": 26115,
+  "nombre": "El Campello",
+  "tipo": "Localidad",
+  "d": 3134,
+  "zona": "mediterraneo",
+  "municipio": "El Campello",
+  "provincia": "Alicante"
+ },
+ "pontedeume": {
+  "id": 22111,
+  "nombre": "Ares",
+  "tipo": "Localidad",
+  "d": 4576,
+  "zona": "cantabrico",
+  "municipio": "Pontedeume",
+  "provincia": "A Coruña"
+ },
+ "mino": {
+  "id": 32157,
+  "nombre": "A Ribeiriña (Miño)",
+  "tipo": "Playa",
+  "d": 720,
+  "zona": "cantabrico",
+  "municipio": "Miño",
+  "provincia": "A Coruña"
+ },
+ "covas": {
+  "id": 32148,
+  "nombre": "Ponzos (Ferrol)",
+  "tipo": "Playa",
+  "d": 2613,
+  "zona": "cantabrico",
+  "municipio": "Covas",
+  "provincia": "A Coruña"
+ },
+ "orihuela": {
+  "id": 26109,
+  "nombre": "Cabo Roig",
+  "tipo": "Localidad",
+  "d": 892,
+  "zona": "mediterraneo",
+  "municipio": "Orihuela",
+  "provincia": "Alicante"
+ },
+ "laxe": {
+  "id": 32173,
+  "nombre": "Laxe",
+  "tipo": "Playa",
+  "d": 2569,
+  "zona": "cantabrico",
+  "municipio": "Laxe",
+  "provincia": "A Coruña"
+ },
+ "nigran": {
+  "id": 22210,
+  "nombre": "Baiona",
+  "tipo": "Localidad",
+  "d": 3914,
+  "zona": "atlantico",
+  "municipio": "Nigrán",
+  "provincia": "Pontevedra"
+ },
+ "a-pobra-do-caraminal": {
+  "id": 32215,
+  "nombre": "A Corna (A Pobra do Caramiñal)",
+  "tipo": "Playa",
+  "d": 2221,
+  "zona": "atlantico",
+  "municipio": "A Pobra do Caramiñal",
+  "provincia": "A Coruña"
+ },
+ "vigo": {
+  "id": 32248,
+  "nombre": "Argazada (Vigo)",
+  "tipo": "Playa",
+  "d": 1120,
+  "zona": "atlantico",
+  "municipio": "Vigo",
+  "provincia": "Pontevedra"
+ },
+ "valdovino": {
+  "id": 32146,
+  "nombre": "A Frouxeira (Valdoviño)",
+  "tipo": "Playa",
+  "d": 1918,
+  "zona": "cantabrico",
+  "municipio": "Valdoviño",
+  "provincia": "A Coruña"
+ },
+ "oleiros": {
+  "id": 32158,
+  "nombre": "Mera (Oleiros)",
+  "tipo": "Playa",
+  "d": 605,
+  "zona": "cantabrico",
+  "municipio": "Oleiros",
+  "provincia": "A Coruña"
+ },
+ "donon": {
+  "id": 32255,
+  "nombre": "Carracedo (Illas Cies)",
+  "tipo": "Playa",
+  "d": 3159,
+  "zona": "atlantico",
+  "municipio": "Donón",
+  "provincia": "Pontevedra"
+ },
+ "torremolinos": {
+  "id": 25205,
+  "nombre": "Torremolinos",
+  "tipo": "Localidad",
+  "d": 529,
+  "zona": "mediterraneo",
+  "municipio": "Torremolinos",
+  "provincia": "Málaga"
+ },
+ "motril": {
+  "id": 15220,
+  "nombre": "Motril",
+  "tipo": "Puerto",
+  "d": 1104,
+  "zona": "mediterraneo",
+  "municipio": "Motril",
+  "provincia": "Granada"
+ },
+ "sant-feliu-de-guixols": {
+  "id": 27126,
+  "nombre": "Sant Feliu de Guixols",
+  "tipo": "Localidad",
+  "d": 1436,
+  "zona": "mediterraneo",
+  "municipio": "Sant Feliu de Guíxols",
+  "provincia": "Girona"
+ },
+ "bajo-campo": {
+  "id": 37111,
+  "nombre": "Del Torn (L'Hospitalet de L'Infant)",
+  "tipo": "Playa",
+  "d": 592,
+  "zona": "mediterraneo",
+  "municipio": "Bajo Campo",
+  "provincia": "Tarragona"
+ },
+ "ribadeo": {
+  "id": 22101,
+  "nombre": "Ribadeo",
+  "tipo": "Localidad",
+  "d": 5706,
+  "zona": "cantabrico",
+  "municipio": "Ribadeo",
+  "provincia": "Lugo"
+ },
+ "santa-margalida": {
+  "id": 38219,
+  "nombre": "Son Baulo (Sta. Margalida)",
+  "tipo": "Playa",
+  "d": 1565,
+  "zona": "mediterraneo",
+  "municipio": "Santa Margalida",
+  "provincia": "Baleares"
+ },
+ "insuela": {
+  "id": 32215,
+  "nombre": "A Corna (A Pobra do Caramiñal)",
+  "tipo": "Playa",
+  "d": 671,
+  "zona": "atlantico",
+  "municipio": "Insuela",
+  "provincia": "A Coruña"
+ },
+ "ribeira": {
+  "id": 32210,
+  "nombre": "Anguleira (Ribeira)",
+  "tipo": "Playa",
+  "d": 2059,
+  "zona": "atlantico",
+  "municipio": "Ribeira",
+  "provincia": "A Coruña"
+ },
+ "zarautz": {
+  "id": 21105,
+  "nombre": "Zarautz",
+  "tipo": "Localidad",
+  "d": 1018,
+  "zona": "cantabrico",
+  "municipio": "Zarautz",
+  "provincia": "Gipuzkoa"
+ },
+ "ses-salines": {
+  "id": 28206,
+  "nombre": "Cala d'Or",
+  "tipo": "Localidad",
+  "d": 8528,
+  "zona": "mediterraneo",
+  "municipio": "Ses Salines",
+  "provincia": "Baleares"
+ },
+ "gijon": {
+  "id": 11210,
+  "nombre": "Gijon-Musel",
+  "tipo": "Puerto",
+  "d": 2368,
+  "zona": "cantabrico",
+  "municipio": "Gijón",
+  "provincia": "Asturias"
+ },
+ "getxo": {
+  "id": 21115,
+  "nombre": "Getxo",
+  "tipo": "Localidad",
+  "d": 1030,
+  "zona": "cantabrico",
+  "municipio": "Getxo",
+  "provincia": "Bizkaia"
+ },
+ "altea": {
+  "id": 26118,
+  "nombre": "Altea",
+  "tipo": "Localidad",
+  "d": 2113,
+  "zona": "mediterraneo",
+  "municipio": "Altea",
+  "provincia": "Alicante"
+ },
+ "donostiasan-sebastian": {
+  "id": 21104,
+  "nombre": "Donostia-San Sebastian",
+  "tipo": "Localidad",
+  "d": 2397,
+  "zona": "cantabrico",
+  "municipio": "Donostia/San Sebastián",
+  "provincia": "Gipuzkoa"
+ },
+ "ibarrangelu": {
+  "id": 21112,
+  "nombre": "Mundaka",
+  "tipo": "Localidad",
+  "d": 1808,
+  "zona": "cantabrico",
+  "municipio": "Ibarrangelu",
+  "provincia": "Bizkaia"
+ },
+ "mogan": {
+  "id": 24206,
+  "nombre": "Puerto Rico",
+  "tipo": "Localidad",
+  "d": 584,
+  "zona": "canarias",
+  "municipio": "Mogán",
+  "provincia": "Las Palmas"
+ },
+ "barcelona": {
+  "id": 37146,
+  "nombre": "Barceloneta (Barcelona)",
+  "tipo": "Playa",
+  "d": 789,
+  "zona": "mediterraneo",
+  "municipio": "Barcelona",
+  "provincia": "Barcelona"
+ },
+ "nijar": {
+  "id": 25218,
+  "nombre": "San Jose",
+  "tipo": "Localidad",
+  "d": 5148,
+  "zona": "mediterraneo",
+  "municipio": "Níjar",
+  "provincia": "Almería"
+ },
+ "fuengirola": {
+  "id": 25203,
+  "nombre": "Fuengirola",
+  "tipo": "Localidad",
+  "d": 1092,
+  "zona": "mediterraneo",
+  "municipio": "Fuengirola",
+  "provincia": "Málaga"
+ },
+ "el-puerto-de-santa-maria": {
+  "id": 23107,
+  "nombre": "El Puerto de Sta Maria",
+  "tipo": "Localidad",
+  "d": 2767,
+  "zona": "atlantico",
+  "municipio": "El Puerto de Santa María",
+  "provincia": "Cádiz"
+ },
+ "deba": {
+  "id": 21108,
+  "nombre": "Deba",
+  "tipo": "Localidad",
+  "d": 1414,
+  "zona": "cantabrico",
+  "municipio": "Deba",
+  "provincia": "Gipuzkoa"
+ },
+ "puerto-real": {
+  "id": 13150,
+  "nombre": "Bahia de Cadiz",
+  "tipo": "Puerto",
+  "d": 4974,
+  "zona": "atlantico",
+  "municipio": "Puerto Real",
+  "provincia": "Cádiz"
+ },
+ "yaiza": {
+  "id": 24220,
+  "nombre": "Las Coloradas",
+  "tipo": "Localidad",
+  "d": 3529,
+  "zona": "canarias",
+  "municipio": "Yaiza",
+  "provincia": "Las Palmas"
+ },
+ "santa-pola": {
+  "id": 26113,
+  "nombre": "Santa Pola",
+  "tipo": "Localidad",
+  "d": 1017,
+  "zona": "mediterraneo",
+  "municipio": "Santa Pola",
+  "provincia": "Alicante"
+ },
+ "benidorm": {
+  "id": 26117,
+  "nombre": "Benidorm",
+  "tipo": "Localidad",
+  "d": 2018,
+  "zona": "mediterraneo",
+  "municipio": "Benidorm",
+  "provincia": "Alicante"
+ },
+ "manacor": {
+  "id": 38208,
+  "nombre": "Cala Anguila (Manacor)",
+  "tipo": "Playa",
+  "d": 778,
+  "zona": "mediterraneo",
+  "municipio": "Manacor",
+  "provincia": "Baleares"
+ },
+ "zumaia": {
+  "id": 21107,
+  "nombre": "Zumaia",
+  "tipo": "Localidad",
+  "d": 68,
+  "zona": "cantabrico",
+  "municipio": "Zumaia",
+  "provincia": "Gipuzkoa"
+ },
+ "getaria": {
+  "id": 21106,
+  "nombre": "Getaria",
+  "tipo": "Localidad",
+  "d": 853,
+  "zona": "cantabrico",
+  "municipio": "Getaria",
+  "provincia": "Gipuzkoa"
+ },
+ "orio": {
+  "id": 21105,
+  "nombre": "Zarautz",
+  "tipo": "Localidad",
+  "d": 3436,
+  "zona": "cantabrico",
+  "municipio": "Orio",
+  "provincia": "Gipuzkoa"
+ },
+ "ondarroa": {
+  "id": 21110,
+  "nombre": "Ondarroa",
+  "tipo": "Localidad",
+  "d": 274,
+  "zona": "cantabrico",
+  "municipio": "Ondarroa",
+  "provincia": "Bizkaia"
+ },
+ "arona": {
+  "id": 14140,
+  "nombre": "Los Cristianos (Tenerife Sur)",
+  "tipo": "Puerto",
+  "d": 2023,
+  "zona": "canarias",
+  "municipio": "Arona",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "los-realejos": {
+  "id": 34113,
+  "nombre": "El Socorro (Los Realejos)",
+  "tipo": "Playa",
+  "d": 1333,
+  "zona": "canarias",
+  "municipio": "Los Realejos",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "javeaxabia": {
+  "id": 26120,
+  "nombre": "Cap de la Nao",
+  "tipo": "Localidad",
+  "d": 4452,
+  "zona": "mediterraneo",
+  "municipio": "Jávea/Xàbia",
+  "provincia": "Alicante"
+ },
+ "santiago-del-teide": {
+  "id": 24107,
+  "nombre": "Puerto de Santiago",
+  "tipo": "Localidad",
+  "d": 836,
+  "zona": "canarias",
+  "municipio": "Santiago del Teide",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "san-roque": {
+  "id": 25103,
+  "nombre": "La Linea de la Concepc.",
+  "tipo": "Localidad",
+  "d": 3829,
+  "zona": "mediterraneo",
+  "municipio": "San Roque",
+  "provincia": "Cádiz"
+ },
+ "cabanas": {
+  "id": 32154,
+  "nombre": "A Magdalena (Cabanas)",
+  "tipo": "Playa",
+  "d": 437,
+  "zona": "cantabrico",
+  "municipio": "Cabanas",
+  "provincia": "A Coruña"
+ },
+ "colunga": {
+  "id": 31209,
+  "nombre": "La Espasa (Colunga)",
+  "tipo": "Playa",
+  "d": 3587,
+  "zona": "cantabrico",
+  "municipio": "Colunga",
+  "provincia": "Asturias"
+ },
+ "ciutadella-de-menorca": {
+  "id": 28207,
+  "nombre": "Ciutadella",
+  "tipo": "Localidad",
+  "d": 2435,
+  "zona": "mediterraneo",
+  "municipio": "Ciutadella de Menorca",
+  "provincia": "Baleares"
+ },
+ "llanes": {
+  "id": 21201,
+  "nombre": "Llanes",
+  "tipo": "Localidad",
+  "d": 2595,
+  "zona": "cantabrico",
+  "municipio": "Llanes",
+  "provincia": "Asturias"
+ },
+ "mutriku": {
+  "id": 21109,
+  "nombre": "Mutriku",
+  "tipo": "Localidad",
+  "d": 650,
+  "zona": "cantabrico",
+  "municipio": "Mutriku",
+  "provincia": "Gipuzkoa"
+ },
+ "costa-calma": {
+  "id": 24214,
+  "nombre": "Costa Calma",
+  "tipo": "Localidad",
+  "d": 1292,
+  "zona": "canarias",
+  "municipio": "Costa Calma",
+  "provincia": "Las Palmas"
+ },
+ "santander": {
+  "id": 11130,
+  "nombre": "Santander",
+  "tipo": "Puerto",
+  "d": 3545,
+  "zona": "cantabrico",
+  "municipio": "Santander",
+  "provincia": "Cantabria"
+ },
+ "isla-de-lanzarote": {
+  "id": 34228,
+  "nombre": "Caleta de Famara",
+  "tipo": "Playa",
+  "d": 5266,
+  "zona": "canarias",
+  "municipio": "Isla de Lanzarote",
+  "provincia": "Las Palmas"
+ },
+ "san-bartolome-de-tirajana": {
+  "id": 24204,
+  "nombre": "Costa Meloneras",
+  "tipo": "Localidad",
+  "d": 1802,
+  "zona": "canarias",
+  "municipio": "San Bartolomé de Tirajana",
+  "provincia": "Las Palmas"
+ },
+ "montgat": {
+  "id": 27113,
+  "nombre": "Badalona",
+  "tipo": "Localidad",
+  "d": 3225,
+  "zona": "mediterraneo",
+  "municipio": "Montgat",
+  "provincia": "Barcelona"
+ },
+ "buenavista-del-norte": {
+  "id": 24106,
+  "nombre": "Garachico",
+  "tipo": "Localidad",
+  "d": 11473,
+  "zona": "canarias",
+  "municipio": "Buenavista del Norte",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "gandia": {
+  "id": 16210,
+  "nombre": "Gandia",
+  "tipo": "Puerto",
+  "d": 1474,
+  "zona": "mediterraneo",
+  "municipio": "Gandia",
+  "provincia": "Valencia"
+ },
+ "almeria": {
+  "id": 35242,
+  "nombre": "San Miguel/Zapillo (Almeria)",
+  "tipo": "Playa",
+  "d": 4031,
+  "zona": "mediterraneo",
+  "municipio": "Almería",
+  "provincia": "Almería"
+ },
+ "valle-gran-rey": {
+  "id": 24115,
+  "nombre": "La Puntilla",
+  "tipo": "Localidad",
+  "d": 1453,
+  "zona": "canarias",
+  "municipio": "Valle Gran Rey",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "vallehermoso": {
+  "id": 24115,
+  "nombre": "La Puntilla",
+  "tipo": "Localidad",
+  "d": 7336,
+  "zona": "canarias",
+  "municipio": "Vallehermoso",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "bakio": {
+  "id": 31113,
+  "nombre": "Bakio",
+  "tipo": "Playa",
+  "d": 130,
+  "zona": "cantabrico",
+  "municipio": "Bakio",
+  "provincia": "Bizkaia"
+ },
+ "mundaka": {
+  "id": 21113,
+  "nombre": "Bermeo",
+  "tipo": "Localidad",
+  "d": 2021,
+  "zona": "cantabrico",
+  "municipio": "Mundaka",
+  "provincia": "Bizkaia"
+ },
+ "busturia": {
+  "id": 21112,
+  "nombre": "Mundaka",
+  "tipo": "Localidad",
+  "d": 2349,
+  "zona": "cantabrico",
+  "municipio": "Busturia",
+  "provincia": "Bizkaia"
+ },
+ "gorliz": {
+  "id": 21114,
+  "nombre": "Plentzia",
+  "tipo": "Localidad",
+  "d": 793,
+  "zona": "cantabrico",
+  "municipio": "Gorliz",
+  "provincia": "Bizkaia"
+ },
+ "sopela": {
+  "id": 31116,
+  "nombre": "Azkorri (Getxo)",
+  "tipo": "Playa",
+  "d": 432,
+  "zona": "cantabrico",
+  "municipio": "Sopela",
+  "provincia": "Bizkaia"
+ },
+ "barrika": {
+  "id": 21114,
+  "nombre": "Plentzia",
+  "tipo": "Localidad",
+  "d": 1325,
+  "zona": "cantabrico",
+  "municipio": "Barrika",
+  "provincia": "Bizkaia"
+ },
+ "san-sebastian-de-la-gomera": {
+  "id": 14130,
+  "nombre": "San Sebastian de la Gomera",
+  "tipo": "Puerto",
+  "d": 2470,
+  "zona": "canarias",
+  "municipio": "San Sebastián de la Gomera",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "las-palmas-de-gran-canaria": {
+  "id": 24201,
+  "nombre": "Las Palmas de Gran Canaria",
+  "tipo": "Localidad",
+  "d": 3225,
+  "zona": "canarias",
+  "municipio": "Las Palmas de Gran Canaria",
+  "provincia": "Las Palmas"
+ },
+ "el-ejido": {
+  "id": 25213,
+  "nombre": "Almerimar",
+  "tipo": "Localidad",
+  "d": 355,
+  "zona": "mediterraneo",
+  "municipio": "El Ejido",
+  "provincia": "Almería"
+ },
+ "sant-antoni-de-portmany": {
+  "id": 28102,
+  "nombre": "Sant Antoni de Portmany",
+  "tipo": "Localidad",
+  "d": 1390,
+  "zona": "mediterraneo",
+  "municipio": "Sant Antoni de Portmany",
+  "provincia": "Baleares"
+ },
+ "santanyi": {
+  "id": 38200,
+  "nombre": "Cala Mondrago",
+  "tipo": "Playa",
+  "d": 1976,
+  "zona": "mediterraneo",
+  "municipio": "Santanyí",
+  "provincia": "Baleares"
+ },
+ "los-llanos-de-aridane": {
+  "id": 34101,
+  "nombre": "Charco Verde (Los Llanos de Ar.)",
+  "tipo": "Playa",
+  "d": 1360,
+  "zona": "canarias",
+  "municipio": "Los Llanos de Aridane",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "nerja": {
+  "id": 25208,
+  "nombre": "Nerja",
+  "tipo": "Localidad",
+  "d": 1799,
+  "zona": "mediterraneo",
+  "municipio": "Nerja",
+  "provincia": "Málaga"
+ },
+ "sant-josep-de-sa-talaia": {
+  "id": 38128,
+  "nombre": "Cala Vedella (S. Josep de Sa Talaia)",
+  "tipo": "Playa",
+  "d": 5624,
+  "zona": "mediterraneo",
+  "municipio": "Sant Josep de sa Talaia",
+  "provincia": "Baleares"
+ },
+ "la-orotava": {
+  "id": 24104,
+  "nombre": "Puerto de la Cruz",
+  "tipo": "Localidad",
+  "d": 3350,
+  "zona": "canarias",
+  "municipio": "La Orotava",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "gozon": {
+  "id": 21204,
+  "nombre": "Gozon",
+  "tipo": "Localidad",
+  "d": 4008,
+  "zona": "cantabrico",
+  "municipio": "Gozón",
+  "provincia": "Asturias"
+ },
+ "la-granda": {
+  "id": 11220,
+  "nombre": "Aviles",
+  "tipo": "Puerto",
+  "d": 6951,
+  "zona": "cantabrico",
+  "municipio": "La Granda",
+  "provincia": "Asturias"
+ },
+ "nieva": {
+  "id": 11220,
+  "nombre": "Aviles",
+  "tipo": "Puerto",
+  "d": 3084,
+  "zona": "cantabrico",
+  "municipio": "Nieva",
+  "provincia": "Asturias"
+ },
+ "castrillon": {
+  "id": 11220,
+  "nombre": "Aviles",
+  "tipo": "Puerto",
+  "d": 4054,
+  "zona": "cantabrico",
+  "municipio": "Castrillón",
+  "provincia": "Asturias"
+ },
+ "ranon": {
+  "id": 32104,
+  "nombre": "Los Quebrantos (Soto del Barco)",
+  "tipo": "Playa",
+  "d": 1128,
+  "zona": "cantabrico",
+  "municipio": "Ranón",
+  "provincia": "Asturias"
+ },
+ "bajo-nalon": {
+  "id": 32104,
+  "nombre": "Los Quebrantos (Soto del Barco)",
+  "tipo": "Playa",
+  "d": 708,
+  "zona": "cantabrico",
+  "municipio": "Bajo Nalón",
+  "provincia": "Asturias"
+ },
+ "cartagena": {
+  "id": 16110,
+  "nombre": "Cartagena",
+  "tipo": "Puerto",
+  "d": 10847,
+  "zona": "mediterraneo",
+  "municipio": "Cartagena",
+  "provincia": "Murcia"
+ },
+ "guardamar-del-segura": {
+  "id": 26112,
+  "nombre": "Guardamar del Segura",
+  "tipo": "Localidad",
+  "d": 1036,
+  "zona": "mediterraneo",
+  "municipio": "Guardamar del Segura",
+  "provincia": "Alicante"
+ },
+ "villaviciosa": {
+  "id": 31211,
+  "nombre": "Rodiles (Villaviciosa)",
+  "tipo": "Playa",
+  "d": 3891,
+  "zona": "cantabrico",
+  "municipio": "Villaviciosa",
+  "provincia": "Asturias"
+ },
+ "orpesaoropesa-del-mar": {
+  "id": 26210,
+  "nombre": "Oropesa",
+  "tipo": "Localidad",
+  "d": 2701,
+  "zona": "mediterraneo",
+  "municipio": "Orpesa/Oropesa del Mar",
+  "provincia": "Castellón"
+ },
+ "capdepera": {
+  "id": 28202,
+  "nombre": "Cala Ratjada",
+  "tipo": "Localidad",
+  "d": 1531,
+  "zona": "mediterraneo",
+  "municipio": "Capdepera",
+  "provincia": "Baleares"
+ },
+ "migjorn": {
+  "id": 28111,
+  "nombre": "Sa Rapita",
+  "tipo": "Localidad",
+  "d": 8102,
+  "zona": "mediterraneo",
+  "municipio": "Migjorn",
+  "provincia": "Baleares"
+ },
+ "campos": {
+  "id": 28111,
+  "nombre": "Sa Rapita",
+  "tipo": "Localidad",
+  "d": 3388,
+  "zona": "mediterraneo",
+  "municipio": "Campos",
+  "provincia": "Baleares"
+ },
+ "santa-cruz-de-bezana": {
+  "id": 31132,
+  "nombre": "Covachos (Sta. Cruz de Bezana)",
+  "tipo": "Playa",
+  "d": 583,
+  "zona": "cantabrico",
+  "municipio": "Santa Cruz de Bezana",
+  "provincia": "Cantabria"
+ },
+ "es-migjorn-gran": {
+  "id": 38233,
+  "nombre": "Cala Galdana (Ferreries)",
+  "tipo": "Playa",
+  "d": 5719,
+  "zona": "mediterraneo",
+  "municipio": "Es Migjorn Gran",
+  "provincia": "Baleares"
+ },
+ "torresoli": {
+  "id": 38234,
+  "nombre": "Son Bou (Alaior)",
+  "tipo": "Playa",
+  "d": 1463,
+  "zona": "mediterraneo",
+  "municipio": "Torresolí",
+  "provincia": "Baleares"
+ },
+ "muxia": {
+  "id": 32174,
+  "nombre": "Lourido (Muxia)",
+  "tipo": "Playa",
+  "d": 1231,
+  "zona": "cantabrico",
+  "municipio": "Muxía",
+  "provincia": "A Coruña"
+ },
+ "escaselas": {
+  "id": 22115,
+  "nombre": "Fisterra",
+  "tipo": "Localidad",
+  "d": 1646,
+  "zona": "atlantico",
+  "municipio": "Escaselas",
+  "provincia": "A Coruña"
+ },
+ "baiona": {
+  "id": 22210,
+  "nombre": "Baiona",
+  "tipo": "Localidad",
+  "d": 307,
+  "zona": "atlantico",
+  "municipio": "Baiona",
+  "provincia": "Pontevedra"
+ },
+ "sabugo": {
+  "id": 21209,
+  "nombre": "Puerto de Vega",
+  "tipo": "Localidad",
+  "d": 2493,
+  "zona": "cantabrico",
+  "municipio": "Sabugo",
+  "provincia": "Asturias"
+ },
+ "valdes": {
+  "id": 21208,
+  "nombre": "Luarca",
+  "tipo": "Localidad",
+  "d": 6022,
+  "zona": "cantabrico",
+  "municipio": "Valdés",
+  "provincia": "Asturias"
+ },
+ "a-coruna": {
+  "id": 12130,
+  "nombre": "A Coruña",
+  "tipo": "Puerto",
+  "d": 3220,
+  "zona": "cantabrico",
+  "municipio": "A Coruña",
+  "provincia": "A Coruña"
+ },
+ "moreno": {
+  "id": 32208,
+  "nombre": "As Furnas (Porto do Son)",
+  "tipo": "Playa",
+  "d": 443,
+  "zona": "atlantico",
+  "municipio": "Moreno",
+  "provincia": "A Coruña"
+ },
+ "carballo": {
+  "id": 32170,
+  "nombre": "Baldaio/Saiñas (Carballo)",
+  "tipo": "Playa",
+  "d": 1058,
+  "zona": "cantabrico",
+  "municipio": "Carballo",
+  "provincia": "A Coruña"
+ },
+ "sada": {
+  "id": 22111,
+  "nombre": "Ares",
+  "tipo": "Localidad",
+  "d": 6362,
+  "zona": "cantabrico",
+  "municipio": "Sada",
+  "provincia": "A Coruña"
+ },
+ "bergondo": {
+  "id": 32157,
+  "nombre": "A Ribeiriña (Miño)",
+  "tipo": "Playa",
+  "d": 1913,
+  "zona": "cantabrico",
+  "municipio": "Bergondo",
+  "provincia": "A Coruña"
+ },
+ "mugardos": {
+  "id": 12110,
+  "nombre": "Ferrol",
+  "tipo": "Puerto",
+  "d": 1076,
+  "zona": "cantabrico",
+  "municipio": "Mugardos",
+  "provincia": "A Coruña"
+ },
+ "camarinas": {
+  "id": 22114,
+  "nombre": "Camariñas",
+  "tipo": "Localidad",
+  "d": 5183,
+  "zona": "cantabrico",
+  "municipio": "Camariñas",
+  "provincia": "A Coruña"
+ },
+ "malpica-de-bergantinos": {
+  "id": 22113,
+  "nombre": "Malpica",
+  "tipo": "Localidad",
+  "d": 1421,
+  "zona": "cantabrico",
+  "municipio": "Malpica de Bergantiños",
+  "provincia": "A Coruña"
+ },
+ "ribamontan-al-mar": {
+  "id": 31126,
+  "nombre": "Somo (Ribamontan al Mar",
+  "tipo": "Playa",
+  "d": 3644,
+  "zona": "cantabrico",
+  "municipio": "Ribamontán al Mar",
+  "provincia": "Cantabria"
+ },
+ "pollenca": {
+  "id": 28110,
+  "nombre": "Port de Pollenca",
+  "tipo": "Localidad",
+  "d": 2627,
+  "zona": "mediterraneo",
+  "municipio": "Pollença",
+  "provincia": "Baleares"
+ },
+ "benalmadena": {
+  "id": 25204,
+  "nombre": "Benalmadena",
+  "tipo": "Localidad",
+  "d": 2765,
+  "zona": "mediterraneo",
+  "municipio": "Benalmádena",
+  "provincia": "Málaga"
+ },
+ "tapia-de-casariego": {
+  "id": 21211,
+  "nombre": "Tapia de Casariego",
+  "tipo": "Localidad",
+  "d": 1420,
+  "zona": "cantabrico",
+  "municipio": "Tapia de Casariego",
+  "provincia": "Asturias"
+ },
+ "rincon-de-la-victoria": {
+  "id": 35220,
+  "nombre": "Benajarrafe (Velez)",
+  "tipo": "Playa",
+  "d": 5862,
+  "zona": "mediterraneo",
+  "municipio": "Rincón de la Victoria",
+  "provincia": "Málaga"
+ },
+ "teulada": {
+  "id": 36161,
+  "nombre": "El Portet (Teulada)",
+  "tipo": "Playa",
+  "d": 1264,
+  "zona": "mediterraneo",
+  "municipio": "Teulada",
+  "provincia": "Alicante"
+ },
+ "arnuero": {
+  "id": 31124,
+  "nombre": "El  Sable (Arnuero)",
+  "tipo": "Playa",
+  "d": 711,
+  "zona": "cantabrico",
+  "municipio": "Arnuero",
+  "provincia": "Cantabria"
+ },
+ "felanitx": {
+  "id": 28206,
+  "nombre": "Cala d'Or",
+  "tipo": "Localidad",
+  "d": 3555,
+  "zona": "mediterraneo",
+  "municipio": "Felanitx",
+  "provincia": "Baleares"
+ },
+ "santa-eulalia-del-rio": {
+  "id": 28103,
+  "nombre": "Santa Eulalia des Riu",
+  "tipo": "Localidad",
+  "d": 1729,
+  "zona": "mediterraneo",
+  "municipio": "Santa Eulalia del Río",
+  "provincia": "Baleares"
+ },
+ "algarrobo": {
+  "id": 35221,
+  "nombre": "Algarrobo",
+  "tipo": "Playa",
+  "d": 100,
+  "zona": "mediterraneo",
+  "municipio": "Algarrobo",
+  "provincia": "Málaga"
+ },
+ "palma": {
+  "id": 38115,
+  "nombre": "Cala Estancia (Palma de Mall.)",
+  "tipo": "Playa",
+  "d": 2852,
+  "zona": "mediterraneo",
+  "municipio": "Palma",
+  "provincia": "Baleares"
+ },
+ "sant-lluis": {
+  "id": 28211,
+  "nombre": "Binbequer",
+  "tipo": "Localidad",
+  "d": 1883,
+  "zona": "mediterraneo",
+  "municipio": "Sant Lluís",
+  "provincia": "Baleares"
+ },
+ "castello-dempuries": {
+  "id": 37243,
+  "nombre": "Empuriabrava (Castello d'Empuries)",
+  "tipo": "Playa",
+  "d": 846,
+  "zona": "mediterraneo",
+  "municipio": "Castelló d'Empúries",
+  "provincia": "Girona"
+ },
+ "torrenueva-costa": {
+  "id": 35231,
+  "nombre": "Torrenueva (Motril)",
+  "tipo": "Playa",
+  "d": 363,
+  "zona": "mediterraneo",
+  "municipio": "Torrenueva Costa",
+  "provincia": "Granada"
+ },
+ "suances": {
+  "id": 21122,
+  "nombre": "Suances",
+  "tipo": "Localidad",
+  "d": 967,
+  "zona": "cantabrico",
+  "municipio": "Suances",
+  "provincia": "Cantabria"
+ },
+ "la-vega-baja": {
+  "id": 26112,
+  "nombre": "Guardamar del Segura",
+  "tipo": "Localidad",
+  "d": 1531,
+  "zona": "mediterraneo",
+  "municipio": "La Vega Baja",
+  "provincia": "Alicante"
+ },
+ "liendo": {
+  "id": 21119,
+  "nombre": "Laredo",
+  "tipo": "Localidad",
+  "d": 4704,
+  "zona": "cantabrico",
+  "municipio": "Liendo",
+  "provincia": "Cantabria"
+ },
+ "oropesa-del-marorpesa": {
+  "id": 26210,
+  "nombre": "Oropesa",
+  "tipo": "Localidad",
+  "d": 1388,
+  "zona": "mediterraneo",
+  "municipio": "Oropesa del Mar/Orpesa",
+  "provincia": "Castellón"
+ },
+ "ponteceso": {
+  "id": 32173,
+  "nombre": "Laxe",
+  "tipo": "Playa",
+  "d": 8366,
+  "zona": "cantabrico",
+  "municipio": "Ponteceso",
+  "provincia": "A Coruña"
+ },
+ "camargo": {
+  "id": 11130,
+  "nombre": "Santander",
+  "tipo": "Puerto",
+  "d": 2694,
+  "zona": "cantabrico",
+  "municipio": "Camargo",
+  "provincia": "Cantabria"
+ },
+ "escorca": {
+  "id": 28109,
+  "nombre": "Sa Calobra",
+  "tipo": "Localidad",
+  "d": 944,
+  "zona": "mediterraneo",
+  "municipio": "Escorca",
+  "provincia": "Baleares"
+ },
+ "telde": {
+  "id": 34203,
+  "nombre": "Hoya del Pozo (Telde)",
+  "tipo": "Playa",
+  "d": 1804,
+  "zona": "canarias",
+  "municipio": "Telde",
+  "provincia": "Las Palmas"
+ },
+ "castro-urdiales": {
+  "id": 21118,
+  "nombre": "Castro-Urdiales",
+  "tipo": "Localidad",
+  "d": 1438,
+  "zona": "cantabrico",
+  "municipio": "Castro-Urdiales",
+  "provincia": "Cantabria"
+ },
+ "ribadesella": {
+  "id": 21202,
+  "nombre": "Ribadesella",
+  "tipo": "Localidad",
+  "d": 274,
+  "zona": "cantabrico",
+  "municipio": "Ribadesella",
+  "provincia": "Asturias"
+ },
+ "los-llaos": {
+  "id": 31137,
+  "nombre": "Oyambre",
+  "tipo": "Playa",
+  "d": 358,
+  "zona": "cantabrico",
+  "municipio": "Los Llaos",
+  "provincia": "Cantabria"
+ },
+ "comillas": {
+  "id": 21123,
+  "nombre": "Comillas",
+  "tipo": "Localidad",
+  "d": 1110,
+  "zona": "cantabrico",
+  "municipio": "Comillas",
+  "provincia": "Cantabria"
+ },
+ "sant-joan-de-labritja": {
+  "id": 38122,
+  "nombre": "Cala Portinatx (S. Joan de Labritja)",
+  "tipo": "Playa",
+  "d": 1633,
+  "zona": "mediterraneo",
+  "municipio": "Sant Joan de Labritja",
+  "provincia": "Baleares"
+ },
+ "cullera": {
+  "id": 26204,
+  "nombre": "Cullera",
+  "tipo": "Localidad",
+  "d": 1343,
+  "zona": "mediterraneo",
+  "municipio": "Cullera",
+  "provincia": "Valencia"
+ },
+ "peniscolapeniscola": {
+  "id": 26212,
+  "nombre": "Peñiscola",
+  "tipo": "Localidad",
+  "d": 3960,
+  "zona": "mediterraneo",
+  "municipio": "Peníscola/Peñíscola",
+  "provincia": "Castellón"
+ },
+ "alcala-de-xivert": {
+  "id": 36255,
+  "nombre": "El Carregador (Alcala de Xivert)",
+  "tipo": "Playa",
+  "d": 689,
+  "zona": "mediterraneo",
+  "municipio": "Alcalà de Xivert",
+  "provincia": "Castellón"
+ },
+ "agaete": {
+  "id": 24207,
+  "nombre": "Pto. de las Nieves(Agaete)",
+  "tipo": "Localidad",
+  "d": 1750,
+  "zona": "canarias",
+  "municipio": "Agaete",
+  "provincia": "Las Palmas"
+ },
+ "nules": {
+  "id": 36238,
+  "nombre": "Pedra Rotja (Moncofa)",
+  "tipo": "Playa",
+  "d": 1070,
+  "zona": "mediterraneo",
+  "municipio": "Nules",
+  "provincia": "Castellón"
+ },
+ "almonte": {
+  "id": 23104,
+  "nombre": "Matalascañas",
+  "tipo": "Localidad",
+  "d": 284,
+  "zona": "atlantico",
+  "municipio": "Almonte",
+  "provincia": "Huelva"
+ },
+ "vilassar-de-mar": {
+  "id": 27115,
+  "nombre": "Premia de Mar",
+  "tipo": "Localidad",
+  "d": 484,
+  "zona": "mediterraneo",
+  "municipio": "Vilassar de Mar",
+  "provincia": "Barcelona"
+ },
+ "brena-alta": {
+  "id": 14110,
+  "nombre": "Santa Cruz de la Palma",
+  "tipo": "Puerto",
+  "d": 559,
+  "zona": "canarias",
+  "municipio": "Breña Alta",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "bras-del-port": {
+  "id": 36124,
+  "nombre": "Tamarit (Santa Pola)",
+  "tipo": "Playa",
+  "d": 1030,
+  "zona": "mediterraneo",
+  "municipio": "Bras del Port",
+  "provincia": "Alicante"
+ },
+ "cerbere": {
+  "id": 27136,
+  "nombre": "Portbou",
+  "tipo": "Localidad",
+  "d": 2495,
+  "zona": "mediterraneo",
+  "municipio": "Cerbère",
+  "provincia": "Girona"
+ },
+ "malaga": {
+  "id": 15210,
+  "nombre": "Malaga",
+  "tipo": "Puerto",
+  "d": 2524,
+  "zona": "mediterraneo",
+  "municipio": "Málaga",
+  "provincia": "Málaga"
+ },
+ "el-rosario": {
+  "id": 24113,
+  "nombre": "Candelaria",
+  "tipo": "Localidad",
+  "d": 7327,
+  "zona": "canarias",
+  "municipio": "El Rosario",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "arico": {
+  "id": 14160,
+  "nombre": "Granadilla",
+  "tipo": "Puerto",
+  "d": 6537,
+  "zona": "canarias",
+  "municipio": "Arico",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "miengo": {
+  "id": 21122,
+  "nombre": "Suances",
+  "tipo": "Localidad",
+  "d": 3712,
+  "zona": "cantabrico",
+  "municipio": "Miengo",
+  "provincia": "Cantabria"
+ },
+ "mao": {
+  "id": 38235,
+  "nombre": "Es Grau (Mao)",
+  "tipo": "Playa",
+  "d": 1549,
+  "zona": "mediterraneo",
+  "municipio": "Maó",
+  "provincia": "Baleares"
+ },
+ "la-savina": {
+  "id": 38131,
+  "nombre": "Platja de Llevant (Formentera)",
+  "tipo": "Playa",
+  "d": 1660,
+  "zona": "mediterraneo",
+  "municipio": "La Savina",
+  "provincia": "Baleares"
+ },
+ "alcudia": {
+  "id": 18210,
+  "nombre": "Alcudia",
+  "tipo": "Puerto",
+  "d": 2448,
+  "zona": "mediterraneo",
+  "municipio": "Alcúdia",
+  "provincia": "Baleares"
+ },
+ "saguntsagunto": {
+  "id": 36233,
+  "nombre": "Canet den Berenguer",
+  "tipo": "Playa",
+  "d": 700,
+  "zona": "mediterraneo",
+  "municipio": "Sagunt/Sagunto",
+  "provincia": "Valencia"
+ },
+ "puig-de-santa-maria-el": {
+  "id": 36229,
+  "nombre": "Pobla de Farmals",
+  "tipo": "Playa",
+  "d": 2985,
+  "zona": "mediterraneo",
+  "municipio": "Puig de Santa Maria, el",
+  "provincia": "Valencia"
+ },
+ "arteixo": {
+  "id": 12140,
+  "nombre": "Langosteira",
+  "tipo": "Puerto",
+  "d": 2778,
+  "zona": "cantabrico",
+  "municipio": "Arteixo",
+  "provincia": "A Coruña"
+ },
+ "a-guarda": {
+  "id": 22211,
+  "nombre": "A Guarda",
+  "tipo": "Localidad",
+  "d": 1589,
+  "zona": "atlantico",
+  "municipio": "A Guarda",
+  "provincia": "Pontevedra"
+ },
+ "mazarron": {
+  "id": 26103,
+  "nombre": "Pto Mazarron",
+  "tipo": "Localidad",
+  "d": 4580,
+  "zona": "mediterraneo",
+  "municipio": "Mazarrón",
+  "provincia": "Murcia"
+ },
+ "puntallana": {
+  "id": 14110,
+  "nombre": "Santa Cruz de la Palma",
+  "tipo": "Puerto",
+  "d": 7522,
+  "zona": "canarias",
+  "municipio": "Puntallana",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "naves": {
+  "id": 31205,
+  "nombre": "San Antolin (Llanes)",
+  "tipo": "Playa",
+  "d": 143,
+  "zona": "cantabrico",
+  "municipio": "Naves",
+  "provincia": "Asturias"
+ },
+ "santa-cruz-de-tenerife": {
+  "id": 34115,
+  "nombre": "Las Teresitas (S. Cruz de Tenerife)",
+  "tipo": "Playa",
+  "d": 2210,
+  "zona": "canarias",
+  "municipio": "Santa Cruz de Tenerife",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "icod-de-los-vinos": {
+  "id": 24106,
+  "nombre": "Garachico",
+  "tipo": "Localidad",
+  "d": 4389,
+  "zona": "canarias",
+  "municipio": "Icod de los Vinos",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "a-gandara": {
+  "id": 32205,
+  "nombre": "Fogareiro (Muros)",
+  "tipo": "Playa",
+  "d": 3430,
+  "zona": "atlantico",
+  "municipio": "A Gándara",
+  "provincia": "A Coruña"
+ },
+ "candelaria": {
+  "id": 24113,
+  "nombre": "Candelaria",
+  "tipo": "Localidad",
+  "d": 1175,
+  "zona": "canarias",
+  "municipio": "Candelaria",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "conil-de-la-frontera": {
+  "id": 23111,
+  "nombre": "Conil de la Frontera",
+  "tipo": "Localidad",
+  "d": 2907,
+  "zona": "atlantico",
+  "municipio": "Conil de la Frontera",
+  "provincia": "Cádiz"
+ },
+ "guimar": {
+  "id": 24113,
+  "nombre": "Candelaria",
+  "tipo": "Localidad",
+  "d": 7197,
+  "zona": "canarias",
+  "municipio": "Güímar",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "noia": {
+  "id": 32206,
+  "nombre": "Aguieira (Porto do Son)",
+  "tipo": "Playa",
+  "d": 7060,
+  "zona": "atlantico",
+  "municipio": "Noia",
+  "provincia": "A Coruña"
+ },
+ "tijarafe": {
+  "id": 24124,
+  "nombre": "Tazacorte",
+  "tipo": "Localidad",
+  "d": 9977,
+  "zona": "canarias",
+  "municipio": "Tijarafe",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "ortigueira": {
+  "id": 32141,
+  "nombre": "A Concha/Espasante (Ortigueira)",
+  "tipo": "Playa",
+  "d": 2096,
+  "zona": "cantabrico",
+  "municipio": "Ortigueira",
+  "provincia": "A Coruña"
+ },
+ "ortegal": {
+  "id": 32139,
+  "nombre": "O Esteiro (Mañon)",
+  "tipo": "Playa",
+  "d": 1098,
+  "zona": "cantabrico",
+  "municipio": "Ortegal",
+  "provincia": "A Coruña"
+ },
+ "cadiz": {
+  "id": 33119,
+  "nombre": "Cortadura (Cadiz)",
+  "tipo": "Playa",
+  "d": 1436,
+  "zona": "atlantico",
+  "municipio": "Cádiz",
+  "provincia": "Cádiz"
+ },
+ "cervo": {
+  "id": 22104,
+  "nombre": "San Cibrao",
+  "tipo": "Localidad",
+  "d": 201,
+  "zona": "cantabrico",
+  "municipio": "Cervo",
+  "provincia": "Lugo"
+ },
+ "xove": {
+  "id": 12120,
+  "nombre": "San Cibrao",
+  "tipo": "Puerto",
+  "d": 3463,
+  "zona": "cantabrico",
+  "municipio": "Xove",
+  "provincia": "Lugo"
+ },
+ "metropolitana-de-almeria": {
+  "id": 25218,
+  "nombre": "San Jose",
+  "tipo": "Localidad",
+  "d": 8164,
+  "zona": "mediterraneo",
+  "municipio": "Metropolitana de Almería",
+  "provincia": "Almería"
+ },
+ "santa-eularia-des-riu": {
+  "id": 28103,
+  "nombre": "Santa Eulalia des Riu",
+  "tipo": "Localidad",
+  "d": 2317,
+  "zona": "mediterraneo",
+  "municipio": "Santa Eulària des Riu",
+  "provincia": "Baleares"
+ },
+ "bergantinos": {
+  "id": 22113,
+  "nombre": "Malpica",
+  "tipo": "Localidad",
+  "d": 9032,
+  "zona": "cantabrico",
+  "municipio": "Bergantiños",
+  "provincia": "A Coruña"
+ },
+ "calp": {
+  "id": 26119,
+  "nombre": "Calpe",
+  "tipo": "Localidad",
+  "d": 943,
+  "zona": "mediterraneo",
+  "municipio": "Calp",
+  "provincia": "Alicante"
+ },
+ "aguilas": {
+  "id": 26102,
+  "nombre": "Aguilas",
+  "tipo": "Localidad",
+  "d": 3214,
+  "zona": "mediterraneo",
+  "municipio": "Águilas",
+  "provincia": "Murcia"
+ },
+ "benissa": {
+  "id": 36159,
+  "nombre": "Cala Fustera (Benissa)",
+  "tipo": "Playa",
+  "d": 762,
+  "zona": "mediterraneo",
+  "municipio": "Benissa",
+  "provincia": "Alicante"
+ },
+ "velez-malaga": {
+  "id": 25207,
+  "nombre": "Torre del Mar",
+  "tipo": "Localidad",
+  "d": 3351,
+  "zona": "mediterraneo",
+  "municipio": "Vélez-Málaga",
+  "provincia": "Málaga"
+ },
+ "soutomaior": {
+  "id": 12220,
+  "nombre": "Marin",
+  "tipo": "Puerto",
+  "d": 9536,
+  "zona": "atlantico",
+  "municipio": "Soutomaior",
+  "provincia": "Pontevedra"
+ },
+ "banyalbufar": {
+  "id": 28106,
+  "nombre": "Banyalbufar",
+  "tipo": "Localidad",
+  "d": 3428,
+  "zona": "mediterraneo",
+  "municipio": "Banyalbufar",
+  "provincia": "Baleares"
+ },
+ "soller": {
+  "id": 28108,
+  "nombre": "Port de Soller",
+  "tipo": "Localidad",
+  "d": 561,
+  "zona": "mediterraneo",
+  "municipio": "Sóller",
+  "provincia": "Baleares"
+ },
+ "raiguer": {
+  "id": 38223,
+  "nombre": "Sant Joan (Alcudia)",
+  "tipo": "Playa",
+  "d": 2001,
+  "zona": "mediterraneo",
+  "municipio": "Raiguer",
+  "provincia": "Baleares"
+ },
+ "port-de-pollenca": {
+  "id": 38229,
+  "nombre": "Cala Boquer",
+  "tipo": "Playa",
+  "d": 258,
+  "zona": "mediterraneo",
+  "municipio": "Port de Pollença",
+  "provincia": "Baleares"
+ },
+ "tarifa": {
+  "id": 35101,
+  "nombre": "Alemanes (Tarifa)",
+  "tipo": "Playa",
+  "d": 1302,
+  "zona": "mediterraneo",
+  "municipio": "Tarifa",
+  "provincia": "Cádiz"
+ },
+ "el-lentiscal": {
+  "id": 35100,
+  "nombre": "Bolonia (Tarifa)",
+  "tipo": "Playa",
+  "d": 999,
+  "zona": "mediterraneo",
+  "municipio": "El Lentiscal",
+  "provincia": "Cádiz"
+ },
+ "muro": {
+  "id": 18210,
+  "nombre": "Alcudia",
+  "tipo": "Puerto",
+  "d": 3558,
+  "zona": "mediterraneo",
+  "municipio": "Muro",
+  "provincia": "Baleares"
+ },
+ "galdar": {
+  "id": 24208,
+  "nombre": "Sardina",
+  "tipo": "Localidad",
+  "d": 1059,
+  "zona": "canarias",
+  "municipio": "Gáldar",
+  "provincia": "Las Palmas"
+ },
+ "cueva-del-agua": {
+  "id": 24126,
+  "nombre": "San Andres y Sauces",
+  "tipo": "Localidad",
+  "d": 2969,
+  "zona": "canarias",
+  "municipio": "Cueva del Agua",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "san-vicente-de-la-barquera": {
+  "id": 21124,
+  "nombre": "San Vicente de la Barquera",
+  "tipo": "Localidad",
+  "d": 1522,
+  "zona": "cantabrico",
+  "municipio": "San Vicente de la Barquera",
+  "provincia": "Cantabria"
+ },
+ "formentera": {
+  "id": 18110,
+  "nombre": "La Savina (Formentera)",
+  "tipo": "Puerto",
+  "d": 5215,
+  "zona": "mediterraneo",
+  "municipio": "Formentera",
+  "provincia": "Baleares"
+ },
+ "area-metropolitana-de-ciutadella": {
+  "id": 28207,
+  "nombre": "Ciutadella",
+  "tipo": "Localidad",
+  "d": 8258,
+  "zona": "mediterraneo",
+  "municipio": "Área Metropolitana de Ciutadella",
+  "provincia": "Baleares"
+ },
+ "ferreries": {
+  "id": 38233,
+  "nombre": "Cala Galdana (Ferreries)",
+  "tipo": "Playa",
+  "d": 4230,
+  "zona": "mediterraneo",
+  "municipio": "Ferreries",
+  "provincia": "Baleares"
+ },
+ "es-mercadal": {
+  "id": 38236,
+  "nombre": "Tirant (Es Mercadal)",
+  "tipo": "Playa",
+  "d": 550,
+  "zona": "mediterraneo",
+  "municipio": "Es Mercadal",
+  "provincia": "Baleares"
+ },
+ "area-metropolitana-de-mahon": {
+  "id": 38236,
+  "nombre": "Tirant (Es Mercadal)",
+  "tipo": "Playa",
+  "d": 4174,
+  "zona": "mediterraneo",
+  "municipio": "Área Metropolitana de Mahón",
+  "provincia": "Baleares"
+ },
+ "almunecar": {
+  "id": 25209,
+  "nombre": "Almuñecar",
+  "tipo": "Localidad",
+  "d": 579,
+  "zona": "mediterraneo",
+  "municipio": "Almuñécar",
+  "provincia": "Granada"
+ },
+ "fornells": {
+  "id": 38236,
+  "nombre": "Tirant (Es Mercadal)",
+  "tipo": "Playa",
+  "d": 3479,
+  "zona": "mediterraneo",
+  "municipio": "Fornells",
+  "provincia": "Baleares"
+ },
+ "la-vila-joiosavillajoyosa": {
+  "id": 26116,
+  "nombre": "Villajoyosa",
+  "tipo": "Localidad",
+  "d": 2067,
+  "zona": "mediterraneo",
+  "municipio": "la Vila Joiosa/Villajoyosa",
+  "provincia": "Alicante"
+ },
+ "torrevieja": {
+  "id": 26111,
+  "nombre": "Torrevieja",
+  "tipo": "Localidad",
+  "d": 870,
+  "zona": "mediterraneo",
+  "municipio": "Torrevieja",
+  "provincia": "Alicante"
+ },
+ "la-union": {
+  "id": 16110,
+  "nombre": "Cartagena",
+  "tipo": "Puerto",
+  "d": 11252,
+  "zona": "mediterraneo",
+  "municipio": "La Unión",
+  "provincia": "Murcia"
+ },
+ "ayamonte": {
+  "id": 23101,
+  "nombre": "Isla Cristina",
+  "tipo": "Localidad",
+  "d": 4481,
+  "zona": "atlantico",
+  "municipio": "Ayamonte",
+  "provincia": "Huelva"
+ },
+ "la-linea-de-la-concepcion": {
+  "id": 25103,
+  "nombre": "La Linea de la Concepc.",
+  "tipo": "Localidad",
+  "d": 1590,
+  "zona": "mediterraneo",
+  "municipio": "La Línea de la Concepción",
+  "provincia": "Cádiz"
+ },
+ "salobrena": {
+  "id": 25210,
+  "nombre": "Salobreña",
+  "tipo": "Localidad",
+  "d": 855,
+  "zona": "mediterraneo",
+  "municipio": "Salobreña",
+  "provincia": "Granada"
+ },
+ "can-picafort": {
+  "id": 38220,
+  "nombre": "Can Picafort",
+  "tipo": "Playa",
+  "d": 1476,
+  "zona": "mediterraneo",
+  "municipio": "Ca'n Picafort",
+  "provincia": "Baleares"
+ },
+ "pielagos": {
+  "id": 31132,
+  "nombre": "Covachos (Sta. Cruz de Bezana)",
+  "tipo": "Playa",
+  "d": 3195,
+  "zona": "cantabrico",
+  "municipio": "Piélagos",
+  "provincia": "Cantabria"
+ },
+ "bareyo": {
+  "id": 31125,
+  "nombre": "El Arenal (Arnuero)",
+  "tipo": "Playa",
+  "d": 2330,
+  "zona": "cantabrico",
+  "municipio": "Bareyo",
+  "provincia": "Cantabria"
+ },
+ "chinamada": {
+  "id": 24102,
+  "nombre": "Punta del Hidalgo",
+  "tipo": "Localidad",
+  "d": 2711,
+  "zona": "canarias",
+  "municipio": "Chinamada",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "campo-de-cartagena": {
+  "id": 16110,
+  "nombre": "Cartagena",
+  "tipo": "Puerto",
+  "d": 4611,
+  "zona": "mediterraneo",
+  "municipio": "Campo de Cartagena",
+  "provincia": "Murcia"
+ },
+ "san-miguel-de-abona": {
+  "id": 24110,
+  "nombre": "Las Galletas",
+  "tipo": "Localidad",
+  "d": 3827,
+  "zona": "canarias",
+  "municipio": "San Miguel de Abona",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "cee": {
+  "id": 32202,
+  "nombre": "Estorde (Cee)",
+  "tipo": "Playa",
+  "d": 3065,
+  "zona": "atlantico",
+  "municipio": "Cee",
+  "provincia": "A Coruña"
+ },
+ "alajero": {
+  "id": 34104,
+  "nombre": "Santiago (Alajero)",
+  "tipo": "Playa",
+  "d": 4301,
+  "zona": "canarias",
+  "municipio": "Alajeró",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "caravia": {
+  "id": 31209,
+  "nombre": "La Espasa (Colunga)",
+  "tipo": "Playa",
+  "d": 1345,
+  "zona": "cantabrico",
+  "municipio": "Caravia",
+  "provincia": "Asturias"
+ },
+ "berbes": {
+  "id": 31208,
+  "nombre": "La Vega (Ribadesella)",
+  "tipo": "Playa",
+  "d": 430,
+  "zona": "cantabrico",
+  "municipio": "Berbes",
+  "provincia": "Asturias"
+ },
+ "el-cotillo": {
+  "id": 24212,
+  "nombre": "Cotillo",
+  "tipo": "Localidad",
+  "d": 1713,
+  "zona": "canarias",
+  "municipio": "El Cotillo",
+  "provincia": "Las Palmas"
+ },
+ "bermeo": {
+  "id": 21113,
+  "nombre": "Bermeo",
+  "tipo": "Localidad",
+  "d": 959,
+  "zona": "cantabrico",
+  "municipio": "Bermeo",
+  "provincia": "Bizkaia"
+ },
+ "isla-de-el-hierro": {
+  "id": 24120,
+  "nombre": "La Restrinja",
+  "tipo": "Localidad",
+  "d": 5461,
+  "zona": "canarias",
+  "municipio": "Isla de el Hierro",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "valencia": {
+  "id": 36224,
+  "nombre": "El Saler (Valencia)",
+  "tipo": "Playa",
+  "d": 1222,
+  "zona": "mediterraneo",
+  "municipio": "Valencia",
+  "provincia": "Valencia"
+ },
+ "abona": {
+  "id": 14160,
+  "nombre": "Granadilla",
+  "tipo": "Puerto",
+  "d": 1822,
+  "zona": "canarias",
+  "municipio": "Abona",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "haria": {
+  "id": 34225,
+  "nombre": "Jameos (Haria)",
+  "tipo": "Playa",
+  "d": 3941,
+  "zona": "canarias",
+  "municipio": "Haría",
+  "provincia": "Las Palmas"
+ },
+ "tinajo": {
+  "id": 34229,
+  "nombre": "La Santa",
+  "tipo": "Playa",
+  "d": 9928,
+  "zona": "canarias",
+  "municipio": "Tinajo",
+  "provincia": "Las Palmas"
+ },
+ "viveiro": {
+  "id": 22105,
+  "nombre": "Viveiro",
+  "tipo": "Localidad",
+  "d": 717,
+  "zona": "cantabrico",
+  "municipio": "Viveiro",
+  "provincia": "Lugo"
+ },
+ "bajo-guadalentin": {
+  "id": 26103,
+  "nombre": "Pto Mazarron",
+  "tipo": "Localidad",
+  "d": 8209,
+  "zona": "mediterraneo",
+  "municipio": "Bajo Guadalentín",
+  "provincia": "Murcia"
+ },
+ "la-pobla-de-farnals": {
+  "id": 36229,
+  "nombre": "Pobla de Farmals",
+  "tipo": "Playa",
+  "d": 509,
+  "zona": "mediterraneo",
+  "municipio": "la Pobla de Farnals",
+  "provincia": "Valencia"
+ },
+ "andratx": {
+  "id": 28107,
+  "nombre": "Port d'Andratx",
+  "tipo": "Localidad",
+  "d": 952,
+  "zona": "mediterraneo",
+  "municipio": "Andratx",
+  "provincia": "Baleares"
+ },
+ "vilar-de-mouros": {
+  "id": 22211,
+  "nombre": "A Guarda",
+  "tipo": "Localidad",
+  "d": 6962,
+  "zona": "atlantico",
+  "municipio": "Vilar de Mouros",
+  "provincia": "Pontevedra"
+ },
+ "fene": {
+  "id": 12110,
+  "nombre": "Ferrol",
+  "tipo": "Puerto",
+  "d": 4770,
+  "zona": "cantabrico",
+  "municipio": "Fene",
+  "provincia": "A Coruña"
+ },
+ "redes": {
+  "id": 22111,
+  "nombre": "Ares",
+  "tipo": "Localidad",
+  "d": 3802,
+  "zona": "cantabrico",
+  "municipio": "Redes",
+  "provincia": "A Coruña"
+ },
+ "benitachellel-poble-nou-de-benitatxell": {
+  "id": 36161,
+  "nombre": "El Portet (Teulada)",
+  "tipo": "Playa",
+  "d": 2252,
+  "zona": "mediterraneo",
+  "municipio": "Benitachell/el Poble Nou de Benitatxell",
+  "provincia": "Alicante"
+ },
+ "trasmiera": {
+  "id": 31123,
+  "nombre": "Tregandin (Noja)",
+  "tipo": "Playa",
+  "d": 477,
+  "zona": "cantabrico",
+  "municipio": "Trasmiera",
+  "provincia": "Cantabria"
+ },
+ "laredo": {
+  "id": 21119,
+  "nombre": "Laredo",
+  "tipo": "Localidad",
+  "d": 2860,
+  "zona": "cantabrico",
+  "municipio": "Laredo",
+  "provincia": "Cantabria"
+ },
+ "sant-andreu-de-llavaneres": {
+  "id": 37154,
+  "nombre": "Del tres Micos (Caldes d'Estrac)",
+  "tipo": "Playa",
+  "d": 2414,
+  "zona": "mediterraneo",
+  "municipio": "Sant Andreu de Llavaneres",
+  "provincia": "Barcelona"
+ },
+ "blanes": {
+  "id": 27123,
+  "nombre": "Blanes",
+  "tipo": "Localidad",
+  "d": 1136,
+  "zona": "mediterraneo",
+  "municipio": "Blanes",
+  "provincia": "Girona"
+ },
+ "els-poblets": {
+  "id": 36205,
+  "nombre": "Les Bovetes (Denia)",
+  "tipo": "Playa",
+  "d": 3485,
+  "zona": "mediterraneo",
+  "municipio": "els Poblets",
+  "provincia": "Alicante"
+ },
+ "la-marina-oriental": {
+  "id": 22101,
+  "nombre": "Ribadeo",
+  "tipo": "Localidad",
+  "d": 4350,
+  "zona": "cantabrico",
+  "municipio": "La Mariña Oriental",
+  "provincia": "Lugo"
+ },
+ "navia": {
+  "id": 21210,
+  "nombre": "Navia",
+  "tipo": "Localidad",
+  "d": 2294,
+  "zona": "cantabrico",
+  "municipio": "Navia",
+  "provincia": "Asturias"
+ },
+ "coana": {
+  "id": 21210,
+  "nombre": "Navia",
+  "tipo": "Localidad",
+  "d": 3433,
+  "zona": "cantabrico",
+  "municipio": "Coaña",
+  "provincia": "Asturias"
+ },
+ "la-dama": {
+  "id": 24115,
+  "nombre": "La Puntilla",
+  "tipo": "Localidad",
+  "d": 3625,
+  "zona": "canarias",
+  "municipio": "La Dama",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "almenara": {
+  "id": 36234,
+  "nombre": "Casablanca (Almenara)",
+  "tipo": "Playa",
+  "d": 1650,
+  "zona": "mediterraneo",
+  "municipio": "Almenara",
+  "provincia": "Castellón"
+ },
+ "carboneras": {
+  "id": 15250,
+  "nombre": "Carboneras",
+  "tipo": "Puerto",
+  "d": 2731,
+  "zona": "mediterraneo",
+  "municipio": "Carboneras",
+  "provincia": "Almería"
+ },
+ "moras": {
+  "id": 12120,
+  "nombre": "San Cibrao",
+  "tipo": "Puerto",
+  "d": 1492,
+  "zona": "cantabrico",
+  "municipio": "Morás",
+  "provincia": "Lugo"
+ },
+ "isla-cristina": {
+  "id": 23101,
+  "nombre": "Isla Cristina",
+  "tipo": "Localidad",
+  "d": 1752,
+  "zona": "atlantico",
+  "municipio": "Isla Cristina",
+  "provincia": "Huelva"
+ },
+ "sant-tomas": {
+  "id": 38233,
+  "nombre": "Cala Galdana (Ferreries)",
+  "tipo": "Playa",
+  "d": 4853,
+  "zona": "mediterraneo",
+  "municipio": "Sant Tomas",
+  "provincia": "Baleares"
+ },
+ "alaior": {
+  "id": 38234,
+  "nombre": "Son Bou (Alaior)",
+  "tipo": "Playa",
+  "d": 1860,
+  "zona": "mediterraneo",
+  "municipio": "Alaior",
+  "provincia": "Baleares"
+ },
+ "seixas": {
+  "id": 22211,
+  "nombre": "A Guarda",
+  "tipo": "Localidad",
+  "d": 4596,
+  "zona": "atlantico",
+  "municipio": "Seixas",
+  "provincia": "Pontevedra"
+ },
+ "bahia-de-cadiz": {
+  "id": 23109,
+  "nombre": "San Fernando",
+  "tipo": "Localidad",
+  "d": 3362,
+  "zona": "atlantico",
+  "municipio": "Bahía de Cádiz",
+  "provincia": "Cádiz"
+ },
+ "canet-de-mar": {
+  "id": 27119,
+  "nombre": "Canet de Mar",
+  "tipo": "Localidad",
+  "d": 218,
+  "zona": "mediterraneo",
+  "municipio": "Canet de Mar",
+  "provincia": "Barcelona"
+ },
+ "arenys-de-mar": {
+  "id": 27118,
+  "nombre": "Arenys de Mar",
+  "tipo": "Localidad",
+  "d": 728,
+  "zona": "mediterraneo",
+  "municipio": "Arenys de Mar",
+  "provincia": "Barcelona"
+ },
+ "naron": {
+  "id": 32148,
+  "nombre": "Ponzos (Ferrol)",
+  "tipo": "Playa",
+  "d": 2753,
+  "zona": "cantabrico",
+  "municipio": "Narón",
+  "provincia": "A Coruña"
+ },
+ "burela": {
+  "id": 22103,
+  "nombre": "Burela",
+  "tipo": "Localidad",
+  "d": 156,
+  "zona": "cantabrico",
+  "municipio": "Burela",
+  "provincia": "Lugo"
+ },
+ "lekeitio": {
+  "id": 21111,
+  "nombre": "Lekeito",
+  "tipo": "Localidad",
+  "d": 384,
+  "zona": "cantabrico",
+  "municipio": "Lekeitio",
+  "provincia": "Bizkaia"
+ },
+ "la-lanzada": {
+  "id": 32228,
+  "nombre": "A Lanzada (O Grove)",
+  "tipo": "Playa",
+  "d": 300,
+  "zona": "atlantico",
+  "municipio": "La Lanzada",
+  "provincia": "Pontevedra"
+ },
+ "cabana-de-bergantinos": {
+  "id": 32173,
+  "nombre": "Laxe",
+  "tipo": "Playa",
+  "d": 4336,
+  "zona": "cantabrico",
+  "municipio": "Cabana de Bergantiños",
+  "provincia": "A Coruña"
+ },
+ "elxelche": {
+  "id": 26113,
+  "nombre": "Santa Pola",
+  "tipo": "Localidad",
+  "d": 1881,
+  "zona": "mediterraneo",
+  "municipio": "Elx/Elche",
+  "provincia": "Alicante"
+ },
+ "dumbria": {
+  "id": 32203,
+  "nombre": "Ezaro (Dumbria)",
+  "tipo": "Playa",
+  "d": 115,
+  "zona": "atlantico",
+  "municipio": "Dumbría",
+  "provincia": "A Coruña"
+ },
+ "elcheelx": {
+  "id": 26113,
+  "nombre": "Santa Pola",
+  "tipo": "Localidad",
+  "d": 2692,
+  "zona": "mediterraneo",
+  "municipio": "Elche/Elx",
+  "provincia": "Alicante"
+ },
+ "algeciras": {
+  "id": 15120,
+  "nombre": "Algeciras-La Linea",
+  "tipo": "Puerto",
+  "d": 3507,
+  "zona": "mediterraneo",
+  "municipio": "Algeciras",
+  "provincia": "Cádiz"
+ },
+ "aguimes": {
+  "id": 14240,
+  "nombre": "Arinaga (Gran Canaria)",
+  "tipo": "Puerto",
+  "d": 2348,
+  "zona": "canarias",
+  "municipio": "Agüimes",
+  "provincia": "Las Palmas"
+ },
+ "marina-de-cudeyo": {
+  "id": 11130,
+  "nombre": "Santander",
+  "tipo": "Puerto",
+  "d": 1924,
+  "zona": "cantabrico",
+  "municipio": "Marina de Cudeyo",
+  "provincia": "Cantabria"
+ },
+ "pulpi": {
+  "id": 26102,
+  "nombre": "Aguilas",
+  "tipo": "Localidad",
+  "d": 8991,
+  "zona": "mediterraneo",
+  "municipio": "Pulpí",
+  "provincia": "Almería"
+ },
+ "comarca-sur": {
+  "id": 24206,
+  "nombre": "Puerto Rico",
+  "tipo": "Localidad",
+  "d": 2069,
+  "zona": "canarias",
+  "municipio": "Comarca Sur",
+  "provincia": "Las Palmas"
+ },
+ "palos-de-la-frontera": {
+  "id": 13120,
+  "nombre": "Huelva",
+  "tipo": "Puerto",
+  "d": 2707,
+  "zona": "atlantico",
+  "municipio": "Palos de la Frontera",
+  "provincia": "Huelva"
+ },
+ "punta-umbria": {
+  "id": 23103,
+  "nombre": "Punta Umbria",
+  "tipo": "Localidad",
+  "d": 4644,
+  "zona": "atlantico",
+  "municipio": "Punta Umbría",
+  "provincia": "Huelva"
+ },
+ "tias": {
+  "id": 24219,
+  "nombre": "Puerto del Carmen",
+  "tipo": "Localidad",
+  "d": 2409,
+  "zona": "canarias",
+  "municipio": "Tías",
+  "provincia": "Las Palmas"
+ },
+ "atamaria": {
+  "id": 26105,
+  "nombre": "Cabo de Palos",
+  "tipo": "Localidad",
+  "d": 7918,
+  "zona": "mediterraneo",
+  "municipio": "Atamaría",
+  "provincia": "Murcia"
+ },
+ "gualchos": {
+  "id": 35232,
+  "nombre": "Calahonda (Motril)",
+  "tipo": "Playa",
+  "d": 4425,
+  "zona": "mediterraneo",
+  "municipio": "Gualchos",
+  "provincia": "Granada"
+ },
+ "villademoros": {
+  "id": 32108,
+  "nombre": "Cadavedo (Valdes)",
+  "tipo": "Playa",
+  "d": 2373,
+  "zona": "cantabrico",
+  "municipio": "Villademoros",
+  "provincia": "Asturias"
+ },
+ "san-fernando": {
+  "id": 23109,
+  "nombre": "San Fernando",
+  "tipo": "Localidad",
+  "d": 2208,
+  "zona": "atlantico",
+  "municipio": "San Fernando",
+  "provincia": "Cádiz"
+ },
+ "roquetas-de-mar": {
+  "id": 25214,
+  "nombre": "Roquetas de Mar",
+  "tipo": "Localidad",
+  "d": 1863,
+  "zona": "mediterraneo",
+  "municipio": "Roquetas de Mar",
+  "provincia": "Almería"
+ },
+ "valdevaqueros": {
+  "id": 35102,
+  "nombre": "Valdevaqueros (Tarifa)",
+  "tipo": "Playa",
+  "d": 1144,
+  "zona": "mediterraneo",
+  "municipio": "Valdevaqueros",
+  "provincia": "Cádiz"
+ },
+ "tazacorte": {
+  "id": 24124,
+  "nombre": "Tazacorte",
+  "tipo": "Localidad",
+  "d": 941,
+  "zona": "canarias",
+  "municipio": "Tazacorte",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "zahara-de-los-atunes": {
+  "id": 33128,
+  "nombre": "Zahara de los Atunes (Barbate)",
+  "tipo": "Playa",
+  "d": 3377,
+  "zona": "mediterraneo",
+  "municipio": "Zahara de los Atunes",
+  "provincia": "Cádiz"
+ },
+ "manilva": {
+  "id": 35112,
+  "nombre": "Sabinillas (Manilva)",
+  "tipo": "Playa",
+  "d": 846,
+  "zona": "mediterraneo",
+  "municipio": "Manilva",
+  "provincia": "Málaga"
+ },
+ "chipiona": {
+  "id": 23106,
+  "nombre": "Chipiona",
+  "tipo": "Localidad",
+  "d": 1427,
+  "zona": "atlantico",
+  "municipio": "Chipiona",
+  "provincia": "Cádiz"
+ },
+ "rota": {
+  "id": 33112,
+  "nombre": "Punta Candor (Rota)",
+  "tipo": "Playa",
+  "d": 1138,
+  "zona": "atlantico",
+  "municipio": "Rota",
+  "provincia": "Cádiz"
+ },
+ "san-cristobal-de-la-laguna": {
+  "id": 24102,
+  "nombre": "Punta del Hidalgo",
+  "tipo": "Localidad",
+  "d": 1027,
+  "zona": "canarias",
+  "municipio": "San Cristóbal de La Laguna",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "villa-de-mazo": {
+  "id": 24122,
+  "nombre": "El Socorro",
+  "tipo": "Localidad",
+  "d": 6948,
+  "zona": "canarias",
+  "municipio": "Villa de Mazo",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "carnota": {
+  "id": 32204,
+  "nombre": "Carnota",
+  "tipo": "Playa",
+  "d": 2506,
+  "zona": "atlantico",
+  "municipio": "Carnota",
+  "provincia": "A Coruña"
+ },
+ "arucas": {
+  "id": 24209,
+  "nombre": "San Andres",
+  "tipo": "Localidad",
+  "d": 1654,
+  "zona": "canarias",
+  "municipio": "Arucas",
+  "provincia": "Las Palmas"
+ },
+ "val-de-san-vicente": {
+  "id": 21124,
+  "nombre": "San Vicente de la Barquera",
+  "tipo": "Localidad",
+  "d": 7194,
+  "zona": "cantabrico",
+  "municipio": "Val de San Vicente",
+  "provincia": "Cantabria"
+ },
+ "pasaia": {
+  "id": 11110,
+  "nombre": "Pasaia",
+  "tipo": "Puerto",
+  "d": 1317,
+  "zona": "cantabrico",
+  "municipio": "Pasaia",
+  "provincia": "Gipuzkoa"
+ },
+ "anaga": {
+  "id": 24102,
+  "nombre": "Punta del Hidalgo",
+  "tipo": "Localidad",
+  "d": 3268,
+  "zona": "canarias",
+  "municipio": "Anaga",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "eivissa": {
+  "id": 18120,
+  "nombre": "Ibiza",
+  "tipo": "Puerto",
+  "d": 352,
+  "zona": "mediterraneo",
+  "municipio": "Eivissa",
+  "provincia": "Baleares"
+ },
+ "finestrat": {
+  "id": 36150,
+  "nombre": "La Cala (Finestrat)",
+  "tipo": "Playa",
+  "d": 877,
+  "zona": "mediterraneo",
+  "municipio": "Finestrat",
+  "provincia": "Alicante"
+ },
+ "alboraiaalboraya": {
+  "id": 36228,
+  "nombre": "Malvarrosa (Valencia)",
+  "tipo": "Playa",
+  "d": 2524,
+  "zona": "mediterraneo",
+  "municipio": "Alboraia/Alboraya",
+  "provincia": "Valencia"
+ },
+ "xabiajavea": {
+  "id": 26120,
+  "nombre": "Cap de la Nao",
+  "tipo": "Localidad",
+  "d": 3832,
+  "zona": "mediterraneo",
+  "municipio": "Xàbia/Jávea",
+  "provincia": "Alicante"
+ },
+ "sukarrieta": {
+  "id": 21112,
+  "nombre": "Mundaka",
+  "tipo": "Localidad",
+  "d": 1608,
+  "zona": "cantabrico",
+  "municipio": "Sukarrieta",
+  "provincia": "Bizkaia"
+ },
+ "sant-vicenc-de-montalt": {
+  "id": 37154,
+  "nombre": "Del tres Micos (Caldes d'Estrac)",
+  "tipo": "Playa",
+  "d": 976,
+  "zona": "mediterraneo",
+  "municipio": "Sant Vicenç de Montalt",
+  "provincia": "Barcelona"
+ },
+ "sant-pol-de-mar": {
+  "id": 27120,
+  "nombre": "Sant Pol de Mar",
+  "tipo": "Localidad",
+  "d": 917,
+  "zona": "mediterraneo",
+  "municipio": "Sant Pol de Mar",
+  "provincia": "Barcelona"
+ },
+ "caldes-destrac": {
+  "id": 37154,
+  "nombre": "Del tres Micos (Caldes d'Estrac)",
+  "tipo": "Playa",
+  "d": 181,
+  "zona": "mediterraneo",
+  "municipio": "Caldes d'Estrac",
+  "provincia": "Barcelona"
+ },
+ "melilla": {
+  "id": 15230,
+  "nombre": "Melilla",
+  "tipo": "Puerto",
+  "d": 1420,
+  "zona": "mediterraneo",
+  "municipio": "Melilla",
+  "provincia": "Melilla"
+ },
+ "moncofa": {
+  "id": 36236,
+  "nombre": "El Cerezo (Xilxes)",
+  "tipo": "Playa",
+  "d": 3412,
+  "zona": "mediterraneo",
+  "municipio": "Moncofa",
+  "provincia": "Castellón"
+ },
+ "bajo-maestrazgo": {
+  "id": 26212,
+  "nombre": "Peñiscola",
+  "tipo": "Localidad",
+  "d": 8556,
+  "zona": "mediterraneo",
+  "municipio": "Bajo Maestrazgo",
+  "provincia": "Castellón"
+ },
+ "costa-occidental": {
+  "id": 33103,
+  "nombre": "Islantilla",
+  "tipo": "Playa",
+  "d": 1426,
+  "zona": "atlantico",
+  "municipio": "Costa Occidental",
+  "provincia": "Huelva"
+ },
+ "bajo-vinalopo": {
+  "id": 36127,
+  "nombre": "Carabassi (Elche)",
+  "tipo": "Playa",
+  "d": 2078,
+  "zona": "mediterraneo",
+  "municipio": "Bajo Vinalopó",
+  "provincia": "Alicante"
+ },
+ "castaneras": {
+  "id": 32108,
+  "nombre": "Cadavedo (Valdes)",
+  "tipo": "Playa",
+  "d": 6486,
+  "zona": "cantabrico",
+  "municipio": "Castañeras",
+  "provincia": "Asturias"
+ },
+ "cudillero": {
+  "id": 32107,
+  "nombre": "San Pedro de Bocamar (Cudillero)",
+  "tipo": "Playa",
+  "d": 2355,
+  "zona": "cantabrico",
+  "municipio": "Cudillero",
+  "provincia": "Asturias"
+ },
+ "manon": {
+  "id": 22107,
+  "nombre": "Bares",
+  "tipo": "Localidad",
+  "d": 3777,
+  "zona": "cantabrico",
+  "municipio": "Mañón",
+  "provincia": "A Coruña"
+ },
+ "ribadedeva": {
+  "id": 31200,
+  "nombre": "La Franca (Ribadedeva)",
+  "tipo": "Playa",
+  "d": 1018,
+  "zona": "cantabrico",
+  "municipio": "Ribadedeva",
+  "provincia": "Asturias"
+ },
+ "oriente-de-asturias": {
+  "id": 21201,
+  "nombre": "Llanes",
+  "tipo": "Localidad",
+  "d": 3841,
+  "zona": "cantabrico",
+  "municipio": "Oriente de Asturias",
+  "provincia": "Asturias"
+ },
+ "rubite": {
+  "id": 35232,
+  "nombre": "Calahonda (Motril)",
+  "tipo": "Playa",
+  "d": 9974,
+  "zona": "mediterraneo",
+  "municipio": "Rubite",
+  "provincia": "Granada"
+ },
+ "hendaye": {
+  "id": 21102,
+  "nombre": "Hondarribia",
+  "tipo": "Localidad",
+  "d": 2456,
+  "zona": "cantabrico",
+  "municipio": "Hendaye",
+  "provincia": "Gipuzkoa"
+ },
+ "son-servera": {
+  "id": 28204,
+  "nombre": "Port Nou",
+  "tipo": "Localidad",
+  "d": 291,
+  "zona": "mediterraneo",
+  "municipio": "Son Servera",
+  "provincia": "Baleares"
+ },
+ "los-barrios": {
+  "id": 35107,
+  "nombre": "El Rinconcillo (Algeciras)",
+  "tipo": "Playa",
+  "d": 478,
+  "zona": "mediterraneo",
+  "municipio": "Los Barrios",
+  "provincia": "Cádiz"
+ },
+ "betanzos": {
+  "id": 32157,
+  "nombre": "A Ribeiriña (Miño)",
+  "tipo": "Playa",
+  "d": 1759,
+  "zona": "cantabrico",
+  "municipio": "Betanzos",
+  "provincia": "A Coruña"
+ },
+ "barcia": {
+  "id": 21208,
+  "nombre": "Luarca",
+  "tipo": "Localidad",
+  "d": 3090,
+  "zona": "cantabrico",
+  "municipio": "Barcia",
+  "provincia": "Asturias"
+ },
+ "urbanizacion-novo-santi-petri": {
+  "id": 33122,
+  "nombre": "Roche (Conil de la Frontera)",
+  "tipo": "Playa",
+  "d": 2803,
+  "zona": "atlantico",
+  "municipio": "Urbanización Novo Santi Petri",
+  "provincia": "Cádiz"
+ },
+ "vejer-de-la-frontera": {
+  "id": 33124,
+  "nombre": "El Palmar (Vejer de la Frontera)",
+  "tipo": "Playa",
+  "d": 436,
+  "zona": "atlantico",
+  "municipio": "Vejer de la Frontera",
+  "provincia": "Cádiz"
+ },
+ "santa-lucia-de-tirajana": {
+  "id": 14240,
+  "nombre": "Arinaga (Gran Canaria)",
+  "tipo": "Puerto",
+  "d": 2571,
+  "zona": "canarias",
+  "municipio": "Santa Lucía de Tirajana",
+  "provincia": "Las Palmas"
+ },
+ "el-franco": {
+  "id": 21210,
+  "nombre": "Navia",
+  "tipo": "Localidad",
+  "d": 9070,
+  "zona": "cantabrico",
+  "municipio": "El Franco",
+  "provincia": "Asturias"
+ },
+ "parque-holandes": {
+  "id": 14220,
+  "nombre": "Puerto del Rosario (Fuerteventura)",
+  "tipo": "Puerto",
+  "d": 9032,
+  "zona": "canarias",
+  "municipio": "Parque Holandés",
+  "provincia": "Las Palmas"
+ },
+ "carino": {
+  "id": 22108,
+  "nombre": "Cariño",
+  "tipo": "Localidad",
+  "d": 1416,
+  "zona": "cantabrico",
+  "municipio": "Cariño",
+  "provincia": "A Coruña"
+ },
+ "vera": {
+  "id": 36103,
+  "nombre": "Las Marinas (Vera)",
+  "tipo": "Playa",
+  "d": 2415,
+  "zona": "mediterraneo",
+  "municipio": "Vera",
+  "provincia": "Almería"
+ },
+ "cabo-penas": {
+  "id": 32100,
+  "nombre": "Xivares (Carreño)",
+  "tipo": "Playa",
+  "d": 36,
+  "zona": "cantabrico",
+  "municipio": "Cabo Peñas",
+  "provincia": "Asturias"
+ },
+ "carreno": {
+  "id": 32101,
+  "nombre": "La Palmeras (Carreño)",
+  "tipo": "Playa",
+  "d": 1156,
+  "zona": "cantabrico",
+  "municipio": "Carreño",
+  "provincia": "Asturias"
+ },
+ "mataro": {
+  "id": 27117,
+  "nombre": "Mataro",
+  "tipo": "Localidad",
+  "d": 865,
+  "zona": "mediterraneo",
+  "municipio": "Mataró",
+  "provincia": "Barcelona"
+ },
+ "el-masnou": {
+  "id": 27114,
+  "nombre": "El Masnou",
+  "tipo": "Localidad",
+  "d": 453,
+  "zona": "mediterraneo",
+  "municipio": "El Masnou",
+  "provincia": "Barcelona"
+ },
+ "espasante": {
+  "id": 32141,
+  "nombre": "A Concha/Espasante (Ortigueira)",
+  "tipo": "Playa",
+  "d": 1144,
+  "zona": "cantabrico",
+  "municipio": "Espasante",
+  "provincia": "A Coruña"
+ },
+ "o-rosal": {
+  "id": 22211,
+  "nombre": "A Guarda",
+  "tipo": "Localidad",
+  "d": 8623,
+  "zona": "atlantico",
+  "municipio": "O Rosal",
+  "provincia": "Pontevedra"
+ },
+ "muskiz": {
+  "id": 31117,
+  "nombre": "La Arena (Zierbena)",
+  "tipo": "Playa",
+  "d": 55,
+  "zona": "cantabrico",
+  "municipio": "Muskiz",
+  "provincia": "Bizkaia"
+ },
+ "levante-almeriense": {
+  "id": 15250,
+  "nombre": "Carboneras",
+  "tipo": "Puerto",
+  "d": 2745,
+  "zona": "mediterraneo",
+  "municipio": "Levante Almeriense",
+  "provincia": "Almería"
+ },
+ "brena-baja": {
+  "id": 14110,
+  "nombre": "Santa Cruz de la Palma",
+  "tipo": "Puerto",
+  "d": 1996,
+  "zona": "canarias",
+  "municipio": "Breña Baja",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "alfoz-de-lloredo": {
+  "id": 21123,
+  "nombre": "Comillas",
+  "tipo": "Localidad",
+  "d": 5577,
+  "zona": "cantabrico",
+  "municipio": "Alfoz de Lloredo",
+  "provincia": "Cantabria"
+ },
+ "bajo-deba": {
+  "id": 21108,
+  "nombre": "Deba",
+  "tipo": "Localidad",
+  "d": 2783,
+  "zona": "cantabrico",
+  "municipio": "Bajo Deba",
+  "provincia": "Gipuzkoa"
+ },
+ "mourin": {
+  "id": 22114,
+  "nombre": "Camariñas",
+  "tipo": "Localidad",
+  "d": 4045,
+  "zona": "cantabrico",
+  "municipio": "Mourín",
+  "provincia": "A Coruña"
+ },
+ "tierra-de-soneira": {
+  "id": 22114,
+  "nombre": "Camariñas",
+  "tipo": "Localidad",
+  "d": 3515,
+  "zona": "cantabrico",
+  "municipio": "Tierra de Soneira",
+  "provincia": "A Coruña"
+ },
+ "el-pinar-de-el-hierro": {
+  "id": 24120,
+  "nombre": "La Restrinja",
+  "tipo": "Localidad",
+  "d": 151,
+  "zona": "canarias",
+  "municipio": "El Pinar de El Hierro",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "san-jose": {
+  "id": 35245,
+  "nombre": "Los Genoveses (Nijar)",
+  "tipo": "Playa",
+  "d": 609,
+  "zona": "mediterraneo",
+  "municipio": "San José",
+  "provincia": "Almería"
+ },
+ "la-isleta": {
+  "id": 25218,
+  "nombre": "San Jose",
+  "tipo": "Localidad",
+  "d": 5834,
+  "zona": "mediterraneo",
+  "municipio": "La Isleta",
+  "provincia": "Almería"
+ },
+ "santa-cruz-de-la-palma": {
+  "id": 14110,
+  "nombre": "Santa Cruz de la Palma",
+  "tipo": "Puerto",
+  "d": 1096,
+  "zona": "canarias",
+  "municipio": "Santa Cruz de la Palma",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "valldemossa": {
+  "id": 28106,
+  "nombre": "Banyalbufar",
+  "tipo": "Localidad",
+  "d": 5666,
+  "zona": "mediterraneo",
+  "municipio": "Valldemossa",
+  "provincia": "Baleares"
+ },
+ "la-manga": {
+  "id": 26105,
+  "nombre": "Cabo de Palos",
+  "tipo": "Localidad",
+  "d": 8720,
+  "zona": "mediterraneo",
+  "municipio": "La Manga",
+  "provincia": "Murcia"
+ },
+ "comarca-de-la-sidra": {
+  "id": 31210,
+  "nombre": "Lastres (Colunga)",
+  "tipo": "Playa",
+  "d": 3827,
+  "zona": "cantabrico",
+  "municipio": "Comarca de la Sidra",
+  "provincia": "Asturias"
+ },
+ "niembru": {
+  "id": 31204,
+  "nombre": "Barro (Llanes)",
+  "tipo": "Playa",
+  "d": 2683,
+  "zona": "cantabrico",
+  "municipio": "Niembru",
+  "provincia": "Asturias"
+ },
+ "paderne": {
+  "id": 32157,
+  "nombre": "A Ribeiriña (Miño)",
+  "tipo": "Playa",
+  "d": 1367,
+  "zona": "cantabrico",
+  "municipio": "Paderne",
+  "provincia": "A Coruña"
+ },
+ "malpaises": {
+  "id": 24122,
+  "nombre": "El Socorro",
+  "tipo": "Localidad",
+  "d": 10235,
+  "zona": "canarias",
+  "municipio": "Malpaises",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "badalona": {
+  "id": 27113,
+  "nombre": "Badalona",
+  "tipo": "Localidad",
+  "d": 716,
+  "zona": "mediterraneo",
+  "municipio": "Badalona",
+  "provincia": "Barcelona"
+ },
+ "es-grau": {
+  "id": 38235,
+  "nombre": "Es Grau (Mao)",
+  "tipo": "Playa",
+  "d": 1729,
+  "zona": "mediterraneo",
+  "municipio": "Es Grau",
+  "provincia": "Baleares"
+ },
+ "la-caridad": {
+  "id": 21210,
+  "nombre": "Navia",
+  "tipo": "Localidad",
+  "d": 7806,
+  "zona": "cantabrico",
+  "municipio": "La Caridad",
+  "provincia": "Asturias"
+ },
+ "begur": {
+  "id": 27130,
+  "nombre": "Aiguafreda",
+  "tipo": "Localidad",
+  "d": 1647,
+  "zona": "mediterraneo",
+  "municipio": "Begur",
+  "provincia": "Girona"
+ },
+ "chilchesxilxes": {
+  "id": 36236,
+  "nombre": "El Cerezo (Xilxes)",
+  "tipo": "Playa",
+  "d": 197,
+  "zona": "mediterraneo",
+  "municipio": "Chilches/Xilxes",
+  "provincia": "Castellón"
+ },
+ "ceuta": {
+  "id": 15130,
+  "nombre": "Ceuta",
+  "tipo": "Puerto",
+  "d": 1435,
+  "zona": "mediterraneo",
+  "municipio": "Ceuta",
+  "provincia": "Ceuta"
+ },
+ "castropol": {
+  "id": 22101,
+  "nombre": "Ribadeo",
+  "tipo": "Localidad",
+  "d": 1168,
+  "zona": "cantabrico",
+  "municipio": "Castropol",
+  "provincia": "Asturias"
+ },
+ "las-cortinas": {
+  "id": 32111,
+  "nombre": "Fabal (Navia)",
+  "tipo": "Playa",
+  "d": 465,
+  "zona": "cantabrico",
+  "municipio": "Las Cortinas",
+  "provincia": "Asturias"
+ },
+ "axarquia": {
+  "id": 35228,
+  "nombre": "La Herradura (Almuñecar)",
+  "tipo": "Playa",
+  "d": 4010,
+  "zona": "mediterraneo",
+  "municipio": "Axarquía",
+  "provincia": "Málaga"
+ },
+ "llano-de-mallorca": {
+  "id": 38219,
+  "nombre": "Son Baulo (Sta. Margalida)",
+  "tipo": "Playa",
+  "d": 471,
+  "zona": "mediterraneo",
+  "municipio": "Llano de Mallorca",
+  "provincia": "Baleares"
+ },
+ "playa-de-tasarte": {
+  "id": 34210,
+  "nombre": "Mogan",
+  "tipo": "Playa",
+  "d": 7848,
+  "zona": "canarias",
+  "municipio": "Playa de Tasarte",
+  "provincia": "Las Palmas"
+ },
+ "tasartico": {
+  "id": 34210,
+  "nombre": "Mogan",
+  "tipo": "Playa",
+  "d": 11385,
+  "zona": "canarias",
+  "municipio": "Tasartico",
+  "provincia": "Las Palmas"
+ },
+ "barakaldo": {
+  "id": 21117,
+  "nombre": "Bilbao",
+  "tipo": "Localidad",
+  "d": 6673,
+  "zona": "cantabrico",
+  "municipio": "Barakaldo",
+  "provincia": "Bizkaia"
+ },
+ "zierbena": {
+  "id": 31117,
+  "nombre": "La Arena (Zierbena)",
+  "tipo": "Playa",
+  "d": 1336,
+  "zona": "cantabrico",
+  "municipio": "Zierbena",
+  "provincia": "Bizkaia"
+ },
+ "torredembarra": {
+  "id": 27106,
+  "nombre": "Torredembarra",
+  "tipo": "Localidad",
+  "d": 1894,
+  "zona": "mediterraneo",
+  "municipio": "Torredembarra",
+  "provincia": "Tarragona"
+ },
+ "tuineje": {
+  "id": 24216,
+  "nombre": "Gran Tarajal",
+  "tipo": "Localidad",
+  "d": 2488,
+  "zona": "canarias",
+  "municipio": "Tuineje",
+  "provincia": "Las Palmas"
+ },
+ "ispaster": {
+  "id": 21111,
+  "nombre": "Lekeito",
+  "tipo": "Localidad",
+  "d": 3718,
+  "zona": "cantabrico",
+  "municipio": "Ispaster",
+  "provincia": "Bizkaia"
+ },
+ "gautegiz-arteaga": {
+  "id": 21112,
+  "nombre": "Mundaka",
+  "tipo": "Localidad",
+  "d": 3092,
+  "zona": "cantabrico",
+  "municipio": "Gautegiz Arteaga",
+  "provincia": "Bizkaia"
+ },
+ "eume": {
+  "id": 32154,
+  "nombre": "A Magdalena (Cabanas)",
+  "tipo": "Playa",
+  "d": 11847,
+  "zona": "cantabrico",
+  "municipio": "Eume",
+  "provincia": "A Coruña"
+ },
+ "lepe": {
+  "id": 33103,
+  "nombre": "Islantilla",
+  "tipo": "Playa",
+  "d": 3108,
+  "zona": "atlantico",
+  "municipio": "Lepe",
+  "provincia": "Huelva"
+ },
+ "tiran": {
+  "id": 12230,
+  "nombre": "Vigo",
+  "tipo": "Puerto",
+  "d": 3708,
+  "zona": "atlantico",
+  "municipio": "Tirán",
+  "provincia": "Pontevedra"
+ },
+ "pilar-de-la-horadada": {
+  "id": 36111,
+  "nombre": "Jesuitas (Pilar de la Horadada)",
+  "tipo": "Playa",
+  "d": 776,
+  "zona": "mediterraneo",
+  "municipio": "Pilar de la Horadada",
+  "provincia": "Alicante"
+ },
+ "plana-alta": {
+  "id": 16240,
+  "nombre": "Castellon",
+  "tipo": "Puerto",
+  "d": 5972,
+  "zona": "mediterraneo",
+  "municipio": "Plana Alta",
+  "provincia": "Castellón"
+ },
+ "el-poble-nou-de-benitatxellbenitachell": {
+  "id": 36161,
+  "nombre": "El Portet (Teulada)",
+  "tipo": "Playa",
+  "d": 3500,
+  "zona": "mediterraneo",
+  "municipio": "el Poble Nou de Benitatxell/Benitachell",
+  "provincia": "Alicante"
+ },
+ "mojacar": {
+  "id": 26101,
+  "nombre": "Mojacar",
+  "tipo": "Localidad",
+  "d": 3346,
+  "zona": "mediterraneo",
+  "municipio": "Mojácar",
+  "provincia": "Almería"
+ },
+ "las-rosas": {
+  "id": 24116,
+  "nombre": "Agulo",
+  "tipo": "Localidad",
+  "d": 4193,
+  "zona": "canarias",
+  "municipio": "Las Rosas",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "agulo": {
+  "id": 24116,
+  "nombre": "Agulo",
+  "tipo": "Localidad",
+  "d": 721,
+  "zona": "canarias",
+  "municipio": "Agulo",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "outes": {
+  "id": 32206,
+  "nombre": "Aguieira (Porto do Son)",
+  "tipo": "Playa",
+  "d": 7031,
+  "zona": "atlantico",
+  "municipio": "Outes",
+  "provincia": "A Coruña"
+ },
+ "antoncojo": {
+  "id": 34104,
+  "nombre": "Santiago (Alajero)",
+  "tipo": "Playa",
+  "d": 3824,
+  "zona": "canarias",
+  "municipio": "Antoncojo",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "taguluche": {
+  "id": 24115,
+  "nombre": "La Puntilla",
+  "tipo": "Localidad",
+  "d": 4571,
+  "zona": "canarias",
+  "municipio": "Taguluche",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "arguamul": {
+  "id": 24116,
+  "nombre": "Agulo",
+  "tipo": "Localidad",
+  "d": 10072,
+  "zona": "canarias",
+  "municipio": "Arguamul",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "adra": {
+  "id": 25212,
+  "nombre": "Adra",
+  "tipo": "Localidad",
+  "d": 422,
+  "zona": "mediterraneo",
+  "municipio": "Adra",
+  "provincia": "Almería"
+ },
+ "combarro": {
+  "id": 12220,
+  "nombre": "Marin",
+  "tipo": "Puerto",
+  "d": 1299,
+  "zona": "atlantico",
+  "municipio": "Combarro",
+  "provincia": "Pontevedra"
+ },
+ "la-franca": {
+  "id": 31200,
+  "nombre": "La Franca (Ribadedeva)",
+  "tipo": "Playa",
+  "d": 384,
+  "zona": "cantabrico",
+  "municipio": "La Franca",
+  "provincia": "Asturias"
+ },
+ "somo": {
+  "id": 31126,
+  "nombre": "Somo (Ribamontan al Mar",
+  "tipo": "Playa",
+  "d": 245,
+  "zona": "cantabrico",
+  "municipio": "Somo",
+  "provincia": "Cantabria"
+ },
+ "salinas": {
+  "id": 11220,
+  "nombre": "Aviles",
+  "tipo": "Puerto",
+  "d": 636,
+  "zona": "cantabrico",
+  "municipio": "Salinas",
+  "provincia": "Asturias"
+ },
+ "ballota": {
+  "id": 32108,
+  "nombre": "Cadavedo (Valdes)",
+  "tipo": "Playa",
+  "d": 3757,
+  "zona": "cantabrico",
+  "municipio": "Ballota",
+  "provincia": "Asturias"
+ },
+ "ferrero": {
+  "id": 11220,
+  "nombre": "Aviles",
+  "tipo": "Puerto",
+  "d": 8474,
+  "zona": "cantabrico",
+  "municipio": "Ferrero",
+  "provincia": "Asturias"
+ },
+ "el-rompido": {
+  "id": 33103,
+  "nombre": "Islantilla",
+  "tipo": "Playa",
+  "d": 7384,
+  "zona": "atlantico",
+  "municipio": "El Rompido",
+  "provincia": "Huelva"
+ },
+ "daimus": {
+  "id": 16210,
+  "nombre": "Gandia",
+  "tipo": "Puerto",
+  "d": 2198,
+  "zona": "mediterraneo",
+  "municipio": "Daimús",
+  "provincia": "Valencia"
+ },
+ "bellreguard": {
+  "id": 36209,
+  "nombre": "Bellreguard",
+  "tipo": "Playa",
+  "d": 361,
+  "zona": "mediterraneo",
+  "municipio": "Bellreguard",
+  "provincia": "Valencia"
+ },
+ "miramar": {
+  "id": 36209,
+  "nombre": "Bellreguard",
+  "tipo": "Playa",
+  "d": 1469,
+  "zona": "mediterraneo",
+  "municipio": "Miramar",
+  "provincia": "Valencia"
+ },
+ "piles": {
+  "id": 36207,
+  "nombre": "Piles",
+  "tipo": "Playa",
+  "d": 159,
+  "zona": "mediterraneo",
+  "municipio": "Piles",
+  "provincia": "Valencia"
+ },
+ "san-cristobal": {
+  "id": 32153,
+  "nombre": "Chanteiro (Ares)",
+  "tipo": "Playa",
+  "d": 1435,
+  "zona": "cantabrico",
+  "municipio": "San Cristóbal",
+  "provincia": "A Coruña"
+ },
+ "mar-menor": {
+  "id": 26110,
+  "nombre": "Dehesa de Campoamor",
+  "tipo": "Localidad",
+  "d": 11295,
+  "zona": "mediterraneo",
+  "municipio": "Mar Menor",
+  "provincia": "Murcia"
+ },
+ "el-mojon": {
+  "id": 26110,
+  "nombre": "Dehesa de Campoamor",
+  "tipo": "Localidad",
+  "d": 7472,
+  "zona": "mediterraneo",
+  "municipio": "El Mojón",
+  "provincia": "Murcia"
+ },
+ "la-coruna": {
+  "id": 12140,
+  "nombre": "Langosteira",
+  "tipo": "Puerto",
+  "d": 3632,
+  "zona": "cantabrico",
+  "municipio": "La Coruña",
+  "provincia": "A Coruña"
+ },
+ "campo-de-alicante": {
+  "id": 16130,
+  "nombre": "Alicante",
+  "tipo": "Puerto",
+  "d": 871,
+  "zona": "mediterraneo",
+  "municipio": "Campo de Alicante",
+  "provincia": "Alicante"
+ },
+ "santona": {
+  "id": 21120,
+  "nombre": "Santoña",
+  "tipo": "Localidad",
+  "d": 824,
+  "zona": "cantabrico",
+  "municipio": "Santoña",
+  "provincia": "Cantabria"
+ },
+ "lemoiz": {
+  "id": 21114,
+  "nombre": "Plentzia",
+  "tipo": "Localidad",
+  "d": 5238,
+  "zona": "cantabrico",
+  "municipio": "Lemoiz",
+  "provincia": "Bizkaia"
+ },
+ "ovinana": {
+  "id": 32107,
+  "nombre": "San Pedro de Bocamar (Cudillero)",
+  "tipo": "Playa",
+  "d": 1976,
+  "zona": "cantabrico",
+  "municipio": "Oviñana",
+  "provincia": "Asturias"
+ },
+ "suegos": {
+  "id": 22105,
+  "nombre": "Viveiro",
+  "tipo": "Localidad",
+  "d": 2110,
+  "zona": "cantabrico",
+  "municipio": "Suegos",
+  "provincia": "Lugo"
+ },
+ "santillan": {
+  "id": 21124,
+  "nombre": "San Vicente de la Barquera",
+  "tipo": "Localidad",
+  "d": 2844,
+  "zona": "cantabrico",
+  "municipio": "Santillán",
+  "provincia": "Cantabria"
+ },
+ "ruiloba": {
+  "id": 21123,
+  "nombre": "Comillas",
+  "tipo": "Localidad",
+  "d": 2016,
+  "zona": "cantabrico",
+  "municipio": "Ruiloba",
+  "provincia": "Cantabria"
+ },
+ "roche": {
+  "id": 33122,
+  "nombre": "Roche (Conil de la Frontera)",
+  "tipo": "Playa",
+  "d": 2359,
+  "zona": "atlantico",
+  "municipio": "Roche",
+  "provincia": "Cádiz"
+ },
+ "deia": {
+  "id": 28108,
+  "nombre": "Port de Soller",
+  "tipo": "Localidad",
+  "d": 4815,
+  "zona": "mediterraneo",
+  "municipio": "Deià",
+  "provincia": "Baleares"
+ },
+ "port-dalcudia": {
+  "id": 18210,
+  "nombre": "Alcudia",
+  "tipo": "Puerto",
+  "d": 3259,
+  "zona": "mediterraneo",
+  "municipio": "Port d'Alcúdia",
+  "provincia": "Baleares"
+ },
+ "tinizara": {
+  "id": 24126,
+  "nombre": "San Andres y Sauces",
+  "tipo": "Localidad",
+  "d": 10914,
+  "zona": "canarias",
+  "municipio": "Tinizara",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "lujar": {
+  "id": 35232,
+  "nombre": "Calahonda (Motril)",
+  "tipo": "Playa",
+  "d": 6811,
+  "zona": "mediterraneo",
+  "municipio": "Lújar",
+  "provincia": "Granada"
+ },
+ "ons": {
+  "id": 32228,
+  "nombre": "A Lanzada (O Grove)",
+  "tipo": "Playa",
+  "d": 9079,
+  "zona": "atlantico",
+  "municipio": "Ons",
+  "provincia": "Pontevedra"
+ },
+ "costa-de-antigua": {
+  "id": 24217,
+  "nombre": "Fustes",
+  "tipo": "Localidad",
+  "d": 3120,
+  "zona": "canarias",
+  "municipio": "Costa de Antigua",
+  "provincia": "Las Palmas"
+ },
+ "malpica": {
+  "id": 22113,
+  "nombre": "Malpica",
+  "tipo": "Localidad",
+  "d": 4475,
+  "zona": "cantabrico",
+  "municipio": "Malpica",
+  "provincia": "A Coruña"
+ },
+ "vicedo": {
+  "id": 22106,
+  "nombre": "O Vicedo",
+  "tipo": "Localidad",
+  "d": 1684,
+  "zona": "cantabrico",
+  "municipio": "Vicedo",
+  "provincia": "A Coruña"
+ },
+ "noja": {
+  "id": 31124,
+  "nombre": "El  Sable (Arnuero)",
+  "tipo": "Playa",
+  "d": 2196,
+  "zona": "cantabrico",
+  "municipio": "Noja",
+  "provincia": "Cantabria"
+ },
+ "tagle": {
+  "id": 21122,
+  "nombre": "Suances",
+  "tipo": "Localidad",
+  "d": 3069,
+  "zona": "cantabrico",
+  "municipio": "Tagle",
+  "provincia": "Cantabria"
+ },
+ "santillana-del-mar": {
+  "id": 21122,
+  "nombre": "Suances",
+  "tipo": "Localidad",
+  "d": 4686,
+  "zona": "cantabrico",
+  "municipio": "Santillana del Mar",
+  "provincia": "Cantabria"
+ },
+ "quinteiro": {
+  "id": 22118,
+  "nombre": "Boiro",
+  "tipo": "Localidad",
+  "d": 5168,
+  "zona": "atlantico",
+  "municipio": "Quinteiro",
+  "provincia": "A Coruña"
+ },
+ "salvora": {
+  "id": 32210,
+  "nombre": "Anguleira (Ribeira)",
+  "tipo": "Playa",
+  "d": 8478,
+  "zona": "atlantico",
+  "municipio": "Sálvora",
+  "provincia": "A Coruña"
+ },
+ "salamir": {
+  "id": 32106,
+  "nombre": "La Concha de Artedo (Cudillero)",
+  "tipo": "Playa",
+  "d": 1637,
+  "zona": "cantabrico",
+  "municipio": "Salamir",
+  "provincia": "Asturias"
+ },
+ "aldea-leiro": {
+  "id": 12110,
+  "nombre": "Ferrol",
+  "tipo": "Puerto",
+  "d": 4462,
+  "zona": "cantabrico",
+  "municipio": "Aldea Leiro",
+  "provincia": "A Coruña"
+ },
+ "quilmas": {
+  "id": 32204,
+  "nombre": "Carnota",
+  "tipo": "Playa",
+  "d": 6592,
+  "zona": "atlantico",
+  "municipio": "Quilmas",
+  "provincia": "A Coruña"
+ },
+ "o-pindo": {
+  "id": 32203,
+  "nombre": "Ezaro (Dumbria)",
+  "tipo": "Playa",
+  "d": 2013,
+  "zona": "atlantico",
+  "municipio": "O Pindo",
+  "provincia": "A Coruña"
+ },
+ "canada-de-gallego": {
+  "id": 26103,
+  "nombre": "Pto Mazarron",
+  "tipo": "Localidad",
+  "d": 9058,
+  "zona": "mediterraneo",
+  "municipio": "Cañada de Gallego",
+  "provincia": "Murcia"
+ },
+ "costacabana": {
+  "id": 25216,
+  "nombre": "Almeria",
+  "tipo": "Localidad",
+  "d": 9267,
+  "zona": "mediterraneo",
+  "municipio": "Costacabana",
+  "provincia": "Almería"
+ },
+ "corralejo": {
+  "id": 24211,
+  "nombre": "Corralejo",
+  "tipo": "Localidad",
+  "d": 1631,
+  "zona": "canarias",
+  "municipio": "Corralejo",
+  "provincia": "Las Palmas"
+ },
+ "majanicho": {
+  "id": 24211,
+  "nombre": "Corralejo",
+  "tipo": "Localidad",
+  "d": 7968,
+  "zona": "canarias",
+  "municipio": "Majanicho",
+  "provincia": "Las Palmas"
+ },
+ "los-lagos": {
+  "id": 24212,
+  "nombre": "Cotillo",
+  "tipo": "Localidad",
+  "d": 3028,
+  "zona": "canarias",
+  "municipio": "Los Lagos",
+  "provincia": "Las Palmas"
+ },
+ "la-marina": {
+  "id": 36123,
+  "nombre": "La Marina (Elche)",
+  "tipo": "Playa",
+  "d": 1332,
+  "zona": "mediterraneo",
+  "municipio": "La Marina",
+  "provincia": "Alicante"
+ },
+ "cala-galdana": {
+  "id": 38233,
+  "nombre": "Cala Galdana (Ferreries)",
+  "tipo": "Playa",
+  "d": 1009,
+  "zona": "mediterraneo",
+  "municipio": "Cala Galdana",
+  "provincia": "Baleares"
+ },
+ "malgrat-de-mar": {
+  "id": 37204,
+  "nombre": "Malgrat de Mar",
+  "tipo": "Playa",
+  "d": 657,
+  "zona": "mediterraneo",
+  "municipio": "Malgrat de Mar",
+  "provincia": "Barcelona"
+ },
+ "castrexe": {
+  "id": 32200,
+  "nombre": "O Rostro (Fisterra)",
+  "tipo": "Playa",
+  "d": 958,
+  "zona": "atlantico",
+  "municipio": "Castrexe",
+  "provincia": "A Coruña"
+ },
+ "las-playitas": {
+  "id": 34213,
+  "nombre": "Las Playitas (Tuineje)",
+  "tipo": "Playa",
+  "d": 4681,
+  "zona": "canarias",
+  "municipio": "Las Playitas",
+  "provincia": "Las Palmas"
+ },
+ "cartaya": {
+  "id": 33104,
+  "nombre": "El Portil (Punta Umbria)",
+  "tipo": "Playa",
+  "d": 6164,
+  "zona": "atlantico",
+  "municipio": "Cartaya",
+  "provincia": "Huelva"
+ },
+ "matalascanas": {
+  "id": 23104,
+  "nombre": "Matalascañas",
+  "tipo": "Localidad",
+  "d": 9251,
+  "zona": "atlantico",
+  "municipio": "Matalascañas",
+  "provincia": "Huelva"
+ },
+ "salmudaina": {
+  "id": 38236,
+  "nombre": "Tirant (Es Mercadal)",
+  "tipo": "Playa",
+  "d": 9567,
+  "zona": "mediterraneo",
+  "municipio": "S'Almudaina",
+  "provincia": "Baleares"
+ },
+ "chiclana-de-la-frontera": {
+  "id": 33121,
+  "nombre": "La Barrosa (Chiclana)",
+  "tipo": "Playa",
+  "d": 3243,
+  "zona": "atlantico",
+  "municipio": "Chiclana de la Frontera",
+  "provincia": "Cádiz"
+ },
+ "lalfas-del-pi": {
+  "id": 36154,
+  "nombre": "Cap Blanc (Altea)",
+  "tipo": "Playa",
+  "d": 799,
+  "zona": "mediterraneo",
+  "municipio": "L'Alfàs del Pi",
+  "provincia": "Alicante"
+ },
+ "tamaduste": {
+  "id": 24118,
+  "nombre": "Tamaduste",
+  "tipo": "Localidad",
+  "d": 1351,
+  "zona": "canarias",
+  "municipio": "Tamaduste",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "colonia-de-sant-jordi": {
+  "id": 28111,
+  "nombre": "Sa Rapita",
+  "tipo": "Localidad",
+  "d": 8337,
+  "zona": "mediterraneo",
+  "municipio": "Colònia de Sant Jordi",
+  "provincia": "Baleares"
+ },
+ "busto": {
+  "id": 21208,
+  "nombre": "Luarca",
+  "tipo": "Localidad",
+  "d": 6208,
+  "zona": "cantabrico",
+  "municipio": "Busto",
+  "provincia": "Asturias"
+ },
+ "el-pinar": {
+  "id": 24120,
+  "nombre": "La Restrinja",
+  "tipo": "Localidad",
+  "d": 3426,
+  "zona": "canarias",
+  "municipio": "El Pinar",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "albuerne": {
+  "id": 32107,
+  "nombre": "San Pedro de Bocamar (Cudillero)",
+  "tipo": "Playa",
+  "d": 3873,
+  "zona": "cantabrico",
+  "municipio": "Albuerne",
+  "provincia": "Asturias"
+ },
+ "villar": {
+  "id": 31211,
+  "nombre": "Rodiles (Villaviciosa)",
+  "tipo": "Playa",
+  "d": 1121,
+  "zona": "cantabrico",
+  "municipio": "Villar",
+  "provincia": "Asturias"
+ },
+ "taibique": {
+  "id": 24120,
+  "nombre": "La Restrinja",
+  "tipo": "Localidad",
+  "d": 5649,
+  "zona": "canarias",
+  "municipio": "Taibique",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "tabaibales": {
+  "id": 34210,
+  "nombre": "Mogan",
+  "tipo": "Playa",
+  "d": 4908,
+  "zona": "canarias",
+  "municipio": "Tabaibales",
+  "provincia": "Las Palmas"
+ },
+ "santa-maria-de-guia-de-gran-canaria": {
+  "id": 24209,
+  "nombre": "San Andres",
+  "tipo": "Localidad",
+  "d": 4764,
+  "zona": "canarias",
+  "municipio": "Santa María de Guía de Gran Canaria",
+  "provincia": "Las Palmas"
+ },
+ "soto-del-barco": {
+  "id": 32105,
+  "nombre": "Aguilar (Muros de Nalon)",
+  "tipo": "Playa",
+  "d": 3263,
+  "zona": "cantabrico",
+  "municipio": "Soto del Barco",
+  "provincia": "Asturias"
+ },
+ "el-pozuelo": {
+  "id": 25212,
+  "nombre": "Adra",
+  "tipo": "Localidad",
+  "d": 10531,
+  "zona": "mediterraneo",
+  "municipio": "El Pozuelo",
+  "provincia": "Granada"
+ },
+ "chozas-de-la-poleosa": {
+  "id": 23104,
+  "nombre": "Matalascañas",
+  "tipo": "Localidad",
+  "d": 9409,
+  "zona": "atlantico",
+  "municipio": "Chozas de la Poleosa",
+  "provincia": "Huelva"
+ },
+ "morro-jable": {
+  "id": 24213,
+  "nombre": "Morro del Jable",
+  "tipo": "Localidad",
+  "d": 1360,
+  "zona": "canarias",
+  "municipio": "Morro Jable",
+  "provincia": "Las Palmas"
+ },
+ "caldebarcos": {
+  "id": 32204,
+  "nombre": "Carnota",
+  "tipo": "Playa",
+  "d": 1229,
+  "zona": "atlantico",
+  "municipio": "Caldebarcos",
+  "provincia": "A Coruña"
+ },
+ "vilar": {
+  "id": 32204,
+  "nombre": "Carnota",
+  "tipo": "Playa",
+  "d": 853,
+  "zona": "atlantico",
+  "municipio": "Vilar",
+  "provincia": "A Coruña"
+ },
+ "san-andres-de-teixido": {
+  "id": 22108,
+  "nombre": "Cariño",
+  "tipo": "Localidad",
+  "d": 7938,
+  "zona": "cantabrico",
+  "municipio": "San Andrés de Teixido",
+  "provincia": "A Coruña"
+ },
+ "caserio-marzagon": {
+  "id": 33106,
+  "nombre": "El Parador (Moguer)",
+  "tipo": "Playa",
+  "d": 7126,
+  "zona": "atlantico",
+  "municipio": "Caserío Marzagón",
+  "provincia": "Huelva"
+ },
+ "sestany-den-mas": {
+  "id": 38208,
+  "nombre": "Cala Anguila (Manacor)",
+  "tipo": "Playa",
+  "d": 3297,
+  "zona": "mediterraneo",
+  "municipio": "S'Estany den Mas",
+  "provincia": "Baleares"
+ },
+ "lescala": {
+  "id": 27132,
+  "nombre": "L'Escala",
+  "tipo": "Localidad",
+  "d": 273,
+  "zona": "mediterraneo",
+  "municipio": "L'Escala",
+  "provincia": "Girona"
+ },
+ "el-arteal": {
+  "id": 36103,
+  "nombre": "Las Marinas (Vera)",
+  "tipo": "Playa",
+  "d": 11424,
+  "zona": "mediterraneo",
+  "municipio": "El Arteal",
+  "provincia": "Almería"
+ },
+ "cartavio": {
+  "id": 21210,
+  "nombre": "Navia",
+  "tipo": "Localidad",
+  "d": 5813,
+  "zona": "cantabrico",
+  "municipio": "Cartavio",
+  "provincia": "Asturias"
+ },
+ "loza": {
+  "id": 21210,
+  "nombre": "Navia",
+  "tipo": "Localidad",
+  "d": 4968,
+  "zona": "cantabrico",
+  "municipio": "Loza",
+  "provincia": "Asturias"
+ },
+ "tomino": {
+  "id": 22211,
+  "nombre": "A Guarda",
+  "tipo": "Localidad",
+  "d": 11186,
+  "zona": "atlantico",
+  "municipio": "Tomiño",
+  "provincia": "Pontevedra"
+ },
+ "san-juan-de-la-rambla": {
+  "id": 24105,
+  "nombre": "San Juan de la Rambla",
+  "tipo": "Localidad",
+  "d": 598,
+  "zona": "canarias",
+  "municipio": "San Juan de la Rambla",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "sant-francesc-de-sestany": {
+  "id": 38129,
+  "nombre": "Ses Salines (S. Josep de Sa Talaia)",
+  "tipo": "Playa",
+  "d": 1518,
+  "zona": "mediterraneo",
+  "municipio": "Sant Francesc de s'Estany",
+  "provincia": "Baleares"
+ },
+ "port-de-sant-miquel": {
+  "id": 38123,
+  "nombre": "Port de San Miquel(S. Joan de Labritja)",
+  "tipo": "Playa",
+  "d": 3756,
+  "zona": "mediterraneo",
+  "municipio": "Port de Sant Miquel",
+  "provincia": "Baleares"
+ },
+ "areos": {
+  "id": 32215,
+  "nombre": "A Corna (A Pobra do Caramiñal)",
+  "tipo": "Playa",
+  "d": 2476,
+  "zona": "atlantico",
+  "municipio": "Areos",
+  "provincia": "A Coruña"
+ },
+ "barranco-de-santiago": {
+  "id": 34104,
+  "nombre": "Santiago (Alajero)",
+  "tipo": "Playa",
+  "d": 3178,
+  "zona": "canarias",
+  "municipio": "Barranco de Santiago",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "catoira": {
+  "id": 12210,
+  "nombre": "Vilagarcia de Arousa",
+  "tipo": "Puerto",
+  "d": 9039,
+  "zona": "atlantico",
+  "municipio": "Catoira",
+  "provincia": "Pontevedra"
+ },
+ "guardamar-de-la-safor": {
+  "id": 36209,
+  "nombre": "Bellreguard",
+  "tipo": "Playa",
+  "d": 490,
+  "zona": "mediterraneo",
+  "municipio": "Guardamar de la Safor",
+  "provincia": "Valencia"
+ },
+ "la-lajita": {
+  "id": 24215,
+  "nombre": "Tarajalejo",
+  "tipo": "Localidad",
+  "d": 4289,
+  "zona": "canarias",
+  "municipio": "La Lajita",
+  "provincia": "Las Palmas"
+ },
+ "o-campanario": {
+  "id": 22116,
+  "nombre": "Porto do Son",
+  "tipo": "Localidad",
+  "d": 3746,
+  "zona": "atlantico",
+  "municipio": "O Campanario",
+  "provincia": "A Coruña"
+ },
+ "redonda": {
+  "id": 32202,
+  "nombre": "Estorde (Cee)",
+  "tipo": "Playa",
+  "d": 1757,
+  "zona": "atlantico",
+  "municipio": "Redonda",
+  "provincia": "A Coruña"
+ },
+ "lira": {
+  "id": 32204,
+  "nombre": "Carnota",
+  "tipo": "Playa",
+  "d": 4547,
+  "zona": "atlantico",
+  "municipio": "Lira",
+  "provincia": "A Coruña"
+ },
+ "poblat-talaiotic-de-sa-torreta": {
+  "id": 28209,
+  "nombre": "Na Macaret",
+  "tipo": "Localidad",
+  "d": 5359,
+  "zona": "mediterraneo",
+  "municipio": "Poblat talaiòtic de Sa Torreta",
+  "provincia": "Baleares"
+ },
+ "son-xoriguer": {
+  "id": 38232,
+  "nombre": "Son Xoringuer (Ciutadella)",
+  "tipo": "Playa",
+  "d": 2076,
+  "zona": "mediterraneo",
+  "municipio": "Son Xoriguer",
+  "provincia": "Baleares"
+ },
+ "torre-saura": {
+  "id": 38232,
+  "nombre": "Son Xoringuer (Ciutadella)",
+  "tipo": "Playa",
+  "d": 4485,
+  "zona": "mediterraneo",
+  "municipio": "Torre Saura",
+  "provincia": "Baleares"
+ },
+ "o-barral": {
+  "id": 22109,
+  "nombre": "Cedeira",
+  "tipo": "Localidad",
+  "d": 1698,
+  "zona": "cantabrico",
+  "municipio": "O Barral",
+  "provincia": "A Coruña"
+ },
+ "tabarca": {
+  "id": 26113,
+  "nombre": "Santa Pola",
+  "tipo": "Localidad",
+  "d": 8363,
+  "zona": "mediterraneo",
+  "municipio": "Tabarca",
+  "provincia": "Alicante"
+ },
+ "plentzia": {
+  "id": 21114,
+  "nombre": "Plentzia",
+  "tipo": "Localidad",
+  "d": 355,
+  "zona": "cantabrico",
+  "municipio": "Plentzia",
+  "provincia": "Bizkaia"
+ },
+ "candelago": {
+  "id": 32173,
+  "nombre": "Laxe",
+  "tipo": "Playa",
+  "d": 5843,
+  "zona": "cantabrico",
+  "municipio": "Candelago",
+  "provincia": "A Coruña"
+ },
+ "borrianaburriana": {
+  "id": 26207,
+  "nombre": "El Grau de Burriana",
+  "tipo": "Localidad",
+  "d": 2834,
+  "zona": "mediterraneo",
+  "municipio": "Borriana/Burriana",
+  "provincia": "Castellón"
+ },
+ "llanca": {
+  "id": 27135,
+  "nombre": "Llanca",
+  "tipo": "Localidad",
+  "d": 685,
+  "zona": "mediterraneo",
+  "municipio": "Llançà",
+  "provincia": "Girona"
+ },
+ "celtigos": {
+  "id": 32141,
+  "nombre": "A Concha/Espasante (Ortigueira)",
+  "tipo": "Playa",
+  "d": 2688,
+  "zona": "cantabrico",
+  "municipio": "Céltigos",
+  "provincia": "A Coruña"
+ },
+ "camposoto": {
+  "id": 33120,
+  "nombre": "Camposoto (San Fernando)",
+  "tipo": "Playa",
+  "d": 197,
+  "zona": "atlantico",
+  "municipio": "Camposoto",
+  "provincia": "Cádiz"
+ },
+ "prellezo": {
+  "id": 21124,
+  "nombre": "San Vicente de la Barquera",
+  "tipo": "Localidad",
+  "d": 3469,
+  "zona": "cantabrico",
+  "municipio": "Prellezo",
+  "provincia": "Cantabria"
+ },
+ "santa-cristina-daro": {
+  "id": 27126,
+  "nombre": "Sant Feliu de Guixols",
+  "tipo": "Localidad",
+  "d": 5419,
+  "zona": "mediterraneo",
+  "municipio": "Santa Cristina d'Aro",
+  "provincia": "Girona"
+ },
+ "los-canos-de-meca": {
+  "id": 33125,
+  "nombre": "Caños de Meca/Faro Trafalgar",
+  "tipo": "Playa",
+  "d": 3574,
+  "zona": "atlantico",
+  "municipio": "Los Caños de Meca",
+  "provincia": "Cádiz"
+ },
+ "vilacha": {
+  "id": 32134,
+  "nombre": "Esteiro (Xove)",
+  "tipo": "Playa",
+  "d": 2828,
+  "zona": "cantabrico",
+  "municipio": "Vilachá",
+  "provincia": "Lugo"
+ },
+ "cambre": {
+  "id": 32167,
+  "nombre": "Areal do Barrañan (Arteixo)",
+  "tipo": "Playa",
+  "d": 1131,
+  "zona": "cantabrico",
+  "municipio": "Cambre",
+  "provincia": "A Coruña"
+ },
+ "monte-de-luna": {
+  "id": 24123,
+  "nombre": "Casas del Morron",
+  "tipo": "Localidad",
+  "d": 8009,
+  "zona": "canarias",
+  "municipio": "Monte de Luna",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "las-brenas": {
+  "id": 24220,
+  "nombre": "Las Coloradas",
+  "tipo": "Localidad",
+  "d": 7104,
+  "zona": "canarias",
+  "municipio": "Las Breñas",
+  "provincia": "Las Palmas"
+ },
+ "la-guancha": {
+  "id": 24105,
+  "nombre": "San Juan de la Rambla",
+  "tipo": "Localidad",
+  "d": 2492,
+  "zona": "canarias",
+  "municipio": "La Guancha",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "es-port": {
+  "id": 28106,
+  "nombre": "Banyalbufar",
+  "tipo": "Localidad",
+  "d": 7726,
+  "zona": "mediterraneo",
+  "municipio": "Es Port",
+  "provincia": "Baleares"
+ },
+ "agua-de-enmedio": {
+  "id": 25219,
+  "nombre": "Carboneras",
+  "tipo": "Localidad",
+  "d": 8518,
+  "zona": "mediterraneo",
+  "municipio": "Agua de Enmedio",
+  "provincia": "Almería"
+ },
+ "garrucha": {
+  "id": 36103,
+  "nombre": "Las Marinas (Vera)",
+  "tipo": "Playa",
+  "d": 1220,
+  "zona": "mediterraneo",
+  "municipio": "Garrucha",
+  "provincia": "Almería"
+ },
+ "costa-del-silencio": {
+  "id": 24110,
+  "nombre": "Las Galletas",
+  "tipo": "Localidad",
+  "d": 2003,
+  "zona": "canarias",
+  "municipio": "Costa del Silencio",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "calvelo": {
+  "id": 22207,
+  "nombre": "Pontevedra",
+  "tipo": "Localidad",
+  "d": 6619,
+  "zona": "atlantico",
+  "municipio": "Calvelo",
+  "provincia": "Pontevedra"
+ },
+ "canelinas": {
+  "id": 32203,
+  "nombre": "Ezaro (Dumbria)",
+  "tipo": "Playa",
+  "d": 2923,
+  "zona": "atlantico",
+  "municipio": "Caneliñas",
+  "provincia": "A Coruña"
+ },
+ "boebre": {
+  "id": 32155,
+  "nombre": "Perbes(Miño)",
+  "tipo": "Playa",
+  "d": 1553,
+  "zona": "cantabrico",
+  "municipio": "Boebre",
+  "provincia": "A Coruña"
+ },
+ "oia": {
+  "id": 22210,
+  "nombre": "Baiona",
+  "tipo": "Localidad",
+  "d": 7234,
+  "zona": "atlantico",
+  "municipio": "Oia",
+  "provincia": "Pontevedra"
+ },
+ "casal-novo": {
+  "id": 22117,
+  "nombre": "Corrubedo",
+  "tipo": "Localidad",
+  "d": 3081,
+  "zona": "atlantico",
+  "municipio": "Casal Novo",
+  "provincia": "A Coruña"
+ },
+ "puerto-del-rosario": {
+  "id": 14220,
+  "nombre": "Puerto del Rosario (Fuerteventura)",
+  "tipo": "Puerto",
+  "d": 1916,
+  "zona": "canarias",
+  "municipio": "Puerto del Rosario",
+  "provincia": "Las Palmas"
+ },
+ "enix": {
+  "id": 15240,
+  "nombre": "Almeria",
+  "tipo": "Puerto",
+  "d": 3999,
+  "zona": "mediterraneo",
+  "municipio": "Enix",
+  "provincia": "Almería"
+ },
+ "chimparra": {
+  "id": 22109,
+  "nombre": "Cedeira",
+  "tipo": "Localidad",
+  "d": 6443,
+  "zona": "cantabrico",
+  "municipio": "Chímparra",
+  "provincia": "A Coruña"
+ },
+ "el-puertito": {
+  "id": 34106,
+  "nombre": "Troya (Adeje)",
+  "tipo": "Playa",
+  "d": 5166,
+  "zona": "canarias",
+  "municipio": "El Puertito",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "alcanar": {
+  "id": 37100,
+  "nombre": "El Marjal (Alcanar)",
+  "tipo": "Playa",
+  "d": 3257,
+  "zona": "mediterraneo",
+  "municipio": "Alcanar",
+  "provincia": "Tarragona"
+ },
+ "garafia": {
+  "id": 24126,
+  "nombre": "San Andres y Sauces",
+  "tipo": "Localidad",
+  "d": 1638,
+  "zona": "canarias",
+  "municipio": "Garafía",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "san-andres": {
+  "id": 34115,
+  "nombre": "Las Teresitas (S. Cruz de Tenerife)",
+  "tipo": "Playa",
+  "d": 5995,
+  "zona": "canarias",
+  "municipio": "San Andrés",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "balanegra": {
+  "id": 35234,
+  "nombre": "Censo (Adra)",
+  "tipo": "Playa",
+  "d": 7473,
+  "zona": "mediterraneo",
+  "municipio": "Balanegra",
+  "provincia": "Almería"
+ },
+ "meliana": {
+  "id": 36228,
+  "nombre": "Malvarrosa (Valencia)",
+  "tipo": "Playa",
+  "d": 5221,
+  "zona": "mediterraneo",
+  "municipio": "Meliana",
+  "provincia": "Valencia"
+ },
+ "pedro-valiente": {
+  "id": 35103,
+  "nombre": "Los Lances Norte (Tarifa)",
+  "tipo": "Playa",
+  "d": 1034,
+  "zona": "mediterraneo",
+  "municipio": "Pedro Valiente",
+  "provincia": "Cádiz"
+ },
+ "el-albir": {
+  "id": 36154,
+  "nombre": "Cap Blanc (Altea)",
+  "tipo": "Playa",
+  "d": 1556,
+  "zona": "mediterraneo",
+  "municipio": "El Albir",
+  "provincia": "Alicante"
+ },
+ "cristelo": {
+  "id": 32262,
+  "nombre": "Os Muiños (A Guarda)",
+  "tipo": "Playa",
+  "d": 1329,
+  "zona": "atlantico",
+  "municipio": "Cristelo",
+  "provincia": "Pontevedra"
+ },
+ "moledo": {
+  "id": 32262,
+  "nombre": "Os Muiños (A Guarda)",
+  "tipo": "Playa",
+  "d": 2803,
+  "zona": "atlantico",
+  "municipio": "Moledo",
+  "provincia": "Pontevedra"
+ },
+ "caleta-del-sebo": {
+  "id": 34227,
+  "nombre": "Las Conchas (La Graciosa)",
+  "tipo": "Playa",
+  "d": 4034,
+  "zona": "canarias",
+  "municipio": "Caleta del Sebo",
+  "provincia": "Las Palmas"
+ },
+ "torre-del-mar": {
+  "id": 25207,
+  "nombre": "Torre del Mar",
+  "tipo": "Localidad",
+  "d": 539,
+  "zona": "mediterraneo",
+  "municipio": "Torre del Mar",
+  "provincia": "Málaga"
+ },
+ "antigua": {
+  "id": 24217,
+  "nombre": "Fustes",
+  "tipo": "Localidad",
+  "d": 2271,
+  "zona": "canarias",
+  "municipio": "Antigua",
+  "provincia": "Las Palmas"
+ },
+ "pozo-negro": {
+  "id": 34213,
+  "nombre": "Las Playitas (Tuineje)",
+  "tipo": "Playa",
+  "d": 8568,
+  "zona": "canarias",
+  "municipio": "Pozo Negro",
+  "provincia": "Las Palmas"
+ },
+ "giniginamar": {
+  "id": 24216,
+  "nombre": "Gran Tarajal",
+  "tipo": "Localidad",
+  "d": 3011,
+  "zona": "canarias",
+  "municipio": "Giniginamar",
+  "provincia": "Las Palmas"
+ },
+ "tarajalejo": {
+  "id": 24215,
+  "nombre": "Tarajalejo",
+  "tipo": "Localidad",
+  "d": 1859,
+  "zona": "canarias",
+  "municipio": "Tarajalejo",
+  "provincia": "Las Palmas"
+ },
+ "cofete": {
+  "id": 24213,
+  "nombre": "Morro del Jable",
+  "tipo": "Localidad",
+  "d": 7884,
+  "zona": "canarias",
+  "municipio": "Cofete",
+  "provincia": "Las Palmas"
+ },
+ "esquinzo": {
+  "id": 34216,
+  "nombre": "Butihondo (Pajara)",
+  "tipo": "Playa",
+  "d": 1233,
+  "zona": "canarias",
+  "municipio": "Esquinzo",
+  "provincia": "Las Palmas"
+ },
+ "barranco-los-canarios": {
+  "id": 24214,
+  "nombre": "Costa Calma",
+  "tipo": "Localidad",
+  "d": 9009,
+  "zona": "canarias",
+  "municipio": "Barranco los Canarios",
+  "provincia": "Las Palmas"
+ },
+ "la-pared": {
+  "id": 24214,
+  "nombre": "Costa Calma",
+  "tipo": "Localidad",
+  "d": 7164,
+  "zona": "canarias",
+  "municipio": "La Pared",
+  "provincia": "Las Palmas"
+ },
+ "el-prat-de-llobregat": {
+  "id": 27111,
+  "nombre": "El Prat de Llobregat",
+  "tipo": "Localidad",
+  "d": 3746,
+  "zona": "mediterraneo",
+  "municipio": "El Prat de Llobregat",
+  "provincia": "Barcelona"
+ },
+ "cala-morell": {
+  "id": 28207,
+  "nombre": "Ciutadella",
+  "tipo": "Localidad",
+  "d": 9596,
+  "zona": "mediterraneo",
+  "municipio": "Cala Morell",
+  "provincia": "Baleares"
+ },
+ "son-parc": {
+  "id": 28209,
+  "nombre": "Na Macaret",
+  "tipo": "Localidad",
+  "d": 5075,
+  "zona": "mediterraneo",
+  "municipio": "Son Parc",
+  "provincia": "Baleares"
+ },
+ "port-daddaia": {
+  "id": 28209,
+  "nombre": "Na Macaret",
+  "tipo": "Localidad",
+  "d": 2320,
+  "zona": "mediterraneo",
+  "municipio": "Port d'Addaia",
+  "provincia": "Baleares"
+ },
+ "salou": {
+  "id": 27104,
+  "nombre": "Salou",
+  "tipo": "Localidad",
+  "d": 1147,
+  "zona": "mediterraneo",
+  "municipio": "Salou",
+  "provincia": "Tarragona"
+ },
+ "pals": {
+  "id": 37238,
+  "nombre": "Mas Pinell (Torroella de Montgri)",
+  "tipo": "Playa",
+  "d": 742,
+  "zona": "mediterraneo",
+  "municipio": "Pals",
+  "provincia": "Girona"
+ },
+ "palamos": {
+  "id": 27128,
+  "nombre": "Palamos",
+  "tipo": "Localidad",
+  "d": 2367,
+  "zona": "mediterraneo",
+  "municipio": "Palamós",
+  "provincia": "Girona"
+ },
+ "cambrils": {
+  "id": 27103,
+  "nombre": "Cambrils",
+  "tipo": "Localidad",
+  "d": 466,
+  "zona": "mediterraneo",
+  "municipio": "Cambrils",
+  "provincia": "Tarragona"
+ },
+ "mont-roig-del-camp": {
+  "id": 27102,
+  "nombre": "Miami Platja",
+  "tipo": "Localidad",
+  "d": 1563,
+  "zona": "mediterraneo",
+  "municipio": "Mont-roig del Camp",
+  "provincia": "Tarragona"
+ },
+ "vila-seca": {
+  "id": 17110,
+  "nombre": "Tarragona",
+  "tipo": "Puerto",
+  "d": 2232,
+  "zona": "mediterraneo",
+  "municipio": "Vila-seca",
+  "provincia": "Tarragona"
+ },
+ "xeraco": {
+  "id": 36212,
+  "nombre": "Xeraco",
+  "tipo": "Playa",
+  "d": 56,
+  "zona": "mediterraneo",
+  "municipio": "Xeraco",
+  "provincia": "Valencia"
+ },
+ "roque-bermejo": {
+  "id": 34115,
+  "nombre": "Las Teresitas (S. Cruz de Tenerife)",
+  "tipo": "Playa",
+  "d": 8746,
+  "zona": "canarias",
+  "municipio": "Roque Bermejo",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "tacoronte": {
+  "id": 24103,
+  "nombre": "Puerto de la Madera",
+  "tipo": "Localidad",
+  "d": 202,
+  "zona": "canarias",
+  "municipio": "Tacoronte",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "las-carboneras": {
+  "id": 24102,
+  "nombre": "Punta del Hidalgo",
+  "tipo": "Localidad",
+  "d": 4662,
+  "zona": "canarias",
+  "municipio": "Las Carboneras",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "torreblanca": {
+  "id": 26211,
+  "nombre": "Torrenostra",
+  "tipo": "Localidad",
+  "d": 477,
+  "zona": "mediterraneo",
+  "municipio": "Torreblanca",
+  "provincia": "Castellón"
+ },
+ "tavernes-de-la-valldigna": {
+  "id": 36213,
+  "nombre": "Tavernes",
+  "tipo": "Playa",
+  "d": 186,
+  "zona": "mediterraneo",
+  "municipio": "Tavernes de la Valldigna",
+  "provincia": "Valencia"
+ },
+ "benicasimbenicassim": {
+  "id": 26209,
+  "nombre": "Benicassim",
+  "tipo": "Localidad",
+  "d": 460,
+  "zona": "mediterraneo",
+  "municipio": "Benicasim/Benicàssim",
+  "provincia": "Castellón"
+ },
+ "castellon-de-la-planacastello-de-la-plana": {
+  "id": 16240,
+  "nombre": "Castellon",
+  "tipo": "Puerto",
+  "d": 4278,
+  "zona": "mediterraneo",
+  "municipio": "Castellón de la Plana/Castelló de la Plana",
+  "provincia": "Castellón"
+ },
+ "castello-de-la-planacastellon-de-la-plana": {
+  "id": 16240,
+  "nombre": "Castellon",
+  "tipo": "Puerto",
+  "d": 3916,
+  "zona": "mediterraneo",
+  "municipio": "Castelló de la Plana/Castellón de la Plana",
+  "provincia": "Castellón"
+ },
+ "premia-de-mar": {
+  "id": 27116,
+  "nombre": "Vilassar de Mar",
+  "tipo": "Localidad",
+  "d": 183,
+  "zona": "mediterraneo",
+  "municipio": "Premià de Mar",
+  "provincia": "Barcelona"
+ },
+ "sant-adria-de-besos": {
+  "id": 27113,
+  "nombre": "Badalona",
+  "tipo": "Localidad",
+  "d": 3626,
+  "zona": "mediterraneo",
+  "municipio": "Sant Adrià de Besòs",
+  "provincia": "Barcelona"
+ },
+ "lloret-de-mar": {
+  "id": 27124,
+  "nombre": "Lloret de mar",
+  "tipo": "Localidad",
+  "d": 929,
+  "zona": "mediterraneo",
+  "municipio": "Lloret de Mar",
+  "provincia": "Girona"
+ },
+ "castelldefels": {
+  "id": 27110,
+  "nombre": "Castelldefels",
+  "tipo": "Localidad",
+  "d": 3208,
+  "zona": "mediterraneo",
+  "municipio": "Castelldefels",
+  "provincia": "Barcelona"
+ },
+ "gava": {
+  "id": 27110,
+  "nombre": "Castelldefels",
+  "tipo": "Localidad",
+  "d": 4169,
+  "zona": "mediterraneo",
+  "municipio": "Gavà",
+  "provincia": "Barcelona"
+ },
+ "viladecans": {
+  "id": 27110,
+  "nombre": "Castelldefels",
+  "tipo": "Localidad",
+  "d": 7082,
+  "zona": "mediterraneo",
+  "municipio": "Viladecans",
+  "provincia": "Barcelona"
+ },
+ "almassora": {
+  "id": 16240,
+  "nombre": "Castellon",
+  "tipo": "Puerto",
+  "d": 4116,
+  "zona": "mediterraneo",
+  "municipio": "Almassora",
+  "provincia": "Castellón"
+ },
+ "venta-de-san-antonio-estacion": {
+  "id": 26211,
+  "nombre": "Torrenostra",
+  "tipo": "Localidad",
+  "d": 4694,
+  "zona": "mediterraneo",
+  "municipio": "Venta de San Antonio-Estación",
+  "provincia": "Castellón"
+ },
+ "torrenostra": {
+  "id": 26211,
+  "nombre": "Torrenostra",
+  "tipo": "Localidad",
+  "d": 1657,
+  "zona": "mediterraneo",
+  "municipio": "Torrenostra",
+  "provincia": "Castellón"
+ },
+ "torre-de-la-sal": {
+  "id": 26210,
+  "nombre": "Oropesa",
+  "tipo": "Localidad",
+  "d": 6596,
+  "zona": "mediterraneo",
+  "municipio": "Torre de la Sal",
+  "provincia": "Castellón"
+ },
+ "cabanes": {
+  "id": 26210,
+  "nombre": "Oropesa",
+  "tipo": "Localidad",
+  "d": 5093,
+  "zona": "mediterraneo",
+  "municipio": "Cabanes",
+  "provincia": "Castellón"
+ },
+ "massalfassar": {
+  "id": 36229,
+  "nombre": "Pobla de Farmals",
+  "tipo": "Playa",
+  "d": 1375,
+  "zona": "mediterraneo",
+  "municipio": "Massalfassar",
+  "provincia": "Valencia"
+ },
+ "vistabella-rafalell": {
+  "id": 36229,
+  "nombre": "Pobla de Farmals",
+  "tipo": "Playa",
+  "d": 660,
+  "zona": "mediterraneo",
+  "municipio": "Vistabella Rafalell",
+  "provincia": "Valencia"
+ },
+ "massamagrell": {
+  "id": 36229,
+  "nombre": "Pobla de Farmals",
+  "tipo": "Playa",
+  "d": 196,
+  "zona": "mediterraneo",
+  "municipio": "Massamagrell",
+  "provincia": "Valencia"
+ },
+ "molinell": {
+  "id": 36206,
+  "nombre": "Aigua Blanca (Denia)",
+  "tipo": "Playa",
+  "d": 3122,
+  "zona": "mediterraneo",
+  "municipio": "Molinell",
+  "provincia": "Valencia"
+ },
+ "tarragona": {
+  "id": 37122,
+  "nombre": "L'Arrabasada (Tarragona)",
+  "tipo": "Playa",
+  "d": 2929,
+  "zona": "mediterraneo",
+  "municipio": "Tarragona",
+  "provincia": "Tarragona"
+ },
+ "altafulla": {
+  "id": 27106,
+  "nombre": "Torredembarra",
+  "tipo": "Localidad",
+  "d": 1533,
+  "zona": "mediterraneo",
+  "municipio": "Altafulla",
+  "provincia": "Tarragona"
+ },
+ "les-maravelles": {
+  "id": 38115,
+  "nombre": "Cala Estancia (Palma de Mall.)",
+  "tipo": "Playa",
+  "d": 2765,
+  "zona": "mediterraneo",
+  "municipio": "Les Maravelles",
+  "provincia": "Baleares"
+ },
+ "sant-llorenc-des-cardassar": {
+  "id": 38211,
+  "nombre": "Cala Millor (Son Servera)",
+  "tipo": "Playa",
+  "d": 1327,
+  "zona": "mediterraneo",
+  "municipio": "Sant Llorenç des Cardassar",
+  "provincia": "Baleares"
+ },
+ "son-serra-de-marina": {
+  "id": 38219,
+  "nombre": "Son Baulo (Sta. Margalida)",
+  "tipo": "Playa",
+  "d": 7277,
+  "zona": "mediterraneo",
+  "municipio": "Son Serra de Marina",
+  "provincia": "Baleares"
+ },
+ "celorio": {
+  "id": 31203,
+  "nombre": "Las Camaras/Los Frailes (Llanes)",
+  "tipo": "Playa",
+  "d": 248,
+  "zona": "cantabrico",
+  "municipio": "Celorio",
+  "provincia": "Asturias"
+ },
+ "arrecife": {
+  "id": 14230,
+  "nombre": "Arrecife (Lanzarote)",
+  "tipo": "Puerto",
+  "d": 2485,
+  "zona": "canarias",
+  "municipio": "Arrecife",
+  "provincia": "Las Palmas"
+ },
+ "roses": {
+  "id": 27133,
+  "nombre": "Roses",
+  "tipo": "Localidad",
+  "d": 2620,
+  "zona": "mediterraneo",
+  "municipio": "Roses",
+  "provincia": "Girona"
+ },
+ "empuriabrava": {
+  "id": 27133,
+  "nombre": "Roses",
+  "tipo": "Localidad",
+  "d": 3109,
+  "zona": "mediterraneo",
+  "municipio": "Empuriabrava",
+  "provincia": "Girona"
+ },
+ "arafo": {
+  "id": 24113,
+  "nombre": "Candelaria",
+  "tipo": "Localidad",
+  "d": 2204,
+  "zona": "canarias",
+  "municipio": "Arafo",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "cunit": {
+  "id": 27107,
+  "nombre": "Cunit",
+  "tipo": "Localidad",
+  "d": 684,
+  "zona": "mediterraneo",
+  "municipio": "Cunit",
+  "provincia": "Tarragona"
+ },
+ "el-monte": {
+  "id": 21204,
+  "nombre": "Gozon",
+  "tipo": "Localidad",
+  "d": 4611,
+  "zona": "cantabrico",
+  "municipio": "El Monte",
+  "provincia": "Asturias"
+ },
+ "zahora": {
+  "id": 33125,
+  "nombre": "Caños de Meca/Faro Trafalgar",
+  "tipo": "Playa",
+  "d": 2015,
+  "zona": "atlantico",
+  "municipio": "Zahora",
+  "provincia": "Cádiz"
+ },
+ "moguer": {
+  "id": 33106,
+  "nombre": "El Parador (Moguer)",
+  "tipo": "Playa",
+  "d": 3938,
+  "zona": "atlantico",
+  "municipio": "Moguer",
+  "provincia": "Huelva"
+ },
+ "el-cabrito": {
+  "id": 14130,
+  "nombre": "San Sebastian de la Gomera",
+  "tipo": "Puerto",
+  "d": 5538,
+  "zona": "canarias",
+  "municipio": "El Cabrito",
+  "provincia": "Santa Cruz de Tenerife"
+ },
+ "vila-praia-de-ancora": {
+  "id": 32262,
+  "nombre": "Os Muiños (A Guarda)",
+  "tipo": "Playa",
+  "d": 7692,
+  "zona": "atlantico",
+  "municipio": "Vila Praia de Âncora",
+  "provincia": "Pontevedra"
+ },
+ "vila-real-de-santo-antonio": {
+  "id": 23101,
+  "nombre": "Isla Cristina",
+  "tipo": "Localidad",
+  "d": 9886,
+  "zona": "atlantico",
+  "municipio": "Vila Real de Santo António",
+  "provincia": "Huelva"
+ },
+ "castell-platja-daro": {
+  "id": 27127,
+  "nombre": "Platja d'Aro",
+  "tipo": "Localidad",
+  "d": 948,
+  "zona": "mediterraneo",
+  "municipio": "Castell-Platja d'Aro",
+  "provincia": "Girona"
+ },
+ "castell-daro-platja-daro-i-sagaro": {
+  "id": 27127,
+  "nombre": "Platja d'Aro",
+  "tipo": "Localidad",
+  "d": 1114,
+  "zona": "mediterraneo",
+  "municipio": "Castell d\"Aro, Platja d\"Aro i s\"Agaró",
+  "provincia": "Girona"
+ },
+ "calonge": {
+  "id": 27128,
+  "nombre": "Palamos",
+  "tipo": "Localidad",
+  "d": 3016,
+  "zona": "mediterraneo",
+  "municipio": "Calonge",
+  "provincia": "Girona"
+ },
+ "monte-moris": {
+  "id": 32101,
+  "nombre": "La Palmeras (Carreño)",
+  "tipo": "Playa",
+  "d": 2168,
+  "zona": "cantabrico",
+  "municipio": "Monte Moris",
+  "provincia": "Asturias"
+ },
+ "el-perello": {
+  "id": 37103,
+  "nombre": "Cap Roig (L'Ampolla)",
+  "tipo": "Playa",
+  "d": 1878,
+  "zona": "mediterraneo",
+  "municipio": "El Perelló",
+  "provincia": "Tarragona"
+ },
+ "lampolla": {
+  "id": 37103,
+  "nombre": "Cap Roig (L'Ampolla)",
+  "tipo": "Playa",
+  "d": 1216,
+  "zona": "mediterraneo",
+  "municipio": "L'Ampolla",
+  "provincia": "Tarragona"
+ },
+ "calonge-i-sant-antoni": {
+  "id": 27128,
+  "nombre": "Palamos",
+  "tipo": "Localidad",
+  "d": 3032,
+  "zona": "mediterraneo",
+  "municipio": "Calonge i Sant Antoni",
+  "provincia": "Girona"
+ },
+ "sa-riera": {
+  "id": 27130,
+  "nombre": "Aiguafreda",
+  "tipo": "Localidad",
+  "d": 3403,
+  "zona": "mediterraneo",
+  "municipio": "Sa Riera",
+  "provincia": "Girona"
+ },
+ "girona": {
+  "id": 37234,
+  "nombre": "El Castell (Palamos)",
+  "tipo": "Playa",
+  "d": 329,
+  "zona": "mediterraneo",
+  "municipio": "Girona",
+  "provincia": "Girona"
+ },
+ "calella-de-palafrugell": {
+  "id": 27129,
+  "nombre": "Calella de Palafrugell",
+  "tipo": "Localidad",
+  "d": 2194,
+  "zona": "mediterraneo",
+  "municipio": "Calella de Palafrugell",
+  "provincia": "Girona"
+ },
+ "mont-ras": {
+  "id": 27129,
+  "nombre": "Calella de Palafrugell",
+  "tipo": "Localidad",
+  "d": 2331,
+  "zona": "mediterraneo",
+  "municipio": "Mont-ras",
+  "provincia": "Girona"
+ },
+ "tossa-de-mar": {
+  "id": 27125,
+  "nombre": "Tossa de Mar",
+  "tipo": "Localidad",
+  "d": 385,
+  "zona": "mediterraneo",
+  "municipio": "Tossa de Mar",
+  "provincia": "Girona"
+ },
+ "rosamar": {
+  "id": 27126,
+  "nombre": "Sant Feliu de Guixols",
+  "tipo": "Localidad",
+  "d": 3887,
+  "zona": "mediterraneo",
+  "municipio": "Rosamar",
+  "provincia": "Girona"
+ },
+ "lestartit": {
+  "id": 37240,
+  "nombre": "Cala Montgo (Torroella de Montgri)",
+  "tipo": "Playa",
+  "d": 4626,
+  "zona": "mediterraneo",
+  "municipio": "L'Estartit",
+  "provincia": "Girona"
+ },
+ "santa-eulalia-de-la-pena": {
+  "id": 27134,
+  "nombre": "Cadaques",
+  "tipo": "Localidad",
+  "d": 3899,
+  "zona": "mediterraneo",
+  "municipio": "Santa Eulalia de la Peña",
+  "provincia": "Girona"
+ },
+ "cadaques": {
+  "id": 27134,
+  "nombre": "Cadaques",
+  "tipo": "Localidad",
+  "d": 863,
+  "zona": "mediterraneo",
+  "municipio": "Cadaqués",
+  "provincia": "Girona"
+ },
+ "portlligat": {
+  "id": 27134,
+  "nombre": "Cadaques",
+  "tipo": "Localidad",
+  "d": 3552,
+  "zona": "mediterraneo",
+  "municipio": "Portlligat",
+  "provincia": "Girona"
+ },
+ "tamariua": {
+  "id": 37248,
+  "nombre": "El Port de la Selva",
+  "tipo": "Playa",
+  "d": 2327,
+  "zona": "mediterraneo",
+  "municipio": "Tamariua",
+  "provincia": "Girona"
+ },
+ "colera": {
+  "id": 27135,
+  "nombre": "Llanca",
+  "tipo": "Localidad",
+  "d": 3473,
+  "zona": "mediterraneo",
+  "municipio": "Colera",
+  "provincia": "Girona"
+ },
+ "portbou": {
+  "id": 27136,
+  "nombre": "Portbou",
+  "tipo": "Localidad",
+  "d": 332,
+  "zona": "mediterraneo",
+  "municipio": "Portbou",
+  "provincia": "Girona"
+ },
+ "suvina": {
+  "id": 32158,
+  "nombre": "Mera (Oleiros)",
+  "tipo": "Playa",
+  "d": 1873,
+  "zona": "cantabrico",
+  "municipio": "Suviña",
+  "provincia": "A Coruña"
+ },
+ "carnoedo": {
+  "id": 22111,
+  "nombre": "Ares",
+  "tipo": "Localidad",
+  "d": 5181,
+  "zona": "cantabrico",
+  "municipio": "Carnoedo",
+  "provincia": "A Coruña"
+ },
+ "calella": {
+  "id": 27121,
+  "nombre": "Calella",
+  "tipo": "Localidad",
+  "d": 1130,
+  "zona": "mediterraneo",
+  "municipio": "Calella",
+  "provincia": "Barcelona"
+ },
+ "pineda-de-mar": {
+  "id": 27122,
+  "nombre": "Pineda de Mar",
+  "tipo": "Localidad",
+  "d": 276,
+  "zona": "mediterraneo",
+  "municipio": "Pineda de Mar",
+  "provincia": "Barcelona"
+ },
+ "les-roquetes": {
+  "id": 27109,
+  "nombre": "Sitges",
+  "tipo": "Localidad",
+  "d": 4416,
+  "zona": "mediterraneo",
+  "municipio": "Les Roquetes",
+  "provincia": "Barcelona"
+ },
+ "sant-pere-de-ribes": {
+  "id": 27108,
+  "nombre": "Vilanova i la Geltru",
+  "tipo": "Localidad",
+  "d": 2799,
+  "zona": "mediterraneo",
+  "municipio": "Sant Pere de Ribes",
+  "provincia": "Barcelona"
+ },
+ "cubelles": {
+  "id": 27107,
+  "nombre": "Cunit",
+  "tipo": "Localidad",
+  "d": 1922,
+  "zona": "mediterraneo",
+  "municipio": "Cubelles",
+  "provincia": "Barcelona"
+ },
+ "calafell": {
+  "id": 37133,
+  "nombre": "Calafell",
+  "tipo": "Playa",
+  "d": 1442,
+  "zona": "mediterraneo",
+  "municipio": "Calafell",
+  "provincia": "Tarragona"
+ },
+ "poo": {
+  "id": 31203,
+  "nombre": "Las Camaras/Los Frailes (Llanes)",
+  "tipo": "Playa",
+  "d": 476,
+  "zona": "cantabrico",
+  "municipio": "Póo",
+  "provincia": "Asturias"
+ },
+ "calafat": {
+  "id": 37109,
+  "nombre": "Cala Calafato (L'Ametlla de Mar)",
+  "tipo": "Playa",
+  "d": 2190,
+  "zona": "mediterraneo",
+  "municipio": "Calafat",
+  "provincia": "Tarragona"
+ },
+ "lametlla-de-mar": {
+  "id": 37106,
+  "nombre": "Cala Forn (L'Ametlla de Mar)",
+  "tipo": "Playa",
+  "d": 2207,
+  "zona": "mediterraneo",
+  "municipio": "L\"Ametlla de Mar",
+  "provincia": "Tarragona"
+ },
+ "creixell": {
+  "id": 37128,
+  "nombre": "Creixell (Creixell)",
+  "tipo": "Playa",
+  "d": 142,
+  "zona": "mediterraneo",
+  "municipio": "Creixell",
+  "provincia": "Tarragona"
+ },
+ "roda-de-bara": {
+  "id": 37130,
+  "nombre": "Costa Daurada (Roda del Bara)",
+  "tipo": "Playa",
+  "d": 1407,
+  "zona": "mediterraneo",
+  "municipio": "Roda de Barà",
+  "provincia": "Tarragona"
+ },
+ "el-vendrell": {
+  "id": 37132,
+  "nombre": "Coma Ruga (El Vendrell)",
+  "tipo": "Playa",
+  "d": 290,
+  "zona": "mediterraneo",
+  "municipio": "El Vendrell",
+  "provincia": "Tarragona"
+ },
+ "estellencs": {
+  "id": 28106,
+  "nombre": "Banyalbufar",
+  "tipo": "Localidad",
+  "d": 5048,
+  "zona": "mediterraneo",
+  "municipio": "Estellencs",
+  "provincia": "Baleares"
+ },
+ "tamarit": {
+  "id": 37124,
+  "nombre": "La Mora (Tarragona)",
+  "tipo": "Playa",
+  "d": 984,
+  "zona": "mediterraneo",
+  "municipio": "Tamarit",
+  "provincia": "Tarragona"
+ },
+ "solimar": {
+  "id": 37124,
+  "nombre": "La Mora (Tarragona)",
+  "tipo": "Playa",
+  "d": 1562,
+  "zona": "mediterraneo",
+  "municipio": "Solimar",
+  "provincia": "Tarragona"
+ },
+ "riumar": {
+  "id": 37103,
+  "nombre": "Cap Roig (L'Ampolla)",
+  "tipo": "Playa",
+  "d": 9820,
+  "zona": "mediterraneo",
+  "municipio": "Riumar",
+  "provincia": "Tarragona"
+ },
+ "poblenou-del-delta": {
+  "id": 27101,
+  "nombre": "San Carles de la Rapita",
+  "tipo": "Localidad",
+  "d": 11100,
+  "zona": "mediterraneo",
+  "municipio": "Poblenou del Delta",
+  "provincia": "Tarragona"
+ },
+ "la-rapita": {
+  "id": 27101,
+  "nombre": "San Carles de la Rapita",
+  "tipo": "Localidad",
+  "d": 2953,
+  "zona": "mediterraneo",
+  "municipio": "La Ràpita",
+  "provincia": "Tarragona"
+ },
+ "sant-carles-de-la-rapita": {
+  "id": 27101,
+  "nombre": "San Carles de la Rapita",
+  "tipo": "Localidad",
+  "d": 1081,
+  "zona": "mediterraneo",
+  "municipio": "Sant Carles de la Ràpita",
+  "provincia": "Tarragona"
+ },
+ "sueca": {
+  "id": 36222,
+  "nombre": "Mareny Blau (Sueca)",
+  "tipo": "Playa",
+  "d": 3050,
+  "zona": "mediterraneo",
+  "municipio": "Sueca",
+  "provincia": "Valencia"
+ },
+ "pucol": {
+  "id": 36230,
+  "nombre": "Puçol",
+  "tipo": "Playa",
+  "d": 685,
+  "zona": "mediterraneo",
+  "municipio": "Puçol",
+  "provincia": "Valencia"
+ },
+ "gondomil": {
+  "id": 32173,
+  "nombre": "Laxe",
+  "tipo": "Playa",
+  "d": 5763,
+  "zona": "cantabrico",
+  "municipio": "Gondomil",
+  "provincia": "A Coruña"
+ },
+ "ingenio": {
+  "id": 14240,
+  "nombre": "Arinaga (Gran Canaria)",
+  "tipo": "Puerto",
+  "d": 7233,
+  "zona": "canarias",
+  "municipio": "Ingenio",
+  "provincia": "Las Palmas"
+ },
+ "puerto-del-carmen": {
+  "id": 34221,
+  "nombre": "Los Pocillos (Tias)",
+  "tipo": "Playa",
+  "d": 268,
+  "zona": "canarias",
+  "municipio": "Puerto del Carmen",
+  "provincia": "Las Palmas"
+ },
+ "urbanizacion-famara": {
+  "id": 34228,
+  "nombre": "Caleta de Famara",
+  "tipo": "Playa",
+  "d": 2597,
+  "zona": "canarias",
+  "municipio": "Urbanización Famara",
+  "provincia": "Las Palmas"
+ },
+ "san-bartolome": {
+  "id": 14230,
+  "nombre": "Arrecife (Lanzarote)",
+  "tipo": "Puerto",
+  "d": 6162,
+  "zona": "canarias",
+  "municipio": "San Bartolomé",
+  "provincia": "Las Palmas"
+ },
+ "salinas-del-rio": {
+  "id": 34225,
+  "nombre": "Jameos (Haria)",
+  "tipo": "Playa",
+  "d": 8956,
+  "zona": "canarias",
+  "municipio": "Salinas del Río",
+  "provincia": "Las Palmas"
+ }
+}

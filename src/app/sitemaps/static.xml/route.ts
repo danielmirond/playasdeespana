@@ -5,6 +5,7 @@
 // (Content Warehouse: imageQualityClickSignals — Google Imágenes asocia
 // una imagen representativa a cada URL del KG).
 
+import { ubicacionMareas } from '@/lib/mareas-portus'
 import { NextResponse } from 'next/server'
 import {
   getComunidades, getProvincias, getMunicipios,
@@ -160,6 +161,13 @@ export async function GET() {
   for (const c of comunidades) urls.push(u(`/comunidad/${c.slug}`, '0.8', 'weekly', today, `/en/communities/${c.slug}`))
   for (const p of provincias) urls.push(u(`/provincia/${p.slug}`, '0.7', 'weekly', today, `/en/provinces/${p.slug}`))
   for (const m of municipios) urls.push(u(`/municipio/${m.slug}`, '0.6', 'weekly', today, `/en/towns/${m.slug}`))
+  // Tablas de mareas: solo los municipios mapeados a Puertos del Estado y
+  // fuera del Mediterráneo, que es donde la página tiene un dato que dar.
+  // Cambia a diario (la predicción es de 3 días), de ahí el daily.
+  for (const m of municipios) {
+    const ubi = ubicacionMareas(m.slug)
+    if (ubi && ubi.zona !== 'mediterraneo') urls.push(u(`/municipio/${m.slug}/tabla-de-mareas`, '0.6', 'daily', null))
+  }
 
   // Themed sections subpages
   for (const c of perrosStats.comunidades) urls.push(u(`/playas-perros/comunidad/${c.slug}`, '0.6', 'weekly', today))
