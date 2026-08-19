@@ -182,6 +182,10 @@ export default async function BeachPageEn({ params }: Props) {
   const meteo = {
     agua: tempAgua ?? 18, olas, viento, vientoRacha,
     vientoDireccion: vientoDirRaw,
+    // Los GRADOS, además de la rosa: la rejilla dibuja la flecha del rumbo
+    // y lib/vientos necesita el sector exacto para saber si eso es levante
+    // o simplemente «del este».
+    vientoDirDeg:    meteoPlayaData?.viento_dir_deg ?? null,
     uv: meteoPlayaData?.uv_max ?? 5,
     tempAire: meteoPlayaData?.temp_aire ?? 22,
     sensacion: meteoPlayaData?.sensacion ?? meteoPlayaData?.temp_aire ?? 20,

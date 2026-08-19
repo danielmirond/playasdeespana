@@ -8,6 +8,7 @@ import type { Camping } from '@/lib/campings'
 import type { CentroBuceo } from '@/lib/buceo'
 import { Dato, CertBadge, type Certeza } from './Certeza'
 import Medusa from '@/components/ui/Medusa'
+import { nombrarViento } from '@/lib/vientos'
 import ListaPOI from './ListaPOI'
 import CuadernoCTA from './CuadernoCTA'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
@@ -76,6 +77,8 @@ const VotacionPlaya = dynamic(() => import('./VotacionPlaya'), {
 interface Meteo {
   // null = el fetch cayó y NO hay dato real; la UI muestra "—", nunca inventa.
   agua: number | null; olas: number | null; viento: number | null; vientoRacha: number
+  /** Rumbo meteorológico en grados. Alimenta lib/vientos. */
+  vientoDirDeg?: number | null
   vientoDireccion: string; uv: number | null; tempAire: number | null
   sensacion: number | null; humedad: number
   amanecer?: string; atardecer?: string; estado: string; periodo?: number
@@ -338,6 +341,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const rojo = hayBanderaRoja(banderaPlaya)
   const ordenSecciones = rojo ? ordenBanderaRoja(ORDER_V2) : ORDER_V2
   const i18n     = T[locale]
+  // El nombre local del viento, si hoy lo tiene y sopla para merecerlo.
+  const vientoNombrado = meteo.vientoDirDeg != null && meteo.viento != null
+    ? nombrarViento(playa.lat, playa.lng, meteo.vientoDirDeg, meteo.viento, locale)
+    : null
   const estado   = ESTADOS[meteo.estado as keyof typeof ESTADOS] ?? ESTADOS.CALMA
   const amazonProductos = getProductosParaPlaya(playa, meteo.estado)
 
@@ -908,7 +915,16 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div className={styles.divider}/>
 
           <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
-            <h2 className={styles.cardTitle}>{i18n.viento(nombreH)}</h2>
+            {/* El título dice el NOMBRE cuando lo hay: «Levante en Los
+                Lances hoy» es como esa playa llama a lo que pasa hoy, y lo
+                que su gente escribiría al buscarlo. */}
+            <h2 className={styles.cardTitle}>
+              {vientoNombrado?.destacado
+                ? (locale === 'en'
+                    ? <>{vientoNombrado.nombreEn} at {nombreH} <em>today</em></>
+                    : <><span style={{ textTransform:'capitalize' }}>{vientoNombrado.nombre}</span> en <em>{nombreH}</em> hoy</>)
+                : i18n.viento(nombreH)}
+            </h2>
           </div>
           <div className={styles.cardBody}>
             <div className={styles.vientoRow}>
@@ -921,6 +937,15 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 </tbody>
               </table>
             </div>
+            {/* Y qué significa. Es lo único de esta tarjeta que contesta la
+                pregunta real —«¿voy o no voy?»—: la cifra la da cualquiera;
+                saber que el levante levanta arena y mar de fondo, no. */}
+            {vientoNombrado?.destacado && (
+              <p style={{ margin:'.7rem 0 0', fontSize:'var(--fs-sm)', lineHeight:1.55, color:'var(--ink)' }}>
+                <strong style={{ textTransform:'capitalize' }}>{locale === 'en' ? vientoNombrado.nombreEn : vientoNombrado.nombre}</strong>
+                {': '}{locale === 'en' ? vientoNombrado.efectoEn : vientoNombrado.efecto}.
+              </p>
+            )}
           </div>
           </Collapsible>
         </div>

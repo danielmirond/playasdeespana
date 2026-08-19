@@ -270,7 +270,11 @@ export default async function PlayaPage({ params }: Props) {
     // Boya de Puertos del Estado más cercana (≤60 km) — dato MEDIDO
     getBoyaCercana(playa.lat, playa.lng),
   ] as const
-  const DEADLINE_MS = 1500
+  // Configurable por entorno SOLO para poder verificar en local: sin KV,
+  // ninguna promesa externa entra en 1.500 ms y la ficha se sirve entera
+  // sin meteo, lo que hace imposible comprobar nada que dependa de ella.
+  // En producción no se define y vale 1.500, como siempre.
+  const DEADLINE_MS = Number(process.env.DEADLINE_MS ?? 1500)
   const conDeadline = promesas.map(p =>
     Promise.race([
       p.then(v => ({ status: 'fulfilled' as const, value: v })),
@@ -438,6 +442,10 @@ export default async function PlayaPage({ params }: Props) {
     viento:          datosViento ? viento : null,
     vientoRacha,
     vientoDireccion: vientoDirRaw,
+    // Los GRADOS, además de la rosa: la rejilla dibuja la flecha del rumbo
+    // y lib/vientos necesita el sector exacto para saber si eso es levante
+    // o simplemente «del este».
+    vientoDirDeg:    meteoPlayaData?.viento_dir_deg ?? null,
     uv:              meteoPlayaData?.uv_max ?? null,
     tempAire:        meteoPlayaData?.temp_aire ?? null,
     sensacion:       meteoPlayaData?.sensacion ?? meteoPlayaData?.temp_aire ?? null,

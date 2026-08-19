@@ -19,10 +19,34 @@
 type KV = { get: (key: string) => Promise<any>; set: (key: string, value: any, opts?: any) => Promise<any> }
 
 let _kv: KV | null | undefined
+
+/**
+ * `import("@vercel/kv")` SIEMPRE resuelve: el paquete no comprueba las
+ * variables de entorno al cargarse, sino en cada llamada. Sin
+ * KV_REST_API_URL, `_kv` quedaba como un objeto que parecía válido y
+ * lanzaba en cada get y en cada set.
+ *
+ * Eso no era gratis. `kvCached` captura la excepción del set, pero DENTRO
+ * de un `Promise.race` con timeout de 1.500 ms, así que cada llamada
+ * pagaba el segundo y medio entero antes de seguir. Y la ficha da 1.500 ms
+ * de plazo a sus promesas externas: perdían todas por unos milisegundos.
+ * Consecuencia medida en local: la ficha entera sin meteo —«Velocidad —»,
+ * «Racha 0 km/h»— y las mareas oficiales sin llegar nunca. Parecía un
+ * fallo de red y era este.
+ *
+ * Se comprueba una vez, de verdad, con un get de sonda. Si KV no está
+ * configurado se marca ausente y ni get ni set vuelven a intentarse: sin
+ * caché, pero sin coste. Un fallo transitorio de KV YA configurado no
+ * pasa por aquí — lo siguen absorbiendo los try/catch de abajo.
+ */
 async function getKV(): Promise<KV | null> {
   if (_kv !== undefined) return _kv
   try {
     const mod = await (import("@vercel/kv") as Promise<{ kv: KV }>)
+    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
+      _kv = null
+      return null
+    }
     _kv = mod.kv
     return _kv
   } catch {

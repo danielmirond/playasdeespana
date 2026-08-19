@@ -19,6 +19,7 @@ import Medusa from '@/components/ui/Medusa'
 import { nombreConPlaya } from '@/lib/geo'
 import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 import { hayBanderaRoja } from '@/lib/bandera-roja'
+import { nombrarViento } from '@/lib/vientos'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
 import RejillaMediciones from './RejillaMediciones'
 import PreguntaDelDia from './PreguntaDelDia'
@@ -26,6 +27,8 @@ import PreguntaDelDia from './PreguntaDelDia'
 interface Meteo {
   agua: number | null; olas: number | null; viento: number | null
   uv: number; tempAire: number; estado: string
+  /** Rumbo meteorológico en grados (de dónde viene). Alimenta el nombre del viento. */
+  vientoDirDeg?: number | null
 }
 interface Props {
   playa:          Playa
@@ -169,6 +172,9 @@ export default function FichaHero({
   // El criterio vive en lib/bandera-roja, no aquí: es el mismo que decide
   // qué bloques de afiliación se retiran en FichaBody, y tiene que ser uno.
   const rojo = hayBanderaRoja(banderaPlaya)   // type guard: dentro, no es null
+  const vientoNombrado = meteo.vientoDirDeg != null && meteo.viento != null
+    ? nombrarViento(playa.lat, playa.lng, meteo.vientoDirDeg, meteo.viento, locale)
+    : null
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   const homeHref = locale === 'en' ? '/en' : '/'
   const comunidadSlug = slug(playa.comunidad)
@@ -406,7 +412,17 @@ export default function FichaHero({
                 mediciones={[
                   { etiqueta: i18n.agua,   valor: meteo.agua ?? null,   unidad: '°',    cert: certMeteo },
                   { etiqueta: i18n.olas,   valor: meteo.olas ?? null,   unidad: 'm',    cert: certMeteo },
-                  { etiqueta: i18n.viento, valor: meteo.viento ?? null, unidad: 'km/h', cert: certMeteo },
+                  {
+                    etiqueta: i18n.viento, valor: meteo.viento ?? null, unidad: 'km/h', cert: certMeteo,
+                    // «viento 28 km/h» no dice nada; «levante 28» lo dice
+                    // todo si estás en Tarifa, y «tramontana» decide el día
+                    // en el Empordà. El nombre solo aparece cuando el viento
+                    // tiene nombre EN ESA COSTA y sopla con fuerza para
+                    // merecerlo: por debajo del umbral es brisa, y llamarla
+                    // tramontana sería folclore, no información.
+                    ...(meteo.vientoDirDeg != null ? { rumboDeg: meteo.vientoDirDeg } : {}),
+                    ...(vientoNombrado?.destacado ? { nota: vientoNombrado.nombre } : {}),
+                  },
                   { etiqueta: i18n.uv,     valor: meteo.uv ?? null,     unidad: '',     cert: certMeteo },
                 ]}
               />

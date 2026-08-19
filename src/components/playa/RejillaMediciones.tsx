@@ -28,6 +28,19 @@ export interface Medicion {
   cert: Certeza
   /** «hace 12 min», «11:20». Se omite si no se sabe. */
   antiguedad?: string
+  /**
+   * Cualidad con nombre de lo que se mide: «levante», «tramontana». No es
+   * metadato —va en serif y con la tinta, no en el gris de .antiguedad—
+   * porque en muchas costas el nombre informa más que la cifra: 28 km/h no
+   * dice nada y «levante 28» lo dice todo.
+   */
+  nota?: string
+  /**
+   * Rumbo en grados METEOROLÓGICOS (de dónde VIENE el viento, que es como
+   * lo dan todos los modelos). La flecha se dibuja apuntando adonde VA,
+   * o sea grados + 180, que es como se lee una veleta.
+   */
+  rumboDeg?: number
 }
 
 interface Props {
@@ -42,8 +55,18 @@ export default function RejillaMediciones({ mediciones, onDark }: Props) {
     <div className={`${styles.rejilla}${onDark ? ' ' + styles.onDark : ''}`} role="list">
       {mediciones.map((m) => (
         <div key={m.etiqueta} className={styles.celda} role="listitem">
-          <span className={styles.etiqueta}>{m.etiqueta}</span>
+          <span className={styles.etiqueta}>
+            {m.etiqueta}
+            {m.rumboDeg != null && (
+              <svg className={styles.flecha} width="9" height="9" viewBox="0 0 16 16" aria-hidden="true"
+                style={{ transform: `rotate(${(m.rumboDeg + 180) % 360}deg)` }}>
+                <path d="M8 1.5 L8 14.5 M8 1.5 L4.4 5.6 M8 1.5 L11.6 5.6"
+                  stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              </svg>
+            )}
+          </span>
           <Dato v={m.valor} u={m.unidad} cert={m.cert} size={23} onDark={onDark} />
+          {m.nota && <span className={styles.nota}>{m.nota}</span>}
           {/* La antigüedad no se inventa: si no se sabe, no se escribe.
               Un «hace un momento» por defecto sería justo la clase de
               precisión falsa que este componente existe para evitar. */}
