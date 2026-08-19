@@ -41,10 +41,31 @@ interface MeteoRaw {
   forecast: MeteoForecast[]
 }
 
-// TTL del caché meteo: 30 min. Open-Meteo refresca cada hora pero el
-// dataset current/forecast tarda 5-10 min en propagarse a sus mirrors.
-// 30 min ofrece TTFB sub-segundo a costa de datos hasta 30 min antiguos.
-const KV_TTL_METEO = 30 * 60
+// TTL del caché meteo: 90 min. TIENE QUE SER MAYOR QUE EL `revalidate` DE
+// LA FICHA, que es una hora, y ese es todo el razonamiento.
+//
+// Antes eran 30 min, y la consecuencia era que la entrada de KV caducaba
+// SIEMPRE antes de que el ISR regenerase la página: el 100 % de las
+// revalidaciones arrancaban en frío y tenían que ganar una carrera de 28
+// promesas con plazo de 1.500 ms. Cuando la perdían —y a veces la
+// pierden— la ficha se servía sin viento, sin agua y sin oleaje, y el ISR
+// congelaba ese hueco una hora entera.
+//
+// Lo importante es que ese TTL corto no compraba frescura ninguna. El HTML
+// ya vive hasta una hora por diseño, así que un dato de 30 minutos se
+// hornea igual en una página que durará sesenta más. Pagábamos el coste de
+// la frescura —el fallo de caché garantizado— sin recibirla.
+//
+// Con 90 min la revalidación encuentra la entrada que dejó la anterior y
+// un `kv.get` responde en milisegundos. El coste real: la antigüedad
+// máxima teórica pasa de 1,5 h a 2,5 h. El beneficio: el caso normal deja
+// de ser «no hay dato».
+//
+// Por qué no más: Open-Meteo actualiza `current` cada ~15 min y la
+// promesa del sitio es «actualizado cada hora». 90 min es el número más
+// pequeño que cumple la restricción estructural con margen para la deriva
+// entre el reloj de KV y el disparo del ISR, que nunca coinciden.
+const KV_TTL_METEO = 90 * 60
 
 /**
  * Obtiene datos meteorológicos completos en UNA sola llamada a Open-Meteo:

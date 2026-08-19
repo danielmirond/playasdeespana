@@ -46,9 +46,24 @@ function calcEstadoSurf(olas: number, viento: number): string {
   return 'CALMA'
 }
 
-// TTL meteo marino: 30 min (Open-Meteo marine refresca c/3-6h pero
-// guardar 30 min basta — el oleaje no salta en ese intervalo).
-const KV_TTL_MAREAS = 30 * 60
+// TTL meteo marino: 90 min, por la misma razón que el de meteo — tiene que
+// sobrevivir al `revalidate` de una hora de la ficha o cada regeneración
+// arranca en frío. Ver el comentario largo en `meteo.ts`.
+//
+// PERO AQUÍ HAY UN TECHO QUE ALLÍ NO EXISTE, y por eso no sube más.
+// `fetchMareasUncached` guarda en KV el payload YA REBANADO por la hora en
+// que se hizo el fetch (`oleaje.slice(ahora, ahora + 6)`). O sea que una
+// entrada envejecida no solo trae datos viejos: trae el oleaje de hace
+// horas ETIQUETADO COMO EL DE AHORA, y ningún indicador de edad puede
+// rescatar eso porque el desfase está dentro del array.
+//
+// Con 90 min el desfase máximo es de un paso de una serie cuya resolución
+// real es horaria, que es del mismo orden que el propio ISR y por tanto
+// tolerable. Subir de ahí exige antes cachear la respuesta CRUDA —la API
+// devuelve siete días de horas— y hacer el `slice` en la lectura y no en
+// la escritura. Con eso esto podría irse a 6 h con total honestidad y
+// reduciría las llamadas marinas unas cuatro veces. Está pendiente.
+const KV_TTL_MAREAS = 90 * 60
 
 export const getMareas = cache((lat: number, lng: number): Promise<MarineData | null> => {
   return kvCached('mareas', [lat, lng], KV_TTL_MAREAS, () => fetchMareasUncached(lat, lng))
