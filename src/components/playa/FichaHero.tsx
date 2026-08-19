@@ -270,7 +270,7 @@ export default function FichaHero({
                     title={locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}
                   >
                     <Flag
-                      size={17}
+                      size="1em"      /* escala con el veredicto, no fijo */
                       weight={certBandera === 'oficial' || certBandera === 'medido' ? 'fill' : 'regular'}
                       aria-hidden="true"
                     />
