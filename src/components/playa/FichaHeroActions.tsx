@@ -27,6 +27,13 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
   const [recienMarcada, setRecienMarcada] = useState(false)
   // Overflow de acciones secundarias (propuesta 2026 §5.2): en móvil solo
   // se ve la primaria; "Estuve aquí" y "Compartir" viven tras el "···".
+  //
+  // MATIZ (ago-2026): por debajo de 520px el CSS deshace ese plegado y
+  // enseña las tres. El motivo no es estético: "Estuve aquí" dispara
+  // `sellar_playa`, que el brief de campaña define como conversión
+  // principal, y tenerla detrás de tres puntos no se sostiene. El estado
+  // de este overflow sigue existiendo para 520–800px, donde el plegado
+  // sí tiene sentido.
   const [overflow, setOverflow] = useState(false)
   // Onboarding mínimo: la PRIMERA vez el overflow va etiquetado ("Más"),
   // porque tres puntos a secas no dicen que ahí viven "Estuve aquí" y
@@ -118,6 +125,8 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
     <div className={styles.fila} data-overflow={String(overflow)}>
       <button
         onClick={toggleFav}
+        aria-label={fav ? 'Quitar de guardadas' : 'Guardar esta playa'}
+        className={styles.soloIcono}
         style={{
           ...base,
           color:       fav ? favColor : muted,
@@ -127,7 +136,8 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
         onMouseEnter={e => { if (!fav) e.currentTarget.style.background = hoverBg }}
         onMouseLeave={e => { if (!fav) e.currentTarget.style.background = 'transparent' }}
       >
-        <Heart size={15} weight={fav ? 'fill' : 'regular'} color="currentColor"/> {fav ? 'Guardada' : 'Guardar'}
+        <Heart size={15} weight={fav ? 'fill' : 'regular'} color="currentColor"/>
+        <span className={styles.etiquetaOpcional}> {fav ? 'Guardada' : 'Guardar'}</span>
       </button>
       <button
         onClick={() => {
@@ -162,7 +172,8 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
       </button>
       <button
         onClick={compartir}
-        className={styles.secundaria}
+        aria-label="Compartir esta playa"
+        className={`${styles.secundaria} ${styles.soloIcono}`}
         style={{
           ...base,
           color:       muted,
@@ -171,7 +182,9 @@ export default function FichaHeroActions({ slug, nombre, municipio = '', provinc
         onMouseEnter={e => { e.currentTarget.style.background = hoverBg }}
         onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
       >
-        {copied ? <><CheckCircle size={15} weight="bold" color="currentColor"/> Copiado</> : '↗ Compartir'}
+        {copied
+          ? <><CheckCircle size={15} weight="bold" color="currentColor"/><span className={styles.etiquetaOpcional}> Copiado</span></>
+          : <><span aria-hidden="true">↗</span><span className={styles.etiquetaOpcional}> Compartir</span></>}
       </button>
       {recienMarcada && (
         <Link href="/mi-cuaderno" style={{

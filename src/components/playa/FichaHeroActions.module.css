@@ -18,3 +18,36 @@
   .secundaria { display: none !important; }
   .fila[data-overflow='true'] .secundaria { display: inline-flex !important; }
 }
+
+/* ── Móvil estrecho: las tres acciones a la vista ──────────────────────
+   El plegado de arriba nació del presupuesto de cromado de la propuesta
+   2026 (§5.2): en móvil el pliegue es oro y solo se veía «Guardar».
+   Pero el brief de campaña posterior define `sellar_playa` —lo que hace
+   «Estuve aquí»— como CONVERSIÓN PRINCIPAL, con tope de 1,50 € por sello
+   en pago. Tener la conversión principal escondida detrás de tres puntos
+   no se sostiene.
+   
+   No se añade una fila: se recompone la que hay, así que el hero NO crece
+   ni un píxel. Se paga quitando etiquetas donde el icono basta —el
+   corazón de guardar y la flecha de compartir se entienden solos— y
+   retirando el «···», que ya no tiene nada que esconder.
+   
+   Cuentas a 375 px, con 348 de ancho útil: corazón 44 + «Estuve aquí»
+   ~130 + compartir 44 + dos huecos de 10 = 238. Sobra sitio. */
+@media (max-width: 520px) {
+  .overflowBtn { display: none !important; }
+  .secundaria  { display: inline-flex !important; }
+  /* Icono solo: la etiqueta se oculta sin sacarla del DOM, que es lo que
+     mantiene el botón anunciado para lectores de pantalla. */
+  .etiquetaOpcional {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  /* Con la etiqueta fuera, el botón deja de ser una píldora ancha y pasa
+     a cuadrado, respetando los 44 px de objetivo táctil. */
+  .soloIcono {
+    min-width: 44px; justify-content: center;
+    padding-left: 0 !important; padding-right: 0 !important;
+  }
+}
