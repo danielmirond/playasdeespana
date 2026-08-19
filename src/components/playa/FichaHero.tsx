@@ -14,7 +14,8 @@ import type { ReportesPlaya } from '@/lib/reportes'
 import type { FotoPlaya } from '@/lib/fotos'
 import AnimatedSea from './AnimatedSea'
 import styles from './FichaHero.module.css'
-import { Fish, Flag, MapPin, Megaphone, Waves } from '@phosphor-icons/react'
+import { Flag, MapPin, Megaphone, Waves } from '@phosphor-icons/react'
+import Medusa from '@/components/ui/Medusa'
 import { nombreConPlaya } from '@/lib/geo'
 import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 import { hayBanderaRoja } from '@/lib/bandera-roja'
@@ -335,7 +336,7 @@ export default function FichaHero({
                     style={{ color: medusas.hex }}
                     title={locale === 'en' ? medusas.detalleEn : medusas.detalle}
                   >
-                    <Fish size="1em" weight={medusas.oficial ? 'fill' : 'regular'} aria-hidden="true" />
+                    <Medusa size="1em" weight={medusas.oficial ? 'fill' : 'regular'} aria-hidden="true" />
                     <span className={styles.banderaSr}>
                       {locale === 'en' ? medusas.labelEn : medusas.label}
                     </span>

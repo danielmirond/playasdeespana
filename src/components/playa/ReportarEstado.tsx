@@ -12,6 +12,7 @@ interface Props {
 }
 
 // ── Catálogo de binarios ─────────────────────────────────────────────
+import Medusa from '@/components/ui/Medusa'
 type IconComp = typeof Fish
 
 interface BinarioDef {
@@ -23,7 +24,7 @@ interface BinarioDef {
 }
 
 const BINARIOS: BinarioDef[] = [
-  { tipo: 'medusas',          icon: Fish,    es: 'He visto medusas',      en: 'Jellyfish spotted',  color: '#e879a0' },
+  { tipo: 'medusas',          icon: Medusa as unknown as IconComp,    es: 'He visto medusas',      en: 'Jellyfish spotted',  color: '#e879a0' },
   { tipo: 'bandera_verde',    icon: Flag,    es: 'Bandera verde',         en: 'Green flag',         color: 'var(--excelente)' },
   { tipo: 'bandera_amarilla', icon: Flag,    es: 'Bandera amarilla',      en: 'Yellow flag',        color: 'var(--aceptable)' },
   { tipo: 'bandera_roja',     icon: Flag,    es: 'Bandera roja',          en: 'Red flag',           color: 'var(--noapto)' },

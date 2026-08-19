@@ -28,7 +28,8 @@
 // ventana rodante de 24 h) para que las dos superficies no se contradigan:
 // contestar aquí debe dejar el cajón marcado y al revés.
 import { useState, useEffect, useCallback } from 'react'
-import { Fish, Flag, Megaphone } from '@phosphor-icons/react'
+import { Flag, Megaphone } from '@phosphor-icons/react'
+import Medusa from '@/components/ui/Medusa'
 import styles from './FichaHero.module.css'
 
 type Tipo = 'bandera_verde' | 'bandera_amarilla' | 'bandera_roja' | 'medusas'
@@ -133,7 +134,7 @@ export default function PreguntaDelDia({
       <span className={styles.respuestas}>
         {preguntarMedusas
           ? btn('medusas', locale === 'en' ? 'Yes, jellyfish' : 'Sí, medusas', '#e879a0',
-              <Fish size={15} weight="fill" aria-hidden="true" />)
+              <Medusa size={15} weight="fill" aria-hidden="true" />)
           : (['bandera_verde', 'bandera_amarilla', 'bandera_roja'] as const).map(t =>
               btn(t,
                 t === 'bandera_verde' ? (locale === 'en' ? 'Green' : 'Verde')

@@ -7,6 +7,7 @@ import type { HotelReal } from '@/lib/hoteles'
 import type { Camping } from '@/lib/campings'
 import type { CentroBuceo } from '@/lib/buceo'
 import { Dato, CertBadge, type Certeza } from './Certeza'
+import Medusa from '@/components/ui/Medusa'
 import ListaPOI from './ListaPOI'
 import CuadernoCTA from './CuadernoCTA'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
@@ -573,7 +574,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               )}
               {medusas && (
                 <div style={{ display:'flex', alignItems:'center', gap:'.75rem' }}>
-                  <div style={{ width:28, height:28, borderRadius:'50%', background:medusas.hex, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden><Fish size={16} weight="bold" color="#fff"/></div>
+                  <div style={{ width:28, height:28, borderRadius:'50%', background:medusas.hex, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }} aria-hidden><Medusa size={16} weight="bold" color="#fff"/></div>
                   <div>
                     <div style={{ fontWeight:700, fontSize: 'var(--fs-base)', color:'var(--ink)' }}>{locale === 'en' ? medusas.labelEn : medusas.label}</div>
                     <div style={{ fontSize:'var(--fs-xs)', color:'var(--muted)', marginTop:'.1rem' }}>{locale === 'en' ? medusas.detalleEn : medusas.detalle}</div>
