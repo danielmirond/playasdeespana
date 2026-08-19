@@ -114,6 +114,12 @@ interface Props {
   chiringuitos?:   import('@/lib/chiringuitos-playa').ChiringuitoCerca[]
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
+  /**
+   * Predicción OFICIAL de Puertos del Estado para el municipio, si lo hay.
+   * Cuando llega, manda sobre la estimación lunar: medido 39 min de error
+   * en la lunar frente a la tabla armónica (Cádiz, ago-2026).
+   */
+  mareasOficiales?: { extremos: Array<{ hora: string; dia: string; tipo: 'pleamar' | 'bajamar'; altura: number }>; ubicacion: string } | null
   horaIdeal?:      HoraIdeal
   playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean; foto?: string }[]
   /** Agregado de opiniones server-side para SSR + JSON-LD. */
@@ -317,7 +323,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, medusas, mareasLunar, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, medusas, mareasLunar, mareasOficiales, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -790,11 +796,22 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <div className={styles.divider}/>
               <div className={styles.cardHead} style={{ paddingTop:'.85rem' }}>
                 <h2 className={styles.cardTitle}>{i18n.mareas(nombreH)}</h2>
-                <span className={styles.cardSrc}>{i18n.mareasSrc}</span>
+                {/* La insignia dice la verdad de cada caso: OFICIAL si hay
+                    Puertos del Estado, ESTIMADO si es la lunar. Antes decía
+                    «Estimación lunar» en gris pequeño y pintaba las horas
+                    con el mismo peso que un dato medido. */}
+                <CertBadge cert={mareasOficiales ? 'oficial' : 'estimado'} locale={locale}>
+                  {mareasOficiales
+                    ? (locale === 'en' ? 'PUERTOS DEL ESTADO' : 'PUERTOS DEL ESTADO')
+                    : (locale === 'en' ? 'LUNAR ESTIMATE' : 'ESTIMACIÓN LUNAR')}
+                </CertBadge>
               </div>
               <div className={styles.cardBody}>
                 <div style={{ display:'flex', gap:'.5rem', flexWrap:'wrap', marginBottom:'.75rem' }}>
-                  {mareasLunar.mareas.map((m, i) => (
+                  {(mareasOficiales
+                    ? mareasOficiales.extremos.filter(e => e.dia === hoyISO).slice(0, 4).map(e => ({ tipo: e.tipo, hora: e.hora, altura: e.altura }))
+                    : mareasLunar.mareas
+                  ).map((m, i) => (
                     <div key={i} style={{
                       flex:'1 1 auto', minWidth:'70px', textAlign:'center',
                       // Pleamar y bajamar no son bueno y malo: son dos
@@ -813,11 +830,19 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     </div>
                   ))}
                 </div>
-                <div style={{ display:'flex', justifyContent:'space-between', fontSize:'var(--fs-xs)', color:'var(--muted)' }}>
-                  <span>{i18n.coeficiente}: <strong style={{ color:'var(--ink)' }}>{mareasLunar.coeficiente}</strong></span>
+                <div style={{ display:'flex', justifyContent:'space-between', fontSize:'var(--fs-xs)', color:'var(--muted)', flexWrap:'wrap', gap:'.4rem' }}>
+                  {/* El «coeficiente» de la lunar era una media de zona, no un
+                      cálculo: se retira. Vivas/muertas sí se sostiene, porque
+                      sale de la fase lunar, que es exacta. */}
                   <span style={{ color: mareasLunar.tipo === 'vivas' ? 'var(--mar-500)' : mareasLunar.tipo === 'muertas' ? 'var(--aceptable)' : 'var(--muted)', fontWeight:600 }}>
                     {mareasLunar.tipo === 'vivas' ? i18n.vivas : mareasLunar.tipo === 'muertas' ? i18n.muertas : i18n.mediasLabel}
                   </span>
+                  {municipioSlug && mareasOficiales && (
+                    <Link href={locale === 'en' ? `/municipio/${municipioSlug}/tabla-de-mareas` : `/municipio/${municipioSlug}/tabla-de-mareas`}
+                      style={{ color:'var(--ink)', fontWeight:600 }}>
+                      {locale === 'en' ? 'Tide table for the next 3 days →' : 'Tabla de mareas de hoy, mañana y pasado →'}
+                    </Link>
+                  )}
                 </div>
               </div>
             </>

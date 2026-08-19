@@ -90,9 +90,26 @@ function valor(fila: { datos: Array<{ nombreParametro: string; valor: string }> 
   return Number.isFinite(n) ? n : null
 }
 
+// Memo de proceso DELANTE de KV, como las ocho fuentes de bandera. Sin él,
+// en un entorno sin KV cada render paga el timeout interno del kv.set
+// (1.500 ms) y la ficha, que espera como mucho 1.500 ms, pierde la carrera
+// por un milisegundo: medido 1.502 ms en local. En producción KV responde
+// en 10 ms y no pasa, pero no se diseña para «en producción irá bien».
+const _memo = new Map<number, { t: number; p: Promise<MareasMunicipio | null> }>()
+const MEMO_MS = 10 * 60 * 1000
+
 export async function getMareasMunicipio(slugMunicipio: string, lat: number, lng: number): Promise<MareasMunicipio | null> {
   const ubi = MAPA[slugMunicipio]
   if (!ubi) return null
+  const m = _memo.get(ubi.id)
+  if (m && Date.now() - m.t < MEMO_MS) return m.p
+  const p = cargarMareas(ubi, lat, lng)
+  _memo.set(ubi.id, { t: Date.now(), p })
+  p.then(v => { if (!v) _memo.delete(ubi.id) }).catch(() => _memo.delete(ubi.id))
+  return p
+}
+
+async function cargarMareas(ubi: UbicacionMarea, lat: number, lng: number): Promise<MareasMunicipio | null> {
   const tz = zonaHoraria(lat, lng)
   try {
     // Una clave por ubicación y día; 30 min de TTL. La predicción se
@@ -134,7 +151,10 @@ export async function getMareasMunicipio(slugMunicipio: string, lat: number, lng
 
       return { ubicacion: ubi, extremos, serie, rangoHoy }
     })
-  } catch {
+  } catch (e) {
+    // Se deja rastro: un null silencioso aquí costó una tarde de buscar el
+    // fallo en el sitio equivocado. Solo en servidor y solo el mensaje.
+    if (typeof window === 'undefined') console.warn('[mareas-portus]', ubi.id, (e as Error)?.message?.slice(0, 120))
     return null
   }
 }

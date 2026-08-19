@@ -32,6 +32,7 @@ import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { getMareasMunicipio, tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import type { Extremo, PuntoHora } from '@/lib/mareas-portus'
 import { CertBadge } from '@/components/playa/Certeza'
+import { estadoLuna } from '@/lib/luna'
 import styles from '../MunicipioPage.module.css'
 
 export const revalidate = 1800
@@ -57,9 +58,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // ── Curva del día: SVG inline, sin JS. Una línea, los extremos marcados y la
 // hora actual señalada. Lo que no se dibuja: rejillas, sombras, degradados.
-function Curva({ serie, extremos, ahoraIso }: { serie: PuntoHora[]; extremos: Extremo[]; ahoraIso: string }) {
+function Curva({ serie, extremos, ahoraIso, soloHoy }: { serie: PuntoHora[]; extremos: Extremo[]; ahoraIso: string; soloHoy?: boolean }) {
+  // En móvil el viewBox 720×180 escalado al ancho quedaba en 82 px de alto:
+  // tres días en un sello de correos, con las horas pisándose. Ahí se
+  // dibuja solo el día de hoy, más alto. Son dos figuras: una visible en
+  // cada tamaño vía CSS, sin JS.
+  if (soloHoy) {
+    const dia = serie[0]?.dia
+    serie = serie.filter(p => p.dia === dia)
+    extremos = extremos.filter(e => e.dia === dia)
+  }
   if (serie.length < 4) return null
-  const W = 720, H = 180, PX = 28, PY = 18
+  const W = soloHoy ? 360 : 720, H = soloHoy ? 200 : 180, PX = 28, PY = 18
   const t0 = new Date(serie[0].iso).getTime()
   const t1 = new Date(serie[serie.length - 1].iso).getTime()
   const niv = serie.map(p => p.nivel)
@@ -118,6 +128,7 @@ export default async function TablaMareasPage({ params }: Props) {
   const ahoraIso = new Date().toISOString()
   const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
 
+  const luna = estadoLuna(new Date())
   const porDia = new Map<string, Extremo[]>()
   for (const e of mareas?.extremos ?? []) (porDia.get(e.dia) ?? porDia.set(e.dia, []).get(e.dia)!).push(e)
   const dias = [...porDia.keys()].sort().slice(0, 3)
@@ -142,7 +153,7 @@ export default async function TablaMareasPage({ params }: Props) {
             <Link href={`/municipio/${slug}`} style={{ color: 'inherit' }}>Playas de {municipio.nombre}</Link> · {municipio.provincia}
           </p>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4.5vw, 2.8rem)', lineHeight: 1.08, margin: 0, letterSpacing: '-.015em' }}>
-            Tabla de mareas de {municipio.nombre}: pleamar y bajamar hoy
+            Tabla de mareas de {municipio.nombre}
           </h1>
 
           {mareas && proximo ? (
@@ -203,7 +214,45 @@ export default async function TablaMareasPage({ params }: Props) {
                   </article>
                 ))}
               </div>
-              <Curva serie={mareas.serie} extremos={mareas.extremos} ahoraIso={ahoraIso} />
+              <div className="curva-ancha"><Curva serie={mareas.serie} extremos={mareas.extremos} ahoraIso={ahoraIso} /></div>
+              <div className="curva-movil"><Curva serie={mareas.serie} extremos={mareas.extremos} ahoraIso={ahoraIso} soloHoy /></div>
+              <style>{`.curva-movil{display:none}@media(max-width:640px){.curva-ancha{display:none}.curva-movil{display:block}}`}</style>
+            </section>
+
+            {/* La Luna: no es un adorno, es la causa. Llena y nueva traen
+                mareas vivas; los cuartos, muertas. Calculada (Meeus), no
+                estimada: certeza «medido», trazo continuo. */}
+            <section aria-labelledby="h-luna" style={{ marginTop: '2.25rem', display: 'flex', gap: '1.1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <svg width="56" height="56" viewBox="0 0 56 56" role="img" aria-label={`Luna ${luna.nombre}, ${luna.iluminacion}% iluminada`} style={{ flexShrink: 0, color: 'var(--ink)' }}>
+                {/* disco: la parte iluminada se dibuja con un arco elíptico
+                    cuyo semieje horizontal depende de la fase */}
+                <circle cx="28" cy="28" r="24" fill="none" stroke="currentColor" strokeWidth="1" opacity=".5" />
+                {(() => {
+                  const f = luna.fase                          // 0 nueva · .5 llena
+                  const k = Math.cos(f * 2 * Math.PI)          // 1 nueva, -1 llena
+                  const r = 24, cx = 28, cy = 28
+                  const creciente = f < 0.5
+                  // terminador: elipse de semieje horizontal |k|·r
+                  const sx = Math.abs(k) * r
+                  const dir = creciente ? 1 : 0
+                  const d = `M ${cx} ${cy - r} A ${r} ${r} 0 0 ${dir} ${cx} ${cy + r} A ${sx} ${r} 0 0 ${k > 0 ? dir : 1 - dir} ${cx} ${cy - r} Z`
+                  return <path d={d} fill="currentColor" opacity=".85" />
+                })()}
+              </svg>
+              <div>
+                <h2 id="h-luna" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', margin: 0 }}>
+                  Luna {luna.nombre} · {Math.round(luna.iluminacion)} % iluminada
+                </h2>
+                <p style={{ margin: '.25rem 0 0', fontSize: '.92rem', color: 'var(--muted)', maxWidth: '40em' }}>
+                  {luna.mareas === 'vivas'
+                    ? 'Mareas vivas: las pleamares más altas y las bajamares más bajas del mes.'
+                    : luna.mareas === 'muertas'
+                      ? 'Mareas muertas: el agua sube y baja menos que otros días del mes.'
+                      : 'Mareas medias, entre vivas y muertas.'}
+                  {' '}Próxima luna {luna.proxima.tipo} {luna.proxima.dias === 0 ? 'hoy' : luna.proxima.dias === 1 ? 'mañana' : `en ${luna.proxima.dias} días`}
+                  {luna.proxima.dias > 0 && luna.mareas !== 'vivas' ? ', con mareas vivas.' : '.'}
+                </p>
+              </div>
             </section>
 
             <section aria-labelledby="h-playas" style={{ marginTop: '2.5rem' }}>

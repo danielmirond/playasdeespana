@@ -19,6 +19,8 @@ import { getBanderaSb, tieneBanderaSb } from '@/lib/banderas-sb'
 import { getBanderaFerrol, tieneBanderaFerrol } from '@/lib/banderas-ferrol'
 import { getBanderaGijon, tieneBanderaGijon } from '@/lib/banderas-gijon'
 import { esUsoProhibido } from '@/lib/playas-prohibidas'
+import { getMareasMunicipio } from '@/lib/mareas-portus'
+import { toSlug as slugMuni } from '@/lib/playas'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
 import { calcularHoraIdeal } from '@/lib/hora-ideal'
@@ -250,6 +252,20 @@ export default async function BeachPageEn({ params }: Props) {
   }
   const medusas = estimarMedusas(playa.lat, playa.lng, tempAgua, viento, vientoDirRaw)
   const mareasLunar = estimarMareas(playa.lat, playa.lng)
+  // Predicción OFICIAL de Puertos del Estado para el municipio. Si llega,
+  // manda sobre la lunar en el bloque de mareas de la ficha. Misma llamada
+  // que la página /municipio/[slug]/tabla-de-mareas, compartida vía KV.
+  // Con su propio plazo: este await está fuera del Promise.all con deadline
+  // de la ficha, y en frío Portus puede tardar. Si no llega en 1,5 s, la
+  // ficha sigue con la lunar —marcada como estimación— y el warming de
+  // KV hará que la siguiente la tenga.
+  const mareasOficialesRaw = await Promise.race([
+    getMareasMunicipio(slugMuni(playa.municipio ?? ''), playa.lat, playa.lng).catch(() => null),
+    new Promise<null>(r => setTimeout(() => r(null), 1500)),
+  ])
+  const mareasOficiales = mareasOficialesRaw
+    ? { extremos: mareasOficialesRaw.extremos.map(e => ({ hora: e.hora, dia: e.dia, tipo: e.tipo, altura: e.altura })), ubicacion: mareasOficialesRaw.ubicacion.nombre }
+    : null
 
   // Qué día es hoy, en hora peninsular y decidido aquí, en el servidor.
   // Mismo motivo que en la ficha en español: TraficoSection se renderiza
@@ -350,6 +366,7 @@ export default async function BeachPageEn({ params }: Props) {
         usoProhibido={esUsoProhibido(slug)}
         medusas={medusas}
         mareasLunar={mareasLunar}
+        mareasOficiales={mareasOficiales}
         horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
         municipioSlug={municipioSlugProp}
