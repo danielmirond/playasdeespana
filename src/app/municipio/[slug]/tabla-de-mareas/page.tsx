@@ -32,7 +32,9 @@ import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { getMareasMunicipio, tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import type { Extremo, PuntoHora } from '@/lib/mareas-portus'
 import { CertBadge } from '@/components/playa/Certeza'
-import { estadoLuna } from '@/lib/luna'
+import { estadoLuna, solunar } from '@/lib/luna'
+import { articulosPara, urlPesca } from '@/lib/pesca'
+import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import styles from '../MunicipioPage.module.css'
 
 export const revalidate = 1800
@@ -129,6 +131,16 @@ export default async function TablaMareasPage({ params }: Props) {
   const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
 
   const luna = estadoLuna(new Date())
+  // Solunar: solo donde la marea es de verdad. En el Mediterráneo la
+  // página ya avisa de que el mar no sube ni baja, y añadir tabla de pesca
+  // allí sería vestir de contenido lo que no lo es.
+  const sol = med ? null : solunar(lat, lng, tz)
+  const pesca = articulosPara(ubi.zona)
+  // Barcos: solo donde hay socio de verdad. Medido, los 21 socios son
+  // mediterráneos o baleares, así que el solape con las 406 páginas de
+  // marea real es CERO y con las mediterráneas son 14. Enlazar donde no hay
+  // socio manda al usuario a una página que no le sirve.
+  const barco = med ? getBoatLinkForPlaya(municipio.provincia, municipio.nombre) : null
   const porDia = new Map<string, Extremo[]>()
   for (const e of mareas?.extremos ?? []) (porDia.get(e.dia) ?? porDia.set(e.dia, []).get(e.dia)!).push(e)
   const dias = [...porDia.keys()].sort().slice(0, 3)
@@ -255,6 +267,53 @@ export default async function TablaMareasPage({ params }: Props) {
               </div>
             </section>
 
+            {/* SOLUNAR — el contenido de pesca.
+                «solunar» son 11.140 búsquedas mensuales pegadas a las de
+                mareas, y el competidor titula su página «tabla de mareas
+                para ir de pesca»: esta es la tabla que esa gente viene a
+                buscar. Va antes de cualquier producto, porque el producto
+                se gana estando junto a algo útil, no al revés. */}
+            {sol && sol.periodos.length > 0 && (
+              <section aria-labelledby="h-solunar" style={{ marginTop: '2.5rem' }}>
+                <h2 id="h-solunar" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', margin: '0 0 .3rem' }}>
+                  Tabla solunar de {municipio.nombre}: las mejores horas para pescar
+                </h2>
+                {/* Lo que se afirma y lo que no. Las posiciones de la Luna
+                    son astronomía exacta; que eso haga picar al pez es
+                    tradición de pescadores. Decirlo no resta: es lo que
+                    separa esta tabla de las que la venden como ciencia. */}
+                <p style={{ color: 'var(--muted)', fontSize: '.92rem', maxWidth: '42em', margin: '0 0 1rem' }}>
+                  Los periodos <b>mayores</b> son las dos horas alrededor de que la Luna pase por lo más alto y por lo más
+                  bajo; los <b>menores</b>, la hora alrededor de su salida y su puesta. Las posiciones son cálculo
+                  astronómico; que el pez pique más en ellas es lo que dice la tradición pesquera, no algo que podamos medir.
+                </p>
+                <div style={{ display: 'grid', gap: '.6rem', gridTemplateColumns: 'repeat(auto-fit, minmax(15rem, 1fr))' }}>
+                  {sol.periodos.map(pr => (
+                    <div key={pr.hora} style={{
+                      border: `1px solid var(--line)`, borderLeftWidth: pr.tipo === 'mayor' ? 3 : 1,
+                      borderRadius: 6, padding: '.7rem .85rem',
+                    }}>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.02rem', fontVariantNumeric: 'tabular-nums' }}>
+                        {pr.hora} – {pr.fin}
+                      </div>
+                      <div style={{ fontSize: '.78rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', marginTop: '.15rem' }}>
+                        periodo {pr.tipo}
+                      </div>
+                      <div style={{ fontSize: '.86rem', color: 'var(--muted)', marginTop: '.3rem' }}>{pr.causa}</div>
+                    </div>
+                  ))}
+                </div>
+                {(sol.salida || sol.puesta) && (
+                  <p style={{ fontSize: '.86rem', color: 'var(--muted)', marginTop: '.7rem' }}>
+                    La Luna {sol.salida ? <>sale a las <b>{sol.salida}</b></> : null}
+                    {sol.salida && sol.puesta ? ' y ' : ''}
+                    {sol.puesta ? <>se pone a las <b>{sol.puesta}</b></> : null}.
+                    {luna.mareas === 'vivas' && ' Con mareas vivas la corriente es más fuerte, que es lo que suele mover el pescado.'}
+                  </p>
+                )}
+              </section>
+            )}
+
             <section aria-labelledby="h-playas" style={{ marginTop: '2.5rem' }}>
               <h2 id="h-playas" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', margin: '0 0 .6rem' }}>
                 Las playas de {municipio.nombre} con esta marea
@@ -271,6 +330,35 @@ export default async function TablaMareasPage({ params }: Props) {
               </ul>
             </section>
 
+            {/* EQUIPO DE PESCA. Después de la tabla solunar, nunca antes:
+                el producto se gana estando junto a algo útil. Y cada
+                artículo dice CUÁNDO sirve en función de la marea —el
+                surfcasting con la marea subiendo, el rastrillo en bajamar
+                viva, la bota de vadeo porque la marea que sube te aísla—,
+                que es lo que justifica que esta lista viva en esta página
+                y no en cualquier otra. */}
+            {pesca.length > 0 && (
+              <section aria-labelledby="h-pesca" style={{ marginTop: '2.5rem' }}>
+                <h2 id="h-pesca" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', margin: '0 0 .3rem' }}>
+                  Qué llevar a pescar con esta marea
+                </h2>
+                <p style={{ color: 'var(--muted)', fontSize: '.86rem', maxWidth: '42em', margin: '0 0 1rem' }}>
+                  Enlaces de afiliado de Amazon: ganamos una comisión sin coste adicional para ti.
+                </p>
+                <ul style={{ display: 'grid', gap: '.55rem', gridTemplateColumns: 'repeat(auto-fit, minmax(17rem, 1fr))', listStyle: 'none', padding: 0, margin: 0 }}>
+                  {pesca.map(a => (
+                    <li key={a.nombre} style={{ border: '1px solid var(--line)', borderRadius: 6, padding: '.7rem .85rem' }}>
+                      <a href={urlPesca(a)} target="_blank" rel="sponsored nofollow noopener"
+                        style={{ color: 'var(--ink)', fontWeight: 600, fontSize: '.95rem' }}>
+                        {a.nombre} →
+                      </a>
+                      <p style={{ margin: '.3rem 0 0', fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.5 }}>{a.cuando}</p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             <section style={{ marginTop: '2.5rem', fontSize: '.88rem', color: 'var(--muted)', maxWidth: '44em' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--ink)', margin: '0 0 .5rem' }}>De dónde sale esta tabla</h2>
               <p>
@@ -281,6 +369,30 @@ export default async function TablaMareasPage({ params }: Props) {
             </section>
           </>
         )}
+
+        {/* Barcos: solo en los 14 municipios mediterráneos con socio.
+            Donde la marea importa no hay ninguno de los 21, así que aquí
+            el enlace es honesto y allí no existiría.
+
+            FUERA del `{mareas && ...}` a propósito: en el Mediterráneo
+            Portus no devuelve extremos, así que `mareas` es null y todo lo
+            que cuelga de él se salta — incluido esto, que es justo donde
+            tiene que aparecer. Estaba dentro y por eso Barcelona no lo
+            pintaba. */}
+        {barco && (
+          <section style={{ marginTop: '2.25rem', border: '1px solid var(--line)', borderRadius: 6, padding: '.9rem 1rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', margin: '0 0 .3rem' }}>
+              Salir al mar en {municipio.nombre}
+            </h2>
+            <p style={{ margin: '0 0 .5rem', fontSize: '.9rem', color: 'var(--muted)' }}>
+              Aquí la marea no condiciona la salida, pero el viento sí: mira el parte antes de reservar.
+            </p>
+            <a href={barco.href} target="_blank" rel="sponsored nofollow noopener" style={{ color: 'var(--ink)', fontWeight: 600 }}>
+              {barco.label} →
+            </a>
+          </section>
+        )}
+
       </main>
     </>
   )
