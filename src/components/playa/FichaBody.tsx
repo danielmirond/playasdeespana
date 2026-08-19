@@ -476,6 +476,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             agua:          meteo.agua,
             bandera:       banderaPlaya,
             medusasRiesgo: medusas?.nivel ?? null,
+            cert:          certBandera,
           })}
           locale={locale}
         />

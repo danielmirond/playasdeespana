@@ -29,6 +29,12 @@ interface Input {
   agua?:      number | null          // ºC
   bandera?:   BanderaPlaya | null
   medusasRiesgo?: 'bajo' | 'medio' | 'alto' | null
+  /**
+   * De dónde sale la bandera. Decide si su motivo encabeza el detalle:
+   * el de una bandera izada explica el aviso, el de una estimada solo
+   * repite lo que ya está en la lista de umbrales.
+   */
+  cert?: 'medido' | 'oficial' | 'reportado' | 'estimado' | 'sindato'
 }
 
 /**
@@ -37,7 +43,7 @@ interface Input {
  * información sin fundamento).
  */
 export function generarReporteSistema(input: Input): ReporteSistema | null {
-  const { oleaje, viento, vientoRacha, agua, bandera, medusasRiesgo } = input
+  const { oleaje, viento, vientoRacha, agua, bandera, medusasRiesgo, cert } = input
   // Sin oleaje + viento + agua no es un reporte: bail.
   if (oleaje == null && viento == null && agua == null) return null
 
@@ -96,10 +102,29 @@ export function generarReporteSistema(input: Input): ReporteSistema | null {
 
   if (partes.length === 0) return null
 
+  // EL DETALLE TIENE QUE EXPLICAR EL TÍTULO, y no lo hacía.
+  //
+  // El título sale de la bandera y el detalle de los umbrales meteo, que
+  // no saben POR QUÉ está izada. Con una roja por contaminación —el caso
+  // de Málaga en agosto de 2026— la tarjeta decía «No te metas hoy ·
+  // oleaje calmo 0,2 m · apenas viento 8 km/h · agua 27 °C». El aviso y su
+  // explicación se contradecían, y el detalle ganaba porque era concreto.
+  //
+  // Cuando la bandera la ha izado alguien, su motivo va DELANTE: ahí está
+  // la razón de verdad, y en fuentes como Canarias llega a decir
+  // «corrientes» o «desprendimientos», que ninguna estimación vería.
+  //
+  // Con bandera estimada no se antepone: su motivo es «Oleaje fuerte
+  // (1.8m)», que ya está en la lista y solo duplicaría.
+  const izada = cert === 'oficial' || cert === 'reportado'
+  const detalle = izada && bandera?.motivo
+    ? [bandera.motivo, ...partes].join(' · ')
+    : partes.join(' · ')
+
   return {
     ts:        new Date().toISOString(),
     titulo,
-    detalle:   partes.join(' · '),
+    detalle,
     severidad,
   }
 }

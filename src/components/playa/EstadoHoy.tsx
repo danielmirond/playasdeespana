@@ -81,12 +81,19 @@ export default function EstadoHoy({ slug, nombre, reporte, locale = 'es' }: Prop
             role="status"
             style={{
               display: 'inline-flex',
-              alignItems: 'center',
+              // flex-start: con el texto en varias líneas, centrar dejaba el
+              // punto y el sello «Sistema» flotando a media altura.
+              alignItems: 'flex-start',
               gap: '.5rem',
               background: 'var(--card-bg)',
               border: '1px solid var(--line)',
-              borderRadius: 100,
-              padding: '.4rem .8rem',
+              // 6 y no 100. Era una píldora, y una píldora solo funciona en
+              // UNA línea: con `flexWrap` puesto, en cuanto el texto salta a
+              // tres el radio de 100px convierte la caja en un pegote con
+              // los lados redondos. Además el sistema no usa esas formas —
+              // su radio de tarjeta es pequeño y su lenguaje es el grabado.
+              borderRadius: 6,
+              padding: '.5rem .8rem',
               fontSize: '.82rem',
               maxWidth: '100%',
               flexWrap: 'wrap',
