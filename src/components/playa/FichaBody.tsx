@@ -613,8 +613,23 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               {boya && boya.hm0 != null && (
                 <div style={{ marginTop:'.9rem', paddingTop:'.75rem', borderTop:'1px dashed var(--line)' }}>
                   <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:'.5rem', marginBottom:'.6rem', flexWrap:'wrap' }}>
+                    {/* El título dice DE DÓNDE es el dato, no solo cómo se
+                        obtuvo. Decía «Medido por boya» y las cuatro cifras
+                        iban con certeza `medido` —trazo continuo de 2 px, el
+                        más alto de la gramática— junto al nombre de la
+                        playa. Todo cierto y todo mal atribuido: la boya está
+                        a 38 km de mediana y la mitad son de aguas
+                        profundas.
+
+                        La certeza se queda en `medido` porque el sensor
+                        midió de verdad; lo que cambia es el SUJETO. El
+                        trazo dice cuánto me fío del número, no de qué sitio
+                        habla, y esa segunda pregunta hay que contestarla
+                        con palabras. */}
                     <strong style={{ fontSize:'var(--fs-xs)', letterSpacing:'.05em', textTransform:'uppercase', color:'var(--muted)' }}>
-                      {locale === 'en' ? 'Measured by a buoy' : 'Medido por boya'}
+                      {locale === 'en'
+                        ? `Open sea, ${boya.distanciaKm} km out`
+                        : `Mar abierto, a ${boya.distanciaKm} km`}
                     </strong>
                     <CertBadge cert="medido" locale={locale}>
                       {`${boya.nombre} · ${boya.distanciaKm} km`}
@@ -622,10 +637,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   </div>
                   <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(84px, 1fr))', gap:'.75rem' }}>
                     {[
-                      { l: locale === 'en' ? 'Waves' : 'Olas', v: boya.hm0.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: 'm' },
+                      { l: locale === 'en' ? 'Waves out there' : 'Olas mar adentro', v: boya.hm0.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: 'm' },
                       ...(boya.tAgua != null ? [{ l: locale === 'en' ? 'Water' : 'Agua', v: boya.tAgua.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: '°C' }] : []),
                       ...(boya.tp != null ? [{ l: locale === 'en' ? 'Period' : 'Periodo', v: String(Math.round(boya.tp)), u: 's' }] : []),
-                      ...(boya.hmax != null ? [{ l: locale === 'en' ? 'Max wave' : 'Ola máx', v: boya.hmax.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: 'm' }] : []),
+                      ...(boya.hmax != null ? [{ l: locale === 'en' ? 'Max out there' : 'Máx. mar adentro', v: boya.hmax.toLocaleString(locale === 'en' ? 'en' : 'es', { maximumFractionDigits: 1 }), u: 'm' }] : []),
                     ].map(m => (
                       <div key={m.l}>
                         <div style={{ fontFamily:'var(--font-mono)', fontSize: 'var(--fs-xs)', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--muted)', marginBottom:'.3rem' }}>{m.l}</div>
@@ -633,8 +648,24 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       </div>
                     ))}
                   </div>
+                  {/* La advertencia que faltaba, y va junto a las cifras,
+                      no en letra pequeña al final: entre la boya y la
+                      orilla la ola asomera, refracta y rompe. Una playa
+                      abrigada recibe una fracción de lo que hay fuera; un
+                      cabo puede recibir más. No se puede inferir, así que
+                      no se insinúa.
+
+                      Agua y periodo NO llevan advertencia a propósito: la
+                      temperatura es coherente en decenas de kilómetros y el
+                      periodo se conserva al propagarse. Esos dos sí
+                      describen esta playa. */}
+                  <p style={{ fontSize:'var(--fs-xs)', color:'var(--muted)', lineHeight:1.5, margin:'.6rem 0 0' }}>
+                    {locale === 'en'
+                      ? <>The wave height is what the sea is doing <b>out there</b>{boya.aguasProfundas ? ', in deep water' : ''} — not at the shore. Waves shoal and refract on the way in, so a sheltered beach gets a fraction of it and a headland can get more. Water temperature and period do describe this beach.</>
+                      : <>La altura de ola es la del mar <b>ahí fuera</b>{boya.aguasProfundas ? ', en aguas profundas' : ''}, no la de la orilla. Al acercarse, la ola asomera y refracta: una playa abrigada recibe una fracción y un cabo puede recibir más. La temperatura del agua y el periodo sí describen esta playa.</>}
+                  </p>
                   <div style={{ fontFamily:'var(--font-mono)', fontSize: 'var(--fs-xs)', color:'var(--muted)', marginTop:'.6rem' }}>
-                    {boya.hora} · Puertos del Estado
+                    {boya.hora} · {boya.nombre} · Puertos del Estado
                   </div>
                 </div>
               )}

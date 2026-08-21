@@ -34,6 +34,20 @@ export interface DatosBoya {
   tAgua: number | null
   /** Hora local de la medición, "HH:MM" */
   hora: string
+  /**
+   * `true` si la boya es de la Red Exterior de Puertos del Estado, o sea
+   * fondeada en aguas profundas y a decenas de kilómetros de la costa.
+   *
+   * IMPORTA PARA EL OLEAJE Y PARA NADA MÁS. La altura de ola que mide una
+   * boya de aguas profundas es la del MAR ABIERTO, y entre ahí y la orilla
+   * la ola se transforma: asomera, refracta, y una playa abrigada recibe
+   * una fracción de lo que hay fuera mientras un cabo puede recibir más.
+   * No se puede inferir. La temperatura del agua y el periodo, en cambio,
+   * viajan bien —la primera porque el mar es térmicamente coherente en
+   * decenas de kilómetros, el segundo porque el periodo se conserva al
+   * propagarse—, y esos sí describen esta playa.
+   */
+  aguasProfundas: boolean
 }
 
 const hav = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
@@ -99,6 +113,7 @@ export async function getBoyaCercana(lat: number, lng: number): Promise<DatosBoy
     return {
       nombre: best.n,
       distanciaKm: Math.round(bestD),
+      aguasProfundas: best.red === 'REDEXT',
       hm0: m.hm0, hmax: m.hmax, tp: m.tp, tAgua: m.tAgua,
       hora,
     }
