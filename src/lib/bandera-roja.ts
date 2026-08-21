@@ -105,7 +105,16 @@ export const BLOQUES_BLANDOS = new Set([
  * AdSense es el caso incómodo: dinero pasivo, no contextual y con creativo
  * no auditable. No se puede excluir por categoría desde aquí, así que la
  * única herramienta es la distancia — va lo más lejos posible del aviso.
+ *
+ * Es un conjunto y no una cadena porque ya hay más de un hueco: al añadir
+ * el de PROFUNDIDAD, la comparación `id === BLOQUE_PASIVO` lo habría dejado
+ * fuera y el hueco nuevo habría nacido saltándose esta regla, que es el
+ * error que este fichero existe para evitar. Cualquier hueco que se añada
+ * en el futuro entra aquí el mismo día que se crea.
  */
+export const BLOQUES_PASIVOS = new Set(['ad', 'ad-profundidad'])
+
+/** @deprecated Usa BLOQUES_PASIVOS. Se conserva por si algo lo importa. */
 export const BLOQUE_PASIVO = 'ad'
 
 /**
@@ -121,7 +130,7 @@ export function ordenBanderaRoja(orden: readonly string[]): string[] {
 
   orden.forEach((id, i) => {
     if (BLOQUES_DUROS.has(id)) return                       // no viaja al DOM
-    if (BLOQUES_BLANDOS.has(id) || id === BLOQUE_PASIVO) {
+    if (BLOQUES_BLANDOS.has(id) || BLOQUES_PASIVOS.has(id)) {
       // Solo se difiere lo que iba ANTES del texto largo; lo que ya estaba
       // después se queda donde está — moverlo no aporta nada.
       if (anclaTextoLargo === -1 || i < anclaTextoLargo) { diferidos.push(id); return }

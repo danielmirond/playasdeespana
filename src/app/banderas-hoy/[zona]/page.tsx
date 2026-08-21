@@ -12,6 +12,8 @@
 // ISR 30 min, igual que el hub, porque la promesa es la misma: la bandera
 // de hoy, no la de esta mañana.
 
+import Hueco from '@/components/ui/Hueco'
+import { SLOTS } from '@/lib/adsense'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -217,6 +219,15 @@ export default async function BanderasZonaPage({ params }: { params: Promise<{ z
             Toda España
           </Link>
         </nav>
+
+        {/* Un solo hueco, y al final del todo.
+            Ésta es la página que destapó lo de Málaga: es donde menos
+            conviene parecer un medio que vive del clic, así que va después
+            de la tabla, después de la metodología y después de los enlaces
+            a las otras zonas. Multiplex y no display, porque a esta altura
+            lo que aporta es llevarse al lector a otro sitio, no
+            interrumpirlo. */}
+        <Hueco zona="cierre" bloque={SLOTS.cierre} />
       </main>
     </>
   )

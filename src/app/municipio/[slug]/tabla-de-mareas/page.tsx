@@ -28,6 +28,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import Hueco from '@/components/ui/Hueco'
+import { SLOTS } from '@/lib/adsense'
 import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { getMareasMunicipio, tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import type { Extremo, PuntoHora } from '@/lib/mareas-portus'
@@ -358,6 +360,10 @@ export default async function TablaMareasPage({ params }: Props) {
                 </ul>
               </section>
             )}
+
+            {/* Zona herramienta: después de la tabla, la curva, el solunar
+                y las playas. Dentro de la herramienta no entra nada. */}
+            <Hueco zona="herramienta" bloque={SLOTS.herramienta} />
 
             <section style={{ marginTop: '2.5rem', fontSize: '.88rem', color: 'var(--muted)', maxWidth: '44em' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--ink)', margin: '0 0 .5rem' }}>De dónde sale esta tabla</h2>

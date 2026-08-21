@@ -34,7 +34,7 @@ import Script from 'next/script'
 import { readConsent } from './CookieBanner'
 
 const GA_ID = 'G-LFHYJE8S16'
-const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID ?? ''
+import { ADSENSE_ID } from '@/lib/adsense'
 
 export default function ConsentScripts() {
   const [analytics, setAnalytics] = useState(false)

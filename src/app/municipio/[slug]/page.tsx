@@ -1,4 +1,7 @@
 // src/app/municipio/[slug]/page.tsx
+import { SLOTS } from '@/lib/adsense'
+import { Fragment } from 'react'
+import Hueco from '@/components/ui/Hueco'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -193,7 +196,13 @@ export default async function MunicipioPage({ params }: Props) {
 
         <div className={styles.lista}>
           {playasConEstado.map((p, i) => (
-            <Link key={p.slug} href={`/playas/${p.slug}`} className={styles.row}>
+            <Fragment key={p.slug}>
+            {/* Tras el octavo resultado: en móvil ya se ha pasado la
+                primera pantalla y el lector está hojeando, no buscando una
+                respuesta concreta. Antes de aquí el anuncio sería lo
+                primero que se ve de una lista. */}
+            {i === 8 && <Hueco zona="hojeo" bloque={SLOTS.lista} resultadosArriba={i} />}
+            <Link href={`/playas/${p.slug}`} className={styles.row}>
               <span className={styles.rowNum}>{i + 1}</span>
               <div className={styles.rowInfo}>
                 <div className={styles.rowNombre}>{p.nombre}</div>
@@ -213,6 +222,7 @@ export default async function MunicipioPage({ params }: Props) {
               </div>
               <span className={styles.rowArrow}>→</span>
             </Link>
+            </Fragment>
           ))}
         </div>
 

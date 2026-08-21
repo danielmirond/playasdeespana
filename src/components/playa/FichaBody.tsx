@@ -1,5 +1,6 @@
 'use client'
 // src/components/playa/FichaBody.tsx
+import { SLOTS } from '@/lib/adsense'
 import { useEffect, useState } from 'react'
 import type { Playa, Restaurante } from '@/types'
 import type { FotoPlaya } from '@/lib/fotos'
@@ -47,7 +48,7 @@ import OpinionesDestacadas from './OpinionesDestacadas'
 import BeachVideoToggle from './BeachVideoToggle'
 import WebcamPlaya from './WebcamPlaya'
 import { Camera, Waves, Sun, Drop, ForkKnife, Bed, Thermometer, Wind, Car, Bus, Bicycle, Person, MapPin, Star, Fish, SunHorizon, Flag, Gauge, Martini } from '@phosphor-icons/react'
-import AdSlot from '@/components/ui/AdSlot'
+import Hueco from '@/components/ui/Hueco'
 import { tinte } from '@/lib/tinte'
 import { miles } from '@/lib/miles'
 import { zonaHoraria } from '@/lib/zona-horaria'
@@ -305,7 +306,7 @@ const ORDER_V2: string[] = [
   'asistente', 'como-llegar', 'trafico', 'actividades-gyg', 'mejor-hora', 'afiliados', 'comer', 'chiringuitos', 'dormir',
   'campings', 'ferries', 'surf', 'buceo', 'cta-barco', 'ad',
   // 3 · PROFUNDIDAD
-  'meteo', 'datos', 'fotos', 'video', 'opiniones', 'votacion', 'asistente-generico', 'cuaderno-cta', 'cercanas',
+  'meteo', 'datos', 'ad-profundidad', 'fotos', 'video', 'opiniones', 'votacion', 'asistente-generico', 'cuaderno-cta', 'cercanas',
   'texto-seo', 'hubs', 'faqs', 'crosslinks',
 ]
 
@@ -1285,12 +1286,21 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         {/* AD. entre hoteles y servicios */}
-        <AdSlot key="ad" slot="hoteles-servicios" format="horizontal" />
+        {/* Último puesto de la fase PLAN: el lector ya tiene su respuesta
+            —«¿puedo bañarme hoy?»— y ya ha organizado la visita. Antes de
+            aquí el anuncio no molestaría: competiría con lo único que hace
+            que la página merezca confianza. */}
+        <Hueco key="ad" zona="profundidad" bloque={SLOTS.fichaPlan} locale={locale} />
 
         {/* DATOS DE LA PLAYA (PR #86 - Consolidación de Servicios + Info)
             Unifica servicios & equipamiento con información técnica.
             Antes estaban dispersos en 2 secciones, ahora en 1 para mejor
             escaneo visual y menor fragmentación de contenido. */}
+        {/* Ya en PROFUNDIDAD: quien sigue aquí está explorando, no
+            decidiendo. Va detrás de «datos», que es el bloque más árido y
+            el que marca que la respuesta quedó atrás. */}
+        <Hueco key="ad-profundidad" zona="cierre" bloque={SLOTS.fichaFondo} locale={locale} />
+
         <div key="datos" className={styles.card} id="s-datos">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{locale === 'en' ? <>About <em>{nombreH}</em></> : <>Características de <em>{nombreH}</em></>}</h2>

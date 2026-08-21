@@ -1,0 +1,12 @@
+# ads.txt — vendedores autorizados a vender el inventario de
+# playas-espana.com (IAB Tech Lab Authorized Digital Sellers).
+#
+# Sin este fichero AdSense marca la cuenta como «ingresos en riesgo» y los
+# compradores no pueden verificar que el inventario es legítimo, así que
+# parte de la demanda sencillamente no puja. Estaba ausente y en producción
+# devolvía 404.
+#
+# Formato: dominio, ID de editor, tipo de relación, ID de la autoridad.
+# El último campo es el identificador de Google en el registro de TAG y es
+# el mismo para todos los editores de AdSense.
+google.com, pub-1045482785137225, DIRECT, f08c47fec0942fa0
