@@ -27,7 +27,7 @@ import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
-import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
+import { calcularBandera, estimarMedusas, exposicionOleaje } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { descripcionPlaya, introBrevePlaya } from '@/lib/copyPlaya'
 import DESCRIPCIONES_IMPULSO from '@/data/descripciones-impulso.json'
@@ -414,7 +414,13 @@ export default async function PlayaPage({ params }: Props) {
 
   // Datos marinos (oleaje, temperatura agua) de Open-Meteo Marine
   const tempAgua = mareasData?.temp_agua?.[0] ?? null
-  const olas     = mareasData?.oleaje_m?.[0]  ?? 0
+  const olasModelo = mareasData?.oleaje_m?.[0]  ?? 0
+  // El oleaje del modelo es un punto de rejilla MAR ADENTRO y no sabe hacia
+  // dónde mira esta playa. Con mar de fondo llegando desde tierra, ese
+  // valor describe un mar que aquí no entra. Se corrige el abrigo
+  // geográfico —que es geometría, no modelo— antes de que nada lo use.
+  const expo     = exposicionOleaje(playa.lat, playa.lng, mareasData?.wave_dir?.[0])
+  const olas     = Math.round(olasModelo * expo.factor * 10) / 10
   const periodo  = mareasData?.wave_period?.[0] ?? 8
 
   // Datos atmosféricos (viento, UV, temp aire, sensación, humedad) de Open-Meteo Forecast
@@ -472,6 +478,14 @@ export default async function PlayaPage({ params }: Props) {
 
   // Sin datos reales de mar Y viento no se puede izar bandera estimada.
   const banderaEstimada = (datosMar && datosViento) ? calcularBandera(olas, viento, vientoRacha) : undefined
+  // Si se ha corregido por abrigo, se DICE. Ajustar la cifra en silencio
+  // sería la misma falta que este trabajo vino a corregir, solo que en la
+  // dirección contraria: en vez de afirmar de más, ocultar por qué se
+  // afirma de menos.
+  if (banderaEstimada && expo.abrigada && olasModelo > olas) {
+    banderaEstimada.motivo = `${banderaEstimada.motivo} · mar de fondo de tierra: fuera hay ${olasModelo} m, aquí entra menos`
+    banderaEstimada.motivoEn = `${banderaEstimada.motivoEn} · offshore swell: ${olasModelo} m out at sea, less reaches this shore`
+  }
 
   // ── Capas "certeras" sobre la estimación meteo (jul-2026) ──────────
   // 1. AEMET oficial: si prevé oleaje fuerte hoy, mínimo amarilla.

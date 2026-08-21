@@ -115,7 +115,7 @@ const DIR_GRADOS: Record<string, number> = {
 // El viento "onshore" (empuja medusas a la orilla) es el que VIENE de esa
 // dirección. Sin orientación playa-a-playa en los datos, se aproxima por región;
 // suficiente para un índice bajo/medio/alto. Refinable luego con geometría OSM.
-function rumboAlMar(lat: number, lng: number): number {
+export function rumboAlMar(lat: number, lng: number): number {
   if (lat < 29.5) return 200                      // Canarias: playas turísticas miran S-SO
   if (lat >= 43.0) return 0                        // Cantábrico: mira N
   if (lng <= -8.0 && lat >= 41.6) return 270       // Galicia atlántica: mira O
@@ -128,6 +128,70 @@ function rumboAlMar(lat: number, lng: number): number {
 const difAngular = (a: number, b: number): number => {
   const d = Math.abs(a - b) % 360
   return d > 180 ? 360 - d : d
+}
+
+
+/**
+ * Cuánto de ese oleaje llega de verdad a esta orilla.
+ *
+ * EL PROBLEMA QUE RESUELVE. `calcularBandera` convertía `olas >= 1,5 m` en
+ * bandera roja, y ese valor es un punto de rejilla del modelo, mar adentro.
+ * No sabe hacia dónde mira la playa. Con mar de fondo del sur, una playa
+ * cantábrica —que mira al norte— tiene toda la península por delante y el
+ * temporal no le llega; el punto de rejilla, que está en el Cantábrico
+ * abierto, sí lo ve. Son 3.212 fichas sin fuente oficial cuya única bandera
+ * sale de esa cifra.
+ *
+ * LO QUE ESTO CAPTA Y LO QUE NO, y la diferencia importa. `rumboAlMar` es
+ * REGIONAL, no playa a playa: sabe que el Cantábrico mira al norte y que
+ * Levante mira al este, y nada más. Así que esto corrige el abrigo
+ * GEOGRÁFICO —el oleaje que viene desde tierra— que es geometría y no
+ * modelo. NO capta el abrigo local: una cala detrás de un cabo sigue
+ * recibiendo la misma estimación que la playa abierta de al lado. Para eso
+ * haría falta la orientación real de cada arenal, que no está en los datos.
+ *
+ * POR QUÉ SOLO PUEDE BAJAR UN ESCALÓN. Reducir la altura efectiva significa
+ * menos banderas rojas, y equivocarse en esa dirección es el error
+ * peligroso. Por eso el suelo es 0,6: una mar de 3 m sigue dando roja
+ * (1,8), y una de 1,5 —justo en el umbral— baja a 0,9, que es amarilla, no
+ * verde. Nunca convierte un peligro en un «adelante».
+ */
+export interface Exposicion {
+  /** Multiplicador sobre la altura del modelo. Entre 0,6 y 1. */
+  factor: number
+  /** El mar de fondo viene desde tierra: la playa está a resguardo. */
+  abrigada: boolean
+}
+
+export function exposicionOleaje(lat: number, lng: number, dirOlaDeg: number | null | undefined): Exposicion {
+  if (dirOlaDeg == null || !Number.isFinite(dirOlaDeg)) return { factor: 1, abrigada: false }
+
+  // SOLO EN LA PENÍNSULA, y esto lo encontré probando y no razonando.
+  //
+  // Las Canteras mira al NORTE. Con 1,32 m de mar del 13° le entra de
+  // frente — y la primera versión de esta función la marcaba «abrigada» y
+  // le recortaba a 0,79 m, que es exactamente el error peligroso que el
+  // suelo de 0,6 pretendía evitar. La causa: `rumboAlMar` devuelve 200°
+  // para TODA Canarias («las turísticas miran al S-SO»), que sirve para un
+  // índice grueso de medusas y no para decidir una bandera playa a playa.
+  //
+  // El fondo del asunto es que en un archipiélago «la ola viene del lado
+  // contrario» NO significa que haya tierra bloqueándola: la isla es
+  // pequeña y hay océano abierto alrededor. En la península sí: un mar de
+  // fondo del sur no llega a la costa cantábrica porque tiene delante
+  // seiscientos kilómetros de meseta, y eso es cierto mire hacia donde
+  // mire cada arenal.
+  //
+  // Así que la corrección se aplica donde hay un continente detrás, y en
+  // las islas se deja el valor del modelo tal cual.
+  const esIsla = lat < 29.5 || (lng > 1.0 && lat >= 38.5 && lat <= 40.2)
+  if (esIsla) return { factor: 1, abrigada: false }
+  // `rumboAlMar` da hacia dónde está el mar abierto; `dirOlaDeg` da de dónde
+  // VIENE la ola. Coinciden cuando la ola entra de frente.
+  const d = difAngular(rumboAlMar(lat, lng), dirOlaDeg)
+  if (d <= 60)  return { factor: 1,    abrigada: false }   // de frente
+  if (d <= 120) return { factor: 0.8,  abrigada: false }   // oblicua
+  return { factor: 0.6, abrigada: true }                    // viene de tierra
 }
 
 /**

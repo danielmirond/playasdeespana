@@ -8,7 +8,7 @@ import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { getMareas, getSol, getTurbidez } from '@/lib/marine'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
-import { calcularBandera, estimarMedusas } from '@/lib/seguridad'
+import { calcularBandera, estimarMedusas, exposicionOleaje } from '@/lib/seguridad'
 import type { BanderaPlaya } from '@/lib/seguridad'
 import { getBanderaCat, tieneBanderaCat } from '@/lib/banderas-cat'
 import { getBanderaCan, tieneBanderaCan } from '@/lib/banderas-can'
@@ -166,7 +166,11 @@ export default async function BeachPageEn({ params }: Props) {
 
   // Datos marinos (oleaje, temperatura agua) de Open-Meteo Marine
   const tempAgua     = mareasData?.temp_agua?.[0]   ?? null
-  const olas         = mareasData?.oleaje_m?.[0]    ?? 0
+  const olasModelo   = mareasData?.oleaje_m?.[0]    ?? 0
+  // Ver el comentario largo en la ficha en español: el oleaje del modelo es
+  // de un punto mar adentro y no sabe hacia dónde mira esta playa.
+  const expo         = exposicionOleaje(playa.lat, playa.lng, mareasData?.wave_dir?.[0])
+  const olas         = Math.round(olasModelo * expo.factor * 10) / 10
   const periodo      = mareasData?.wave_period?.[0] ?? 8
 
   // Datos atmosféricos (viento, UV, temp aire, sensación, humedad) de Open-Meteo Forecast
@@ -209,6 +213,11 @@ export default async function BeachPageEn({ params }: Props) {
   // oficial izada REEMPLAZA a la estimación, y si sabemos que hay fuente
   // oficial pero no hemos podido leerla no se adivina.
   let banderaPlaya: BanderaPlaya | undefined = calcularBandera(olas, viento, vientoRacha)
+  // Si se ha corregido por abrigo, se dice. Ver el comentario en la ficha ES.
+  if (banderaPlaya && expo.abrigada && olasModelo > olas) {
+    banderaPlaya.motivoEn = `${banderaPlaya.motivoEn} · offshore swell: ${olasModelo} m out at sea, less reaches this shore`
+    banderaPlaya.motivo = `${banderaPlaya.motivo} · mar de fondo de tierra: fuera hay ${olasModelo} m, aquí entra menos`
+  }
   let certBandera: 'oficial' | 'reportado' | 'estimado' | 'sindato' = 'estimado'
   const oficialCat = banderaCatResult.status === 'fulfilled' ? banderaCatResult.value : null
   const oficialCan = banderaCanResult.status === 'fulfilled' ? banderaCanResult.value : null

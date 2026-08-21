@@ -9,6 +9,15 @@ export interface MarineData {
   temp_agua:   number[]
   oleaje_m:    number[]
   wave_period: number[]
+  /**
+   * DE DÓNDE VIENE el mar de fondo, en grados meteorológicos.
+   *
+   * No se pedía, y por eso la bandera estimada trataba igual a una playa
+   * que recibe el temporal de frente y a otra a la que ese mismo temporal
+   * le llega desde tierra. Va en la MISMA llamada: una variable más en el
+   * `hourly`, coste cero.
+   */
+  wave_dir:    number[]
   forecast:    ForecastDay[]
 }
 
@@ -78,7 +87,7 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
     // ahora desde el hourly (abajo). No añadir variables daily sin
     // probarlas: un solo nombre inválido tumba la petición entera.
     const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
-      + `&hourly=wave_height,wave_period,wind_wave_height,sea_surface_temperature`
+      + `&hourly=wave_height,wave_direction,wave_period,wind_wave_height,sea_surface_temperature`
       + `&daily=wave_height_max,wind_speed_10m_max`
       + `&wind_speed_unit=kmh&forecast_days=7&timezone=${zonaHorariaParam(lat, lng)}`
 
@@ -89,6 +98,7 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
 
     const ahora   = new Date().getHours()
     const oleaje  = marine.hourly?.wave_height ?? []
+    const dirOla  = marine.hourly?.wave_direction ?? []
     const periodo = marine.hourly?.wave_period ?? []
     const temps   = marine.hourly?.sea_surface_temperature ?? []
     const tempAgua = temps[ahora] ?? temps[0] ?? null
@@ -124,6 +134,7 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
       temp_agua:   tempAgua !== null ? [tempAgua, ...temps.slice(ahora + 1, ahora + 6)] : [],
       oleaje_m:    oleaje.slice(ahora, ahora + 6).map((v: number) => parseFloat(v.toFixed(1))),
       wave_period: periodo.slice(ahora, ahora + 6),
+      wave_dir:    dirOla.slice(ahora, ahora + 6),
       forecast,
     }
   } catch {
