@@ -76,7 +76,29 @@ export async function kvCached<T>(
 
   if (kv) {
     try {
-      const cached = await kv.get(key) as T | null
+      // TIMEOUT EN EL GET, igual que en el set de abajo.
+      //
+      // No lo tenía, y el `set` sí — porque el set nos costó un incidente y
+      // el get no había dado la cara todavía. La dio: con las credenciales
+      // de KV apuntando a un sitio inalcanzable, `kv.get` tarda entre seis
+      // y ocho segundos antes de rendirse. Como esto se ejecuta ANTES del
+      // cómputo, cada dato de la ficha pagaba esa espera y ninguno entraba
+      // en el plazo de la ficha, que es de segundos. La consecuencia
+      // visible: fichas servidas sin viento, sin agua y sin oleaje, y el
+      // ISR congelando ese hueco una hora.
+      //
+      // Costó dos días encontrarlo porque el síntoma apuntaba a todas
+      // partes menos aquí: parecía la cuota de Open-Meteo, parecía
+      // contención entre 28 promesas, parecía el plazo. El fetch a
+      // Open-Meteo tardaba 330 ms y la ruta entera 8 segundos.
+      //
+      // 300 ms es holgado para un KV sano —responde en 5-10 ms desde la
+      // misma región— y ridículo comparado con lo que costaba fallar. Si
+      // KV no contesta en 300 ms, se calcula en vivo y se sigue.
+      const cached = await Promise.race([
+        kv.get(key),
+        new Promise<undefined>(r => setTimeout(() => r(undefined), 300)),
+      ]) as T | null | undefined
       if (cached !== null && cached !== undefined) {
         return cached
       }

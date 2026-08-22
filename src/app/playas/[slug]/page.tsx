@@ -215,81 +215,115 @@ export default async function PlayaPage({ params }: Props) {
   // hasta 4s en p99 si Overpass no respondía. 1.5s mantiene el meteo
   // y la cascada de fotos pero corta los Overpass lentos.
   //
-  // ORDEN: los fetches críticos para hero/above-the-fold van primero
-  // (no afecta tiempo, pero deja claro el contrato).
+  // Fuera de la carrera, y resueltas ANTES de armarla.
+  //
+  // No son red: son lectura de disco. Darles un plazo es absurdo, porque si
+  // «expiran» no hay nada mejor que hacer y el resultado degrada la página
+  // en silencio — con `municipioSlugsSet` vacío, el enlace al municipio
+  // desaparece de la ficha y nadie se entera. Era un fallo de enlazado
+  // interno causado por un plazo pensado para Overpass.
+  //
+  // Y además `getPlayas()` parsea un JSON de 5.098 entradas, que bloquea el
+  // event loop decenas de milisegundos. Bloquearlo aquí es gratis; hacerlo
+  // mientras 26 promesas resuelven sus temporizadores les robaba tiempo a
+  // todas.
+  const [allPlayasRaw, municipioSlugsSetRaw] = await Promise.all([
+    getPlayas().catch(() => []),
+    getMunicipioSlugsSet().catch(() => new Set<string>()),
+  ])
+
+  // DOS PLAZOS, no uno.
+  //
+  // Con un único plazo de 1.500 ms para las 28 promesas, la meteo competía
+  // en igualdad con los cinco Overpass. Medido con la caché fría antes de
+  // este cambio: 0 de 6 fichas conseguían viento, agua y oleaje. Y no se
+  // ganaba tiempo a cambio — esas mismas seis tardaban 13 segundos igual,
+  // porque lo lento no era la carrera.
+  //
+  // Lo crítico es lo que sostiene la promesa del sitio: el estado del mar y
+  // la bandera. Lo accesorio son restaurantes, hoteles y vídeos, que además
+  // tienen su propia ruta de API y se rellenan desde el cliente si faltan.
+  //
+  // Sobre el TTFB, que es la objeción evidente: con ISR el render lento casi
+  // nunca lo paga un usuario. Página vigente, HIT de CDN. Página expirada,
+  // se sirve rancia y se regenera detrás. Solo la primerísima visita a una
+  // ficha nunca generada paga — y para esa persona servir en seis segundos
+  // CON datos es mejor que servir en uno y medio sin ellos y congelar el
+  // hueco una hora para todas las siguientes.
+  const P_CRITICO   = Number(process.env.DEADLINE_MS ?? 6000)
+  const P_ACCESORIO = Number(process.env.DEADLINE_ACCESORIO ?? 1200)
+  const conPlazo = <T,>(p: Promise<T>, ms: number) =>
+    Promise.race([
+      p.then(v => ({ status: 'fulfilled' as const, value: v })),
+      new Promise<{ status: 'rejected'; reason: string }>(r =>
+        setTimeout(() => r({ status: 'rejected', reason: 'deadline' }), ms)
+      ),
+    ]).catch(reason => ({ status: 'rejected' as const, reason: String(reason) }))
+  /** Crítico: sostiene la promesa del sitio. */
+  const C = <T,>(p: Promise<T>) => conPlazo(p, P_CRITICO)
+  /** Accesorio: si falta, la página sigue siendo la página. */
+  const A = <T,>(p: Promise<T>) => conPlazo(p, P_ACCESORIO)
+
+  // Cada promesa lleva su plazo DONDE SE CREA, no en una lista de índices
+  // aparte: una lista de índices se desincroniza en cuanto alguien inserta
+  // una línea, y el fallo sería silencioso.
   const promesas = [
     // Críticos
-    getMeteoPlaya(playa.lat, playa.lng),
-    getSol(playa.lat, playa.lng),
-    getMareas(playa.lat, playa.lng),
-    getCalidad(slug),
-    getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia, slug),
-    getReportes(slug),
-    getOpiniones(slug, 1, 10),
-    getVotos(slug),
-    getMeteoForecast(playa.lat, playa.lng),
-    getTurbidez(playa.lat, playa.lng),
+    C(getMeteoPlaya(playa.lat, playa.lng)),
+    C(getSol(playa.lat, playa.lng)),
+    C(getMareas(playa.lat, playa.lng)),
+    C(getCalidad(slug)),
+    C(getFotos(playa.nombre, playa.municipio, playa.lat, playa.lng, playa.provincia, slug)),
+    C(getReportes(slug)),
+    A(getOpiniones(slug, 1, 10)),
+    A(getVotos(slug)),
+    C(getMeteoForecast(playa.lat, playa.lng)),
+    A(getTurbidez(playa.lat, playa.lng)),
     // Usados below-the-fold (más sensibles a deadline)
-    getRestaurantes(playa.lat, playa.lng),
-    getHoteles(playa.lat, playa.lng),
-    getCampings(playa.lat, playa.lng),
-    getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true }),
-    getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true }),
-    // Datos del filesystem (rápidos)
-    getPlayas(),
-    getMunicipioSlugsSet(),
+    A(getRestaurantes(playa.lat, playa.lng)),
+    A(getHoteles(playa.lat, playa.lng)),
+    A(getCampings(playa.lat, playa.lng)),
+    A(getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })),
+    A(getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true })),
     // Video YouTube — cache KV 30d, llamada API solo en miss
-    getVideoYouTube(playa.nombre, playa.municipio, slug),
+    A(getVideoYouTube(playa.nombre, playa.municipio, slug)),
     // Webcams en directo (Windy) — gated por WINDY_API_KEY; [] si no hay clave
-    getWebcams(playa.lat, playa.lng),
+    A(getWebcams(playa.lat, playa.lng)),
     // Predicción oficial AEMET — gated por AEMET_API_KEY; null sin key/mapeo
-    getPrediccionAemet(slug),
+    C(getPrediccionAemet(slug)),
     // Bandera OFICIAL izada (solo Cataluña, dataset Transparència) — null
     // fuera del mapeo; 1 llamada SODA compartida vía KV para toda la costa
-    getBanderaCat(slug),
+    C(getBanderaCat(slug)),
     // Bandera OFICIAL izada (Canarias, socorrismo DGSE) — null fuera del
     // mapeo; 1 llamada REST compartida vía KV para las 7 islas. Es la única
     // fuente de España que dice POR QUÉ está izada (corrientes,
     // desprendimientos, oleaje), y el motivo va a la ficha.
-    getBanderaCan(slug),
+    C(getBanderaCan(slug)),
     // Bandera OFICIAL izada (Andalucía, Junta) — 506 playas de las 5
     // provincias en 1 llamada. Sin motivo y sin timestamp, pero es la que
     // habría evitado que La Misericordia dijera "BUENA" el 15-ago-2026 con
     // el baño prohibido por E. coli.
-    getBanderaAnd(slug),
+    C(getBanderaAnd(slug)),
     // Bandera OFICIAL izada (Bizkaia). Aporta el estado cerrada/precintada,
     // que va aparte del color: una playa puede estar precintada sin bandera.
-    getBanderaBiz(slug),
+    C(getBanderaBiz(slug)),
     // Bandera OFICIAL izada (Gipuzkoa, KostaSystem de la Diputación).
-    getBanderaGip(slug),
+    C(getBanderaGip(slug)),
     // Bandera izada en municipios con SafeBeach (Levante, Baleares, Murcia).
-    getBanderaSb(slug),
+    C(getBanderaSb(slug)),
     // Ferrol: única fuente de bandera pública de Galicia. Gijón: única de Asturias.
-    getBanderaFerrol(slug),
-    getBanderaGijon(slug),
+    C(getBanderaFerrol(slug)),
+    C(getBanderaGijon(slug)),
     // Boya de Puertos del Estado más cercana (≤60 km) — dato MEDIDO
-    getBoyaCercana(playa.lat, playa.lng),
-  ] as const
-  // Configurable por entorno SOLO para poder verificar en local: sin KV,
-  // ninguna promesa externa entra en 1.500 ms y la ficha se sirve entera
-  // sin meteo, lo que hace imposible comprobar nada que dependa de ella.
-  // En producción no se define y vale 1.500, como siempre.
-  const DEADLINE_MS = Number(process.env.DEADLINE_MS ?? 1500)
-  const conDeadline = promesas.map(p =>
-    Promise.race([
-      p.then(v => ({ status: 'fulfilled' as const, value: v })),
-      new Promise<{ status: 'rejected'; reason: string }>(r =>
-        setTimeout(() => r({ status: 'rejected', reason: 'deadline' }), DEADLINE_MS)
-      ),
-    ]).catch(reason => ({ status: 'rejected' as const, reason: String(reason) }))
-  )
+    C(getBoyaCercana(playa.lat, playa.lng)),
+  ]
+  const conDeadline = promesas
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [
     meteoPlaya, sol, mareas, calidadResult, fotos,
     reportesResult, opinionesResult, votosResult,
     meteoForecast, turbidez,
     restaurantes, hoteles, campingsResult, buceoResult, escuelasResult,
-    allPlayasResult, municipioSlugsResult,
     videoResult, webcamResult, aemetResult, banderaCatResult, banderaCanResult, banderaAndResult, banderaBizResult, banderaGipResult, banderaSbResult, banderaFerResult, banderaGijResult, boyaResult,
   ] = await Promise.all(conDeadline) as any[]
   const videoData = videoResult?.status === 'fulfilled' ? videoResult.value : null
@@ -399,7 +433,7 @@ export default async function PlayaPage({ params }: Props) {
   // es enlazable si existe. Cádiz / Cádiz genera dos links distintos.
   const municipioSlug = toSlug(playa.municipio)
   const provinciaSlug = playa.provincia ? toSlug(playa.provincia) : undefined
-  const municipioSlugsSet = municipioSlugsResult.status === 'fulfilled' ? municipioSlugsResult.value : new Set<string>()
+  const municipioSlugsSet = municipioSlugsSetRaw
   const municipioSlugProp = municipioSlugsSet.has(municipioSlug) ? municipioSlug : undefined
 
   const mareasData        = mareas.status === 'fulfilled' ? mareas.value : null
@@ -757,7 +791,7 @@ export default async function PlayaPage({ params }: Props) {
   const boatLink = getBoatLinkForPlaya(playa.provincia, playa.municipio)
 
   // Playas cercanas (server-side, sin API extra)
-  const allPlayas = allPlayasResult.status === 'fulfilled' ? allPlayasResult.value : []
+  const allPlayas = allPlayasRaw
   const cercanasBase = allPlayas
     .filter(p => p.slug !== playa.slug)
     .map(p => ({ p, distKm: haversine(playa.lat, playa.lng, p.lat, p.lng) / 1000 }))

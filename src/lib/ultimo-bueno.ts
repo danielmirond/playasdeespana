@@ -76,7 +76,14 @@ export async function cargarConUltimoBueno<T>(
   try {
     const kv = await getKV()
     if (!kv) throw new Error('sin kv')
-    const guardado = await kv.get(claveUltimo) as { t: number; d: T } | null
+    // Con plazo, como el de kv-cache: un `kv.get` sin límite se come el
+    // presupuesto entero de la ficha cuando KV no contesta, y este get se
+    // ejecuta justo cuando ya hemos fallado una vez —o sea, en el peor
+    // momento posible para esperar ocho segundos más.
+    const guardado = await Promise.race([
+      kv.get(claveUltimo),
+      new Promise<null>(r => setTimeout(() => r(null), 300)),
+    ]) as { t: number; d: T } | null
     if (!guardado?.t) throw new Error('sin copia')
     const edadMs = Date.now() - guardado.t
     if (edadMs > TOPE_MS) throw new Error('demasiado viejo')
