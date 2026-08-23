@@ -1,6 +1,17 @@
 # Playas de España — Brief de producto para auditoría CRO / UX
 
-*Documento para agencia de diseño. Actualizado: junio 2026.*
+*Documento para agencia de diseño. Actualizado: **agosto 2026**.*
+
+> **Qué ha cambiado desde la versión de junio, y por qué importa para el
+> diseño.** El producto tiene ahora un eje que antes no existía: **no solo
+> dice el dato, dice cuánto se fía de él**, y esa distinción está codificada
+> en el trazo de cada cifra (§5b). Han entrado ocho fuentes oficiales de
+> bandera, la predicción de mareas de Puertos del Estado y una capa nueva de
+> publicidad con reglas propias. Si algo de esta guía choca con el diseño que
+> propongáis, es la §5b lo que no se puede romper.
+>
+> `UX_AUDIT.md`, de mayo, describe problemas ya resueltos: está superado, no
+> lo useis como referencia.
 URL: https://playas-espana.com · Idiomas: Español (`/`) e Inglés (`/en`).
 
 ---
@@ -14,13 +25,25 @@ un **score 0–100 recalculado cada hora**, la mejor playa según las condicione
 actuales. Es **editorial + utilitario**, no un folleto turístico: el diferencial
 es el dato y la honestidad (decimos también cuándo NO ir).
 
+**El eje que define el producto hoy:** cada cifra de la página lleva escrito
+de dónde sale y cuánta confianza merece. No es un adorno de transparencia —
+es la respuesta a un fallo real: el 15 de agosto de 2026 el Ayuntamiento de
+Málaga prohibió el baño en seis playas por *E. coli* y nuestras fichas decían
+«BUENA», porque la bandera se estimaba con oleaje y viento y una playa
+contaminada está en calma. De ahí salió todo lo que hay en la §5b, y por eso
+esa parte no es negociable.
+
 Modelo de negocio: **gratis para el usuario**, monetizado por **afiliación**
 (alquiler de barcos y autocaravanas, hoteles, actividades, etc.) y publicidad.
 
-### Cifras clave
-- **5.098 playas** · **898 con Bandera Azul** · 20 comunidades · 49 provincias.
-- **4.300 playas con foto real** (84%); resto, imagen genérica por estado del mar.
-- **18 artículos** de Magazine (ES+EN) · contenido creciente (3/día automatizado).
+### Cifras clave *(medidas en agosto de 2026)*
+- **5.098 playas** en el catálogo · **4.456 indexables** · 20 comunidades · 49 provincias.
+- **898 con Bandera Azul** · **4.300 con foto real** (84 %); el resto, imagen
+  genérica según el estado del mar.
+- **93 rutas distintas en español y 30 en inglés** — el mapa completo, en la §4.
+- **1.244 fichas con fuente OFICIAL de bandera; 3.212 sin ninguna.** Esa
+  proporción crea dos experiencias distintas dentro del mismo sitio, y
+  resolverla visualmente es de las cosas más útiles que podéis proponer (§4b).
 - Bilingüe ES/EN.
 
 ---
@@ -92,6 +115,40 @@ Bandera Azul, autocaravana, islas.
 
 ---
 
+## 4b. Dos Españas: dónde hay dato oficial y dónde no
+
+Ocho fuentes oficiales de bandera, todas descubiertas en visores municipales o
+autonómicos —ninguna publicada como dato abierto—: Cataluña, Canarias, Junta de
+Andalucía, Bizkaia, Gipuzkoa, SafeBeach (Levante/Baleares/Murcia), Ferrol y
+Gijón. Más la predicción de mareas de **Puertos del Estado**.
+
+Cobertura real, en fichas con fuente oficial sobre el total de la comunidad:
+
+| Comunidad | Con fuente | Total | |
+|---|---|---|---|
+| Canarias | 412 | 580 | 71 % |
+| Andalucía | 325 | 550 | 59 % |
+| Cataluña | 268 | 576 | 47 % |
+| País Vasco | 34 | 83 | 41 % |
+| Baleares | 131 | 421 | 31 % |
+| C. Valenciana | 29 | 225 | 13 % |
+| Asturias | 11 | 238 | 5 % |
+| Murcia | 8 | 200 | 4 % |
+| **Galicia** | **9** | **1.298** | **1 %** |
+| Cantabria | 0 | 113 | 0 % |
+| Ceuta / Melilla | 0 | 19 | 0 % |
+
+**Galicia tiene más fichas que ninguna otra comunidad —1.298— y un 1 % de
+cobertura oficial.** Ahí la bandera que ve el usuario es siempre una estimación
+nuestra.
+
+Esto es un problema de diseño antes que de datos: **la misma plantilla tiene que
+servir a una ficha con parte oficial y a otra donde solo hay modelo, sin que la
+segunda parezca rota ni la primera parezca igual que la segunda.** Es la pregunta
+número uno que os hacemos.
+
+---
+
 ## 5. Sistema de diseño actual (tokens reales en código)
 
 Estética **editorial, cálida, "arena + tinta"** (no el típico azul turístico).
@@ -110,6 +167,48 @@ Estética **editorial, cálida, "arena + tinta"** (no el típico azul turístico
 
 > Nota: la marca usa una **"P" serif** como icono (favicon/PWA). El logo es un
 > wordmark "playas de España".
+
+---
+
+## 5b. La gramática de certeza — **lo que no se puede romper**
+
+Es lo más importante de este documento. Si una propuesta de diseño choca aquí,
+gana esto.
+
+**La regla:** toda cifra de la página declara de dónde sale, y lo declara en el
+**trazo**, no en el color. El color ya está ocupado por el significado (verde =
+buena calidad, rojo = peligro); si además codificara la confianza, las dos
+lecturas se pisarían.
+
+| Certeza | Qué significa | Trazo |
+|---|---|---|
+| `medido` | Un sensor físico lo midió | `2px solid` |
+| `oficial` | Lo publica una administración | `1.5px solid` |
+| `reportado` | Lo ha dicho un bañista | `1.5px dotted` |
+| `estimado` | Lo deduce nuestro modelo | `1px dashed` + texto atenuado |
+| `sindato` | No lo sabemos | sin trazo, en gris |
+
+Tokens: `--cert-medido #2d5266` · `--cert-oficial #3d6b1f` · `--cert-reportado
+#8a5f0a` · `--cert-estimado #7a6850` · `--cert-sindato #7a6b55`.
+Se aplica con `data-cert` sobre `.dato` (componente de servidor, cero JS).
+
+Dos corolarios que también rigen:
+
+- **«Glifo relleno = sensor, hueco = modelo».** El icono de bandera del hero va
+  relleno si la izó alguien y hueco si la deduce el modelo. Igual el de medusas.
+- **La estimación describe, no autoriza.** Los estados estimados se rotulan «Mar
+  en calma / con precaución / peligroso», nunca «BUENA»: una etiqueta de
+  aprobación sobre una estimación es exactamente el fallo de Málaga.
+
+**Qué NO puede hacer un diseño nuevo:**
+
+1. Codificar la certeza en color en vez de en trazo.
+2. Dar a un espacio pagado el vocabulario de la certeza — nada de anuncios con
+   forma de `<Dato>`, ni dentro de la rejilla de mediciones. Los trazos
+   significan «cuánto me fío»; prestárselos a un anuncio devalúa cada medición
+   real del sitio.
+3. Homogeneizar las cifras «para que se vean todas igual». Que no se vean igual
+   es el producto.
 
 ---
 
@@ -140,33 +239,70 @@ Estética **editorial, cálida, "arena + tinta"** (no el típico azul turístico
 
 ## 8. Estado actual y temas abiertos (contexto para la auditoría)
 
-- **PWA instalable** recién añadida (manifest + iconos + banner "Instalar app").
-- Recientes correcciones UX: logo vs hamburguesa en móvil, favicon de marca,
-  imágenes de fallback rotas, repetición de playas en Home (ahora el score lo
-  decide más el estado del mar).
-- **Home**: el "Top playas hoy" tiende a mostrar las mejor equipadas; se ha
-  rebalanceado hacia condiciones reales, pero la **selección/orden y la jerarquía
-  visual de la Home** son candidatas claras a CRO.
-- **Ficha de playa**: es muy densa (muchos módulos). Priorización visual,
-  orden de bloques y ubicación de CTAs de afiliación = gran oportunidad.
-- **Cobertura de foto**: 84% real; el 16% usa imagen genérica.
+*Reescrito en agosto de 2026. Lo que decía esta sección en junio —PWA recién
+añadida, logo vs hamburguesa, imágenes rotas— está resuelto.*
+
+**Superficies nuevas desde la última versión**, todas candidatas a auditoría:
+
+- **Tabla de mareas por municipio** (`/municipio/[slug]/tabla-de-mareas`), con
+  predicción oficial de Puertos del Estado a tres días, tabla solunar y equipo
+  de pesca afiliado. Enlazada en 163 municipios del Atlántico, Cantábrico y
+  Canarias; en el Mediterráneo existe pero abre diciendo que ahí la marea son
+  25 cm.
+- **Vientos con nombre** en la ficha: levante, tramontana, alisio, terral,
+  nordés… El nombre depende de la costa y solo aparece cuando el viento sopla
+  lo bastante para merecerlo.
+- **Índice completo por municipio** en la página de provincia, subido del 92 %
+  al 20 % de la página.
+- **`/banderas-hoy`**, la superficie de autoridad: la que destapó lo de Málaga.
+- **Publicidad**, encendida en agosto. Va con una regla explícita, resumida en
+  el anexo H.
+
+**Temas abiertos donde más valor tendría vuestra opinión:**
+
+1. **La ficha sigue siendo muy densa** — **37 módulos** en tres fases narrativas
+   (anexo A). Sigue siendo la mayor oportunidad.
+2. **La certeza no se explica en ninguna parte.** Los trazos están, pero nadie
+   le dice al usuario qué significan. ¿Se explica? ¿Dónde? ¿O tiene que
+   entenderse sin leer?
+3. **La foto de portada compite con las cifras.** Sobre foto clara, la rejilla
+   necesita un velo del 38 % para que los números se lean, y aun así es el punto
+   más frágil del hero.
+4. **El 16 % de fichas sin foto real** usa una ilustración por estado del mar.
 
 ---
 
 ## 9. Qué necesitamos de la agencia (entregables CRO/UX)
 
-1. **Auditoría heurística + CRO** de: Home, Ficha de playa, y una página comercial
+1. **Auditoría heurística + CRO** de: Home, ficha de playa y una página comercial
    (alquiler de barco o autocaravana). Foco en el embudo a afiliación.
-2. **Jerarquía y ubicación de CTAs** de afiliación/actividades sin dañar la
+2. **Jerarquía y ubicación de CTAs** de afiliación y actividades sin dañar la
    credibilidad editorial ni los Core Web Vitals.
-3. **Priorización de módulos** en la ficha (qué va above-the-fold en móvil).
-4. **Recomendaciones accionables** expresables en nuestro sistema de tokens
-   (no rediseño que rompa el stack ni meta dependencias pesadas).
-5. (Opcional) Propuesta de **test A/B** priorizados por impacto/esfuerzo.
+3. **Priorización de módulos** en la ficha: qué va above-the-fold en móvil.
+4. **Recomendaciones accionables** expresables en nuestros tokens — no un
+   rediseño que rompa el stack ni meta dependencias pesadas.
+5. (Opcional) **Tests A/B** priorizados por impacto y esfuerzo.
 
-**Restricciones a respetar:** mobile-first, sin Tailwind, performance/SEO
-crítico, estética editorial "arena + tinta", monetización por afiliación
-(no intrusiva), cumplimiento RGPD (consentimiento).
+### Las cuatro preguntas que de verdad queremos que contestéis
+
+Más útiles que un informe genérico:
+
+1. **¿Qué hace la ficha donde no hay dato oficial?** Son 3.212 de 4.456, y en
+   Galicia el 99 %. Hoy se muestra la estimación con su trazo discontinuo y ya
+   está. ¿Es suficiente? ¿Se explica, se compensa con otra cosa, se cambia la
+   jerarquía entera de esas fichas?
+2. **¿Se puede leer la certeza sin que nadie la explique?** Los cinco trazos
+   están implementados y son coherentes. Nunca se ha probado con usuarios.
+3. **¿Estorba la monetización a la credibilidad?** Somos un sitio que vive de
+   decir la verdad sobre el mar y que cobra comisión por hoteles y excursiones
+   en la misma página. Queremos saber dónde se nota.
+4. **¿Cuál es el coste real de la densidad?** La ficha lo tiene todo. La
+   hipótesis interna es que eso es una virtud para el SEO y un problema para la
+   persona. No lo hemos medido.
+
+**Restricciones a respetar:** mobile-first, sin Tailwind, rendimiento y SEO
+críticos, estética editorial «arena + tinta», monetización no intrusiva,
+cumplimiento del RGPD, y **la gramática de certeza de la §5b**.
 
 ---
 
@@ -174,32 +310,39 @@ crítico, estética editorial "arena + tinta", monetización por afiliación
 
 ## A. Ficha de playa — orden REAL de módulos (clave para CRO)
 
-Orden vertical actual en móvil (lo que el usuario ve al hacer scroll). Es una
-página **muy densa**; la pregunta CRO es qué sube, qué baja y dónde van los CTAs.
+*Generado desde `ORDER_V2` en `src/components/playa/FichaBody.tsx`, agosto de
+2026. La versión de junio de este anexo describía un orden anterior.*
 
-1. **Hero** — foto (o "mar animado" SVG si no hay foto), nombre, **score 0–100**
-   (badge de color), estado del mar, acciones (favorito, compartir).
-2. **Nav interno** (jump links a secciones).
-3. **Estado de hoy** — recomendación + bandera de baño + riesgo de medusas.
-4. **Asistente "¿Qué necesitas hoy?"** — chips de necesidades (sombra, calma…).
-5. **Calidad del agua** (EEA): % muestras, temporada, clasificación Directiva 2006/7/CE.
-6. **Opiniones destacadas + reseñas** (votos de usuarios).
-7. **🟢 Bloque CTA de afiliados** (`AffiliatesCTABlock`) — primer punto comercial fuerte.
-8. **Oleaje** (gráfico) + desplegable: sol, mareas, temperatura agua/aire, sensación,
-   UV, humedad, viento + brújula.
-9. **Surf** (si aplica).
-10. **Cómo llegar**: coche / bus / bici / a pie + datos de acceso y parking + **mapa**.
-11. **Tráfico en tiempo real**.
-12. **Hoteles cercanos** (→ Booking, afiliado) · **AdSlot** (publicidad).
-13. **Ferris** (si es isla) · **Restaurantes** (→ TheFork) · **Campings** (→ Pitchup).
-14. **Centros de buceo / escuelas**.
-15. **Servicios y equipamiento** + ficha técnica (desplegable).
-16. **Texto SEO** + **hubs relacionados** + **"Cosas que hacer cerca"** (GetYourGuide).
-17. (Desktop) **aside** con acciones y CTA de afiliación.
+La columna principal se ordena en **tres fases mentales**, y esa estructura es
+la decisión de producto más importante de la ficha:
 
-> Hipótesis CRO a validar: el primer CTA comercial llega **después** de calidad
-> del agua y opiniones; ¿debería haber un CTA contextual antes? ¿El score y el
-> "estado de hoy" están bien jerarquizados above-the-fold en móvil?
+**1 · DECISIÓN — «¿puedo ir hoy y estaré bien?»** (8 módulos)
+`intro` · `trust` · `estado` · `webcam` · `seguridad` · `calidad` ·
+`opiniones-dest` · `cta-ctx`
+
+**2 · PLAN — «cómo organizo la visita»** (15 módulos)
+`asistente` · `como-llegar` · `trafico` · `actividades-gyg` · `mejor-hora` ·
+`afiliados` · `comer` · `chiringuitos` · `dormir` · `campings` · `ferries` ·
+`surf` · `buceo` · `cta-barco` · `ad`
+
+**3 · PROFUNDIDAD — datos y exploración para quien quiera más** (14 módulos)
+`meteo` · `datos` · `ad-profundidad` · `fotos` · `video` · `opiniones` ·
+`votacion` · `asistente-generico` · `cuaderno-cta` · `cercanas` · `texto-seo` ·
+`hubs` · `faqs` · `crosslinks`
+
+**Lo comercial vive casi entero en la fase 2**, y no por casualidad: en DECISIÓN
+un CTA compite con lo único que hace que la página merezca confianza. La única
+excepción es `cta-ctx`, que cierra la fase 1.
+
+**Con bandera roja el orden cambia**: los bloques duros se descartan del DOM y
+los blandos —incluida la publicidad— se empujan detrás del texto largo. La
+lógica está en `src/lib/bandera-roja.ts` y es deliberada, no un efecto
+secundario.
+
+El reordenado es determinista en servidor y cliente (mismo resultado, sin CLS).
+Si proponéis mover módulos, basta con reordenar esa lista.
+
+---
 
 ## B. Inventario de componentes (los relevantes para diseño)
 
@@ -241,13 +384,32 @@ página **muy densa**; la pregunta CRO es qué sube, qué baja y dónde van los 
 | Sol (amanecer/atardecer) | Sunrise-Sunset.org | 24 h |
 | Calidad del agua | EEA (Agencia Europea Medio Ambiente) | Anual |
 | Bandera Azul | ADEAC | Anual |
-| Medusas / bandera baño | Modelo propio (viento + zona + temp.) | Tiempo real |
-| Mareas | Cálculo astronómico | Tiempo real |
+| **Bandera OFICIAL izada** | **8 fuentes: Cataluña, Canarias, Junta de Andalucía, Bizkaia, Gipuzkoa, SafeBeach, Ferrol y Gijón** | 15 min |
+| Bandera estimada | Modelo propio (oleaje + viento, corregido por el abrigo de la costa) | Tiempo real |
+| Medusas | Modelo propio (viento + zona + temperatura) | Tiempo real |
+| **Mareas** | **Puertos del Estado (predicción con corrección meteorológica)** | 30 min · 3 días vista |
+| Oleaje medido | Boyas de Puertos del Estado (≤ 60 km) | Horaria |
+| Fase lunar y solunar | Cálculo astronómico (Meeus) | Tiempo real |
 | Hoteles/restaurantes | Overpass (OSM) + caché | On-demand |
 | Fotos | Wikimedia/Wikipedia/Flickr/Openverse/Pexels/Unsplash | Pre-resueltas (offline) |
 
-El mensaje de marca ("datos oficiales, actualizados cada hora") es un **activo
-de conversión/confianza**: conviene que el diseño lo haga visible sin saturar.
+Notas que condicionan el diseño, no solo la ingeniería:
+
+- **Ninguna de las ocho fuentes de bandera está publicada como dato abierto.**
+  Salen de visores municipales y autonómicos. Van con atribución visible, y esa
+  atribución es parte de la credibilidad: no se puede esconder por limpieza
+  visual.
+- **Solo Canarias dice POR QUÉ está izada la bandera** (corrientes,
+  desprendimientos, oleaje). Las demás dan el color y nada más, así que la ficha
+  a veces tiene un motivo que contar y a veces no.
+- **El oleaje de la boya es del mar abierto, no de la orilla** — mediana de
+  38 km, la mitad en aguas profundas. Se muestra como «Mar abierto, a N km», y
+  esa distinción tiene que sobrevivir a cualquier rediseño.
+- **44 fichas canarias son de uso prohibido** y llevan un aviso permanente.
+
+El mensaje de marca («datos oficiales, actualizados cada hora») es un **activo
+de conversión y de confianza**: conviene que el diseño lo haga visible sin
+saturar.
 
 ## E. Accesibilidad y rendimiento (restricciones de la auditoría)
 
@@ -281,3 +443,35 @@ encajar con este tono (cómplice, honesto, basado en dato).
 ---
 
 *Contacto técnico / accesos de staging y analítica: a coordinar.*
+
+---
+
+## H. Publicidad — dónde puede ir y dónde no
+
+Encendida en agosto de 2026 (AdSense). El principio: **el anuncio lo paga la
+respuesta, así que nunca puede ponerse entre el lector y la respuesta.**
+
+Cada hueco declara en qué **zona** de la página está, y la zona decide formato,
+altura reservada y si se pinta:
+
+| Zona | Dónde | Qué admite |
+|---|---|---|
+| `hojeo` | listados | intercalado tras el 8.º resultado, nunca antes |
+| `profundidad` | ficha, ya con respuesta y plan resueltos | display |
+| `cierre` | al final del todo | multiplex; es lo único que admite `banderas-hoy` |
+| `herramienta` | tras la tabla de mareas, comparar, mapa | display, jamás dentro de la herramienta |
+
+**No existe zona para la fase de DECISIÓN de la ficha.** Si algún día hace falta
+un anuncio ahí, que cueste escribirlo.
+
+**Superficies sin publicidad, y no es olvido:** metodología, aviso legal,
+privacidad, cookies y `/mi-cuaderno`, que promete al usuario «sin registro, sin
+cuentas y sin darnos tu correo». Son las páginas que sostienen la credibilidad
+de todas las demás.
+
+Con bandera roja, los bloques comerciales duros desaparecen del DOM —no se
+ocultan con `display:none`, que seguiría contando impresiones— y los blandos,
+AdSense incluido, se van detrás del texto largo.
+
+Todo hueco lleva la etiqueta «Publicidad» encima. Es la misma regla que el resto
+del sitio —cada dato dice de dónde sale— aplicada a lo que no es un dato.
