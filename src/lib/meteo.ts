@@ -4,6 +4,7 @@ import { cache } from 'react'
 import { gradosADireccion } from './geo'
 import { fetchWithTimeout } from './fetch-timeout'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBuenoONulo } from './ultimo-bueno'
 import { zonaHoraria, zonaHorariaParam } from './zona-horaria'
 
 export interface MeteoPlaya {
@@ -75,9 +76,39 @@ const KV_TTL_METEO = 90 * 60
  * Cacheado en KV por (lat, lng) con TTL 30 min. React.cache() arriba
  * deduplica dentro del mismo request; KV deduplica entre requests.
  */
-const fetchMeteo = cache((lat: number, lng: number): Promise<MeteoRaw | null> => {
-  return kvCached('meteo', [lat, lng], KV_TTL_METEO, () => fetchMeteoUncached(lat, lng))
-})
+/**
+ * TOPE DE EDAD DE LA METEO: 3 horas, no las 6 de las banderas.
+ *
+ * Una bandera es un acto administrativo y la de hace cinco horas suele seguir
+ * siendo la de hoy. El viento no lo es: una térmica de tarde lo cambia entero
+ * en tres horas, y este sitio existe para no publicar condiciones que ya no
+ * son. Tres horas cubren de sobra lo que este mecanismo debe cubrir —una
+ * regeneración en frío que perdió el plazo, o una caída puntual de
+ * Open-Meteo, que duran minutos— y se quedan por debajo del cambio de régimen
+ * de un día de playa.
+ */
+export const TOPE_METEO_MS = 3 * 60 * 60 * 1000
+
+/**
+ * Devuelve el dato Y SU EDAD, porque la ficha tiene que poder decirla.
+ *
+ * `porClave: true` no es opcional aquí: sin él, las 5.098 playas compartirían
+ * la clave de respaldo `ultimo:meteo` y cada una serviría el tiempo de otra.
+ */
+const fetchMeteoConEdad = cache((lat: number, lng: number) =>
+  cargarConUltimoBuenoONulo<MeteoRaw>(
+    'meteo', [lat, lng], KV_TTL_METEO,
+    () => fetchMeteoUncached(lat, lng),
+    v => v == null,
+    { topeMs: TOPE_METEO_MS, porClave: true },
+  ))
+
+const fetchMeteo = cache(async (lat: number, lng: number): Promise<MeteoRaw | null> =>
+  (await fetchMeteoConEdad(lat, lng)).datos)
+
+/** La edad del dato meteo servido, en ms. 0 = recién traído. */
+export const edadMeteo = cache(async (lat: number, lng: number): Promise<number> =>
+  (await fetchMeteoConEdad(lat, lng)).edadMs)
 
 async function fetchMeteoUncached(lat: number, lng: number): Promise<MeteoRaw | null> {
   try {

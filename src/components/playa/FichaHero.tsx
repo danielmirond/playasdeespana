@@ -20,6 +20,7 @@ import { nombreConPlaya } from '@/lib/geo'
 import { nombreMostrado, nombreOficialAside } from '@/lib/nombres-populares'
 import { hayBanderaRoja } from '@/lib/bandera-roja'
 import { nombrarViento } from '@/lib/vientos'
+import { textoEdad } from '@/lib/ultimo-bueno'
 import type { BanderaPlaya, MedusasRiesgo } from '@/lib/seguridad'
 import RejillaMediciones from './RejillaMediciones'
 import PreguntaDelDia from './PreguntaDelDia'
@@ -80,6 +81,14 @@ interface Props {
    * NEXT_PUBLIC_, y a que el cliente pudiera discrepar del servidor.
    */
   variante?:      'litoral' | 'arena'
+  /**
+   * Antigüedad de cada dato, en ms. Son DOS porque vienen de sitios
+   * distintos: el viento de Open-Meteo Forecast y el agua y el oleaje del
+   * modelo marino. Una sola edad para las cuatro celdas mentiría sobre la
+   * mitad de la rejilla.
+   */
+  edadViento?:    number
+  edadMar?:       number
 }
 
 const t = {
@@ -167,6 +176,8 @@ export default function FichaHero({
   medusas,
   hayFuenteOficial,
   variante = 'arena',
+  edadViento = 0,
+  edadMar = 0,
 }: Props) {
   const i18n = t[locale]
   // El criterio vive en lib/bandera-roja, no aquí: es el mismo que decide
@@ -410,10 +421,14 @@ export default function FichaHero({
               <RejillaMediciones
                 onDark={hasPhoto}
                 mediciones={[
-                  { etiqueta: i18n.agua,   valor: meteo.agua ?? null,   unidad: '°',    cert: certMeteo },
-                  { etiqueta: i18n.olas,   valor: meteo.olas ?? null,   unidad: 'm',    cert: certMeteo },
+                  // `antiguedad` solo cuando el dato NO es de ahora mismo:
+                  // `textoEdad` devuelve null por debajo de un minuto, así
+                  // que un dato fresco no escribe nada y no añade ruido.
+                  { etiqueta: i18n.agua,   valor: meteo.agua ?? null,   unidad: '°',    cert: certMeteo, antiguedad: textoEdad(edadMar, locale) ?? undefined },
+                  { etiqueta: i18n.olas,   valor: meteo.olas ?? null,   unidad: 'm',    cert: certMeteo, antiguedad: textoEdad(edadMar, locale) ?? undefined },
                   {
                     etiqueta: i18n.viento, valor: meteo.viento ?? null, unidad: 'km/h', cert: certMeteo,
+                    antiguedad: textoEdad(edadViento, locale) ?? undefined,
                     // «viento 28 km/h» no dice nada; «levante 28» lo dice
                     // todo si estás en Tarifa, y «tramontana» decide el día
                     // en el Empordà. El nombre solo aparece cuando el viento

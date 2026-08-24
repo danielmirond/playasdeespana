@@ -2,6 +2,7 @@
 import { cache } from 'react'
 import { fetchWithTimeout } from './fetch-timeout'
 import { kvCached } from './kv-cache'
+import { cargarConUltimoBuenoONulo } from './ultimo-bueno'
 import { zonaHoraria, zonaHorariaParam } from './zona-horaria'
 
 
@@ -74,9 +75,32 @@ function calcEstadoSurf(olas: number, viento: number): string {
 // reduciría las llamadas marinas unas cuatro veces. Está pendiente.
 const KV_TTL_MAREAS = 90 * 60
 
-export const getMareas = cache((lat: number, lng: number): Promise<MarineData | null> => {
-  return kvCached('mareas', [lat, lng], KV_TTL_MAREAS, () => fetchMareasUncached(lat, lng))
-})
+/**
+ * Tope de edad del mar: 2 horas, MENOS que las 3 de la meteo.
+ *
+ * Porque aquí el dato envejece peor de lo que dice su reloj: el payload se
+ * guarda YA REBANADO por la hora del fetch (`oleaje.slice(ahora, ahora + 6)`),
+ * así que una copia vieja no trae datos viejos — trae el oleaje de hace horas
+ * ETIQUETADO COMO EL DE AHORA, y el desfase vive dentro del array donde
+ * ningún indicador de edad lo alcanza. Dos horas es un paso de una serie
+ * horaria: tolerable. Más, no.
+ */
+export const TOPE_MAR_MS = 2 * 60 * 60 * 1000
+
+const fetchMareasConEdad = cache((lat: number, lng: number) =>
+  cargarConUltimoBuenoONulo<MarineData>(
+    'mareas', [lat, lng], KV_TTL_MAREAS,
+    () => fetchMareasUncached(lat, lng),
+    v => v == null,
+    { topeMs: TOPE_MAR_MS, porClave: true },
+  ))
+
+export const getMareas = cache(async (lat: number, lng: number): Promise<MarineData | null> =>
+  (await fetchMareasConEdad(lat, lng)).datos)
+
+/** La edad del dato marino servido, en ms. */
+export const edadMar = cache(async (lat: number, lng: number): Promise<number> =>
+  (await fetchMareasConEdad(lat, lng)).edadMs)
 
 async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData | null> {
   try {

@@ -152,7 +152,7 @@ export async function kvPeek<T>(namespace: string, parts: Array<string | number>
   }
 }
 
-function makeKey(namespace: string, parts: Array<string | number>): string {
+export function makeKey(namespace: string, parts: Array<string | number>): string {
   const pieces = parts.map(p => {
     if (typeof p === 'number') {
       // Redondea a 4 decimales (~11m). Las coordenadas de OSM y

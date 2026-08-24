@@ -32,9 +32,33 @@
 //
 // Dos copias del mismo ayudante con el mismo fallo es justo cómo se llega
 // a esto, así que ahora hay una.
-import { kvCached, getKV } from './kv-cache'
+import { kvCached, getKV, makeKey } from './kv-cache'
 
+/**
+ * Tope por defecto: 6 h, pensado para las banderas.
+ *
+ * Una bandera es un ACTO ADMINISTRATIVO: se iza por la mañana y se arría por
+ * la tarde, así que la de hace cinco horas suele seguir siendo la de hoy. El
+ * viento no es un acto administrativo, y por eso la meteo pasa el suyo por
+ * `opts.topeMs` — ver el comentario en `getMeteoPlaya`.
+ */
 const TOPE_MS = 6 * 60 * 60 * 1000
+
+export interface OpcionesUltimoBueno {
+  /** Edad máxima que se puede arrastrar. Por defecto 6 h. */
+  topeMs?: number
+  /**
+   * Meter `partes` en la clave de respaldo.
+   *
+   * Por defecto NO, y es deliberado: las siete fuentes de bandera guardan un
+   * snapshot único por fuente y comparten `ultimo:banderas-and` a propósito.
+   * Pero para un dato POR COORDENADA —la meteo— esa clave única sería
+   * catastrófica: las 5.098 playas compartirían respaldo y cada una serviría
+   * el tiempo de otra. Se activa solo donde hace falta, para no cambiar ni un
+   * byte de la clave de las banderas, que funcionan y estamos en agosto.
+   */
+  porClave?: boolean
+}
 
 export interface ConEdad<T> {
   datos: T
@@ -51,12 +75,52 @@ export interface ConEdad<T> {
  */
 export async function cargarConUltimoBueno<T>(
   ns: string,
-  partes: string[],
+  partes: Array<string | number>,
   ttl: number,
   cargar: () => Promise<T>,
   vacio: (v: T) => boolean,
+  opts: OpcionesUltimoBueno = {},
 ): Promise<ConEdad<T>> {
-  const claveUltimo = `ultimo:${ns}`
+  const r = await intentar(ns, partes, ttl, cargar, vacio, opts)
+  // Los siete llamadores históricos esperan SIEMPRE un objeto, nunca null.
+  return r.datos === null ? { datos: {} as T, edadMs: 0 } : (r as ConEdad<T>)
+}
+
+/**
+ * Igual, pero devuelve `null` cuando no hay nada — ni fresco ni respaldo
+ * válido.
+ *
+ * Existe porque el `{} as T` del original es una trampa para cualquier
+ * llamador que compruebe `!== null`: un objeto vacío pasa el filtro y sigue
+ * adelante con todos los campos `undefined`. La ficha hace exactamente esa
+ * comprobación para decidir si omite bandera, score, frase y FAQ del schema,
+ * y esa cadena de honestidad no se puede romper por comodidad.
+ */
+export async function cargarConUltimoBuenoONulo<T>(
+  ns: string,
+  partes: Array<string | number>,
+  ttl: number,
+  cargar: () => Promise<T | null>,
+  vacio: (v: T | null) => boolean,
+  opts: OpcionesUltimoBueno = {},
+): Promise<ConEdad<T | null>> {
+  return intentar(ns, partes, ttl, cargar, vacio, opts)
+}
+
+async function intentar<T>(
+  ns: string,
+  partes: Array<string | number>,
+  ttl: number,
+  cargar: () => Promise<T | null>,
+  vacio: (v: T | null) => boolean,
+  opts: OpcionesUltimoBueno,
+): Promise<ConEdad<T | null>> {
+  const tope = opts.topeMs ?? TOPE_MS
+  // Con `makeKey`, no concatenando a mano: redondea las coordenadas a cuatro
+  // decimales igual que `kvCached`, y si no coincidieran, la misma playa
+  // generaría dos claves —una para el dato fresco y otra para su respaldo— y
+  // el respaldo no se encontraría nunca.
+  const claveUltimo = opts.porClave ? makeKey(`ultimo:${ns}`, partes) : `ultimo:${ns}`
   try {
     const fresco = await kvCached(ns, partes, ttl, cargar)
     if (!vacio(fresco)) {
@@ -86,10 +150,10 @@ export async function cargarConUltimoBueno<T>(
     ]) as { t: number; d: T } | null
     if (!guardado?.t) throw new Error('sin copia')
     const edadMs = Date.now() - guardado.t
-    if (edadMs > TOPE_MS) throw new Error('demasiado viejo')
+    if (edadMs > tope) throw new Error('demasiado viejo')
     return { datos: guardado.d, edadMs }
   } catch {
-    return { datos: {} as T, edadMs: 0 }
+    return { datos: null, edadMs: 0 }
   }
 }
 

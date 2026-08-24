@@ -25,8 +25,8 @@ import { getReportes } from '@/lib/reportes'
 import { getOpiniones } from '@/lib/opiniones'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
-import { getMareas, getSol, getTurbidez } from '@/lib/marine'
-import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
+import { getMareas, getSol, getTurbidez, edadMar } from '@/lib/marine'
+import { getMeteoPlaya, getMeteoForecast, edadMeteo } from '@/lib/meteo'
 import { calcularBandera, estimarMedusas, exposicionOleaje } from '@/lib/seguridad'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { descripcionPlaya, introBrevePlaya } from '@/lib/copyPlaya'
@@ -471,10 +471,38 @@ export default async function PlayaPage({ params }: Props) {
   const datosViento = meteoPlayaData !== null
   const datosMeteo  = datosMar || datosViento
 
+  // LA EDAD DEL DATO, Y LOS DOS ESCALONES QUE DECIDE.
+  //
+  // El respaldo de último-valor-bueno permite servir una cifra de hace un
+  // rato en vez de un hueco, pero eso solo es legítimo con dos condiciones:
+  //
+  //   1) La cifra DICE su edad. Un dato viejo que la dice es información;
+  //      uno que la calla es un engaño. Va a la ranura `antiguedad` de la
+  //      rejilla, que existe justo para esto.
+  //
+  //   2) Por encima de una hora se callan las CONCLUSIONES: bandera, score,
+  //      frase del día y FAQ del schema. La cifra vieja describe algo que
+  //      pasó; la conclusión derivada de ella es una afirmación sobre el
+  //      presente. Publicar «Mar en calma» a partir de un viento de hace dos
+  //      horas es el fallo de La Misericordia otra vez, con temperatura en
+  //      vez de con E. coli.
+  //
+  // Son DOS edades distintas: el viento viene de `meteo` y el agua y el
+  // oleaje de `mareas`. Usar una sola sería mentir sobre media rejilla.
+  const [edadV, edadM] = await Promise.all([
+    edadMeteo(playa.lat, playa.lng).catch(() => 0),
+    edadMar(playa.lat, playa.lng).catch(() => 0),
+  ])
+  const UMBRAL_CONCLUSION_MS = 60 * 60 * 1000
+  const datoFresco = Math.max(edadV, edadM) <= UMBRAL_CONCLUSION_MS
+  /** ¿Se puede concluir algo? Hace falta dato Y que no sea viejo. */
+  const concluir = datosMar && datosViento && datoFresco
+
   const seed      = playa.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
   const estadoKey = calcularEstado({ olas, viento })
   const estado    = ESTADOS[estadoKey]
-  const frase     = datosMeteo ? getFrase(estadoKey, seed % 3) : 'Actualizando datos del mar…'
+  // La frase del día es una conclusión, no un dato: se calla igual.
+  const frase     = concluir ? getFrase(estadoKey, seed % 3) : 'Actualizando datos del mar…'
 
   const meteo = {
     agua:            tempAgua,                                    // null si sin dato
@@ -511,7 +539,7 @@ export default async function PlayaPage({ params }: Props) {
   const dateModified = meteoPlayaData?.timestamp ?? PLAYAS_DATA_MODIFIED
 
   // Sin datos reales de mar Y viento no se puede izar bandera estimada.
-  const banderaEstimada = (datosMar && datosViento) ? calcularBandera(olas, viento, vientoRacha) : undefined
+  const banderaEstimada = concluir ? calcularBandera(olas, viento, vientoRacha) : undefined
   // Si se ha corregido por abrigo, se DICE. Ajustar la cifra en silencio
   // sería la misma falta que este trabajo vino a corregir, solo que en la
   // dirección contraria: en vez de afirmar de más, ocultar por qué se
@@ -892,6 +920,8 @@ export default async function PlayaPage({ params }: Props) {
       <FichaHero
         playa={playa}
         meteo={meteo}
+        edadViento={edadV}
+        edadMar={edadM}
         estado={estado}
         frase={frase}
         municipioSlug={municipioSlugProp}
