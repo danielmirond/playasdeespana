@@ -24,6 +24,10 @@
       "schedule": "45 */12 * * *"
     },
     {
+      "path": "/api/cron/warm?slice=meteo&n=250",
+      "schedule": "20 6-21/3 * * *"
+    },
+    {
       "path": "/api/cron/vigia",
       "schedule": "0 17 * * *"
     }

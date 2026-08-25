@@ -26,6 +26,9 @@
 
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
+import { getMeteoPlaya } from '@/lib/meteo'
+import { getMareas, getSol } from '@/lib/marine'
+import { kvPeek } from '@/lib/kv-cache'
 import { getPlayas, getComunidades, getProvincias } from '@/lib/playas'
 import { refetchAndStoreFotos } from '@/lib/fotos'
 import { getBanderaCat } from '@/lib/banderas-cat'
@@ -137,10 +140,10 @@ export async function GET(req: NextRequest) {
   }
 
   const slice = (req.nextUrl.searchParams.get('slice') ?? 'landings') as
-    | 'landings' | 'geo' | 'top' | 'all'
+    | 'landings' | 'geo' | 'top' | 'meteo' | 'all'
 
   const t0 = Date.now()
-  const buckets: Record<string, ReturnType<typeof summarise>> = {}
+  const buckets: Record<string, ReturnType<typeof summarise> & { kvCalientes?: string; segundos?: number }> = {}
 
   // ─── BANDERAS OFICIALES ────────────────────────────────────────
   // Siete llamadas que dejan KV poblado para ~1.450 fichas: el snapshot de
@@ -267,6 +270,69 @@ export async function GET(req: NextRequest) {
       avgMs: Math.round((Date.now() - fotosCronT0) / Math.max(1, playasParaFoto.length)),
       slowest: [],
     }
+  }
+
+  // ─── METEO Y MAR, LLAMANDO A LAS FUNCIONES ─────────────────────
+  //
+  // POR QUÉ ESTE BLOQUE EXISTE. El `slice=top` de abajo calienta pidiendo la
+  // PÁGINA por HTTP, y para la meteo eso es autofrustrante: ese render sufre
+  // exactamente el mismo plazo que sufriría un visitante, así que si la
+  // meteo no llega, el calentamiento tampoco la deja en KV. Las banderas y
+  // las fotos sí se calientan bien precisamente porque se las llama
+  // directamente. Aquí se hace lo mismo con meteo, mar y sol: lo que
+  // interesa es el efecto colateral de poblar KV, y el valor se descarta.
+  //
+  // EL TECHO NO ES EL TIEMPO, ES LA CUOTA. Open-Meteo da 10.000 llamadas al
+  // día y 5.000 a la hora. Un barrido de las 5.098 fichas son 10.196
+  // llamadas —forecast más marino— y no cabe en un día, así que no se
+  // intenta: se calienta lo que tiene tráfico y el resto se calienta solo,
+  // en la primera visita, vía el `after()` de la ficha.
+  //
+  // `getSol` entra aunque su TTL sean 12 h, porque su clave lleva la fecha:
+  // caduca a medianoche para las 5.098 A LA VEZ, y sin esto el primer render
+  // de cada playa cada día es un fallo garantizado.
+  if (slice === 'meteo' || slice === 'all') {
+    const t0 = Date.now()
+    const limite = Math.min(Number(req.nextUrl.searchParams.get('n') ?? 250), 450)
+    const playas = (await getPlayas())
+      .filter(p => p.lat && p.lng)
+      .map(p => ({ p, score: (p.bandera ? 5 : 0) + (p.socorrismo ? 1 : 0) + (p.parking ? 1 : 0) + (p.accesible ? 1 : 0) }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limite)
+      .map(x => x.p)
+
+    // Concurrencia 8 y no más: por encima, Open-Meteo empieza a limitar y
+    // `fetchWithTimeout` nos lo devolvería como fallo, que es peor que ir
+    // despacio. A ese ritmo son 0,58 s por playa —medido—, así que el tope
+    // de 450 son unos 260 s y cabe en los 300 de `maxDuration`.
+    const resultados: WarmResult[] = []
+    for (let i = 0; i < playas.length; i += 8) {
+      const lote = playas.slice(i, i + 8)
+      const tLote = Date.now()
+      const rs = await Promise.allSettled(lote.flatMap(p => [
+        getMeteoPlaya(p.lat!, p.lng!),
+        getMareas(p.lat!, p.lng!),
+        getSol(p.lat!, p.lng!),
+      ]))
+      const msLote = Date.now() - tLote
+      rs.forEach((r, k) => resultados.push({
+        url: `${lote[Math.floor(k / 3)]?.slug ?? '?'}:${['meteo', 'mar', 'sol'][k % 3]}`,
+        status: r.status === 'fulfilled' && r.value != null ? 200 : 0,
+        ms: Math.round(msLote / Math.max(1, rs.length)),
+      }))
+    }
+    // Comprobación DIRECTA del estado de KV, inmune a la ISR: si esto sale
+    // a cero, el calentamiento no ha servido de nada por mucho que las
+    // llamadas dijeran «ok».
+    const muestra = playas.slice(0, 10)
+    const calientes = (await Promise.all(
+      muestra.map(p => kvPeek('meteo', [p.lat!, p.lng!]).then(v => v != null).catch(() => false)),
+    )).filter(Boolean).length
+
+    // `kvCalientes` es lo que de verdad prueba que ha funcionado: el resto
+    // de contadores dicen que las llamadas salieron bien, no que el dato
+    // quedara guardado.
+    buckets.meteo = { ...summarise('meteo', resultados), kvCalientes: `${calientes}/${muestra.length}`, segundos: Math.round((Date.now() - t0) / 1000) }
   }
 
   // ─── TOP fichas (por score interno) ────────────────────────────
