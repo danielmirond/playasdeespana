@@ -1071,7 +1071,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <GygActivities
           key="actividades-gyg"
           query={playa.actividades?.surf
-            ? `surf ${playa.municipio || playa.provincia}`
+            // `, Spain` SIEMPRE, también aquí: esta rama se había quedado
+            // sin país. Sin él, GetYourGuide resuelve el topónimo donde
+            // quiere —hay un San Felipe en Panamá, un Cádiz en Filipinas y
+            // un Santiago en medio mundo— y esta rama cubre todas las playas
+            // marcadas como de surf.
+            ? `surf ${playa.municipio || playa.provincia}, Spain`
             : `${playa.municipio || playa.provincia}, Spain`}
           cmp="ficha_playa"
           id="actividades"

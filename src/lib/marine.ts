@@ -1,8 +1,6 @@
 // src/lib/marine.ts
 import { cache } from 'react'
 import { fetchWithTimeout } from './fetch-timeout'
-import { kvCached } from './kv-cache'
-import { cargarConUltimoBuenoONulo } from './ultimo-bueno'
 import { zonaHoraria, zonaHorariaParam } from './zona-horaria'
 
 
@@ -76,31 +74,15 @@ function calcEstadoSurf(olas: number, viento: number): string {
 const KV_TTL_MAREAS = 90 * 60
 
 /**
- * Tope de edad del mar: 2 horas, MENOS que las 3 de la meteo.
- *
- * Porque aquí el dato envejece peor de lo que dice su reloj: el payload se
- * guarda YA REBANADO por la hora del fetch (`oleaje.slice(ahora, ahora + 6)`),
- * así que una copia vieja no trae datos viejos — trae el oleaje de hace horas
- * ETIQUETADO COMO EL DE AHORA, y el desfase vive dentro del array donde
- * ningún indicador de edad lo alcanza. Dos horas es un paso de una serie
- * horaria: tolerable. Más, no.
+ * Fuera de KV, por la misma razón que la meteo — ver el comentario largo en
+ * `meteo.ts`. La Data Cache de Vercel cachea la respuesta GET sin cuota de
+ * operaciones, y una clave por playa en KV no tenía ningún apalancamiento.
  */
-export const TOPE_MAR_MS = 2 * 60 * 60 * 1000
+export const getMareas = cache((lat: number, lng: number): Promise<MarineData | null> =>
+  fetchMareasUncached(lat, lng))
 
-const fetchMareasConEdad = cache((lat: number, lng: number) =>
-  cargarConUltimoBuenoONulo<MarineData>(
-    'mareas', [lat, lng], KV_TTL_MAREAS,
-    () => fetchMareasUncached(lat, lng),
-    v => v == null,
-    { topeMs: TOPE_MAR_MS, porClave: true },
-  ))
-
-export const getMareas = cache(async (lat: number, lng: number): Promise<MarineData | null> =>
-  (await fetchMareasConEdad(lat, lng)).datos)
-
-/** La edad del dato marino servido, en ms. */
-export const edadMar = cache(async (lat: number, lng: number): Promise<number> =>
-  (await fetchMareasConEdad(lat, lng)).edadMs)
+/** Sin respaldo: o el dato es de ahora o no está. Se conserva la firma. */
+export const edadMar = cache(async (_lat: number, _lng: number): Promise<number> => 0)
 
 async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData | null> {
   try {
@@ -115,7 +97,9 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
       + `&daily=wave_height_max,wind_speed_10m_max`
       + `&wind_speed_unit=kmh&forecast_days=7&timezone=${zonaHorariaParam(lat, lng)}`
 
-    const res = await fetchWithTimeout(url, { next: { revalidate: 3600 } })
+    // 5.400 s: la Data Cache debe sobrevivir al `revalidate` de una hora de
+    // la ficha. Ver `meteo.ts`.
+    const res = await fetchWithTimeout(url, { next: { revalidate: 5400 } })
     if (!res.ok) return null
 
     const marine = await res.json()
@@ -169,11 +153,19 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
 // TTL sol: 12h. Amanecer/atardecer dependen del día → la clave de KV
 // incluye la fecha YYYY-MM-DD para invalidar automáticamente al cambiar
 // de día.
-const KV_TTL_SOL = 12 * 3600
-
+/**
+ * Sol, también fuera de KV: es un GET con `revalidate` de 24 h, así que la
+ * Data Cache lo cubre sin gastar cuota.
+ *
+ * Y de paso se arregla algo que la clave de KV tenía mal por diseño: llevaba
+ * la fecha, o sea que caducaba a medianoche para las 5.098 playas A LA VEZ y
+ * el primer render de cada playa cada día era un fallo garantizado. La Data
+ * Cache tiene el mismo problema, pero ahora no cuesta operaciones: cuesta una
+ * llamada a una API gratuita.
+ */
 export const getSol = cache((lat: number, lng: number): Promise<SolData | null> => {
-  const hoy = new Date().toISOString().split('T')[0]
-  return kvCached('sol', [hoy, lat, lng], KV_TTL_SOL, () => fetchSolUncached(lat, lng, hoy))
+  const hoy = new Date().toISOString().slice(0, 10)
+  return fetchSolUncached(lat, lng, hoy)
 })
 
 async function fetchSolUncached(lat: number, lng: number, fecha: string): Promise<SolData | null> {

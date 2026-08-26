@@ -3,8 +3,6 @@
 import { cache } from 'react'
 import { gradosADireccion } from './geo'
 import { fetchWithTimeout } from './fetch-timeout'
-import { kvCached } from './kv-cache'
-import { cargarConUltimoBuenoONulo } from './ultimo-bueno'
 import { zonaHoraria, zonaHorariaParam } from './zona-horaria'
 
 export interface MeteoPlaya {
@@ -42,31 +40,7 @@ interface MeteoRaw {
   forecast: MeteoForecast[]
 }
 
-// TTL del caché meteo: 90 min. TIENE QUE SER MAYOR QUE EL `revalidate` DE
-// LA FICHA, que es una hora, y ese es todo el razonamiento.
-//
-// Antes eran 30 min, y la consecuencia era que la entrada de KV caducaba
-// SIEMPRE antes de que el ISR regenerase la página: el 100 % de las
-// revalidaciones arrancaban en frío y tenían que ganar una carrera de 28
-// promesas con plazo de 1.500 ms. Cuando la perdían —y a veces la
-// pierden— la ficha se servía sin viento, sin agua y sin oleaje, y el ISR
-// congelaba ese hueco una hora entera.
-//
-// Lo importante es que ese TTL corto no compraba frescura ninguna. El HTML
-// ya vive hasta una hora por diseño, así que un dato de 30 minutos se
-// hornea igual en una página que durará sesenta más. Pagábamos el coste de
-// la frescura —el fallo de caché garantizado— sin recibirla.
-//
-// Con 90 min la revalidación encuentra la entrada que dejó la anterior y
-// un `kv.get` responde en milisegundos. El coste real: la antigüedad
-// máxima teórica pasa de 1,5 h a 2,5 h. El beneficio: el caso normal deja
-// de ser «no hay dato».
-//
-// Por qué no más: Open-Meteo actualiza `current` cada ~15 min y la
-// promesa del sitio es «actualizado cada hora». 90 min es el número más
-// pequeño que cumple la restricción estructural con margen para la deriva
-// entre el reloj de KV y el disparo del ISR, que nunca coinciden.
-const KV_TTL_METEO = 90 * 60
+
 
 /**
  * Obtiene datos meteorológicos completos en UNA sola llamada a Open-Meteo:
@@ -77,38 +51,37 @@ const KV_TTL_METEO = 90 * 60
  * deduplica dentro del mismo request; KV deduplica entre requests.
  */
 /**
- * TOPE DE EDAD DE LA METEO: 3 horas, no las 6 de las banderas.
+ * FUERA DE KV. La Data Cache de Vercel ya hace este trabajo, y gratis.
  *
- * Una bandera es un acto administrativo y la de hace cinco horas suele seguir
- * siendo la de hoy. El viento no lo es: una térmica de tarde lo cambia entero
- * en tres horas, y este sitio existe para no publicar condiciones que ya no
- * son. Tres horas cubren de sobra lo que este mecanismo debe cubrir —una
- * regeneración en frío que perdió el plazo, o una caída puntual de
- * Open-Meteo, que duran minutos— y se quedan por debajo del cambio de régimen
- * de un día de playa.
- */
-export const TOPE_METEO_MS = 3 * 60 * 60 * 1000
-
-/**
- * Devuelve el dato Y SU EDAD, porque la ficha tiene que poder decirla.
+ * Con la base de KV en 5.000 comandos al día —que es donde se queda—, cada
+ * render de ficha gastaba 21 operaciones y el sitio solo aguantaba unos 240
+ * renders diarios. Había que elegir qué merece de verdad estar en KV.
  *
- * `porClave: true` no es opcional aquí: sin él, las 5.098 playas compartirían
- * la clave de respaldo `ultimo:meteo` y cada una serviría el tiempo de otra.
+ * Y para esto no lo merece: la Data Cache de Vercel es regional, la comparten
+ * todas las instancias, persiste entre despliegues y NO tiene cuota de
+ * operaciones —solo un límite de tamaño con desalojo LRU—. Cachea la
+ * respuesta HTTP de cualquier `fetch` GET con `next.revalidate`, que es
+ * exactamente lo que hace `fetchMeteoUncached`. Lo único que se recalcula en
+ * cada render es la transformación del JSON, que es CPU y no cuesta nada.
+ *
+ * KV se reserva para lo que la Data Cache NO puede cachear: las peticiones
+ * POST (la Junta de Andalucía, las boyas, Google Places) y los snapshots
+ * compartidos, donde una clave sirve a comunidades enteras. Ahí el
+ * apalancamiento es enorme; aquí era una clave por playa, o sea ninguno.
+ *
+ * SE PIERDE el último-valor-bueno de la meteo, añadido ayer: su lectura y su
+ * escritura eran dos operaciones más por render y no caben en el
+ * presupuesto. La Data Cache cubre el caso que motivaba aquello —la
+ * regeneración en frío que pierde el plazo— y deja fuera solo la caída de
+ * Open-Meteo, que es rara y para la que ya decimos «sin dato». Las ocho
+ * fuentes de bandera SÍ conservan su respaldo: son POST y su clave es
+ * compartida.
  */
-const fetchMeteoConEdad = cache((lat: number, lng: number) =>
-  cargarConUltimoBuenoONulo<MeteoRaw>(
-    'meteo', [lat, lng], KV_TTL_METEO,
-    () => fetchMeteoUncached(lat, lng),
-    v => v == null,
-    { topeMs: TOPE_METEO_MS, porClave: true },
-  ))
+const fetchMeteo = cache((lat: number, lng: number): Promise<MeteoRaw | null> =>
+  fetchMeteoUncached(lat, lng))
 
-const fetchMeteo = cache(async (lat: number, lng: number): Promise<MeteoRaw | null> =>
-  (await fetchMeteoConEdad(lat, lng)).datos)
-
-/** La edad del dato meteo servido, en ms. 0 = recién traído. */
-export const edadMeteo = cache(async (lat: number, lng: number): Promise<number> =>
-  (await fetchMeteoConEdad(lat, lng)).edadMs)
+/** Sin respaldo, el dato o es de ahora o no está. Se conserva la firma. */
+export const edadMeteo = cache(async (_lat: number, _lng: number): Promise<number> => 0)
 
 async function fetchMeteoUncached(lat: number, lng: number): Promise<MeteoRaw | null> {
   try {
@@ -117,7 +90,11 @@ async function fetchMeteoUncached(lat: number, lng: number): Promise<MeteoRaw | 
       + `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,cloudcover_mean,weathercode`
       + `&wind_speed_unit=kmh&forecast_days=5&timezone=${zonaHorariaParam(lat, lng)}`
 
-    const res = await fetchWithTimeout(url, { next: { revalidate: 3600 } })
+    // 5.400 s y no 3.600: la Data Cache tiene que sobrevivir al `revalidate`
+    // de la ficha, que es una hora, o cada regeneración la encontraría
+    // caducada y volvería a salir a la red. Es el mismo razonamiento que
+    // llevó el TTL de KV a 90 minutos, aplicado a la capa que ahora manda.
+    const res = await fetchWithTimeout(url, { next: { revalidate: 5400 } })
     if (!res.ok) return null
     const data = await res.json()
 

@@ -18,7 +18,6 @@
 
 import { fetchWithTimeout } from './fetch-timeout'
 import { cache } from 'react'
-import { kvCached, kvPeek } from './kv-cache'
 import { haversine } from './geo'
 
 const WINDY_KEY = process.env.WINDY_API_KEY ?? ''
@@ -93,29 +92,21 @@ async function fetchWebcams(lat: number, lng: number): Promise<Webcam[]> {
 }
 
 /**
- * Lectura de KV memoizada POR PETICIÓN.
+ * Fuera de KV: es un GET con `next.revalidate` de 24 h, así que la Data
+ * Cache de Vercel lo guarda sin gastar cuota. Ver el comentario largo en
+ * `meteo.ts` sobre por qué KV se reserva para POST y snapshots compartidos.
  *
- * `generateMetadata` pregunta si hay webcam —para meter la palabra en el
- * title— y el componente pide las webcams. Son dos funciones distintas
- * sobre LA MISMA CLAVE, así que cada ficha hacía dos viajes a KV para el
- * mismo dato. Con `cache()` de React, ambas comparten la lectura dentro de
- * la misma petición.
- *
- * No es solo ahorro de cuota: cada lectura es un viaje de red en el camino
- * crítico del render, y esta ocurría dos veces en todas las fichas.
+ * `cache()` de React sigue haciendo falta: `generateMetadata` y el
+ * componente preguntan lo mismo en la misma petición, y sin memo serían dos
+ * llamadas.
  */
-const leerCacheWebcams = cache((lat: number, lng: number) => kvPeek<Webcam[]>(CACHE_NS, [lat, lng]))
+const webcamsDeLaPeticion = cache(async (lat: number, lng: number): Promise<Webcam[]> => {
+  if (!WINDY_KEY) return []
+  return fetchWebcams(lat, lng)
+})
 
 export async function getWebcams(lat: number, lng: number): Promise<Webcam[]> {
-  if (!WINDY_KEY) return []
-  // Si `generateMetadata` ya leyó la clave en esta misma petición, esto no
-  // vuelve a tocar KV.
-  const cacheado = await leerCacheWebcams(lat, lng)
-  if (Array.isArray(cacheado)) return cacheado
-  // Fallo de caché: se calcula y se guarda por la vía normal. Aquí sí hay
-  // un segundo `get`, pero es el caso raro —el TTL son 24 h— y de todos
-  // modos vamos a llamar a Windy, que cuesta mucho más que un get.
-  return kvCached(CACHE_NS, [lat, lng], TTL_S, () => fetchWebcams(lat, lng))
+  return webcamsDeLaPeticion(lat, lng)
 }
 
 /**
@@ -126,6 +117,6 @@ export async function getWebcams(lat: number, lng: number): Promise<Webcam[]> {
  */
 export async function hasWebcamNearby(lat: number, lng: number): Promise<boolean> {
   if (!WINDY_KEY) return false
-  const cached = await leerCacheWebcams(lat, lng)
-  return Array.isArray(cached) && cached.length > 0
+  const w = await webcamsDeLaPeticion(lat, lng)
+  return w.length > 0
 }

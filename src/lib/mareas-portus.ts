@@ -30,7 +30,6 @@
 // y pasado, y no un calendario.
 //
 // Certeza: OFICIAL. Trazo continuo y atribución visible a Puertos del Estado.
-import { kvCached } from './kv-cache'
 import { zonaHoraria } from './zona-horaria'
 import mapa from '@/data/mareas-map.json'
 
@@ -115,7 +114,11 @@ async function cargarMareas(ubi: UbicacionMarea, lat: number, lng: number): Prom
     // Una clave por ubicación y día; 30 min de TTL. La predicción se
     // regenera varias veces al día pero las horas de los extremos no
     // saltan entre pasadas.
-    return await kvCached('mareas-portus', [String(ubi.id)], 1800, async () => {
+    // Sin `kvCached`: los dos fetch de abajo son GET con `next.revalidate`
+    // de 30 min, así que la Data Cache de Vercel los guarda sin gastar cuota
+    // —y el memo de proceso de arriba evita repetirlos dentro del render—.
+    // Ver `meteo.ts`: KV se reserva para POST y snapshots compartidos.
+    return await (async () => {
       const cab = { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' }
       const [r1, r2] = await Promise.all([
         fetch(`${API}/SEA_LEVEL_PLEABAJA/${ubi.id}?locale=es&cero=0`, { headers: cab, signal: AbortSignal.timeout(6000), next: { revalidate: 1800 } }),
@@ -150,7 +153,7 @@ async function cargarMareas(ubi: UbicacionMarea, lat: number, lng: number): Prom
       const rangoHoy = ple.length && baj.length ? Math.round((Math.max(...ple) - Math.min(...baj)) * 100) / 100 : null
 
       return { ubicacion: ubi, extremos, serie, rangoHoy }
-    })
+    })()
   } catch (e) {
     // Se deja rastro: un null silencioso aquí costó una tarde de buscar el
     // fallo en el sitio equivocado. Solo en servidor y solo el mensaje.
