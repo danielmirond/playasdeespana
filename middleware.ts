@@ -8,6 +8,7 @@
 // funcionaba. Se ha fusionado aquí y eliminado el duplicado.
 import { NextRequest, NextResponse } from 'next/server'
 import EXTRANJERAS_ARR from './src/data/slugs-extranjeras.json'
+import RETIRADAS_MAP from './src/data/playas-retiradas.json'
 import DUPLICADOS_MAP from './src/data/duplicados.json'
 
 const SUPPORTED_LOCALES = ['en']
@@ -17,6 +18,16 @@ const DEFAULT_LOCALE    = 'es'
 // scripts/extract-extranjeras.mjs. Se sirve 410 (purga de índice más rápida
 // que 404) y se dejan de enlazar (getPlayas las filtra).
 const EXTRANJERAS = new Set(EXTRANJERAS_ARR as string[])
+
+// Fichas RETIRADAS a mano. Distinto de EXTRANJERAS, que se deduce de la
+// provincia: esto son playas españolas de pleno derecho que hemos decidido
+// no publicar, una a una y con el motivo escrito al lado.
+//
+// El motivo se guarda a propósito, igual que en `fotos-vetadas.json`: dentro
+// de un año nadie recuerda por qué desapareció un slug, y sin motivo la
+// lista se vuelve intocable. Y 410 y no 404 porque le dice a Google que esto
+// NO vuelve y debe purgarlo del índice.
+const RETIRADAS = new Set(Object.keys(RETIRADAS_MAP as Record<string, string>))
 
 // Fichas duplicadas (misma playa importada 2-4 veces, <0.8 km). Se hace 301 a
 // la ficha canónica para consolidar señales y quitar la autocanibalización.
@@ -54,7 +65,7 @@ export function middleware(req: NextRequest) {
   const mFicha = pathname.match(/^\/(playas|en\/beaches)\/([^/?#]+)/)
   if (mFicha) {
     const slug = decodeURIComponent(mFicha[2])
-    if (EXTRANJERAS.has(slug)) {
+    if (EXTRANJERAS.has(slug) || RETIRADAS.has(slug)) {
       return new NextResponse(GONE_HTML, {
         status: 410,
         headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Robots-Tag': 'noindex' },

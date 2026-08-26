@@ -3,6 +3,7 @@ import type { Playa } from '@/types'
 import { cache } from 'react'
 import slugsExtranjeras from '@/data/slugs-extranjeras.json'
 import duplicados from '@/data/duplicados.json'
+import retiradas from '@/data/playas-retiradas.json'
 import playasJson from '@/../public/data/playas.json'
 
 // Playas fuera del ámbito (extranjeras/interiores sin costa) + fichas
@@ -12,6 +13,11 @@ import playasJson from '@/../public/data/playas.json'
 const EXCLUIDAS = new Set<string>([
   ...(slugsExtranjeras as string[]),
   ...Object.keys(duplicados as Record<string, string>),
+  // Retiradas a mano, con su motivo en el JSON. Se filtran AQUÍ además de
+  // dar 410 en el middleware: si solo se hiciera lo segundo, el sitio
+  // seguiría enlazando internamente a una página que responde «retirado»,
+  // que es peor que no haberla quitado.
+  ...Object.keys(retiradas as Record<string, string>),
 ])
 
 /**
