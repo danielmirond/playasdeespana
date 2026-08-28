@@ -30,7 +30,7 @@
 // el servidor —el widget— y solo cambia después, en un efecto. Renderizar
 // cosas distintas en servidor y cliente es lo que provocó los #418 que
 // costaron una tarde en esta ficha; aquí no se repite.
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 function hayConsentimientoMarketing(): boolean {
@@ -54,6 +54,11 @@ export default function GygSlot({
   cmp?: string
 }) {
   const [promo, setPromo] = useState(false)
+  // Referencia al contenedor PROPIO. Antes se buscaba con
+  // `document.querySelector('[data-gyg-widget]')`, que devuelve el PRIMERO
+  // del documento: en cualquier página con dos bloques, cada uno miraba el
+  // contenedor del otro.
+  const caja = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let vivo = true
@@ -64,18 +69,39 @@ export default function GygSlot({
       // Con permiso, se le da margen a que pinte. Si a los 3 s el contenedor
       // sigue vacío, es que no hay oferta para esta zona y el hueco se
       // rellena igual.
+      // SE MIDE LA ALTURA, no el número de hijos.
+      //
+      // Contar hijos no detecta el caso real. Medido en producción en Nova
+      // Icària y en La Victoria: GetYourGuide SÍ inyecta su iframe —el
+      // contenedor tiene un hijo, así que la comprobación antigua lo daba
+      // por bueno— y ese iframe se queda en 0 px de alto. El resultado es
+      // que la página publica el titular «Cosas que hacer cerca» y el aviso
+      // «podemos recibir una comisión» encima de nada. Declarar una
+      // relación comercial sobre un hueco es peor que no enseñar el bloque.
+      //
+      // 6 s y no 3: el script se carga con `lazyOnload` y el iframe tardó
+      // 271 ms en cargar DESPUÉS de eso. A los 3 s se estaba juzgando a un
+      // widget que aún venía de camino.
       window.setTimeout(() => {
         if (!vivo) return
-        const cont = document.querySelector('[data-gyg-widget]')
-        if (cont && cont.children.length === 0) setPromo(true)
-      }, 3000)
+        // Búsqueda ACOTADA a este slot. El contenedor lo pinta
+        // `GygActivities`, que es hijo; buscarlo en todo el documento
+        // hacía que dos bloques de la misma página se miraran el uno al
+        // otro.
+        const cont = caja.current?.querySelector('[data-gyg-widget]')
+        if (!cont) return
+        if (cont.getBoundingClientRect().height < 80) setPromo(true)
+      }, 6000)
     }
     revisar()
     window.addEventListener('cookie-consent-change', revisar)
     return () => { vivo = false; window.removeEventListener('cookie-consent-change', revisar) }
   }, [])
 
-  if (!promo) return <>{children}</>
+  // Envoltorio con referencia: es la única forma de acotar la búsqueda del
+  // contenedor a ESTE slot sin que GygSlot tenga que conocer el marcado de
+  // su hijo. `display: contents` para no meter una caja en el layout.
+  if (!promo) return <div ref={caja} style={{ display: 'contents' }}>{children}</div>
 
   // Copy alineado con el brief de campaña de julio 2026 (proyecto «Playas»,
   // camp26/data.jsx). No es decoración: el brief define `sellar_playa` como
