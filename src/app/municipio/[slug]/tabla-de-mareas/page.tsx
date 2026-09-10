@@ -48,8 +48,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const ubi = ubicacionMareas(slug)
   if (!ubi) return {}
-  const m = (await getMunicipios()).find(x => x.slug === slug)
-  if (!m) return {}
+  // El nombre sale del mapa de mareas, igual que en el componente. Antes se
+  // buscaba en `getMunicipios()`, que exige cuatro playas, así que las 243
+  // páginas de municipios pequeños se habrían servido SIN title, sin
+  // description y sin canonical — indexables y mudas, que es peor que no
+  // existir.
+  const m = { nombre: ubi.municipio }
   const med = ubi.zona === 'mediterraneo'
   return {
     title: `Tabla de mareas de ${m.nombre}: pleamar y bajamar hoy`,
@@ -116,11 +120,29 @@ function Curva({ serie, extremos, ahoraIso, soloHoy }: { serie: PuntoHora[]; ext
 export default async function TablaMareasPage({ params }: Props) {
   const { slug } = await params
   if (!tieneMareas(slug)) notFound()
-  const municipio = (await getMunicipios()).find(m => m.slug === slug)
-  if (!municipio) notFound()
+  const ubiBase = ubicacionMareas(slug)!
+
+  // LA MAREA NO DEPENDE DE CUÁNTAS PLAYAS TENGA EL PUEBLO.
+  //
+  // Esto colgaba de `getMunicipios()`, que exige un mínimo de CUATRO playas
+  // para dar página de municipio. Es una regla razonable para «¿merece este
+  // pueblo un listado de playas?» y absurda para las mareas: dejaba fuera
+  // 243 municipios con marea real, entre ellos Santoña, que tiene tres
+  // playas y cuatro metros de carrera.
+  //
+  // La fuente de verdad pasa a ser `mareas-map.json`, que ya trae nombre,
+  // provincia y zona de los 707 municipios mapeados a Puertos del Estado.
+  // `getMunicipios()` se sigue consultando, pero solo para saber si existe
+  // la página de municipio a la que enlazar en la miga de pan: enlazar a un
+  // 404 sería peor que no enlazar.
+  const municipio = { nombre: ubiBase.municipio, provincia: ubiBase.provincia }
+  const tienePaginaMunicipio = (await getMunicipios()).some(m => m.slug === slug)
+
   const playas = await getPlayasByMunicipio(slug)
-  const lat = playas.reduce((a, p) => a + p.lat, 0) / (playas.length || 1)
-  const lng = playas.reduce((a, p) => a + p.lng, 0) / (playas.length || 1)
+  // Sin playas en el catálogo se usan las coordenadas de la propia ubicación
+  // de Portus, que es justo lo que describe la marea.
+  const lat = playas.length ? playas.reduce((a, p) => a + p.lat, 0) / playas.length : ubiBase.lat
+  const lng = playas.length ? playas.reduce((a, p) => a + p.lng, 0) / playas.length : ubiBase.lng
 
   const mareas = await getMareasMunicipio(slug, lat, lng)
   const ubi = ubicacionMareas(slug)!
@@ -164,7 +186,9 @@ export default async function TablaMareasPage({ params }: Props) {
       <header className={styles.hero}>
         <div className={styles.heroInner}>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', margin: '0 0 .6rem' }}>
-            <Link href={`/municipio/${slug}`} style={{ color: 'inherit' }}>Playas de {municipio.nombre}</Link> · {municipio.provincia}
+            {tienePaginaMunicipio
+              ? <Link href={`/municipio/${slug}`} style={{ color: 'inherit' }}>Playas de {municipio.nombre}</Link>
+              : <>Playas de {municipio.nombre}</>} · {municipio.provincia}
           </p>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4.5vw, 2.8rem)', lineHeight: 1.08, margin: 0, letterSpacing: '-.015em' }}>
             Tabla de mareas de {municipio.nombre}
@@ -316,6 +340,7 @@ export default async function TablaMareasPage({ params }: Props) {
               </section>
             )}
 
+            {playas.length > 0 && (
             <section aria-labelledby="h-playas" style={{ marginTop: '2.5rem' }}>
               <h2 id="h-playas" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', margin: '0 0 .6rem' }}>
                 Las playas de {municipio.nombre} con esta marea
@@ -331,6 +356,7 @@ export default async function TablaMareasPage({ params }: Props) {
                 ))}
               </ul>
             </section>
+            )}
 
             {/* EQUIPO DE PESCA. Después de la tabla solunar, nunca antes:
                 el producto se gana estando junto a algo útil. Y cada

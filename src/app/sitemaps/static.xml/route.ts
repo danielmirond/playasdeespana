@@ -5,7 +5,7 @@
 // (Content Warehouse: imageQualityClickSignals — Google Imágenes asocia
 // una imagen representativa a cada URL del KG).
 
-import { ubicacionMareas } from '@/lib/mareas-portus'
+import MAPA_MAREAS from '@/data/mareas-map.json'
 import { NextResponse } from 'next/server'
 import {
   getComunidades, getProvincias, getMunicipios,
@@ -164,9 +164,12 @@ export async function GET() {
   // Tablas de mareas: solo los municipios mapeados a Puertos del Estado y
   // fuera del Mediterráneo, que es donde la página tiene un dato que dar.
   // Cambia a diario (la predicción es de 3 días), de ahí el daily.
-  for (const m of municipios) {
-    const ubi = ubicacionMareas(m.slug)
-    if (ubi && ubi.zona !== 'mediterraneo') urls.push(u(`/municipio/${m.slug}/tabla-de-mareas`, '0.6', 'daily', null))
+  // Se recorre el MAPA DE MAREAS, no la lista de municipios: la página de
+  // mareas ya no exige que el pueblo tenga cuatro playas —la marea no
+  // depende de eso— y recorrer `municipios` dejaba fuera 243 municipios con
+  // marea real, Santoña entre ellos.
+  for (const [slug, ubi] of Object.entries(MAPA_MAREAS)) {
+    if (ubi.zona !== 'mediterraneo') urls.push(u(`/municipio/${slug}/tabla-de-mareas`, '0.6', 'daily', null))
   }
 
   // Themed sections subpages

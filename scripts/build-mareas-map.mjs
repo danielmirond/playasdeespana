@@ -91,6 +91,10 @@ async function main() {
       id: c.u.id, nombre: c.u.nombre, tipo: c.u.tipo,
       d: Math.round(c.d), zona: zonaMarea(m.lat, m.lng),
       municipio: m.nombre, provincia: m.provincia,
+      // Centroide del municipio. Se guarda porque la página de mareas ya no
+      // depende de que exista página de municipio —la marea no depende de
+      // cuántas playas tenga el pueblo— y necesita coordenadas propias.
+      lat: Math.round(m.lat * 1e5) / 1e5, lng: Math.round(m.lng * 1e5) / 1e5,
     }
     audit.push({ slug: m.slug, ...map[m.slug] })
   }

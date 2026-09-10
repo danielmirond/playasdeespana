@@ -37,6 +37,8 @@ export interface UbicacionMarea {
   id: number; nombre: string; tipo: 'Puerto' | 'Localidad' | 'Playa'
   d: number; zona: 'atlantico' | 'cantabrico' | 'mediterraneo' | 'canarias'
   municipio: string; provincia: string
+  /** Centroide del municipio, para no depender de que tenga fichas cargadas. */
+  lat: number; lng: number
 }
 const MAPA = mapa as Record<string, UbicacionMarea>
 

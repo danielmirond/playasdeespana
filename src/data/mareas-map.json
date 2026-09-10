@@ -6,7 +6,9 @@
   "d": 2330,
   "zona": "mediterraneo",
   "municipio": "Es Pujols",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.73779,
+  "lng": 1.44442
  },
  "estepona": {
   "id": 35115,
@@ -15,7 +17,9 @@
   "d": 1043,
   "zona": "mediterraneo",
   "municipio": "Estepona",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.43863,
+  "lng": -5.09352
  },
  "marbella": {
   "id": 25202,
@@ -24,7 +28,9 @@
   "d": 1797,
   "zona": "mediterraneo",
   "municipio": "Marbella",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.49663,
+  "lng": -4.87471
  },
  "torrox": {
   "id": 35222,
@@ -33,7 +39,9 @@
   "d": 2768,
   "zona": "mediterraneo",
   "municipio": "Torrox",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.73291,
+  "lng": -3.95935
  },
  "palma-de-mallorca": {
   "id": 38116,
@@ -42,7 +50,9 @@
   "d": 9884,
   "zona": "mediterraneo",
   "municipio": "Palma de Mallorca",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.41919,
+  "lng": 2.73318
  },
  "san-pedro-del-pinatar": {
   "id": 26110,
@@ -51,7 +61,9 @@
   "d": 9392,
   "zona": "mediterraneo",
   "municipio": "San Pedro del Pinatar",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.81696,
+  "lng": -0.76758
  },
  "la-oliva": {
   "id": 24211,
@@ -60,7 +72,9 @@
   "d": 7659,
   "zona": "canarias",
   "municipio": "La Oliva",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.69354,
+  "lng": -13.92798
  },
  "hondarribia": {
   "id": 21102,
@@ -69,7 +83,9 @@
   "d": 2575,
   "zona": "cantabrico",
   "municipio": "Hondarribia",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.38815,
+  "lng": -1.79269
  },
  "el-toro": {
   "id": 38109,
@@ -78,7 +94,9 @@
   "d": 4897,
   "zona": "mediterraneo",
   "municipio": "El Toro",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.47286,
+  "lng": 2.48728
  },
  "vinaros": {
   "id": 16250,
@@ -87,7 +105,9 @@
   "d": 3135,
   "zona": "mediterraneo",
   "municipio": "Vinaròs",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.48579,
+  "lng": 0.48855
  },
  "muros-de-nalon": {
   "id": 32105,
@@ -96,7 +116,9 @@
   "d": 1475,
   "zona": "cantabrico",
   "municipio": "Muros de Nalón",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55899,
+  "lng": -6.10054
  },
  "calvia": {
   "id": 38109,
@@ -105,7 +127,9 @@
   "d": 2324,
   "zona": "mediterraneo",
   "municipio": "Calvià",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.51713,
+  "lng": 2.52773
  },
  "arta": {
   "id": 38218,
@@ -114,7 +138,9 @@
   "d": 7458,
   "zona": "mediterraneo",
   "municipio": "Artà",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.7508,
+  "lng": 3.34722
  },
  "alboraya": {
   "id": 36228,
@@ -123,7 +149,9 @@
   "d": 2476,
   "zona": "mediterraneo",
   "municipio": "Alboraya",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.49726,
+  "lng": -0.32299
  },
  "mendexa": {
   "id": 21111,
@@ -132,7 +160,9 @@
   "d": 1473,
   "zona": "cantabrico",
   "municipio": "Mendexa",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.35679,
+  "lng": -2.4869
  },
  "villajoyosala-vila-joiosa": {
   "id": 26116,
@@ -141,7 +171,9 @@
   "d": 1504,
   "zona": "mediterraneo",
   "municipio": "Villajoyosa/La Vila Joiosa",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.50829,
+  "lng": -0.21461
  },
  "comarca-vaqueira": {
   "id": 32108,
@@ -150,7 +182,9 @@
   "d": 6874,
   "zona": "cantabrico",
   "municipio": "Comarca Vaqueira",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56932,
+  "lng": -6.29201
  },
  "teguise": {
   "id": 34228,
@@ -159,7 +193,9 @@
   "d": 3616,
   "zona": "canarias",
   "municipio": "Teguise",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 29.12002,
+  "lng": -13.52779
  },
  "ares": {
   "id": 22111,
@@ -168,7 +204,9 @@
   "d": 581,
   "zona": "cantabrico",
   "municipio": "Ares",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.42828,
+  "lng": -8.25097
  },
  "sant-pere-pescador": {
   "id": 37241,
@@ -177,7 +215,9 @@
   "d": 640,
   "zona": "mediterraneo",
   "municipio": "Sant Pere Pescador",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.17627,
+  "lng": 3.11181
  },
  "isla-de-la-gomera": {
   "id": 24116,
@@ -186,7 +226,9 @@
   "d": 5365,
   "zona": "canarias",
   "municipio": "Isla de la Gomera",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.13975,
+  "lng": -17.1922
  },
  "los-silos": {
   "id": 24106,
@@ -195,7 +237,9 @@
   "d": 4013,
   "zona": "canarias",
   "municipio": "Los Silos",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.37739,
+  "lng": -16.80384
  },
  "adeje": {
   "id": 34106,
@@ -204,7 +248,9 @@
   "d": 3676,
   "zona": "canarias",
   "municipio": "Adeje",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.09833,
+  "lng": -16.75409
  },
  "a-laracha": {
   "id": 32168,
@@ -213,7 +259,9 @@
   "d": 292,
   "zona": "cantabrico",
   "municipio": "A Laracha",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.31777,
+  "lng": -8.60732
  },
  "granadilla-de-abona": {
   "id": 24112,
@@ -222,7 +270,9 @@
   "d": 1554,
   "zona": "canarias",
   "municipio": "Granadilla de Abona",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.0402,
+  "lng": -16.55087
  },
  "oliva": {
   "id": 36206,
@@ -231,7 +281,9 @@
   "d": 1749,
   "zona": "mediterraneo",
   "municipio": "Oliva",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 38.92978,
+  "lng": -0.09239
  },
  "ibiza": {
   "id": 18120,
@@ -240,7 +292,9 @@
   "d": 5141,
   "zona": "mediterraneo",
   "municipio": "Ibiza",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.93494,
+  "lng": 1.39481
  },
  "mijas": {
   "id": 35206,
@@ -249,7 +303,9 @@
   "d": 506,
   "zona": "mediterraneo",
   "municipio": "Mijas",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.49981,
+  "lng": -4.67735
  },
  "sanlucar-de-barrameda": {
   "id": 13130,
@@ -258,7 +314,9 @@
   "d": 5703,
   "zona": "atlantico",
   "municipio": "Sanlúcar de Barrameda",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.81751,
+  "lng": -6.39587
  },
  "guia-de-isora": {
   "id": 24108,
@@ -267,7 +325,9 @@
   "d": 1328,
   "zona": "canarias",
   "municipio": "Guía de Isora",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.19224,
+  "lng": -16.82298
  },
  "valverde": {
   "id": 14120,
@@ -276,7 +336,9 @@
   "d": 5593,
   "zona": "canarias",
   "municipio": "Valverde",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 27.74397,
+  "lng": -17.93585
  },
  "la-marina-occidental": {
   "id": 12120,
@@ -285,7 +347,9 @@
   "d": 4400,
   "zona": "cantabrico",
   "municipio": "La Mariña Occidental",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.69962,
+  "lng": -7.50999
  },
  "pajara": {
   "id": 24214,
@@ -294,7 +358,9 @@
   "d": 9863,
   "zona": "canarias",
   "municipio": "Pájara",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.24832,
+  "lng": -14.19277
  },
  "roda-de-bera": {
   "id": 37130,
@@ -303,7 +369,9 @@
   "d": 495,
   "zona": "mediterraneo",
   "municipio": "Roda de Berà",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.16916,
+  "lng": 1.48262
  },
  "maxorata": {
   "id": 24211,
@@ -312,7 +380,9 @@
   "d": 7521,
   "zona": "canarias",
   "municipio": "Maxorata",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.71787,
+  "lng": -13.94164
  },
  "figueiroa": {
   "id": 32142,
@@ -321,7 +391,9 @@
   "d": 976,
   "zona": "cantabrico",
   "municipio": "Figueiroa",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.70631,
+  "lng": -7.85824
  },
  "ea": {
   "id": 31110,
@@ -330,7 +402,9 @@
   "d": 373,
   "zona": "cantabrico",
   "municipio": "Ea",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.38404,
+  "lng": -2.57961
  },
  "alacantalicante": {
   "id": 16130,
@@ -339,7 +413,9 @@
   "d": 3731,
   "zona": "mediterraneo",
   "municipio": "Alacant/Alicante",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.2931,
+  "lng": -0.47399
  },
  "vandellos-i-lhospitalet-de-linfant": {
   "id": 37111,
@@ -348,7 +424,9 @@
   "d": 180,
   "zona": "mediterraneo",
   "municipio": "Vandellòs i l\"Hospitalet de l\"Infant",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.9723,
+  "lng": 0.89793
  },
  "el-bajo-ebro": {
   "id": 37103,
@@ -357,7 +435,9 @@
   "d": 4591,
   "zona": "mediterraneo",
   "municipio": "El Bajo Ebro",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.79068,
+  "lng": 0.76902
  },
  "torroella-de-montgri": {
   "id": 37239,
@@ -366,7 +446,9 @@
   "d": 429,
   "zona": "mediterraneo",
   "municipio": "Torroella de Montgrí",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.04828,
+  "lng": 3.19282
  },
  "alto-ampurdan": {
   "id": 27133,
@@ -375,7 +457,9 @@
   "d": 1760,
   "zona": "mediterraneo",
   "municipio": "Alto Ampurdán",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.2778,
+  "lng": 3.17834
  },
  "corcubion": {
   "id": 32202,
@@ -384,7 +468,9 @@
   "d": 2887,
   "zona": "atlantico",
   "municipio": "Corcubión",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.93113,
+  "lng": -9.18746
  },
  "vilanova-i-la-geltru": {
   "id": 27108,
@@ -393,7 +479,9 @@
   "d": 1483,
   "zona": "mediterraneo",
   "municipio": "Vilanova i la Geltrú",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.21165,
+  "lng": 1.71931
  },
  "campo-de-gibraltar": {
   "id": 35100,
@@ -402,7 +490,9 @@
   "d": 1395,
   "zona": "mediterraneo",
   "municipio": "Campo de Gibraltar",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.07793,
+  "lng": -5.7727
  },
  "cala-tirant": {
   "id": 38236,
@@ -411,7 +501,9 @@
   "d": 3868,
   "zona": "mediterraneo",
   "municipio": "Cala Tirant",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 40.05649,
+  "lng": 4.05959
  },
  "sanxenxo": {
   "id": 22205,
@@ -420,7 +512,9 @@
   "d": 735,
   "zona": "atlantico",
   "municipio": "Sanxenxo",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.40173,
+  "lng": -8.81564
  },
  "hendaya": {
   "id": 21102,
@@ -429,7 +523,9 @@
   "d": 3441,
   "zona": "cantabrico",
   "municipio": "Hendaya",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.38027,
+  "lng": -1.75496
  },
  "valle-de-guimar": {
   "id": 24113,
@@ -438,7 +534,9 @@
   "d": 5806,
   "zona": "canarias",
   "municipio": "Valle de Güímar",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.30087,
+  "lng": -16.36775
  },
  "monte-gordo": {
   "id": 33101,
@@ -447,7 +545,9 @@
   "d": 11852,
   "zona": "atlantico",
   "municipio": "Monte Gordo",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.17614,
+  "lng": -7.46081
  },
  "urola-costa": {
   "id": 21105,
@@ -456,7 +556,9 @@
   "d": 1286,
   "zona": "cantabrico",
   "municipio": "Urola Costa",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.29012,
+  "lng": -2.1567
  },
  "porto-do-son": {
   "id": 22116,
@@ -465,7 +567,9 @@
   "d": 1669,
   "zona": "atlantico",
   "municipio": "Porto do Son",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.71828,
+  "lng": -8.99036
  },
  "vilagarcia-de-arousa": {
   "id": 12210,
@@ -474,7 +578,9 @@
   "d": 1069,
   "zona": "atlantico",
   "municipio": "Vilagarcía de Arousa",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.6096,
+  "lng": -8.78041
  },
  "la-janda": {
   "id": 23111,
@@ -483,7 +589,9 @@
   "d": 2068,
   "zona": "atlantico",
   "municipio": "La Janda",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.25902,
+  "lng": -6.09992
  },
  "barbate": {
   "id": 23112,
@@ -492,7 +600,9 @@
   "d": 5500,
   "zona": "atlantico",
   "municipio": "Barbate",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.18361,
+  "lng": -5.98625
  },
  "santa-susanna": {
   "id": 27122,
@@ -501,7 +611,9 @@
   "d": 2689,
   "zona": "mediterraneo",
   "municipio": "Santa Susanna",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.62976,
+  "lng": 2.71664
  },
  "sitges": {
   "id": 27109,
@@ -510,7 +622,9 @@
   "d": 619,
   "zona": "mediterraneo",
   "municipio": "Sitges",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.23373,
+  "lng": 1.81876
  },
  "garachico": {
   "id": 24106,
@@ -519,7 +633,9 @@
   "d": 105,
   "zona": "canarias",
   "municipio": "Garachico",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.37378,
+  "lng": -16.76405
  },
  "hermigua": {
   "id": 24116,
@@ -528,7 +644,9 @@
   "d": 2909,
   "zona": "canarias",
   "municipio": "Hermigua",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.17415,
+  "lng": -17.16782
  },
  "benicarlo": {
   "id": 26213,
@@ -537,7 +655,9 @@
   "d": 419,
   "zona": "mediterraneo",
   "municipio": "Benicarló",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.41829,
+  "lng": 0.43442
  },
  "jandia": {
   "id": 24214,
@@ -546,7 +666,9 @@
   "d": 1963,
   "zona": "canarias",
   "municipio": "Jandía",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.18125,
+  "lng": -14.22823
  },
  "isla-de-la-palma": {
   "id": 24126,
@@ -555,7 +677,9 @@
   "d": 10205,
   "zona": "canarias",
   "municipio": "Isla de la Palma",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.75318,
+  "lng": -18.00429
  },
  "boiro": {
   "id": 22118,
@@ -564,7 +688,9 @@
   "d": 2723,
   "zona": "atlantico",
   "municipio": "Boiro",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.63036,
+  "lng": -8.86971
  },
  "cangas": {
   "id": 22208,
@@ -573,7 +699,9 @@
   "d": 3082,
   "zona": "atlantico",
   "municipio": "Cangas",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.2715,
+  "lng": -8.82065
  },
  "o-grove": {
   "id": 22204,
@@ -582,7 +710,9 @@
   "d": 3697,
   "zona": "atlantico",
   "municipio": "O Grove",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.47647,
+  "lng": -8.90015
  },
  "denia": {
   "id": 26202,
@@ -591,7 +721,9 @@
   "d": 2963,
   "zona": "mediterraneo",
   "municipio": "Dénia",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.85083,
+  "lng": 0.0822
  },
  "o-vicedo": {
   "id": 22106,
@@ -600,7 +732,9 @@
   "d": 1647,
   "zona": "cantabrico",
   "municipio": "O Vicedo",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.72883,
+  "lng": -7.65736
  },
  "llucmajor": {
   "id": 38116,
@@ -609,7 +743,9 @@
   "d": 7204,
   "zona": "mediterraneo",
   "municipio": "Llucmajor",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.44815,
+  "lng": 2.78612
  },
  "balares": {
   "id": 32173,
@@ -618,7 +754,9 @@
   "d": 5331,
   "zona": "cantabrico",
   "municipio": "Balarés",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.23201,
+  "lng": -8.93807
  },
  "barreiros": {
   "id": 32120,
@@ -627,7 +765,9 @@
   "d": 893,
   "zona": "cantabrico",
   "municipio": "Barreiros",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.56168,
+  "lng": -7.20105
  },
  "mazagon": {
   "id": 13120,
@@ -636,7 +776,9 @@
   "d": 2757,
   "zona": "atlantico",
   "municipio": "Mazagón",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.14635,
+  "lng": -6.89321
  },
  "laguna-de-el-portil": {
   "id": 33104,
@@ -645,7 +787,9 @@
   "d": 319,
   "zona": "atlantico",
   "municipio": "Laguna de El Portil",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.20401,
+  "lng": -7.03162
  },
  "palafrugell": {
   "id": 27129,
@@ -654,7 +798,9 @@
   "d": 1530,
   "zona": "mediterraneo",
   "municipio": "Palafrugell",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.9016,
+  "lng": 3.19796
  },
  "fisterra": {
   "id": 22115,
@@ -663,7 +809,9 @@
   "d": 2443,
   "zona": "atlantico",
   "municipio": "Fisterra",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.92778,
+  "lng": -9.25705
  },
  "a-illa-de-arousa": {
   "id": 32223,
@@ -672,7 +820,9 @@
   "d": 2197,
   "zona": "atlantico",
   "municipio": "A Illa de Arousa",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.55104,
+  "lng": -8.87323
  },
  "pontevedra": {
   "id": 22207,
@@ -681,7 +831,9 @@
   "d": 1741,
   "zona": "atlantico",
   "municipio": "Pontevedra",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.4318,
+  "lng": -8.669
  },
  "vilanova-de-arousa": {
   "id": 22202,
@@ -690,7 +842,9 @@
   "d": 485,
   "zona": "atlantico",
   "municipio": "Vilanova de Arousa",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.5654,
+  "lng": -8.82339
  },
  "cambados": {
   "id": 22203,
@@ -699,7 +853,9 @@
   "d": 2567,
   "zona": "atlantico",
   "municipio": "Cambados",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.49252,
+  "lng": -8.82513
  },
  "barbanza": {
   "id": 32211,
@@ -708,7 +864,9 @@
   "d": 1022,
   "zona": "atlantico",
   "municipio": "Barbanza",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.51907,
+  "lng": -9.00505
  },
  "comarca-este": {
   "id": 14240,
@@ -717,7 +875,9 @@
   "d": 4019,
   "zona": "canarias",
   "municipio": "Comarca Este",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.88239,
+  "lng": -15.39171
  },
  "salnes": {
   "id": 12210,
@@ -726,7 +886,9 @@
   "d": 2169,
   "zona": "atlantico",
   "municipio": "Salnés",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.59053,
+  "lng": -8.80417
  },
  "os-campos": {
   "id": 32225,
@@ -735,7 +897,9 @@
   "d": 1197,
   "zona": "atlantico",
   "municipio": "Os Campos",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.46686,
+  "lng": -8.92588
  },
  "as-quintans": {
   "id": 22203,
@@ -744,7 +908,9 @@
   "d": 2335,
   "zona": "atlantico",
   "municipio": "As Quintáns",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.49453,
+  "lng": -8.81164
  },
  "marin": {
   "id": 32265,
@@ -753,7 +919,9 @@
   "d": 229,
   "zona": "atlantico",
   "municipio": "Marín",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.37217,
+  "lng": -8.7343
  },
  "comarca-de-el-morrazo": {
   "id": 32240,
@@ -762,7 +930,9 @@
   "d": 2801,
   "zona": "atlantico",
   "municipio": "Comarca de El Morrazo",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.34669,
+  "lng": -8.84081
  },
  "redondela": {
   "id": 12230,
@@ -771,7 +941,9 @@
   "d": 10875,
   "zona": "atlantico",
   "municipio": "Redondela",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.29466,
+  "lng": -8.63826
  },
  "bueu": {
   "id": 32240,
@@ -780,7 +952,9 @@
   "d": 2444,
   "zona": "atlantico",
   "municipio": "Bueu",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.34383,
+  "lng": -8.83885
  },
  "moana": {
   "id": 12230,
@@ -789,7 +963,9 @@
   "d": 5057,
   "zona": "atlantico",
   "municipio": "Moaña",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.27761,
+  "lng": -8.7192
  },
  "vilaboa": {
   "id": 12220,
@@ -798,7 +974,9 @@
   "d": 10368,
   "zona": "atlantico",
   "municipio": "Vilaboa",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.31339,
+  "lng": -8.65326
  },
  "larache": {
   "id": 12220,
@@ -807,7 +985,9 @@
   "d": 9645,
   "zona": "atlantico",
   "municipio": "Larache",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.32561,
+  "lng": -8.63965
  },
  "poio": {
   "id": 12220,
@@ -816,7 +996,9 @@
   "d": 2785,
   "zona": "atlantico",
   "municipio": "Poio",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.41682,
+  "lng": -8.72513
  },
  "rianxo": {
   "id": 12210,
@@ -825,7 +1007,9 @@
   "d": 5864,
   "zona": "atlantico",
   "municipio": "Rianxo",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.6512,
+  "lng": -8.79816
  },
  "brion": {
   "id": 12210,
@@ -834,7 +1018,9 @@
   "d": 4351,
   "zona": "atlantico",
   "municipio": "Brión",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.63758,
+  "lng": -8.79581
  },
  "foz": {
   "id": 32127,
@@ -843,7 +1029,9 @@
   "d": 336,
   "zona": "cantabrico",
   "municipio": "Foz",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.60496,
+  "lng": -7.30008
  },
  "fuencaliente-de-la-palma": {
   "id": 24123,
@@ -852,7 +1040,9 @@
   "d": 1745,
   "zona": "canarias",
   "municipio": "Fuencaliente de la Palma",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.47933,
+  "lng": -17.8514
  },
  "el-port-de-la-selva": {
   "id": 37248,
@@ -861,7 +1051,9 @@
   "d": 786,
   "zona": "mediterraneo",
   "municipio": "El Port de la Selva",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.34204,
+  "lng": 3.19914
  },
  "noya": {
   "id": 22116,
@@ -870,7 +1062,9 @@
   "d": 5352,
   "zona": "atlantico",
   "municipio": "Noya",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.67958,
+  "lng": -9.01815
  },
  "ferrol": {
   "id": 32148,
@@ -879,7 +1073,9 @@
   "d": 2792,
   "zona": "cantabrico",
   "municipio": "Ferrol",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.5299,
+  "lng": -8.2676
  },
  "cedeira": {
   "id": 22109,
@@ -888,7 +1084,9 @@
   "d": 779,
   "zona": "cantabrico",
   "municipio": "Cedeira",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.65422,
+  "lng": -8.06308
  },
  "la-matanza-de-acentejo": {
   "id": 24103,
@@ -897,7 +1095,9 @@
   "d": 6200,
   "zona": "canarias",
   "municipio": "La Matanza de Acentejo",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.45861,
+  "lng": -16.46385
  },
  "finisterre": {
   "id": 32174,
@@ -906,7 +1106,9 @@
   "d": 6598,
   "zona": "cantabrico",
   "municipio": "Finisterre",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.03299,
+  "lng": -9.18836
  },
  "muros": {
   "id": 22116,
@@ -915,7 +1117,9 @@
   "d": 6664,
   "zona": "atlantico",
   "municipio": "Muros",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.78454,
+  "lng": -9.02983
  },
  "el-campello": {
   "id": 26115,
@@ -924,7 +1128,9 @@
   "d": 3134,
   "zona": "mediterraneo",
   "municipio": "El Campello",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.44451,
+  "lng": -0.3608
  },
  "pontedeume": {
   "id": 22111,
@@ -933,7 +1139,9 @@
   "d": 4576,
   "zona": "cantabrico",
   "municipio": "Pontedeume",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.39898,
+  "lng": -8.20252
  },
  "mino": {
   "id": 32157,
@@ -942,7 +1150,9 @@
   "d": 720,
   "zona": "cantabrico",
   "municipio": "Miño",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.3563,
+  "lng": -8.21205
  },
  "covas": {
   "id": 32148,
@@ -951,7 +1161,9 @@
   "d": 2613,
   "zona": "cantabrico",
   "municipio": "Covas",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.55267,
+  "lng": -8.30026
  },
  "orihuela": {
   "id": 26109,
@@ -960,7 +1172,9 @@
   "d": 892,
   "zona": "mediterraneo",
   "municipio": "Orihuela",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 37.91762,
+  "lng": -0.73007
  },
  "laxe": {
   "id": 32173,
@@ -969,7 +1183,9 @@
   "d": 2569,
   "zona": "cantabrico",
   "municipio": "Laxe",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.20736,
+  "lng": -9.02914
  },
  "nigran": {
   "id": 22210,
@@ -978,7 +1194,9 @@
   "d": 3914,
   "zona": "atlantico",
   "municipio": "Nigrán",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.15272,
+  "lng": -8.83538
  },
  "a-pobra-do-caraminal": {
   "id": 32215,
@@ -987,7 +1205,9 @@
   "d": 2221,
   "zona": "atlantico",
   "municipio": "A Pobra do Caramiñal",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.59816,
+  "lng": -8.92859
  },
  "vigo": {
   "id": 32248,
@@ -996,7 +1216,9 @@
   "d": 1120,
   "zona": "atlantico",
   "municipio": "Vigo",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.21581,
+  "lng": -8.7896
  },
  "valdovino": {
   "id": 32146,
@@ -1005,7 +1227,9 @@
   "d": 1918,
   "zona": "cantabrico",
   "municipio": "Valdoviño",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.62969,
+  "lng": -8.13307
  },
  "oleiros": {
   "id": 32158,
@@ -1014,7 +1238,9 @@
   "d": 605,
   "zona": "cantabrico",
   "municipio": "Oleiros",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.3757,
+  "lng": -8.3407
  },
  "donon": {
   "id": 32255,
@@ -1023,7 +1249,9 @@
   "d": 3159,
   "zona": "atlantico",
   "municipio": "Donón",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.24306,
+  "lng": -8.89031
  },
  "torremolinos": {
   "id": 25205,
@@ -1032,7 +1260,9 @@
   "d": 529,
   "zona": "mediterraneo",
   "municipio": "Torremolinos",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.62243,
+  "lng": -4.4941
  },
  "motril": {
   "id": 15220,
@@ -1041,7 +1271,9 @@
   "d": 1104,
   "zona": "mediterraneo",
   "municipio": "Motril",
-  "provincia": "Granada"
+  "provincia": "Granada",
+  "lat": 36.71627,
+  "lng": -3.51212
  },
  "sant-feliu-de-guixols": {
   "id": 27126,
@@ -1050,7 +1282,9 @@
   "d": 1436,
   "zona": "mediterraneo",
   "municipio": "Sant Feliu de Guíxols",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.77432,
+  "lng": 3.01987
  },
  "bajo-campo": {
   "id": 37111,
@@ -1059,7 +1293,9 @@
   "d": 592,
   "zona": "mediterraneo",
   "municipio": "Bajo Campo",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.96872,
+  "lng": 0.89182
  },
  "ribadeo": {
   "id": 22101,
@@ -1068,7 +1304,9 @@
   "d": 5706,
   "zona": "cantabrico",
   "municipio": "Ribadeo",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.55223,
+  "lng": -7.10808
  },
  "santa-margalida": {
   "id": 38219,
@@ -1077,7 +1315,9 @@
   "d": 1565,
   "zona": "mediterraneo",
   "municipio": "Santa Margalida",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.75314,
+  "lng": 3.18665
  },
  "insuela": {
   "id": 32215,
@@ -1086,7 +1326,9 @@
   "d": 671,
   "zona": "atlantico",
   "municipio": "Insuela",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.5829,
+  "lng": -8.95668
  },
  "ribeira": {
   "id": 32210,
@@ -1095,7 +1337,9 @@
   "d": 2059,
   "zona": "atlantico",
   "municipio": "Ribeira",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.55319,
+  "lng": -9.00587
  },
  "zarautz": {
   "id": 21105,
@@ -1104,7 +1348,9 @@
   "d": 1018,
   "zona": "cantabrico",
   "municipio": "Zarautz",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.28919,
+  "lng": -2.15979
  },
  "ses-salines": {
   "id": 28206,
@@ -1113,7 +1359,9 @@
   "d": 8528,
   "zona": "mediterraneo",
   "municipio": "Ses Salines",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.42088,
+  "lng": 3.15946
  },
  "gijon": {
   "id": 11210,
@@ -1122,7 +1370,9 @@
   "d": 2368,
   "zona": "cantabrico",
   "municipio": "Gijón",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.54973,
+  "lng": -5.64554
  },
  "getxo": {
   "id": 21115,
@@ -1131,7 +1381,9 @@
   "d": 1030,
   "zona": "cantabrico",
   "municipio": "Getxo",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.35393,
+  "lng": -3.01436
  },
  "altea": {
   "id": 26118,
@@ -1140,7 +1392,9 @@
   "d": 2113,
   "zona": "mediterraneo",
   "municipio": "Altea",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.61166,
+  "lng": -0.0288
  },
  "donostiasan-sebastian": {
   "id": 21104,
@@ -1149,7 +1403,9 @@
   "d": 2397,
   "zona": "cantabrico",
   "municipio": "Donostia/San Sebastián",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.31799,
+  "lng": -2.01333
  },
  "ibarrangelu": {
   "id": 21112,
@@ -1158,7 +1414,9 @@
   "d": 1808,
   "zona": "cantabrico",
   "municipio": "Ibarrangelu",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.40752,
+  "lng": -2.67462
  },
  "mogan": {
   "id": 24206,
@@ -1167,7 +1425,9 @@
   "d": 584,
   "zona": "canarias",
   "municipio": "Mogán",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.79092,
+  "lng": -15.72284
  },
  "barcelona": {
   "id": 37146,
@@ -1176,7 +1436,9 @@
   "d": 789,
   "zona": "mediterraneo",
   "municipio": "Barcelona",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.37041,
+  "lng": 2.18518
  },
  "nijar": {
   "id": 25218,
@@ -1185,7 +1447,9 @@
   "d": 5148,
   "zona": "mediterraneo",
   "municipio": "Níjar",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.7987,
+  "lng": -2.07826
  },
  "fuengirola": {
   "id": 25203,
@@ -1194,7 +1458,9 @@
   "d": 1092,
   "zona": "mediterraneo",
   "municipio": "Fuengirola",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.54517,
+  "lng": -4.61448
  },
  "el-puerto-de-santa-maria": {
   "id": 23107,
@@ -1203,7 +1469,9 @@
   "d": 2767,
   "zona": "atlantico",
   "municipio": "El Puerto de Santa María",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.5842,
+  "lng": -6.25458
  },
  "deba": {
   "id": 21108,
@@ -1212,7 +1480,9 @@
   "d": 1414,
   "zona": "cantabrico",
   "municipio": "Deba",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.29801,
+  "lng": -2.33453
  },
  "puerto-real": {
   "id": 13150,
@@ -1221,7 +1491,9 @@
   "d": 4974,
   "zona": "atlantico",
   "municipio": "Puerto Real",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.52617,
+  "lng": -6.2087
  },
  "yaiza": {
   "id": 24220,
@@ -1230,7 +1502,9 @@
   "d": 3529,
   "zona": "canarias",
   "municipio": "Yaiza",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.88632,
+  "lng": -13.79356
  },
  "santa-pola": {
   "id": 26113,
@@ -1239,7 +1513,9 @@
   "d": 1017,
   "zona": "mediterraneo",
   "municipio": "Santa Pola",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.1941,
+  "lng": -0.5466
  },
  "benidorm": {
   "id": 26117,
@@ -1248,7 +1524,9 @@
   "d": 2018,
   "zona": "mediterraneo",
   "municipio": "Benidorm",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.53619,
+  "lng": -0.10582
  },
  "manacor": {
   "id": 38208,
@@ -1257,7 +1535,9 @@
   "d": 778,
   "zona": "mediterraneo",
   "municipio": "Manacor",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.51628,
+  "lng": 3.32054
  },
  "zumaia": {
   "id": 21107,
@@ -1266,7 +1546,9 @@
   "d": 68,
   "zona": "cantabrico",
   "municipio": "Zumaia",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.30104,
+  "lng": -2.25384
  },
  "getaria": {
   "id": 21106,
@@ -1275,7 +1557,9 @@
   "d": 853,
   "zona": "cantabrico",
   "municipio": "Getaria",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.29958,
+  "lng": -2.19934
  },
  "orio": {
   "id": 21105,
@@ -1284,7 +1568,9 @@
   "d": 3436,
   "zona": "cantabrico",
   "municipio": "Orio",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.28654,
+  "lng": -2.12955
  },
  "ondarroa": {
   "id": 21110,
@@ -1293,7 +1579,9 @@
   "d": 274,
   "zona": "cantabrico",
   "municipio": "Ondarroa",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.32342,
+  "lng": -2.41822
  },
  "arona": {
   "id": 14140,
@@ -1302,7 +1590,9 @@
   "d": 2023,
   "zona": "canarias",
   "municipio": "Arona",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.03757,
+  "lng": -16.70195
  },
  "los-realejos": {
   "id": 34113,
@@ -1311,7 +1601,9 @@
   "d": 1333,
   "zona": "canarias",
   "municipio": "Los Realejos",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.39913,
+  "lng": -16.5882
  },
  "javeaxabia": {
   "id": 26120,
@@ -1320,7 +1612,9 @@
   "d": 4452,
   "zona": "mediterraneo",
   "municipio": "Jávea/Xàbia",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.7655,
+  "lng": 0.19569
  },
  "santiago-del-teide": {
   "id": 24107,
@@ -1329,7 +1623,9 @@
   "d": 836,
   "zona": "canarias",
   "municipio": "Santiago del Teide",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.2435,
+  "lng": -16.84329
  },
  "san-roque": {
   "id": 25103,
@@ -1338,7 +1634,9 @@
   "d": 3829,
   "zona": "mediterraneo",
   "municipio": "San Roque",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.19104,
+  "lng": -5.36885
  },
  "cabanas": {
   "id": 32154,
@@ -1347,7 +1645,9 @@
   "d": 437,
   "zona": "cantabrico",
   "municipio": "Cabanas",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.41872,
+  "lng": -8.17732
  },
  "colunga": {
   "id": 31209,
@@ -1356,7 +1656,9 @@
   "d": 3587,
   "zona": "cantabrico",
   "municipio": "Colunga",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.49619,
+  "lng": -5.24852
  },
  "ciutadella-de-menorca": {
   "id": 28207,
@@ -1365,7 +1667,9 @@
   "d": 2435,
   "zona": "mediterraneo",
   "municipio": "Ciutadella de Menorca",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.99119,
+  "lng": 3.86156
  },
  "llanes": {
   "id": 21201,
@@ -1374,7 +1678,9 @@
   "d": 2595,
   "zona": "cantabrico",
   "municipio": "Llanes",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.42771,
+  "lng": -4.78177
  },
  "mutriku": {
   "id": 21109,
@@ -1383,7 +1689,9 @@
   "d": 650,
   "zona": "cantabrico",
   "municipio": "Mutriku",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.31269,
+  "lng": -2.38482
  },
  "costa-calma": {
   "id": 24214,
@@ -1392,7 +1700,9 @@
   "d": 1292,
   "zona": "canarias",
   "municipio": "Costa Calma",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.15482,
+  "lng": -14.21593
  },
  "santander": {
   "id": 11130,
@@ -1401,7 +1711,9 @@
   "d": 3545,
   "zona": "cantabrico",
   "municipio": "Santander",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.47465,
+  "lng": -3.80028
  },
  "isla-de-lanzarote": {
   "id": 34228,
@@ -1410,7 +1722,9 @@
   "d": 5266,
   "zona": "canarias",
   "municipio": "Isla de Lanzarote",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 29.07245,
+  "lng": -13.57501
  },
  "san-bartolome-de-tirajana": {
   "id": 24204,
@@ -1419,7 +1733,9 @@
   "d": 1802,
   "zona": "canarias",
   "municipio": "San Bartolomé de Tirajana",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.7568,
+  "lng": -15.5984
  },
  "montgat": {
   "id": 27113,
@@ -1428,7 +1744,9 @@
   "d": 3225,
   "zona": "mediterraneo",
   "municipio": "Montgat",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.46537,
+  "lng": 2.27983
  },
  "buenavista-del-norte": {
   "id": 24106,
@@ -1437,7 +1755,9 @@
   "d": 11473,
   "zona": "canarias",
   "municipio": "Buenavista del Norte",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.35273,
+  "lng": -16.87774
  },
  "gandia": {
   "id": 16210,
@@ -1446,7 +1766,9 @@
   "d": 1474,
   "zona": "mediterraneo",
   "municipio": "Gandia",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.00539,
+  "lng": -0.1626
  },
  "almeria": {
   "id": 35242,
@@ -1455,7 +1777,9 @@
   "d": 4031,
   "zona": "mediterraneo",
   "municipio": "Almería",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.81338,
+  "lng": -2.4047
  },
  "valle-gran-rey": {
   "id": 24115,
@@ -1464,7 +1788,9 @@
   "d": 1453,
   "zona": "canarias",
   "municipio": "Valle Gran Rey",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.09875,
+  "lng": -17.34023
  },
  "vallehermoso": {
   "id": 24115,
@@ -1473,7 +1799,9 @@
   "d": 7336,
   "zona": "canarias",
   "municipio": "Vallehermoso",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.14371,
+  "lng": -17.30074
  },
  "bakio": {
   "id": 31113,
@@ -1482,7 +1810,9 @@
   "d": 130,
   "zona": "cantabrico",
   "municipio": "Bakio",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.43115,
+  "lng": -2.80569
  },
  "mundaka": {
   "id": 21113,
@@ -1491,7 +1821,9 @@
   "d": 2021,
   "zona": "cantabrico",
   "municipio": "Mundaka",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.40975,
+  "lng": -2.70034
  },
  "busturia": {
   "id": 21112,
@@ -1500,7 +1832,9 @@
   "d": 2349,
   "zona": "cantabrico",
   "municipio": "Busturia",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.38754,
+  "lng": -2.6898
  },
  "gorliz": {
   "id": 21114,
@@ -1509,7 +1843,9 @@
   "d": 793,
   "zona": "cantabrico",
   "municipio": "Gorliz",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.41669,
+  "lng": -2.94509
  },
  "sopela": {
   "id": 31116,
@@ -1518,7 +1854,9 @@
   "d": 432,
   "zona": "cantabrico",
   "municipio": "Sopela",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.39133,
+  "lng": -2.99172
  },
  "barrika": {
   "id": 21114,
@@ -1527,7 +1865,9 @@
   "d": 1325,
   "zona": "cantabrico",
   "municipio": "Barrika",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.40855,
+  "lng": -2.96705
  },
  "san-sebastian-de-la-gomera": {
   "id": 14130,
@@ -1536,7 +1876,9 @@
   "d": 2470,
   "zona": "canarias",
   "municipio": "San Sebastián de la Gomera",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.08505,
+  "lng": -17.13308
  },
  "las-palmas-de-gran-canaria": {
   "id": 24201,
@@ -1545,7 +1887,9 @@
   "d": 3225,
   "zona": "canarias",
   "municipio": "Las Palmas de Gran Canaria",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.09704,
+  "lng": -15.42128
  },
  "el-ejido": {
   "id": 25213,
@@ -1554,7 +1898,9 @@
   "d": 355,
   "zona": "mediterraneo",
   "municipio": "El Ejido",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.69591,
+  "lng": -2.79099
  },
  "sant-antoni-de-portmany": {
   "id": 28102,
@@ -1563,7 +1909,9 @@
   "d": 1390,
   "zona": "mediterraneo",
   "municipio": "Sant Antoni de Portmany",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.9924,
+  "lng": 1.29703
  },
  "santanyi": {
   "id": 38200,
@@ -1572,7 +1920,9 @@
   "d": 1976,
   "zona": "mediterraneo",
   "municipio": "Santanyí",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.33853,
+  "lng": 3.16844
  },
  "los-llanos-de-aridane": {
   "id": 34101,
@@ -1581,7 +1931,9 @@
   "d": 1360,
   "zona": "canarias",
   "municipio": "Los Llanos de Aridane",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.58111,
+  "lng": -17.90829
  },
  "nerja": {
   "id": 25208,
@@ -1590,7 +1942,9 @@
   "d": 1799,
   "zona": "mediterraneo",
   "municipio": "Nerja",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.74702,
+  "lng": -3.85696
  },
  "sant-josep-de-sa-talaia": {
   "id": 38128,
@@ -1599,7 +1953,9 @@
   "d": 5624,
   "zona": "mediterraneo",
   "municipio": "Sant Josep de sa Talaia",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.90483,
+  "lng": 1.28814
  },
  "la-orotava": {
   "id": 24104,
@@ -1608,7 +1964,9 @@
   "d": 3350,
   "zona": "canarias",
   "municipio": "La Orotava",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.42072,
+  "lng": -16.512
  },
  "gozon": {
   "id": 21204,
@@ -1617,7 +1975,9 @@
   "d": 4008,
   "zona": "cantabrico",
   "municipio": "Gozón",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.61744,
+  "lng": -5.83471
  },
  "la-granda": {
   "id": 11220,
@@ -1626,7 +1986,9 @@
   "d": 6951,
   "zona": "cantabrico",
   "municipio": "La Granda",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.62401,
+  "lng": -5.88157
  },
  "nieva": {
   "id": 11220,
@@ -1635,7 +1997,9 @@
   "d": 3084,
   "zona": "cantabrico",
   "municipio": "Nieva",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.60394,
+  "lng": -5.92089
  },
  "castrillon": {
   "id": 11220,
@@ -1644,7 +2008,9 @@
   "d": 4054,
   "zona": "cantabrico",
   "municipio": "Castrillón",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.57875,
+  "lng": -6.00188
  },
  "ranon": {
   "id": 32104,
@@ -1653,7 +2019,9 @@
   "d": 1128,
   "zona": "cantabrico",
   "municipio": "Ranón",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.57288,
+  "lng": -6.04959
  },
  "bajo-nalon": {
   "id": 32104,
@@ -1662,7 +2030,9 @@
   "d": 708,
   "zona": "cantabrico",
   "municipio": "Bajo Nalón",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56517,
+  "lng": -6.06941
  },
  "cartagena": {
   "id": 16110,
@@ -1671,7 +2041,9 @@
   "d": 10847,
   "zona": "mediterraneo",
   "municipio": "Cartagena",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.61379,
+  "lng": -0.86476
  },
  "guardamar-del-segura": {
   "id": 26112,
@@ -1680,7 +2052,9 @@
   "d": 1036,
   "zona": "mediterraneo",
   "municipio": "Guardamar del Segura",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.07669,
+  "lng": -0.64758
  },
  "villaviciosa": {
   "id": 31211,
@@ -1689,7 +2063,9 @@
   "d": 3891,
   "zona": "cantabrico",
   "municipio": "Villaviciosa",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.5353,
+  "lng": -5.42724
  },
  "orpesaoropesa-del-mar": {
   "id": 26210,
@@ -1698,7 +2074,9 @@
   "d": 2701,
   "zona": "mediterraneo",
   "municipio": "Orpesa/Oropesa del Mar",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.07066,
+  "lng": 0.12038
  },
  "capdepera": {
   "id": 28202,
@@ -1707,7 +2085,9 @@
   "d": 1531,
   "zona": "mediterraneo",
   "municipio": "Capdepera",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.69944,
+  "lng": 3.45226
  },
  "migjorn": {
   "id": 28111,
@@ -1716,7 +2096,9 @@
   "d": 8102,
   "zona": "mediterraneo",
   "municipio": "Migjorn",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.31224,
+  "lng": 3.00597
  },
  "campos": {
   "id": 28111,
@@ -1725,7 +2107,9 @@
   "d": 3388,
   "zona": "mediterraneo",
   "municipio": "Campos",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.34961,
+  "lng": 2.975
  },
  "santa-cruz-de-bezana": {
   "id": 31132,
@@ -1734,7 +2118,9 @@
   "d": 583,
   "zona": "cantabrico",
   "municipio": "Santa Cruz de Bezana",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.47334,
+  "lng": -3.90115
  },
  "es-migjorn-gran": {
   "id": 38233,
@@ -1743,7 +2129,9 @@
   "d": 5719,
   "zona": "mediterraneo",
   "municipio": "Es Migjorn Gran",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.92012,
+  "lng": 4.02289
  },
  "torresoli": {
   "id": 38234,
@@ -1752,7 +2140,9 @@
   "d": 1463,
   "zona": "mediterraneo",
   "municipio": "Torresolí",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.90606,
+  "lng": 4.05678
  },
  "muxia": {
   "id": 32174,
@@ -1761,7 +2151,9 @@
   "d": 1231,
   "zona": "cantabrico",
   "municipio": "Muxía",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.08984,
+  "lng": -9.20734
  },
  "escaselas": {
   "id": 22115,
@@ -1770,7 +2162,9 @@
   "d": 1646,
   "zona": "atlantico",
   "municipio": "Escaselas",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.92057,
+  "lng": -9.25744
  },
  "baiona": {
   "id": 22210,
@@ -1779,7 +2173,9 @@
   "d": 307,
   "zona": "atlantico",
   "municipio": "Baiona",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.11952,
+  "lng": -8.85265
  },
  "sabugo": {
   "id": 21209,
@@ -1788,7 +2184,9 @@
   "d": 2493,
   "zona": "cantabrico",
   "municipio": "Sabugo",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56098,
+  "lng": -6.61485
  },
  "valdes": {
   "id": 21208,
@@ -1797,7 +2195,9 @@
   "d": 6022,
   "zona": "cantabrico",
   "municipio": "Valdés",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55305,
+  "lng": -6.4586
  },
  "a-coruna": {
   "id": 12130,
@@ -1806,7 +2206,9 @@
   "d": 3220,
   "zona": "cantabrico",
   "municipio": "A Coruña",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.37138,
+  "lng": -8.41001
  },
  "moreno": {
   "id": 32208,
@@ -1815,7 +2217,9 @@
   "d": 443,
   "zona": "atlantico",
   "municipio": "Moreno",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.63313,
+  "lng": -9.04474
  },
  "carballo": {
   "id": 32170,
@@ -1824,7 +2228,9 @@
   "d": 1058,
   "zona": "cantabrico",
   "municipio": "Carballo",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.30312,
+  "lng": -8.65765
  },
  "sada": {
   "id": 22111,
@@ -1833,7 +2239,9 @@
   "d": 6362,
   "zona": "cantabrico",
   "municipio": "Sada",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.37164,
+  "lng": -8.26392
  },
  "bergondo": {
   "id": 32157,
@@ -1842,7 +2250,9 @@
   "d": 1913,
   "zona": "cantabrico",
   "municipio": "Bergondo",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.33542,
+  "lng": -8.22256
  },
  "mugardos": {
   "id": 12110,
@@ -1851,7 +2261,9 @@
   "d": 1076,
   "zona": "cantabrico",
   "municipio": "Mugardos",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.4581,
+  "lng": -8.24924
  },
  "camarinas": {
   "id": 22114,
@@ -1860,7 +2272,9 @@
   "d": 5183,
   "zona": "cantabrico",
   "municipio": "Camariñas",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.16407,
+  "lng": -9.13891
  },
  "malpica-de-bergantinos": {
   "id": 22113,
@@ -1869,7 +2283,9 @@
   "d": 1421,
   "zona": "cantabrico",
   "municipio": "Malpica de Bergantiños",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.31212,
+  "lng": -8.81448
  },
  "ribamontan-al-mar": {
   "id": 31126,
@@ -1878,7 +2294,9 @@
   "d": 3644,
   "zona": "cantabrico",
   "municipio": "Ribamontán al Mar",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.47397,
+  "lng": -3.69857
  },
  "pollenca": {
   "id": 28110,
@@ -1887,7 +2305,9 @@
   "d": 2627,
   "zona": "mediterraneo",
   "municipio": "Pollença",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.92152,
+  "lng": 3.10602
  },
  "benalmadena": {
   "id": 25204,
@@ -1896,7 +2316,9 @@
   "d": 2765,
   "zona": "mediterraneo",
   "municipio": "Benalmádena",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.58465,
+  "lng": -4.54229
  },
  "tapia-de-casariego": {
   "id": 21211,
@@ -1905,7 +2327,9 @@
   "d": 1420,
   "zona": "cantabrico",
   "municipio": "Tapia de Casariego",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56222,
+  "lng": -6.95343
  },
  "rincon-de-la-victoria": {
   "id": 35220,
@@ -1914,7 +2338,9 @@
   "d": 5862,
   "zona": "mediterraneo",
   "municipio": "Rincón de la Victoria",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.71214,
+  "lng": -4.26259
  },
  "teulada": {
   "id": 36161,
@@ -1923,7 +2349,9 @@
   "d": 1264,
   "zona": "mediterraneo",
   "municipio": "Teulada",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.68535,
+  "lng": 0.13259
  },
  "arnuero": {
   "id": 31124,
@@ -1932,7 +2360,9 @@
   "d": 711,
   "zona": "cantabrico",
   "municipio": "Arnuero",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.49729,
+  "lng": -3.54998
  },
  "felanitx": {
   "id": 28206,
@@ -1941,7 +2371,9 @@
   "d": 3555,
   "zona": "mediterraneo",
   "municipio": "Felanitx",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.40174,
+  "lng": 3.25511
  },
  "santa-eulalia-del-rio": {
   "id": 28103,
@@ -1950,7 +2382,9 @@
   "d": 1729,
   "zona": "mediterraneo",
   "municipio": "Santa Eulalia del Río",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.99074,
+  "lng": 1.5556
  },
  "algarrobo": {
   "id": 35221,
@@ -1959,7 +2393,9 @@
   "d": 100,
   "zona": "mediterraneo",
   "municipio": "Algarrobo",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.7453,
+  "lng": -4.05006
  },
  "palma": {
   "id": 38115,
@@ -1968,7 +2404,9 @@
   "d": 2852,
   "zona": "mediterraneo",
   "municipio": "Palma",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.51258,
+  "lng": 2.69684
  },
  "sant-lluis": {
   "id": 28211,
@@ -1977,7 +2415,9 @@
   "d": 1883,
   "zona": "mediterraneo",
   "municipio": "Sant Lluís",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.82542,
+  "lng": 4.2574
  },
  "castello-dempuries": {
   "id": 37243,
@@ -1986,7 +2426,9 @@
   "d": 846,
   "zona": "mediterraneo",
   "municipio": "Castelló d'Empúries",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.2357,
+  "lng": 3.12709
  },
  "torrenueva-costa": {
   "id": 35231,
@@ -1995,7 +2437,9 @@
   "d": 363,
   "zona": "mediterraneo",
   "municipio": "Torrenueva Costa",
-  "provincia": "Granada"
+  "provincia": "Granada",
+  "lat": 36.70274,
+  "lng": -3.48724
  },
  "suances": {
   "id": 21122,
@@ -2004,7 +2448,9 @@
   "d": 967,
   "zona": "cantabrico",
   "municipio": "Suances",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.43275,
+  "lng": -4.04877
  },
  "la-vega-baja": {
   "id": 26112,
@@ -2013,7 +2459,9 @@
   "d": 1531,
   "zona": "mediterraneo",
   "municipio": "La Vega Baja",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.07223,
+  "lng": -0.64798
  },
  "liendo": {
   "id": 21119,
@@ -2022,7 +2470,9 @@
   "d": 4704,
   "zona": "cantabrico",
   "municipio": "Liendo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.41252,
+  "lng": -3.3528
  },
  "oropesa-del-marorpesa": {
   "id": 26210,
@@ -2031,7 +2481,9 @@
   "d": 1388,
   "zona": "mediterraneo",
   "municipio": "Oropesa del Mar/Orpesa",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.08207,
+  "lng": 0.12951
  },
  "ponteceso": {
   "id": 32173,
@@ -2040,7 +2492,9 @@
   "d": 8366,
   "zona": "cantabrico",
   "municipio": "Ponteceso",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.27309,
+  "lng": -8.93066
  },
  "camargo": {
   "id": 11130,
@@ -2049,7 +2503,9 @@
   "d": 2694,
   "zona": "cantabrico",
   "municipio": "Camargo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.42149,
+  "lng": -3.81033
  },
  "escorca": {
   "id": 28109,
@@ -2058,7 +2514,9 @@
   "d": 944,
   "zona": "mediterraneo",
   "municipio": "Escorca",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.84616,
+  "lng": 2.79092
  },
  "telde": {
   "id": 34203,
@@ -2067,7 +2525,9 @@
   "d": 1804,
   "zona": "canarias",
   "municipio": "Telde",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.98603,
+  "lng": -15.37827
  },
  "castro-urdiales": {
   "id": 21118,
@@ -2076,7 +2536,9 @@
   "d": 1438,
   "zona": "cantabrico",
   "municipio": "Castro-Urdiales",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.38248,
+  "lng": -3.23468
  },
  "ribadesella": {
   "id": 21202,
@@ -2085,7 +2547,9 @@
   "d": 274,
   "zona": "cantabrico",
   "municipio": "Ribadesella",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.46519,
+  "lng": -5.06139
  },
  "los-llaos": {
   "id": 31137,
@@ -2094,7 +2558,9 @@
   "d": 358,
   "zona": "cantabrico",
   "municipio": "Los Llaos",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.39402,
+  "lng": -4.32946
  },
  "comillas": {
   "id": 21123,
@@ -2103,7 +2569,9 @@
   "d": 1110,
   "zona": "cantabrico",
   "municipio": "Comillas",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.38798,
+  "lng": -4.30309
  },
  "sant-joan-de-labritja": {
   "id": 38122,
@@ -2112,7 +2580,9 @@
   "d": 1633,
   "zona": "mediterraneo",
   "municipio": "Sant Joan de Labritja",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.09747,
+  "lng": 1.50213
  },
  "cullera": {
   "id": 26204,
@@ -2121,7 +2591,9 @@
   "d": 1343,
   "zona": "mediterraneo",
   "municipio": "Cullera",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.17274,
+  "lng": -0.2313
  },
  "peniscolapeniscola": {
   "id": 26212,
@@ -2130,7 +2602,9 @@
   "d": 3960,
   "zona": "mediterraneo",
   "municipio": "Peníscola/Peñíscola",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.33183,
+  "lng": 0.3748
  },
  "alcala-de-xivert": {
   "id": 36255,
@@ -2139,7 +2613,9 @@
   "d": 689,
   "zona": "mediterraneo",
   "municipio": "Alcalà de Xivert",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.24012,
+  "lng": 0.28373
  },
  "agaete": {
   "id": 24207,
@@ -2148,7 +2624,9 @@
   "d": 1750,
   "zona": "canarias",
   "municipio": "Agaete",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.08883,
+  "lng": -15.71675
  },
  "nules": {
   "id": 36238,
@@ -2157,7 +2635,9 @@
   "d": 1070,
   "zona": "mediterraneo",
   "municipio": "Nules",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.82624,
+  "lng": -0.11053
  },
  "almonte": {
   "id": 23104,
@@ -2166,7 +2646,9 @@
   "d": 284,
   "zona": "atlantico",
   "municipio": "Almonte",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.00153,
+  "lng": -6.56113
  },
  "vilassar-de-mar": {
   "id": 27115,
@@ -2175,7 +2657,9 @@
   "d": 484,
   "zona": "mediterraneo",
   "municipio": "Vilassar de Mar",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.50106,
+  "lng": 2.39155
  },
  "brena-alta": {
   "id": 14110,
@@ -2184,7 +2668,9 @@
   "d": 559,
   "zona": "canarias",
   "municipio": "Breña Alta",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.67026,
+  "lng": -17.76892
  },
  "bras-del-port": {
   "id": 36124,
@@ -2193,7 +2679,9 @@
   "d": 1030,
   "zona": "mediterraneo",
   "municipio": "Bras del Port",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.18605,
+  "lng": -0.59766
  },
  "cerbere": {
   "id": 27136,
@@ -2202,7 +2690,9 @@
   "d": 2495,
   "zona": "mediterraneo",
   "municipio": "Cerbère",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.44837,
+  "lng": 3.16427
  },
  "malaga": {
   "id": 15210,
@@ -2211,7 +2701,9 @@
   "d": 2524,
   "zona": "mediterraneo",
   "municipio": "Málaga",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.7042,
+  "lng": -4.38872
  },
  "el-rosario": {
   "id": 24113,
@@ -2220,7 +2712,9 @@
   "d": 7327,
   "zona": "canarias",
   "municipio": "El Rosario",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.40288,
+  "lng": -16.32207
  },
  "arico": {
   "id": 14160,
@@ -2229,7 +2723,9 @@
   "d": 6537,
   "zona": "canarias",
   "municipio": "Arico",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.13668,
+  "lng": -16.45021
  },
  "miengo": {
   "id": 21122,
@@ -2238,7 +2734,9 @@
   "d": 3712,
   "zona": "cantabrico",
   "municipio": "Miengo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.43937,
+  "lng": -3.99908
  },
  "mao": {
   "id": 38235,
@@ -2247,7 +2745,9 @@
   "d": 1549,
   "zona": "mediterraneo",
   "municipio": "Maó",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.95299,
+  "lng": 4.24726
  },
  "la-savina": {
   "id": 38131,
@@ -2256,7 +2756,9 @@
   "d": 1660,
   "zona": "mediterraneo",
   "municipio": "La Savina",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.76539,
+  "lng": 1.4329
  },
  "alcudia": {
   "id": 18210,
@@ -2265,7 +2767,9 @@
   "d": 2448,
   "zona": "mediterraneo",
   "municipio": "Alcúdia",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.85681,
+  "lng": 3.14952
  },
  "saguntsagunto": {
   "id": 36233,
@@ -2274,7 +2778,9 @@
   "d": 700,
   "zona": "mediterraneo",
   "municipio": "Sagunt/Sagunto",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.69112,
+  "lng": -0.19908
  },
  "puig-de-santa-maria-el": {
   "id": 36229,
@@ -2283,7 +2789,9 @@
   "d": 2985,
   "zona": "mediterraneo",
   "municipio": "Puig de Santa Maria, el",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.58367,
+  "lng": -0.27327
  },
  "arteixo": {
   "id": 12140,
@@ -2292,7 +2800,9 @@
   "d": 2778,
   "zona": "cantabrico",
   "municipio": "Arteixo",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.32805,
+  "lng": -8.52041
  },
  "a-guarda": {
   "id": 22211,
@@ -2301,7 +2811,9 @@
   "d": 1589,
   "zona": "atlantico",
   "municipio": "A Guarda",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 41.88987,
+  "lng": -8.87042
  },
  "mazarron": {
   "id": 26103,
@@ -2310,7 +2822,9 @@
   "d": 4580,
   "zona": "mediterraneo",
   "municipio": "Mazarrón",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.55538,
+  "lng": -1.30928
  },
  "puntallana": {
   "id": 14110,
@@ -2319,7 +2833,9 @@
   "d": 7522,
   "zona": "canarias",
   "municipio": "Puntallana",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.73655,
+  "lng": -17.735
  },
  "naves": {
   "id": 31205,
@@ -2328,7 +2844,9 @@
   "d": 143,
   "zona": "cantabrico",
   "municipio": "Naves",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.44273,
+  "lng": -4.86954
  },
  "santa-cruz-de-tenerife": {
   "id": 34115,
@@ -2337,7 +2855,9 @@
   "d": 2210,
   "zona": "canarias",
   "municipio": "Santa Cruz de Tenerife",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.52774,
+  "lng": -16.18954
  },
  "icod-de-los-vinos": {
   "id": 24106,
@@ -2346,7 +2866,9 @@
   "d": 4389,
   "zona": "canarias",
   "municipio": "Icod de los Vinos",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.37964,
+  "lng": -16.7186
  },
  "a-gandara": {
   "id": 32205,
@@ -2355,7 +2877,9 @@
   "d": 3430,
   "zona": "atlantico",
   "municipio": "A Gándara",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.76464,
+  "lng": -9.11843
  },
  "candelaria": {
   "id": 24113,
@@ -2364,7 +2888,9 @@
   "d": 1175,
   "zona": "canarias",
   "municipio": "Candelaria",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.36212,
+  "lng": -16.36495
  },
  "conil-de-la-frontera": {
   "id": 23111,
@@ -2373,7 +2899,9 @@
   "d": 2907,
   "zona": "atlantico",
   "municipio": "Conil de la Frontera",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.29164,
+  "lng": -6.12088
  },
  "guimar": {
   "id": 24113,
@@ -2382,7 +2910,9 @@
   "d": 7197,
   "zona": "canarias",
   "municipio": "Güímar",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.28869,
+  "lng": -16.37929
  },
  "noia": {
   "id": 32206,
@@ -2391,7 +2921,9 @@
   "d": 7060,
   "zona": "atlantico",
   "municipio": "Noia",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.78905,
+  "lng": -8.91608
  },
  "tijarafe": {
   "id": 24124,
@@ -2400,7 +2932,9 @@
   "d": 9977,
   "zona": "canarias",
   "municipio": "Tijarafe",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.72188,
+  "lng": -17.97957
  },
  "ortigueira": {
   "id": 32141,
@@ -2409,7 +2943,9 @@
   "d": 2096,
   "zona": "cantabrico",
   "municipio": "Ortigueira",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.72829,
+  "lng": -7.78811
  },
  "ortegal": {
   "id": 32139,
@@ -2418,7 +2954,9 @@
   "d": 1098,
   "zona": "cantabrico",
   "municipio": "Ortegal",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.74592,
+  "lng": -7.73644
  },
  "cadiz": {
   "id": 33119,
@@ -2427,7 +2965,9 @@
   "d": 1436,
   "zona": "atlantico",
   "municipio": "Cádiz",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.49886,
+  "lng": -6.27387
  },
  "cervo": {
   "id": 22104,
@@ -2436,7 +2976,9 @@
   "d": 201,
   "zona": "cantabrico",
   "municipio": "Cervo",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.69564,
+  "lng": -7.44064
  },
  "xove": {
   "id": 12120,
@@ -2445,7 +2987,9 @@
   "d": 3463,
   "zona": "cantabrico",
   "municipio": "Xove",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.71742,
+  "lng": -7.50043
  },
  "metropolitana-de-almeria": {
   "id": 25218,
@@ -2454,7 +2998,9 @@
   "d": 8164,
   "zona": "mediterraneo",
   "municipio": "Metropolitana de Almería",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.82469,
+  "lng": -2.06704
  },
  "santa-eularia-des-riu": {
   "id": 28103,
@@ -2463,7 +3009,9 @@
   "d": 2317,
   "zona": "mediterraneo",
   "municipio": "Santa Eulària des Riu",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.99698,
+  "lng": 1.55894
  },
  "bergantinos": {
   "id": 22113,
@@ -2472,7 +3020,9 @@
   "d": 9032,
   "zona": "cantabrico",
   "municipio": "Bergantiños",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.25864,
+  "lng": -8.87424
  },
  "calp": {
   "id": 26119,
@@ -2481,7 +3031,9 @@
   "d": 943,
   "zona": "mediterraneo",
   "municipio": "Calp",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.64062,
+  "lng": 0.05571
  },
  "aguilas": {
   "id": 26102,
@@ -2490,7 +3042,9 @@
   "d": 3214,
   "zona": "mediterraneo",
   "municipio": "Águilas",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.41835,
+  "lng": -1.55017
  },
  "benissa": {
   "id": 36159,
@@ -2499,7 +3053,9 @@
   "d": 762,
   "zona": "mediterraneo",
   "municipio": "Benissa",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.6694,
+  "lng": 0.09473
  },
  "velez-malaga": {
   "id": 25207,
@@ -2508,7 +3064,9 @@
   "d": 3351,
   "zona": "mediterraneo",
   "municipio": "Vélez-Málaga",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.7267,
+  "lng": -4.12674
  },
  "soutomaior": {
   "id": 12220,
@@ -2517,7 +3075,9 @@
   "d": 9536,
   "zona": "atlantico",
   "municipio": "Soutomaior",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.34297,
+  "lng": -8.61331
  },
  "banyalbufar": {
   "id": 28106,
@@ -2526,7 +3086,9 @@
   "d": 3428,
   "zona": "mediterraneo",
   "municipio": "Banyalbufar",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.70006,
+  "lng": 2.55187
  },
  "soller": {
   "id": 28108,
@@ -2535,7 +3097,9 @@
   "d": 561,
   "zona": "mediterraneo",
   "municipio": "Sóller",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.79306,
+  "lng": 2.69434
  },
  "raiguer": {
   "id": 38223,
@@ -2544,7 +3108,9 @@
   "d": 2001,
   "zona": "mediterraneo",
   "municipio": "Raiguer",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.87153,
+  "lng": 3.15929
  },
  "port-de-pollenca": {
   "id": 38229,
@@ -2553,7 +3119,9 @@
   "d": 258,
   "zona": "mediterraneo",
   "municipio": "Port de Pollença",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.92846,
+  "lng": 3.09604
  },
  "tarifa": {
   "id": 35101,
@@ -2562,7 +3130,9 @@
   "d": 1302,
   "zona": "mediterraneo",
   "municipio": "Tarifa",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.06564,
+  "lng": -5.73777
  },
  "el-lentiscal": {
   "id": 35100,
@@ -2571,7 +3141,9 @@
   "d": 999,
   "zona": "mediterraneo",
   "municipio": "El Lentiscal",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.08215,
+  "lng": -5.77281
  },
  "muro": {
   "id": 18210,
@@ -2580,7 +3152,9 @@
   "d": 3558,
   "zona": "mediterraneo",
   "municipio": "Muro",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.80819,
+  "lng": 3.11888
  },
  "galdar": {
   "id": 24208,
@@ -2589,7 +3163,9 @@
   "d": 1059,
   "zona": "canarias",
   "municipio": "Gáldar",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.151,
+  "lng": -15.68526
  },
  "cueva-del-agua": {
   "id": 24126,
@@ -2598,7 +3174,9 @@
   "d": 2969,
   "zona": "canarias",
   "municipio": "Cueva del Agua",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.81458,
+  "lng": -17.97188
  },
  "san-vicente-de-la-barquera": {
   "id": 21124,
@@ -2607,7 +3185,9 @@
   "d": 1522,
   "zona": "cantabrico",
   "municipio": "San Vicente de la Barquera",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.39195,
+  "lng": -4.38177
  },
  "formentera": {
   "id": 18110,
@@ -2616,7 +3196,9 @@
   "d": 5215,
   "zona": "mediterraneo",
   "municipio": "Formentera",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.7039,
+  "lng": 1.46408
  },
  "area-metropolitana-de-ciutadella": {
   "id": 28207,
@@ -2625,7 +3207,9 @@
   "d": 8258,
   "zona": "mediterraneo",
   "municipio": "Área Metropolitana de Ciutadella",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 40.00995,
+  "lng": 3.93225
  },
  "ferreries": {
   "id": 38233,
@@ -2634,7 +3218,9 @@
   "d": 4230,
   "zona": "mediterraneo",
   "municipio": "Ferreries",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.97466,
+  "lng": 3.97325
  },
  "es-mercadal": {
   "id": 38236,
@@ -2643,7 +3229,9 @@
   "d": 550,
   "zona": "mediterraneo",
   "municipio": "Es Mercadal",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 40.04534,
+  "lng": 4.09578
  },
  "area-metropolitana-de-mahon": {
   "id": 38236,
@@ -2652,7 +3240,9 @@
   "d": 4174,
   "zona": "mediterraneo",
   "municipio": "Área Metropolitana de Mahón",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 40.00867,
+  "lng": 4.11858
  },
  "almunecar": {
   "id": 25209,
@@ -2661,7 +3251,9 @@
   "d": 579,
   "zona": "mediterraneo",
   "municipio": "Almuñécar",
-  "provincia": "Granada"
+  "provincia": "Granada",
+  "lat": 36.73708,
+  "lng": -3.69241
  },
  "fornells": {
   "id": 38236,
@@ -2670,7 +3262,9 @@
   "d": 3479,
   "zona": "mediterraneo",
   "municipio": "Fornells",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 40.04856,
+  "lng": 4.14243
  },
  "la-vila-joiosavillajoyosa": {
   "id": 26116,
@@ -2679,7 +3273,9 @@
   "d": 2067,
   "zona": "mediterraneo",
   "municipio": "la Vila Joiosa/Villajoyosa",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.49813,
+  "lng": -0.25354
  },
  "torrevieja": {
   "id": 26111,
@@ -2688,7 +3284,9 @@
   "d": 870,
   "zona": "mediterraneo",
   "municipio": "Torrevieja",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 37.97955,
+  "lng": -0.67361
  },
  "la-union": {
   "id": 16110,
@@ -2697,7 +3295,9 @@
   "d": 11252,
   "zona": "mediterraneo",
   "municipio": "La Unión",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.58009,
+  "lng": -0.8544
  },
  "ayamonte": {
   "id": 23101,
@@ -2706,7 +3306,9 @@
   "d": 4481,
   "zona": "atlantico",
   "municipio": "Ayamonte",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.17669,
+  "lng": -7.35506
  },
  "la-linea-de-la-concepcion": {
   "id": 25103,
@@ -2715,7 +3317,9 @@
   "d": 1590,
   "zona": "mediterraneo",
   "municipio": "La Línea de la Concepción",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.17367,
+  "lng": -5.3398
  },
  "salobrena": {
   "id": 25210,
@@ -2724,7 +3328,9 @@
   "d": 855,
   "zona": "mediterraneo",
   "municipio": "Salobreña",
-  "provincia": "Granada"
+  "provincia": "Granada",
+  "lat": 36.73494,
+  "lng": -3.59491
  },
  "can-picafort": {
   "id": 38220,
@@ -2733,7 +3339,9 @@
   "d": 1476,
   "zona": "mediterraneo",
   "municipio": "Ca'n Picafort",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.78025,
+  "lng": 3.13802
  },
  "pielagos": {
   "id": 31132,
@@ -2742,7 +3350,9 @@
   "d": 3195,
   "zona": "cantabrico",
   "municipio": "Piélagos",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.46342,
+  "lng": -3.94424
  },
  "bareyo": {
   "id": 31125,
@@ -2751,7 +3361,9 @@
   "d": 2330,
   "zona": "cantabrico",
   "municipio": "Bareyo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.50127,
+  "lng": -3.60564
  },
  "chinamada": {
   "id": 24102,
@@ -2760,7 +3372,9 @@
   "d": 2711,
   "zona": "canarias",
   "municipio": "Chinamada",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.56947,
+  "lng": -16.29624
  },
  "campo-de-cartagena": {
   "id": 16110,
@@ -2769,7 +3383,9 @@
   "d": 4611,
   "zona": "mediterraneo",
   "municipio": "Campo de Cartagena",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.56477,
+  "lng": -1.02835
  },
  "san-miguel-de-abona": {
   "id": 24110,
@@ -2778,7 +3394,9 @@
   "d": 3827,
   "zona": "canarias",
   "municipio": "San Miguel de Abona",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.01998,
+  "lng": -16.6189
  },
  "cee": {
   "id": 32202,
@@ -2787,7 +3405,9 @@
   "d": 3065,
   "zona": "atlantico",
   "municipio": "Cee",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.93788,
+  "lng": -9.182
  },
  "alajero": {
   "id": 34104,
@@ -2796,7 +3416,9 @@
   "d": 4301,
   "zona": "canarias",
   "municipio": "Alajeró",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.03481,
+  "lng": -17.23932
  },
  "caravia": {
   "id": 31209,
@@ -2805,7 +3427,9 @@
   "d": 1345,
   "zona": "cantabrico",
   "municipio": "Caravia",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.47513,
+  "lng": -5.19833
  },
  "berbes": {
   "id": 31208,
@@ -2814,7 +3438,9 @@
   "d": 430,
   "zona": "cantabrico",
   "municipio": "Berbes",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.48019,
+  "lng": -5.14232
  },
  "el-cotillo": {
   "id": 24212,
@@ -2823,7 +3449,9 @@
   "d": 1713,
   "zona": "canarias",
   "municipio": "El Cotillo",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.66759,
+  "lng": -14.01209
  },
  "bermeo": {
   "id": 21113,
@@ -2832,7 +3460,9 @@
   "d": 959,
   "zona": "cantabrico",
   "municipio": "Bermeo",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.42615,
+  "lng": -2.72933
  },
  "isla-de-el-hierro": {
   "id": 24120,
@@ -2841,7 +3471,9 @@
   "d": 5461,
   "zona": "canarias",
   "municipio": "Isla de el Hierro",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 27.68739,
+  "lng": -17.99358
  },
  "valencia": {
   "id": 36224,
@@ -2850,7 +3482,9 @@
   "d": 1222,
   "zona": "mediterraneo",
   "municipio": "Valencia",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.40324,
+  "lng": -0.31681
  },
  "abona": {
   "id": 14160,
@@ -2859,7 +3493,9 @@
   "d": 1822,
   "zona": "canarias",
   "municipio": "Abona",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.10204,
+  "lng": -16.48775
  },
  "haria": {
   "id": 34225,
@@ -2868,7 +3504,9 @@
   "d": 3941,
   "zona": "canarias",
   "municipio": "Haría",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 29.19053,
+  "lng": -13.44117
  },
  "tinajo": {
   "id": 34229,
@@ -2877,7 +3515,9 @@
   "d": 9928,
   "zona": "canarias",
   "municipio": "Tinajo",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 29.06912,
+  "lng": -13.75424
  },
  "viveiro": {
   "id": 22105,
@@ -2886,7 +3526,9 @@
   "d": 717,
   "zona": "cantabrico",
   "municipio": "Viveiro",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.68743,
+  "lng": -7.59664
  },
  "bajo-guadalentin": {
   "id": 26103,
@@ -2895,7 +3537,9 @@
   "d": 8209,
   "zona": "mediterraneo",
   "municipio": "Bajo Guadalentín",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.54962,
+  "lng": -1.34981
  },
  "la-pobla-de-farnals": {
   "id": 36229,
@@ -2904,7 +3548,9 @@
   "d": 509,
   "zona": "mediterraneo",
   "municipio": "la Pobla de Farnals",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.56271,
+  "lng": -0.28351
  },
  "andratx": {
   "id": 28107,
@@ -2913,7 +3559,9 @@
   "d": 952,
   "zona": "mediterraneo",
   "municipio": "Andratx",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.55219,
+  "lng": 2.38234
  },
  "vilar-de-mouros": {
   "id": 22211,
@@ -2922,7 +3570,9 @@
   "d": 6962,
   "zona": "atlantico",
   "municipio": "Vilar de Mouros",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 41.88077,
+  "lng": -8.79937
  },
  "fene": {
   "id": 12110,
@@ -2931,7 +3581,9 @@
   "d": 4770,
   "zona": "cantabrico",
   "municipio": "Fene",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.45157,
+  "lng": -8.18886
  },
  "redes": {
   "id": 22111,
@@ -2940,7 +3592,9 @@
   "d": 3802,
   "zona": "cantabrico",
   "municipio": "Redes",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.42652,
+  "lng": -8.19692
  },
  "benitachellel-poble-nou-de-benitatxell": {
   "id": 36161,
@@ -2949,7 +3603,9 @@
   "d": 2252,
   "zona": "mediterraneo",
   "municipio": "Benitachell/el Poble Nou de Benitatxell",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.7038,
+  "lng": 0.16149
  },
  "trasmiera": {
   "id": 31123,
@@ -2958,7 +3614,9 @@
   "d": 477,
   "zona": "cantabrico",
   "municipio": "Trasmiera",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.47782,
+  "lng": -3.51132
  },
  "laredo": {
   "id": 21119,
@@ -2967,7 +3625,9 @@
   "d": 2860,
   "zona": "cantabrico",
   "municipio": "Laredo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.4218,
+  "lng": -3.44474
  },
  "sant-andreu-de-llavaneres": {
   "id": 37154,
@@ -2976,7 +3636,9 @@
   "d": 2414,
   "zona": "mediterraneo",
   "municipio": "Sant Andreu de Llavaneres",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.5559,
+  "lng": 2.50007
  },
  "blanes": {
   "id": 27123,
@@ -2985,7 +3647,9 @@
   "d": 1136,
   "zona": "mediterraneo",
   "municipio": "Blanes",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.67632,
+  "lng": 2.80332
  },
  "els-poblets": {
   "id": 36205,
@@ -2994,7 +3658,9 @@
   "d": 3485,
   "zona": "mediterraneo",
   "municipio": "els Poblets",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.86505,
+  "lng": 0.01484
  },
  "la-marina-oriental": {
   "id": 22101,
@@ -3003,7 +3669,9 @@
   "d": 4350,
   "zona": "cantabrico",
   "municipio": "La Mariña Oriental",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.55584,
+  "lng": -7.08894
  },
  "navia": {
   "id": 21210,
@@ -3012,7 +3680,9 @@
   "d": 2294,
   "zona": "cantabrico",
   "municipio": "Navia",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55849,
+  "lng": -6.70374
  },
  "coana": {
   "id": 21210,
@@ -3021,7 +3691,9 @@
   "d": 3433,
   "zona": "cantabrico",
   "municipio": "Coaña",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55654,
+  "lng": -6.76293
  },
  "la-dama": {
   "id": 24115,
@@ -3030,7 +3702,9 @@
   "d": 3625,
   "zona": "canarias",
   "municipio": "La Dama",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.05915,
+  "lng": -17.31604
  },
  "almenara": {
   "id": 36234,
@@ -3039,7 +3713,9 @@
   "d": 1650,
   "zona": "mediterraneo",
   "municipio": "Almenara",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.73382,
+  "lng": -0.18085
  },
  "carboneras": {
   "id": 15250,
@@ -3048,7 +3724,9 @@
   "d": 2731,
   "zona": "mediterraneo",
   "municipio": "Carboneras",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.98932,
+  "lng": -1.89272
  },
  "moras": {
   "id": 12120,
@@ -3057,7 +3735,9 @@
   "d": 1492,
   "zona": "cantabrico",
   "municipio": "Morás",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.70716,
+  "lng": -7.47532
  },
  "isla-cristina": {
   "id": 23101,
@@ -3066,7 +3746,9 @@
   "d": 1752,
   "zona": "atlantico",
   "municipio": "Isla Cristina",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.19818,
+  "lng": -7.29063
  },
  "sant-tomas": {
   "id": 38233,
@@ -3075,7 +3757,9 @@
   "d": 4853,
   "zona": "mediterraneo",
   "municipio": "Sant Tomas",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.92332,
+  "lng": 4.0136
  },
  "alaior": {
   "id": 38234,
@@ -3084,7 +3768,9 @@
   "d": 1860,
   "zona": "mediterraneo",
   "municipio": "Alaior",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.89071,
+  "lng": 4.09013
  },
  "seixas": {
   "id": 22211,
@@ -3093,7 +3779,9 @@
   "d": 4596,
   "zona": "atlantico",
   "municipio": "Seixas",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 41.89095,
+  "lng": -8.82488
  },
  "bahia-de-cadiz": {
   "id": 23109,
@@ -3102,7 +3790,9 @@
   "d": 3362,
   "zona": "atlantico",
   "municipio": "Bahía de Cádiz",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.49459,
+  "lng": -6.18476
  },
  "canet-de-mar": {
   "id": 27119,
@@ -3111,7 +3801,9 @@
   "d": 218,
   "zona": "mediterraneo",
   "municipio": "Canet de Mar",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.58793,
+  "lng": 2.58718
  },
  "arenys-de-mar": {
   "id": 27118,
@@ -3120,7 +3812,9 @@
   "d": 728,
   "zona": "mediterraneo",
   "municipio": "Arenys de Mar",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.57631,
+  "lng": 2.54954
  },
  "naron": {
   "id": 32148,
@@ -3129,7 +3823,9 @@
   "d": 2753,
   "zona": "cantabrico",
   "municipio": "Narón",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.56882,
+  "lng": -8.23965
  },
  "burela": {
   "id": 22103,
@@ -3138,7 +3834,9 @@
   "d": 156,
   "zona": "cantabrico",
   "municipio": "Burela",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.66044,
+  "lng": -7.35685
  },
  "lekeitio": {
   "id": 21111,
@@ -3147,7 +3845,9 @@
   "d": 384,
   "zona": "cantabrico",
   "municipio": "Lekeitio",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.36254,
+  "lng": -2.5001
  },
  "la-lanzada": {
   "id": 32228,
@@ -3156,7 +3856,9 @@
   "d": 300,
   "zona": "atlantico",
   "municipio": "La Lanzada",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.4473,
+  "lng": -8.87984
  },
  "cabana-de-bergantinos": {
   "id": 32173,
@@ -3165,7 +3867,9 @@
   "d": 4336,
   "zona": "cantabrico",
   "municipio": "Cabana de Bergantiños",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.22521,
+  "lng": -8.94841
  },
  "elxelche": {
   "id": 26113,
@@ -3174,7 +3878,9 @@
   "d": 1881,
   "zona": "mediterraneo",
   "municipio": "Elx/Elche",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.20288,
+  "lng": -0.57096
  },
  "dumbria": {
   "id": 32203,
@@ -3183,7 +3889,9 @@
   "d": 115,
   "zona": "atlantico",
   "municipio": "Dumbría",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.90897,
+  "lng": -9.13013
  },
  "elcheelx": {
   "id": 26113,
@@ -3192,7 +3900,9 @@
   "d": 2692,
   "zona": "mediterraneo",
   "municipio": "Elche/Elx",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.21418,
+  "lng": -0.5557
  },
  "algeciras": {
   "id": 15120,
@@ -3201,7 +3911,9 @@
   "d": 3507,
   "zona": "mediterraneo",
   "municipio": "Algeciras",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.11553,
+  "lng": -5.44044
  },
  "aguimes": {
   "id": 14240,
@@ -3210,7 +3922,9 @@
   "d": 2348,
   "zona": "canarias",
   "municipio": "Agüimes",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.86661,
+  "lng": -15.39115
  },
  "marina-de-cudeyo": {
   "id": 11130,
@@ -3219,7 +3933,9 @@
   "d": 1924,
   "zona": "cantabrico",
   "municipio": "Marina de Cudeyo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.44738,
+  "lng": -3.77195
  },
  "pulpi": {
   "id": 26102,
@@ -3228,7 +3944,9 @@
   "d": 8991,
   "zona": "mediterraneo",
   "municipio": "Pulpí",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 37.35794,
+  "lng": -1.6655
  },
  "comarca-sur": {
   "id": 24206,
@@ -3237,7 +3955,9 @@
   "d": 2069,
   "zona": "canarias",
   "municipio": "Comarca Sur",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.80669,
+  "lng": -15.72632
  },
  "palos-de-la-frontera": {
   "id": 13120,
@@ -3246,7 +3966,9 @@
   "d": 2707,
   "zona": "atlantico",
   "municipio": "Palos de la Frontera",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.13503,
+  "lng": -6.83657
  },
  "punta-umbria": {
   "id": 23103,
@@ -3255,7 +3977,9 @@
   "d": 4644,
   "zona": "atlantico",
   "municipio": "Punta Umbría",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.19061,
+  "lng": -6.99793
  },
  "tias": {
   "id": 24219,
@@ -3264,7 +3988,9 @@
   "d": 2409,
   "zona": "canarias",
   "municipio": "Tías",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.92351,
+  "lng": -13.64357
  },
  "atamaria": {
   "id": 26105,
@@ -3273,7 +3999,9 @@
   "d": 7918,
   "zona": "mediterraneo",
   "municipio": "Atamaría",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.59535,
+  "lng": -0.7763
  },
  "gualchos": {
   "id": 35232,
@@ -3282,7 +4010,9 @@
   "d": 4425,
   "zona": "mediterraneo",
   "municipio": "Gualchos",
-  "provincia": "Granada"
+  "provincia": "Granada",
+  "lat": 36.71673,
+  "lng": -3.36997
  },
  "villademoros": {
   "id": 32108,
@@ -3291,7 +4021,9 @@
   "d": 2373,
   "zona": "cantabrico",
   "municipio": "Villademoros",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55673,
+  "lng": -6.40435
  },
  "san-fernando": {
   "id": 23109,
@@ -3300,7 +4032,9 @@
   "d": 2208,
   "zona": "atlantico",
   "municipio": "San Fernando",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.46213,
+  "lng": -6.22122
  },
  "roquetas-de-mar": {
   "id": 25214,
@@ -3309,7 +4043,9 @@
   "d": 1863,
   "zona": "mediterraneo",
   "municipio": "Roquetas de Mar",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.74726,
+  "lng": -2.61416
  },
  "valdevaqueros": {
   "id": 35102,
@@ -3318,7 +4054,9 @@
   "d": 1144,
   "zona": "mediterraneo",
   "municipio": "Valdevaqueros",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.06309,
+  "lng": -5.68381
  },
  "tazacorte": {
   "id": 24124,
@@ -3327,7 +4065,9 @@
   "d": 941,
   "zona": "canarias",
   "municipio": "Tazacorte",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.63525,
+  "lng": -17.93881
  },
  "zahara-de-los-atunes": {
   "id": 33128,
@@ -3336,7 +4076,9 @@
   "d": 3377,
   "zona": "mediterraneo",
   "municipio": "Zahara de los Atunes",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.15386,
+  "lng": -5.87434
  },
  "manilva": {
   "id": 35112,
@@ -3345,7 +4087,9 @@
   "d": 846,
   "zona": "mediterraneo",
   "municipio": "Manilva",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.3512,
+  "lng": -5.23222
  },
  "chipiona": {
   "id": 23106,
@@ -3354,7 +4098,9 @@
   "d": 1427,
   "zona": "atlantico",
   "municipio": "Chipiona",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.73217,
+  "lng": -6.43071
  },
  "rota": {
   "id": 33112,
@@ -3363,7 +4109,9 @@
   "d": 1138,
   "zona": "atlantico",
   "municipio": "Rota",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.63665,
+  "lng": -6.37936
  },
  "san-cristobal-de-la-laguna": {
   "id": 24102,
@@ -3372,7 +4120,9 @@
   "d": 1027,
   "zona": "canarias",
   "municipio": "San Cristóbal de La Laguna",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.57143,
+  "lng": -16.31361
  },
  "villa-de-mazo": {
   "id": 24122,
@@ -3381,7 +4131,9 @@
   "d": 6948,
   "zona": "canarias",
   "municipio": "Villa de Mazo",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.58653,
+  "lng": -17.7592
  },
  "carnota": {
   "id": 32204,
@@ -3390,7 +4142,9 @@
   "d": 2506,
   "zona": "atlantico",
   "municipio": "Carnota",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.83879,
+  "lng": -9.13531
  },
  "arucas": {
   "id": 24209,
@@ -3399,7 +4153,9 @@
   "d": 1654,
   "zona": "canarias",
   "municipio": "Arucas",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.15075,
+  "lng": -15.53501
  },
  "val-de-san-vicente": {
   "id": 21124,
@@ -3408,7 +4164,9 @@
   "d": 7194,
   "zona": "cantabrico",
   "municipio": "Val de San Vicente",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.39124,
+  "lng": -4.48661
  },
  "pasaia": {
   "id": 11110,
@@ -3417,7 +4175,9 @@
   "d": 1317,
   "zona": "cantabrico",
   "municipio": "Pasaia",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.33333,
+  "lng": -1.92274
  },
  "anaga": {
   "id": 24102,
@@ -3426,7 +4186,9 @@
   "d": 3268,
   "zona": "canarias",
   "municipio": "Anaga",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.57022,
+  "lng": -16.29053
  },
  "eivissa": {
   "id": 18120,
@@ -3435,7 +4197,9 @@
   "d": 352,
   "zona": "mediterraneo",
   "municipio": "Eivissa",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.91167,
+  "lng": 1.44618
  },
  "finestrat": {
   "id": 36150,
@@ -3444,7 +4208,9 @@
   "d": 877,
   "zona": "mediterraneo",
   "municipio": "Finestrat",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.52429,
+  "lng": -0.16695
  },
  "alboraiaalboraya": {
   "id": 36228,
@@ -3453,7 +4219,9 @@
   "d": 2524,
   "zona": "mediterraneo",
   "municipio": "Alboraia/Alboraya",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.49769,
+  "lng": -0.32375
  },
  "xabiajavea": {
   "id": 26120,
@@ -3462,7 +4230,9 @@
   "d": 3832,
   "zona": "mediterraneo",
   "municipio": "Xàbia/Jávea",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.76598,
+  "lng": 0.2072
  },
  "sukarrieta": {
   "id": 21112,
@@ -3471,7 +4241,9 @@
   "d": 1608,
   "zona": "cantabrico",
   "municipio": "Sukarrieta",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.39362,
+  "lng": -2.69493
  },
  "sant-vicenc-de-montalt": {
   "id": 37154,
@@ -3480,7 +4252,9 @@
   "d": 976,
   "zona": "mediterraneo",
   "municipio": "Sant Vicenç de Montalt",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.56255,
+  "lng": 2.51489
  },
  "sant-pol-de-mar": {
   "id": 27120,
@@ -3489,7 +4263,9 @@
   "d": 917,
   "zona": "mediterraneo",
   "municipio": "Sant Pol de Mar",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.59885,
+  "lng": 2.61881
  },
  "caldes-destrac": {
   "id": 37154,
@@ -3498,7 +4274,9 @@
   "d": 181,
   "zona": "mediterraneo",
   "municipio": "Caldes d'Estrac",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.56756,
+  "lng": 2.52704
  },
  "melilla": {
   "id": 15230,
@@ -3507,7 +4285,9 @@
   "d": 1420,
   "zona": "mediterraneo",
   "municipio": "Melilla",
-  "provincia": "Melilla"
+  "provincia": "Melilla",
+  "lat": 35.28759,
+  "lng": -2.9367
  },
  "moncofa": {
   "id": 36236,
@@ -3516,7 +4296,9 @@
   "d": 3412,
   "zona": "mediterraneo",
   "municipio": "Moncofa",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.79437,
+  "lng": -0.13457
  },
  "bajo-maestrazgo": {
   "id": 26212,
@@ -3525,7 +4307,9 @@
   "d": 8556,
   "zona": "mediterraneo",
   "municipio": "Bajo Maestrazgo",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.29653,
+  "lng": 0.34608
  },
  "costa-occidental": {
   "id": 33103,
@@ -3534,7 +4318,9 @@
   "d": 1426,
   "zona": "atlantico",
   "municipio": "Costa Occidental",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.19261,
+  "lng": -7.24242
  },
  "bajo-vinalopo": {
   "id": 36127,
@@ -3543,7 +4329,9 @@
   "d": 2078,
   "zona": "mediterraneo",
   "municipio": "Bajo Vinalopó",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.22464,
+  "lng": -0.51055
  },
  "castaneras": {
   "id": 32108,
@@ -3552,7 +4340,9 @@
   "d": 6486,
   "zona": "cantabrico",
   "municipio": "Castañeras",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56668,
+  "lng": -6.29614
  },
  "cudillero": {
   "id": 32107,
@@ -3561,7 +4351,9 @@
   "d": 2355,
   "zona": "cantabrico",
   "municipio": "Cudillero",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.57471,
+  "lng": -6.24888
  },
  "manon": {
   "id": 22107,
@@ -3570,7 +4362,9 @@
   "d": 3777,
   "zona": "cantabrico",
   "municipio": "Mañón",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.75134,
+  "lng": -7.69216
  },
  "ribadedeva": {
   "id": 31200,
@@ -3579,7 +4373,9 @@
   "d": 1018,
   "zona": "cantabrico",
   "municipio": "Ribadedeva",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.39427,
+  "lng": -4.5634
  },
  "oriente-de-asturias": {
   "id": 21201,
@@ -3588,7 +4384,9 @@
   "d": 3841,
   "zona": "cantabrico",
   "municipio": "Oriente de Asturias",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.41644,
+  "lng": -4.70386
  },
  "rubite": {
   "id": 35232,
@@ -3597,7 +4395,9 @@
   "d": 9974,
   "zona": "mediterraneo",
   "municipio": "Rubite",
-  "provincia": "Granada"
+  "provincia": "Granada",
+  "lat": 36.74098,
+  "lng": -3.31546
  },
  "hendaye": {
   "id": 21102,
@@ -3606,7 +4406,9 @@
   "d": 2456,
   "zona": "cantabrico",
   "municipio": "Hendaye",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.37646,
+  "lng": -1.76602
  },
  "son-servera": {
   "id": 28204,
@@ -3615,7 +4417,9 @@
   "d": 291,
   "zona": "mediterraneo",
   "municipio": "Son Servera",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.6241,
+  "lng": 3.3984
  },
  "los-barrios": {
   "id": 35107,
@@ -3624,7 +4428,9 @@
   "d": 478,
   "zona": "mediterraneo",
   "municipio": "Los Barrios",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.17485,
+  "lng": -5.428
  },
  "betanzos": {
   "id": 32157,
@@ -3633,7 +4439,9 @@
   "d": 1759,
   "zona": "cantabrico",
   "municipio": "Betanzos",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.36579,
+  "lng": -8.2113
  },
  "barcia": {
   "id": 21208,
@@ -3642,7 +4450,9 @@
   "d": 3090,
   "zona": "cantabrico",
   "municipio": "Barcia",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.54962,
+  "lng": -6.49473
  },
  "urbanizacion-novo-santi-petri": {
   "id": 33122,
@@ -3651,7 +4461,9 @@
   "d": 2803,
   "zona": "atlantico",
   "municipio": "Urbanización Novo Santi Petri",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.34308,
+  "lng": -6.1731
  },
  "vejer-de-la-frontera": {
   "id": 33124,
@@ -3660,7 +4472,9 @@
   "d": 436,
   "zona": "atlantico",
   "municipio": "Vejer de la Frontera",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.22453,
+  "lng": -6.06675
  },
  "santa-lucia-de-tirajana": {
   "id": 14240,
@@ -3669,7 +4483,9 @@
   "d": 2571,
   "zona": "canarias",
   "municipio": "Santa Lucía de Tirajana",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.83132,
+  "lng": -15.41922
  },
  "el-franco": {
   "id": 21210,
@@ -3678,7 +4494,9 @@
   "d": 9070,
   "zona": "cantabrico",
   "municipio": "El Franco",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55942,
+  "lng": -6.83451
  },
  "parque-holandes": {
   "id": 14220,
@@ -3687,7 +4505,9 @@
   "d": 9032,
   "zona": "canarias",
   "municipio": "Parque Holandés",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.57399,
+  "lng": -13.83014
  },
  "carino": {
   "id": 22108,
@@ -3696,7 +4516,9 @@
   "d": 1416,
   "zona": "cantabrico",
   "municipio": "Cariño",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.72644,
+  "lng": -7.8641
  },
  "vera": {
   "id": 36103,
@@ -3705,7 +4527,9 @@
   "d": 2415,
   "zona": "mediterraneo",
   "municipio": "Vera",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 37.20865,
+  "lng": -1.80756
  },
  "cabo-penas": {
   "id": 32100,
@@ -3714,7 +4538,9 @@
   "d": 36,
   "zona": "cantabrico",
   "municipio": "Cabo Peñas",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56933,
+  "lng": -5.71598
  },
  "carreno": {
   "id": 32101,
@@ -3723,7 +4549,9 @@
   "d": 1156,
   "zona": "cantabrico",
   "municipio": "Carreño",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.58244,
+  "lng": -5.74811
  },
  "mataro": {
   "id": 27117,
@@ -3732,7 +4560,9 @@
   "d": 865,
   "zona": "mediterraneo",
   "municipio": "Mataró",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.53815,
+  "lng": 2.45528
  },
  "el-masnou": {
   "id": 27114,
@@ -3741,7 +4571,9 @@
   "d": 453,
   "zona": "mediterraneo",
   "municipio": "El Masnou",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.47854,
+  "lng": 2.32139
  },
  "espasante": {
   "id": 32141,
@@ -3750,7 +4582,9 @@
   "d": 1144,
   "zona": "cantabrico",
   "municipio": "Espasante",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.71283,
+  "lng": -7.82202
  },
  "o-rosal": {
   "id": 22211,
@@ -3759,7 +4593,9 @@
   "d": 8623,
   "zona": "atlantico",
   "municipio": "O Rosal",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 41.92467,
+  "lng": -8.77794
  },
  "muskiz": {
   "id": 31117,
@@ -3768,7 +4604,9 @@
   "d": 55,
   "zona": "cantabrico",
   "municipio": "Muskiz",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.34651,
+  "lng": -3.11911
  },
  "levante-almeriense": {
   "id": 15250,
@@ -3777,7 +4615,9 @@
   "d": 2745,
   "zona": "mediterraneo",
   "municipio": "Levante Almeriense",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.9422,
+  "lng": -1.90883
  },
  "brena-baja": {
   "id": 14110,
@@ -3786,7 +4626,9 @@
   "d": 1996,
   "zona": "canarias",
   "municipio": "Breña Baja",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.6576,
+  "lng": -17.76198
  },
  "alfoz-de-lloredo": {
   "id": 21123,
@@ -3795,7 +4637,9 @@
   "d": 5577,
   "zona": "cantabrico",
   "municipio": "Alfoz de Lloredo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.39411,
+  "lng": -4.22111
  },
  "bajo-deba": {
   "id": 21108,
@@ -3804,7 +4648,9 @@
   "d": 2783,
   "zona": "cantabrico",
   "municipio": "Bajo Deba",
-  "provincia": "Gipuzkoa"
+  "provincia": "Gipuzkoa",
+  "lat": 43.29659,
+  "lng": -2.31766
  },
  "mourin": {
   "id": 22114,
@@ -3813,7 +4659,9 @@
   "d": 4045,
   "zona": "cantabrico",
   "municipio": "Mourín",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.16537,
+  "lng": -9.18248
  },
  "tierra-de-soneira": {
   "id": 22114,
@@ -3822,7 +4670,9 @@
   "d": 3515,
   "zona": "cantabrico",
   "municipio": "Tierra de Soneira",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.1603,
+  "lng": -9.18709
  },
  "el-pinar-de-el-hierro": {
   "id": 24120,
@@ -3831,7 +4681,9 @@
   "d": 151,
   "zona": "canarias",
   "municipio": "El Pinar de El Hierro",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 27.64083,
+  "lng": -17.98021
  },
  "san-jose": {
   "id": 35245,
@@ -3840,7 +4692,9 @@
   "d": 609,
   "zona": "mediterraneo",
   "municipio": "San José",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.74013,
+  "lng": -2.12784
  },
  "la-isleta": {
   "id": 25218,
@@ -3849,7 +4703,9 @@
   "d": 5834,
   "zona": "mediterraneo",
   "municipio": "La Isleta",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.79663,
+  "lng": -2.06235
  },
  "santa-cruz-de-la-palma": {
   "id": 14110,
@@ -3858,7 +4714,9 @@
   "d": 1096,
   "zona": "canarias",
   "municipio": "Santa Cruz de la Palma",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.684,
+  "lng": -17.76242
  },
  "valldemossa": {
   "id": 28106,
@@ -3867,7 +4725,9 @@
   "d": 5666,
   "zona": "mediterraneo",
   "municipio": "Valldemossa",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.71059,
+  "lng": 2.57459
  },
  "la-manga": {
   "id": 26105,
@@ -3876,7 +4736,9 @@
   "d": 8720,
   "zona": "mediterraneo",
   "municipio": "La Manga",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.69211,
+  "lng": -0.7651
  },
  "comarca-de-la-sidra": {
   "id": 31210,
@@ -3885,7 +4747,9 @@
   "d": 3827,
   "zona": "cantabrico",
   "municipio": "Comarca de la Sidra",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.53265,
+  "lng": -5.30875
  },
  "niembru": {
   "id": 31204,
@@ -3894,7 +4758,9 @@
   "d": 2683,
   "zona": "cantabrico",
   "municipio": "Niembru",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.44409,
+  "lng": -4.85776
  },
  "paderne": {
   "id": 32157,
@@ -3903,7 +4769,9 @@
   "d": 1367,
   "zona": "cantabrico",
   "municipio": "Paderne",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.33772,
+  "lng": -8.20899
  },
  "malpaises": {
   "id": 24122,
@@ -3912,7 +4780,9 @@
   "d": 10235,
   "zona": "canarias",
   "municipio": "Malpaises",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.55771,
+  "lng": -17.77134
  },
  "badalona": {
   "id": 27113,
@@ -3921,7 +4791,9 @@
   "d": 716,
   "zona": "mediterraneo",
   "municipio": "Badalona",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.44408,
+  "lng": 2.25038
  },
  "es-grau": {
   "id": 38235,
@@ -3930,7 +4802,9 @@
   "d": 1729,
   "zona": "mediterraneo",
   "municipio": "Es Grau",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.96366,
+  "lng": 4.2747
  },
  "la-caridad": {
   "id": 21210,
@@ -3939,7 +4813,9 @@
   "d": 7806,
   "zona": "cantabrico",
   "municipio": "La Caridad",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55939,
+  "lng": -6.81851
  },
  "begur": {
   "id": 27130,
@@ -3948,7 +4824,9 @@
   "d": 1647,
   "zona": "mediterraneo",
   "municipio": "Begur",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.95628,
+  "lng": 3.2178
  },
  "chilchesxilxes": {
   "id": 36236,
@@ -3957,7 +4835,9 @@
   "d": 197,
   "zona": "mediterraneo",
   "municipio": "Chilches/Xilxes",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.76633,
+  "lng": -0.15575
  },
  "ceuta": {
   "id": 15130,
@@ -3966,7 +4846,9 @@
   "d": 1435,
   "zona": "mediterraneo",
   "municipio": "Ceuta",
-  "provincia": "Ceuta"
+  "provincia": "Ceuta",
+  "lat": 35.89451,
+  "lng": -5.33142
  },
  "castropol": {
   "id": 22101,
@@ -3975,7 +4857,9 @@
   "d": 1168,
   "zona": "cantabrico",
   "municipio": "Castropol",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.54597,
+  "lng": -7.02623
  },
  "las-cortinas": {
   "id": 32111,
@@ -3984,7 +4868,9 @@
   "d": 465,
   "zona": "cantabrico",
   "municipio": "Las Cortinas",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56113,
+  "lng": -6.69655
  },
  "axarquia": {
   "id": 35228,
@@ -3993,7 +4879,9 @@
   "d": 4010,
   "zona": "mediterraneo",
   "municipio": "Axarquía",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.74164,
+  "lng": -3.78598
  },
  "llano-de-mallorca": {
   "id": 38219,
@@ -4002,7 +4890,9 @@
   "d": 471,
   "zona": "mediterraneo",
   "municipio": "Llano de Mallorca",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.75759,
+  "lng": 3.1752
  },
  "playa-de-tasarte": {
   "id": 34210,
@@ -4011,7 +4901,9 @@
   "d": 7848,
   "zona": "canarias",
   "municipio": "Playa de Tasarte",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.87637,
+  "lng": -15.80889
  },
  "tasartico": {
   "id": 34210,
@@ -4020,7 +4912,9 @@
   "d": 11385,
   "zona": "canarias",
   "municipio": "Tasartico",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.90401,
+  "lng": -15.82684
  },
  "barakaldo": {
   "id": 21117,
@@ -4029,7 +4923,9 @@
   "d": 6673,
   "zona": "cantabrico",
   "municipio": "Barakaldo",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.30055,
+  "lng": -2.97972
  },
  "zierbena": {
   "id": 31117,
@@ -4038,7 +4934,9 @@
   "d": 1336,
   "zona": "cantabrico",
   "municipio": "Zierbena",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.35305,
+  "lng": -3.10473
  },
  "torredembarra": {
   "id": 27106,
@@ -4047,7 +4945,9 @@
   "d": 1894,
   "zona": "mediterraneo",
   "municipio": "Torredembarra",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.14636,
+  "lng": 1.41989
  },
  "tuineje": {
   "id": 24216,
@@ -4056,7 +4956,9 @@
   "d": 2488,
   "zona": "canarias",
   "municipio": "Tuineje",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.20733,
+  "lng": -14.04683
  },
  "ispaster": {
   "id": 21111,
@@ -4065,7 +4967,9 @@
   "d": 3718,
   "zona": "cantabrico",
   "municipio": "Ispaster",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.37296,
+  "lng": -2.54499
  },
  "gautegiz-arteaga": {
   "id": 21112,
@@ -4074,7 +4978,9 @@
   "d": 3092,
   "zona": "cantabrico",
   "municipio": "Gautegiz Arteaga",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.38313,
+  "lng": -2.6799
  },
  "eume": {
   "id": 32154,
@@ -4083,7 +4989,9 @@
   "d": 11847,
   "zona": "cantabrico",
   "municipio": "Eume",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.43918,
+  "lng": -8.02823
  },
  "lepe": {
   "id": 33103,
@@ -4092,7 +5000,9 @@
   "d": 3108,
   "zona": "atlantico",
   "municipio": "Lepe",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.20576,
+  "lng": -7.19997
  },
  "tiran": {
   "id": 12230,
@@ -4101,7 +5011,9 @@
   "d": 3708,
   "zona": "atlantico",
   "municipio": "Tirán",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.2693,
+  "lng": -8.74629
  },
  "pilar-de-la-horadada": {
   "id": 36111,
@@ -4110,7 +5022,9 @@
   "d": 776,
   "zona": "mediterraneo",
   "municipio": "Pilar de la Horadada",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 37.86673,
+  "lng": -0.75788
  },
  "plana-alta": {
   "id": 16240,
@@ -4119,7 +5033,9 @@
   "d": 5972,
   "zona": "mediterraneo",
   "municipio": "Plana Alta",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.91216,
+  "lng": -0.00885
  },
  "el-poble-nou-de-benitatxellbenitachell": {
   "id": 36161,
@@ -4128,7 +5044,9 @@
   "d": 3500,
   "zona": "mediterraneo",
   "municipio": "el Poble Nou de Benitatxell/Benitachell",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.71211,
+  "lng": 0.17131
  },
  "mojacar": {
   "id": 26101,
@@ -4137,7 +5055,9 @@
   "d": 3346,
   "zona": "mediterraneo",
   "municipio": "Mojácar",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 37.1074,
+  "lng": -1.84071
  },
  "las-rosas": {
   "id": 24116,
@@ -4146,7 +5066,9 @@
   "d": 4193,
   "zona": "canarias",
   "municipio": "Las Rosas",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.20055,
+  "lng": -17.23335
  },
  "agulo": {
   "id": 24116,
@@ -4155,7 +5077,9 @@
   "d": 721,
   "zona": "canarias",
   "municipio": "Agulo",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.19448,
+  "lng": -17.19324
  },
  "outes": {
   "id": 32206,
@@ -4164,7 +5088,9 @@
   "d": 7031,
   "zona": "atlantico",
   "municipio": "Outes",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.79898,
+  "lng": -8.93994
  },
  "antoncojo": {
   "id": 34104,
@@ -4173,7 +5099,9 @@
   "d": 3824,
   "zona": "canarias",
   "municipio": "Antoncojo",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.02459,
+  "lng": -17.23464
  },
  "taguluche": {
   "id": 24115,
@@ -4182,7 +5110,9 @@
   "d": 4571,
   "zona": "canarias",
   "municipio": "Taguluche",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.12679,
+  "lng": -17.34278
  },
  "arguamul": {
   "id": 24116,
@@ -4191,7 +5121,9 @@
   "d": 10072,
   "zona": "canarias",
   "municipio": "Arguamul",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.20815,
+  "lng": -17.29321
  },
  "adra": {
   "id": 25212,
@@ -4200,7 +5132,9 @@
   "d": 422,
   "zona": "mediterraneo",
   "municipio": "Adra",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.74477,
+  "lng": -3.02684
  },
  "combarro": {
   "id": 12220,
@@ -4209,7 +5143,9 @@
   "d": 1299,
   "zona": "atlantico",
   "municipio": "Combarro",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.41086,
+  "lng": -8.70581
  },
  "la-franca": {
   "id": 31200,
@@ -4218,7 +5154,9 @@
   "d": 384,
   "zona": "cantabrico",
   "municipio": "La Franca",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.39416,
+  "lng": -4.57125
  },
  "somo": {
   "id": 31126,
@@ -4227,7 +5165,9 @@
   "d": 245,
   "zona": "cantabrico",
   "municipio": "Somo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.45945,
+  "lng": -3.73571
  },
  "salinas": {
   "id": 11220,
@@ -4236,7 +5176,9 @@
   "d": 636,
   "zona": "cantabrico",
   "municipio": "Salinas",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.58429,
+  "lng": -5.95359
  },
  "ballota": {
   "id": 32108,
@@ -4245,7 +5187,9 @@
   "d": 3757,
   "zona": "cantabrico",
   "municipio": "Ballota",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56072,
+  "lng": -6.32905
  },
  "ferrero": {
   "id": 11220,
@@ -4254,7 +5198,9 @@
   "d": 8474,
   "zona": "cantabrico",
   "municipio": "Ferrero",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.63227,
+  "lng": -5.86641
  },
  "el-rompido": {
   "id": 33103,
@@ -4263,7 +5209,9 @@
   "d": 7384,
   "zona": "atlantico",
   "municipio": "El Rompido",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.20727,
+  "lng": -7.15173
  },
  "daimus": {
   "id": 16210,
@@ -4272,7 +5220,9 @@
   "d": 2198,
   "zona": "mediterraneo",
   "municipio": "Daimús",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 38.97696,
+  "lng": -0.1416
  },
  "bellreguard": {
   "id": 36209,
@@ -4281,7 +5231,9 @@
   "d": 361,
   "zona": "mediterraneo",
   "municipio": "Bellreguard",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 38.9633,
+  "lng": -0.12869
  },
  "miramar": {
   "id": 36209,
@@ -4290,7 +5242,9 @@
   "d": 1469,
   "zona": "mediterraneo",
   "municipio": "Miramar",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 38.95538,
+  "lng": -0.12088
  },
  "piles": {
   "id": 36207,
@@ -4299,7 +5253,9 @@
   "d": 159,
   "zona": "mediterraneo",
   "municipio": "Piles",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 38.94791,
+  "lng": -0.1128
  },
  "san-cristobal": {
   "id": 32153,
@@ -4308,7 +5264,9 @@
   "d": 1435,
   "zona": "cantabrico",
   "municipio": "San Cristóbal",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.4559,
+  "lng": -8.29159
  },
  "mar-menor": {
   "id": 26110,
@@ -4317,7 +5275,9 @@
   "d": 11295,
   "zona": "mediterraneo",
   "municipio": "Mar Menor",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.79849,
+  "lng": -0.75271
  },
  "el-mojon": {
   "id": 26110,
@@ -4326,7 +5286,9 @@
   "d": 7472,
   "zona": "mediterraneo",
   "municipio": "El Mojón",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.83348,
+  "lng": -0.76003
  },
  "la-coruna": {
   "id": 12140,
@@ -4335,7 +5297,9 @@
   "d": 3632,
   "zona": "cantabrico",
   "municipio": "La Coruña",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.32104,
+  "lng": -8.52476
  },
  "campo-de-alicante": {
   "id": 16130,
@@ -4344,7 +5308,9 @@
   "d": 871,
   "zona": "mediterraneo",
   "municipio": "Campo de Alicante",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.32007,
+  "lng": -0.51318
  },
  "santona": {
   "id": 21120,
@@ -4353,7 +5319,9 @@
   "d": 824,
   "zona": "cantabrico",
   "municipio": "Santoña",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.44757,
+  "lng": -3.45573
  },
  "lemoiz": {
   "id": 21114,
@@ -4362,7 +5330,9 @@
   "d": 5238,
   "zona": "cantabrico",
   "municipio": "Lemoiz",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.43269,
+  "lng": -2.89343
  },
  "ovinana": {
   "id": 32107,
@@ -4371,7 +5341,9 @@
   "d": 1976,
   "zona": "cantabrico",
   "municipio": "Oviñana",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.58555,
+  "lng": -6.24221
  },
  "suegos": {
   "id": 22105,
@@ -4380,7 +5352,9 @@
   "d": 2110,
   "zona": "cantabrico",
   "municipio": "Suegos",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.69859,
+  "lng": -7.60584
  },
  "santillan": {
   "id": 21124,
@@ -4389,7 +5363,9 @@
   "d": 2844,
   "zona": "cantabrico",
   "municipio": "Santillán",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.39295,
+  "lng": -4.43145
  },
  "ruiloba": {
   "id": 21123,
@@ -4398,7 +5374,9 @@
   "d": 2016,
   "zona": "cantabrico",
   "municipio": "Ruiloba",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.39163,
+  "lng": -4.26507
  },
  "roche": {
   "id": 33122,
@@ -4407,7 +5385,9 @@
   "d": 2359,
   "zona": "atlantico",
   "municipio": "Roche",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.30174,
+  "lng": -6.14696
  },
  "deia": {
   "id": 28108,
@@ -4416,7 +5396,9 @@
   "d": 4815,
   "zona": "mediterraneo",
   "municipio": "Deià",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.76741,
+  "lng": 2.65312
  },
  "port-dalcudia": {
   "id": 18210,
@@ -4425,7 +5407,9 @@
   "d": 3259,
   "zona": "mediterraneo",
   "municipio": "Port d'Alcúdia",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.84005,
+  "lng": 3.17497
  },
  "tinizara": {
   "id": 24126,
@@ -4434,7 +5418,9 @@
   "d": 10914,
   "zona": "canarias",
   "municipio": "Tinizara",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.74,
+  "lng": -17.99167
  },
  "lujar": {
   "id": 35232,
@@ -4443,7 +5429,9 @@
   "d": 6811,
   "zona": "mediterraneo",
   "municipio": "Lújar",
-  "provincia": "Granada"
+  "provincia": "Granada",
+  "lat": 36.73126,
+  "lng": -3.34928
  },
  "ons": {
   "id": 32228,
@@ -4452,7 +5440,9 @@
   "d": 9079,
   "zona": "atlantico",
   "municipio": "Ons",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.38282,
+  "lng": -8.94177
  },
  "costa-de-antigua": {
   "id": 24217,
@@ -4461,7 +5451,9 @@
   "d": 3120,
   "zona": "canarias",
   "municipio": "Costa de Antigua",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.42494,
+  "lng": -13.85788
  },
  "malpica": {
   "id": 22113,
@@ -4470,7 +5462,9 @@
   "d": 4475,
   "zona": "cantabrico",
   "municipio": "Malpica",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.35829,
+  "lng": -8.83697
  },
  "vicedo": {
   "id": 22106,
@@ -4479,7 +5473,9 @@
   "d": 1684,
   "zona": "cantabrico",
   "municipio": "Vicedo",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.74607,
+  "lng": -7.69031
  },
  "noja": {
   "id": 31124,
@@ -4488,7 +5484,9 @@
   "d": 2196,
   "zona": "cantabrico",
   "municipio": "Noja",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.48765,
+  "lng": -3.52075
  },
  "tagle": {
   "id": 21122,
@@ -4497,7 +5495,9 @@
   "d": 3069,
   "zona": "cantabrico",
   "municipio": "Tagle",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.43387,
+  "lng": -4.08173
  },
  "santillana-del-mar": {
   "id": 21122,
@@ -4506,7 +5506,9 @@
   "d": 4686,
   "zona": "cantabrico",
   "municipio": "Santillana del Mar",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.42468,
+  "lng": -4.0985
  },
  "quinteiro": {
   "id": 22118,
@@ -4515,7 +5517,9 @@
   "d": 5168,
   "zona": "atlantico",
   "municipio": "Quinteiro",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.66214,
+  "lng": -8.84205
  },
  "salvora": {
   "id": 32210,
@@ -4524,7 +5528,9 @@
   "d": 8478,
   "zona": "atlantico",
   "municipio": "Sálvora",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.47813,
+  "lng": -9.01147
  },
  "salamir": {
   "id": 32106,
@@ -4533,7 +5539,9 @@
   "d": 1637,
   "zona": "cantabrico",
   "municipio": "Salamir",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.57859,
+  "lng": -6.19071
  },
  "aldea-leiro": {
   "id": 12110,
@@ -4542,7 +5550,9 @@
   "d": 4462,
   "zona": "cantabrico",
   "municipio": "Aldea Leiro",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.43495,
+  "lng": -8.27728
  },
  "quilmas": {
   "id": 32204,
@@ -4551,7 +5561,9 @@
   "d": 6592,
   "zona": "atlantico",
   "municipio": "Quilmas",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.87111,
+  "lng": -9.16677
  },
  "o-pindo": {
   "id": 32203,
@@ -4560,7 +5572,9 @@
   "d": 2013,
   "zona": "atlantico",
   "municipio": "O Pindo",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.894,
+  "lng": -9.14157
  },
  "canada-de-gallego": {
   "id": 26103,
@@ -4569,7 +5583,9 @@
   "d": 9058,
   "zona": "mediterraneo",
   "municipio": "Cañada de Gallego",
-  "provincia": "Murcia"
+  "provincia": "Murcia",
+  "lat": 37.54748,
+  "lng": -1.35911
  },
  "costacabana": {
   "id": 25216,
@@ -4578,7 +5594,9 @@
   "d": 9267,
   "zona": "mediterraneo",
   "municipio": "Costacabana",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.84019,
+  "lng": -2.36387
  },
  "corralejo": {
   "id": 24211,
@@ -4587,7 +5605,9 @@
   "d": 1631,
   "zona": "canarias",
   "municipio": "Corralejo",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.72709,
+  "lng": -13.85683
  },
  "majanicho": {
   "id": 24211,
@@ -4596,7 +5616,9 @@
   "d": 7968,
   "zona": "canarias",
   "municipio": "Majanicho",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.74029,
+  "lng": -13.94968
  },
  "los-lagos": {
   "id": 24212,
@@ -4605,7 +5627,9 @@
   "d": 3028,
   "zona": "canarias",
   "municipio": "Los Lagos",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.70993,
+  "lng": -14.01666
  },
  "la-marina": {
   "id": 36123,
@@ -4614,7 +5638,9 @@
   "d": 1332,
   "zona": "mediterraneo",
   "municipio": "La Marina",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.1325,
+  "lng": -0.63823
  },
  "cala-galdana": {
   "id": 38233,
@@ -4623,7 +5649,9 @@
   "d": 1009,
   "zona": "mediterraneo",
   "municipio": "Cala Galdana",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.93375,
+  "lng": 3.97046
  },
  "malgrat-de-mar": {
   "id": 37204,
@@ -4632,7 +5660,9 @@
   "d": 657,
   "zona": "mediterraneo",
   "municipio": "Malgrat de Mar",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.64329,
+  "lng": 2.75172
  },
  "castrexe": {
   "id": 32200,
@@ -4641,7 +5671,9 @@
   "d": 958,
   "zona": "atlantico",
   "municipio": "Castrexe",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.97496,
+  "lng": -9.2595
  },
  "las-playitas": {
   "id": 34213,
@@ -4650,7 +5682,9 @@
   "d": 4681,
   "zona": "canarias",
   "municipio": "Las Playitas",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.24114,
+  "lng": -13.94261
  },
  "cartaya": {
   "id": 33104,
@@ -4659,7 +5693,9 @@
   "d": 6164,
   "zona": "atlantico",
   "municipio": "Cartaya",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.21575,
+  "lng": -7.10328
  },
  "matalascanas": {
   "id": 23104,
@@ -4668,7 +5704,9 @@
   "d": 9251,
   "zona": "atlantico",
   "municipio": "Matalascañas",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 36.94224,
+  "lng": -6.48428
  },
  "salmudaina": {
   "id": 38236,
@@ -4677,7 +5715,9 @@
   "d": 9567,
   "zona": "mediterraneo",
   "municipio": "S'Almudaina",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 40.05547,
+  "lng": 3.99061
  },
  "chiclana-de-la-frontera": {
   "id": 33121,
@@ -4686,7 +5726,9 @@
   "d": 3243,
   "zona": "atlantico",
   "municipio": "Chiclana de la Frontera",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.39277,
+  "lng": -6.21017
  },
  "lalfas-del-pi": {
   "id": 36154,
@@ -4695,7 +5737,9 @@
   "d": 799,
   "zona": "mediterraneo",
   "municipio": "L'Alfàs del Pi",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.56974,
+  "lng": -0.05948
  },
  "tamaduste": {
   "id": 24118,
@@ -4704,7 +5748,9 @@
   "d": 1351,
   "zona": "canarias",
   "municipio": "Tamaduste",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 27.83611,
+  "lng": -17.89955
  },
  "colonia-de-sant-jordi": {
   "id": 28111,
@@ -4713,7 +5759,9 @@
   "d": 8337,
   "zona": "mediterraneo",
   "municipio": "Colònia de Sant Jordi",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.31216,
+  "lng": 3.00977
  },
  "busto": {
   "id": 21208,
@@ -4722,7 +5770,9 @@
   "d": 6208,
   "zona": "cantabrico",
   "municipio": "Busto",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56475,
+  "lng": -6.45951
  },
  "el-pinar": {
   "id": 24120,
@@ -4731,7 +5781,9 @@
   "d": 3426,
   "zona": "canarias",
   "municipio": "El Pinar",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 27.67024,
+  "lng": -17.97233
  },
  "albuerne": {
   "id": 32107,
@@ -4740,7 +5792,9 @@
   "d": 3873,
   "zona": "cantabrico",
   "municipio": "Albuerne",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.57715,
+  "lng": -6.26806
  },
  "villar": {
   "id": 31211,
@@ -4749,7 +5803,9 @@
   "d": 1121,
   "zona": "cantabrico",
   "municipio": "Villar",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.53315,
+  "lng": -5.36514
  },
  "taibique": {
   "id": 24120,
@@ -4758,7 +5814,9 @@
   "d": 5649,
   "zona": "canarias",
   "municipio": "Taibique",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 27.68918,
+  "lng": -17.96461
  },
  "tabaibales": {
   "id": 34210,
@@ -4767,7 +5825,9 @@
   "d": 4908,
   "zona": "canarias",
   "municipio": "Tabaibales",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.85198,
+  "lng": -15.79586
  },
  "santa-maria-de-guia-de-gran-canaria": {
   "id": 24209,
@@ -4776,7 +5836,9 @@
   "d": 4764,
   "zona": "canarias",
   "municipio": "Santa María de Guía de Gran Canaria",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.14431,
+  "lng": -15.59955
  },
  "soto-del-barco": {
   "id": 32105,
@@ -4785,7 +5847,9 @@
   "d": 3263,
   "zona": "cantabrico",
   "municipio": "Soto del Barco",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55142,
+  "lng": -6.07781
  },
  "el-pozuelo": {
   "id": 25212,
@@ -4794,7 +5858,9 @@
   "d": 10531,
   "zona": "mediterraneo",
   "municipio": "El Pozuelo",
-  "provincia": "Granada"
+  "provincia": "Granada",
+  "lat": 36.74663,
+  "lng": -3.14119
  },
  "chozas-de-la-poleosa": {
   "id": 23104,
@@ -4803,7 +5869,9 @@
   "d": 9409,
   "zona": "atlantico",
   "municipio": "Chozas de la Poleosa",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.0484,
+  "lng": -6.64579
  },
  "morro-jable": {
   "id": 24213,
@@ -4812,7 +5880,9 @@
   "d": 1360,
   "zona": "canarias",
   "municipio": "Morro Jable",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.0535,
+  "lng": -14.36756
  },
  "caldebarcos": {
   "id": 32204,
@@ -4821,7 +5891,9 @@
   "d": 1229,
   "zona": "atlantico",
   "municipio": "Caldebarcos",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.8427,
+  "lng": -9.10978
  },
  "vilar": {
   "id": 32204,
@@ -4830,7 +5902,9 @@
   "d": 853,
   "zona": "atlantico",
   "municipio": "Vilar",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.82453,
+  "lng": -9.10839
  },
  "san-andres-de-teixido": {
   "id": 22108,
@@ -4839,7 +5913,9 @@
   "d": 7938,
   "zona": "cantabrico",
   "municipio": "San Andrés de Teixido",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.72178,
+  "lng": -7.96287
  },
  "caserio-marzagon": {
   "id": 33106,
@@ -4848,7 +5924,9 @@
   "d": 7126,
   "zona": "atlantico",
   "municipio": "Caserío Marzagón",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.09197,
+  "lng": -6.7324
  },
  "sestany-den-mas": {
   "id": 38208,
@@ -4857,7 +5935,9 @@
   "d": 3297,
   "zona": "mediterraneo",
   "municipio": "S'Estany den Mas",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.49832,
+  "lng": 3.2967
  },
  "lescala": {
   "id": 27132,
@@ -4866,7 +5946,9 @@
   "d": 273,
   "zona": "mediterraneo",
   "municipio": "L'Escala",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.12305,
+  "lng": 3.13906
  },
  "el-arteal": {
   "id": 36103,
@@ -4875,7 +5957,9 @@
   "d": 11424,
   "zona": "mediterraneo",
   "municipio": "El Arteal",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 37.27408,
+  "lng": -1.74555
  },
  "cartavio": {
   "id": 21210,
@@ -4884,7 +5968,9 @@
   "d": 5813,
   "zona": "cantabrico",
   "municipio": "Cartavio",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.55708,
+  "lng": -6.79384
  },
  "loza": {
   "id": 21210,
@@ -4893,7 +5979,9 @@
   "d": 4968,
   "zona": "cantabrico",
   "municipio": "Loza",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.56492,
+  "lng": -6.77847
  },
  "tomino": {
   "id": 22211,
@@ -4902,7 +5990,9 @@
   "d": 11186,
   "zona": "atlantico",
   "municipio": "Tomiño",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 41.93977,
+  "lng": -8.75215
  },
  "san-juan-de-la-rambla": {
   "id": 24105,
@@ -4911,7 +6001,9 @@
   "d": 598,
   "zona": "canarias",
   "municipio": "San Juan de la Rambla",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.39502,
+  "lng": -16.64389
  },
  "sant-francesc-de-sestany": {
   "id": 38129,
@@ -4920,7 +6012,9 @@
   "d": 1518,
   "zona": "mediterraneo",
   "municipio": "Sant Francesc de s'Estany",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 38.86521,
+  "lng": 1.35236
  },
  "port-de-sant-miquel": {
   "id": 38123,
@@ -4929,7 +6023,9 @@
   "d": 3756,
   "zona": "mediterraneo",
   "municipio": "Port de Sant Miquel",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.0744,
+  "lng": 1.39809
  },
  "areos": {
   "id": 32215,
@@ -4938,7 +6034,9 @@
   "d": 2476,
   "zona": "atlantico",
   "municipio": "Areos",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.5938,
+  "lng": -8.92122
  },
  "barranco-de-santiago": {
   "id": 34104,
@@ -4947,7 +6045,9 @@
   "d": 3178,
   "zona": "canarias",
   "municipio": "Barranco de Santiago",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.04262,
+  "lng": -17.16754
  },
  "catoira": {
   "id": 12210,
@@ -4956,7 +6056,9 @@
   "d": 9039,
   "zona": "atlantico",
   "municipio": "Catoira",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.67169,
+  "lng": -8.72892
  },
  "guardamar-de-la-safor": {
   "id": 36209,
@@ -4965,7 +6067,9 @@
   "d": 490,
   "zona": "mediterraneo",
   "municipio": "Guardamar de la Safor",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 38.96934,
+  "lng": -0.1347
  },
  "la-lajita": {
   "id": 24215,
@@ -4974,7 +6078,9 @@
   "d": 4289,
   "zona": "canarias",
   "municipio": "La Lajita",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.17984,
+  "lng": -14.15714
  },
  "o-campanario": {
   "id": 22116,
@@ -4983,7 +6089,9 @@
   "d": 3746,
   "zona": "atlantico",
   "municipio": "O Campanario",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.69754,
+  "lng": -9.02922
  },
  "redonda": {
   "id": 32202,
@@ -4992,7 +6100,9 @@
   "d": 1757,
   "zona": "atlantico",
   "municipio": "Redonda",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.92915,
+  "lng": -9.20861
  },
  "lira": {
   "id": 32204,
@@ -5001,7 +6111,9 @@
   "d": 4547,
   "zona": "atlantico",
   "municipio": "Lira",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.80196,
+  "lng": -9.14381
  },
  "poblat-talaiotic-de-sa-torreta": {
   "id": 28209,
@@ -5010,7 +6122,9 @@
   "d": 5359,
   "zona": "mediterraneo",
   "municipio": "Poblat talaiòtic de Sa Torreta",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.99219,
+  "lng": 4.25495
  },
  "son-xoriguer": {
   "id": 38232,
@@ -5019,7 +6133,9 @@
   "d": 2076,
   "zona": "mediterraneo",
   "municipio": "Son Xoriguer",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.92309,
+  "lng": 3.86604
  },
  "torre-saura": {
   "id": 38232,
@@ -5028,7 +6144,9 @@
   "d": 4485,
   "zona": "mediterraneo",
   "municipio": "Torre Saura",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.92588,
+  "lng": 3.8946
  },
  "o-barral": {
   "id": 22109,
@@ -5037,7 +6155,9 @@
   "d": 1698,
   "zona": "cantabrico",
   "municipio": "O Barral",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.64691,
+  "lng": -8.06888
  },
  "tabarca": {
   "id": 26113,
@@ -5046,7 +6166,9 @@
   "d": 8363,
   "zona": "mediterraneo",
   "municipio": "Tabarca",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.16285,
+  "lng": -0.46778
  },
  "plentzia": {
   "id": 21114,
@@ -5055,7 +6177,9 @@
   "d": 355,
   "zona": "cantabrico",
   "municipio": "Plentzia",
-  "provincia": "Bizkaia"
+  "provincia": "Bizkaia",
+  "lat": 43.41104,
+  "lng": -2.9466
  },
  "candelago": {
   "id": 32173,
@@ -5064,7 +6188,9 @@
   "d": 5843,
   "zona": "cantabrico",
   "municipio": "Candelago",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.26883,
+  "lng": -8.98271
  },
  "borrianaburriana": {
   "id": 26207,
@@ -5073,7 +6199,9 @@
   "d": 2834,
   "zona": "mediterraneo",
   "municipio": "Borriana/Burriana",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.8574,
+  "lng": -0.07769
  },
  "llanca": {
   "id": 27135,
@@ -5082,7 +6210,9 @@
   "d": 685,
   "zona": "mediterraneo",
   "municipio": "Llançà",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.37449,
+  "lng": 3.16123
  },
  "celtigos": {
   "id": 32141,
@@ -5091,7 +6221,9 @@
   "d": 2688,
   "zona": "cantabrico",
   "municipio": "Céltigos",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.73315,
+  "lng": -7.7841
  },
  "camposoto": {
   "id": 33120,
@@ -5100,7 +6232,9 @@
   "d": 197,
   "zona": "atlantico",
   "municipio": "Camposoto",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.43923,
+  "lng": -6.23813
  },
  "prellezo": {
   "id": 21124,
@@ -5109,7 +6243,9 @@
   "d": 3469,
   "zona": "cantabrico",
   "municipio": "Prellezo",
-  "provincia": "Cantabria"
+  "provincia": "Cantabria",
+  "lat": 43.39361,
+  "lng": -4.43925
  },
  "santa-cristina-daro": {
   "id": 27126,
@@ -5118,7 +6254,9 @@
   "d": 5419,
   "zona": "mediterraneo",
   "municipio": "Santa Cristina d'Aro",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.75699,
+  "lng": 2.9777
  },
  "los-canos-de-meca": {
   "id": 33125,
@@ -5127,7 +6265,9 @@
   "d": 3574,
   "zona": "atlantico",
   "municipio": "Los Caños de Meca",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.17916,
+  "lng": -5.99009
  },
  "vilacha": {
   "id": 32134,
@@ -5136,7 +6276,9 @@
   "d": 2828,
   "zona": "cantabrico",
   "municipio": "Vilachá",
-  "provincia": "Lugo"
+  "provincia": "Lugo",
+  "lat": 43.72874,
+  "lng": -7.53379
  },
  "cambre": {
   "id": 32167,
@@ -5145,7 +6287,9 @@
   "d": 1131,
   "zona": "cantabrico",
   "municipio": "Cambre",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.3076,
+  "lng": -8.56661
  },
  "monte-de-luna": {
   "id": 24123,
@@ -5154,7 +6298,9 @@
   "d": 8009,
   "zona": "canarias",
   "municipio": "Monte de Luna",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.51876,
+  "lng": -17.79852
  },
  "las-brenas": {
   "id": 24220,
@@ -5163,7 +6309,9 @@
   "d": 7104,
   "zona": "canarias",
   "municipio": "Las Breñas",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.91717,
+  "lng": -13.84217
  },
  "la-guancha": {
   "id": 24105,
@@ -5172,7 +6320,9 @@
   "d": 2492,
   "zona": "canarias",
   "municipio": "La Guancha",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.3945,
+  "lng": -16.67546
  },
  "es-port": {
   "id": 28106,
@@ -5181,7 +6331,9 @@
   "d": 7726,
   "zona": "mediterraneo",
   "municipio": "Es Port",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.64604,
+  "lng": 2.4441
  },
  "agua-de-enmedio": {
   "id": 25219,
@@ -5190,7 +6342,9 @@
   "d": 8518,
   "zona": "mediterraneo",
   "municipio": "Agua de Enmedio",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 37.06557,
+  "lng": -1.85483
  },
  "garrucha": {
   "id": 36103,
@@ -5199,7 +6353,9 @@
   "d": 1220,
   "zona": "mediterraneo",
   "municipio": "Garrucha",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 37.17786,
+  "lng": -1.82128
  },
  "costa-del-silencio": {
   "id": 24110,
@@ -5208,7 +6364,9 @@
   "d": 2003,
   "zona": "canarias",
   "municipio": "Costa del Silencio",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.00939,
+  "lng": -16.63478
  },
  "calvelo": {
   "id": 22207,
@@ -5217,7 +6375,9 @@
   "d": 6619,
   "zona": "atlantico",
   "municipio": "Calvelo",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.45865,
+  "lng": -8.57457
  },
  "canelinas": {
   "id": 32203,
@@ -5226,7 +6386,9 @@
   "d": 2923,
   "zona": "atlantico",
   "municipio": "Caneliñas",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.9206,
+  "lng": -9.16284
  },
  "boebre": {
   "id": 32155,
@@ -5235,7 +6397,9 @@
   "d": 1553,
   "zona": "cantabrico",
   "municipio": "Boebre",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.3896,
+  "lng": -8.2184
  },
  "oia": {
   "id": 22210,
@@ -5244,7 +6408,9 @@
   "d": 7234,
   "zona": "atlantico",
   "municipio": "Oia",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 42.06201,
+  "lng": -8.89128
  },
  "casal-novo": {
   "id": 22117,
@@ -5253,7 +6419,9 @@
   "d": 3081,
   "zona": "atlantico",
   "municipio": "Casal Novo",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 42.56312,
+  "lng": -9.03801
  },
  "puerto-del-rosario": {
   "id": 14220,
@@ -5262,7 +6430,9 @@
   "d": 1916,
   "zona": "canarias",
   "municipio": "Puerto del Rosario",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.51261,
+  "lng": -13.85076
  },
  "enix": {
   "id": 15240,
@@ -5271,7 +6441,9 @@
   "d": 3999,
   "zona": "mediterraneo",
   "municipio": "Enix",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.82181,
+  "lng": -2.53111
  },
  "chimparra": {
   "id": 22109,
@@ -5280,7 +6452,9 @@
   "d": 6443,
   "zona": "cantabrico",
   "municipio": "Chímparra",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.70452,
+  "lng": -8.00643
  },
  "el-puertito": {
   "id": 34106,
@@ -5289,7 +6463,9 @@
   "d": 5166,
   "zona": "canarias",
   "municipio": "El Puertito",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.10951,
+  "lng": -16.76245
  },
  "alcanar": {
   "id": 37100,
@@ -5298,7 +6474,9 @@
   "d": 3257,
   "zona": "mediterraneo",
   "municipio": "Alcanar",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.57122,
+  "lng": 0.54769
  },
  "garafia": {
   "id": 24126,
@@ -5307,7 +6485,9 @@
   "d": 1638,
   "zona": "canarias",
   "municipio": "Garafía",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.82667,
+  "lng": -17.96338
  },
  "san-andres": {
   "id": 34115,
@@ -5316,7 +6496,9 @@
   "d": 5995,
   "zona": "canarias",
   "municipio": "San Andrés",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.53623,
+  "lng": -16.13472
  },
  "balanegra": {
   "id": 35234,
@@ -5325,7 +6507,9 @@
   "d": 7473,
   "zona": "mediterraneo",
   "municipio": "Balanegra",
-  "provincia": "Almería"
+  "provincia": "Almería",
+  "lat": 36.7466,
+  "lng": -2.91219
  },
  "meliana": {
   "id": 36228,
@@ -5334,7 +6518,9 @@
   "d": 5221,
   "zona": "mediterraneo",
   "municipio": "Meliana",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.5216,
+  "lng": -0.31565
  },
  "pedro-valiente": {
   "id": 35103,
@@ -5343,7 +6529,9 @@
   "d": 1034,
   "zona": "mediterraneo",
   "municipio": "Pedro Valiente",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.02988,
+  "lng": -5.62978
  },
  "el-albir": {
   "id": 36154,
@@ -5352,7 +6540,9 @@
   "d": 1556,
   "zona": "mediterraneo",
   "municipio": "El Albir",
-  "provincia": "Alicante"
+  "provincia": "Alicante",
+  "lat": 38.56521,
+  "lng": -0.0526
  },
  "cristelo": {
   "id": 32262,
@@ -5361,7 +6551,9 @@
   "d": 1329,
   "zona": "atlantico",
   "municipio": "Cristelo",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 41.86405,
+  "lng": -8.86401
  },
  "moledo": {
   "id": 32262,
@@ -5370,7 +6562,9 @@
   "d": 2803,
   "zona": "atlantico",
   "municipio": "Moledo",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 41.85093,
+  "lng": -8.86752
  },
  "caleta-del-sebo": {
   "id": 34227,
@@ -5379,7 +6573,9 @@
   "d": 4034,
   "zona": "canarias",
   "municipio": "Caleta del Sebo",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 29.24021,
+  "lng": -13.52775
  },
  "torre-del-mar": {
   "id": 25207,
@@ -5388,7 +6584,9 @@
   "d": 539,
   "zona": "mediterraneo",
   "municipio": "Torre del Mar",
-  "provincia": "Málaga"
+  "provincia": "Málaga",
+  "lat": 36.73849,
+  "lng": -4.08725
  },
  "antigua": {
   "id": 24217,
@@ -5397,7 +6595,9 @@
   "d": 2271,
   "zona": "canarias",
   "municipio": "Antigua",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.379,
+  "lng": -13.86595
  },
  "pozo-negro": {
   "id": 34213,
@@ -5406,7 +6606,9 @@
   "d": 8568,
   "zona": "canarias",
   "municipio": "Pozo Negro",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.26744,
+  "lng": -13.91285
  },
  "giniginamar": {
   "id": 24216,
@@ -5415,7 +6617,9 @@
   "d": 3011,
   "zona": "canarias",
   "municipio": "Giniginamar",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.20305,
+  "lng": -14.051
  },
  "tarajalejo": {
   "id": 24215,
@@ -5424,7 +6628,9 @@
   "d": 1859,
   "zona": "canarias",
   "municipio": "Tarajalejo",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.19484,
+  "lng": -14.09715
  },
  "cofete": {
   "id": 24213,
@@ -5433,7 +6639,9 @@
   "d": 7884,
   "zona": "canarias",
   "municipio": "Cofete",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.11701,
+  "lng": -14.38335
  },
  "esquinzo": {
   "id": 34216,
@@ -5442,7 +6650,9 @@
   "d": 1233,
   "zona": "canarias",
   "municipio": "Esquinzo",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.06847,
+  "lng": -14.31623
  },
  "barranco-los-canarios": {
   "id": 24214,
@@ -5451,7 +6661,9 @@
   "d": 9009,
   "zona": "canarias",
   "municipio": "Barranco los Canarios",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.14538,
+  "lng": -14.31343
  },
  "la-pared": {
   "id": 24214,
@@ -5460,7 +6672,9 @@
   "d": 7164,
   "zona": "canarias",
   "municipio": "La Pared",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.22829,
+  "lng": -14.21921
  },
  "el-prat-de-llobregat": {
   "id": 27111,
@@ -5469,7 +6683,9 @@
   "d": 3746,
   "zona": "mediterraneo",
   "municipio": "El Prat de Llobregat",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.28341,
+  "lng": 2.09459
  },
  "cala-morell": {
   "id": 28207,
@@ -5478,7 +6694,9 @@
   "d": 9596,
   "zona": "mediterraneo",
   "municipio": "Cala Morell",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 40.05256,
+  "lng": 3.92637
  },
  "son-parc": {
   "id": 28209,
@@ -5487,7 +6705,9 @@
   "d": 5075,
   "zona": "mediterraneo",
   "municipio": "Son Parc",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 40.05191,
+  "lng": 4.1626
  },
  "port-daddaia": {
   "id": 28209,
@@ -5496,7 +6716,9 @@
   "d": 2320,
   "zona": "mediterraneo",
   "municipio": "Port d'Addaia",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.99987,
+  "lng": 4.21655
  },
  "salou": {
   "id": 27104,
@@ -5505,7 +6727,9 @@
   "d": 1147,
   "zona": "mediterraneo",
   "municipio": "Salou",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.0654,
+  "lng": 1.15055
  },
  "pals": {
   "id": 37238,
@@ -5514,7 +6738,9 @@
   "d": 742,
   "zona": "mediterraneo",
   "municipio": "Pals",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.00342,
+  "lng": 3.19749
  },
  "palamos": {
   "id": 27128,
@@ -5523,7 +6749,9 @@
   "d": 2367,
   "zona": "mediterraneo",
   "municipio": "Palamós",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.85676,
+  "lng": 3.15087
  },
  "cambrils": {
   "id": 27103,
@@ -5532,7 +6760,9 @@
   "d": 466,
   "zona": "mediterraneo",
   "municipio": "Cambrils",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.06354,
+  "lng": 1.06521
  },
  "mont-roig-del-camp": {
   "id": 27102,
@@ -5541,7 +6771,9 @@
   "d": 1563,
   "zona": "mediterraneo",
   "municipio": "Mont-roig del Camp",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.01737,
+  "lng": 0.95786
  },
  "vila-seca": {
   "id": 17110,
@@ -5550,7 +6782,9 @@
   "d": 2232,
   "zona": "mediterraneo",
   "municipio": "Vila-seca",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.08259,
+  "lng": 1.18957
  },
  "xeraco": {
   "id": 36212,
@@ -5559,7 +6793,9 @@
   "d": 56,
   "zona": "mediterraneo",
   "municipio": "Xeraco",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.04838,
+  "lng": -0.19343
  },
  "roque-bermejo": {
   "id": 34115,
@@ -5568,7 +6804,9 @@
   "d": 8746,
   "zona": "canarias",
   "municipio": "Roque Bermejo",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.57513,
+  "lng": -16.14033
  },
  "tacoronte": {
   "id": 24103,
@@ -5577,7 +6815,9 @@
   "d": 202,
   "zona": "canarias",
   "municipio": "Tacoronte",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.50049,
+  "lng": -16.42515
  },
  "las-carboneras": {
   "id": 24102,
@@ -5586,7 +6826,9 @@
   "d": 4662,
   "zona": "canarias",
   "municipio": "Las Carboneras",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.5717,
+  "lng": -16.27629
  },
  "torreblanca": {
   "id": 26211,
@@ -5595,7 +6837,9 @@
   "d": 477,
   "zona": "mediterraneo",
   "municipio": "Torreblanca",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.19601,
+  "lng": 0.23061
  },
  "tavernes-de-la-valldigna": {
   "id": 36213,
@@ -5604,7 +6848,9 @@
   "d": 186,
   "zona": "mediterraneo",
   "municipio": "Tavernes de la Valldigna",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.08948,
+  "lng": -0.21501
  },
  "benicasimbenicassim": {
   "id": 26209,
@@ -5613,7 +6859,9 @@
   "d": 460,
   "zona": "mediterraneo",
   "municipio": "Benicasim/Benicàssim",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.04488,
+  "lng": 0.06744
  },
  "castellon-de-la-planacastello-de-la-plana": {
   "id": 16240,
@@ -5622,7 +6870,9 @@
   "d": 4278,
   "zona": "mediterraneo",
   "municipio": "Castellón de la Plana/Castelló de la Plana",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.99807,
+  "lng": 0.03016
  },
  "castello-de-la-planacastellon-de-la-plana": {
   "id": 16240,
@@ -5631,7 +6881,9 @@
   "d": 3916,
   "zona": "mediterraneo",
   "municipio": "Castelló de la Plana/Castellón de la Plana",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.99498,
+  "lng": 0.02826
  },
  "premia-de-mar": {
   "id": 27116,
@@ -5640,7 +6892,9 @@
   "d": 183,
   "zona": "mediterraneo",
   "municipio": "Premià de Mar",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.48836,
+  "lng": 2.35891
  },
  "sant-adria-de-besos": {
   "id": 27113,
@@ -5649,7 +6903,9 @@
   "d": 3626,
   "zona": "mediterraneo",
   "municipio": "Sant Adrià de Besòs",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.41919,
+  "lng": 2.23273
  },
  "lloret-de-mar": {
   "id": 27124,
@@ -5658,7 +6914,9 @@
   "d": 929,
   "zona": "mediterraneo",
   "municipio": "Lloret de Mar",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.69744,
+  "lng": 2.85465
  },
  "castelldefels": {
   "id": 27110,
@@ -5667,7 +6925,9 @@
   "d": 3208,
   "zona": "mediterraneo",
   "municipio": "Castelldefels",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.26776,
+  "lng": 2.01176
  },
  "gava": {
   "id": 27110,
@@ -5676,7 +6936,9 @@
   "d": 4169,
   "zona": "mediterraneo",
   "municipio": "Gavà",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.26755,
+  "lng": 2.02406
  },
  "viladecans": {
   "id": 27110,
@@ -5685,7 +6947,9 @@
   "d": 7082,
   "zona": "mediterraneo",
   "municipio": "Viladecans",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.27393,
+  "lng": 2.06136
  },
  "almassora": {
   "id": 16240,
@@ -5694,7 +6958,9 @@
   "d": 4116,
   "zona": "mediterraneo",
   "municipio": "Almassora",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 39.9281,
+  "lng": -0.0015
  },
  "venta-de-san-antonio-estacion": {
   "id": 26211,
@@ -5703,7 +6969,9 @@
   "d": 4694,
   "zona": "mediterraneo",
   "municipio": "Venta de San Antonio-Estación",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.16482,
+  "lng": 0.18775
  },
  "torrenostra": {
   "id": 26211,
@@ -5712,7 +6980,9 @@
   "d": 1657,
   "zona": "mediterraneo",
   "municipio": "Torrenostra",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.18622,
+  "lng": 0.21028
  },
  "torre-de-la-sal": {
   "id": 26210,
@@ -5721,7 +6991,9 @@
   "d": 6596,
   "zona": "mediterraneo",
   "municipio": "Torre de la Sal",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.14188,
+  "lng": 0.17101
  },
  "cabanes": {
   "id": 26210,
@@ -5730,7 +7002,9 @@
   "d": 5093,
   "zona": "mediterraneo",
   "municipio": "Cabanes",
-  "provincia": "Castellón"
+  "provincia": "Castellón",
+  "lat": 40.12948,
+  "lng": 0.16383
  },
  "massalfassar": {
   "id": 36229,
@@ -5739,7 +7013,9 @@
   "d": 1375,
   "zona": "mediterraneo",
   "municipio": "Massalfassar",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.54898,
+  "lng": -0.2964
  },
  "vistabella-rafalell": {
   "id": 36229,
@@ -5748,7 +7024,9 @@
   "d": 660,
   "zona": "mediterraneo",
   "municipio": "Vistabella Rafalell",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.55407,
+  "lng": -0.29129
  },
  "massamagrell": {
   "id": 36229,
@@ -5757,7 +7035,9 @@
   "d": 196,
   "zona": "mediterraneo",
   "municipio": "Massamagrell",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.55738,
+  "lng": -0.28791
  },
  "molinell": {
   "id": 36206,
@@ -5766,7 +7046,9 @@
   "d": 3122,
   "zona": "mediterraneo",
   "municipio": "Molinell",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 38.90083,
+  "lng": -0.05045
  },
  "tarragona": {
   "id": 37122,
@@ -5775,7 +7057,9 @@
   "d": 2929,
   "zona": "mediterraneo",
   "municipio": "Tarragona",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.12354,
+  "lng": 1.31044
  },
  "altafulla": {
   "id": 27106,
@@ -5784,7 +7068,9 @@
   "d": 1533,
   "zona": "mediterraneo",
   "municipio": "Altafulla",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.13276,
+  "lng": 1.38358
  },
  "les-maravelles": {
   "id": 38115,
@@ -5793,7 +7079,9 @@
   "d": 2765,
   "zona": "mediterraneo",
   "municipio": "Les Maravelles",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.5178,
+  "lng": 2.73628
  },
  "sant-llorenc-des-cardassar": {
   "id": 38211,
@@ -5802,7 +7090,9 @@
   "d": 1327,
   "zona": "mediterraneo",
   "municipio": "Sant Llorenç des Cardassar",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.58422,
+  "lng": 3.38155
  },
  "son-serra-de-marina": {
   "id": 38219,
@@ -5811,7 +7101,9 @@
   "d": 7277,
   "zona": "mediterraneo",
   "municipio": "Son Serra de Marina",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.73045,
+  "lng": 3.24659
  },
  "celorio": {
   "id": 31203,
@@ -5820,7 +7112,9 @@
   "d": 248,
   "zona": "cantabrico",
   "municipio": "Celorio",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.43235,
+  "lng": -4.79803
  },
  "arrecife": {
   "id": 14230,
@@ -5829,7 +7123,9 @@
   "d": 2485,
   "zona": "canarias",
   "municipio": "Arrecife",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.95901,
+  "lng": -13.55861
  },
  "roses": {
   "id": 27133,
@@ -5838,7 +7134,9 @@
   "d": 2620,
   "zona": "mediterraneo",
   "municipio": "Roses",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.25161,
+  "lng": 3.20557
  },
  "empuriabrava": {
   "id": 27133,
@@ -5847,7 +7145,9 @@
   "d": 3109,
   "zona": "mediterraneo",
   "municipio": "Empuriabrava",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.25285,
+  "lng": 3.1413
  },
  "arafo": {
   "id": 24113,
@@ -5856,7 +7156,9 @@
   "d": 2204,
   "zona": "canarias",
   "municipio": "Arafo",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.33417,
+  "lng": -16.36395
  },
  "cunit": {
   "id": 27107,
@@ -5865,7 +7167,9 @@
   "d": 684,
   "zona": "mediterraneo",
   "municipio": "Cunit",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.19268,
+  "lng": 1.63212
  },
  "el-monte": {
   "id": 21204,
@@ -5874,7 +7178,9 @@
   "d": 4611,
   "zona": "cantabrico",
   "municipio": "El Monte",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.6429,
+  "lng": -5.82087
  },
  "zahora": {
   "id": 33125,
@@ -5883,7 +7189,9 @@
   "d": 2015,
   "zona": "atlantico",
   "municipio": "Zahora",
-  "provincia": "Cádiz"
+  "provincia": "Cádiz",
+  "lat": 36.19721,
+  "lng": -6.04664
  },
  "moguer": {
   "id": 33106,
@@ -5892,7 +7200,9 @@
   "d": 3938,
   "zona": "atlantico",
   "municipio": "Moguer",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.10731,
+  "lng": -6.76283
  },
  "el-cabrito": {
   "id": 14130,
@@ -5901,7 +7211,9 @@
   "d": 5538,
   "zona": "canarias",
   "municipio": "El Cabrito",
-  "provincia": "Santa Cruz de Tenerife"
+  "provincia": "Santa Cruz de Tenerife",
+  "lat": 28.05527,
+  "lng": -17.15151
  },
  "vila-praia-de-ancora": {
   "id": 32262,
@@ -5910,7 +7222,9 @@
   "d": 7692,
   "zona": "atlantico",
   "municipio": "Vila Praia de Âncora",
-  "provincia": "Pontevedra"
+  "provincia": "Pontevedra",
+  "lat": 41.80687,
+  "lng": -8.86743
  },
  "vila-real-de-santo-antonio": {
   "id": 23101,
@@ -5919,7 +7233,9 @@
   "d": 9886,
   "zona": "atlantico",
   "municipio": "Vila Real de Santo António",
-  "provincia": "Huelva"
+  "provincia": "Huelva",
+  "lat": 37.17196,
+  "lng": -7.41778
  },
  "castell-platja-daro": {
   "id": 27127,
@@ -5928,7 +7244,9 @@
   "d": 948,
   "zona": "mediterraneo",
   "municipio": "Castell-Platja d'Aro",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.81149,
+  "lng": 3.06927
  },
  "castell-daro-platja-daro-i-sagaro": {
   "id": 27127,
@@ -5937,7 +7255,9 @@
   "d": 1114,
   "zona": "mediterraneo",
   "municipio": "Castell d\"Aro, Platja d\"Aro i s\"Agaró",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.8102,
+  "lng": 3.06721
  },
  "calonge": {
   "id": 27128,
@@ -5946,7 +7266,9 @@
   "d": 3016,
   "zona": "mediterraneo",
   "municipio": "Calonge",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.83536,
+  "lng": 3.09349
  },
  "monte-moris": {
   "id": 32101,
@@ -5955,7 +7277,9 @@
   "d": 2168,
   "zona": "cantabrico",
   "municipio": "Monte Moris",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.57581,
+  "lng": -5.73895
  },
  "el-perello": {
   "id": 37103,
@@ -5964,7 +7288,9 @@
   "d": 1878,
   "zona": "mediterraneo",
   "municipio": "El Perelló",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.83476,
+  "lng": 0.74493
  },
  "lampolla": {
   "id": 37103,
@@ -5973,7 +7299,9 @@
   "d": 1216,
   "zona": "mediterraneo",
   "municipio": "L'Ampolla",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.81521,
+  "lng": 0.71974
  },
  "calonge-i-sant-antoni": {
   "id": 27128,
@@ -5982,7 +7310,9 @@
   "d": 3032,
   "zona": "mediterraneo",
   "municipio": "Calonge i Sant Antoni",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.83518,
+  "lng": 3.09337
  },
  "sa-riera": {
   "id": 27130,
@@ -5991,7 +7321,9 @@
   "d": 3403,
   "zona": "mediterraneo",
   "municipio": "Sa Riera",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.99258,
+  "lng": 3.20175
  },
  "girona": {
   "id": 37234,
@@ -6000,7 +7332,9 @@
   "d": 329,
   "zona": "mediterraneo",
   "municipio": "Girona",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.86089,
+  "lng": 3.1588
  },
  "calella-de-palafrugell": {
   "id": 27129,
@@ -6009,7 +7343,9 @@
   "d": 2194,
   "zona": "mediterraneo",
   "municipio": "Calella de Palafrugell",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.87188,
+  "lng": 3.17753
  },
  "mont-ras": {
   "id": 27129,
@@ -6018,7 +7354,9 @@
   "d": 2331,
   "zona": "mediterraneo",
   "municipio": "Mont-ras",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.8706,
+  "lng": 3.17732
  },
  "tossa-de-mar": {
   "id": 27125,
@@ -6027,7 +7365,9 @@
   "d": 385,
   "zona": "mediterraneo",
   "municipio": "Tossa de Mar",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.7241,
+  "lng": 2.9336
  },
  "rosamar": {
   "id": 27126,
@@ -6036,7 +7376,9 @@
   "d": 3887,
   "zona": "mediterraneo",
   "municipio": "Rosamar",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 41.76275,
+  "lng": 2.9945
  },
  "lestartit": {
   "id": 37240,
@@ -6045,7 +7387,9 @@
   "d": 4626,
   "zona": "mediterraneo",
   "municipio": "L'Estartit",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.07355,
+  "lng": 3.20235
  },
  "santa-eulalia-de-la-pena": {
   "id": 27134,
@@ -6054,7 +7398,9 @@
   "d": 3899,
   "zona": "mediterraneo",
   "municipio": "Santa Eulalia de la Peña",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.25497,
+  "lng": 3.2788
  },
  "cadaques": {
   "id": 27134,
@@ -6063,7 +7409,9 @@
   "d": 863,
   "zona": "mediterraneo",
   "municipio": "Cadaqués",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.29587,
+  "lng": 3.28788
  },
  "portlligat": {
   "id": 27134,
@@ -6072,7 +7420,9 @@
   "d": 3552,
   "zona": "mediterraneo",
   "municipio": "Portlligat",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.31897,
+  "lng": 3.2992
  },
  "tamariua": {
   "id": 37248,
@@ -6081,7 +7431,9 @@
   "d": 2327,
   "zona": "mediterraneo",
   "municipio": "Tamariua",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.34711,
+  "lng": 3.22309
  },
  "colera": {
   "id": 27135,
@@ -6090,7 +7442,9 @@
   "d": 3473,
   "zona": "mediterraneo",
   "municipio": "Colera",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.3999,
+  "lng": 3.1588
  },
  "portbou": {
   "id": 27136,
@@ -6099,7 +7453,9 @@
   "d": 332,
   "zona": "mediterraneo",
   "municipio": "Portbou",
-  "provincia": "Girona"
+  "provincia": "Girona",
+  "lat": 42.42831,
+  "lng": 3.16456
  },
  "suvina": {
   "id": 32158,
@@ -6108,7 +7464,9 @@
   "d": 1873,
   "zona": "cantabrico",
   "municipio": "Suviña",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.39778,
+  "lng": -8.34106
  },
  "carnoedo": {
   "id": 22111,
@@ -6117,7 +7475,9 @@
   "d": 5181,
   "zona": "cantabrico",
   "municipio": "Carnoedo",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.38518,
+  "lng": -8.27227
  },
  "calella": {
   "id": 27121,
@@ -6126,7 +7486,9 @@
   "d": 1130,
   "zona": "mediterraneo",
   "municipio": "Calella",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.60779,
+  "lng": 2.64734
  },
  "pineda-de-mar": {
   "id": 27122,
@@ -6135,7 +7497,9 @@
   "d": 276,
   "zona": "mediterraneo",
   "municipio": "Pineda de Mar",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.62019,
+  "lng": 2.68827
  },
  "les-roquetes": {
   "id": 27109,
@@ -6144,7 +7508,9 @@
   "d": 4416,
   "zona": "mediterraneo",
   "municipio": "Les Roquetes",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.22001,
+  "lng": 1.76366
  },
  "sant-pere-de-ribes": {
   "id": 27108,
@@ -6153,7 +7519,9 @@
   "d": 2799,
   "zona": "mediterraneo",
   "municipio": "Sant Pere de Ribes",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.21949,
+  "lng": 1.75893
  },
  "cubelles": {
   "id": 27107,
@@ -6162,7 +7530,9 @@
   "d": 1922,
   "zona": "mediterraneo",
   "municipio": "Cubelles",
-  "provincia": "Barcelona"
+  "provincia": "Barcelona",
+  "lat": 41.19699,
+  "lng": 1.66194
  },
  "calafell": {
   "id": 37133,
@@ -6171,7 +7541,9 @@
   "d": 1442,
   "zona": "mediterraneo",
   "municipio": "Calafell",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.18842,
+  "lng": 1.59313
  },
  "poo": {
   "id": 31203,
@@ -6180,7 +7552,9 @@
   "d": 476,
   "zona": "cantabrico",
   "municipio": "Póo",
-  "provincia": "Asturias"
+  "provincia": "Asturias",
+  "lat": 43.43379,
+  "lng": -4.78964
  },
  "calafat": {
   "id": 37109,
@@ -6189,7 +7563,9 @@
   "d": 2190,
   "zona": "mediterraneo",
   "municipio": "Calafat",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.94438,
+  "lng": 0.86025
  },
  "lametlla-de-mar": {
   "id": 37106,
@@ -6198,7 +7574,9 @@
   "d": 2207,
   "zona": "mediterraneo",
   "municipio": "L\"Ametlla de Mar",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.89183,
+  "lng": 0.81178
  },
  "creixell": {
   "id": 37128,
@@ -6207,7 +7585,9 @@
   "d": 142,
   "zona": "mediterraneo",
   "municipio": "Creixell",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.15864,
+  "lng": 1.44837
  },
  "roda-de-bara": {
   "id": 37130,
@@ -6216,7 +7596,9 @@
   "d": 1407,
   "zona": "mediterraneo",
   "municipio": "Roda de Barà",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.16667,
+  "lng": 1.47221
  },
  "el-vendrell": {
   "id": 37132,
@@ -6225,7 +7607,9 @@
   "d": 290,
   "zona": "mediterraneo",
   "municipio": "El Vendrell",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.1798,
+  "lng": 1.52845
  },
  "estellencs": {
   "id": 28106,
@@ -6234,7 +7618,9 @@
   "d": 5048,
   "zona": "mediterraneo",
   "municipio": "Estellencs",
-  "provincia": "Baleares"
+  "provincia": "Baleares",
+  "lat": 39.65856,
+  "lng": 2.47146
  },
  "tamarit": {
   "id": 37124,
@@ -6243,7 +7629,9 @@
   "d": 984,
   "zona": "mediterraneo",
   "municipio": "Tamarit",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.12858,
+  "lng": 1.33544
  },
  "solimar": {
   "id": 37124,
@@ -6252,7 +7640,9 @@
   "d": 1562,
   "zona": "mediterraneo",
   "municipio": "Solimar",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 41.12891,
+  "lng": 1.32852
  },
  "riumar": {
   "id": 37103,
@@ -6261,7 +7651,9 @@
   "d": 9820,
   "zona": "mediterraneo",
   "municipio": "Riumar",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.75329,
+  "lng": 0.80689
  },
  "poblenou-del-delta": {
   "id": 27101,
@@ -6270,7 +7662,9 @@
   "d": 11100,
   "zona": "mediterraneo",
   "municipio": "Poblenou del Delta",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.60918,
+  "lng": 0.7251
  },
  "la-rapita": {
   "id": 27101,
@@ -6279,7 +7673,9 @@
   "d": 2953,
   "zona": "mediterraneo",
   "municipio": "La Ràpita",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.59232,
+  "lng": 0.60691
  },
  "sant-carles-de-la-rapita": {
   "id": 27101,
@@ -6288,7 +7684,9 @@
   "d": 1081,
   "zona": "mediterraneo",
   "municipio": "Sant Carles de la Ràpita",
-  "provincia": "Tarragona"
+  "provincia": "Tarragona",
+  "lat": 40.60888,
+  "lng": 0.58696
  },
  "sueca": {
   "id": 36222,
@@ -6297,7 +7695,9 @@
   "d": 3050,
   "zona": "mediterraneo",
   "municipio": "Sueca",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.25137,
+  "lng": -0.25947
  },
  "pucol": {
   "id": 36230,
@@ -6306,7 +7706,9 @@
   "d": 685,
   "zona": "mediterraneo",
   "municipio": "Puçol",
-  "provincia": "Valencia"
+  "provincia": "Valencia",
+  "lat": 39.60662,
+  "lng": -0.26372
  },
  "gondomil": {
   "id": 32173,
@@ -6315,7 +7717,9 @@
   "d": 5763,
   "zona": "cantabrico",
   "municipio": "Gondomil",
-  "provincia": "A Coruña"
+  "provincia": "A Coruña",
+  "lat": 43.25408,
+  "lng": -8.94993
  },
  "ingenio": {
   "id": 14240,
@@ -6324,7 +7728,9 @@
   "d": 7233,
   "zona": "canarias",
   "municipio": "Ingenio",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 27.91097,
+  "lng": -15.38664
  },
  "puerto-del-carmen": {
   "id": 34221,
@@ -6333,7 +7739,9 @@
   "d": 268,
   "zona": "canarias",
   "municipio": "Puerto del Carmen",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.92474,
+  "lng": -13.63365
  },
  "urbanizacion-famara": {
   "id": 34228,
@@ -6342,7 +7750,9 @@
   "d": 2597,
   "zona": "canarias",
   "municipio": "Urbanización Famara",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 29.12618,
+  "lng": -13.53956
  },
  "san-bartolome": {
   "id": 14230,
@@ -6351,7 +7761,9 @@
   "d": 6162,
   "zona": "canarias",
   "municipio": "San Bartolomé",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 28.94873,
+  "lng": -13.59455
  },
  "salinas-del-rio": {
   "id": 34225,
@@ -6360,6 +7772,8 @@
   "d": 8956,
   "zona": "canarias",
   "municipio": "Salinas del Río",
-  "provincia": "Las Palmas"
+  "provincia": "Las Palmas",
+  "lat": 29.20944,
+  "lng": -13.49802
  }
 }
