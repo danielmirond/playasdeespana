@@ -64,9 +64,57 @@ const EXCLUIDAS = new Set([
   ...JSON.parse(readFileSync(resolve(ROOT, 'src/data/slugs-extranjeras.json'), 'utf8')),
   ...Object.keys(JSON.parse(readFileSync(resolve(ROOT, 'src/data/duplicados.json'), 'utf8'))),
 ])
-const aemet = JSON.parse(readFileSync(resolve(ROOT, 'src/data/aemet-playas.json'), 'utf8'))
-const playas = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'utf8'))
-  .filter(p => p?.slug && p.lat && p.lng && !EXCLUIDAS.has(p.slug) && aemet[p.slug])
+const TODAS = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'utf8'))
+  .filter(p => p?.slug && p.lat && p.lng && !EXCLUIDAS.has(p.slug))
+
+// ── UNIVERSO ────────────────────────────────────────────────────────────
+//
+// `--universo=trafico` (recomendado desde sep-2026) coge las fichas que de
+// verdad recibe gente, leyendo una exportación de Search Console.
+//
+// La cosecha de agosto usó «las playas con estación AEMET» porque no había
+// datos de tráfico. Con ellos delante se ve el desajuste: de las 637 fichas
+// con clics, solo 173 tenían sidecar. Se pagó por cientos de playas que
+// nadie abre mientras la mitad de las visitadas se servía con OSM y sin
+// valoraciones.
+//
+// El CSV necesita las columnas `Landing Page` y `Url Clicks`. Se ordena por
+// clics descendente, así que si el tope corta, corta por la cola.
+const UNIVERSO = arg('universo', 'aemet')
+const CSV      = arg('csv', '')
+const MIN_CLICS = Number(arg('min-clics', 1))
+
+let playas
+if (UNIVERSO === 'trafico') {
+  if (!CSV || !existsSync(CSV)) {
+    console.error('Con --universo=trafico hace falta --csv=<ruta a la exportación de Search Console>')
+    process.exit(1)
+  }
+  const clics = new Map()
+  const lineas = readFileSync(CSV, 'utf8').split(/\r?\n/)
+  const cab = lineas[0].replace(/^\uFEFF/, '').split(',')
+  const iLP = cab.indexOf('Landing Page'), iC = cab.indexOf('Url Clicks')
+  if (iLP < 0 || iC < 0) {
+    console.error('El CSV no tiene las columnas «Landing Page» y «Url Clicks».')
+    process.exit(1)
+  }
+  for (let i = 1; i < lineas.length; i++) {
+    const f = lineas[i].split(',')
+    const m = /\/playas\/([^/?#,]+)/.exec(f[iLP] ?? '')
+    if (!m) continue
+    const n = Number(f[iC] ?? 0)
+    if (Number.isFinite(n)) clics.set(m[1], (clics.get(m[1]) ?? 0) + n)
+  }
+  const porSlug = new Map(TODAS.map(p => [p.slug, p]))
+  playas = [...clics.entries()]
+    .filter(([, n]) => n >= MIN_CLICS)
+    .sort((a, b) => b[1] - a[1])
+    .map(([s]) => porSlug.get(s))
+    .filter(Boolean)
+} else {
+  const aemet = JSON.parse(readFileSync(resolve(ROOT, 'src/data/aemet-playas.json'), 'utf8'))
+  playas = TODAS.filter(p => aemet[p.slug])
+}
 
 const out = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : {}
 const clave = (c, p) => `${c}:${p.lat.toFixed(4)}:${p.lng.toFixed(4)}`
@@ -79,12 +127,13 @@ for (const p of playas) for (const c of CONSULTAS) {
 
 console.log('')
 console.log('══ COSECHA DE GOOGLE PLACES ' + '═'.repeat(42))
-console.log(`Playas con AEMET   ${playas.length}`)
+console.log(`Universo           ${UNIVERSO}${UNIVERSO === 'trafico' ? ` (≥${MIN_CLICS} clic)` : ' (estación AEMET)'} · ${playas.length} playas`)
 console.log(`Consultas/playa    ${CONSULTAS.length} (restaurantes 3 km · hoteles 5 km)`)
 console.log(`Ya en el sidecar   ${Object.keys(out).length}`)
 console.log(`Llamadas pendientes ${pendientes.length}`)
 console.log(`Tope duro          ${MAX}`)
-console.log(`Tramo gratuito Pro 5.000/mes · coste esperado 0 €`)
+console.log(`Tramo gratuito Pro 5.000/mes (SKU Nearby Search Pro) · coste esperado 0 €`)
+console.log(`Si se pasara     ${(0.0256).toFixed(4)} €/llamada aprox. · estas ${pendientes.length} serían ${(pendientes.length * 0.0256).toFixed(2)} € a precio de lista`)
 console.log('═'.repeat(70))
 
 if (pendientes.length > MAX) {
