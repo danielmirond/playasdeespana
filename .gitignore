@@ -28,3 +28,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# Copias de seguridad de variables de entorno (llevan claves). Añadido tras
+# dejar un .env.local.bak-* sin ignorar al cambiar las credenciales de KV.
+.env*.bak*
