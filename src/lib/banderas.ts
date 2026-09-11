@@ -83,7 +83,7 @@ export async function meteoBatch(coords: { lat: number; lng: number }[]): Promis
   const fb: MeteoBandera = { olas: 0.4, viento: 10, racha: 15, tempAgua: null, vientoDir: '' }
   if (!coords.length) return []
   const hora = parseInt(
-    new Intl.DateTimeFormat('es-ES', { hour: 'numeric', hour12: false, timeZone: 'Europe/Madrid' }).format(new Date()),
+    new Intl.DateTimeFormat('es-ES', { hour: 'numeric', hourCycle: 'h23', timeZone: 'Europe/Madrid' }).format(new Date()),
     10,
   ) || 12
 

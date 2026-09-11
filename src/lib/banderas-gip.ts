@@ -130,7 +130,7 @@ export async function getBanderaGip(slug: string): Promise<EstadoOficialGip | nu
     if (diaParte !== hoyMadrid()) return null
 
     const hora = new Intl.DateTimeFormat('es-ES', {
-      timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', hour12: false,
+      timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
     }).format(new Date(f.tspub))
 
     // Trampa 2: "auto" no es bandera izada.

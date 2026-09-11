@@ -10,6 +10,7 @@ import type { CentroBuceo } from '@/lib/buceo'
 import { Dato, CertBadge, type Certeza } from './Certeza'
 import Medusa from '@/components/ui/Medusa'
 import { nombrarViento } from '@/lib/vientos'
+import { gradosADireccion } from '@/lib/geo'
 import ListaPOI from './ListaPOI'
 import CuadernoCTA from './CuadernoCTA'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
@@ -83,6 +84,9 @@ interface Meteo {
   vientoDireccion: string; uv: number | null; tempAire: number | null
   sensacion: number | null; humedad: number
   amanecer?: string; atardecer?: string; estado: string; periodo?: number
+  /** Mar de fondo (m, s, grados de donde viene) y mar de viento (m). Modelo, mar adentro. */
+  marFondo?: number | null; marFondoPeriodo?: number | null; marFondoDir?: number | null
+  marViento?: number | null
 }
 interface OleajeHora { h: string; v: number }
 interface SolData { amanecer: string; atardecer: string; horas_luz: string; pct_dia: number }
@@ -813,6 +817,40 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <OleajeChart olas={meteo.olas ?? 0} oleajeHoras={oleajeHoras} nowLabel={i18n.nowLabel} />
+            {/* MAR DE FONDO / MAR DE VIENTO. La altura total mezcla dos mares que no
+                se parecen: el de fondo viene de lejos y entra o no según hacia dónde
+                mira la playa; el de viento lo levanta el viento de aquí y se va con él.
+                Certeza `estimado`: valores del modelo en un punto mar adentro.
+                Decimales a mano y no con toLocaleString: el ICU de Node y el del
+                navegador no siempre coinciden, y eso rompe la hidratación. */}
+            {meteo.marFondo != null && meteo.marViento != null && (
+              <div style={{ marginTop:'1rem', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'.9rem' }}>
+                <div>
+                  <div style={{ fontFamily:'var(--font-mono)', fontSize:'var(--fs-xs)', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--muted)', marginBottom:'.3rem' }}>
+                    {locale === 'en' ? 'Swell' : 'Mar de fondo'}
+                  </div>
+                  <Dato v={locale === 'en' ? meteo.marFondo.toFixed(1) : meteo.marFondo.toFixed(1).replace('.', ',')} u="m" cert="estimado" size={20}/>
+                  {(meteo.marFondoPeriodo != null || meteo.marFondoDir != null) && (
+                    <div style={{ fontSize:'var(--fs-xs)', color:'var(--muted)', marginTop:'.25rem' }}>
+                      {meteo.marFondoPeriodo != null ? `${Math.round(meteo.marFondoPeriodo)} s` : ''}
+                      {meteo.marFondoPeriodo != null && meteo.marFondoDir != null ? ' · ' : ''}
+                      {meteo.marFondoDir != null ? `${locale === 'en' ? 'from' : 'del'} ${gradosADireccion(meteo.marFondoDir)}` : ''}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <div style={{ fontFamily:'var(--font-mono)', fontSize:'var(--fs-xs)', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--muted)', marginBottom:'.3rem' }}>
+                    {locale === 'en' ? 'Wind waves' : 'Mar de viento'}
+                  </div>
+                  <Dato v={locale === 'en' ? meteo.marViento.toFixed(1) : meteo.marViento.toFixed(1).replace('.', ',')} u="m" cert="estimado" size={20}/>
+                </div>
+                <p style={{ gridColumn:'1 / -1', margin:0, fontSize:'var(--fs-xs)', color:'var(--muted)', lineHeight:1.5 }}>
+                  {locale === 'en'
+                    ? 'Swell comes from far away and reaches this beach or not depending on which way it faces; wind waves are raised by the local wind and drop with it. Model values, offshore.'
+                    : 'El mar de fondo viene de lejos y entra o no en esta playa según hacia dónde mira; el de viento lo levanta el viento de aquí y amaina con él. Valores del modelo, mar adentro.'}
+                </p>
+              </div>
+            )}
           </div>
 
           <Collapsible maxHeight={0} labelMore={locale === 'en' ? 'Sun, tides, temperature, wind' : 'Sol, mareas, temperatura, viento'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
@@ -1696,7 +1734,7 @@ function formatTime(iso?: string, locale: string = 'es', tz = 'Europe/Madrid'): 
     // ficha: ponerlo en hora peninsular allí desmiente al dato.
     const partes = new Intl.DateTimeFormat('en-GB', {
       timeZone: tz,
-      day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,
+      day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
     }).formatToParts(d)
     const p = (t: string) => partes.find(x => x.type === t)?.value ?? ''
     const dia = String(Number(p('day')))

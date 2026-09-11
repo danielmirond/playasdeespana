@@ -116,7 +116,7 @@ async function cargar(hoy: string): Promise<Record<number, FilaFlag>> {
         const d = new Date(iso)
         if (!Number.isNaN(d.getTime())) {
           hora = new Intl.DateTimeFormat('es-ES', {
-            timeZone: 'Atlantic/Canary', hour: '2-digit', minute: '2-digit', hour12: false,
+            timeZone: 'Atlantic/Canary', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
           }).format(d)
         }
       }

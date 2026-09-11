@@ -215,7 +215,7 @@ export function solunar(lat: number, lng: number, tz: string, date: Date = new D
     timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit',
   }).format(new Date(ms))
   const fmt = (ms: number) => new Intl.DateTimeFormat('es-ES', {
-    timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
+    timeZone: tz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
   }).format(new Date(ms))
   const hoy = diaLocal(date.getTime())
 

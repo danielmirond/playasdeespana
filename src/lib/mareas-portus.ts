@@ -79,7 +79,7 @@ function local(fechaUtc: string, tz: string) {
   const d = new Date(fechaUtc.replace(' ', 'T').replace(/\.0$/, '') + 'Z')
   const f = new Intl.DateTimeFormat('en-CA', {
     timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', hour12: false,
+    hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
   }).formatToParts(d)
   const g = (t: string) => f.find(x => x.type === t)?.value ?? ''
   return { iso: d.toISOString(), dia: `${g('year')}-${g('month')}-${g('day')}`, hora: `${g('hour')}:${g('minute')}` }

@@ -522,6 +522,11 @@ export default async function PlayaPage({ params }: Props) {
     amanecer:        solData?.amanecer,
     atardecer:       solData?.atardecer,
     periodo,
+    // Mar de fondo y mar de viento por separado. Ver `MarineData` en marine.ts.
+    marFondo:        mareasData?.mar_fondo_m?.[0] ?? null,
+    marFondoPeriodo: mareasData?.mar_fondo_periodo?.[0] ?? null,
+    marFondoDir:     mareasData?.mar_fondo_dir?.[0] ?? null,
+    marViento:       mareasData?.mar_viento_m?.[0] ?? null,
   }
 
   const oleajeHoras = mareasData

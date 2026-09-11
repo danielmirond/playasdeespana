@@ -198,6 +198,11 @@ export default async function BeachPageEn({ params }: Props) {
     amanecer: solData?.amanecer,
     atardecer: solData?.atardecer,
     periodo,
+    // Swell and wind waves, separately. See `MarineData` in marine.ts.
+    marFondo:        mareasData?.mar_fondo_m?.[0] ?? null,
+    marFondoPeriodo: mareasData?.mar_fondo_periodo?.[0] ?? null,
+    marFondoDir:     mareasData?.mar_fondo_dir?.[0] ?? null,
+    marViento:       mareasData?.mar_viento_m?.[0] ?? null,
   }
 
   const oleajeHoras = mareasData

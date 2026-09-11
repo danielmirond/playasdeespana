@@ -17,6 +17,21 @@ export interface MarineData {
    * `hourly`, coste cero.
    */
   wave_dir:    number[]
+  /**
+   * MAR DE FONDO y MAR DE VIENTO, por separado.
+   *
+   * La altura de ola total mezcla dos cosas que se comportan distinto. El
+   * mar de fondo viene de lejos, trae periodo largo y es el que entra o no
+   * en una playa según hacia dónde mira. El mar de viento lo levanta el
+   * viento de aquí y amaina con él. Es la distinción que usan pescadores y
+   * surfistas, y la que da sentido a la corrección por abrigo de la bandera.
+   * Misma llamada, tres variables más, coste cero. Probadas contra la API
+   * antes de añadirlas: un nombre inválido tumba la petición entera.
+   */
+  mar_fondo_m:       number[]
+  mar_fondo_periodo: number[]
+  mar_fondo_dir:     number[]
+  mar_viento_m:      number[]
   forecast:    ForecastDay[]
 }
 
@@ -93,7 +108,7 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
     // ahora desde el hourly (abajo). No añadir variables daily sin
     // probarlas: un solo nombre inválido tumba la petición entera.
     const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}`
-      + `&hourly=wave_height,wave_direction,wave_period,wind_wave_height,sea_surface_temperature`
+      + `&hourly=wave_height,wave_direction,wave_period,wind_wave_height,swell_wave_height,swell_wave_direction,swell_wave_period,sea_surface_temperature`
       + `&daily=wave_height_max,wind_speed_10m_max`
       + `&wind_speed_unit=kmh&forecast_days=7&timezone=${zonaHorariaParam(lat, lng)}`
 
@@ -109,6 +124,10 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
     const dirOla  = marine.hourly?.wave_direction ?? []
     const periodo = marine.hourly?.wave_period ?? []
     const temps   = marine.hourly?.sea_surface_temperature ?? []
+    const fondo    = marine.hourly?.swell_wave_height ?? []
+    const fondoPer = marine.hourly?.swell_wave_period ?? []
+    const fondoDir = marine.hourly?.swell_wave_direction ?? []
+    const olaViento = marine.hourly?.wind_wave_height ?? []
     const tempAgua = temps[ahora] ?? temps[0] ?? null
 
     const dias      = marine.daily?.time ?? []
@@ -143,6 +162,10 @@ async function fetchMareasUncached(lat: number, lng: number): Promise<MarineData
       oleaje_m:    oleaje.slice(ahora, ahora + 6).map((v: number) => parseFloat(v.toFixed(1))),
       wave_period: periodo.slice(ahora, ahora + 6),
       wave_dir:    dirOla.slice(ahora, ahora + 6),
+      mar_fondo_m:       fondo.slice(ahora, ahora + 6),
+      mar_fondo_periodo: fondoPer.slice(ahora, ahora + 6),
+      mar_fondo_dir:     fondoDir.slice(ahora, ahora + 6),
+      mar_viento_m:      olaViento.slice(ahora, ahora + 6),
       forecast,
     }
   } catch {

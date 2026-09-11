@@ -29,6 +29,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import Hueco from '@/components/ui/Hueco'
+import CuentaAtras from '@/components/ui/CuentaAtras'
 import { SLOTS } from '@/lib/adsense'
 import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { getMareasMunicipio, tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
@@ -198,7 +199,7 @@ export default async function TablaMareasPage({ params }: Props) {
             <p style={{ fontSize: '1.08rem', marginTop: '1rem', maxWidth: '38em' }}>
               {estado === 'subiendo' ? 'El mar está subiendo.' : estado === 'bajando' ? 'El mar está bajando.' : ''}{' '}
               La próxima <b>{proximo.tipo}</b> es a las <b>{proximo.hora}</b>
-              {proximo.dia !== hoy ? ` de ${fechaLarga(proximo.dia)}` : ''}, con {proximo.altura.toFixed(2).replace('.', ',')} m.
+              {proximo.dia !== hoy ? ` de ${fechaLarga(proximo.dia)}` : ''}<CuentaAtras iso={proximo.iso} />, con {proximo.altura.toFixed(2).replace('.', ',')} m.
               {mareas.rangoHoy != null && !med && <> Hoy el agua sube y baja <b>{mareas.rangoHoy.toFixed(1).replace('.', ',')} m</b>.</>}
             </p>
           ) : med ? (
@@ -236,7 +237,7 @@ export default async function TablaMareasPage({ params }: Props) {
                 {dias.map((d, i) => (
                   <article key={d} style={{ border: '1px solid var(--line)', borderRadius: 6, padding: '.9rem 1rem' }}>
                     <h3 style={{ margin: '0 0 .5rem', fontSize: '.95rem', fontFamily: 'var(--font-serif)' }}>
-                      {etiquetaDia(d, i)} <span style={{ color: 'var(--muted)', fontWeight: 400, fontSize: '.82rem' }}>· {fechaLarga(d)}</span>
+                      {etiquetaDia(d, i)}{/* La fecha larga solo acompaña a «Hoy» y «Mañana». Del tercer día en adelante la etiqueta YA es la fecha, y repetirla daba «domingo, 13 de septiembre · domingo, 13 de septiembre». */}{etiquetaDia(d, i) !== fechaLarga(d) && <> <span style={{ color: 'var(--muted)', fontWeight: 400, fontSize: '.82rem' }}>· {fechaLarga(d)}</span></>}
                     </h3>
                     <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.92rem', fontVariantNumeric: 'tabular-nums' }}>
                       <tbody>

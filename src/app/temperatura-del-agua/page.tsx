@@ -43,7 +43,7 @@ const POR_PROVINCIA = 6
 
 async function tempBatch(coords: { lat: number; lng: number }[]): Promise<(number | null)[]> {
   if (!coords.length) return []
-  const hora = parseInt(new Intl.DateTimeFormat('es-ES', { hour: 'numeric', hour12: false, timeZone: 'Europe/Madrid' }).format(new Date()), 10) || 12
+  const hora = parseInt(new Intl.DateTimeFormat('es-ES', { hour: 'numeric', hourCycle: 'h23', timeZone: 'Europe/Madrid' }).format(new Date()), 10) || 12
   const CHUNK = 50
   const chunks: { lat: number; lng: number }[][] = []
   for (let i = 0; i < coords.length; i += CHUNK) chunks.push(coords.slice(i, i + CHUNK))
