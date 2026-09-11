@@ -70,6 +70,30 @@ const API = 'https://portus.puertos.es/portussvr/api/predData/portus'
 export function tieneMareas(slugMunicipio: string): boolean {
   return slugMunicipio in MAPA
 }
+/**
+ * Las tablas de mareas más cercanas, para enlazarlas entre sí.
+ *
+ * Solo destinos con marea real: desde Santoña no tiene sentido mandar a una
+ * página que abre diciendo «aquí la marea son 25 cm». Cálculo sobre los
+ * centroides del mapa, sin red ni cuota.
+ */
+export function mareasCercanas(slugMunicipio: string, n = 6, maxKm = 60): Array<{ slug: string; municipio: string; km: number }> {
+  const yo = MAPA[slugMunicipio]
+  if (!yo || !Number.isFinite(yo.lat)) return []
+  const r = (d: number) => d * Math.PI / 180
+  const km = (b: UbicacionMarea) => {
+    const dLat = r(b.lat - yo.lat), dLon = r(b.lng - yo.lng)
+    const x = Math.sin(dLat / 2) ** 2 + Math.cos(r(yo.lat)) * Math.cos(r(b.lat)) * Math.sin(dLon / 2) ** 2
+    return 2 * 6371 * Math.asin(Math.sqrt(x))
+  }
+  return Object.entries(MAPA)
+    .filter(([s, u]) => s !== slugMunicipio && u.zona !== 'mediterraneo' && Number.isFinite(u.lat))
+    .map(([s, u]) => ({ slug: s, municipio: u.municipio, km: Math.round(km(u) * 10) / 10 }))
+    .filter(x => x.km <= maxKm)
+    .sort((a, b) => a.km - b.km)
+    .slice(0, n)
+}
+
 export function ubicacionMareas(slugMunicipio: string): UbicacionMarea | null {
   return MAPA[slugMunicipio] ?? null
 }

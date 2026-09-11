@@ -32,7 +32,7 @@ import Hueco from '@/components/ui/Hueco'
 import CuentaAtras from '@/components/ui/CuentaAtras'
 import { SLOTS } from '@/lib/adsense'
 import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
-import { getMareasMunicipio, tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
+import { getMareasMunicipio, tieneMareas, ubicacionMareas, mareasCercanas } from '@/lib/mareas-portus'
 import type { Extremo, PuntoHora } from '@/lib/mareas-portus'
 import { CertBadge } from '@/components/playa/Certeza'
 import { estadoLuna, solunar } from '@/lib/luna'
@@ -148,6 +148,7 @@ export default async function TablaMareasPage({ params }: Props) {
   const mareas = await getMareasMunicipio(slug, lat, lng)
   const ubi = ubicacionMareas(slug)!
   const med = ubi.zona === 'mediterraneo'
+  const cercanas = med ? [] : mareasCercanas(slug)
 
   // La hora actual, en la zona de la costa, fijada en servidor: la página
   // es ISR de 30 min y no hay cliente que la corrija.
@@ -357,6 +358,25 @@ export default async function TablaMareasPage({ params }: Props) {
                 ))}
               </ul>
             </section>
+            )}
+
+            {/* OTRAS TABLAS DE MAREAS CERCA. Enlaza tablas entre sí, con la
+                distancia al lado, que es lo que decide si merece la pena ir.
+                Solo destinos con marea real, y nada en las mediterráneas. */}
+            {cercanas.length > 0 && (
+              <section aria-labelledby="h-cercanas" style={{ marginTop: '2.25rem' }}>
+                <h2 id="h-cercanas" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', margin: '0 0 .6rem' }}>
+                  Tablas de mareas cerca de {municipio.nombre}
+                </h2>
+                <ul style={{ columns: '2 14rem', gap: '2rem', padding: 0, margin: 0, listStyle: 'none', fontSize: '.95rem' }}>
+                  {cercanas.map(c => (
+                    <li key={c.slug} style={{ breakInside: 'avoid', padding: '.25rem 0' }}>
+                      <Link href={`/municipio/${c.slug}/tabla-de-mareas`} style={{ color: 'var(--ink)' }}>Mareas en {c.municipio}</Link>
+                      <span style={{ color: 'var(--muted)', fontSize: '.85rem' }}> · {c.km < 10 ? c.km.toFixed(1).replace('.', ',') : Math.round(c.km)} km</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
             )}
 
             {/* EQUIPO DE PESCA. Después de la tabla solunar, nunca antes:

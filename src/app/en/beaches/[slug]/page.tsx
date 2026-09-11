@@ -19,7 +19,9 @@ import { getBanderaSb, tieneBanderaSb } from '@/lib/banderas-sb'
 import { getBanderaFerrol, tieneBanderaFerrol } from '@/lib/banderas-ferrol'
 import { getBanderaGijon, tieneBanderaGijon } from '@/lib/banderas-gijon'
 import { esUsoProhibido } from '@/lib/playas-prohibidas'
-import { getMareasMunicipio } from '@/lib/mareas-portus'
+import { getMareasMunicipio, ubicacionMareas } from '@/lib/mareas-portus'
+import { solunar } from '@/lib/luna'
+import { zonaHoraria } from '@/lib/zona-horaria'
 import { toSlug as slugMuni } from '@/lib/playas'
 import { nombreConPlaya, haversine } from '@/lib/geo'
 import { estimarMareas } from '@/lib/mareas-lunar'
@@ -284,6 +286,13 @@ export default async function BeachPageEn({ params }: Props) {
   const mareasOficiales = mareasOficialesRaw
     ? { extremos: mareasOficialesRaw.extremos.map(e => ({ hora: e.hora, dia: e.dia, tipo: e.tipo, altura: e.altura })), ubicacion: mareasOficialesRaw.ubicacion.nombre }
     : null
+  // PESCA HOY, calculada en el SERVIDOR y pasada como dato: la ficha es de
+  // cliente, y calcularla allí con `new Date()` daría árboles distintos en
+  // servidor y cliente —un #418—. Solo donde hay marea real.
+  const ubiPesca = ubicacionMareas(slugMuni(playa.municipio ?? ''))
+  const pescaHoy = ubiPesca && ubiPesca.zona !== 'mediterraneo'
+    ? { periodos: solunar(playa.lat, playa.lng, zonaHoraria(playa.lat, playa.lng)).periodos.map(x => ({ hora: x.hora, fin: x.fin, tipo: x.tipo })) }
+    : null
 
   // Qué día es hoy, en hora peninsular y decidido aquí, en el servidor.
   // Mismo motivo que en la ficha en español: TraficoSection se renderiza
@@ -385,6 +394,8 @@ export default async function BeachPageEn({ params }: Props) {
         medusas={medusas}
         mareasLunar={mareasLunar}
         mareasOficiales={mareasOficiales}
+        pesca={pescaHoy}
+        mareasSlug={ubiPesca ? slugMuni(playa.municipio ?? '') : null}
         horaIdeal={horaIdeal}
         playasCercanas={playasCercanas}
         municipioSlug={municipioSlugProp}

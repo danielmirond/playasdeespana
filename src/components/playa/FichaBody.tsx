@@ -129,6 +129,16 @@ interface Props {
    * en la lunar frente a la tabla armónica (Cádiz, ago-2026).
    */
   mareasOficiales?: { extremos: Array<{ hora: string; dia: string; tipo: 'pleamar' | 'bajamar'; altura: number }>; ubicacion: string } | null
+  /** Periodos solunares de hoy, calculados en el SERVIDOR: calcularlos aquí con `new Date()` rompería la hidratación. */
+  pesca?: { periodos: Array<{ hora: string; fin: string; tipo: 'mayor' | 'menor' }> } | null
+  /**
+   * Slug para enlazar la TABLA DE MAREAS. Va aparte de `municipioSlug` porque
+   * ese solo llega cuando el municipio tiene página propia (mínimo 4 playas),
+   * y la tabla de mareas ya no depende de eso: existe en los 406 municipios
+   * con marea real. Usar `municipioSlug` dejaba sin enlace a Caleta del
+   * Cotillo y a todas las playas de municipios pequeños.
+   */
+  mareasSlug?: string | null
   horaIdeal?:      HoraIdeal
   playasCercanas?: { slug: string; nombre: string; municipio: string; distKm: number; bandera?: boolean; foto?: string }[]
   /** Agregado de opiniones server-side para SSR + JSON-LD. */
@@ -308,7 +318,7 @@ const ORDER_V2: string[] = [
   'intro', 'trust', 'estado', 'webcam', 'seguridad', 'calidad', 'opiniones-dest', 'cta-ctx',
   // 2 · PLAN
   'asistente', 'como-llegar', 'trafico', 'actividades-gyg', 'mejor-hora', 'afiliados', 'comer', 'chiringuitos', 'dormir',
-  'campings', 'ferries', 'surf', 'buceo', 'cta-barco', 'ad',
+  'campings', 'ferries', 'surf', 'pesca', 'buceo', 'cta-barco', 'ad',
   // 3 · PROFUNDIDAD
   'meteo', 'datos', 'ad-profundidad', 'fotos', 'video', 'opiniones', 'votacion', 'asistente-generico', 'cuaderno-cta', 'cercanas',
   'texto-seo', 'hubs', 'faqs', 'crosslinks',
@@ -332,7 +342,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, medusas, mareasLunar, mareasOficiales, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -915,8 +925,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   <span style={{ color: mareasLunar.tipo === 'vivas' ? 'var(--mar-500)' : mareasLunar.tipo === 'muertas' ? 'var(--aceptable)' : 'var(--muted)', fontWeight:600 }}>
                     {mareasLunar.tipo === 'vivas' ? i18n.vivas : mareasLunar.tipo === 'muertas' ? i18n.muertas : i18n.mediasLabel}
                   </span>
-                  {municipioSlug && mareasOficiales && (
-                    <Link href={locale === 'en' ? `/municipio/${municipioSlug}/tabla-de-mareas` : `/municipio/${municipioSlug}/tabla-de-mareas`}
+                  {mareasSlug && mareasOficiales && (
+                    <Link href={locale === 'en' ? `/municipio/${mareasSlug}/tabla-de-mareas` : `/municipio/${mareasSlug}/tabla-de-mareas`}
                       style={{ color:'var(--ink)', fontWeight:600 }}>
                       {locale === 'en' ? 'Tide table for the next 3 days →' : 'Tabla de mareas de hoy, mañana y pasado →'}
                     </Link>
@@ -1537,6 +1547,37 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         <TextoSEO key="texto-seo" playa={playa} locale={locale} />
+
+        {/* PESCA HOY. El dato de la tabla de mareas, resumido en la ficha: los
+            periodos solunares del día y el salto a la tabla completa con el
+            equipo. Solo donde hay marea real (lo decide la página) y nunca con
+            bandera roja (va en BLOQUES_DUROS con surf y buceo). */}
+        {pesca && pesca.periodos.length > 0 && mareasSlug && (
+          <div key="pesca" className={styles.card} id="s-pesca">
+            <div className={styles.cardHead}>
+              <h2 className={styles.cardTitle}>{locale === 'en' ? <>Fishing <em>today</em> at {nombreH}</> : <>Pesca <em>hoy</em> en {nombreH}</>}</h2>
+              <span className={styles.cardSrc}>{locale === 'en' ? 'Solunar table' : 'Tabla solunar'}</span>
+            </div>
+            <div className={styles.cardBody}>
+              <div style={{ display:'flex', flexWrap:'wrap', gap:'.5rem' }}>
+                {pesca.periodos.map(p => (
+                  <div key={p.hora} style={{ border:'1px solid var(--line)', borderLeftWidth: p.tipo === 'mayor' ? 3 : 1, borderRadius:4, padding:'.45rem .6rem', fontFamily:'var(--font-mono)', fontSize:'var(--fs-sm)' }}>
+                    {p.hora}–{p.fin}
+                    <div style={{ fontSize:'var(--fs-xs)', color:'var(--muted)' }}>{locale === 'en' ? (p.tipo === 'mayor' ? 'major period' : 'minor period') : `periodo ${p.tipo}`}</div>
+                  </div>
+                ))}
+              </div>
+              <p style={{ margin:'.7rem 0 0', fontSize:'var(--fs-xs)', color:'var(--muted)', lineHeight:1.5 }}>
+                {locale === 'en'
+                  ? 'When the Moon is highest, lowest, rising or setting. The astronomy is exact; that fish bite more then is angling tradition.'
+                  : 'Cuando la Luna pasa por lo más alto, lo más bajo, sale o se pone. La astronomía es exacta; que el pez pique más entonces es tradición pesquera.'}
+              </p>
+              <Link href={`/municipio/${mareasSlug}/tabla-de-mareas#h-solunar`} style={{ display:'inline-block', marginTop:'.6rem', fontSize:'var(--fs-sm)', fontWeight:600, color:'var(--ink)' }}>
+                {locale === 'en' ? 'Tides, solunar table and fishing gear →' : 'Mareas, tabla solunar y equipo de pesca →'}
+              </Link>
+            </div>
+          </div>
+        )}
 
         {/* CTA alquiler de barco — solo para costas relevantes */}
         {locale === 'es' && debeMostrarCTABarco(playa) && (

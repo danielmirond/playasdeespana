@@ -78,6 +78,9 @@ export function hayBanderaRoja(
  */
 export const BLOQUES_DUROS = new Set([
   'cta-ctx', 'cta-barco', 'buceo', 'surf', 'chiringuitos', 'afiliados',
+  // `pesca` (sep-2026) va con surf y buceo: es una actividad EN el agua, y con
+  // el baño prohibido no se le proponen horas buenas para meterse en ella.
+  'pesca',
 ])
 
 /**
