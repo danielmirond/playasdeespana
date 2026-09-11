@@ -37,7 +37,6 @@ import type { Extremo, PuntoHora } from '@/lib/mareas-portus'
 import { CertBadge } from '@/components/playa/Certeza'
 import { estadoLuna, solunar } from '@/lib/luna'
 import { articulosPara, urlPesca } from '@/lib/pesca'
-import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import styles from '../MunicipioPage.module.css'
 
 export const revalidate = 1800
@@ -162,11 +161,6 @@ export default async function TablaMareasPage({ params }: Props) {
   // allí sería vestir de contenido lo que no lo es.
   const sol = med ? null : solunar(lat, lng, tz)
   const pesca = articulosPara(ubi.zona)
-  // Barcos: solo donde hay socio de verdad. Medido, los 21 socios son
-  // mediterráneos o baleares, así que el solape con las 406 páginas de
-  // marea real es CERO y con las mediterráneas son 14. Enlazar donde no hay
-  // socio manda al usuario a una página que no le sirve.
-  const barco = med ? getBoatLinkForPlaya(municipio.provincia, municipio.nombre) : null
   const porDia = new Map<string, Extremo[]>()
   for (const e of mareas?.extremos ?? []) (porDia.get(e.dia) ?? porDia.set(e.dia, []).get(e.dia)!).push(e)
   const dias = [...porDia.keys()].sort().slice(0, 3)
@@ -421,29 +415,6 @@ export default async function TablaMareasPage({ params }: Props) {
               </p>
             </section>
           </>
-        )}
-
-        {/* Barcos: solo en los 14 municipios mediterráneos con socio.
-            Donde la marea importa no hay ninguno de los 21, así que aquí
-            el enlace es honesto y allí no existiría.
-
-            FUERA del `{mareas && ...}` a propósito: en el Mediterráneo
-            Portus no devuelve extremos, así que `mareas` es null y todo lo
-            que cuelga de él se salta — incluido esto, que es justo donde
-            tiene que aparecer. Estaba dentro y por eso Barcelona no lo
-            pintaba. */}
-        {barco && (
-          <section style={{ marginTop: '2.25rem', border: '1px solid var(--line)', borderRadius: 6, padding: '.9rem 1rem' }}>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', margin: '0 0 .3rem' }}>
-              Salir al mar en {municipio.nombre}
-            </h2>
-            <p style={{ margin: '0 0 .5rem', fontSize: '.9rem', color: 'var(--muted)' }}>
-              Aquí la marea no condiciona la salida, pero el viento sí: mira el parte antes de reservar.
-            </p>
-            <a href={barco.href} target="_blank" rel="sponsored nofollow noopener" style={{ color: 'var(--ink)', fontWeight: 600 }}>
-              {barco.label} →
-            </a>
-          </section>
         )}
 
       </main>
