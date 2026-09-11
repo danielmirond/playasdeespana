@@ -7,7 +7,7 @@
 //
 // Uso: node scripts/extract-extranjeras.mjs
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -28,6 +28,15 @@ const PROV_ES = new Set([
 ])
 
 const playas = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'utf-8'))
+
+// País real de las fichas de zona fronteriza, preguntado a OpenStreetMap por
+// scripts/geo-pais-frontera.mjs y guardado en el repo. Manda sobre las reglas
+// de abajo cuando existe: las reglas por coordenadas fallan en las
+// desembocaduras del Guadiana y del Miño y no cubrían el Bidasoa. `null`
+// (sin respuesta) no excluye nada: ante la duda, la ficha se queda.
+const PAIS = existsSync(resolve(ROOT, 'src/data/pais-frontera.json'))
+  ? JSON.parse(readFileSync(resolve(ROOT, 'src/data/pais-frontera.json'), 'utf-8'))
+  : {}
 
 // Override manual: slugs extranjeros con provincia ES válida PERO coords fuera
 // de España que las reglas geográficas no atrapan limpiamente (p.ej. un lago
@@ -69,11 +78,28 @@ function fueraDeEspana(p) {
   return false
 }
 
+// LA LISTA SOLO CRECE. Una exclusión ya publicada no desaparece por
+// regenerar: solo sale si se rescata a mano en SAFE.
+//
+// Pasó en sep-2026: regenerar devolvía a producción 36 fichas extranjeras
+// —Gibraltar, costa de Argelia (Mostaganem), Marruecos, interior de Francia y
+// del Alentejo— porque se habían excluido en commits posteriores y luego otro
+// commit les corrigió la provincia a una española. Ninguna regla de este
+// fichero las atrapaba ya, y el generador las soltaba en silencio.
+const OUT_PATH = resolve(ROOT, 'src/data/slugs-extranjeras.json')
+const PREVIAS = existsSync(OUT_PATH) ? JSON.parse(readFileSync(OUT_PATH, 'utf-8')) : []
+const SLUGS_CATALOGO = new Set(playas.map(p => p?.slug).filter(Boolean))
+
 const extranjeras = playas
   .filter(p => p?.slug && !SAFE.has(p.slug) && (
+    PREVIAS.includes(p.slug) ||
     !p.provincia || !PROV_ES.has(p.provincia) || fueraDeEspana(p) || EXTRA.has(p.slug)
+    || (PAIS[p.slug] != null && PAIS[p.slug] !== 'es')
   ))
   .map(p => p.slug)
+// Y las previas que ya no están en el catálogo se conservan igual: si una
+// importación futura las trae de vuelta, deben seguir fuera.
+for (const slug of PREVIAS) if (!SLUGS_CATALOGO.has(slug) && !SAFE.has(slug) && !extranjeras.includes(slug)) extranjeras.push(slug)
 
 const out = resolve(ROOT, 'src/data/slugs-extranjeras.json')
 writeFileSync(out, JSON.stringify(extranjeras.sort(), null, 2) + '\n')

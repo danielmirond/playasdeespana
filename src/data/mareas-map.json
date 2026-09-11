@@ -516,17 +516,6 @@
   "lat": 42.40173,
   "lng": -8.81564
  },
- "hendaya": {
-  "id": 21102,
-  "nombre": "Hondarribia",
-  "tipo": "Localidad",
-  "d": 3441,
-  "zona": "cantabrico",
-  "municipio": "Hendaya",
-  "provincia": "Gipuzkoa",
-  "lat": 43.38027,
-  "lng": -1.75496
- },
  "valle-de-guimar": {
   "id": 24113,
   "nombre": "Candelaria",
@@ -537,17 +526,6 @@
   "provincia": "Santa Cruz de Tenerife",
   "lat": 28.30087,
   "lng": -16.36775
- },
- "monte-gordo": {
-  "id": 33101,
-  "nombre": "Punta del Caiman (Isla Cristina)",
-  "tipo": "Playa",
-  "d": 11852,
-  "zona": "atlantico",
-  "municipio": "Monte Gordo",
-  "provincia": "Huelva",
-  "lat": 37.17614,
-  "lng": -7.46081
  },
  "urola-costa": {
   "id": 21105,
@@ -2683,17 +2661,6 @@
   "lat": 38.18605,
   "lng": -0.59766
  },
- "cerbere": {
-  "id": 27136,
-  "nombre": "Portbou",
-  "tipo": "Localidad",
-  "d": 2495,
-  "zona": "mediterraneo",
-  "municipio": "Cerbère",
-  "provincia": "Girona",
-  "lat": 42.44837,
-  "lng": 3.16427
- },
  "malaga": {
   "id": 15210,
   "nombre": "Malaga",
@@ -3563,17 +3530,6 @@
   "lat": 39.55219,
   "lng": 2.38234
  },
- "vilar-de-mouros": {
-  "id": 22211,
-  "nombre": "A Guarda",
-  "tipo": "Localidad",
-  "d": 6962,
-  "zona": "atlantico",
-  "municipio": "Vilar de Mouros",
-  "provincia": "Pontevedra",
-  "lat": 41.88077,
-  "lng": -8.79937
- },
  "fene": {
   "id": 12110,
   "nombre": "Ferrol",
@@ -3771,17 +3727,6 @@
   "provincia": "Baleares",
   "lat": 39.89071,
   "lng": 4.09013
- },
- "seixas": {
-  "id": 22211,
-  "nombre": "A Guarda",
-  "tipo": "Localidad",
-  "d": 4596,
-  "zona": "atlantico",
-  "municipio": "Seixas",
-  "provincia": "Pontevedra",
-  "lat": 41.89095,
-  "lng": -8.82488
  },
  "bahia-de-cadiz": {
   "id": 23109,
@@ -4398,17 +4343,6 @@
   "provincia": "Granada",
   "lat": 36.74098,
   "lng": -3.31546
- },
- "hendaye": {
-  "id": 21102,
-  "nombre": "Hondarribia",
-  "tipo": "Localidad",
-  "d": 2456,
-  "zona": "cantabrico",
-  "municipio": "Hendaye",
-  "provincia": "Gipuzkoa",
-  "lat": 43.37646,
-  "lng": -1.76602
  },
  "son-servera": {
   "id": 28204,
@@ -6544,28 +6478,6 @@
   "lat": 38.56521,
   "lng": -0.0526
  },
- "cristelo": {
-  "id": 32262,
-  "nombre": "Os Muiños (A Guarda)",
-  "tipo": "Playa",
-  "d": 1329,
-  "zona": "atlantico",
-  "municipio": "Cristelo",
-  "provincia": "Pontevedra",
-  "lat": 41.86405,
-  "lng": -8.86401
- },
- "moledo": {
-  "id": 32262,
-  "nombre": "Os Muiños (A Guarda)",
-  "tipo": "Playa",
-  "d": 2803,
-  "zona": "atlantico",
-  "municipio": "Moledo",
-  "provincia": "Pontevedra",
-  "lat": 41.85093,
-  "lng": -8.86752
- },
  "caleta-del-sebo": {
   "id": 34227,
   "nombre": "Las Conchas (La Graciosa)",
@@ -7214,28 +7126,6 @@
   "provincia": "Santa Cruz de Tenerife",
   "lat": 28.05527,
   "lng": -17.15151
- },
- "vila-praia-de-ancora": {
-  "id": 32262,
-  "nombre": "Os Muiños (A Guarda)",
-  "tipo": "Playa",
-  "d": 7692,
-  "zona": "atlantico",
-  "municipio": "Vila Praia de Âncora",
-  "provincia": "Pontevedra",
-  "lat": 41.80687,
-  "lng": -8.86743
- },
- "vila-real-de-santo-antonio": {
-  "id": 23101,
-  "nombre": "Isla Cristina",
-  "tipo": "Localidad",
-  "d": 9886,
-  "zona": "atlantico",
-  "municipio": "Vila Real de Santo António",
-  "provincia": "Huelva",
-  "lat": 37.17196,
-  "lng": -7.41778
  },
  "castell-platja-daro": {
   "id": 27127,
