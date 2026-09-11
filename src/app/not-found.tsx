@@ -1,6 +1,19 @@
 // src/app/not-found.tsx. Custom 404 with beach suggestions
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import type { Metadata } from 'next'
+
+// `noindex` explícito. Hasta sep-2026 esta página se servía con código 200
+// en fichas, municipios, provincias y tablas de mareas —el `loading.tsx` de
+// esas rutas empezaba a enviar la respuesta antes del `notFound()`— y heredaba
+// el `index, follow` del layout: cualquier URL inexistente era indexable, y
+// Search Console tenía 158 fichas inexistentes recibiendo impresiones. Los
+// `loading.tsx` se han retirado; esto es la segunda red, por si el estado
+// vuelve a colarse como 200 por otro camino.
+export const metadata: Metadata = {
+  title: 'Página no encontrada',
+  robots: { index: false, follow: true },
+}
 
 export default function NotFound() {
   return (

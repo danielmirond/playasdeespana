@@ -10,6 +10,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import EXTRANJERAS_ARR from './src/data/slugs-extranjeras.json'
 import RETIRADAS_MAP from './src/data/playas-retiradas.json'
 import DUPLICADOS_MAP from './src/data/duplicados.json'
+import ANTIGUOS_MAP from './src/data/slugs-antiguos.json'
 
 const SUPPORTED_LOCALES = ['en']
 const DEFAULT_LOCALE    = 'es'
@@ -33,6 +34,13 @@ const RETIRADAS = new Set(Object.keys(RETIRADAS_MAP as Record<string, string>))
 // la ficha canónica para consolidar señales y quitar la autocanibalización.
 // Generado por scripts/build-duplicados.mjs (analiza public/data/playas.json).
 const DUPLICADOS = DUPLICADOS_MAP as Record<string, string>
+
+// Slugs ANTIGUOS de fichas que siguen existiendo con otro slug. Salen de cruzar
+// Search Console con el catálogo: URLs que Google aún enseña y ya no existen,
+// con UN ÚNICO candidato claro, contrastado con las búsquedas que las traían.
+// 301 para conservar lo que tuvieran. Fichero propio y NO duplicados.json,
+// porque aquel lo regenera un script y borraría lo añadido a mano.
+const ANTIGUOS = ANTIGUOS_MAP as Record<string, string>
 
 const GONE_HTML =
   '<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>410 Gone</title></head><body style="font-family:Georgia,serif;text-align:center;padding:4rem 2rem;color:#2a1a08;background:#f5ecd5"><h1>410 · Contenido retirado</h1><p>Esta ficha ya no pertenece al ámbito de Playas de España y se ha retirado del catálogo.</p><p><a href="/" style="color:#6b400a">Ir a Playas de España</a></p></body></html>'
@@ -72,7 +80,7 @@ export function middleware(req: NextRequest) {
       })
     }
     // 0bis) 301 de ficha duplicada → canónica (misma playa duplicada en dataset).
-    const canon = DUPLICADOS[slug]
+    const canon = DUPLICADOS[slug] ?? ANTIGUOS[slug]
     if (canon) {
       const url = req.nextUrl.clone()
       url.pathname = `/${mFicha[1]}/${canon}`
