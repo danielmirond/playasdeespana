@@ -166,19 +166,22 @@ function gmst(date: Date): number {
  * min de paso el error tras interpolar es de segundos, y el código se
  * puede leer.
  */
-function eventosLunares(diaUTC: Date, lat: number, lng: number) {
-  const H0 = 0.125            // altura de referencia para orto/ocaso lunar (grados)
-  const t0 = Date.UTC(diaUTC.getUTCFullYear(), diaUTC.getUTCMonth(), diaUTC.getUTCDate())
+function eventosLunares(desde: number, horas: number, lat: number, lng: number) {
+  // Se muestrea un RANGO y se devuelven TODOS los cruces, no el primero de
+  // cada tipo en un día UTC. La versión anterior buscaba de 00:00 a 24:00
+  // UTC, y en España eso es de 02:00 a 02:00: el tránsito inferior de la
+  // madrugada —el periodo mayor de las ~01:50— caía la víspera en UTC y
+  // desaparecía. Contrastado con fishingpoints.app para Nova Icària el
+  // 11-sep-2026: ellos daban cuatro periodos y nosotros tres.
+  const H0 = 0.125
   const paso = 10 * 60 * 1000
-  const n = (24 * 60) / 10
-
+  const n = (horas * 60) / 10
   const altura = (t: number) => {
     const d = new Date(t)
     const { ar, dec } = posicionLuna(d)
     const H = rad(norm360(gmst(d) + lng - ar))
     return Math.asin(Math.sin(rad(lat)) * Math.sin(rad(dec)) + Math.cos(rad(lat)) * Math.cos(rad(dec)) * Math.cos(H)) * 180 / Math.PI
   }
-  // Ángulo horario en [-180, 180): 0 = tránsito superior, ±180 = inferior
   const angHorario = (t: number) => {
     const d = new Date(t)
     const { ar } = posicionLuna(d)
@@ -186,22 +189,18 @@ function eventosLunares(diaUTC: Date, lat: number, lng: number) {
     if (h >= 180) h -= 360
     return h
   }
-
-  const cruces = { salida: null as number | null, puesta: null as number | null, superior: null as number | null, inferior: null as number | null }
-  let aPrev = altura(t0), hPrev = angHorario(t0)
+  const ev = { salida: [] as number[], puesta: [] as number[], superior: [] as number[], inferior: [] as number[] }
+  let aPrev = altura(desde), hPrev = angHorario(desde)
   for (let i = 1; i <= n; i++) {
-    const t = t0 + i * paso
+    const t = desde + i * paso
     const a = altura(t), h = angHorario(t)
-    // orto y ocaso: cruce de la altura de referencia
-    if (aPrev < H0 && a >= H0 && cruces.salida === null) cruces.salida = t - paso + paso * ((H0 - aPrev) / (a - aPrev))
-    if (aPrev > H0 && a <= H0 && cruces.puesta === null) cruces.puesta = t - paso + paso * ((aPrev - H0) / (aPrev - a))
-    // tránsito superior: el ángulo horario pasa de negativo a positivo
-    if (hPrev < 0 && h >= 0 && cruces.superior === null) cruces.superior = t - paso + paso * (-hPrev / (h - hPrev))
-    // tránsito inferior: salto de +180 a -180
-    if (hPrev > 90 && h < -90 && cruces.inferior === null) cruces.inferior = t - paso + paso * ((180 - hPrev) / (180 - hPrev + h + 180))
+    if (aPrev < H0 && a >= H0) ev.salida.push(t - paso + paso * ((H0 - aPrev) / (a - aPrev)))
+    if (aPrev > H0 && a <= H0) ev.puesta.push(t - paso + paso * ((aPrev - H0) / (aPrev - a)))
+    if (hPrev < 0 && h >= 0) ev.superior.push(t - paso + paso * (-hPrev / (h - hPrev)))
+    if (hPrev > 90 && h < -90) ev.inferior.push(t - paso + paso * ((180 - hPrev) / (180 - hPrev + h + 180)))
     aPrev = a; hPrev = h
   }
-  return cruces
+  return ev
 }
 
 /**
@@ -212,26 +211,30 @@ function eventosLunares(diaUTC: Date, lat: number, lng: number) {
  * la convención de toda la vida y la que usan las tablas impresas.
  */
 export function solunar(lat: number, lng: number, tz: string, date: Date = new Date()): Solunar {
-  const ev = eventosLunares(date, lat, lng)
+  const diaLocal = (ms: number) => new Intl.DateTimeFormat('en-CA', {
+    timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date(ms))
   const fmt = (ms: number) => new Intl.DateTimeFormat('es-ES', {
     timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
   }).format(new Date(ms))
+  const hoy = diaLocal(date.getTime())
+
+  // Rango holgado alrededor del día LOCAL y luego se filtra por fecha local:
+  // así ningún evento de madrugada se queda en el día UTC equivocado.
+  const ev = eventosLunares(date.getTime() - 36 * 3600 * 1000, 72, lat, lng)
+  const deHoy = (xs: number[]) => xs.filter(x => diaLocal(x) === hoy)
 
   const periodos: Periodo[] = []
-  const add = (ms: number | null, tipo: 'mayor' | 'menor', causa: string, causaEn: string) => {
-    if (ms === null) return
+  const add = (ms: number, tipo: 'mayor' | 'menor', causa: string, causaEn: string) => {
     const media = tipo === 'mayor' ? 60 * 60 * 1000 : 30 * 60 * 1000
     periodos.push({ hora: fmt(ms - media), fin: fmt(ms + media), tipo, causa, causaEn })
   }
-  add(ev.superior, 'mayor', 'la Luna en lo más alto del cielo', 'moon at its highest')
-  add(ev.inferior, 'mayor', 'la Luna en lo más bajo, bajo el horizonte', 'moon at its lowest, below the horizon')
-  add(ev.salida,   'menor', 'sale la Luna', 'moonrise')
-  add(ev.puesta,   'menor', 'se pone la Luna', 'moonset')
+  for (const x of deHoy(ev.superior)) add(x, 'mayor', 'la Luna en lo más alto del cielo', 'moon at its highest')
+  for (const x of deHoy(ev.inferior)) add(x, 'mayor', 'la Luna en lo más bajo, bajo el horizonte', 'moon at its lowest, below the horizon')
+  for (const x of deHoy(ev.salida))   add(x, 'menor', 'sale la Luna', 'moonrise')
+  for (const x of deHoy(ev.puesta))   add(x, 'menor', 'se pone la Luna', 'moonset')
   periodos.sort((a, b) => a.hora.localeCompare(b.hora))
 
-  return {
-    periodos,
-    salida: ev.salida !== null ? fmt(ev.salida) : null,
-    puesta: ev.puesta !== null ? fmt(ev.puesta) : null,
-  }
+  const sal = deHoy(ev.salida)[0], pue = deHoy(ev.puesta)[0]
+  return { periodos, salida: sal != null ? fmt(sal) : null, puesta: pue != null ? fmt(pue) : null }
 }
