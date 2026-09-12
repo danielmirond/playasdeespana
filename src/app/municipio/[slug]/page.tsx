@@ -18,6 +18,7 @@ import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tinte } from '@/lib/tinte'
 import SeaIcon from '@/components/ui/SeaIcon'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
+import { tieneBarcos } from '@/lib/barcos-municipio'
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -86,11 +87,15 @@ export default async function MunicipioPage({ params }: Props) {
   const buenas = playasConEstado.filter(p => p.estadoKey === 'CALMA' || p.estadoKey === 'BUENA').length
   const conBandera = playas.filter(p => p.bandera).length
 
-  // Barcos: donde hay socio. Medido sobre los municipios con página: 20
-  // tienen localidad propia y 169 comparten costa con alguna. Las Palmas
-  // queda fuera: el helper la manda a Tenerife por falta de oferta, y
-  // en una ficha de Fuerteventura eso es enviar a otra isla.
-  const barco = municipio.provincia === 'Las Palmas' ? null : getBoatLinkForPlaya(municipio.provincia, municipio.nombre)
+  // Barcos: ahora el enlace va a nuestra propia subpágina del municipio,
+  // que existe justo en los 87 donde SamBoat tiene inventario. El enlace a
+  // la landing de costa se queda como respaldo para los municipios sin
+  // subpágina propia, y Las Palmas sigue fuera: el respaldo la manda a
+  // Tenerife por falta de oferta, y eso es enviar a otra isla.
+  const barcoPropio = tieneBarcos(slug)
+  const barco = barcoPropio ? null
+    : municipio.provincia === 'Las Palmas' ? null
+    : getBoatLinkForPlaya(municipio.provincia, municipio.nombre)
   const barcoLocal = !!barco?.href.includes('/provincias/')
 
   // Respuesta directa a "¿X tiene playa?" — query-pregunta real detectada
@@ -236,6 +241,20 @@ export default async function MunicipioPage({ params }: Props) {
 
         {/* Después de la lista: quien llega busca playas, y alquilar un
             barco es la intención siguiente, no la primera. */}
+        {barcoPropio && (
+          <section style={{ marginTop: '2rem', border: '1px solid var(--line)', borderRadius: 6, padding: '.9rem 1rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', margin: '0 0 .3rem' }}>
+              Alquiler de barcos en {municipio.nombre}
+            </h2>
+            <p style={{ margin: '0 0 .5rem', fontSize: '.9rem', color: 'var(--muted)' }}>
+              De qué puerto se sale, qué calas tienen fondeo y a cuáles solo se llega por mar.
+            </p>
+            <Link href={`/municipio/${slug}/alquiler-de-barcos`} style={{ color: 'var(--ink)', fontWeight: 600 }}>
+              Salir al mar desde {municipio.nombre} →
+            </Link>
+          </section>
+        )}
+
         {barco && (
           <section style={{ marginTop: '2rem', border: '1px solid var(--line)', borderRadius: 6, padding: '.9rem 1rem' }}>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', margin: '0 0 .3rem' }}>

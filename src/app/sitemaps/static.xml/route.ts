@@ -6,6 +6,7 @@
 // una imagen representativa a cada URL del KG).
 
 import MAPA_MAREAS from '@/data/mareas-map.json'
+import { MUNICIPIOS_CON_BARCOS } from '@/lib/barcos-municipio'
 import { NextResponse } from 'next/server'
 import {
   getComunidades, getProvincias, getMunicipios,
@@ -170,6 +171,13 @@ export async function GET() {
   // marea real, Santoña entre ellos.
   for (const [slug, ubi] of Object.entries(MAPA_MAREAS)) {
     if (ubi.zona !== 'mediterraneo') urls.push(u(`/municipio/${slug}/tabla-de-mareas`, '0.6', 'daily', null))
+  }
+
+  // Alquiler de barcos por municipio: los 87 donde SamBoat tiene inventario
+  // de verdad. `weekly` y no `daily` porque lo que cambia es el número de
+  // barcos, no la costa, y el refresco lo manda el script de cosecha.
+  for (const m of MUNICIPIOS_CON_BARCOS) {
+    urls.push(u(`/municipio/${m.municipio}/alquiler-de-barcos`, '0.6', 'weekly', today))
   }
 
   // Themed sections subpages

@@ -130,6 +130,18 @@ const LOCALES: Record<Region, Local[]> = {
   ],
 }
 
+/**
+ * Los vientos con nombre de una zona, sin necesidad de un parte.
+ *
+ * `nombrarViento` contesta «qué viento hay ahora». Esto contesta «qué vientos
+ * hay que mirar aquí», que es lo que necesita quien planea una salida en
+ * barco para dentro de dos semanas: en el Empordà la tramontana, en Málaga
+ * el terral, en las Rías el nordés. Misma tabla, sin duplicarla.
+ */
+export function vientosDeLaZona(lat: number, lng: number): Array<{ nombre: string; efecto: string; umbral: number }> {
+  return LOCALES[region(lat, lng)].map(({ nombre, efecto, umbral }) => ({ nombre, efecto, umbral }))
+}
+
 export function nombrarViento(lat: number, lng: number, grados: number, kmh: number, locale: 'es' | 'en' = 'es'): VientoNombrado {
   const idx = Math.round(((grados % 360) + 360) % 360 / 22.5) % 16
   const rumbo = RUMBOS[idx]
