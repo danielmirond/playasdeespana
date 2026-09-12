@@ -65,6 +65,27 @@
    ]
   },
   {
+   "municipio": "palma",
+   "nombre": "Palma",
+   "provincia": "Baleares",
+   "playas": 11,
+   "samboat": "palma-de-mallorca-islas-baleares-espana",
+   "url": "https://www.samboat.es/alquiler-barco/palma-de-mallorca-islas-baleares-espana",
+   "barcos": 602,
+   "precioMin": 75,
+   "conPatron": 410,
+   "licencia": "opcional",
+   "tipos": [
+    "Lancha",
+    "Velero",
+    "Catamarán",
+    "Neumática",
+    "Yate de lujo",
+    "Moto de agua",
+    "Casa flotante"
+   ]
+  },
+  {
    "municipio": "calvia",
    "nombre": "Calvià",
    "provincia": "Baleares",
@@ -72,7 +93,7 @@
    "samboat": "calvia-espagne",
    "url": "https://www.samboat.es/alquiler-barco/calvia-espagne",
    "barcos": 581,
-   "precioMin": 75,
+   "precioMin": null,
    "conPatron": 391,
    "licencia": "opcional",
    "tipos": [
@@ -408,7 +429,7 @@
    "samboat": "torrevieja-espana",
    "url": "https://www.samboat.es/alquiler-barco/torrevieja-espana",
    "barcos": 222,
-   "precioMin": 96,
+   "precioMin": null,
    "conPatron": 119,
    "licencia": "opcional",
    "tipos": [
@@ -513,7 +534,7 @@
    "samboat": "vilanova-espagne",
    "url": "https://www.samboat.es/alquiler-barco/vilanova-espagne",
    "barcos": 214,
-   "precioMin": 50,
+   "precioMin": null,
    "conPatron": 165,
    "licencia": "opcional",
    "tipos": [
@@ -534,7 +555,7 @@
    "samboat": "vilanova-espagne",
    "url": "https://www.samboat.es/alquiler-barco/vilanova-espagne",
    "barcos": 214,
-   "precioMin": 50,
+   "precioMin": null,
    "conPatron": 165,
    "licencia": "opcional",
    "tipos": [
@@ -828,7 +849,7 @@
    "samboat": "javea-espana",
    "url": "https://www.samboat.es/alquiler-barco/javea-espana",
    "barcos": 181,
-   "precioMin": null,
+   "precioMin": 145,
    "conPatron": 124,
    "licencia": "opcional",
    "tipos": [
@@ -870,7 +891,7 @@
    "samboat": "javea-espana",
    "url": "https://www.samboat.es/alquiler-barco/javea-espana",
    "barcos": 181,
-   "precioMin": null,
+   "precioMin": 145,
    "conPatron": 124,
    "licencia": "opcional",
    "tipos": [
@@ -1143,7 +1164,7 @@
    "samboat": "sanxenxo-espana",
    "url": "https://www.samboat.es/alquiler-barco/sanxenxo-espana",
    "barcos": 65,
-   "precioMin": null,
+   "precioMin": 100,
    "conPatron": 53,
    "licencia": "obligatoria",
    "tipos": [
@@ -1374,7 +1395,7 @@
    "samboat": "valencia-espana",
    "url": "https://www.samboat.es/alquiler-barco/valencia-espana",
    "barcos": 49,
-   "precioMin": null,
+   "precioMin": 120,
    "conPatron": 42,
    "licencia": "opcional",
    "tipos": [
@@ -1584,7 +1605,7 @@
    "samboat": "santa-cruz-de-tenerife-canarias-espana",
    "url": "https://www.samboat.es/alquiler-barco/santa-cruz-de-tenerife-canarias-espana",
    "barcos": 21,
-   "precioMin": null,
+   "precioMin": 229,
    "conPatron": 11,
    "licencia": "obligatoria",
    "tipos": [
@@ -1794,7 +1815,7 @@
    "samboat": "getxo",
    "url": "https://www.samboat.es/alquiler-barco/getxo",
    "barcos": 10,
-   "precioMin": null,
+   "precioMin": 150,
    "conPatron": 10,
    "licencia": "opcional",
    "tipos": [

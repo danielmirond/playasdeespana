@@ -72,7 +72,15 @@ const SUFIJOS = ['', '-espana', '-espagne', '-spain']
 const REGIONES = ['andalucia', 'cataluna', 'comunidad-valenciana', 'islas-baleares', 'canarias',
   'galicia', 'murcia', 'region-de-murcia', 'asturias', 'cantabria', 'pais-vasco']
 
+// Los que ningún patrón puede adivinar, porque SamBoat les pone otro nombre.
+// Se comprueba igual que el resto: si la página deja de existir o cambia de
+// país, el fichaje la descarta sola.
+const ALIAS = {
+  palma: 'palma-de-mallorca-islas-baleares-espana',   // «Palma» a secas no existe allí
+}
+
 function candidato(slug) {
+  if (slug in ALIAS && ciudades.has(ALIAS[slug])) return ALIAS[slug]
   for (const s of SUFIJOS) if (ciudades.has(slug + s)) return slug + s
   for (const r of REGIONES) for (const s of ['-espana', '-espagne']) if (ciudades.has(`${slug}-${r}${s}`)) return `${slug}-${r}${s}`
   // «alacant-alicante» → «alicante»; «orpesa-oropesa-del-mar» ya casa entero.
