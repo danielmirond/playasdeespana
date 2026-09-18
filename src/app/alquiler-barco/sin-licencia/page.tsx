@@ -55,7 +55,7 @@ const breadcrumbSchema = {
 
 export default function SinLicenciaPage() {
   const locs = getAllLocalities()
-  const affId = process.env.NEXT_PUBLIC_AWIN_AFFID || 'playasdeespana'
+  const affId = process.env.NEXT_PUBLIC_SAMBOAT_AFF || process.env.NEXT_PUBLIC_AWIN_AFFID || 'playasdeespana'
   // Destino final verificado (los paths "sin licencia" de SamBoat hacen 301
   // aquí; ir directo evita el salto y protege el tracking de afiliado).
   const cta = samboatAwinUrl(affId, '/alquiler-barco/espana', 'playasdeespana_sinlicencia')

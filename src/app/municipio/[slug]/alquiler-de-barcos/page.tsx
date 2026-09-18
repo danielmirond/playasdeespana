@@ -91,7 +91,7 @@ export default async function AlquilerBarcosMunicipio({ params }: Props) {
 
   const playas = await getPlayasByMunicipio(slug)
   const costa = costaEnBarco(playas)
-  const afiliado = process.env.NEXT_PUBLIC_AWIN_AFFID || 'playasdeespana'
+  const afiliado = process.env.NEXT_PUBLIC_SAMBOAT_AFF || process.env.NEXT_PUBLIC_AWIN_AFFID || 'playasdeespana'
   const enlace = samboatAwinUrl(afiliado, `/alquiler-barco/${sb.samboat}`, clickref(slug))
   const mareas = tieneMareas(slug) && ubicacionMareas(slug)?.zona !== 'mediterraneo'
 

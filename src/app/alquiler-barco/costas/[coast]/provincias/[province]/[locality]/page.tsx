@@ -50,7 +50,7 @@ export default async function LocalityPage({ params }: { params: Promise<Localit
   const locality = getLocalityBySlug(localitySlug)
   if (!locality) notFound()
 
-  const afinityId = process.env.NEXT_PUBLIC_AWIN_AFFID || 'playasdeespana'
+  const afinityId = process.env.NEXT_PUBLIC_SAMBOAT_AFF || process.env.NEXT_PUBLIC_AWIN_AFFID || 'playasdeespana'
   const awinUrl = samboatAwinUrl(afinityId, locality.samboatUrl, `playasdeespana_${locality.slug}`)
   const hero = getBoatImage(locality.slug)
 
