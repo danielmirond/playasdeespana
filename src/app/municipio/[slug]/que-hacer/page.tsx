@@ -35,6 +35,19 @@ import { osmRestaurantes } from '@/lib/osm-pois'
 import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tieneBarcos } from '@/lib/barcos-municipio'
 import GygActivities from '@/components/GygActivities'
+import dynamic from 'next/dynamic'
+
+// Leaflet vive en el cliente: dynamic import con SSR desactivado y un
+// placeholder del alto exacto para que no baile el layout al hidratar.
+const MapaQueHacer = dynamic(() => import('@/components/ui/MapaQueHacer'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      border: '1px solid var(--line)', borderRadius: 8,
+      height: '360px', background: 'var(--card-bg)',
+    }} aria-hidden="true"/>
+  ),
+})
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -383,6 +396,31 @@ export default async function QueHacerPage({ params }: Props) {
       </div>
 
       <main style={{ maxWidth: 780, margin: '0 auto', padding: '2.5rem 1.5rem 3rem' }}>
+
+        {/* Mapa de qué hacer: todos los puntos del plan sobre OSM. Ancla
+            visual antes de las guías; el usuario ve el contexto y luego
+            baja al itinerario. */}
+        <section id="mapa" style={{ marginBottom: '2.5rem' }}>
+          <div style={{
+            fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
+            textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
+          }}>Sobre el terreno</div>
+          <h2 style={{
+            fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+            color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
+          }}>
+            Todo lo del plan, en el <em style={{ fontWeight: 500, color: 'var(--accent)' }}>mapa</em>
+          </h2>
+          <MapaQueHacer
+            centro={{ lat: pois.lat, lng: pois.lng }}
+            playas={topPlayas.map(p => ({ slug: p.slug, nombre: p.nombre, lat: p.lat, lng: p.lng, bandera: p.bandera }))}
+            museos={pois.museos}
+            monumentos={pois.monumentos}
+            miradores={pois.miradores}
+            cultura={pois.cultura}
+            parques={pois.parques}
+          />
+        </section>
 
         {/* Guía de 1 día — solo si el generador consiguió al menos 3 paradas. */}
         {gUnDia.paradas.length >= 3 && (
