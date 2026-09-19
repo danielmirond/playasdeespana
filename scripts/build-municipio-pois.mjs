@@ -214,6 +214,13 @@ async function main() {
   }
 
   console.log(`\nHecho: ${ok} municipios, ${ko} fallidos. Salida: ${OUT}`)
+
+  // Fallo catastrófico: ningún municipio se pudo generar. En un cron
+  // esto suele significar que Overpass está caído o que la red del
+  // runner tiene problemas. Salir con != 0 marca el workflow como
+  // fallido y llegan las notificaciones. Fallos parciales no hacen
+  // saltar la alarma — son la norma con mirrors públicos.
+  if (ok === 0 && ko > 0) process.exit(1)
 }
 
 main().catch(e => { console.error(e); process.exit(1) })
