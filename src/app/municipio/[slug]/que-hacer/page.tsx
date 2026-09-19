@@ -30,6 +30,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { getMunicipioPois, getMunicipiosConPois, type Poi } from '@/lib/municipio-pois'
+import { guiaUnDia, guiaTresDias, type Guia, type Parada } from '@/lib/guia-municipio'
 import { osmRestaurantes } from '@/lib/osm-pois'
 import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tieneBarcos } from '@/lib/barcos-municipio'
@@ -124,6 +125,131 @@ function BloquePois({ id, eyebrow, titulo, items, mostrar = 8 }: {
   )
 }
 
+// Un renderer único para las paradas de guía. Mantiene el timeline visual y
+// la accesibilidad (ol/li). Solo pinta lo que la parada trae — sin
+// adjetivos, sin prosa vacía.
+function ParadaLi({ p, esUltima }: { p: Parada; esUltima: boolean }) {
+  const href = p.playa && p.slug ? `/playas/${p.slug}` : p.href
+  const titulo = href
+    ? <a href={href} target={p.playa ? undefined : '_blank'} rel={p.playa ? undefined : 'noopener nofollow'} style={{
+        fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem',
+        color: 'var(--ink)', borderBottom: '1px dotted var(--muted)',
+      }}>{p.nombre}</a>
+    : <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem' }}>{p.nombre}</span>
+  return (
+    <li style={{
+      display: 'grid', gridTemplateColumns: '3.6rem 1fr', gap: '.65rem',
+      padding: '.65rem 0',
+      borderTop: '1px dashed var(--line)',
+    }}>
+      <span style={{
+        fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+        fontSize: '.78rem', fontWeight: 500, color: 'var(--accent)',
+        paddingTop: '.1rem', letterSpacing: '.02em',
+      }}>{p.hora}</span>
+      <div style={{ minWidth: 0 }}>
+        {titulo}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginTop: '.2rem', fontSize: '.74rem', color: 'var(--muted)' }}>
+          <span style={{
+            fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+            fontSize: '.6rem', padding: '.1rem .45rem', border: '1px solid var(--line)',
+            borderRadius: 100, letterSpacing: '.06em', textTransform: 'uppercase',
+          }}>{p.tipo}</span>
+          <span>~{formatearDuracion(p.duracionMin)}</span>
+          {p.wikipedia && <span>Wikipedia</span>}
+          {p.pmr && <span>Accesible</span>}
+          {p.banderaAzul && <span>Bandera Azul</span>}
+          {p.socorrismo && <span>Socorrismo</span>}
+        </div>
+        {!esUltima && p.trasladoDescripcion && (
+          <div style={{
+            fontSize: '.7rem', color: 'var(--muted)', fontStyle: 'italic',
+            marginTop: '.3rem', paddingLeft: '.8rem', borderLeft: '1px solid var(--line)',
+          }}>
+            Al siguiente: {p.trasladoDescripcion}
+          </div>
+        )}
+      </div>
+    </li>
+  )
+}
+
+function formatearDuracion(min: number): string {
+  if (min < 60) return `${min} min`
+  const h = min / 60
+  return h === Math.round(h) ? `${h} h` : `${h.toFixed(1).replace('.', ',')} h`
+}
+
+// Renderiza un bloque «Guía» con sus paradas. Si no hay paradas suficientes
+// (menos de 3) no se pinta: peor una guía que empiece y acabe en dos sitios.
+function BloqueGuia({ guia, subtitulo }: { guia: Guia; subtitulo?: string }) {
+  if (guia.paradas.length < 3) return null
+  return (
+    <div style={{ marginBottom: '1rem', border: '1px solid var(--line)', borderRadius: 6, overflow: 'hidden' }}>
+      {(guia.subtitulo ?? subtitulo) && (
+        <div style={{
+          padding: '.75rem 1rem 0',
+          fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+          fontWeight: 500, fontSize: '.95rem', color: 'var(--muted)',
+        }}>{guia.subtitulo ?? subtitulo}</div>
+      )}
+      <ol style={{ listStyle: 'none', padding: '0 1rem 1rem', margin: 0 }}>
+        {guia.paradas.map((p, i) => (
+          <ParadaLi key={`${p.hora}-${p.nombre}`} p={p} esUltima={i === guia.paradas.length - 1} />
+        ))}
+      </ol>
+    </div>
+  )
+}
+
+// Degradados editoriales para el carrusel superior: mismos que Destacadas usa
+// en la home, para mantener el registro visual del sistema.
+const GRADIENTES_CARR = [
+  'linear-gradient(180deg, #c7d8dc 0%, #a3b9c0 35%, #e8d9b8 55%, #d9c7a0 100%)',
+  'linear-gradient(180deg, #a3b6b8 0%, #6b8890 40%, #d4c090 60%, #b8a06a 100%)',
+  'linear-gradient(180deg, #d8ccae 0%, #b5a582 45%, #9d8a62 70%, #6b5840 100%)',
+  'linear-gradient(180deg, #b8c8c8 0%, #8aa4a8 35%, #c9b890 55%, #a8956c 100%)',
+  'linear-gradient(180deg, #d0bba0 0%, #ac9670 40%, #826444 70%, #4e3a22 100%)',
+]
+
+interface SlideCarrusel { eyebrow: string; titulo: string; grad: string }
+
+/** Compone el carrusel intercalando playas top con POIs top: mejor playa,
+ *  monumento icónico, museo top, segunda playa, faro/mirador. Máximo 5
+ *  tiles. Los slots vacíos se saltan. */
+function componerCarrusel(
+  topPlayas: readonly { nombre: string; bandera?: boolean }[],
+  pois: NonNullable<Awaited<ReturnType<typeof getMunicipioPois>>>,
+): SlideCarrusel[] {
+  const s: SlideCarrusel[] = []
+  if (topPlayas[0]) s.push({
+    eyebrow: topPlayas[0].bandera ? 'Playa · Bandera Azul' : 'Playa',
+    titulo: topPlayas[0].nombre,
+    grad: GRADIENTES_CARR[0],
+  })
+  if (pois.monumentos[0]) s.push({
+    eyebrow: pois.monumentos[0].tipo,
+    titulo: pois.monumentos[0].nombre,
+    grad: GRADIENTES_CARR[1],
+  })
+  if (pois.museos[0]) s.push({
+    eyebrow: pois.museos[0].tipo,
+    titulo: pois.museos[0].nombre,
+    grad: GRADIENTES_CARR[2],
+  })
+  if (topPlayas[1]) s.push({
+    eyebrow: 'Playa',
+    titulo: topPlayas[1].nombre,
+    grad: GRADIENTES_CARR[3],
+  })
+  if (pois.miradores[0]) s.push({
+    eyebrow: pois.miradores[0].tipo === 'Faro' ? 'Faro · atardecer' : 'Mirador',
+    titulo: pois.miradores[0].nombre,
+    grad: GRADIENTES_CARR[4],
+  })
+  return s.slice(0, 5)
+}
+
 export default async function QueHacerPage({ params }: Props) {
   const { slug } = await params
   const pois = await getMunicipioPois(slug)
@@ -151,6 +277,13 @@ export default async function QueHacerPage({ params }: Props) {
   const restaurantes = topPlayas[0]
     ? (await osmRestaurantes(topPlayas[0].lat, topPlayas[0].lng))?.slice(0, 6) ?? []
     : []
+
+  // Itinerarios deterministas (ver src/lib/guia-municipio.ts). Se calculan
+  // aquí y se pintan tal cual — el módulo no genera prosa, solo elige y
+  // ordena; toda la copy visible se ha escrito en este archivo.
+  const gUnDia = guiaUnDia(pois, topPlayas[0] ?? null)
+  const gTresDias = guiaTresDias(pois, playas)
+  const slidesCarrusel = componerCarrusel(topPlayas, pois)
 
   const respuesta = frase(pois, playas.length)
   const faq = {
@@ -203,10 +336,111 @@ export default async function QueHacerPage({ params }: Props) {
           <p data-speakable style={{
             fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.6, margin: 0,
           }}>{respuesta}</p>
+
+          {/* Carrusel visual: primer vistazo al municipio. Degradados
+              editoriales por ahora; cuando el POI tenga tag OSM
+              `wikipedia=*`, en un segundo paso se sustituyen por la foto
+              principal del artículo de Commons. */}
+          {slidesCarrusel.length > 0 && (
+            <div style={{
+              display: 'flex', gap: '.5rem', overflowX: 'auto',
+              scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch',
+              margin: '1.5rem -1.5rem 0', padding: '0 1.5rem .5rem',
+              scrollbarWidth: 'none',
+            }} aria-label={`Vistazo visual de ${pois.nombre}`} role="region">
+              {slidesCarrusel.map((s, i) => (
+                <div key={i} style={{
+                  flex: '0 0 78%', maxWidth: 320, scrollSnapAlign: 'start',
+                  borderRadius: 8, overflow: 'hidden', position: 'relative',
+                  aspectRatio: '3 / 2', border: '1px solid var(--line)',
+                  background: s.grad,
+                }}>
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    background: 'linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55) 100%)',
+                    zIndex: 2,
+                  }} aria-hidden="true"/>
+                  <div style={{
+                    position: 'absolute', bottom: '.65rem', left: '.8rem', right: '.8rem',
+                    zIndex: 3, color: '#f5ecd5',
+                  }}>
+                    <div style={{
+                      fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+                      fontSize: '.55rem', textTransform: 'uppercase',
+                      letterSpacing: '.14em', opacity: .85, marginBottom: '.1rem',
+                    }}>{s.eyebrow}</div>
+                    <div style={{
+                      fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.05rem',
+                      letterSpacing: '-.01em', lineHeight: 1.1,
+                      textShadow: '0 1px 6px rgba(0,0,0,.35)',
+                    }}>{s.titulo}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
       <main style={{ maxWidth: 780, margin: '0 auto', padding: '2.5rem 1.5rem 3rem' }}>
+
+        {/* Guía de 1 día — solo si el generador consiguió al menos 3 paradas. */}
+        {gUnDia.paradas.length >= 3 && (
+          <section id="guia-1-dia" style={{ marginBottom: '2.5rem' }}>
+            <div style={{
+              fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
+              textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
+            }}>Un plan cerrado</div>
+            <h2 style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+              color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
+            }}>
+              Guía de <em style={{ fontWeight: 500, color: 'var(--accent)' }}>1 día</em>
+            </h2>
+            <BloqueGuia guia={gUnDia} />
+            <p style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.75rem' }}>
+              Itinerario montado con reglas mecánicas sobre los POIs del catálogo. Los tiempos
+              son medias estándar por categoría; verifica horarios de apertura antes de ir.
+            </p>
+          </section>
+        )}
+
+        {/* Guía de 3 días — la componen tres guías, una por día. Cada día
+            se pinta seguido (mejor SEO que tabs) con su tipología como
+            subtítulo en el bloque. */}
+        {gTresDias.some(g => g.paradas.length >= 3) && (
+          <section id="guia-3-dias" style={{ marginBottom: '2.5rem' }}>
+            <div style={{
+              fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
+              textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
+            }}>Fin de semana largo</div>
+            <h2 style={{
+              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
+              color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
+            }}>
+              Guía de <em style={{ fontWeight: 500, color: 'var(--accent)' }}>3 días</em>
+            </h2>
+            {gTresDias.map((g, i) => (
+              <div key={i} style={{ marginBottom: '1.5rem' }}>
+                <h3 style={{
+                  fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 700,
+                  color: 'var(--ink)', marginBottom: '.4rem',
+                }}>
+                  {g.titulo}
+                  {g.subtitulo && (
+                    <span style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--muted)', fontSize: '.95rem' }}>
+                      {' · ' + g.subtitulo}
+                    </span>
+                  )}
+                </h3>
+                <BloqueGuia guia={g} />
+              </div>
+            ))}
+            <p style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.5rem' }}>
+              Cada día responde a una tipología distinta para no repetir museo tras museo. Distancias haversine reales; los slots sin dato en OSM se saltan.
+            </p>
+          </section>
+        )}
 
         {topPlayas.length > 0 && (
           <section id="banarse" style={{ marginBottom: '2.5rem' }}>
