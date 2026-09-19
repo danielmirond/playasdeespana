@@ -39,6 +39,12 @@ jobs:
         run: node scripts/build-municipio-pois.mjs
 
       - name: Commit and push sidecar
+        # `pull --rebase` antes del push: el script tarda 10-20 min y
+        # cualquier commit intermedio a main hacía rechazar el push
+        # (rejected: fetch first). Como el bot solo toca UN fichero, la
+        # rebase se aplica limpia siempre; si por lo que sea un humano
+        # ha editado ese mismo JSON en paralelo (poco probable), es
+        # mejor fallar la rebase que sobrescribir.
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -53,5 +59,7 @@ jobs:
             los estándar de OSM (tourism, historic, amenity, man_made,
             leisure) dentro de un radio de 3 km del centroide.
             Automated by .github/workflows/build-municipio-pois.yml"
+            # Puede haber commits humanos mientras el runner trabajaba.
+            git pull --rebase origin main
             git push
           fi

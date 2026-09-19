@@ -32,10 +32,15 @@ const OUT = resolve(ROOT, 'public/data/municipio-pois.json')
 
 // Mirrors de Overpass. El primero suele funcionar; los otros son fallback
 // para cuando el principal está saturado (típico en horario CET).
+//
+// `overpass.openstreetmap.ru` estaba en la lista y daba timeouts (verificado
+// contra 6/28 municipios en el run 35429127948: UND_ERR_CONNECT_TIMEOUT a 20
+// s). Se retira: cada intento gastaba 20 s antes del siguiente mirror y con
+// 78 municipios eso son >25 min extra por run. Si vuelve a estar sano, se
+// reincorpora.
 const MIRRORS = [
   'https://overpass-api.de/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',
-  'https://overpass.openstreetmap.ru/cgi/interpreter',
 ]
 
 const RADIO_M = 3000  // 3 km desde el centroide
