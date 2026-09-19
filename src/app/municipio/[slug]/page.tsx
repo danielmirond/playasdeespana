@@ -19,6 +19,7 @@ import { tinte } from '@/lib/tinte'
 import SeaIcon from '@/components/ui/SeaIcon'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { tieneBarcos } from '@/lib/barcos-municipio'
+import { tienePois } from '@/lib/municipio-pois'
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -98,6 +99,10 @@ export default async function MunicipioPage({ params }: Props) {
     : getBoatLinkForPlaya(municipio.provincia, municipio.nombre)
   const barcoLocal = !!barco?.href.includes('/provincias/')
 
+  // ¿Este municipio tiene la subpágina «qué hacer»? Del prototipo salen ~25
+  // slugs; si no está, el enlace no se pinta (mejor no ofrecer un 404).
+  const hayQueHacer = await tienePois(slug)
+
   // Respuesta directa a "¿X tiene playa?" — query-pregunta real detectada
   // en GSC (jul-2026, p.ej. "foios tiene playa": 487 imp sin clicks).
   // La redacción varía con los datos para no sonar a plantilla.
@@ -163,6 +168,17 @@ export default async function MunicipioPage({ params }: Props) {
               Tabla de mareas de {municipio.nombre} →
             </Link>{' '}
             <span style={{ color: 'var(--muted)' }}>pleamar y bajamar de hoy, mañana y pasado, según Puertos del Estado.</span>
+          </p>
+        )}
+
+        {/* Enlace a «Qué hacer». Solo aparece en los municipios donde el
+            sidecar tiene datos: no ofrecemos una promesa que el 404 desmiente. */}
+        {hayQueHacer && (
+          <p style={{ margin: '-1rem 0 2rem', fontSize: '.92rem' }}>
+            <Link href={`/municipio/${slug}/que-hacer`} style={{ color: 'var(--ink)', fontWeight: 600 }}>
+              Qué hacer en {municipio.nombre} →
+            </Link>{' '}
+            <span style={{ color: 'var(--muted)' }}>museos, monumentos, miradores, cine y teatro cerca de las playas.</span>
           </p>
         )}
 
