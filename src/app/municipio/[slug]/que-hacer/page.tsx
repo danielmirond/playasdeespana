@@ -50,8 +50,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pois = await getMunicipioPois(slug)
   if (!pois) return {}
   return {
-    title: `Qué hacer en ${pois.nombre}: playas, museos, monumentos y rutas`,
-    description: `Guía práctica de qué ver y qué hacer en ${pois.nombre}: sus mejores playas, museos, monumentos, miradores, teatros y sitios donde comer con vistas. Datos oficiales, actualizados.`,
+    title: `Qué hacer, ver y visitar hoy en ${pois.nombre}`,
+    description: `Guía práctica de qué ver y qué hacer hoy en ${pois.nombre}: sus mejores playas, museos, monumentos, miradores, teatros y sitios donde comer con vistas. Datos oficiales, actualizados.`,
     alternates: { canonical: `/municipio/${slug}/que-hacer` },
   }
 }
