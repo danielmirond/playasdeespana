@@ -37,6 +37,7 @@ import IconoTiempo from '@/components/ui/IconoTiempo'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tienePois } from '@/lib/municipio-pois'
+import { getAvisos, type AvisoMeteo } from '@/lib/meteoalarm'
 
 export const maxDuration = 30
 export const revalidate = 3600      // el forecast cambia cada hora
@@ -287,6 +288,83 @@ function TarjetasSieteDias({ dias }: { dias: DiaTiempo[] }) {
   )
 }
 
+// Colores del sistema para cada nivel — ya definidos como tokens en el
+// tema global (bloques amarillo/naranja/rojo con contraste suficiente).
+const NIVEL_TOKEN: Record<AvisoMeteo['nivel'], { color: string; label: string }> = {
+  yellow: { color: 'var(--alert-amber, #c48a1e)', label: 'Amarillo' },
+  orange: { color: 'var(--alert-orange, #a04818)', label: 'Naranja' },
+  red:    { color: 'var(--alert-red, #7a2818)', label: 'Rojo' },
+}
+
+function BloqueAvisos({ avisos, comunidad }: { avisos: AvisoMeteo[]; comunidad: string }) {
+  if (avisos.length === 0) return null
+  return (
+    <section style={{ marginBottom: '2.5rem' }}>
+      <div style={{
+        fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
+        textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
+      }}>Meteoalarm · Avisos oficiales</div>
+      <h2 style={{
+        fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700,
+        color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
+      }}>
+        Avisos activos en <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{comunidad}</em>
+      </h2>
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+        {avisos.map((a, i) => {
+          const t = NIVEL_TOKEN[a.nivel]
+          const desde = a.desde ? new Date(a.desde) : null
+          const hasta = a.hasta ? new Date(a.hasta) : null
+          return (
+            <li key={`${a.desde}-${a.tipo}-${i}`} style={{
+              padding: '.85rem 1rem',
+              borderRadius: 6,
+              display: 'flex', alignItems: 'baseline', gap: '.75rem',
+              marginBottom: '.4rem',
+              borderLeft: `4px solid ${t.color}`,
+              background: `color-mix(in srgb, ${t.color} 8%, var(--surface))`,
+            }}>
+              <span style={{
+                fontFamily: 'var(--font-mono, monospace)', fontSize: '.62rem',
+                textTransform: 'uppercase', letterSpacing: '.1em',
+                padding: '.1rem .5rem', borderRadius: 100,
+                background: t.color, color: '#fff', flexShrink: 0,
+              }}>{t.label}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{
+                  fontFamily: 'var(--font-serif)', fontWeight: 700,
+                  color: 'var(--ink)', fontSize: '.95rem',
+                }}>{a.tipoLabel}</div>
+                {(desde || hasta) && (
+                  <div style={{ fontSize: '.75rem', color: 'var(--muted)', marginTop: '.1rem' }}>
+                    {desde ? formatearRango(desde, hasta) : ''}
+                  </div>
+                )}
+                {a.descripcion && (
+                  <div style={{ fontSize: '.82rem', color: 'var(--ink-soft)', marginTop: '.2rem' }}>
+                    {a.descripcion}
+                  </div>
+                )}
+              </div>
+            </li>
+          )
+        })}
+      </ul>
+      <p style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.6rem', lineHeight: 1.5 }}>
+        Los avisos son de <strong>Meteoalarm</strong> y aplican al conjunto de {comunidad} (nivel NUTS 2, no municipal). Comprueba <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos" target="_blank" rel="noopener nofollow" style={{ color: 'var(--muted)', borderBottom: '1px dotted currentColor' }}>AEMET</a> para el detalle por provincia.
+      </p>
+    </section>
+  )
+}
+
+function formatearRango(desde: Date, hasta: Date | null): string {
+  const dias = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb']
+  const meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+  const fmt = (d: Date) => `${dias[d.getDay()]} ${d.getDate()} ${meses[d.getMonth()]} · ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
+  if (!hasta) return `desde ${fmt(desde)}`
+  return `${fmt(desde)} → ${fmt(hasta)}`
+}
+
 function BloqueSol({ hoy }: { hoy: DiaTiempo }) {
   if (!hoy?.amanecer || !hoy?.atardecer) return null
   return (
@@ -403,7 +481,11 @@ export default async function ElTiempoPage({ params }: Props) {
     }],
   }
 
-  const [hayPois, hayMar] = [await tienePois(slug), tieneMareas(slug)]
+  const [hayPois, hayMar, avisos] = await Promise.all([
+    tienePois(slug),
+    Promise.resolve(tieneMareas(slug)),
+    getAvisos(municipio.comunidad),
+  ])
   const marMediterraneo = hayMar && ubicacionMareas(slug)?.zona === 'mediterraneo'
 
   // Hora local del municipio para el eyebrow «Ahora · HH:MM». Sale del ISO
@@ -479,6 +561,11 @@ export default async function ElTiempoPage({ params }: Props) {
             </div>
           </div>
         </section>
+
+        {/* Avisos oficiales — se pintan antes del gráfico horario porque
+            son información de seguridad y no un adorno. Cuando no hay,
+            no hay bloque; nada de «sin avisos activos», que es paja. */}
+        <BloqueAvisos avisos={avisos} comunidad={municipio.comunidad} />
 
         <GraficoHoras hoy={meteo.hoy} />
         <TarjetasSieteDias dias={meteo.dias} />

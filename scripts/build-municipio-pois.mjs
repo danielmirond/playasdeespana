@@ -40,47 +40,97 @@ const MIRRORS = [
 
 const RADIO_M = 3000  // 3 km desde el centroide
 
-// Municipios prioritarios: alto conteo de playas + destinos turísticos top.
-// {slug, nombre, lat, lng}. Los slugs son los reales del inventario.
+// Municipios prioritarios: mezcla curada del top por número de playas del
+// inventario MITECO + destinos turísticos consolidados con demanda «qué
+// hacer en X» medida en GSC. {slug, nombre, lat, lng}. Los slugs son los
+// reales del inventario.
 const MUNICIPIOS = [
-  // Costa del Sol
+  // ── ANDALUCÍA ─────────────────────────────────────────────────────
   { slug: 'malaga', nombre: 'Málaga', lat: 36.7213, lng: -4.4213 },
   { slug: 'marbella', nombre: 'Marbella', lat: 36.5099, lng: -4.8862 },
   { slug: 'nerja', nombre: 'Nerja', lat: 36.7511, lng: -3.8828 },
   { slug: 'torremolinos', nombre: 'Torremolinos', lat: 36.6203, lng: -4.4996 },
-  // Cádiz
+  { slug: 'estepona', nombre: 'Estepona', lat: 36.4386, lng: -5.0935 },
+  { slug: 'fuengirola', nombre: 'Fuengirola', lat: 36.5452, lng: -4.6145 },
   { slug: 'cadiz', nombre: 'Cádiz', lat: 36.5297, lng: -6.2926 },
   { slug: 'tarifa', nombre: 'Tarifa', lat: 36.0143, lng: -5.6044 },
   { slug: 'el-puerto-de-santa-maria', nombre: 'El Puerto de Santa María', lat: 36.5936, lng: -6.2337 },
-  // Almería
+  { slug: 'chiclana-de-la-frontera', nombre: 'Chiclana de la Frontera', lat: 36.4189, lng: -6.1466 },
+  { slug: 'conil-de-la-frontera', nombre: 'Conil de la Frontera', lat: 36.2777, lng: -6.0879 },
   { slug: 'nijar', nombre: 'Níjar', lat: 36.9700, lng: -2.2065 },
-  // Levante
+  { slug: 'roquetas-de-mar', nombre: 'Roquetas de Mar', lat: 36.7473, lng: -2.6142 },
+  { slug: 'almunecar', nombre: 'Almuñécar', lat: 36.7371, lng: -3.6924 },
+  { slug: 'salobrena', nombre: 'Salobreña', lat: 36.7349, lng: -3.5949 },
+  // ── LEVANTE ───────────────────────────────────────────────────────
   { slug: 'alacant-alicante', nombre: 'Alicante', lat: 38.3452, lng: -0.4810 },
   { slug: 'benidorm', nombre: 'Benidorm', lat: 38.5411, lng: -0.1225 },
   { slug: 'valencia', nombre: 'Valencia', lat: 39.4699, lng: -0.3763 },
   { slug: 'javea-xabia', nombre: 'Jávea', lat: 38.7898, lng: 0.1663 },
-  // Murcia
+  { slug: 'denia', nombre: 'Dénia', lat: 38.8508, lng: 0.0822 },
+  { slug: 'calp', nombre: 'Calp', lat: 38.6406, lng: 0.0557 },
+  { slug: 'torrevieja', nombre: 'Torrevieja', lat: 37.9795, lng: -0.6736 },
+  { slug: 'guardamar-del-segura', nombre: 'Guardamar del Segura', lat: 38.0767, lng: -0.6476 },
+  { slug: 'cullera', nombre: 'Cullera', lat: 39.1727, lng: -0.2313 },
+  { slug: 'peniscolapeniscola', nombre: 'Peñíscola', lat: 40.3318, lng: 0.3748 },
+  { slug: 'vinaros', nombre: 'Vinaròs', lat: 40.4858, lng: 0.4885 },
+  { slug: 'benicasimbenicassim', nombre: 'Benicàssim', lat: 40.0449, lng: 0.0674 },
+  // ── MURCIA ────────────────────────────────────────────────────────
   { slug: 'cartagena', nombre: 'Cartagena', lat: 37.6138, lng: -0.8648 },
   { slug: 'aguilas', nombre: 'Águilas', lat: 37.4056, lng: -1.5836 },
-  // Cataluña
+  { slug: 'mazarron', nombre: 'Mazarrón', lat: 37.5554, lng: -1.3093 },
+  { slug: 'san-javier', nombre: 'San Javier', lat: 37.7404, lng: -0.7504 },
+  // ── CATALUÑA ──────────────────────────────────────────────────────
+  { slug: 'barcelona', nombre: 'Barcelona', lat: 41.3704, lng: 2.1852 },
   { slug: 'sitges', nombre: 'Sitges', lat: 41.2373, lng: 1.8117 },
   { slug: 'cadaques', nombre: 'Cadaqués', lat: 42.2887, lng: 3.2778 },
   { slug: 'tossa-de-mar', nombre: 'Tossa de Mar', lat: 41.7204, lng: 2.9308 },
   { slug: 'salou', nombre: 'Salou', lat: 41.0762, lng: 1.1416 },
-  // Baleares
+  { slug: 'roses', nombre: 'Roses', lat: 42.2516, lng: 3.2056 },
+  { slug: 'lloret-de-mar', nombre: 'Lloret de Mar', lat: 41.6974, lng: 2.8547 },
+  { slug: 'blanes', nombre: 'Blanes', lat: 41.6763, lng: 2.8033 },
+  { slug: 'lametlla-de-mar', nombre: "L'Ametlla de Mar", lat: 40.8909, lng: 0.8111 },
+  // ── BALEARES ──────────────────────────────────────────────────────
   { slug: 'palma', nombre: 'Palma', lat: 39.5696, lng: 2.6502 },
   { slug: 'calvia', nombre: 'Calvià', lat: 39.5160, lng: 2.5276 },
+  { slug: 'alcudia', nombre: 'Alcúdia', lat: 39.8568, lng: 3.1495 },
+  { slug: 'pollenca', nombre: 'Pollença', lat: 39.9215, lng: 3.1060 },
+  { slug: 'andratx', nombre: 'Andratx', lat: 39.5522, lng: 2.3823 },
   { slug: 'sant-antoni-de-portmany', nombre: 'Sant Antoni de Portmany', lat: 38.9807, lng: 1.3040 },
-  // Canarias
+  { slug: 'eivissa', nombre: 'Eivissa', lat: 38.9117, lng: 1.4462 },
+  { slug: 'santa-eularia-des-riu', nombre: 'Santa Eulària des Riu', lat: 38.9970, lng: 1.5589 },
+  { slug: 'ciutadella-de-menorca', nombre: 'Ciutadella de Menorca', lat: 39.9916, lng: 3.8585 },
+  { slug: 'mao', nombre: 'Maó', lat: 39.9550, lng: 4.2482 },
+  // ── CANARIAS ──────────────────────────────────────────────────────
   { slug: 'santa-cruz-de-tenerife', nombre: 'Santa Cruz de Tenerife', lat: 28.4636, lng: -16.2518 },
+  { slug: 'adeje', nombre: 'Adeje', lat: 28.0983, lng: -16.7541 },
+  { slug: 'arona', nombre: 'Arona', lat: 28.0376, lng: -16.7019 },
+  { slug: 'puerto-de-la-cruz', nombre: 'Puerto de la Cruz', lat: 28.3015, lng: -15.8555 },
   { slug: 'mogan', nombre: 'Mogán', lat: 27.8134, lng: -15.7605 },
-  // Norte
+  { slug: 'san-bartolome-de-tirajana', nombre: 'San Bartolomé de Tirajana', lat: 27.7575, lng: -15.5944 },
+  { slug: 'teguise', nombre: 'Teguise', lat: 29.1246, lng: -13.5278 },
+  { slug: 'yaiza', nombre: 'Yaiza', lat: 28.8863, lng: -13.7936 },
+  { slug: 'la-oliva', nombre: 'La Oliva', lat: 28.6935, lng: -13.9280 },
+  // ── NORTE (Cantábrico / País Vasco) ───────────────────────────────
   { slug: 'san-sebastian-donostia', nombre: 'San Sebastián', lat: 43.3183, lng: -1.9812 },
+  { slug: 'zarautz', nombre: 'Zarautz', lat: 43.2892, lng: -2.1598 },
+  { slug: 'hondarribia', nombre: 'Hondarribia', lat: 43.3882, lng: -1.7927 },
+  { slug: 'getxo', nombre: 'Getxo', lat: 43.3539, lng: -3.0144 },
   { slug: 'santander', nombre: 'Santander', lat: 43.4623, lng: -3.8099 },
+  { slug: 'san-vicente-de-la-barquera', nombre: 'San Vicente de la Barquera', lat: 43.3919, lng: -4.3818 },
+  { slug: 'comillas', nombre: 'Comillas', lat: 43.3880, lng: -4.3031 },
   { slug: 'gijon', nombre: 'Gijón', lat: 43.5453, lng: -5.6619 },
-  // Galicia
+  { slug: 'llanes', nombre: 'Llanes', lat: 43.4277, lng: -4.7818 },
+  { slug: 'ribadesella', nombre: 'Ribadesella', lat: 43.4652, lng: -5.0614 },
+  { slug: 'cudillero', nombre: 'Cudillero', lat: 43.5751, lng: -6.2478 },
+  // ── GALICIA ───────────────────────────────────────────────────────
   { slug: 'vigo', nombre: 'Vigo', lat: 42.2158, lng: -8.7896 },
   { slug: 'a-coruna', nombre: 'A Coruña', lat: 43.3623, lng: -8.4115 },
+  { slug: 'ferrol', nombre: 'Ferrol', lat: 43.5299, lng: -8.2676 },
+  { slug: 'sanxenxo', nombre: 'Sanxenxo', lat: 42.4017, lng: -8.8156 },
+  { slug: 'baiona', nombre: 'Baiona', lat: 42.1195, lng: -8.8527 },
+  { slug: 'o-grove', nombre: 'O Grove', lat: 42.4765, lng: -8.9002 },
+  { slug: 'cangas', nombre: 'Cangas', lat: 42.2715, lng: -8.8206 },
+  { slug: 'ribadeo', nombre: 'Ribadeo', lat: 43.5522, lng: -7.1081 },
 ]
 
 function queryFor(lat, lng) {

@@ -180,6 +180,27 @@ export async function GET() {
     urls.push(u(`/municipio/${m.municipio}/alquiler-de-barcos`, '0.6', 'weekly', today))
   }
 
+  // El tiempo en cada municipio con playa. Cambia cada hora (revalidate
+  // de la página es 3.600 s), pero declaramos `daily` en el sitemap: el
+  // hourly no está definido en el estándar y `daily` es lo que Google
+  // toma como «lo miran a diario». Prioridad 0.7 porque es una consulta
+  // volumétrica clásica («tiempo en X»).
+  for (const m of municipios) {
+    urls.push(u(`/municipio/${m.slug}/el-tiempo`, '0.7', 'daily', today))
+  }
+
+  // Qué hacer en cada municipio. Cobertura limitada por el sidecar de
+  // POIs (~25 al escribir esto, ampliable). No añadimos las URLs de los
+  // que aún no están cubiertos: sitemap con 404 dentro es peor que sin
+  // esa URL. La lista sale del propio sidecar leído en runtime.
+  try {
+    const { getMunicipiosConPois } = await import('@/lib/municipio-pois')
+    const slugsPois = await getMunicipiosConPois()
+    for (const slug of slugsPois) {
+      urls.push(u(`/municipio/${slug}/que-hacer`, '0.6', 'weekly', today))
+    }
+  } catch { /* sin sidecar todavía → sin URLs; el ISR las servirá cuando exista */ }
+
   // Themed sections subpages
   for (const c of perrosStats.comunidades) urls.push(u(`/playas-perros/comunidad/${c.slug}`, '0.6', 'weekly', today))
   for (const p of perrosStats.provincias) urls.push(u(`/playas-perros/provincia/${p.slug}`, '0.6', 'weekly', today))

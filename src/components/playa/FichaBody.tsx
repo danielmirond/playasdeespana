@@ -825,6 +825,24 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             <h2 className={styles.cardTitle}>{locale === 'en' ? <>Waves & <em>wind by hour</em> at {nombreH}</> : <>Oleaje y <em>viento por horas</em> en {nombreH}</>}</h2>
             <span className={styles.cardSrc}>{i18n.oleajeSrc}</span>
           </div>
+          {/* Enlace al tiempo del municipio. La ficha mide MAR (oleaje,
+              viento cerca de la costa), no meteo urbana; para «va a llover
+              esta tarde» o «temperatura del aire mañana» tiene su
+              subpágina propia. Solo se pinta si hay municipio identificado
+              (que es siempre en el catálogo). */}
+          {municipioSlug && (
+            <div style={{
+              padding: '.4rem 1rem .1rem', fontSize: 'var(--fs-xs)',
+              color: 'var(--muted)', display: 'flex', flexWrap: 'wrap', gap: '.4rem',
+            }}>
+              <span>{locale === 'en' ? 'Air weather at' : 'El aire y la lluvia en'}{' '}</span>
+              <Link href={locale === 'en' ? `/en/towns/${municipioSlug}/el-tiempo` : `/municipio/${municipioSlug}/el-tiempo`}
+                    style={{ color: 'var(--ink)', fontWeight: 600 }}>
+                {playa.municipio} →
+              </Link>
+              <span>{locale === 'en' ? '— temperature, rain, wind and 7-day forecast.' : '— temperatura, lluvia, viento y previsión a 7 días.'}</span>
+            </div>
+          )}
           <div className={styles.cardBody}>
             <OleajeChart olas={meteo.olas ?? 0} oleajeHoras={oleajeHoras} nowLabel={i18n.nowLabel} />
             {/* MAR DE FONDO / MAR DE VIENTO. La altura total mezcla dos mares que no
