@@ -100,20 +100,39 @@ out center tags 200;
 `.trim()
 }
 
+// User-Agent identificable. Sin esto Overpass devuelve 429 o cierra la
+// conexión — política contra abusos anónimos. El correo es el del proyecto
+// para que puedan avisar antes de bloquear si algún patrón les molesta.
+const UA = 'playas-espana.com/1.0 sidecar-pois (contact: hola@playas-espana.com)'
+
 async function fetchOverpass(query) {
   let lastErr
   for (const url of MIRRORS) {
     try {
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'User-Agent': UA,
+          'Accept': 'application/json',
+        },
         body: 'data=' + encodeURIComponent(query),
         signal: AbortSignal.timeout(30000),
       })
-      if (!res.ok) { lastErr = new Error(`${url}: ${res.status}`); continue }
+      if (!res.ok) {
+        // Guardamos body corto para tener pista del rechazo (Overpass a
+        // veces manda HTML con el motivo).
+        const cuerpo = await res.text().catch(() => '')
+        lastErr = new Error(`${url}: HTTP ${res.status}${cuerpo ? ` — ${cuerpo.slice(0, 140).replace(/\s+/g, ' ')}` : ''}`)
+        continue
+      }
       return await res.json()
     } catch (e) {
-      lastErr = e
+      // Los TypeError de fetch nativo esconden la causa real en `cause`.
+      // Sin esto salía «fetch failed» a secas y no se sabía si era DNS,
+      // TLS, timeout o reset. Ahora se ve.
+      const causa = e?.cause?.code || e?.cause?.message || e?.message || String(e)
+      lastErr = new Error(`${url}: ${causa}`)
     }
   }
   throw lastErr
