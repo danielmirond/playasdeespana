@@ -33,13 +33,18 @@ const OUT = resolve(ROOT, 'public/data/municipio-pois.json')
 // Mirrors de Overpass. El primero suele funcionar; los otros son fallback
 // para cuando el principal está saturado (típico en horario CET).
 //
-// `overpass.openstreetmap.ru` estaba en la lista y daba timeouts (verificado
-// contra 6/28 municipios en el run 35429127948: UND_ERR_CONNECT_TIMEOUT a 20
-// s). Se retira: cada intento gastaba 20 s antes del siguiente mirror y con
-// 78 municipios eso son >25 min extra por run. Si vuelve a estar sano, se
-// reincorpora.
+// `overpass.openstreetmap.ru` estaba en la lista y daba timeouts a 20 s
+// (verificado contra 6/28 municipios en el run 35429127948: UND_ERR_
+// CONNECT_TIMEOUT). Se retiró.
+//
+// `overpass.kumi.systems` funciona pero es intermitente: en el run
+// 35429862841 falló 23/78 municipios con timeouts de fetch a 30 s. Se
+// deja porque cuando responde es rápido, pero es solo respaldo. Añadimos
+// `z.overpass-api.de` (mirror oficial secundario del proyecto Overpass)
+// como tercer intento, para no depender del kumi.
 const MIRRORS = [
   'https://overpass-api.de/api/interpreter',
+  'https://z.overpass-api.de/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',
 ]
 
@@ -172,7 +177,11 @@ async function fetchOverpass(query) {
           'Accept': 'application/json',
         },
         body: 'data=' + encodeURIComponent(query),
-        signal: AbortSignal.timeout(30000),
+        // 45 s: la query lleva `[timeout:25]`, y el servidor añade
+        // tiempo de red y proceso. En el run 35429862841 kumi.systems se
+        // abortó a los 30 s exactos en 23/78 municipios — con 45 s le
+        // damos margen para que la respuesta llegue antes del abort.
+        signal: AbortSignal.timeout(45000),
       })
       if (!res.ok) {
         // Guardamos body corto para tener pista del rechazo (Overpass a
