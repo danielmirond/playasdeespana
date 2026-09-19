@@ -51,13 +51,21 @@ const MapaQueHacer = dynamic(() => import('@/components/ui/MapaQueHacer'), {
 
 export const maxDuration = 60
 export const revalidate = 3600
+// `dynamicParams: true` explícito. Con generateStaticParams devolviendo
+// [], TODA la ruta es ISR bajo demanda: Next.js renderiza en el primer
+// hit y cachea 1 h. Antes se pre-renderizaba la lista del sidecar en
+// build time, y si Vercel construía justo entre dos commits (uno con
+// el JSON vacío y otro con el JSON poblado) las páginas quedaban
+// permanentemente 404 hasta el siguiente deploy. Ahora depende solo
+// del contenido del JSON EN RUNTIME.
+export const dynamicParams = true
 
 interface Props { params: Promise<{ slug: string }> }
 
-export async function generateStaticParams() {
-  const slugs = await getMunicipiosConPois()
-  return slugs.map(slug => ({ slug }))
-}
+// Vacío a propósito: no pre-generamos nada en build. El ISR se encarga
+// de servir cada slug la primera vez que se pide. Si el sidecar no tiene
+// ese slug, notFound() abajo devolverá 404 legítimo.
+export function generateStaticParams() { return [] }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
