@@ -182,6 +182,17 @@ export default async function MunicipioPage({ params }: Props) {
           </p>
         )}
 
+        {/* Enlace a «El tiempo». Aquí no gateamos por cobertura de datos:
+            Open-Meteo cubre toda la costa española y solo pedimos que el
+            municipio tenga alguna playa (para tener centroide). Cualquier
+            municipio con playa tiene página del tiempo. */}
+        <p style={{ margin: '-1rem 0 2rem', fontSize: '.92rem' }}>
+          <Link href={`/municipio/${slug}/el-tiempo`} style={{ color: 'var(--ink)', fontWeight: 600 }}>
+            El tiempo en {municipio.nombre} →
+          </Link>{' '}
+          <span style={{ color: 'var(--muted)' }}>temperatura, lluvia y viento hora a hora y a 7 días, más las mejores playas con este tiempo.</span>
+        </p>
+
         {/* TOP 6 con hero foto: mejor scoring del municipio */}
         {playas.length >= 6 && (
           <section aria-labelledby="top-muni" style={{ marginBottom: '2.5rem' }}>
