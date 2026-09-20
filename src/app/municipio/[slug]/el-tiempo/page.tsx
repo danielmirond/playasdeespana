@@ -26,7 +26,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
+import { getMunicipios, getPlayasByMunicipio, getProvincias } from '@/lib/playas'
 import { esCapitalHomonima } from '@/lib/geo-duplicadas'
 import { getMeteoMunicipio, type MeteoMunicipio, type DiaTiempo } from '@/lib/meteo-municipio'
 import {
@@ -54,9 +54,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const municipios = await getMunicipios()
   const m = municipios.find(x => x.slug === slug)
   if (!m) return {}
-  // Igual que /que-hacer y raíz: si el nombre choca con la provincia
-  // (Cádiz, Málaga…) desambiguamos con «capital».
-  const homonima = esCapitalHomonima(slug, municipios.map(x => x.slug))
+  // Igual que la raíz: si el nombre choca con el de SU PROVINCIA (Cádiz,
+  // Málaga…) desambiguamos con «capital».
+  //
+  // La lista tiene que ser de provincias. Con la de municipios el slug se
+  // encuentra a sí mismo y la condición es siempre cierta: el título decía
+  // «El tiempo en Torrevieja capital» y «en Gijón capital», que no son
+  // capitales de nada.
+  const homonima = esCapitalHomonima(slug, (await getProvincias()).map(x => x.slug))
   const comoSeLlama = homonima ? `${m.nombre} capital` : m.nombre
   return {
     title: `El tiempo en ${comoSeLlama} hoy, mañana y 7 días`,
@@ -444,8 +449,9 @@ export default async function ElTiempoPage({ params }: Props) {
   // Sin datos, notFound: mejor no publicar que publicar valores placebo.
   if (!meteo) notFound()
 
-  // «Málaga capital» cuando la ciudad se llama igual que su provincia.
-  const esCapital = esCapitalHomonima(slug, municipios.map(x => x.slug))
+  // «Málaga capital» cuando la ciudad se llama igual que su provincia: la
+  // lista es de PROVINCIAS, ver el comentario de generateMetadata.
+  const esCapital = esCapitalHomonima(slug, (await getProvincias()).map(x => x.slug))
   const nombreH1 = esCapital ? `${municipio.nombre} capital` : municipio.nombre
   const provinciaSlug = municipio.provinciaSlug
 
