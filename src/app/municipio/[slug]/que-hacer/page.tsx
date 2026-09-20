@@ -35,19 +35,15 @@ import { osmRestaurantes } from '@/lib/osm-pois'
 import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tieneBarcos } from '@/lib/barcos-municipio'
 import GygActivities from '@/components/GygActivities'
-import dynamic from 'next/dynamic'
-
-// Leaflet vive en el cliente: dynamic import con SSR desactivado y un
-// placeholder del alto exacto para que no baile el layout al hidratar.
-const MapaQueHacer = dynamic(() => import('@/components/ui/MapaQueHacer'), {
-  ssr: false,
-  loading: () => (
-    <div style={{
-      border: '1px solid var(--line)', borderRadius: 8,
-      height: '360px', background: 'var(--card-bg)',
-    }} aria-hidden="true"/>
-  ),
-})
+// Leaflet vive en el cliente, pero eso ya lo resuelve el propio componente:
+// lleva 'use client' y no toca `document` hasta dentro de un efecto, igual
+// que MapaPlayas, que se importa así desde la página del municipio.
+//
+// NO volver a `dynamic(..., { ssr: false })`: en un componente de servidor
+// no está permitido, y tumbó el build de producción entero durante un día
+// —«ssr: false is not allowed with next/dynamic in Server Components»—, con
+// lo que ni esta página ni /el-tiempo llegaron a desplegarse.
+import MapaQueHacer from '@/components/ui/MapaQueHacer'
 
 export const maxDuration = 60
 export const revalidate = 3600
