@@ -202,6 +202,14 @@ const nextConfig = {
       { source: '/comunidad/aragn',             destination: '/comunidad/aragon',             permanent: true },
       { source: '/comunidad/pas-vasco',         destination: '/comunidad/pais-vasco',         permanent: true },
 
+      // España no es una comunidad autónoma. El hub existía porque 148 playas
+      // de Castellón, Valencia, Alicante y Ourense traían «España» en el campo
+      // `comunidad` —sin dato, rellenado con el país—. Corregido el dataset con
+      // scripts/fix-comunidad-por-provincia.mjs, la página se queda sin playas;
+      // el 301 va al índice porque mezclaba dos comunidades y mandarla a una
+      // sola sería mentirle a quien llegue desde la SERP.
+      { source: '/comunidad/espana',            destination: '/comunidades',                  permanent: true },
+
       // Versión EN
       { source: '/en/provinces/mlaga',     destination: '/en/provinces/malaga',     permanent: true },
       { source: '/en/provinces/crdoba',    destination: '/en/provinces/cordoba',    permanent: true },
