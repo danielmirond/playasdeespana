@@ -38,6 +38,7 @@ import { calcularEstado, ESTADOS } from '@/lib/estados'
 import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tienePois } from '@/lib/municipio-pois'
 import { getAvisos, type AvisoMeteo } from '@/lib/meteoalarm'
+import { comunidadDe, comunidadParaAvisos } from '@/lib/comunidad'
 
 export const maxDuration = 30
 export const revalidate = 3600      // el forecast cambia cada hora
@@ -490,7 +491,9 @@ export default async function ElTiempoPage({ params }: Props) {
   const [hayPois, hayMar, avisos] = await Promise.all([
     tienePois(slug),
     Promise.resolve(tieneMareas(slug)),
-    getAvisos(municipio.comunidad),
+    // Con «España» en el dato, Meteoalarm no encontraba código NUTS y las
+    // 148 playas valencianas y orensanas se quedaban sin avisos.
+    getAvisos(comunidadParaAvisos(municipio.comunidad, municipio.provincia)),
   ])
   const marMediterraneo = hayMar && ubicacionMareas(slug)?.zona === 'mediterraneo'
 
@@ -517,8 +520,13 @@ export default async function ElTiempoPage({ params }: Props) {
           }}>
             <Link href="/">Inicio</Link>
             <span aria-hidden="true">›</span>
-            <Link href={`/comunidad/${municipio.comunidadSlug}`}>{municipio.comunidad}</Link>
-            <span aria-hidden="true">›</span>
+            {/* Sin comunidad cuando el dato no dice nada: ver lib/comunidad. */}
+            {(() => { const com = comunidadDe(municipio.comunidad, municipio.provincia); return com && (
+              <>
+                <Link href={`/comunidad/${com.slug}`}>{com.nombre}</Link>
+                <span aria-hidden="true">›</span>
+              </>
+            ) })()}
             {provinciaSlug && (
               <>
                 <Link href={`/provincia/${provinciaSlug}`}>{municipio.provincia}</Link>
@@ -571,7 +579,7 @@ export default async function ElTiempoPage({ params }: Props) {
         {/* Avisos oficiales — se pintan antes del gráfico horario porque
             son información de seguridad y no un adorno. Cuando no hay,
             no hay bloque; nada de «sin avisos activos», que es paja. */}
-        <BloqueAvisos avisos={avisos} comunidad={municipio.comunidad} />
+        <BloqueAvisos avisos={avisos} comunidad={comunidadParaAvisos(municipio.comunidad, municipio.provincia)} />
 
         <GraficoHoras hoy={meteo.hoy} />
         <TarjetasSieteDias dias={meteo.dias} />

@@ -34,6 +34,7 @@ import { guiaUnDia, guiaTresDias, type Guia, type Parada } from '@/lib/guia-muni
 import { osmRestaurantes } from '@/lib/osm-pois'
 import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tieneBarcos } from '@/lib/barcos-municipio'
+import { comunidadDe } from '@/lib/comunidad'
 import GygActivities from '@/components/GygActivities'
 // Leaflet vive en el cliente, pero eso ya lo resuelve el propio componente:
 // lleva 'use client' y no toca `document` hasta dentro de un efecto, igual
@@ -69,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!pois) return {}
   return {
     title: `Qué hacer, ver y visitar hoy en ${pois.nombre}`,
-    description: `Guía práctica de qué ver y qué hacer hoy en ${pois.nombre}: sus mejores playas, museos, monumentos, miradores, teatros y sitios donde comer con vistas. Datos oficiales, actualizados.`,
+    description: `Qué ver y qué hacer en ${pois.nombre}: sus museos, monumentos, miradores y parques, las playas mejor equipadas y dos planes cerrados, de un día y de tres.`,
     alternates: { canonical: `/municipio/${slug}/que-hacer` },
   }
 }
@@ -84,8 +85,8 @@ function frase(pois: NonNullable<Awaited<ReturnType<typeof getMunicipioPois>>>, 
   if (pois.miradores.length) trozos.push(`${pois.miradores.length} ${pois.miradores.length === 1 ? 'mirador' : 'miradores'}`)
   if (pois.cultura.length) trozos.push(`${pois.cultura.length} espacios culturales`)
   if (pois.parques.length) trozos.push(`${pois.parques.length} parques`)
-  if (trozos.length === 0) return `En ${pois.nombre} hay cosas que hacer más allá del baño; a continuación las principales.`
-  return `${pois.nombre} concentra ${trozos.slice(0, -1).join(', ')}${trozos.length > 1 ? ' y ' : ''}${trozos[trozos.length - 1]} en un radio de 3 km. Selección real desde OpenStreetMap.`
+  if (trozos.length === 0) return `En ${pois.nombre} hay cosas que hacer además de bañarse. Estas son las principales.`
+  return `En ${pois.nombre} y sus alrededores tienes ${trozos.slice(0, -1).join(', ')}${trozos.length > 1 ? ' y ' : ''}${trozos[trozos.length - 1]}. Abajo están en el mapa, y con ellos dos planes ya montados: uno de un día y otro de tres.`
 }
 
 // Componente de bloque: un h2 con eyebrow y una lista de POIs. Solo se
@@ -135,7 +136,7 @@ function BloquePois({ id, eyebrow, titulo, items, mostrar = 8 }: {
       </ul>
       {items.length > mostrar && (
         <div style={{ marginTop: '.55rem', fontSize: '.78rem', color: 'var(--muted)' }}>
-          Otros {items.length - mostrar} sitios de esta categoría dentro del radio.
+          Y otros {items.length - mostrar} más por la zona.
         </div>
       )}
     </section>
@@ -330,8 +331,17 @@ export default async function QueHacerPage({ params }: Props) {
             <span aria-hidden="true">›</span>
             {municipio && provinciaSlug && (
               <>
-                <Link href={`/comunidad/${municipio.comunidadSlug}`}>{municipio.comunidad}</Link>
-                <span aria-hidden="true">›</span>
+                {/* La comunidad se salta cuando no aporta: en el dataset,
+                    Asturias, Murcia, Cantabria y otras cinco repiten nombre
+                    con su provincia («Asturias › Asturias»), y las cuatro
+                    provincias valencianas y Ourense lo traen como «España»,
+                    que no es ninguna comunidad. */}
+                {(() => { const com = comunidadDe(municipio.comunidad, municipio.provincia); return com && (
+                  <>
+                    <Link href={`/comunidad/${com.slug}`}>{com.nombre}</Link>
+                    <span aria-hidden="true">›</span>
+                  </>
+                ) })()}
                 <Link href={`/provincia/${provinciaSlug}`}>{municipio.provincia}</Link>
                 <span aria-hidden="true">›</span>
               </>
@@ -441,8 +451,9 @@ export default async function QueHacerPage({ params }: Props) {
             </h2>
             <BloqueGuia guia={gUnDia} />
             <p style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.75rem' }}>
-              Itinerario montado con reglas mecánicas sobre los POIs del catálogo. Los tiempos
-              son medias estándar por categoría; verifica horarios de apertura antes de ir.
+              El plan lo ordena el mapa: se empieza por lo que está más cerca y se deja la playa
+              para el mediodía. Los tiempos de cada parada son aproximados. Mira los horarios antes
+              de ir, sobre todo fuera de verano: muchos museos cierran los lunes.
             </p>
           </section>
         )}
@@ -479,7 +490,8 @@ export default async function QueHacerPage({ params }: Props) {
               </div>
             ))}
             <p style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.5rem' }}>
-              Cada día responde a una tipología distinta para no repetir museo tras museo. Distancias haversine reales; los slots sin dato en OSM se saltan.
+              Cada día va de una cosa distinta, para no encadenar tres museos seguidos. Las distancias
+              entre paradas son en línea recta, así que andando siempre será algo más.
             </p>
           </section>
         )}
@@ -533,10 +545,10 @@ export default async function QueHacerPage({ params }: Props) {
           </section>
         )}
 
-        <BloquePois id="museos" eyebrow="Ver arte y cultura" titulo="Museos y galerías" items={pois.museos} />
-        <BloquePois id="monumentos" eyebrow="Patrimonio" titulo="Monumentos y sitios históricos" items={pois.monumentos} mostrar={10} />
+        <BloquePois id="museos" eyebrow="Para ver" titulo="Museos, galerías y sitios de visita" items={pois.museos} />
+        <BloquePois id="monumentos" eyebrow="Patrimonio" titulo="Monumentos y estatuas" items={pois.monumentos} mostrar={10} />
         <BloquePois id="miradores" eyebrow="Panorámicas" titulo="Miradores y faros" items={pois.miradores} />
-        <BloquePois id="cultura" eyebrow="Cine, teatro, ocio" titulo="Cultura y espectáculos" items={pois.cultura} />
+        <BloquePois id="cultura" eyebrow="Para una tarde" titulo="Teatros, cines y bibliotecas" items={pois.cultura} />
         <BloquePois id="parques" eyebrow="Aire libre" titulo="Parques y jardines" items={pois.parques} />
 
         {restaurantes.length > 0 && (
@@ -635,10 +647,10 @@ export default async function QueHacerPage({ params }: Props) {
         )}
 
         <p style={{ marginTop: '2.5rem', fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.5 }}>
-          Los puntos de interés proceden de OpenStreetMap (contribuidores voluntarios, licencia ODbL) y están
-          dentro de un radio de 3&nbsp;km del centro del municipio. Si echas en falta algo, edítalo en
-          osm.org y aparecerá en la próxima actualización de los datos.
-          Sidecar generado el {pois.generado}.
+          Los sitios de esta página salen de OpenStreetMap, que escribe gente voluntaria (licencia ODbL),
+          y están a menos de 3&nbsp;km del centro del pueblo. Puede que falte alguno o que alguno haya
+          cerrado. Si conoces la zona, se corrige en osm.org y aquí aparece en la siguiente
+          actualización. Lista revisada el {pois.generado}.
         </p>
       </main>
     </>
