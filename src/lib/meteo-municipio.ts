@@ -51,6 +51,9 @@ export interface DiaTiempo {
   prob_lluvia:   number
   lluvia_mm:     number
   viento_max:    number
+  /** De dónde sopla el viento dominante del día, en grados. Con él se le
+   *  pone nombre (levante, tramontana…) y se sabe qué playas quedan abrigadas. */
+  viento_dir:    number | null
   uv_max:        number | null
   wmo:           number
   amanecer:      string   // ISO
@@ -69,7 +72,7 @@ async function fetchMeteoMunicipioBruto(lat: number, lng: number): Promise<Meteo
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}`
       + `&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,uv_index,pressure_msl,weather_code`
       + `&hourly=temperature_2m,precipitation_probability,precipitation`
-      + `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,weather_code,wind_speed_10m_max,uv_index_max,sunrise,sunset`
+      + `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,weather_code,wind_speed_10m_max,wind_direction_10m_dominant,uv_index_max,sunrise,sunset`
       + `&wind_speed_unit=kmh&forecast_days=7&timezone=${tz}`
     // Igual que en meteo.ts: 5.400 s = TTL Data Cache algo mayor que el
     // revalidate de la página, para no forzar un miss al regenerar.
@@ -114,6 +117,7 @@ async function fetchMeteoMunicipioBruto(lat: number, lng: number): Promise<Meteo
       prob_lluvia: Math.round(d.precipitation_probability_max?.[i] ?? 0),
       lluvia_mm:   parseFloat((d.precipitation_sum?.[i] ?? 0).toFixed(1)),
       viento_max:  Math.round(d.wind_speed_10m_max?.[i] ?? 0),
+      viento_dir:  d.wind_direction_10m_dominant?.[i] != null ? Math.round(d.wind_direction_10m_dominant[i]) : null,
       uv_max:      d.uv_index_max?.[i] != null ? Math.round(d.uv_index_max[i]) : null,
       wmo:         Number(d.weather_code?.[i] ?? 0),
       amanecer:    d.sunrise?.[i] ?? '',

@@ -34,7 +34,9 @@ import {
   respuestaLluvia, diaCorto, diaMes, diaLegible, soloHora, duracionHM,
 } from '@/lib/tiempo-copy'
 import IconoTiempo from '@/components/ui/IconoTiempo'
-import { calcularEstado, ESTADOS } from '@/lib/estados'
+import { getMareas } from '@/lib/marine'
+import { veredictoDia, mejorDia, type VeredictoDia } from '@/lib/dia-playa'
+import { exposicionOleaje } from '@/lib/seguridad'
 import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tienePois } from '@/lib/municipio-pois'
 import { getAvisos, type AvisoMeteo } from '@/lib/meteoalarm'
@@ -68,8 +70,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const homonima = esCapitalHomonima(slug, (await getProvincias()).map(x => x.slug))
   const comoSeLlama = homonima ? `${m.nombre} capital` : m.nombre
   return {
-    title: `El tiempo en ${comoSeLlama} hoy, mañana y 7 días`,
-    description: `Predicción meteorológica en ${comoSeLlama}: temperatura, lluvia, viento y UV hora a hora y a 7 días. Con este tiempo, ¿a qué playa vamos? Datos de Open-Meteo, actualizados cada hora.`,
+    // «El tiempo en X» a secas lo gana el widget de Google; lo nuestro es el
+    // veredicto de playa. Sin la respuesta en el título: regla de casa.
+    title: `El tiempo en las playas de ${comoSeLlama}: qué día ir esta semana`,
+    description: `Si hace día de playa hoy en ${comoSeLlama} y qué día de la semana es el mejor: viento con nombre, olas, lluvia y agua, con las playas más abrigadas según sople.`,
     alternates: { canonical: `/municipio/${slug}/el-tiempo` },
   }
 }
@@ -231,6 +235,50 @@ function GraficoHoras({ hoy }: { hoy: MeteoMunicipio['hoy'] }) {
           </span>
         </div>
       </div>
+    </section>
+  )
+}
+
+const COLOR_NIVEL = { bueno: 'var(--excelente)', regular: 'var(--aceptable)', malo: 'var(--noapto)' } as const
+
+// La respuesta antes que los grados: «¿Hace día de playa hoy?» en grande,
+// con el porqué, y debajo los 7 días como calendario de playa y el mejor.
+function BloqueVeredicto({ hoy, veredictos, mejor, nombre }: {
+  hoy: VeredictoDia; veredictos: VeredictoDia[]; mejor: VeredictoDia | null; nombre: string
+}) {
+  return (
+    <section style={{ marginBottom: '2.25rem' }}>
+      <div data-speakable style={{
+        padding: '1.1rem 1.25rem', borderLeft: `3px solid ${COLOR_NIVEL[hoy.nivel]}`,
+        background: 'var(--surface)', borderRadius: 3, marginBottom: '1rem',
+      }}>
+        <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--ink)', fontSize: '1rem', marginBottom: '.25rem' }}>
+          ¿Hace día de playa hoy en {nombre}?
+        </div>
+        <div style={{ fontSize: '1.05rem', color: 'var(--ink)', lineHeight: 1.5 }}>
+          <b style={{ color: COLOR_NIVEL[hoy.nivel] }}>{hoy.titulo}</b>: {hoy.motivo}.
+        </div>
+      </div>
+      <ol style={{ listStyle: 'none', padding: 0, margin: '0 0 .75rem', display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', gap: '.35rem' }}>
+        {veredictos.map((v, i) => (
+          <li key={v.fecha} title={v.motivo} style={{
+            textAlign: 'center', padding: '.55rem .2rem', borderRadius: 6,
+            border: `1px solid ${mejor?.fecha === v.fecha ? COLOR_NIVEL.bueno : 'var(--line)'}`,
+            background: 'var(--surface)',
+          }}>
+            <div style={{ fontSize: '.68rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.06em' }}>{i === 0 ? 'Hoy' : diaCorto(v.fecha)}</div>
+            <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: COLOR_NIVEL[v.nivel], fontSize: '.95rem', marginTop: '.15rem' }}>{v.titulo}</div>
+            <div style={{ fontSize: '.62rem', color: 'var(--muted)', marginTop: '.2rem', lineHeight: 1.3 }}>{v.motivo.split(' · ')[0]}</div>
+          </li>
+        ))}
+      </ol>
+      <p style={{ margin: 0, fontSize: '.95rem', lineHeight: 1.55, color: 'var(--ink)' }}>
+        {!mejor
+          ? <>Ninguno de los próximos {veredictos.length} días pinta bien para la playa.</>
+          : mejor.nivel === 'bueno'
+            ? <><b>El mejor día es {mejor.fecha === veredictos[0].fecha ? 'hoy' : diaLegible(mejor.fecha)}</b>: {mejor.motivo}.</>
+            : <><b>Ningún día es redondo; el menos malo, {mejor.fecha === veredictos[0].fecha ? 'hoy' : diaLegible(mejor.fecha)}</b>, con {mejor.motivo}.</>}
+      </p>
     </section>
   )
 }
@@ -463,22 +511,24 @@ export default async function ElTiempoPage({ params }: Props) {
   const nombreH1 = esCapital ? `${municipio.nombre} capital` : municipio.nombre
   const provinciaSlug = municipio.provinciaSlug
 
-  // Playas mejor con este tiempo: el mismo criterio de scoring que llevan
-  // las listas del sitio (seed determinista mientras no haya datos oleaje
-  // reales; ver notas de calcularEstado y sortByScore). Cogemos las 3.
-  const playasConEstado = playas.map(p => {
-    const seed = p.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
-    const olas = parseFloat(((seed % 15) / 10).toFixed(1))
-    const viento = 5 + (seed % 30)
-    const estadoKey = calcularEstado({ olas, viento })
-    const estado = ESTADOS[estadoKey]
-    const score = 100
-      - Math.round(olas * 10)
-      - (viento > 20 ? 15 : viento > 10 ? 5 : 0)
-      + (p.bandera ? 5 : 0)
-      + (p.socorrismo ? 3 : 0)
-    return { ...p, estadoKey, estado, olas, viento, score }
-  }).sort((a, b) => b.score - a.score).slice(0, 3)
+  // Veredicto por día. El oleaje viene de la llamada marina (5 días) y puede
+  // faltar: entonces se juzga con viento y lluvia, y se dice menos.
+  const mar = await getMareas(lat, lng)
+  const veredictos: VeredictoDia[] = meteo.dias.map((d, i) =>
+    veredictoDia(d, mar?.forecast[i]?.olas_max ?? null, lat, lng))
+  const hoyV = veredictos[0]
+  const mejor = mejorDia(veredictos)
+
+  // Qué playas quedan a resguardo con el viento del día. Antes aquí había un
+  // «score /100» calculado con un seed del slug: números inventados con
+  // aspecto de medición. Fuera. Esto sale de la orientación de cada playa
+  // frente al viento dominante, la misma regla que corrige la bandera
+  // estimada en las fichas. Solo tiene sentido cuando el viento molesta.
+  const dirHoy = meteo.dias[0]?.viento_dir ?? null
+  const ventoso = (meteo.dias[0]?.viento_max ?? 0) >= 20 && dirHoy != null
+  const abrigadas = ventoso
+    ? playas.filter(p => exposicionOleaje(p.lat, p.lng, dirHoy).abrigada).slice(0, 5)
+    : []
 
   // Respuesta directa — copy mecánico
   const respuesta = respuestaLluvia(meteo.hoy, meteo.dias, nombreH1)
@@ -488,11 +538,25 @@ export default async function ElTiempoPage({ params }: Props) {
   const faq = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [{
-      '@type': 'Question',
-      name: `¿Va a llover hoy en ${nombreH1}?`,
-      acceptedAnswer: { '@type': 'Answer', text: respuesta },
-    }],
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `¿Hace día de playa hoy en ${nombreH1}?`,
+        acceptedAnswer: { '@type': 'Answer', text: `${hoyV.titulo}: ${hoyV.motivo}.` },
+      },
+      {
+        '@type': 'Question',
+        name: `¿Qué día es mejor para ir a la playa en ${nombreH1} esta semana?`,
+        acceptedAnswer: { '@type': 'Answer', text: mejor
+          ? (mejor.nivel === 'bueno' ? `${diaLegible(mejor.fecha)}: ${mejor.motivo}.` : `Ningún día es redondo; el menos malo es ${diaLegible(mejor.fecha)}, con ${mejor.motivo}.`)
+          : `Ninguno de los próximos ${veredictos.length} días pinta bien para la playa en ${nombreH1}.` },
+      },
+      {
+        '@type': 'Question',
+        name: `¿Va a llover hoy en ${nombreH1}?`,
+        acceptedAnswer: { '@type': 'Answer', text: respuesta },
+      },
+    ],
   }
 
   const [hayPois, hayMar, avisos] = await Promise.all([
@@ -551,17 +615,19 @@ export default async function ElTiempoPage({ params }: Props) {
             fontWeight: 700, letterSpacing: '-.02em', lineHeight: 1.1, color: 'var(--ink)',
             marginBottom: '.3rem',
           }}>
-            El tiempo en <em style={{ fontWeight: 500, color: 'var(--accent)', fontStyle: 'italic' }}>{nombreH1}</em>
+            El tiempo en las playas de <em style={{ fontWeight: 500, color: 'var(--accent)', fontStyle: 'italic' }}>{nombreH1}</em>
           </h1>
           <p style={{
             fontSize: '1rem', color: 'var(--muted)',
             fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 500,
             margin: 0,
-          }}>hoy, mañana y a {meteo.dias.length} días</p>
+          }}>si hace día de playa hoy, y qué día ir esta semana</p>
         </div>
       </div>
 
       <main style={{ maxWidth: 780, margin: '0 auto', padding: '2.5rem 1.5rem 3rem' }}>
+
+        <BloqueVeredicto hoy={hoyV} veredictos={veredictos} mejor={mejor} nombre={nombreH1} />
 
         <BloqueAhora meteo={meteo.actual} actualizado={actualizado} />
 
@@ -594,69 +660,35 @@ export default async function ElTiempoPage({ params }: Props) {
         <TarjetasSieteDias dias={meteo.dias} />
         <BloqueSol hoy={meteo.dias[0]} />
 
-        {/* Cruce meteo × playas: la ventaja competitiva. Solo si el municipio
-            tiene playas en el catálogo. */}
-        {playasConEstado.length > 0 && (
+        {/* Con viento, qué playas quedan a resguardo. Sin viento no hay
+            bloque: no hay nada que recomendar. */}
+        {ventoso && (
           <section style={{ marginBottom: '2.5rem' }}>
             <div style={{
               fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
               textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-            }}>Con este tiempo</div>
+            }}>Con el viento de hoy</div>
             <h2 style={{
               fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700,
               color: 'var(--ink)', marginBottom: '.5rem', lineHeight: 1.15,
             }}>
-              Las mejores <em style={{ fontWeight: 500, color: 'var(--accent)' }}>playas hoy</em> en {municipio.nombre}
+              {abrigadas.length ? <>Las playas <em style={{ fontWeight: 500, color: 'var(--accent)' }}>más abrigadas</em></> : <>Hoy no hay playa abrigada</>}
             </h2>
-            <p style={{
-              color: 'var(--muted)', fontSize: '.9rem', marginBottom: '.85rem', lineHeight: 1.55,
-            }}>
-              Score cruzando oleaje, viento y servicios de la playa con las condiciones actuales del municipio.
+            <p style={{ color: 'var(--muted)', fontSize: '.9rem', marginBottom: '.85rem', lineHeight: 1.55 }}>
+              {hoyV.viento ? `Sopla ${hoyV.viento}` : 'Sopla viento'} a {meteo.dias[0].viento_max} km/h.{' '}
+              {abrigadas.length
+                ? 'Estas dan la espalda a ese viento por cómo está orientada su costa; el resto lo reciben de frente.'
+                : `Ninguna playa de ${municipio.nombre} queda claramente a resguardo de ese viento: mejor esperar a que amaine o mirar en el municipio de al lado.`}
             </p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {playasConEstado.map((p, i) => (
-                <li key={p.slug} style={{
-                  border: '1px solid var(--line)', borderRadius: 6, padding: '.75rem .9rem',
-                  background: 'var(--surface)', display: 'flex', alignItems: 'baseline',
-                  gap: '.8rem', marginBottom: '.5rem',
-                }}>
-                  <span style={{
-                    fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-                    fontSize: '1.1rem', color: 'var(--muted)', flexShrink: 0, minWidth: '1.2rem',
-                  }}>{i + 1}</span>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <Link href={`/playas/${p.slug}`} style={{
-                      fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.05rem',
-                      color: 'var(--ink)', borderBottom: '1px dotted var(--muted)',
-                    }}>{p.nombre}</Link>
-                    <div style={{
-                      fontSize: '.75rem', color: 'var(--muted)', marginTop: '.15rem',
-                      display: 'flex', gap: '.4rem', flexWrap: 'wrap', alignItems: 'center',
-                    }}>
-                      <span style={{ color: p.estado.dot }}>● {p.estado.label}</span>
-                      <span>· olas {p.olas} m</span>
-                      <span>· viento {p.viento} km/h</span>
-                    </div>
-                  </div>
-                  <span style={{
-                    fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.2rem',
-                    color: 'var(--sea-buena, #3d6b1f)',
-                  }}>
-                    {p.score}<span style={{
-                      fontFamily: 'var(--font-mono, monospace)', fontSize: '.6rem',
-                      color: 'var(--muted)', fontWeight: 500, marginLeft: 2,
-                    }}>/100</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-            {playas.length > 3 && (
-              <Link href={`/municipio/${slug}`} style={{
-                color: 'var(--accent)', fontSize: '.85rem',
-                display: 'inline-block', marginTop: '.6rem',
-              }}>
-                Todas las {playas.length} playas de {municipio.nombre} →
-              </Link>
+            {abrigadas.length > 0 && (
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.5rem' }}>
+                {abrigadas.map(p => (
+                  <li key={p.slug} style={{ border: '1px solid var(--line)', borderRadius: 6, padding: '.7rem .9rem', background: 'var(--surface)' }}>
+                    <Link href={`/playas/${p.slug}`} style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--ink)', borderBottom: '1px dotted var(--muted)' }}>{p.nombre}</Link>
+                    {p.socorrismo && <span style={{ fontSize: '.72rem', color: 'var(--muted)', marginLeft: '.6rem' }}>Socorrismo</span>}
+                  </li>
+                ))}
+              </ul>
             )}
           </section>
         )}
