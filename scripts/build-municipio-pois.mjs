@@ -143,6 +143,31 @@ const MUNICIPIOS = [
   { slug: 'ribadeo', nombre: 'Ribadeo', lat: 43.5522, lng: -7.1081 },
 ]
 
+// El resto sale del catálogo: todos los municipios con página (cuatro playas
+// o más, sin las extranjeras), con el centro en el promedio de sus playas.
+// Los 78 de arriba conservan su coordenada a mano, que en las ciudades apunta
+// al casco y no a la costa —en Málaga el promedio de las playas cae a 4 km
+// del centro—. Para un pueblo de costa el promedio y el casco son lo mismo.
+const EXTRANJERAS = new Set(JSON.parse(readFileSync(resolve(ROOT, 'src/data/slugs-extranjeras.json'), 'utf-8')))
+const aSlug = (x) => x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+{
+  const playas = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'utf-8'))
+    .filter(p => !EXTRANJERAS.has(p.slug) && p.lat && p.lng)
+  const porMunicipio = new Map()
+  for (const p of playas) {
+    const slug = aSlug(p.municipio)
+    const m = porMunicipio.get(slug) ?? { slug, nombre: p.municipio, lat: 0, lng: 0, n: 0 }
+    m.lat += p.lat; m.lng += p.lng; m.n++
+    porMunicipio.set(slug, m)
+  }
+  const yaEstan = new Set(MUNICIPIOS.map(m => m.slug))
+  for (const m of porMunicipio.values()) {
+    if (m.n < 4 || yaEstan.has(m.slug)) continue
+    MUNICIPIOS.push({ slug: m.slug, nombre: m.nombre, lat: +(m.lat / m.n).toFixed(4), lng: +(m.lng / m.n).toFixed(4) })
+  }
+}
+
 function queryFor(lat, lng) {
   // AroundQL simple. Nada de recursos exóticos: nodes+ways+relations con
   // tags conocidos. `out center 200;` limita cada categoría a 200 elementos.
@@ -281,8 +306,15 @@ async function main() {
   const out = { ...previo }
   let ok = 0, ko = 0
 
+  // Sin `--refrescar`, lo ya cosechado se respeta: sirve para reanudar una
+  // pasada cortada a medias. Con él se vuelve a pedir todo —es lo que hace
+  // el cron mensual, que antes de esto solo añadía municipios nuevos y no
+  // refrescaba ninguno—, pero si Overpass falla en uno se conserva lo que
+  // había en vez de dejarlo sin datos.
+  const refrescar = process.argv.includes('--refrescar')
+
   for (const m of MUNICIPIOS) {
-    if (out[m.slug]) { console.log(`✔  ${m.slug} (cache)`); ok++; continue }
+    if (out[m.slug] && !refrescar) { console.log(`✔  ${m.slug} (cache)`); ok++; continue }
     try {
       const { pois, total } = await procesarMunicipio(m)
       out[m.slug] = { nombre: m.nombre, lat: m.lat, lng: m.lng, pois, total, generado: new Date().toISOString().slice(0, 10) }

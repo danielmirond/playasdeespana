@@ -36,7 +36,7 @@ jobs:
         # entradas cacheadas del mismo mes, no vuelve a llamar a Overpass
         # por ellas. En el cron mensual el cache está vacío y regenera
         # todo desde cero.
-        run: node scripts/build-municipio-pois.mjs
+        run: node scripts/build-municipio-pois.mjs --refrescar
 
       - name: Commit and push sidecar
         # `pull --rebase` antes del push: el script tarda 10-20 min y

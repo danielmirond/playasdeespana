@@ -61,6 +61,16 @@ export interface MunicipioPois {
 
 let _sidecar: Record<string, MunicipioPoisData> | null | undefined
 
+/**
+ * Mínimo para tener página. Desde que la lista sale del catálogo entero y no
+ * de 78 destinos elegidos a mano, entran pueblos donde Overpass encuentra dos
+ * o tres cosas. Con eso no hay plan de un día que montar ni nada que leer:
+ * mejor sin página que con una que decepciona. El dato sigue en el sidecar
+ * por si mañana OSM tiene más.
+ */
+const MINIMO_POIS = 5
+const publicable = (raw: MunicipioPoisData | undefined) => !!raw && raw.total >= MINIMO_POIS
+
 async function getSidecar(): Promise<Record<string, MunicipioPoisData> | null> {
   if (_sidecar !== undefined) return _sidecar
   try {
@@ -90,7 +100,7 @@ export const getMunicipioPois = cache(async (slug: string): Promise<MunicipioPoi
   const s = await getSidecar()
   if (!s) return null
   const raw = s[slug]
-  if (!raw) return null
+  if (!publicable(raw)) return null
   return {
     nombre: raw.nombre,
     lat: raw.lat,
@@ -108,12 +118,12 @@ export const getMunicipioPois = cache(async (slug: string): Promise<MunicipioPoi
 /** Lista de slugs con datos (para generateStaticParams). */
 export const getMunicipiosConPois = cache(async (): Promise<string[]> => {
   const s = await getSidecar()
-  return s ? Object.keys(s) : []
+  return s ? Object.keys(s).filter(k => publicable(s[k])) : []
 })
 
 /** ¿Este municipio está en el prototipo? Sirve para pintar el enlace desde
  *  la página raíz del municipio solo cuando hay página destino que servir. */
 export const tienePois = cache(async (slug: string): Promise<boolean> => {
   const s = await getSidecar()
-  return !!s?.[slug]
+  return publicable(s?.[slug])
 })
