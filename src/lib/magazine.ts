@@ -79,6 +79,88 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Cala Pregonda, Es Mercadal (voz bicéfala) ─────
+  {
+    slug: 'cala-pregonda-menorca-arena-roja-tramuntana-binimela',
+    category: 'rutas',
+    title: 'Cala Pregonda, la Menorca de arena roja: 20 minutos a pie y a merced de la tramuntana',
+    excerpt:
+      'En la costa norte de Menorca, arena rojiza y rocas mucho más antiguas que las de las calas del sur, con un islote delante. Las pegas: se llega andando desde Binimel·là por el Camí de Cavalls, no hay ni un servicio ni sombra, y cuando sopla la tramuntana el mar entra de frente y la orilla se llena de posidonia.',
+    heroAlt:
+      'Cala Pregonda, en Es Mercadal (Menorca): pequeña cala de arena rojiza entre rocas oscuras y rojizas, con un islote rocoso frente a la orilla y el mar en calma',
+    heroQuery: 'cala pregonda,menorca,beach,cove',
+    gygQuery: 'Menorca, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-09-21T08:34:31Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/islas-baleares', label: 'Playas de Baleares' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+      { href: '/alquiler-barco/costas/islas-baleares/provincias/baleares/menorca', label: 'Alquiler de barco en Menorca' },
+    ],
+    body: [
+      { t: 'p', html: 'El camino sale de la arena de Binimel·là, sube un poco entre matorral bajo y piedra suelta, y al coronar la primera loma cambia el color de todo. La roca ya no es la caliza pálida de las postales del sur de la isla: es oscura, con vetas que tiran a óxido, y la arena de la cala que aparece abajo tiene un tono entre ladrillo y canela. Delante, a pocos metros de la orilla, un islote corta el horizonte y deja entre él y la playa una lámina de agua que, en un día sin viento, parece un estanque.' },
+      { t: 'p', html: '<strong>Cala Pregonda</strong>, en el término municipal de <strong>Es Mercadal</strong>, es la imagen que suele elegirse para explicar que Menorca tiene dos costas que no se parecen en nada. Lo que la imagen no cuenta es que esa misma orientación al norte que le da el color es la que, varios días al año, la deja inservible para el baño.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Menorca se divide geológicamente en dos mitades. El sur, el <strong>Migjorn</strong>, es una plataforma de calizas relativamente recientes, la roca blanca de Macarella o Turqueta. El norte, la <strong>Tramuntana</strong>, está hecho de materiales mucho más antiguos —pizarras, areniscas y conglomerados rojizos—, y esa es la razón del color de Pregonda: la arena es el resultado de erosionar esas rocas, y por eso es más gruesa y más oscura que la harina clara de las calas del sur. La isla entera es <strong>Reserva de la Biosfera de la UNESCO desde 1993</strong>, y la cala se mantiene sin urbanizar, sin paseo y sin chiringuito.' },
+      { t: 'p', html: 'El primer contra es el acceso. <strong>No hay carretera hasta la arena</strong>: el coche se deja en el aparcamiento de tierra de <strong>Binimel·là</strong> y desde allí se camina por el tramo del <strong>Camí de Cavalls</strong> —el sendero histórico que rodea la isla, balizado como GR 223— unos <strong>veinte minutos</strong>, pasando por la pequeña <strong>Cala Pregondó</strong>. No es un camino difícil, pero es terreno de piedra suelta, con algún repecho y sin un árbol, y en agosto ese aparcamiento se queda corto pronto: quien llega a media mañana suele encontrarse los coches alineados en la cuneta del camino de acceso.' },
+      { t: 'p', html: 'El segundo contra es el viento, y es el que decide. La costa norte está <strong>abierta a la tramuntana</strong>, el viento del norte que en Menorca sopla con una frecuencia y una fuerza que marcan hasta la forma de los árboles. Con tramuntana, el mar entra de frente en la cala, el agua se enturbia y la orilla amanece cubierta de <strong>hojas de posidonia</strong> arrancadas del fondo. Esos bancos de hojas no son suciedad —protegen la playa de la erosión y por eso no se retiran en las calas naturales—, pero cambian la experiencia de quien venía buscando la foto. El tercer contra es la ausencia total de servicios: <strong>ni socorrista, ni aseos, ni agua, ni sombra natural</strong> que merezca ese nombre. El agua potable y la comida se cargan desde el coche. La calidad sanitaria del agua de baño de las playas de Baleares se publica cada temporada en el sistema nacional <strong>NÁYADE</strong>.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> Los días de viento del sur, el <strong>migjorn</strong>, que es justo cuando las calas famosas de la costa sur se llenan de oleaje y de gente. Es la regla más útil de Menorca y cabe en una frase: si sopla del sur, se va al norte; si sopla del norte, se va al sur. Con migjorn o sin viento, Pregonda tiene agua quieta, el islote hace de rompeolas y el fondo de arena y roca se presta al snorkel. Junio y septiembre son los meses buenos: agua ya templada, aparcamiento con sitio y la luz de la tarde encendiendo el rojo de la roca. <strong>El truco</strong> es llegar antes de las diez o después de las cinco, y no quedarse en la primera arena: el tramo más alejado del camino se vacía antes.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Con tramuntana, sin discusión: el baño se vuelve incómodo o directamente peligroso y la cala pierde lo que se ha ido a buscar. Conviene mirar la previsión la noche antes, porque el viento del norte suele entrar con cielos limpios y engaña: día radiante, mar imposible. Tampoco es buena idea con niños muy pequeños o carritos, por el tramo de piedra suelta, ni en las horas centrales de julio y agosto, con el sol cayendo a plomo sobre un camino sin sombra. <strong>La alternativa</strong> con viento del norte está al otro lado de la isla: las calas del sur, a sotavento. Y si lo que se busca es el mismo color sin caminar, <strong>Cala Cavalleria</strong>, algo más al este, tiene arena de tonos parecidos y acceso más corto, aunque se llena antes.' },
+      { t: 'ul', items: [
+        'Costa norte de Menorca (Tramuntana): rocas antiguas y arena rojiza, frente a la caliza blanca del sur (Migjorn).',
+        'Sin carretera: aparcamiento en Binimel·là y unos 20 minutos a pie por el Camí de Cavalls (GR 223), pasando por Cala Pregondó.',
+        'Menorca es Reserva de la Biosfera de la UNESCO desde 1993; la cala no está urbanizada.',
+        'Abierta a la tramuntana: con viento del norte hay oleaje, agua turbia y posidonia en la orilla.',
+        'Ni socorrista, ni aseos, ni agua, ni sombra. Todo se lleva desde el coche.',
+        'Mejor con migjorn o calma, en junio y septiembre, antes de las 10:00 o después de las 17:00.',
+      ] },
+      { t: 'quote', text: 'Aquí nadie promete aguas de anuncio: con migjorn es un estanque rojo; con tramuntana, un rompeolas lleno de posidonia. La misma cala, dos días distintos.' },
+      { t: 'p', html: 'A última hora de la tarde el sol cae por el oeste y pega de lado contra la roca, que pasa del óxido al granate. Los últimos bañistas recogen y desandan el camino hacia Binimel·là en fila, con las toallas al hombro. El islote se queda recortado sobre un agua que ya no refleja nada. Mañana puede entrar el norte y convertir todo esto en otra cosa: la cala no está hecha para la foto, está hecha para leer el viento antes de salir de casa.' },
+    ],
+    faq: [
+      { q: '¿Cómo se llega a Cala Pregonda?', a: 'No hay acceso rodado hasta la cala. Se deja el coche en el aparcamiento de tierra de la playa de Binimel·là, en el término de Es Mercadal, y se camina hacia el oeste por el Camí de Cavalls (GR 223) unos veinte minutos, pasando por la pequeña Cala Pregondó. El camino es sencillo pero de piedra suelta y sin sombra, así que conviene calzado cerrado y agua.' },
+      { q: '¿Qué viento estropea Cala Pregonda?', a: 'La tramuntana, el viento del norte. Como la cala mira al norte, con tramuntana el mar entra de frente, el agua se enturbia y la orilla se llena de hojas de posidonia. Es el día para ir a las calas del sur. Con viento del sur (migjorn) o en calma, Pregonda queda protegida y el agua está quieta.' },
+      { q: '¿Tiene servicios Cala Pregonda?', a: 'No. No hay socorrista, aseos, chiringuito, fuentes ni sombra natural suficiente. Hay que llevar agua, comida y protección solar desde el coche y bajarse la basura de vuelta. En agosto, además, el aparcamiento de Binimel·là se llena pronto: es mejor llegar antes de las diez.' },
+    ],
+    en: {
+      title: 'Cala Pregonda, Menorca’s red-sand cove: a 20-minute walk, wide open to the tramuntana',
+      excerpt:
+        'On Menorca’s north coast, reddish sand and rock far older than the southern coves, with an islet just offshore. The catch: you walk in from Binimel·là on the Camí de Cavalls, there are no facilities and no shade, and when the tramuntana blows the sea comes straight in and the shoreline fills with posidonia.',
+      related: [
+        { href: '/en/boat-rental/coasts/islas-baleares/provinces/baleares/menorca', label: 'Boat rental in Menorca' },
+        { href: '/en/islands', label: 'Beaches by island' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'The path leaves the sand at Binimel·là, climbs a little through low scrub and loose stone, and as you top the first rise the colour of everything changes. The rock is no longer the pale limestone of the island’s southern postcards: it is dark, streaked with rust, and the sand in the cove below is somewhere between brick and cinnamon. Just offshore an islet cuts across the horizon, leaving between itself and the beach a sheet of water that, on a windless day, looks like a pond.' },
+        { t: 'p', html: '<strong>Cala Pregonda</strong>, in the municipality of <strong>Es Mercadal</strong>, is the picture usually chosen to show that Menorca has two coasts that look nothing alike. What the picture leaves out is that the same north-facing aspect that gives it its colour is what, a good number of days a year, makes it useless for swimming.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'Geologically, Menorca comes in two halves. The south, the <strong>Migjorn</strong>, is a platform of relatively young limestone — the white rock of Macarella or Turqueta. The north, the <strong>Tramuntana</strong>, is made of far older material — slates, sandstones and reddish conglomerates — and that is where Pregonda’s colour comes from: the sand is those rocks worn down, which is why it is coarser and darker than the pale flour of the southern coves. The whole island has been a <strong>UNESCO Biosphere Reserve since 1993</strong>, and the cove remains undeveloped: no promenade, no beach bar.' },
+        { t: 'p', html: 'The first catch is access. <strong>No road reaches the sand</strong>: you leave the car at the dirt car park at <strong>Binimel·là</strong> and walk the stretch of the <strong>Camí de Cavalls</strong> — the historic path that circles the island, waymarked as the GR 223 — for about <strong>twenty minutes</strong>, past the little <strong>Cala Pregondó</strong>. It is not a hard walk, but it is loose stone, with the odd short climb and not a single tree, and in August the car park runs out of room early: arrive mid-morning and you will usually find cars lined up along the verge of the access track.' },
+        { t: 'p', html: 'The second catch is the wind, and it is the one that decides. The north coast is <strong>wide open to the tramuntana</strong>, the northerly that blows in Menorca often and hard enough to shape the trees. When it blows, the sea comes straight into the cove, the water clouds over and the shoreline wakes up under a layer of <strong>posidonia leaves</strong> torn from the seabed. Those banks of seagrass are not litter — they protect the beach from erosion, which is why they are left in place on natural coves — but they change things for anyone who came for the photograph. The third catch is the complete lack of facilities: <strong>no lifeguard, no toilets, no water and no natural shade</strong> worth the name. Drinking water and food come from the car. Bathing-water quality for Balearic beaches is published each season through Spain’s national <strong>NÁYADE</strong> system.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> On days of southerly wind, the <strong>migjorn</strong>, which is exactly when the famous southern coves fill up with swell and people. It is the most useful rule in Menorca and fits in a sentence: if the wind is from the south, go north; if it is from the north, go south. With a southerly or no wind at all, Pregonda has flat water, the islet acts as a breakwater and the sand-and-rock seabed is good for snorkelling. June and September are the months: water already warm, space in the car park, and the evening light setting the red rock alight. <strong>The trick</strong> is to arrive before ten or after five, and not to stop at the first stretch of sand: the far end, away from the path, empties first.' },
+        { t: 'p', html: '<strong>When not to?</strong> In a tramuntana, no argument: swimming becomes uncomfortable or downright dangerous and the cove loses whatever you came for. Check the forecast the night before, because the northerly tends to arrive under clear skies and is deceptive: glorious day, impossible sea. Nor is it a good idea with very small children or pushchairs, given the loose stone, or in the middle of the day in July and August, with the sun beating down on a path with no shade. <strong>The alternative</strong> in a northerly is on the other side of the island: the southern coves, in the lee. And for the same colour without the walk, <strong>Cala Cavalleria</strong>, a little further east, has similarly toned sand and a shorter approach, though it fills up sooner.' },
+        { t: 'ul', items: [
+          'Menorca’s north coast (Tramuntana): ancient rock and reddish sand, against the white limestone of the south (Migjorn).',
+          'No road: park at Binimel·là and walk about 20 minutes on the Camí de Cavalls (GR 223), past Cala Pregondó.',
+          'Menorca has been a UNESCO Biosphere Reserve since 1993; the cove is undeveloped.',
+          'Open to the tramuntana: a northerly brings swell, cloudy water and posidonia on the shore.',
+          'No lifeguard, toilets, water or shade. Bring everything from the car.',
+          'Best with a southerly or calm, in June and September, before 10:00 or after 17:00.',
+        ] },
+        { t: 'quote', text: 'Nobody here promises brochure water: in a southerly it is a red pond; in a northerly, a breakwater buried in seagrass. Same cove, two different days.' },
+        { t: 'p', html: 'Late in the afternoon the sun drops to the west and strikes the rock side-on, turning it from rust to garnet. The last swimmers pack up and file back towards Binimel·là, towels over their shoulders. The islet stays in silhouette over water that no longer reflects anything. Tomorrow the north wind may come in and turn all this into something else: the cove is not made for the photograph, it is made for reading the wind before you leave home.' },
+      ],
+      faq: [
+        { q: 'How do you get to Cala Pregonda?', a: 'There is no road to the cove. Leave the car at the dirt car park at Binimel·là beach, in Es Mercadal, and walk west along the Camí de Cavalls (GR 223) for about twenty minutes, past the little Cala Pregondó. The path is easy but loose underfoot and has no shade, so wear proper shoes and take water.' },
+        { q: 'Which wind spoils Cala Pregonda?', a: 'The tramuntana, the northerly. Because the cove faces north, the sea comes straight in, the water clouds over and the shore fills with posidonia leaves. That is the day for the southern coves. With a southerly (migjorn) or in calm weather, Pregonda is sheltered and the water is flat.' },
+        { q: 'Does Cala Pregonda have facilities?', a: 'No. There is no lifeguard, no toilets, no beach bar, no fountain and not enough natural shade. Bring water, food and sun protection from the car and take your rubbish back with you. In August the Binimel·là car park also fills early, so aim to arrive before ten.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Dunas de Maspalomas, San Bartolomé de Tirajana (voz bicéfala) ─────
   {
     slug: 'dunas-de-maspalomas-gran-canaria-menguan-alisio-playa-del-ingles',
