@@ -52,7 +52,10 @@ export function generateStaticParams() { return [] }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const municipios = await getMunicipios()
+  // Con 1 playa basta: el tiempo no depende de cuántas playas tenga el
+  // pueblo. Con el mínimo de 4 de la página raíz se quedaban fuera 444
+  // municipios, y «el tiempo en X» se busca igual en los pequeños.
+  const municipios = await getMunicipios(1)
   const m = municipios.find(x => x.slug === slug)
   if (!m) return {}
   // Igual que la raíz: si el nombre choca con el de SU PROVINCIA (Cádiz,
@@ -432,9 +435,12 @@ function BloqueSol({ hoy }: { hoy: DiaTiempo }) {
 
 export default async function ElTiempoPage({ params }: Props) {
   const { slug } = await params
-  const municipios = await getMunicipios()
+  const municipios = await getMunicipios(1)     // ver generateMetadata
   const municipio = municipios.find(m => m.slug === slug)
   if (!municipio) notFound()
+  // La página raíz sí exige 4 playas: sin ella, el nombre en la miga y el
+  // enlace «todas las playas» van a la ficha de la playa única, no a un 404.
+  const tienePaginaMuni = municipios.some(m => m.slug === slug && m.count >= 4)
 
   // Necesitamos coordenadas para llamar a Open-Meteo. `getMunicipios()`
   // no las lleva —solo nombre y conteos—; el centroide sale del promedio
@@ -443,6 +449,7 @@ export default async function ElTiempoPage({ params }: Props) {
   // sin ancla geográfica.
   const playas = await getPlayasByMunicipio(slug)
   if (playas.length === 0) notFound()
+  const enlaceMuni = tienePaginaMuni ? `/municipio/${slug}` : `/playas/${playas[0].slug}`
   const lat = playas.reduce((a, p) => a + p.lat, 0) / playas.length
   const lng = playas.reduce((a, p) => a + p.lng, 0) / playas.length
 
@@ -533,7 +540,9 @@ export default async function ElTiempoPage({ params }: Props) {
                 <span aria-hidden="true">›</span>
               </>
             )}
-            <Link href={`/municipio/${slug}`}>{municipio.nombre}</Link>
+            {tienePaginaMuni
+              ? <Link href={`/municipio/${slug}`}>{municipio.nombre}</Link>
+              : <span>{municipio.nombre}</span>}
             <span aria-hidden="true">›</span>
             <span aria-current="page">El tiempo</span>
           </nav>
@@ -683,11 +692,11 @@ export default async function ElTiempoPage({ params }: Props) {
               </li>
             )}
             <li>
-              <Link href={`/municipio/${slug}`} style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                Todas las playas de {municipio.nombre} →
+              <Link href={enlaceMuni} style={{ fontWeight: 600, color: 'var(--ink)' }}>
+                {tienePaginaMuni ? `Todas las playas de ${municipio.nombre}` : `La playa de ${municipio.nombre}`} →
               </Link>{' '}
               <span style={{ color: 'var(--muted)', fontSize: '.88rem' }}>
-                bandera, oleaje y servicios de las {playas.length} playas.
+                bandera, oleaje y servicios de {playas.length === 1 ? 'la playa' : `las ${playas.length} playas`}.
               </span>
             </li>
           </ul>

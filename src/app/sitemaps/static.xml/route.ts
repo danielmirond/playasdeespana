@@ -185,7 +185,9 @@ export async function GET() {
   // hourly no está definido en el estándar y `daily` es lo que Google
   // toma como «lo miran a diario». Prioridad 0.7 porque es una consulta
   // volumétrica clásica («tiempo en X»).
-  for (const m of municipios) {
+  // Todos los municipios con alguna playa, no solo los 322 con página raíz:
+  // la subpágina ya no exige cuatro playas (ver su comentario).
+  for (const m of await getMunicipios(1)) {
     urls.push(u(`/municipio/${m.slug}/el-tiempo`, '0.7', 'daily', today))
   }
 
