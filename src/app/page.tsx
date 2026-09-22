@@ -23,6 +23,7 @@ import ParkingHoy from '@/components/home/ParkingHoy'
 import MonetizacionBlock from '@/components/home/MonetizacionBlock'
 import BoatRentalCTA from '@/components/home/BoatRentalCTA'
 import MagazineCarrusel from '@/components/home/MagazineCarrusel'
+import TresMunicipios from '@/components/home/TresMunicipios'
 import { getPlayas, getComunidades } from '@/lib/playas'
 
 export const revalidate = 3600
@@ -176,6 +177,7 @@ export default async function HomePage() {
         }>
           <Destacadas playas={candidatas} topCount={6} avoidCount={3} />
         </Suspense>
+        <div className="cv-auto"><TresMunicipios /></div>
         <div className="cv-auto"><ParkingHoy playas={playas} /></div>
         <div className="cv-auto"><ActividadesHoy playas={playas} /></div>
         <div className="cv-auto"><MonetizacionBlock /></div>
