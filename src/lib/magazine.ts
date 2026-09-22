@@ -79,6 +79,94 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Doniños, Ferrol (voz bicéfala) ─────
+  {
+    slug: 'praia-de-doninos-ferrol-a-coruna-corrientes-extremos-laguna',
+    category: 'guias',
+    title: '¿Por qué en Doniños (Ferrol) se nada en el centro? Corrientes en los dos extremos',
+    excerpt:
+      'Doniños, la playa más conocida de Ferrol, tiene 1.900 metros de arena, Bandera Azul 2026 y una laguna protegida detrás de las dunas. La pega: oleaje fuerte y corrientes en las dos puntas, las zonas que más vigilan los socorristas, y un agua atlántica fría incluso en agosto.',
+    heroAlt:
+      'Praia de Doniños, en Ferrol (A Coruña): arenal recto de arena clara abierto al Atlántico, con olas rompiendo en varias líneas, dunas con vegetación detrás y un promontorio rocoso en el extremo norte',
+    heroQuery: 'doninos,ferrol,galicia,beach',
+    gygQuery: 'Ferrol, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-09-22T17:44:41Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/galicia', label: 'Playas de Galicia' },
+      { href: '/banderas-azules', label: 'Banderas azules 2026' },
+      { href: '/clases-surf', label: 'Clases de surf en España' },
+    ],
+    body: [
+      { t: 'p', html: 'Desde lo alto de la duna se ve entera: una raya de arena clara casi recta, de punta a punta, y el Atlántico entrando en tres o cuatro líneas de espuma que no se acaban nunca. A la espalda, quieta como un espejo entre juncos y pinos, una laguna que no parece de este sitio. Entre las dos aguas, la salada que ruge y la dulce que calla, apenas un cordón de dunas y un puente pequeño sobre el regato que las une.' },
+      { t: 'p', html: 'Es <strong>Doniños</strong>, en la parroquia del mismo nombre, a las afueras de <strong>Ferrol</strong>. Aquí cuentan que bajo la laguna duerme <strong>Valverde</strong>, una villa que se tragó el agua por negarle limosna a un pobre, y que solo se salvaron <strong>dos niños</strong> cuya madre sí le dio pan. De ahí saldría el nombre, dicen, aunque la etimología es cosa de leyenda. Lo que no es leyenda es lo otro que se repite en el pueblo: que en Doniños el mar hay que leerlo antes de meterse.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'El arenal mide <strong>unos 1.900 metros de largo y 50 de ancho</strong>, de <strong>arena fina y clara</strong>, según la ficha que recogen Turismo de Galicia y el Concello de Ferrol. En 2026 luce <strong>Bandera Azul</strong> (ADEAC): es una de las <strong>seis</strong> que tiene este año el municipio, junto a Caranza, San Xurxo, Esmelle, A Fragata-O Pareixal y Ponzos, según <em>Diario de Ferrol</em> (junio de 2026). Tiene puesto de socorro en temporada, chiringuitos, duchas, paseo de madera, zona infantil y acceso adaptado. La calidad sanitaria del agua se controla en temporada y se publica en el sistema nacional <strong>NÁYADE</strong>.' },
+      { t: 'p', html: 'Ahora, lo que la bandera no dice. Las fichas oficiales la describen como playa de <strong>oleaje fuerte y ventosa</strong>, y la propia descripción de la playa avisa de que <strong>los dos extremos se vigilan especialmente por las corrientes</strong> que se forman ahí. Es la trampa típica de los arenales rectos abiertos al Atlántico: el agua que entra con cada ola tiene que salir por algún sitio, y lo hace en canales que tiran mar adentro, sobre todo junto a las rocas de las puntas. Justo donde la gente busca refugio del viento y donde aparcan los que llegan por los dos accesos.' },
+      { t: 'p', html: 'El otro contra es la temperatura. Esto es la costa ártabra, no el Mediterráneo: el agua está <strong>fría incluso en pleno agosto</strong> y, con mar de fondo, la rompiente no da tregua. Por eso Doniños es, desde hace décadas, una de las referencias del <strong>surf y el bodyboard</strong> en Ferrolterra. Buena noticia para quien lleva tabla y neopreno; menos para quien busca un baño largo y tranquilo con niños.' },
+      { t: 'p', html: 'Detrás de las dunas está lo que hace distinta a esta playa. La <strong>lagoa de Doniños</strong> es un humedal de agua casi dulce, separado del mar por un complejo dunar frágil y protegido dentro de la <strong>Red Natura 2000</strong> (LIC y ZEPA). Ronda los <strong>diez metros de profundidad</strong> en su parte más honda, con nenúfares, anguilas y aves acuáticas. Pisar la duna fuera de las pasarelas no es un detalle menor: es lo que la mantiene en pie.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En días de mar pequeño y con el socorrismo de temporada en marcha, bañándose <strong>en el tramo central</strong>, entre banderas si las hay, lejos de las rocas de las puntas. A primera hora de la tarde de agosto, cuando el <strong>nordés</strong> del verano sopla de tierra y aplana un poco la superficie, es cuando mejor se ve la playa desde el agua. <strong>El truco</strong> para el aparcamiento: el acceso de <strong>O Outeiro</strong>, al norte, tiene el aparcamiento grande; el de <strong>Punta Penencia</strong>, al sur, es más pequeño pero va menos lleno.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Con <strong>bandera roja</strong> o con mar de fondo del oeste y noroeste, que llega con los temporales: la rompiente se ensancha, las corrientes de las puntas se refuerzan y el agua deja de ser para bañistas, por muy bueno que sea el día en tierra. Fuera de la temporada de socorrismo, conviene comprobar si el servicio sigue antes de meterse. Y para quien no nade con soltura o vaya con críos pequeños, esta no es la primera opción de Ferrol.' },
+      { t: 'p', html: '<strong>La alternativa</strong> para esos días está a pocos kilómetros y dentro de la ría: <strong>Caranza</strong>, playa urbana con Bandera Azul 2026 y un agua mucho más resguardada del oleaje atlántico. Y si el mar no acompaña, Doniños se sigue disfrutando sin mojarse: la <strong>ruta circular de la laguna</strong>, de unos cuatro kilómetros, o la subida a la <strong>Punta do Castro</strong>, en el extremo norte, donde quedan restos del <strong>castro de Lobadiz</strong> y de una <strong>batería de costa del siglo XVIII</strong>.' },
+      { t: 'ul', items: [
+        'Arenal de unos 1.900 m de largo y 50 m de ancho, arena fina y clara, en Ferrol (A Coruña) (Turismo de Galicia, Concello de Ferrol).',
+        'Bandera Azul 2026 (ADEAC); una de las seis del municipio este año.',
+        'Oleaje fuerte y corrientes en los dos extremos, las zonas más vigiladas: bañarse en el centro.',
+        'Agua atlántica fría incluso en agosto; referencia de surf y bodyboard en Ferrolterra.',
+        'Laguna de Doniños detrás de las dunas: humedal en Red Natura 2000 (LIC y ZEPA), cerca de 10 m de fondo.',
+        'Dos accesos: O Outeiro (norte, aparcamiento grande) y Punta Penencia (sur, menos gente).',
+        'Con bandera roja o mar de fondo, alternativa dentro de la ría: Caranza.',
+      ] },
+      { t: 'quote', text: '«Bandera Azul» no significa «mar en calma». En Doniños la bandera habla del agua y de los servicios; el color del mástil del socorrista, y las puntas de la playa, hablan de otra cosa.' },
+      { t: 'p', html: 'Cae la tarde y la luz se va hacia el oeste, por detrás de la rompiente, mientras los últimos surfistas salen del agua con el neopreno chorreando. Al otro lado de la duna la laguna ya está en sombra, oscura, sin una arruga. Los de aquí dicen que en los días muy quietos se oyen campanas desde el fondo, las de Valverde. Nadie las ha oído nunca, claro. Pero a Doniños no se viene a creer leyendas: se viene a mirar el mar con respeto, que es la otra manera de quererlo.' },
+    ],
+    faq: [
+      { q: '¿Es peligroso bañarse en la playa de Doniños?', a: 'Puede serlo según el estado del mar. Es una playa abierta al Atlántico, de oleaje fuerte, y las fichas oficiales avisan de que los dos extremos se vigilan especialmente por las corrientes. Con socorrismo de temporada, mar pequeño y bañándose en el tramo central, lejos de las rocas, es una playa frecuentada por familias; con bandera roja o mar de fondo, no es para bañistas.' },
+      { q: '¿Tiene Bandera Azul la playa de Doniños en 2026?', a: 'Sí. Doniños tiene Bandera Azul en 2026 y es una de las seis playas galardonadas de Ferrol este año, junto a Caranza, San Xurxo, Esmelle, A Fragata-O Pareixal y Ponzos, según Diario de Ferrol.' },
+      { q: '¿Cómo se llega a Doniños y dónde se aparca?', a: 'Desde Ferrol, por la carretera de San Xurxo, con desvío señalizado en Valón. Hay dos accesos con aparcamiento: O Outeiro, al norte, más amplio, y Punta Penencia, al sur, más pequeño y normalmente con menos gente.' },
+    ],
+    en: {
+      title: 'Why swimmers keep to the middle at Doniños (Ferrol): rip currents at both ends',
+      excerpt:
+        'Doniños, Ferrol’s best-known beach, has 1,900 metres of sand, a 2026 Blue Flag and a protected lagoon behind its dunes. The catch: heavy surf and currents at both ends, the stretches lifeguards watch most closely, and Atlantic water that stays cold even in August.',
+      related: [
+        { href: '/en/blue-flag', label: 'Blue Flag beaches' },
+        { href: '/en/surf', label: 'Surfing in Spain' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'From the top of the dune you can see all of it: a near-straight line of pale sand from one headland to the other, and the Atlantic arriving in three or four bands of white water that never quite stop. Behind you, still as a mirror among reeds and pines, lies a lagoon that looks as if it belongs somewhere else. Between the two waters, the salt one roaring and the fresh one silent, there is little more than a ridge of dunes and a small bridge over the stream that links them.' },
+        { t: 'p', html: 'This is <strong>Doniños</strong>, in the parish of the same name on the edge of <strong>Ferrol</strong>. Locals say a village called <strong>Valverde</strong> lies beneath the lagoon, swallowed by the water for refusing alms to a beggar, and that only <strong>two children</strong> survived, because their mother had given him bread — <em>dos niños</em>, hence the name, or so the story goes, though the etymology belongs to legend. What is not legend is the other thing people here repeat: at Doniños you read the sea before you go in.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The beach is <strong>about 1,900 metres long and 50 wide</strong>, with <strong>fine, pale sand</strong>, according to the listings published by Turismo de Galicia and Ferrol council. In 2026 it flies a <strong>Blue Flag</strong> (ADEAC), one of <strong>six</strong> in the municipality this year, alongside Caranza, San Xurxo, Esmelle, A Fragata-O Pareixal and Ponzos, as reported by <em>Diario de Ferrol</em> in June 2026. There is a lifeguard post in season, beach bars, showers, a wooden boardwalk, a children’s play area and step-free access. Bathing-water quality is monitored in season and published through Spain’s national <strong>NÁYADE</strong> system.' },
+        { t: 'p', html: 'Now what the flag leaves out. The official listings describe a beach with <strong>heavy surf and plenty of wind</strong>, and note that <strong>both ends are watched especially closely because of the currents</strong> that form there. It is the classic trap of a long, straight Atlantic beach: the water every wave pushes in has to get out somewhere, and it does so through channels that pull seawards, above all beside the rocks at each end. Which is exactly where people shelter from the wind, and where those arriving from either car park first reach the sand.' },
+        { t: 'p', html: 'The other drawback is temperature. This is the Costa Ártabra, not the Mediterranean: the water is <strong>cold even in high summer</strong>, and with a groundswell running the break gives no respite. That is why Doniños has long been one of the reference spots for <strong>surfing and bodyboarding</strong> around Ferrol. Good news if you bring a board and a wetsuit; less so if you want a long, easy swim with small children.' },
+        { t: 'p', html: 'Behind the dunes is what makes this beach different. The <strong>Doniños lagoon</strong> is a near-freshwater wetland, cut off from the sea by a fragile dune system and protected within the <strong>Natura 2000</strong> network (as an SCI and SPA). It reaches <strong>around ten metres</strong> at its deepest, with water lilies, eels and waterbirds. Keeping to the boardwalks across the dunes is not a detail: it is what keeps them standing.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> On small-swell days with the summer lifeguard service running, swimming <strong>in the central stretch</strong>, between the flags if there are any, well away from the rocks at either end. In the early afternoon in August, when the summer <strong>nordés</strong> blows off the land and smooths the surface a little, is when the beach looks best from the water. <strong>The trick</strong> with parking: the <strong>O Outeiro</strong> entrance at the north end has the big car park; <strong>Punta Penencia</strong> at the south end is smaller but less busy.' },
+        { t: 'p', html: '<strong>When not to?</strong> Under a <strong>red flag</strong>, or when a westerly or north-westerly groundswell rolls in with the autumn and winter storms: the surf zone widens, the currents at the ends strengthen and the sea stops being for swimmers, however fine the day on land. Outside the lifeguard season, check whether the service is still running before going in. And for weak swimmers or families with toddlers, this is not the first choice in Ferrol.' },
+        { t: 'p', html: '<strong>The alternative</strong> for those days is a few kilometres away, inside the estuary: <strong>Caranza</strong>, a town beach with a 2026 Blue Flag and water far more sheltered from the Atlantic swell. And if the sea will not play along, Doniños still works without getting wet: the <strong>circular lagoon trail</strong>, about four kilometres, or the climb to <strong>Punta do Castro</strong> at the north end, with the remains of the <strong>Lobadiz hillfort</strong> and an <strong>18th-century coastal battery</strong>.' },
+        { t: 'ul', items: [
+          'Beach about 1,900m long and 50m wide, fine pale sand, in Ferrol (A Coruña) (Turismo de Galicia, Ferrol council).',
+          'Blue Flag 2026 (ADEAC); one of six in the municipality this year.',
+          'Heavy surf and currents at both ends, the most closely watched areas: swim in the middle.',
+          'Cold Atlantic water even in August; a reference spot for surfing and bodyboarding around Ferrol.',
+          'Doniños lagoon behind the dunes: Natura 2000 wetland (SCI and SPA), around 10m deep.',
+          'Two entrances: O Outeiro (north, large car park) and Punta Penencia (south, quieter).',
+          'Red flag or big swell? Try Caranza, inside the estuary.',
+        ] },
+        { t: 'quote', text: '«Blue Flag» does not mean «calm sea». At Doniños the flag speaks for the water quality and the facilities; the colour on the lifeguard’s pole, and the two ends of the beach, tell you something else.' },
+        { t: 'p', html: 'Evening comes and the light slides west, beyond the break, as the last surfers wade out with their wetsuits streaming. On the other side of the dune the lagoon is already in shadow, dark and without a ripple. People here say that on very still days you can hear bells from the bottom — Valverde’s. Nobody has ever heard them, of course. But nobody comes to Doniños to believe in legends: they come to watch the sea with respect, which is the other way of loving it.' },
+      ],
+      faq: [
+        { q: 'Is it dangerous to swim at Doniños beach?', a: 'It can be, depending on the sea. It is an exposed Atlantic beach with heavy surf, and the official listings note that both ends are watched especially closely because of currents. With lifeguards on duty, a small swell and staying in the central stretch away from the rocks, families use it regularly; under a red flag or with a groundswell running, it is not a swimming beach.' },
+        { q: 'Does Doniños have a Blue Flag in 2026?', a: 'Yes. Doniños holds a Blue Flag in 2026 and is one of six awarded beaches in Ferrol this year, alongside Caranza, San Xurxo, Esmelle, A Fragata-O Pareixal and Ponzos, according to Diario de Ferrol.' },
+        { q: 'How do you get to Doniños and where do you park?', a: 'From Ferrol, take the road towards San Xurxo and follow the signed turn-off at Valón. There are two entrances with parking: O Outeiro at the north end, the larger one, and Punta Penencia at the south end, smaller and usually quieter.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Platja del Torn, L’Hospitalet de l’Infant (voz bicéfala) ─────
   {
     slug: 'platja-del-torn-hospitalet-infant-tarragona-naturista-nuclear-vandellos',
