@@ -79,6 +79,94 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Platja del Torn, L’Hospitalet de l’Infant (voz bicéfala) ─────
+  {
+    slug: 'platja-del-torn-hospitalet-infant-tarragona-naturista-nuclear-vandellos',
+    category: 'guias',
+    title: 'Bañarse a 3 km de una nuclear: El Torn (Tarragona), Bandera Azul y naturista',
+    excerpt:
+      'La Platja del Torn, en Vandellòs i l’Hospitalet de l’Infant, tiene Bandera Azul 2026, pinar detrás y uso naturista, y la central nuclear de Vandellòs a unos tres kilómetros en línea recta. Las pegas: menos de 50 plazas de aparcamiento, sin autobús y un acceso a pie que el Ministerio califica de difícil.',
+    heroAlt:
+      'Platja del Torn, en L’Hospitalet de l’Infant (Tarragona): playa larga de arena dorada con pinar hasta la orilla, mar en calma y un promontorio rocoso al sur con los restos de una torre de vigía',
+    heroQuery: 'platja del torn,hospitalet de l infant,tarragona,beach',
+    gygQuery: 'Tarragona, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-09-22T12:28:07Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/cataluna', label: 'Playas de Cataluña' },
+      { href: '/playas-nudistas', label: 'Playas nudistas de España' },
+      { href: '/banderas-azules', label: 'Banderas azules 2026' },
+    ],
+    body: [
+      { t: 'p', html: 'El pinar llega casi hasta la arena. Hay que atravesarlo por un sendero de tierra y agujas secas, con el ruido de la N-340 quedándose atrás, y de pronto se abre la luz: una playa larga, dorada, casi sin edificios a la vista, con el mar quieto como una bandeja y un promontorio de roca cerrando el lado sur. Encima del promontorio, los restos de una torre de vigía. En septiembre, a media mañana, la gente se cuenta con los dedos, y casi nadie lleva bañador.' },
+      { t: 'p', html: 'Es la <strong>Platja del Torn</strong>, en el término de <strong>Vandellòs i l’Hospitalet de l’Infant</strong>, el último tramo de la Costa Daurada antes de que la costa se empine hacia el Ebro. Tiene todo lo que se le pide a una playa sin urbanizar y un vecino que ninguna guía pone en la foto: a unos tres kilómetros en línea recta, al suroeste, trabaja la <strong>central nuclear de Vandellòs II</strong>. La pregunta que se hace medio mundo al saberlo es razonable. La respuesta, también.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La ficha de la guía de playas del <strong>Ministerio para la Transición Ecológica (MITECO)</strong> la describe como playa de <strong>arena</strong>, <strong>aislada</strong>, con fachada de <strong>montaña</strong>, vegetación, dentro de un <strong>espacio protegido</strong>, grado de ocupación <strong>bajo</strong> y <strong>aguas tranquilas</strong>, con unos <strong>90 metros de anchura</strong>. La misma ficha la marca como <strong>naturista</strong> y recoge socorrismo en temporada, aseos, duchas, lavapiés, alquiler de hamacas y de material náutico. En 2026 luce <strong>Bandera Azul</strong> (ADEAC). La calidad sanitaria del agua la controla en temporada la <strong>Agència Catalana de l’Aigua</strong> y se publica en el sistema nacional <strong>NÁYADE</strong>.' },
+      { t: 'p', html: 'Ahora, la letra pequeña de esa misma ficha. El acceso a pie figura como <strong>difícil</strong>, el aparcamiento es <strong>no vigilado y de menos de 50 plazas</strong>, y <strong>no hay autobús</strong>. Traducido: en agosto, quien llega pasadas las once da vueltas o aparca lejos y camina. No hay alquiler de sombrillas, y el pinar da sombra detrás de la arena, no sobre ella. El hospital de referencia, según el MITECO, es el <strong>Sant Joan de Reus, a unos 40 kilómetros</strong>: no es un dato para asustar, sino para llevar el botiquín completo.' },
+      { t: 'p', html: 'Y la nuclear. <strong>Vandellòs I</strong> se paró tras el incendio de octubre de 1989, el incidente más grave de la historia nuclear española, y desde entonces está en desmantelamiento; <strong>Vandellòs II</strong> sigue produciendo y la vigila el <strong>Consejo de Seguridad Nuclear</strong>. La proximidad no afecta a la Bandera Azul ni a la calidad del agua, que se miden igual que en cualquier otra playa. Lo que sí hace es condicionar la experiencia de quien no lo sabía: saber que está ahí, a un paseo largo por la costa, cambia el baño para algunas personas. Hay quien no vuelve por eso, y conviene decirlo antes, no después.' },
+      { t: 'p', html: 'El otro contra es de costumbres. El Torn es <strong>naturista de uso tradicional</strong>, y aquí el bañador es la excepción, no la norma. No es una playa mixta con una esquina nudista: quien vaya con niños o simplemente prefiera no desvestirse tiene opciones mejores a un par de kilómetros, en el pueblo.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En <strong>junio y septiembre</strong>, entre semana, cuando hay socorristas y sitio para el coche; y a primera hora en julio y agosto. Los días de mar plano, que en este tramo son muchos, el agua se queda quieta y transparente sobre la arena, buena para nadar largo paralelo a la orilla. <strong>El truco</strong> es aparcar pronto y no bajar cargado: el sendero por el pinar es corto pero irregular, y la sombra hay que traerla.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Los días de <strong>mestral</strong>, el viento seco del noroeste que baja por el valle del Ebro: aquí sopla de tierra hacia el mar, levanta arena y empuja mar adentro cualquier cosa que flote, colchonetas y tablas de pádel incluidas. Con temporal de levante entra mar de fondo y la orilla deja de estar tranquila. Tampoco es sitio para quien busque chiringuito a pie de toalla, sombrilla de alquiler o autobús de vuelta.' },
+      { t: 'p', html: '<strong>La alternativa</strong>, según lo que se busque. Para ir con familia y con todos los servicios, <strong>L’Arenal</strong>, la playa urbana de L’Hospitalet: más de dos kilómetros de arena, Bandera Azul y aparcamiento amplio. Para seguir en ambiente naturista con menos gente, las calas pequeñas entre El Torn y el pueblo, como <strong>Cala Bea</strong> o <strong>Cala d’Oques</strong>, de unos 150 metros y con acceso a pie fácil según el Ministerio, aunque sin bandera ni apenas servicios.' },
+      { t: 'ul', items: [
+        'Playa de arena aislada en Vandellòs i l’Hospitalet de l’Infant (Tarragona), unos 90 m de ancho, espacio protegido y ocupación baja (guía de playas del MITECO).',
+        'Bandera Azul 2026 (ADEAC); socorrismo en temporada, aseos, duchas y alquiler de hamacas.',
+        'Naturista de uso tradicional: el bañador es minoría.',
+        'Central nuclear de Vandellòs II a unos 3 km en línea recta al suroeste.',
+        'Aparcamiento no vigilado de menos de 50 plazas, sin autobús y acceso a pie calificado de difícil.',
+        'Evitar con mestral (viento de tierra) y con temporal de levante.',
+        'Alternativas: L’Arenal (urbana, familias) o Cala Bea y Cala d’Oques (naturistas, más pequeñas).',
+      ] },
+      { t: 'quote', text: '«Playa sin urbanizar» es verdad, pero no es toda la verdad: este tramo de costa lo comparte con una central nuclear. Aquí lo intacto tiene vecinos, y conviene conocerlos antes de extender la toalla.' },
+      { t: 'p', html: 'A última hora de la tarde el sol se va por detrás del pinar y la playa se queda en sombra antes que el mar, que todavía brilla un rato. Los pocos que quedan recogen las toallas sin prisa y suben por el sendero entre los troncos, con la arena pegada a los tobillos. Desde el promontorio, la torre en ruinas mira hacia el sur, hacia unas luces que se encienden en la costa. Antes vigilaba barcos; ahora vigila otra cosa, y la playa, a sus pies, sigue igual de quieta.' },
+    ],
+    faq: [
+      { q: '¿Es seguro bañarse en la Platja del Torn estando cerca de la central de Vandellòs?', a: 'Sí. La calidad del agua se controla en temporada como en cualquier otra playa catalana (Agència Catalana de l’Aigua, datos publicados en NÁYADE) y la playa tiene Bandera Azul 2026. La central de Vandellòs II está a unos tres kilómetros en línea recta y la supervisa el Consejo de Seguridad Nuclear. La cercanía es un factor de paisaje y de percepción, no un riesgo sanitario para el bañista.' },
+      { q: '¿La Platja del Torn es nudista?', a: 'Sí. La guía de playas del Ministerio la marca como naturista y es de uso nudista tradicional: la mayoría de bañistas va sin ropa. Quien prefiera una playa textil tiene L’Arenal, la playa urbana de L’Hospitalet de l’Infant, a unos dos kilómetros.' },
+      { q: '¿Cómo se llega a la Platja del Torn y dónde se aparca?', a: 'En coche, desde la N-340 al sur de L’Hospitalet de l’Infant; no hay autobús. El aparcamiento es no vigilado y de menos de 50 plazas según el Ministerio, así que en julio y agosto conviene llegar temprano. Desde allí se baja a pie por un sendero entre pinos, corto pero irregular.' },
+    ],
+    en: {
+      title: 'Swimming 3 km from a nuclear plant: El Torn (Tarragona), Blue Flag and naturist',
+      excerpt:
+        'Platja del Torn, in Vandellòs i l’Hospitalet de l’Infant, has a 2026 Blue Flag, pine woods behind it and a naturist tradition, with the Vandellòs nuclear plant about three kilometres away as the crow flies. The catch: fewer than 50 parking spaces, no bus, and a path the ministry rates as difficult.',
+      related: [
+        { href: '/en/nudist-beaches', label: 'Nudist beaches in Spain' },
+        { href: '/en/blue-flag', label: 'Blue Flag beaches' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'The pine wood runs almost down to the sand. You cross it on a track of earth and dry needles, the noise of the N-340 fading behind you, and then the light opens up: a long golden beach with barely a building in sight, the sea flat as a tray, and a rocky headland closing off the southern end. On top of the headland, the remains of a watchtower. On a September mid-morning you can count the people on your fingers, and hardly any of them are wearing swimsuits.' },
+        { t: 'p', html: 'This is <strong>Platja del Torn</strong>, in the municipality of <strong>Vandellòs i l’Hospitalet de l’Infant</strong>, the last stretch of the Costa Daurada before the coast climbs towards the Ebro. It has everything you ask of an undeveloped beach, plus a neighbour no guidebook puts in the picture: about three kilometres away as the crow flies, to the south-west, the <strong>Vandellòs II nuclear power station</strong> is running. The question most people ask on hearing this is a fair one. So is the answer.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The entry in the beach guide of Spain’s <strong>Ministry for the Ecological Transition (MITECO)</strong> describes a <strong>sandy</strong>, <strong>isolated</strong> beach backed by <strong>hills</strong> and vegetation, inside a <strong>protected area</strong>, with <strong>low</strong> occupancy, <strong>calm water</strong> and a width of around <strong>90 metres</strong>. The same entry flags it as <strong>naturist</strong> and lists lifeguards in season, toilets, showers, foot-washes, and sunlounger and watersports hire. In 2026 it flies a <strong>Blue Flag</strong> (ADEAC). Bathing-water quality is monitored in season by the <strong>Catalan Water Agency</strong> and published through Spain’s national <strong>NÁYADE</strong> system.' },
+        { t: 'p', html: 'Now the small print from that same entry. Access on foot is rated <strong>difficult</strong>, parking is <strong>unattended, with fewer than 50 spaces</strong>, and there is <strong>no bus</strong>. In practice: arrive after eleven in August and you will circle or park far away and walk. There is no parasol hire, and the pines give shade behind the sand, not on it. The nearest hospital, according to MITECO, is <strong>Sant Joan in Reus, about 40 kilometres away</strong> — not a scare, just a reason to pack a proper first-aid kit.' },
+        { t: 'p', html: 'And the nuclear plant. <strong>Vandellòs I</strong> was shut down after the fire of October 1989, the most serious incident in Spain’s nuclear history, and has been under decommissioning ever since; <strong>Vandellòs II</strong> is still generating, overseen by Spain’s <strong>Nuclear Safety Council</strong>. Its proximity has no bearing on the Blue Flag or the water quality, which are measured exactly as on any other beach. What it does do is colour the experience for anyone who did not know: knowing it is there, a long walk down the coast, changes the swim for some. Some people do not come back because of it, and it is better to say so beforehand than afterwards.' },
+        { t: 'p', html: 'The other catch is about custom. El Torn is <strong>traditionally naturist</strong>, and here a swimsuit is the exception, not the rule. This is not a mixed beach with a nudist corner: families with children, or anyone who simply prefers to stay dressed, have better options a couple of kilometres away in the town.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> In <strong>June and September</strong>, on weekdays, when lifeguards are on duty and there is room for the car; and first thing in the morning in July and August. On flat-calm days, which are frequent on this stretch, the water sits still and clear over the sand, good for long swims parallel to the shore. <strong>The trick</strong> is to park early and travel light: the path through the pines is short but uneven, and you bring your own shade.' },
+        { t: 'p', html: '<strong>When not to?</strong> On days of <strong>mestral</strong>, the dry north-westerly that funnels down the Ebro valley: here it blows offshore, whips up sand and pushes anything that floats out to sea, inflatables and paddleboards included. An easterly gale brings swell and the shoreline stops being calm. Nor is it the place for anyone wanting a beach bar a few steps from the towel, a parasol for hire or a bus home.' },
+        { t: 'p', html: '<strong>The alternative</strong> depends on what you want. For families and full facilities, <strong>L’Arenal</strong>, L’Hospitalet’s town beach: more than two kilometres of sand, a Blue Flag and plenty of parking. To stay naturist with fewer people, the small coves between El Torn and the town, such as <strong>Cala Bea</strong> or <strong>Cala d’Oques</strong>, around 150 metres long and with easy access on foot according to the ministry, though without a flag and with few facilities.' },
+        { t: 'ul', items: [
+          'Isolated sandy beach in Vandellòs i l’Hospitalet de l’Infant (Tarragona), about 90m wide, protected area, low occupancy (MITECO beach guide).',
+          'Blue Flag 2026 (ADEAC); lifeguards in season, toilets, showers and sunlounger hire.',
+          'Traditionally naturist: swimsuits are in the minority.',
+          'Vandellòs II nuclear plant about 3km to the south-west as the crow flies.',
+          'Unattended car park with fewer than 50 spaces, no bus, access on foot rated difficult.',
+          'Avoid in a mestral (offshore wind) and in an easterly gale.',
+          'Alternatives: L’Arenal (town beach, families) or Cala Bea and Cala d’Oques (naturist, smaller).',
+        ] },
+        { t: 'quote', text: '«Undeveloped» is true, but it is not the whole truth: this stretch of coast is shared with a nuclear power station. Untouched, here, has neighbours — and it pays to meet them before you lay out your towel.' },
+        { t: 'p', html: 'Late in the afternoon the sun drops behind the pines and the beach falls into shade before the sea does, which keeps shining a while longer. The few who remain fold their towels unhurriedly and climb the path between the trunks, sand stuck to their ankles. From the headland, the ruined tower looks south, towards lights coming on along the coast. Once it watched for ships; now it watches something else, and the beach below stays just as still.' },
+      ],
+      faq: [
+        { q: 'Is it safe to swim at Platja del Torn so close to the Vandellòs plant?', a: 'Yes. Water quality is monitored in season as on any other Catalan beach (Catalan Water Agency, with results published on NÁYADE), and the beach holds a 2026 Blue Flag. Vandellòs II is about three kilometres away as the crow flies and is overseen by the Nuclear Safety Council. The proximity is a matter of landscape and perception, not a health risk for swimmers.' },
+        { q: 'Is Platja del Torn a nudist beach?', a: 'Yes. The ministry’s beach guide flags it as naturist and it has long-standing nudist use: most bathers go without clothes. If you prefer a textile beach, L’Arenal, the town beach of L’Hospitalet de l’Infant, is about two kilometres away.' },
+        { q: 'How do you get to Platja del Torn and where do you park?', a: 'By car, off the N-340 south of L’Hospitalet de l’Infant; there is no bus. According to the ministry the car park is unattended with fewer than 50 spaces, so arrive early in July and August. From there it is a short but uneven walk down through the pines.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Barinatxe «La Salvaje», Getxo–Sopela (voz bicéfala) ─────
   {
     slug: 'playa-barinatxe-la-salvaje-getxo-sopela-surf-marea',
