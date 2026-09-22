@@ -36,6 +36,8 @@ import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tieneBarcos } from '@/lib/barcos-municipio'
 import { comunidadDe } from '@/lib/comunidad'
 import GygActivities from '@/components/GygActivities'
+import DelMunicipio from '@/components/ui/DelMunicipio'
+import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 // Leaflet vive en el cliente, pero eso ya lo resuelve el propio componente:
 // lleva 'use client' y no toca `document` hasta dentro de un efecto, igual
 // que MapaPlayas, que se importa así desde la página del municipio.
@@ -278,6 +280,7 @@ export default async function QueHacerPage({ params }: Props) {
     getMunicipios(),
   ])
   const tienePaginaMuni = municipios.some(m => m.slug === slug)
+  const enlaces = await enlacesMunicipio(slug, pois.nombre)
   const municipio = municipios.find(m => m.slug === slug)
   const provinciaSlug = municipio?.provinciaSlug
 
@@ -606,45 +609,7 @@ export default async function QueHacerPage({ params }: Props) {
           <GygActivities query={`${pois.nombre}, Spain`} cmp="que-hacer" items={4} />
         </section>
 
-        {/* Enlaces cruzados a otras subpáginas del municipio. */}
-        {(tieneBarcos(slug) || tieneMareas(slug) || tienePaginaMuni) && (
-          <section style={{
-            marginTop: '2rem', padding: '1.15rem 1.25rem',
-            border: '1px solid var(--line)', borderRadius: 6,
-            background: 'var(--card-bg)',
-          }}>
-            <div style={{
-              fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-              textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.5rem',
-            }}>Y también</div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '.35rem' }}>
-              {tieneBarcos(slug) && (
-                <li>
-                  <Link href={`/municipio/${slug}/alquiler-de-barcos`} style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                    Alquiler de barcos en {pois.nombre} →
-                  </Link>{' '}
-                  <span style={{ color: 'var(--muted)', fontSize: '.88rem' }}>salir al mar sin licencia y con licencia.</span>
-                </li>
-              )}
-              {tieneMareas(slug) && ubicacionMareas(slug)?.zona !== 'mediterraneo' && (
-                <li>
-                  <Link href={`/municipio/${slug}/tabla-de-mareas`} style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                    Tabla de mareas de {pois.nombre} →
-                  </Link>{' '}
-                  <span style={{ color: 'var(--muted)', fontSize: '.88rem' }}>pleamar y bajamar según Puertos del Estado.</span>
-                </li>
-              )}
-              {tienePaginaMuni && (
-                <li>
-                  <Link href={`/municipio/${slug}`} style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                    Todas las playas de {pois.nombre} →
-                  </Link>{' '}
-                  <span style={{ color: 'var(--muted)', fontSize: '.88rem' }}>bandera, oleaje y servicios de las {playas.length} playas.</span>
-                </li>
-              )}
-            </ul>
-          </section>
-        )}
+        <DelMunicipio nombre={pois.nombre} enlaces={enlaces} actual="queHacer" />
 
         <p style={{ marginTop: '2.5rem', fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.5 }}>
           Los sitios de esta página salen de OpenStreetMap, que escribe gente voluntaria (licencia ODbL),

@@ -19,7 +19,8 @@ import { tinte } from '@/lib/tinte'
 import SeaIcon from '@/components/ui/SeaIcon'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { tieneBarcos } from '@/lib/barcos-municipio'
-import { tienePois } from '@/lib/municipio-pois'
+import DelMunicipio from '@/components/ui/DelMunicipio'
+import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -99,10 +100,6 @@ export default async function MunicipioPage({ params }: Props) {
     : getBoatLinkForPlaya(municipio.provincia, municipio.nombre)
   const barcoLocal = !!barco?.href.includes('/provincias/')
 
-  // ¿Este municipio tiene la subpágina «qué hacer»? Del prototipo salen ~25
-  // slugs; si no está, el enlace no se pinta (mejor no ofrecer un 404).
-  const hayQueHacer = await tienePois(slug)
-
   // Respuesta directa a "¿X tiene playa?" — query-pregunta real detectada
   // en GSC (jul-2026, p.ej. "foios tiene playa": 487 imp sin clicks).
   // La redacción varía con los datos para no sonar a plantilla.
@@ -158,40 +155,11 @@ export default async function MunicipioPage({ params }: Props) {
           {respuestaTienePlaya}
         </p>
 
-        {/* Enlace a la tabla de mareas. Solo donde la marea significa algo:
-            en el Mediterráneo son 25 cm y mandar ahí a alguien que busca
-            playas no aporta; la página existe igualmente para quien la
-            busque directamente. */}
-        {tieneMareas(slug) && ubicacionMareas(slug)?.zona !== 'mediterraneo' && (
-          <p style={{ margin: '-1rem 0 2rem', fontSize: '.92rem' }}>
-            <Link href={`/municipio/${slug}/tabla-de-mareas`} style={{ color: 'var(--ink)', fontWeight: 600 }}>
-              Tabla de mareas de {municipio.nombre} →
-            </Link>{' '}
-            <span style={{ color: 'var(--muted)' }}>pleamar y bajamar de hoy, mañana y pasado, según Puertos del Estado.</span>
-          </p>
-        )}
-
-        {/* Enlace a «Qué hacer». Solo aparece en los municipios donde el
-            sidecar tiene datos: no ofrecemos una promesa que el 404 desmiente. */}
-        {hayQueHacer && (
-          <p style={{ margin: '-1rem 0 2rem', fontSize: '.92rem' }}>
-            <Link href={`/municipio/${slug}/que-hacer`} style={{ color: 'var(--ink)', fontWeight: 600 }}>
-              Qué hacer en {municipio.nombre} →
-            </Link>{' '}
-            <span style={{ color: 'var(--muted)' }}>museos, monumentos, miradores, cine y teatro cerca de las playas.</span>
-          </p>
-        )}
-
-        {/* Enlace a «El tiempo». Aquí no gateamos por cobertura de datos:
-            Open-Meteo cubre toda la costa española y solo pedimos que el
-            municipio tenga alguna playa (para tener centroide). Cualquier
-            municipio con playa tiene página del tiempo. */}
-        <p style={{ margin: '-1rem 0 2rem', fontSize: '.92rem' }}>
-          <Link href={`/municipio/${slug}/el-tiempo`} style={{ color: 'var(--ink)', fontWeight: 600 }}>
-            El tiempo en {municipio.nombre} →
-          </Link>{' '}
-          <span style={{ color: 'var(--muted)' }}>temperatura, lluvia y viento hora a hora y a 7 días, más las mejores playas con este tiempo.</span>
-        </p>
+        {/* Las otras páginas del municipio, con la misma lista que usan ellas
+            entre sí: ver lib/enlaces-municipio. */}
+        <div style={{ margin: '-1rem 0 2.25rem' }}>
+          <DelMunicipio nombre={municipio.nombre} enlaces={await enlacesMunicipio(slug, municipio.nombre)} actual="playas" />
+        </div>
 
         {/* TOP 6 con hero foto: mejor scoring del municipio */}
         {playas.length >= 6 && (

@@ -33,6 +33,8 @@ import {
   datosSamboat, costaEnBarco, clickref, distancia, ACTUALIZADO_SAMBOAT, MUNICIPIOS_CON_BARCOS,
 } from '@/lib/barcos-municipio'
 import type { PlayaBarco } from '@/lib/barcos-municipio'
+import DelMunicipio from '@/components/ui/DelMunicipio'
+import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import styles from '../MunicipioPage.module.css'
 
 export const revalidate = 86400
@@ -275,11 +277,9 @@ export default async function AlquilerBarcosMunicipio({ params }: Props) {
           ))}
         </dl>
 
-        <p style={{ margin: '2rem 0 3rem', fontSize: '.95rem' }}>
-          <Link href={`/municipio/${slug}`} style={{ color: 'var(--ink)', fontWeight: 600 }}>
-            ← Las {playas.length} playas de {sb.nombre}
-          </Link>
-        </p>
+        <div style={{ marginBottom: '3rem' }}>
+          <DelMunicipio nombre={sb.nombre} enlaces={await enlacesMunicipio(slug, sb.nombre)} actual="barcos" />
+        </div>
       </div>
     </>
   )

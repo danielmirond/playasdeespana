@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
+import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import { getPrediccionAemet } from '@/lib/aemet'
 import { getBanderaCat, tieneBanderaCat } from '@/lib/banderas-cat'
 import { getBanderaCan, tieneBanderaCan } from '@/lib/banderas-can'
@@ -437,6 +438,11 @@ export default async function PlayaPage({ params }: Props) {
   const provinciaSlug = playa.provincia ? toSlug(playa.provincia) : undefined
   const municipioSlugsSet = municipioSlugsSetRaw
   const municipioSlugProp = municipioSlugsSet.has(municipioSlug) ? municipioSlug : undefined
+  // Las páginas del municipio (qué hacer, el tiempo, mareas, barcos) con la
+  // misma lista que ellas usan entre sí. Fuera de la carrera de plazos: solo
+  // lee JSON ya cargado. Con el slug crudo, no con municipioSlugProp: la
+  // ficha de un pueblo de dos playas sigue teniendo página del tiempo.
+  const delMunicipio = await enlacesMunicipio(municipioSlug, playa.municipio)
 
   const mareasData        = mareas.status === 'fulfilled' ? mareas.value : null
   const solData           = sol.status === 'fulfilled' ? sol.value : null
@@ -995,6 +1001,7 @@ export default async function PlayaPage({ params }: Props) {
         playasCercanas={playasCercanas}
         opinionesIniciales={opinionesData}
         municipioSlug={municipioSlugProp}
+        delMunicipio={delMunicipio}
         provinciaSlug={provinciaSlug}
         necesidades={necesidadesAsistente}
         videoData={videoData}

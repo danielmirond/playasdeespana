@@ -41,6 +41,8 @@ import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tienePois } from '@/lib/municipio-pois'
 import { getAvisos, type AvisoMeteo } from '@/lib/meteoalarm'
 import { comunidadDe, comunidadParaAvisos } from '@/lib/comunidad'
+import DelMunicipio from '@/components/ui/DelMunicipio'
+import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 
 export const maxDuration = 30
 export const revalidate = 3600      // el forecast cambia cada hora
@@ -498,6 +500,7 @@ export default async function ElTiempoPage({ params }: Props) {
   const playas = await getPlayasByMunicipio(slug)
   if (playas.length === 0) notFound()
   const enlaceMuni = tienePaginaMuni ? `/municipio/${slug}` : `/playas/${playas[0].slug}`
+  const enlaces = await enlacesMunicipio(slug, municipio.nombre)
   const lat = playas.reduce((a, p) => a + p.lat, 0) / playas.length
   const lng = playas.reduce((a, p) => a + p.lng, 0) / playas.length
 
@@ -693,46 +696,7 @@ export default async function ElTiempoPage({ params }: Props) {
           </section>
         )}
 
-        {/* Y también — cross-links a las otras subpáginas del municipio. */}
-        <section style={{
-          padding: '1.15rem 1.25rem', border: '1px solid var(--line)',
-          borderRadius: 6, background: 'var(--card-bg)',
-        }}>
-          <div style={{
-            fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-            textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.5rem',
-          }}>Y también</div>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-            {hayPois && (
-              <li>
-                <Link href={`/municipio/${slug}/que-hacer`} style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                  Qué hacer en {municipio.nombre} →
-                </Link>{' '}
-                <span style={{ color: 'var(--muted)', fontSize: '.88rem' }}>
-                  museos, monumentos, guías de 1 y 3 días.
-                </span>
-              </li>
-            )}
-            {hayMar && !marMediterraneo && (
-              <li>
-                <Link href={`/municipio/${slug}/tabla-de-mareas`} style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                  Tabla de mareas de {municipio.nombre} →
-                </Link>{' '}
-                <span style={{ color: 'var(--muted)', fontSize: '.88rem' }}>
-                  pleamar y bajamar según Puertos del Estado.
-                </span>
-              </li>
-            )}
-            <li>
-              <Link href={enlaceMuni} style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                {tienePaginaMuni ? `Todas las playas de ${municipio.nombre}` : `La playa de ${municipio.nombre}`} →
-              </Link>{' '}
-              <span style={{ color: 'var(--muted)', fontSize: '.88rem' }}>
-                bandera, oleaje y servicios de {playas.length === 1 ? 'la playa' : `las ${playas.length} playas`}.
-              </span>
-            </li>
-          </ul>
-        </section>
+        <DelMunicipio nombre={municipio.nombre} enlaces={enlaces} actual="elTiempo" />
 
         <p style={{
           marginTop: '2.5rem', paddingTop: '1.5rem',

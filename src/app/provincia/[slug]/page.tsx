@@ -9,6 +9,7 @@ import Nav from '@/components/ui/Nav'
 import EnlacesGeoHubs from '@/components/seo/EnlacesGeoHubs'
 import { getPlayas, getPlayasByProvincia, getProvincias, getMunicipios, toSlug } from '@/lib/playas'
 import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
+import { getMunicipiosConPois } from '@/lib/municipio-pois'
 import { calcularEstado, ESTADOS } from '@/lib/estados'
 import styles from './ProvinciaPage.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
@@ -93,6 +94,7 @@ export default async function ProvinciaPage({ params }: Props) {
     cur.playas.push(p)
     porMuni.set(ms, cur)
   }
+  const conPois = new Set(await getMunicipiosConPois())
   const indiceMunicipios = [...porMuni.values()]
     .map(m => ({
       slug: m.slug,
@@ -101,6 +103,7 @@ export default async function ProvinciaPage({ params }: Props) {
       playas: m.playas,
       tienePagina: conPagina.has(m.slug),
       mareas: conPagina.has(m.slug) && tieneMareas(m.slug) && ubicacionMareas(m.slug)?.zona !== 'mediterraneo',
+      queHacer: conPois.has(m.slug),
     }))
     .sort((a, b) => b.count - a.count || a.nombre.localeCompare(b.nombre, 'es'))
 
@@ -257,12 +260,17 @@ export default async function ProvinciaPage({ params }: Props) {
               {/* Mareas: solo donde la marea es un dato —Atlántico,
                   Cantábrico y Canarias— y el municipio tiene tabla. En el
                   Mediterráneo sería un enlace a «aquí la marea son 25 cm». */}
-              {m.mareas && (
-                <Link href={`/municipio/${m.slug}/tabla-de-mareas`} className={styles.rowMeta}
-                  style={{ color: 'var(--ink)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: 'auto' }}>
-                  mareas →
-                </Link>
-              )}
+              {/* Las subpáginas del municipio, con la palabra que se busca.
+                  El tiempo existe para todos; qué hacer y mareas, donde hay dato. */}
+              <span className={styles.rowMeta} style={{ marginLeft: 'auto', display: 'flex', gap: '.7rem', whiteSpace: 'nowrap' }}>
+                {m.queHacer && (
+                  <Link href={`/municipio/${m.slug}/que-hacer`} style={{ color: 'var(--ink)', fontWeight: 600 }}>qué hacer</Link>
+                )}
+                <Link href={`/municipio/${m.slug}/el-tiempo`} style={{ color: 'var(--ink)', fontWeight: 600 }}>el tiempo</Link>
+                {m.mareas && (
+                  <Link href={`/municipio/${m.slug}/tabla-de-mareas`} style={{ color: 'var(--ink)', fontWeight: 600 }}>mareas</Link>
+                )}
+              </span>
               {m.tienePagina && (
                 <Link href={`/municipio/${m.slug}`} className={styles.rowArrow} aria-label={`Playas de ${m.nombre}`}>→</Link>
               )}

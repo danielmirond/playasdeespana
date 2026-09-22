@@ -38,6 +38,8 @@ import { CertBadge } from '@/components/playa/Certeza'
 import { estadoLuna, solunar } from '@/lib/luna'
 import { articulosPara, urlPesca } from '@/lib/pesca'
 import styles from '../MunicipioPage.module.css'
+import DelMunicipio from '@/components/ui/DelMunicipio'
+import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 
 export const revalidate = 1800
 export const maxDuration = 30
@@ -401,6 +403,8 @@ export default async function TablaMareasPage({ params }: Props) {
                 </ul>
               </section>
             )}
+
+            <DelMunicipio nombre={municipio.nombre} enlaces={await enlacesMunicipio(slug, municipio.nombre)} actual="mareas" />
 
             {/* Zona herramienta: después de la tabla, la curva, el solunar
                 y las playas. Dentro de la herramienta no entra nada. */}

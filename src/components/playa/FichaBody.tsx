@@ -1,4 +1,6 @@
 'use client'
+import DelMunicipio from '@/components/ui/DelMunicipio'
+import type { EnlaceMunicipio } from '@/lib/enlaces-municipio'
 // src/components/playa/FichaBody.tsx
 import { SLOTS } from '@/lib/adsense'
 import { useEffect, useState } from 'react'
@@ -155,6 +157,8 @@ interface Props {
   locale?:         'es' | 'en'
   /** Slug del municipio si la página existe (ver getMunicipioSlugsSet). */
   municipioSlug?:  string
+  /** Páginas del municipio, ya calculadas en el servidor (lib/enlaces-municipio). */
+  delMunicipio?:   EnlaceMunicipio[]
   /** Slug de la provincia si la página existe. */
   provinciaSlug?:  string
   /**
@@ -342,7 +346,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -1530,6 +1534,13 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         {/* PLAYAS CERCANAS */}
+        {/* Del municipio: qué hacer, el tiempo, mareas, barcos. Solo en
+            español: las subpáginas no tienen versión inglesa. */}
+        {locale === 'es' && delMunicipio && delMunicipio.length > 0 && (
+          <div key="del-municipio" style={{ marginBottom: '1.5rem' }}>
+            <DelMunicipio nombre={playa.municipio} enlaces={delMunicipio} compacto />
+          </div>
+        )}
         {playasCercanas && playasCercanas.length > 0 && (
           <div key="cercanas" className={styles.card} id="s-cercanas">
             <div className={styles.cardHead}>
