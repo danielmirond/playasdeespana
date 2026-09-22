@@ -38,6 +38,9 @@ jobs:
         # todo desde cero.
         run: node scripts/build-municipio-pois.mjs --refrescar
 
+      - name: Fotos del carrusel (Wikipedia/Commons, licencia libre)
+        run: node scripts/resolve-pois-fotos.mjs
+
       - name: Commit and push sidecar
         # `pull --rebase` antes del push: el script tarda 10-20 min y
         # cualquier commit intermedio a main hacía rechazar el push

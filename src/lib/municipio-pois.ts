@@ -19,6 +19,9 @@ interface PoiCompacto {
   w?: string      // website
   wp?: string     // wikipedia
   pmr?: 1         // accesible silla de ruedas
+  /** Foto de Wikipedia/Commons con licencia libre, solo en los del carrusel
+   *  (scripts/resolve-pois-fotos.mjs). `null` = se buscó y no había. */
+  f?: { u: string; a: string; l: string; w: number; h: number } | null
 }
 
 interface MunicipioPoisData {
@@ -44,6 +47,7 @@ export interface Poi {
   website?: string
   wikipedia?: string
   pmr?: boolean
+  foto?: { url: string; autor: string; licencia: string; ancho: number; alto: number }
 }
 
 export interface MunicipioPois {
@@ -93,6 +97,7 @@ function expand(p: PoiCompacto): Poi {
     ...(p.w ? { website: p.w } : {}),
     ...(p.wp ? { wikipedia: p.wp } : {}),
     ...(p.pmr ? { pmr: true } : {}),
+    ...(p.f ? { foto: { url: p.f.u, autor: p.f.a, licencia: p.f.l, ancho: p.f.w, alto: p.f.h } } : {}),
   }
 }
 

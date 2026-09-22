@@ -37,6 +37,7 @@ import { tieneBarcos } from '@/lib/barcos-municipio'
 import { comunidadDe } from '@/lib/comunidad'
 import GygActivities from '@/components/GygActivities'
 import DelMunicipio from '@/components/ui/DelMunicipio'
+import { getFotos } from '@/lib/fotos'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 // Leaflet vive en el cliente, pero eso ya lo resuelve el propio componente:
 // lleva 'use client' y no toca `document` hasta dentro de un efecto, igual
@@ -232,40 +233,41 @@ const GRADIENTES_CARR = [
   'linear-gradient(180deg, #d0bba0 0%, #ac9670 40%, #826444 70%, #4e3a22 100%)',
 ]
 
-interface SlideCarrusel { eyebrow: string; titulo: string; grad: string }
+interface SlideCarrusel { eyebrow: string; titulo: string; grad: string; foto?: { url: string; autor?: string } | null }
 
 /** Compone el carrusel intercalando playas top con POIs top: mejor playa,
  *  monumento icónico, museo top, segunda playa, faro/mirador. Máximo 5
  *  tiles. Los slots vacíos se saltan. */
 function componerCarrusel(
-  topPlayas: readonly { nombre: string; bandera?: boolean }[],
+  topPlayas: readonly { nombre: string; bandera?: boolean; foto?: { url: string; autor?: string } | null }[],
   pois: NonNullable<Awaited<ReturnType<typeof getMunicipioPois>>>,
 ): SlideCarrusel[] {
   const s: SlideCarrusel[] = []
+  const poiFoto = (p?: Poi) => p?.foto ? { url: p.foto.url, autor: p.foto.autor } : null
   if (topPlayas[0]) s.push({
     eyebrow: topPlayas[0].bandera ? 'Playa · Bandera Azul' : 'Playa',
     titulo: topPlayas[0].nombre,
-    grad: GRADIENTES_CARR[0],
+    grad: GRADIENTES_CARR[0], foto: topPlayas[0].foto,
   })
   if (pois.monumentos[0]) s.push({
     eyebrow: pois.monumentos[0].tipo,
     titulo: pois.monumentos[0].nombre,
-    grad: GRADIENTES_CARR[1],
+    grad: GRADIENTES_CARR[1], foto: poiFoto(pois.monumentos[0]),
   })
   if (pois.museos[0]) s.push({
     eyebrow: pois.museos[0].tipo,
     titulo: pois.museos[0].nombre,
-    grad: GRADIENTES_CARR[2],
+    grad: GRADIENTES_CARR[2], foto: poiFoto(pois.museos[0]),
   })
   if (topPlayas[1]) s.push({
     eyebrow: 'Playa',
     titulo: topPlayas[1].nombre,
-    grad: GRADIENTES_CARR[3],
+    grad: GRADIENTES_CARR[3], foto: topPlayas[1].foto,
   })
   if (pois.miradores[0]) s.push({
     eyebrow: pois.miradores[0].tipo === 'Faro' ? 'Faro · atardecer' : 'Mirador',
     titulo: pois.miradores[0].nombre,
-    grad: GRADIENTES_CARR[4],
+    grad: GRADIENTES_CARR[4], foto: poiFoto(pois.miradores[0]),
   })
   return s.slice(0, 5)
 }
@@ -304,7 +306,15 @@ export default async function QueHacerPage({ params }: Props) {
   // ordena; toda la copy visible se ha escrito en este archivo.
   const gUnDia = guiaUnDia(pois, topPlayas[0] ?? null)
   const gTresDias = guiaTresDias(pois, playas)
-  const slidesCarrusel = componerCarrusel(topPlayas, pois)
+  // La foto de cada playa del carrusel: la real del sidecar, con autor. Si
+  // la playa no tiene entrada, getFotos podría ir a la red; para la portada
+  // de un municipio se acepta, la Data Cache lo amortigua.
+  const topConFoto = await Promise.all(topPlayas.slice(0, 2).map(async p => {
+    const fotos = await getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia, p.slug)
+    const real = fotos.find(f => f.fuente !== 'generica')
+    return { ...p, foto: real ? { url: real.thumb, autor: real.autor } : null }
+  }))
+  const slidesCarrusel = componerCarrusel(topConFoto, pois)
 
   const respuesta = frase(pois, playas.length)
   const faq = {
@@ -385,11 +395,23 @@ export default async function QueHacerPage({ params }: Props) {
                   aspectRatio: '3 / 2', border: '1px solid var(--line)',
                   background: s.grad,
                 }}>
+                  {s.foto && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={s.foto.url} alt={s.titulo} loading={i === 0 ? 'eager' : 'lazy'} decoding="async"
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
+                  )}
                   <div style={{
                     position: 'absolute', inset: 0,
                     background: 'linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55) 100%)',
                     zIndex: 2,
                   }} aria-hidden="true"/>
+                  {s.foto?.autor && (
+                    <div style={{
+                      position: 'absolute', top: '.4rem', right: '.5rem', zIndex: 3,
+                      fontSize: '.55rem', color: 'rgba(245,236,213,.85)', textShadow: '0 1px 3px rgba(0,0,0,.6)',
+                      fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+                    }}>Foto: {s.foto.autor}</div>
+                  )}
                   <div style={{
                     position: 'absolute', bottom: '.65rem', left: '.8rem', right: '.8rem',
                     zIndex: 3, color: '#f5ecd5',
