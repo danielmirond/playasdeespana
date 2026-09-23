@@ -134,6 +134,11 @@ function BloquePois({ id, eyebrow, titulo, items, mostrar = 8 }: {
               style={{ fontSize: '.72rem', color: 'var(--muted)' }}>
               Cómo llegar →
             </a>
+            {p.resumen && (
+              <p style={{ flexBasis: '100%', margin: '.15rem 0 0', fontSize: '.88rem', lineHeight: 1.55, color: 'var(--ink-soft, var(--ink))' }}>
+                {p.resumen}
+              </p>
+            )}
           </li>
         ))}
       </ul>
@@ -638,6 +643,9 @@ export default async function QueHacerPage({ params }: Props) {
           y están a menos de 3&nbsp;km del centro del pueblo. Puede que falte alguno o que alguno haya
           cerrado. Si conoces la zona, se corrige en osm.org y aquí aparece en la siguiente
           actualización. Lista revisada el {pois.generado}.
+          {(pois.museos.concat(pois.monumentos, pois.cultura, pois.miradores, pois.parques)).some(p => p.resumen) && (
+            <> Los resúmenes de los sitios están escritos a partir de sus artículos en Wikipedia.</>
+          )}
         </p>
       </main>
     </>

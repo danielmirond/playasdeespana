@@ -22,6 +22,10 @@ interface PoiCompacto {
   /** Foto de Wikipedia/Commons con licencia libre, solo en los del carrusel
    *  (scripts/resolve-pois-fotos.mjs). `null` = se buscó y no había. */
   f?: { u: string; a: string; l: string; w: number; h: number } | null
+  /** Extracto crudo de Wikipedia (no se publica; CC BY-SA). */
+  e?: { t: string; l: string; p: string } | null
+  /** Resumen reescrito con voz propia a partir de `e` (rewrite-pois-resumen.mjs). `null` = descartado. */
+  r?: string | null
 }
 
 interface MunicipioPoisData {
@@ -48,6 +52,8 @@ export interface Poi {
   wikipedia?: string
   pmr?: boolean
   foto?: { url: string; autor: string; licencia: string; ancho: number; alto: number }
+  /** Dos frases sobre el sitio, reescritas de Wikipedia. Fuente al pie de la página. */
+  resumen?: string
 }
 
 export interface MunicipioPois {
@@ -98,6 +104,7 @@ function expand(p: PoiCompacto): Poi {
     ...(p.wp ? { wikipedia: p.wp } : {}),
     ...(p.pmr ? { pmr: true } : {}),
     ...(p.f ? { foto: { url: p.f.u, autor: p.f.a, licencia: p.f.l, ancho: p.f.w, alto: p.f.h } } : {}),
+    ...(p.r ? { resumen: p.r } : {}),
   }
 }
 
