@@ -42,6 +42,8 @@ import { tienePois } from '@/lib/municipio-pois'
 import { getAvisos, type AvisoMeteo } from '@/lib/meteoalarm'
 import { comunidadDe, comunidadParaAvisos } from '@/lib/comunidad'
 import DelMunicipio from '@/components/ui/DelMunicipio'
+import Hueco from '@/components/ui/Hueco'
+import { SLOTS } from '@/lib/adsense'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 
 export const maxDuration = 30
@@ -661,6 +663,9 @@ export default async function ElTiempoPage({ params }: Props) {
 
         <GraficoHoras hoy={meteo.hoy} />
         <TarjetasSieteDias dias={meteo.dias} />
+        {/* Zona herramienta: después de la predicción a 7 días, que es lo
+            que se viene a consultar. Nunca antes del veredicto. */}
+        <Hueco zona="herramienta" bloque={SLOTS.herramienta} />
         <BloqueSol hoy={meteo.dias[0]} />
 
         {/* Con viento, qué playas quedan a resguardo. Sin viento no hay
@@ -695,6 +700,8 @@ export default async function ElTiempoPage({ params }: Props) {
             )}
           </section>
         )}
+
+        <Hueco zona="cierre" bloque={SLOTS.cierre} />
 
         <DelMunicipio nombre={municipio.nombre} enlaces={enlaces} actual="elTiempo" />
 

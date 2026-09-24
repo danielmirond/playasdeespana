@@ -25,8 +25,22 @@ function parsearWp(wp) {
   return m ? { lang: m[1], title: m[2] } : { lang: 'es', title: wp.trim() }
 }
 
+// Si el artículo está en catalán, gallego u otro idioma, Wikipedia suele
+// tener el equivalente en castellano enlazado (langlinks). Se prefiere ese:
+// el modelo local copia el idioma del extracto, y un extracto en castellano
+// es la forma más barata de que el resumen salga en castellano.
+async function enCastellano(lang, title) {
+  if (lang === 'es') return { lang, title }
+  const url = `https://${lang}.wikipedia.org/w/api.php?action=query&format=json&prop=langlinks&lllang=es&redirects=1&titles=${encodeURIComponent(title)}`
+  const res = await fetch(url, { headers: { 'user-agent': UA } })
+  if (!res.ok) return { lang, title }
+  const page = Object.values((await res.json()).query?.pages ?? {})[0]
+  const es = page?.langlinks?.[0]?.['*']
+  return es ? { lang: 'es', title: es } : { lang, title }
+}
+
 async function extracto(wp) {
-  const { lang, title } = parsearWp(wp)
+  const { lang, title } = await enCastellano(...Object.values(parsearWp(wp)))
   const url = `https://${lang}.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=1&explaintext=1&exsentences=3&redirects=1&titles=${encodeURIComponent(title)}`
   const res = await fetch(url, { headers: { 'user-agent': UA } })
   if (!res.ok) throw new Error(`${res.status}`)
@@ -43,7 +57,11 @@ for (const slug of Object.keys(data)) {
   for (const cat of Object.values(data[slug].pois)) {
     for (const poi of cat) {
       if (!poi.wp) continue
-      if (poi.e !== undefined && !refrescar) { ya++; continue }
+      // Sin --refrescar solo se vuelve a mirar lo que no tiene resumen y cuyo
+      // extracto no está en castellano: es donde el langlink puede ayudar.
+      const candidatoEs = poi.r === null && poi.e && poi.e.l !== 'es'
+      if (poi.e !== undefined && !refrescar && !candidatoEs) { ya++; continue }
+      if (candidatoEs) { const antes = poi.e.l; const nuevo = await extracto(poi.wp).catch(() => null); if (nuevo && nuevo.l === 'es') { poi.e = nuevo; poi.r = undefined; ok++ } else { ya++ } await dormir(200); continue }
       try {
         poi.e = await extracto(poi.wp)
         poi.e ? ok++ : nada++

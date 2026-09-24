@@ -37,7 +37,11 @@ import { tieneBarcos } from '@/lib/barcos-municipio'
 import { comunidadDe } from '@/lib/comunidad'
 import GygActivities from '@/components/GygActivities'
 import DelMunicipio from '@/components/ui/DelMunicipio'
+import Hueco from '@/components/ui/Hueco'
+import { SLOTS } from '@/lib/adsense'
 import { getFotos } from '@/lib/fotos'
+import { getVideoYouTube } from '@/lib/videos'
+import BeachVideoToggle from '@/components/playa/BeachVideoToggle'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 // Leaflet vive en el cliente, pero eso ya lo resuelve el propio componente:
 // lleva 'use client' y no toca `document` hasta dentro de un efecto, igual
@@ -320,6 +324,11 @@ export default async function QueHacerPage({ params }: Props) {
     return { ...p, foto: real ? { url: real.thumb, autor: real.autor } : null }
   }))
   const slidesCarrusel = componerCarrusel(topConFoto, pois)
+  // Un vídeo del municipio, con la misma búsqueda y los mismos filtros que
+  // usa la ficha de playa (dron, corto, en español, canal no vetado). Cache
+  // de 30 días en KV: la cuota de YouTube son 100 búsquedas al día y se
+  // reparte con las fichas. Si no hay clave o no hay vídeo, no hay bloque.
+  const video = await getVideoYouTube(pois.nombre, '', `municipio-${slug}`).catch(() => null)
 
   const respuesta = frase(pois, playas.length)
   const faq = {
@@ -526,6 +535,20 @@ export default async function QueHacerPage({ params }: Props) {
           </section>
         )}
 
+        {video && (
+          <section id="video" style={{ marginBottom: '2.5rem' }}>
+            <div style={{ fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem' }}>Desde el aire</div>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15 }}>
+              {pois.nombre} en <em style={{ fontWeight: 500, color: 'var(--accent)' }}>vídeo</em>
+            </h2>
+            <BeachVideoToggle video={video} nombre={pois.nombre} />
+          </section>
+        )}
+
+        {/* Zona herramienta: después de los planes, que son la herramienta
+            de esta página, y antes de las listas. */}
+        <Hueco zona="herramienta" bloque={SLOTS.herramienta} />
+
         {topPlayas.length > 0 && (
           <section id="banarse" style={{ marginBottom: '2.5rem' }}>
             <div style={{
@@ -635,6 +658,8 @@ export default async function QueHacerPage({ params }: Props) {
           </h2>
           <GygActivities query={`${pois.nombre}, Spain`} cmp="que-hacer" items={4} />
         </section>
+
+        <Hueco zona="cierre" bloque={SLOTS.cierre} />
 
         <DelMunicipio nombre={pois.nombre} enlaces={enlaces} actual="queHacer" />
 
