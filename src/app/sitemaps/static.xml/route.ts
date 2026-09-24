@@ -203,6 +203,17 @@ export async function GET() {
     }
   } catch { /* sin sidecar todavía → sin URLs; el ISR las servirá cuando exista */ }
 
+  // Campings cerca de cada municipio: los que tienen dos o más. Se calcula
+  // desde el sidecar de OSM en memoria; el sitemap revalida a la semana.
+  {
+    const { campingsDelMunicipio, MINIMO_CAMPINGS } = await import('@/lib/campings-municipio')
+    const { getPlayasByMunicipio } = await import('@/lib/playas')
+    for (const m of await getMunicipios(1)) {
+      const c = await campingsDelMunicipio(await getPlayasByMunicipio(m.slug))
+      if (c.length >= MINIMO_CAMPINGS) urls.push(u(`/municipio/${m.slug}/camping-cerca`, '0.6', 'weekly', today))
+    }
+  }
+
   // Themed sections subpages
   for (const c of perrosStats.comunidades) urls.push(u(`/playas-perros/comunidad/${c.slug}`, '0.6', 'weekly', today))
   for (const p of perrosStats.provincias) urls.push(u(`/playas-perros/provincia/${p.slug}`, '0.6', 'weekly', today))

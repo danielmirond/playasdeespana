@@ -10,12 +10,13 @@
 // AQUÍ SE DECIDE UNA VEZ qué existe para ese municipio, con la misma regla
 // que usa cada página para publicarse o no: si aquí sale, allí hay página.
 // Quien pinta el bloque (DelMunicipio) solo quita la página en la que está.
-import { getMunicipioSlugsSet } from './playas'
+import { getMunicipioSlugsSet, getPlayasByMunicipio } from './playas'
+import { campingsDelMunicipio, MINIMO_CAMPINGS } from './campings-municipio'
 import { tienePois } from './municipio-pois'
 import { tieneBarcos } from './barcos-municipio'
 import { tieneMareas, ubicacionMareas } from './mareas-portus'
 
-export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'barcos'
+export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos'
 
 export interface EnlaceMunicipio {
   clave: ClaveMunicipio
@@ -26,9 +27,10 @@ export interface EnlaceMunicipio {
 }
 
 export async function enlacesMunicipio(slug: string, nombre: string): Promise<EnlaceMunicipio[]> {
-  const [conPagina, conAlgunaPlaya, hayPois] = await Promise.all([
-    getMunicipioSlugsSet(4), getMunicipioSlugsSet(1), tienePois(slug),
+  const [conPagina, conAlgunaPlaya, hayPois, playas] = await Promise.all([
+    getMunicipioSlugsSet(4), getMunicipioSlugsSet(1), tienePois(slug), getPlayasByMunicipio(slug),
   ])
+  const campings = await campingsDelMunicipio(playas)
   const out: EnlaceMunicipio[] = []
 
   if (conPagina.has(slug)) out.push({
@@ -47,6 +49,10 @@ export async function enlacesMunicipio(slug: string, nombre: string): Promise<En
   if (tieneMareas(slug) && ubicacionMareas(slug)?.zona !== 'mediterraneo') out.push({
     clave: 'mareas', href: `/municipio/${slug}/tabla-de-mareas`,
     texto: `Tabla de mareas de ${nombre}`, nota: 'pleamar y bajamar según Puertos del Estado',
+  })
+  if (campings.length >= MINIMO_CAMPINGS) out.push({
+    clave: 'campings', href: `/municipio/${slug}/camping-cerca`,
+    texto: `Campings cerca de ${nombre}`, nota: `${campings.length} campings y a qué playa les queda más cerca`,
   })
   if (tieneBarcos(slug)) out.push({
     clave: 'barcos', href: `/municipio/${slug}/alquiler-de-barcos`,
