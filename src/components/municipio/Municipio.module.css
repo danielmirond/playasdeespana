@@ -18,7 +18,7 @@
 .heroVelo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,4,.35) 0%, rgba(20,12,4,0) 35%, rgba(20,12,4,.8) 100%); }
 .heroVeloLado { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,4,.4) 0%, rgba(20,12,4,.05) 40%, rgba(20,12,4,.82) 100%); }
 .heroCuerpo { position: relative; padding: 1.25rem 1.25rem 1.6rem; display: flex; flex-direction: column; gap: .5rem; max-width: 1000px; width: 100%; margin: 0 auto; box-sizing: border-box; }
-.heroTitulo { margin: 0; font-family: var(--font-serif); font-weight: 700; font-size: clamp(2.2rem, 9vw, 4.2rem); line-height: .98; letter-spacing: -.02em; text-shadow: 0 2px 14px rgba(0,0,0,.35); }
+.heroTitulo { margin: 0; font-family: var(--font-serif); font-weight: 700; font-size: clamp(1.9rem, 7.5vw, 4rem); line-height: 1; letter-spacing: -.02em; text-shadow: 0 2px 14px rgba(0,0,0,.35); text-wrap: balance; }
 .heroLede { font-size: 1rem; line-height: 1.45; max-width: 52ch; opacity: .95; }
 .heroCredito { font-family: var(--font-mono, ui-monospace, monospace); font-size: .6rem; opacity: .75; }
 .heroMiga { position: absolute; top: 0; left: 0; right: 0; padding: .8rem 1.25rem; display: flex; gap: .4rem; flex-wrap: wrap; font-size: .75rem; color: #faf4e6; opacity: .92; max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
@@ -42,10 +42,10 @@
 .cuerpo { max-width: 1000px; margin: 0 auto; padding: 1.5rem 1.25rem 6rem; box-sizing: border-box; display: flex; flex-direction: column; gap: 2.25rem; }
 @media (min-width: 900px) { .cuerpo { padding: 2rem 1.5rem 3rem; } }
 
-.seccionCab { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; }
+.seccionCab { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; margin-bottom: .75rem; }
 .h2 { margin: 0; font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--ink); line-height: 1.15; }
 .h2 em { font-weight: 500; font-style: italic; color: var(--accent); }
-.meta { font-family: var(--font-mono, ui-monospace, monospace); font-size: .7rem; color: var(--muted); white-space: nowrap; }
+.meta { font-family: var(--font-mono, ui-monospace, monospace); font-size: .7rem; color: var(--muted); }
 
 /* Plan del día: tarjetas con foto. Fila con scroll en móvil, rejilla en escritorio. */
 .plan { display: flex; gap: .75rem; overflow-x: auto; scrollbar-width: none; margin: 0 -1.25rem; padding: 0 1.25rem .25rem; }
