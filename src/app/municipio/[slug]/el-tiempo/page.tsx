@@ -42,6 +42,10 @@ import { tienePois } from '@/lib/municipio-pois'
 import { getAvisos, type AvisoMeteo } from '@/lib/meteoalarm'
 import { comunidadDe, comunidadParaAvisos } from '@/lib/comunidad'
 import DelMunicipio from '@/components/ui/DelMunicipio'
+import HeroMunicipio from '@/components/municipio/HeroMunicipio'
+import NavMunicipio from '@/components/municipio/NavMunicipio'
+import mun from '@/components/municipio/Municipio.module.css'
+import { getFotos } from '@/lib/fotos'
 import Hueco from '@/components/ui/Hueco'
 import { SLOTS } from '@/lib/adsense'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
@@ -85,54 +89,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // —————————————————————————————————————————————————————————————
 // Sub-componentes de sección
 // —————————————————————————————————————————————————————————————
-
-function BloqueAhora({ meteo, actualizado }: { meteo: MeteoMunicipio['actual']; actualizado: string }) {
-  const tipo = iconoDeWmo(meteo.wmo)
-  return (
-    <section style={{ marginBottom: '2.5rem' }}>
-      <div style={{
-        fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-        textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-      }}>Ahora · {actualizado}</div>
-      <h2 style={{
-        fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700,
-        color: 'var(--ink)', marginBottom: '.7rem', lineHeight: 1.15,
-      }}>En este momento</h2>
-      <div style={{
-        border: '1px solid var(--line)', borderRadius: 10,
-        background: 'var(--surface)', padding: '1.25rem 1.4rem',
-        display: 'grid', gridTemplateColumns: '1fr auto', gap: '1rem', alignItems: 'center',
-      }}>
-        <div style={{ minWidth: 0 }}>
-          <div style={{
-            fontFamily: 'var(--font-serif)', fontSize: 'clamp(3rem, 12vw, 4.5rem)',
-            fontWeight: 700, lineHeight: 1, letterSpacing: '-.03em', color: 'var(--ink)',
-            display: 'flex', alignItems: 'baseline', gap: '.1rem',
-          }}>
-            {meteo.temp}
-            <span style={{ fontSize: '.5em', color: 'var(--muted)', fontWeight: 500 }}>°C</span>
-          </div>
-          <div style={{
-            fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 500,
-            fontSize: '1.05rem', color: 'var(--accent)', marginTop: '.3rem',
-          }}>
-            {textoDeWmo(meteo.wmo)}, sensación de {meteo.sensacion}°
-          </div>
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', gap: '.35rem .9rem',
-            marginTop: '.6rem', fontSize: '.82rem', color: 'var(--muted)',
-          }}>
-            <span>Viento <strong style={{ color: 'var(--ink)', fontWeight: 600 }}>{meteo.viento_kmh} km/h {etiquetaViento(meteo.viento_kmh)}</strong></span>
-            {meteo.uv != null && <span>UV <strong style={{ color: 'var(--ink)', fontWeight: 600 }}>{meteo.uv} {etiquetaUv(meteo.uv)}</strong></span>}
-            <span>Humedad <strong style={{ color: 'var(--ink)', fontWeight: 600 }}>{meteo.humedad}%</strong></span>
-            {meteo.presion != null && <span>Presión <strong style={{ color: 'var(--ink)', fontWeight: 600 }}>{meteo.presion} hPa</strong></span>}
-          </div>
-        </div>
-        <IconoTiempo tipo={tipo} size={96} />
-      </div>
-    </section>
-  )
-}
 
 function GraficoHoras({ hoy }: { hoy: MeteoMunicipio['hoy'] }) {
   if (hoy.length < 6) return null
@@ -244,39 +200,30 @@ function GraficoHoras({ hoy }: { hoy: MeteoMunicipio['hoy'] }) {
 }
 
 const COLOR_NIVEL = { bueno: 'var(--excelente)', regular: 'var(--aceptable)', malo: 'var(--noapto)' } as const
+// Sobre la foto oscura del hero, los tres colores del semáforo se aclaran
+// para que contrasten (el verde y el rojo del sitio están pensados sobre arena).
+const COLOR_NIVEL_CLARO = { bueno: '#8ac46a', regular: '#e8c058', malo: '#f08a78' } as const
 
-// La respuesta antes que los grados: «¿Hace día de playa hoy?» en grande,
-// con el porqué, y debajo los 7 días como calendario de playa y el mejor.
-function BloqueVeredicto({ hoy, veredictos, mejor, nombre }: {
-  hoy: VeredictoDia; veredictos: VeredictoDia[]; mejor: VeredictoDia | null; nombre: string
-}) {
+// La semana: tiras con el color del veredicto en móvil, tarjetas con icono
+// en escritorio. Mismo marcado, lo cambia el CSS. El mejor día lleva borde.
+function SemanaTiras({ veredictos, dias, mejor }: { veredictos: VeredictoDia[]; dias: DiaTiempo[]; mejor: VeredictoDia | null }) {
   return (
-    <section style={{ marginBottom: '2.25rem' }}>
-      <div data-speakable style={{
-        padding: '1.1rem 1.25rem', borderLeft: `3px solid ${COLOR_NIVEL[hoy.nivel]}`,
-        background: 'var(--surface)', borderRadius: 3, marginBottom: '1rem',
-      }}>
-        <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--ink)', fontSize: '1rem', marginBottom: '.25rem' }}>
-          ¿Hace día de playa hoy en {nombre}?
-        </div>
-        <div style={{ fontSize: '1.05rem', color: 'var(--ink)', lineHeight: 1.5 }}>
-          <b style={{ color: COLOR_NIVEL[hoy.nivel] }}>{hoy.titulo}</b>: {hoy.motivo}.
-        </div>
+    <section id="semana">
+      <div className={mun.seccionCab}>
+        <h2 className={mun.h2}>Esta <em>semana</em></h2>
+        {mejor && <span className={mun.meta}>{mejor.nivel === 'bueno' ? 'mejor día' : 'el menos malo'}: {mejor.fecha === veredictos[0].fecha ? 'hoy' : diaCorto(mejor.fecha)}</span>}
       </div>
-      <ol style={{ listStyle: 'none', padding: 0, margin: '0 0 .75rem', display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', gap: '.35rem' }}>
+      <ol className={mun.semana} style={{ listStyle: 'none', padding: 0, margin: 0 }}>
         {veredictos.map((v, i) => (
-          <li key={v.fecha} title={v.motivo} style={{
-            textAlign: 'center', padding: '.55rem .2rem', borderRadius: 6,
-            border: `1px solid ${mejor?.fecha === v.fecha ? COLOR_NIVEL.bueno : 'var(--line)'}`,
-            background: 'var(--surface)',
-          }}>
-            <div style={{ fontSize: '.68rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.06em' }}>{i === 0 ? 'Hoy' : diaCorto(v.fecha)}</div>
-            <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: COLOR_NIVEL[v.nivel], fontSize: '.95rem', marginTop: '.15rem' }}>{v.titulo}</div>
-            <div style={{ fontSize: '.62rem', color: 'var(--muted)', marginTop: '.2rem', lineHeight: 1.3 }}>{v.motivo.split(' · ')[0]}</div>
+          <li key={v.fecha} className={`${mun.dia} ${mejor?.fecha === v.fecha ? mun.diaMejor : ''}`} style={{ borderColor: COLOR_NIVEL[v.nivel] }}>
+            <span className={mun.diaNombre}>{i === 0 ? 'Hoy' : `${diaCorto(v.fecha)} ${diaMes(v.fecha)}`}</span>
+            <span className={mun.diaIcono}><IconoTiempo tipo={iconoDeWmo(dias[i]?.wmo ?? 0)} size={30} /></span>
+            <span><span className={mun.diaVeredicto} style={{ color: COLOR_NIVEL[v.nivel] }}>{v.titulo}</span><span className={mun.diaMotivo}> · {v.motivo}</span></span>
+            <span className={mun.diaTemp}>{dias[i]?.temp_max}°</span>
           </li>
         ))}
       </ol>
-      <p style={{ margin: 0, fontSize: '.95rem', lineHeight: 1.55, color: 'var(--ink)' }}>
+      <p style={{ margin: '.75rem 0 0', fontSize: '.95rem', lineHeight: 1.55 }}>
         {!mejor
           ? <>Ninguno de los próximos {veredictos.length} días pinta bien para la playa.</>
           : mejor.nivel === 'bueno'
@@ -287,70 +234,9 @@ function BloqueVeredicto({ hoy, veredictos, mejor, nombre }: {
   )
 }
 
-function TarjetasSieteDias({ dias }: { dias: DiaTiempo[] }) {
-  if (!dias.length) return null
-  return (
-    <section style={{ marginBottom: '2.5rem' }}>
-      <div style={{
-        fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-        textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-      }}>Los próximos días</div>
-      <h2 style={{
-        fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700,
-        color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
-      }}>
-        Predicción a <em style={{ fontWeight: 500, color: 'var(--accent)' }}>{dias.length} días</em>
-      </h2>
-      <ul style={{
-        listStyle: 'none', padding: 0, margin: 0,
-        display: 'grid', gap: '.35rem',
-        gridTemplateColumns: `repeat(${Math.min(dias.length, 7)}, minmax(0, 1fr))`,
-      }}>
-        {dias.map((d, i) => (
-          <li key={d.fecha} style={{
-            border: `1px solid ${i === 0 ? 'var(--accent)' : 'var(--line)'}`,
-            background: i === 0
-              ? 'color-mix(in srgb, var(--accent) 5%, var(--surface))'
-              : 'var(--surface)',
-            borderRadius: 8, padding: '.7rem .35rem .8rem',
-            textAlign: 'center', display: 'flex', flexDirection: 'column',
-            alignItems: 'center', gap: '.25rem',
-          }}>
-            <span style={{
-              fontFamily: 'var(--font-mono, monospace)', fontSize: '.62rem',
-              textTransform: 'uppercase', letterSpacing: '.14em',
-              color: i === 0 ? 'var(--accent)' : 'var(--muted)',
-              fontWeight: i === 0 ? 500 : 400,
-            }}>{diaCorto(d.fecha)}</span>
-            <span style={{
-              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-              fontSize: '.82rem', color: 'var(--muted)', lineHeight: 1,
-            }}>{diaMes(d.fecha)}</span>
-            <IconoTiempo tipo={iconoDeWmo(d.wmo)} size={30} />
-            <span style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.05rem',
-              fontWeight: 700, color: 'var(--ink)', lineHeight: 1,
-            }}>{d.temp_max}°</span>
-            <span style={{
-              fontFamily: 'var(--font-serif)', fontSize: '.8rem',
-              color: 'var(--muted)', lineHeight: 1,
-            }}>{d.temp_min}°</span>
-            <span style={{
-              fontFamily: 'var(--font-mono, monospace)', fontSize: '.58rem',
-              letterSpacing: '.05em',
-              color: d.prob_lluvia === 0 ? 'var(--muted)' : 'var(--rain, #4a7a90)',
-              opacity: d.prob_lluvia === 0 ? .5 : 1,
-              marginTop: '.1rem',
-            }}>{d.prob_lluvia === 0 ? '0 mm' : `${d.prob_lluvia}%`}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )
-}
-
-// Colores del sistema para cada nivel — ya definidos como tokens en el
-// tema global (bloques amarillo/naranja/rojo con contraste suficiente).
+// La respuesta antes que los grados: «¿Hace día de playa hoy?» en grande,
+// con el porqué, y debajo los 7 días como calendario de playa y el mejor.
+// Niveles de Meteoalarm, con el color de alerta del sitio.
 const NIVEL_TOKEN: Record<AvisoMeteo['nivel'], { color: string; label: string }> = {
   yellow: { color: 'var(--alert-amber, #c48a1e)', label: 'Amarillo' },
   orange: { color: 'var(--alert-orange, #a04818)', label: 'Naranja' },
@@ -535,6 +421,19 @@ export default async function ElTiempoPage({ params }: Props) {
     ? playas.filter(p => exposicionOleaje(p.lat, p.lng, dirHoy).abrigada).slice(0, 5)
     : []
 
+  // Las fotos: la playa mejor equipada va de fondo del veredicto; la segunda,
+  // en la tarjeta del viento. Solo del sidecar con licencia y autor.
+  const mejorEquipadas = [...playas].sort((a, b) =>
+    ((b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0)) - ((a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0))).slice(0, 2)
+  const fotosPlayas = await Promise.all(mejorEquipadas.map(async p => {
+    const f = (await getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia, p.slug)).find(x => x.fuente !== 'generica')
+    return f ? { url: f.url, autor: f.autor, alt: `${p.nombre}, ${municipio.nombre}` } : null
+  }))
+  const heroFoto = fotosPlayas[0] ?? fotosPlayas[1] ?? null
+  const fotoViento = fotosPlayas[1] ?? fotosPlayas[0] ?? null
+  const aguaHoy = mar?.temp_agua?.[0] != null ? Math.round(mar.temp_agua[0]) : null
+  const olasHoy = mar?.oleaje_m?.[0] ?? null
+
   // Respuesta directa — copy mecánico
   const respuesta = respuestaLluvia(meteo.hoy, meteo.dias, nombreH1)
 
@@ -588,53 +487,40 @@ export default async function ElTiempoPage({ params }: Props) {
       <script type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
 
-      <div style={{ borderBottom: '1px solid var(--line)', padding: '2rem 1.5rem 2.25rem' }}>
-        <div style={{ maxWidth: 780, margin: '0 auto' }}>
-          <nav aria-label="Ruta de navegación" style={{
-            fontSize: '.78rem', color: 'var(--muted)', marginBottom: '.85rem',
-            display: 'flex', flexWrap: 'wrap', gap: '.35rem',
-          }}>
-            <Link href="/">Inicio</Link>
-            <span aria-hidden="true">›</span>
-            {/* Sin comunidad cuando el dato no dice nada: ver lib/comunidad. */}
-            {(() => { const com = comunidadDe(municipio.comunidad, municipio.provincia); return com && (
-              <>
-                <Link href={`/comunidad/${com.slug}`}>{com.nombre}</Link>
-                <span aria-hidden="true">›</span>
-              </>
-            ) })()}
-            {provinciaSlug && (
-              <>
-                <Link href={`/provincia/${provinciaSlug}`}>{municipio.provincia}</Link>
-                <span aria-hidden="true">›</span>
-              </>
-            )}
-            {tienePaginaMuni
-              ? <Link href={`/municipio/${slug}`}>{municipio.nombre}</Link>
-              : <span>{municipio.nombre}</span>}
-            <span aria-hidden="true">›</span>
-            <span aria-current="page">El tiempo</span>
-          </nav>
-          <h1 style={{
-            fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.85rem, 5vw, 2.4rem)',
-            fontWeight: 700, letterSpacing: '-.02em', lineHeight: 1.1, color: 'var(--ink)',
-            marginBottom: '.3rem',
-          }}>
-            El tiempo en las playas de <em style={{ fontWeight: 500, color: 'var(--accent)', fontStyle: 'italic' }}>{nombreH1}</em>
-          </h1>
-          <p style={{
-            fontSize: '1rem', color: 'var(--muted)',
-            fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 500,
-            margin: 0,
-          }}>si hace día de playa hoy, y qué día ir esta semana</p>
+      <HeroMunicipio foto={heroFoto} veloLado
+        miga={<>
+          <Link href="/">Inicio</Link><span aria-hidden="true">›</span>
+          {(() => { const com = comunidadDe(municipio.comunidad, municipio.provincia); return com && (<><Link href={`/comunidad/${com.slug}`}>{com.nombre}</Link><span aria-hidden="true">›</span></>) })()}
+          {provinciaSlug && (<><Link href={`/provincia/${provinciaSlug}`}>{municipio.provincia}</Link><span aria-hidden="true">›</span></>)}
+          {tienePaginaMuni ? <Link href={`/municipio/${slug}`}>{municipio.nombre}</Link> : <span>{municipio.nombre}</span>}
+          <span aria-hidden="true">›</span><span aria-current="page">El tiempo</span>
+        </>}
+      >
+        <div style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', opacity: .9 }}>
+          {municipio.provincia} · hoy · {actualizado}
         </div>
-      </div>
+        <h1 style={{ margin: 0, fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.7rem, 6vw, 2.5rem)', fontWeight: 700, lineHeight: 1.02, letterSpacing: '-.02em', textShadow: '0 2px 12px rgba(0,0,0,.35)' }}>
+          El tiempo en las playas de {nombreH1}
+        </h1>
+        <div data-speakable style={{ display: 'flex', alignItems: 'flex-end', gap: '1.25rem', flexWrap: 'wrap', marginTop: '.5rem' }}>
+          <div>
+            <div style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', opacity: .9 }}>¿Día de playa?</div>
+            <div className={mun.veredictoGrande} style={{ color: COLOR_NIVEL_CLARO[hoyV.nivel] }}>{hoyV.titulo}</div>
+          </div>
+          <div style={{ fontSize: '1.05rem', fontWeight: 600, lineHeight: 1.35, maxWidth: '30ch', paddingBottom: '.4rem' }}>{hoyV.motivo}.</div>
+        </div>
+      </HeroMunicipio>
 
-      <main style={{ maxWidth: 780, margin: '0 auto', padding: '2.5rem 1.5rem 3rem' }}>
+      <NavMunicipio enlaces={enlaces} actual="elTiempo" />
 
-        <BloqueVeredicto hoy={hoyV} veredictos={veredictos} mejor={mejor} nombre={nombreH1} />
+      <main className={mun.cuerpo}>
+        <div className={mun.tiles}>
+          <div className={mun.tile}><div className={mun.tileEtiqueta}>Aire</div><div className={mun.tileValor}>{meteo.actual.temp}°</div></div>
+          <div className={mun.tile}><div className={mun.tileEtiqueta}>Agua</div><div className={mun.tileValor}>{aguaHoy != null ? `${aguaHoy}°` : '—'}</div></div>
+          <div className={mun.tile}><div className={mun.tileEtiqueta}>Viento</div><div className={mun.tileValor}>{meteo.actual.viento_kmh}</div><div className={mun.tileEtiqueta}>km/h{hoyV.viento ? ` · ${hoyV.viento}` : ''}</div></div>
+          <div className={mun.tile}><div className={mun.tileEtiqueta}>Olas</div><div className={mun.tileValor}>{olasHoy != null ? olasHoy.toFixed(1).replace('.', ',') : '—'}</div><div className={mun.tileEtiqueta}>m</div></div>
+        </div>
 
-        <BloqueAhora meteo={meteo.actual} actualizado={actualizado} />
 
         {/* Respuesta directa: schema arriba dice esto, HTML lo repite. */}
         <section style={{ marginBottom: '2rem' }}>
@@ -662,7 +548,7 @@ export default async function ElTiempoPage({ params }: Props) {
         <BloqueAvisos avisos={avisos} comunidad={comunidadParaAvisos(municipio.comunidad, municipio.provincia)} />
 
         <GraficoHoras hoy={meteo.hoy} />
-        <TarjetasSieteDias dias={meteo.dias} />
+        <SemanaTiras veredictos={veredictos} dias={meteo.dias} mejor={mejor} />
         {/* Zona herramienta: después de la predicción a 7 días, que es lo
             que se viene a consultar. Nunca antes del veredicto. */}
         <Hueco zona="herramienta" bloque={SLOTS.herramienta} />
@@ -671,33 +557,34 @@ export default async function ElTiempoPage({ params }: Props) {
         {/* Con viento, qué playas quedan a resguardo. Sin viento no hay
             bloque: no hay nada que recomendar. */}
         {ventoso && (
-          <section style={{ marginBottom: '2.5rem' }}>
-            <div style={{
-              fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-              textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-            }}>Con el viento de hoy</div>
-            <h2 style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700,
-              color: 'var(--ink)', marginBottom: '.5rem', lineHeight: 1.15,
-            }}>
-              {abrigadas.length ? <>Las playas <em style={{ fontWeight: 500, color: 'var(--accent)' }}>más abrigadas</em></> : <>Hoy no hay playa abrigada</>}
-            </h2>
-            <p style={{ color: 'var(--muted)', fontSize: '.9rem', marginBottom: '.85rem', lineHeight: 1.55 }}>
-              {hoyV.viento ? `Sopla ${hoyV.viento}` : 'Sopla viento'} a {meteo.dias[0].viento_max} km/h.{' '}
-              {abrigadas.length
-                ? 'Estas dan la espalda a ese viento por cómo está orientada su costa; el resto lo reciben de frente.'
-                : `Ninguna playa de ${municipio.nombre} queda claramente a resguardo de ese viento: mejor esperar a que amaine o mirar en el municipio de al lado.`}
-            </p>
-            {abrigadas.length > 0 && (
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.5rem' }}>
-                {abrigadas.map(p => (
-                  <li key={p.slug} style={{ border: '1px solid var(--line)', borderRadius: 6, padding: '.7rem .9rem', background: 'var(--surface)' }}>
-                    <Link href={`/playas/${p.slug}`} style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--ink)', borderBottom: '1px dotted var(--muted)' }}>{p.nombre}</Link>
-                    {p.socorrismo && <span style={{ fontSize: '.72rem', color: 'var(--muted)', marginLeft: '.6rem' }}>Socorrismo</span>}
-                  </li>
-                ))}
-              </ul>
-            )}
+          <section id="viento">
+            <div className={mun.tarjetaFoto}>
+              {fotoViento && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={fotoViento.url} alt="" loading="lazy" decoding="async" />
+              )}
+              <div className={mun.tarjetaFotoVelo} aria-hidden="true" />
+              <div className={mun.tarjetaFotoCuerpo}>
+                <div style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.62rem', letterSpacing: '.14em', textTransform: 'uppercase', opacity: .9 }}>Con el viento de hoy</div>
+                <h2 style={{ margin: 0, fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700, lineHeight: 1.1 }}>
+                  {abrigadas.length ? 'Las playas más abrigadas' : 'Hoy no hay playa abrigada'}
+                </h2>
+                <p style={{ margin: 0, fontSize: '.88rem', lineHeight: 1.5, opacity: .92, maxWidth: '40ch' }}>
+                  {hoyV.viento ? `Sopla ${hoyV.viento}` : 'Sopla viento'} a {meteo.dias[0].viento_max} km/h.{' '}
+                  {abrigadas.length
+                    ? 'Estas dan la espalda a ese viento por cómo está orientada su costa.'
+                    : `Ninguna playa de ${municipio.nombre} queda claramente a resguardo: mejor esperar a que amaine o mirar en el municipio de al lado.`}
+                </p>
+                {abrigadas.length > 0 && (
+                  <div style={{ display: 'flex', gap: '.4rem', flexWrap: 'wrap', marginTop: '.3rem' }}>
+                    {abrigadas.map((p, i) => (
+                      <Link key={p.slug} href={`/playas/${p.slug}`} style={{ height: 32, padding: '0 .8rem', borderRadius: 100, background: i === 0 ? '#faf4e6' : 'rgba(250,244,230,.25)', color: i === 0 ? 'var(--ink)' : '#faf4e6', fontSize: '.78rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center' }}>{p.nombre}</Link>
+                    ))}
+                  </div>
+                )}
+                {fotoViento?.autor && <div style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.55rem', opacity: .7 }}>Foto: {fotoViento.autor}</div>}
+              </div>
+            </div>
           </section>
         )}
 

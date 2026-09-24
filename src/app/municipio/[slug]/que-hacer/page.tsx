@@ -29,11 +29,9 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
-import { getMunicipioPois, getMunicipiosConPois, type Poi } from '@/lib/municipio-pois'
+import { getMunicipioPois, type Poi } from '@/lib/municipio-pois'
 import { guiaUnDia, guiaTresDias, type Guia, type Parada } from '@/lib/guia-municipio'
 import { osmRestaurantes } from '@/lib/osm-pois'
-import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
-import { tieneBarcos } from '@/lib/barcos-municipio'
 import { comunidadDe } from '@/lib/comunidad'
 import GygActivities from '@/components/GygActivities'
 import DelMunicipio from '@/components/ui/DelMunicipio'
@@ -52,6 +50,11 @@ import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 // —«ssr: false is not allowed with next/dynamic in Server Components»—, con
 // lo que ni esta página ni /el-tiempo llegaron a desplegarse.
 import MapaQueHacer from '@/components/ui/MapaQueHacer'
+import HeroMunicipio from '@/components/municipio/HeroMunicipio'
+import NavMunicipio from '@/components/municipio/NavMunicipio'
+import TarjetaSitio, { TarjetaPlaya } from '@/components/municipio/TarjetaSitio'
+import Pictograma from '@/components/municipio/Pictograma'
+import mun from '@/components/municipio/Municipio.module.css'
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -96,111 +99,49 @@ function frase(pois: NonNullable<Awaited<ReturnType<typeof getMunicipioPois>>>, 
   return `En ${pois.nombre} y sus alrededores tienes ${trozos.slice(0, -1).join(', ')}${trozos.length > 1 ? ' y ' : ''}${trozos[trozos.length - 1]}. Abajo están en el mapa, y con ellos dos planes ya montados: uno de un día y otro de tres.`
 }
 
-// Componente de bloque: un h2 con eyebrow y una lista de POIs. Solo se
-// renderiza si hay datos.
-function BloquePois({ id, eyebrow, titulo, items, mostrar = 8 }: {
-  id: string; eyebrow: string; titulo: string; items: Poi[]; mostrar?: number
-}) {
-  if (!items.length) return null
-  const visibles = items.slice(0, mostrar)
+// Una parada del plan como tarjeta: foto (de la playa o del sitio) con la
+// hora encima, o el pictograma del tipo sobre tinta cuando no hay foto.
+function ParadaTarjeta({ p, foto }: { p: Parada; foto: { url: string } | null }) {
+  const href = p.playa && p.slug ? `/playas/${p.slug}` : p.href
+  const cuerpo = (
+    <>
+      <div className={mun.paradaFoto} style={foto ? undefined : { background: p.playa ? 'var(--mar, #2d5266)' : 'var(--ink)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {foto
+          // eslint-disable-next-line @next/next/no-img-element
+          ? <img src={foto.url} alt="" loading="lazy" decoding="async" />
+          : <Pictograma tipo={p.playa ? 'playa' : p.tipo} size={40} />}
+        <span className={mun.paradaHora}>{p.hora}</span>
+      </div>
+      <div className={mun.paradaNombre}>{p.nombre}</div>
+      <div className={mun.paradaMeta}>
+        {p.tipo} · {formatearDuracion(p.duracionMin)}{p.pmr ? ' · accesible' : ''}{p.banderaAzul ? ' · Bandera Azul' : ''}
+        {p.trasladoDescripcion && <><br />{p.trasladoDescripcion}</>}
+      </div>
+    </>
+  )
   return (
-    <section id={id} style={{ marginBottom: '2.5rem' }}>
-      <div style={{
-        fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-        textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-      }}>{eyebrow}</div>
-      <h2 style={{
-        fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-        color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
-      }}>{titulo}</h2>
-      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.5rem' }}>
-        {visibles.map(p => (
-          <li key={`${p.nombre}-${p.lat}`} style={{
-            border: '1px solid var(--line)', borderRadius: 6, padding: '.7rem .85rem',
-            display: 'flex', alignItems: 'baseline', gap: '.75rem', flexWrap: 'wrap',
-          }}>
-            <span style={{
-              fontSize: '.6rem', fontWeight: 600, letterSpacing: '.1em',
-              textTransform: 'uppercase', color: 'var(--muted)',
-              padding: '.15rem .45rem', border: '1px solid var(--line)',
-              borderRadius: 100, flexShrink: 0,
-            }}>{p.tipo}</span>
-            <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.95rem', flex: 1, minWidth: 0 }}>
-              {p.website ? (
-                <a href={p.website} target="_blank" rel="noopener nofollow" style={{ color: 'var(--ink)', textDecoration: 'none', borderBottom: '1px dotted var(--muted)' }}>
-                  {p.nombre}
-                </a>
-              ) : p.nombre}
-            </span>
-            {p.pmr && <span style={{ fontSize: '.65rem', color: 'var(--muted)' }}>Accesible</span>}
-            <a href={`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`}
-              target="_blank" rel="noopener"
-              style={{ fontSize: '.72rem', color: 'var(--muted)' }}>
-              Cómo llegar →
-            </a>
-            {p.resumen && (
-              <p style={{ flexBasis: '100%', margin: '.15rem 0 0', fontSize: '.88rem', lineHeight: 1.55, color: 'var(--ink-soft, var(--ink))' }}>
-                {p.resumen}
-              </p>
-            )}
-          </li>
-        ))}
-      </ul>
-      {items.length > mostrar && (
-        <div style={{ marginTop: '.55rem', fontSize: '.78rem', color: 'var(--muted)' }}>
-          Y otros {items.length - mostrar} más por la zona.
-        </div>
-      )}
-    </section>
+    <li className={mun.parada}>
+      {href
+        ? <a href={href} target={p.playa ? undefined : '_blank'} rel={p.playa ? undefined : 'noopener nofollow'} style={{ display: 'contents', color: 'inherit' }}>{cuerpo}</a>
+        : cuerpo}
+    </li>
   )
 }
 
-// Un renderer único para las paradas de guía. Mantiene el timeline visual y
-// la accesibilidad (ol/li). Solo pinta lo que la parada trae — sin
-// adjetivos, sin prosa vacía.
-function ParadaLi({ p, esUltima }: { p: Parada; esUltima: boolean }) {
-  const href = p.playa && p.slug ? `/playas/${p.slug}` : p.href
-  const titulo = href
-    ? <a href={href} target={p.playa ? undefined : '_blank'} rel={p.playa ? undefined : 'noopener nofollow'} style={{
-        fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem',
-        color: 'var(--ink)', borderBottom: '1px dotted var(--muted)',
-      }}>{p.nombre}</a>
-    : <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem' }}>{p.nombre}</span>
+// Una categoría de sitios en rejilla de tarjetas. Sin datos, sin sección.
+function SeccionSitios({ id, titulo, items, mostrar = 6 }: { id: string; titulo: string; items: Poi[]; mostrar?: number }) {
+  if (!items.length) return null
   return (
-    <li style={{
-      display: 'grid', gridTemplateColumns: '3.6rem 1fr', gap: '.65rem',
-      padding: '.65rem 0',
-      borderTop: '1px dashed var(--line)',
-    }}>
-      <span style={{
-        fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-        fontSize: '.78rem', fontWeight: 500, color: 'var(--accent)',
-        paddingTop: '.1rem', letterSpacing: '.02em',
-      }}>{p.hora}</span>
-      <div style={{ minWidth: 0 }}>
-        {titulo}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem', marginTop: '.2rem', fontSize: '.74rem', color: 'var(--muted)' }}>
-          <span style={{
-            fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-            fontSize: '.6rem', padding: '.1rem .45rem', border: '1px solid var(--line)',
-            borderRadius: 100, letterSpacing: '.06em', textTransform: 'uppercase',
-          }}>{p.tipo}</span>
-          <span>~{formatearDuracion(p.duracionMin)}</span>
-          {p.wikipedia && <span>Wikipedia</span>}
-          {p.pmr && <span>Accesible</span>}
-          {p.banderaAzul && <span>Bandera Azul</span>}
-          {p.socorrismo && <span>Socorrismo</span>}
-        </div>
-        {!esUltima && p.trasladoDescripcion && (
-          <div style={{
-            fontSize: '.7rem', color: 'var(--muted)', fontStyle: 'italic',
-            marginTop: '.3rem', paddingLeft: '.8rem', borderLeft: '1px solid var(--line)',
-          }}>
-            Al siguiente: {p.trasladoDescripcion}
-          </div>
-        )}
+    <section id={id}>
+      <div className={mun.seccionCab}>
+        <h2 className={mun.h2}>{titulo}</h2>
+        {items.length > mostrar && <span className={mun.meta}>{mostrar} de {items.length}</span>}
       </div>
-    </li>
+      <div className={mun.sitios}>
+        {items.slice(0, mostrar).map(p => <TarjetaSitio key={`${p.nombre}-${p.lat}`} p={p} />)}
+      </div>
+      {items.length > mostrar && <div style={{ marginTop: '.6rem', fontSize: '.8rem', color: 'var(--muted)' }}>Y otros {items.length - mostrar} más por la zona.</div>}
+    </section>
   )
 }
 
@@ -208,77 +149,6 @@ function formatearDuracion(min: number): string {
   if (min < 60) return `${min} min`
   const h = min / 60
   return h === Math.round(h) ? `${h} h` : `${h.toFixed(1).replace('.', ',')} h`
-}
-
-// Renderiza un bloque «Guía» con sus paradas. Si no hay paradas suficientes
-// (menos de 3) no se pinta: peor una guía que empiece y acabe en dos sitios.
-function BloqueGuia({ guia, subtitulo }: { guia: Guia; subtitulo?: string }) {
-  if (guia.paradas.length < 3) return null
-  return (
-    <div style={{ marginBottom: '1rem', border: '1px solid var(--line)', borderRadius: 6, overflow: 'hidden' }}>
-      {(guia.subtitulo ?? subtitulo) && (
-        <div style={{
-          padding: '.75rem 1rem 0',
-          fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-          fontWeight: 500, fontSize: '.95rem', color: 'var(--muted)',
-        }}>{guia.subtitulo ?? subtitulo}</div>
-      )}
-      <ol style={{ listStyle: 'none', padding: '0 1rem 1rem', margin: 0 }}>
-        {guia.paradas.map((p, i) => (
-          <ParadaLi key={`${p.hora}-${p.nombre}`} p={p} esUltima={i === guia.paradas.length - 1} />
-        ))}
-      </ol>
-    </div>
-  )
-}
-
-// Degradados editoriales para el carrusel superior: mismos que Destacadas usa
-// en la home, para mantener el registro visual del sistema.
-const GRADIENTES_CARR = [
-  'linear-gradient(180deg, #c7d8dc 0%, #a3b9c0 35%, #e8d9b8 55%, #d9c7a0 100%)',
-  'linear-gradient(180deg, #a3b6b8 0%, #6b8890 40%, #d4c090 60%, #b8a06a 100%)',
-  'linear-gradient(180deg, #d8ccae 0%, #b5a582 45%, #9d8a62 70%, #6b5840 100%)',
-  'linear-gradient(180deg, #b8c8c8 0%, #8aa4a8 35%, #c9b890 55%, #a8956c 100%)',
-  'linear-gradient(180deg, #d0bba0 0%, #ac9670 40%, #826444 70%, #4e3a22 100%)',
-]
-
-interface SlideCarrusel { eyebrow: string; titulo: string; grad: string; foto?: { url: string; autor?: string } | null }
-
-/** Compone el carrusel intercalando playas top con POIs top: mejor playa,
- *  monumento icónico, museo top, segunda playa, faro/mirador. Máximo 5
- *  tiles. Los slots vacíos se saltan. */
-function componerCarrusel(
-  topPlayas: readonly { nombre: string; bandera?: boolean; foto?: { url: string; autor?: string } | null }[],
-  pois: NonNullable<Awaited<ReturnType<typeof getMunicipioPois>>>,
-): SlideCarrusel[] {
-  const s: SlideCarrusel[] = []
-  const poiFoto = (p?: Poi) => p?.foto ? { url: p.foto.url, autor: p.foto.autor } : null
-  if (topPlayas[0]) s.push({
-    eyebrow: topPlayas[0].bandera ? 'Playa · Bandera Azul' : 'Playa',
-    titulo: topPlayas[0].nombre,
-    grad: GRADIENTES_CARR[0], foto: topPlayas[0].foto,
-  })
-  if (pois.monumentos[0]) s.push({
-    eyebrow: pois.monumentos[0].tipo,
-    titulo: pois.monumentos[0].nombre,
-    grad: GRADIENTES_CARR[1], foto: poiFoto(pois.monumentos[0]),
-  })
-  if (pois.museos[0]) s.push({
-    eyebrow: pois.museos[0].tipo,
-    titulo: pois.museos[0].nombre,
-    grad: GRADIENTES_CARR[2], foto: poiFoto(pois.museos[0]),
-  })
-  if (topPlayas[1]) s.push({
-    eyebrow: 'Playa',
-    titulo: topPlayas[1].nombre,
-    grad: GRADIENTES_CARR[3], foto: topPlayas[1].foto,
-  })
-  if (pois.miradores[0]) s.push({
-    eyebrow: pois.miradores[0].tipo === 'Faro' ? 'Faro · atardecer' : 'Mirador',
-    titulo: pois.miradores[0].nombre,
-    grad: GRADIENTES_CARR[4], foto: poiFoto(pois.miradores[0]),
-  })
-  return s.slice(0, 5)
 }
 
 export default async function QueHacerPage({ params }: Props) {
@@ -318,12 +188,22 @@ export default async function QueHacerPage({ params }: Props) {
   // La foto de cada playa del carrusel: la real del sidecar, con autor. Si
   // la playa no tiene entrada, getFotos podría ir a la red; para la portada
   // de un municipio se acepta, la Data Cache lo amortigua.
-  const topConFoto = await Promise.all(topPlayas.slice(0, 2).map(async p => {
+  const topConFoto = await Promise.all(topPlayas.slice(0, 3).map(async p => {
     const fotos = await getFotos(p.nombre, p.municipio, p.lat, p.lng, p.provincia, p.slug)
     const real = fotos.find(f => f.fuente !== 'generica')
     return { ...p, foto: real ? { url: real.thumb, autor: real.autor } : null }
   }))
-  const slidesCarrusel = componerCarrusel(topConFoto, pois)
+  const heroFoto = topConFoto.find(p => p.foto)?.foto
+    ? { url: topConFoto.find(p => p.foto)!.foto!.url, autor: topConFoto.find(p => p.foto)!.foto!.autor, alt: `${topConFoto.find(p => p.foto)!.nombre}, ${pois.nombre}` }
+    : null
+  // La foto de cada parada del plan: la de la playa si es playa, la del sitio
+  // (Wikipedia) si la tiene. Sin foto, la tarjeta lleva el pictograma.
+  const todosPois = [...pois.museos, ...pois.monumentos, ...pois.miradores, ...pois.cultura, ...pois.parques]
+  const fotoDeParada = (p: Parada): { url: string } | null => {
+    if (p.playa && p.slug) return topConFoto.find(x => x.slug === p.slug)?.foto ?? null
+    const poi = todosPois.find(x => x.nombre === p.nombre)
+    return poi?.foto ? { url: poi.foto.url } : null
+  }
   // Un vídeo del municipio, con la misma búsqueda y los mismos filtros que
   // usa la ficha de playa (dron, corto, en español, canal no vetado). Cache
   // de 30 días en KV: la cuota de YouTube son 100 búsquedas al día y se
@@ -346,124 +226,84 @@ export default async function QueHacerPage({ params }: Props) {
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
 
-      <div style={{
-        borderBottom: '1px solid var(--line)', padding: '2rem 1.5rem 2.25rem',
-      }}>
-        <div style={{ maxWidth: 780, margin: '0 auto' }}>
-          <nav aria-label="Ruta de navegación" style={{
-            fontSize: '.78rem', color: 'var(--muted)', marginBottom: '.85rem',
-            display: 'flex', flexWrap: 'wrap', gap: '.35rem',
-          }}>
-            <Link href="/">Inicio</Link>
-            <span aria-hidden="true">›</span>
-            {municipio && provinciaSlug && (
-              <>
-                {/* La comunidad se salta cuando no aporta: en el dataset,
-                    Asturias, Murcia, Cantabria y otras cinco repiten nombre
-                    con su provincia («Asturias › Asturias»), y las cuatro
-                    provincias valencianas y Ourense lo traen como «España»,
-                    que no es ninguna comunidad. */}
-                {(() => { const com = comunidadDe(municipio.comunidad, municipio.provincia); return com && (
-                  <>
-                    <Link href={`/comunidad/${com.slug}`}>{com.nombre}</Link>
-                    <span aria-hidden="true">›</span>
-                  </>
-                ) })()}
-                <Link href={`/provincia/${provinciaSlug}`}>{municipio.provincia}</Link>
-                <span aria-hidden="true">›</span>
-              </>
-            )}
-            {tienePaginaMuni ? (
-              <Link href={`/municipio/${slug}`}>{pois.nombre}</Link>
-            ) : <span>{pois.nombre}</span>}
-            <span aria-hidden="true">›</span>
-            <span aria-current="page">Qué hacer</span>
-          </nav>
+      <HeroMunicipio
+        foto={heroFoto}
+        miga={<>
+          <Link href="/">Inicio</Link><span aria-hidden="true">›</span>
+          {municipio && provinciaSlug && (<>
+            {(() => { const com = comunidadDe(municipio.comunidad, municipio.provincia); return com && (<><Link href={`/comunidad/${com.slug}`}>{com.nombre}</Link><span aria-hidden="true">›</span></>) })()}
+            <Link href={`/provincia/${provinciaSlug}`}>{municipio.provincia}</Link><span aria-hidden="true">›</span>
+          </>)}
+          {tienePaginaMuni ? <Link href={`/municipio/${slug}`}>{pois.nombre}</Link> : <span>{pois.nombre}</span>}
+          <span aria-hidden="true">›</span><span aria-current="page">Qué hacer</span>
+        </>}
+      >
+        <div style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', opacity: .9 }}>
+          {municipio?.provincia}{playas.length ? ` · ${playas.length} ${playas.length === 1 ? 'playa' : 'playas'}` : ''} · {pois.total} sitios
+        </div>
+        <h1 className={mun.heroTitulo}>Qué hacer en {pois.nombre}</h1>
+        <p data-speakable className={mun.heroLede} style={{ margin: 0 }}>{respuesta}</p>
+      </HeroMunicipio>
 
-          <h1 style={{
-            fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.85rem, 4vw, 2.4rem)',
-            fontWeight: 700, letterSpacing: '-.02em', lineHeight: 1.1, color: 'var(--ink)',
-            marginBottom: '.6rem',
-          }}>
-            Qué hacer en <em style={{ fontWeight: 500, color: 'var(--accent)', fontStyle: 'italic' }}>{pois.nombre}</em>
-          </h1>
-          <p data-speakable style={{
-            fontSize: '1rem', color: 'var(--muted)', lineHeight: 1.6, margin: 0,
-          }}>{respuesta}</p>
+      <NavMunicipio enlaces={enlaces} actual="queHacer" />
 
-          {/* Carrusel visual: primer vistazo al municipio. Degradados
-              editoriales por ahora; cuando el POI tenga tag OSM
-              `wikipedia=*`, en un segundo paso se sustituyen por la foto
-              principal del artículo de Commons. */}
-          {slidesCarrusel.length > 0 && (
-            <div style={{
-              display: 'flex', gap: '.5rem', overflowX: 'auto',
-              scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch',
-              margin: '1.5rem -1.5rem 0', padding: '0 1.5rem .5rem',
-              scrollbarWidth: 'none',
-            }} aria-label={`Vistazo visual de ${pois.nombre}`} role="region">
-              {slidesCarrusel.map((s, i) => (
-                <div key={i} style={{
-                  flex: '0 0 78%', maxWidth: 320, scrollSnapAlign: 'start',
-                  borderRadius: 8, overflow: 'hidden', position: 'relative',
-                  aspectRatio: '3 / 2', border: '1px solid var(--line)',
-                  background: s.grad,
-                }}>
-                  {s.foto && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={s.foto.url} alt={s.titulo} loading={i === 0 ? 'eager' : 'lazy'} decoding="async"
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
-                  )}
-                  <div style={{
-                    position: 'absolute', inset: 0,
-                    background: 'linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55) 100%)',
-                    zIndex: 2,
-                  }} aria-hidden="true"/>
-                  {s.foto?.autor && (
-                    <div style={{
-                      position: 'absolute', top: '.4rem', right: '.5rem', zIndex: 3,
-                      fontSize: '.55rem', color: 'rgba(245,236,213,.85)', textShadow: '0 1px 3px rgba(0,0,0,.6)',
-                      fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-                    }}>Foto: {s.foto.autor}</div>
-                  )}
-                  <div style={{
-                    position: 'absolute', bottom: '.65rem', left: '.8rem', right: '.8rem',
-                    zIndex: 3, color: '#f5ecd5',
-                  }}>
-                    <div style={{
-                      fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-                      fontSize: '.55rem', textTransform: 'uppercase',
-                      letterSpacing: '.14em', opacity: .85, marginBottom: '.1rem',
-                    }}>{s.eyebrow}</div>
-                    <div style={{
-                      fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1.05rem',
-                      letterSpacing: '-.01em', lineHeight: 1.1,
-                      textShadow: '0 1px 6px rgba(0,0,0,.35)',
-                    }}>{s.titulo}</div>
-                  </div>
+      {/* Chips: saltan a cada sección; el recuento es lo que hay en la página. */}
+      <div className={mun.chips}>
+        {playas.length > 0 && <a href="#playas" className={mun.chip}><span className={mun.chipPunto} style={{ background: 'var(--mar, #2d5266)' }} />Playas {playas.length}</a>}
+        {pois.museos.length > 0 && <a href="#museos" className={mun.chip}><span className={mun.chipPunto} style={{ background: 'var(--accent)' }} />Museos {pois.museos.length}</a>}
+        {pois.monumentos.length > 0 && <a href="#monumentos" className={mun.chip}><span className={mun.chipPunto} style={{ background: 'var(--aceptable, #c48a1e)' }} />Monumentos {pois.monumentos.length}</a>}
+        {pois.miradores.length > 0 && <a href="#miradores" className={mun.chip}>Miradores {pois.miradores.length}</a>}
+        {pois.parques.length > 0 && <a href="#parques" className={mun.chip}><span className={mun.chipPunto} style={{ background: 'var(--excelente, #3d6b1f)' }} />Parques {pois.parques.length}</a>}
+        {pois.cultura.length > 0 && <a href="#cultura" className={mun.chip}>Teatros y cines {pois.cultura.length}</a>}
+        {restaurantes.length > 0 && <a href="#comer" className={mun.chip}>Comer</a>}
+      </div>
+
+      <main className={mun.cuerpo}>
+
+        {/* El plan: la herramienta de la página, en tarjetas con foto. */}
+        {gUnDia.paradas.length >= 3 && (
+          <section id="guia-1-dia">
+            <div className={mun.seccionCab}>
+              <h2 className={mun.h2}>Un día en {pois.nombre}</h2>
+              <span className={mun.meta}>{gUnDia.paradas.length} paradas · {formatearDuracion(gUnDia.paradas.reduce((a, x) => a + x.duracionMin, 0))}</span>
+            </div>
+            <ol className={mun.plan} style={{ listStyle: 'none', margin: 0 }}>
+              {gUnDia.paradas.map(p => <ParadaTarjeta key={`${p.hora}-${p.nombre}`} p={p} foto={fotoDeParada(p)} />)}
+            </ol>
+            <p style={{ margin: '.75rem 0 0', fontSize: '.78rem', lineHeight: 1.5, color: 'var(--muted)' }}>
+              El plan lo ordena el mapa: se empieza por lo que está más cerca y se deja la playa para el mediodía. Los tiempos
+              son aproximados. Mira los horarios antes de ir, sobre todo fuera de verano: muchos museos cierran los lunes.
+            </p>
+          </section>
+        )}
+
+        {gTresDias.some(g => g.paradas.length >= 3) && (
+          <section id="guia-3-dias">
+            <div className={mun.seccionCab}><h2 className={mun.h2}>Tres días en {pois.nombre}</h2><span className={mun.meta}>fin de semana largo</span></div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {gTresDias.filter(g => g.paradas.length >= 3).map((g, i) => (
+                <div key={i}>
+                  <h3 style={{ margin: '0 0 .5rem', fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 700 }}>
+                    {g.titulo}{g.subtitulo && <span style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--muted)' }}> · {g.subtitulo}</span>}
+                  </h3>
+                  <ol className={mun.plan} style={{ listStyle: 'none', margin: 0 }}>
+                    {g.paradas.map(p => <ParadaTarjeta key={`${p.hora}-${p.nombre}`} p={p} foto={fotoDeParada(p)} />)}
+                  </ol>
                 </div>
               ))}
             </div>
-          )}
-        </div>
-      </div>
+            <p style={{ margin: '.75rem 0 0', fontSize: '.78rem', lineHeight: 1.5, color: 'var(--muted)' }}>
+              Cada día va de una cosa distinta, para no encadenar tres museos seguidos. Las distancias entre paradas son
+              en línea recta, así que andando siempre será algo más.
+            </p>
+          </section>
+        )}
+        {gUnDia.paradas.length < 3 && (
+          <p style={{ margin: 0, fontSize: '.9rem', color: 'var(--muted)' }}>Con {pois.total} sitios no hay plan que montar, y no se inventa: {pois.nombre} es un pueblo de playas.</p>
+        )}
 
-      <main style={{ maxWidth: 780, margin: '0 auto', padding: '2.5rem 1.5rem 3rem' }}>
-
-        {/* Mapa de qué hacer: todos los puntos del plan sobre OSM. Ancla
-            visual antes de las guías; el usuario ve el contexto y luego
-            baja al itinerario. */}
-        <section id="mapa" style={{ marginBottom: '2.5rem' }}>
-          <div style={{
-            fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-            textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-          }}>Sobre el terreno</div>
-          <h2 style={{
-            fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-            color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
-          }}>
-            Todo lo del plan, en el <em style={{ fontWeight: 500, color: 'var(--accent)' }}>mapa</em>
-          </h2>
+        <section id="mapa">
+          <div className={mun.seccionCab}><h2 className={mun.h2}>Todo, en el <em>mapa</em></h2></div>
           <MapaQueHacer
             centro={{ lat: pois.lat, lng: pois.lng }}
             playas={topPlayas.map(p => ({ slug: p.slug, nombre: p.nombre, lat: p.lat, lng: p.lng, bandera: p.bandera }))}
@@ -475,187 +315,52 @@ export default async function QueHacerPage({ params }: Props) {
           />
         </section>
 
-        {/* Guía de 1 día — solo si el generador consiguió al menos 3 paradas. */}
-        {gUnDia.paradas.length >= 3 && (
-          <section id="guia-1-dia" style={{ marginBottom: '2.5rem' }}>
-            <div style={{
-              fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-              textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-            }}>Un plan cerrado</div>
-            <h2 style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-              color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
-            }}>
-              Guía de <em style={{ fontWeight: 500, color: 'var(--accent)' }}>1 día</em>
-            </h2>
-            <BloqueGuia guia={gUnDia} />
-            <p style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.75rem' }}>
-              El plan lo ordena el mapa: se empieza por lo que está más cerca y se deja la playa
-              para el mediodía. Los tiempos de cada parada son aproximados. Mira los horarios antes
-              de ir, sobre todo fuera de verano: muchos museos cierran los lunes.
-            </p>
-          </section>
-        )}
-
-        {/* Guía de 3 días — la componen tres guías, una por día. Cada día
-            se pinta seguido (mejor SEO que tabs) con su tipología como
-            subtítulo en el bloque. */}
-        {gTresDias.some(g => g.paradas.length >= 3) && (
-          <section id="guia-3-dias" style={{ marginBottom: '2.5rem' }}>
-            <div style={{
-              fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-              textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-            }}>Fin de semana largo</div>
-            <h2 style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-              color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
-            }}>
-              Guía de <em style={{ fontWeight: 500, color: 'var(--accent)' }}>3 días</em>
-            </h2>
-            {gTresDias.map((g, i) => (
-              <div key={i} style={{ marginBottom: '1.5rem' }}>
-                <h3 style={{
-                  fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 700,
-                  color: 'var(--ink)', marginBottom: '.4rem',
-                }}>
-                  {g.titulo}
-                  {g.subtitulo && (
-                    <span style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--muted)', fontSize: '.95rem' }}>
-                      {' · ' + g.subtitulo}
-                    </span>
-                  )}
-                </h3>
-                <BloqueGuia guia={g} />
-              </div>
-            ))}
-            <p style={{ fontSize: '.72rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: '.5rem' }}>
-              Cada día va de una cosa distinta, para no encadenar tres museos seguidos. Las distancias
-              entre paradas son en línea recta, así que andando siempre será algo más.
-            </p>
+        {topConFoto.length > 0 && (
+          <section id="playas">
+            <div className={mun.seccionCab}>
+              <h2 className={mun.h2}>Sus <em>playas</em></h2>
+              {tienePaginaMuni && <Link href={`/municipio/${slug}`} style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--accent)', whiteSpace: 'nowrap' }}>Las {playas.length} →</Link>}
+            </div>
+            <div className={mun.playas}>
+              {topConFoto.map(p => <TarjetaPlaya key={p.slug} slug={p.slug} nombre={p.nombre} foto={p.foto} bandera={p.bandera} socorrismo={p.socorrismo} accesible={p.accesible} parking={p.parking} />)}
+            </div>
           </section>
         )}
 
         {video && (
-          <section id="video" style={{ marginBottom: '2.5rem' }}>
-            <div style={{ fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem' }}>Desde el aire</div>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700, color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15 }}>
-              {pois.nombre} en <em style={{ fontWeight: 500, color: 'var(--accent)' }}>vídeo</em>
-            </h2>
+          <section id="video">
+            <div className={mun.seccionCab}><h2 className={mun.h2}>{pois.nombre} desde el <em>aire</em></h2></div>
             <BeachVideoToggle video={video} nombre={pois.nombre} />
           </section>
         )}
 
-        {/* Zona herramienta: después de los planes, que son la herramienta
-            de esta página, y antes de las listas. */}
         <Hueco zona="herramienta" bloque={SLOTS.herramienta} />
 
-        {topPlayas.length > 0 && (
-          <section id="banarse" style={{ marginBottom: '2.5rem' }}>
-            <div style={{
-              fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-              textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-            }}>Bañarse</div>
-            <h2 style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-              color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
-            }}>
-              Las playas <em style={{ fontWeight: 500, color: 'var(--accent)' }}>mejor equipadas</em>
-            </h2>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.5rem' }}>
-              {topPlayas.map((p, i) => (
-                <li key={p.slug} style={{
-                  border: '1px solid var(--line)', borderRadius: 6, padding: '.7rem .85rem',
-                  display: 'flex', alignItems: 'baseline', gap: '.75rem',
-                }}>
-                  <span style={{
-                    fontFamily: 'var(--font-serif)', fontStyle: 'italic',
-                    fontSize: '1rem', color: 'var(--muted)', flexShrink: 0,
-                  }}>{i + 1}</span>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <Link href={`/playas/${p.slug}`} style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '1rem', color: 'var(--ink)' }}>
-                      {p.nombre}
-                    </Link>
-                    <div style={{ fontSize: '.75rem', color: 'var(--muted)', marginTop: '.15rem', display: 'flex', gap: '.4rem', flexWrap: 'wrap' }}>
-                      {p.bandera && <span>Bandera Azul</span>}
-                      {p.socorrismo && <span>· Socorrismo</span>}
-                      {p.accesible && <span>· PMR</span>}
-                      {p.parking && <span>· Parking</span>}
-                    </div>
-                  </div>
-                  <Link href={`/playas/${p.slug}`} style={{ fontSize: '.78rem', color: 'var(--accent)', fontWeight: 600 }}>
-                    Ver ficha →
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            {tienePaginaMuni && playas.length > 3 && (
-              <div style={{ marginTop: '.6rem', fontSize: '.82rem' }}>
-                <Link href={`/municipio/${slug}`} style={{ color: 'var(--accent)' }}>
-                  Todas las {playas.length} playas de {pois.nombre} →
-                </Link>
-              </div>
-            )}
-          </section>
-        )}
-
-        <BloquePois id="museos" eyebrow="Para ver" titulo="Museos, galerías y sitios de visita" items={pois.museos} />
-        <BloquePois id="monumentos" eyebrow="Patrimonio" titulo="Monumentos y estatuas" items={pois.monumentos} mostrar={10} />
-        <BloquePois id="miradores" eyebrow="Panorámicas" titulo="Miradores y faros" items={pois.miradores} />
-        <BloquePois id="cultura" eyebrow="Para una tarde" titulo="Teatros, cines y bibliotecas" items={pois.cultura} />
-        <BloquePois id="parques" eyebrow="Aire libre" titulo="Parques y jardines" items={pois.parques} />
+        <SeccionSitios id="museos" titulo="Museos, galerías y sitios de visita" items={pois.museos} />
+        <SeccionSitios id="monumentos" titulo="Monumentos y estatuas" items={pois.monumentos} />
+        <SeccionSitios id="miradores" titulo="Miradores y faros" items={pois.miradores} />
+        <SeccionSitios id="parques" titulo="Parques y jardines" items={pois.parques} />
+        <SeccionSitios id="cultura" titulo="Teatros, cines y bibliotecas" items={pois.cultura} />
 
         {restaurantes.length > 0 && (
-          <section id="comer" style={{ marginBottom: '2.5rem' }}>
-            <div style={{
-              fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-              textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-            }}>Comer cerca del mar</div>
-            <h2 style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-              color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
-            }}>
-              Restaurantes junto a la <em style={{ fontWeight: 500, color: 'var(--accent)' }}>playa</em>
-            </h2>
+          <section id="comer">
+            <div className={mun.seccionCab}><h2 className={mun.h2}>Restaurantes junto a la <em>playa</em></h2><span className={mun.meta}>cerca de {topPlayas[0]?.nombre}</span></div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.5rem' }}>
               {restaurantes.map(r => (
-                <li key={r.id} style={{
-                  border: '1px solid var(--line)', borderRadius: 6, padding: '.7rem .85rem',
-                  display: 'flex', alignItems: 'baseline', gap: '.75rem',
-                }}>
-                  <span style={{
-                    fontSize: '.6rem', fontWeight: 600, letterSpacing: '.1em',
-                    textTransform: 'uppercase', color: 'var(--muted)',
-                    padding: '.15rem .45rem', border: '1px solid var(--line)',
-                    borderRadius: 100, flexShrink: 0,
-                  }}>{r.tipo}</span>
+                <li key={r.id} style={{ borderRadius: 12, padding: '.7rem .9rem', background: 'var(--card-bg, var(--surface))', display: 'flex', alignItems: 'baseline', gap: '.75rem' }}>
+                  <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.6rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', flexShrink: 0 }}>{r.tipo}</span>
                   <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, fontSize: '.95rem', flex: 1, minWidth: 0 }}>
-                    {r.website ? (
-                      <a href={r.website} target="_blank" rel="noopener nofollow" style={{ color: 'var(--ink)' }}>{r.nombre}</a>
-                    ) : r.nombre}
+                    {r.website ? <a href={r.website} target="_blank" rel="noopener nofollow" style={{ color: 'var(--ink)' }}>{r.nombre}</a> : r.nombre}
                   </span>
-                  {r.distancia_m > 0 && (
-                    <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>
-                      {r.distancia_m < 1000 ? `${r.distancia_m} m` : `${(r.distancia_m / 1000).toFixed(1)} km`}
-                    </span>
-                  )}
+                  {r.distancia_m > 0 && <span style={{ fontSize: '.72rem', color: 'var(--muted)' }}>{r.distancia_m < 1000 ? `${r.distancia_m} m` : `${(r.distancia_m / 1000).toFixed(1)} km`}</span>}
                 </li>
               ))}
             </ul>
           </section>
         )}
 
-        {/* Actividades organizadas: widget de GetYourGuide con el nombre del muni. */}
-        <section id="actividades" style={{ marginBottom: '2.5rem' }}>
-          <div style={{
-            fontSize: '.7rem', fontWeight: 500, letterSpacing: '.14em',
-            textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.35rem',
-          }}>Actividades organizadas</div>
-          <h2 style={{
-            fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-            color: 'var(--ink)', marginBottom: '.9rem', lineHeight: 1.15,
-          }}>
-            Excursiones y <em style={{ fontWeight: 500, color: 'var(--accent)' }}>tours</em>
-          </h2>
+        <section id="tours">
+          <div className={mun.seccionCab}><h2 className={mun.h2}>Excursiones y <em>tours</em></h2></div>
           <GygActivities query={`${pois.nombre}, Spain`} cmp="que-hacer" items={4} />
         </section>
 
@@ -663,7 +368,7 @@ export default async function QueHacerPage({ params }: Props) {
 
         <DelMunicipio nombre={pois.nombre} enlaces={enlaces} actual="queHacer" />
 
-        <p style={{ marginTop: '2.5rem', fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.5 }}>
+        <p style={{ margin: 0, fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.5 }}>
           Los sitios de esta página salen de OpenStreetMap, que escribe gente voluntaria (licencia ODbL),
           y están a menos de 3&nbsp;km del centro del pueblo. Puede que falte alguno o que alguno haya
           cerrado. Si conoces la zona, se corrige en osm.org y aquí aparece en la siguiente

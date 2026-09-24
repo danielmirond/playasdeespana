@@ -1,0 +1,134 @@
+/* src/components/municipio/Municipio.module.css — la dirección visual
+   aprobada para las páginas del municipio (qué hacer, el tiempo):
+   foto a sangre con el titular o el veredicto encima, chips de categoría,
+   tarjetas con imagen, navegación inferior fija en móvil y píldoras en
+   escritorio. Lo que depende del ancho vive aquí; lo demás va inline. */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  color: #faf4e6;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.heroFoto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.heroVelo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,4,.35) 0%, rgba(20,12,4,0) 35%, rgba(20,12,4,.8) 100%); }
+.heroVeloLado { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,4,.4) 0%, rgba(20,12,4,.05) 40%, rgba(20,12,4,.82) 100%); }
+.heroCuerpo { position: relative; padding: 1.25rem 1.25rem 1.6rem; display: flex; flex-direction: column; gap: .5rem; max-width: 1000px; width: 100%; margin: 0 auto; box-sizing: border-box; }
+.heroTitulo { margin: 0; font-family: var(--font-serif); font-weight: 700; font-size: clamp(2.2rem, 9vw, 4.2rem); line-height: .98; letter-spacing: -.02em; text-shadow: 0 2px 14px rgba(0,0,0,.35); }
+.heroLede { font-size: 1rem; line-height: 1.45; max-width: 52ch; opacity: .95; }
+.heroCredito { font-family: var(--font-mono, ui-monospace, monospace); font-size: .6rem; opacity: .75; }
+.heroMiga { position: absolute; top: 0; left: 0; right: 0; padding: .8rem 1.25rem; display: flex; gap: .4rem; flex-wrap: wrap; font-size: .75rem; color: #faf4e6; opacity: .92; max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
+.heroMiga a { color: inherit; }
+
+@media (min-width: 900px) {
+  .hero { min-height: 480px; margin: 0 1.5rem; border-radius: 20px; }
+  .heroCuerpo { padding: 2rem 2.25rem 2.25rem; }
+  .heroMiga { padding: 1rem 2.25rem; }
+}
+
+/* Chips de categoría: fila con scroll en móvil, envuelve en escritorio. */
+.chips { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; padding: 1rem 1.25rem 0; -webkit-overflow-scrolling: touch; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: 0 0 auto; height: 40px; padding: 0 1rem; border-radius: 100px; border: 1px solid var(--line); background: var(--card-bg, var(--surface)); color: var(--ink); font-size: .82rem; font-weight: 500; display: inline-flex; align-items: center; gap: .4rem; text-decoration: none; white-space: nowrap; }
+.chipActivo { background: var(--ink); color: #faf4e6; border-color: var(--ink); font-weight: 600; }
+.chipPunto { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+@media (min-width: 900px) { .chips { flex-wrap: wrap; overflow: visible; padding: 1.25rem 1.5rem 0; max-width: 1000px; margin: 0 auto; box-sizing: border-box; } }
+
+/* Contenido: una columna en móvil, misma anchura que el resto del sitio. */
+.cuerpo { max-width: 1000px; margin: 0 auto; padding: 1.5rem 1.25rem 6rem; box-sizing: border-box; display: flex; flex-direction: column; gap: 2.25rem; }
+@media (min-width: 900px) { .cuerpo { padding: 2rem 1.5rem 3rem; } }
+
+.seccionCab { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; }
+.h2 { margin: 0; font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--ink); line-height: 1.15; }
+.h2 em { font-weight: 500; font-style: italic; color: var(--accent); }
+.meta { font-family: var(--font-mono, ui-monospace, monospace); font-size: .7rem; color: var(--muted); white-space: nowrap; }
+
+/* Plan del día: tarjetas con foto. Fila con scroll en móvil, rejilla en escritorio. */
+.plan { display: flex; gap: .75rem; overflow-x: auto; scrollbar-width: none; margin: 0 -1.25rem; padding: 0 1.25rem .25rem; }
+.plan::-webkit-scrollbar { display: none; }
+.parada { flex: 0 0 210px; display: flex; flex-direction: column; gap: .45rem; text-decoration: none; color: var(--ink); }
+.paradaFoto { position: relative; height: 130px; border-radius: 14px; overflow: hidden; background: var(--card-bg, var(--surface)); }
+.paradaFoto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.paradaHora { position: absolute; top: 8px; left: 8px; height: 24px; padding: 0 .55rem; border-radius: 100px; background: #faf4e6; color: var(--ink); font-family: var(--font-mono, ui-monospace, monospace); font-size: .68rem; display: inline-flex; align-items: center; }
+.paradaNombre { font-weight: 700; font-size: .95rem; line-height: 1.2; }
+.paradaMeta { font-size: .76rem; color: var(--muted); }
+@media (min-width: 900px) {
+  .plan { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; margin: 0; padding: 0; }
+  .parada { flex: initial; }
+}
+
+/* Tarjetas de playa con foto: fila con scroll en móvil, rejilla en escritorio. */
+.playas { display: flex; gap: .65rem; overflow-x: auto; scrollbar-width: none; margin: 0 -1.25rem; padding: 0 1.25rem .25rem; }
+.playas::-webkit-scrollbar { display: none; }
+.playa { flex: 0 0 200px; position: relative; height: 240px; border-radius: 16px; overflow: hidden; background: var(--mar, #2d5266); color: #faf4e6; text-decoration: none; display: block; }
+.playa img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.playaVelo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,4,0) 45%, rgba(20,12,4,.82) 100%); }
+.playaPie { position: absolute; left: 12px; right: 12px; bottom: 12px; }
+.playaNombre { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; line-height: 1.1; }
+.playaMeta { font-size: .74rem; opacity: .9; margin-top: .15rem; }
+.playaBandera { position: absolute; top: 10px; left: 10px; height: 26px; padding: 0 .6rem; border-radius: 100px; background: var(--excelente, #3d6b1f); color: #faf4e6; font-size: .68rem; font-weight: 700; display: inline-flex; align-items: center; gap: .35rem; }
+@media (min-width: 900px) {
+  .playas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; margin: 0; padding: 0; }
+  .playa { flex: initial; height: 260px; }
+}
+
+/* Sitios: tarjetas con foto o pictograma, resumen debajo. */
+.sitios { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+@media (min-width: 640px) { .sitios { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 900px) { .sitios { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; } }
+.sitio { border-radius: 18px; overflow: hidden; background: var(--card-bg, var(--surface)); display: flex; flex-direction: column; }
+.sitioFoto { position: relative; height: 150px; background: var(--ink); display: flex; align-items: center; justify-content: center; }
+.sitioFoto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sitioTipo { position: absolute; top: 10px; left: 10px; height: 24px; padding: 0 .55rem; border-radius: 100px; background: #faf4e6; color: var(--ink); font-family: var(--font-mono, ui-monospace, monospace); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; display: inline-flex; align-items: center; }
+.sitioCredito { position: absolute; right: 8px; bottom: 6px; font-family: var(--font-mono, ui-monospace, monospace); font-size: .55rem; color: #faf4e6; opacity: .8; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.sitioCuerpo { padding: .85rem 1rem 1rem; display: flex; flex-direction: column; gap: .35rem; }
+.sitioNombre { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; line-height: 1.15; color: var(--ink); }
+.sitioResumen { font-size: .84rem; line-height: 1.5; color: var(--muted); }
+.sitioAcciones { display: flex; gap: .8rem; font-size: .76rem; font-weight: 600; margin-top: .2rem; }
+.sitioAcciones a { color: var(--accent); }
+
+/* Navegación del municipio: píldoras en escritorio, barra inferior fija en móvil. */
+.navPildoras { display: none; }
+.navBarra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; height: calc(64px + env(safe-area-inset-bottom, 0px)); padding: 0 .5rem env(safe-area-inset-bottom, 0px); background: rgba(250,244,230,.96); border-top: 1px solid var(--line); display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: center; box-sizing: border-box; backdrop-filter: blur(8px); }
+.navItem { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .2rem; height: 56px; font-size: .68rem; font-weight: 500; color: var(--muted); text-decoration: none; }
+.navItemActivo { color: var(--accent); font-weight: 700; }
+@media (min-width: 900px) {
+  .navBarra { display: none; }
+  .navPildoras { display: flex; gap: .35rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; padding: .9rem 1.5rem 0; box-sizing: border-box; }
+  .pildora { height: 36px; padding: 0 .9rem; border-radius: 100px; font-size: .82rem; font-weight: 600; color: var(--ink); display: inline-flex; align-items: center; text-decoration: none; }
+  .pildoraActiva { background: var(--ink); color: #faf4e6; font-weight: 700; }
+}
+
+/* Veredicto sobre la foto (el tiempo). */
+.veredictoGrande { font-family: var(--font-serif); font-weight: 700; font-size: clamp(5rem, 24vw, 8.5rem); line-height: .85; letter-spacing: -.04em; }
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; }
+.tile { border-radius: 12px; background: var(--card-bg, var(--surface)); padding: .7rem .4rem; text-align: center; }
+.tileEtiqueta { font-size: .62rem; color: var(--muted); }
+.tileValor { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; color: var(--ink); line-height: 1.1; }
+
+/* Semana: tiras en móvil, tarjetas en escritorio. */
+.semana { display: flex; flex-direction: column; gap: .4rem; }
+.dia { display: grid; grid-template-columns: 44px 1fr auto; gap: .75rem; align-items: center; border-radius: 12px; padding: .6rem .75rem; background: var(--card-bg, var(--surface)); border-left: 5px solid var(--line); text-decoration: none; color: var(--ink); }
+.diaMejor { outline: 2px solid var(--ink); }
+.diaNombre { font-family: var(--font-mono, ui-monospace, monospace); font-size: .72rem; color: var(--muted); text-transform: uppercase; }
+.diaVeredicto { font-weight: 700; }
+.diaMotivo { font-size: .84rem; }
+.diaTemp { font-family: var(--font-mono, ui-monospace, monospace); font-size: .75rem; }
+.diaIcono { display: none; }
+@media (min-width: 900px) {
+  .semana { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .6rem; }
+  .dia { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; gap: .35rem; align-items: start; border-left: 0; border-bottom: 5px solid var(--line); border-radius: 16px; padding: .85rem .75rem; }
+  .diaIcono { display: block; }
+  .diaVeredicto { font-family: var(--font-serif); font-size: 1.4rem; }
+  .diaMotivo { font-size: .76rem; color: var(--muted); }
+  .diaTemp { display: none; }
+}
+
+.tarjetaFoto { position: relative; border-radius: 16px; overflow: hidden; min-height: 170px; background: var(--ink); color: #faf4e6; display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; }
+.tarjetaFoto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tarjetaFotoVelo { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,12,4,.85) 0%, rgba(20,12,4,.55) 60%, rgba(20,12,4,.25) 100%); }
+.tarjetaFotoCuerpo { position: relative; display: flex; flex-direction: column; gap: .3rem; }
