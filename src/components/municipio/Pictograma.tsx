@@ -2,11 +2,12 @@
 // pictograma de su tipo sobre color liso. Es lo que se aprobó en el lienzo:
 // nada de degradados anónimos con el nombre encima. Trazo, sin relleno,
 // mismo registro que los iconos de estado del mar.
-export type TipoPictograma = 'museo' | 'monumento' | 'mirador' | 'faro' | 'parque' | 'cultura' | 'playa' | 'castillo' | 'yacimiento' | 'camping'
+export type TipoPictograma = 'museo' | 'monumento' | 'mirador' | 'faro' | 'parque' | 'cultura' | 'playa' | 'castillo' | 'yacimiento' | 'camping' | 'comida'
 
 export function tipoPictograma(tipo: string): TipoPictograma {
   const t = tipo.toLowerCase()
   if (/camping|acampada|caravan/.test(t)) return 'camping'
+  if (/comida|comer|restaurante/.test(t)) return 'comida'
   if (/faro/.test(t)) return 'faro'
   if (/castillo|castell|fort|torre|muralla/.test(t)) return 'castillo'
   if (/yacimiento|castro|ruinas|dolmen|necr/.test(t)) return 'yacimiento'
@@ -29,6 +30,7 @@ const TRAZOS: Record<TipoPictograma, string> = {
   cultura:    'M4 5h16v12H4zM8 21h8M12 17v4M8 9l3 2-3 2M13 13h3',
   playa:      'M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0',
   camping:    'M3 20L12 4l9 16H3zM12 4v16M8 20l4-7 4 7',
+  comida:     'M7 3v7a2 2 0 0 0 4 0V3M9 3v18M17 3c-2 0-3 3-3 6v3h3v9M17 3v18',
 }
 
 export default function Pictograma({ tipo, size = 44, color = '#faf4e6' }: { tipo: string; size?: number; color?: string }) {

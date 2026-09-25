@@ -109,12 +109,12 @@ function ParadaTarjeta({ p, foto }: { p: Parada; foto: { url: string } | null })
         {foto
           // eslint-disable-next-line @next/next/no-img-element
           ? <img src={foto.url} alt="" loading="lazy" decoding="async" />
-          : <Pictograma tipo={p.playa ? 'playa' : p.tipo} size={40} />}
+          : <Pictograma tipo={p.playa ? 'playa' : p.hueco ? 'comida' : p.tipo} size={40} />}
         <span className={mun.paradaHora}>{p.hora}</span>
       </div>
       <div className={mun.paradaNombre}>{p.nombre}</div>
       <div className={mun.paradaMeta}>
-        {p.tipo} · {formatearDuracion(p.duracionMin)}{p.pmr ? ' · accesible' : ''}{p.banderaAzul ? ' · Bandera Azul' : ''}
+        {p.hueco ? 'cerca de la última parada' : p.tipo} · {formatearDuracion(p.duracionMin)}{p.pmr ? ' · accesible' : ''}{p.banderaAzul ? ' · Bandera Azul' : ''}
         {p.trasladoDescripcion && <><br />{p.trasladoDescripcion}</>}
       </div>
     </>
@@ -183,7 +183,7 @@ export default async function QueHacerPage({ params }: Props) {
   // Itinerarios deterministas (ver src/lib/guia-municipio.ts). Se calculan
   // aquí y se pintan tal cual — el módulo no genera prosa, solo elige y
   // ordena; toda la copy visible se ha escrito en este archivo.
-  const gUnDia = guiaUnDia(pois, topPlayas[0] ?? null)
+  const gUnDia = guiaUnDia(pois, topPlayas[0] ?? null, playas)
   const gTresDias = guiaTresDias(pois, playas)
   // La foto de cada playa del carrusel: la real del sidecar, con autor. Si
   // la playa no tiene entrada, getFotos podría ir a la red; para la portada
@@ -201,7 +201,8 @@ export default async function QueHacerPage({ params }: Props) {
   const todosPois = [...pois.museos, ...pois.monumentos, ...pois.miradores, ...pois.cultura, ...pois.parques]
   const fotoDeParada = (p: Parada): { url: string } | null => {
     if (p.playa && p.slug) return topConFoto.find(x => x.slug === p.slug)?.foto ?? null
-    const poi = todosPois.find(x => x.nombre === p.nombre)
+    // La guía limpia el nombre («A;B», «A / B» → «A»), así que se casa por prefijo.
+    const poi = todosPois.find(x => x.nombre === p.nombre || x.nombre.startsWith(p.nombre))
     return poi?.foto ? { url: poi.foto.url } : null
   }
   // Un vídeo del municipio, con la misma búsqueda y los mismos filtros que
@@ -250,6 +251,7 @@ export default async function QueHacerPage({ params }: Props) {
       {/* Chips: saltan a cada sección; el recuento es lo que hay en la página. */}
       <div className={mun.chips}>
         {playas.length > 0 && <a href="#playas" className={mun.chip}><span className={mun.chipPunto} style={{ background: 'var(--mar, #2d5266)' }} />Playas {playas.length}</a>}
+        {pois.alrededores.length > 0 && <a href="#alrededores" className={mun.chip}>Alrededores</a>}
         {pois.museos.length > 0 && <a href="#museos" className={mun.chip}><span className={mun.chipPunto} style={{ background: 'var(--accent)' }} />Museos {pois.museos.length}</a>}
         {pois.monumentos.length > 0 && <a href="#monumentos" className={mun.chip}><span className={mun.chipPunto} style={{ background: 'var(--aceptable, #c48a1e)' }} />Monumentos {pois.monumentos.length}</a>}
         {pois.miradores.length > 0 && <a href="#miradores" className={mun.chip}>Miradores {pois.miradores.length}</a>}
@@ -271,17 +273,18 @@ export default async function QueHacerPage({ params }: Props) {
               {gUnDia.paradas.map(p => <ParadaTarjeta key={`${p.hora}-${p.nombre}`} p={p} foto={fotoDeParada(p)} />)}
             </ol>
             <p style={{ margin: '.75rem 0 0', fontSize: '.78rem', lineHeight: 1.5, color: 'var(--muted)' }}>
-              El plan lo ordena el mapa: se empieza por lo que está más cerca y se deja la playa para el mediodía. Los tiempos
-              son aproximados. Mira los horarios antes de ir, sobre todo fuera de verano: muchos museos cierran los lunes.
+              El plan lo ordena el mapa: la mañana se hace andando alrededor del sitio principal y la tarde se pasa en la playa
+              que queda más cerca. Las horas suman lo que se tarda en llegar, pero son aproximadas. Mira los horarios antes de ir,
+              sobre todo fuera de verano: muchos museos cierran los lunes.
             </p>
           </section>
         )}
 
-        {gTresDias.some(g => g.paradas.length >= 3) && (
+        {gTresDias.every(g => g.paradas.length >= 3) && (
           <section id="guia-3-dias">
             <div className={mun.seccionCab}><h2 className={mun.h2}>Tres días en {pois.nombre}</h2><span className={mun.meta}>fin de semana largo</span></div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {gTresDias.filter(g => g.paradas.length >= 3).map((g, i) => (
+              {gTresDias.map((g, i) => (
                 <div key={i}>
                   <h3 style={{ margin: '0 0 .5rem', fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 700 }}>
                     {g.titulo}{g.subtitulo && <span style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--muted)' }}> · {g.subtitulo}</span>}
@@ -293,8 +296,8 @@ export default async function QueHacerPage({ params }: Props) {
               ))}
             </div>
             <p style={{ margin: '.75rem 0 0', fontSize: '.78rem', lineHeight: 1.5, color: 'var(--muted)' }}>
-              Cada día va de una cosa distinta, para no encadenar tres museos seguidos. Las distancias entre paradas son
-              en línea recta, así que andando siempre será algo más.
+              Cada día es una zona: el casco, la mejor playa y lo que queda lejos del centro. Así no se cruza el municipio
+              tres veces. Las distancias son en línea recta, así que andando siempre será algo más.
             </p>
           </section>
         )}
@@ -341,6 +344,18 @@ export default async function QueHacerPage({ params }: Props) {
         <SeccionSitios id="miradores" titulo="Miradores y faros" items={pois.miradores} />
         <SeccionSitios id="parques" titulo="Parques y jardines" items={pois.parques} />
         <SeccionSitios id="cultura" titulo="Teatros, cines y bibliotecas" items={pois.cultura} />
+
+        {/* Alrededores: lo que cualquier guía cuenta y el radio de 3 km
+            dejaba fuera. Solo sitios con artículo en Wikipedia, con la
+            distancia al centro del pueblo en el chip. */}
+        {pois.alrededores.length > 0 && (
+          <section id="alrededores">
+            <div className={mun.seccionCab}><h2 className={mun.h2}>A menos de <em>25 km</em></h2><span className={mun.meta}>para un día fuera</span></div>
+            <div className={mun.sitios}>
+              {pois.alrededores.slice(0, 6).map(p => <TarjetaSitio key={`${p.nombre}-${p.lat}`} p={{ ...p, tipo: `${p.tipo} · ${p.km.toFixed(0)} km` }} />)}
+            </div>
+          </section>
+        )}
 
         {restaurantes.length > 0 && (
           <section id="comer">

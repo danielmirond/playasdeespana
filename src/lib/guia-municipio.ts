@@ -1,31 +1,36 @@
 // src/lib/guia-municipio.ts — Itinerarios deterministas de 1 día y 3 días.
 //
-// LA FILOSOFÍA DE ESTE MÓDULO. Nada de prosa generativa. La guía se construye
-// eligiendo POIs por reglas mecánicas y ensartándolos por proximidad. Cada
-// parada muestra un dato objetivo: nombre + tipo + duración estándar por
-// categoría + distancia haversine al siguiente. Si un slot no tiene POI que
-// asignarle (p. ej. no hay cines abiertos ese día), el slot se salta — no se
-// rellena con «disfruta de la gastronomía local».
+// LA FILOSOFÍA. Nada de prosa generativa: la guía elige sitios por reglas y
+// los ensarta por proximidad. Cada parada lleva un dato objetivo: nombre,
+// tipo, duración típica de su categoría y distancia real a la siguiente.
+// Si un hueco no tiene sitio que ponerle, el hueco desaparece.
 //
-// POR QUÉ DIFERENTE POR DÍA. Sin tipología por día, la guía de 3 días
-// serviría el mismo museo por la mañana los tres días. Cada día tiene una
-// intención distinta: casco histórico + comer + baño (día 1), naturaleza +
-// segunda playa + mirador (día 2), museo/cultura + comida + despedida (día 3).
-// Con esa restricción, los POIs se distribuyen sin repeticiones y la guía
-// tiene el ritmo que una guía real tendría.
+// LO QUE FALLABA (medido en Gijón, Tarifa, Cadaqués, Sanxenxo, Torrevieja):
+// el orden lo decidía solo «tiene Wikipedia», así que el «casco histórico»
+// eran un memorial y una chimenea; las playas se elegían por dispersión
+// máxima, lo que mandaba a Aboño o Atlanterra a 20 km de la ciudad; el
+// 1 día y el Día 1 eran la misma lista; el Día 2 desaparecía si no había
+// parque; y una «Sala de Exposiciones» a 24 km era la «cultura» del Día 3.
 //
-// LOS TIEMPOS SON HEURÍSTICOS, NO VERIFICADOS. Duración media por
-// categoría; nunca horario de apertura, que la ficha real de OSM rara vez
-// lleva. El pie de la guía deja claro que hay que verificar antes de ir.
+// AHORA. Cada día es UN clúster andable: se elige un ancla (el sitio con
+// más peso: foto, resumen, artículo) y se completa con lo que queda a paso
+// de paseo; el orden dentro del día es el del vecino más próximo. La playa
+// de cada día es la más cercana al clúster entre las bien equipadas, no la
+// más lejana. Memoriales, galerías, salas y bibliotecas nunca son ancla:
+// solo entran si están de camino. Hay hueco de comida cuando la mañana
+// llega a las 13:30 y la playa ocupa la tarde entera.
+//
+// LOS TIEMPOS SON HEURÍSTICOS: duración mediana por categoría, nunca
+// horario de apertura. El pie de la guía lo deja claro.
 
 import type { MunicipioPois, Poi } from './municipio-pois'
 import type { Playa } from '@/types'
 
 // —————————————————————————————————————————————————————————————
-// Utilidades geométricas
+// Geometría
 // —————————————————————————————————————————————————————————————
 
-/** Metros entre dos puntos, esferoide simplificado (Haversine). */
+/** Metros entre dos puntos (Haversine). */
 export function distanciaMetros(la1: number, lo1: number, la2: number, lo2: number): number {
   const R = 6371000
   const rad = (d: number) => (d * Math.PI) / 180
@@ -35,11 +40,10 @@ export function distanciaMetros(la1: number, lo1: number, la2: number, lo2: numb
   return 2 * R * Math.asin(Math.sqrt(a))
 }
 
-/** Cadena "800 m a pie · 11 min" o "5 km · coche". Punto de corte razonable
- *  para andar: 1.5 km, que es más o menos 20 min a paso de paseo. */
+/** "800 m a pie · 11 min", "2,5 km · autobús o taxi" o "9 km · coche". */
 export function describirTraslado(metros: number): string {
   if (metros < 1500) {
-    const min = Math.max(1, Math.round(metros / 75))     // 75 m/min = ~4,5 km/h
+    const min = Math.max(1, Math.round(metros / 75))     // ~4,5 km/h
     return `${Math.round(metros)} m a pie · ${min} min`
   }
   const km = (metros / 1000).toFixed(1).replace('.', ',')
@@ -47,76 +51,84 @@ export function describirTraslado(metros: number): string {
   return `${km} km · coche`
 }
 
+/** Minutos de traslado que suma el reloj. Andando 75 m/min; a partir de
+ *  1,5 km se supone transporte y se cuenta 10 min fijos + 1 min por km. */
+function minutosTraslado(metros: number): number {
+  if (metros < 60) return 0
+  if (metros < 1500) return Math.ceil(metros / 75)
+  return 10 + Math.ceil(metros / 1000)
+}
+
+type Punto = { lat: number; lng: number }
+const dist = (a: Punto, b: Punto) => distanciaMetros(a.lat, a.lng, b.lat, b.lng)
+
 // —————————————————————————————————————————————————————————————
 // Reglas de selección
 // —————————————————————————————————————————————————————————————
 
-/** Prioriza POIs con artículo en Wikipedia (proxy de «icónico»). Cuando la
- *  fuente no lo lleva se conserva el orden original: OSM ya suele ir por
- *  relevancia. */
-function ranked(pois: Poi[]): Poi[] {
-  return [...pois].sort((a, b) => {
-    const aw = a.wikipedia ? 1 : 0
-    const bw = b.wikipedia ? 1 : 0
-    return bw - aw
-  })
+/** Radio de un clúster: lo que se anda en una mañana sin coger nada. */
+const RADIO_CLUSTER_M = 1500
+/** Hasta dónde se va a la playa desde el clúster antes de preferir otra. */
+const RADIO_PLAYA_M = 6000
+
+/** Tipos que nunca abren un día. Entran solo si están de camino. */
+const NO_ANCLA = /^(Memorial|Galer[ií]a|Sala|Centro cultural|Biblioteca|Molino|Molino de agua|Muelle|Atracción|Cine|Teatro)$/i
+/** Nombres que delatan un sitio menor aunque el tipo sea «Monumento». */
+const NOMBRE_MENOR = /\b(ruins of|restos de|sala de exposiciones|exposicion|capilla|ermita de|fuente|cruz|cruceiro|lavadero|puente|escultura|estatua|mural)\b/i
+
+/** Peso editorial: con qué contarse (foto, resumen), luego artículo, luego web. */
+function peso(p: Poi): number {
+  let n = (p.foto ? 4 : 0) + (p.resumen ? 3 : 0) + (p.wikipedia ? 2 : 0) + (p.website ? 1 : 0)
+  if (/^(Castillo|Fortificación|Catedral|Faro)$/i.test(p.tipo)) n += 2
+  if (/^(Ruinas|Yacimiento)$/i.test(p.tipo)) n -= 1        // a igualdad, antes el museo que el pozo
+  if (NOMBRE_MENOR.test(p.nombre)) n -= 3
+  return n
 }
 
-/** Duración estándar por tipo de POI. Son medianas de guías reales, no
- *  compromiso — el pie deja claro que se ajuste al ritmo del viajero. */
+// Un mirador no abre el día: es la parada de la tarde. Ancla solo si no hay otra cosa.
+const esAncla = (p: Poi) => !NO_ANCLA.test(p.tipo) && p.tipo !== 'Mirador' && !NOMBRE_MENOR.test(p.nombre) && peso(p) >= 2
+const esMirador = (p: Poi) => /^(Mirador|Faro)$/i.test(p.tipo)
+const esMuseo = (p: Poi) => /^(Museo|Acuario|Zoo)$/i.test(p.tipo)
+const esParque = (p: Poi) => /^(Parque|Jardín)$/i.test(p.tipo)
+const nombreLimpio = (p: Poi) => p.nombre.split(';')[0].split(' / ')[0].trim()
+
+/** Duración típica por tipo (medianas de guías reales). */
 const DURACION: Record<string, number> = {
-  Museo:            90,
-  Galería:          60,
-  Acuario:          90,
-  Zoo:              120,
-  Atracción:        45,
-  Mirador:          30,
-  Faro:             30,
-  Molino:           20,
-  'Molino de agua': 20,
-  Muelle:           30,
-  Teatro:           120,
-  Cine:             120,
-  'Centro cultural':60,
-  Biblioteca:       30,
-  Castillo:         75,
-  Fortificación:    90,
-  Monumento:        30,
-  Memorial:         15,
-  Iglesia:          30,
-  Catedral:         45,
-  Ruinas:           30,
-  Yacimiento:       45,
-  Torre:            30,
-  Parque:           60,
-  Jardín:           90,
+  Museo: 90, Galería: 45, Acuario: 90, Zoo: 120, Atracción: 30,
+  Mirador: 30, Faro: 30, Molino: 20, 'Molino de agua': 20, Muelle: 30,
+  Teatro: 60, Cine: 120, 'Centro cultural': 45, Biblioteca: 30,
+  Castillo: 75, Fortificación: 75, Monumento: 30, Memorial: 15,
+  Iglesia: 30, Catedral: 45, Ruinas: 30, Yacimiento: 45, Torre: 30,
+  Parque: 60, Jardín: 75,
 }
-const DURACION_DEFECTO = 45
-const DURACION_PLAYA_H = 3     // baño típico de tarde
+const DURACION_DEFECTO = 40
+const DURACION_PLAYA_TARDE = 180
 const DURACION_COMIDA = 90
-const DURACION_CENA = 90
+const HORA_INICIO = 10 * 60
+const HORA_COMIDA_MIN = 13 * 60 + 30   // si la mañana llega aquí, se come
+const HORA_COMIDA_PRONTO = 13 * 60     // y nunca antes de esta: si la mañana acaba antes, hay rato libre
 
-function duracionMin(tipo: string): number {
-  return DURACION[tipo] ?? DURACION_DEFECTO
-}
+const duracionMin = (tipo: string) => DURACION[tipo] ?? DURACION_DEFECTO
 
 // —————————————————————————————————————————————————————————————
-// Tipos de la salida
+// Tipos de salida
 // —————————————————————————————————————————————————————————————
 
 export interface Parada {
-  hora: string                    // "10:00"
+  hora: string
   nombre: string
-  tipo: string                    // etiqueta de chip
+  tipo: string
   duracionMin: number
-  slug?: string                   // href si es playa
-  href?: string                   // Google Maps al POI, o link externo
+  slug?: string
+  href?: string
   wikipedia?: string
   pmr?: boolean
-  playa?: boolean                 // banderas para la ficha en vez de mapa externo
+  playa?: boolean
   banderaAzul?: boolean
   socorrismo?: boolean
-  trasladoDescripcion?: string    // al siguiente slot
+  /** Hueco sin sitio concreto (comer). No lleva foto ni enlace. */
+  hueco?: boolean
+  trasladoDescripcion?: string
 }
 
 export interface Guia {
@@ -125,8 +137,29 @@ export interface Guia {
   paradas: Parada[]
 }
 
+type ParadaCruda = Omit<Parada, 'hora' | 'trasladoDescripcion'> & Punto
+
+function paradaDePoi(p: Poi): ParadaCruda {
+  return {
+    nombre: nombreLimpio(p), tipo: p.tipo, duracionMin: duracionMin(p.tipo),
+    href: p.website ?? `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`,
+    wikipedia: p.wikipedia, pmr: p.pmr, lat: p.lat, lng: p.lng,
+  }
+}
+
+function paradaDePlaya(p: Playa, duracion = DURACION_PLAYA_TARDE): ParadaCruda {
+  return {
+    nombre: p.nombre, tipo: 'Playa', duracionMin: duracion, playa: true, slug: p.slug,
+    banderaAzul: !!p.bandera, socorrismo: !!p.socorrismo, lat: p.lat, lng: p.lng,
+  }
+}
+
+function paradaComer(donde: Punto): ParadaCruda {
+  return { nombre: 'Comer', tipo: 'Comida', duracionMin: DURACION_COMIDA, hueco: true, lat: donde.lat, lng: donde.lng }
+}
+
 // —————————————————————————————————————————————————————————————
-// Formato de horas mecánico
+// Reloj
 // —————————————————————————————————————————————————————————————
 
 function hhmm(minutos: number): string {
@@ -135,229 +168,205 @@ function hhmm(minutos: number): string {
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`
 }
 
-/** Encadenar paradas: hora inicial fija; cada parada ocupa su duración; la
- *  distancia al siguiente se añade como texto informativo (no suma tiempo,
- *  para no acumular errores). Última parada no lleva traslado. */
-function encadenar(
-  paradasSinHora: Omit<Parada, 'hora' | 'trasladoDescripcion'>[],
-  horaInicioMin: number,
-): Parada[] {
-  const out: Parada[] = []
-  let ahora = horaInicioMin
-  for (let i = 0; i < paradasSinHora.length; i++) {
-    const p = paradasSinHora[i]
-    const sig = paradasSinHora[i + 1]
-    let trasladoTxt: string | undefined
-    if (sig && typeof (p as any).lat === 'number' && typeof (sig as any).lat === 'number') {
-      const d = distanciaMetros((p as any).lat, (p as any).lng, (sig as any).lat, (sig as any).lng)
-      if (d > 30) trasladoTxt = describirTraslado(d)
+/** Pone hora a cada parada sumando duración + traslado real. El hueco de
+ *  comer va siempre antes de la playa de la tarde (nunca después de tres
+ *  horas de arena) y, si no hay playa, cuando la mañana llega a las 13:30.
+ *  Nunca antes de las 13:00: si la mañana acaba pronto, el reloj espera. */
+function encadenar(lista: ParadaCruda[]): Parada[] {
+  // Primera pasada: dónde cae la comida.
+  const conComida: ParadaCruda[] = []
+  let reloj = HORA_INICIO
+  let comido = false
+  for (let i = 0; i < lista.length; i++) {
+    const p = lista[i]
+    if (i > 0 && !comido && (p.playa || reloj >= HORA_COMIDA_MIN)) {
+      reloj = Math.max(reloj, HORA_COMIDA_PRONTO) + DURACION_COMIDA
+      conComida.push(paradaComer(lista[i - 1]))
+      comido = true
     }
-    out.push({
-      ...(p as Parada),
-      hora: hhmm(ahora),
-      trasladoDescripcion: trasladoTxt,
-    })
-    // Avanzamos el reloj: duración de la parada + una holgura fija de 15 min
-    // por traslado (no depende de la distancia real; una guía no es un plano
-    // de metro y sobrestimar es peor que subestimar a esta escala).
-    ahora += p.duracionMin + (sig ? 15 : 0)
+    conComida.push(p)
+    reloj += p.duracionMin + (lista[i + 1] ? minutosTraslado(dist(p, lista[i + 1])) : 0)
+  }
+  // Segunda pasada: horas y traslados. La comida está donde la parada
+  // anterior, así que esa no pinta traslado y la comida sí.
+  const out: Parada[] = []
+  reloj = HORA_INICIO
+  for (let i = 0; i < conComida.length; i++) {
+    const p = conComida[i]
+    const sig = conComida[i + 1]
+    if (p.hueco) reloj = Math.max(reloj, HORA_COMIDA_PRONTO)
+    const { lat: _la, lng: _lo, ...resto } = p
+    const d = sig ? dist(p, sig) : 0
+    out.push({ ...(resto as Parada), hora: hhmm(reloj), trasladoDescripcion: sig && d > 60 ? describirTraslado(d) : undefined })
+    reloj += p.duracionMin + (sig ? minutosTraslado(d) : 0)
   }
   return out
 }
 
 // —————————————————————————————————————————————————————————————
-// Utilidades de mapping: Poi/Playa → Parada bruta
+// Construcción de clústeres
 // —————————————————————————————————————————————————————————————
 
-// Extendemos la parada con lat/lng temporalmente para poder calcular la
-// distancia al siguiente en encadenar(); no salen al consumidor.
-type ParadaCruda = Omit<Parada, 'hora' | 'trasladoDescripcion'> & { lat: number; lng: number }
+interface Sel { pois: Poi[]; playas: Playa[]; usados: Set<string> }
 
-function paradaDePoi(p: Poi, duracion?: number): ParadaCruda {
-  return {
-    nombre: p.nombre,
-    tipo: p.tipo,
-    duracionMin: duracion ?? duracionMin(p.tipo),
-    href: p.website ?? `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`,
-    wikipedia: p.wikipedia,
-    pmr: p.pmr,
-    lat: p.lat,
-    lng: p.lng,
-  }
+const libre = (s: Sel, p: Poi) => !s.usados.has(p.nombre)
+const usar = (s: Sel, p: Poi | null | undefined) => { if (p) s.usados.add(p.nombre); return p ?? null }
+
+/** El sitio con más peso que puede abrir un día. */
+function ancla(s: Sel, filtro: (p: Poi) => boolean = () => true): Poi | null {
+  const cands = s.pois.filter(p => libre(s, p) && esAncla(p) && filtro(p))
+  if (!cands.length) cands.push(...s.pois.filter(p => libre(s, p) && !NO_ANCLA.test(p.tipo) && filtro(p)))
+  return cands.sort((a, b) => peso(b) - peso(a))[0] ?? null
 }
 
-function paradaDePlaya(p: Playa, tipo = 'Baño', duracion = DURACION_PLAYA_H * 60): ParadaCruda {
-  return {
-    nombre: p.nombre,
-    tipo,
-    duracionMin: duracion,
-    playa: true,
-    slug: p.slug,
-    banderaAzul: !!p.bandera,
-    socorrismo: !!p.socorrismo,
-    lat: p.lat,
-    lng: p.lng,
+/** Rellena alrededor de un ancla con lo que queda a paso de paseo, por
+ *  peso; luego ordena la mañana por vecino más próximo desde el ancla. */
+function cluster(s: Sel, centro: Poi, maximo: number, evitar: (p: Poi) => boolean = () => false): Poi[] {
+  const cerca = s.pois
+    .filter(p => libre(s, p) && p !== centro && !evitar(p) && dist(p, centro) <= RADIO_CLUSTER_M)
+    .filter(p => (!NO_ANCLA.test(p.tipo) && !NOMBRE_MENOR.test(p.nombre)) || peso(p) >= 4)
+    .sort((a, b) => peso(b) - peso(a))
+    .slice(0, maximo - 1)
+  // Como mucho un mirador por mañana: tres seguidos no son un casco.
+  let mirs = esMirador(centro) ? 1 : 0
+  const filtrada = cerca.filter(p => !esMirador(p) || mirs++ < 1)
+  const restantes = [...filtrada]
+  const orden: Poi[] = [centro]
+  while (restantes.length) {
+    const ult = orden[orden.length - 1]
+    restantes.sort((a, b) => dist(a, ult) - dist(b, ult))
+    orden.push(restantes.shift()!)
   }
+  orden.forEach(p => usar(s, p))
+  return orden
 }
 
-/** Coge el POI más próximo a `ref` de una lista, sin repetir los ya usados.
- *  Devuelve null cuando la lista queda vacía. */
-function cercano(pool: Poi[], ref: { lat: number; lng: number } | null, usados: Set<string>): Poi | null {
-  const libres = pool.filter(p => !usados.has(p.nombre))
+const equipamiento = (p: Playa) => (p.bandera ? 5 : 0) + (p.socorrismo ? 2 : 0) + (p.accesible ? 1 : 0) + (p.parking ? 1 : 0)
+
+/** La playa del día: la más cercana al punto de las bien equipadas, sin
+ *  repetir. Si ninguna queda a menos de 6 km: null en modo estricto, y si
+ *  no, la más cercana a secas (nunca «la mejor» a 20 km). */
+function playaCerca(s: Sel, ref: Punto, usadas: Set<string>, estricto = true): Playa | null {
+  const libres = s.playas.filter(p => !usadas.has(p.slug))
   if (!libres.length) return null
-  if (!ref) return libres[0]
-  let best = libres[0]
-  let bestD = distanciaMetros(ref.lat, ref.lng, best.lat, best.lng)
-  for (let i = 1; i < libres.length; i++) {
-    const d = distanciaMetros(ref.lat, ref.lng, libres[i].lat, libres[i].lng)
-    if (d < bestD) { best = libres[i]; bestD = d }
-  }
-  return best
+  const cercanas = libres.filter(p => dist(p, ref) <= RADIO_PLAYA_M)
+  if (!cercanas.length && estricto) return null
+  const pool = cercanas.length ? cercanas : [libres.sort((a, b) => dist(a, ref) - dist(b, ref))[0]]
+  // Equipamiento manda, y a igualdad, la más cercana.
+  pool.sort((a, b) => (equipamiento(b) - equipamiento(a)) || (dist(a, ref) - dist(b, ref)))
+  // Entre las de equipamiento máximo, no vale irse 4 km más lejos por un parking.
+  const top = equipamiento(pool[0])
+  const elegida = pool.filter(p => equipamiento(p) >= top - 1).sort((a, b) => dist(a, ref) - dist(b, ref))[0]
+  usadas.add(elegida.slug)
+  return elegida
 }
 
-// —————————————————————————————————————————————————————————————
-// Guía de 1 día
-// —————————————————————————————————————————————————————————————
+/** El mirador o faro más cercano a un punto, a menos de 3 km. */
+function miradorCerca(s: Sel, ref: Punto, maxM = 3000): Poi | null {
+  const cands = s.pois.filter(p => libre(s, p) && esMirador(p) && dist(p, ref) <= maxM)
+  cands.sort((a, b) => dist(a, ref) - dist(b, ref))
+  return usar(s, cands[0])
+}
 
-/** Guía de un día. Slots (todos opcionales; se saltan si falta el dato):
- *   10:00  monumento icónico
- *   11:30  monumento cercano
- *   12:30  museo top
- *   14:15  comida (osmRestaurantes se resuelve fuera; aquí solo playa)
- *   16:00  playa top
- *   19:30  faro o mirador (atardecer)
- *   20:30  cena (no la resolvemos aquí — es una etiqueta genérica). */
-export function guiaUnDia(
-  pois: MunicipioPois,
-  topPlaya: Playa | null,
-): Guia {
-  const paradas: ParadaCruda[] = []
-  const usados = new Set<string>()
-
-  const monumentos = ranked(pois.monumentos)
-  const museos = ranked(pois.museos)
-  const miradores = ranked(pois.miradores)
-
-  // Slot 1: monumento con más peso.
-  if (monumentos[0]) {
-    paradas.push(paradaDePoi(monumentos[0]))
-    usados.add(monumentos[0].nombre)
-  }
-
-  // Slot 2: segundo monumento, el más cercano al primero.
-  const monCerca = cercano(monumentos, paradas[paradas.length - 1] ?? null, usados)
-  if (monCerca) {
-    paradas.push(paradaDePoi(monCerca))
-    usados.add(monCerca.nombre)
-  }
-
-  // Slot 3: museo, elegido por peso Wikipedia.
-  if (museos[0]) {
-    paradas.push(paradaDePoi(museos[0]))
-    usados.add(museos[0].nombre)
-  }
-
-  // Slot 4: playa (con horas de tarde).
-  if (topPlaya) paradas.push(paradaDePlaya(topPlaya))
-
-  // Slot 5: mirador o faro (para el atardecer).
-  const mir = cercano(miradores, paradas[paradas.length - 1] ?? null, usados)
-  if (mir) {
-    paradas.push(paradaDePoi(mir))
-    usados.add(mir.nombre)
-  }
-
-  // Hora inicial: 10:00.
+function nuevaSel(pois: MunicipioPois, playas: Playa[]): Sel {
   return {
-    titulo: '1 día',
-    subtitulo: 'Cómo aprovechar la ciudad en una jornada',
-    paradas: encadenar(paradas, 10 * 60),
+    pois: [...pois.monumentos, ...pois.museos, ...pois.miradores, ...pois.parques, ...pois.cultura],
+    playas,
+    usados: new Set(),
   }
 }
 
 // —————————————————————————————————————————————————————————————
-// Guía de 3 días
+// Guía de 1 día: lo imprescindible, andando
 // —————————————————————————————————————————————————————————————
 
-/** Guía de tres días con tipología distinta por día. Slots:
- *   Día 1 (Casco histórico): 2 monumentos → museo top → playa 1ª
- *   Día 2 (Naturaleza y aire libre): jardín/parque → playa 2ª → mirador
- *   Día 3 (Cultura y despedida): 2 museos → playa 3ª → faro
- *
- *  Cuando no hay dato para un slot, el slot desaparece. Cuando no hay
- *  segunda o tercera playa distinta a la del día anterior, se reutiliza la
- *  mejor con un turno horario distinto. */
-export function guiaTresDias(
-  pois: MunicipioPois,
-  playas: Playa[],
-): Guia[] {
-  const usadosGlobal = new Set<string>()
-  const monumentos = ranked(pois.monumentos)
-  const museos = ranked(pois.museos)
-  const parques = ranked([...pois.parques])
-  const miradores = ranked(pois.miradores)
-  const usarPoi = (p: Poi | null) => { if (p) usadosGlobal.add(p.nombre); return p }
+/** Un día: el sitio con más peso y lo que hay a su alrededor (hasta 3 sitios
+ *  por la mañana), comer, la playa más cercana a ese casco por la tarde y,
+ *  si lo hay, un mirador o faro cerca de la playa para acabar. */
+export function guiaUnDia(pois: MunicipioPois, _topPlaya: Playa | null, playas: Playa[] = _topPlaya ? [_topPlaya] : []): Guia {
+  const s = nuevaSel(pois, playas)
+  const paradas: ParadaCruda[] = []
+  const a = ancla(s)
+  if (a) cluster(s, a, 3).forEach(p => paradas.push(paradaDePoi(p)))
+  const ref: Punto = paradas[paradas.length - 1] ?? { lat: pois.lat, lng: pois.lng }
+  const playa = playaCerca(s, ref, new Set(), false)
+  if (playa) {
+    paradas.push(paradaDePlaya(playa))
+    const m = miradorCerca(s, playa)
+    if (m) paradas.push(paradaDePoi(m))
+  }
+  return { titulo: '1 día', subtitulo: 'Lo imprescindible, andando', paradas: encadenar(paradas) }
+}
 
-  // Playas por diversidad geográfica: la mejor, la más alejada de esa, y la
-  // tercera más alejada del promedio. Sin sofisticaciones — con haversine
-  // basta para no acabar en la misma cala tres veces.
-  const playasDif = elegirPlayasDiferentes(playas, 3)
+// —————————————————————————————————————————————————————————————
+// Guía de 3 días: tres zonas distintas
+// —————————————————————————————————————————————————————————————
 
-  // ── DÍA 1 ────────────────────────────────────────────────────
+/** Tres días, cada uno una zona:
+ *   Día 1 · el casco: ancla de más peso + hasta 3 sitios andando + playa
+ *           más cercana por la tarde.
+ *   Día 2 · de playa: la mejor playa que no sea la del día 1, con un
+ *           parque, mirador o faro a menos de 3 km; si no hay nada, la
+ *           mañana es un segundo mirador o un museo y la tarde la playa.
+ *   Día 3 · otra zona: un ancla lejos del casco del día 1 (>1,8 km) o, si
+ *           el pueblo es pequeño, lo mejor que quedó sin ver; playa
+ *           cercana; faro para despedirse.
+ *  Un día con menos de 3 paradas no se pinta (lo filtra la página). */
+export function guiaTresDias(pois: MunicipioPois, playas: Playa[]): Guia[] {
+  const s = nuevaSel(pois, playas)
+  const playasUsadas = new Set<string>()
+  const centro: Punto = { lat: pois.lat, lng: pois.lng }
+
+  // ── Día 1 · el casco ─────────────────────────────────────────
   const d1: ParadaCruda[] = []
-  const m1a = usarPoi(monumentos[0]); if (m1a) d1.push(paradaDePoi(m1a))
-  const m1b = usarPoi(cercano(monumentos, d1[d1.length - 1] ?? null, usadosGlobal))
-  if (m1b) d1.push(paradaDePoi(m1b))
-  const mus1 = usarPoi(museos[0]); if (mus1) d1.push(paradaDePoi(mus1))
-  if (playasDif[0]) d1.push(paradaDePlaya(playasDif[0], 'Baño', 60))   // el día 1 la playa es corta: la ciudad manda
+  const a1 = ancla(s)
+  const c1 = a1 ? cluster(s, a1, 4) : []
+  c1.forEach(p => d1.push(paradaDePoi(p)))
+  const ref1: Punto = d1[d1.length - 1] ?? centro
+  const p1 = playaCerca(s, ref1, playasUsadas, false)
+  if (p1) d1.push(paradaDePlaya(p1))
 
-  // ── DÍA 2 ────────────────────────────────────────────────────
+  // ── Día 2 · de playa ─────────────────────────────────────────
   const d2: ParadaCruda[] = []
-  const par2 = usarPoi(parques[0]); if (par2) d2.push(paradaDePoi(par2))
-  if (playasDif[1]) d2.push(paradaDePlaya(playasDif[1]))
-  const mir2 = usarPoi(cercano(miradores, d2[d2.length - 1] ?? null, usadosGlobal))
-  if (mir2) d2.push(paradaDePoi(mir2))
+  // La mejor playa que quede, medida desde el pueblo (no desde el casco).
+  const p2 = playaCerca(s, centro, playasUsadas, false) ?? p1
+  if (p2) {
+    const manana = [
+      usar(s, s.pois.filter(p => libre(s, p) && esParque(p) && dist(p, p2) <= 3000).sort((a, b) => peso(b) - peso(a))[0]),
+      miradorCerca(s, p2),
+    ].filter((p): p is Poi => !!p)
+    if (!manana.length) {
+      // Sin nada junto a la playa: una mañana corta en el sitio con más peso
+      // que quede (museo o monumento), y luego la playa.
+      const alt = usar(s, ancla(s, p => esMuseo(p) || esMirador(p)) ?? ancla(s))
+      if (alt) manana.push(alt)
+    }
+    manana.sort((a, b) => dist(a, p2) - dist(b, p2)).reverse()   // lo más lejos primero, se acaba en la playa
+    manana.forEach(p => d2.push(paradaDePoi(p)))
+    d2.push(paradaDePlaya(p2, 240))                               // día de playa: la tarde entera
+    const fin = miradorCerca(s, p2)
+    if (fin) d2.push(paradaDePoi(fin))
+  }
 
-  // ── DÍA 3 ────────────────────────────────────────────────────
+  // ── Día 3 · otra zona ────────────────────────────────────────
   const d3: ParadaCruda[] = []
-  const mus3a = usarPoi(museos.find(m => !usadosGlobal.has(m.nombre)) ?? null)
-  if (mus3a) d3.push(paradaDePoi(mus3a))
-  const mus3b = usarPoi(museos.find(m => !usadosGlobal.has(m.nombre)) ?? null)
-  if (mus3b) d3.push(paradaDePoi(mus3b))
-  if (playasDif[2] ?? playasDif[0]) d3.push(paradaDePlaya(playasDif[2] ?? playasDif[0]))
-  const faro3 = usarPoi(miradores.find(m => m.tipo === 'Faro' && !usadosGlobal.has(m.nombre)) ?? cercano(miradores, d3[d3.length - 1] ?? null, usadosGlobal))
-  if (faro3) d3.push(paradaDePoi(faro3))
+  const lejosDelCasco = (p: Poi) => !a1 || dist(p, a1) > RADIO_CLUSTER_M
+  const a3 = ancla(s, lejosDelCasco) ?? ancla(s)
+  if (a3) {
+    cluster(s, a3, 3).forEach(p => d3.push(paradaDePoi(p)))
+    const ref3: Punto = d3[d3.length - 1]
+    const p3 = playaCerca(s, ref3, playasUsadas) ?? p1
+    if (p3) {
+      d3.push(paradaDePlaya(p3, 150))
+      const faro = usar(s, s.pois.filter(p => libre(s, p) && p.tipo === 'Faro').sort((a, b) => dist(a, p3) - dist(b, p3))[0])
+        ?? miradorCerca(s, p3)
+      if (faro) d3.push(paradaDePoi(faro))
+    }
+  }
 
   return [
-    { titulo: 'Día 1', subtitulo: 'Casco histórico',           paradas: encadenar(d1, 10 * 60) },
-    { titulo: 'Día 2', subtitulo: 'Naturaleza y aire libre',    paradas: encadenar(d2, 10 * 60) },
-    { titulo: 'Día 3', subtitulo: 'Cultura y despedida',        paradas: encadenar(d3, 10 * 60) },
+    { titulo: 'Día 1', subtitulo: a1 ? `El casco, alrededor de ${nombreLimpio(a1)}` : 'El casco', paradas: encadenar(d1) },
+    { titulo: 'Día 2', subtitulo: p2 ? `De playa en ${p2.nombre}` : 'De playa', paradas: encadenar(d2) },
+    { titulo: 'Día 3', subtitulo: a3 && a3 !== a1 && lejosDelCasco(a3) ? `Otra zona: ${nombreLimpio(a3)}` : 'Lo que quedó por ver', paradas: encadenar(d3) },
   ]
-}
-
-/** Selecciona hasta N playas del listado que estén lo más dispersas posible.
- *  Empieza por la mejor equipada y añade la más lejana a las ya elegidas.
- *  Cuando no hay dispersión, devuelve simplemente las N primeras. */
-function elegirPlayasDiferentes(playas: Playa[], n: number): Playa[] {
-  if (!playas.length) return []
-  const equipadas = [...playas].sort((a, b) =>
-    ((b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0) + (b.parking ? 1 : 0)) -
-    ((a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0) + (a.parking ? 1 : 0)))
-  const salida: Playa[] = [equipadas[0]]
-  while (salida.length < n && equipadas.length > salida.length) {
-    let bestIdx = -1
-    let bestMinD = -1
-    for (let i = 1; i < equipadas.length; i++) {
-      if (salida.includes(equipadas[i])) continue
-      let minD = Infinity
-      for (const s of salida) {
-        const d = distanciaMetros(equipadas[i].lat, equipadas[i].lng, s.lat, s.lng)
-        if (d < minD) minD = d
-      }
-      if (minD > bestMinD) { bestMinD = minD; bestIdx = i }
-    }
-    if (bestIdx >= 0) salida.push(equipadas[bestIdx])
-    else break
-  }
-  return salida
 }
