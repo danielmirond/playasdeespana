@@ -28,10 +28,16 @@ interface PoiCompacto {
   r?: string | null
 }
 
+interface AlrededorCompacto extends PoiCompacto { km: number }
+
 interface MunicipioPoisData {
   nombre: string
   lat: number
   lng: number
+  /** Sitios con artículo en Wikipedia entre 3 y 25 km: Baelo Claudia desde
+   *  Tarifa, la duna de Valdevaqueros. Lo que cualquier guía cuenta y el
+   *  radio de 3 km dejaba fuera. */
+  alrededores?: AlrededorCompacto[]
   pois: {
     museo: PoiCompacto[]
     monumento: PoiCompacto[]
@@ -60,6 +66,7 @@ export interface MunicipioPois {
   nombre: string
   lat: number
   lng: number
+  alrededores: (Poi & { km: number })[]
   museos: Poi[]
   monumentos: Poi[]
   cultura: Poi[]
@@ -108,6 +115,20 @@ function expand(p: PoiCompacto): Poi {
   }
 }
 
+/**
+ * Relleno que OSM etiqueta como monumento o museo y que ninguna guía
+ * contaría: un torpedo en una rotonda, un carro elevador, unas escaleras,
+ * el busto de un concejal. Medido en Tarifa: el castillo de Guzmán salía
+ * en el puesto 11, detrás de una catapulta. Se quitan por nombre.
+ */
+const RELLENO = /\b(torpedo|catapulta|carro elevador|gr[úu]a|escaleras?|busto|placa|hito|rotonda|aniversario|centenario|homenaje a|monumento a (los|las|la|el|un|una)\b)/i
+
+/** Primero lo que tiene con qué contarse: foto y resumen, luego artículo, luego web. */
+const relevancia = (p: PoiCompacto) => (p.f ? 4 : 0) + (p.r ? 3 : 0) + (p.wp ? 2 : 0) + (p.w ? 1 : 0)
+const ordenar = (lista: PoiCompacto[]) => lista
+  .filter(p => !RELLENO.test(p.n))
+  .sort((a, b) => relevancia(b) - relevancia(a))
+
 export const getMunicipioPois = cache(async (slug: string): Promise<MunicipioPois | null> => {
   const s = await getSidecar()
   if (!s) return null
@@ -117,11 +138,12 @@ export const getMunicipioPois = cache(async (slug: string): Promise<MunicipioPoi
     nombre: raw.nombre,
     lat: raw.lat,
     lng: raw.lng,
-    museos: raw.pois.museo.map(expand),
-    monumentos: raw.pois.monumento.map(expand),
-    cultura: raw.pois.cultura.map(expand),
-    miradores: raw.pois.mirador.map(expand),
-    parques: raw.pois.parque.map(expand),
+    alrededores: (raw.alrededores ?? []).map(p => ({ ...expand(p), km: p.km })),
+    museos: ordenar(raw.pois.museo).map(expand),
+    monumentos: ordenar(raw.pois.monumento).map(expand),
+    cultura: ordenar(raw.pois.cultura).map(expand),
+    miradores: ordenar(raw.pois.mirador).map(expand),
+    parques: ordenar(raw.pois.parque).map(expand),
     total: raw.total,
     generado: raw.generado,
   }
