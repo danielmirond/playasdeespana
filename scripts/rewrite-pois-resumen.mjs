@@ -111,7 +111,7 @@ function valido(r, extracto, nombre, municipio) {
 const data = JSON.parse(readFileSync(FILE, 'utf8'))
 const todos = []
 for (const slug of Object.keys(data))
-  for (const cat of Object.values(data[slug].pois))
+  for (const cat of [...Object.values(data[slug].pois), data[slug].alrededores ?? []])
     for (const poi of cat) if (poi.e?.t) todos.push({ slug, poi })
 
 if (revalidar) {
@@ -125,7 +125,10 @@ if (revalidar) {
   console.log(`\nRevalidado: ${anulados} anulados (quedan sin resumen hasta la próxima pasada).`)
   process.exit(0)
 }
-const lote = prueba ? todos.sort(() => Math.random() - 0.5).slice(0, prueba) : todos
+// PRUEBA_SEMILLA fija la muestra para comparar modelos sobre los mismos sitios.
+let semilla = Number(process.env.PRUEBA_SEMILLA ?? 0) || Date.now()
+const azar = () => { semilla = (semilla * 9301 + 49297) % 233280; return semilla / 233280 - 0.5 }
+const lote = prueba ? todos.sort(azar).slice(0, prueba) : todos
 let ok = 0, ko = 0, ya = 0
 const motivos = {}
 for (const [i, { slug, poi }] of lote.entries()) {

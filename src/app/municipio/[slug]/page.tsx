@@ -3,7 +3,7 @@ import { SLOTS } from '@/lib/adsense'
 import { Fragment } from 'react'
 import Hueco from '@/components/ui/Hueco'
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import EnlacesGeoHubs from '@/components/seo/EnlacesGeoHubs'
@@ -66,7 +66,12 @@ export default async function MunicipioPage({ params }: Props) {
   const { slug } = await params
   const municipios = await getMunicipios()
   const municipio = municipios.find(m => m.slug === slug)
-  if (!municipio) notFound()
+  if (!municipio) {
+    // Con una sola playa no hay municipio que comparar: a la ficha.
+    const unica = await getPlayasByMunicipio(slug)
+    if (unica.length === 1) permanentRedirect(`/playas/${unica[0].slug}`)
+    notFound()
+  }
 
   const playas = await getPlayasByMunicipio(slug)
 

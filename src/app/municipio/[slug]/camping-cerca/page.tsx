@@ -22,7 +22,7 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import Hueco from '@/components/ui/Hueco'
 import { SLOTS } from '@/lib/adsense'
-import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
+import { getMunicipios, getPlayasByMunicipio, MIN_PLAYAS_MUNICIPIO } from '@/lib/playas'
 import { campingsDelMunicipio, metros, MINIMO_CAMPINGS } from '@/lib/campings-municipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import { comunidadDe } from '@/lib/comunidad'
@@ -60,7 +60,7 @@ export default async function CampingCercaPage({ params }: Props) {
   const campings = await campingsDelMunicipio(playas)
   if (campings.length < MINIMO_CAMPINGS) notFound()
 
-  const tienePaginaMuni = municipio.count >= 4
+  const tienePaginaMuni = municipio.count >= MIN_PLAYAS_MUNICIPIO
   const enlaces = await enlacesMunicipio(slug, municipio.nombre)
 
   // Foto de cabecera: la de la playa más cercana al camping más cercano.

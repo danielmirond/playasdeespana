@@ -71,7 +71,7 @@ export function toSlug(str: string): string {
  * (>= minPlayas beaches). Useful for deciding whether to render
  * a link or plain text in the ficha.
  */
-export const getMunicipioSlugsSet = cache(async (minPlayas = 4): Promise<Set<string>> => {
+export const getMunicipioSlugsSet = cache(async (minPlayas = MIN_PLAYAS_MUNICIPIO): Promise<Set<string>> => {
   const municipios = await getMunicipios(minPlayas)
   return new Set(municipios.map(m => m.slug))
 })
@@ -133,7 +133,16 @@ export const getComunidades = cache(async () => {
     .sort((a, b) => b.count - a.count)
 })
 
-export const getMunicipios = cache(async (minPlayas = 4) => {
+/**
+ * Playas mínimas para que un municipio tenga página raíz. Era 4, y dejaba
+ * sin página a Santoña, Laredo, Comillas, Mundaka, Sóller o Corralejo:
+ * 437 municipios con 1-3 playas cuyas subpáginas (el tiempo, campings,
+ * qué hacer) sí existían y enlazaban a un raíz que daba 404. Con 2 playas
+ * ya hay comparación que hacer; con 1, la raíz redirige a la ficha.
+ */
+export const MIN_PLAYAS_MUNICIPIO = 2
+
+export const getMunicipios = cache(async (minPlayas = MIN_PLAYAS_MUNICIPIO) => {
   const playas = await getPlayas()
   // Se agrupa por SLUG, no por el nombre tal cual viene.
   //

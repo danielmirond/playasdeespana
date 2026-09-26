@@ -28,7 +28,7 @@ export interface EnlaceMunicipio {
 
 export async function enlacesMunicipio(slug: string, nombre: string): Promise<EnlaceMunicipio[]> {
   const [conPagina, conAlgunaPlaya, hayPois, playas] = await Promise.all([
-    getMunicipioSlugsSet(4), getMunicipioSlugsSet(1), tienePois(slug), getPlayasByMunicipio(slug),
+    getMunicipioSlugsSet(), getMunicipioSlugsSet(1), tienePois(slug), getPlayasByMunicipio(slug),
   ])
   const campings = await campingsDelMunicipio(playas)
   const out: EnlaceMunicipio[] = []

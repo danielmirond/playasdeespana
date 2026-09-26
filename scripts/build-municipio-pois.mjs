@@ -268,6 +268,45 @@ function nombre(tags) {
   return tags.name || tags['name:es'] || tags['name:en'] || tags.official_name || null
 }
 
+// Alrededores: lo que cualquier guía de «qué ver en X» cuenta y el radio de
+// 3 km deja fuera (Baelo Claudia desde Tarifa, Cabo de Gata desde Níjar).
+// Solo sitios con artículo en Wikipedia: es el filtro más barato de
+// «merece la visita», y da resumen y foto por el mismo camino que el resto.
+const RADIO_ALREDEDORES_M = 25000
+function queryAlrededores(lat, lng) {
+  return `
+[out:json][timeout:25];
+(
+  nwr(around:${RADIO_ALREDEDORES_M},${lat},${lng})[wikipedia][historic~"^(castle|fort|ruins|archaeological_site|monument|tower)$"];
+  nwr(around:${RADIO_ALREDEDORES_M},${lat},${lng})[wikipedia][tourism~"^(museum|attraction|viewpoint)$"];
+  nwr(around:${RADIO_ALREDEDORES_M},${lat},${lng})[wikipedia][natural~"^(cape|peak|beach|dune|cave_entrance|bay)$"];
+  nwr(around:${RADIO_ALREDEDORES_M},${lat},${lng})[wikipedia][boundary=protected_area];
+  nwr(around:${RADIO_ALREDEDORES_M},${lat},${lng})[wikipedia][man_made=lighthouse];
+);
+out center tags 120;
+`.trim()
+}
+const kmEntre = (a, b, c, d) => { const r = Math.PI / 180, x = (c - a) * r, y = (d - b) * r
+  const h = Math.sin(x / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin(y / 2) ** 2
+  return 2 * 6371 * Math.asin(Math.sqrt(h)) }
+
+async function alrededoresDe(m) {
+  const data = await fetchOverpass(queryAlrededores(m.lat, m.lng))
+  const out = [], seen = new Set()
+  for (const el of data.elements ?? []) {
+    const tags = el.tags ?? {}, n = nombre(tags), c = centroide(el)
+    if (!n || !c) continue
+    const km = kmEntre(m.lat, m.lng, c.lat, c.lng)
+    if (km < RADIO_M / 1000 || seen.has(n.toLowerCase())) continue
+    seen.add(n.toLowerCase())
+    const t = tags.natural === 'cape' ? 'Cabo' : tags.natural === 'dune' ? 'Duna' : tags.natural === 'peak' ? 'Cumbre'
+      : tags.natural === 'beach' ? 'Playa' : tags.natural === 'cave_entrance' ? 'Cueva' : tags.boundary ? 'Espacio natural'
+      : tags.man_made === 'lighthouse' ? 'Faro' : (categoria(tags)?.tipo ?? 'Sitio')
+    out.push({ n, t, la: +c.lat.toFixed(5), lo: +c.lng.toFixed(5), wp: tags.wikipedia, km: +km.toFixed(1), ...(tags.website ? { w: tags.website } : {}) })
+  }
+  return out.sort((a, b) => a.km - b.km).slice(0, 8)
+}
+
 async function procesarMunicipio(m) {
   const query = queryFor(m.lat, m.lng)
   const data = await fetchOverpass(query)
@@ -296,7 +335,9 @@ async function procesarMunicipio(m) {
   const LIMITES = { museo: 12, monumento: 20, cultura: 10, mirador: 10, parque: 10 }
   for (const k of Object.keys(pois)) pois[k] = pois[k].slice(0, LIMITES[k])
   const total = Object.values(pois).reduce((a, arr) => a + arr.length, 0)
-  return { pois, total }
+  await new Promise(r => setTimeout(r, 800))
+  const alrededores = await alrededoresDe(m).catch(() => [])
+  return { pois, total, alrededores }
 }
 
 async function main() {
@@ -312,12 +353,37 @@ async function main() {
   // refrescaba ninguno—, pero si Overpass falla en uno se conserva lo que
   // había en vez de dejarlo sin datos.
   const refrescar = process.argv.includes('--refrescar')
+  // --solo-alrededores: deja los POIs como están y solo pide la segunda
+  // consulta a los municipios que aún no la tienen. Es lo que se corrió la
+  // primera vez, para no rehacer 318 cosechas por un bloque nuevo.
+  const soloAlrededores = process.argv.includes('--solo-alrededores')
 
   for (const m of MUNICIPIOS) {
+    if (soloAlrededores) {
+      if (!out[m.slug] || out[m.slug].alrededores) { ok++; continue }
+      try {
+        out[m.slug].alrededores = await alrededoresDe(m)
+        console.log(`✔  ${m.slug}: ${out[m.slug].alrededores.length} alrededores`)
+        writeFileSync(OUT, JSON.stringify(out, null, 0)); ok++
+        await new Promise(r => setTimeout(r, 1500))
+      } catch (e) { console.error(`✗  ${m.slug}: ${e.message ?? e}`); ko++ }
+      continue
+    }
     if (out[m.slug] && !refrescar) { console.log(`✔  ${m.slug} (cache)`); ok++; continue }
     try {
-      const { pois, total } = await procesarMunicipio(m)
-      out[m.slug] = { nombre: m.nombre, lat: m.lat, lng: m.lng, pois, total, generado: new Date().toISOString().slice(0, 10) }
+      const { pois, total, alrededores } = await procesarMunicipio(m)
+      // Con --refrescar se conservan resúmenes y fotos ya resueltos de los
+      // POIs que siguen existiendo: se casan por nombre.
+      const previoPois = out[m.slug]?.pois ?? {}
+      for (const k of Object.keys(pois)) for (const p of pois[k]) {
+        const ant = (previoPois[k] ?? []).find(x => x.n === p.n)
+        if (ant) { if (ant.f !== undefined) p.f = ant.f; if (ant.e !== undefined) p.e = ant.e; if (ant.r !== undefined) p.r = ant.r }
+      }
+      for (const p of alrededores) {
+        const ant = (out[m.slug]?.alrededores ?? []).find(x => x.n === p.n)
+        if (ant) { if (ant.f !== undefined) p.f = ant.f; if (ant.e !== undefined) p.e = ant.e; if (ant.r !== undefined) p.r = ant.r }
+      }
+      out[m.slug] = { nombre: m.nombre, lat: m.lat, lng: m.lng, pois, total, alrededores, generado: new Date().toISOString().slice(0, 10) }
       console.log(`✔  ${m.slug}: ${total} POIs (${pois.museo.length}m · ${pois.monumento.length}mn · ${pois.cultura.length}c · ${pois.mirador.length}mi · ${pois.parque.length}pk)`)
       writeFileSync(OUT, JSON.stringify(out, null, 0))
       ok++

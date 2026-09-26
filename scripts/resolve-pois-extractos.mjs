@@ -54,7 +54,7 @@ async function extracto(wp) {
 const data = JSON.parse(readFileSync(FILE, 'utf8'))
 let ok = 0, nada = 0, ya = 0, err = 0
 for (const slug of Object.keys(data)) {
-  for (const cat of Object.values(data[slug].pois)) {
+  for (const cat of [...Object.values(data[slug].pois), data[slug].alrededores ?? []]) {
     for (const poi of cat) {
       if (!poi.wp) continue
       // Sin --refrescar solo se vuelve a mirar lo que no tiene resumen y cuyo
