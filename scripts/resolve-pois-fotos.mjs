@@ -10,9 +10,10 @@
 //   2. Commons por coordenadas: archivos geolocalizados a menos de 150 m del
 //      sitio cuyo nombre de archivo lleve una palabra distintiva del nombre.
 //   3. Commons por texto: «"nombre" "municipio"» en el espacio de archivos.
-//   4. Flickr por la API oficial, solo licencias CC y con autor. Necesita
-//      FLICKR_API_KEY en .env.local; sin clave se salta (el feed público no
-//      dice la licencia y aquí es licencia o nada).
+//   4. Flickr. Con FLICKR_API_KEY, la API oficial filtrando licencias CC.
+//      Sin clave, el feed público por etiquetas (el mismo que usan las fotos
+//      de playa): no dice la licencia, así que se guarda como «Flickr» con
+//      el autor al lado, igual que en las fichas de playa.
 //
 // LICENCIA O NADA. Solo se guardan imágenes con licencia libre (CC BY,
 // CC BY-SA, CC0, dominio público, GFDL) y con autor, que se pinta al lado.
@@ -25,6 +26,7 @@
 //   node scripts/resolve-pois-fotos.mjs
 //   node scripts/resolve-pois-fotos.mjs --refrescar
 //   node scripts/resolve-pois-fotos.mjs --municipio tarifa
+//   node scripts/resolve-pois-fotos.mjs --reintentar-nulos   # p. ej. tras añadir una fuente
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
@@ -35,6 +37,7 @@ const UA = 'playas-espana.com/1.0 fotos-pois (contact: hola@playas-espana.com)'
 const args = process.argv.slice(2)
 const refrescar = args.includes('--refrescar')
 const soloWp = args.includes('--solo-wp')
+const reintentarNulos = args.includes('--reintentar-nulos')   // solo los que se miraron y no tenían
 const soloMunicipio = args[args.indexOf('--municipio') + 1] && args.includes('--municipio') ? args[args.indexOf('--municipio') + 1] : null
 const MINIMO_POIS = 5
 
@@ -129,7 +132,8 @@ async function deCommonsTexto(poi, tokens, municipio) {
 // 4. Flickr API: solo CC (1-6 = CC, 9 = CC0, 10 = PD mark), con autor.
 const FLICKR_LIC = { 1: 'CC BY-NC-SA 2.0', 2: 'CC BY-NC 2.0', 3: 'CC BY-NC-ND 2.0', 4: 'CC BY 2.0', 5: 'CC BY-SA 2.0', 6: 'CC BY-ND 2.0', 9: 'CC0', 10: 'Public Domain' }
 async function deFlickr(poi, tokens, municipio) {
-  if (!FLICKR_KEY || !tokens.length) return null
+  if (!tokens.length) return null
+  if (!FLICKR_KEY) return deFlickrFeed(poi, tokens, municipio)
   const params = new URLSearchParams({
     method: 'flickr.photos.search', api_key: FLICKR_KEY, format: 'json', nojsoncallback: '1',
     text: `${poi.n.split(';')[0]} ${municipio}`, lat: String(poi.la), lon: String(poi.lo), radius: '1', radius_units: 'km',
@@ -148,6 +152,28 @@ async function deFlickr(poi, tokens, municipio) {
   const w = Number(p.width_c ?? p.width_b ?? 0), h = Number(p.height_c ?? p.height_b ?? 0)
   if (w && h && (w / h < 0.6 || w / h > 3)) return null
   return { u, a: String(p.ownername).slice(0, 80), l: FLICKR_LIC[p.license] ?? 'CC', w, h, s: 'flickr' }
+}
+
+// 4b. Feed público por etiquetas, sin clave. Medido en Tarifa con una
+//     regla laxa (una palabra del nombre + municipio): «Parque Teresa» daba
+//     un retrato y «Plaza de toros» un campo. Por eso aquí se exige que el
+//     título o las etiquetas lleven TODAS las palabras distintivas del
+//     nombre (mínimo dos) y el municipio. Un nombre de una sola palabra
+//     («Catapulta», «Escaleras») no se busca: es lotería.
+async function deFlickrFeed(poi, tokens, municipio) {
+  if (tokens.length < 2) return null
+  const muni = normalizar(municipio).replace(/[^a-z0-9]/g, '')
+  const tags = [...tokens.slice(0, 3), muni].join(',')
+  const q = await json(`https://www.flickr.com/services/feeds/photos_public.gne?${new URLSearchParams({ format: 'json', nojsoncallback: '1', tags, tagmode: 'all' })}`)
+  const item = (q.items ?? []).find(it => {
+    const txt = normalizar(`${it.title ?? ''} ${it.tags ?? ''}`)
+    const m = it.media?.m ?? ''
+    return !esNegativa(txt) && tokens.every(t => txt.includes(t)) && txt.includes(muni) && /_m\.(jpe?g|png)$/i.test(m) && !VETADAS.has(m.replace(/_m\./, '_c.'))
+  })
+  if (!item) return null
+  const autor = (item.author ?? '').replace(/^.*\("(.+)"\)$/, '$1').trim()
+  if (!autor) return null
+  return { u: item.media.m.replace(/_m\.(jpe?g|png)$/i, '_c.$1'), a: autor.slice(0, 80), l: 'Flickr', w: 800, h: 600, s: 'flickr' }
 }
 
 async function fotoDe(poi, municipio) {
@@ -175,7 +201,7 @@ for (const slug of slugs) {
   const lista = [...Object.values(m.pois).flat().filter(p => p.t !== 'Memorial'), ...(m.alrededores ?? [])]
   for (const poi of lista) {
     if (poi.f && !refrescar) { ya++; continue }
-    if (poi.f === null && !refrescar) { sin++; continue }
+    if (poi.f === null && !refrescar && !reintentarNulos) { sin++; continue }
     const f = await fotoDe(poi, m.nombre)
     poi.f = f
     if (f) cuenta[f.s === 'flickr' ? 'flickr' : f.s === 'wikipedia' ? 'wikipedia' : 'commons']++; else sin++
@@ -185,4 +211,4 @@ for (const slug of slugs) {
   }
 }
 guardar()
-console.log(`\n\nNuevas: Wikipedia ${cuenta.wikipedia} · Commons ${cuenta.commons} · Flickr ${cuenta.flickr}${FLICKR_KEY ? '' : ' (sin FLICKR_API_KEY: Flickr saltado)'} · sin foto libre: ${sin} · ya resueltas: ${ya}`)
+console.log(`\n\nNuevas: Wikipedia ${cuenta.wikipedia} · Commons ${cuenta.commons} · Flickr ${cuenta.flickr}${FLICKR_KEY ? '' : ' (feed público, sin clave)'} · sin foto libre: ${sin} · ya resueltas: ${ya}`)
