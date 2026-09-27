@@ -18,7 +18,7 @@ import { NextRequest } from 'next/server'
 export const runtime = 'edge'
 
 const INK    = '#2a1a08'
-const ACCENT = '#6b400a'
+const ACCENT = '#1f6f8b'
 const PAPEL  = '#faf4e6'
 const RULE   = 'rgba(42,26,8,0.18)'
 const RULE_S = 'rgba(42,26,8,0.32)'

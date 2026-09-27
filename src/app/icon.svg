@@ -13,5 +13,5 @@
         fill="#2a1a08"
         text-anchor="middle">P</text>
   <!-- Ondita decorativa bajo la P -->
-  <path d="M18 50 Q26 46 32 50 T46 50" fill="none" stroke="#6b400a" stroke-width="2" stroke-linecap="round"/>
+  <path d="M18 50 Q26 46 32 50 T46 50" fill="none" stroke="#1f6f8b" stroke-width="2" stroke-linecap="round"/>
 </svg>

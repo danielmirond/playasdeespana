@@ -18,31 +18,31 @@ export const LITORAL_CSS = `
   /* ——— Papel y tinta ———————————————————————————————————
      Blanco cálido apagado, no brillante. La diferencia entre niveles es
      mínima: el contraste vive en la tinta, no en el escalonado de fondos. */
-  --paper-0: #fffefc;   /* tarjeta */
-  --paper-1: #ede9e0;   /* fondo del documento */
-  --paper-2: #e4dfd4;   /* hundida */
-  --paper-3: #d8d3c6;   /* bandas, pies, zócalos */
+  --paper-0: #ffffff;   /* tarjeta */
+  --paper-1: #ffffff;   /* fondo del documento */
+  --paper-2: #f8fbfc;   /* hundida */
+  --paper-3: #eef4f7;   /* bandas, pies, zócalos */
   /* El fondo baja dos puntos desde el #f7f5f1 original: con la tarjeta en
      #fffefc, ~6% de luminancia de diferencia basta para que flote sin
      borde ni sombra. Los otros dos niveles bajan con él por obligación,
      no por gusto: si --paper-1 se hunde y los demás no, la «hundida»
      acaba siendo más clara que el fondo y la escala se invierte. */
 
-  --ink-900: #12110e;   /* casi negra y aún cálida.
+  --ink-900: #0f2a3d;   /* casi negra y aún cálida.
        DESVIACIÓN DECLARADA: el manual dice 17,3:1 y esa cifra era cierta
        sobre el papel original (#f7f5f1). Sobre el fondo actual (#ede9e0,
        dos puntos más hundido por decisión de producto) da 15,6:1, medido.
        Sigue muy por encima de AAA, que pide 7. Se anota porque el zip ya
        no describe el sitio y quien lo consulte dentro de seis meses leerá
        una cifra que no es. */
-  --ink-700: #3d3a33;
-  --ink-500: #666257;   /* Era #6e6a5f, medido 5,4:1 sobre la tarjeta. Al
+  --ink-700: #2f4d62;
+  --ink-500: #4d6675;   /* Era #6e6a5f, medido 5,4:1 sobre la tarjeta. Al
                            bajar el fondo dos puntos ese mismo gris caía a
                            4,46:1 sobre --paper-1 y a 4,06:1 sobre la
                            superficie hundida: por debajo de AA justo en el
                            texto secundario, que además es el de 11-14px.
                            Ahora 5,0 / 4,6 / 6,0 sobre los tres papeles. */
-  --ink-300: #a39d90;   /* DECORATIVO · 2,5:1 · nunca bajo texto */
+  --ink-300: #a9bcc8;   /* DECORATIVO · 2,5:1 · nunca bajo texto */
 
   --bg:        var(--paper-1);
   --surface:   var(--paper-0);
@@ -62,37 +62,37 @@ export const LITORAL_CSS = `
      «interacción con color» contra «interacción en tinta» y no mete de
      paso un tono nuevo que nadie ha decidido. Ver el bloque
      [data-flags~="ds_sin_acento"] al final de la hoja. */
-  --accent:   #6b400a;
-  --accent-2: #85560f;
+  --accent:   #1f6f8b;
+  --accent-2: #2b7f9c;
 
   /* ——— El único material de color ———————————————————————
      Bronce. EN EXCLUSIVA para el sello del cuaderno: el momento en que el
      usuario se lleva algo. Es material, no tinta — 3,6:1, así que rellena y
      bordea, pero nunca escribe. Si el sello lleva rótulo, va en --ink-900
      sobre --bronce-tint. */
-  --bronce:      #9a7b46;
-  --bronce-tint: #f1ead9;
+  --bronce:      #3d93b0;
+  --bronce-tint: #e6f0f4;
 
   /* ——— Filetes de un cabello ————————————————————————————
      La separación entre bloques debe intuirse, no verse. */
-  --rule:        rgba(18,17,14,.08);
-  --rule-strong: rgba(18,17,14,.18);
-  --rule-hair:   rgba(18,17,14,.05);
+  --rule:        rgba(15,42,61,.10);
+  --rule-strong: rgba(15,42,61,.22);
+  --rule-hair:   rgba(15,42,61,.06);
 
   /* ——— Certeza del dato —————————————————————————————————
      El COLOR es matiz; el TRAZO es el mensaje. Así funciona en monocromo y
      para quien no distingue el verde del ocre. */
-  --cert-medido:       #1f4f6d;   /* sensor físico · el único azul */
-  --cert-oficial:      #2f6b39;   /* AEMET, socorrismo */
-  --cert-reportado:    #9a7433;   /* bañistas · 3,9:1 → trazo y cifra ≥18,66px en 700 */
-  --cert-estimado:     #6e6a5f;   /* modelo propio */
-  --cert-sindato:      #666257;   /* ausencia · estado de 1.ª clase.
+  --cert-medido:       #1f6f8b;   /* sensor físico · el único azul */
+  --cert-oficial:      #2e7d4f;   /* AEMET, socorrismo */
+  --cert-reportado:    #9a5a12;   /* bañistas · 3,9:1 → trazo y cifra ≥18,66px en 700 */
+  --cert-estimado:     #5a6f7c;   /* modelo propio */
+  --cert-sindato:      #6b7a83;   /* ausencia · estado de 1.ª clase.
        Era #6e6a5f, y el manual lo describe como «contraste real AA» —
        que es justo lo que dejó de ser al bajar el fondo dos puntos:
        4,46:1 sobre --paper-1 y 4,06 sobre la hundida. Un estado de
        primera clase que no se lee es un hueco con más letras. Mismo
        valor que --ink-500, por el mismo motivo y en el mismo sitio. */
-  --cert-sindato-tint: #cdc8bb;   /* decorativo · NUNCA bajo texto */
+  --cert-sindato-tint: #d9e3e9;   /* decorativo · NUNCA bajo texto */
 
   --trazo-medido:    2px solid;
   --trazo-oficial:   1.5px solid;
@@ -102,19 +102,19 @@ export const LITORAL_CSS = `
   /* ——— Score ————————————————————————————————————————————
      Desaturados: el score se lee por la cifra, no por el color. Señal, no
      tipografía de lectura — colorean cifras grandes, nunca texto corrido. */
-  --score-excellent: #2f6b39;   /* 85–100 */
-  --score-good:      #5c7734;   /* 70–84 */
-  --score-mid:       #9a7433;   /* 50–69 */
-  --score-low:       #9c4a20;   /* 30–49 */
-  --score-danger:    #862a22;   /* 0–29 */
+  --score-excellent: #2e7d4f;   /* 85–100 */
+  --score-good:      #5f8a3a;   /* 70–84 */
+  --score-mid:       #b8791d;   /* 50–69 */
+  --score-low:       #b0522a;   /* 30–49 */
+  --score-danger:    #a63a2c;   /* 0–29 */
 
   /* ——— Estados del mar ——————————————————————————————————— */
-  --sea-calma:   #3a7a6c;
-  --sea-buena:   #2f6b39;
-  --sea-aviso:   #9a7433;
-  --sea-surf:    #1f4f6d;
-  --sea-viento:  #66696d;
-  --sea-peligro: #862a22;
+  --sea-calma:   #3f9a8a;
+  --sea-buena:   #2e7d4f;
+  --sea-aviso:   #b8791d;
+  --sea-surf:    #1f6f8b;
+  --sea-viento:  #6b7a83;
+  --sea-peligro: #a63a2c;
 
   /* ——— Tipografía ———————————————————————————————————————
      Literata: serif de lectura variable (200–900), itálica real, cifras
@@ -240,13 +240,13 @@ export const LITORAL_CSS = `
 
 /* ——— Modo oscuro ——————————————————————————————————————— */
 [data-theme="dark"] {
-  --paper-0: #191814; --paper-1: #100f0d; --paper-2: #211f1a; --paper-3: #2a2721;
-  --ink-900: #f5f2eb; --ink-700: #c4bfb2; --ink-500: #8e8a7c; --ink-300: #6a675d;
+  --paper-0: #0f2130; --paper-1: #081521; --paper-2: #15303f; --paper-3: #1c3a4f;
+  --ink-900: #e8f1f5; --ink-700: #c3d6e0; --ink-500: #8aa0ad; --ink-300: #5a7080;
 
-  --bronce: #c9a86a; --bronce-tint: #2a2317;
-  --rule: rgba(245,242,235,.10);
-  --rule-strong: rgba(245,242,235,.22);
-  --rule-hair: rgba(245,242,235,.06);
+  --bronce: #5fb0c8; --bronce-tint: #15303f;
+  --rule: rgba(232,241,245,.10);
+  --rule-strong: rgba(232,241,245,.22);
+  --rule-hair: rgba(232,241,245,.06);
 
   --cert-medido: #77b0d4; --cert-oficial: #74b87c; --cert-reportado: #cfa552;
   --cert-estimado: #8e8a7c; --cert-sindato: #8e8a7c; --cert-sindato-tint: #3f3c34;

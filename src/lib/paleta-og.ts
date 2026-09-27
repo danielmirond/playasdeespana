@@ -30,22 +30,22 @@ export interface PaletaOG {
 }
 
 const ARENA: PaletaOG = {
-  bg: '#f5ecd5', surface: '#faf4e6',
-  ink: '#2a1a08', inkSoft: '#524030', inkMute: '#6a5840',
-  line: 'rgba(42,26,8,.14)', accent: '#6b400a', onPhoto: '#ffffff',
-  score: { excelente:'#3d6b1f', muybueno:'#7a8a30', aceptable:'#c48a1e',
-           limitado:'#a04818', noapto:'#7a2818', sindato:'#7a6858' },
-  ilustracion: ['#a8b8c4', '#c8c090', '#b8a06a'],
+  bg: '#f8fbfc', surface: '#ffffff',
+  ink: '#0f2a3d', inkSoft: '#2f4d62', inkMute: '#4d6675',
+  line: 'rgba(15,42,61,.14)', accent: '#1f6f8b', onPhoto: '#ffffff',
+  score: { excelente:'#2e7d4f', muybueno:'#6a8f3a', aceptable:'#c2711a',
+           limitado:'#b0522a', noapto:'#a63a2c', sindato:'#6b7a83' },
+  ilustracion: ['#8fcbdc', '#cfe6ee', '#3d93b0'],
   serif: 'Playfair Display, Georgia, serif',
 }
 
 const LITORAL: PaletaOG = {
-  bg: '#f7f5f1', surface: '#fffefc',
-  ink: '#12110e', inkSoft: '#3d3a33', inkMute: '#6e6a5f',
-  line: 'rgba(18,17,14,.08)', accent: '#12110e',   // la interacción no lleva color
-  onPhoto: '#fffefc',
-  score: { excelente:'#2f6b39', muybueno:'#5c7734', aceptable:'#9a7433',
-           limitado:'#9c4a20', noapto:'#862a22', sindato:'#6e6a5f' },
+  bg: '#f8fbfc', surface: '#ffffff',
+  ink: '#0f2a3d', inkSoft: '#2f4d62', inkMute: '#4d6675',
+  line: 'rgba(15,42,61,.10)', accent: '#0f2a3d',   // la interacción no lleva color
+  onPhoto: '#ffffff',
+  score: { excelente:'#2e7d4f', muybueno:'#5f8a3a', aceptable:'#b8791d',
+           limitado:'#b0522a', noapto:'#a63a2c', sindato:'#6b7a83' },
   ilustracion: ['#b9c2c4', '#d8d4c9', '#c4bcaa'],
   serif: 'Literata, Georgia, serif',
 }

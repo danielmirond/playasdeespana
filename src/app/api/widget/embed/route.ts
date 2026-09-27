@@ -22,7 +22,7 @@ const JS = `
       font-family:Georgia,serif;text-decoration:none;color:#2a1a08;
       transition:border-color .15s;max-width:360px;
     }
-    .pe-widget:hover{border-color:#6b400a;text-decoration:none}
+    .pe-widget:hover{border-color:#1f6f8b;text-decoration:none}
     .pe-score{
       width:40px;height:40px;border-radius:50%;
       display:flex;align-items:center;justify-content:center;
