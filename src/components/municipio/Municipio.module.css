@@ -38,7 +38,7 @@
 .chips { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; padding: 1rem 1.25rem 0; -webkit-overflow-scrolling: touch; }
 .chips::-webkit-scrollbar { display: none; }
 .chip { flex: 0 0 auto; height: 40px; padding: 0 1rem; border-radius: 100px; border: 1px solid var(--line); background: var(--card-bg, var(--surface)); color: var(--ink); font-size: .82rem; font-weight: 500; display: inline-flex; align-items: center; gap: .4rem; text-decoration: none; white-space: nowrap; }
-.chipActivo { background: var(--ink); color: #faf4e6; border-color: var(--ink); font-weight: 600; }
+.chipActivo { background: var(--ink); color: #ffffff; border-color: var(--ink); font-weight: 600; }
 .chipPunto { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 @media (min-width: 900px) { .chips { flex-wrap: wrap; overflow: visible; padding: 1.25rem 1.5rem 0; max-width: 1000px; margin: 0 auto; box-sizing: border-box; } }
 
@@ -104,7 +104,7 @@
   .navBarra { display: none; }
   .navPildoras { display: flex; gap: .35rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; padding: .9rem 1.5rem 0; box-sizing: border-box; }
   .pildora { height: 36px; padding: 0 .9rem; border-radius: 100px; font-size: .82rem; font-weight: 600; color: var(--ink); display: inline-flex; align-items: center; text-decoration: none; }
-  .pildoraActiva { background: var(--ink); color: #faf4e6; font-weight: 700; }
+  .pildoraActiva { background: var(--ink); color: #ffffff; font-weight: 700; }
 }
 
 /* Veredicto sobre la foto (el tiempo). */

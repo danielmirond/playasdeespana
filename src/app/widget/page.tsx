@@ -85,7 +85,7 @@ export default function WidgetPage() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 10,
                 padding: '10px 14px',
-                background: 'var(--surface)', border: '1px solid #e5d6b4', borderRadius: 6,
+                background: 'var(--surface)', border: '1px solid #cfe6ee', borderRadius: 6,
                 fontFamily: 'Georgia, serif', textDecoration: 'none', color: 'var(--ink)',
                 maxWidth: 360,
               }}

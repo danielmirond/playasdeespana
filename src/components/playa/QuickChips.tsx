@@ -155,7 +155,7 @@ export default function QuickChips({ slug, locale = 'es', inlineMode = false }: 
       style={{
         margin: '0 0 1.5rem',
         padding: '1rem 1.1rem',
-        background: 'linear-gradient(135deg, #faf6ef 0%, #f0e6d0 100%)',
+        background: 'linear-gradient(135deg, #ffffff 0%, #e6f0f4 100%)',
         border: '1px solid var(--line)',
         borderRadius: 8,
       }}

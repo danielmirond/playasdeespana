@@ -158,28 +158,28 @@ export const viewport: Viewport = {
 const CRITICAL_CSS = `
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-/* Arena · superficies */
---arena-50:#faf4e6;--arena-100:#f5ecd5;--arena-200:#f0e6d0;--arena-300:#e5d6b4;--arena-400:#d4c090;--arena-500:#b8a06a;
+/* Arena · superficies. Piel «Blanco y mar» (sep-2026): blanco y gris azulado; los nombres se conservan para no tocar los componentes. */
+--arena-50:#ffffff;--arena-100:#f8fbfc;--arena-200:#ffffff;--arena-300:#eef4f7;--arena-400:#d9eaf0;--arena-500:#a9cbd8;
 /* Tinta · texto */
---tinta-900:#1a0f04;--tinta-800:#2a1a08;--tinta-700:#3d2a14;--tinta-600:#524030;--tinta-500:#6a5840;--tinta-400:#a89880;
+--tinta-900:#081a29;--tinta-800:#0f2a3d;--tinta-700:#1c3a4f;--tinta-600:#2f4d62;--tinta-500:#4d6675;--tinta-400:#8aa0ad;
 /* Acentos · marca */
---terra-900:#4a2a04;--terra-800:#6b400a;--terra-700:#8a5418;--terra-600:#a8691e;--ocre-500:#d48a1a;--ocre-400:#e8a030;--ocre-300:#f0bc62;
+--terra-900:#0f4b60;--terra-800:#1f6f8b;--terra-700:#2b7f9c;--terra-600:#3d93b0;--ocre-500:#c2711a;--ocre-400:#5fb0c8;--ocre-300:#8fcbdc;
 /* Mar. solo contexto marino */
---mar-700:#2d5266;--mar-500:#4a7a90;--mar-300:#8aa8b8;
+--mar-700:#1f6f8b;--mar-500:#3d93b0;--mar-300:#8fcbdc;
 /* Semánticos (puntuación) */
---excelente:#3d6b1f;--muybueno:#7a8a30;--aceptable:#c48a1e;--limitado:#a04818;--noapto:#7a2818;
+--excelente:#2e7d4f;--muybueno:#6a8f3a;--aceptable:#c2711a;--limitado:#b0522a;--noapto:#a63a2c;
 /* Estados del mar */
---sea-calma:#5a8a7a;--sea-buena:#3d6b1f;--sea-aviso:#c48a1e;--sea-surf:#2d5266;--sea-viento:#7a7a7a;--sea-peligro:#7a2818;
+--sea-calma:#4f9a8a;--sea-buena:#2e7d4f;--sea-aviso:#c2711a;--sea-surf:#1f6f8b;--sea-viento:#6b7a83;--sea-peligro:#a63a2c;
 /* Aliases funcionales */
 --bg:var(--arena-200);--surface:var(--arena-50);--surface-2:var(--arena-100);
 --ink:var(--tinta-800);--ink-soft:var(--tinta-600);--muted:var(--tinta-500);
 --accent:var(--terra-800);--accent2:var(--ocre-400);
---line:rgba(42,26,8,.14);--line-strong:rgba(42,26,8,.28);
+--line:rgba(15,42,61,.14);--line-strong:rgba(15,42,61,.28);
 --card-bg:var(--surface);--metric-bg:var(--surface);--ring:var(--terra-700);
 /* Cuatro tokens que solo existían como fallback dentro de los componentes.
    Declararlos aquí es lo que permite quitarles el hex: sin esto, al
    limpiarlo la propiedad quedaría inválida y el navegador la ignoraría. */
---card-bg2:#f5ede0;--accent-soft:#fdecd6;--on-accent:#fff;--on-media:#ffd66e;--sello-accent:var(--terra-800);--sello-ink:var(--tinta-800);
+--card-bg2:#f8fbfc;--accent-soft:#eef4f7;--on-accent:#fff;--on-media:#8fcbdc;--sello-accent:var(--terra-800);--sello-ink:var(--tinta-800);
 /* Compat */
 --calma:var(--sea-calma);--buena:var(--sea-buena);--aviso:var(--sea-aviso);--peligro:var(--sea-peligro);--surf:var(--sea-surf);--viento:var(--sea-viento);
 /* Fonts */
@@ -189,11 +189,11 @@ const CRITICAL_CSS = `
 /* Certeza del dato (propuesta de diseño 2026, §5.4). Cuatro grados de
    confianza y una ausencia. El color solo matiza: el peso lo lleva el
    TRAZO del subrayado, para que se lea en monocromo y sobre fotografía. */
---cert-medido:#2d5266;--cert-oficial:#3d6b1f;--cert-reportado:#8a5f0a;--cert-estimado:#7a6850;--cert-sindato:#7a6b55;
+--cert-medido:#1f6f8b;--cert-oficial:#2e7d4f;--cert-reportado:#9a5a12;--cert-estimado:#5a6f7c;--cert-sindato:#6b7a83;
 --cert-rule-medido:2px solid var(--cert-medido);--cert-rule-oficial:1.5px solid var(--cert-oficial);
 --cert-rule-reportado:1.5px dotted var(--cert-reportado);--cert-rule-estimado:1px dashed var(--cert-estimado);
---cert-bg-medido:rgba(45,82,102,.08);--cert-bg-oficial:rgba(61,107,31,.08);
---cert-bg-reportado:rgba(196,138,30,.10);--cert-bg-estimado:rgba(122,104,80,.07);
+--cert-bg-medido:rgba(31,111,139,.08);--cert-bg-oficial:rgba(46,125,79,.08);
+--cert-bg-reportado:rgba(194,113,26,.10);--cert-bg-estimado:rgba(90,111,124,.07);
 /* Cifra destacada: score y mediciones son voz de medio → serif */
 /* Escala de texto. Existía solo en Litoral, así que los componentes
    escribían el tamaño a mano y cambiar uno cambiaba los dos sistemas.
@@ -210,14 +210,14 @@ const CRITICAL_CSS = `
 /* Objetivos táctiles */
 --touch-min:44px;--touch-comfy:48px;
 /* Shadows. muy sutiles */
---shadow-sm:0 1px 0 rgba(42,26,8,.06),0 1px 2px rgba(42,26,8,.04);
---shadow-md:0 2px 4px rgba(42,26,8,.06),0 4px 12px rgba(42,26,8,.05);
---shadow-lg:0 8px 24px rgba(42,26,8,.10);
+--shadow-sm:0 1px 0 rgba(15,42,61,.06),0 1px 2px rgba(15,42,61,.04);
+--shadow-md:0 2px 4px rgba(15,42,61,.06),0 4px 12px rgba(15,42,61,.05);
+--shadow-lg:0 8px 24px rgba(15,42,61,.10);
 /* Motion */
 --ease:cubic-bezier(.2,.6,.2,1);--dur-fast:120ms;--dur:200ms
 }
 /* Dark mode */
-[data-theme="dark"]{--arena-200:#1a1208;--arena-300:#241a0e;--bg:#15100a;--surface:#1f160c;--surface-2:#281d12;--ink:#f0e6d0;--ink-soft:#d4c090;--muted:#a89880;--accent:#d48a1a;--accent2:#e8a030;--line:rgba(240,230,208,.14);--line-strong:rgba(240,230,208,.28);--card-bg:var(--surface);--metric-bg:var(--surface);--shadow-sm:0 1px 0 rgba(0,0,0,.4);--shadow-md:0 4px 12px rgba(0,0,0,.45);--shadow-lg:0 12px 32px rgba(0,0,0,.55)}
+[data-theme="dark"]{--arena-200:#0b1a26;--arena-300:#12283a;--bg:#081521;--surface:#0f2130;--surface-2:#15303f;--ink:#e8f1f5;--ink-soft:#c3d6e0;--muted:#8aa0ad;--accent:#5fb0c8;--accent2:#8fcbdc;--line:rgba(232,241,245,.14);--line-strong:rgba(232,241,245,.28);--card-bg:var(--surface);--metric-bg:var(--surface);--shadow-sm:0 1px 0 rgba(0,0,0,.4);--shadow-md:0 4px 12px rgba(0,0,0,.45);--shadow-lg:0 12px 32px rgba(0,0,0,.55)}
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;text-rendering:optimizeLegibility;font-feature-settings:"ss01","cv11"}
 a{text-decoration:none;color:inherit}

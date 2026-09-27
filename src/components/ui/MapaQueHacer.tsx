@@ -36,8 +36,8 @@ interface Props {
 // Colores del sistema. Cada categoría se lee de un vistazo.
 const COLOR = {
   playa:     '#3d6b1f',   // verde bandera
-  museo:     '#6b400a',   // terracota accent
-  monumento: '#2a1a08',   // tinta oscura
+  museo:     '#1f6f8b',   // azul de marca
+  monumento: '#0f2a3d',   // tinta marino
   mirador:   '#e8a030',   // ocre para faros/miradores (visible sobre tierra)
   cultura:   '#4a7a90',   // marino para cines/teatros
   parque:    '#8a8a30',   // oliva para verde real
@@ -54,10 +54,10 @@ function icono(color: string, size: number, L: any) {
 }
 
 function popupPlaya(p: PlayaMarcador): string {
-  return `<div style="font-family:var(--font-sans,system-ui);min-width:170px;color:#2a1a08">
+  return `<div style="font-family:var(--font-sans,system-ui);min-width:170px;color:#0f2a3d">
     <div style="font-family:var(--font-serif,Georgia,serif);font-weight:700;font-size:1rem;line-height:1.15;margin-bottom:.3rem;letter-spacing:-.01em">${escapar(p.nombre)}</div>
     <div style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.68rem;color:${COLOR.playa};margin-bottom:.5rem;letter-spacing:.04em;text-transform:uppercase">Playa${p.bandera ? ' · Bandera Azul' : ''}</div>
-    <a href="/playas/${escapar(p.slug)}" style="display:block;text-align:center;background:#6b400a;color:#faf4e6;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">Ver ficha →</a>
+    <a href="/playas/${escapar(p.slug)}" style="display:block;text-align:center;background:#1f6f8b;color:#ffffff;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">Ver ficha →</a>
   </div>`
 }
 
@@ -66,10 +66,10 @@ function popupPoi(p: Poi, color: string): string {
   const gmapsHref = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`
   const href = p.website ?? gmapsHref
   const rel = p.website ? 'noopener nofollow' : 'noopener'
-  return `<div style="font-family:var(--font-sans,system-ui);min-width:170px;color:#2a1a08">
+  return `<div style="font-family:var(--font-sans,system-ui);min-width:170px;color:#0f2a3d">
     <div style="font-family:var(--font-serif,Georgia,serif);font-weight:700;font-size:1rem;line-height:1.15;margin-bottom:.3rem;letter-spacing:-.01em">${escapar(p.nombre)}</div>
     <div style="font-family:var(--font-mono,ui-monospace,monospace);font-size:.68rem;color:${color};margin-bottom:.5rem;letter-spacing:.04em;text-transform:uppercase">${escapar(p.tipo)}${acc}</div>
-    <a href="${href}" target="_blank" rel="${rel}" style="display:block;text-align:center;background:#6b400a;color:#faf4e6;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">${p.website ? 'Web oficial →' : 'Cómo llegar →'}</a>
+    <a href="${href}" target="_blank" rel="${rel}" style="display:block;text-align:center;background:#1f6f8b;color:#ffffff;padding:6px 10px;border-radius:4px;font-size:.75rem;font-weight:500;text-decoration:none">${p.website ? 'Web oficial →' : 'Cómo llegar →'}</a>
   </div>`
 }
 

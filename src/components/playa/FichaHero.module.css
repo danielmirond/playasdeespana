@@ -6,7 +6,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--hero-bg, #f0e6d0);
+  background: var(--hero-bg, #eef4f7);
   transition: background .4s;
 }
 [data-theme="dark"] .hero {
