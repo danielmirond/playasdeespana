@@ -75,7 +75,7 @@ export default function AdSlot({ slot, format = 'auto', responsive = true, style
       <span style={{
         display: 'block', fontFamily: 'var(--font-mono, ui-monospace, monospace)',
         fontSize: 9.5, letterSpacing: '.18em', textTransform: 'uppercase',
-        color: 'var(--ink-mute, #8a8378)', marginBottom: '.35rem',
+        color: 'var(--ink-mute, #8aa0ad)', marginBottom: '.35rem',
       }}>{etiqueta}</span>
       <ins
         ref={adRef}

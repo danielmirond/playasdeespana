@@ -18,8 +18,8 @@ const JS = `
     .pe-widget{
       display:inline-flex;align-items:center;gap:10px;
       padding:10px 14px;
-      background:#faf4e6;border:1px solid #e5d6b4;border-radius:6px;
-      font-family:Georgia,serif;text-decoration:none;color:#2a1a08;
+      background:#ffffff;border:1px solid #cfe6ee;border-radius:6px;
+      font-family:Georgia,serif;text-decoration:none;color:#0f2a3d;
       transition:border-color .15s;max-width:360px;
     }
     .pe-widget:hover{border-color:#1f6f8b;text-decoration:none}
@@ -31,9 +31,9 @@ const JS = `
     }
     .pe-info{flex:1;min-width:0}
     .pe-name{font-weight:700;font-size:14px;line-height:1.2}
-    .pe-meta{font-size:11px;color:#7a6858;margin-top:2px}
-    .pe-data{font-size:11px;color:#7a6858;margin-top:3px;font-family:ui-monospace,monospace}
-    .pe-by{font-size:9px;color:#a89880;margin-top:4px;letter-spacing:.08em;text-transform:uppercase}
+    .pe-meta{font-size:11px;color:#4d6675;margin-top:2px}
+    .pe-data{font-size:11px;color:#4d6675;margin-top:3px;font-family:ui-monospace,monospace}
+    .pe-by{font-size:9px;color:#8aa0ad;margin-top:4px;letter-spacing:.08em;text-transform:uppercase}
   \`;
   document.head.appendChild(style);
 

@@ -8,8 +8,8 @@ import { camperdaysAwinUrl } from '@/lib/camperdaysAwinUrl'
 
 export const revalidate = 86400
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
-const CTA = '#0b7285'
-const CTA2 = '#0c4a6e'
+const CTA = '#2b7f9c'
+const CTA2 = '#0f4b60'
 
 export const metadata: Metadata = {
   title: 'Precio de alquiler de autocaravana en España 2026 | Por temporada y ciudad',

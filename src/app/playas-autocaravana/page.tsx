@@ -233,7 +233,7 @@ export default async function PlayasAutocaravanaPage() {
         {/* CTA afiliación Camperdays — esta pillar tenía 0 monetización pese
             a su tráfico. ued genérico de España (no hay deep-link por playa). */}
         <section style={{
-          background: 'linear-gradient(135deg,#0c4a6e 0%,#0369a1 55%,#0891b2 100%)',
+          background: 'linear-gradient(135deg,#0f4b60 0%,#1f6f8b 55%,#3d93b0 100%)',
           color: '#fff', borderRadius: 10, padding: '1.75rem 1.5rem', marginBottom: '2.5rem',
           textAlign: 'center',
         }}>
@@ -247,7 +247,7 @@ export default async function PlayasAutocaravanaPage() {
           <a
             href={camperdaysAwinUrl('playasdeespana_camper_playas')}
             target="_blank" rel="noopener noreferrer sponsored"
-            style={{ display: 'inline-block', padding: '.85rem 1.7rem', background: '#fff', color: '#0369a1', borderRadius: 8, fontWeight: 800, textDecoration: 'none', fontSize: '.95rem' }}
+            style={{ display: 'inline-block', padding: '.85rem 1.7rem', background: '#fff', color: '#1f6f8b', borderRadius: 8, fontWeight: 800, textDecoration: 'none', fontSize: '.95rem' }}
           >
             Ver autocaravanas disponibles →
           </a>

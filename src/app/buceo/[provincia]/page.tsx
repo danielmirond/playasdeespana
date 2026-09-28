@@ -29,7 +29,7 @@ const CONFIG: TopicConfig = {
   slug: 'buceo',
   gygActivity: 'submarinismo',
   emoji: '🤿',
-  color: '#0891b2',
+  color: '#3d93b0',
   tituloTopic: 'Centros de buceo',
   intro: 'Centros de buceo y spots de inmersión cerca de las playas de {provincia}. Certificaciones PADI y SSI, bautismos desde 40€ y acceso a reservas marinas. En cada ficha de playa mostramos los centros más cercanos con contacto directo.',
   score: p => (p.actividades?.buceo ? 3 : 0) + (p.actividades?.snorkel ? 1 : 0),

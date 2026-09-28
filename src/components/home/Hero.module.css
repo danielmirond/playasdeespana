@@ -17,7 +17,7 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  filter: saturate(.95);
+  filter: saturate(.72);   /* el fondo es atmósfera, no fotografía */
   animation: cross 45s infinite;
 }
 .scene.s1 { animation-delay: 0s;   }
@@ -37,11 +37,13 @@
 .gradient {
   position: absolute;
   inset: 0;
+  /* Velo blanco. Era crema (247,239,222) y, con las fotos de playa al 42 %
+     por debajo, teñía la cabecera de verdoso. */
   background: linear-gradient(110deg,
-    rgba(247, 239, 222, .95) 0%,
-    rgba(247, 239, 222, .78) 38%,
-    rgba(247, 239, 222, .35) 70%,
-    rgba(247, 239, 222, .10) 100%);
+    rgba(255, 255, 255, .96) 0%,
+    rgba(255, 255, 255, .84) 38%,
+    rgba(255, 255, 255, .48) 70%,
+    rgba(255, 255, 255, .22) 100%);
   z-index: 1;
 }
 
@@ -107,7 +109,7 @@
 }
 .searchInput::placeholder { color: var(--muted); }
 .searchBtn {
-  background: var(--accent); color: var(--arena-50, var(--surface));
+  background: var(--accent); color: #ffffff;
   padding: .65rem 1.15rem; border-radius: var(--r-sm, 4px);
   font-size: .82rem; font-weight: 700;
   font-family: inherit; border: none; cursor: pointer;
@@ -165,9 +167,9 @@
 @media (max-width: 640px) {
   .gradient {
     background: linear-gradient(180deg,
-      rgba(247, 239, 222, .92) 0%,
-      rgba(247, 239, 222, .72) 50%,
-      rgba(247, 239, 222, .45) 100%);
+      rgba(255, 255, 255, .95) 0%,
+      rgba(255, 255, 255, .80) 50%,
+      rgba(255, 255, 255, .55) 100%);
   }
   .scene { animation-duration: 36s; }
   @keyframes cross {

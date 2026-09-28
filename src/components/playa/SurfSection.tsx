@@ -166,7 +166,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
             {
               icon: <Fish size={18} weight="bold"/>, label: 'Buceo',
               score: scoreSnorkel(olas, turbidez),
-              color: '#0891b2',
+              color: '#3d93b0',
               datos: `Agua ${agua}°C · Traje ${agua < 18 ? '5mm' : agua < 22 ? '3mm' : 'corto'}`,
               disponible: playa.actividades?.buceo,
             },

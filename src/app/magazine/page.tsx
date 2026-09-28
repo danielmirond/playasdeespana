@@ -34,7 +34,7 @@ function Card({ a }: { a: Article }) {
         // eslint-disable-next-line @next/next/no-img-element
         <img src={a.heroThumb ?? a.heroImage} alt={a.heroAlt} width={260} height={140} loading="lazy" style={{ width: '100%', height: 140, objectFit: 'cover', display: 'block', background: 'var(--card-bg)' }} />
       ) : (
-        <div style={{ height: 140, background: `linear-gradient(135deg,#0c4a6e,#0891b2)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem' }} aria-hidden>{cat.emoji}</div>
+        <div style={{ height: 140, background: `linear-gradient(135deg,#0f4b60,#3d93b0)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem' }} aria-hidden>{cat.emoji}</div>
       )}
       <div style={{ padding: '1.1rem' }}>
         <span style={{ fontSize: '.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.05em', color: 'var(--accent)' }}>{cat.label}</span>
@@ -63,7 +63,7 @@ export default function MagazinePage() {
   return (
     <>
       <Nav />
-      <section style={{ background: 'linear-gradient(135deg,#0c4a6e 0%,#0369a1 45%,#0891b2 100%)', color: '#fff', padding: '3rem 1.5rem' }}>
+      <section style={{ background: 'linear-gradient(135deg,#0f4b60 0%,#1f6f8b 45%,#3d93b0 100%)', color: '#fff', padding: '3rem 1.5rem' }}>
         <div style={{ maxWidth: 920, margin: '0 auto' }}>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 900, lineHeight: 1.1, margin: '0 0 .75rem' }}>Magazine</h1>
           <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,.92)', maxWidth: 560, lineHeight: 1.6, margin: 0 }}>

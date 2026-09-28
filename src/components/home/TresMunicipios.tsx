@@ -27,9 +27,9 @@ const CUANTOS = 3
 // Mismos degradados que el carrusel de «qué hacer»: cuando no hay foto, la
 // tarjeta no queda gris.
 const FONDOS = [
-  'linear-gradient(180deg, #c7d8dc 0%, #a3b9c0 35%, #e8d9b8 55%, #d9c7a0 100%)',
-  'linear-gradient(180deg, #a3b6b8 0%, #6b8890 40%, #d4c090 60%, #b8a06a 100%)',
-  'linear-gradient(180deg, #d8ccae 0%, #b5a582 45%, #9d8a62 70%, #6b5840 100%)',
+  'linear-gradient(180deg, #dceaf1 0%, #a9cbd8 35%, #5fb0c8 55%, #2b7f9c 100%)',
+  'linear-gradient(180deg, #cfe6ee 0%, #8fcbdc 40%, #3d93b0 60%, #1f6f8b 100%)',
+  'linear-gradient(180deg, #e6f0f4 0%, #a9cbd8 45%, #4f9fbb 70%, #145c75 100%)',
 ]
 
 export default async function TresMunicipios() {

@@ -16,8 +16,8 @@ interface Props {
 // contexto (v.g. dentro de una tarjeta gris); tintes explícitos para las
 // piezas cromáticas del icono.
 const SUN = 'var(--sun, #d48a1a)'
-const CLOUD = 'var(--cloud, #8b8477)'
-const RAIN = 'var(--rain, #4a7a90)'
+const CLOUD = 'var(--cloud, #8aa0ad)'
+const RAIN = 'var(--rain, #3d93b0)'
 
 function Sol({ s }: { s: number }) {
   return (

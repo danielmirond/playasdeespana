@@ -99,7 +99,7 @@ export default async function CrystalClearBeachesEn() {
           playas={seleccion.slice(0, 10).map(p => ({ slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia, comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera, score: p.score }))}
           limit={10}
           eyebrow="Top 10 · Estimated visibility + Blue Flag + EEA quality"
-          scoreColor="#0369a1"
+          scoreColor="#1f6f8b"
           locale="en"
         />
 
@@ -110,12 +110,12 @@ export default async function CrystalClearBeachesEn() {
               {seleccion.slice(10).map((p, i) => (
                 <li key={p.slug}>
                   <Link href={`/en/beaches/${p.slug}`} prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: '.65rem', padding: '.7rem .85rem', borderRadius: 6, background: 'var(--card-bg)', border: '1px solid var(--line)', textDecoration: 'none', color: 'inherit' }}>
-                    <span style={{ flexShrink: 0, width: 26, height: 26, borderRadius: '50%', background: 'rgba(74,122,144,.15)', color: '#0369a1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '.72rem', fontWeight: 800 }}>{i + 11}</span>
+                    <span style={{ flexShrink: 0, width: 26, height: 26, borderRadius: '50%', background: 'rgba(74,122,144,.15)', color: '#1f6f8b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '.72rem', fontWeight: 800 }}>{i + 11}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ fontWeight: 700, fontSize: '.86rem', color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.nombre}</div>
                       <div style={{ fontSize: '.7rem', color: 'var(--muted)', marginTop: '.15rem' }}>{p.municipio} · {p.provincia}{p.bandera && <span style={{ color: '#2563eb', marginLeft: '.35rem' }}>· Blue Flag</span>}</div>
                     </div>
-                    <span style={{ fontSize: '.72rem', fontWeight: 700, color: '#0369a1', flexShrink: 0 }}>{p.score}/100</span>
+                    <span style={{ fontSize: '.72rem', fontWeight: 700, color: '#1f6f8b', flexShrink: 0 }}>{p.score}/100</span>
                   </Link>
                 </li>
               ))}

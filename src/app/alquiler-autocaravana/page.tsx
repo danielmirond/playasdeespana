@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   openGraph: { title: 'Alquiler de autocaravanas y campers en España', url: `${BASE}/alquiler-autocaravana`, type: 'website' },
 }
 
-const CTA = '#0b7285' // teal autocaravana
-const CTA2 = '#0c4a6e'
+const CTA = '#2b7f9c' // teal autocaravana
+const CTA2 = '#0f4b60'
 
 export default function AutocaravanaHubPage() {
   const cities = getCamperCities()

@@ -163,7 +163,7 @@ export default async function Page() {
           }))}
           limit={10}
           eyebrow="Top 10 · Visibilidad estimada + Bandera Azul + Calidad EEA"
-          scoreColor="#0369a1"
+          scoreColor="#1f6f8b"
         />
 
         {/* Resto del ranking 11-30 como lista compacta */}
@@ -187,7 +187,7 @@ export default async function Page() {
                   >
                     <span style={{
                       flexShrink: 0, width: 26, height: 26, borderRadius: '50%',
-                      background: 'rgba(74,122,144,.15)', color: '#0369a1',
+                      background: 'rgba(74,122,144,.15)', color: '#1f6f8b',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontSize: '.72rem', fontWeight: 800,
                     }}>
@@ -202,7 +202,7 @@ export default async function Page() {
                         {p.bandera && <span style={{ color: '#2563eb', marginLeft: '.35rem' }}>· Bandera Azul</span>}
                       </div>
                     </div>
-                    <span style={{ fontSize: '.72rem', fontWeight: 700, color: '#0369a1', flexShrink: 0 }}>
+                    <span style={{ fontSize: '.72rem', fontWeight: 700, color: '#1f6f8b', flexShrink: 0 }}>
                       {p.score}/100
                     </span>
                   </Link>

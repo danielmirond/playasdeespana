@@ -46,7 +46,7 @@ const LITORAL: PaletaOG = {
   onPhoto: '#ffffff',
   score: { excelente:'#2e7d4f', muybueno:'#5f8a3a', aceptable:'#b8791d',
            limitado:'#b0522a', noapto:'#a63a2c', sindato:'#6b7a83' },
-  ilustracion: ['#b9c2c4', '#d8d4c9', '#c4bcaa'],
+  ilustracion: ['#a9cbd8', '#cfe6ee', '#8fcbdc'],
   serif: 'Literata, Georgia, serif',
 }
 

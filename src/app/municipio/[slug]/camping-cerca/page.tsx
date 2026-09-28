@@ -130,7 +130,7 @@ export default async function CampingCercaPage({ params }: Props) {
           <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.75rem' }}>
             {campings.map((c, i) => (
               <li key={c.id} className={mun.sitio} style={{ flexDirection: 'row', alignItems: 'stretch' }}>
-                <div style={{ width: 92, flexShrink: 0, background: 'var(--ink)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '.3rem', color: '#faf4e6' }}>
+                <div style={{ width: 92, flexShrink: 0, background: 'var(--ink)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '.3rem', color: '#ffffff' }}>
                   <Pictograma tipo="camping" size={34} />
                   <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.62rem' }}>{i + 1}</span>
                 </div>

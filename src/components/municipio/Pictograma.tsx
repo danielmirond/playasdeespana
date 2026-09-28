@@ -33,7 +33,7 @@ const TRAZOS: Record<TipoPictograma, string> = {
   comida:     'M7 3v7a2 2 0 0 0 4 0V3M9 3v18M17 3c-2 0-3 3-3 6v3h3v9M17 3v18',
 }
 
-export default function Pictograma({ tipo, size = 44, color = '#faf4e6' }: { tipo: string; size?: number; color?: string }) {
+export default function Pictograma({ tipo, size = 44, color = '#ffffff' }: { tipo: string; size?: number; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d={TRAZOS[tipoPictograma(tipo)]} />

@@ -171,7 +171,7 @@ export default function CookieBanner() {
         style={{
           position: 'absolute', top: 8, right: 8,
           width: 32, height: 32, borderRadius: '50%',
-          border: 'none', background: 'transparent', color: '#8a7560',
+          border: 'none', background: 'transparent', color: '#4d6675',
           cursor: 'pointer', display: 'flex',
           alignItems: 'center', justifyContent: 'center',
         }}
@@ -182,7 +182,7 @@ export default function CookieBanner() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '.6rem', paddingRight: '2rem' }}>
         <ShieldCheck size={18} weight="bold" color="var(--accent)" aria-hidden="true" style={{ flexShrink: 0, marginTop: 2 }} />
-        <p style={{ margin: 0, fontSize: '.82rem', lineHeight: 1.55, color: '#4a3520' }}>
+        <p style={{ margin: 0, fontSize: '.82rem', lineHeight: 1.55, color: '#2f4d62' }}>
           <strong style={{ color: 'var(--ink)' }}>{i18n.titulo}.</strong>{' '}
           {i18n.texto}{' '}
           <Link href={locale === 'en' ? '/en/cookies' : '/cookies'} style={{ color: 'var(--terra-800)', textDecoration: 'underline' }}>
@@ -271,7 +271,7 @@ function Toggle({ checked, disabled, onChange, label, desc }: {
       />
       <div>
         <div style={{ fontWeight: 700, color: 'var(--ink)' }}>{label}</div>
-        <div style={{ fontSize: '.7rem', color: '#8a7560', lineHeight: 1.4 }}>{desc}</div>
+        <div style={{ fontSize: '.7rem', color: '#4d6675', lineHeight: 1.4 }}>{desc}</div>
       </div>
     </label>
   )

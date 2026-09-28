@@ -578,7 +578,7 @@ export default async function ElTiempoPage({ params }: Props) {
                 {abrigadas.length > 0 && (
                   <div style={{ display: 'flex', gap: '.4rem', flexWrap: 'wrap', marginTop: '.3rem' }}>
                     {abrigadas.map((p, i) => (
-                      <Link key={p.slug} href={`/playas/${p.slug}`} style={{ height: 32, padding: '0 .8rem', borderRadius: 100, background: i === 0 ? '#faf4e6' : 'rgba(250,244,230,.25)', color: i === 0 ? 'var(--ink)' : '#faf4e6', fontSize: '.78rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center' }}>{p.nombre}</Link>
+                      <Link key={p.slug} href={`/playas/${p.slug}`} style={{ height: 32, padding: '0 .8rem', borderRadius: 100, background: i === 0 ? '#ffffff' : 'rgba(250,244,230,.25)', color: i === 0 ? 'var(--ink)' : '#ffffff', fontSize: '.78rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center' }}>{p.nombre}</Link>
                     ))}
                   </div>
                 )}

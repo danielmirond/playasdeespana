@@ -165,12 +165,12 @@ export default async function Destacadas({ playas, topCount = 8, avoidCount = 4,
   )
 
   const GRADIENTS = [
-    'linear-gradient(180deg, #c7d8dc 0%, #a3b9c0 35%, #e8d9b8 55%, #d9c7a0 100%)',
-    'linear-gradient(180deg, #a3b6b8 0%, #6b8890 40%, #d4c090 60%, #b8a06a 100%)',
-    'linear-gradient(180deg, #d8ccae 0%, #b5a582 45%, #9d8a62 70%, #6b5840 100%)',
-    'linear-gradient(180deg, #b8c8c8 0%, #8aa4a8 35%, #c9b890 55%, #a8956c 100%)',
-    'linear-gradient(180deg, #d0bba0 0%, #ac9670 40%, #826444 70%, #4e3a22 100%)',
-    'linear-gradient(180deg, #c4d0d0 0%, #94adb0 30%, #b9a57c 55%, #7a6040 100%)',
+    'linear-gradient(180deg, #dceaf1 0%, #a9cbd8 35%, #5fb0c8 55%, #2b7f9c 100%)',
+    'linear-gradient(180deg, #cfe6ee 0%, #8fcbdc 40%, #3d93b0 60%, #1f6f8b 100%)',
+    'linear-gradient(180deg, #e6f0f4 0%, #a9cbd8 45%, #4f9fbb 70%, #145c75 100%)',
+    'linear-gradient(180deg, #d9e9f0 0%, #9cc6d6 35%, #3d93b0 55%, #256e88 100%)',
+    'linear-gradient(180deg, #cfe2ea 0%, #86bdd0 40%, #2b7f9c 70%, #0f4b60 100%)',
+    'linear-gradient(180deg, #e2eff4 0%, #b0d5e2 30%, #4f9fbb 55%, #1b6580 100%)',
   ]
 
   const renderCard = (item: typeof top[number], rank?: number, idx = 0) => {

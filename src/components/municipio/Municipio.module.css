@@ -8,7 +8,7 @@
   position: relative;
   overflow: hidden;
   background: var(--ink);
-  color: #faf4e6;
+  color: #ffffff;
   min-height: 420px;
   display: flex;
   flex-direction: column;
@@ -21,11 +21,11 @@
 /* Color explícito en todo lo que va sobre la foto: el h1 global del sitio
    pone tinta oscura y pisaba el color heredado del hero (medido en Gijón:
    «Qué hacer en Gijón» en marrón sobre la foto). */
-.heroCuerpo, .heroCuerpo h1, .heroCuerpo h2, .heroCuerpo p, .heroCuerpo b, .heroMiga, .heroMiga a { color: #faf4e6; }
-.heroTitulo { margin: 0; font-family: var(--font-serif); font-weight: 700; font-size: clamp(1.9rem, 7.5vw, 4rem); line-height: 1; letter-spacing: -.02em; color: #faf4e6; text-shadow: 0 2px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4); text-wrap: balance; }
-.heroLede { font-size: 1rem; line-height: 1.45; max-width: 52ch; color: #faf4e6; text-shadow: 0 1px 8px rgba(0,0,0,.45); }
+.heroCuerpo, .heroCuerpo h1, .heroCuerpo h2, .heroCuerpo p, .heroCuerpo b, .heroMiga, .heroMiga a { color: #ffffff; }
+.heroTitulo { margin: 0; font-family: var(--font-serif); font-weight: 700; font-size: clamp(1.9rem, 7.5vw, 4rem); line-height: 1; letter-spacing: -.02em; color: #ffffff; text-shadow: 0 2px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4); text-wrap: balance; }
+.heroLede { font-size: 1rem; line-height: 1.45; max-width: 52ch; color: #ffffff; text-shadow: 0 1px 8px rgba(0,0,0,.45); }
 .heroCredito { font-family: var(--font-mono, ui-monospace, monospace); font-size: .6rem; opacity: .75; }
-.heroMiga { position: absolute; top: 0; left: 0; right: 0; padding: .8rem 1.25rem; display: flex; gap: .4rem; flex-wrap: wrap; font-size: .75rem; color: #faf4e6; opacity: .92; max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
+.heroMiga { position: absolute; top: 0; left: 0; right: 0; padding: .8rem 1.25rem; display: flex; gap: .4rem; flex-wrap: wrap; font-size: .75rem; color: #ffffff; opacity: .92; max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
 .heroMiga a { color: inherit; }
 
 @media (min-width: 900px) {
@@ -57,7 +57,7 @@
 .parada { flex: 0 0 210px; display: flex; flex-direction: column; gap: .45rem; text-decoration: none; color: var(--ink); }
 .paradaFoto { position: relative; height: 130px; border-radius: 14px; overflow: hidden; background: var(--card-bg, var(--surface)); }
 .paradaFoto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.paradaHora { position: absolute; top: 8px; left: 8px; height: 24px; padding: 0 .55rem; border-radius: 100px; background: #faf4e6; color: var(--ink); font-family: var(--font-mono, ui-monospace, monospace); font-size: .68rem; display: inline-flex; align-items: center; }
+.paradaHora { position: absolute; top: 8px; left: 8px; height: 24px; padding: 0 .55rem; border-radius: 100px; background: #ffffff; color: var(--ink); font-family: var(--font-mono, ui-monospace, monospace); font-size: .68rem; display: inline-flex; align-items: center; }
 .paradaNombre { font-weight: 700; font-size: .95rem; line-height: 1.2; }
 .paradaMeta { font-size: .76rem; color: var(--muted); }
 @media (min-width: 900px) {
@@ -68,13 +68,13 @@
 /* Tarjetas de playa con foto: fila con scroll en móvil, rejilla en escritorio. */
 .playas { display: flex; gap: .65rem; overflow-x: auto; scrollbar-width: none; margin: 0 -1.25rem; padding: 0 1.25rem .25rem; }
 .playas::-webkit-scrollbar { display: none; }
-.playa { flex: 0 0 200px; position: relative; height: 240px; border-radius: 16px; overflow: hidden; background: var(--mar, #2d5266); color: #faf4e6; text-decoration: none; display: block; }
+.playa { flex: 0 0 200px; position: relative; height: 240px; border-radius: 16px; overflow: hidden; background: var(--mar, #2d5266); color: #ffffff; text-decoration: none; display: block; }
 .playa img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .playaVelo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,4,0) 45%, rgba(20,12,4,.82) 100%); }
 .playaPie { position: absolute; left: 12px; right: 12px; bottom: 12px; }
-.playaNombre { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; line-height: 1.1; color: #faf4e6; text-shadow: 0 1px 6px rgba(0,0,0,.45); }
+.playaNombre { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; line-height: 1.1; color: #ffffff; text-shadow: 0 1px 6px rgba(0,0,0,.45); }
 .playaMeta { font-size: .74rem; opacity: .9; margin-top: .15rem; }
-.playaBandera { position: absolute; top: 10px; left: 10px; height: 26px; padding: 0 .6rem; border-radius: 100px; background: var(--excelente, #3d6b1f); color: #faf4e6; font-size: .68rem; font-weight: 700; display: inline-flex; align-items: center; gap: .35rem; }
+.playaBandera { position: absolute; top: 10px; left: 10px; height: 26px; padding: 0 .6rem; border-radius: 100px; background: var(--excelente, #3d6b1f); color: #ffffff; font-size: .68rem; font-weight: 700; display: inline-flex; align-items: center; gap: .35rem; }
 @media (min-width: 900px) {
   .playas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; margin: 0; padding: 0; }
   .playa { flex: initial; height: 260px; }
@@ -87,8 +87,8 @@
 .sitio { border-radius: 18px; overflow: hidden; background: var(--card-bg, var(--surface)); display: flex; flex-direction: column; }
 .sitioFoto { position: relative; height: 150px; background: var(--ink); display: flex; align-items: center; justify-content: center; }
 .sitioFoto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.sitioTipo { position: absolute; top: 10px; left: 10px; height: 24px; padding: 0 .55rem; border-radius: 100px; background: #faf4e6; color: var(--ink); font-family: var(--font-mono, ui-monospace, monospace); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; display: inline-flex; align-items: center; }
-.sitioCredito { position: absolute; right: 8px; bottom: 6px; font-family: var(--font-mono, ui-monospace, monospace); font-size: .55rem; color: #faf4e6; opacity: .8; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.sitioTipo { position: absolute; top: 10px; left: 10px; height: 24px; padding: 0 .55rem; border-radius: 100px; background: #ffffff; color: var(--ink); font-family: var(--font-mono, ui-monospace, monospace); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; display: inline-flex; align-items: center; }
+.sitioCredito { position: absolute; right: 8px; bottom: 6px; font-family: var(--font-mono, ui-monospace, monospace); font-size: .55rem; color: #ffffff; opacity: .8; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
 .sitioCuerpo { padding: .85rem 1rem 1rem; display: flex; flex-direction: column; gap: .35rem; }
 .sitioNombre { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; line-height: 1.15; color: var(--ink); }
 .sitioResumen { font-size: .84rem; line-height: 1.5; color: var(--muted); }
@@ -132,8 +132,8 @@
   .diaTemp { display: none; }
 }
 
-.tarjetaFoto { position: relative; border-radius: 16px; overflow: hidden; min-height: 170px; background: var(--ink); color: #faf4e6; display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; }
+.tarjetaFoto { position: relative; border-radius: 16px; overflow: hidden; min-height: 170px; background: var(--ink); color: #ffffff; display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; }
 .tarjetaFoto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .tarjetaFotoVelo { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,12,4,.85) 0%, rgba(20,12,4,.55) 60%, rgba(20,12,4,.25) 100%); }
-.tarjetaFotoCuerpo { position: relative; display: flex; flex-direction: column; gap: .3rem; color: #faf4e6; }
-.tarjetaFotoCuerpo h2, .tarjetaFotoCuerpo p { color: #faf4e6; }
+.tarjetaFotoCuerpo { position: relative; display: flex; flex-direction: column; gap: .3rem; color: #ffffff; }
+.tarjetaFotoCuerpo h2, .tarjetaFotoCuerpo p { color: #ffffff; }

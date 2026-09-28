@@ -27,7 +27,7 @@ export default function BoatRentalHubPage() {
 
       {/* HERO */}
       <section style={{
-        background: 'linear-gradient(135deg, #0c4a6e 0%, #0369a1 45%, #0891b2 100%)',
+        background: 'linear-gradient(135deg, #0f4b60 0%, #1f6f8b 45%, #3d93b0 100%)',
         color: '#fff', padding: '3.5rem 1.5rem',
       }}>
         <div style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
@@ -45,7 +45,7 @@ export default function BoatRentalHubPage() {
           </p>
           <div style={{ display: 'flex', gap: '.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="#coasts" style={{
-              padding: '.8rem 1.4rem', background: '#fff', color: '#0369a1',
+              padding: '.8rem 1.4rem', background: '#fff', color: '#1f6f8b',
               borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: '.95rem',
             }}>
               Explorar costas
@@ -87,12 +87,12 @@ export default function BoatRentalHubPage() {
         <NearContext />
         {/* Pilar "sin licencia": la intención transaccional más buscada del
             clúster; merece hueco arriba del listado de costas. */}
-        <Link href="/alquiler-barco/sin-licencia" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0c4a6e,#0b7285)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none', marginBottom: '2rem' }}>
+        <Link href="/alquiler-barco/sin-licencia" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0f4b60,#2b7f9c)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none', marginBottom: '2rem' }}>
           <span style={{ minWidth: 0 }}>
             <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontWeight: 800, fontSize: '1.05rem' }}>¿Sin título náutico? Puedes alquilar igualmente</span>
             <span style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.85)' }}>Qué barcos puedes llevar sin licencia, dónde y desde cuánto.</span>
           </span>
-          <span style={{ flexShrink: 0, background: '#fff', color: '#0c4a6e', fontWeight: 800, fontSize: '.82rem', borderRadius: 7, padding: '.55rem .9rem', whiteSpace: 'nowrap' }}>Ver guía →</span>
+          <span style={{ flexShrink: 0, background: '#fff', color: '#0f4b60', fontWeight: 800, fontSize: '.82rem', borderRadius: 7, padding: '.55rem .9rem', whiteSpace: 'nowrap' }}>Ver guía →</span>
         </Link>
 
         <h2 style={{
@@ -161,7 +161,7 @@ export default function BoatRentalHubPage() {
       </main>
 
       {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg, #0369a1 0%, #0891b2 100%)', color: '#fff', padding: '3rem 1.5rem' }}>
+      <section style={{ background: 'linear-gradient(135deg, #1f6f8b 0%, #3d93b0 100%)', color: '#fff', padding: '3rem 1.5rem' }}>
         <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.7rem', fontWeight: 800, margin: '0 0 .75rem' }}>
             Comienza tu aventura en barco
@@ -170,7 +170,7 @@ export default function BoatRentalHubPage() {
             Explora cientos de barcos verificados en todas las costas españolas. Reserva seguro con SamBoat.
           </p>
           <a href={AWIN_BOTTOM} target="_blank" rel="noopener noreferrer sponsored" style={{
-            display: 'inline-block', padding: '.9rem 1.8rem', background: '#fff', color: '#0369a1',
+            display: 'inline-block', padding: '.9rem 1.8rem', background: '#fff', color: '#1f6f8b',
             borderRadius: 8, fontWeight: 800, textDecoration: 'none', fontSize: '1rem',
           }}>
             Explorar ofertas en SamBoat

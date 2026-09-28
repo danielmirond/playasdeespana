@@ -23,8 +23,8 @@ const TIPO_EN: Record<string, { name: string; desc: string }> = {
 }
 const tipoEn = (nombre: string, desc: string) => TIPO_EN[nombre] ?? { name: nombre, desc }
 
-const CTA = '#0b7285'
-const CTA2 = '#0c4a6e'
+const CTA = '#2b7f9c'
+const CTA2 = '#0f4b60'
 
 export const metadata: Metadata = {
   title: 'Campervan & motorhome rental in Spain | Compare prices',

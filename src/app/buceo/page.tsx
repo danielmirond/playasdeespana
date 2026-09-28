@@ -141,7 +141,7 @@ export default async function BuceoPage() {
             >
               <span style={{
                 flexShrink: 0, width: 30, height: 30, borderRadius: '50%',
-                background: i < 3 ? 'linear-gradient(135deg, #0891b2, var(--mar-500))' : 'rgba(8,145,178,.12)',
+                background: i < 3 ? 'linear-gradient(135deg, #3d93b0, var(--mar-500))' : 'rgba(8,145,178,.12)',
                 color: i < 3 ? '#fff' : '#0e7490',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '.78rem', fontWeight: 800,
@@ -180,7 +180,7 @@ export default async function BuceoPage() {
                 border: '1px solid var(--line)', borderRadius: 4,
                 padding: '.75rem', background: 'rgba(255,255,255,.4)',
               }}>
-                <div style={{ fontWeight: 700, fontSize: '1rem', color: '#0891b2' }}>{c.sigla}</div>
+                <div style={{ fontWeight: 700, fontSize: '1rem', color: '#3d93b0' }}>{c.sigla}</div>
                 <div style={{ fontSize: '.65rem', color: 'var(--muted)', marginBottom: '.25rem' }}>{c.nombre}</div>
                 <div style={{ fontSize: '.78rem', color: 'var(--muted)', lineHeight: 1.45 }}>{c.desc}</div>
               </div>
@@ -233,7 +233,7 @@ export default async function BuceoPage() {
         {/* Civitatis CTA */}
         {CIVITATIS_AFF && (
           <div style={{
-            background: 'linear-gradient(135deg, #0891b2, var(--mar-500))',
+            background: 'linear-gradient(135deg, #3d93b0, var(--mar-500))',
             borderRadius: 6, padding: '1.1rem 1.25rem', marginBottom: '2rem',
             display: 'flex', alignItems: 'center', gap: '.85rem', flexWrap: 'wrap',
           }}>
@@ -249,7 +249,7 @@ export default async function BuceoPage() {
               href={`https://www.civitatis.com/es/?q=buceo&aid=${CIVITATIS_AFF}`}
               target="_blank" rel="noopener noreferrer sponsored"
               style={{
-                padding: '.55rem 1.1rem', background: '#fff', color: '#0891b2',
+                padding: '.55rem 1.1rem', background: '#fff', color: '#3d93b0',
                 borderRadius: 4, fontSize: '.82rem', fontWeight: 700, textDecoration: 'none',
               }}
             >

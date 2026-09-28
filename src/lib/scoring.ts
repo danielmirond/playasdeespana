@@ -28,11 +28,11 @@ const TONO = {
 } as const
 
 export const TONO_HEX = {
-  'var(--excelente)': '#3d6b1f',
-  'var(--muybueno)':  '#7a8a30',
-  'var(--aceptable)': '#c48a1e',
-  'var(--limitado)':  '#a04818',
-  'var(--noapto)':    '#7a2818',
+  'var(--excelente)': '#2e7d4f',
+  'var(--muybueno)':  '#6a8f3a',
+  'var(--aceptable)': '#b8791d',
+  'var(--limitado)':  '#b0522a',
+  'var(--noapto)':    '#a63a2c',
 } as const
 
 /** Traduce un color de token a hex. Para superficies sin nuestros tokens. */

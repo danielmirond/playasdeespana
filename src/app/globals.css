@@ -62,7 +62,7 @@
 /* ── Score chip utilities (design system v1 §05) ────────────── */
 .score-chip {
   display: inline-flex; align-items: baseline; gap: 3px;
-  background: var(--card-bg,#faf6ef); border: 1px solid var(--line);
+  background: var(--card-bg,#ffffff); border: 1px solid var(--line);
   padding: 4px 9px; border-radius: 999px;
   font-family: var(--font-serif); font-weight: 700; font-size: .88rem;
   letter-spacing: -.01em; color: var(--ink); line-height: 1;

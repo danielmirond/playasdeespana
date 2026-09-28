@@ -18,13 +18,13 @@ export type TipologiaBN =
   | 'turistificacion'
 
 export const TIPOLOGIAS: Record<TipologiaBN, { label: string; emoji: string; color: string }> = {
-  vertidos:        { label: 'Vertidos y saneamiento deficiente', emoji: '🚱', color: '#7a2818' },
-  biodiversidad:   { label: 'Afecciones a la biodiversidad',     emoji: '🐟', color: '#a04818' },
-  urbanizacion:    { label: 'Urbanización e invasión del litoral', emoji: '🏗️', color: '#8a6210' },
-  quimica:         { label: 'Contaminación química',             emoji: '☣️', color: '#6b1f1f' },
-  turistificacion: { label: 'Turistificación y masificación',    emoji: '🚢', color: '#845c22' },
-  portuarias:      { label: 'Obras portuarias mal gestionadas',  emoji: '⚓', color: '#4a5a68' },
-  basuras:         { label: 'Basuras y microplásticos',          emoji: '🗑️', color: '#5a5040' },
+  vertidos:        { label: 'Vertidos y saneamiento deficiente', emoji: '🚱', color: '#a63a2c' },
+  biodiversidad:   { label: 'Afecciones a la biodiversidad',     emoji: '🐟', color: '#b0522a' },
+  urbanizacion:    { label: 'Urbanización e invasión del litoral', emoji: '🏗️', color: '#9a5a12' },
+  quimica:         { label: 'Contaminación química',             emoji: '☣️', color: '#7a2420' },
+  turistificacion: { label: 'Turistificación y masificación',    emoji: '🚢', color: '#8a6a2a' },
+  portuarias:      { label: 'Obras portuarias mal gestionadas',  emoji: '⚓', color: '#3d6b80' },
+  basuras:         { label: 'Basuras y microplásticos',          emoji: '🗑️', color: '#5a6f7c' },
   patrimonio:      { label: 'Daños al patrimonio en el litoral', emoji: '🏛️', color: '#5c4a6b' },
 }
 

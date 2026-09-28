@@ -49,7 +49,7 @@ export default async function CoastPage({ params }: { params: Promise<CoastPageP
       <Nav />
 
       {/* HERO */}
-      <section style={{ background: 'linear-gradient(135deg,#0c4a6e 0%,#0369a1 45%,#0891b2 100%)', color: '#fff', padding: '3.5rem 1.5rem' }}>
+      <section style={{ background: 'linear-gradient(135deg,#0f4b60 0%,#1f6f8b 45%,#3d93b0 100%)', color: '#fff', padding: '3.5rem 1.5rem' }}>
         <div style={{ maxWidth: 880, margin: '0 auto' }}>
           <nav style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.85)', marginBottom: '1rem' }}>
             <Link href="/alquiler-barco" style={{ color: 'rgba(255,255,255,.85)' }}>Alquiler de barcos</Link>{' › '}{coastName}
@@ -60,7 +60,7 @@ export default async function CoastPage({ params }: { params: Promise<CoastPageP
           <p style={{ fontSize: '1.05rem', maxWidth: 620, lineHeight: 1.6, color: 'rgba(255,255,255,.92)', margin: '0 0 1.5rem' }}>
             {localities.length} destinos para navegar por {coastName}: calas escondidas, fondeos seguros y barcos con o sin patrón desde €{minPrice}/día.
           </p>
-          <a href={AWIN(`coast_${coastSlug}_hero`)} target="_blank" rel="noopener noreferrer sponsored" style={{ display: 'inline-block', padding: '.9rem 1.8rem', background: '#fff', color: '#0369a1', borderRadius: 8, fontWeight: 800, textDecoration: 'none' }}>
+          <a href={AWIN(`coast_${coastSlug}_hero`)} target="_blank" rel="noopener noreferrer sponsored" style={{ display: 'inline-block', padding: '.9rem 1.8rem', background: '#fff', color: '#1f6f8b', borderRadius: 8, fontWeight: 800, textDecoration: 'none' }}>
             Ver barcos en {coastName} →
           </a>
         </div>
@@ -121,12 +121,12 @@ export default async function CoastPage({ params }: { params: Promise<CoastPageP
         })}
 
         {/* CTA */}
-        <section style={{ background: 'linear-gradient(135deg,#0369a1 0%,#0891b2 100%)', color: '#fff', borderRadius: 14, padding: '2.5rem 1.5rem', textAlign: 'center', marginTop: '1rem' }}>
+        <section style={{ background: 'linear-gradient(135deg,#1f6f8b 0%,#3d93b0 100%)', color: '#fff', borderRadius: 14, padding: '2.5rem 1.5rem', textAlign: 'center', marginTop: '1rem' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 800, margin: '0 0 .6rem' }}>Encuentra tu barco en {coastName}</h2>
           <p style={{ color: 'rgba(255,255,255,.9)', lineHeight: 1.6, margin: '0 0 1.5rem', maxWidth: 520, marginInline: 'auto' }}>
             Cientos de embarcaciones verificadas con reserva segura y cancelación flexible.
           </p>
-          <a href={AWIN(`coast_${coastSlug}_bottom`)} target="_blank" rel="noopener noreferrer sponsored" style={{ display: 'inline-block', padding: '.9rem 1.8rem', background: '#fff', color: '#0369a1', borderRadius: 8, fontWeight: 800, textDecoration: 'none' }}>
+          <a href={AWIN(`coast_${coastSlug}_bottom`)} target="_blank" rel="noopener noreferrer sponsored" style={{ display: 'inline-block', padding: '.9rem 1.8rem', background: '#fff', color: '#1f6f8b', borderRadius: 8, fontWeight: 800, textDecoration: 'none' }}>
             Explorar ofertas en SamBoat →
           </a>
         </section>

@@ -22,7 +22,7 @@ function Card({ a }: { a: Article }) {
   const catEn = CATEGORIES_EN[a.category]
   return (
     <Link href={`/en/magazine/${a.slug}`} style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 12, overflow: 'hidden', textDecoration: 'none', color: 'inherit' }}>
-      <div style={{ height: 140, background: `linear-gradient(135deg,#0c4a6e,#0891b2)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem' }} aria-hidden>{cat.emoji}</div>
+      <div style={{ height: 140, background: `linear-gradient(135deg,#0f4b60,#3d93b0)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem' }} aria-hidden>{cat.emoji}</div>
       <div style={{ padding: '1.1rem' }}>
         <span style={{ fontSize: '.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.05em', color: 'var(--accent)' }}>{catEn.label}</span>
         <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--ink)', margin: '.35rem 0 .4rem', lineHeight: 1.25 }}>{a.en!.title}</h2>
@@ -38,7 +38,7 @@ export default function MagazinePageEn() {
   return (
     <>
       <Nav />
-      <section style={{ background: 'linear-gradient(135deg,#0c4a6e 0%,#0369a1 45%,#0891b2 100%)', color: '#fff', padding: '3rem 1.5rem' }}>
+      <section style={{ background: 'linear-gradient(135deg,#0f4b60 0%,#1f6f8b 45%,#3d93b0 100%)', color: '#fff', padding: '3rem 1.5rem' }}>
         <div style={{ maxWidth: 920, margin: '0 auto' }}>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 900, lineHeight: 1.1, margin: '0 0 .75rem' }}>Magazine</h1>
           <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,.92)', maxWidth: 560, lineHeight: 1.6, margin: 0 }}>

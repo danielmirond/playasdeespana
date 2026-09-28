@@ -72,7 +72,7 @@ export default function WidgetPage() {
           </div>
           <div style={{
             padding: '2rem',
-            background: '#f8f8f8',
+            background: '#f8fbfc',
             border: '1px solid var(--line)',
             borderRadius: 6,
             display: 'flex', justifyContent: 'center',
@@ -102,7 +102,7 @@ export default function WidgetPage() {
                 <div style={{ fontWeight: 700, fontSize: 14, lineHeight: 1.2 }}>Playa de la Concha</div>
                 <div style={{ fontSize: 11, color: 'var(--cert-estimado)', marginTop: 2 }}>San Sebastián · Gipuzkoa</div>
                 <div style={{ fontSize: 11, color: 'var(--cert-estimado)', marginTop: 3, fontFamily: 'ui-monospace, monospace' }}>19°C · 0.3m olas · 12km/h</div>
-                <div style={{ fontSize: 9, color: '#a89880', marginTop: 4, letterSpacing: '.08em', textTransform: 'uppercase' }}>playas-espana.com</div>
+                <div style={{ fontSize: 9, color: '#8aa0ad', marginTop: 4, letterSpacing: '.08em', textTransform: 'uppercase' }}>playas-espana.com</div>
               </div>
             </a>
           </div>

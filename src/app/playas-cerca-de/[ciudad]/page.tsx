@@ -146,12 +146,12 @@ export default async function PlayasCercaDeCiudadPage({ params }: Props) {
 
         {/* Cross a autocaravana si la ciudad tiene página de alquiler */}
         {camper && (
-          <Link href={`/alquiler-autocaravana/${camper.slug}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0c4a6e,#0b7285)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none', marginTop: '1.5rem' }}>
+          <Link href={`/alquiler-autocaravana/${camper.slug}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0f4b60,#2b7f9c)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none', marginTop: '1.5rem' }}>
             <span style={{ minWidth: 0 }}>
               <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontWeight: 800, fontSize: '1.02rem' }}>¿Y si te llevas la casa a la playa? <span aria-hidden="true">🚐</span></span>
               <span style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.85)' }}>Alquiler de autocaravanas y campers en {camper.ciudad}: precios, rutas y consejos.</span>
             </span>
-            <span style={{ flexShrink: 0, background: '#fff', color: '#0c4a6e', fontWeight: 800, fontSize: '.82rem', borderRadius: 7, padding: '.55rem .9rem', whiteSpace: 'nowrap' }}>Ver guía →</span>
+            <span style={{ flexShrink: 0, background: '#fff', color: '#0f4b60', fontWeight: 800, fontSize: '.82rem', borderRadius: 7, padding: '.55rem .9rem', whiteSpace: 'nowrap' }}>Ver guía →</span>
           </Link>
         )}
 

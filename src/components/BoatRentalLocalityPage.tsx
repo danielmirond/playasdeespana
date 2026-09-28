@@ -110,7 +110,7 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
   }
 
   const ctaBtn: React.CSSProperties = {
-    display: 'inline-block', padding: '.95rem 2rem', background: '#fff', color: '#0369a1',
+    display: 'inline-block', padding: '.95rem 2rem', background: '#fff', color: '#1f6f8b',
     borderRadius: 8, fontWeight: 800, textDecoration: 'none', fontSize: '1.02rem',
   }
 
@@ -220,7 +220,7 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
             <p style={{ color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>{bestSeason}</p>
           </div>
           <div style={{ background: 'linear-gradient(135deg,#ecfeff,#f0f9ff)', border: '1px solid #bae6fd', borderRadius: 10, padding: '1.25rem' }}>
-            <div style={{ fontWeight: 700, color: '#0369a1', marginBottom: '.4rem' }}>💡 Consejo de navegante</div>
+            <div style={{ fontWeight: 700, color: '#1f6f8b', marginBottom: '.4rem' }}>💡 Consejo de navegante</div>
             <p style={{ color: '#155e75', lineHeight: 1.6, margin: 0 }}>{insiderTip}</p>
           </div>
         </section>
@@ -273,7 +273,7 @@ export default function BoatRentalLocalityPage(props: LocalityPageProps) {
 
         {/* CTA */}
         <section style={{
-          background: 'linear-gradient(135deg,#0369a1 0%,#0891b2 100%)', color: '#fff',
+          background: 'linear-gradient(135deg,#1f6f8b 0%,#3d93b0 100%)', color: '#fff',
           borderRadius: 14, padding: '2.5rem 1.5rem', textAlign: 'center',
         }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.7rem', fontWeight: 800, margin: '0 0 .6rem' }}>

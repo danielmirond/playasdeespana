@@ -46,7 +46,7 @@ export function TarjetaPlaya({ slug, nombre, foto, bandera, socorrismo, accesibl
         ? <img src={foto.url} alt="" loading="lazy" decoding="async" />
         : <div style={{ position: 'absolute', left: 16, top: 16 }}><Pictograma tipo="playa" size={34} /></div>}
       <div className={styles.playaVelo} />
-      {bandera && <span className={styles.playaBandera}><span style={{ width: 7, height: 7, borderRadius: '50%', background: '#faf4e6' }} />Bandera Azul</span>}
+      {bandera && <span className={styles.playaBandera}><span style={{ width: 7, height: 7, borderRadius: '50%', background: '#ffffff' }} />Bandera Azul</span>}
       <div className={styles.playaPie}>
         <div className={styles.playaNombre}>{nombre}</div>
         <div className={styles.playaMeta}>{meta || (foto ? '' : 'sin foto aún')}</div>

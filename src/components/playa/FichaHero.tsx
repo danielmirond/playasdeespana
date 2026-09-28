@@ -197,7 +197,7 @@ export default function FichaHero({
   const dot = statusDot(reportes, banderaPlaya, medusas)
   // Tinte del icono de estado para la barra inferior (fondo oscuro):
   // tonos brillantes para contraste sobre tinta-900.
-  const dotColorBar = dot === 'danger' ? '#e8755e' : dot === 'warn' ? '#e6b24a' : '#5fbf7f'
+  const dotColorBar = dot === 'danger' ? '#d9604a' : dot === 'warn' ? '#d29a2a' : '#3f9a6a'
   const hasPhoto = !!foto?.url
   // Agua y olas del hero salen SIEMPRE del modelo de Open-Meteo: el dato
   // medido por boya vive, con su trazo sólido, en la tarjeta de seguridad.

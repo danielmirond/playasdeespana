@@ -1366,7 +1366,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div key="buceo" className={styles.card} id="s-buceo">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>
-                <Fish size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'#0891b2'}}/>
+                <Fish size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'#3d93b0'}}/>
                 {locale === 'en' ? <>Dive <em>centers</em></> : <>Centros de <em>buceo</em></>}
               </h2>
               <span className={styles.cardSrc}>OpenStreetMap</span>

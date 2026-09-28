@@ -121,7 +121,7 @@ export default function VotacionPlaya({ slug, locale = 'es' }: Props) {
                 <Star
                   size={28}
                   weight={llena ? 'fill' : 'regular'}
-                  color={llena ? '#f5a623' : '#8a7560'}
+                  color={llena ? '#f5a623' : '#8aa0ad'}
                   aria-hidden="true"
                 />
               </button>

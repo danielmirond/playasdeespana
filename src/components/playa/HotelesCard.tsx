@@ -10,7 +10,7 @@ function Estrellas({ n }: { n: number }) {
 }
 
 function RatingBadge({ rating, count }: { rating: number; count: number | null }) {
-  const color = rating >= 8.5 ? '#3a8c5c' : rating >= 7 ? '#2e7bb4' : '#d4a96a'
+  const color = rating >= 8.5 ? '#3a8c5c' : rating >= 7 ? '#2b7f9c' : '#b8791d'
   return (
     <span className="hotel-rating" style={{ background: color }}>
       {rating.toFixed(1)}

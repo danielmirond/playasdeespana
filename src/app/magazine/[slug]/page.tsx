@@ -63,7 +63,7 @@ function renderBlock(b: Block, i: number) {
       )
     case 'cta':
       return (
-        <Link key={i} href={b.href} style={{ display: 'block', margin: '1.75rem 0', padding: '1.1rem 1.25rem', background: 'linear-gradient(135deg,#0369a1 0%,#0891b2 100%)', borderRadius: 10, textDecoration: 'none', color: '#fff' }}>
+        <Link key={i} href={b.href} style={{ display: 'block', margin: '1.75rem 0', padding: '1.1rem 1.25rem', background: 'linear-gradient(135deg,#1f6f8b 0%,#3d93b0 100%)', borderRadius: 10, textDecoration: 'none', color: '#fff' }}>
           <span style={{ fontWeight: 800, fontSize: '1rem' }}>{b.label} →</span>
           {b.sub && <span style={{ display: 'block', fontSize: '.82rem', color: 'rgba(255,255,255,.85)', marginTop: '.2rem' }}>{b.sub}</span>}
         </Link>

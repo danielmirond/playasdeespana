@@ -1,17 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Playas de España">
   <title>Playas de España</title>
-  <!-- Fondo arena -->
-  <rect width="64" height="64" rx="10" fill="#f5ecd5"/>
-  <!-- Caja con borde tinta -->
-  <rect x="8" y="8" width="48" height="48" rx="4" fill="none" stroke="#2a1a08" stroke-width="2"/>
+  <!-- Fondo azul sólido: el marco fino sobre blanco se emborronaba a 16 px
+       en la pestaña. Macizo se lee a cualquier tamaño y sobre cualquier tema. -->
+  <rect width="64" height="64" rx="12" fill="#1f6f8b"/>
   <!-- Letra P en Playfair italic serif -->
-  <text x="32" y="43"
+  <text x="32" y="44"
         font-family="Playfair Display, Georgia, serif"
-        font-size="34"
+        font-size="38"
         font-weight="700"
         font-style="italic"
-        fill="#2a1a08"
+        fill="#ffffff"
         text-anchor="middle">P</text>
   <!-- Ondita decorativa bajo la P -->
-  <path d="M18 50 Q26 46 32 50 T46 50" fill="none" stroke="#1f6f8b" stroke-width="2" stroke-linecap="round"/>
+  <path d="M19 52 Q26 47 32 52 T45 52" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
 </svg>

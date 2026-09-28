@@ -249,7 +249,7 @@ export const LITORAL_CSS = `
   --rule-hair: rgba(232,241,245,.06);
 
   --cert-medido: #77b0d4; --cert-oficial: #74b87c; --cert-reportado: #cfa552;
-  --cert-estimado: #8e8a7c; --cert-sindato: #8e8a7c; --cert-sindato-tint: #3f3c34;
+  --cert-estimado: #8aa0ad; --cert-sindato: #8aa0ad; --cert-sindato-tint: #35414a;
 
   --score-excellent: #74b87c; --score-good: #9ab35e; --score-mid: #cfa552;
   --score-low: #d98a5c; --score-danger: #d97465;

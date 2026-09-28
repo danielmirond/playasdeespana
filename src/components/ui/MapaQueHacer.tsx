@@ -35,18 +35,18 @@ interface Props {
 
 // Colores del sistema. Cada categoría se lee de un vistazo.
 const COLOR = {
-  playa:     '#3d6b1f',   // verde bandera
+  playa:     '#2e7d4f',   // verde bandera
   museo:     '#1f6f8b',   // azul de marca
   monumento: '#0f2a3d',   // tinta marino
-  mirador:   '#e8a030',   // ocre para faros/miradores (visible sobre tierra)
-  cultura:   '#4a7a90',   // marino para cines/teatros
-  parque:    '#8a8a30',   // oliva para verde real
+  mirador:   '#c2711a',   // ámbar para faros/miradores (visible sobre tierra)
+  cultura:   '#5fb0c8',   // azul claro para cines/teatros
+  parque:    '#5f8a3a',   // verde para verde real
 } as const
 
 function icono(color: string, size: number, L: any) {
   // Círculo relleno con borde blanco y sombra sutil. Sin emoji.
   return L.divIcon({
-    html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid #faf4e6;box-shadow:0 1px 3px rgba(0,0,0,.35)"></div>`,
+    html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid #ffffff;box-shadow:0 1px 3px rgba(0,0,0,.35)"></div>`,
     className: '',
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
@@ -208,7 +208,7 @@ function ItemLeyenda({ color, tam, label, n }: { color: string; tam: number; lab
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '.4rem' }}>
       <span style={{
         width: tam, height: tam, borderRadius: '50%',
-        background: color, border: '1.5px solid #faf4e6',
+        background: color, border: '1.5px solid #ffffff',
         boxShadow: '0 1px 2px rgba(0,0,0,.25)',
         display: 'inline-block',
       }} aria-hidden="true"/>

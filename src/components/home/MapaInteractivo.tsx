@@ -40,7 +40,7 @@ export default function MapaInteractivo({ playas }: { playas: PlayaCard[] }) {
       // Icono personalizado
       const icon = L.divIcon({
         className: '',
-        html: `<div style="width:10px;height:10px;border-radius:50%;background:#2e7bb4;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.3)"></div>`,
+        html: `<div style="width:10px;height:10px;border-radius:50%;background:#2b7f9c;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.3)"></div>`,
         iconSize: [10,10],
         iconAnchor: [5,5],
       })
@@ -59,7 +59,7 @@ export default function MapaInteractivo({ playas }: { playas: PlayaCard[] }) {
               <div style="font-weight:600;font-size:.85rem;margin-bottom:.2rem">${p.nombre}</div>
               <div style="font-size:.72rem;color:#7a8c7c;margin-bottom:.4rem">${p.municipio} · ${p.provincia}</div>
               ${p.bandera ? '<div style="font-size: .72rem;color:#3a8c5c;font-weight:500">Bandera Azul</div>' : ''}
-              <a href="/playas/${p.slug}" style="display:inline-block;margin-top:.4rem;font-size:.72rem;color:#2e7bb4;text-decoration:none">Ver condiciones →</a>
+              <a href="/playas/${p.slug}" style="display:inline-block;margin-top:.4rem;font-size:.72rem;color:#2b7f9c;text-decoration:none">Ver condiciones →</a>
             </div>
           `, { maxWidth: 200 })
       })
@@ -76,7 +76,7 @@ export default function MapaInteractivo({ playas }: { playas: PlayaCard[] }) {
           <h2 className="section-title">Todas las <em>playas</em></h2>
           <p className="section-desc">
             <span className="map-legend-dot" style={{background:'#3a8c5c'}}/>Bandera Azul
-            <span className="map-legend-dot" style={{background:'#2e7bb4',marginLeft:'.8rem'}}/>Resto de playas
+            <span className="map-legend-dot" style={{background:'#2b7f9c',marginLeft:'.8rem'}}/>Resto de playas
           </p>
         </div>
         <div className="mapa-frame" ref={mapRef}/>
