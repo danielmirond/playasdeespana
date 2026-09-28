@@ -11,7 +11,13 @@
 // una hora y con un `Math.random()` cada regeneración enseñaría tres
 // distintas —y el HTML del servidor y el del cliente no coincidirían—. Con
 // la semana, los siete días son los mismos tres para todo el mundo, y el
-// lunes cambian. El orden del fondo es por slug, estable entre despliegues.
+// lunes cambian.
+//
+// LA LISTA VA BARAJADA, NO EN ORDEN ALFABÉTICO. Antes se ordenaba por slug
+// y se cogían tres seguidos, así que cada semana salían tres vecinos del
+// abecedario —Vigo, Vilaboa, Vilagarcía— y parecía que no rotaba. Ahora el
+// orden lo da un hash del slug: estable entre despliegues, pero mezclado.
+// Además no se repite provincia dentro de la misma semana.
 //
 // QUIÉN ENTRA. Los municipios que tienen las dos páginas grandes: la de
 // playas (cuatro o más) y la de qué hacer (cinco sitios o más). Sin eso la
@@ -20,7 +26,7 @@ import Link from 'next/link'
 import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { getMunicipiosConPois } from '@/lib/municipio-pois'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
-import { getFotos } from '@/lib/fotos'
+import { getFotoThumbSidecar } from '@/lib/fotos'
 
 const CUANTOS = 3
 
@@ -32,23 +38,50 @@ const FONDOS = [
   'linear-gradient(180deg, #e6f0f4 0%, #a9cbd8 45%, #4f9fbb 70%, #145c75 100%)',
 ]
 
+/** Hash estable de una cadena: baraja sin depender del despliegue. */
+function hash(s: string): number {
+  let h = 2166136261
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) }
+  return h >>> 0
+}
+
 export default async function TresMunicipios() {
   const [municipios, conPois] = await Promise.all([getMunicipios(), getMunicipiosConPois()])
   const pois = new Set(conPois)
-  const fondo = municipios.filter(m => pois.has(m.slug)).sort((a, b) => a.slug.localeCompare(b.slug))
+  const fondo = municipios.filter(m => pois.has(m.slug)).sort((a, b) => hash(a.slug) - hash(b.slug))
   if (fondo.length < CUANTOS) return null
 
   const semana = Math.floor(Date.now() / (7 * 86_400_000))
-  const elegidos = Array.from({ length: CUANTOS }, (_, k) => fondo[(semana * CUANTOS + k) % fondo.length])
+  // Uno de cada tercio de la lista, y la semana avanza los tres a la vez.
+  // Cogerlos seguidos hacía que el lunes cambiara solo uno y los otros dos
+  // siguieran ahí; así los tres son nuevos cada semana y la vuelta completa
+  // tarda tantas semanas como municipios hay. Si dos caen en la misma
+  // provincia, el segundo avanza hasta salir de ella.
+  const tercio = Math.floor(fondo.length / CUANTOS)
+  const elegidos: typeof fondo = []
+  for (let k = 0; k < CUANTOS; k++) {
+    for (let d = 0; d < fondo.length; d++) {
+      const m = fondo[(semana + k * tercio + d) % fondo.length]
+      if (elegidos.some(e => e.slug === m.slug || e.provincia === m.provincia)) continue
+      elegidos.push(m); break
+    }
+  }
 
   const tarjetas = await Promise.all(elegidos.map(async (m, i) => {
     const [playas, enlaces] = await Promise.all([getPlayasByMunicipio(m.slug), enlacesMunicipio(m.slug, m.nombre)])
-    // La foto de su playa mejor equipada, solo si ya está resuelta en el
-    // sidecar: la home no puede permitirse ir a buscarla a la red.
-    const top = [...playas].sort((a, b) =>
-      ((b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0)) - ((a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0)))[0]
-    const fotos = top ? await getFotos(top.nombre, top.municipio, top.lat, top.lng, top.provincia, top.slug) : []
-    const foto = fotos.find(f => f.fuente !== 'generica')?.thumb ?? null
+    // LA FOTO ES LA DE LA PRIMERA PLAYA QUE TENGA UNA, no la de la mejor
+    // equipada. Vigo tiene 55 playas y la mejor equipada no tenía foto: la
+    // tarjeta salía con degradado teniendo 54 fotos detrás. Se recorren por
+    // equipamiento y se para en la primera resuelta. Solo sidecar: la home
+    // no puede permitirse ir a buscarla a la red.
+    const orden = [...playas].sort((a, b) =>
+      ((b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0) + (b.accesible ? 1 : 0)) -
+      ((a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0) + (a.accesible ? 1 : 0)))
+    let foto: string | null = null
+    for (const p of orden) {
+      foto = await getFotoThumbSidecar(p.slug)
+      if (foto) break
+    }
     return { m, n: playas.length, foto, fondo: FONDOS[i % FONDOS.length], enlaces: enlaces.filter(e => e.clave !== 'playas') }
   }))
 
