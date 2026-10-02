@@ -79,6 +79,93 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Pals, Baix Empordà (voz bicéfala) ─────
+  {
+    slug: 'platja-de-pals-girona-radio-liberty-arena-gruesa-levante',
+    category: 'curiosidades',
+    title: 'Pals (Girona): de aquí emitía Radio Liberty a la URSS hasta 2001; el fondo cae deprisa',
+    excerpt:
+      'Durante 42 años, las antenas de Radio Liberty en la platja de Pals emitieron hacia la Unión Soviética; las derribaron en 2006 y hoy quedan 3,5 km de arena gruesa sin edificios a la vista. La pega: esa arena gruesa hace que el fondo se pierda a pocos pasos de la orilla y, con levante, el rompiente se vuelve serio.',
+    heroAlt:
+      'La platja de Pals, en el Baix Empordà (Girona): un arenal largo y recto de arena gruesa y dorada, con el mar abierto al este, dunas bajas con vegetación detrás y, al norte, el macizo del Montgrí y la silueta de las islas Medes en el horizonte',
+    heroQuery: 'pals,girona,costa brava,beach',
+    gygQuery: 'Pals, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-02T07:46:49Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/cataluna', label: 'Playas de Cataluña' },
+      { href: '/playas-sin-viento', label: 'Playas sin viento (para los días de levante)' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+    ],
+    body: [
+      { t: 'p', html: 'Quien pasea hoy por la mitad norte de la <strong>platja de Pals</strong> ve dunas bajas, juncos, un pinar ralo y, al fondo, la mole calcárea del Montgrí con las <strong>islas Medes</strong> flotando delante. Es difícil imaginar que durante más de cuatro décadas ese mismo horizonte estuvo cosido por torres metálicas de hasta 169 metros, un bosque de acero que zumbaba día y noche y que se veía desde media comarca. Desde esta arena, la voz de Occidente salía hacia Moscú.' },
+      { t: 'p', html: 'Era <strong>Radio Liberty</strong>, la emisora financiada por Estados Unidos que emitía en ruso y en otras lenguas de la URSS. Los pescadores de la zona la llamaban simplemente «les antenes». Los veraneantes se bañaban a su sombra sin preguntar mucho. Cuando cayeron, en 2006, la playa recuperó un vacío que hoy es justo lo que la distingue en una Costa Brava muy construida: kilómetros de arena con muy poco detrás.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Primero, la historia con fechas. El gobierno estadounidense compró en 1958 unos <strong>333.500 m²</strong> de terreno junto a la playa; las emisiones empezaron en <strong>1959</strong> y la última salió al aire el <strong>25 de mayo de 2001</strong>. La instalación tenía <strong>20 torres</strong> que sostenían nueve antenas de cortina, dos de ellas de <strong>169 metros</strong>. Se demolieron el <strong>22 de marzo de 2006</strong>. Los edificios que quedaron fueron declarados <strong>Bien Cultural de Interés Local</strong> en 2022 por el Consell Comarcal del Baix Empordà, tras la presión de la plataforma <em>Salvem la Platja de Pals</em> y del Cercle Català d’Història, que piden convertirlos en un memorial de la Guerra Fría. A día de hoy, esas mismas entidades denuncian que el proyecto de museo está en un cajón: no esperes un centro de interpretación, sino ruinas valladas.' },
+      { t: 'p', html: 'La playa en sí. Son unos <strong>3,5 km</strong> de arenal continuo, según la oficina de turismo de Pals, divididos en la <strong>Platja Gran</strong> y la <strong>Platja del Grau</strong>, y quedan dentro del ámbito del <strong>Parque Natural del Montgrí, les Medes i el Baix Ter</strong>. Está orientada al este, a mar abierto, y la arena es <strong>gruesa</strong>, de grano casi de sémola: no se pega, no vuela con facilidad y quema menos que la fina. Esa es la parte buena.' },
+      { t: 'p', html: 'Y aquí llega el <strong>contra</strong>, que viene del mismo grano. Las playas de arena gruesa tienen un perfil más empinado que las de arena fina: el agua se lleva menos sedimento y la pendiente se queda fuerte. En Pals eso se traduce en que <strong>el fondo se pierde a pocos pasos de la orilla</strong> y en que la ola rompe casi encima de la arena. Con <strong>levante</strong>, el viento de mar del este, ese rompiente se vuelve duro, la resaca tira hacia dentro y la bandera amarilla o roja es habitual; los mismos días aparecen surfistas en el extremo norte, que es la mejor pista de cómo está el mar. Para niños pequeños que solo quieren chapotear en la orilla, no es la playa más cómoda de la comarca.' },
+      { t: 'p', html: 'Más letra pequeña. En la arena <strong>no hay sombra natural</strong>: el pinar queda detrás de las dunas, no encima de la toalla. Los servicios se concentran en el tramo sur, junto a la urbanización; hacia el norte, cuanto más se camina, menos hay. Sobre la <strong>calidad del agua de baño</strong>, los resultados oficiales se publican en el sistema <strong>NÁYADE</strong> del Ministerio de Sanidad y se reportan a la <strong>Agencia Europea de Medio Ambiente</strong>; nuestra ficha no le asigna Bandera Azul y no le ponemos ese sello: la lista que vale es la de <strong>ADEAC</strong> de cada temporada.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En días de <strong>mar en calma o con viento de tierra</strong>, cuando el agua queda plana y la pendiente deja de ser un problema para convertirse en una ventaja: se nada en profundidad a dos brazadas de la orilla. <strong>Junio y septiembre</strong> son los meses buenos; con 3,5 km de arena, incluso en agosto basta andar diez minutos hacia el norte para que la densidad de toallas baje mucho. <strong>El truco</strong>: dejar el coche en el tramo sur y caminar hacia la Gola del Ter; a media playa se ven los restos de la emisora tras las dunas y, al fondo, las Medes.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Con <strong>levante entablado</strong> o mar de fondo del este: la ola rompe en la orilla y el baño deja de ser un baño. Tampoco con niños que no nadan, por la pendiente. Ni si se busca sombra hecha o un chiringuito cada cien metros. Y con <strong>tramuntana</strong> fuerte el mar puede quedar más tranquilo, pero la arena y el frío del viento del norte hacen la toalla poco agradable.' },
+      { t: 'p', html: '<strong>La alternativa</strong>. Si el mar está bravo, la idea no es buscar otra playa abierta al este, sino cambiar de plan: subir a <strong>Pals</strong>, el pueblo medieval amurallado que queda a pocos kilómetros tierra adentro, o acercarse a los arrozales del Baix Ter. Si el día es de calma y se quiere roca en vez de arenal, las calas de <strong>Begur</strong>, al sur, son más recogidas, aunque mucho más pequeñas y en agosto bastante más llenas.' },
+      { t: 'ul', items: [
+        'Longitud: unos 3,5 km de arenal continuo (Platja Gran y Platja del Grau), según la oficina de turismo de Pals.',
+        'Arena gruesa y orientación al este: pendiente fuerte, el fondo se pierde rápido y la ola rompe cerca de la orilla.',
+        'Dentro del ámbito del Parque Natural del Montgrí, les Medes i el Baix Ter.',
+        'Radio Liberty: terrenos comprados en 1958, emisiones de 1959 al 25 de mayo de 2001, 20 torres (dos de 169 m), demolidas el 22 de marzo de 2006.',
+        'Los edificios restantes son Bien Cultural de Interés Local desde 2022; el proyecto de memorial sigue sin ejecutarse.',
+        'Sin sombra natural en la arena; servicios concentrados en el tramo sur.',
+        'Calidad del agua: resultados oficiales en NÁYADE y EEA. Sin Bandera Azul en nuestra ficha; consulta la lista anual de ADEAC.',
+      ] },
+      { t: 'quote', text: 'Dicen que es una playa salvaje. No del todo: durante cuarenta años fue la más vigilada de la Costa Brava, con antenas que se veían desde las Medes. Lo salvaje aquí es lo que vino después de que se fueran.' },
+      { t: 'p', html: 'Al caer la tarde, el Montgrí se pone de color ceniza y el viento cambia. En el tramo norte quedan pocas toallas, alguna caña de pescador clavada en la arena gruesa y el sonido seco de la ola que rompe de golpe, sin preámbulo. Detrás de las dunas, entre las cañas, asoman los muros de hormigón de lo que fue la emisora, con las ventanas vacías mirando al mar. Hace veinticinco años, a esta hora, desde aquí se hablaba a medio continente. Ahora solo se oye el mar.' },
+    ],
+    faq: [
+      { q: '¿Qué queda de Radio Liberty en la platja de Pals?', a: 'Las antenas, 20 torres de hasta 169 metros, se demolieron el 22 de marzo de 2006. Quedan algunos edificios de la antigua emisora detrás de las dunas, declarados Bien Cultural de Interés Local en 2022. Hay un proyecto para convertirlos en memorial de la Guerra Fría, pero las entidades que lo impulsan denuncian que está paralizado, así que hoy solo se ven desde fuera.' },
+      { q: '¿Es la playa de Pals buena para ir con niños?', a: 'Depende del día. Tiene mucho espacio, pero la arena gruesa le da una pendiente fuerte: el fondo se pierde a pocos pasos y la ola rompe cerca de la orilla. Con mar en calma es manejable vigilando de cerca; con levante o bandera amarilla o roja, mejor buscar otra opción. En la arena no hay sombra natural.' },
+      { q: '¿Cuál es la mejor zona de la playa de Pals para evitar gente?', a: 'El tramo norte, hacia la desembocadura del Ter. Los servicios y la mayoría de bañistas se concentran en el sur, junto a la urbanización; caminando diez o quince minutos hacia el norte la ocupación baja mucho, a cambio de no tener servicios cerca.' },
+    ],
+    en: {
+      title: 'Pals (Girona): Radio Liberty beamed into the USSR from this sand until 2001; it shelves fast',
+      excerpt:
+        'For 42 years, Radio Liberty’s antennas on Pals beach broadcast towards the Soviet Union; they came down in 2006, leaving 3.5 km of coarse sand with no buildings in sight. The catch: that coarse sand means the seabed drops away a few steps from the shore and, in an easterly, the shorebreak turns serious.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Beaches with clear water' },
+      ],
+      body: [
+        { t: 'p', html: 'Walk the northern half of <strong>Pals beach</strong> today and you see low dunes, rushes, thin pinewood and, beyond, the limestone bulk of the Montgrí with the <strong>Medes Islands</strong> floating in front. It is hard to picture that for more than four decades the same skyline was stitched with steel towers up to 169 metres tall, a forest of metal that hummed day and night and could be seen from half the county. From this sand, the voice of the West went out towards Moscow.' },
+        { t: 'p', html: 'This was <strong>Radio Liberty</strong>, the US-funded station broadcasting in Russian and other languages of the USSR. Local fishermen simply called it “les antenes”. Holidaymakers swam in its shadow without asking many questions. When it came down in 2006, the beach got back an emptiness that is now exactly what sets it apart on a heavily built-up Costa Brava: kilometres of sand with very little behind them.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'First, the history with dates. The US government bought some <strong>333,500 m²</strong> of land beside the beach in 1958; broadcasts began in <strong>1959</strong> and the last one went out on <strong>25 May 2001</strong>. The site had <strong>20 towers</strong> carrying nine curtain antennas, two of them <strong>169 metres</strong> high. They were demolished on <strong>22 March 2006</strong>. The remaining buildings were declared a <strong>Cultural Asset of Local Interest</strong> in 2022 by the Baix Empordà county council, after pressure from the <em>Salvem la Platja de Pals</em> campaign and the Cercle Català d’Història, who want them turned into a Cold War memorial. Those same groups now complain the museum plan has been shelved: expect fenced-off ruins, not a visitor centre.' },
+        { t: 'p', html: 'The beach itself. It is roughly <strong>3.5 km</strong> of continuous sand, according to Pals tourist office, split into <strong>Platja Gran</strong> and <strong>Platja del Grau</strong>, and lies within the <strong>Montgrí, Medes Islands and Baix Ter Natural Park</strong>. It faces east onto open sea, and the sand is <strong>coarse</strong>, almost semolina-grained: it does not stick, does not blow about easily and runs cooler underfoot than fine sand. That is the good part.' },
+        { t: 'p', html: 'Now the <strong>catch</strong>, which comes from the same grain. Coarse-sand beaches have a steeper profile than fine-sand ones, and at Pals that means <strong>the seabed drops away a few steps from the shore</strong> and waves break almost on the sand. In a <strong>llevant</strong>, the easterly sea wind, that shorebreak gets rough, the backwash pulls hard and yellow or red flags are common; on those days surfers turn up at the northern end, which is the best clue to the state of the sea. For small children who only want to paddle at the edge, it is not the easiest beach in the area.' },
+        { t: 'p', html: 'More small print. There is <strong>no natural shade</strong> on the sand: the pines are behind the dunes, not over your towel. Facilities cluster at the southern end, by the holiday development; the further north you walk, the less there is. On <strong>bathing water quality</strong>, official results are published on Spain’s <strong>NÁYADE</strong> system and reported to the <strong>European Environment Agency</strong>; our record does not give it a Blue Flag and we do not award it one here — the list that counts is <strong>ADEAC</strong>’s, season by season.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> On <strong>calm days or with an offshore wind</strong>, when the water lies flat and the steep shelf stops being a problem and becomes an asset: you are swimming in deep water two strokes from the shore. <strong>June and September</strong> are the good months; with 3.5 km of sand, even in August a ten-minute walk north thins the towels out considerably. <strong>The trick</strong>: park at the southern end and walk towards the Gola del Ter; halfway along you can see what is left of the station behind the dunes, with the Medes beyond.' },
+        { t: 'p', html: '<strong>When not to?</strong> In a <strong>settled easterly</strong> or an easterly ground swell: the waves dump on the shore and a swim stops being a swim. Nor with children who cannot swim, because of the shelf. Nor if you want ready-made shade or a beach bar every hundred metres. And in a strong <strong>tramuntana</strong> the sea may be calmer, but the blowing sand and the chill of the north wind make the towel a poor place to be.' },
+        { t: 'p', html: '<strong>The alternative</strong>. When the sea is up, the answer is not another east-facing beach but a change of plan: drive up to <strong>Pals</strong>, the walled medieval village a few kilometres inland, or out to the rice fields of the Baix Ter. On a calm day, if you would rather have rock than a long strand, the coves of <strong>Begur</strong> to the south are more sheltered, though far smaller and much busier in August.' },
+        { t: 'ul', items: [
+          'Length: about 3.5 km of continuous sand (Platja Gran and Platja del Grau), according to Pals tourist office.',
+          'Coarse sand, east-facing: a steep shelf, deep water close in and waves breaking near the shore.',
+          'Within the Montgrí, Medes Islands and Baix Ter Natural Park.',
+          'Radio Liberty: land bought in 1958, on air from 1959 to 25 May 2001, 20 towers (two of 169 m), demolished 22 March 2006.',
+          'The remaining buildings have been a Cultural Asset of Local Interest since 2022; the memorial plan has not gone ahead.',
+          'No natural shade on the sand; facilities concentrated at the southern end.',
+          'Water quality: official results on NÁYADE and the EEA. No Blue Flag in our record; check ADEAC’s annual list.',
+        ] },
+        { t: 'quote', text: 'People call it a wild beach. Not quite: for forty years it was the most closely watched stretch of the Costa Brava, with antennas visible from the Medes. What is wild here is what came after they left.' },
+        { t: 'p', html: 'As evening comes on, the Montgrí turns ash-grey and the wind shifts. At the northern end there are few towels left, the odd fishing rod planted in the coarse sand and the dry slap of a wave breaking all at once, without preamble. Behind the dunes, among the reeds, the concrete walls of the old station show through, empty windows facing the sea. Twenty-five years ago, at this hour, half a continent was being spoken to from here. Now there is only the sea.' },
+      ],
+      faq: [
+        { q: 'What is left of Radio Liberty at Pals beach?', a: 'The antennas — 20 towers up to 169 metres tall — were demolished on 22 March 2006. Some of the old station buildings remain behind the dunes and were declared a Cultural Asset of Local Interest in 2022. There is a plan to turn them into a Cold War memorial, but the groups behind it say it has stalled, so for now they can only be seen from outside.' },
+        { q: 'Is Pals beach good for children?', a: 'It depends on the day. There is plenty of space, but the coarse sand gives it a steep shelf: the seabed drops away within a few steps and waves break close to the shore. In a flat calm it is manageable with close supervision; in an easterly or under a yellow or red flag, look elsewhere. There is no natural shade on the sand.' },
+        { q: 'Where is the quietest part of Pals beach?', a: 'The northern stretch, towards the mouth of the Ter. Facilities and most bathers are at the southern end by the development; walk ten to fifteen minutes north and it empties out considerably, at the cost of having no facilities nearby.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Barra, Cangas (voz bicéfala) ─────
   {
     slug: 'praia-de-barra-cangas-pontevedra-naturista-cies-sin-socorrista',
