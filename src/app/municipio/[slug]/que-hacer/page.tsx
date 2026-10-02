@@ -389,7 +389,10 @@ export default async function QueHacerPage({ params }: Props) {
           cerrado. Si conoces la zona, se corrige en osm.org y aquí aparece en la siguiente
           actualización. Lista revisada el {pois.generado}.
           {(pois.museos.concat(pois.monumentos, pois.cultura, pois.miradores, pois.parques)).some(p => p.resumen) && (
-            <> Los resúmenes de los sitios están escritos a partir de sus artículos en Wikipedia.</>
+            <> Los resúmenes de dos frases que acompañan a cada sitio los redacta un modelo de lenguaje
+              resumiendo la entradilla de su artículo en Wikipedia, sin añadir nada que no esté en ella:
+              se descarta de forma automática todo texto que introduzca cifras, fechas o épocas ausentes
+              del original. Aun así puede colarse un error; si ves uno, escríbenos.</>
           )}
         </p>
       </main>
