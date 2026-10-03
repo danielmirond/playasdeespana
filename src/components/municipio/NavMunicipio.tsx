@@ -10,7 +10,7 @@ import type { ClaveMunicipio, EnlaceMunicipio } from '@/lib/enlaces-municipio'
 import styles from './Municipio.module.css'
 
 const CORTO: Record<ClaveMunicipio, string> = {
-  playas: 'Playas', queHacer: 'Qué hacer', elTiempo: 'El tiempo', mareas: 'Mareas', campings: 'Camping', barcos: 'Barcos',
+  playas: 'Playas', queHacer: 'Qué hacer', elTiempo: 'El tiempo', mareas: 'Mareas', campings: 'Camping', barcos: 'Barcos', aparcar: 'Aparcar',
 }
 
 const ICONO: Record<ClaveMunicipio, string> = {
@@ -20,6 +20,7 @@ const ICONO: Record<ClaveMunicipio, string> = {
   mareas:   'M3 14c3-6 6-6 9 0s6 6 9 0M3 20h18',
   campings: 'M3 20L12 4l9 16H3zM12 4v16M8 20l4-7 4 7',
   barcos:   'M3 17h18l-2 4H5zM12 3v10M12 3l6 8H6z',
+  aparcar:  'M7 20V4h5a4 4 0 0 1 0 8H7M17 14v6',
 }
 
 export default function NavMunicipio({ enlaces, actual }: { enlaces: EnlaceMunicipio[]; actual: ClaveMunicipio }) {
@@ -43,6 +44,7 @@ export default function NavMunicipio({ enlaces, actual }: { enlaces: EnlaceMunic
           </Link>
         ))}
       </nav>
+      <div className={styles.navHueco} aria-hidden="true" />
     </>
   )
 }

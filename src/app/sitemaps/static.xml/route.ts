@@ -207,10 +207,14 @@ export async function GET() {
   // desde el sidecar de OSM en memoria; el sitemap revalida a la semana.
   {
     const { campingsDelMunicipio, MINIMO_CAMPINGS } = await import('@/lib/campings-municipio')
+    const { tieneAparcamiento } = await import('@/lib/aparcamiento-municipio')
     const { getPlayasByMunicipio } = await import('@/lib/playas')
     for (const m of await getMunicipios(1)) {
-      const c = await campingsDelMunicipio(await getPlayasByMunicipio(m.slug))
+      const playas = await getPlayasByMunicipio(m.slug)
+      const c = await campingsDelMunicipio(playas)
       if (c.length >= MINIMO_CAMPINGS) urls.push(u(`/municipio/${m.slug}/camping-cerca`, '0.6', 'weekly', today))
+      // Dónde aparcar: mismo recorrido, misma regla que decide el enlace.
+      if (await tieneAparcamiento(playas, m.slug)) urls.push(u(`/municipio/${m.slug}/donde-aparcar`, '0.6', 'weekly', today))
     }
   }
 

@@ -100,8 +100,17 @@
 .navBarra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; height: calc(64px + env(safe-area-inset-bottom, 0px)); padding: 0 .5rem env(safe-area-inset-bottom, 0px); background: rgba(255,255,255,.96); border-top: 1px solid var(--line); display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: center; box-sizing: border-box; backdrop-filter: blur(8px); }
 .navItem { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .2rem; height: 56px; font-size: .68rem; font-weight: 500; color: var(--muted); text-decoration: none; }
 .navItemActivo { color: var(--accent); font-weight: 700; }
+/* La barra va fija, así que se come el final de la página. Las que usan
+   .cuerpo ya reservan 6rem; este hueco lo garantiza en cualquier otra. */
+.navHueco { height: calc(64px + env(safe-area-inset-bottom, 0px)); }
+/* Lo que mide la barra, para que lo que flote encima no la tape. El banner
+   de cookies lee esta variable y se sube; sin ella cubría los cinco enlaces
+   y no se podía pulsar ninguno hasta aceptar las cookies. Va en :root a
+   través del body porque quien flota es hijo del body, no de la barra. */
+:global(body):has(.navBarra) { --barra-inferior: 64px; }
 @media (min-width: 900px) {
-  .navBarra { display: none; }
+  .navBarra, .navHueco { display: none; }
+  :global(body):has(.navBarra) { --barra-inferior: 0px; }
   .navPildoras { display: flex; gap: .35rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; padding: .9rem 1.5rem 0; box-sizing: border-box; }
   .pildora { height: 36px; padding: 0 .9rem; border-radius: 100px; font-size: .82rem; font-weight: 600; color: var(--ink); display: inline-flex; align-items: center; text-decoration: none; }
   .pildoraActiva { background: var(--ink); color: #ffffff; font-weight: 700; }

@@ -20,6 +20,7 @@ import SeaIcon from '@/components/ui/SeaIcon'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { tieneBarcos } from '@/lib/barcos-municipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
+import NavMunicipio from '@/components/municipio/NavMunicipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 
 export const maxDuration = 60
@@ -123,9 +124,13 @@ export default async function MunicipioPage({ params }: Props) {
     }],
   }
 
+  // Una sola consulta de enlaces para la barra inferior y el pie.
+  const enlacesMuni = await enlacesMunicipio(slug, municipio.nombre)
+
   return (
     <>
       <Nav />
+      <NavMunicipio enlaces={enlacesMuni} actual="playas" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqTienePlaya) }} />
 
       <div className={styles.hero}>
@@ -163,7 +168,7 @@ export default async function MunicipioPage({ params }: Props) {
         {/* Las otras páginas del municipio, con la misma lista que usan ellas
             entre sí: ver lib/enlaces-municipio. */}
         <div style={{ margin: '-1rem 0 2.25rem' }}>
-          <DelMunicipio nombre={municipio.nombre} enlaces={await enlacesMunicipio(slug, municipio.nombre)} actual="playas" />
+          <DelMunicipio nombre={municipio.nombre} enlaces={enlacesMuni} actual="playas" />
         </div>
 
         {/* TOP 6 con hero foto: mejor scoring del municipio */}

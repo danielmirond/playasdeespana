@@ -34,6 +34,7 @@ import {
 } from '@/lib/barcos-municipio'
 import type { PlayaBarco } from '@/lib/barcos-municipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
+import NavMunicipio from '@/components/municipio/NavMunicipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import styles from '../MunicipioPage.module.css'
 
@@ -139,9 +140,13 @@ export default async function AlquilerBarcosMunicipio({ params }: Props) {
     })),
   }
 
+  // Una sola consulta de enlaces para la barra inferior y el pie.
+  const enlacesMuni = await enlacesMunicipio(slug, sb.nombre)
+
   return (
     <>
       <Nav />
+      <NavMunicipio enlaces={enlacesMuni} actual="barcos" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <div className={styles.wrap} style={{ paddingTop: '1.5rem' }}>
@@ -278,7 +283,7 @@ export default async function AlquilerBarcosMunicipio({ params }: Props) {
         </dl>
 
         <div style={{ marginBottom: '3rem' }}>
-          <DelMunicipio nombre={sb.nombre} enlaces={await enlacesMunicipio(slug, sb.nombre)} actual="barcos" />
+          <DelMunicipio nombre={sb.nombre} enlaces={enlacesMuni} actual="barcos" />
         </div>
       </div>
     </>

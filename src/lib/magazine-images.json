@@ -76,6 +76,12 @@
     "source": "Flickr",
     "author": "SBA73"
   },
+  "platja-de-la-devesa-el-saler-valencia-1974-erosion-puerto-dunas": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Platja_de_la_Brava_o_platja_de_la_Devesa_del_Saler.jpg/1920px-Platja_de_la_Brava_o_platja_de_la_Devesa_del_Saler.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Platja_de_la_Brava_o_platja_de_la_Devesa_del_Saler.jpg/640px-Platja_de_la_Brava_o_platja_de_la_Devesa_del_Saler.jpg",
+    "source": "Wikimedia Commons",
+    "author": "Joanbanjo"
+  },
   "platja-de-pals-girona-radio-liberty-arena-gruesa-levante": {
     "url": "https://live.staticflickr.com/65535/52836627187_d839815f2e_c.jpg",
     "thumb": "https://live.staticflickr.com/65535/52836627187_d839815f2e_m.jpg",
@@ -337,11 +343,5 @@
     "thumb": "https://live.staticflickr.com/65535/54329235265_7248c9b01a_m.jpg",
     "source": "Flickr",
     "author": "hermez"
-  },
-  "platja-de-la-devesa-el-saler-valencia-1974-erosion-puerto-dunas": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Platja_de_la_Brava_o_platja_de_la_Devesa_del_Saler.jpg/1920px-Platja_de_la_Brava_o_platja_de_la_Devesa_del_Saler.jpg",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Platja_de_la_Brava_o_platja_de_la_Devesa_del_Saler.jpg/640px-Platja_de_la_Brava_o_platja_de_la_Devesa_del_Saler.jpg",
-    "source": "Wikimedia Commons",
-    "author": "Joanbanjo"
   }
 }

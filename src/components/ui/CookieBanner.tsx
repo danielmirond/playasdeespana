@@ -144,7 +144,12 @@ export default function CookieBanner() {
       aria-live="polite"
       style={{
         position: 'fixed',
-        bottom: '1rem',
+        // Se sube por encima de la barra inferior de secciones del municipio,
+        // que mide 64 px y va fija abajo: con bottom 1rem el banner la tapaba
+        // entera y los cinco enlaces no se podían pulsar mientras no se
+        // aceptaran las cookies. La variable la declara el layout a 0 y la
+        // pone a la altura de la barra quien la pinta.
+        bottom: 'calc(1rem + var(--barra-inferior, 0px) + env(safe-area-inset-bottom, 0px))',
         left: '1rem',
         right: '1rem',
         maxWidth: 540,

@@ -39,6 +39,7 @@ import { estadoLuna, solunar } from '@/lib/luna'
 import { articulosPara, urlPesca } from '@/lib/pesca'
 import styles from '../MunicipioPage.module.css'
 import DelMunicipio from '@/components/ui/DelMunicipio'
+import NavMunicipio from '@/components/municipio/NavMunicipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 
 export const revalidate = 1800
@@ -178,9 +179,13 @@ export default async function TablaMareasPage({ params }: Props) {
     return ant.tipo === 'bajamar' ? 'subiendo' : 'bajando'
   })()
 
+  // Una sola consulta de enlaces para la barra inferior y el pie.
+  const enlacesMuni = await enlacesMunicipio(slug, municipio.nombre)
+
   return (
     <>
       <Nav />
+      <NavMunicipio enlaces={enlacesMuni} actual="mareas" />
       <header className={styles.hero}>
         <div className={styles.heroInner}>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', margin: '0 0 .6rem' }}>
@@ -404,7 +409,7 @@ export default async function TablaMareasPage({ params }: Props) {
               </section>
             )}
 
-            <DelMunicipio nombre={municipio.nombre} enlaces={await enlacesMunicipio(slug, municipio.nombre)} actual="mareas" />
+            <DelMunicipio nombre={municipio.nombre} enlaces={enlacesMuni} actual="mareas" />
 
             {/* Zona herramienta: después de la tabla, la curva, el solunar
                 y las playas. Dentro de la herramienta no entra nada. */}

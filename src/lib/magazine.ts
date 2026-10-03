@@ -79,6 +79,98 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Cala Comte, Sant Josep (Ibiza) (voz bicéfala) ─────
+  {
+    slug: 'cala-comte-sant-josep-ibiza-acantilados-cerrados-coche-2017-corriente',
+    category: 'guias',
+    title: 'Cala Comte (Ibiza): el coche no pisa sus acantilados desde 2017 porque se desmoronan',
+    excerpt:
+      'Cala Comte, en Sant Josep, son dos playas cortas —una al norte, otra al oeste— frente a s’Illa des Bosc, s’Espartar y sa Conillera, con un agua que limpia la corriente. La pega: en 2017 el ayuntamiento cerró al tráfico los acantilados tras desprendimientos y accidentes, apenas hay arena ni sombra y al atardecer no cabe nadie más.',
+    heroAlt:
+      'Cala Comte, en el oeste de Ibiza: plataformas de roca baja y pequeñas lenguas de arena clara junto a un canal de agua poco profunda, con los islotes de s’Illa des Bosc y sa Conillera al fondo bajo la luz de la tarde',
+    heroQuery: 'cala comte,ibiza,beach,islets',
+    gygQuery: 'Ibiza, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-03T12:12:26Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/islas-baleares', label: 'Playas de las Islas Baleares' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+      { href: '/alquiler-barco/costas/islas-baleares/provincias/baleares/ibiza', label: 'Alquiler de barco en Ibiza' },
+    ],
+    body: [
+      { t: 'p', html: 'Hacia las siete de la tarde, en el extremo occidental de Ibiza, la gente deja de mirar el agua y empieza a mirar el horizonte. Se sientan en la roca caliente, en fila, como en las gradas de un teatro sin escenario, y esperan a que el sol baje detrás de <strong>sa Conillera</strong>. Abajo, el canal que separa la costa de <strong>s’Illa des Bosc</strong> conserva un color que no sale bien en ninguna foto: demasiado claro donde la arena asoma, demasiado oscuro donde el fondo cae de golpe.' },
+      { t: 'p', html: 'Es <strong>Cala Comte</strong> —Platges de Comte en los mapas, Cala Conta para muchos ibicencos—, y no es exactamente una cala. Es un trozo de costa baja, de roca recortada, con un par de playas cortas metidas entre plataformas y una torre de vigía del siglo XVIII mirando todo desde la punta. Lo que hace famoso el lugar no es la arena, que escasea, sino el agua y lo que hay enfrente.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La geografía, primero. Las Platges de Comte están en el municipio de <strong>Sant Josep de sa Talaia</strong>, en el suroeste de la isla, y son en realidad <strong>dos playas</strong> separadas por la punta: la <strong>Platja de Tramuntana</strong>, que mira al norte, y la <strong>Platja de Ponent</strong>, que mira al oeste, más algunas calitas de arena entre la roca. Frente a ellas quedan tres islotes: <strong>s’Espartar</strong>, <strong>s’Illa des Bosc</strong> y <strong>sa Conillera</strong>. La transparencia del agua tiene una causa física: la <strong>corriente constante</strong> que circula entre la costa y los islotes, que renueva el agua y no deja que se estanque.' },
+      { t: 'p', html: 'La torre. En la punta que separa Comte de Cala Bassa se levanta la <strong>Torre d’en Rovira</strong>, también llamada Torre de Comte, una torre de defensa costera construida en <strong>1763</strong> según proyecto del ingeniero Juan Ballester. Desde arriba se ven sa Conillera, s’Illa des Bosc, s’Espartar y, más lejos, ses Bledes. Merece el paseo corto por la roca antes de bajar al agua.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>, y es el que da título a este texto. Durante años, la costumbre fue dejar el coche casi al borde del acantilado, encima de las calas. En <strong>mayo de 2017</strong> el Ayuntamiento de Sant Josep <strong>cerró al tráfico el acceso a los acantilados</strong> de Platges de Comte, empezando por la parte oeste, donde están la mayoría de las calitas. Los motivos, según la información municipal publicada entonces: la degradación del terreno, <strong>desprendimientos</strong> el verano anterior y accidentes de coches que aparcaban demasiado cerca de un borde inestable. El aparcamiento más próximo se bloqueó con rocas y se anunció una zona alternativa de unos <strong>26.000 m²</strong> al otro lado de la carretera. Traducido: hoy se camina más que antes y, en verano, el aparcamiento que queda <strong>se llena pronto</strong>.' },
+      { t: 'p', html: 'Más letra pequeña. La arena es <strong>poca</strong>: en agosto, las dos playas pequeñas se cubren de toallas a media mañana y el resto de la gente se reparte por la roca, que quema y no es cómoda para estar horas. <strong>No hay sombra natural</strong> en primera línea; quien la quiere, paga hamaca o se va al chiringuito. Y como la costa mira al norte y al oeste, queda <strong>expuesta a la tramuntana y al ponent</strong>: con esos vientos el canal se pica, entra resaca entre las rocas y lo que era una piscina se vuelve mar abierto. Al revés, los días de <strong>levante</strong> es de lo más resguardado de la isla.' },
+      { t: 'p', html: 'Lo que hay debajo del agua también tiene reglas. El fondo de Ibiza y Formentera está cubierto en buena parte por <strong>praderas de posidonia</strong>, incluidas en la declaración de Patrimonio Mundial de la UNESCO de <strong>1999</strong> («Ibiza, biodiversidad y cultura»), y en Baleares está <strong>prohibido fondear sobre posidonia</strong> (Decreto 25/2018). Frente a Comte fondean muchos barcos en verano: quien llegue por mar tiene que soltar el ancla en arena. En cuanto a distinciones, en <strong>2010</strong> Cala Comte figuraba entre las playas de la isla con <strong>Bandera Azul</strong>; si la conserva este año, lo dice la lista anual de ADEAC, y la calidad del agua oficial se consulta en <strong>NÁYADE</strong> y en los informes de la <strong>EEA</strong>.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En <strong>junio y septiembre</strong>, y a primera hora de la mañana. Es cuando el agua está más quieta, el aparcamiento tiene sitio y la roca todavía no quema. Para bucear con gafas, el mejor momento es con mar en calma y sol alto: el canal muestra el fondo de arena y las manchas oscuras de posidonia.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> En <strong>agosto a la hora de la puesta de sol</strong>, salvo que se busque precisamente eso: medio Ibiza viene a ver el atardecer aquí, el chiringuito se llena y la salida en coche es lenta. Tampoco con <strong>tramuntana o ponent</strong> fuertes: mirar antes la previsión de <strong>AEMET</strong> o Puertos del Estado ahorra el viaje.' },
+      { t: 'p', html: '<strong>El truco</strong>. El canal hasta s’Illa des Bosc parece una invitación, y en parte del recorrido hay poca profundidad. Pero es la misma corriente que limpia el agua la que corre por ahí: no es una piscina. Solo con mar en calma, sabiendo nadar bien y sin calzado que estorbe; con viento, ni intentarlo. Unas escarpines ayudan a entrar desde la roca.' },
+      { t: 'p', html: '<strong>La alternativa</strong>. Si Comte está imposible, <strong>Cala Bassa</strong>, al otro lado de la Torre d’en Rovira, tiene más arena y sombra de pinar, aunque también más hamacas. Y si sopla del norte o del oeste, conviene mirar playas orientadas al sur o al este, o consultar nuestras <a href="/playas-sin-viento">playas sin viento</a>.' },
+      { t: 'ul', items: [
+        'Dos playas cortas: Platja de Tramuntana (norte) y Platja de Ponent (oeste), más calitas entre roca, en Sant Josep de sa Talaia.',
+        'Frente a la costa: s’Espartar, s’Illa des Bosc y sa Conillera; corriente constante en el canal.',
+        'Torre d’en Rovira o de Comte, defensa costera de 1763.',
+        'Mayo de 2017: cerrado al tráfico el acceso a los acantilados por desprendimientos y accidentes; aparcamiento alternativo de unos 26.000 m² anunciado.',
+        'Poca arena, sin sombra natural, expuesta a tramuntana y ponent; resguardada con levante.',
+        'Prohibido fondear sobre posidonia (Decreto 25/2018); posidonia Patrimonio Mundial desde 1999.',
+        'Bandera Azul en 2010; estado actual en la lista anual de ADEAC. Calidad del agua en NÁYADE y EEA.',
+      ] },
+      { t: 'quote', text: 'Le dicen «atardecer de postal». La postal no enseña los cientos de personas sentadas en la roca ni la cola de coches para salir. Lo que vale la pena aquí está a las nueve de la mañana, con el canal en calma y nadie en la torre.' },
+      { t: 'p', html: 'Cuando el sol por fin cae detrás de sa Conillera, se oye un aplauso desordenado que llega desde la roca y desde los barcos fondeados. Luego la gente se levanta casi a la vez y sube hacia los coches. Diez minutos después, el canal se queda gris y quieto, y la torre de 1763 sigue en la punta, igual que antes de que nadie aparcara aquí.' },
+    ],
+    faq: [
+      { q: '¿Se puede aparcar en Cala Comte?', a: 'Sí, pero ya no al borde del acantilado: en 2017 el Ayuntamiento de Sant Josep cerró al tráfico el acceso a los acantilados por los desprendimientos y los accidentes, y anunció una zona de aparcamiento alternativa al otro lado de la carretera. En julio y agosto se llena pronto, sobre todo por la tarde; conviene llegar a primera hora o mirar el transporte público de temporada.' },
+      { q: '¿Se puede cruzar nadando hasta s’Illa des Bosc?', a: 'El canal tiene zonas poco profundas, pero por él corre la corriente que mantiene limpia el agua. Solo es razonable con mar en calma y para quien nada bien; con tramuntana o ponent hay que olvidarse.' },
+      { q: '¿Es buena Cala Comte para ir con niños?', a: 'El agua es poco profunda en algunas zonas, lo que ayuda, pero hay poca arena, ninguna sombra natural y mucha roca. Para un día largo con niños pequeños, la vecina Cala Bassa es más cómoda.' },
+    ],
+    en: {
+      title: 'Cala Comte, Ibiza: cars banned from its crumbling cliff tops since 2017',
+      excerpt:
+        'Cala Comte, in Sant Josep, is two short beaches — one facing north, one west — looking out at s’Illa des Bosc, s’Espartar and sa Conillera, with water kept clear by the current. The catch: in 2017 the council shut the cliff tops to traffic after rockfalls and accidents, there is little sand and no shade, and at sunset there is no room left.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+        { href: '/en/islands', label: 'Spain’s island beaches' },
+        { href: '/en/boat-rental/coasts/islas-baleares/provinces/baleares/ibiza', label: 'Boat rental in Ibiza' },
+      ],
+      body: [
+        { t: 'p', html: 'Around seven in the evening, at the western tip of Ibiza, people stop looking at the water and start looking at the horizon. They sit on the warm rock in rows, like the terraces of a theatre with no stage, and wait for the sun to drop behind <strong>sa Conillera</strong>. Below, the channel between the shore and <strong>s’Illa des Bosc</strong> holds a colour that never comes out right in a photo: too pale where the sand shows through, too dark where the seabed drops away.' },
+        { t: 'p', html: 'This is <strong>Cala Comte</strong> — Platges de Comte on the maps, Cala Conta to many locals — and it is not really a cove. It is a stretch of low, ragged rock with a couple of short beaches tucked between ledges and an 18th-century watchtower looking over it all from the point. What made the place famous is not the sand, of which there is little, but the water and what lies offshore.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'Geography first. Platges de Comte lie in the municipality of <strong>Sant Josep de sa Talaia</strong>, in the island’s south-west, and are actually <strong>two beaches</strong> divided by the point: <strong>Platja de Tramuntana</strong>, facing north, and <strong>Platja de Ponent</strong>, facing west, plus a few pockets of sand among the rocks. Offshore sit three islets: <strong>s’Espartar</strong>, <strong>s’Illa des Bosc</strong> and <strong>sa Conillera</strong>. The clarity of the water has a physical cause: a <strong>steady current</strong> running between the coast and the islets, which keeps the water moving and stops it going stale.' },
+        { t: 'p', html: 'The tower. On the headland between Comte and Cala Bassa stands the <strong>Torre d’en Rovira</strong>, also called Torre de Comte, a coastal defence tower built in <strong>1763</strong> to a design by the engineer Juan Ballester. From the top you can see sa Conillera, s’Illa des Bosc, s’Espartar and, further out, ses Bledes. It is worth the short walk over the rock before going in.' },
+        { t: 'p', html: 'Now the <strong>catch</strong>, and it is the one in the headline. For years the habit was to leave the car almost at the cliff edge, right above the coves. In <strong>May 2017</strong> Sant Josep council <strong>closed the cliff tops to traffic</strong>, starting with the western side where most of the coves are. The reasons, as reported at the time: erosion, <strong>rockfalls</strong> the previous summer and accidents involving cars parked too close to an unstable edge. The nearest car park was blocked off with boulders and an alternative area of roughly <strong>26,000 m²</strong> was announced on the other side of the road. In practice: more walking than before, and in summer the remaining parking <strong>fills up early</strong>.' },
+        { t: 'p', html: 'More small print. There is <strong>not much sand</strong>: in August the two small beaches are covered in towels by mid-morning and everyone else spreads out over the rock, which gets hot and is not comfortable for hours on end. There is <strong>no natural shade</strong> by the water; if you want it, you pay for a sunbed or retreat to the beach bar. And because the coast faces north and west, it is <strong>exposed to the tramuntana and the ponent</strong>: in those winds the channel chops up, a swell pushes in between the rocks and the pool becomes open sea. Conversely, on <strong>easterly</strong> days it is one of the most sheltered spots on the island.' },
+        { t: 'p', html: 'What lies under the water has rules too. Much of the seabed around Ibiza and Formentera is covered by <strong>Posidonia seagrass meadows</strong>, included in the UNESCO World Heritage listing of <strong>1999</strong> (“Ibiza, Biodiversity and Culture”), and in the Balearics <strong>anchoring on Posidonia is prohibited</strong> (Decree 25/2018). Plenty of boats anchor off Comte in summer: anyone arriving by sea must drop anchor on sand. As for awards, in <strong>2010</strong> Cala Comte was among the island’s <strong>Blue Flag</strong> beaches; whether it still holds one is on ADEAC’s annual list, and official water quality is published on <strong>NÁYADE</strong> and in <strong>EEA</strong> reports.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> In <strong>June and September</strong>, and first thing in the morning. That is when the water is calmest, there is space to park and the rock is not yet scorching. For snorkelling, the best time is a calm sea with the sun high: the channel shows its sandy floor and the dark patches of seagrass.' },
+        { t: 'p', html: '<strong>When not to?</strong> In <strong>August at sunset</strong>, unless that is exactly what you are after: half of Ibiza comes here to watch it, the beach bar is packed and getting out by car is slow. Nor in a strong <strong>tramuntana or ponent</strong>: a look at the <strong>AEMET</strong> or Puertos del Estado forecast saves the trip.' },
+        { t: 'p', html: '<strong>The trick</strong>. The channel to s’Illa des Bosc looks like an invitation, and parts of it are shallow. But the same current that cleans the water runs through it: this is not a pool. Only in a calm sea, only if you swim well, and in wind not at all. Water shoes help getting in off the rock.' },
+        { t: 'p', html: '<strong>The alternative</strong>. If Comte is impossible, <strong>Cala Bassa</strong>, on the other side of the Torre d’en Rovira, has more sand and pine shade, though also more sunbeds. And if the wind is from the north or west, look at beaches facing south or east instead.' },
+        { t: 'ul', items: [
+          'Two short beaches: Platja de Tramuntana (north) and Platja de Ponent (west), plus coves among the rock, in Sant Josep de sa Talaia.',
+          'Offshore: s’Espartar, s’Illa des Bosc and sa Conillera; steady current through the channel.',
+          'Torre d’en Rovira, or Torre de Comte, a coastal defence tower from 1763.',
+          'May 2017: cliff-top access closed to traffic after rockfalls and accidents; an alternative car park of about 26,000 m² announced.',
+          'Little sand, no natural shade, exposed to tramuntana and ponent; sheltered in an easterly.',
+          'Anchoring on Posidonia prohibited (Decree 25/2018); the seagrass has been World Heritage since 1999.',
+          'Blue Flag in 2010; current status on ADEAC’s annual list. Water quality on NÁYADE and the EEA.',
+        ] },
+        { t: 'quote', text: 'They call it a picture-postcard sunset. The postcard leaves out the hundreds of people sitting on the rock and the queue of cars trying to leave. The thing worth having here is at nine in the morning, with the channel flat and nobody up at the tower.' },
+        { t: 'p', html: 'When the sun finally drops behind sa Conillera, a ragged round of applause drifts up from the rock and from the anchored boats. Then everyone stands at once and heads for the cars. Ten minutes later the channel has turned grey and still, and the 1763 tower is still out on the point, just as it was before anyone parked here.' },
+      ],
+      faq: [
+        { q: 'Can you park at Cala Comte?', a: 'Yes, but no longer at the cliff edge: in 2017 Sant Josep council closed the cliff tops to traffic because of rockfalls and accidents, and announced an alternative car park across the road. In July and August it fills early, especially in the afternoon; arrive first thing or check the seasonal public transport.' },
+        { q: 'Can you swim across to s’Illa des Bosc?', a: 'Parts of the channel are shallow, but the current that keeps the water clear runs through it. It is only sensible in a calm sea and for strong swimmers; in a tramuntana or ponent, forget it.' },
+        { q: 'Is Cala Comte good for children?', a: 'The water is shallow in places, which helps, but there is little sand, no natural shade and a lot of rock. For a long day with small children, neighbouring Cala Bassa is easier.' },
+      ],
+    },
+  },
   // ───── Diario de playas · La Devesa del Saler, València (voz bicéfala) ─────
   {
     slug: 'platja-de-la-devesa-el-saler-valencia-1974-erosion-puerto-dunas',
