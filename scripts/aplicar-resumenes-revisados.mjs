@@ -23,6 +23,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const FILE = resolve(ROOT, 'public/data/municipio-pois.json')
 const carpeta = process.argv[2]
 const aplicar = process.argv.includes('--aplicar')
+const reescribir = process.argv.includes('--reescribir')
 if (!carpeta) { console.error('Falta la carpeta con los ficheros escrito-N.json'); process.exit(1) }
 
 const norm = s => (s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
@@ -66,9 +67,17 @@ function porQueNoEntra(r, fuente, nombre) {
   if (typeof r !== 'string' || !r.trim()) return 'vacío'
   if (r.length < 40 || r.length > 320) return `longitud ${r.length}`
   if ((r.match(/[.!?](\s|$)/g) ?? []).length > 3) return 'más de tres frases'
-  if (/[«»"""]|\n|\/no\b|\/noindex|^\s*[-*]/.test(r)) return 'caracteres o marcadores raros'
-  if (FOLLETO.test(r)) return 'lenguaje de folleto'
-  if (NO_CASTELLANO.test(r)) return 'mezcla de idiomas'
+  // Las comillas angulares son cita, no basura: «anar en conill» es ir
+  // desnudo en valenciano, y eso es justo lo que queremos publicar.
+  if (/[“”"]|\n|\/no\b|\/noindex|^\s*[-*]/.test(r)) return 'caracteres o marcadores raros'
+  // «arena fina» es relleno cuando se lo inventa el modelo y es un dato
+  // cuando lo dice el inventario. Se mira la fuente antes de condenar.
+  const folletazo = r.match(FOLLETO)?.[0]
+  if (folletazo && !norm(fuente).includes(norm(folletazo))) return 'lenguaje de folleto'
+  // Fuera los nombres propios antes de juzgar el idioma: «Cala dels Jueus»
+  // y «Platja de les Cases d'Alcanar» se escriben así, no se traducen.
+  const sinNombres = r.replace(/[A-ZÁÉÍÓÚÑÜ][\wáéíóúñü'’-]*(\s+(de|del|dels|de la|de les|d'|i|el|la|les|els|es|sa|ses|do|da|dos|das)\s+[\wáéíóúñü'’-]+)*/g, ' ')
+  if (NO_CASTELLANO.test(sinNombres)) return 'mezcla de idiomas'
   if (norm(r).startsWith(norm(nombre).slice(0, 12))) return 'empieza por el nombre del sitio'
   // «su término municipal» o «el municipio» en genérico están bien; lo que no
   // vale es decir el nombre, que ya está en el titular de la página.
@@ -101,14 +110,14 @@ function porQueNoEntra(r, fuente, nombre) {
 
 // ——— Recoger lo escrito ——————————————————————————————————————
 const escritos = new Map()
-for (const f of readdirSync(carpeta).filter(x => /^escrito-\d+\.json$/.test(x))) {
+for (const f of readdirSync(carpeta).filter(x => /^(escrito|nuevo)-\d+\.json$/.test(x))) {
   for (const e of JSON.parse(readFileSync(join(carpeta, f), 'utf8'))) {
     if (!e?.id) continue
     if (escritos.has(e.id) && escritos.get(e.id).resumen && !e.resumen) continue
     escritos.set(e.id, e)
   }
 }
-console.log(`Ficheros leídos: ${readdirSync(carpeta).filter(x => /^escrito-\d+\.json$/.test(x)).length}`)
+console.log(`Ficheros leídos: ${readdirSync(carpeta).filter(x => /^(escrito|nuevo)-\d+\.json$/.test(x)).length}`)
 console.log(`Entradas con veredicto del escritor: ${escritos.size}`)
 
 const data = JSON.parse(readFileSync(FILE, 'utf8'))
@@ -120,8 +129,11 @@ for (const [slug, m] of Object.entries(data))
   for (const p of [...Object.values(m.pois).flat(), ...(m.alrededores ?? [])]) {
     const e = escritos.get(`${slug}|${p.n}`)
     if (!e) continue
-    if (p.r) { noEstaba++; continue }           // alguien lo rellenó entretanto: no se pisa
-    if (!e.resumen) { seNiega++; continue }     // el escritor dijo que no
+    // En la primera escritura el hueco estaba vacío. En una reescritura el
+    // texto viejo sigue ahí y es justo lo que hay que sustituir, así que
+    // --reescribir permite pisarlo; sin el flag, no se toca lo publicado.
+    if (p.r && !reescribir) { noEstaba++; continue }
+    if (!e.resumen) { if (reescribir && aplicar) p.r = null; seNiega++; continue }
     const pega = porQueNoEntra(e.resumen, p.e?.t ?? '', p.n)
     if (pega) {
       rechazados++
@@ -146,6 +158,7 @@ if (rechazados) {
 if (aplicar) {
   writeFileSync(FILE, JSON.stringify(data))
   console.log(`\n${entran} resúmenes publicados.`)
+  if (reescribir) console.log(`${seNiega} retirados porque el reescritor no vio con qué sustituirlos.`)
 } else {
   console.log('\n(informe: no se ha escrito nada. Añade --aplicar)')
 }
