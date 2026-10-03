@@ -10,7 +10,7 @@ import type { ClaveMunicipio, EnlaceMunicipio } from '@/lib/enlaces-municipio'
 import styles from './Municipio.module.css'
 
 const CORTO: Record<ClaveMunicipio, string> = {
-  playas: 'Playas', queHacer: 'Qué hacer', elTiempo: 'El tiempo', mareas: 'Mareas', campings: 'Camping', barcos: 'Barcos', aparcar: 'Aparcar',
+  playas: 'Playas', queHacer: 'Qué hacer', elTiempo: 'El tiempo', mareas: 'Mareas', campings: 'Camping', barcos: 'Barcos', aparcar: 'Aparcar', dormir: 'Dormir',
 }
 
 const ICONO: Record<ClaveMunicipio, string> = {
@@ -21,6 +21,7 @@ const ICONO: Record<ClaveMunicipio, string> = {
   campings: 'M3 20L12 4l9 16H3zM12 4v16M8 20l4-7 4 7',
   barcos:   'M3 17h18l-2 4H5zM12 3v10M12 3l6 8H6z',
   aparcar:  'M7 20V4h5a4 4 0 0 1 0 8H7M17 14v6',
+  dormir:   'M3 18v-6h18v6M3 18v2M21 18v2M3 12V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4M13 12V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4',
 }
 
 export default function NavMunicipio({ enlaces, actual }: { enlaces: EnlaceMunicipio[]; actual: ClaveMunicipio }) {

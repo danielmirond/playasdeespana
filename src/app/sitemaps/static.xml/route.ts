@@ -208,6 +208,7 @@ export async function GET() {
   {
     const { campingsDelMunicipio, MINIMO_CAMPINGS } = await import('@/lib/campings-municipio')
     const { tieneAparcamiento } = await import('@/lib/aparcamiento-municipio')
+    const { tieneAlojamientos } = await import('@/lib/alojamiento-municipio')
     const { getPlayasByMunicipio } = await import('@/lib/playas')
     for (const m of await getMunicipios(1)) {
       const playas = await getPlayasByMunicipio(m.slug)
@@ -215,6 +216,7 @@ export async function GET() {
       if (c.length >= MINIMO_CAMPINGS) urls.push(u(`/municipio/${m.slug}/camping-cerca`, '0.6', 'weekly', today))
       // Dónde aparcar: mismo recorrido, misma regla que decide el enlace.
       if (await tieneAparcamiento(playas, m.slug)) urls.push(u(`/municipio/${m.slug}/donde-aparcar`, '0.6', 'weekly', today))
+      if (await tieneAlojamientos(playas)) urls.push(u(`/municipio/${m.slug}/donde-dormir`, '0.6', 'weekly', today))
     }
   }
 

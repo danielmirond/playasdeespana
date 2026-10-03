@@ -13,11 +13,12 @@
 import { getMunicipioSlugsSet, getPlayasByMunicipio } from './playas'
 import { campingsDelMunicipio, MINIMO_CAMPINGS } from './campings-municipio'
 import { tieneAparcamiento } from './aparcamiento-municipio'
+import { tieneAlojamientos } from './alojamiento-municipio'
 import { tienePois } from './municipio-pois'
 import { tieneBarcos } from './barcos-municipio'
 import { tieneMareas, ubicacionMareas } from './mareas-portus'
 
-export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar'
+export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar' | 'dormir'
 
 export interface EnlaceMunicipio {
   clave: ClaveMunicipio
@@ -31,8 +32,8 @@ export async function enlacesMunicipio(slug: string, nombre: string): Promise<En
   const [conPagina, conAlgunaPlaya, hayPois, playas] = await Promise.all([
     getMunicipioSlugsSet(), getMunicipioSlugsSet(1), tienePois(slug), getPlayasByMunicipio(slug),
   ])
-  const [campings, hayAparcamiento] = await Promise.all([
-    campingsDelMunicipio(playas), tieneAparcamiento(playas, slug),
+  const [campings, hayAparcamiento, hayAlojamiento] = await Promise.all([
+    campingsDelMunicipio(playas), tieneAparcamiento(playas, slug), tieneAlojamientos(playas),
   ])
   const out: EnlaceMunicipio[] = []
 
@@ -56,6 +57,10 @@ export async function enlacesMunicipio(slug: string, nombre: string): Promise<En
   if (campings.length >= MINIMO_CAMPINGS) out.push({
     clave: 'campings', href: `/municipio/${slug}/camping-cerca`,
     texto: `Campings cerca de ${nombre}`, nota: `${campings.length} campings y a qué playa les queda más cerca`,
+  })
+  if (hayAlojamiento) out.push({
+    clave: 'dormir', href: `/municipio/${slug}/donde-dormir`,
+    texto: `Dónde dormir en ${nombre}`, nota: 'a qué playa le queda más cerca cada hotel',
   })
   if (hayAparcamiento) out.push({
     clave: 'aparcar', href: `/municipio/${slug}/donde-aparcar`,

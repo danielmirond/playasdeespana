@@ -27,6 +27,10 @@ export interface HotelReal {
   telefono?:   string | null
   googleId:    string
   source:      'osm' | 'google'
+  /** Lo que dice OpenStreetMap: Hotel, Hostal, Casa de huéspedes. */
+  tipo?:       string
+  lat?:        number
+  lng?:        number
 }
 
 function inferirEstrellas(tags: Record<string, string>): number {

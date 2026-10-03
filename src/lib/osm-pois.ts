@@ -79,6 +79,7 @@ export async function osmHoteles(lat: number, lon: number): Promise<HotelReal[] 
       rating: 0, reseñas: 0, foto: null,
       website: p.w ?? null, telefono: p.p ?? null,
       googleId: '', source: 'osm',
+      tipo: p.t, lat: p.la, lng: p.lo,
     }
   })
 }
