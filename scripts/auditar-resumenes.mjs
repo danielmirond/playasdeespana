@@ -31,6 +31,15 @@
 //      al que solo se le deja MARCAR, nunca aprobar. Su «OK» no vale nada;
 //      su «esto no está en la fuente» manda a la cola.
 //
+//      HOY ESTA CAPA NO PASA SU PROPIO CONTROL. Antes de auditar nada se le
+//      da una fuente y un resumen con una fecha inventada: si no la señala,
+//      el script aborta. gemma3:12b no está instalado, qwen3:14b no cabe en
+//      memoria con el servidor de desarrollo levantado y qwen3:4b razona en
+//      voz alta en vez de responder en el formato pedido. Queda escrita y
+//      apagada hasta que haya un modelo que la pase. La primera versión no
+//      tenía control y se tragó 1.018 errores en silencio, informando de
+//      cero dudas: eso es peor que no auditar, porque da confianza falsa.
+//
 // DOS NIVELES. Lo que puede ser falso se retira. Lo que solo suena a
 // máquina —plantilla, fórmula— se deja publicado y va a una lista aparte
 // para reescribir: retirarlo no protege a nadie y vacía fichas correctas.
@@ -231,12 +240,39 @@ for (const t of todos) {
 
 if (conModelo) {
   const limpios = todos.filter(t => !dudas.some(d => d.p === t.p))
-  process.stderr.write(`\nSegunda opinión con ${MODELO} sobre ${limpios.length} resúmenes…\n`)
+  // Control envenenado antes de empezar: se le da una fuente y un resumen
+  // con un dato que no está en ella. Si no lo marca, el verificador no
+  // verifica y el informe sería un sello en falso.
+  const CONTROL_F = 'El faro de Punta Nati es un faro situado en el municipio de Ciudadela, en Menorca.'
+  const CONTROL_R = 'Faro de Punta Nati, en Ciudadela. Se construyó en 1859 tras el naufragio del vapor General Chanzy.'
+  const prueba = await segundaOpinion(CONTROL_R, CONTROL_F).catch(e => { throw new Error(`no responde: ${e.message}`) })
+  // No basta con que diga algo: tiene que señalar LO QUE FALLA y hacerlo en
+  // el formato pedido. Un modelo que piensa en voz alta devuelve texto, y
+  // tomar ese texto por hallazgos deja pasar el control sin verificar nada.
+  const dioEnElClavo = prueba?.some(l => /1859|chanzy|naufragi/i.test(l))
+  const formatoSano = prueba && prueba.length <= 3 && prueba.every(l => l.length < 160)
+  if (!prueba || !dioEnElClavo || !formatoSano) {
+    console.error(`\nControl FALLIDO con ${MODELO}.`)
+    console.error(!prueba ? '  Da por buena una fecha que no está en la fuente.'
+      : !dioEnElClavo ? `  No señala el dato inventado. Dijo: ${prueba.join(' / ').slice(0, 160)}`
+      : `  No respeta el formato: devuelve prosa en vez de una línea por hallazgo.`)
+    console.error('Esta capa no se ejecuta: un verificador que no detecta lo evidente firmaría en falso.')
+    process.exit(1)
+  }
+  process.stderr.write(`\nControl superado (${MODELO} marcó: ${prueba.join(' / ')}).\n`)
+  process.stderr.write(`Segunda opinión sobre ${limpios.length} resúmenes…\n`)
   for (const [i, t] of limpios.entries()) {
     try {
       const pegas = await segundaOpinion(t.p.r, t.p.e.t)
       if (pegas) { dudas.push({ ...t, razones: [`el verificador no encuentra en la fuente: ${pegas.join(' / ')}`] }); apunta('verificador') }
-    } catch { /* si el modelo falla, el resumen no se marca: la capa 1 manda */ }
+    } catch (err) {
+      // NUNCA en silencio. Un verificador que se traga los errores informa
+      // de cero dudas y da una confianza que no ha ganado: pasó aquí, con
+      // el modelo desinstalado y 1.018 fallos invisibles. Si falla, para.
+      console.error(`\n\nEl verificador ha fallado en «${t.p.n}»: ${err.message}`)
+      console.error('Se aborta: un informe a medias sobre si el contenido es cierto no vale nada.')
+      process.exit(1)
+    }
     if (i % 25 === 24) process.stderr.write(`\r  ${i + 1}/${limpios.length} · dudas ${dudas.length}`)
   }
   process.stderr.write('\n')
