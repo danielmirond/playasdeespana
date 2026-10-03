@@ -117,7 +117,7 @@ export default async function PlayasCercaDeCiudadPage({ params }: Props) {
               </span>
               {/* Ruta medida por carretera si la tenemos; si no, la
                   estimación de siempre. El trazo del subrayado dice cuál
-                  de las dos estás leyendo — la misma gramática de la ficha. */}
+                  de las dos estás leyendo: la misma gramática de la ficha. */}
               {(() => {
                 const r = rutas[p.slug]
                 return (

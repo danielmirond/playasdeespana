@@ -63,7 +63,7 @@ export default function YogaPlayaPage() {
         </h1>
         <p data-speakable style={{ fontSize: '.95rem', color: 'var(--ink)', lineHeight: 1.65, margin: '0 0 .5rem', maxWidth: 640 }}>
           {total} estudios reales de yoga y pilates a menos de 15 km de la costa, en {provincias.length} provincias.
-          Cada uno con su valoración de Google, sus reseñas y la playa de nuestra guía que le queda al lado —
+          Cada uno con su valoración de Google, sus reseñas y la playa de nuestra guía que le queda al lado,
           para encadenar esterilla y baño sin coger el coche.
         </p>
         <p style={{ fontSize: '.72rem', color: 'var(--muted)', margin: '0 0 2rem' }}>

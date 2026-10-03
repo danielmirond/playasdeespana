@@ -102,8 +102,8 @@
 .cercanaNombre { font-size: .85rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
 .cercanaMeta { font-size: .74rem; color: var(--muted); margin-top: .2rem; }
 /* La foto de la playa cercana. Va a sangre contra los tres bordes de
-   arriba —de ahí los márgenes negativos, que compensan el padding de la
-   tarjeta— porque una foto con marco por los cuatro lados parece un
+   arriba, de ahí los márgenes negativos, que compensan el padding de la
+   tarjeta, porque una foto con marco por los cuatro lados parece un
    adjunto y no la playa.
    Altura fija: las fuentes devuelven proporciones dispares y con altura
    libre el carrusel quedaba en dientes de sierra. object-fit recorta,

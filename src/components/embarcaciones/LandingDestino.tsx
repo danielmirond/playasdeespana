@@ -54,7 +54,7 @@ export default function LandingDestino({ tipo, destino }: Props) {
         : `¿Necesito licencia/título para pilotarlo?`,
       a: tipo === 'sin-licencia'
         ? `En España sin titulación puedes pilotar embarcaciones de hasta 5 metros de eslora y motor menor de 15 CV (RD 875/2014). Velocidad limitada y zona costera (máx. 2 millas).`
-        : `Para ${t.es} sí. La titulación PER (Patrón Embarcaciones Recreo) es la mínima para esloras 8-15 m. Si no la tienes, alquila con skipper incluido — añade 150-300€/día.`,
+        : `Para ${t.es} sí. La titulación PER (Patrón Embarcaciones Recreo) es la mínima para esloras 8-15 m. Si no la tienes, alquila con skipper incluido: añade 150-300€/día.`,
     },
     {
       q: `¿Mejor temporada para ir a ${destino.nombre}?`,
@@ -179,7 +179,7 @@ export default function LandingDestino({ tipo, destino }: Props) {
           Calas y fondeos accesibles por mar
         </h2>
         <p style={{ fontSize: '.9rem', color: 'var(--muted)', marginBottom: '1.25rem', maxWidth: 700 }}>
-          Estos son los puntos top donde te llevará un {t.es} en {destino.nombre} — varios son accesibles únicamente desde el agua.
+          Estos son los puntos top donde te llevará un {t.es} en {destino.nombre}: varios son accesibles únicamente desde el agua.
         </p>
         <ol style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '.85rem' }}>
           {destino.fondeos.map((f, i) => (

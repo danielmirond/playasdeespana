@@ -70,7 +70,7 @@ const LOCALES: Record<Region, Local[]> = {
     { sector: ['E','ESE','ENE'], nombre: 'levante', en: 'levante (easterly)', umbral: 20,
       efecto: 'mar picado y agua más fría en la Costa del Sol', efectoEn: 'choppy sea and colder water on the Costa del Sol' },
     { sector: ['O','OSO','ONO'], nombre: 'poniente', en: 'poniente (westerly)', umbral: 25,
-      efecto: 'aplana el mar y es el bueno para el baño', efectoEn: 'flattens the sea — the good one for swimming' },
+      efecto: 'aplana el mar y es el bueno para el baño', efectoEn: 'flattens the sea, the good one for swimming' },
     { sector: ['N','NNO','NNE'], nombre: 'terral', en: 'terral (hot land wind)', umbral: 15,
       efecto: 'calor seco que baja de la sierra; sube mucho la temperatura', efectoEn: 'dry heat coming down from the hills; temperatures jump' },
   ],
@@ -110,7 +110,7 @@ const LOCALES: Record<Region, Local[]> = {
   ],
   'galicia': [
     { sector: ['NE','NNE','ENE'], nombre: 'nordés', en: 'nordés (north-easterly)', umbral: 20,
-      efecto: 'el de verano — seco, frío y con agua más fría por afloramiento', efectoEn: 'the summer one — dry, cool, with colder water from upwelling' },
+      efecto: 'el de verano, seco, frío y con agua más fría por afloramiento', efectoEn: 'the summer one, dry, cool, with colder water from upwelling' },
     { sector: ['SO','SSO','OSO','S'], nombre: 'vendaval', en: 'vendaval (south-westerly)', umbral: 30,
       efecto: 'el de los temporales, con lluvia y mar gruesa', efectoEn: 'the storm wind; rain and heavy seas' },
   ],
@@ -124,7 +124,7 @@ const LOCALES: Record<Region, Local[]> = {
   ],
   'canarias': [
     { sector: ['NE','NNE','ENE','N'], nombre: 'alisio', en: 'trade wind', umbral: 25,
-      efecto: 'el de siempre — fresco, constante y mar movida en la cara norte', efectoEn: 'the usual one — fresh, steady, with a lively sea on the north side' },
+      efecto: 'el de siempre, fresco, constante y mar movida en la cara norte', efectoEn: 'the usual one, fresh, steady, with a lively sea on the north side' },
     { sector: ['E','ESE','SE'], nombre: 'calima', en: 'calima (Saharan wind)', umbral: 15,
       efecto: 'aire del Sáhara, con calor, polvo y poca visibilidad', efectoEn: 'Saharan air, with heat, dust and poor visibility' },
   ],

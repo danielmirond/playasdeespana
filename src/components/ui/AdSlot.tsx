@@ -68,8 +68,8 @@ export default function AdSlot({ slot, format = 'auto', responsive = true, style
       style={{ textAlign: 'center', minHeight: alto ?? ALTURA[format] ?? 250, ...style }}
     >
       {/* La etiqueta va SIEMPRE y va arriba. No es una formalidad legal: es
-          la misma regla que el resto del sitio —cada dato dice de dónde
-          sale— aplicada a lo que no es un dato. Un anuncio que no se
+          la misma regla que el resto del sitio, cada dato dice de dónde
+          sale, aplicada a lo que no es un dato. Un anuncio que no se
           identifica se apoya en la credibilidad de las mediciones que tiene
           al lado, y esa credibilidad no está en venta. */}
       <span style={{

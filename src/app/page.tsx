@@ -124,7 +124,7 @@ export default async function HomePage() {
     },
     {
       q: '¿Cuántas playas hay en España?',
-      a: `El inventario oficial del MITECO recoge más de 3.500 playas, y aquí tienes ficha de ${playas.length.toLocaleString('es')} incluyendo calas y zonas de baño de las diez comunidades costeras, Ceuta y Melilla. De ellas, ${nBandera.toLocaleString('es')} lucen Bandera Azul en 2026 — España lleva décadas siendo el país con más banderas azules del mundo.`,
+      a: `El inventario oficial del MITECO recoge más de 3.500 playas, y aquí tienes ficha de ${playas.length.toLocaleString('es')} incluyendo calas y zonas de baño de las diez comunidades costeras, Ceuta y Melilla. De ellas, ${nBandera.toLocaleString('es')} lucen Bandera Azul en 2026: España lleva décadas siendo el país con más banderas azules del mundo.`,
     },
     {
       q: '¿Dónde puedo ir a la playa con mi perro?',

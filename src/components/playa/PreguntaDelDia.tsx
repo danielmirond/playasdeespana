@@ -98,7 +98,7 @@ export default function PreguntaDelDia({
     return (
       <span className={styles.statusTxt}>
         {locale === 'en'
-          ? 'Thanks — whoever looks up this beach next will see it.'
+          ? 'Thanks: whoever looks up this beach next will see it.'
           : 'Gracias. Lo verá quien busque esta playa después de ti.'}
       </span>
     )

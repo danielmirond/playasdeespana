@@ -88,7 +88,7 @@ export default async function CoastPage({ params }: { params: Promise<CoastPageP
           <h2 style={sectionH2}>Por qué alquilar un barco en {coastName}</h2>
           <p style={{ color: 'var(--muted)', lineHeight: 1.7 }}>
             {coastName} concentra algunas de las mejores calas de España, muchas solo accesibles por mar.
-            Alquilar un barco —con patrón si no tienes experiencia o sin licencia para embarcaciones de hasta 5,5 m—
+            Alquilar un barco, con patrón si no tienes experiencia o sin licencia para embarcaciones de hasta 5,5 m, 
             te permite descubrir fondeos tranquilos, playas vírgenes y rincones que desde tierra están masificados o son inaccesibles.
             Abajo encontrarás cada destino con sus precios, mejores playas, fondeos recomendados y consejos locales.
           </p>

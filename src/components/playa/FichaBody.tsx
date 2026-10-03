@@ -473,7 +473,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* ORDEN ABOVE-THE-FOLD (post critique PR #84):
               1. Intro breve (texto, anchor reading)
               2. EstadoHoy (sistema + chips fusionados)
-              3. AsistentePlaya (qué necesitas hoy — diferencial #1)
+              3. AsistentePlaya (qué necesitas hoy: diferencial #1)
               4. ...resto (galería, mareas, hoteles, ...)
             El thumbnail strip + BeachVideo bajan a posición posterior
             (los maneja page.tsx). */}
@@ -523,7 +523,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             Antes salían aquí los cuatro o cinco productos juntos, y una
             auditoría midió que los tres primeros enlaces de Amazon
             aparecían al 26% de la ficha. De esos tres, solo el protector
-            solar estaba justificado —«índice UV de 8 (extremo)»—; la
+            solar estaba justificado, «índice UV de 8 (extremo)», ; la
             toalla y la botella son de siempre, no de hoy.
             La prioridad ya existía en el dato (critica/alta/media/baja),
             solo que nadie la usaba para decidir la posición: critica y
@@ -633,8 +633,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:'.5rem', marginBottom:'.6rem', flexWrap:'wrap' }}>
                     {/* El título dice DE DÓNDE es el dato, no solo cómo se
                         obtuvo. Decía «Medido por boya» y las cuatro cifras
-                        iban con certeza `medido` —trazo continuo de 2 px, el
-                        más alto de la gramática— junto al nombre de la
+                        iban con certeza `medido`trazo continuo de 2 px, el
+                        más alto de la gramática, junto al nombre de la
                         playa. Todo cierto y todo mal atribuido: la boya está
                         a 38 km de mediana y la mitad son de aguas
                         profundas.
@@ -679,7 +679,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       describen esta playa. */}
                   <p style={{ fontSize:'var(--fs-xs)', color:'var(--muted)', lineHeight:1.5, margin:'.6rem 0 0' }}>
                     {locale === 'en'
-                      ? <>The wave height is what the sea is doing <b>out there</b>{boya.aguasProfundas ? ', in deep water' : ''} — not at the shore. Waves shoal and refract on the way in, so a sheltered beach gets a fraction of it and a headland can get more. Water temperature and period do describe this beach.</>
+                      ? <>The wave height is what the sea is doing <b>out there</b>{boya.aguasProfundas ? ', in deep water' : ''}, not at the shore. Waves shoal and refract on the way in, so a sheltered beach gets a fraction of it and a headland can get more. Water temperature and period do describe this beach.</>
                       : <>La altura de ola es la del mar <b>ahí fuera</b>{boya.aguasProfundas ? ', en aguas profundas' : ''}, no la de la orilla. Al acercarse, la ola asomera y refracta: una playa abrigada recibe una fracción y un cabo puede recibir más. La temperatura del agua y el periodo sí describen esta playa.</>}
                   </p>
                   <div style={{ fontFamily:'var(--font-mono)', fontSize: 'var(--fs-xs)', color:'var(--muted)', marginTop:'.6rem' }}>
@@ -844,7 +844,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                     style={{ color: 'var(--ink)', fontWeight: 600 }}>
                 {playa.municipio} →
               </Link>
-              <span>{locale === 'en' ? '— temperature, rain, wind and 7-day forecast.' : '— temperatura, lluvia, viento y previsión a 7 días.'}</span>
+              <span>{locale === 'en' ? ', temperature, rain, wind and 7-day forecast.' : ', temperatura, lluvia, viento y previsión a 7 días.'}</span>
             </div>
           )}
           <div className={styles.cardBody}>
@@ -983,10 +983,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           </div>
           <div className={styles.cardBody}>
             <div className={styles.tempGrid}>
-              <TempCell icon={<Thermometer size={18} weight="bold" color="var(--accent)"/>} val={meteo.tempAire != null ? `${meteo.tempAire}°C` : '—'}   label={i18n.tempAire}/>
-              <TempCell icon={<Drop size={18} weight="bold" color="var(--accent)"/>} val={meteo.agua != null ? `${meteo.agua}°C` : '—'}       label={i18n.tempAgua}/>
-              <TempCell icon={<Thermometer size={18} weight="light" color="var(--muted)"/>} val={meteo.sensacion != null ? `${meteo.sensacion}°C` : '—'}  label={i18n.sensacion}/>
-              <TempCell icon={<Sun size={18} weight="bold" color="var(--accent)"/>} val={meteo.uv != null ? `UV ${meteo.uv}` : '—'}        label={i18n.indiceUV}/>
+              <TempCell icon={<Thermometer size={18} weight="bold" color="var(--accent)"/>} val={meteo.tempAire != null ? `${meteo.tempAire}°C` : ''}   label={i18n.tempAire}/>
+              <TempCell icon={<Drop size={18} weight="bold" color="var(--accent)"/>} val={meteo.agua != null ? `${meteo.agua}°C` : ''}       label={i18n.tempAgua}/>
+              <TempCell icon={<Thermometer size={18} weight="light" color="var(--muted)"/>} val={meteo.sensacion != null ? `${meteo.sensacion}°C` : ''}  label={i18n.sensacion}/>
+              <TempCell icon={<Sun size={18} weight="bold" color="var(--accent)"/>} val={meteo.uv != null ? `UV ${meteo.uv}` : ''}        label={i18n.indiceUV}/>
               <TempCell icon={<Gauge size={18} weight="bold" color="var(--accent)"/>} val={`${meteo.humedad}%`}     label={i18n.humedad}/>
             </div>
             {meteo.uv != null && meteo.uv >= 3 && (
@@ -1033,14 +1033,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <CompassSVG dir={meteo.vientoDireccion}/>
               <table className={styles.vTable}>
                 <tbody>
-                  <tr><td className={styles.vtK}>{i18n.velocidad}</td><td className={styles.vtV}>{meteo.viento != null ? `${meteo.viento} km/h` : '—'}</td></tr>
+                  <tr><td className={styles.vtK}>{i18n.velocidad}</td><td className={styles.vtV}>{meteo.viento != null ? `${meteo.viento} km/h` : ''}</td></tr>
                   <tr><td className={styles.vtK}>{i18n.racha}</td><td className={styles.vtV}>{meteo.vientoRacha} km/h</td></tr>
                   <tr><td className={styles.vtK}>{i18n.direccion}</td><td className={styles.vtV}>{meteo.vientoDireccion}</td></tr>
                 </tbody>
               </table>
             </div>
             {/* Y qué significa. Es lo único de esta tarjeta que contesta la
-                pregunta real —«¿voy o no voy?»—: la cifra la da cualquiera;
+                pregunta real, «¿voy o no voy?», : la cifra la da cualquiera;
                 saber que el levante levanta arena y mar de fondo, no. */}
             {vientoNombrado?.destacado && (
               <p style={{ margin:'.7rem 0 0', fontSize:'var(--fs-sm)', lineHeight:1.55, color:'var(--ink)' }}>
@@ -1114,8 +1114,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         {/* TRÁFICO */}
         {/* El id vive en la raíz de TraficoSection, no aquí: este div
             existe solo para dar la `key` a Reorder. Llevaba también
-            id="s-trafico" y eran DOS elementos con el mismo id —HTML
-            inválido—, así que cualquier índice apuntaba al envoltorio
+            id="s-trafico" y eran DOS elementos con el mismo id, HTML
+            inválido, , así que cualquier índice apuntaba al envoltorio
             vacío en vez de a la sección. */}
         <div key="trafico">
           <TraficoSection playa={playa} hoyISO={hoyISO} />
@@ -1177,8 +1177,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               {playa.parking && (
                 <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--muted)', lineHeight: 1.55, margin: '.7rem 0 0' }}>
                   {locale === 'en'
-                    ? `${nombreH} has nearby parking — in high season it fills up before midday, so aim for the early slot.`
-                    : `${nombreH} tiene aparcamiento cercano — en temporada alta se llena antes del mediodía; apunta a la franja temprana para no dar vueltas.`}
+                    ? `${nombreH} has nearby parking: in high season it fills up before midday, so aim for the early slot.`
+                    : `${nombreH} tiene aparcamiento cercano, en temporada alta se llena antes del mediodía; apunta a la franja temprana para no dar vueltas.`}
                 </p>
               )}
             </div>
@@ -1244,7 +1244,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </div>
             <div className={styles.cardBody}>
               {/* variante rating: aquí la nota ES el criterio y la foto no
-                  aporta nada — un chiringuito se elige por reseñas. */}
+                  aporta nada: un chiringuito se elige por reseñas. */}
               <ListaPOI
                 variante="rating"
                 locale={locale}
@@ -1393,7 +1393,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
         {/* AD. entre hoteles y servicios */}
         {/* Último puesto de la fase PLAN: el lector ya tiene su respuesta
-            —«¿puedo bañarme hoy?»— y ya ha organizado la visita. Antes de
+, «¿puedo bañarme hoy?», y ya ha organizado la visita. Antes de
             aquí el anuncio no molestaría: competiría con lo único que hace
             que la página merezca confianza. */}
         <Hueco key="ad" zona="profundidad" bloque={SLOTS.fichaPlan} locale={locale} />
@@ -1464,7 +1464,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               />
               {/* El hemisferio se deduce del signo, no se da por hecho.
                   Estaba escrito «N, E» fijo, así que toda la costa
-                  atlántica y Canarias mostraban «-13.839299° E» — una
+                  atlántica y Canarias mostraban «-13.839299° E»: una
                   longitud negativa es Oeste, y el signo y la letra se
                   contradecían en la misma línea. Se muestra el valor
                   absoluto con la letra que le toca, que es como se
@@ -1553,7 +1553,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                       las genéricas). Sin foto, la tarjeta queda como estaba:
                       un hueco gris diría «cargando» y un icono de relleno
                       diría «foto no disponible», y ninguna de las dos cosas
-                      es verdad — simplemente esta playa no tiene foto.
+                      es verdad: simplemente esta playa no tiene foto.
                       alt="" porque el nombre va escrito justo debajo: con
                       alt repetido, un lector de pantalla lo dice dos veces. */}
                   {pc.foto && (
@@ -1664,7 +1664,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         </div>
         {/* soloDesktop: en móvil el aside cae al flujo principal y este
             resumen repetía el mismo 11:00-14:00 que la sección
-            "Masificación y mejor hora" un par de scrolls más abajo —
+            "Masificación y mejor hora" un par de scrolls más abajo,
             además con otra gramática de cabecera (antetítulo en
             versalitas vs H2 serif). En desktop vive en la columna
             sticky, donde sí aporta. */}

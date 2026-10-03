@@ -22,14 +22,14 @@
 /* ── Móvil estrecho: las tres acciones a la vista ──────────────────────
    El plegado de arriba nació del presupuesto de cromado de la propuesta
    2026 (§5.2): en móvil el pliegue es oro y solo se veía «Guardar».
-   Pero el brief de campaña posterior define `sellar_playa` —lo que hace
+   Pero el brief de campaña posterior define `sellar_playa`lo que hace
    «Estuve aquí»— como CONVERSIÓN PRINCIPAL, con tope de 1,50 € por sello
    en pago. Tener la conversión principal escondida detrás de tres puntos
    no se sostiene.
    
    No se añade una fila: se recompone la que hay, así que el hero NO crece
-   ni un píxel. Se paga quitando etiquetas donde el icono basta —el
-   corazón de guardar y la flecha de compartir se entienden solos— y
+   ni un píxel. Se paga quitando etiquetas donde el icono basta, el
+   corazón de guardar y la flecha de compartir se entienden solos, y
    retirando el «···», que ya no tiene nada que esconder.
    
    Cuentas a 375 px, con 348 de ancho útil: corazón 44 + «Estuve aquí»

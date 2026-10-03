@@ -100,7 +100,7 @@ export async function getAvisos(): Promise<Aviso[]> {
         vistos.add(titular)
         avisos.push({
           titular,
-          medio: texto(item, 'source') || '—',
+          medio: texto(item, 'source') || '',
           fecha: texto(item, 'pubDate'),
           // Si un titular nombra varios, se queda con el más específico
           // (el nombre más largo suele ser el municipio real, no la provincia).

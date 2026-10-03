@@ -5,7 +5,7 @@
   border-bottom: 1px solid var(--line);
   display: flex; overflow-x: auto; padding: 0 1.5rem;
   /* La última pestaña se cortaba a hueso contra el borde y nada decía
-     que hubiera más a la derecha. El desvanecido sí lo dice — y se
+     que hubiera más a la derecha. El desvanecido sí lo dice: y se
      apaga al llegar al final del scroll. */
   -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
           mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
@@ -32,7 +32,7 @@
 
 /* En móvil esta barra desaparece: su función (saltar entre secciones) la
    asume el índice de la píldora contextual, que además no ocupa cromado
-   fijo permanente. Propuesta de diseño 2026 §5.1 — de 316px a 64px. */
+   fijo permanente. Propuesta de diseño 2026 §5.1: de 316px a 64px. */
 @media (max-width: 800px) {
   .nav { display: none; }
 }

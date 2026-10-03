@@ -133,7 +133,7 @@ export const BOAT_RENTAL_LOCALITIES: Record<string, BoatRentalLocality> = {
     },
 
     regulations: [
-      'Posidonia: prohibido fondear sobre praderas en Baleares (Decreto 25/2018) — usa boyas o arena',
+      'Posidonia: prohibido fondear sobre praderas en Baleares (Decreto 25/2018), usa boyas o arena',
       'Pesca prohibida en reserva marina',
       'Temporada alta: Julio-Agosto (40% más caro)',
       'Depósito caución: €500-€1000 típico',

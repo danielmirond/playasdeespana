@@ -186,7 +186,7 @@ export default function MapaQueHacer({
         style={{ width: '100%', height, background: 'var(--card-bg)' }}
       />
       {/* Leyenda: qué es cada punto. Solo se muestran las categorías con
-          contenido — si no hay miradores no aparece «Miradores». */}
+          contenido: si no hay miradores no aparece «Miradores». */}
       <div style={{
         display: 'flex', flexWrap: 'wrap', gap: '.65rem 1rem',
         padding: '.7rem .95rem', borderTop: '1px solid var(--line)',

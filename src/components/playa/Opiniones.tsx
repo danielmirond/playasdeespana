@@ -231,14 +231,14 @@ export default function Opiniones({ slug, nombre, initial, locale = 'es' }: Prop
                 anunciando un vacío: prueba social en negativo, y en
                 miles de fichas a la vez. La lista vacía ya comunica que
                 no hay nada; decirlo además solo resta.
-                Sigue siendo honesto —«serías el primero» no esconde que
-                está vacío— pero pregunta en vez de constatar. Y justo
+                Sigue siendo honesto, «serías el primero» no esconde que
+                está vacío, pero pregunta en vez de constatar. Y justo
                 debajo, VotacionPlaya enseña la media y el número de
                 valoraciones cuando las hay, así que la señal social de
                 verdad está a un centímetro. */}
             {es
               ? <>¿Has estado en <em>{nombre}</em>? Cuenta cómo estaba: serías el primero.</>
-              : <>Been to <em>{nombre}</em>? Tell others how it was — yours would be the first.</>}
+              : <>Been to <em>{nombre}</em>? Tell others how it was, yours would be the first.</>}
           </p>
         )
       )}

@@ -325,7 +325,7 @@ export default async function QueHacerPage({ params }: Props) {
               {yoga.slice(0, 6).map(e => (
                 <li key={e.id} style={{ display: 'flex', gap: '.7rem', alignItems: 'baseline', padding: '.5rem 0', borderTop: '1px solid var(--line)' }}>
                   <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.72rem', color: 'var(--muted)', flexShrink: 0, minWidth: '2.6rem' }}>
-                    {e.valoracion > 0 ? e.valoracion.toFixed(1) : '—'}
+                    {e.valoracion > 0 ? e.valoracion.toFixed(1) : ''}
                   </span>
                   <span style={{ flex: 1, minWidth: 0 }}>
                     <a href={`https://www.google.com/maps/search/?api=1&query=${e.lat},${e.lng}`} target="_blank" rel="noopener"

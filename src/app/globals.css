@@ -99,8 +99,8 @@
    porque el número heredaba. Litoral le da familia propia a las cifras
    con `.num { color: var(--ink) }`, y una clase gana a la herencia
    siempre: sobre la foto de Formentor el 29,7 salía en tinta oscura
-   sobre agua oscura mientras el «°» de al lado se veía blanco —la
-   unidad usa otra clase—, que es la pista de que esto era especificidad
+   sobre agua oscura mientras el «°» de al lado se veía blanco, la
+   unidad usa otra clase, , que es la pista de que esto era especificidad
    y no un token mal puesto. Se sube a `.dato-ondark .num` (0,2,0) para
    ganarle a `.num` (0,1,0). */
 .dato-ondark .num,

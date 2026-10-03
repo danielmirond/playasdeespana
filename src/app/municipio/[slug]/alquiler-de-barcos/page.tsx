@@ -221,7 +221,7 @@ export default async function AlquilerBarcosMunicipio({ params }: Props) {
             <ul style={{ margin: '0 0 .5rem 1.1rem', lineHeight: 1.8, fontSize: '.95rem', maxWidth: 660 }}>
               {costa.vientos.map(v => (
                 <li key={v.nombre}>
-                  <b>{v.nombre}</b> <span style={{ color: 'var(--muted)' }}>— {v.efecto}. Se nota a partir de {v.umbral} km/h.</span>
+                  <b>{v.nombre}</b> <span style={{ color: 'var(--muted)' }}>{v.efecto}. Se nota a partir de {v.umbral} km/h.</span>
                 </li>
               ))}
             </ul>

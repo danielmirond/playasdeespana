@@ -112,7 +112,7 @@ export default async function BanderasZonaPage({ params }: { params: Promise<{ z
     },
     {
       q: `¿Es la bandera oficial de la playa?`,
-      a: `No. Es una estimación meteorológica orientativa a partir del oleaje y el viento. La bandera oficial y vinculante la decide el socorrista según las condiciones locales del momento —corrientes, medusas, calidad del agua—, que esta estimación no ve. Consulta siempre la bandera izada en el puesto de vigilancia.`,
+      a: `No. Es una estimación meteorológica orientativa a partir del oleaje y el viento. La bandera oficial y vinculante la decide el socorrista según las condiciones locales del momento, corrientes, medusas, calidad del agua, , que esta estimación no ve. Consulta siempre la bandera izada en el puesto de vigilancia.`,
     },
   ]
   const faqSchema = {

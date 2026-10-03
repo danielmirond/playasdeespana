@@ -27,7 +27,7 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
   'costa-brava': {
     intro: [
       'La Costa Brava se extiende a lo largo de 220 kilómetros desde Blanes hasta la frontera francesa, en la provincia de Girona. Es probablemente la costa con mayor concentración de calas escondidas de la península: rincones que se alcanzan por sendero costero (camí de ronda) entre acantilados de pinos y aguas turquesa.',
-      'A diferencia de otras zonas mediterráneas, la Costa Brava conserva un equilibrio entre desarrollo turístico (Lloret, Tossa, Platja d\'Aro) y costa virgen (Cap de Creus, Aiguablava, Begur). Los pueblos medievales del interior — Pals, Peratallada, Begur — se conectan con sus calas en menos de 10 minutos.',
+      'A diferencia de otras zonas mediterráneas, la Costa Brava conserva un equilibrio entre desarrollo turístico (Lloret, Tossa, Platja d\'Aro) y costa virgen (Cap de Creus, Aiguablava, Begur). Los pueblos medievales del interior, Pals, Peratallada, Begur, se conectan con sus calas en menos de 10 minutos.',
       'La gastronomía local ronda el mar y montaña catalán: erizos, gambas de Palamós, suquet de peix. Salvador Dalí dejó su huella en Cadaqués, Port Lligat y Figueres, todo a una hora del litoral.',
     ],
     mejorEpoca: [
@@ -93,7 +93,7 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
 
   'costa-de-la-luz': {
     intro: [
-      'La Costa de la Luz se extiende de norte a sur por las provincias de Huelva y Cádiz, mirando al Atlántico. Su nombre lo dice todo: la luz aquí tiene una calidad distinta — el viento del Levante limpia la atmósfera y devuelve cielos como en pocos sitios de la península.',
+      'La Costa de la Luz se extiende de norte a sur por las provincias de Huelva y Cádiz, mirando al Atlántico. Su nombre lo dice todo: la luz aquí tiene una calidad distinta, el viento del Levante limpia la atmósfera y devuelve cielos como en pocos sitios de la península.',
       'Mientras la Costa del Sol se llena, la Costa de la Luz mantiene playas de varios kilómetros casi vacías incluso en agosto. Bolonia, Zahara de los Atunes, El Palmar, Caños de Meca: nombres que evocan dunas, pinares cerca del mar y ese viento de Poniente o Levante que define el día.',
       'Es la costa del kitesurf y el windsurf por excelencia. Tarifa concentra la mayor flota mundial de kite. La gastronomía gira alrededor del atún rojo de almadraba (Zahara, Conil, Barbate) y los chiringuitos suelen ser de tablones y atún braseado.',
     ],
@@ -127,8 +127,8 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
 
   'islas-baleares': {
     intro: [
-      'Las Islas Baleares — Mallorca, Menorca, Ibiza y Formentera — son el archipiélago mediterráneo con más diversidad de playas de Europa. Cada isla tiene su personalidad: Mallorca combina calas turquesa (Cala Mondragó, S\'Amarador) con playas extensas (Playa de Muro, Es Trenc); Menorca es la isla de las calas vírgenes (Macarella, Cala Mitjana); Ibiza junta playas familiares (Cala Bassa) con caletas remotas (Cala d\'Hort, Aigües Blanques); y Formentera tiene la mejor relación arena-agua del país (Ses Illetes, Llevant).',
-      'La posidonia oceánica — patrimonio UNESCO en Formentera — explica esa transparencia única: filtra el agua y le da el característico azul-turquesa. En septiembre y octubre las masas turistas se van pero el agua sigue a 24 °C.',
+      'Las Islas Baleares, Mallorca, Menorca, Ibiza y Formentera, son el archipiélago mediterráneo con más diversidad de playas de Europa. Cada isla tiene su personalidad: Mallorca combina calas turquesa (Cala Mondragó, S\'Amarador) con playas extensas (Playa de Muro, Es Trenc); Menorca es la isla de las calas vírgenes (Macarella, Cala Mitjana); Ibiza junta playas familiares (Cala Bassa) con caletas remotas (Cala d\'Hort, Aigües Blanques); y Formentera tiene la mejor relación arena-agua del país (Ses Illetes, Llevant).',
+      'La posidonia oceánica, patrimonio UNESCO en Formentera, explica esa transparencia única: filtra el agua y le da el característico azul-turquesa. En septiembre y octubre las masas turistas se van pero el agua sigue a 24 °C.',
       'Llegar a las calas más pequeñas requiere a menudo barco o sendero costero. Muchos puertos tienen alquiler de embarcaciones sin titulación (hasta 6m) que abren los rincones imposibles por carretera.',
     ],
     mejorEpoca: [
@@ -146,7 +146,7 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
       { nombre: 'Santanyí (Mallorca)',     slug: 'santanyi',         resumen: 'Cala Mondragó, S\'Amarador, Cala Llombards. Calas turquesa entre pinos.' },
       { nombre: 'Ciutadella (Menorca)',    slug: 'ciutadella',       resumen: 'Macarella, Cala Mitjana, Turqueta. Las calas top del Mediterráneo.' },
       { nombre: 'Sant Josep (Ibiza)',      slug: 'sant-josep',       resumen: 'Cala d\'Hort (vista a Es Vedrà), Cala Salada, Cala Bassa.' },
-      { nombre: 'Formentera',              slug: 'formentera',       resumen: 'Toda la isla. Ses Illetes, Llevant, Migjorn — playas de 5 km de arena fina.' },
+      { nombre: 'Formentera',              slug: 'formentera',       resumen: 'Toda la isla. Ses Illetes, Llevant, Migjorn: playas de 5 km de arena fina.' },
     ],
     faq: [
       { q: '¿Cuál es la cala más bonita de Baleares?',
@@ -195,7 +195,7 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
   // ── Costa Cantábrica ──────────────────────────────────────────────
   'costa-vasca': {
     intro: [
-      'La Costa Vasca recorre 150 kilómetros desde la desembocadura del Bidasoa (Hondarribia) hasta Muskiz, en las provincias de Gipuzkoa y Bizkaia. Es la costa más urbana del Cantábrico: las ciudades de Donostia y Bilbao tienen sus propias playas (La Concha, Zurriola, Ondarreta, Las Arenas), y entre medias se suceden pueblos pesqueros vivos — Getaria, Zumaia, Lekeitio, Bermeo — y la mejor ola de Europa, Mundaka.',
+      'La Costa Vasca recorre 150 kilómetros desde la desembocadura del Bidasoa (Hondarribia) hasta Muskiz, en las provincias de Gipuzkoa y Bizkaia. Es la costa más urbana del Cantábrico: las ciudades de Donostia y Bilbao tienen sus propias playas (La Concha, Zurriola, Ondarreta, Las Arenas), y entre medias se suceden pueblos pesqueros vivos, Getaria, Zumaia, Lekeitio, Bermeo, y la mejor ola de Europa, Mundaka.',
       'La temperatura del agua oscila entre 14 °C en febrero y 22 °C en agosto. El swell atlántico que entra por Vizcaya hace que el surf sea consistente todo el año. La luz es la del norte: nubes bajas que se abren al mediodía, atardeceres largos en verano y el verde de los montes hasta la línea del mar.',
       'La gastronomía es razón suficiente para venir: pintxos en San Sebastián, anchoas de Getaria, txuleta, sidra natural en Astigarraga. Y el flysch de Zumaia, la formación geológica más fotogénica de la península, asoma a pie de playa.',
     ],
@@ -298,7 +298,7 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
   'costa-de-almeria': {
     intro: [
       'La Costa de Almería son 220 kilómetros de litoral desde Mojácar hasta Adra. Es la costa más seca de Europa (200 mm de precipitación al año, similar al norte de África) y la más virgen del Mediterráneo español: el Parque Natural Cabo de Gata-Níjar protege 50 km de costa con calas vírgenes, dunas fósiles y acantilados de origen volcánico.',
-      'Las playas emblemáticas — Mónsul, Los Genoveses, Los Muertos, La Cala del Plomo, El Playazo de Rodalquilar — no tienen apenas urbanización, llegan tras 1-2 km de pista de tierra y conservan el aspecto de la película "Indiana Jones y la Última Cruzada" (rodada aquí). El mar Mediterráneo en estado puro.',
+      'Las playas emblemáticas, Mónsul, Los Genoveses, Los Muertos, La Cala del Plomo, El Playazo de Rodalquilar, no tienen apenas urbanización, llegan tras 1-2 km de pista de tierra y conservan el aspecto de la película "Indiana Jones y la Última Cruzada" (rodada aquí). El mar Mediterráneo en estado puro.',
       'A esto suma Cabo de Gata el clima más estable de España (320 días de sol), aguas claras (en verano la visibilidad supera los 10 m sin esfuerzo), y una gastronomía donde el pescado azul (caballa, melva, atún de almadraba) compite con las verduras del invernadero y el ajoblanco.',
     ],
     mejorEpoca: [
@@ -332,9 +332,9 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
   // ── Atlántica gallega ─────────────────────────────────────────────
   'rias-baixas': {
     intro: [
-      'Las Rías Baixas son cuatro grandes entradas de mar en la provincia de Pontevedra: Vigo, Pontevedra, Arousa y Muros-Noia (esta última en A Coruña). Suman más de 200 km de costa con playas resguardadas del Atlántico, arena fina blanca, agua sorprendentemente cálida para el norte (21 °C en agosto) y un horizonte de islas — Cíes, Ons, Sálvora, Cortegada — que forman el Parque Nacional de las Islas Atlánticas.',
-      'Playa de Rodas (Cíes) figura en muchas listas como la mejor playa del mundo: 1.300 m de arena de cristal, aguas turquesa por su orientación protegida y solo accesible en barco con permiso del parque (junio-septiembre, aforo limitado). Otras joyas: A Lanzada (más de 2 km de surf y dunas), Areas Gordas (Bayona), Montalvo, Praia das Catedrais — espera, esa está en Lugo.',
-      'Las Rías Baixas se viven con marisco: vieiras, mejillón de batea, percebes, navajas, almejas. Cambados es la capital del albariño. Y los pueblos costeros — Combarro, Sanxenxo, Baiona, Cangas — combinan tradición pesquera con turismo cuidado.',
+      'Las Rías Baixas son cuatro grandes entradas de mar en la provincia de Pontevedra: Vigo, Pontevedra, Arousa y Muros-Noia (esta última en A Coruña). Suman más de 200 km de costa con playas resguardadas del Atlántico, arena fina blanca, agua sorprendentemente cálida para el norte (21 °C en agosto) y un horizonte de islas, Cíes, Ons, Sálvora, Cortegada, que forman el Parque Nacional de las Islas Atlánticas.',
+      'Playa de Rodas (Cíes) figura en muchas listas como la mejor playa del mundo: 1.300 m de arena de cristal, aguas turquesa por su orientación protegida y solo accesible en barco con permiso del parque (junio-septiembre, aforo limitado). Otras joyas: A Lanzada (más de 2 km de surf y dunas), Areas Gordas (Bayona), Montalvo, Praia das Catedrais, espera, esa está en Lugo.',
+      'Las Rías Baixas se viven con marisco: vieiras, mejillón de batea, percebes, navajas, almejas. Cambados es la capital del albariño. Y los pueblos costeros, Combarro, Sanxenxo, Baiona, Cangas, combinan tradición pesquera con turismo cuidado.',
     ],
     mejorEpoca: [
       { ventana: 'Julio–agosto',     razon: 'Pico de temperatura: 21 °C agua, 25 °C aire. Acceso a Cíes activo.' },
@@ -369,7 +369,7 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
     intro: [
       'La Costa Blanca son 220 km del litoral de Alicante, desde Dénia (frontera con Valencia) hasta Pilar de la Horadada (frontera con Murcia). Su nombre lo dio el viaje de placer británico de los años 60 por la luz blanca y la arena casi cegadora. Hoy combina turismo masivo (Benidorm), pueblos blancos con calas pequeñas (Calpe, Jávea, Moraira) y zonas naturales protegidas (Cabo de las Huertas, Cabo de Sant Antoni).',
       'Las playas se dividen en dos tipos muy distintos: las largas y urbanas (Levante de Benidorm, Postiguet de Alicante, Playa de Saladar) y las calas rocosas con aguas turquesa (Cala Granadella, Moraig, Cala del Portichol, Cala Llebeig). Las primeras tienen todos los servicios; las segundas requieren a veces andar 10 minutos por sendero costero.',
-      'Clima: 320 días de sol al año, agua entre 16 °C en invierno y 27 °C en agosto. Gastronomía mediterránea con identidad — arroz a banda, arroz del senyoret, fideuá, esgarraet — y vino de Jumilla y Yecla cerca. Aeropuerto de Alicante y AVE conectan en 3h con Madrid.',
+      'Clima: 320 días de sol al año, agua entre 16 °C en invierno y 27 °C en agosto. Gastronomía mediterránea con identidad, arroz a banda, arroz del senyoret, fideuá, esgarraet, y vino de Jumilla y Yecla cerca. Aeropuerto de Alicante y AVE conectan en 3h con Madrid.',
     ],
     mejorEpoca: [
       { ventana: 'Mayo–junio',       razon: 'Calor amable (25 °C), agua a 20-22 °C, sin masificación de julio-agosto.' },
@@ -470,8 +470,8 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
   // ── Mediterránea (Tropical, Azahar, Valencia, Garraf) ───────────
   'costa-tropical': {
     intro: [
-      'La Costa Tropical son 80 km de la provincia de Granada, desde La Herradura hasta Adra (frontera con Almería). Es la costa con clima subtropical de la península: rodeada por Sierra Nevada al norte (que actúa de barrera contra el frío) y el mar de Alborán al sur, las temperaturas mínimas no bajan de 14 °C en invierno y permiten cultivar mango, aguacate, chirimoyo y caña de azúcar — fruta tropical real, no metáfora.',
-      'Las playas son una mezcla de acantilados, calas entre rocas (La Herradura, Marina del Este, Cantarriján) y arenales largos (Almuñécar Playa San Cristóbal, Salobreña). El agua es transparente por los fondos rocosos y el escaso aporte de ríos. La temperatura del agua alcanza los 24 °C en agosto y baja a 16 °C en febrero — la más templada del Mediterráneo español tras Almería.',
+      'La Costa Tropical son 80 km de la provincia de Granada, desde La Herradura hasta Adra (frontera con Almería). Es la costa con clima subtropical de la península: rodeada por Sierra Nevada al norte (que actúa de barrera contra el frío) y el mar de Alborán al sur, las temperaturas mínimas no bajan de 14 °C en invierno y permiten cultivar mango, aguacate, chirimoyo y caña de azúcar, fruta tropical real, no metáfora.',
+      'Las playas son una mezcla de acantilados, calas entre rocas (La Herradura, Marina del Este, Cantarriján) y arenales largos (Almuñécar Playa San Cristóbal, Salobreña). El agua es transparente por los fondos rocosos y el escaso aporte de ríos. La temperatura del agua alcanza los 24 °C en agosto y baja a 16 °C en febrero: la más templada del Mediterráneo español tras Almería.',
       'Tras la playa, Granada está a 75 km (Alhambra, Sierra Nevada). En primavera puedes esquiar por la mañana y bañarte por la tarde. Salobreña conserva castillo árabe sobre el mar, Almuñécar tiene parque ornitológico y acuario, y la subida a la Alpujarra granadina es a 30 minutos. Gastronomía mediterránea con toque andaluz: pescaíto frito, gambones de Motril, vinos de la contraviesa.',
     ],
     mejorEpoca: [
@@ -494,7 +494,7 @@ export const COSTAS_EDITORIAL: Record<string, CostaEditorial> = {
     ],
     faq: [
       { q: '¿Por qué se llama Costa Tropical?',
-        a: 'Por su microclima subtropical real (no marketing): mínimas anuales sobre 14 °C, máximas en verano 28 °C, agua del mar entre 16 y 24 °C. Esto permite cultivar mango, aguacate, chirimoyo, papaya, caña de azúcar y plátano enano — la única zona de Europa continental donde estas frutas dan cosecha comercial. Sierra Nevada actúa de escudo contra el frío norte.' },
+        a: 'Por su microclima subtropical real (no marketing): mínimas anuales sobre 14 °C, máximas en verano 28 °C, agua del mar entre 16 y 24 °C. Esto permite cultivar mango, aguacate, chirimoyo, papaya, caña de azúcar y plátano enano: la única zona de Europa continental donde estas frutas dan cosecha comercial. Sierra Nevada actúa de escudo contra el frío norte.' },
       { q: '¿Se puede ir de la nieve a la playa el mismo día?',
         a: 'Sí, es la promesa turística de la zona. Sierra Nevada (Pradollano, 2.100 m) está a 90 minutos en coche de Almuñécar. En marzo-abril es perfectamente realista esquiar por la mañana (estación abre 9 AM) y bañarse en La Herradura a las 16 PM. En enero el agua está fría (16 °C) pero se puede.' },
       { q: '¿Cuál es la mejor playa de la Costa Tropical?',

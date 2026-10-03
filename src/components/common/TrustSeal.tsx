@@ -10,8 +10,8 @@ export default function TrustSeal({ locale = 'es' }: { locale?: 'es' | 'en' }) {
     ? 'Official data · updated hourly'
     : 'Datos oficiales · actualizados cada hora'
   const aria = locale === 'en'
-    ? 'Official data updated hourly — see methodology'
-    : 'Datos oficiales actualizados cada hora — ver metodología'
+    ? 'Official data updated hourly: see methodology'
+    : 'Datos oficiales actualizados cada hora, ver metodología'
   return (
     <Link
       href="/metodologia"

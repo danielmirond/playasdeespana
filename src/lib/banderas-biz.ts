@@ -240,8 +240,8 @@ export async function getBanderaBiz(slug: string): Promise<EstadoOficialBiz | nu
     let bandera: BanderaPlaya | null = null
     if (f.bandera === 'Roja') {
       bandera = { color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
-        motivo: `Bandera oficial izada hoy — baño prohibido (Diputación Foral de Bizkaia)${hora}`,
-        motivoEn: 'Official flag flying today — no swimming', hex: '#ef4444' }
+        motivo: `Bandera oficial izada hoy, baño prohibido (Diputación Foral de Bizkaia)${hora}`,
+        motivoEn: 'Official flag flying today, no swimming', hex: '#ef4444' }
     } else if (f.bandera === 'Amarilla') {
       bandera = { color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
         motivo: `Bandera oficial izada hoy (Diputación Foral de Bizkaia)${hora}`,

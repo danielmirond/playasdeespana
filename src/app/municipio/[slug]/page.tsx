@@ -113,7 +113,7 @@ export default async function MunicipioPage({ params }: Props) {
     .sort((a, b) => ((b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0)) - ((a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0)))[0]
   const respuestaTienePlaya = playas.length === 1
     ? `Sí, ${municipio.nombre} tiene una playa: ${topPlaya.nombre}. En su ficha ves la bandera, la temperatura del agua y el oleaje de hoy, actualizados cada hora.`
-    : `Sí — ${municipio.nombre} tiene ${playas.length} playas en su litoral${conBandera > 0 ? `, ${conBandera} de ellas con Bandera Azul` : ''}. ${topPlaya ? `La más completa por servicios es ${topPlaya.nombre}.` : ''} Abajo tienes el estado del mar de todas, actualizado cada hora.`
+    : `Sí, ${municipio.nombre} tiene ${playas.length} playas en su litoral${conBandera > 0 ? `, ${conBandera} de ellas con Bandera Azul` : ''}. ${topPlaya ? `La más completa por servicios es ${topPlaya.nombre}.` : ''} Abajo tienes el estado del mar de todas, actualizado cada hora.`
   const faqTienePlaya = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

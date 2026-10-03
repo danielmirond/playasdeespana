@@ -94,7 +94,7 @@ export const DESTINOS_PREMIUM: DestinoEmbarcacion[] = [
     provincia: 'Islas Baleares',
     comunidad: 'Baleares',
     enSamboat: 'formentera-islas-baleares-espana',
-    hero:      'Formentera no tiene aeropuerto. La forma natural de descubrirla es por mar — y ahí el catamarán de día desde Ibiza gana. Ses Illetes top mundial.',
+    hero:      'Formentera no tiene aeropuerto. La forma natural de descubrirla es por mar: y ahí el catamarán de día desde Ibiza gana. Ses Illetes top mundial.',
     fondeos: [
       { nombre: 'Ses Illetes',     playaSlug: 'platja-dilletes', descripcion: 'TripAdvisor #1 playas de Europa varios años. Arena blanca como Caribe.' },
       { nombre: 'Cala Saona',                                     descripcion: 'Atardecer de cuento. Fondeo protegido del Levante.' },
@@ -120,7 +120,7 @@ export const DESTINOS_PREMIUM: DestinoEmbarcacion[] = [
     ],
     precios: { yateSemana: [11000, 30000], catamaranDia: [700, 2100] },
     temporada: 'Todo el año. Pico avistamiento ballenas pilotos en marzo-mayo.',
-    insider:   'Las ballenas pilotos viven aquí permanentemente (no migran). Probabilidad de avistamiento >90% en cualquier salida — único en España.',
+    insider:   'Las ballenas pilotos viven aquí permanentemente (no migran). Probabilidad de avistamiento >90% en cualquier salida: único en España.',
   },
   {
     slug:      'costa-brava',
@@ -138,7 +138,7 @@ export const DESTINOS_PREMIUM: DestinoEmbarcacion[] = [
     ],
     precios: { yateSemana: [8000, 20000], catamaranDia: [600, 1800], barcoSinLicDia: [140, 300] },
     temporada: 'Junio–septiembre. Tramontana puede ser fuerte en mayo y octubre.',
-    insider:   'Las Illes Medes tienen el snorkel mejor protegido del Mediterráneo peninsular. Hay zonas donde solo se entra con guía oficial — pregunta al alquilar si tienen permiso.',
+    insider:   'Las Illes Medes tienen el snorkel mejor protegido del Mediterráneo peninsular. Hay zonas donde solo se entra con guía oficial: pregunta al alquilar si tienen permiso.',
   },
   {
     slug:      'barcelona',

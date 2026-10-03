@@ -42,8 +42,8 @@ function Card({ a }: { a: Article }) {
         <p style={{ fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.5, margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.excerpt}</p>
         {/* Fecha además del tiempo de lectura. El índice solo decía
             «7 min», así que no se veía si un artículo era de esta
-            semana o del año pasado —y en un sitio de datos de hoy, eso
-            es justo lo que el lector necesita para fiarse—.
+            semana o del año pasado, y en un sitio de datos de hoy, eso
+            es justo lo que el lector necesita para fiarse, .
             Formateada a mano, sin toLocaleDateString: el ICU de Node y
             el del navegador no coinciden en los meses abreviados y esto
             se renderiza en las dos partes. Ya rompió la hidratación de

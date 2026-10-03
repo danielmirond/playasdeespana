@@ -35,7 +35,7 @@ html[data-flags~="ds_litoral_tokens"] .heroPhoto { min-height: 660px; }
    Tres capas, en este orden:
      1 · el filtro apaga la foto (satura menos, contrasta menos)
      2 · el color del estado del mar en multiply al 16 % la unifica con
-         el resto de la ficha — la misma playa se ve distinta un día de
+         el resto de la ficha: la misma playa se ve distinta un día de
          calma que uno de temporal, que es información, no decoración
      3 · la viñeta cierra los bordes y empuja la mirada al centro
 
@@ -77,7 +77,7 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
 /* El bloque editorial (H1 + score + datos + botonera) ocupa la mitad
    inferior, así que ahí la foto debe pasar a fondo, no competir: con el
    degradado antiguo (transparente hasta el 32%, .85 solo al final) las
-   fotos de alto contraste — casetas de colores, arena clara — se comían
+   fotos de alto contraste, casetas de colores, arena clara, se comían
    el score y el subtítulo. Ahora la opacidad crece antes y termina casi
    opaca. */
 .photoGradient {
@@ -117,7 +117,7 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
   padding: 1.25rem 0;
   /* Alto declarado: al ir en absolute no ocupa flujo, y el contenido del
      hero arrancaba en el mismo y=0. En producción se veía la miga escrita
-     encima del H1 — 50px de solape, medido. El contenido reserva este
+     encima del H1: 50px de solape, medido. El contenido reserva este
      mismo alto más abajo. */
   height: 49px;
   box-sizing: border-box;
@@ -146,7 +146,7 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
 /* ── Contenido editorial en overlay inferior ────────────────────── */
 /* Anclado abajo, pero con techo. Sin el `top`, el contenido crece hacia
    arriba sin límite y se monta sobre la miga de pan: al añadir la rejilla
-   2×2 (134px) el H1 acabó escrito encima del breadcrumb — 50px de solape,
+   2×2 (134px) el H1 acabó escrito encima del breadcrumb: 50px de solape,
    medido en producción. Con `top` y justify-content:flex-end sigue pegado
    abajo, pero nunca invade la cabecera; si no cupiera, se apila hacia
    abajo, que se ve raro pero se lee. */
@@ -196,13 +196,13 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
   align-self: center;
   filter: drop-shadow(0 1px 2px rgba(0,0,0,.55));
   /* A la escala del VEREDICTO, no a 17px fijos (ago-2026).
-     La bandera y la palabra que la acompaña —«calma», «precaución»— son
+     La bandera y la palabra que la acompaña, «calma», «precaución», son
      el mismo hecho dicho de dos formas. Con el veredicto entre 25 y 38 px
      y la bandera a 17, esto se leía como un punto decorativo delante de
      un texto, cuando es el dato que contesta la única pregunta que trae
      a alguien a esta ficha.
      Sigue siendo el tratamiento MENOR de la línea: el score manda a 68px.
-     Solo aparece en verde y amarilla — la roja tiene su propio bloque. */
+     Solo aparece en verde y amarilla: la roja tiene su propio bloque. */
   font-size: clamp(1.55rem, 3vw, 2.4rem);
 }
 /* Texto solo para lectores de pantalla: el icono va aria-hidden, así que
@@ -217,7 +217,7 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
 }
 .scoreNum {
   /* El tamaño sale del token, no de un clamp escrito a ojo. El clamp
-     anterior daba 41,6px a 375 —el viewport en el que se juzga— cuando el
+     anterior daba 41,6px a 375, el viewport en el que se juzga, cuando el
      sistema pide 76. Cada sistema trae el suyo: Litoral 76, Arena 68.
      El clamp se queda solo como techo en pantallas anchas. */
   font-family: var(--font-serif); font-weight: 500;
@@ -344,7 +344,7 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
 /* Sin box-shadow aquí: pulseDot lo anima al 100% del ciclo, así que
    cualquier valor que se declare en estas tres reglas no llega a verse.
    El keyframe pinta el halo con currentColor, de modo que lo que hay que
-   fijar es el color del texto — el punto es sólido y no lo usa para nada
+   fijar es el color del texto: el punto es sólido y no lo usa para nada
    más. Antes nadie lo fijaba y el halo salía en la tinta heredada. */
 .dot_ok      { background: var(--excelente); color: var(--excelente); }
 .dot_warn    { background: var(--aceptable); color: var(--aceptable); }
@@ -424,7 +424,7 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
   .metaLine strong { font-size: .92rem; }
   .more { margin-left: 0; }
   /* 2rem y no 1,25: con las tres acciones a la vista, la fila de botones
-     acababa a 432 px y el crédito de la foto empezaba a 431 — se pisaban
+     acababa a 432 px y el crédito de la foto empezaba a 431: se pisaban
      por 1 px, medido a 375. Los 12 px extra dejan un hueco legible entre
      el botón y el «Foto: …» sin tocar el crédito, que va anclado abajo. */
   .contentBottom { padding-bottom: 2rem; }
@@ -480,7 +480,7 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
    el aviso se delimita, no se decora.
 
    Sobre foto el rojo del sistema no se lee, así que la caja se apoya en
-   un fondo oscuro y el texto pasa a claro — el borde mantiene el color y
+   un fondo oscuro y el texto pasa a claro: el borde mantiene el color y
    sigue diciendo de qué se trata. */
 .noBanyo {
   display: inline-flex;

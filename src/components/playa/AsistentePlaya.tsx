@@ -193,8 +193,8 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es', var
         lineHeight: 1.4,
       }}>
         {es
-          ? 'Generado con datos reales de hoy. Si compras por estos enlaces nos llevamos una pequeña comisión — a ti no te cuesta nada.'
-          : 'Generated from today\'s real data. If you buy through these links we get a small commission — at no extra cost to you.'}
+          ? 'Generado con datos reales de hoy. Si compras por estos enlaces nos llevamos una pequeña comisión: a ti no te cuesta nada.'
+          : 'Generated from today\'s real data. If you buy through these links we get a small commission: at no extra cost to you.'}
       </p>
     </section>
   )

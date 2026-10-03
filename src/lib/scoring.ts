@@ -125,7 +125,7 @@ function scoreUV(uv: number): { s: number; reasons: string[]; reasonsEn: string[
   if (uv <= 2)       { s = 50;  reasons.push('UV bajo');      reasonsEn.push('Low UV') }
   else if (uv <= 5)  { s = 100; reasons.push('UV moderado');  reasonsEn.push('Moderate UV') }
   else if (uv <= 7)  { s = 80;  reasons.push('UV alto');      reasonsEn.push('High UV') }
-  else if (uv <= 10) { s = 45;  reasons.push('UV muy alto — protección obligatoria'); reasonsEn.push('Very high UV — sun protection required') }
+  else if (uv <= 10) { s = 45;  reasons.push('UV muy alto, protección obligatoria'); reasonsEn.push('Very high UV, sun protection required') }
   else               { s = 20;  reasons.push('UV extremo');   reasonsEn.push('Extreme UV') }
   return { s, reasons, reasonsEn }
 }

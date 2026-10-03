@@ -382,9 +382,9 @@ export default async function TablaMareasPage({ params }: Props) {
 
             {/* EQUIPO DE PESCA. Después de la tabla solunar, nunca antes:
                 el producto se gana estando junto a algo útil. Y cada
-                artículo dice CUÁNDO sirve en función de la marea —el
+                artículo dice CUÁNDO sirve en función de la marea, el
                 surfcasting con la marea subiendo, el rastrillo en bajamar
-                viva, la bota de vadeo porque la marea que sube te aísla—,
+                viva, la bota de vadeo porque la marea que sube te aísla, ,
                 que es lo que justifica que esta lista viva en esta página
                 y no en cualquier otra. */}
             {pesca.length > 0 && (
@@ -419,7 +419,7 @@ export default async function TablaMareasPage({ params }: Props) {
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--ink)', margin: '0 0 .5rem' }}>De dónde sale esta tabla</h2>
               <p>
                 Es la predicción de nivel del mar de <b>Puertos del Estado</b> para el punto «{ubi.nombre}», con corrección
-                meteorológica —viento y presión—, no la marea astronómica teórica. Por eso solo cubre tres días: la meteo
+                meteorológica, viento y presión, , no la marea astronómica teórica. Por eso solo cubre tres días: la meteo
                 no se predice a un mes. Las alturas van sobre el cero del puerto. Horas en hora local.
               </p>
             </section>

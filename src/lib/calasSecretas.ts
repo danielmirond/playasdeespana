@@ -48,7 +48,7 @@ export const DESTINOS_CALAS: DestinoCalasSecretas[] = [
       && !IBIZA_MUNIS.has(p.municipio)
       && !MENORCA_MUNIS.has(p.municipio)
       && !FORMENTERA_MUNIS.has(p.municipio),
-    hero: 'Mallorca tiene 550 km de costa pero el 90 % del turismo se concentra en 12 playas conocidas. Estas calas secretas requieren caminata o llegar por mar — y compensan.',
+    hero: 'Mallorca tiene 550 km de costa pero el 90 % del turismo se concentra en 12 playas conocidas. Estas calas secretas requieren caminata o llegar por mar: y compensan.',
   },
   {
     slug:      'ibiza',
@@ -57,7 +57,7 @@ export const DESTINOS_CALAS: DestinoCalasSecretas[] = [
     filterDescr: 'Ibiza concentra su turismo en 8 calas famosas. El resto del litoral (oeste y norte) guarda joyas accesibles solo a pie o por mar.',
     filter: (p) =>
       p.provincia === 'Islas Baleares' && IBIZA_MUNIS.has(p.municipio),
-    hero: 'Más allá de Cala Comte, Salinas y Cala Bassa, Ibiza esconde calas vírgenes en el noroeste y norte. Pocas tienen acceso terrestre cómodo — lo que las protege del turismo masivo.',
+    hero: 'Más allá de Cala Comte, Salinas y Cala Bassa, Ibiza esconde calas vírgenes en el noroeste y norte. Pocas tienen acceso terrestre cómodo: lo que las protege del turismo masivo.',
   },
   {
     slug:      'menorca',
@@ -74,7 +74,7 @@ export const DESTINOS_CALAS: DestinoCalasSecretas[] = [
     provincia: 'Girona',
     filterDescr: 'La Costa Brava (Girona) tiene 200 km de litoral entre Blanes y la frontera francesa. El tramo del Cap de Creus es la zona menos transitada.',
     filter: (p) => p.provincia === 'Girona' || p.provincia === 'Gerona',
-    hero: 'La Costa Brava tiene 250 calas reconocidas, pero solo 30-40 figuran en blogs. Las otras 200+ son justamente las "secretas" — algunas en el Parc Natural del Cap de Creus solo accesibles por mar.',
+    hero: 'La Costa Brava tiene 250 calas reconocidas, pero solo 30-40 figuran en blogs. Las otras 200+ son justamente las "secretas": algunas en el Parc Natural del Cap de Creus solo accesibles por mar.',
   },
   {
     slug:      'cabo-de-gata',

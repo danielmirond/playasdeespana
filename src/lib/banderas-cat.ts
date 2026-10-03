@@ -58,15 +58,15 @@ const MOTIVOS: Array<[RegExp, string, string]> = [
 
 // Especie → nombre común + peligrosidad (lo que un bañista quiere saber).
 const ESPECIES: Record<string, [string, string]> = {
-  'Pelagia noctiluca':        ['medusa luminiscente — picadura dolorosa', 'mauve stinger — painful sting'],
-  'Rhizostoma pulmo':         ['aguamala — picadura leve', 'barrel jellyfish — mild sting'],
-  'Cotylorhiza tuberculata':  ['medusa huevo frito — casi inofensiva', 'fried egg jellyfish — mostly harmless'],
-  'Physalia physalis':        ['carabela portuguesa — PELIGROSA, no tocar', 'Portuguese man o\'war — DANGEROUS'],
-  'Carybdea marsupialis':     ['cubomedusa — picadura fuerte', 'box jellyfish — strong sting'],
-  'Aurelia aurita':           ['medusa común — picadura muy leve', 'moon jellyfish — very mild sting'],
-  'Chrysaora hysoscella':     ['medusa de compases — picadura dolorosa', 'compass jellyfish — painful sting'],
-  'Velella velella':          ['velero — inofensivo', 'by-the-wind sailor — harmless'],
-  'Olindias phosphorica':     ['medusa de fondo — picadura dolorosa', 'olindias — painful sting'],
+  'Pelagia noctiluca':        ['medusa luminiscente, picadura dolorosa', 'mauve stinger, painful sting'],
+  'Rhizostoma pulmo':         ['aguamala, picadura leve', 'barrel jellyfish, mild sting'],
+  'Cotylorhiza tuberculata':  ['medusa huevo frito, casi inofensiva', 'fried egg jellyfish, mostly harmless'],
+  'Physalia physalis':        ['carabela portuguesa, PELIGROSA, no tocar', 'Portuguese man o\'war, DANGEROUS'],
+  'Carybdea marsupialis':     ['cubomedusa, picadura fuerte', 'box jellyfish, strong sting'],
+  'Aurelia aurita':           ['medusa común, picadura muy leve', 'moon jellyfish, very mild sting'],
+  'Chrysaora hysoscella':     ['medusa de compases, picadura dolorosa', 'compass jellyfish, painful sting'],
+  'Velella velella':          ['velero, inofensivo', 'by-the-wind sailor, harmless'],
+  'Olindias phosphorica':     ['medusa de fondo, picadura dolorosa', 'olindias, painful sting'],
 }
 const CANTIDAD: Record<string, [string, string]> = {
   poques:   ['pocas', 'a few'],
@@ -193,8 +193,8 @@ export async function getBanderaCat(slug: string): Promise<EstadoOficialCat | nu
         motivoEn: `Official flag flying today${sufijoEn}`, hex: '#f59e0b' }
     } else if (fila.b === 'vermella') {
       bandera = { color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
-        motivo: `Bandera oficial izada hoy${sufijo} — baño prohibido (Generalitat)`,
-        motivoEn: `Official flag flying today${sufijoEn} — no swimming`, hex: '#ef4444' }
+        motivo: `Bandera oficial izada hoy${sufijo}, baño prohibido (Generalitat)`,
+        motivoEn: `Official flag flying today${sufijoEn}, no swimming`, hex: '#ef4444' }
     }
     // 'complet' (aforo lleno) y 'sense informacio' no son banderas de baño.
 

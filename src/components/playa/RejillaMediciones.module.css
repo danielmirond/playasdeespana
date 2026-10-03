@@ -72,8 +72,8 @@
 }
 
 /* Sobre foto la rejilla necesita fondo propio, no solo filetes claros.
-   En producción, con la foto de Bolonia —agua turquesa y arena a plena
-   luz— las cifras en blanco se disolvían: el 0,5 sobre el agua era
+   En producción, con la foto de Bolonia, agua turquesa y arena a plena
+   luz, las cifras en blanco se disolvían: el 0,5 sobre el agua era
    ilegible. Las etiquetas aguantaban por ser pequeñas y espaciadas; los
    números, que son lo que se viene a leer, no.
 
@@ -87,7 +87,7 @@
 
    Sobre foto. El modificador va en la propia rejilla, no en un ancestro:
    la primera versión escribía `.onDark .rejilla` esperando que alguien
-   pusiera la clase más arriba, y no la ponía nadie — la malla quedaba con
+   pusiera la clase más arriba, y no la ponía nadie: la malla quedaba con
    --line sobre una foto oscura, o sea invisible. Se vio en la captura,
    no en el código. */
 .rejilla.onDark {

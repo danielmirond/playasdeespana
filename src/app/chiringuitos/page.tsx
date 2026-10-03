@@ -61,7 +61,7 @@ export default function ChiringuitosPage() {
         </h1>
         <p data-speakable style={{ fontSize: '.95rem', color: 'var(--ink)', lineHeight: 1.65, margin: '0 0 .5rem', maxWidth: 640 }}>
           {total} chiringuitos reales en las playas de España, en {provincias.length} provincias. Cada uno con su
-          valoración de Google, sus reseñas y la playa de nuestra guía en la que está — para elegir mesa
+          valoración de Google, sus reseñas y la playa de nuestra guía en la que está: para elegir mesa
           mirando antes cómo está el mar.
         </p>
         <p style={{ fontSize: '.72rem', color: 'var(--muted)', margin: '0 0 2rem' }}>

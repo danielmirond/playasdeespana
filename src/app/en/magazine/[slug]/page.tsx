@@ -39,7 +39,7 @@ function renderBlock(b: Block, i: number) {
       return (
         <blockquote key={i} style={{ margin: '1.5rem 0', padding: '1rem 1.25rem', borderLeft: '4px solid var(--accent)', background: 'var(--card-bg)', borderRadius: '0 8px 8px 0' }}>
           <p style={{ margin: 0, fontSize: '1rem', lineHeight: 1.6, color: 'var(--ink)', fontStyle: 'italic' }}>{b.text}</p>
-          {b.cite && <cite style={{ display: 'block', marginTop: '.5rem', fontSize: '.78rem', color: 'var(--muted)', fontStyle: 'normal' }}>— {b.cite}</cite>}
+          {b.cite && <cite style={{ display: 'block', marginTop: '.5rem', fontSize: '.78rem', color: 'var(--muted)', fontStyle: 'normal' }}>{b.cite}</cite>}
         </blockquote>
       )
     case 'cta':

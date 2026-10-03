@@ -159,7 +159,7 @@ export function generarTextoQueLlevar(playa: Playa, estado: string): ContextoQue
   if (acts.length === 0) {
     qHacer = `${np} es una playa para venir a desconectar. Lo habitual es bañarse, leer y comer. Si quieres más actividad, hay opciones cerca en el mismo municipio.`
   } else {
-    qHacer = `Aquí se puede ${acts.slice(0, -1).join(', ')}${acts.length > 1 ? ' y ' : ''}${acts[acts.length - 1]}. Las condiciones de cada actividad varían según el día — consulta el estado del mar antes de venir.`
+    qHacer = `Aquí se puede ${acts.slice(0, -1).join(', ')}${acts.length > 1 ? ' y ' : ''}${acts[acts.length - 1]}. Las condiciones de cada actividad varían según el día: consulta el estado del mar antes de venir.`
   }
   if (playa.perros) qHacer += ' Es una playa que admite perros (consulta horarios estacionales en el ayuntamiento).'
   if (playa.accesible) qHacer += ' Está catalogada como accesible: hay rampas o pasarelas para personas con movilidad reducida.'

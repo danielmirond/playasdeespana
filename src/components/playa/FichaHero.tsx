@@ -245,7 +245,7 @@ export default function FichaHero({
             />
             {/* C7. Siempre en el DOM; quien decide si pintan es el CSS,
                 según el flag en <html>. Este componente es de cliente y no
-                puede leer flags — y el manual pide justamente eso: «hacerlo
+                puede leer flags: y el manual pide justamente eso: «hacerlo
                 por data-flags en CSS donde sea posible». Sin el flag las dos
                 capas son transparentes y no cuestan nada. */}
             <div className={styles.photoTint} />
@@ -294,8 +294,8 @@ export default function FichaHero({
 
             {/* Bifurcación del hero. Con bandera roja el score NO se
                 renderiza: ni pequeño, ni en rojo, ni degradado. Una cifra
-                invita a negociar con una prohibición —«23, bueno, tampoco
-                es 5»—, y una bandera roja es binaria. La pantalla también.
+                invita a negociar con una prohibición, «23, bueno, tampoco
+                es 5», , y una bandera roja es binaria. La pantalla también.
 
                 El alcance es este hero y solo este: en una tarjeta de
                 ranking o de «cerca de aquí» el 23 sí se pinta, porque ahí
@@ -339,7 +339,7 @@ export default function FichaHero({
                     />
                     <span className={styles.banderaSr}>
                       {locale === 'en' ? banderaPlaya.labelEn : banderaPlaya.label}
-                      {' — '}
+                      {': '}
                       {locale === 'en' ? banderaPlaya.motivoEn : banderaPlaya.motivo}
                     </span>
                   </span>
@@ -378,7 +378,7 @@ export default function FichaHero({
 
             {/* Metadatos: cinco → tres en móvil (propuesta 2026 §5.2).
                 Municipio y provincia ya están en las migas y se repiten en
-                la primera tarjeta; en el hero solo queda lo del DÍA —
+                la primera tarjeta; en el hero solo queda lo del DÍA,
                 agua, olas y el enlace a meteo. Cada medición lleva su
                 trazo de certeza: sobre foto pasa a blanco, porque ahí el
                 color no distingue pero el patrón sí. */}

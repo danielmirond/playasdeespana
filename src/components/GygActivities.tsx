@@ -38,7 +38,7 @@ export default function GygActivities({
     <section id={id} className="cv-auto" style={{ maxWidth: 1000, margin: '2.5rem auto 0', padding: '0 1.5rem', scrollMarginTop: '64px' }}>
       {/* Tratamiento deliberadamente MENOR que el de las secciones de
           contenido (ago-2026). Antes compartía rango visual con «Seguridad»
-          o «Cómo llegar» —serif de hasta 1,7rem en peso 700— y llevaba un
+          o «Cómo llegar», serif de hasta 1,7rem en peso 700, y llevaba un
           🎟️ que anunciaba «aquí se venden entradas» antes de que nadie
           leyera el titular. Un bloque patrocinado que se disfraza de sección
           editorial es peor negocio a la larga que uno que se presenta como

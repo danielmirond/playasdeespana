@@ -40,7 +40,7 @@ const MAPA: Record<string, string> = {
   zar002: 'zarauzko-hondartza',          // Zarautz
   itz001: 'itzurun-hondartza',           // Itzurun, Zumaia
   san001: 'santiago-hondartza',          // Santiago de ZUMAIA
-  deb001: 'debako-santiago-hondartza',   // Santiago de DEBA — no es la misma
+  deb001: 'debako-santiago-hondartza',   // Santiago de DEBA, no es la misma
   lap001: 'lapari',                      // Lapari, Deba
   otz001: 'ondarbeltz-hondartza',        // Ondarbeltz, Mutriku
   sat001: 'saturraran',                  // Saturrarán, Mutriku
@@ -143,8 +143,8 @@ export async function getBanderaGip(slug: string): Promise<EstadoOficialGip | nu
     let bandera: BanderaPlaya | null = null
     if (f.flag === 'red') {
       bandera = { color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
-        motivo: `Bandera oficial izada hoy${porQue} — baño prohibido ${attr}`,
-        motivoEn: 'Official flag flying today — no swimming', hex: '#ef4444' }
+        motivo: `Bandera oficial izada hoy${porQue}, baño prohibido ${attr}`,
+        motivoEn: 'Official flag flying today, no swimming', hex: '#ef4444' }
     } else if (f.flag === 'yellow') {
       bandera = { color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
         motivo: `Bandera oficial izada hoy${porQue} ${attr}`,

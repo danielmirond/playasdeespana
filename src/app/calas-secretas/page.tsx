@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/calas-secretas' },
   openGraph: {
     title: 'Calas secretas de España',
-    description: 'Las menos conocidas — filtradas desde el dataset oficial MITECO, no opinión editorial.',
+    description: 'Las menos conocidas, filtradas desde el dataset oficial MITECO, no opinión editorial.',
     url: `${BASE}/calas-secretas`,
     type: 'website',
   },
@@ -111,7 +111,7 @@ export default function CalasSecretasMaster() {
             Nuestro criterio es <strong>objetivo y reproducible</strong>, no opinión:
           </p>
           <ul style={{ fontSize: '.9rem', color: 'var(--ink)', lineHeight: 1.7, paddingLeft: '1.2rem', margin: 0 }}>
-            <li><strong>Longitud ≤ 200 m</strong> (cala/caleta pequeña — capacidad limitada)</li>
+            <li><strong>Longitud ≤ 200 m</strong> (cala/caleta pequeña: capacidad limitada)</li>
             <li><strong>Sin socorrismo</strong> oficial (no en circuito de Cruz Roja/playas turísticas)</li>
             <li><strong>Sin parking habilitado</strong> (acceso difícil = menos gente)</li>
             <li><strong>Sin duchas / sin servicios</strong> (no urbanizada)</li>

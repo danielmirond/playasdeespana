@@ -67,7 +67,7 @@ export const LITORAL_CSS = `
 
   /* ——— El único material de color ———————————————————————
      Bronce. EN EXCLUSIVA para el sello del cuaderno: el momento en que el
-     usuario se lleva algo. Es material, no tinta — 3,6:1, así que rellena y
+     usuario se lleva algo. Es material, no tinta: 3,6:1, así que rellena y
      bordea, pero nunca escribe. Si el sello lleva rótulo, va en --ink-900
      sobre --bronce-tint. */
   --bronce:      #3d93b0;
@@ -87,7 +87,7 @@ export const LITORAL_CSS = `
   --cert-reportado:    #9a5a12;   /* bañistas · 3,9:1 → trazo y cifra ≥18,66px en 700 */
   --cert-estimado:     #5a6f7c;   /* modelo propio */
   --cert-sindato:      #6b7a83;   /* ausencia · estado de 1.ª clase.
-       Era #6e6a5f, y el manual lo describe como «contraste real AA» —
+       Era #6e6a5f, y el manual lo describe como «contraste real AA»,
        que es justo lo que dejó de ser al bajar el fondo dos puntos:
        4,46:1 sobre --paper-1 y 4,06 sobre la hundida. Un estado de
        primera clase que no se lee es un hueco con más letras. Mismo
@@ -101,7 +101,7 @@ export const LITORAL_CSS = `
 
   /* ——— Score ————————————————————————————————————————————
      Desaturados: el score se lee por la cifra, no por el color. Señal, no
-     tipografía de lectura — colorean cifras grandes, nunca texto corrido. */
+     tipografía de lectura: colorean cifras grandes, nunca texto corrido. */
   --score-excellent: #2e7d4f;   /* 85–100 */
   --score-good:      #5f8a3a;   /* 70–84 */
   --score-mid:       #b8791d;   /* 50–69 */
@@ -121,14 +121,14 @@ export const LITORAL_CSS = `
      tabulares y eje de tamaño óptico. Una sola familia para TODOS los
      numerales del producto: al ser tabulares, nada baila al actualizarse. */
   /* Las familias NO se declaran aquí. C2 es su propio flag, y el manual
-     pide expresamente que pueda ir solo —Literata sobre Arena— para medir
+     pide expresamente que pueda ir solo, Literata sobre Arena, para medir
      la tipografía sin el cambio de color de por medio. Si la hoja de
      tokens las fijara, ese A/B sería imposible.
      Viven en el bloque [data-flags~="ds_litoral_type"] del final, que se
      aplica esté o no activa esta hoja.
      El respaldo son las familias de Arena, por el mismo motivo que el
      acento: con los tokens encendidos y el tipo apagado hay que enseñar
-     algo, y ese algo debe ser el sistema anterior — no una a medias. */
+     algo, y ese algo debe ser el sistema anterior: no una a medias. */
   --font-serif: var(--font-playfair), Georgia, serif;
   --font-sans:  var(--font-dm-sans), system-ui, sans-serif;
   --font-mono:  var(--font-jetbrains), ui-monospace, monospace;
@@ -203,7 +203,7 @@ export const LITORAL_CSS = `
   --sello-accent: var(--bronce);       /* el sello es el único material de color */
   --sello-ink: var(--ink-900);         /* el bronce rellena; el rótulo va en tinta */
   /* Texto sobre la foto del hero. Es un caso que Litoral no contempla —su
-     hero apila media y nombre en vez de superponerlos—, así que aquí manda
+     hero apila media y nombre en vez de superponerlos, así que aquí manda
      su regla de fondo: la interacción y el énfasis no llevan color. Sobre
      la foto, papel. El dorado de Arena queda en Arena. */
   /* Texto sobre un relleno de acento (botones llenos). No sirve
@@ -289,7 +289,7 @@ h2 { letter-spacing: var(--tr-lg); line-height: 1.12; }
 h3, h4 { letter-spacing: var(--tr-sm); line-height: 1.2; }
 
 /* El acento del titular es itálica dibujada, en tinta. Es la firma de la
-   marca — y no gasta color. */
+   marca: y no gasta color. */
 h1 em, h2 em, h3 em, h4 em {
   font-style: italic;
   font-weight: var(--w-display);
@@ -342,7 +342,7 @@ img, svg { display: block; max-width: 100%; }
    Va aquí y no en globals.css por orden de cascada: las cuatro reglas de
    arriba se cargan DESPUÉS de globals y su atajo \`border-bottom\` reponía
    el color de certeza, así que el blanco de .dato-ondark no llegaba nunca.
-   Medido en la ficha de Formentor: rgb(31,79,109) —azul oscuro— a 2px
+   Medido en la ficha de Formentor: rgb(31,79,109), azul oscuro, a 2px
    sobre agua en sombra. El trazo es la señal de certeza; si no se ve, la
    señal no existe.
 

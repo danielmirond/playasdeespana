@@ -83,7 +83,7 @@ export const getPlayas = cache(async (): Promise<Playa[]> => {
     })
     return (data as unknown as Playa[]).filter(p => !EXCLUIDAS.has(p.slug))
   } catch {
-    console.warn('[playas] public/data/playas.json no encontrado — ejecuta npm run sync:playas')
+    console.warn('[playas] public/data/playas.json no encontrado: ejecuta npm run sync:playas')
     return []
   }
 })

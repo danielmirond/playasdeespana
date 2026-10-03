@@ -96,7 +96,7 @@ export default async function BanderasNegrasPage() {
         />
         <p data-speakable style={{ fontSize: '.95rem', color: 'var(--ink)', lineHeight: 1.65, margin: '0 0 1rem', maxWidth: 640 }}>
           Cada verano, <a href="https://www.ecologistasenaccion.org/372065/informe-banderas-negras-2026/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontWeight: 600 }}>Ecologistas en Acción</a> recorre
-          los más de 8.000 km de costa española y señala con <strong>48 banderas negras</strong> —dos por provincia costera— los
+          los más de 8.000 km de costa española y señala con <strong>48 banderas negras</strong>, dos por provincia costera, los
           puntos más castigados por los vertidos, la contaminación y la mala gestión ambiental. Esta es la lista de 2026,
           cruzada con nuestras fichas para que sepas qué playas están afectadas y qué alternativas limpias tienes cerca.
         </p>
@@ -160,7 +160,7 @@ export default async function BanderasNegrasPage() {
                               {j < alts.length - 1 ? ' · ' : ''}
                             </span>
                           ))}
-                          {' '}— con Bandera Azul 2026.
+                          {' '}con Bandera Azul 2026.
                         </div>
                       )}
                     </div>

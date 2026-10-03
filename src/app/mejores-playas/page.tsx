@@ -100,7 +100,7 @@ export default function MejoresPlayasPage() {
         </h1>
         <p style={{ fontSize: '.95rem', color: 'var(--muted)', lineHeight: 1.65, maxWidth: 680, marginBottom: '1.5rem' }}>
           Sin jurado, sin votos de influencers y sin patrocinios: las {(5098).toLocaleString('es')} playas del
-          inventario oficial puntuadas 0-100 con datos públicos — entorno natural, seguridad y servicios,
+          inventario oficial puntuadas 0-100 con datos públicos: entorno natural, seguridad y servicios,
           Bandera Azul y calidad del agua, y oferta a pie de arena. El mismo criterio para la cala gallega
           y para el arenal mediterráneo. Abajo, el top 5 de cada provincia.
         </p>

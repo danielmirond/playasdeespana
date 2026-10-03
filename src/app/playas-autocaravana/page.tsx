@@ -202,7 +202,7 @@ export default async function PlayasAutocaravanaPage() {
           Playas destacadas con buen acceso en autocaravana
         </h2>
         <p style={{ fontSize: '.88rem', color: 'var(--muted)', marginBottom: '1rem' }}>
-          Selección de playas con parking grande y Bandera Azul —las más fáciles para acceder con caravana
+          Selección de playas con parking grande y Bandera Azul, las más fáciles para acceder con caravana
           y con áreas de servicio habitualmente cerca.
         </p>
         <ol style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.5rem', marginBottom: '2.5rem' }}>

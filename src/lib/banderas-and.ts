@@ -158,8 +158,8 @@ export async function getBanderaAnd(slug: string): Promise<EstadoOficialAnd | nu
     const bandera: BanderaPlaya | null =
       peor === 'roja'
         ? { color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
-            motivo: `Bandera oficial izada hoy — baño prohibido (Junta de Andalucía)${varios}`,
-            motivoEn: 'Official flag flying today — no swimming', hex: '#ef4444' }
+            motivo: `Bandera oficial izada hoy, baño prohibido (Junta de Andalucía)${varios}`,
+            motivoEn: 'Official flag flying today, no swimming', hex: '#ef4444' }
         : peor === 'amarilla'
           ? { color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
               motivo: `Bandera oficial izada hoy (Junta de Andalucía)${varios}`,

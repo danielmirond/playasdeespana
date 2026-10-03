@@ -104,7 +104,7 @@ export function generarTextoPlaya(playa: Playa): string {
   if (nudista) {
     extraStr = `Es una playa nudista, así que si buscas un ambiente libre y sin restricciones, aquí lo encontrarás.`
   } else if (perros) {
-    extraStr = `Si vas con tu perro, estás de suerte — en ${nombre} está permitido, algo cada vez más difícil de encontrar en la costa española.`
+    extraStr = `Si vas con tu perro, estás de suerte: en ${nombre} está permitido, algo cada vez más difícil de encontrar en la costa española.`
   } else if (perros === false) {
     extraStr = `Ten en cuenta que no se permiten perros en esta playa, especialmente en temporada alta.`
   }
@@ -112,7 +112,7 @@ export function generarTextoPlaya(playa: Playa): string {
   // Cierre con intención
   const cierres = [
     `Antes de salir, consulta el estado del mar en tiempo real desde esta misma página para no llevarte ninguna sorpresa.`,
-    `Revisa la temperatura del agua, el oleaje y la afluencia antes de ir — todo lo tienes actualizado aquí en tiempo real.`,
+    `Revisa la temperatura del agua, el oleaje y la afluencia antes de ir: todo lo tienes actualizado aquí en tiempo real.`,
     `Usa esta página para ver cómo está el mar hoy, la afluencia esperada y cómo llegar sin complicaciones.`,
   ]
   const cierre = deterministicPick(cierres, seed + '2')
@@ -181,7 +181,7 @@ export function generarTextoPlayaEn(playa: Playa): string {
     ? `It has ${servicios.slice(0, -1).join(', ')} and ${servicios[servicios.length - 1]}, so you can visit with peace of mind.`
     : servicios.length === 1
     ? `It has ${servicios[0]} to make your visit more comfortable.`
-    : `It's a more natural beach, without major facilities — perfect if you're looking for something quieter and more unspoiled.`
+    : `It's a more natural beach, without major facilities, perfect if you're looking for something quieter and more unspoiled.`
 
   let actividadStr = ''
   if (actsArr.length > 0) {
@@ -198,14 +198,14 @@ export function generarTextoPlayaEn(playa: Playa): string {
   if (nudista) {
     extraStr = `This is a naturist beach, so if you're looking for a free and unrestricted atmosphere, you'll find it here.`
   } else if (perros) {
-    extraStr = `If you're bringing your dog, you're in luck — dogs are allowed at ${nombre}, which is increasingly rare on the Spanish coast.`
+    extraStr = `If you're bringing your dog, you're in luck: dogs are allowed at ${nombre}, which is increasingly rare on the Spanish coast.`
   } else if (perros === false) {
     extraStr = `Please note that dogs are not allowed on this beach, especially during the high season.`
   }
 
   const cierres = [
     `Before you head out, check the real-time sea conditions on this page so there are no surprises.`,
-    `Check the water temperature, wave height and crowd levels before you go — everything is updated here in real time.`,
+    `Check the water temperature, wave height and crowd levels before you go: everything is updated here in real time.`,
     `Use this page to see current sea conditions, expected crowds and how to get there without any hassle.`,
   ]
   const cierre = deterministicPick(cierres, seed + '2')

@@ -39,7 +39,7 @@ export default function TiposPage() {
             Tipos de autocaravana y camper para alquilar
           </h1>
           <p style={{ fontSize: '1.02rem', lineHeight: 1.6, maxWidth: 620, margin: 0, color: 'rgba(255,255,255,.92)' }}>
-            Cuál elegir según tu viaje, plazas y presupuesto — de la camper ágil a la integral de lujo.
+            Cuál elegir según tu viaje, plazas y presupuesto: de la camper ágil a la integral de lujo.
           </p>
         </div>
       </section>

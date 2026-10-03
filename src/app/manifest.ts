@@ -4,7 +4,7 @@ import type { MetadataRoute } from 'next'
 // Hace la web instalable ("Añadir a la pantalla de inicio" / prompt de Chrome).
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Playas de España — ¿A qué playa voy hoy?',
+    name: 'Playas de España, ¿A qué playa voy hoy?',
     short_name: 'Playas',
     description:
       'Estado del mar en tiempo real de más de 4.400 playas de España: temperatura del agua, oleaje, viento, medusas y calidad del agua. Datos oficiales actualizados cada hora.',

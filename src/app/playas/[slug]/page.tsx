@@ -962,7 +962,7 @@ export default async function PlayaPage({ params }: Props) {
       {/* BeachVideo se renderiza ahora dentro de FichaBody como
           BeachVideoToggle (click-to-load) tras el bloque asistente
           y antes de la galería completa. Esto saca el iframe del
-          above-the-fold y mejora LCP/INP — el critique de diseño
+          above-the-fold y mejora LCP/INP: el critique de diseño
           (PR #84) destacó que el video estaba robando atención
           antes del contenido textual concreto. */}
       {/* Barra de secciones: en móvil la sustituye el índice de la
@@ -1010,7 +1010,7 @@ export default async function PlayaPage({ params }: Props) {
       />
       {/* El alquiler de barcos es bloque DURO: mete al usuario en el agua.
           Vive aquí, hermano de <FichaBody>, así que el Reorder que aplica
-          la regla dentro de la ficha no lo alcanza — de ahí que hasta
+          la regla dentro de la ficha no lo alcanza: de ahí que hasta
           ahora sobreviviera a la bandera roja. La comprobación tiene que
           repetirse en cada superficie de monetización que quede fuera. */}
       {boatLink && !hayBanderaRoja(banderaPlaya) && (
@@ -1044,7 +1044,7 @@ export default async function PlayaPage({ params }: Props) {
       </nav>
       {/* GygActivities ya NO se pinta aquí: vive dentro de FichaBody, en
           el orden, detrás de «cómo llegar» y parking. Aquí quedaba al
-          final del documento —tras las FAQ— y además fuera del sistema
+          final del documento, tras las FAQ, y además fuera del sistema
           de orden, así que ninguna reordenación lo alcanzaba. */}
       {/* Arquitectura C de la propuesta 2026: un solo elemento fijo en
           móvil (64px) en lugar de nav + secciones + acciones (316px). */}

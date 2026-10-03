@@ -239,7 +239,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                   }}>
                     <div style={{ fontSize:'.72rem', color: 'var(--muted)', fontWeight: 600, marginBottom: '.2rem' }}>
                       {/* Respaldo cuando el forecast no trae fecha. Se
-                          calcula desde hoyISO —que decide el servidor—
+                          calcula desde hoyISO, que decide el servidor, 
                           y no con new Date(): este componente se
                           renderiza en las dos partes, y un «Mié 13» en
                           el HTML frente a un «Jue 14» en el navegador

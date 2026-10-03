@@ -297,7 +297,7 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
           <div role="tabpanel" id="tabpanel-afluencia" aria-labelledby="tab-afluencia">
             {/* La ocupación «ahora» depende del reloj del visitante, así
                 que no existe hasta que monta. El bloque se pinta igual y
-                con la misma altura —minHeight— para que aparecer no
+                con la misma altura, minHeight, para que aparecer no
                 desplace nada: el CLS de esta ficha es 0 y sigue así.
                 «Mejor hora hoy» no depende de la hora, solo del día, y
                 por eso se ve desde el HTML servido. */}
@@ -313,7 +313,7 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
                   fontSize: '1.6rem', fontWeight: 700, lineHeight: 1,
                   color: nivelAhora ? nivelAhora.color : 'var(--muted)',
                 }}>
-                  {ahoraData ? `${ahoraData.pct}%` : '—'}
+                  {ahoraData ? `${ahoraData.pct}%` : ''}
                 </div>
                 <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.1rem' }}>ocupación</div>
               </div>

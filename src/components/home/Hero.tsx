@@ -23,17 +23,17 @@ const SCENES = [
   {
     src:    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=70',
     alt:    'Playa en calma con agua turquesa',
-    credit: 'Sean O. — Unsplash',
+    credit: 'Sean O.: Unsplash',
   },
   {
     src:    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1600&q=70',
     alt:    'Olas rompiendo en una playa al amanecer',
-    credit: 'Sean O. — Unsplash',
+    credit: 'Sean O.: Unsplash',
   },
   {
     src:    'https://images.unsplash.com/photo-1535262971677-1c823d4c814e?w=1600&q=70',
     alt:    'Atardecer en la costa',
-    credit: 'Sean O. — Unsplash',
+    credit: 'Sean O.: Unsplash',
   },
 ]
 

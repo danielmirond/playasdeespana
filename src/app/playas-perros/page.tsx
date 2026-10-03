@@ -190,14 +190,14 @@ export default async function PlayasPerrosPage() {
               condiciones. Por eso conviven dos realidades. Están las <strong>playas caninas oficiales</strong>, zonas
               habilitadas expresamente para que el perro entre y se bañe durante todo el año, normalmente con papeleras
               de excrementos, ducha y a veces bebederos. Y está el <strong>resto de playas</strong>, donde lo habitual
-              es que el perro solo pueda entrar fuera de la temporada de baño —de forma orientativa, entre octubre y
-              mayo—, mientras que en pleno verano el acceso queda prohibido de día.
+              es que el perro solo pueda entrar fuera de la temporada de baño, de forma orientativa, entre octubre y
+              mayo, , mientras que en pleno verano el acceso queda prohibido de día.
             </p>
             <p style={{ margin: '0 0 1rem' }}>
-              La densidad de playas caninas cambia mucho según la zona. El litoral mediterráneo —
+              La densidad de playas caninas cambia mucho según la zona. El litoral mediterráneo,
               {' '}<Link href="/playas-perros/comunidad/comunitat-valenciana" style={{ color: 'var(--accent)' }}>Comunitat Valenciana</Link>,
               {' '}<Link href="/playas-perros/comunidad/cataluna" style={{ color: 'var(--accent)' }}>Cataluña</Link> y
-              {' '}<Link href="/playas-perros/comunidad/andalucia" style={{ color: 'var(--accent)' }}>Andalucía</Link>— concentra
+              {' '}<Link href="/playas-perros/comunidad/andalucia" style={{ color: 'var(--accent)' }}>Andalucía</Link>concentra
               buena parte de las zonas habilitadas oficiales, muchas de ellas de arena y bien señalizadas. En la
               cornisa cantábrica y en Galicia el acceso suele ser más estacional que oficial: playas amplias y poco
               masificadas donde el perro es bienvenido casi todo el año salvo en los meses de más afluencia. Usa el
@@ -206,7 +206,7 @@ export default async function PlayasPerrosPage() {
             </p>
             <p style={{ margin: 0 }}>
               Antes de ir, dos comprobaciones ahorran disgustos: confirmar en la ordenanza municipal que el acceso
-              sigue vigente —cambian de un año a otro— y preparar lo básico para el perro. Agua dulce y bebedero
+              sigue vigente, cambian de un año a otro, y preparar lo básico para el perro. Agua dulce y bebedero
               (el agua salada deshidrata), sombra, bolsas para los excrementos, correa y, en razas consideradas
               potencialmente peligrosas, bozal y seguro. A la vuelta, un enjuague con agua dulce le quita la sal del
               pelo y las almohadillas. Puedes cruzar esta lista con la de <Link href="/banderas-hoy" style={{ color: 'var(--accent)' }}>banderas

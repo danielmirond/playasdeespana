@@ -139,15 +139,15 @@ export function diferenciaEnDias(fechaISO: string): number {
 
 /** Formato «HH:MM» de un ISO local. Devuelve «—» si no es válido. */
 export function soloHora(iso: string): string {
-  if (!iso || iso.length < 16) return '—'
+  if (!iso || iso.length < 16) return ''
   return iso.slice(11, 16)
 }
 
 /** Duración legible entre dos ISO: «12 h 22 min». */
 export function duracionHM(desde: string, hasta: string): string {
-  if (!desde || !hasta) return '—'
+  if (!desde || !hasta) return ''
   const ms = new Date(hasta).getTime() - new Date(desde).getTime()
-  if (isNaN(ms) || ms <= 0) return '—'
+  if (isNaN(ms) || ms <= 0) return ''
   const totalMin = Math.round(ms / 60000)
   const h = Math.floor(totalMin / 60)
   const m = totalMin % 60

@@ -58,7 +58,7 @@ function renderBlock(b: Block, i: number) {
       return (
         <blockquote key={i} style={{ margin: '1.5rem 0', padding: '1rem 1.25rem', borderLeft: '4px solid var(--accent)', background: 'var(--card-bg)', borderRadius: '0 8px 8px 0' }}>
           <p style={{ margin: 0, fontSize: '1rem', lineHeight: 1.6, color: 'var(--ink)', fontStyle: 'italic' }}>{b.text}</p>
-          {b.cite && <cite style={{ display: 'block', marginTop: '.5rem', fontSize: '.78rem', color: 'var(--muted)', fontStyle: 'normal' }}>— {b.cite}</cite>}
+          {b.cite && <cite style={{ display: 'block', marginTop: '.5rem', fontSize: '.78rem', color: 'var(--muted)', fontStyle: 'normal' }}>{b.cite}</cite>}
         </blockquote>
       )
     case 'cta':
@@ -152,7 +152,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             de este componente y otro inline más abajo, los dos con el
             mismo headline. Dos nodos Article para una sola página es
             pedirle a Google que elija, y el de aquí es el completo
-            —lleva speakable y el author con @id estable—, solo le
+, lleva speakable y el author con @id estable, , solo le
             faltaba la imagen. Discover exige imagen grande en el
             Article, así que se le pasa. */}
         <AuthorByline

@@ -281,11 +281,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="impact-site-verification" {...{ value: 'a656d2a6-4ace-403d-84f9-172e9b6c8da0' }} />
 
         {/* Critical CSS inline: paint inmediato sin esperar CSS externo.
-            Una hoja U OTRA, nunca las dos — Litoral sustituye a Arena, no se
+            Una hoja U OTRA, nunca las dos: Litoral sustituye a Arena, no se
             apila sobre ella. Solo existe un juego de tokens a la vez. */}
         <style dangerouslySetInnerHTML={{ __html: litoral ? LITORAL_CSS_MIN : CRITICAL_CSS }} />
         {/* C2 va detrás de la hoja base, sea cual sea: así Literata puede
-            medirse sola sobre Arena. Gana por especificidad — un atributo
+            medirse sola sobre Arena. Gana por especificidad: un atributo
             en <html> pesa más que :root. */}
         {tipoLitoral && <style dangerouslySetInnerHTML={{ __html: TIPO_LITORAL_CSS }} />}
 
@@ -360,7 +360,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           del árbol se sigue viendo.
           Ojo, no es cosmético: al abortar, React repinta el árbol
           entero y se lleva por delante lo que el script había hecho
-          —así se quedó la píldora congelada en «01 / 18 Webcam»—. */}
+, así se quedó la píldora congelada en «01 / 18 Webcam», . */}
       <body suppressHydrationWarning>
         {/* Organization + WebSite globales referenciables por @id */}
         <script

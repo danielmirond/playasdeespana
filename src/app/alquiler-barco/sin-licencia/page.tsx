@@ -112,7 +112,7 @@ export default function SinLicenciaPage() {
             <p style={{ margin: 0 }}>
               Fuera de ese marco necesitas titulación (o patrón): motos de agua siempre, barcos más grandes,
               navegación nocturna o alejarte más. Si se te queda corto, la Licencia de Navegación
-              — el "titulín" — se saca en un día sin examen, y la opción <em>con patrón</em> te
+, el "titulín", se saca en un día sin examen, y la opción <em>con patrón</em> te
               permite cualquier barco desde el primer día.
             </p>
           </div>
@@ -167,8 +167,8 @@ export default function SinLicenciaPage() {
               'El briefing de salida (15-30 min) es la clave del día: pregunta ahí todo lo que te dé vergüenza preguntar en el mar.',
               'El viento casi siempre sube por la tarde. Haz la milla "difícil" por la mañana y vuelve empujado, no remontando.',
               'Las distancias en el mar engañan: esa cala "que se ve ahí" puede estar a 40 minutos. Planea la mitad de lo que crees que te da tiempo.',
-              'Fondea siempre sobre arena (se ve clara desde arriba) — sobre roca se engancha y sobre posidonia está prohibido y multado.',
-              'Combustible: el depósito se paga aparte al volver. Un día normal de calas son 20-40 € — acelerar a fondo lo duplica.',
+              'Fondea siempre sobre arena (se ve clara desde arriba): sobre roca se engancha y sobre posidonia está prohibido y multado.',
+              'Combustible: el depósito se paga aparte al volver. Un día normal de calas son 20-40 €: acelerar a fondo lo duplica.',
               'Vuelve con una hora de margen sobre la hora de entrega. La fianza se devuelve entera si el barco llega como salió.',
             ].map(c => (
               <li key={c.slice(0, 20)} style={{ display: 'flex', gap: '.6rem', alignItems: 'flex-start', fontSize: '.92rem', color: 'var(--muted)', lineHeight: 1.55 }}>

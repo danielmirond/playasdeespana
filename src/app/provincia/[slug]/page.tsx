@@ -72,6 +72,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+/** En la fila del municipio van en minúscula, como una frase. */
+const ETIQUETA: Record<string, string> = {
+  queHacer: 'qué hacer', elTiempo: 'el tiempo', mareas: 'mareas',
+  campings: 'camping', barcos: 'barcos', aparcar: 'aparcar',
+  dormir: 'dormir', chiringuitos: 'chiringuitos',
+}
+
 export default async function ProvinciaPage({ params }: Props) {
   const { slug } = await params
   const provincias = await getProvincias()
@@ -95,17 +102,25 @@ export default async function ProvinciaPage({ params }: Props) {
     porMuni.set(ms, cur)
   }
   const conPois = new Set(await getMunicipiosConPois())
-  const indiceMunicipios = [...porMuni.values()]
-    .map(m => ({
+  // Las subpáginas del municipio salen de lib/enlaces-municipio, la misma
+  // función que decide si existen. Antes se enumeraban tres a mano aquí y
+  // las seis nuevas (campings, barcos, aparcar, dormir, chiringuitos) no se
+  // enlazaban desde ningún sitio salvo desde dentro del propio municipio.
+  const { enlacesMunicipio } = await import('@/lib/enlaces-municipio')
+  const indiceMunicipios = (await Promise.all([...porMuni.values()].map(async m => {
+    const nombre = municipios.find(x => x.slug === m.slug)?.nombre ?? m.nombre
+    return {
       slug: m.slug,
-      nombre: municipios.find(x => x.slug === m.slug)?.nombre ?? m.nombre,
+      nombre,
       count: m.playas.length,
       playas: m.playas,
       tienePagina: conPagina.has(m.slug),
       mareas: conPagina.has(m.slug) && tieneMareas(m.slug) && ubicacionMareas(m.slug)?.zona !== 'mediterraneo',
       queHacer: conPois.has(m.slug),
-    }))
-    .sort((a, b) => b.count - a.count || a.nombre.localeCompare(b.nombre, 'es'))
+      // Todas menos la de playas, que es la flecha del final de la fila.
+      paginas: (await enlacesMunicipio(m.slug, nombre)).filter(e => e.clave !== 'playas'),
+    }
+  }))).sort((a, b) => b.count - a.count || a.nombre.localeCompare(b.nombre, 'es'))
 
   // «la provincia de Cádiz» cuando la capital se llama igual: el H1
   // tiene que decir lo mismo que el title. Si no, quien llega desde la
@@ -227,8 +242,8 @@ export default async function ProvinciaPage({ params }: Props) {
             Antes era «Municipios con más playas», al 92 % de la página y
             solo con los municipios que tienen página propia (≥4 playas):
             en Cádiz, 13 de 30. El title promete «listado por municipios» y
-            el listado era lo último que se veía. Ahora va aquí —tras el
-            mapa, antes de las playas sueltas— porque la navegación natural
+            el listado era lo último que se veía. Ahora va aquí, tras el
+            mapa, antes de las playas sueltas, porque la navegación natural
             de una provincia es elegir municipio, no playa. Y están TODOS:
             los que tienen página, enlazados; los que no, con sus playas
             desplegadas. Quien busca «playas de Zahara» no sabe que la regla
@@ -258,18 +273,16 @@ export default async function ProvinciaPage({ params }: Props) {
                 </div>
               </div>
               {/* Mareas: solo donde la marea es un dato —Atlántico,
-                  Cantábrico y Canarias— y el municipio tiene tabla. En el
+                  Cantábrico y Canarias, y el municipio tiene tabla. En el
                   Mediterráneo sería un enlace a «aquí la marea son 25 cm». */}
               {/* Las subpáginas del municipio, con la palabra que se busca.
                   El tiempo existe para todos; qué hacer y mareas, donde hay dato. */}
-              <span className={styles.rowMeta} style={{ marginLeft: 'auto', display: 'flex', gap: '.7rem', whiteSpace: 'nowrap' }}>
-                {m.queHacer && (
-                  <Link href={`/municipio/${m.slug}/que-hacer`} style={{ color: 'var(--ink)', fontWeight: 600 }}>qué hacer</Link>
-                )}
-                <Link href={`/municipio/${m.slug}/el-tiempo`} style={{ color: 'var(--ink)', fontWeight: 600 }}>el tiempo</Link>
-                {m.mareas && (
-                  <Link href={`/municipio/${m.slug}/tabla-de-mareas`} style={{ color: 'var(--ink)', fontWeight: 600 }}>mareas</Link>
-                )}
+              <span className={styles.rowMeta} style={{ marginLeft: 'auto', display: 'flex', gap: '.55rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                {m.paginas.map(e => (
+                  <Link key={e.clave} href={e.href} style={{ color: 'var(--ink)', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                    {ETIQUETA[e.clave]}
+                  </Link>
+                ))}
               </span>
               {m.tienePagina && (
                 <Link href={`/municipio/${m.slug}`} className={styles.rowArrow} aria-label={`Playas de ${m.nombre}`}>→</Link>

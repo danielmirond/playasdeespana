@@ -127,14 +127,14 @@ export async function getBanderaSb(slug: string): Promise<EstadoOficialSb | null
     const hora = f.hora ? ` (${f.hora} h)` : ''
     // `texto` es la frase del propio socorrismo: «Baño prohibido», «Baño con
     // precaución». Se usa tal cual porque la escriben ellos.
-    const frase = f.texto ? `${f.texto} — ` : ''
+    const frase = f.texto ? `${f.texto}: ` : ''
     const attr = `(socorrismo municipal vía SafeBeach)`
 
     const bandera: BanderaPlaya =
       f.color === 'roja'
         ? { color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
             motivo: `${frase}bandera oficial izada hoy ${attr}${hora}`,
-            motivoEn: 'Official flag flying today — no swimming', hex: '#ef4444' }
+            motivoEn: 'Official flag flying today, no swimming', hex: '#ef4444' }
         : f.color === 'amarilla'
           ? { color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
               motivo: `${frase}bandera oficial izada hoy ${attr}${hora}`,

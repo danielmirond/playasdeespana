@@ -18,7 +18,7 @@ interface Props {
 
 export default function BeachVideo({ video, nombre }: Props) {
   const embedUrl = videoEmbedUrl(video.videoId)
-  const titleAttr = `${video.title} — vídeo de ${nombre}`
+  const titleAttr = `${video.title}: vídeo de ${nombre}`
 
   return (
     <section
@@ -73,7 +73,7 @@ export default function BeachVideo({ video, nombre }: Props) {
 
       {/* Atribución mínima en texto plano (sin enlaces salientes).
           Mantenemos channelTitle como cumplimiento ligero de
-          atribución, pero sin CTAs a youtube.com — fuga de tráfico
+          atribución, pero sin CTAs a youtube.com: fuga de tráfico
           que queremos evitar en una ficha turística. */}
       <div
         style={{

@@ -98,8 +98,8 @@ export async function getBanderaFerrol(slug: string): Promise<EstadoOficialFerro
     const bandera: BanderaPlaya =
       f.color === 'roja'
         ? { color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
-            motivo: `Bandera oficial izada hoy — baño prohibido ${attr}`,
-            motivoEn: 'Official flag flying today — no swimming', hex: '#ef4444' }
+            motivo: `Bandera oficial izada hoy, baño prohibido ${attr}`,
+            motivoEn: 'Official flag flying today, no swimming', hex: '#ef4444' }
         : f.color === 'amarilla'
           ? { color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
               motivo: `Bandera oficial izada hoy ${attr}`,

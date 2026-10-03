@@ -479,7 +479,7 @@ export default async function ElTiempoPage({ params }: Props) {
   const actualizado = (() => {
     const ms = Date.now()
     const proximo = meteo.hoy.find(h => new Date(h.iso).getTime() >= ms) ?? meteo.hoy[meteo.hoy.length - 1]
-    return proximo ? soloHora(proximo.iso) : '—:—'
+    return proximo ? soloHora(proximo.iso) : ', :, '
   })()
 
   return (
@@ -522,9 +522,9 @@ export default async function ElTiempoPage({ params }: Props) {
       <main className={mun.cuerpo}>
         <div className={mun.tiles}>
           <div className={mun.tile}><div className={mun.tileEtiqueta}>Aire</div><div className={mun.tileValor}>{meteo.actual.temp}°</div></div>
-          <div className={mun.tile}><div className={mun.tileEtiqueta}>Agua</div><div className={mun.tileValor}>{aguaHoy != null ? `${aguaHoy}°` : '—'}</div></div>
+          <div className={mun.tile}><div className={mun.tileEtiqueta}>Agua</div><div className={mun.tileValor}>{aguaHoy != null ? `${aguaHoy}°` : ''}</div></div>
           <div className={mun.tile}><div className={mun.tileEtiqueta}>Viento</div><div className={mun.tileValor}>{meteo.actual.viento_kmh}</div><div className={mun.tileEtiqueta}>km/h{hoyV.viento ? ` · ${hoyV.viento}` : ''}</div></div>
-          <div className={mun.tile}><div className={mun.tileEtiqueta}>Olas</div><div className={mun.tileValor}>{olasHoy != null ? olasHoy.toFixed(1).replace('.', ',') : '—'}</div><div className={mun.tileEtiqueta}>m</div></div>
+          <div className={mun.tile}><div className={mun.tileEtiqueta}>Olas</div><div className={mun.tileValor}>{olasHoy != null ? olasHoy.toFixed(1).replace('.', ',') : ''}</div><div className={mun.tileEtiqueta}>m</div></div>
         </div>
 
 

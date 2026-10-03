@@ -46,7 +46,7 @@ function scoreAguasCristalinas(p: Playa, turbidez: { visibilidad_m: number } | n
 const FAQ = [
   { q: 'Where are Spain’s clearest-water beaches?', a: 'Mainly in the Canaries (La Graciosa, Fuerteventura, Lanzarote), the Balearics (Menorca, Formentera, Ibiza), Cabo de Gata (Almería) and parts of the Murcia coast. White sand seabed, warm climate and the absence of rivers give the greatest transparency.' },
   { q: 'How is water transparency measured?', a: 'Visibility is estimated in metres using remote sensing and oceanographic models. 20-25 metres (the Canaries in summer) is exceptional; 10-15 metres is very good; 5-10 metres is the Atlantic standard; below that indicates high turbidity or sediment-laden water.' },
-  { q: 'Is it the same as water quality?', a: 'No. Water quality (EEA Directive 2006/7/EC) measures bacteriological pollution — a health indicator. Transparency measures visual clarity. A beach can have Excellent quality and murky water (for example near river mouths).' },
+  { q: 'Is it the same as water quality?', a: 'No. Water quality (EEA Directive 2006/7/EC) measures bacteriological pollution: a health indicator. Transparency measures visual clarity. A beach can have Excellent quality and murky water (for example near river mouths).' },
   { q: 'When is the water clearest?', a: 'In summer after several days without strong wind. Waves suspend sand and cut visibility. The best weeks tend to be mid-June and September (stable water, little plankton) in the Mediterranean; year-round in the Canaries.' },
 ]
 const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', inLanguage: 'en', mainEntity: FAQ.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }
@@ -80,17 +80,17 @@ export default async function CrystalClearBeachesEn() {
           Spain’s <em style={{ fontWeight: 500, color: 'var(--accent)' }}>clearest-water beaches</em>
         </h1>
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.6 }}>
-          Spain’s most transparent waters are in the Canaries, the Balearics and specific spots in Almería and Murcia. A ranking based on estimated visibility, EEA water quality and Blue Flag — the three indicators that best predict real transparency.
+          Spain’s most transparent waters are in the Canaries, the Balearics and specific spots in Almería and Murcia. A ranking based on estimated visibility, EEA water quality and Blue Flag: the three indicators that best predict real transparency.
         </p>
 
         <section aria-labelledby="h2-what" style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '1.25rem', marginBottom: '2rem' }}>
           <h2 id="h2-what" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.5rem' }}>What makes a beach’s water crystal-clear?</h2>
           <ul style={{ fontSize: '.9rem', color: 'var(--muted)', lineHeight: 1.7, paddingLeft: '1.2rem' }}>
-            <li><strong>White sand or rocky seabed</strong> — reflects light, stirs up no sediment.</li>
-            <li><strong>No nearby rivers</strong> — freshwater inflows cloud the sea.</li>
-            <li><strong>Usually little swell</strong> — waves suspend sand and cut visibility.</li>
-            <li><strong>Warm, stable climate</strong> — less plankton (chlorophyll) in the water.</li>
-            <li><strong>Pollution protection</strong> — Blue Flag and EEA Excellent classification.</li>
+            <li><strong>White sand or rocky seabed</strong>: reflects light, stirs up no sediment.</li>
+            <li><strong>No nearby rivers</strong>: freshwater inflows cloud the sea.</li>
+            <li><strong>Usually little swell</strong>: waves suspend sand and cut visibility.</li>
+            <li><strong>Warm, stable climate</strong>: less plankton (chlorophyll) in the water.</li>
+            <li><strong>Pollution protection</strong>: Blue Flag and EEA Excellent classification.</li>
           </ul>
         </section>
 

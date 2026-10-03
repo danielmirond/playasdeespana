@@ -173,8 +173,8 @@ export async function getBanderaCan(slug: string): Promise<EstadoOficialCan | nu
     const bandera: BanderaPlaya =
       color === 'roja'
         ? { color: 'roja', label: 'Bandera roja', labelEn: 'Red flag',
-            motivo: `Bandera oficial izada hoy${sufijo} — baño prohibido (Gobierno de Canarias)${varios}`,
-            motivoEn: `Official flag flying today${sufijoEn} — no swimming`, hex: '#ef4444' }
+            motivo: `Bandera oficial izada hoy${sufijo}, baño prohibido (Gobierno de Canarias)${varios}`,
+            motivoEn: `Official flag flying today${sufijoEn}, no swimming`, hex: '#ef4444' }
         : color === 'amarilla'
           ? { color: 'amarilla', label: 'Bandera amarilla', labelEn: 'Yellow flag',
               motivo: `Bandera oficial izada hoy${sufijo} (Gobierno de Canarias)${varios}`,
