@@ -41,6 +41,7 @@ import { tieneMareas, ubicacionMareas } from '@/lib/mareas-portus'
 import { tienePois } from '@/lib/municipio-pois'
 import { getAvisos, type AvisoMeteo } from '@/lib/meteoalarm'
 import { comunidadDe, comunidadParaAvisos } from '@/lib/comunidad'
+import { migaMunicipio } from '@/lib/miga-municipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
@@ -484,6 +485,11 @@ export default async function ElTiempoPage({ params }: Props) {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(migaMunicipio({
+        slug, nombre: municipio.nombre, provincia: municipio.provincia,
+        provinciaSlug, comunidad: municipio.comunidad,
+        seccion: 'El tiempo', seccionHref: `/municipio/${slug}/el-tiempo`, conRaiz: tienePaginaMuni,
+      })) }} />
       <script type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
 

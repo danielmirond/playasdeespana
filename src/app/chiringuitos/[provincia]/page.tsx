@@ -45,6 +45,26 @@ export default async function ChiringuitosProvinciaPage({ params }: Props) {
   const d = DATA[provincia]
   if (!d) notFound()
 
+  // Reparto por municipio: solo los que tienen página propia, que es lo
+  // mismo que decir los que llegan al mínimo de chiringuitos.
+  const { getPlayas } = await import('@/lib/playas')
+  const { MINIMO_CHIRINGUITOS } = await import('@/lib/chiringuitos-municipio')
+  const slugMuni = (x: string) => x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  const playasTodas = await getPlayas()
+  const muniDePlaya = new Map(playasTodas.map(p => [p.slug, p.municipio]))
+  const cuenta = new Map<string, { slug: string; nombre: string; n: number }>()
+  for (const e of d.estudios) {
+    const nombreMuni = e.playaCercana?.slug ? muniDePlaya.get(e.playaCercana.slug) : undefined
+    if (!nombreMuni || (e.playaCercana?.distM ?? 1e9) > 3000) continue
+    const k = slugMuni(nombreMuni)
+    const x = cuenta.get(k) ?? { slug: k, nombre: nombreMuni, n: 0 }
+    x.n++; cuenta.set(k, x)
+  }
+  const porMunicipio = [...cuenta.values()]
+    .filter(m => m.n >= MINIMO_CHIRINGUITOS)
+    .sort((a, b) => b.n - a.n || a.nombre.localeCompare(b.nombre))
+
   const itemList = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -101,6 +121,30 @@ export default async function ChiringuitosProvinciaPage({ params }: Props) {
             </div>
           ))}
         </div>
+
+        {/* Pueblo a pueblo. El hub de provincia mezcla cincuenta kilómetros de
+            costa; quien ya sabe a qué pueblo va necesita bajar un escalón, y
+            sin este enlace las páginas de municipio quedaban huérfanas. */}
+        {porMunicipio.length > 0 && (
+          <section style={{ margin: '2rem 0' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 700, color: 'var(--ink)', margin: '0 0 .2rem' }}>
+              Pueblo a pueblo
+            </h2>
+            <p style={{ fontSize: '.84rem', color: 'var(--muted)', margin: '0 0 .8rem' }}>
+              En qué playa está cada chiringuito, municipio por municipio.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '.45rem' }}>
+              {porMunicipio.map(m => (
+                <li key={m.slug}>
+                  <Link href={`/municipio/${m.slug}/chiringuitos`} style={{ display: 'inline-flex', alignItems: 'baseline', gap: '.4rem', padding: '.4rem .85rem', borderRadius: 100, border: '1px solid var(--line)', fontSize: '.86rem', color: 'var(--ink)' }}>
+                    {m.nombre}
+                    <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.72rem', color: 'var(--muted)' }}>{m.n}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* Cross-links */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '.6rem', maxWidth: 800, marginTop: '2.5rem' }}>

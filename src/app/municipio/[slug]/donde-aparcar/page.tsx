@@ -25,6 +25,7 @@ import { getMunicipios, getPlayasByMunicipio, MIN_PLAYAS_MUNICIPIO } from '@/lib
 import { aparcamientosDelMunicipio, tieneAparcamiento, reparte, metros, type Aparcamiento } from '@/lib/aparcamiento-municipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import { comunidadDe } from '@/lib/comunidad'
+import { migaMunicipio } from '@/lib/miga-municipio'
 import { getFotos } from '@/lib/fotos'
 import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
@@ -117,6 +118,11 @@ export default async function DondeAparcarPage({ params }: Props) {
       a: `A ${enBus.slice(0, 3).map(p => p.nombre).join(', ')}: no tienen aparcamiento en el inventario oficial ni aparcamientos cerca, pero sí línea de autobús.`,
     }] : []),
   ]
+  const miga = migaMunicipio({
+    slug, nombre: municipio.nombre, provincia: municipio.provincia,
+    provinciaSlug: municipio.provinciaSlug, comunidad: municipio.comunidad,
+    seccion: 'Aparcar', seccionHref: `/municipio/${slug}/donde-aparcar`, conRaiz: tienePaginaMuni,
+  })
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
@@ -125,6 +131,7 @@ export default async function DondeAparcarPage({ params }: Props) {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(miga) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <HeroMunicipio

@@ -23,6 +23,7 @@ import { getMunicipios, getPlayasByMunicipio, MIN_PLAYAS_MUNICIPIO } from '@/lib
 import { alojamientosDelMunicipio, tieneAlojamientos, metros } from '@/lib/alojamiento-municipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import { comunidadDe } from '@/lib/comunidad'
+import { migaMunicipio } from '@/lib/miga-municipio'
 import { getFotos } from '@/lib/fotos'
 import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
@@ -87,6 +88,11 @@ export default async function DondeDormirPage({ params }: Props) {
       a: `${todos.length} a menos de 5 km de alguna de sus ${playas.length} ${playas.length === 1 ? 'playa' : 'playas'}, entre hoteles, hostales y casas de huéspedes. Los datos son de OpenStreetMap${valorados.length ? ' y las valoraciones de Google' : ''}. Precios y disponibilidad, en la web de cada uno.`,
     },
   ]
+  const miga = migaMunicipio({
+    slug, nombre: municipio.nombre, provincia: municipio.provincia,
+    provinciaSlug: municipio.provinciaSlug, comunidad: municipio.comunidad,
+    seccion: 'Dormir', seccionHref: `/municipio/${slug}/donde-dormir`, conRaiz: tienePaginaMuni,
+  })
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
@@ -123,6 +129,7 @@ export default async function DondeDormirPage({ params }: Props) {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(miga) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <HeroMunicipio

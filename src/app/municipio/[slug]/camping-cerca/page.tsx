@@ -26,6 +26,7 @@ import { getMunicipios, getPlayasByMunicipio, MIN_PLAYAS_MUNICIPIO } from '@/lib
 import { campingsDelMunicipio, metros, MINIMO_CAMPINGS } from '@/lib/campings-municipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import { comunidadDe } from '@/lib/comunidad'
+import { migaMunicipio } from '@/lib/miga-municipio'
 import { getFotos } from '@/lib/fotos'
 import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
@@ -89,6 +90,11 @@ export default async function CampingCercaPage({ params }: Props) {
       a: `${campings.length}, todos a menos de 10 km de alguna de sus ${playas.length} ${playas.length === 1 ? 'playa' : 'playas'}. Los datos son de OpenStreetMap: nombre, contacto y ubicación. Precios y disponibilidad, en la web de cada camping.`,
     },
   ]
+  const miga = migaMunicipio({
+    slug, nombre: municipio.nombre, provincia: municipio.provincia,
+    provinciaSlug: municipio.provinciaSlug, comunidad: municipio.comunidad,
+    seccion: 'Campings', seccionHref: `/municipio/${slug}/camping-cerca`, conRaiz: tienePaginaMuni,
+  })
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
@@ -97,6 +103,7 @@ export default async function CampingCercaPage({ params }: Props) {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(miga) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <HeroMunicipio

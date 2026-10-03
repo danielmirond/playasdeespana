@@ -33,6 +33,7 @@ import { getMunicipioPois, type Poi } from '@/lib/municipio-pois'
 import { guiaUnDia, guiaTresDias, type Guia, type Parada } from '@/lib/guia-municipio'
 import { osmRestaurantes } from '@/lib/osm-pois'
 import { comunidadDe } from '@/lib/comunidad'
+import { migaMunicipio } from '@/lib/miga-municipio'
 import GygActivities from '@/components/GygActivities'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import Hueco from '@/components/ui/Hueco'
@@ -229,6 +230,11 @@ export default async function QueHacerPage({ params }: Props) {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(migaMunicipio({
+        slug, nombre: municipio.nombre, provincia: municipio.provincia,
+        provinciaSlug: municipio.provinciaSlug, comunidad: municipio.comunidad,
+        seccion: 'Qué hacer', seccionHref: `/municipio/${slug}/que-hacer`, conRaiz: tienePaginaMuni,
+      })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
 
       <HeroMunicipio

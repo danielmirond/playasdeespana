@@ -18,6 +18,7 @@ import { getMunicipios, getPlayasByMunicipio, MIN_PLAYAS_MUNICIPIO } from '@/lib
 import { chiringuitosDelMunicipio, tieneChiringuitos, metros } from '@/lib/chiringuitos-municipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import { comunidadDe } from '@/lib/comunidad'
+import { migaMunicipio } from '@/lib/miga-municipio'
 import { getFotos } from '@/lib/fotos'
 import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
@@ -90,6 +91,11 @@ export default async function ChiringuitosMunicipioPage({ params }: Props) {
         : `Los más cercanos quedan a más de 150 metros de la arena.`,
     },
   ]
+  const miga = migaMunicipio({
+    slug, nombre: municipio.nombre, provincia: municipio.provincia,
+    provinciaSlug: municipio.provinciaSlug, comunidad: municipio.comunidad,
+    seccion: 'Chiringuitos', seccionHref: `/municipio/${slug}/chiringuitos`, conRaiz: tienePaginaMuni,
+  })
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
@@ -98,6 +104,7 @@ export default async function ChiringuitosMunicipioPage({ params }: Props) {
   return (
     <>
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(miga) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <HeroMunicipio
