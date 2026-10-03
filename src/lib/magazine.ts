@@ -79,6 +79,95 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Papagayo, Yaiza (Lanzarote) (voz bicéfala) ─────
+  {
+    slug: 'playa-papagayo-yaiza-lanzarote-peaje-pista-tierra-120-metros',
+    category: 'guias',
+    title: '3 € por coche y pista de tierra hasta Papagayo (Lanzarote): 120 metros de arena',
+    excerpt:
+      'Papagayo, en el Monumento Natural de Los Ajaches (Yaiza), es una cala de 120 metros de arena rubia encajada entre acantilados, con Fuerteventura enfrente. La letra pequeña: 3 € por coche para los no residentes, solo con tarjeta, una pista de tierra para llegar, ninguna sombra y los catamaranes de Playa Blanca fondeando a mediodía.',
+    heroAlt:
+      'Playa de Papagayo, en el sur de Lanzarote: una media luna de arena dorada encajada entre acantilados volcánicos ocres, con el agua en calma y la silueta de Fuerteventura al fondo',
+    heroQuery: 'papagayo,lanzarote,beach,cove',
+    gygQuery: 'Lanzarote, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-03T19:07:34Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/canarias', label: 'Playas de Canarias' },
+      { href: '/islas', label: 'Playas de las islas' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+    ],
+    body: [
+      { t: 'p', html: 'La pista empieza donde se acaban las últimas urbanizaciones de Playa Blanca y, a partir de ahí, Lanzarote se vuelve ocre y polvo. El coche avanza despacio entre lomas peladas, levantando una nube que se queda flotando detrás, hasta una barrera con una caseta y un datáfono. Al otro lado, el macizo de <strong>Los Ajaches</strong> se rompe contra el mar en una serie de bocados de arena clara.' },
+      { t: 'p', html: 'El más famoso es <strong>Papagayo</strong>: una media luna corta, cerrada por dos paredes de roca, con un agua tan quieta que los barcos fondeados parecen colgados. Enfrente, a pocos kilómetros, la línea parda de <strong>Fuerteventura</strong> y el islote de Lobos. Es la foto que ilustra media Lanzarote en las guías, y también la razón de que a las doce del mediodía no quede un hueco.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'El nombre engaña: «Papagayo» designa a la vez una cala concreta y un conjunto de playas en la <strong>Punta del Papagayo</strong>, en el municipio de <strong>Yaiza</strong>, todas dentro del <strong>Monumento Natural de Los Ajaches</strong>. La ficha del Ayuntamiento de Yaiza las enumera con sus medidas: <strong>Playa Mujeres</strong> (395 m, la más larga), <strong>Playa de la Cruz o del Pozo</strong> (320 m), <strong>Caleta del Congrio</strong> (130 m), <strong>Puerto Muelas</strong> (130 m), <strong>Playa de la Cera</strong> (105 m), el <strong>Caletón de San Marcial</strong> (35 m, solo a pie) y la propia <strong>Playa de Papagayo</strong>: <strong>120 metros de largo y unos 15 de ancho</strong>, con ocupación «alta» y zona de fondeo. Puerto Muelas, Caleta del Congrio y San Marcial figuran como <strong>naturistas</strong>.' },
+      { t: 'p', html: 'La arena tiene explicación geológica. El Instituto Geológico y Minero (IGME) incluye las «Calas y playas encajadas de Papagayo» en su inventario de Lugares de Interés Geológico y describe <strong>arenas rubias de origen orgánico</strong> —restos de conchas y organismos marinos— que el mar acarrea hasta la costa, encajadas en los restos de un volcán antiguo. Los Ajaches es uno de los relieves más viejos de la isla, y por eso aquí no hay arena negra ni malpaís reciente. El mismo IGME anota que, tras un temporal, el sistema recupera la arena por sí solo en días o semanas.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>, que empieza en la barrera. Entrar en coche al espacio natural cuesta <strong>3 € por vehículo</strong> para los no residentes en Lanzarote, y el Ayuntamiento de Yaiza solo acepta <strong>pago con tarjeta</strong> (física o desde el móvil): sin efectivo. A pie y en bici se entra gratis. El cobro existe desde hace más de dos décadas; en agosto de 2024 <em>La Voz de Lanzarote</em> publicó que el ayuntamiento había ingresado <strong>144.000 €</strong> en los siete primeros meses del año y que solo <strong>tres trabajadores</strong> se turnaban en la caseta. Detrás de la barrera, la <strong>pista de tierra</strong> sigue varios kilómetros: se hace despacio, con polvo y baches, y no es para tener prisa.' },
+      { t: 'p', html: 'Más letra pequeña. <strong>No hay sombra natural</strong> en ninguna de las calas: roca volcánica, arena y sol, también en octubre. La ficha municipal no recoge <strong>socorrismo ni duchas</strong> en Papagayo; agua y comida, de casa, porque no conviene contar con comprarlas allí. Y la cala principal tiene <strong>zona de fondeo</strong>: en temporada, los catamaranes y barcos de excursión que salen de Playa Blanca se quedan frente a la orilla en las horas centrales. La calidad del agua oficial se consulta en <strong>NÁYADE</strong> (Ministerio de Sanidad) y en los informes de la <strong>EEA</strong>; nosotros no le ponemos adjetivo.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> A primera hora, con la luz baja sobre los acantilados y la cala casi vacía. En invierno y primavera es una de las bazas de Lanzarote: el sur de la isla está más resguardado que la costa norte, y el agua conserva una calma que <a href="/comunidad/canarias">Famara o las playas del norte</a> rara vez ofrecen.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> En pleno verano y en Semana Santa a mediodía, cuando coinciden los coches de la pista, la gente que llega andando desde Playa Blanca y los barcos de excursión. Tampoco con viento del sur o del suroeste, poco frecuente pero que entra de lleno en una costa que mira hacia Fuerteventura: la previsión de <strong>AEMET</strong> lo dice el día antes.' },
+      { t: 'p', html: '<strong>El truco</strong>. Papagayo es la que sale en la foto, pero no la única. <strong>Playa Mujeres</strong>, la primera que aparece desde la pista, tiene más de tres veces su longitud y bastante más espacio, y <strong>la Cera</strong> y <strong>el Pozo</strong> se reparten a la gente. Quien busca naturismo tiene <strong>Puerto Muelas</strong> y <strong>Caleta del Congrio</strong>, señaladas como tales por el propio ayuntamiento. Escarpines y gafas de bucear: en los bordes de roca de cada cala hay más vida que en el centro de arena.' },
+      { t: 'p', html: '<strong>La alternativa</strong>. Para no pagar ni pisar la pista, se puede llegar <strong>a pie o en bici</strong> por la costa desde Playa Blanca, sin sombra en todo el camino: con calor, solo a primera hora y con agua de sobra. Si se busca arena sin pista ni peaje, las playas urbanas de Playa Blanca están a un paso, con servicios y sin el paisaje.' },
+      { t: 'ul', items: [
+        'Siete playas en la Punta del Papagayo (Yaiza), dentro del Monumento Natural de Los Ajaches, según la ficha del Ayuntamiento de Yaiza.',
+        'Playa de Papagayo: 120 m de largo y unos 15 m de ancho, arena fina, ocupación alta y zona de fondeo.',
+        'Playa Mujeres, 395 m; Playa del Pozo, 320 m; Puerto Muelas, Caleta del Congrio y San Marcial, naturistas.',
+        'Arena rubia de origen orgánico en un volcán antiguo: Lugar de Interés Geológico del IGME.',
+        'Acceso en coche: 3 € por vehículo para no residentes, solo tarjeta; a pie o en bici, gratis. Pista de tierra.',
+        'Sin sombra natural ni socorrismo recogido en la ficha municipal; barcos de excursión fondeados en temporada.',
+        'Calidad del agua oficial: NÁYADE y EEA.',
+      ] },
+      { t: 'quote', text: 'La llaman «paraíso» en cada folleto de la isla. Un paraíso no tiene barrera con datáfono, ni pista de polvo, ni un catamarán con música a cincuenta metros de la toalla. Lo que sí tiene Papagayo es una hora buena, la primera, y seis vecinas que casi nadie fotografía.' },
+      { t: 'p', html: 'A media tarde el sol se pone de lado y los acantilados de Los Ajaches pasan del ocre al rojo. Los barcos levan ancla y vuelven hacia el puerto, y la cala recupera el ruido pequeño del agua contra la arena. En la pista, de vuelta, la nube de polvo se levanta otra vez detrás del coche, y en la caseta ya no queda nadie.' },
+    ],
+    faq: [
+      { q: '¿Cuánto cuesta entrar a las playas de Papagayo?', a: 'En coche, 3 € por vehículo para quienes no residen en Lanzarote, y el Ayuntamiento de Yaiza solo acepta pago con tarjeta (física o desde el móvil). Los residentes no pagan, y quien llega a pie o en bici tampoco.' },
+      { q: '¿Hay sombra o servicios en Papagayo?', a: 'No hay sombra natural en ninguna de las calas y la ficha municipal no recoge socorrismo ni duchas en Papagayo. Conviene llevar agua, comida y algo para cubrirse: no conviene contar con comprarlos allí.' },
+      { q: '¿Cuál es la playa menos llena de Papagayo?', a: 'La cala de Papagayo, de 120 metros, es la más concurrida. Playa Mujeres (395 m) y la del Pozo (320 m) tienen más espacio, y Puerto Muelas y Caleta del Congrio son naturistas. A primera hora cualquiera de ellas está tranquila.' },
+    ],
+    en: {
+      title: 'Papagayo, Lanzarote: €3 per car and a dirt track to reach 120 metres of sand',
+      excerpt:
+        'Papagayo, in the Los Ajaches Natural Monument (Yaiza), is a 120-metre cove of golden sand wedged between cliffs, with Fuerteventura across the water. The small print: €3 per car for non-residents, card only, a dirt track to get there, no shade at all and the Playa Blanca catamarans anchoring offshore at midday.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+        { href: '/en/islands', label: 'Spain’s island beaches' },
+      ],
+      body: [
+        { t: 'p', html: 'The track starts where the last holiday developments of Playa Blanca give out, and from there Lanzarote turns to ochre and dust. The car crawls between bare hills, raising a cloud that hangs in the air behind it, until it reaches a barrier with a hut and a card reader. Beyond it, the <strong>Los Ajaches</strong> massif breaks against the sea in a series of pale sandy bites.' },
+        { t: 'p', html: 'The best known is <strong>Papagayo</strong>: a short crescent closed in by two rock walls, the water so still that the anchored boats look suspended. Opposite, a few kilometres away, lies the brown outline of <strong>Fuerteventura</strong> and the islet of Lobos. It is the picture on half the Lanzarote guidebooks, and the reason there is no space left by midday.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The name is misleading: “Papagayo” means both a single cove and a group of beaches on the <strong>Punta del Papagayo</strong>, in the municipality of <strong>Yaiza</strong>, all inside the <strong>Los Ajaches Natural Monument</strong>. Yaiza council lists them with their measurements: <strong>Playa Mujeres</strong> (395 m, the longest), <strong>Playa de la Cruz or del Pozo</strong> (320 m), <strong>Caleta del Congrio</strong> (130 m), <strong>Puerto Muelas</strong> (130 m), <strong>Playa de la Cera</strong> (105 m), the <strong>Caletón de San Marcial</strong> (35 m, on foot only) and <strong>Playa de Papagayo</strong> itself: <strong>120 metres long and about 15 wide</strong>, with “high” occupancy and an anchoring area. Puerto Muelas, Caleta del Congrio and San Marcial are listed as <strong>naturist</strong>.' },
+        { t: 'p', html: 'The sand has a geological explanation. Spain’s Geological Survey (IGME) includes the “Calas y playas encajadas de Papagayo” in its inventory of Sites of Geological Interest and describes <strong>blond sand of organic origin</strong> — fragments of shells and marine organisms — carried ashore by the sea and lodged in the remains of an old volcano. Los Ajaches is one of the oldest landforms on the island, which is why there is no black sand or fresh lava field here. The IGME also notes that after a storm the system rebuilds its sand on its own within days or weeks.' },
+        { t: 'p', html: 'Now the <strong>catch</strong>, and it starts at the barrier. Driving into the protected area costs <strong>€3 per vehicle</strong> for non-residents of Lanzarote, and Yaiza council takes <strong>card payment only</strong> (physical card or phone): no cash. Walkers and cyclists get in free. The charge has been in place for more than two decades; in August 2024 <em>La Voz de Lanzarote</em> reported that the council had taken <strong>€144,000</strong> in the first seven months of the year, with just <strong>three staff</strong> taking turns in the hut. Past the barrier the <strong>dirt track</strong> runs on for several kilometres: slow going, dusty and rutted, and no place to be in a hurry.' },
+        { t: 'p', html: 'More small print. There is <strong>no natural shade</strong> at any of the coves: volcanic rock, sand and sun, even in October. The council’s listing records <strong>no lifeguard service or showers</strong> at Papagayo; bring your own water and food, because you cannot count on buying them there. And the main cove has an <strong>anchoring area</strong>: in season, catamarans and excursion boats out of Playa Blanca sit off the beach through the middle of the day. Official water quality is published on <strong>NÁYADE</strong> (Spain’s health ministry) and in <strong>EEA</strong> reports; we will not put an adjective on it.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> First thing, with low light on the cliffs and the cove nearly empty. In winter and spring it is one of Lanzarote’s strong cards: the south of the island is more sheltered than the north coast, and the water keeps a calm that Famara and the northern beaches rarely offer.' },
+        { t: 'p', html: '<strong>When not to?</strong> At midday in high summer and over Easter, when the cars on the track, the people walking in from Playa Blanca and the excursion boats all arrive together. Nor in a southerly or south-westerly — not common, but it blows straight into a coast that faces Fuerteventura: the <strong>AEMET</strong> forecast will tell you the day before.' },
+        { t: 'p', html: '<strong>The trick</strong>. Papagayo is the one in the photo, but not the only one. <strong>Playa Mujeres</strong>, the first you reach from the track, is more than three times as long and has far more room, while <strong>la Cera</strong> and <strong>el Pozo</strong> soak up the rest of the crowd. For naturism there are <strong>Puerto Muelas</strong> and <strong>Caleta del Congrio</strong>, designated as such by the council. Take water shoes and a mask: the rocky edges of each cove hold more life than the sandy middle.' },
+        { t: 'p', html: '<strong>The alternative</strong>. To skip both the fee and the track, you can come <strong>on foot or by bike</strong> along the coast from Playa Blanca, with no shade the whole way: in the heat, only early and with plenty of water. If all you want is sand without a track or a toll, the town beaches of Playa Blanca are close by, with facilities and without the scenery.' },
+        { t: 'ul', items: [
+          'Seven beaches on the Punta del Papagayo (Yaiza), inside the Los Ajaches Natural Monument, per Yaiza council’s listing.',
+          'Playa de Papagayo: 120 m long and about 15 m wide, fine sand, high occupancy and an anchoring area.',
+          'Playa Mujeres, 395 m; Playa del Pozo, 320 m; Puerto Muelas, Caleta del Congrio and San Marcial, naturist.',
+          'Blond sand of organic origin in an old volcano: an IGME Site of Geological Interest.',
+          'Access by car: €3 per vehicle for non-residents, card only; free on foot or by bike. Dirt track.',
+          'No natural shade and no lifeguard service in the council listing; excursion boats anchored offshore in season.',
+          'Official water quality: NÁYADE and the EEA.',
+        ] },
+        { t: 'quote', text: 'Every brochure on the island calls it paradise. Paradise does not have a barrier with a card reader, a dust track, or a catamaran playing music fifty metres from your towel. What Papagayo does have is one good hour, the first, and six neighbours almost nobody photographs.' },
+        { t: 'p', html: 'By mid-afternoon the sun comes in sideways and the Los Ajaches cliffs shift from ochre to red. The boats weigh anchor and head back to port, and the cove gets back the small sound of water on sand. On the track home the dust cloud rises again behind the car, and the hut at the barrier is empty.' },
+      ],
+      faq: [
+        { q: 'How much does it cost to get into the Papagayo beaches?', a: 'By car, €3 per vehicle for non-residents of Lanzarote, and Yaiza council only takes card payment (physical card or phone). Residents do not pay, and neither do walkers or cyclists.' },
+        { q: 'Is there shade or any facilities at Papagayo?', a: 'There is no natural shade at any of the coves, and the council listing records no lifeguard service or showers at Papagayo. Bring water, food and something to cover up: you cannot count on buying them there.' },
+        { q: 'Which Papagayo beach is least crowded?', a: 'The 120-metre Papagayo cove is the busiest. Playa Mujeres (395 m) and Playa del Pozo (320 m) have more room, and Puerto Muelas and Caleta del Congrio are naturist. First thing in the morning, any of them is quiet.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Cala Comte, Sant Josep (Ibiza) (voz bicéfala) ─────
   {
     slug: 'cala-comte-sant-josep-ibiza-acantilados-cerrados-coche-2017-corriente',
