@@ -41,6 +41,7 @@ import { getFotos } from '@/lib/fotos'
 import { getVideoYouTube } from '@/lib/videos'
 import BeachVideoToggle from '@/components/playa/BeachVideoToggle'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
+import { yogaDelMunicipio, MINIMO_ESTUDIOS, metrosYoga } from '@/lib/yoga-municipio'
 // Leaflet vive en el cliente, pero eso ya lo resuelve el propio componente:
 // lleva 'use client' y no toca `document` hasta dentro de un efecto, igual
 // que MapaPlayas, que se importa así desde la página del municipio.
@@ -183,6 +184,9 @@ export default async function QueHacerPage({ params }: Props) {
   // Itinerarios deterministas (ver src/lib/guia-municipio.ts). Se calculan
   // aquí y se pintan tal cual — el módulo no genera prosa, solo elige y
   // ordena; toda la copy visible se ha escrito en este archivo.
+  // Yoga y pilates: no da para página propia (61 municipios) pero sí para
+  // un bloque aquí, donde el lector ya busca plan.
+  const yoga = await yogaDelMunicipio(playas)
   const gUnDia = guiaUnDia(pois, topPlayas[0] ?? null, playas)
   const gTresDias = guiaTresDias(pois, playas)
   // La foto de cada playa del carrusel: la real del sidecar, con autor. Si
@@ -303,6 +307,37 @@ export default async function QueHacerPage({ params }: Props) {
         )}
         {gUnDia.paradas.length < 3 && (
           <p style={{ margin: 0, fontSize: '.9rem', color: 'var(--muted)' }}>Con {pois.total} sitios no hay plan que montar, y no se inventa: {pois.nombre} es un pueblo de playas.</p>
+        )}
+
+        {yoga.length >= MINIMO_ESTUDIOS && (
+          <section id="yoga">
+            <div className={mun.seccionCab}>
+              <h2 className={mun.h2}>Yoga y <em>pilates</em></h2>
+              <span className={mun.meta}>{yoga.length} {yoga.length === 1 ? 'estudio' : 'estudios'} cerca de la playa</span>
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.5rem' }}>
+              {yoga.slice(0, 6).map(e => (
+                <li key={e.id} style={{ display: 'flex', gap: '.7rem', alignItems: 'baseline', padding: '.5rem 0', borderTop: '1px solid var(--line)' }}>
+                  <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.72rem', color: 'var(--muted)', flexShrink: 0, minWidth: '2.6rem' }}>
+                    {e.valoracion > 0 ? e.valoracion.toFixed(1) : '—'}
+                  </span>
+                  <span style={{ flex: 1, minWidth: 0 }}>
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${e.lat},${e.lng}`} target="_blank" rel="noopener"
+                      style={{ fontWeight: 600, fontSize: '.88rem', color: 'var(--ink)' }}>{e.nombre}</a>
+                    <span style={{ fontSize: '.8rem', color: 'var(--muted)' }}>
+                      {e.pilates ? ' · yoga y pilates' : ' · yoga'}
+                      {e.resenas > 0 && ` · ${e.resenas.toLocaleString('es-ES')} reseñas`}
+                      {` · a ${metrosYoga(e.playa.metros)} de ${e.playa.nombre}`}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p style={{ margin: '.6rem 0 0', fontSize: '.78rem', color: 'var(--muted)' }}>
+              Valoraciones de Google, consultadas una vez y guardadas.{' '}
+              <Link href="/yoga-playa" style={{ color: 'var(--accent)', fontWeight: 600 }}>Yoga y pilates en toda la costa →</Link>
+            </p>
+          </section>
         )}
 
         <section id="mapa">
