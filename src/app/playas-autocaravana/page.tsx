@@ -5,6 +5,7 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { municipiosConAutocaravana } from '@/lib/autocaravana-municipio'
 import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
 import SchemaItemList from '@/components/seo/SchemaItemList'
@@ -51,6 +52,7 @@ function slugify(s: string) {
 }
 
 export default async function PlayasAutocaravanaPage() {
+  const porComunidad = await municipiosConAutocaravana()
   const [playas, comunidades] = await Promise.all([getPlayas(), getComunidades()])
 
   // Selección: playas con parking (mejor acceso para autocaravana) y bandera azul,
@@ -232,6 +234,35 @@ export default async function PlayasAutocaravanaPage() {
 
         {/* CTA afiliación Camperdays — esta pillar tenía 0 monetización pese
             a su tráfico. ued genérico de España (no hay deep-link por playa). */}
+        {porComunidad.length > 0 && (
+          <section style={{ marginBottom: '2.5rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--ink)', margin: '0 0 .5rem' }}>
+              Pueblo a pueblo: dónde pasar la noche
+            </h2>
+            <p style={{ color: 'var(--muted)', lineHeight: 1.6, margin: '0 0 1.1rem', fontSize: '.92rem', maxWidth: 680 }}>
+              Las reglas generales están arriba; lo que cambia el viaje es el detalle de cada sitio. Estos municipios
+              tienen su propia página con las áreas de autocaravanas que hay cerca, qué servicios tiene cada una y a
+              qué playas del pueblo se puede llegar con el vehículo grande.
+            </p>
+            {porComunidad.map(c => (
+              <div key={c.comunidad} style={{ marginBottom: '1.1rem' }}>
+                <h3 style={{ fontSize: '.78rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', margin: '0 0 .45rem', fontFamily: 'var(--font-mono, ui-monospace, monospace)' }}>
+                  {c.comunidad} · {c.municipios.length}
+                </h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
+                  {c.municipios.map(m => (
+                    <li key={m.slug}>
+                      <Link href={`/municipio/${m.slug}/autocaravana`} style={{ display: 'inline-block', padding: '.35rem .75rem', borderRadius: 100, border: '1px solid var(--line)', background: 'var(--card-bg)', fontSize: '.84rem', color: 'var(--ink)', textDecoration: 'none' }}>
+                        {m.nombre}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+        )}
+
         <section style={{
           background: 'linear-gradient(135deg,#0f4b60 0%,#1f6f8b 55%,#3d93b0 100%)',
           color: '#fff', borderRadius: 10, padding: '1.75rem 1.5rem', marginBottom: '2.5rem',

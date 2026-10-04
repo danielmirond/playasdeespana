@@ -52,6 +52,22 @@ export default async function CamperCityPage({ params }: Props) {
   const coords = CITY_COORDS[c.slug]
   const playasCerca = coords ? await getPlayasCercaDe(coords.lat, coords.lng, 8) : []
 
+  // La otra mitad del viaje: dónde se deja el vehículo. De los municipios
+  // de esas playas, los que tienen área de pernocta publicada.
+  const { getPlayasByMunicipio } = await import('@/lib/playas')
+  const { tieneAutocaravana } = await import('@/lib/autocaravana-municipio')
+  const vistos = new Map<string, string>()
+  for (const p of playasCerca) {
+    const slug = (p.municipio ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+    if (!slug || vistos.has(slug)) continue
+    vistos.set(slug, p.municipio)
+  }
+  const pernocta: { slug: string; nombre: string }[] = []
+  for (const [slug, nombre] of vistos) {
+    if (await tieneAutocaravana(await getPlayasByMunicipio(slug), slug)) pernocta.push({ slug, nombre })
+  }
+
   const faqLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: c.faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
@@ -158,6 +174,22 @@ export default async function CamperCityPage({ params }: Props) {
             </ul>
           )}
           <p style={{ color: 'var(--muted)', lineHeight: 1.6, margin: '0 0 .75rem', fontSize: '.9rem' }}>{c.areasNota}</p>
+          {pernocta.length > 0 && (
+            <div style={{ marginBottom: '.9rem' }}>
+              <div style={{ fontSize: '.86rem', color: 'var(--ink)', marginBottom: '.45rem' }}>
+                Y dónde dejarla al llegar, pueblo a pueblo: áreas de pernocta y qué playas admiten el vehículo.
+              </div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
+                {pernocta.map(m => (
+                  <li key={m.slug}>
+                    <Link href={`/municipio/${m.slug}/autocaravana`} style={{ display: 'inline-block', padding: '.35rem .75rem', borderRadius: 100, border: '1px solid var(--line)', background: 'var(--bg)', fontSize: '.83rem', color: 'var(--ink)', textDecoration: 'none' }}>
+                      Autocaravana en {m.nombre}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <Link href="/playas-autocaravana" style={{ color: CTA, fontWeight: 600, fontSize: '.9rem', textDecoration: 'none' }}>Ver todas las playas aptas para autocaravana →</Link>
         </section>
 

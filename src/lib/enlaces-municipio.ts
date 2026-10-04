@@ -14,12 +14,13 @@ import { getMunicipioSlugsSet, getPlayasByMunicipio } from './playas'
 import { campingsDelMunicipio, MINIMO_CAMPINGS } from './campings-municipio'
 import { tieneAparcamiento } from './aparcamiento-municipio'
 import { tieneAlojamientos } from './alojamiento-municipio'
+import { tieneAutocaravana } from './autocaravana-municipio'
 import { tieneChiringuitos } from './chiringuitos-municipio'
 import { tienePois } from './municipio-pois'
 import { tieneBarcos } from './barcos-municipio'
 import { tieneMareas, ubicacionMareas } from './mareas-portus'
 
-export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar' | 'dormir' | 'chiringuitos'
+export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar' | 'dormir' | 'chiringuitos' | 'autocaravana'
 
 export interface EnlaceMunicipio {
   clave: ClaveMunicipio
@@ -33,9 +34,9 @@ export async function enlacesMunicipio(slug: string, nombre: string): Promise<En
   const [conPagina, conAlgunaPlaya, hayPois, playas] = await Promise.all([
     getMunicipioSlugsSet(), getMunicipioSlugsSet(1), tienePois(slug), getPlayasByMunicipio(slug),
   ])
-  const [campings, hayAparcamiento, hayAlojamiento, hayChiringuitos] = await Promise.all([
+  const [campings, hayAparcamiento, hayAlojamiento, hayChiringuitos, hayAutocaravana] = await Promise.all([
     campingsDelMunicipio(playas), tieneAparcamiento(playas, slug), tieneAlojamientos(playas),
-    tieneChiringuitos(playas),
+    tieneChiringuitos(playas), tieneAutocaravana(playas, slug),
   ])
   const out: EnlaceMunicipio[] = []
 
@@ -71,6 +72,10 @@ export async function enlacesMunicipio(slug: string, nombre: string): Promise<En
   if (hayAparcamiento) out.push({
     clave: 'aparcar', href: `/municipio/${slug}/donde-aparcar`,
     texto: `Dónde aparcar en ${nombre}`, nota: 'a qué playa se llega en coche y a cuál mejor en autobús',
+  })
+  if (hayAutocaravana) out.push({
+    clave: 'autocaravana', href: `/municipio/${slug}/autocaravana`,
+    texto: `Autocaravana en ${nombre}`, nota: 'áreas de pernocta y a qué playa cabe el vehículo',
   })
   if (tieneBarcos(slug)) out.push({
     clave: 'barcos', href: `/municipio/${slug}/alquiler-de-barcos`,
