@@ -241,8 +241,8 @@ export default async function PlayasAutocaravanaPage() {
             </h2>
             <p style={{ color: 'var(--muted)', lineHeight: 1.6, margin: '0 0 1.1rem', fontSize: '.92rem', maxWidth: 680 }}>
               Las reglas generales están arriba; lo que cambia el viaje es el detalle de cada sitio. Estos municipios
-              tienen su propia página con las áreas de autocaravanas que hay cerca, qué servicios tiene cada una y a
-              qué playas del pueblo se puede llegar con el vehículo grande.
+              tienen área de autocaravanas propia, y cada uno su página: qué servicios tiene cada área, cuánto cuesta
+              y a qué playas del pueblo se puede llegar con el vehículo grande.
             </p>
             {porComunidad.map(c => (
               <div key={c.comunidad} style={{ marginBottom: '1.1rem' }}>

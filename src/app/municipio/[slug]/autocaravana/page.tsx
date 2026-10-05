@@ -5,6 +5,10 @@
 // distintos: uno se alquila en Madrid y el otro se duerme en Mojácar. Por
 // eso esta no sustituye a aquella, la continúa, y las dos se enlazan.
 //
+// SOLO LAS DE AQUÍ. Cada área pertenece al municipio al que le queda más
+// cerca. Las del pueblo de al lado salen aparte y con su nombre, para que
+// nadie lea «siete áreas en Nerja» cuando las siete están en Torrox.
+//
 // QUÉ SE PUBLICA. Las áreas de autocaravanas de OpenStreetMap con sus
 // servicios y a cuántos kilómetros están del pueblo, y las playas del
 // municipio cuyo aparcamiento, según el inventario oficial, es de los dos
@@ -94,14 +98,14 @@ export default async function AutocaravanaMunicipioPage({ params }: Props) {
   const playas = await getPlayasByMunicipio(slug)
   if (!(await tieneAutocaravana(playas, slug))) notFound()
 
-  const { areas, playas: conSitio } = await autocaravanaDelMunicipio(playas, slug)
+  const { areas, cerca: vecinas, playas: conSitio } = await autocaravanaDelMunicipio(playas, slug)
   const enlaces = await enlacesMunicipio(slug, municipio.nombre)
   const tienePaginaMuni = municipio.count >= MIN_PLAYAS_MUNICIPIO
   const alquiler = getCamperCity(slug)
 
   const propias = areas.filter(a => a.tipo === 'area')
   const cerca = propias[0] ?? areas[0]
-  const conVaciado = areas.filter(a => a.vaciado)
+  const conVaciado = [...areas, ...vecinas].filter(a => a.vaciado)
   const gratis = areas.filter(a => a.pago === false)
   const grandes = conSitio.filter(p => /m[áa]s de 100|150|200/i.test(p.tamano))
 
@@ -116,13 +120,13 @@ export default async function AutocaravanaMunicipioPage({ params }: Props) {
     {
       q: `¿Dónde se puede pernoctar en autocaravana en ${municipio.nombre}?`,
       a: cerca
-        ? `El sitio más cercano es ${cerca.nombre ?? (cerca.tipo === 'area' ? 'un área sin nombre en OpenStreetMap' : 'un aparcamiento que admite autocaravanas')}, a ${km(cerca.metros)} del centro${cerca.pago === false ? ', gratuito' : cerca.pago === true ? ', de pago' : ''}. Pernoctar dentro del vehículo, con las ruedas en el suelo y sin desplegar nada, es otra cosa que acampar; lo que esté permitido en cada calle lo decide el ayuntamiento y conviene mirar la señal.`
-        : `No consta ningún área de autocaravanas en OpenStreetMap a menos de 12 km.`,
+        ? `En ${municipio.nombre} el sitio es ${cerca.nombre ?? (cerca.tipo === 'area' ? 'un área sin nombre en OpenStreetMap' : 'un aparcamiento que admite autocaravanas')}, a ${km(cerca.metros)} del centro${cerca.pago === false ? ', gratuito' : cerca.pago === true ? ', de pago' : ''}. Pernoctar dentro del vehículo, con las ruedas en el suelo y sin desplegar nada, es otra cosa que acampar; lo que esté permitido en cada calle lo decide el ayuntamiento y conviene mirar la señal.`
+        : `No consta ningún área de autocaravanas en el municipio.${vecinas.length ? ` La más cercana está en ${vecinas[0].en}, a ${km(vecinas[0].metros)}.` : ''}`,
     },
     {
       q: `¿Dónde vaciar aguas grises y el químico cerca de ${municipio.nombre}?`,
       a: conVaciado.length
-        ? `${conVaciado.length === 1 ? 'Hay un sitio con vaciado anotado: ' : `Hay ${conVaciado.length} sitios con vaciado anotado, entre ellos `}${conVaciado.slice(0, 3).map(a => a.nombre ?? 'un área sin nombre').join(', ')}. Fuera de un punto habilitado está prohibido y la multa es alta.`
+        ? `${conVaciado.length === 1 ? 'Hay un sitio con vaciado anotado: ' : `Hay ${conVaciado.length} sitios con vaciado anotado, entre ellos `}${conVaciado.slice(0, 3).map(a => `${a.nombre ?? 'un área sin nombre'}${a.en ? ` (en ${a.en})` : ''}`).join(', ')}. Fuera de un punto habilitado está prohibido y la multa es alta.`
         : `Ninguna de las áreas cercanas tiene el vaciado anotado en OpenStreetMap, lo que no quiere decir que no lo tenga: es de los datos que peor se rellenan. Las gasolineras de carretera suelen tenerlo.`,
     },
     ...(conSitio.length ? [{
@@ -158,12 +162,12 @@ export default async function AutocaravanaMunicipioPage({ params }: Props) {
         </>}
       >
         <div style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', opacity: .9 }}>
-          {municipio.provincia} · {propias.length} {propias.length === 1 ? 'área' : 'áreas'} · {conSitio.length} {conSitio.length === 1 ? 'playa con sitio' : 'playas con sitio'}
+          {municipio.provincia} · {propias.length} {propias.length === 1 ? 'área' : 'áreas'} en el municipio · {conSitio.length} {conSitio.length === 1 ? 'playa con sitio' : 'playas con sitio'}
         </div>
         <h1 className={mun.heroTitulo}>Autocaravana en {municipio.nombre}</h1>
         <p data-speakable className={mun.heroLede} style={{ margin: 0 }}>
           {cerca
-            ? <>Lo más cerca para pasar la noche es <b>{cerca.nombre ?? 'un área sin nombre en OpenStreetMap'}</b>, a {km(cerca.metros)}{gratis.length ? `, y ${gratis.length === 1 ? 'una de las áreas consta como gratuita' : `${gratis.length} de las áreas constan como gratuitas`}` : ''}.{conSitio.length ? ` Para el día, ${conSitio.length === 1 ? 'hay una playa con aparcamiento grande' : `hay ${conSitio.length} playas con aparcamiento grande`}.` : ''}</>
+            ? <>Para pasar la noche, <b>{cerca.nombre ?? 'un área sin nombre en OpenStreetMap'}</b>, a {km(cerca.metros)} del centro{gratis.length ? `, y ${gratis.length === 1 ? 'una de las áreas consta como gratuita' : `${gratis.length} de las áreas constan como gratuitas`}` : ''}.{conSitio.length ? ` Para el día, ${conSitio.length === 1 ? 'hay una playa con aparcamiento grande' : `hay ${conSitio.length} playas con aparcamiento grande`}.` : ''}</>
             : <>No hay áreas de autocaravanas anotadas cerca, pero {conSitio.length === 1 ? 'una playa tiene' : `${conSitio.length} playas tienen`} aparcamiento de los tramos grandes.</>}
         </p>
       </HeroMunicipio>
@@ -175,11 +179,34 @@ export default async function AutocaravanaMunicipioPage({ params }: Props) {
           <section id="areas">
             <div className={mun.seccionCab}>
               <h2 className={mun.h2}>Dónde <em>pasar la noche</em></h2>
-              <span className={mun.meta}>a menos de 12 km del pueblo</span>
+              <span className={mun.meta}>en {municipio.nombre}</span>
             </div>
             <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.9rem' }}>
               {areas.map((a, i) => <Area key={`${a.lat}-${a.lng}-${i}`} a={a} />)}
             </ol>
+          </section>
+        )}
+
+        {vecinas.length > 0 && (
+          <section id="cerca">
+            <div className={mun.seccionCab}>
+              <h2 className={mun.h2}>Y en los <em>pueblos de al lado</em></h2>
+              <span className={mun.meta}>a menos de 12 km</span>
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.35rem' }}>
+              {vecinas.map((a, i) => (
+                <li key={`${a.lat}-${a.lng}-${i}`} style={{ display: 'flex', gap: '.7rem', alignItems: 'baseline', padding: '.5rem 0', borderTop: '1px solid var(--line)' }}>
+                  <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.72rem', color: 'var(--muted)', flexShrink: 0, minWidth: '3.8rem' }}>{km(a.metros)}</span>
+                  <span style={{ flex: 1, minWidth: 0 }}>
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${a.lat},${a.lng}`} target="_blank" rel="noopener" style={{ fontWeight: 600, fontSize: '.9rem', color: 'var(--ink)' }}>
+                      {a.nombre ?? (a.tipo === 'area' ? 'Área sin nombre' : 'Aparcamiento sin nombre')}
+                    </a>
+                    {a.en && <span style={{ fontSize: '.82rem', color: 'var(--muted)' }}> · en {a.en}</span>}
+                    {servicios(a).length > 0 && <span style={{ fontSize: '.82rem', color: 'var(--muted)' }}> · {servicios(a).join(', ')}</span>}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 

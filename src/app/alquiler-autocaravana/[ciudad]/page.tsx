@@ -177,7 +177,8 @@ export default async function CamperCityPage({ params }: Props) {
           {pernocta.length > 0 && (
             <div style={{ marginBottom: '.9rem' }}>
               <div style={{ fontSize: '.86rem', color: 'var(--ink)', marginBottom: '.45rem' }}>
-                Y dónde dejarla al llegar, pueblo a pueblo: áreas de pernocta y qué playas admiten el vehículo.
+                Y dónde dejarla al llegar: estos pueblos de la zona tienen área de autocaravanas propia y su página
+                con los servicios de cada una.
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
                 {pernocta.map(m => (

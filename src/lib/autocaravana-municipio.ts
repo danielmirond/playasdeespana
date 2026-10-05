@@ -7,6 +7,12 @@
 // ya teníamos: las áreas de OpenStreetMap, sus servicios, y el tamaño del
 // aparcamiento de cada playa según el inventario oficial.
 //
+// CADA ÁREA TIENE UN DUEÑO. Un área a diez kilómetros la reclamaban hasta
+// dieciséis municipios, y 173 páginas enseñaban la misma lista con otro
+// título. Ahora cada área pertenece al municipio al que le queda más cerca:
+// ahí se publica, y el vecino la ve en «cerca de aquí» con el nombre del
+// pueblo donde está. Una página que solo tenía áreas prestadas no sale.
+//
 // LO QUE NO SE PROMETE. Ni que la pernocta esté permitida (eso lo decide
 // cada ayuntamiento y cambia cada temporada), ni que el aparcamiento grande
 // admita autocaravanas: muchos ponen barra de altura. La página lo dice con
@@ -28,6 +34,8 @@ export interface AreaAutocaravana {
   aseos: boolean
   tarifa: string | null
   maxEstancia: string | null
+  /** El municipio donde está, cuando no es este. */
+  en: string | null
   lat: number
   lng: number
 }
@@ -43,7 +51,7 @@ export interface PlayaAutocaravana {
 
 interface Sidecar {
   pool: {
-    n?: string | null; k: 'area' | 'parking'; f?: 0 | 1; c?: number
+    n?: string | null; k: 'area' | 'parking'; f?: 0 | 1; c?: number; m?: string
     agua?: 1; vaciado?: 1; luz?: 1; duchas?: 1; aseos?: 1
     tarifa?: string; max?: string; la: number; lo: number
   }[]
@@ -67,11 +75,15 @@ async function getSidecar(): Promise<Sidecar | null> {
 const GRANDE = /m[áa]s de 100|150|200|entre 50 y 100/i
 
 export const autocaravanaDelMunicipio = cache(async (playas: Playa[], slugMunicipio: string): Promise<{
+  /** Las del municipio: las que le quedan más cerca a él que a nadie. */
   areas: AreaAutocaravana[]
+  /** Las del pueblo de al lado, con su nombre. */
+  cerca: AreaAutocaravana[]
   playas: PlayaAutocaravana[]
 }> => {
   const s = await getSidecar()
-  const areas: AreaAutocaravana[] = !s ? [] : (s.municipios[slugMunicipio] ?? []).map(([i, d]) => {
+  const nombres = await nombresMunicipio()
+  const todas: AreaAutocaravana[] = !s ? [] : (s.municipios[slugMunicipio] ?? []).map(([i, d]) => {
     const p = s.pool[i]
     return {
       nombre: p.n ?? null,
@@ -87,12 +99,15 @@ export const autocaravanaDelMunicipio = cache(async (playas: Playa[], slugMunici
       // OSM escribe «13 EUR»; aquí se lee «13 €», que es como está en el cartel.
       tarifa: p.tarifa ? p.tarifa.replace(/\s*EUR\b/gi, ' €').replace(/\s+/g, ' ').trim() : null,
       maxEstancia: p.max ?? null,
+      en: p.m && p.m !== slugMunicipio ? (nombres.get(p.m) ?? null) : null,
       lat: p.la,
       lng: p.lo,
     }
   })
   // Primero las áreas de verdad, y dentro de cada grupo la más cercana.
-  areas.sort((a, b) => (a.tipo === b.tipo ? 0 : a.tipo === 'area' ? -1 : 1) || a.metros - b.metros)
+  todas.sort((a, b) => (a.tipo === b.tipo ? 0 : a.tipo === 'area' ? -1 : 1) || a.metros - b.metros)
+  const areas = todas.filter(a => !a.en)
+  const cerca = todas.filter(a => a.en)
 
   const conSitio: PlayaAutocaravana[] = playas
     .map(p => {
@@ -104,7 +119,13 @@ export const autocaravanaDelMunicipio = cache(async (playas: Playa[], slugMunici
     .sort((a, b) => (/m[áa]s de 100|150|200/i.test(b.tamano) ? 1 : 0) - (/m[áa]s de 100|150|200/i.test(a.tamano) ? 1 : 0)
       || a.nombre.localeCompare(b.nombre))
 
-  return { areas, playas: conSitio }
+  return { areas, cerca, playas: conSitio }
+})
+
+/** slug → nombre, para decir «en Torrox» y no «en torrox». */
+const nombresMunicipio = cache(async (): Promise<Map<string, string>> => {
+  const { getMunicipios } = await import('./playas')
+  return new Map((await getMunicipios(1)).map(m => [m.slug, m.nombre]))
 })
 
 /** Se publica cuando la página responde algo que no está ya en otra: un
@@ -148,7 +169,8 @@ export const municipiosConAutocaravana = cache(async (): Promise<
   const porComunidad = new Map<string, { slug: string; nombre: string; provincia: string; areas: number }[]>()
   for (const m of municipios) {
     const ps = porSlug.get(m.slug) ?? []
-    const areas = (s.municipios[m.slug] ?? []).filter(([i]) => s.pool[i].k === 'area').length
+    const areas = (s.municipios[m.slug] ?? [])
+      .filter(([i]) => s.pool[i].k === 'area' && s.pool[i].m === m.slug).length
     const grandes = ps.filter(p => GRANDE.test((p as unknown as { parking_plazas?: string }).parking_plazas ?? '')).length
     if (!((areas >= 1 && grandes >= 1) || areas >= 2)) continue
     if (!porComunidad.has(m.comunidad)) porComunidad.set(m.comunidad, [])

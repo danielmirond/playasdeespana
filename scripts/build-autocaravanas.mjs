@@ -12,17 +12,30 @@
 //   nwr[tourism=caravan_site]; nwr[amenity=parking][motorhome~yes|designated]
 //   nwr[amenity=parking][caravan~yes|designated]   (bbox de España)
 //
-//   node scripts/build-autocaravanas.mjs /tmp/caravan.json
+// DOS CONSULTAS, NO UNA. La del bbox trae todo lo que hay en el rectángulo,
+// y el rectángulo de España incluye el Algarve y el Rosellón. La segunda,
+// con el área administrativa, dice cuáles están de verdad en España, y se
+// cruzan por coordenada: 21 áreas portuguesas y francesas se caían si no.
+//
+//   node scripts/build-autocaravanas.mjs /tmp/caravan.json /tmp/es.json
+//
+// CADA ÁREA TIENE UN DUEÑO. Un área a diez kilómetros la reclamaban hasta
+// dieciséis municipios a la vez, así que 173 páginas enseñaban exactamente
+// la misma lista de áreas con otro título: eso es contenido duplicado y es
+// lo que había que arreglar. Ahora cada área pertenece al municipio al que
+// le queda más cerca, y los demás la ven en «cerca de aquí», con el nombre
+// del pueblo donde está.
 //
 // Salida: public/data/autocaravanas.json
-//   { pool: [area…], municipios: { slug: [[idx, metros]…] } }
+//   { pool: [{…, m: slug del dueño}], municipios: { slug: [[idx, metros]…] } }
 import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const IN = process.argv[2]
-if (!IN) { console.error('Uso: node scripts/build-autocaravanas.mjs <caravan.json>'); process.exit(1) }
+const EN_ESPANA = process.argv[3]
+if (!IN) { console.error('Uso: node scripts/build-autocaravanas.mjs <caravan.json> [es.json]'); process.exit(1) }
 const OUT = resolve(ROOT, 'public/data/autocaravanas.json')
 
 // Generoso a propósito: un área de pernocta a 12 km sigue sirviendo para
@@ -77,6 +90,12 @@ const munis = [...porMuni].map(([slug, ps]) => ({
 }))
 
 const datos = JSON.parse(readFileSync(IN, 'utf8'))
+// Las que la consulta administrativa confirma dentro de España, por id de
+// OpenStreetMap, que es lo único que no se mueve entre las dos consultas.
+const soloES = EN_ESPANA
+  ? new Set(JSON.parse(readFileSync(EN_ESPANA, 'utf8')).elements.map(e => `${e.type}/${e.id}`))
+  : null
+let fuera = 0
 const pool = []
 const deMuni = new Map()
 for (const e of datos.elements ?? []) {
@@ -85,6 +104,7 @@ for (const e of datos.elements ?? []) {
   if (!d) continue
   const lat = e.lat ?? e.center?.lat, lon = e.lon ?? e.center?.lon
   if (!lat || !lon) continue
+  if (soloES && !soloES.has(`${e.type}/${e.id}`)) { fuera++; continue }
   let idx = -1
   for (const m of munis) {
     const dist = hav(lat, lon, m.lat, m.lon)
@@ -97,7 +117,21 @@ for (const e of datos.elements ?? []) {
 const municipios = Object.fromEntries([...deMuni]
   .map(([k, v]) => [k, v.sort((a, b) => a[1] - b[1]).slice(0, POR_MUNI)]))
 
+// El dueño de cada área: el municipio al que le queda más cerca. Se calcula
+// sobre el reparto completo, antes de recortar a ocho por municipio, para
+// que no dependa de cuántas áreas tenga alrededor el vecino.
+const dueno = new Map()
+for (const [slug, v] of deMuni) for (const [i, d] of v) {
+  const cur = dueno.get(i)
+  if (!cur || d < cur.d) dueno.set(i, { slug, d })
+}
+for (const [i, x] of dueno) pool[i].m = x.slug
+
 writeFileSync(OUT, JSON.stringify({ pool, municipios }))
+if (soloES) console.log(`descartadas por estar fuera de España: ${fuera}`)
+const propias = new Map()
+for (const p of pool) if (p.k === 'area' && p.m) propias.set(p.m, (propias.get(p.m) ?? 0) + 1)
+console.log(`municipios con área propia: ${propias.size}`)
 console.log(`áreas y parkings en zona costera: ${pool.length} (${pool.filter(p => p.k === 'area').length} áreas)`)
 console.log(`municipios con alguna a ${RADIO_MUNI_M / 1000} km: ${Object.keys(municipios).length}`)
 console.log(`con vaciado: ${pool.filter(p => p.vaciado).length} · con agua: ${pool.filter(p => p.agua).length} · gratis: ${pool.filter(p => p.f === 0).length}`)
