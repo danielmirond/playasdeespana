@@ -79,6 +79,93 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Barayo, Navia-Valdés (Asturias) (voz bicéfala) ─────
+  {
+    slug: 'playa-de-barayo-navia-valdes-asturias-reserva-rio-800-metros-pie',
+    category: 'guias',
+    title: 'Barayo (Navia-Valdés): se llega tras 800 m a pie y un río parte la arena en dos',
+    excerpt:
+      'Barayo son 670 metros de arena oscura y fina dentro de una Reserva Natural Parcial de 342 hectáreas, entre Navia y Valdés. La pega: el coche se queda arriba, hay unos 800 metros de senda, ni aseos ni duchas ni socorrista, y el río divide la playa en dos lenguas de arena.',
+    heroAlt:
+      'Playa de Barayo, en el occidente de Asturias: una ensenada de arena oscura entre acantilados verdes, con el río serpenteando por la arena hasta el mar y dunas cubiertas de barrón al fondo',
+    heroQuery: 'barayo,navia,asturias,beach',
+    gygQuery: 'Navia, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-05T14:10:44Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/asturias', label: 'Playas de Asturias' },
+      { href: '/playas-secretas', label: 'Playas poco conocidas' },
+    ],
+    body: [
+      { t: 'p', html: 'Desde el mirador de Vigo, en el lado de Navia, la ensenada aparece de golpe: un valle estrecho que baja hasta el mar, un río que no sabe ir recto y, al final, una lengua de arena oscura cortada por el agua dulce. No hay carretera que termine en la orilla, ni chiringuito, ni hilera de sombrillas. Solo una senda entre helechos y alisos, y el ruido del Cantábrico que sube antes de que se vea la espuma.' },
+      { t: 'p', html: 'Barayo es una de esas playas que el occidente asturiano guarda para quien acepta caminar. El río que le da nombre recorre unos doce kilómetros antes de abrirse en meandros, marisma y dunas, y todo ese final de trayecto lleva protegido desde hace tres décadas. Se baja andando, se sube andando y, entre medias, lo que hay es exactamente lo que se ve desde arriba.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La playa forma parte de la <strong>Reserva Natural Parcial de Barayo</strong>, declarada por el <strong>Decreto 70/1995, de 27 de abril</strong>, con <strong>342 hectáreas</strong> repartidas entre los concejos de <strong>Navia y Valdés</strong>. Su gestión se rige hoy por el instrumento aprobado en el <strong>Decreto 160/2014</strong>, el mismo que declaró la Zona Especial de Conservación Penarronda-Barayo, dentro de la Red Natura 2000. La ficha de la Red Ambiental de Asturias describe la desembocadura del río, la marisma, el sistema dunar con barrón (<em>Ammophila arenaria</em>) y antiguas plantaciones de pino, y cita tres especies de fauna amenazada: la <strong>nutria</strong>, el <strong>ostrero euroasiático</strong> y el <strong>cormorán moñudo</strong>.' },
+      { t: 'p', html: 'La ficha de playas de Vivir Asturias le da <strong>670 metros de longitud</strong> y una anchura media de <strong>85 metros</strong> (Turismo Luarca la redondea a 700). La arena es oscura, de pizarras y cuarcitas, y las oficinas de turismo locales coinciden en que es de las de grano más fino de Asturias. El río la parte <strong>longitudinalmente en dos lenguas</strong>: una hacia el lado de Navia y otra hacia el de Valdés.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>, que aquí son varios. El primero, llegar: el acceso de vehículos hasta la arena está prohibido y el coche se deja en las explanadas de <strong>Vigo</strong> (Navia) o de <strong>Sabugo</strong> (Otur, Valdés). Desde ahí, Turismo Luarca habla de <strong>unos 800 metros</strong> de paseo; las guías de senderismo, de unos veinte minutos. Es fácil a la ida y se nota a la vuelta, cargado y con la tarde encima. El segundo: <strong>no hay servicios</strong>. Ni aseos, ni duchas, ni papeleras, ni socorrismo. Lo que se baja, se sube.' },
+      { t: 'p', html: 'El tercero es el río. Partir la playa en dos tiene encanto en la foto y consecuencias en la práctica: pasar de una lengua a otra obliga a vadear, y guías locales advierten de que con marea alta cruzarlo se complica. Y un matiz sobre el mar: Navia Turismo describe sus aguas como poco peligrosas y sin corrientes relevantes, pero también como playa <strong>ventosa y de oleaje medio</strong>. Sin vigilancia, esa descripción optimista no sustituye al sentido común. Sobre la calidad del agua, no hemos encontrado una calificación sanitaria publicada específica de Barayo que podamos citar, así que no la damos.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> Con la marea bajando y un día sin nordeste fuerte. En bajamar la playa gana anchura, el río se queda en un hilo manejable y, en el lado oriental, se forma una poza de agua dulce y templada que las guías locales recomiendan para los niños. Fuera de agosto, la senda y la arena son casi para uno mismo.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Con pleamar si la idea es moverse de un lado a otro de la playa, porque el río manda. Con mar de fondo, sin socorrista a quien avisar. Y con niños muy pequeños o personas con movilidad reducida si no se cuenta con la caminata de vuelta, que es la parte que nadie pone en las fotos.' },
+      { t: 'p', html: '<strong>El truco</strong>. Elegir el acceso según el plan. Por <strong>Vigo</strong> se llega al mirador y se tiene la vista completa de la ensenada; por <strong>Sabugo</strong> se baja hacia el lado de Valdés. El ala oriental, mirando al mar a la derecha, es donde se tolera el <strong>naturismo</strong>, según Navia Turismo: no es una playa nudista oficial, pero conviene saberlo antes de colocar la toalla.' },
+      { t: 'p', html: '<strong>El viento y la alternativa</strong>. Es una ensenada abierta al Cantábrico y lo nota. Si apetece arena con servicios, aseo y aparcamiento a pie de playa, Navia y Puerto de Vega, a pocos kilómetros, tienen playas urbanas; si lo que se busca es la misma sensación de valle y río, la propia senda de la reserva merece la visita aunque no se pise el agua.' },
+      { t: 'ul', items: [
+        'Reserva Natural Parcial de Barayo: Decreto 70/1995; 342 ha entre Navia y Valdés (Red Ambiental de Asturias).',
+        'Instrumento de gestión y ZEC Penarronda-Barayo: Decreto 160/2014 (Red Natura 2000).',
+        'Playa: 670 m de longitud y 85 m de anchura media; arena oscura de grano fino (Vivir Asturias).',
+        'Acceso solo a pie desde Vigo (Navia) o Sabugo (Valdés): unos 800 m de senda (Turismo Luarca).',
+        'Sin aseos, duchas, papeleras ni socorrismo.',
+        'Naturismo tolerado en el ala oriental, sin ser playa nudista oficial (Navia Turismo).',
+        'Fauna amenazada en la reserva: nutria, ostrero euroasiático y cormorán moñudo.',
+      ] },
+      { t: 'quote', text: 'Dirán que Barayo es una playa virgen. No lo es por casualidad: lo es porque en 1995 alguien firmó un decreto, porque el coche se queda arriba y porque cada uno se lleva su basura de vuelta por la senda.' },
+      { t: 'p', html: 'A media tarde, cuando el sol baja hacia Valdés, la arena oscura se vuelve casi negra y el río brilla como una línea de metal entre las dos mitades de la playa. Los ostreros pasan pegados al agua, alguien recoge la toalla y empieza a subir. Arriba, en el mirador, la ensenada sigue igual que al llegar: sin un solo edificio, porque así se decidió.' },
+    ],
+    faq: [
+      { q: '¿Cómo se llega a la playa de Barayo?', a: 'Solo a pie. El acceso de vehículos hasta la arena está prohibido: el coche se deja en las explanadas de Vigo (Puerto de Vega, Navia) o de Sabugo (Otur, Valdés) y desde ahí hay una senda señalizada de unos 800 metros, unos veinte minutos andando.' },
+      { q: '¿Tiene servicios o socorrista la playa de Barayo?', a: 'No. No hay aseos, duchas, papeleras ni servicio de socorrismo. Hay que llevar agua, comida y bolsas para bajar y subir todo lo necesario.' },
+      { q: '¿Es nudista la playa de Barayo?', a: 'No oficialmente, pero según Navia Turismo el naturismo se tolera en el ala oriental de la playa, a la derecha mirando al mar.' },
+    ],
+    en: {
+      title: 'Barayo, Asturias: an 800 m walk from the car, and a river that splits the sand in two',
+      excerpt:
+        'Barayo is 670 metres of fine, dark sand inside a 342-hectare partial nature reserve between Navia and Valdés. The catch: the car stays up top, there is an 800-metre path, no toilets, showers or lifeguards, and the river divides the beach into two tongues of sand.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'From the viewpoint at Vigo, on the Navia side, the inlet appears all at once: a narrow valley dropping to the sea, a river that cannot hold a straight line and, at the bottom, a tongue of dark sand cut through by fresh water. No road ends at the shoreline, there is no beach bar and no row of parasols. Just a path through ferns and alders, and the sound of the Bay of Biscay arriving well before the foam is in view.' },
+        { t: 'p', html: 'Barayo is one of those beaches western Asturias keeps for people willing to walk. The river it is named after runs for about twelve kilometres before it loosens into meanders, salt marsh and dunes, and that whole final stretch has been protected for three decades. You walk down, you walk back up, and in between there is exactly what you saw from the top.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The beach lies within the <strong>Barayo Partial Nature Reserve</strong>, created by <strong>Decree 70/1995 of 27 April</strong>, covering <strong>342 hectares</strong> across the municipalities of <strong>Navia and Valdés</strong>. It is now managed under the plan approved by <strong>Decree 160/2014</strong>, which also designated the Penarronda-Barayo Special Area of Conservation within the Natura 2000 network. The Asturian environment network’s fact sheet describes the river mouth, the salt marsh, a dune system held together by marram grass (<em>Ammophila arenaria</em>) and old pine plantations, and lists three threatened species: the <strong>otter</strong>, the <strong>Eurasian oystercatcher</strong> and the <strong>European shag</strong>.' },
+        { t: 'p', html: 'The Vivir Asturias beach guide gives it a <strong>length of 670 metres</strong> and an average width of <strong>85 metres</strong> (Luarca’s tourist office rounds it up to 700). The sand is dark, from slate and quartzite, and local tourist offices agree it is among the finest-grained in Asturias. The river splits it <strong>lengthways into two tongues</strong>: one towards Navia, the other towards Valdés.' },
+        { t: 'p', html: 'Now the <strong>drawbacks</strong>, and there are several. First, getting there: vehicles are banned from the road down to the sand, so you park on the open ground at <strong>Vigo</strong> (Navia) or <strong>Sabugo</strong> (Otur, Valdés). From there, Luarca’s tourist office counts <strong>about 800 metres</strong> on foot; walking guides say around twenty minutes. Easy on the way down, noticeable on the way back, laden and late in the day. Second: <strong>there are no facilities</strong>. No toilets, no showers, no bins, no lifeguards. Whatever goes down comes back up.' },
+        { t: 'p', html: 'Third, the river. Splitting the beach in two looks lovely in pictures and has practical consequences: moving from one side to the other means wading, and local guides warn that at high tide the crossing gets awkward. And a note on the sea: Navia’s tourist office calls the water not very dangerous and free of significant currents, but also describes the beach as <strong>windy, with medium surf</strong>. With nobody on watch, that optimistic line is no substitute for judgement. On water quality, we have not found a published health rating specific to Barayo that we can cite, so we are not giving one.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> On a falling tide and a day without a strong north-easterly. At low water the beach widens, the river shrinks to a manageable thread and, on the eastern side, a pool of warmer fresh water forms that local guides recommend for children. Outside August, path and sand are close to empty.' },
+        { t: 'p', html: '<strong>When not to?</strong> At high tide if you plan to move between the two halves, because the river decides. In a groundswell, with no lifeguard to call. And with very small children or anyone with limited mobility unless you have factored in the walk back, which is the part no photograph shows.' },
+        { t: 'p', html: '<strong>The trick</strong>. Pick your access to suit the day. From <strong>Vigo</strong> you reach the viewpoint and see the whole inlet; from <strong>Sabugo</strong> you come down on the Valdés side. The eastern wing, on the right as you face the sea, is where <strong>naturism</strong> is tolerated, according to Navia’s tourist office: it is not an official nudist beach, but worth knowing before you lay your towel down.' },
+        { t: 'p', html: '<strong>The wind and the alternative</strong>. This is an inlet open to the Cantabrian Sea and it feels it. If you want sand with toilets and parking at the edge, Navia and Puerto de Vega, a few kilometres away, have town beaches; if you are after the same valley-and-river feeling, the reserve path is worth walking even if you never touch the water.' },
+        { t: 'ul', items: [
+          'Barayo Partial Nature Reserve: Decree 70/1995; 342 ha between Navia and Valdés (Asturian environment network).',
+          'Management plan and Penarronda-Barayo SAC: Decree 160/2014 (Natura 2000).',
+          'Beach: 670 m long, 85 m average width; fine dark sand (Vivir Asturias).',
+          'Access on foot only, from Vigo (Navia) or Sabugo (Valdés): about 800 m of path (Luarca tourist office).',
+          'No toilets, showers, bins or lifeguards.',
+          'Naturism tolerated on the eastern wing, though not an official nudist beach (Navia tourist office).',
+          'Threatened fauna in the reserve: otter, Eurasian oystercatcher and European shag.',
+        ] },
+        { t: 'quote', text: 'They will call Barayo unspoilt. It isn’t by accident: it is because someone signed a decree in 1995, because the car stays at the top, and because everyone carries their rubbish back up the path.' },
+        { t: 'p', html: 'By mid-afternoon, as the sun drops towards Valdés, the dark sand turns almost black and the river shines like a strip of metal between the two halves of the beach. Oystercatchers skim the waterline, someone folds a towel and starts the climb. Up at the viewpoint the inlet looks just as it did on arrival: not a single building, because that is what was decided.' },
+      ],
+      faq: [
+        { q: 'How do you get to Barayo beach?', a: 'On foot only. Vehicles are banned from the road to the sand: you park at Vigo (Puerto de Vega, Navia) or Sabugo (Otur, Valdés) and follow a signposted path of about 800 metres, roughly twenty minutes’ walk.' },
+        { q: 'Does Barayo have facilities or lifeguards?', a: 'No. There are no toilets, showers, bins or lifeguards. Bring water, food and bags, and carry everything back up.' },
+        { q: 'Is Barayo a nudist beach?', a: 'Not officially, but according to Navia’s tourist office naturism is tolerated on the eastern wing, on the right as you face the sea.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Zarautz (Gipuzkoa) (voz bicéfala) ─────
   {
     slug: 'playa-de-zarautz-gipuzkoa-mareas-corrientes-retorno-dunas-inurritza',
