@@ -79,6 +79,93 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Zarautz (Gipuzkoa) (voz bicéfala) ─────
+  {
+    slug: 'playa-de-zarautz-gipuzkoa-mareas-corrientes-retorno-dunas-inurritza',
+    category: 'guias',
+    title: 'Zarautz (Gipuzkoa): 2,5 km de arena, mareas de 4,8 m y corrientes en la zona más llena',
+    excerpt:
+      'La playa de Zarautz es la más larga de Gipuzkoa: 2.500 metros de arena fina orientados al norte, con agua de calidad «excelente» según el Gobierno Vasco. La letra pequeña: con pleamar el tramo oeste queda bajo el agua y las corrientes de retorno más intensas se forman en el centro, justo donde se concentra la gente.',
+    heroAlt:
+      'Playa de Zarautz, en Gipuzkoa: un largo arenal dorado y curvo frente al Cantábrico, con olas rompiendo en varias líneas, surfistas en el agua y el paseo marítimo y los edificios del pueblo detrás',
+    heroQuery: 'zarauzko,zarautz,gipuzkoa,beach',
+    gygQuery: 'Zarautz, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-04T16:36:37Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/pais-vasco', label: 'Playas del País Vasco' },
+      { href: '/comunidad/cantabria', label: 'Playas de Cantabria' },
+    ],
+    body: [
+      { t: 'p', html: 'A las ocho de la mañana el malecón de Zarautz todavía huele a salitre y a café. Abajo, la arena se estira dos kilómetros y medio hacia el este hasta perderse entre las dunas, y el agua viene en líneas ordenadas, una detrás de otra, con una regularidad que explica por qué fuera del verano aquí se ven más tablas que toallas. Los primeros surfistas ya están dentro, puntos negros de neopreno sentados en la espuma, esperando.' },
+      { t: 'p', html: 'Es la playa más larga de <strong>Gipuzkoa</strong> y una playa urbana de las de verdad: un pueblo entero asomado a un arenal, con paseo, escuelas de surf y bares a pie de muro. Pero el arenal tiene dos caras. En un extremo, cemento y cabinas; en el otro, la ría del <strong>Iñurritza</strong>, un campo de golf y los restos de un sistema dunar que guarda plantas que no crecen en ningún otro punto de la península.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'El perfil oficial de aguas de baño del <strong>Gobierno Vasco</strong> (revisión 2023) la describe así: arena fina, <strong>orientación norte</strong>, <strong>2.500 metros de longitud</strong>, <strong>80 metros de anchura media</strong> y unos <strong>200.000 m²</strong> de superficie, entre la punta Ailla al oeste y la regata Iñurritza (San Pelaio) al este. La Diputación de Gipuzkoa añade en su ficha dos palabras que conviene leer antes de bajar: <strong>«playa ventosa, fuerte oleaje»</strong>. Hay cabinas con duchas de agua caliente, baño asistido, zona nudista y un área reservada a deportes acuáticos.' },
+      { t: 'p', html: 'La calidad del agua no es el problema. La Dirección de Salud Pública del Gobierno Vasco calificó como <strong>«excelente»</strong> todos sus puntos de muestreo en cada temporada de 2016 a 2022, y la Diputación mantiene esa calificación en sus tres zonas (Iñurritza, Golf y Malecón). El mismo informe matiza que la nota «puntualmente se ha visto comprometida» y sitúa el riesgo de contaminación de corta duración en <strong>bajo</strong>: tras lluvias fuertes, la regata puede multiplicar su caudal. La playa tiene además certificación ISO 14001 y sistema EMAS desde mayo de 2004.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>, y aquí sí hay cifras incómodas. La marea en Zarautz es semidiurna, con una amplitud astronómica máxima de <strong>unos 4,80 metros</strong>. La pendiente del tramo oeste es tan suave que, según el perfil, en pleamar ese sector <strong>queda habitualmente inundado</strong>; en el centro y el este sobrevive una franja estrecha, y con temporales fuertes del noroeste la playa entera desaparece bajo el agua. Lo segundo es peor: la estación de videometría que el Ayuntamiento tiene instalada desde 2010 señala como zonas de especial peligro <strong>el centro de la playa</strong>, «zona concurrida en la que existen sistemas de corrientes de retorno intensos y marcados de manera habitual», y el extremo este. Es decir: la corriente fuerte coincide con el tramo donde más gente se baña.' },
+      { t: 'p', html: 'Y una tercera pega, de este mismo año. En una entrevista publicada en <em>Noticias de Gipuzkoa</em> el 28 de agosto de 2026, un instructor de surf con ocho temporadas en esta playa contaba que en primavera, con olas y corrientes fuertes desde Semana Santa y sin socorristas todavía (entran en junio), hubo «bastantes rescates», hasta el punto de que jóvenes del pueblo se organizaron como voluntarios con <em>walkie-talkies</em> para avisar de dónde estaban las corrientes. En verano, las <strong>carabelas portuguesas</strong> obligaron a parar clases los días en que entraba viento.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> Con la marea bajando o en bajamar, cuando aparece el arenal completo y la playa respira. En temporada, dentro del horario de vigilancia (la Diputación indica de 10:00 a 20:00) y entre banderas: la de Zarautz es una playa de banderas que cambian a lo largo del día, y el amarillo y el rojo no son decoración.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> En pleamar y en el tramo oeste, donde no queda arena para la toalla. Con mar de fondo del noroeste, que es cuando el Cantábrico entra de lleno en una playa abierta al norte. Y fuera de temporada, sin vigilancia, si no se sabe leer una corriente de retorno: ese canal de agua más oscura y lisa entre dos zonas de rompiente es, aquí, lo que hay que evitar.' },
+      { t: 'p', html: '<strong>El truco</strong>. Consultar la tabla de mareas antes que la previsión del tiempo: la misma playa puede ofrecer 80 metros de arena o casi nada según la hora. Y si se va a alquilar una tabla por primera vez, preguntar en cualquiera de las escuelas del malecón por dónde tira la corriente ese día; es gratis y es exactamente lo que piden los instructores.' },
+      { t: 'p', html: '<strong>El viento y la alternativa</strong>. Los días de viento son también los de las carabelas, como recuerdan los instructores. Quien busque agua más tranquila puede caminar hacia el extremo este, más resguardado del oleaje según el propio perfil oficial por los bajos de arena y las puntas rocosas, o acercarse a las playas de Getaria, a pocos kilómetros al oeste por la costa.' },
+      { t: 'ul', items: [
+        'Longitud: 2.500 m; anchura media: 80 m; arena fina; orientación norte (perfil de aguas de baño del Gobierno Vasco, 2023).',
+        'Calidad del agua: «excelente» en todas las temporadas de 2016 a 2022; riesgo de contaminación de corta duración bajo.',
+        'Marea semidiurna con amplitud máxima de unos 4,8 m; el tramo oeste se inunda habitualmente en pleamar.',
+        'Zonas de especial peligro según la videometría municipal: el centro (corrientes de retorno intensas y habituales) y el este.',
+        'Biotopo protegido de Iñurritza (Decreto 40/1997) y ZEC ES2120009; parte de las dunas está ocupada por un campo de golf.',
+        'Vigilancia en temporada de 10:00 a 20:00 según la Diputación de Gipuzkoa; perros prohibidos durante la temporada de baño.',
+      ] },
+      { t: 'p', html: 'Las dunas merecen el paseo aunque no se piense en bañarse. El perfil oficial las considera el enclave más valioso del País Vasco para la flora de arenales costeros: aquí viven las únicas poblaciones conocidas en Euskadi de especies como <em>Medicago marina</em> o <em>Alyssum loiseleurii</em>, y la de <em>Galium arenarium</em>, un endemismo de las costas vascas y de Aquitania, es la única conocida en la península ibérica. Todo eso convive con los <em>greens</em> de un campo de golf que, reconoce el mismo informe, modificó en su día la forma y la vegetación del campo de dunas.' },
+      { t: 'quote', text: 'Dirán que Zarautz es la meca del surf en Gipuzkoa. Los surfistas que llevan años en ella hablan de otra cosa: de mirar la marea, de preguntar por la corriente y de sacar del agua, cada temporada, a quien no lo hizo.' },
+      { t: 'p', html: 'A última hora de la tarde la marea vuelve a subir y el agua se come primero el tramo oeste, luego la mitad de la playa, hasta dejar a la gente apretada contra el muro del malecón. Las escuelas recogen las tablas, los socorristas bajan las banderas y, en el extremo este, el viento sigue peinando las dunas como lleva haciéndolo desde mucho antes de que alguien pensara en un campo de golf.' },
+    ],
+    faq: [
+      { q: '¿Es peligroso bañarse en la playa de Zarautz?', a: 'Tiene oleaje fuerte y corrientes de retorno. El perfil oficial del Gobierno Vasco señala como zonas de especial peligro el centro de la playa, con corrientes de retorno intensas y habituales, y el extremo este. Lo prudente es bañarse en temporada, con socorrismo y respetando las banderas.' },
+      { q: '¿Cómo afecta la marea a la playa de Zarautz?', a: 'Mucho. La amplitud máxima de la marea ronda los 4,8 metros y el tramo oeste, de pendiente muy suave, suele quedar inundado en pleamar; en el centro y el este queda una franja estrecha. Conviene ir con la marea bajando o en bajamar.' },
+      { q: '¿Cómo es la calidad del agua en Zarautz?', a: 'El Gobierno Vasco la calificó como excelente en todas las temporadas de 2016 a 2022 y la Diputación de Gipuzkoa mantiene esa calificación en sus tres zonas. El riesgo de contaminación puntual, por ejemplo tras lluvias fuertes, se considera bajo.' },
+    ],
+    en: {
+      title: 'Zarautz, Gipuzkoa: 2.5 km of sand, 4.8 m tides and rip currents where it’s busiest',
+      excerpt:
+        'Zarautz is the longest beach in Gipuzkoa: 2,500 metres of fine, north-facing sand with water rated “excellent” by the Basque Government. The small print: at high tide the western stretch goes under, and the strongest rip currents form in the middle, exactly where the crowd gathers.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'At eight in the morning the Zarautz seafront still smells of salt and coffee. Below it the sand runs two and a half kilometres east until it disappears into the dunes, and the swell arrives in tidy lines, one after another, with a regularity that explains why, outside summer, you see more boards than towels here. The first surfers are already out, black dots of neoprene sitting in the foam, waiting.' },
+        { t: 'p', html: 'It is the longest beach in <strong>Gipuzkoa</strong> and an urban beach in the full sense: a whole town leaning over a strand, with a promenade, surf schools and bars along the sea wall. But the beach has two faces. At one end, concrete and changing cabins; at the other, the <strong>Iñurritza</strong> estuary, a golf course and what remains of a dune system holding plants that grow nowhere else on the Iberian peninsula.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The <strong>Basque Government</strong>’s official bathing-water profile (2023 revision) describes it as fine sand, <strong>north-facing</strong>, <strong>2,500 metres long</strong>, <strong>80 metres wide on average</strong> and around <strong>200,000 m²</strong> in area, between Punta Ailla to the west and the Iñurritza (San Pelaio) stream to the east. Gipuzkoa’s provincial council adds three words worth reading before you go down: <strong>“windy beach, heavy surf”</strong>. There are cabins with hot showers, assisted bathing, a naturist area and a zone set aside for water sports.' },
+        { t: 'p', html: 'Water quality is not the issue. The Basque public health department rated every sampling point <strong>“excellent”</strong> in each season from 2016 to 2022, and the provincial council keeps that rating across its three zones (Iñurritza, Golf and Malecón). The same report notes the rating has “occasionally been compromised” and puts the risk of short-term pollution at <strong>low</strong>: after heavy rain the stream can multiply its flow. The beach also holds ISO 14001 certification and has run an EMAS environmental system since May 2004.' },
+        { t: 'p', html: 'Now the <strong>catch</strong>, and here the numbers are uncomfortable. Tides at Zarautz are semi-diurnal, with a maximum astronomical range of <strong>about 4.80 metres</strong>. The western stretch slopes so gently that, according to the profile, it is <strong>usually flooded at high tide</strong>; in the centre and east a narrow strip survives, and in heavy north-westerly storms the whole beach goes under. Worse, the video-monitoring station the town council has run since 2010 identifies <strong>the middle of the beach</strong> as a particular danger zone, a “busy area with strong, well-defined rip current systems as a matter of course”, along with the eastern end. In other words: the strongest currents sit where most people swim.' },
+        { t: 'p', html: 'And a third drawback, from this year. In an interview published in <em>Noticias de Gipuzkoa</em> on 28 August 2026, a surf instructor with eight seasons on this beach said that in spring, with big waves and strong currents from Easter onwards and no lifeguards yet (they start in June), there were “quite a few rescues”, to the point that young locals organised themselves as volunteers with walkie-talkies to warn people where the currents were. In summer, <strong>Portuguese man o’ war</strong> forced the schools to stop lessons on windy days.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> On a falling or low tide, when the whole strand is exposed and the beach has room to breathe. In season, within lifeguard hours (the provincial council gives 10:00 to 20:00) and between the flags: at Zarautz the flags change through the day, and yellow and red are not decoration.' },
+        { t: 'p', html: '<strong>When not to?</strong> At high tide on the western stretch, where there is no sand left for a towel. In a north-westerly groundswell, when the Bay of Biscay comes straight into a north-facing beach. And out of season, with no lifeguards, if you cannot read a rip: that channel of darker, flatter water between two breaking zones is, here, the thing to stay out of.' },
+        { t: 'p', html: '<strong>The trick</strong>. Check the tide table before the weather forecast: the same beach can offer 80 metres of sand or almost none depending on the hour. And if you are hiring a board for the first time, ask at any of the schools on the seafront which way the current is pulling that day; it costs nothing and it is exactly what the instructors ask for.' },
+        { t: 'p', html: '<strong>The wind and the alternative</strong>. Windy days are also man o’ war days, as the instructors point out. For calmer water, walk towards the eastern end, which the official profile says is more sheltered thanks to sandbanks and rocky points, or try the beaches of Getaria, a few kilometres west along the coast.' },
+        { t: 'ul', items: [
+          'Length: 2,500 m; average width: 80 m; fine sand; north-facing (Basque Government bathing-water profile, 2023).',
+          'Water quality: “excellent” every season from 2016 to 2022; low risk of short-term pollution.',
+          'Semi-diurnal tide with a maximum range of about 4.8 m; the western stretch usually floods at high tide.',
+          'Danger zones per the council’s video monitoring: the centre (strong, regular rip currents) and the east.',
+          'Iñurritza protected biotope (Decree 40/1997) and SAC ES2120009; part of the dunes is taken up by a golf course.',
+          'Lifeguards in season from 10:00 to 20:00 per Gipuzkoa council; dogs banned during the bathing season.',
+        ] },
+        { t: 'p', html: 'The dunes are worth the walk even if you have no plans to swim. The official profile calls them the most valuable site in the Basque Country for coastal sand flora: they hold the only known Basque populations of species such as <em>Medicago marina</em> and <em>Alyssum loiseleurii</em>, and the stand of <em>Galium arenarium</em>, endemic to the Basque and Aquitaine coasts, is the only one known on the Iberian peninsula. All of it lives alongside the greens of a golf course which, the same report admits, altered the shape and vegetation of the dune field when it was built.' },
+        { t: 'quote', text: 'They will tell you Zarautz is Gipuzkoa’s surfing mecca. The surfers who have spent years on it talk about something else: watching the tide, asking about the current, and pulling out of the water, every season, the people who didn’t.' },
+        { t: 'p', html: 'Late in the afternoon the tide comes back in and the water swallows the western stretch first, then half the beach, until people are pressed up against the sea wall. The schools stack their boards, the lifeguards take down the flags and, at the eastern end, the wind keeps combing the dunes as it did long before anyone thought of a golf course.' },
+      ],
+      faq: [
+        { q: 'Is it dangerous to swim at Zarautz?', a: 'It has heavy surf and rip currents. The Basque Government’s official profile flags the middle of the beach, with strong and regular rips, and the eastern end as particular danger zones. The sensible approach is to swim in season, with lifeguards on duty, and to respect the flags.' },
+        { q: 'How does the tide affect Zarautz beach?', a: 'A great deal. The maximum tidal range is around 4.8 metres and the very gently sloping western stretch is usually flooded at high tide; in the centre and east a narrow strip remains. Go on a falling or low tide.' },
+        { q: 'What is the water quality like at Zarautz?', a: 'The Basque Government rated it excellent in every season from 2016 to 2022, and Gipuzkoa’s provincial council keeps that rating across all three zones. The risk of short-term pollution, for example after heavy rain, is considered low.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Papagayo, Yaiza (Lanzarote) (voz bicéfala) ─────
   {
     slug: 'playa-papagayo-yaiza-lanzarote-peaje-pista-tierra-120-metros',
