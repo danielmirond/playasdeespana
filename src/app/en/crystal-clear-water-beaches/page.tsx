@@ -1,6 +1,7 @@
 // EN mirror of /playas-aguas-cristalinas. Same scoring engine (toponyms +
 // turbidity), translated prose. TopBeachCardsConHero with locale="en".
 import type { Metadata } from 'next'
+import { robotsMeta } from '@/lib/robots-meta'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   description: 'Discover Spain’s clearest, most transparent beaches: the Canaries, Balearics, Almería and Menorca. Rankings by water visibility, EEA quality and Blue Flag.',
   alternates: { canonical: '/en/crystal-clear-water-beaches', languages: { es: '/playas-aguas-cristalinas', en: '/en/crystal-clear-water-beaches', 'x-default': '/playas-aguas-cristalinas' } },
   openGraph: { title: 'Crystal-clear water beaches in Spain', description: 'Spain’s most transparent beaches: ranked by water visibility, EEA quality and Blue Flag.', url: `${BASE}/en/crystal-clear-water-beaches`, type: 'article', images: [{ url: '/api/og?playa=Crystal-clear%20water%20beaches%20in%20Spain', width: 1200, height: 630 }] },
-  robots: { index: true, follow: true },
+  robots: robotsMeta(),
 }
 
 function scoreAguasCristalinas(p: Playa, turbidez: { visibilidad_m: number } | null): number {

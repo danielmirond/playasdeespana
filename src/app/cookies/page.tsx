@@ -1,5 +1,6 @@
 // src/app/cookies/page.tsx. Política de cookies conforme LSSI-CE y RGPD
 import type { Metadata } from 'next'
+import { robotsMeta } from '@/lib/robots-meta'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Política de cookies | Playas de España',
   description: 'Información sobre las cookies que utiliza playas-espana.com: tipos, finalidad, duración y cómo gestionarlas.',
   alternates: { canonical: '/cookies' },
-  robots: { index: true, follow: true },
+  robots: robotsMeta(),
 }
 
 export default function CookiesPage() {

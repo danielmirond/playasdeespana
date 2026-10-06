@@ -79,6 +79,90 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Sonabia, Liendo (Cantabria) (voz bicéfala) ─────
+  {
+    slug: 'playa-de-sonabia-liendo-cantabria-buitres-candina-150-metros-aparcamiento',
+    category: 'curiosidades',
+    title: 'Buitres sobre la arena de Sonabia (Liendo): 150 metros y menos de 50 plazas para aparcar',
+    excerpt:
+      'Sobre Sonabia vuela la única colonia de buitres leonados de España que cría en un acantilado marino, la del monte Candina. La pega: la playa mide unos 150 metros, no tiene socorrista, duchas ni bar, el aparcamiento no llega a 50 plazas y el oleaje abierto trae corrientes.',
+    heroAlt:
+      'Playa de Sonabia en Liendo, Cantabria: una cala de arena dorada encajada entre paredes de roca caliza y prados, con el monte Candina detrás y el mar Cantábrico abierto delante',
+    heroQuery: 'sonabia,liendo,cantabria,beach,candina',
+    gygQuery: 'Castro Urdiales, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-06T08:19:49Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/cantabria', label: 'Playas de Cantabria' },
+      { href: '/playas-secretas', label: 'Playas poco conocidas' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+    ],
+    body: [
+      { t: 'p', html: 'Lo primero que se ve no está en el agua sino arriba. Una sombra ancha pasa sobre la toalla, luego otra, y al levantar la vista aparecen planeando a media ladera, sin batir las alas, aprovechando el aire que el mar empuja contra la pared del monte. Son buitres leonados, más de dos metros de envergadura, y vuelan sobre una cala de arena dorada donde la gente se baña desnuda o vestida sin que nadie mire a nadie.' },
+      { t: 'p', html: 'Sonabia es eso: un arenal pequeño en la costa oriental de Cantabria, encajado entre roca caliza y prados, a los pies del <strong>monte Candina</strong>. En los mapas oficiales también aparece como <strong>Valdearenas</strong>. Casi todo lo que la hace distinta —la colonia de aves, los arcos de piedra de lo alto, la falta absoluta de servicios— es también lo que exige ir con algo de cabeza.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Según la <strong>Guía de Playas del Ministerio para la Transición Ecológica (MITECO)</strong>, la playa pertenece al municipio de <strong>Liendo</strong>, mide unos <strong>150 metros de largo por 120 de ancho</strong>, es de arena, está catalogada como aislada y dentro de un espacio protegido, y se llega <strong>a pie</strong> desde la N-634. La ficha la marca como <strong>nudista</strong> y es coherente con lo que se ve allí: convivencia tranquila de bañistas con y sin ropa, como recoge también la guía turística de Cantabria.' },
+      { t: 'p', html: 'Lo de los buitres no es folclore. El monte Candina alberga la mayor colonia de <strong>buitre leonado</strong> de la costa cantábrica y, según la prensa regional y las asociaciones naturalistas de la zona, es el único punto de España donde esta especie cría en un <strong>acantilado marino</strong>, la colonia más cercana al mar conocida en Europa. Desde 2011 el área figura en el inventario de Áreas Importantes para la Conservación de las Aves (IBA) de SEO/BirdLife con el nombre de <strong>Montaña Oriental Costera</strong>. En lo alto, a casi 500 metros, están los <strong>Ojos del Diablo</strong> o arcos de Llanegro, dos grandes ventanas naturales en la roca que miran hacia Santoña.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>, que es largo. La misma ficha del MITECO dice: <strong>sin socorrismo</strong>, sin duchas, sin aseos, sin papeleras y sin establecimientos. El aparcamiento es no vigilado y de <strong>menos de 50 plazas</strong>, y en julio y agosto se llena pronto. La playa da al Cantábrico abierto, con oleaje moderado a fuerte según el día, y las guías locales avisan de <strong>corrientes</strong> en cuanto uno se aleja de la orilla. Los <strong>perros no están permitidos</strong> según la ficha oficial; ya en 2013 una recogida de firmas pidió que se levantara la prohibición, sin éxito visible. No damos una calificación concreta de calidad de agua porque no hemos podido contrastar el dato del último año para este punto.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En junio, septiembre y primeros de octubre, entre semana y con la marea baja, cuando la arena está ancha, el aparcamiento tiene hueco y los buitres siguen ahí, porque no se van con los veraneantes. Para observarlos, las horas centrales de días soleados: las térmicas y el viento contra la ladera los ponen a planear.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Un sábado de agosto a mediodía, si no se quiere dar vueltas por la carretera buscando sitio. Tampoco con mar de fondo o bandera roja en las playas vecinas: sin socorrista, aquí no hay nadie que avise. Y no es la playa para quien busca chiringuito, sombra de sombrilla alquilada o ir con el perro.' },
+      { t: 'p', html: '<strong>El truco</strong>. Mirar la tabla de mareas antes de salir: en el Cantábrico la marea cambia mucho la superficie de arena seca de una cala tan corta. Llevar agua y comida, porque no hay nada abajo. Y si apetece subir a los Ojos del Diablo, hacerlo con tiempo despejado: la ruta circular habitual desde Oriñón ronda los <strong>9 km y 4-5 horas</strong>, con tramos de trepada cerca del borde, y la niebla puede tapar el camino en minutos.' },
+      { t: 'p', html: '<strong>El viento y la alternativa</strong>. Con viento del norte o del noroeste la ola entra de lleno; con sur, la cala queda más resguardada. Si se busca arena con más metros y algo más de servicio, al lado está Oriñón, en la desembocadura del Agüera. Y hacia el oeste, pasado Laredo, <a href="/magazine/playa-de-berria-santona-cantabria-penal-dueso-corrientes">Berria (Santoña)</a> ofrece dos kilómetros de arena, con sus propias corrientes.' },
+      { t: 'ul', items: [
+        'Municipio: Liendo (Cantabria). Nombre alternativo: Valdearenas.',
+        'Unos 150 × 120 m de arena; acceso a pie desde la N-634 (Guía de Playas, MITECO).',
+        'Nudista; sin socorrismo, duchas, aseos ni establecimientos; perros no permitidos (MITECO).',
+        'Aparcamiento no vigilado de menos de 50 plazas (MITECO).',
+        'Monte Candina: colonia de buitre leonado en acantilado marino; IBA «Montaña Oriental Costera» desde 2011.',
+        'Ojos del Diablo (arcos de Llanegro): ruta circular desde Oriñón de unos 9 km y 4-5 h.',
+      ] },
+      { t: 'quote', text: 'La llamarán rincón salvaje. Salvaje de verdad: aquí lo que vigila la playa desde arriba no es un socorrista, es una colonia de buitres.' },
+      { t: 'p', html: 'A última hora de la tarde, cuando la sombra del Candina empieza a cubrir la arena, los bañistas recogen y suben por el sendero entre los prados. Arriba, en la pared, los buitres se van posando en las repisas uno a uno, como si también ellos dieran el día por terminado. Abajo queda la cala vacía, y el ruido del mar sin nadie que lo escuche.' },
+    ],
+    faq: [
+      { q: '¿Es nudista la playa de Sonabia?', a: 'Sí. La Guía de Playas del MITECO la cataloga como nudista y en la práctica conviven bañistas con y sin ropa sin problemas.' },
+      { q: '¿Hay socorrista o servicios en Sonabia?', a: 'No. Según la ficha oficial no hay socorrismo, duchas, aseos ni establecimientos. Al estar abierta al Cantábrico puede haber corrientes, así que conviene bañarse cerca de la orilla y no entrar con mar de fondo.' },
+      { q: '¿Dónde se ven los buitres de Sonabia?', a: 'Sobre el monte Candina, que se levanta junto a la playa. La colonia de buitre leonado cría en el acantilado marino y se les ve planear sobre la ladera y la cala, sobre todo en las horas centrales de días soleados.' },
+    ],
+    en: {
+      title: 'Sonabia (Cantabria): vultures overhead, 150 m of sand and under 50 parking spaces',
+      excerpt:
+        'Above Sonabia flies the only griffon vulture colony in Spain that nests on a sea cliff, on Monte Candina. The catch: the beach is about 150 metres long, has no lifeguard, showers or bar, parking runs to fewer than 50 spaces, and the open swell brings currents.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'The first thing you notice is not in the water but overhead. A broad shadow slides across your towel, then another, and when you look up there they are, gliding halfway up the slope without a wingbeat, riding the air the sea pushes against the mountain. Griffon vultures, more than two metres from wingtip to wingtip, circling above a cove of golden sand where people swim with or without clothes and nobody looks twice.' },
+        { t: 'p', html: 'That is Sonabia: a small strip of sand on Cantabria’s eastern coast, wedged between limestone and pasture at the foot of <strong>Monte Candina</strong>. Official maps also call it <strong>Valdearenas</strong>. Almost everything that sets it apart — the birds, the stone arches up top, the total lack of facilities — is also what means you need to arrive with your wits about you.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'According to the <strong>Spanish environment ministry’s beach guide (MITECO)</strong>, the beach lies in the municipality of <strong>Liendo</strong>, measures about <strong>150 metres long by 120 wide</strong>, is sandy, is classed as isolated and within a protected area, and is reached <strong>on foot</strong> from the N-634. The listing marks it as <strong>naturist</strong>, which matches what you find there: a relaxed mix of clothed and unclothed bathers, as Cantabria’s tourist guide also notes.' },
+        { t: 'p', html: 'The vultures are not folklore. Monte Candina holds the largest <strong>griffon vulture</strong> colony on the Cantabrian coast and, according to the regional press and local naturalist groups, it is the only place in Spain where the species breeds on a <strong>sea cliff</strong> — the colony closest to the sea known in Europe. Since 2011 the area has been listed in SEO/BirdLife’s inventory of Important Bird Areas (IBA) as <strong>Montaña Oriental Costera</strong>. Up top, at nearly 500 metres, are the <strong>Ojos del Diablo</strong> (Devil’s Eyes), or Llanegro arches: two large natural windows in the rock looking out towards Santoña.' },
+        { t: 'p', html: 'Now the <strong>drawback</strong>, and it is a long one. The same MITECO listing says: <strong>no lifeguard</strong>, no showers, no toilets, no bins and no businesses. Parking is unattended with <strong>fewer than 50 spaces</strong>, and in July and August it fills early. The beach faces the open Cantabrian Sea, with moderate to heavy swell depending on the day, and local guides warn of <strong>currents</strong> once you move away from the shore. <strong>Dogs are not allowed</strong> according to the official listing; a 2013 petition asked for the ban to be lifted, with no visible result. We are not giving a water-quality rating because we could not confirm the latest figure for this sampling point.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> June, September and early October, midweek and at low tide, when the sand is wide, there is room to park and the vultures are still there — they do not leave with the holidaymakers. For birdwatching, the middle of a sunny day is best: thermals and the onshore breeze against the slope keep them soaring.' },
+        { t: 'p', html: '<strong>When not to?</strong> A Saturday in August at midday, unless you enjoy circling the road for a space. Nor with a heavy groundswell or red flags on neighbouring beaches: with no lifeguard, there is nobody here to warn you. And it is not the beach for anyone after a bar, a rented parasol or a day out with the dog.' },
+        { t: 'p', html: '<strong>The trick</strong>. Check the tide table before setting off: on the Cantabrian coast the tide makes a big difference to how much dry sand a cove this short has. Bring water and food, because there is nothing below. And if you fancy climbing to the Ojos del Diablo, pick a clear day: the usual circular route from Oriñón is around <strong>9 km and 4-5 hours</strong>, with scrambling near the edge, and fog can swallow the path in minutes.' },
+        { t: 'p', html: '<strong>The wind and the alternative</strong>. With a northerly or north-westerly the swell comes straight in; with a southerly the cove is more sheltered. For more sand and a few more facilities, Oriñón is next door at the mouth of the Agüera. And further west, past Laredo, <a href="/en/magazine/playa-de-berria-santona-cantabria-penal-dueso-corrientes">Berria (Santoña)</a> offers two kilometres of sand, with currents of its own.' },
+        { t: 'ul', items: [
+          'Municipality: Liendo (Cantabria). Also known as Valdearenas.',
+          'About 150 × 120 m of sand; on-foot access from the N-634 (MITECO beach guide).',
+          'Naturist; no lifeguard, showers, toilets or businesses; no dogs (MITECO).',
+          'Unattended car park with fewer than 50 spaces (MITECO).',
+          'Monte Candina: griffon vulture colony on a sea cliff; IBA “Montaña Oriental Costera” since 2011.',
+          'Ojos del Diablo (Llanegro arches): circular route from Oriñón of about 9 km and 4-5 hours.',
+        ] },
+        { t: 'quote', text: 'They will call it a wild cove. Wild indeed: what watches over this beach from above is not a lifeguard but a colony of vultures.' },
+        { t: 'p', html: 'Late in the afternoon, as Candina’s shadow starts to cover the sand, bathers pack up and climb the path through the fields. Up on the rock face the vultures settle on their ledges one by one, as if they too were calling it a day. Below, the cove is left empty, with the sound of the sea and no one to hear it.' },
+      ],
+      faq: [
+        { q: 'Is Sonabia a naturist beach?', a: 'Yes. MITECO’s beach guide lists it as naturist, and in practice clothed and unclothed bathers share it without fuss.' },
+        { q: 'Are there lifeguards or facilities at Sonabia?', a: 'No. According to the official listing there is no lifeguard, no showers, no toilets and no businesses. It is open to the Cantabrian Sea and can have currents, so stay close to the shore and keep out when there is a heavy swell.' },
+        { q: 'Where can you see the Sonabia vultures?', a: 'On Monte Candina, which rises beside the beach. The griffon vulture colony breeds on the sea cliff, and the birds can be seen soaring over the slope and the cove, especially in the middle of sunny days.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Matalascañas, Almonte (Huelva) (voz bicéfala) ─────
   {
     slug: 'playa-de-matalascanas-almonte-huelva-torre-higuera-1755-espigones',

@@ -5,6 +5,7 @@ import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
+import { robotsMeta } from '@/lib/robots-meta'
 import { getPrediccionAemet } from '@/lib/aemet'
 import { getBanderaCat, tieneBanderaCat } from '@/lib/banderas-cat'
 import { getBanderaCan, tieneBanderaCan } from '@/lib/banderas-can'
@@ -180,9 +181,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // compartir.
     title: { absolute: title },
     description,
-    robots: indexable
-      ? { index: true, follow: true }
-      : { index: false, follow: true },
+    robots: robotsMeta(indexable),
     openGraph: {
       title,
       description,

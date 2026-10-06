@@ -6,6 +6,7 @@
 // SEO: FAQPage schema + BreadcrumbList + TouristInformationCenter. H1
 // editorial con italic em. Contenido original explicando el método (EEAT).
 import type { Metadata } from 'next'
+import { robotsMeta } from '@/lib/robots-meta'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas, getComunidades } from '@/lib/playas'
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [{ url: '/api/og?playa=Playas%20cerca%20de%20m%C3%AD', width: 1200, height: 630 }],
   },
-  robots: { index: true, follow: true },
+  robots: robotsMeta(),
 }
 
 const COSTERAS = [

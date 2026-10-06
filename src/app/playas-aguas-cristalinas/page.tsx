@@ -4,6 +4,7 @@
 // + Bandera Azul. Página hub que lista las mejores playas por
 // transparencia del agua, con enlaces a comunidades/provincias.
 import type { Metadata } from 'next'
+import { robotsMeta } from '@/lib/robots-meta'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     type: 'article',
     images: [{ url: '/api/og?playa=Playas%20con%20aguas%20cristalinas%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
-  robots: { index: true, follow: true },
+  robots: robotsMeta(),
 }
 
 // Clasifica una playa por su "puntuación de aguas cristalinas" combinando:

@@ -1,5 +1,6 @@
 // src/app/privacidad/page.tsx. Política de privacidad LOPDGDD + RGPD
 import type { Metadata } from 'next'
+import { robotsMeta } from '@/lib/robots-meta'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Política de privacidad | Playas de España',
   description: 'Información sobre el tratamiento de datos personales en playas-espana.com conforme al RGPD y la LOPDGDD.',
   alternates: { canonical: '/privacidad' },
-  robots: { index: true, follow: true },
+  robots: robotsMeta(),
 }
 
 export default function PrivacidadPage() {
