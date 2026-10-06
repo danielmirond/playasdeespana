@@ -18,6 +18,20 @@
 import { MapPin, Waves, Megaphone } from '@phosphor-icons/react/dist/ssr'
 import styles from './PildoraContextual.module.css'
 
+// LA MITAD IZQUIERDA ENSEÑA A DÓNDE VAS, NO SOLO DÓNDE ESTÁS (oct-2026).
+// Antes decía «07 / 18 · Restaurantes» y el índice estaba detrás de un
+// toque. La alternativa evidente —una tira horizontal con todas las
+// secciones, como la barra de municipio— no sale: las 18 etiquetas de la
+// ficha suman 2.078 px y en un móvil de 375 px, quitando la acción de la
+// derecha, caben dos. O sea que la tira cuesta scroll horizontal, pelea
+// con el gesto de «atrás» del borde izquierdo y el autocentrado del chip
+// activo se pisa con el dedo del usuario, todo para enseñar lo mismo que
+// cabe sin scroll. Así que el ancho se gasta en la sección SIGUIENTE, que
+// es el enlace que de verdad falta: el «sigue leyendo» de la ficha.
+//
+// El glifo abre el índice completo; el resto de la izquierda es un enlace
+// de verdad a la siguiente sección. Tienen que ser dos elementos: un <a>
+// dentro de un <summary> no se puede pulsar, lo intercepta el summary.
 interface Seccion { id: string; t: string }
 
 const SECCIONES: Record<'es' | 'en', Seccion[]> = {
@@ -78,17 +92,13 @@ export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es'
 
   return (
     <div className={styles.wrap} id="pildora" data-lat={lat} data-lng={lng}>
+      {/* Cuánto llevas de ficha. Dos píxeles en el borde de arriba: la
+          sensación de avance sin gastar ancho. */}
+      <span className={styles.progreso} data-pildora-progreso aria-hidden="true" />
+
       <details className={styles.panel} id="pildora-panel">
         <summary className={styles.pillLeft} aria-label={es ? 'Índice de secciones' : 'Section index'}>
           <span className={styles.glifo} aria-hidden="true">☰</span>
-          <span className={styles.indiceTxt}>
-            <span className={styles.contador} data-pildora-contador>
-              01 / {secciones.length}
-            </span>
-            <span className={styles.seccion} data-pildora-seccion>
-              {secciones[0].t}
-            </span>
-          </span>
         </summary>
 
         {/* Tocar fuera cierra: el velo es un <label> del propio details
@@ -106,6 +116,20 @@ export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es'
           ))}
         </nav>
       </details>
+
+      {/* Dónde estás y, debajo, a dónde lleva el dedo. El script reescribe
+          las dos etiquetas y el destino en cada frame de scroll. */}
+      <a className={styles.avance} href={`#${secciones[1]?.id ?? secciones[0].id}`} data-pildora-siguiente-href>
+        <span className={styles.contador}>
+          <span data-pildora-contador>01 / {secciones.length}</span>
+          {' · '}
+          <span data-pildora-seccion>{secciones[0].t}</span>
+        </span>
+        <span className={styles.siguiente}>
+          <span className={styles.flecha} aria-hidden="true">↓</span>
+          <span className={styles.siguienteTxt} data-pildora-siguiente>{secciones[1]?.t ?? ''}</span>
+        </span>
+      </a>
 
       {/* Aviso de presencia. Se pinta siempre y el CSS lo muestra solo
           cuando body[data-enplaya='si']. Quien está en la arena es el

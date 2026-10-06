@@ -38,12 +38,24 @@
      recortaría) contra la píldora en vez de contra el viewport. */
   .wrap:has(> .panel[open]) { transform: none; }
 
-  /* ── Izquierda: índice + sección actual (es el <summary>) ─────── */
-  .panel { flex: 1; min-width: 0; display: flex; }
+  /* ── Progreso: dos píxeles en el borde superior de la píldora ─── */
+  .progreso {
+    position: absolute; left: 0; top: 0; height: 2px;
+    width: 100%;
+    transform: scaleX(var(--pildora-progreso, 0));
+    transform-origin: left center;
+    background: var(--mar-700, var(--ink));
+    border-radius: var(--r-pill) var(--r-pill) 0 0;
+    transition: transform 180ms linear;
+  }
+  @media (prefers-reduced-motion: reduce) { .progreso { transition: none; } }
+
+  /* ── Izquierda: solo el glifo, que abre el índice (es el <summary>) ─ */
+  .panel { min-width: 0; display: flex; flex-shrink: 0; }
   .pillLeft {
-    display: flex; align-items: center; gap: .5rem;
-    flex: 1; min-width: 0;
-    padding: 0 .9rem;
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; min-width: 0;
+    padding: 0;
     border-radius: var(--r-pill) 0 0 var(--r-pill);
     color: var(--ink);
     cursor: pointer;
@@ -54,19 +66,37 @@
   .pillLeft::marker { content: ''; }
   .pillLeft:active { background: color-mix(in srgb, var(--ink) 5%, transparent); }
 
-  .glifo { font-size: .8rem; color: var(--muted); flex-shrink: 0; }
-  .indiceTxt { min-width: 0; }
+  .glifo { font-size: .95rem; color: var(--muted); flex-shrink: 0; }
+
+  /* ── Centro: dónde estás, y debajo a dónde va el dedo ─────────── */
+  .avance {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: .1rem;
+    flex: 1; min-width: 0;
+    padding: 0 .2rem 0 .1rem;
+    color: var(--ink); text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .avance:active { opacity: .7; }
   .contador {
     display: block;
     font-family: var(--font-mono);
-    font-size: .5rem; letter-spacing: .08em;
+    font-size: .58rem; letter-spacing: .06em;
     color: var(--muted);
-  }
-  .seccion {
-    display: block;
-    font-size: .82rem; font-weight: 500;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
+  .siguiente {
+    display: flex; align-items: baseline; gap: .3rem;
+    min-width: 0;
+  }
+  .flecha { font-size: .7rem; color: var(--mar-700, var(--muted)); flex-shrink: 0; }
+  .siguienteTxt {
+    font-size: .84rem; font-weight: 600;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  /* En la última sección no hay siguiente: la línea se va y el contador
+     se queda solo, centrado. */
+  .avance[data-sin-siguiente] .siguiente { display: none; }
 
   /* ── Derecha: acción contextual ───────────────────────────────── */
   .accion {

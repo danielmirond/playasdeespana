@@ -62,10 +62,15 @@ momentos inolvidables · de postal`
 
 ## 6 · Ángulos quemados (evitar o subvertir)
 
-Listicle sin método · "la más bonita de…" · "el refugio de [famoso]" ·
-"ni X ni Y" · "según The Times, esta playa española…" · "la cala secreta"
-(que publican 20 medios). Si se usa un gancho de estos, hay que **darle la vuelta
-con un dato** ("la 'cala secreta' que ya no lo es: así de llena está a las 12h").
+Listicle sin método · "la más bonita de…" · "ni X ni Y" · "según The Times,
+esta playa española…" · "la cala secreta" (que publican 20 medios). Si se usa
+un gancho de estos, hay que **darle la vuelta con un dato** ("la 'cala secreta'
+que ya no lo es: así de llena está a las 12h").
+
+"El refugio de [famoso]" sale de esta lista desde oct-2026: los datos de Discover
+(§11) lo sitúan entre las piezas que más rinden. Se permite **solo** con las
+condiciones de §11 (persona real, vínculo con fuente publicada, y la playa sigue
+llevando su dato y su contra).
 
 ## 7 · Estructura bicéfala — DOS VOCES en el mismo texto (mín. 600 palabras)
 
@@ -128,9 +133,12 @@ Nada de ocultar; al revés, el dato concreto ES el gancho.
   - **Gancho delante, nombre pronto:** `Agua a 26°C y ni una sombra en Percheles
     (Mazarrón): pista de tierra hasta la arena`.
   El municipio/provincia entre paréntesis **acompaña** al nombre, no lo sustituye.
-- **Tope ~90 caracteres.** En el feed móvil se trunca con "…" y lo que se cae es el
-  final —justo donde va el CONTRA, el alma de la voz—. Dato **y** contra tienen que
-  caber en lo visible. Si no caben los dos, prioriza y recorta, no alargues.
+- **Zona visible ~90 caracteres; total hasta ~110.** En el feed móvil se trunca con
+  "…" y lo que se cae es el final —justo donde va el CONTRA, el alma de la voz—.
+  Nombre, dato **y** contra tienen que caber en los primeros ~90. Desde oct-2026 se
+  admite alargar hasta ~110 (el titular mediano de playa en Discover ronda los 116,
+  §11) solo para añadir contexto (distancia, municipio, quién); nunca para empujar
+  el contra más allá del carácter 90. Si no caben, prioriza y recorta.
 - **El dato/gancho, cuanto antes** (idealmente en los primeros ~40, junto al nombre):
   °C, distancia, marea, viento, "mejor playa 2014", aforo. El dato sustituye a la
   intriga.
@@ -167,8 +175,68 @@ Nada de ocultar; al revés, el dato concreto ES el gancho.
 Regla de oro Discover: **si quitas el dato y el titular sigue funcionando, es
 clickbait y lo borras.** El titular debe caerse sin su cifra.
 
+## 11 · Lo que rinde en Discover en playas (datos, verano 2026)
+
+Fuente: DiscoverSnoop, mercado ES, categoría 1285 *Beaches & Islands* + piezas con
+playa/cala/isla en otras categorías, jul-sep 2026 (603 piezas; 199 puras de la
+categoría). Score 0-100 relativo al n.º 1. Octubre es temporada baja: esto vale
+para planificar la próxima temporada. Página con el análisis:
+https://claude.ai/artifact/GJ69HCtRSFfgiz1RAwHaam
+
+| Patrón de titular | n | Score medio | Qué hacemos |
+|---|---|---|---|
+| Servicio / consejo / experto | 15 | **6,2** | Molde prioritario |
+| Lista con número | 6 | 5,6 | Sí, con método y cifra real |
+| Pueblo / escapada | 70 | 4,4 | Sí, con dato verificable |
+| Cercanía (a X min/km de) | 17 | 3,9 | Sí, como dato, no como gancho único |
+| Superlativo (la mejor / más bonita) | 37 | 3,9 | Nunca en seco |
+| Secreto / virgen / desconocida | 9 | 3,8 | Solo subvertido (§6) |
+| Comparación (parece el Caribe / tropical) | 29 | **3,2** | Sigue prohibido (§5): es el que menos rinde |
+
+Ojo con las muestras pequeñas: servicio (n=15) y lista (n=6) son señal, no ley.
+Pueblo/escapada (n=70) es el dato más sólido.
+
+**El hallazgo de fondo.** Las piezas que más rinden no son "las mejores playas de
+X": son **historia o personaje con la playa de fondo**, **servicio** y, a veces,
+**oportunidad viral** (vivir en una isla). El 35 % lleva cifra en el titular.
+
+### Moldes nuevos (todos con nombre, dato y contra)
+- **Servicio:** `Lo que hay que saber antes de bañarte en [playa]: [dato + contra]`
+  · `Cómo ir a [playa] sin [problema concreto]: [el truco con dato]`.
+  *Ej.: "Lo que hay que saber antes de bañarte en Sonabia: no hay socorrista y el
+  Cantábrico trae corrientes".*
+- **Historia / personaje:** la playa es el escenario y la persona el gancho.
+  Condiciones duras: **persona real**, vínculo **publicado en una fuente que
+  enlazamos** (entrevista, prensa), nada de inferir ni de "se dice que", y la
+  playa conserva su dato y su contra. Si no hay fuente, no hay titular.
+- **Lista con número:** `Las [N] calas de [zona] con [criterio medible]` (aforo,
+  acceso a pie, sin viento con levante). El número sale de nuestro método, no de
+  relleno. "Que casi nadie conoce" solo si se subvierte con dato.
+- **Pueblo / escapada:** `[Pueblo] ([provincia]): [N] playas con bandera azul y
+  [contra]`. Dato ADEAC del año en curso.
+- **Cercanía:** `A [N] minutos de [ciudad]: [playa], [dato + contra]`. Distancia
+  medida (ruta real), nunca a ojo.
+- **Curiosidad natural:** `Por qué la arena de [playa] es [negra/rosa…]: [la
+  causa]`. Buen satélite para piezas evergreen.
+
+### Lo que el análisis propone y descartamos
+- **"La cala virgen que parece el Caribe a 40 min de [ciudad]".** Junta dos clichés
+  de §5 y la comparación tropical es el patrón que **peor** rinde (3,2). Nos
+  quedamos con la cercanía y el dato; fuera el Caribe.
+- **Oportunidad viral ("buscan voluntarios para vivir en una isla…").** Solo si
+  existe la convocatoria real con fuente y afecta a una playa o isla española. No
+  se fabrica.
+
+### Reglas transversales que se suman a §10
+- **Lugar reconocible en las 5 primeras palabras** (compatible con "nombre en los
+  primeros ~40 caracteres").
+- **Imagen sin texto ni logo.** En playas, la tarjeta es la foto: hero real del
+  lugar (cascada Wikimedia/Wikipedia), nunca una foto de banco reconocible ni una
+  OG con texto si hay foto disponible.
+
 ---
 
 *Fuentes: análisis NatGeo Viajes + 575 titulares ranking ES + scraping de 8
 medios de playas (jun 2026). El hueco "datos + criterio + honestidad" está
-vacío en todo el sector. Última actualización: junio 2026.*
+vacío en todo el sector. §11: DiscoverSnoop, playas jul-sep 2026. Última
+actualización: octubre 2026.*

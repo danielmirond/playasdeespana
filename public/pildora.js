@@ -49,6 +49,9 @@
       sec:   w.querySelector('[data-pildora-seccion]'),
       cont:  w.querySelector('[data-pildora-contador]'),
       velo:  w.querySelector('[data-pildora-velo]'),
+      sig:   w.querySelector('[data-pildora-siguiente]'),
+      avance: w.querySelector('[data-pildora-siguiente-href]'),
+      prog:  w.querySelector('[data-pildora-progreso]'),
       items: [].slice.call(w.querySelectorAll('[data-pildora-item]')),
     };
   }
@@ -87,6 +90,26 @@
     // aunque la sección activa no haya cambiado.
     if (v.sec  && v.sec.textContent  !== etiqueta) v.sec.textContent  = etiqueta;
     if (v.cont && v.cont.textContent !== contador) v.cont.textContent = contador;
+
+    // La siguiente sección: el enlace que convierte la píldora en un
+    // "sigue leyendo". En la última no hay, y la línea se retira.
+    var sig = secs[i + 1];
+    if (v.avance) {
+      if (sig) {
+        v.avance.removeAttribute('data-sin-siguiente');
+        var href = '#' + sig.id;
+        if (v.avance.getAttribute('href') !== href) v.avance.setAttribute('href', href);
+        if (v.sig && v.sig.textContent !== sig.label) v.sig.textContent = sig.label;
+      } else {
+        v.avance.setAttribute('data-sin-siguiente', '');
+      }
+    }
+
+    // Cuánto llevas leído, en la barra de dos píxeles.
+    if (v.prog) {
+      var p = (i + 1) / secs.length;
+      v.prog.style.setProperty('--pildora-progreso', p.toFixed(3));
+    }
     v.items.forEach(function (a) { a.removeAttribute('aria-current'); });
     secs[i].a.setAttribute('aria-current', 'location');
   }
@@ -155,9 +178,64 @@
     var p = document.getElementById('pildora-panel');
     if (p) p.open = false;
   }
+  /* ── Saltar a una sección, a mano ─────────────────────────────
+   * Medido en la ficha real (oct-2026): pulsar una sección del índice
+   * cambiaba el hash y no movía la página ni un píxel. Queda el enlace
+   * nativo para quien no tenga JS, pero cuando hay script el salto lo
+   * hacemos aquí, que además nos deja dejar un respiro arriba en vez de
+   * pegar el titular al borde.
+   */
+  var RESPIRO = 12;
+  var TOLERANCIA = 24;
+
+  /* Saltar a una sección, a mano.
+   *
+   * Medido en la ficha real (oct-2026): pulsar una sección del índice
+   * cambiaba el hash y no movía la página ni un píxel, así que el índice
+   * llevaba desde siempre sin llevar a ninguna parte.
+   *
+   * Quién scrollea aquí no es evidente —el <body> lleva su propio
+   * overflow y según el momento el que se mueve es el documento— y
+   * elegirlo a ojo fue justo lo que lo rompió otra vez. Así que no se
+   * elige: scrollIntoView ya sabe cuál es el contenedor de cada
+   * elemento, y el respiro de arriba lo pone scroll-margin-top en vez de
+   * una resta nuestra. Queda el href nativo para quien no tenga JS.
+   */
+  function saltar(id) {
+    var el = document.getElementById(id);
+    if (!el) return false;
+    var suave = !window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.style.scrollMarginTop = RESPIRO + 'px';
+    el.scrollIntoView({ behavior: suave ? 'smooth' : 'auto', block: 'start' });
+    alScroll();
+    // La ficha carga imágenes y mapas por debajo mientras se baja, así
+    // que el destino se mueve durante la animación: medido, el salto se
+    // pasaba 372 px o se quedaba 339 corto. Se corrige cuando el scroll
+    // ya ha parado, y solo si de verdad quedó desviado.
+    [420, 900, 1600].forEach(function (ms) {
+      setTimeout(function () {
+        var e = document.getElementById(id);
+        if (!e) return;
+        if (Math.abs(e.getBoundingClientRect().top - RESPIRO) > TOLERANCIA) {
+          e.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }
+      }, ms);
+    });
+    return true;
+  }
+
   document.addEventListener('click', function (e) {
     var t = e.target;
     if (!t || !t.closest) return;
+    // No se intercepta el enlace: el salto nativo se deja correr y
+    // encima se pasan las correcciones. Si el navegador llega bien, las
+    // correcciones no hacen nada; si no se mueve —que es lo que pasaba—
+    // lo arreglan. Así esto no puede dejarlo peor de lo que estaba.
+    var salto = t.closest('[data-pildora-item]') || t.closest('[data-pildora-siguiente-href]');
+    if (salto) {
+      var href = salto.getAttribute('href') || '';
+      if (href.charAt(0) === '#') saltar(href.slice(1));
+    }
     if (t.closest('[data-pildora-velo]') || t.closest('[data-pildora-item]')) cerrar();
     // "Cómo está hoy" reutiliza el drawer de reportar que ya existe.
     // (Hay más de un disparador: la píldora, el aviso de presencia…)
