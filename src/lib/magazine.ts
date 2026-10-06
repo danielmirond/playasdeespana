@@ -79,6 +79,92 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Matalascañas, Almonte (Huelva) (voz bicéfala) ─────
+  {
+    slug: 'playa-de-matalascanas-almonte-huelva-torre-higuera-1755-espigones',
+    category: 'curiosidades',
+    title: 'Boca abajo desde 1755: la torre de Matalascañas (Huelva) y una arena sujeta con espigones',
+    excerpt:
+      'En la orilla de Matalascañas yace invertida la Torre de la Higuera, una atalaya de 1577 que el terremoto de Lisboa de 1755 hizo caer del acantilado. La pega: la playa urbana vive de espigones y de arena traída del fondo del mar, y en verano recibe en torno a 150.000 veraneantes.',
+    heroAlt:
+      'Restos de la Torre de la Higuera en la playa de Matalascañas, Huelva: un gran bloque de piedra invertido en la orilla, rodeado por el agua del Atlántico, con arena dorada y edificios al fondo',
+    heroQuery: 'matalascanas,almonte,huelva,beach,tower',
+    gygQuery: 'Matalascañas, Spain',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-06T07:27:10Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/andalucia', label: 'Playas de Andalucía' },
+      { href: '/familias', label: 'Playas para ir con niños' },
+      { href: '/playas-sin-viento', label: 'Playas sin viento' },
+    ],
+    body: [
+      { t: 'p', html: 'Con la marea baja se puede llegar andando hasta ella. Es un bloque de piedra y argamasa del tamaño de una casa, tumbado sobre la arena húmeda, con la base apuntando al cielo como si alguien hubiera clavado una torre del revés. Los niños la rodean, los pescadores de caña la usan de referencia y, cuando sube el agua, el Atlántico la vuelve a aislar y la deja como un islote extraño delante de los bloques de apartamentos.' },
+      { t: 'p', html: 'En Matalascañas la llaman <strong>La Peña</strong>, <strong>El Tapón</strong> o, sin más, la Piedra. Es lo que queda de la <strong>Torre de la Higuera</strong>, una atalaya que vigiló esta costa durante casi dos siglos y que lleva otros dos y medio mirando al revés. Pocas playas de veraneo tienen una historia tan a la vista; casi ninguna la tiene tan mal colocada.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La torre se terminó en <strong>1577</strong> dentro del sistema de atalayas que <strong>Felipe II</strong> mandó levantar para defender el litoral de los corsarios berberiscos, según recoge su ficha en Wikipedia. Estaba en lo alto del acantilado. El <strong>terremoto de Lisboa de 1755</strong> la hizo bascular desde arriba y la envió a la playa, donde quedó en posición <strong>totalmente invertida</strong>: lo que hoy se ve como la «corona» es en realidad el zócalo de sus cimientos. Según la marea, queda rodeada de agua o accesible a pie por la arena. La erosión marina la sigue desgastando, así que no es un sitio para trepar.' },
+      { t: 'p', html: 'La playa pertenece al municipio de <strong>Almonte</strong>, el mismo de El Rocío, y linda con el <strong>Parque Nacional de Doñana</strong>. Hacia el este, la arena continúa ya dentro del espacio protegido hasta la desembocadura del Guadalquivir; el litoral almonteño suma más de 50 kilómetros. La urbanización, en cambio, es reciente: Wikipedia sitúa su fundación en <strong>1972</strong>. Junto a ella, el <strong>Parque Dunar</strong> protege desde 1992 unas <strong>130 hectáreas</strong> de dunas y pinar con senderos.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>. Matalascañas no es una playa salvaje que casualmente tiene una torre: es una playa urbana con edificios casi a pie de arena, que pasa de unos pocos miles de vecinos a <strong>en torno a 150.000 veraneantes</strong> al año, buena parte de Sevilla, a unos 100 km por carretera. Y su arena no se sostiene sola. Tras los temporales de 2018, el Ministerio para la Transición Ecológica reconoció la necesidad de regenerarla; el proyecto, de casi <strong>6 millones de euros</strong>, prevé remodelar <strong>nueve espigones</strong> y aportar <strong>700.000 m³ de arena</strong> de un yacimiento submarino sobre <strong>3.700 metros</strong> de playa, y recibió luz verde para empezar las obras en noviembre de 2025. Lo que se pisa en el tramo urbano es, en parte, arena traída y retenida a base de escollera.' },
+      { t: 'p', html: 'Sobre la calidad del agua no damos una calificación concreta porque no hemos podido contrastar el dato del último año para este punto de muestreo. Es Atlántico abierto: el agua es más fresca que en el Mediterráneo y las mareas cambian de forma visible el ancho de la playa a lo largo del día.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En septiembre y octubre, entre semana, con la marea bajando. Es cuando la torre se puede rodear a pie sin mojarse más allá de los tobillos, la arena está ancha y la urbanización recupera el silencio de los meses sin veraneo. También en primavera, si se combina con Doñana o con El Rocío fuera de las fechas de la romería.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> En los fines de semana de julio y agosto, cuando el tramo urbano se llena y llegar y aparcar se vuelve parte del plan. Y con pleamar si el objetivo es la torre: el agua la rodea y verla de cerca obliga a nadar hasta un bloque de piedra erosionada, que no es buena idea.' },
+      { t: 'p', html: '<strong>El truco</strong>. Mirar la tabla de mareas antes de salir y no después. La torre está en la zona conocida como playa de Castilla; con la bajamar se llega andando por la orilla y es el mejor momento para fotografiarla y para entender lo grande que era. Cuanto más se camina hacia el este, alejándose de los edificios, más espacio hay en la arena.' },
+      { t: 'p', html: '<strong>El viento y la alternativa</strong>. La costa de Huelva está a merced del levante y del poniente, y una playa tan abierta los nota. Si se busca arena sin un solo edificio, al oeste está <a href="/magazine/playa-cuesta-maneli-donana-huelva-pasarela-acantilado-asperillo">Cuesta Maneli</a>, con su pasarela sobre el acantilado del Asperillo; a cambio, no tiene ni sombra ni bar.' },
+      { t: 'ul', items: [
+        'Torre de la Higuera: atalaya terminada en 1577 bajo Felipe II; volcada por el terremoto de Lisboa de 1755 (Wikipedia).',
+        'Conocida como La Peña, El Tapón o la Piedra de Matalascañas; accesible a pie o rodeada de agua según la marea.',
+        'Municipio: Almonte (Huelva), lindando con el Parque Nacional de Doñana.',
+        'Urbanización fundada en 1972; Parque Dunar de 130 ha protegido desde 1992.',
+        'Unos 150.000 veraneantes al año frente a unos pocos miles de residentes.',
+        'Regeneración del MITECO: casi 6 M€, nueve espigones y 700.000 m³ de arena sobre 3.700 m; luz verde a las obras en noviembre de 2025.',
+      ] },
+      { t: 'quote', text: 'Dirán que es una playa virgen a las puertas de Doñana. Virgen no: la sostienen nueve espigones, la recargan con arena del fondo del mar y su monumento más famoso lleva 270 años del revés.' },
+      { t: 'p', html: 'Al atardecer, cuando la marea vuelve a subir, el agua empieza a rodear La Peña desde los lados y la gente que estaba junto a ella retrocede hacia la arena seca. La piedra se queda sola otra vez, oscura contra el reflejo del sol, cumpliendo a su manera el mismo oficio de hace cuatro siglos: ser lo primero que se ve desde el mar.' },
+    ],
+    faq: [
+      { q: '¿Qué es la piedra que hay en la orilla de Matalascañas?', a: 'Son los restos de la Torre de la Higuera, una atalaya defensiva terminada en 1577 bajo Felipe II. El terremoto de Lisboa de 1755 la hizo caer del acantilado y quedó invertida en la playa, donde se conoce como La Peña o El Tapón.' },
+      { q: '¿Se puede llegar andando a la Torre de la Higuera?', a: 'Sí, con la marea baja se llega por la arena. Con la pleamar queda rodeada de agua. No conviene trepar a ella: la erosión marina la sigue desgastando.' },
+      { q: '¿Está muy llena la playa de Matalascañas en verano?', a: 'En el tramo urbano, sí: recibe en torno a 150.000 veraneantes al año. Los fines de semana de julio y agosto son los peores; caminando hacia el este, lejos de los edificios, hay más espacio.' },
+    ],
+    en: {
+      title: 'Matalascañas, Huelva: a tower upside down since 1755, and sand held in place by groynes',
+      excerpt:
+        'On the shore at Matalascañas lies the inverted Torre de la Higuera, a 1577 watchtower toppled off the cliff by the 1755 Lisbon earthquake. The catch: the town beach depends on groynes and sand dredged from the seabed, and takes around 150,000 summer visitors a year.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'At low tide you can walk right up to it. It is a block of stone and mortar the size of a house, lying on the wet sand with its base pointing at the sky, as if someone had planted a tower the wrong way up. Children circle it, anglers use it as a marker and, when the water rises, the Atlantic cuts it off again and leaves it as an odd little islet in front of the apartment blocks.' },
+        { t: 'p', html: 'In Matalascañas they call it <strong>La Peña</strong>, <strong>El Tapón</strong> (the plug) or simply the Stone. It is what remains of the <strong>Torre de la Higuera</strong>, a watchtower that guarded this coast for nearly two centuries and has spent another two and a half upside down. Few holiday beaches have history this visible; almost none have it this awkwardly placed.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The tower was completed in <strong>1577</strong> as part of the chain of watchtowers <strong>Philip II</strong> ordered to defend the coast against Barbary corsairs, according to its Wikipedia entry. It stood on top of the cliff. The <strong>1755 Lisbon earthquake</strong> tipped it over and sent it down to the beach, where it came to rest <strong>completely inverted</strong>: what looks like its crown is in fact the plinth of its foundations. Depending on the tide it is either surrounded by water or reachable on foot across the sand. The sea is still wearing it down, so it is not something to climb.' },
+        { t: 'p', html: 'The beach belongs to the municipality of <strong>Almonte</strong>, home of El Rocío, and borders <strong>Doñana National Park</strong>. Eastwards the sand continues inside the protected area as far as the mouth of the Guadalquivir; Almonte’s coastline runs to more than 50 kilometres. The resort itself is recent: Wikipedia dates its founding to <strong>1972</strong>. Next to it, the <strong>Parque Dunar</strong> has protected some <strong>130 hectares</strong> of dunes and pinewood, with footpaths, since 1992.' },
+        { t: 'p', html: 'Now the <strong>drawback</strong>. Matalascañas is not a wild beach that happens to have a tower: it is a town beach with buildings almost on the sand, which goes from a few thousand residents to <strong>around 150,000 summer visitors</strong> a year, many of them from Seville, about 100 km away by road. And its sand does not stay put on its own. After the 2018 storms, Spain’s Ministry for Ecological Transition accepted it needed restoring; the project, worth nearly <strong>€6 million</strong>, involves rebuilding <strong>nine groynes</strong> and adding <strong>700,000 m³ of sand</strong> from an offshore deposit along <strong>3,700 metres</strong> of beach, and was cleared to start work in November 2025. Much of what you walk on along the town stretch is sand brought in and held by rock barriers.' },
+        { t: 'p', html: 'We are not giving a water-quality rating because we could not confirm the latest figure for this sampling point. This is the open Atlantic: the water is cooler than the Mediterranean, and the tides visibly change the width of the beach through the day.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> September and October, midweek, on a falling tide. That is when you can walk round the tower without getting wet above the ankles, the sand is wide and the resort returns to its off-season quiet. Spring works too, combined with Doñana or El Rocío outside pilgrimage dates.' },
+        { t: 'p', html: '<strong>When not to?</strong> Weekends in July and August, when the town stretch fills and getting there and parking become part of the outing. And at high tide if the tower is the point: the water surrounds it, and seeing it close up means swimming out to a block of eroded stone, which is a poor idea.' },
+        { t: 'p', html: '<strong>The trick</strong>. Check the tide table before you set off, not after. The tower stands on the stretch known as playa de Castilla; at low water you reach it along the shoreline, which is the best moment to photograph it and to grasp how big it was. The further east you walk, away from the buildings, the more room there is on the sand.' },
+        { t: 'p', html: '<strong>The wind and the alternative</strong>. The Huelva coast is at the mercy of the levante and the poniente, and a beach this exposed feels both. If you want sand with no buildings at all, head west to <a href="/en/magazine/playa-cuesta-maneli-donana-huelva-pasarela-acantilado-asperillo">Cuesta Maneli</a> and its boardwalk over the Asperillo cliff; in exchange, there is no shade and no bar.' },
+        { t: 'ul', items: [
+          'Torre de la Higuera: watchtower completed in 1577 under Philip II; toppled by the 1755 Lisbon earthquake (Wikipedia).',
+          'Known locally as La Peña, El Tapón or the Matalascañas Stone; reachable on foot or cut off by water depending on the tide.',
+          'Municipality: Almonte (Huelva), bordering Doñana National Park.',
+          'Resort founded in 1972; 130 ha Parque Dunar protected since 1992.',
+          'Around 150,000 summer visitors a year against a few thousand residents.',
+          'Ministry restoration project: nearly €6m, nine groynes and 700,000 m³ of sand along 3,700 m; cleared to start in November 2025.',
+        ] },
+        { t: 'quote', text: 'They will tell you it is an unspoilt beach on Doñana’s doorstep. Hardly: nine groynes hold it together, it is topped up with sand from the seabed, and its most famous monument has been upside down for 270 years.' },
+        { t: 'p', html: 'At dusk, as the tide turns, the water starts closing round La Peña from both sides and the people standing next to it back off towards the dry sand. The stone is left alone again, dark against the glare, doing in its own way the same job it did four centuries ago: being the first thing you see from the sea.' },
+      ],
+      faq: [
+        { q: 'What is the big stone on the shore at Matalascañas?', a: 'The remains of the Torre de la Higuera, a defensive watchtower completed in 1577 under Philip II. The 1755 Lisbon earthquake knocked it off the cliff and it landed upside down on the beach, where locals call it La Peña or El Tapón.' },
+        { q: 'Can you walk to the Torre de la Higuera?', a: 'Yes, at low tide you can reach it across the sand. At high tide it is surrounded by water. Do not climb it: the sea is still eroding it.' },
+        { q: 'Does Matalascañas get very crowded in summer?', a: 'The town stretch does: it takes around 150,000 summer visitors a year. July and August weekends are the worst; walk east, away from the buildings, for more space.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Barayo, Navia-Valdés (Asturias) (voz bicéfala) ─────
   {
     slug: 'playa-de-barayo-navia-valdes-asturias-reserva-rio-800-metros-pie',
