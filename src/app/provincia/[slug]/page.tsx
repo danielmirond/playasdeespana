@@ -73,11 +73,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /** En la fila del municipio van en minúscula, como una frase. */
-const ETIQUETA: Record<string, string> = {
-  queHacer: 'qué hacer', elTiempo: 'el tiempo', mareas: 'mareas',
-  campings: 'camping', barcos: 'barcos', aparcar: 'aparcar',
-  dormir: 'dormir', chiringuitos: 'chiringuitos',
-}
 
 export default async function ProvinciaPage({ params }: Props) {
   const { slug } = await params
@@ -106,7 +101,7 @@ export default async function ProvinciaPage({ params }: Props) {
   // función que decide si existen. Antes se enumeraban tres a mano aquí y
   // las seis nuevas (campings, barcos, aparcar, dormir, chiringuitos) no se
   // enlazaban desde ningún sitio salvo desde dentro del propio municipio.
-  const { enlacesMunicipio } = await import('@/lib/enlaces-municipio')
+  const { enlacesMunicipio, ETIQUETA_MUNICIPIO } = await import('@/lib/enlaces-municipio')
   const indiceMunicipios = (await Promise.all([...porMuni.values()].map(async m => {
     const nombre = municipios.find(x => x.slug === m.slug)?.nombre ?? m.nombre
     return {
@@ -280,7 +275,7 @@ export default async function ProvinciaPage({ params }: Props) {
               <span className={styles.rowMeta} style={{ marginLeft: 'auto', display: 'flex', gap: '.55rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                 {m.paginas.map(e => (
                   <Link key={e.clave} href={e.href} style={{ color: 'var(--ink)', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                    {ETIQUETA[e.clave]}
+                    {ETIQUETA_MUNICIPIO[e.clave].toLowerCase()}
                   </Link>
                 ))}
               </span>

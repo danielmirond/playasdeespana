@@ -25,7 +25,7 @@
 import Link from 'next/link'
 import { getMunicipios, getPlayasByMunicipio } from '@/lib/playas'
 import { getMunicipiosConPois } from '@/lib/municipio-pois'
-import { enlacesMunicipio } from '@/lib/enlaces-municipio'
+import { enlacesMunicipio, ETIQUETA_MUNICIPIO } from '@/lib/enlaces-municipio'
 import { getFotoThumbSidecar } from '@/lib/fotos'
 
 const CUANTOS = 3
@@ -113,7 +113,7 @@ export default async function TresMunicipios() {
                 {t.enlaces.map(e => (
                   <li key={e.clave}>
                     <Link href={e.href} style={{ color: 'var(--ink)', fontWeight: 600, borderBottom: '1px dotted var(--muted)' }}>
-                      {e.clave === 'queHacer' ? 'Qué hacer' : e.clave === 'elTiempo' ? 'El tiempo' : e.clave === 'mareas' ? 'Mareas' : 'Barcos'}
+                      {ETIQUETA_MUNICIPIO[e.clave]}
                     </Link>
                   </li>
                 ))}

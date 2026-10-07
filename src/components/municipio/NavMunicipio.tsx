@@ -6,12 +6,8 @@
 // pulgar, no al final del todo. La lista la sigue decidiendo
 // lib/enlaces-municipio, así que aquí no hay forma de enlazar a un 404.
 import Link from 'next/link'
-import type { ClaveMunicipio, EnlaceMunicipio } from '@/lib/enlaces-municipio'
+import { ETIQUETA_MUNICIPIO as CORTO, type ClaveMunicipio, type EnlaceMunicipio } from '@/lib/enlaces-municipio'
 import styles from './Municipio.module.css'
-
-const CORTO: Record<ClaveMunicipio, string> = {
-  playas: 'Playas', queHacer: 'Qué hacer', elTiempo: 'El tiempo', mareas: 'Mareas', campings: 'Camping', barcos: 'Barcos', aparcar: 'Aparcar', dormir: 'Dormir', chiringuitos: 'Chiringuitos', autocaravana: 'Autocaravana',
-}
 
 const ICONO: Record<ClaveMunicipio, string> = {
   playas:   'M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 12h18',

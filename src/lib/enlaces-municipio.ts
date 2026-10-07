@@ -22,6 +22,30 @@ import { tieneMareas, ubicacionMareas } from './mareas-portus'
 
 export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar' | 'dormir' | 'chiringuitos' | 'autocaravana'
 
+/** La etiqueta corta de cada página, en un solo sitio.
+ *
+ * Estaba escrita tres veces —la barra del municipio, las tarjetas de la
+ * home y la lista de la provincia— y cada copia se quedaba atrás al
+ * añadir una página. Medido en producción: la home pintaba «Barcos» en
+ * todo lo que no fuera qué hacer, el tiempo o mareas, así que Santa Pola
+ * enseñaba cuatro enlaces seguidos llamados «Barcos» que iban a sitios
+ * distintos; y la provincia dejaba el de autocaravana sin texto.
+ *
+ * Al ser un Record de ClaveMunicipio, añadir una clave nueva ya no
+ * compila hasta que tiene etiqueta. Ese es el punto. */
+export const ETIQUETA_MUNICIPIO: Record<ClaveMunicipio, string> = {
+  playas: 'Playas',
+  queHacer: 'Qué hacer',
+  elTiempo: 'El tiempo',
+  mareas: 'Mareas',
+  campings: 'Camping',
+  barcos: 'Barcos',
+  aparcar: 'Aparcar',
+  dormir: 'Dormir',
+  chiringuitos: 'Chiringuitos',
+  autocaravana: 'Autocaravana',
+}
+
 export interface EnlaceMunicipio {
   clave: ClaveMunicipio
   href: string
