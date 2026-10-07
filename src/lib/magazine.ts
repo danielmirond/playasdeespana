@@ -79,6 +79,94 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Güigüí, La Aldea de San Nicolás (Gran Canaria) (voz bicéfala) ─────
+  {
+    slug: 'playa-de-guigui-la-aldea-gran-canaria-tasartico-550-metros-bajamar',
+    category: 'guias',
+    title: 'Lo que hay que saber antes de ir a Güigüí: 550 m de cuesta, sin agua y un paso solo con bajamar',
+    excerpt:
+      'A Güigüí, en el oeste de Gran Canaria, no llega ninguna carretera: o barco, o una subida de unos 550 metros de desnivel desde Tasartico y otra bajada hasta la arena. La pega: no hay agua, ni servicios, ni socorrismo, y la segunda playa solo se alcanza con la marea baja.',
+    heroAlt:
+      'Playa de Güigüí en La Aldea de San Nicolás, Gran Canaria: arena oscura al pie de barrancos y acantilados volcánicos de color ocre que caen al Atlántico',
+    heroQuery: 'guigui grande,la aldea,gran canaria,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-07T08:39:30Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/canarias', label: 'Playas de Canarias' },
+      { href: '/islas', label: 'Playas de las islas' },
+      { href: '/playas-secretas', label: 'Playas poco conocidas' },
+    ],
+    body: [
+      { t: 'p', html: 'Desde arriba, en el collado, la playa parece una raya oscura dibujada al final de un barranco que no termina nunca. Llevas un par de horas subiendo por una ladera de piedra suelta, sin un árbol, y de pronto el terreno se abre: abajo el Atlántico, a la izquierda las paredes del macizo cayendo a pico, y en el horizonte, los días limpios, la silueta del Teide flotando sobre el mar. Todavía falta la bajada. Y luego, la vuelta.' },
+      { t: 'p', html: 'Güigüí (también escrito Güi-Güi o Guguy) es lo más parecido que le queda a Gran Canaria a una costa sin carretera. En una isla con más de 800.000 habitantes, este rincón del municipio de <strong>La Aldea de San Nicolás</strong> sigue sin tráfico rodado, y casi todo lo que lo hace valioso —el aislamiento, la arena sin sombrillas, la sensación de estar en otra isla— es lo mismo que lo hace exigente.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La zona es la <strong>Reserva Natural Especial de Güi-Güi</strong>, la categoría de mayor protección de la red canaria de espacios naturales, con <strong>2.920,9 hectáreas</strong> de sierra costera entre barrancos y acantilados. Además es Zona Especial de Conservación de la Red Natura 2000 y forma parte de la Reserva de la Biosfera de Gran Canaria. En 2021, según informó RTVC, el <strong>Cabildo compró algo más de 3 millones de metros cuadrados</strong> de la reserva —incluidas las playas y los antiguos terrenos de cultivo— por <strong>3,1 millones de euros</strong>, para asegurar su protección pública.' },
+      { t: 'p', html: 'No es una playa, son dos. <strong>Güigüí Grande</strong> mide unos <strong>360 metros de largo por 25 de ancho</strong>, de arena oscura al pie de los acantilados; <strong>Güigüí Chico</strong>, unos 350 metros. Entre ambas hay una punta de roca que solo se rodea a pie <strong>con la marea baja</strong>: con pleamar o mar movida, ese paso por las piedras al pie del risco es peligroso. Con marea alta, además, buena parte de la orilla se queda en callao y la arena aparece al bajar el agua. En las dos se practica el nudismo con normalidad.' },
+      { t: 'p', html: 'Se llega de dos maneras. En <strong>barco</strong>, la opción que recomiendan las guías para Güigüí Grande. O <strong>a pie desde el barranco de Tasartico</strong>: unos 6 kilómetros por trayecto con cerca de <strong>550 metros de desnivel</strong> concentrados en unos 3 kilómetros de subida empinada y con tramos resbaladizos. Las guías de senderismo calculan entre <strong>dos horas y media y tres horas</strong> solo de ida. Y la vuelta repite la subida, ya con el cansancio y, a menudo, con el sol de la tarde de cara.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>, que aquí no es un matiz. No hay <strong>agua potable</strong>, ni bar, ni aseos, ni socorrismo: la población del entorno se reduce a un par de casas habitadas. Si algo sale mal —una torcedura en la bajada, un golpe de calor—, la ayuda está lejos y no llega por carretera. El sendero no es para principiantes, familias con niños pequeños ni personas con movilidad reducida. Y no damos una calificación concreta de calidad de agua porque no hemos encontrado un punto de muestreo oficial publicado para estas playas.' },
+      { t: 'p', html: 'Lo que sí está documentado es el valor de lo que se pisa: el Cabildo cifra en unos <strong>1.000 ejemplares de cedro canario</strong> silvestre los que hay ahora en Guguy, frente a unos 50 en 2003, y la reserva guarda <strong>18 yacimientos arqueológicos</strong> catalogados. Es otra razón para no salirse del camino.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En los meses frescos, de octubre a abril, saliendo de Tasartico con la primera luz y con la tabla de mareas consultada para que la bajamar coincida con la llegada si se quiere pasar a Güigüí Chico. La costa mira al oeste: la tarde es la mejor luz en la arena, pero es también la hora más dura para emprender la subida de regreso.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Un día de calor fuerte en verano a mediodía, cuando la ladera desnuda se convierte en un horno. Tampoco con mar de fondo: ni el paso entre playas ni el baño compensan el riesgo sin nadie que vigile. Y no es plan para quien busca una tarde de playa con nevera y sombrilla.' },
+      { t: 'p', html: '<strong>El truco</strong>. Calcular el agua por exceso —más de lo que parece razonable— porque abajo no hay dónde reponer, y guardar fuerzas para la vuelta, que es la mitad seria de la excursión. Si se puede, encadenar barco de ida y sendero de vuelta (o al revés) evita repetir el tramo más duro dos veces el mismo día.' },
+      { t: 'p', html: '<strong>El viento y la alternativa</strong>. El oeste de la isla queda a resguardo de buena parte del alisio, pero eso no lo protege del oleaje del Atlántico abierto. Quien quiera arena sin cuesta tiene en la propia costa de La Aldea playas con acceso en coche, y en el sur de la isla las <a href="/magazine/dunas-de-maspalomas-gran-canaria-menguan-alisio-playa-del-ingles">dunas de Maspalomas</a>, con sus propios problemas de arena.' },
+      { t: 'ul', items: [
+        'Municipio: La Aldea de San Nicolás (Gran Canaria). Grafías: Güigüí, Güi-Güi, Guguy.',
+        'Reserva Natural Especial de Güi-Güi: 2.920,9 ha; ZEC Red Natura 2000; Reserva de la Biosfera.',
+        'Güigüí Grande: unos 360 × 25 m de arena oscura. Güigüí Chico: unos 350 m. Paso entre ambas solo con bajamar.',
+        'Acceso: barco o sendero desde Tasartico, unos 6 km por trayecto y cerca de 550 m de desnivel; 2,5-3 h de ida.',
+        'Sin agua, sin servicios y sin socorrismo. Nudismo habitual.',
+        'El Cabildo compró en 2021 algo más de 3 millones de m² de la reserva por 3,1 millones de euros (RTVC).',
+      ] },
+      { t: 'quote', text: 'La llamarán la playa virgen de Gran Canaria. Virgen no es la palabra: es la playa que se paga en sudor a la ida y otra vez a la vuelta.' },
+      { t: 'p', html: 'Cuando el sol empieza a caer hacia Tenerife, la sombra de los barrancos avanza sobre la arena oscura y los pocos que han bajado empiezan a mirar el reloj y la ladera. Unos se quedan a ver el atardecer y subirán con frontal; otros arrancan ya, despacio, en fila. Arriba, en el collado, todos se dan la vuelta una última vez. La raya oscura sigue ahí, al final del barranco, sin una sola huella de neumático.' },
+    ],
+    faq: [
+      { q: '¿Cómo se llega a la playa de Güigüí?', a: 'En barco o a pie desde el barranco de Tasartico, en La Aldea de San Nicolás. El sendero tiene unos 6 km por trayecto y cerca de 550 metros de desnivel, con tramos empinados y resbaladizos; se calculan entre dos horas y media y tres horas solo de ida.' },
+      { q: '¿Hay servicios o socorrista en Güigüí?', a: 'No. No hay agua potable, ni bar, ni aseos, ni socorrismo, y no llega ninguna carretera. Hay que llevar toda el agua y la comida y no bañarse con mar de fondo.' },
+      { q: '¿Se puede pasar de Güigüí Grande a Güigüí Chico?', a: 'Sí, pero solo con la marea baja, rodeando a pie la punta de roca que las separa. Con pleamar o mar movida ese paso es peligroso, así que conviene consultar la tabla de mareas antes de salir.' },
+    ],
+    en: {
+      title: 'Güigüí, Gran Canaria: a 550 m climb, no water and a crossing only at low tide',
+      excerpt:
+        'No road reaches Güigüí, on the west coast of Gran Canaria: it is a boat or a climb of about 550 metres from Tasartico, then a descent to the sand. The catch: there is no water, no facilities and no lifeguard, and the second beach can only be reached at low tide.',
+      related: [
+        { href: '/en/islands', label: 'Island beaches' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'From the pass above, the beach looks like a dark line drawn at the end of a ravine that never seems to finish. You have been climbing a slope of loose stone for a couple of hours, not a tree in sight, and suddenly the ground opens out: the Atlantic below, the walls of the massif dropping sheer to the left and, on clear days, the outline of Teide floating on the horizon. The descent is still to come. And then the way back.' },
+        { t: 'p', html: 'Güigüí (also spelt Güi-Güi or Guguy) is the closest thing Gran Canaria has left to a coastline without a road. On an island of more than 800,000 people, this corner of the municipality of <strong>La Aldea de San Nicolás</strong> still has no vehicle access, and almost everything that makes it precious — the isolation, the sand without parasols, the sense of being on another island — is exactly what makes it hard work.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The area is the <strong>Güi-Güi Special Nature Reserve</strong>, the highest protection category in the Canary Islands’ network of natural areas, covering <strong>2,920.9 hectares</strong> of coastal sierra, ravines and cliffs. It is also a Natura 2000 Special Area of Conservation and part of the Gran Canaria Biosphere Reserve. In 2021, as reported by the regional broadcaster RTVC, the island council (<strong>Cabildo</strong>) bought just over <strong>3 million square metres</strong> of the reserve — beaches and old farmland included — for <strong>€3.1 million</strong>, to keep it in public hands.' },
+        { t: 'p', html: 'It is not one beach but two. <strong>Güigüí Grande</strong> is about <strong>360 metres long and 25 wide</strong>, dark sand beneath the cliffs; <strong>Güigüí Chico</strong> is about 350 metres. Between them is a rocky point you can only get round on foot <strong>at low tide</strong>: at high water or in a rough sea, that scramble over the rocks below the cliff is dangerous. At high tide much of the shore is also reduced to boulders, with the sand appearing as the water drops. Nudism is the norm on both.' },
+        { t: 'p', html: 'There are two ways in. By <strong>boat</strong>, which guides recommend for Güigüí Grande. Or <strong>on foot from the Tasartico ravine</strong>: about 6 km each way with around <strong>550 metres of ascent</strong> packed into some 3 km of steep, sometimes slippery climbing. Hiking guides reckon on <strong>two and a half to three hours</strong> one way. The return repeats the climb, by then on tired legs and often with the afternoon sun in your face.' },
+        { t: 'p', html: 'Now the <strong>drawback</strong>, and here it is not a footnote. There is no <strong>drinking water</strong>, no bar, no toilets and no lifeguard: the local population amounts to a couple of inhabited houses. If something goes wrong — a twisted ankle on the descent, heatstroke — help is a long way off and cannot arrive by road. The path is not for beginners, families with small children or people with reduced mobility. We are not giving a water-quality rating because we found no published official sampling point for these beaches.' },
+        { t: 'p', html: 'What is documented is the value of the ground underfoot: the Cabildo puts the number of wild <strong>Canary cedars</strong> in Guguy at around <strong>1,000</strong>, up from about 50 in 2003, and the reserve holds <strong>18 catalogued archaeological sites</strong>. One more reason to stay on the path.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> In the cooler months, October to April, leaving Tasartico at first light and having checked the tide table so that low water coincides with your arrival if you want to cross to Güigüí Chico. The coast faces west: afternoon gives the best light on the sand, but it is also the toughest time to start the climb back.' },
+        { t: 'p', html: '<strong>When not to?</strong> A hot summer day at midday, when the bare slope turns into an oven. Nor with a big swell: neither the crossing between beaches nor a swim is worth the risk with nobody watching. And it is no place for an afternoon with a cool box and a parasol.' },
+        { t: 'p', html: '<strong>The trick</strong>. Carry more water than seems sensible, because there is nowhere to refill below, and save your strength for the return, which is the serious half of the outing. If you can, take the boat one way and walk the other, so you do not tackle the hardest stretch twice in a day.' },
+        { t: 'p', html: '<strong>The wind and the alternative</strong>. The west of the island is sheltered from much of the trade wind, but that does nothing to shield it from open Atlantic swell. For sand without the climb, La Aldea’s own coast has beaches you can drive to, and in the south of the island there are the <a href="/en/magazine/dunas-de-maspalomas-gran-canaria-menguan-alisio-playa-del-ingles">Maspalomas dunes</a>, with sand problems of their own.' },
+        { t: 'ul', items: [
+          'Municipality: La Aldea de San Nicolás (Gran Canaria). Spellings: Güigüí, Güi-Güi, Guguy.',
+          'Güi-Güi Special Nature Reserve: 2,920.9 ha; Natura 2000 SAC; Biosphere Reserve.',
+          'Güigüí Grande: about 360 × 25 m of dark sand. Güigüí Chico: about 350 m. Crossing between them only at low tide.',
+          'Access: boat, or the path from Tasartico, about 6 km each way and around 550 m of ascent; 2.5-3 hours one way.',
+          'No water, no facilities, no lifeguard. Nudism common.',
+          'In 2021 the Cabildo bought just over 3 million m² of the reserve for €3.1 million (RTVC).',
+        ] },
+        { t: 'quote', text: 'They will call it Gran Canaria’s unspoilt beach. Unspoilt is not quite the word: it is the beach you pay for in sweat on the way in and again on the way out.' },
+        { t: 'p', html: 'As the sun starts to sink towards Tenerife, the shadow of the ravines creeps across the dark sand and the few who made it down begin glancing at their watches and at the slope. Some stay for the sunset and will climb by head torch; others set off now, slowly, in single file. At the pass, everyone turns round one last time. The dark line is still there at the end of the ravine, without a single tyre track.' },
+      ],
+      faq: [
+        { q: 'How do you get to Güigüí beach?', a: 'By boat, or on foot from the Tasartico ravine in La Aldea de San Nicolás. The path is about 6 km each way with around 550 metres of ascent, steep and slippery in places; allow two and a half to three hours one way.' },
+        { q: 'Are there facilities or a lifeguard at Güigüí?', a: 'No. There is no drinking water, bar, toilets or lifeguard, and no road. Bring all your water and food, and stay out of the sea in a big swell.' },
+        { q: 'Can you walk from Güigüí Grande to Güigüí Chico?', a: 'Yes, but only at low tide, by scrambling round the rocky point that separates them. At high tide or in rough seas the crossing is dangerous, so check the tide table before you set off.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Sonabia, Liendo (Cantabria) (voz bicéfala) ─────
   {
     slug: 'playa-de-sonabia-liendo-cantabria-buitres-candina-150-metros-aparcamiento',
