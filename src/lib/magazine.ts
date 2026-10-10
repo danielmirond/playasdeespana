@@ -79,6 +79,94 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Pantín, Valdoviño (Galicia) (voz bicéfala) ─────
+  {
+    slug: 'praia-de-pantin-valdovino-a-coruna-surf-1988-oleaje-fuerte',
+    category: 'guias',
+    title: 'Surf mundial desde 1988 en Pantín (Valdoviño): 950 m de arena con oleaje fuerte y viento',
+    excerpt:
+      'Pantín, en Valdoviño (A Coruña), recibe desde 1988 el Pantín Classic, una de las pruebas de surf profesional más antiguas de Europa. Son 950 metros de arena entre dunas; la pega para quien solo quiere bañarse: las fichas oficiales la marcan como playa de oleaje fuerte y ventosa.',
+    heroAlt:
+      'Praia de Pantín en Valdoviño: arenal dorado entre dunas y lomas verdes, con surfistas en el agua y series de olas atlánticas rompiendo en la orilla',
+    heroQuery: 'pantin,valdovino,galicia,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-10T12:04:01Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/galicia', label: 'Playas de Galicia' },
+      { href: '/magazine/praia-de-doninos-ferrol-a-coruna-corrientes-extremos-laguna', label: 'Doniños (Ferrol): por qué se nada en el centro' },
+      { href: '/playas-sin-viento', label: 'Playas resguardadas del viento' },
+    ],
+    body: [
+      { t: 'p', html: 'Se oye antes de verse. Desde la carretera que baja entre maizales y casas de piedra, el ruido llega como un tren que no termina de pasar. Luego la curva se abre y aparece el arenal: una franja dorada entre dunas con hierba, lomas verdes a los lados y, en el agua, una fila de puntos negros sentados sobre sus tablas, mirando todos hacia el mismo sitio, esperando la misma serie.' },
+      { t: 'p', html: 'Pantín no se vende como playa de toalla. El propio Concello de Valdoviño la presenta con una expresión que lo resume: <strong>una «fábrica de olas»</strong>. Aquí, cada final de verano, el surf profesional monta su andamiaje de carpas, megafonía y jueces sobre la arena. Y el resto del año, la playa sigue siendo lo mismo: un lugar donde el Atlántico llega con fuerza y sin pedir permiso.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Según la ficha de <strong>Turespaña (spain.info)</strong>, Pantín mide <strong>950 metros de largo y 45 de ancho</strong>, es de arena dorada, semiurbana y de <strong>ocupación alta</strong>. El mismo dato de longitud aparece en otras dos fichas turísticas independientes. Está en el municipio de Valdoviño, en la comarca de Ferrolterra, junto a la carretera AC-566; el puerto deportivo de Ferrol queda a unos 28 kilómetros. El arenal está rodeado de dunas con vegetación y la ficha de inspain.org lo sitúa dentro de un espacio protegido de la Red Natura.' },
+      { t: 'p', html: 'El dato que la define es deportivo. Desde <strong>1988</strong> se celebra aquí el <strong>Pantín Classic</strong>, hoy Abanca Pantín Classic Galicia Pro, una de las pruebas de surf profesional más antiguas de Europa. Las cuentas cuadran: la de 2022 fue la 35.ª edición y la de 2026, la 39.ª, disputada a finales de agosto como prueba clasificatoria del circuito de la World Surf League. La competición se centra en el tramo de <strong>O Rodo</strong>, donde rompe la ola de pico que buscan los surfistas.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>, que es el reverso exacto de lo anterior. Las fichas oficiales describen sus condiciones de baño con dos palabras: <strong>oleaje fuerte y ventosa</strong>. Lo que es una virtud para quien lleva tabla es un problema para quien quiere nadar tranquilo o va con niños pequeños. Una playa que rompe bien para el surf es, casi por definición, una playa donde el agua se mueve: olas que tumban en la orilla y corrientes de retorno que se forman donde el agua vuelve mar adentro. Las guías locales apuntan que el agua está más mansa en la parte central del arenal que en los extremos.' },
+      { t: 'p', html: 'A favor, los servicios: la ficha de inspain.org recoge <strong>equipo de salvamento</strong> en temporada, señalización de peligro durante el verano, aseos, duchas, lavapiés, pasarelas, acceso para personas con movilidad reducida y un <strong>aparcamiento sin vigilancia de más de cien plazas</strong>. La parada de autobús interurbano más próxima queda a cerca de un kilómetro. Lo que no damos: una calificación concreta de calidad de agua o una Bandera Azul que no hemos podido confirmar para este año. Y sobre la temperatura, sin cifras inventadas: es agua del Atlántico gallego, bastante más fresca que la del Mediterráneo incluso en agosto.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> Para mirar, cualquier día con mar de fondo: sentarse en la duna y ver el pico de O Rodo trabajar es un plan en sí mismo. Para surfear, con nivel acorde al tamaño del día y respetando el orden del pico. Para pasear, en otoño e invierno, cuando la arena se queda para los perros, los surfistas locales y el viento.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Para un baño con niños un día de olas grandes o con bandera amarilla o roja: no es la playa. Tampoco en los días del Pantín Classic si se busca tranquilidad, porque el aparcamiento y la arena se llenan de público. Y fuera de la temporada de socorrismo, el baño queda sin vigilancia en una playa que no perdona descuidos.' },
+      { t: 'p', html: '<strong>El truco</strong>. Mirar la bandera y preguntar al socorrista dónde se forma la corriente ese día antes de plantar la toalla; nadar en la zona que indiquen, que suele ser la central. Si una corriente arrastra mar adentro, no nadar contra ella: salir en paralelo a la orilla y luego volver, como recomiendan los servicios de salvamento.' },
+      { t: 'p', html: '<strong>El viento y la alternativa</strong>. Es una playa expuesta, abierta al Atlántico, y la propia ficha oficial la marca como ventosa: un día de viento fuerte, la toalla se llena de arena. Dentro del mismo arenal, el tramo de <strong>Marnela</strong>, junto a la desembocadura del río, es el que usan las escuelas para las primeras clases, y en el extremo opuesto queda la pequeña <strong>Porto Carrizo</strong>. Quien quiera más sitio tiene a pocos kilómetros la larga playa de A Frouxeira, también en Valdoviño, junto a su laguna. Y en la misma costa de Ferrol, <a href="/magazine/praia-de-doninos-ferrol-a-coruna-corrientes-extremos-laguna">Doniños</a> repite la misma lección: se nada en el centro, no en los extremos.' },
+      { t: 'ul', items: [
+        'Municipio: Valdoviño (A Coruña), comarca de Ferrolterra; junto a la AC-566.',
+        'Medidas (Turespaña): 950 m de largo, 45 m de ancho, arena dorada, ocupación alta.',
+        'Condiciones de baño según las fichas oficiales: oleaje fuerte y viento.',
+        'Pantín Classic: desde 1988; en 2026, 39.ª edición, a finales de agosto (WSL, clasificatoria).',
+        'Tramos: O Rodo (pico de surf), Marnela (desembocadura, clases de iniciación), Porto Carrizo (cala pequeña en el extremo).',
+        'Servicios (inspain.org): salvamento en temporada, aseos, duchas, pasarelas, acceso adaptado, parking de más de 100 plazas sin vigilancia.',
+        'Bus interurbano: parada a cerca de 1 km.',
+      ] },
+      { t: 'quote', text: 'En las fotos parece una playa de toalla. Una playa de toalla no tumba a nadie en la orilla. Pantín sí, y por eso los surfistas vienen desde 1988.' },
+      { t: 'p', html: 'Al caer la tarde, las tablas suben por la pasarela con el neopreno chorreando y el pico de O Rodo sigue rompiendo para nadie. El viento peina la duna, la marea va cambiando el dibujo de la orilla y el ruido de tren sigue ahí, de fondo, como el primer día. En Pantín el mar no se mira desde la toalla: se le toma la medida antes de entrar.' },
+    ],
+    faq: [
+      { q: '¿Se puede uno bañar en la playa de Pantín?', a: 'Sí, pero con precaución. Las fichas oficiales la describen como playa de oleaje fuerte y ventosa. En temporada hay equipo de salvamento y señalización de peligro: conviene mirar la bandera, preguntar dónde se forman las corrientes ese día y bañarse en la zona indicada, normalmente la central.' },
+      { q: '¿Cuándo se celebra el Pantín Classic?', a: 'A finales de agosto. Se disputa desde 1988 y en 2026 cumplió su 39.ª edición como prueba clasificatoria de la World Surf League. Esos días hay mucho público y el aparcamiento se llena.' },
+      { q: '¿Es buena Pantín para aprender a surfear?', a: 'El tramo de Marnela, junto a la desembocadura del río, es el que suelen usar las escuelas para las clases de iniciación. El pico de O Rodo, donde se celebra la competición, es para surfistas con experiencia.' },
+    ],
+    en: {
+      title: 'Pantín (Valdoviño): a pro surf contest since 1988, 950 m of sand and a heavy swell for swimmers',
+      excerpt:
+        'Pantín, in Valdoviño (A Coruña), has hosted the Pantín Classic since 1988, one of the oldest professional surf contests in Europe. It is 950 metres of sand backed by dunes; the catch for anyone who just wants a swim is that the official listings describe it as windy, with a strong swell.',
+      related: [
+        { href: '/en/magazine/praia-de-doninos-ferrol-a-coruna-corrientes-extremos-laguna', label: 'Doniños (Ferrol): why you swim in the middle' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'You hear it before you see it. From the road that drops between maize fields and stone houses, the noise arrives like a train that never quite finishes passing. Then the bend opens out and there is the beach: a golden strip between grassy dunes, green hills on either side and, out on the water, a line of black dots sitting on their boards, all facing the same way, waiting for the same set.' },
+        { t: 'p', html: 'Pantín does not sell itself as a beach for lying on a towel. The Valdoviño council sums it up in a phrase: <strong>a «wave factory»</strong>. Every end of summer, professional surfing puts up its scaffolding of marquees, loudspeakers and judges on the sand. For the rest of the year the beach stays what it is: a place where the Atlantic arrives hard and without asking.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'According to the <strong>Turespaña (spain.info)</strong> listing, Pantín is <strong>950 metres long and 45 metres wide</strong>, with golden sand, semi-urban surroundings and <strong>high occupancy</strong>. Two other independent tourism listings give the same length. It lies in the municipality of Valdoviño, in the Ferrolterra district, next to the AC-566 road; Ferrol’s marina is about 28 kilometres away. The beach is backed by vegetated dunes, and the inspain.org listing places it within a Natura 2000 protected area.' },
+        { t: 'p', html: 'The fact that defines it is sporting. Since <strong>1988</strong> it has hosted the <strong>Pantín Classic</strong>, now the Abanca Pantín Classic Galicia Pro, one of the oldest professional surf contests in Europe. The numbers add up: 2022 was the 35th edition and 2026 the 39th, held in late August as a World Surf League qualifying event. The contest centres on the <strong>O Rodo</strong> stretch, where the peak that surfers come for breaks.' },
+        { t: 'p', html: 'Now the <strong>drawback</strong>, which is the exact flip side. The official listings describe the bathing conditions in two words: <strong>strong swell and windy</strong>. What suits anyone with a board is a problem for anyone who wants a quiet swim or has small children. A beach that breaks well for surfing is, almost by definition, a beach where the water moves: waves that knock you over at the shoreline and rip currents where the water heads back out. Local guides note that the water is calmer in the middle of the beach than at either end.' },
+        { t: 'p', html: 'On the plus side, facilities: the inspain.org listing records a <strong>lifeguard team</strong> in season, danger signage in summer, toilets, showers, foot showers, boardwalks, step-free access and an <strong>unattended car park with more than 100 spaces</strong>. The nearest intercity bus stop is about a kilometre away. What we are not giving: a specific water-quality rating, or a Blue Flag we have not been able to confirm for this year. As for temperature, no invented figures: this is Galician Atlantic water, noticeably cooler than the Mediterranean even in August.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> To watch, any day with a groundswell: sitting on the dune watching the O Rodo peak at work is a plan in itself. To surf, with a level that matches the size of the day and respect for the pecking order. To walk, in autumn and winter, when the sand is left to dogs, local surfers and the wind.' },
+        { t: 'p', html: '<strong>When not to?</strong> For a swim with children on a big-wave day or under a yellow or red flag: this is not the beach. Nor during the Pantín Classic if you want peace, because the car park and the sand fill with spectators. And outside the lifeguard season, swimming is unsupervised on a beach that does not forgive carelessness.' },
+        { t: 'p', html: '<strong>The trick</strong>. Check the flag and ask the lifeguard where the current is forming that day before you put your towel down; swim where they tell you, usually the middle. If a current drags you out, do not swim against it: swim parallel to the shore and then come back in, as rescue services advise.' },
+        { t: 'p', html: '<strong>The wind and the alternative</strong>. It is an exposed beach, open to the Atlantic, and the official listing marks it as windy: on a blowy day your towel fills with sand. Within the same beach, the <strong>Marnela</strong> stretch by the river mouth is where the schools hold first lessons, and at the far end sits little <strong>Porto Carrizo</strong>. For more room, the long beach of A Frouxeira, also in Valdoviño, lies a few kilometres away beside its lagoon. And on the same Ferrol coast, <a href="/en/magazine/praia-de-doninos-ferrol-a-coruna-corrientes-extremos-laguna">Doniños</a> teaches the same lesson: swim in the middle, not at the ends.' },
+        { t: 'ul', items: [
+          'Municipality: Valdoviño (A Coruña), Ferrolterra; next to the AC-566.',
+          'Size (Turespaña): 950 m long, 45 m wide, golden sand, high occupancy.',
+          'Bathing conditions per official listings: strong swell and wind.',
+          'Pantín Classic: since 1988; 39th edition in 2026, late August (WSL qualifier).',
+          'Sections: O Rodo (surf peak), Marnela (river mouth, beginner lessons), Porto Carrizo (small cove at the far end).',
+          'Facilities (inspain.org): lifeguards in season, toilets, showers, boardwalks, step-free access, unattended car park with 100+ spaces.',
+          'Intercity bus: stop about 1 km away.',
+        ] },
+        { t: 'quote', text: 'In the photos it looks like a beach for lying about. Beaches for lying about do not knock people over at the water’s edge. Pantín does, and that is why surfers have been coming since 1988.' },
+        { t: 'p', html: 'As the afternoon goes, boards come up the boardwalk with wetsuits dripping and the O Rodo peak keeps breaking for no one. The wind combs the dune, the tide redraws the shoreline and the train-like roar is still there in the background, as on the first day. At Pantín you do not look at the sea from your towel: you size it up before going in.' },
+      ],
+      faq: [
+        { q: 'Can you swim at Pantín beach?', a: 'Yes, with care. Official listings describe it as windy with a strong swell. In season there is a lifeguard team and danger signage: check the flag, ask where the currents are forming that day and swim in the area indicated, usually the middle.' },
+        { q: 'When is the Pantín Classic held?', a: 'In late August. It has run since 1988 and in 2026 reached its 39th edition as a World Surf League qualifying event. Expect crowds and a full car park on those days.' },
+        { q: 'Is Pantín good for learning to surf?', a: 'The Marnela stretch by the river mouth is where schools usually hold beginner lessons. The O Rodo peak, where the contest takes place, is for experienced surfers.' },
+      ],
+    },
+  },
   // ───── Diario de playas · El Portús, Cartagena (Región de Murcia) (voz bicéfala) ─────
   {
     slug: 'playa-el-portus-cartagena-murcia-grava-fondo-cala-morena-desprendimientos',
