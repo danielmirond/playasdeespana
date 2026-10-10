@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
-import styles from '@/app/banderas-azules/BanderasAzules.module.css'
+import styles from '@/app/(es)/banderas-azules/BanderasAzules.module.css'
 import MapaPlayas from '@/components/ui/MapaPlayas'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 

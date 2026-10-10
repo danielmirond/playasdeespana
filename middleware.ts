@@ -134,9 +134,45 @@ export function middleware(req: NextRequest) {
   if (localeCookie === DEFAULT_LOCALE) return NextResponse.next()
 
   if (preferred === 'en' && SUPPORTED_LOCALES.includes('en')) {
-    const url = req.nextUrl.clone()
-    url.pathname = `/en${pathname}`
-    return NextResponse.redirect(url)
+    // OJO: `/en` + el pathname EN CASTELLANO no existe para casi ninguna
+    // ruta. El inglés tiene sus propios segmentos —beaches, towns,
+    // provinces, communities— y solo esos cuatro los recupera después la
+    // reescritura de arriba. Mandar a /en/calas-secretas a quien tiene el
+    // navegador en inglés era servirle un 404 por tener el navegador en
+    // inglés. Solo se traducen las rutas que tienen equivalente conocido;
+    // el resto se queda en castellano, que es peor que la traducción pero
+    // mucho mejor que nada.
+    const EQUIVALENTE: Record<string, string> = {
+      '/': '/en',
+      '/buscar': '/en/search',
+      '/rutas': '/en/routes',
+      '/surf': '/en/surf',
+      '/magazine': '/en/magazine',
+      '/islas': '/en/islands',
+      '/atardeceres': '/en/sunsets',
+      '/banderas-azules': '/en/blue-flag',
+      '/playas-nudistas': '/en/nudist-beaches',
+      '/playas-perros': '/en/dog-beaches',
+      '/playas-accesibles': '/en/accessible-beaches',
+      '/playas-aguas-cristalinas': '/en/crystal-clear-water-beaches',
+    }
+    const PREFIJO: [RegExp, string][] = [
+      [/^\/playas\//, '/en/beaches/'],
+      [/^\/municipio\//, '/en/towns/'],
+      [/^\/provincia\//, '/en/provinces/'],
+      [/^\/comunidad\//, '/en/communities/'],
+    ]
+    let destino = EQUIVALENTE[pathname]
+    if (!destino) {
+      for (const [re, con] of PREFIJO) {
+        if (re.test(pathname)) { destino = pathname.replace(re, con); break }
+      }
+    }
+    if (destino) {
+      const url = req.nextUrl.clone()
+      url.pathname = destino
+      return NextResponse.redirect(url)
+    }
   }
 
   return NextResponse.next()

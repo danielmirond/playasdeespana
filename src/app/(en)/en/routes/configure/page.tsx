@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Nav from '@/components/ui/Nav'
-import ConfiguradorRuta from '@/app/rutas/configurar/ConfiguradorRuta'
+import ConfiguradorRuta from '@/app/(es)/rutas/configurar/ConfiguradorRuta'
 export const metadata: Metadata = { title: 'Build Your Beach Route | Spain', alternates: { canonical: '/en/routes/configure', languages: {  'es': '/rutas/configurar', 'en': '/en/routes/configure', 'x-default': '/rutas/configurar' } } }
 export default function Page() {
   return (<><Nav /><main style={{maxWidth:800,margin:'0 auto',padding:'2rem 1.5rem 5rem'}}>
