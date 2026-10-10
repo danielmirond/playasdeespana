@@ -510,6 +510,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             bandera:       banderaPlaya,
             medusasRiesgo: medusas?.nivel ?? null,
             cert:          certBandera,
+            locale,
           })}
           locale={locale}
         />
@@ -1118,7 +1119,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             inválido, , así que cualquier índice apuntaba al envoltorio
             vacío en vez de a la sección. */}
         <div key="trafico">
-          <TraficoSection playa={playa} hoyISO={hoyISO} />
+          <TraficoSection playa={playa} hoyISO={hoyISO} locale={locale} />
         </div>
 
         {/* QUÉ HACER ALLÍ — detrás de «cómo llegar» y parking.
@@ -1140,6 +1141,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               · resto → el cuaderno, que es la conversión principal. */}
         <GygActivities
           key="actividades-gyg"
+          locale={locale}
           query={playa.actividades?.surf
             // `, Spain` SIEMPRE, también aquí: esta rama se había quedado
             // sin país. Sin él, GetYourGuide resuelve el topónimo donde

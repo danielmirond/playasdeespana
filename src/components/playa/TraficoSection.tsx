@@ -9,6 +9,7 @@ import type { Playa } from '@/types'
 import { tinte } from '@/lib/tinte'
 
 interface Props {
+  locale?: 'es' | 'en'
   playa: Playa
   /**
    * El día de HOY en hora peninsular, decidido por el servidor, como
@@ -140,19 +141,19 @@ function calcAfluencia(
   return Math.min(100, Math.max(0, Math.round(base)))
 }
 
-function nivelAfluencia(pct: number): { label: string; color: string; bg: string } {
-  if (pct >= 85) return { label: 'Llena',          color: 'var(--noapto)', bg: 'color-mix(in srgb, var(--noapto) 6%, transparent)' }
-  if (pct >= 65) return { label: 'Muy concurrida', color: 'var(--aceptable)', bg: 'color-mix(in srgb, var(--aceptable) 6%, transparent)' }
-  if (pct >= 40) return { label: 'Concurrida',     color: 'var(--mar-500)', bg: 'rgba(74,122,144,.08)' }
-  if (pct >= 15) return { label: 'Tranquila',      color: 'var(--excelente)', bg: 'color-mix(in srgb, var(--excelente) 6%, transparent)' }
-  return               { label: 'Vacía',           color: '#9ca3af', bg: '#f9fafb' }
+function nivelAfluencia(pct: number, es = true): { label: string; color: string; bg: string } {
+  if (pct >= 85) return { label: es ? 'Llena' : 'Packed',       color: 'var(--noapto)', bg: 'color-mix(in srgb, var(--noapto) 6%, transparent)' }
+  if (pct >= 65) return { label: es ? 'Muy concurrida' : 'Very busy', color: 'var(--aceptable)', bg: 'color-mix(in srgb, var(--aceptable) 6%, transparent)' }
+  if (pct >= 40) return { label: es ? 'Concurrida' : 'Busy',    color: 'var(--mar-500)', bg: 'rgba(74,122,144,.08)' }
+  if (pct >= 15) return { label: es ? 'Tranquila' : 'Quiet',    color: 'var(--excelente)', bg: 'color-mix(in srgb, var(--excelente) 6%, transparent)' }
+  return               { label: es ? 'Vacía' : 'Empty',         color: '#9ca3af', bg: '#f9fafb' }
 }
 
-function etiquetaTemporada(mes: number, zona: string): string {
+function etiquetaTemporada(mes: number, zona: string, es = true): string {
   const mult = TEMP_MULT[zona]?.[mes - 1] ?? 0.5
-  if (mult >= 0.7) return 'Temporada alta'
-  if (mult >= 0.4) return 'Temporada media'
-  return 'Temporada baja'
+  if (mult >= 0.7) return es ? 'Temporada alta' : 'High season'
+  if (mult >= 0.4) return es ? 'Temporada media' : 'Shoulder season'
+  return es ? 'Temporada baja' : 'Low season'
 }
 
 // ─── API helpers ──────────────────────────────────────────────────────────────
@@ -187,7 +188,8 @@ async function fetchParkings(lat: number, lng: number): Promise<Parking[]> {
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 
-export default function TraficoSection({ playa, hoyISO }: Props) {
+export default function TraficoSection({ playa, hoyISO, locale = 'es' }: Props) {
+  const es = locale === 'es'
   // Mediodía UTC a propósito: con la fecha ya resuelta en Madrid, las
   // 12:00 caen en el mismo día natural en cualquier zona razonable, así
   // que los getters locales de esFestivo() no se van al día anterior.
@@ -229,7 +231,7 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
   // contemplarlo: en el primer render, y para quien no ejecute JS, no
   // hay «ahora» que enseñar.
   const ahoraData  = horaActual === null ? null : horas[horaActual]
-  const nivelAhora = ahoraData ? nivelAfluencia(ahoraData.pct) : null
+  const nivelAhora = ahoraData ? nivelAfluencia(ahoraData.pct, es) : null
 
   const mejorHora = horas
     .filter(h => h.h >= 7 && h.h <= 20)
@@ -259,16 +261,16 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
       {/* CABECERA */}
       <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h2 style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink)', margin: 0, fontFamily: 'inherit' }}><Car size={16} weight="bold" color="var(--accent)" style={{verticalAlign:'middle',marginRight:6}}/> Dónde aparcar en {playa.nombre}: parking, tráfico y afluencia</h2>
+          <h2 style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink)', margin: 0, fontFamily: 'inherit' }}><Car size={16} weight="bold" color="var(--accent)" style={{verticalAlign:'middle',marginRight:6}}/> {es ? <>Dónde aparcar en {playa.nombre}: parking, tráfico y afluencia</> : <>Parking at {playa.nombre}: spaces, traffic and how busy it gets</>}</h2>
           {/* LA PROCEDENCIA, POR PESTAÑA.
               Había un «Tiempo real» único para las tres, y de las tres solo
               el tráfico lo es (TomTom). La afluencia es un modelo nuestro a
               partir de la hora, el mes y el tipo de playa: llamarla tiempo
               real era afirmar que contamos gente en la arena. */}
           <span style={{ fontSize:'.75rem', color: 'var(--muted)' }}>
-            {tabActivo === 'trafico' ? (trafico ? 'Tiempo real · TomTom' : 'Tiempo real')
+            {tabActivo === 'trafico' ? (trafico ? (es ? 'Tiempo real · TomTom' : 'Live · TomTom') : (es ? 'Tiempo real' : 'Live'))
               : tabActivo === 'parking' ? 'OpenStreetMap'
-              : 'Estimación'}
+              : (es ? 'Estimación' : 'Estimate')}
           </span>
         </div>
         <div
@@ -295,7 +297,7 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
                 cursor: 'pointer', textTransform: 'capitalize',
               }}
             >
-              {tab === 'afluencia' ? <><Users size={14}/>&nbsp;Afluencia</> : tab === 'trafico' ? <><Car size={14}/>&nbsp;Tráfico</> : <><Park size={14}/>&nbsp;Aparcamiento</>}
+              {tab === 'afluencia' ? <><Users size={14}/>&nbsp;{es ? 'Afluencia' : 'How busy'}</> : tab === 'trafico' ? <><Car size={14}/>&nbsp;{es ? 'Tráfico' : 'Traffic'}</> : <><Park size={14}/>&nbsp;{es ? 'Aparcamiento' : 'Parking'}</>}
             </button>
           ))}
         </div>
@@ -329,17 +331,18 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
                   fontWeight: 700, fontSize: '1.05rem',
                   color: nivelAhora ? nivelAhora.color : 'var(--muted)',
                 }}>
-                  {nivelAhora ? nivelAhora.label : 'A esta hora'}
+                  {nivelAhora ? nivelAhora.label : (es ? 'A esta hora' : 'Right now')}
                 </div>
                 <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.15rem' }}>
-                  Suele haber menos gente a las <strong style={{ color: 'var(--accent)' }}>{mejorHora.label}</strong>.
+                  {es ? <>Suele haber menos gente a las </> : <>Usually quietest around </>}
+                  <strong style={{ color: 'var(--accent)' }}>{mejorHora.label}</strong>.
                 </div>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'flex-end', gap: '2px', height: '60px', marginBottom: '.5rem' }}>
               {horas.map(h => {
-                const n = nivelAfluencia(h.pct)
+                const n = nivelAfluencia(h.pct, es)
                 return (
                   <div key={h.h} title={`${h.label}: ${n.label.toLowerCase()}`} style={{
                     flex: 1, height: `${Math.max(6, h.pct * 0.58)}px`,
@@ -354,17 +357,22 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
               <span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>11pm</span>
             </div>
             <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.5rem' }}>
-              {etiquetaTemporada(mes, zona)} · {dia === 0 || dia === 6 ? 'Fin de semana' : 'Día laborable'}
-              {esUrbana ? ' · Playa urbana' : ''}
-              {esFestivo(hoy) ? ' · Festivo' : ''}
+              {etiquetaTemporada(mes, zona, es)} · {dia === 0 || dia === 6 ? (es ? 'Fin de semana' : 'Weekend') : (es ? 'Día laborable' : 'Weekday')}
+              {esUrbana ? (es ? ' · Playa urbana' : ' · Urban beach') : ''}
+              {esFestivo(hoy) ? (es ? ' · Festivo' : ' · Public holiday') : ''}
             </div>
             {/* Decir de dónde sale, donde sale. Nadie mide cuánta gente hay
                 en la arena en tiempo real, y menos en 5.098 playas. */}
             <p style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.4rem', lineHeight: 1.5 }}>
-              Estimación propia: curva horaria según el mes, la zona, si es
-              fin de semana o festivo y si la playa es urbana. No contamos
-              gente ni hay sensores: sirve para elegir la hora, no para saber
-              cuánta gente hay ahora mismo.
+              {es
+                ? <>Estimación propia: curva horaria según el mes, la zona, si es
+                  fin de semana o festivo y si la playa es urbana. No contamos
+                  gente ni hay sensores: sirve para elegir la hora, no para saber
+                  cuánta gente hay ahora mismo.</>
+                : <>Our own estimate: an hourly curve based on the month, the
+                  region, whether it is a weekend or a public holiday and whether
+                  the beach is urban. We count nobody and there are no sensors:
+                  it helps you pick a time, not know how busy it is right now.</>}
             </p>
           </div>
         )}
@@ -373,7 +381,7 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
         {tabActivo === 'trafico' && (
           <div role="tabpanel" id="tabpanel-trafico" aria-labelledby="tab-trafico">
             {loadingT ? (
-              <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--muted)', fontSize: '.8rem' }}>Consultando tráfico…</div>
+              <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--muted)', fontSize: '.8rem' }}>{es ? 'Consultando tráfico…' : 'Checking traffic…'}</div>
             ) : trafico ? (
               <div style={{
                 display: 'flex', alignItems: 'center', gap: '1rem',

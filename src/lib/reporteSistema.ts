@@ -35,6 +35,8 @@ interface Input {
    * repite lo que ya está en la lista de umbrales.
    */
   cert?: 'medido' | 'oficial' | 'reportado' | 'estimado' | 'sindato'
+  /** El resumen se sirve también en /en/beaches/*, donde salía en castellano. */
+  locale?: 'es' | 'en'
 }
 
 /**
@@ -43,7 +45,8 @@ interface Input {
  * información sin fundamento).
  */
 export function generarReporteSistema(input: Input): ReporteSistema | null {
-  const { oleaje, viento, vientoRacha, agua, bandera, medusasRiesgo, cert } = input
+  const { oleaje, viento, vientoRacha, agua, bandera, medusasRiesgo, cert, locale = 'es' } = input
+  const es = locale === 'es'
   // Sin oleaje + viento + agua no es un reporte: bail.
   if (oleaje == null && viento == null && agua == null) return null
 
@@ -55,48 +58,48 @@ export function generarReporteSistema(input: Input): ReporteSistema | null {
   // institucional. La gente decide '¿me meto o no?' — no clasifica.
   let titulo = ''
   if (bandera?.color === 'roja') {
-    titulo = 'No te metas hoy'
+    titulo = es ? 'No te metas hoy' : 'Stay out of the water today'
     severidad = 'danger'
   } else if (bandera?.color === 'amarilla') {
-    titulo = 'Precaución hoy'
+    titulo = es ? 'Precaución hoy' : 'Take care today'
     severidad = 'warn'
   } else if (bandera?.color === 'verde') {
-    titulo = 'Baño OK · agua tranquila'
+    titulo = es ? 'Baño OK · agua tranquila' : 'Safe to swim · calm water'
   } else {
-    titulo = 'Calma en la costa'
+    titulo = es ? 'Calma en la costa' : 'Calm along the coast'
   }
 
   // Oleaje.
   if (typeof oleaje === 'number') {
     const olM = oleaje.toFixed(1)
-    if (oleaje >= 2)        { partes.push(`oleaje fuerte ${olM} m`); if (severidad === 'ok') severidad = 'warn' }
-    else if (oleaje >= 1)   { partes.push(`oleaje moderado ${olM} m`) }
-    else                    { partes.push(`oleaje calmo ${olM} m`) }
+    if (oleaje >= 2)        { partes.push(es ? `oleaje fuerte ${olM} m` : `heavy swell ${olM} m`); if (severidad === 'ok') severidad = 'warn' }
+    else if (oleaje >= 1)   { partes.push(es ? `oleaje moderado ${olM} m` : `moderate swell ${olM} m`) }
+    else                    { partes.push(es ? `oleaje calmo ${olM} m` : `calm sea ${olM} m`) }
   }
 
   // Viento.
   if (typeof viento === 'number') {
     const v = Math.round(viento)
-    if (v >= 30)            { partes.push(`viento ${v} km/h`); if (severidad === 'ok') severidad = 'warn' }
-    else if (v >= 20)       { partes.push(`brisa moderada ${v} km/h`) }
-    else                    { partes.push(`apenas viento ${v} km/h`) }
+    if (v >= 30)            { partes.push(es ? `viento ${v} km/h` : `wind ${v} km/h`); if (severidad === 'ok') severidad = 'warn' }
+    else if (v >= 20)       { partes.push(es ? `brisa moderada ${v} km/h` : `moderate breeze ${v} km/h`) }
+    else                    { partes.push(es ? `apenas viento ${v} km/h` : `barely any wind ${v} km/h`) }
   }
 
   // Rachas (solo si claramente racheado vs viento sostenido).
   if (typeof vientoRacha === 'number' && typeof viento === 'number' && vientoRacha > viento * 1.6) {
-    partes.push(`con rachas hasta ${Math.round(vientoRacha)} km/h`)
+    partes.push(es ? `con rachas hasta ${Math.round(vientoRacha)} km/h` : `gusting to ${Math.round(vientoRacha)} km/h`)
     if (severidad === 'ok') severidad = 'warn'
   }
 
   // Agua.
   if (typeof agua === 'number') {
     const ag = agua.toFixed(0)
-    partes.push(`agua ${ag} °C`)
+    partes.push(es ? `agua ${ag} °C` : `water ${ag} °C`)
   }
 
   // Medusas (si el riesgo lo eleva).
   if (medusasRiesgo === 'alto') {
-    partes.push('riesgo de medusas')
+    partes.push(es ? 'riesgo de medusas' : 'jellyfish risk')
     if (severidad === 'ok') severidad = 'warn'
   }
 

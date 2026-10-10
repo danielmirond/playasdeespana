@@ -53,7 +53,7 @@ export default function CampervanHubPageEn() {
             Compare campervans →
           </a>
           <p style={{ color: 'rgba(255,255,255,.7)', fontSize: '.8rem', marginTop: '1rem' }}>
-            Price comparison with Camperdays · at no extra cost to you
+            Price comparison with Camperdays · Affiliate link: we earn a commission at no extra cost to you.
           </p>
         </div>
       </section>

@@ -125,7 +125,7 @@ export default function BoatRentalHubPage() {
             Explore Offers on SamBoat
           </a>
           <p className="text-blue-200 text-sm mt-6">
-            Affiliated with SamBoat • No additional costs
+            Affiliated with SamBoat · Affiliate link: we earn a commission at no extra cost to you.
           </p>
         </div>
       </section>

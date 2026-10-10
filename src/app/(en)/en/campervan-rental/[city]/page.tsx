@@ -185,7 +185,8 @@ export default async function CamperCityPageEn({ params }: Props) {
         {/* CTA */}
         <section style={{ background: `linear-gradient(135deg, ${CTA} 0%, ${CTA2} 100%)`, color: '#fff', borderRadius: 10, padding: '2.25rem 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 800, margin: '0 0 .6rem' }}>Compare your campervan in {c.ciudad}</h2>
-          <p style={{ color: 'rgba(255,255,255,.88)', margin: '0 0 1.25rem' }}>Several companies, one comparison tool. At no extra cost to you.</p>
+          <p style={{ color: 'rgba(255,255,255,.88)', margin: '0 0 1.25rem' }}>Several companies, one comparison tool.</p>
+          <p style={{ color: 'rgba(255,255,255,.72)', fontSize: '.78rem', margin: '-.8rem 0 1.25rem' }}>Affiliate link: we earn a commission at no extra cost to you.</p>
           <a href={cta2} target="_blank" rel="noopener noreferrer sponsored" style={{ display: 'inline-block', padding: '.85rem 1.7rem', background: '#fff', color: CTA2, borderRadius: 8, fontWeight: 800, textDecoration: 'none' }}>
             See prices on Camperdays →
           </a>
