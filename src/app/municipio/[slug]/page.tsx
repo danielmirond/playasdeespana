@@ -109,11 +109,16 @@ export default async function MunicipioPage({ params }: Props) {
   // Respuesta directa a "¿X tiene playa?" — query-pregunta real detectada
   // en GSC (jul-2026, p.ej. "foios tiene playa": 487 imp sin clicks).
   // La redacción varía con los datos para no sonar a plantilla.
-  const topPlaya = [...playas]
+  // Esto no ordena «por servicios»: mira dos campos, bandera y socorrismo.
+  // Y solo significan algo si detrás hay inventario oficial; sin él valen
+  // false por defecto y el «top» acaba siendo la primera de la lista.
+  const conInventario = playas.filter(p => (p as unknown as Record<string, unknown>).servicios_fuente === 'miteco')
+  const topPlaya = [...conInventario]
     .sort((a, b) => ((b.bandera ? 5 : 0) + (b.socorrismo ? 2 : 0)) - ((a.bandera ? 5 : 0) + (a.socorrismo ? 2 : 0)))[0]
+  const topTieneAlgo = topPlaya && (topPlaya.bandera || (topPlaya as unknown as Record<string, unknown>).socorrismo)
   const respuestaTienePlaya = playas.length === 1
-    ? `Sí, ${municipio.nombre} tiene una playa: ${topPlaya.nombre}. En su ficha ves la bandera, la temperatura del agua y el oleaje de hoy, actualizados cada hora.`
-    : `Sí, ${municipio.nombre} tiene ${playas.length} playas en su litoral${conBandera > 0 ? `, ${conBandera} de ellas con Bandera Azul` : ''}. ${topPlaya ? `La más completa por servicios es ${topPlaya.nombre}.` : ''} Abajo tienes el estado del mar de todas, actualizado cada hora.`
+    ? `Sí, ${municipio.nombre} tiene una playa: ${playas[0].nombre}. En su ficha ves la bandera, la temperatura del agua y el oleaje de hoy, actualizados cada hora.`
+    : `Sí, ${municipio.nombre} tiene ${playas.length} playas en su litoral${conBandera > 0 ? `, ${conBandera} de ellas con Bandera Azul` : ''}. ${topTieneAlgo ? `${topPlaya.bandera ? `Con Bandera Azul y socorrismo, ${topPlaya.nombre}` : `Con socorrismo, ${topPlaya.nombre}`}.` : ''} Abajo tienes el estado del mar de todas, con el oleaje actualizado cada hora.`
   const faqTienePlaya = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

@@ -73,7 +73,8 @@ export function etiquetaViento(kmh: number): string {
  * Genera la respuesta directa a «¿va a llover hoy en X?». Regla mecánica:
  *
  *   1. Máxima probabilidad horaria en las horas restantes del día:
- *        · < 20 % → «No lloverá hoy».
+ *        · 0 %    → «La predicción no da lluvia hoy».
+ *        · < 20 % → «Es muy poco probable que llueva» con la cifra.
  *        · 20-40 % → «Es poco probable que llueva».
  *        · > 40 % → «Sí, puede llover» + primera hora con >40 %.
  *   2. Además, se busca en los 7 días la próxima jornada con > 40 % para
@@ -102,7 +103,12 @@ export function respuestaLluvia(hoy: HoraTiempo[], dias: DiaTiempo[], municipio:
   const en = municipio
   let hoyTxt: string
   if (maxProb < 20) {
-    hoyTxt = `No lloverá hoy en ${en}.`
+    // Un 19 % no es un no. La predicción da probabilidad y nosotros la
+    // convertíamos en una negación: el mismo error que pintar «No hay
+    // duchas» cuando el inventario calla.
+    hoyTxt = maxProb === 0
+      ? `La predicción no da lluvia hoy en ${en}.`
+      : `Es muy poco probable que llueva hoy en ${en} (máximo ${maxProb} % en las próximas horas).`
   } else if (maxProb < 40) {
     hoyTxt = `Es poco probable que llueva hoy en ${en} (máximo ${maxProb} % en las próximas horas).`
   } else {
