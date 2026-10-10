@@ -1,8 +1,24 @@
-import { TOTAL_PUBLICADAS_TXT } from '@/lib/playas'
-import type { Metadata, Viewport } from 'next'
-import { Playfair_Display, DM_Sans, JetBrains_Mono, Literata, Schibsted_Grotesk } from 'next/font/google'
+// src/components/layout/RootShell.tsx — el documento, en el idioma que toque.
+//
+// POR QUÉ EXISTE. Había un único root layout que fijaba <html lang="es"> y
+// montaba <Footer /> sin idioma. Como ese layout envuelve también a /en, las
+// 4.948 páginas en inglés servían el pie entero en castellano —incluido el
+// aviso de afiliación, que es justo el texto que tiene que entender quien lo
+// lee— y un lang equivocado. El HtmlLangSetter lo corregía con JavaScript
+// después de hidratar, o sea nunca para quien lee el HTML.
+//
+// Ahora hay dos root layouts, uno por idioma, y los dos pintan ESTE shell.
+// Todo lo que no depende del idioma vive aquí y solo aquí: si se duplicara,
+// los dos árboles divergirían sin que nadie se entere.
+//
+// Lo que NO se puede tocar al mantenerlo:
+//   · las fuentes se instancian en app/fonts.ts, nunca aquí ni en los layouts
+//   · el suppressHydrationWarning del <body> y su comentario van literales
+import type { ReactNode } from 'react'
 import { LITORAL_CSS_MIN, TIPO_LITORAL_CSS } from '@/styles/litoral'
-import { getFlags, flagsAttr, tieneFlag } from '@/lib/flags'
+import { flagsAttr, tieneFlag } from '@/lib/flags'
+import { clasesDeFuente } from '@/app/fonts'
+import { websiteSchema, ORGANIZATION_SCHEMA, type Idioma } from '@/lib/schema/site'
 import InstallPrompt from '@/components/pwa/InstallPrompt'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ConsentScripts from '@/components/ui/ConsentScripts'
@@ -11,151 +27,8 @@ import { Suspense } from 'react'
 import NavigationProgress from '@/components/ui/NavigationProgress'
 import MobileNav from '@/components/ui/MobileNav'
 import Footer from '@/components/ui/Footer'
-import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
-import './globals.css'
+import '@/app/globals.css'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
-
-// Organization JSON-LD global. Se emite una sola vez por página y todos los
-// schemas de la app referencian su @id (Beach.publisher, Article.author...).
-// Le permite a Google fusionar las menciones a una única entidad del
-// Knowledge Graph (Content Warehouse: authorEntities, trustedSource).
-const ORGANIZATION_SCHEMA = {
-  '@context': 'https://schema.org',
-  ...AUTOR_PLAYAS_ESPANA,
-}
-
-// WebSite + SearchAction: activa el cuadro de búsqueda de Google bajo el
-// dominio en SERP (sitelinks searchbox). Aumenta visibilidad de marca
-// y CTR. El @id estable enlaza el WebSite con la Organization vía
-// publisher. Content Warehouse: brand entity, sitelinks signals.
-const WEBSITE_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type':    'WebSite',
-  '@id':      `${BASE_URL}/#website`,
-  url:        BASE_URL,
-  name:       'Playas de España',
-  alternateName: ['playas-espana.com', 'Playas España'],
-  description:
-    `Estado del mar y guía de ${TOTAL_PUBLICADAS_TXT} playas españolas. Oleaje y viento cada hora (Open-Meteo); inventario del MITECO y calidad del agua de la EEA, de actualización anual.`,
-  inLanguage: 'es-ES',
-  publisher:  { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
-  potentialAction: {
-    '@type':       'SearchAction',
-    target: {
-      '@type':       'EntryPoint',
-      urlTemplate:   `${BASE_URL}/buscar?q={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
-}
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  display: 'swap',
-  weight: ['400', '500'],
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  // Antes era '--font-mono', que chocaba con el token --font-mono de la hoja
-  // y producía `--font-mono: var(--font-mono, …)` — autorreferencia inválida
-  // que caía al nombre de familia literal. Ahora la fuente y el token tienen
-  // nombres distintos y ambas hojas la referencian igual.
-  variable: '--font-jetbrains',
-  display: 'swap',
-  weight: ['400'],
-})
-
-// ——— Sistema Litoral ———————————————————————————————————————
-// Literata es VARIABLE (200–900) con itálica real y cifras tabulares: se
-// sirve el archivo variable, no instancias estáticas, porque el sistema usa
-// 400 de cuerpo, 500 de display y 700 de énfasis. Sin rango variable harían
-// falta tres ficheros y la negrita sintética que el handoff prohíbe.
-const literata = Literata({
-  subsets: ['latin'],
-  variable: '--font-literata',
-  display: 'swap',
-  style: ['normal', 'italic'],
-  axes: ['opsz'],
-})
-const schibsted = Schibsted_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-schibsted',
-  display: 'swap',
-})
-// JetBrains lo comparten las dos hojas vía --font-jetbrains.
-
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'),
-  title: {
-    default: 'Playas de España. Estado del mar en tiempo real',
-    template: '%s · Playas de España',
-  },
-  description: `Temperatura del agua, oleaje, calidad y servicios de ${TOTAL_PUBLICADAS_TXT} playas españolas. El oleaje y el viento, cada hora.`,
-  keywords: ['playas españa', 'estado del mar', 'temperatura agua', 'oleaje', 'calidad agua playa', 'banderas azules'],
-  openGraph: {
-    type: 'website',
-    locale: 'es_ES',
-    alternateLocale: ['en_GB'],
-    siteName: 'Playas de España',
-    images: [{ url: '/og-default.png', width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@playasespana',
-    creator: '@playasespana',
-  },
-  // Discover/SERP: max-image-preview:large es REQUISITO para que Google
-  // muestre imagen grande (sin esto no hay miniatura grande en Discover).
-  robots: {
-    index: true, follow: true,
-    'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1,
-    googleBot: {
-      index: true, follow: true,
-      'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1,
-    },
-  },
-  alternates: { canonical: 'https://playas-espana.com' },
-  // PWA: instalable ("Añadir a la pantalla de inicio" / prompt de Chrome).
-  manifest: '/manifest.webmanifest',
-  appleWebApp: { capable: true, title: 'Playas', statusBarStyle: 'default' },
-  icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },        // navegadores modernos (nítido)
-      { url: '/favicon.ico', sizes: 'any' },              // fallback: la "P" en .ico (16/32/48)
-    ],
-    apple: '/apple-touch-icon.png',
-  },
-  verification: {
-    google: 'vu3fltICpdNm3MPHVSDcB9YJE5gvNnxg4Nm-vUDk50E',
-    // Bing, Yandex y Seznam: sustituye XXXXXX por el código de cada dashboard
-    other: {
-      'msvalidate.01': process.env.BING_VERIFY ?? '',
-      'yandex-verification': process.env.YANDEX_VERIFY ?? '',
-      'seznam-wmt': process.env.SEZNAM_VERIFY ?? '',
-    },
-  },
-}
-
-export const viewport: Viewport = {
-  themeColor: '#1f6f8b',
-  // PWA / iOS instalado: expone env(safe-area-inset-*) para que las barras
-  // fijas (p.ej. la barra inferior de la ficha) respeten notch y home indicator.
-  viewportFit: 'cover',
-}
-
-// Critical CSS inline. renderiza antes del paint inicial
-// Design system v2 · tokens alineados con Figma export abril 2026
 const CRITICAL_CSS = `
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -258,7 +131,7 @@ h1,h2,h3,h4,h5,h6{scroll-margin-top:80px;line-height:1.12;letter-spacing:-.01em;
 @media (forced-colors: active){:root{--accent:LinkText;--muted:CanvasText;--line:CanvasText;--line-strong:CanvasText}a{color:LinkText}:focus-visible{outline:3px solid Highlight;box-shadow:none}}
 `
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootShell({ locale, children }: { locale: Idioma; children: React.ReactNode }) {
   // La decisión de flag se toma AQUÍ, en servidor, y se pinta en <html>.
   // Nunca un swap en cliente: produce FOUC y parte de la sesión se mediría
   // con un sistema y parte con el otro.
@@ -270,12 +143,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   // Las cuatro combinaciones son legítimas y cada una carga lo suyo: servir
   // las cuatro familias para usar dos es peso muerto en un sitio 90% móvil.
   const tipoLitoral = tieneFlag('ds_litoral_type')
-  const fuentes = tipoLitoral
-    ? `${literata.variable} ${schibsted.variable} ${jetbrainsMono.variable}`
-    : `${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`
+  const fuentes = clasesDeFuente(tipoLitoral)
 
   return (
-    <html lang="es" className={fuentes} {...(flags ? { 'data-flags': flags } : {})}>
+    <html lang={locale} className={fuentes} {...(flags ? { 'data-flags': flags } : {})}>
       <head>
         {/* Verificación de sitio Impact.com (afiliación). Usa atributo `value`
             (no `content`), por eso va como tag literal y no vía Metadata API. */}
@@ -370,12 +241,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema(locale)) }}
         />
         <NavigationProgress />
         <MobileNav />
         {children}
-        <Footer />
+        <Footer locale={locale} />
         {/* GA4 con Consent Mode v2 + AdSense y GetYourGuide tras permiso */}
         <ConsentScripts />
         {/* La vista de página en cada navegación de cliente. El App
