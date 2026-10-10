@@ -1428,9 +1428,16 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   de ruedas, inventarse un no es peor que no decir nada.
                   Lo que no consta se agrupa abajo en una línea y se dice. */}
               {(() => {
+                const reg = playa as unknown as Record<string, unknown>
+                // Sin registro oficial detrás, un false no es un «no hay»:
+                // es el valor con el que nació la variable. En las 1.529
+                // fichas que no cruzan con el inventario, duchas y parking
+                // estaban en false el 100 % de las veces.
+                const conFuente = reg.servicios_fuente === 'miteco'
                 const estado = (k: string) => {
-                  const v = (playa as unknown as Record<string, unknown>)[k]
-                  return v === true ? 'si' : v === false ? 'no' : 'nd'
+                  const v = reg[k]
+                  if (v === true) return k === 'socorrismo' && reg.socorrismo_temporada === true ? 'temporada' : 'si'
+                  return v === false && conFuente ? 'no' : 'nd'
                 }
                 const sabidos = i18n.SERVICIOS.filter(s => estado(s.key) !== 'nd')
                 const sinDato = i18n.SERVICIOS.filter(s => estado(s.key) === 'nd')
@@ -1438,8 +1445,12 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                   <>
                     <div className={styles.srvGrid}>
                       {sabidos.map(s => {
-                        const on = estado(s.key) === 'si'
-                        return <span key={s.key} className={`${styles.srv} ${on ? styles.srvSi : styles.srvNo}`}>{on ? (locale === 'en' ? 'Yes' : 'Sí') : 'No'} · {s.label}</span>
+                        const e = estado(s.key)
+                        const clase = e === 'no' ? styles.srvNo : e === 'temporada' ? styles.srvTemporada : styles.srvSi
+                        const txt = e === 'no' ? 'No'
+                          : e === 'temporada' ? (locale === 'en' ? 'Summer only' : 'En verano')
+                          : (locale === 'en' ? 'Yes' : 'Sí')
+                        return <span key={s.key} className={`${styles.srv} ${clase}`}>{txt} · {s.label}</span>
                       })}
                     </div>
                     {sinDato.length > 0 && (
@@ -1447,6 +1458,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                         {locale === 'en'
                           ? <>The official inventory has no entry for {sinDato.map(s => s.label.toLowerCase()).join(', ')} at this beach. Not listed is not the same as not there.</>
                           : <>El inventario oficial no dice nada sobre {sinDato.map(s => s.label.toLowerCase()).join(', ')} en esta playa. Que no conste no significa que no lo haya.</>}
+                        {(playa as unknown as Record<string, unknown>).socorrismo_temporada === true && (
+                          locale === 'en'
+                            ? <> Lifeguard cover is summer season only.</>
+                            : <> El socorrismo es solo de temporada estival.</>)}
                       </p>
                     )}
                   </>

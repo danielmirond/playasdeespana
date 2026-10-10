@@ -79,6 +79,96 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · El Portús, Cartagena (Región de Murcia) (voz bicéfala) ─────
+  {
+    slug: 'playa-el-portus-cartagena-murcia-grava-fondo-cala-morena-desprendimientos',
+    category: 'guias',
+    title: 'A 11 km de Cartagena, El Portús: grava, hondo a pocos pasos y aparcamiento que se llena en verano',
+    excerpt:
+      'El Portús es la playa del pueblo pesquero del mismo nombre, a 11 km de Cartagena: grava y arena media, una orilla que coge fondo enseguida y la sierra cayendo detrás. La pega: el aparcamiento se llena en verano y el paso hacia Cala Morena lleva años cerrado por desprendimientos.',
+    heroAlt:
+      'Playa de El Portús en Cartagena: cala de grava gris entre laderas secas de la sierra, con las casas del pueblo pesquero al fondo y el Mediterráneo en calma',
+    heroQuery: 'el portus,cartagena,murcia,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-10T10:09:07Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/murcia', label: 'Playas de la Región de Murcia' },
+      { href: '/magazine/playa-calblanque-murcia-bus-verano', label: 'Calblanque: el bus de verano y la arena sin edificios' },
+      { href: '/calas-con-encanto', label: 'Calas con carácter' },
+    ],
+    body: [
+      { t: 'p', html: 'La carretera deja atrás Galifa y empieza a enroscarse entre lomas peladas, de un ocre que en agosto parece recién horneado. No hay mar a la vista hasta la última curva. Entonces aparece de golpe, metido en una muesca de la sierra: un puñado de casas blancas, unas barcas varadas, una rotonda con un ancla y, abajo, una lengua de grava gris que el agua lame sin hacer ruido. Detrás, la montaña sigue subiendo como si el pueblo le estorbara.' },
+      { t: 'p', html: 'El Portús es eso: un pueblo pesquero de Cartagena con una playa al pie y un espacio protegido —el de la <strong>Sierra de la Muela, Cabo Tiñoso y Roldán</strong>— rodeándolo por los tres lados que no son mar. Tiene fama por el camping naturista de la ladera y por las rutas que salen desde el mismo aparcamiento. La playa, en cambio, se suele despachar en una línea. Merece más, y también merece un par de avisos.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Está a unos <strong>11 kilómetros de Cartagena</strong>. Se entra desde el desvío de la carretera de la costa hacia Isla Plana y La Azohía, y el último tramo cruza Galifa por una carretera estrecha y con curvas. La ficha de <strong>Turismo de la Región de Murcia</strong> la describe como playa urbana de <strong>350 metros de largo y 16 de ancho medio</strong>, de arena media y grava, con <strong>afluencia alta</strong>. Otras fichas oficiales de turismo la dejan en unos 130 metros: la diferencia depende de si se cuenta solo el tramo frente al pueblo o toda la orilla. Lo que no cambia es el material: aquí se pisa piedra pequeña, no arena fina.' },
+      { t: 'p', html: 'El <strong>contra</strong> número uno está en el agua, no en la orilla. La playa tiene pendiente y <strong>coge fondo muy pronto</strong>: a pocos pasos ya no se hace pie. Para nadar es una ventaja; para niños pequeños o para quien no nada con soltura, es justo lo contrario. Las guías locales no señalan corrientes peligrosas en condiciones normales, y en las semanas punta del verano hay <strong>socorrista de 11:00 a 19:00</strong>, según la guía de Murcia Today. Fuera de esas semanas, no hay vigilancia.' },
+      { t: 'p', html: 'El segundo contra está en la ladera. Al otro lado de un promontorio queda <strong>Cala Morena</strong>, la cala vecina, a la que hoy se entra por el camping naturista El Portús. El acceso a pie desde el extremo de la playa lleva <strong>años cerrado por riesgo de desprendimientos</strong>: la roca se ha venido abajo también sobre alguna de las casas del frente. No es un aviso decorativo. Saltarse la valla para ahorrarse el rodeo es meterse en la zona exacta que se ha cerrado por eso.' },
+      { t: 'p', html: 'El tercero es logístico. Hay aparcamiento junto al pueblo, pero <strong>en verano se llena</strong> y toca dejar el coche cuesta arriba y bajar andando. En julio y agosto existe alternativa: la <strong>línea 12 de autobús urbano (Bus Playa)</strong> va de Cartagena a la playa. El resto del año, el bus urbano llega hasta Galifa. Una nota a favor: según los datos de accesibilidad de la ficha regional para 2026, la playa tiene <strong>pasarela de madera de 2 metros de ancho</strong>, una silla anfibia, un módulo de aseo adaptado, sombra adaptada y dos plazas reservadas.' },
+      { t: 'p', html: 'Sobre los distintivos, prudencia. La ficha regional muestra el icono de Bandera Azul, pero no hemos podido confirmar a El Portús en la lista de ADEAC de 2026, así que no la damos por segura. Tampoco damos una calificación concreta de calidad de agua sin haberla contrastado. Y una aclaración que conviene hacer antes de ir: <strong>la playa del pueblo no es nudista</strong>. El naturismo está en el camping y en su entorno, no en la orilla frente a las barcas.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En junio y septiembre, entre semana, y también en otoño: el agua del Mediterráneo murciano conserva el calor bastantes semanas después del verano y el pueblo recupera su tamaño. A primera hora hay sitio para aparcar abajo y la grava todavía no quema.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Un domingo de agosto a mediodía, cuando coinciden los bañistas de Cartagena, el aparcamiento lleno y la cuesta de subida al coche con el sol de cara. Y en torno al <strong>15 de agosto</strong>, cuando el pueblo celebra sus fiestas: buen plan si se va a eso, mal plan si se busca una tarde tranquila de playa.' },
+      { t: 'p', html: '<strong>El truco</strong>. Escarpines o cangrejeras. La grava se lleva mal descalzo, sobre todo al salir del agua por la pendiente. Y si se va con niños, plantar la toalla en el lado donde hay socorrista y no perderlos de vista en la orilla: dos pasos de más y ya están sin pie.' },
+      { t: 'p', html: '<strong>El viento y la alternativa</strong>. La cala se abre al sur, con la sierra a la espalda: de los vientos de componente norte la protege la montaña; cuando el viento entra del mar, la ola llega de frente y el baño pierde la calma. Quien quiera arena fina y horizonte sin edificios tiene al otro lado de Cartagena <a href="/magazine/playa-calblanque-murcia-bus-verano">Calblanque</a>, con el acceso en coche restringido en temporada. Quien vaya a caminar puede combinar el baño con las rutas del espacio protegido que salen del propio El Portús.' },
+      { t: 'ul', items: [
+        'Municipio: Cartagena (Región de Murcia). A unos 11 km de la ciudad, por Galifa.',
+        'Ficha de Turismo de la Región de Murcia: 350 m de largo, 16 m de ancho medio, arena media y grava, afluencia alta.',
+        'Orilla con pendiente: coge fondo a pocos pasos.',
+        'Socorrista de 11:00 a 19:00 en las semanas punta del verano (Murcia Today).',
+        'Acceso a Cala Morena desde la playa cerrado desde hace años por desprendimientos; se entra por el camping naturista.',
+        'Bus: línea 12 (Bus Playa) desde Cartagena en julio y agosto; aparcamiento que se llena en verano.',
+        'Accesibilidad 2026: pasarela de 2 m, silla anfibia, aseo y sombra adaptados, 2 plazas reservadas.',
+      ] },
+      { t: 'quote', text: 'Le llamarán un rincón tranquilo a las puertas de Cartagena. Tranquilo lo es en octubre. En agosto es la playa de media ciudad, con la grava al rojo y el coche aparcado a media cuesta.' },
+      { t: 'p', html: 'A última hora de la tarde, la sombra de la sierra baja sobre el pueblo antes que sobre el agua. Las barcas siguen varadas en la grava, alguien recoge una caña en el espigón y el bus de vuelta espera con el motor encendido en la rotonda del ancla. La montaña, detrás, sigue a lo suyo: soltando de vez en cuando alguna piedra hacia Cala Morena, como recordando que el pueblo está aquí de prestado.' },
+    ],
+    faq: [
+      { q: '¿Cómo se llega a la playa de El Portús?', a: 'En coche desde Cartagena, unos 11 km, por la carretera de la costa hacia Isla Plana y La Azohía y el desvío que cruza Galifa. En julio y agosto la línea 12 de autobús urbano (Bus Playa) llega a la playa; el resto del año el bus urbano llega hasta Galifa. El aparcamiento se llena en verano.' },
+      { q: '¿Es buena la playa de El Portús para niños?', a: 'Con cautela. Es de grava y arena media y la orilla coge fondo muy pronto, así que los niños pierden pie a pocos pasos. Hay socorrista en las semanas punta del verano; fuera de ellas, no hay vigilancia.' },
+      { q: '¿Es nudista la playa de El Portús?', a: 'La playa del pueblo no lo es. El naturismo se concentra en el camping naturista de la ladera y su entorno; Cala Morena, la cala vecina, se alcanza hoy por el camping, porque el acceso a pie desde la playa está cerrado por desprendimientos.' },
+    ],
+    en: {
+      title: 'El Portús, 11 km from Cartagena: shingle, deep water within a few strides and a car park that fills in summer',
+      excerpt:
+        'El Portús is the beach of the fishing village of the same name, 11 km from Cartagena: shingle and coarse sand, a shore that drops to deep water almost at once and the sierra rising behind. The catch: the car park fills in summer, and the way through to Cala Morena has been shut for years because of rockfalls.',
+      related: [
+        { href: '/en/magazine/playa-calblanque-murcia-bus-verano', label: 'Calblanque: the summer bus and sand without buildings' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'The road leaves Galifa behind and starts to coil between bare hills, an ochre that in August looks freshly baked. There is no sea in sight until the last bend. Then it appears all at once, tucked into a notch in the sierra: a handful of white houses, a few boats hauled up, a roundabout with an anchor on it and, below, a tongue of grey shingle that the water laps without a sound. Behind it, the mountain keeps climbing as if the village were in its way.' },
+        { t: 'p', html: 'That is El Portús: a fishing village in the municipality of Cartagena with a beach at its feet and a protected area — the <strong>Sierra de la Muela, Cabo Tiñoso y Roldán</strong> — wrapped around the three sides that are not sea. It is known for the naturist campsite on the hillside and for the walking routes that start from the car park. The beach itself usually gets a single line. It deserves more, and it deserves a couple of warnings too.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'It lies about <strong>11 kilometres from Cartagena</strong>. You turn off the coast road towards Isla Plana and La Azohía, and the final stretch runs through Galifa on a narrow, winding road. The regional tourist board’s listing describes it as an urban beach <strong>350 metres long and 16 metres wide on average</strong>, of coarse sand and shingle, with <strong>heavy visitor numbers</strong>. Other official tourism listings put it at around 130 metres: the difference depends on whether you count only the stretch in front of the village or the whole shore. What does not change is the surface: this is small stone underfoot, not fine sand.' },
+        { t: 'p', html: 'The first <strong>drawback</strong> is in the water, not on the shore. The beach shelves and <strong>gets deep very quickly</strong>: a few steps in and you are out of your depth. For swimmers that is a plus; for small children or anyone unsure in the water, it is the opposite. Local guides do not flag dangerous currents in normal conditions, and in the peak summer weeks there is a <strong>lifeguard from 11am to 7pm</strong>, according to the Murcia Today guide. Outside those weeks, nobody is watching.' },
+        { t: 'p', html: 'The second drawback is on the hillside. Beyond a headland lies <strong>Cala Morena</strong>, the neighbouring cove, which today is reached through the El Portús naturist campsite. The path from the end of the beach has been <strong>closed for years because of rockfalls</strong>: rock has also come down on some of the houses along the front. This is not a decorative sign. Climbing the fence to save the detour puts you in exactly the area that was closed for that reason.' },
+        { t: 'p', html: 'The third is logistics. There is parking by the village, but <strong>it fills in summer</strong> and you end up leaving the car up the hill and walking down. In July and August there is an alternative: the <strong>number 12 city bus (Bus Playa)</strong> runs from Cartagena to the beach. The rest of the year, the city bus goes as far as Galifa. One point in its favour: according to the regional listing’s 2026 accessibility data, the beach has a <strong>2-metre-wide boardwalk</strong>, an amphibious chair, an adapted toilet, adapted shade and two reserved parking bays.' },
+        { t: 'p', html: 'On awards, some caution. The regional listing shows a Blue Flag icon, but we have not been able to confirm El Portús on ADEAC’s 2026 list, so we do not count it as certain. Nor are we giving a specific water-quality rating we have not checked. And one thing worth knowing before you go: <strong>the village beach is not a nudist beach</strong>. Naturism belongs to the campsite and its surroundings, not to the shore in front of the boats.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> June and September, on weekdays, and into autumn too: the Murcian Mediterranean holds its warmth for weeks after summer and the village shrinks back to its real size. Early in the day there is room to park at the bottom and the shingle is not yet scorching.' },
+        { t: 'p', html: '<strong>When not to?</strong> An August Sunday at midday, when Cartagena’s bathers, a full car park and the uphill walk back to the car with the sun in your face all coincide. And around <strong>15 August</strong>, when the village holds its fiestas: a good plan if that is what you are after, a poor one if you want a quiet afternoon on the beach.' },
+        { t: 'p', html: '<strong>The trick</strong>. Water shoes. Shingle is hard going barefoot, especially climbing out up the slope. With children, set up on the side where the lifeguard is and keep them close at the water’s edge: two steps too many and they are out of their depth.' },
+        { t: 'p', html: '<strong>The wind and the alternative</strong>. The cove faces south with the sierra at its back: the mountain shelters it from northerly winds, but when the wind comes off the sea the waves roll straight in and the calm goes. For fine sand and a skyline without buildings, there is <a href="/en/magazine/playa-calblanque-murcia-bus-verano">Calblanque</a> on the other side of Cartagena, with its own access restrictions in season. Walkers can pair a swim with the protected area’s routes, which start from El Portús itself.' },
+        { t: 'ul', items: [
+          'Municipality: Cartagena (Región de Murcia). About 11 km from the city, via Galifa.',
+          'Regional tourist board listing: 350 m long, 16 m average width, coarse sand and shingle, heavy visitor numbers.',
+          'Shelving shore: deep water within a few steps.',
+          'Lifeguard 11am–7pm in the peak summer weeks (Murcia Today).',
+          'Path to Cala Morena from the beach closed for years by rockfalls; access is through the naturist campsite.',
+          'Bus: line 12 (Bus Playa) from Cartagena in July and August; car park fills in summer.',
+          'Accessibility 2026: 2 m boardwalk, amphibious chair, adapted toilet and shade, 2 reserved bays.',
+        ] },
+        { t: 'quote', text: 'They will sell it as a quiet cove on Cartagena’s doorstep. Quiet it is, in October. In August it is half the city’s beach, with the shingle red-hot and the car parked halfway up the hill.' },
+        { t: 'p', html: 'Late in the afternoon the sierra’s shadow reaches the village before it reaches the water. The boats are still drawn up on the shingle, someone is packing away a rod on the breakwater and the bus back idles at the anchor roundabout. Behind it all, the mountain carries on as it always has: letting a stone go now and then towards Cala Morena, as if to remind the village that it is only here on loan.' },
+      ],
+      faq: [
+        { q: 'How do you get to El Portús beach?', a: 'By car from Cartagena, about 11 km, along the coast road towards Isla Plana and La Azohía and the turn-off through Galifa. In July and August the number 12 city bus (Bus Playa) goes to the beach; the rest of the year the city bus stops at Galifa. The car park fills in summer.' },
+        { q: 'Is El Portús good for children?', a: 'With care. It is shingle and coarse sand and the shore gets deep very quickly, so children lose their footing within a few steps. There is a lifeguard in the peak summer weeks; outside them, there is no supervision.' },
+        { q: 'Is El Portús a nudist beach?', a: 'The village beach is not. Naturism centres on the naturist campsite on the hillside and its surroundings; Cala Morena, the neighbouring cove, is now reached through the campsite because the footpath from the beach is closed by rockfalls.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Güigüí, La Aldea de San Nicolás (Gran Canaria) (voz bicéfala) ─────
   {
     slug: 'playa-de-guigui-la-aldea-gran-canaria-tasartico-550-metros-bajamar',

@@ -245,6 +245,9 @@
 /* Lo que el inventario no dice. Sin chip y sin tachar: un «no consta» no
    es un servicio ausente, y pintarlo igual que un «No» era el error. */
 .srvSinDato { margin: .6rem 0 0; font-size: .8rem; line-height: 1.5; color: var(--muted); }
+/* Socorrismo de temporada: ni un sí pelado, que en octubre es mentira, ni
+   un no. El inventario lo distingue en 324 playas y aquí también. */
+.srvTemporada { border-color: rgba(184,121,29,.35); background: rgba(184,121,29,.08); color: #8a5a12; }
 
 /* ── ACTIVIDADES (legacy) ───────────────────────────────────────── */
 .actGrid {
