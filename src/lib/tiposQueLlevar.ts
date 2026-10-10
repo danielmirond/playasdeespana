@@ -84,7 +84,7 @@ export const TIPOS: TipoQueLlevar[] = [
     titulo: 'Qué llevar a una playa de arena',
     descripcion: 'Imprescindibles para un día en una playa de arena: sombrilla, toalla, protección solar y los esenciales para que no falte nada.',
     intro: [
-      'La playa de arena es la playa por defecto en España. Más de 2.500 de las 3.500 catalogadas son arenosas. Pueden ser urbanas (paseo marítimo, chiringuitos, socorrismo) o vírgenes (cero servicios), grandes y abiertas o pequeñas y resguardadas. La lista de cosas que llevar es relativamente estándar, pero los detalles cambian según el contexto.',
+      'La playa de arena es la playa por defecto en España. Dos de cada tres de las catalogadas por el Ministerio son arenosas. Pueden ser urbanas (paseo marítimo, chiringuitos, socorrismo) o vírgenes (cero servicios), grandes y abiertas o pequeñas y resguardadas. La lista de cosas que llevar es relativamente estándar, pero los detalles cambian según el contexto.',
       'En arenosas urbanas tipo Barcelona, Valencia, Málaga, San Sebastián o Las Palmas hay servicios cerca, pero los precios suben en agosto y los pequeños descuidos (saturación de aparcamiento, agua a 3€) suman. En arenosas vírgenes tipo el Cabo de Gata, los Caños de Meca o Cies, vienes autosuficiente o pagas el peaje de improvisar.',
       'Lo común a todas: protección solar generosa, sombra propia (pocas playas españolas tienen sombra natural en su mitad central) y agua suficiente. El resto se ajusta.',
     ],

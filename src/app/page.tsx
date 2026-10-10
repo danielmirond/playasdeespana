@@ -24,13 +24,13 @@ import MonetizacionBlock from '@/components/home/MonetizacionBlock'
 import BoatRentalCTA from '@/components/home/BoatRentalCTA'
 import MagazineCarrusel from '@/components/home/MagazineCarrusel'
 import TresMunicipios from '@/components/home/TresMunicipios'
-import { getPlayas, getComunidades } from '@/lib/playas'
+import { getPlayas, getComunidades, TOTAL_PUBLICADAS_TXT } from '@/lib/playas'
 
 export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Playas de España | ¿A qué playa voy hoy?',
-  description: 'Estado del mar en tiempo real en más de 4.400 playas de España. Temperatura del agua, oleaje, viento y servicios. Datos actualizados cada hora.',
+  description: `Estado del mar en ${TOTAL_PUBLICADAS_TXT} playas de España. Temperatura del agua, oleaje, viento y servicios, con el oleaje actualizado cada hora.`,
   alternates: {
     canonical: '/',
     languages: {
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Playas de España | ¿A qué playa voy hoy?',
-    description: 'Consulta el estado del mar en más de 4.400 playas españolas.',
+    description: `Consulta el estado del mar en ${TOTAL_PUBLICADAS_TXT} playas españolas.`,
     url: 'https://playas-espana.com',
     images: [{ url: '/api/og?playa=Playas+de+España', width: 1200, height: 630 }],
   },
@@ -124,7 +124,7 @@ export default async function HomePage() {
     },
     {
       q: '¿Cuántas playas hay en España?',
-      a: `El inventario oficial del MITECO recoge más de 3.500 playas, y aquí tienes ficha de ${playas.length.toLocaleString('es')} incluyendo calas y zonas de baño de las diez comunidades costeras, Ceuta y Melilla. De ellas, ${nBandera.toLocaleString('es')} lucen Bandera Azul en 2026: España lleva décadas siendo el país con más banderas azules del mundo.`,
+      a: `El inventario oficial del Ministerio recoge unas 3.550 playas de costa, y aquí tienes ficha de ${playas.length.toLocaleString('es')} incluyendo calas y zonas de baño de las diez comunidades costeras, Ceuta y Melilla. De ellas, ${nBandera.toLocaleString('es')} lucen Bandera Azul en 2026: España lleva décadas siendo el país con más banderas azules del mundo.`,
     },
     {
       q: '¿Dónde puedo ir a la playa con mi perro?',
@@ -150,7 +150,7 @@ export default async function HomePage() {
         name: 'Playas de España | ¿A qué playa voy hoy?',
         inLanguage: 'es',
         dateModified: getPlayasDataModified(),
-        description: 'Estado del mar en tiempo real en más de 4.400 playas de España: temperatura del agua, oleaje, viento, banderas y servicios.',
+        description: `Estado del mar en ${TOTAL_PUBLICADAS_TXT} playas de España: temperatura del agua, oleaje, viento, banderas y servicios.`,
       }) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         '@context': 'https://schema.org',

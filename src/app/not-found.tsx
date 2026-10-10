@@ -1,3 +1,4 @@
+import { TOTAL_PUBLICADAS_TXT } from '@/lib/playas'
 // src/app/not-found.tsx. Custom 404 with beach suggestions
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
@@ -33,7 +34,7 @@ export default function NotFound() {
         </h1>
         <p style={{ fontSize: '.95rem', color: 'var(--muted)', maxWidth: 420, marginBottom: '2rem', lineHeight: 1.6 }}>
           La página que buscas no existe o ha cambiado de dirección.
-          Pero hay más de 4.400 playas esperándote.
+          Pero hay {TOTAL_PUBLICADAS_TXT} playas esperándote.
         </p>
         <div style={{ display: 'flex', gap: '.55rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <Link href="/" style={{

@@ -5,6 +5,7 @@ import slugsExtranjeras from '@/data/slugs-extranjeras.json'
 import duplicados from '@/data/duplicados.json'
 import retiradas from '@/data/playas-retiradas.json'
 import playasJson from '@/../public/data/playas.json'
+import { esIndexable } from '@/lib/calidad-indexacion'
 
 // Playas fuera del ámbito (extranjeras/interiores sin costa) + fichas
 // DUPLICADAS (misma playa importada varias veces; el middleware hace 301 a la
@@ -27,8 +28,10 @@ const EXCLUIDAS = new Set<string>([
  * credibilidad: 4.500 en la home, 5.611 en el layout, «Cinco mil» en el
  * H1, 5.000+ en la metodología. Ninguna era esta.
  *
- * 5.098 registros brutos − 588 extranjeras − 83 duplicadas = 4.427.
- * El bruto NO se publica: mide el fichero, no las páginas.
+ * 5.098 registros brutos − 761 excluidas (extranjeras, duplicadas y
+ * retiradas) = 4.337. El bruto NO se publica: mide el fichero, no las
+ * páginas. Y de esas 4.337, las que pasan el filtro de calidad y llegan al
+ * sitemap son 4.329: esa es TOTAL_PUBLICADAS, y es la que se anuncia.
  *
  * Las extranjeras eran 523 hasta que Search Console enseñó 62 páginas
  * indexadas fuera de España: playas argelinas de Mostaganem colgando de
@@ -41,8 +44,8 @@ const EXCLUIDAS = new Set<string>([
  *
  * Donde la página ya carga las playas, usa `playas.length`. Esta
  * constante es para los metadatos y sitios estáticos, donde no hay
- * conteo a mano. Y si no cabe la cifra exacta, «más de 4.400» — nunca
- * «más de 4.500», que es falso por nueve.
+ * conteo a mano. Para lo que se le promete al lector usa TOTAL_PUBLICADAS,
+ * no esta: «más de 4.400» llegó a ser falso por sesenta y tres.
  */
 export const TOTAL_PLAYAS =
   (playasJson as unknown as Playa[]).filter(p => !EXCLUIDAS.has(p.slug)).length
@@ -56,6 +59,33 @@ export const TOTAL_PLAYAS =
  * es el argumento de venta del sitio.
  */
 export const TOTAL_PLAYAS_TXT = String(TOTAL_PLAYAS).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
+/**
+ * Las que de verdad publicamos: las que pasan el filtro del sitemap.
+ *
+ * TOTAL_PLAYAS cuenta fichas que existen; esta cuenta páginas que alguien
+ * puede encontrar. La diferencia son las que el filtro de calidad deja en
+ * noindex, y prometer esas es prometer páginas que no se ven.
+ *
+ * Es la cifra para los metadatos, el pie y la portada. Comprobación: tiene
+ * que coincidir con la suma de <loc> de /sitemaps/playas/1..5.
+ *
+ * Y la regla de siempre: si no cabe la cifra exacta, se redondea HACIA ABAJO
+ * al centenar. Nunca hacia arriba, que es lo que convirtió 4.427 en «más de
+ * 4.500» y nos dejó mintiendo por setenta y tres.
+ */
+export const TOTAL_PUBLICADAS =
+  (playasJson as unknown as Playa[]).filter(p => !EXCLUIDAS.has(p.slug) && esIndexable(p)).length
+
+export const TOTAL_PUBLICADAS_TXT = String(TOTAL_PUBLICADAS).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
+/** La misma, con coma, para el inglés. Mismo motivo para no usar
+ *  toLocaleString: el separador no puede depender del ICU del build. */
+export const TOTAL_PUBLICADAS_TXT_EN = String(TOTAL_PUBLICADAS).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+/** «más de 4.300», redondeado hacia abajo al centenar. */
+export const TOTAL_PUBLICADAS_APROX_TXT =
+  String(Math.floor(TOTAL_PUBLICADAS / 100) * 100).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
 export function toSlug(str: string): string {
   return (str ?? '')

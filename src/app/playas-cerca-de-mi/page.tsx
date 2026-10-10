@@ -9,7 +9,7 @@ import type { Metadata } from 'next'
 import { robotsMeta } from '@/lib/robots-meta'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import { getPlayas, getComunidades } from '@/lib/playas'
+import { getPlayas, getComunidades, TOTAL_PUBLICADAS_TXT } from '@/lib/playas'
 import GeolocateCTA from './GeolocateCTA'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 
@@ -249,7 +249,7 @@ export default async function PlayasCercaDeMiPage() {
               {
                 n: '02',
                 titulo: 'Cálculo de distancia',
-                texto: 'Medimos la distancia en línea recta desde tu posición a las más de 4.400 playas del catálogo oficial (MITECO). Se ordenan de más cercana a más lejana al instante.',
+                texto: `Medimos la distancia en línea recta desde tu posición a las ${TOTAL_PUBLICADAS_TXT} playas que publicamos. Se ordenan de más cercana a más lejana al instante.`,
               },
               {
                 n: '03',

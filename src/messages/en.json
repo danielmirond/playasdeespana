@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Beaches of Spain — Real-time sea conditions",
-    "description": "Water temperature, waves, quality and services for 5,611 Spanish beaches. Open-Meteo and EEA data updated every hour.",
+    "description": "Water temperature, waves, quality and services for Spanish beaches. Waves and wind update hourly; the official inventory and water quality are updated yearly.",
     "og_title": "Beaches of Spain",
     "og_description": "Real-time sea conditions"
   },
@@ -11,7 +11,7 @@
     "communities": "Regions"
   },
   "hero": {
-    "kicker": "5,611 beaches · real-time data",
+    "kicker": "Spanish beaches · waves and wind every hour",
     "title_line1": "Sea conditions,",
     "title_line2": "before you leave home",
     "subtitle": "Water temperature, waves and quality for every beach in Spain.",

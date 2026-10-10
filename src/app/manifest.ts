@@ -1,3 +1,4 @@
+import { TOTAL_PUBLICADAS_TXT } from '@/lib/playas'
 import type { MetadataRoute } from 'next'
 
 // PWA manifest → Next sirve /manifest.webmanifest y enlaza <link rel="manifest">.
@@ -7,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Playas de España, ¿A qué playa voy hoy?',
     short_name: 'Playas',
     description:
-      'Estado del mar en tiempo real de más de 4.400 playas de España: temperatura del agua, oleaje, viento, medusas y calidad del agua. Datos oficiales actualizados cada hora.',
+      `Estado del mar de las ${TOTAL_PUBLICADAS_TXT} playas que publicamos: temperatura del agua, oleaje, viento, medusas y calidad del agua. Oleaje y viento cada hora; inventario y calidad del agua, de fuente oficial.`,
     id: '/',
     start_url: '/?utm_source=pwa',
     scope: '/',

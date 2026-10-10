@@ -9,7 +9,7 @@ export function buildWebSiteSchema() {
     '@type': 'WebSite',
     name: 'Playas de España',
     url: BASE,
-    description: 'Condiciones en tiempo real de más de 3.500 playas españolas.',
+    description: 'Oleaje, viento y servicios de las playas de España, con los datos oficiales y la fecha de cada uno.',
     potentialAction: {
       '@type': 'SearchAction',
       target: { '@type': 'EntryPoint', urlTemplate: `${BASE}/api/search?q={search_term_string}` },

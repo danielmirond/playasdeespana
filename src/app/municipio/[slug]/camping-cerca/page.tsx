@@ -146,10 +146,26 @@ export default async function CampingCercaPage({ params }: Props) {
                     {c.website ? <a href={c.website} target="_blank" rel="noopener nofollow" style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px dotted var(--muted)' }}>{c.nombre}</a> : c.nombre}
                     {c.estrellas > 0 && <span style={{ fontSize: '.72rem', color: 'var(--muted)', marginLeft: '.5rem' }}>{'★'.repeat(Math.min(c.estrellas, 5))}</span>}
                   </div>
+                  {/* La bandera, el socorrismo y los perros son de la PLAYA,
+                      no del camping: salen de `c.playa`. Colgaban de la misma
+                      línea, detrás del nombre del camping, y se leían como si
+                      fueran suyos. La FAQ de abajo siempre lo dijo bien; aquí
+                      ahora también, con el sujeto delante. */}
                   <p className={mun.sitioResumen} style={{ margin: 0 }}>
                     A <b style={{ color: 'var(--ink)' }}>{metros(c.playa.metros)}</b> de{' '}
                     <Link href={`/playas/${c.playa.slug}`} style={{ color: 'var(--ink)', fontWeight: 600 }}>{c.playa.nombre}</Link>
-                    {c.playa.bandera && ' · Bandera Azul'}{c.playa.socorrismo && ' · socorrismo'}{c.playa.perros && ' · admite perros'}
+                    {(() => {
+                      const dela = [
+                        c.playa.bandera ? 'Bandera Azul' : null,
+                        c.playa.socorrismo ? 'socorrismo' : null,
+                        c.playa.perros ? 'admite perros' : null,
+                      ].filter(Boolean)
+                      if (!dela.length) return null
+                      const lista = dela.length > 1
+                        ? `${dela.slice(0, -1).join(', ')} y ${dela[dela.length - 1]}`
+                        : dela[0]
+                      return <span style={{ color: 'var(--muted)' }}>. La playa tiene {lista}</span>
+                    })()}
                   </p>
                   <div className={mun.sitioAcciones}>
                     <a href={`https://www.google.com/maps/search/?api=1&query=${c.lat},${c.lng}`} target="_blank" rel="noopener">Cómo llegar →</a>

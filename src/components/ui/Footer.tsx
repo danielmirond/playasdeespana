@@ -1,3 +1,4 @@
+import { TOTAL_PUBLICADAS_TXT, TOTAL_PUBLICADAS_TXT_EN } from '@/lib/playas'
 // src/components/ui/Footer.tsx
 // Footer común desplegado en layout.tsx. Cumple 4 funciones:
 //   1. Internal linking SEO: anchors coinciden con H1 destino para evitar
@@ -50,8 +51,8 @@ export default function Footer({ locale = 'es' }: Props) {
               margin: 0,
             }}>
               {es
-                ? 'Estado del mar y guía de más de 4.400 playas españolas, actualizado cada hora con datos oficiales (MITECO, EEA, AEMET).'
-                : '4,400+ Spanish beaches with real-time conditions, updated hourly from official sources.'}
+                ? `Estado del mar y guía de ${TOTAL_PUBLICADAS_TXT} playas españolas. El oleaje y el viento se actualizan cada hora (Open-Meteo); el inventario de playas (MITECO) y la calidad del agua (EEA) son de actualización anual.`
+                : `Sea conditions and guide for ${TOTAL_PUBLICADAS_TXT_EN} Spanish beaches. Waves and wind update hourly (Open-Meteo); the beach inventory (MITECO) and water quality (EEA) are updated yearly.`}
             </p>
           </div>
 

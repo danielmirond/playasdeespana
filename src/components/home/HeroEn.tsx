@@ -1,3 +1,4 @@
+import { TOTAL_PUBLICADAS_TXT_EN } from '@/lib/playas'
 // src/components/home/HeroEn.tsx
 import styles from './Hero.module.css'
 import en from '@/messages/en.json'
@@ -47,7 +48,8 @@ export default function HeroEn() {
 
       <div className={styles.stats}>
         <div className={styles.stat}>
-          <span className={styles.statV}>5,611</span>
+          {/* Era 5.611: el bruto de un dataset viejo. Publicamos 4.329. */}
+          <span className={styles.statV}>{TOTAL_PUBLICADAS_TXT_EN}</span>
           <span className={styles.statL}>{m.stats.beaches}</span>
         </div>
         <div className={styles.statDiv}/>
