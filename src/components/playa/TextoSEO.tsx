@@ -1,6 +1,6 @@
 // src/components/playa/TextoSEO.tsx
 import type { Playa } from '@/types'
-import { generarTextoPlaya, generarTextoPlayaEn } from '@/lib/textoPlaya'
+import { generarTextoPlaya, generarTextoPlayaEn, descripcionDeCampos } from '@/lib/textoPlaya'
 
 interface Props {
   playa:   Playa
@@ -9,6 +9,11 @@ interface Props {
 
 export default function TextoSEO({ playa, locale = 'es' }: Props) {
   const texto = locale === 'en' ? generarTextoPlayaEn(playa) : generarTextoPlaya(playa)
+  // El campo `descripcion` del dataset está en castellano siempre: 3.498 son
+  // prosa oficial del Ministerio y 1.556 las genera nuestro script. En
+  // inglés se construye desde los mismos campos en vez de traducir miles de
+  // párrafos sin revisar.
+  const ficha = locale === 'en' ? descripcionDeCampos(playa) : playa.descripcion
 
   const titulo  = locale === 'en' ? `About ${playa.nombre}` : `Sobre ${playa.nombre}`
   const subtitulo = locale === 'en' ? 'Everything you need to know ↓' : 'Todo lo que necesitas saber ↓'
@@ -65,9 +70,9 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
         borderTop: '1px solid var(--line)',
         paddingTop: '1rem',
       }}>
-        {playa.descripcion && (
+        {ficha && (
           <p style={{ margin: '0 0 .9rem', fontStyle: 'italic', color: 'var(--muted)', borderLeft: '3px solid var(--accent)', paddingLeft: '.85rem' }}>
-            {playa.descripcion}
+            {ficha}
             {playa.nombres_alt && (
               <span style={{ display: 'block', marginTop: '.35rem', fontSize: '.75rem', color: 'var(--muted)' }}>
                 {locale === 'en' ? 'Also known as' : 'También conocida como'}: {playa.nombres_alt}

@@ -212,3 +212,58 @@ export function generarTextoPlayaEn(playa: Playa): string {
 
   return [intro, fisicaStr, servicioStr, actividadStr, banderaStr, extraStr, cierre].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim()
 }
+
+/**
+ * La ficha de datos en inglés, construida con los campos.
+ *
+ * POR QUÉ NO SE TRADUCE. El campo `descripcion` tiene dos orígenes: 3.498
+ * son prosa oficial del Ministerio, escrita en castellano, y 1.556 las
+ * genera nuestro propio script a partir de los campos. Las 4.948 páginas
+ * inglesas abrían con ese párrafo en castellano.
+ *
+ * Pasar la prosa oficial por un traductor sería producir miles de textos
+ * sin revisar, que es exactamente lo que Google señala como falta de
+ * esfuerzo. Así que no se traduce ninguna: se escribe la inglesa desde los
+ * mismos datos, igual que el script hace con la castellana. Mismo molde,
+ * mismos campos, cero invención.
+ *
+ * Y una diferencia con el script: aquí los servicios solo se nombran si
+ * hay inventario oficial detrás (`servicios_fuente`). Sin él valen false
+ * por defecto, y decir «it has no showers» porque una variable nació en
+ * false es el error que estuvimos arreglando toda la semana.
+ */
+export function descripcionDeCampos(playa: Playa): string {
+  const p = playa as unknown as Record<string, unknown>
+  const { nombre, municipio, provincia, comunidad, longitud, composicion } = playa
+  const partes: string[] = []
+
+  partes.push(
+    `${nombre} is a beach in ${municipio}, in the province of ${provincia}${comunidad ? `, ${comunidad}` : ''}.`,
+  )
+
+  const comp = composicion ? (COMPOSICION_EN[String(composicion).toLowerCase()] ?? String(composicion).toLowerCase()) : null
+  if (comp) partes.push(`It is mostly ${comp}.`)
+  if (longitud) partes.push(`It is roughly ${longitud} metres long.`)
+
+  // Servicios: solo con inventario detrás.
+  if (p.servicios_fuente === 'miteco') {
+    const tiene: string[] = []
+    if (playa.socorrismo) tiene.push(p.socorrismo_temporada === true ? 'lifeguards in summer' : 'lifeguards')
+    if (playa.duchas) tiene.push('showers')
+    if (p.aseos === true) tiene.push('toilets')
+    if (playa.parking) tiene.push('parking')
+    if (playa.accesible) tiene.push('step-free access')
+    if (tiene.length) {
+      const ultimo = tiene[tiene.length - 1]
+      const resto = tiene.slice(0, -1).join(', ')
+      partes.push(`It has ${resto}${resto ? ' and ' : ''}${ultimo}.`)
+    }
+  } else {
+    partes.push('The official inventory lists no services for this beach, which is not the same as there being none.')
+  }
+
+  if (playa.bandera) partes.push('It holds a Blue Flag, the international award for water quality, safety and facilities.')
+  if (playa.perros) partes.push('Dogs are allowed, though the municipal by-law is worth checking before setting off.')
+
+  return partes.join(' ')
+}
