@@ -242,6 +242,9 @@
 }
 .srvSi { border-color: rgba(56,142,60,.3); background: rgba(56,142,60,.08); color: #2a5e2a; }
 .srvNo { border-color: var(--line); background: transparent; color: var(--muted); text-decoration: line-through; }
+/* Lo que el inventario no dice. Sin chip y sin tachar: un «no consta» no
+   es un servicio ausente, y pintarlo igual que un «No» era el error. */
+.srvSinDato { margin: .6rem 0 0; font-size: .8rem; line-height: 1.5; color: var(--muted); }
 
 /* ── ACTIVIDADES (legacy) ───────────────────────────────────────── */
 .actGrid {

@@ -134,8 +134,10 @@ function calcAfluencia(
   if (esPuente(diaSemana, hoy))    base *= 1.15
   if (esUrbana) base *= esFinDeSemana ? 1.10 : 1.20
 
-  const ruido = Math.sin(hora * 7 + 3) * 4
-  return Math.min(100, Math.max(0, Math.round(base + ruido)))
+  // Aquí había un término de ruido, sin(hora*7+3)*4, que no modelaba nada:
+  // movía la cifra unos puntos para que la curva no se viera sintética. Eso
+  // es maquillaje sobre una estimación, así que fuera.
+  return Math.min(100, Math.max(0, Math.round(base)))
 }
 
 function nivelAfluencia(pct: number): { label: string; color: string; bg: string } {
@@ -258,7 +260,16 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
       <div style={{ padding: '1rem 1.25rem .75rem', borderBottom: '1px solid var(--line)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <h2 style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink)', margin: 0, fontFamily: 'inherit' }}><Car size={16} weight="bold" color="var(--accent)" style={{verticalAlign:'middle',marginRight:6}}/> Dónde aparcar en {playa.nombre}: parking, tráfico y afluencia</h2>
-          <span style={{ fontSize:'.75rem', color: 'var(--muted)' }}>Tiempo real</span>
+          {/* LA PROCEDENCIA, POR PESTAÑA.
+              Había un «Tiempo real» único para las tres, y de las tres solo
+              el tráfico lo es (TomTom). La afluencia es un modelo nuestro a
+              partir de la hora, el mes y el tipo de playa: llamarla tiempo
+              real era afirmar que contamos gente en la arena. */}
+          <span style={{ fontSize:'.75rem', color: 'var(--muted)' }}>
+            {tabActivo === 'trafico' ? (trafico ? 'Tiempo real · TomTom' : 'Tiempo real')
+              : tabActivo === 'parking' ? 'OpenStreetMap'
+              : 'Estimación'}
+          </span>
         </div>
         <div
           role="tablist"
@@ -308,24 +319,20 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
               background: nivelAhora ? nivelAhora.bg : 'var(--card-bg2, rgba(0,0,0,.03))',
               marginBottom: '1rem',
             }}>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{
-                  fontSize: '1.6rem', fontWeight: 700, lineHeight: 1,
-                  color: nivelAhora ? nivelAhora.color : 'var(--muted)',
-                }}>
-                  {ahoraData ? `${ahoraData.pct}%` : ''}
-                </div>
-                <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.1rem' }}>ocupación</div>
-              </div>
+              {/* El «11 %» de antes prometía una precisión que no existe: la
+                  cifra sale de una curva horaria, no de contar a nadie. Se
+                  queda el nivel, que es lo que la estimación sí sostiene, y
+                  la hora a la que suele haber menos gente, que es para lo
+                  que sirve el modelo. */}
               <div>
                 <div style={{
-                  fontWeight: 700, fontSize: '.85rem',
+                  fontWeight: 700, fontSize: '1.05rem',
                   color: nivelAhora ? nivelAhora.color : 'var(--muted)',
                 }}>
                   {nivelAhora ? nivelAhora.label : 'A esta hora'}
                 </div>
                 <div style={{ fontSize: '.72rem', color: 'var(--muted)', marginTop: '.15rem' }}>
-                  Mejor hora hoy: <strong style={{ color: 'var(--accent)' }}>{mejorHora.label}</strong> ({mejorHora.pct}% ocupación)
+                  Suele haber menos gente a las <strong style={{ color: 'var(--accent)' }}>{mejorHora.label}</strong>.
                 </div>
               </div>
             </div>
@@ -334,7 +341,7 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
               {horas.map(h => {
                 const n = nivelAfluencia(h.pct)
                 return (
-                  <div key={h.h} title={`${h.label}: ${h.pct}%`} style={{
+                  <div key={h.h} title={`${h.label}: ${n.label.toLowerCase()}`} style={{
                     flex: 1, height: `${Math.max(6, h.pct * 0.58)}px`,
                     background: h.esAhora ? 'var(--accent)' : n.color,
                     borderRadius: '3px 3px 0 0', opacity: h.esAhora ? 1 : 0.55,
@@ -346,11 +353,19 @@ export default function TraficoSection({ playa, hoyISO }: Props) {
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize:'.72rem', color: 'var(--muted)' }}>
               <span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>11pm</span>
             </div>
-            <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.5rem', fontStyle: 'italic' }}>
+            <div style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.5rem' }}>
               {etiquetaTemporada(mes, zona)} · {dia === 0 || dia === 6 ? 'Fin de semana' : 'Día laborable'}
               {esUrbana ? ' · Playa urbana' : ''}
               {esFestivo(hoy) ? ' · Festivo' : ''}
             </div>
+            {/* Decir de dónde sale, donde sale. Nadie mide cuánta gente hay
+                en la arena en tiempo real, y menos en 5.098 playas. */}
+            <p style={{ fontSize:'.72rem', color: 'var(--muted)', marginTop: '.4rem', lineHeight: 1.5 }}>
+              Estimación propia: curva horaria según el mes, la zona, si es
+              fin de semana o festivo y si la playa es urbana. No contamos
+              gente ni hay sensores: sirve para elegir la hora, no para saber
+              cuánta gente hay ahora mismo.
+            </p>
           </div>
         )}
 

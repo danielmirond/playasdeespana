@@ -1417,12 +1417,41 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.03em', marginBottom: '.75rem' }}>
                 {locale === 'en' ? 'Facilities & Services' : 'Servicios y Equipamiento'}
               </div>
-              <div className={styles.srvGrid}>
-                {i18n.SERVICIOS.map(s => {
-                  const on = !!(playa as any)[s.key]
-                  return <span key={s.key} className={`${styles.srv} ${on ? styles.srvSi : styles.srvNo}`}>{on ? 'Sí' : 'No'} · {s.label}</span>
-                })}
-              </div>
+              {/* TRES ESTADOS, NO DOS.
+                  El inventario del MITECO no trae todos los campos en todas
+                  las fichas: aseos, lavapiés, papeleras, limpieza, teléfonos,
+                  oficina de turismo, zona infantil, autobús y bares vienen
+                  vacíos en 1.598 de las 5.098. Con `!!valor` eso se pintaba
+                  como «No», o sea que afirmábamos que una playa no tiene
+                  aseos cuando lo que pasa es que no lo sabemos. En una
+                  página por la que alguien decide si va con niños o en silla
+                  de ruedas, inventarse un no es peor que no decir nada.
+                  Lo que no consta se agrupa abajo en una línea y se dice. */}
+              {(() => {
+                const estado = (k: string) => {
+                  const v = (playa as unknown as Record<string, unknown>)[k]
+                  return v === true ? 'si' : v === false ? 'no' : 'nd'
+                }
+                const sabidos = i18n.SERVICIOS.filter(s => estado(s.key) !== 'nd')
+                const sinDato = i18n.SERVICIOS.filter(s => estado(s.key) === 'nd')
+                return (
+                  <>
+                    <div className={styles.srvGrid}>
+                      {sabidos.map(s => {
+                        const on = estado(s.key) === 'si'
+                        return <span key={s.key} className={`${styles.srv} ${on ? styles.srvSi : styles.srvNo}`}>{on ? (locale === 'en' ? 'Yes' : 'Sí') : 'No'} · {s.label}</span>
+                      })}
+                    </div>
+                    {sinDato.length > 0 && (
+                      <p className={styles.srvSinDato}>
+                        {locale === 'en'
+                          ? <>The official inventory has no entry for {sinDato.map(s => s.label.toLowerCase()).join(', ')} at this beach. Not listed is not the same as not there.</>
+                          : <>El inventario oficial no dice nada sobre {sinDato.map(s => s.label.toLowerCase()).join(', ')} en esta playa. Que no conste no significa que no lo haya.</>}
+                      </p>
+                    )}
+                  </>
+                )
+              })()}
             </div>
 
             <div style={{ height: '1rem' }}/>
