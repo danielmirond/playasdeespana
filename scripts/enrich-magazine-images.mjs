@@ -213,6 +213,11 @@ async function flickr(nombre, municipio) {
         const tn = normalizar(titulo), tg = normalizar(tagsStr)
         if (!tokens.some(t => t.length >= 4 && (tn.includes(t) || tg.includes(t)))) return null
         const m = item.media?.m ?? ''; if (!m || !/_m\.(jpg|jpeg|png)/i.test(m)) return null
+        // El sufijo decide el ancho: _m 240, _c 800, _b 1024, _h 1600, _k 2048.
+        // Se guardaba _c, o sea 800, y Discover pide 1.200 de ancho mínimo
+        // para la tarjeta grande. Se pide el mayor que exista; cuál es lo
+        // resuelve mayorFlickr con una cabecera, porque no todas las fotos
+        // tienen los tamaños grandes publicados.
         return { url: m.replace(/_m\.(jpg|jpeg|png)/i, '_c.$1'), thumb: m, source: 'Flickr', author: item.author?.replace(/^.*\("(.+)"\)$/, '$1') || undefined }
       }).filter(Boolean)
       if (fotos.length >= 2) return fotos.slice(0, 6)
@@ -328,16 +333,18 @@ function parseArticles(src) {
 // Tokens del heroQuery que NO son un lugar (descriptores de la foto).
 const GENERIC_HERO = new Set(['beach','beaches','cove','coves','sea','ocean','mediterranean','atlantic','dune','dunes','sand','sandy','coast','coastline','cliff','cliffs','island','islands','spain','espana','volcanic','texture','boat','sailboat','restaurant','seafood','food','morning','calm','summer','winter','spring','autumn','sunset','sunrise','blue','flag','lifeguard','erosion','gredas','water','crystal','clear','snorkel','diving','aerial','panorama','view'])
 
-function matchPlaya(playas, nombre, region) {
+/** `exigirRegion` fuerza que la región case: la primera pasada la usa para
+ *  no quedarse con una homónima de otra provincia. «Platja Gran» hay cuatro. */
+function matchPlaya(playas, nombre, region, exigirRegion = false) {
   const nN = normalizar(nombre), rN = normalizar(region)
   if (nN.length < 3) return null
   const cands = playas.filter(p => normalizar(p.nombre).includes(nN))
   if (cands.length === 0) return null
   if (rN) {
-    const conRegion = cands.find(p => [p.municipio, p.provincia, p.comunidad].some(x => normalizar(x).includes(rN) || rN.includes(normalizar(x))))
-    if (conRegion) return conRegion
+    const conRegion = cands.filter(p => [p.municipio, p.provincia, p.comunidad].some(x => normalizar(x).includes(rN) || rN.includes(normalizar(x))))
+    if (conRegion.length) return conRegion[0]
   }
-  return cands[0]
+  return exigirRegion ? null : cands[0]
 }
 
 // Resuelve {nombre, municipio, lat, lon} para un artículo.
@@ -358,11 +365,28 @@ function resolvePlace(title, heroQuery, playas) {
   const heroPlaces = heroToks.filter(t => !GENERIC_HERO.has(normalizar(t)))
 
   // Orden de intentos de "nombre": título (si no es frase) y luego heroQuery.
+  //
+  // La REGIÓN también sale del heroQuery, no solo del título. Medido con
+  // Tossa: el título es «Platja Gran de Tossa: …», sin coma, así que la
+  // región salía vacía y «Platja Gran» casaba con la primera playa de ese
+  // nombre en toda España —una sin foto— teniendo la de Tossa una al lado.
+  // El heroQuery ya traía 'tossa de mar': basta con usarlo.
   const intentos = []
-  if (tituloNombre && !sentenceLike) intentos.push({ nombre: tituloNombre, region: tituloRegion })
-  for (const t of heroPlaces) intentos.push({ nombre: t, region: tituloRegion })
+  const regiones = [tituloRegion, ...heroPlaces].filter(Boolean)
+  if (tituloNombre && !sentenceLike) {
+    for (const r of regiones) intentos.push({ nombre: tituloNombre, region: r })
+    intentos.push({ nombre: tituloNombre, region: tituloRegion })
+  }
+  for (const t of heroPlaces) {
+    for (const r of regiones) if (normalizar(r) !== normalizar(t)) intentos.push({ nombre: t, region: r })
+    intentos.push({ nombre: t, region: tituloRegion })
+  }
 
   // Primer intento que case con una playa real (mejor: aporta coords).
+  for (const it of intentos) {
+    const playa = matchPlaya(playas, it.nombre, it.region, true)
+    if (playa) return { nombre: playa.nombre, municipio: playa.municipio, lat: playa.lat, lon: playa.lng }
+  }
   for (const it of intentos) {
     const playa = matchPlaya(playas, it.nombre, it.region)
     if (playa) return { nombre: playa.nombre, municipio: playa.municipio, lat: playa.lat, lon: playa.lng }
@@ -371,6 +395,19 @@ function resolvePlace(title, heroQuery, playas) {
   const first = intentos[0]
   if (first) return { nombre: first.nombre, municipio: first.region || '', lat: undefined, lon: undefined }
   return null
+}
+
+/** El mayor tamaño que Flickr tenga publicado para esa foto. */
+async function mayorFlickr(url) {
+  if (!/live\.staticflickr\.com/.test(url)) return url
+  for (const suf of ['_k', '_h', '_b']) {
+    const prueba = url.replace(/_[a-z0-9]+\.(jpg|jpeg|png)$/i, `${suf}.$1`)
+    try {
+      const r = await fetchT(prueba, { method: 'HEAD' })
+      if (r.ok) return prueba
+    } catch { /* siguiente */ }
+  }
+  return url
 }
 
 // ── main ─────────────────────────────────────────────────────
@@ -392,6 +429,7 @@ async function main() {
     try {
       const foto = await resolverFoto(nombre, municipio, lat, lon)
       if (!foto) { console.warn(`  · ${a.slug}: sin foto (nombre="${nombre}", coords=${lat != null})`); continue }
+      foto.url = await mayorFlickr(foto.url)
       map[a.slug] = { url: foto.url, thumb: foto.thumb || foto.url, source: foto.source, ...(foto.author ? { author: foto.author } : {}) }
       console.log(`  ✓ ${a.slug} → ${foto.source}${foto.author ? ` (${foto.author})` : ''}${lat != null ? ` [geo:${nombre}]` : ` [name:${nombre}]`}`)
     } catch (e) { console.warn(`  ✗ ${a.slug}: ${e.message}`) }

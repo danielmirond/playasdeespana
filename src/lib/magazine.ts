@@ -79,6 +79,94 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Platja Gran, Tossa de Mar (Cataluña) (voz bicéfala) ─────
+  {
+    slug: 'platja-gran-tossa-de-mar-girona-ava-gardner-vila-vella-arena-gruesa',
+    category: 'curiosidades',
+    title: 'Platja Gran de Tossa: Ava Gardner en bronce desde 1998, 385 m de arena gruesa que se llena',
+    excerpt:
+      'Desde 1998 una Ava Gardner de bronce mira la Platja Gran desde la muralla de Tossa de Mar, donde rodó «Pandora» en 1950. Abajo: 385 metros de arena dorada y gruesa, Bandera Azul en 2026 y una ocupación alta que en verano no perdona.',
+    heroAlt:
+      'Platja Gran de Tossa de Mar: arenal en media luna de arena dorada con la muralla medieval y las torres de la Vila Vella sobre el promontorio al fondo',
+    heroQuery: 'tossa de mar,platja gran,vila vella,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-11T17:20:40Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/cataluna', label: 'Playas de Cataluña' },
+      { href: '/banderas-azules', label: 'Playas con Bandera Azul' },
+      { href: '/alquiler-barco/costas/costa-brava/provincias/girona/tossa-de-mar', label: 'Alquiler de barco en Tossa de Mar' },
+    ],
+    body: [
+      { t: 'p', html: 'La muralla aparece antes que el mar. Se baja por las calles del pueblo y, al final, la piedra gris de la Vila Vella se levanta sobre el promontorio con sus torres redondas, como si alguien hubiera dejado un castillo de juguete al borde del agua. A sus pies, la arena dibuja una media luna corta y dorada, con las barcas de pesca varadas en un extremo y las sombrillas ocupando el resto en cuanto el sol sube un poco.' },
+      { t: 'p', html: 'En 1950 llegó a esta bahía un equipo de Hollywood. El director Albert Lewin rodó aquí <em>Pandora y el holandés errante</em>, con <strong>Ava Gardner</strong> y James Mason, estrenada en 1951. El pueblo nunca lo olvidó: en <strong>agosto de 1998</strong> se inauguró en lo alto de la Vila Vella una estatua de bronce de la actriz, obra de la escultora gerundense <strong>Ció Abellí</strong>. Ava mira al mar desde un mirador. Lo que ve justo debajo es la Platja Gran.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La ficha de <strong>Turespaña (spain.info)</strong> da a la Platja Gran <strong>385 metros de largo y 50 de ancho</strong>, arena dorada, entorno <strong>urbano</strong> y <strong>ocupación alta</strong>. Otras guías dan cifras algo distintas (entre 345 y 400 metros, según dónde se empiece a medir), así que nos quedamos con la oficial. Tiene socorrismo, aseos, duchas y alquiler de hamacas y sombrillas, y la carretera de acceso más cercana es la GI-682, la de la costa entre Lloret y Sant Feliu de Guíxols.' },
+      { t: 'p', html: 'Tiene <strong>Bandera Azul en 2026</strong>: «Gran de Tossa» figura en la lista de playas de Girona distinguidas este año, publicada el 5 de mayo por la prensa catalana a partir de los datos de ADEAC. En la misma lista está su vecina, <strong>La Mar Menuda</strong>. Es decir, Tossa tiene dos playas urbanas con el distintivo, una al lado de la otra.' },
+      { t: 'p', html: 'La muralla es el otro dato. La Vila Vella se levantó con base del <strong>siglo XII</strong> para defender la villa de los ataques piratas, se reforzó en el XIV y conserva sus torres circulares. Fue declarada <strong>Monumento Histórico-Artístico Nacional en 1931</strong>, y las guías la presentan como el último recinto medieval fortificado que queda en pie en la costa catalana. Es el telón de fondo de cada foto de la playa, y no está ahí de decorado.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>. La arena no es la harina fina del folleto: la ficha de VerPlayas la describe como <strong>dorada y de textura gruesa</strong>, el grano de granito típico de la Costa Brava. Se pega menos, pero se clava en los pies y no es la mejor para que los niños hagan castillos. Y el dato oficial de ocupación no es un adorno: son 385 metros de playa urbana, al pie del monumento más visitado del pueblo. En julio y agosto la toalla compite por cada palmo, y el casco antiguo, pequeño, no está pensado para los coches que llegan a la vez.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En junio y en septiembre, cuando el agua sigue templada y la arena vuelve a tener huecos. A primera hora, con las barcas todavía en la orilla y la muralla iluminada de lado. Y al final de la tarde, cuando la sombra del promontorio se alarga sobre el agua.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Un mediodía de agosto, si lo que se busca es sitio: es la playa más céntrica de un pueblo que vive del verano. Tampoco un día de temporal de levante, cuando el mar del este entra en la bahía y el baño deja de ser tranquilo.' },
+      { t: 'p', html: '<strong>El truco</strong>. Subir primero a la Vila Vella y ver la playa desde arriba, junto a la estatua: desde allí se distingue qué tramo está libre antes de cargar con la sombrilla. Y llevar escarpines si se tienen los pies sensibles; la arena gruesa se agradece calzada. En coche, aparcar en las afueras y caminar: el centro se satura antes que la playa.' },
+      { t: 'p', html: '<strong>La alternativa</strong>. En el extremo norte de la misma bahía está <strong>La Mar Menuda</strong>, más pequeña y también con Bandera Azul en 2026. Y hacia el norte, por la carretera de la costa, quedan las calas de pinar como Cala Pola y Cala Giverola, que salen en nuestra <a href="/magazine/ruta-calas-costa-brava-barco">ruta en barco por las calas de la Costa Brava</a>.' },
+      { t: 'ul', items: [
+        'Municipio: Tossa de Mar (Girona), Costa Brava.',
+        'Medidas (Turespaña): 385 m de largo y 50 m de ancho; arena dorada, urbana, ocupación alta.',
+        'Arena (VerPlayas): dorada y de textura gruesa.',
+        'Bandera Azul: sí, en 2026 (lista de ADEAC publicada por la prensa catalana), igual que La Mar Menuda.',
+        'Vila Vella: muralla con base del siglo XII, Monumento Histórico-Artístico Nacional desde 1931.',
+        'Ava Gardner: rodó «Pandora y el holandés errante» en Tossa en 1950; estatua de Ció Abellí desde agosto de 1998.',
+        'Servicios: socorrismo, aseos, duchas, hamacas y sombrillas. Acceso por la GI-682.',
+      ] },
+      { t: 'quote', text: 'Las fotos venden una playa medieval de película. La película es real y la muralla también; lo que no sale en la foto es la arena gruesa y las toallas pegadas unas a otras en agosto.' },
+      { t: 'p', html: 'Cuando cae la tarde, las torres se ponen de color miel y la playa se vacía por tramos, de la orilla hacia el paseo. Arriba, en el mirador, la estatua sigue en la misma postura desde hace casi tres décadas, mirando el agua por encima de las cabezas. Hollywood se fue en 1950; la muralla llevaba ocho siglos esperando y sigue ahí, sin necesitar a nadie que la saque guapa.' },
+    ],
+    faq: [
+      { q: '¿Tiene Bandera Azul la Platja Gran de Tossa de Mar?', a: 'Sí. «Gran de Tossa» figura en la lista de Banderas Azules de 2026 de la provincia de Girona, según los datos de ADEAC publicados por la prensa catalana. La vecina La Mar Menuda también la tiene.' },
+      { q: '¿Cómo es la arena de la Platja Gran de Tossa?', a: 'Dorada y de grano grueso, de granito, como en buena parte de la Costa Brava. Se pega menos a la piel que la arena fina, pero es más incómoda descalzo; unos escarpines ayudan.' },
+      { q: '¿Dónde está la estatua de Ava Gardner en Tossa de Mar?', a: 'En lo alto de la Vila Vella, el recinto amurallado, en un mirador sobre la Platja Gran. Es obra de Ció Abellí y se inauguró en agosto de 1998 en recuerdo del rodaje de «Pandora y el holandés errante» (1950).' },
+    ],
+    en: {
+      title: 'Platja Gran, Tossa: Ava Gardner in bronze since 1998 over 385 m of coarse, crowded sand',
+      excerpt:
+        'Since 1998 a bronze Ava Gardner has watched the Platja Gran from the walls of Tossa de Mar, where she filmed «Pandora» in 1950. Below: 385 metres of coarse golden sand, a Blue Flag for 2026 and high occupancy that shows no mercy in summer.',
+      related: [
+        { href: '/en/boat-rental/coasts/costa-brava/provinces/girona/tossa-de-mar', label: 'Boat rental in Tossa de Mar' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'You see the walls before the sea. Walk down through the village and, at the bottom, the grey stone of the Vila Vella rises over the headland with its round towers, as if someone had left a toy castle at the water’s edge. Below it the sand draws a short golden crescent, with fishing boats hauled up at one end and parasols claiming the rest as soon as the sun gets going.' },
+        { t: 'p', html: 'In 1950 a Hollywood crew arrived in this bay. Director Albert Lewin shot <em>Pandora and the Flying Dutchman</em> here, with <strong>Ava Gardner</strong> and James Mason; it came out in 1951. The town never forgot: in <strong>August 1998</strong> a bronze statue of the actress, by the Girona sculptor <strong>Ció Abellí</strong>, was unveiled at the top of the Vila Vella. Ava looks out to sea from a viewpoint. What lies directly beneath her is the Platja Gran.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The <strong>Turespaña (spain.info)</strong> listing gives the Platja Gran as <strong>385 metres long and 50 wide</strong>, golden sand, <strong>urban</strong> surroundings and <strong>high occupancy</strong>. Other guides give slightly different figures (between 345 and 400 metres, depending on where you start measuring), so we stick with the official one. It has lifeguards, toilets, showers and sunbed and parasol hire, and the nearest road is the GI-682, the coast road between Lloret and Sant Feliu de Guíxols.' },
+        { t: 'p', html: 'It holds a <strong>Blue Flag for 2026</strong>: «Gran de Tossa» is on this year’s list of awarded beaches in Girona, published on 5 May in the Catalan press from ADEAC data. Its neighbour, <strong>La Mar Menuda</strong>, is on the same list. So Tossa has two town beaches with the award, side by side.' },
+        { t: 'p', html: 'The walls are the other fact. The Vila Vella was built on 12th-century foundations to protect the town from pirate raids, strengthened in the 14th century, and keeps its round towers. It was declared a <strong>National Historic-Artistic Monument in 1931</strong>, and guides describe it as the last fortified medieval town still standing on the Catalan coast. It is the backdrop to every photo of the beach, and it is not there for show.' },
+        { t: 'p', html: 'Now the <strong>drawback</strong>. The sand is not the powder of the brochure: the VerPlayas listing describes it as <strong>golden and coarse-grained</strong>, the granite grit typical of the Costa Brava. It sticks less, but it digs into bare feet and is not ideal for children’s sandcastles. And the official occupancy rating is no figure of speech: this is 385 metres of town beach at the foot of the most visited monument in Tossa. In July and August towels fight for every inch, and the small old centre was never built for the cars that all turn up at once.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> In June and September, when the water is still mild and the sand has gaps again. Early in the morning, with the boats still on the shore and the walls lit from the side. And late in the afternoon, when the shadow of the headland stretches across the water.' },
+        { t: 'p', html: '<strong>When not to?</strong> An August midday, if you want space: this is the most central beach in a town that lives off summer. Nor on a day of easterly storm, when the sea from the east rolls into the bay and swimming stops being calm.' },
+        { t: 'p', html: '<strong>The trick</strong>. Climb to the Vila Vella first and look down from beside the statue: from up there you can see which stretch is free before hauling the parasol down. Bring water shoes if your feet are sensitive; coarse sand is kinder with something on. By car, park on the edge of town and walk: the centre jams before the beach does.' },
+        { t: 'p', html: '<strong>The alternative</strong>. At the northern end of the same bay lies <strong>La Mar Menuda</strong>, smaller and also Blue Flag for 2026. And north along the coast road are pine-backed coves such as Cala Pola and Cala Giverola, which feature in our <a href="/en/magazine/ruta-calas-costa-brava-barco">Costa Brava coves by boat route</a>.' },
+        { t: 'ul', items: [
+          'Municipality: Tossa de Mar (Girona), Costa Brava.',
+          'Size (Turespaña): 385 m long and 50 m wide; golden sand, urban, high occupancy.',
+          'Sand (VerPlayas): golden and coarse-grained.',
+          'Blue Flag: yes, for 2026 (ADEAC list as reported in the Catalan press), as is La Mar Menuda.',
+          'Vila Vella: walls on 12th-century foundations, National Historic-Artistic Monument since 1931.',
+          'Ava Gardner: filmed «Pandora and the Flying Dutchman» in Tossa in 1950; statue by Ció Abellí since August 1998.',
+          'Facilities: lifeguards, toilets, showers, sunbeds and parasols. Access via the GI-682.',
+        ] },
+        { t: 'quote', text: 'The photos sell a medieval beach straight out of the movies. The movie was real and so are the walls; what the photo leaves out is the coarse sand and the towels laid edge to edge in August.' },
+        { t: 'p', html: 'As evening falls the towers turn honey-coloured and the beach empties in strips, from the shoreline back towards the promenade. Up at the viewpoint the statue holds the same pose it has kept for nearly three decades, looking at the water over everyone’s heads. Hollywood left in 1950; the walls had been waiting eight centuries and are still there, needing nobody to make them look good.' },
+      ],
+      faq: [
+        { q: 'Does the Platja Gran in Tossa de Mar have a Blue Flag?', a: 'Yes. «Gran de Tossa» is on the 2026 Blue Flag list for the province of Girona, according to ADEAC data reported in the Catalan press. Neighbouring La Mar Menuda has one too.' },
+        { q: 'What is the sand like at the Platja Gran in Tossa?', a: 'Golden and coarse-grained granite, as on much of the Costa Brava. It sticks to the skin less than fine sand but is less comfortable barefoot; water shoes help.' },
+        { q: 'Where is the Ava Gardner statue in Tossa de Mar?', a: 'At the top of the Vila Vella, the walled old town, on a viewpoint above the Platja Gran. It is by Ció Abellí and was unveiled in August 1998 to mark the filming of «Pandora and the Flying Dutchman» (1950).' },
+      ],
+    },
+  },
   // ───── Diario de playas · Zahara de los Atunes, Barbate (Andalucía) (voz bicéfala) ─────
   {
     slug: 'playa-zahara-de-los-atunes-barbate-cadiz-almadraba-cervantes-levante',
