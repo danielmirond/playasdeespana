@@ -79,6 +79,94 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Zahara de los Atunes, Barbate (Andalucía) (voz bicéfala) ─────
+  {
+    slug: 'playa-zahara-de-los-atunes-barbate-cadiz-almadraba-cervantes-levante',
+    category: 'curiosidades',
+    title: 'Zahara de los Atunes: la almadraba de Cervantes, 1.600 m de arena y un levante racheado',
+    excerpt:
+      'Cervantes llamó a las almadrabas de Zahara «el finibusterrae de la picaresca». Hoy su tramo urbano mide 1.600 metros, tiene Bandera Azul en 2026 y ocupación alta; la pega es el levante, que sopla de tierra, fuerte y a rachas.',
+    heroAlt:
+      'Playa de Zahara de los Atunes en Barbate: arenal ancho de arena dorada frente al Atlántico, con las casas blancas del pueblo al fondo y la sierra detrás',
+    heroQuery: 'zahara de los atunes,barbate,cadiz,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-11T09:22:03Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/andalucia', label: 'Playas de Andalucía' },
+      { href: '/banderas-azules', label: 'Playas con Bandera Azul' },
+      { href: '/magazine/playa-canos-de-meca-barbate-manantiales-acantilado-marea', label: 'Caños de Meca (Barbate): manantiales y marea' },
+    ],
+    body: [
+      { t: 'p', html: 'A primera hora la arena todavía está dura y fría, marcada por las ruedas del tractor de limpieza. El pueblo queda detrás, blanco y bajo, con la sierra encima y el río Cachón abriéndose paso hasta el mar. Delante, el Atlántico entra en series largas y tranquilas, y en el horizonte, los días claros, asoma la costa de África. Huele a sal y, de vez en cuando, a la plancha de algún bar que ya ha encendido el fuego.' },
+      { t: 'p', html: 'Este pueblo lleva el pescado en el apellido, y no es un adorno. Hace más de cuatro siglos, Miguel de Cervantes mandó aquí a uno de sus personajes a terminar su carrera de pícaro. En <em>La ilustre fregona</em>, Carriazo pasa por todos los grados del oficio «hasta que se graduó de maestro en las almadrabas de Zahara, donde es el <strong>finibusterrae de la picaresca</strong>». El fin del mundo de los buscavidas era, entonces, esta playa.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Según la ficha de <strong>Turespaña (spain.info)</strong>, la playa de Zahara de los Atunes, en el municipio de <strong>Barbate</strong>, mide <strong>1.600 metros de largo y 70 de ancho</strong>, es de arena dorada, semiurbana y de <strong>ocupación alta</strong>. Ese es el tramo junto al pueblo; hacia el sur el arenal sigue por Atlanterra hasta el Cabo de Plata, y por eso hay guías que hablan de cinco, ocho o nueve kilómetros según dónde empiecen y acaben a medir. La ficha oficial recoge alquiler de sombrillas y hamacas, aseos, duchas, lavapiés y zona de surf.' },
+      { t: 'p', html: 'Tiene <strong>Bandera Azul en 2026</strong>: Zahara de los Atunes aparece en la lista de playas gaditanas distinguidas este año, uno de los 32 distintivos de la provincia de Cádiz según el recuento publicado por la prensa andaluza a partir de los datos de ADEAC. Sobre el agua, sin inventar: la ficha de VerPlayas la sitúa en torno a los <strong>23 °C en verano</strong> y unos 16 °C en invierno. Es Atlántico, no Mediterráneo.' },
+      { t: 'p', html: 'El dato histórico sigue vivo. La de Zahara es una de las <strong>cuatro almadrabas de Cádiz</strong>, junto a Conil, Barbate y Tarifa: redes fijas que se calan cada primavera para interceptar al atún rojo en su viaje del Atlántico al Mediterráneo para desovar. La campaña suele ir de <strong>abril a junio</strong>, y en esas semanas el pueblo organiza su Ruta del Atún. En el centro quedan las ruinas del <strong>Castillo de las Almadrabas</strong>, levantado entre los siglos XV y XVI para guardar y procesar la pesca de los duques de Medina Sidonia.' },
+      { t: 'p', html: 'Ahora el <strong>contra</strong>. Aquí manda el <strong>levante</strong>, el viento del este que domina el Estrecho: llega de tierra, cálido, fuerte y a rachas. En una playa abierta al oeste como esta, sopla de la arena hacia el mar. Eso tiene dos efectos que el folleto no menciona: la arena seca vuela y pica en las piernas, y las sombrillas no aguantan clavadas. Y un tercero que importa más: un viento de tierra empuja mar adentro cualquier cosa que flote, desde una colchoneta hasta un paddle surf. A eso se suma la otra cara de la fama: la ocupación oficial es alta, y en agosto el pueblo, pequeño, se llena.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En primavera, entre abril y junio, cuando coinciden la temporada de almadraba y una playa todavía holgada: es cuando el pueblo hace honor a su nombre. Y en septiembre, con el agua aún templada y menos gente. A primera hora o al caer la tarde, cuando el sol se pone sobre el mar, justo enfrente.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Un día de levante fuerte, si el plan era tumbarse con sombrilla: se pasa el día recolocándola. Y en las semanas centrales de agosto si se busca calma, porque el tramo urbano concentra a casi todo el mundo.' },
+      { t: 'p', html: '<strong>El truco</strong>. Mirar el parte de viento antes que el del sol. Con levante, nada de hinchables en el agua: el viento de tierra los aleja de la orilla más rápido de lo que se nada. Y la cuenta de los kilómetros juega a favor: el tramo frente al pueblo es el que se llena, y basta con caminar en cualquier dirección para ganar sitio.' },
+      { t: 'p', html: '<strong>La alternativa</strong>. Dentro del mismo arenal, alejarse del núcleo hacia el sur, camino de Atlanterra, o hacia el norte, camino de Barbate. Y en el mismo municipio de Barbate queda <a href="/magazine/playa-canos-de-meca-barbate-manantiales-acantilado-marea">Caños de Meca</a>, con su acantilado y sus manantiales, que se lee con la tabla de mareas en la mano.' },
+      { t: 'ul', items: [
+        'Municipio: Barbate (Cádiz), Costa de la Luz.',
+        'Medidas (Turespaña): 1.600 m de largo y 70 m de ancho en el tramo junto al pueblo; arena dorada, semiurbana, ocupación alta.',
+        'Bandera Azul: sí, en 2026 (lista de ADEAC recogida por la prensa andaluza).',
+        'Agua (VerPlayas): unos 23 °C en verano y unos 16 °C en invierno.',
+        'Almadraba: una de las cuatro de Cádiz (Conil, Barbate, Zahara, Tarifa); campaña habitual de abril a junio.',
+        'Viento: el levante, de tierra, fuerte y racheado; arena volando y nada de hinchables.',
+        'Cervantes, «La ilustre fregona»: las almadrabas de Zahara, «finibusterrae de la picaresca».',
+      ] },
+      { t: 'quote', text: 'En las fotos sale un pueblo blanco y una arena que no se acaba. Cervantes la eligió por otra razón: era el último sitio del mapa. Lo sigue siendo los días de levante, cuando no hay sombrilla que se quede quieta.' },
+      { t: 'p', html: 'Cuando el sol baja, la sombra de la sierra se alarga sobre el pueblo y la luz se vuelve naranja encima del agua. Los pescadores de caña se quedan en la orilla, la arena se enfría otra vez y el levante, si ha soplado, amaina con la noche. Cuatro siglos después del pícaro de Cervantes, la playa sigue siendo ese lugar donde parece que el mapa termina.' },
+    ],
+    faq: [
+      { q: '¿Tiene Bandera Azul la playa de Zahara de los Atunes?', a: 'Sí. Zahara de los Atunes, en Barbate, figura en la lista de playas de Cádiz con Bandera Azul en 2026, según los datos de ADEAC publicados por la prensa andaluza.' },
+      { q: '¿Qué pasa en Zahara cuando sopla levante?', a: 'El levante sopla de tierra hacia el mar, cálido, fuerte y a rachas. La arena seca vuela, las sombrillas cuestan de sujetar y cualquier hinchable puede ser arrastrado mar adentro. Conviene mirar el parte de viento antes de ir.' },
+      { q: '¿Cuándo es la temporada de almadraba en Zahara de los Atunes?', a: 'Normalmente de abril a junio, cuando el atún rojo pasa por la costa de Cádiz camino del Mediterráneo. En esas semanas el pueblo celebra su Ruta del Atún; las fechas exactas cambian cada año.' },
+    ],
+    en: {
+      title: 'Zahara de los Atunes: Cervantes’s tuna-trap town, 1,600 m of sand and a gusty levante',
+      excerpt:
+        'Cervantes called the tuna traps of Zahara «the finibusterrae of roguery». Today the stretch in front of the village runs 1,600 metres, holds a Blue Flag for 2026 and gets very busy; the catch is the levante, an offshore wind that blows hard and in gusts.',
+      related: [
+        { href: '/en/magazine/playa-canos-de-meca-barbate-manantiales-acantilado-marea', label: 'Caños de Meca (Barbate): springs and tides' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'First thing in the morning the sand is still hard and cool, ridged by the tracks of the beach-cleaning tractor. The village sits behind, low and white, with the hills above it and the Cachón river finding its way to the sea. In front, the Atlantic rolls in long, quiet sets and, on clear days, the coast of Africa shows on the horizon. It smells of salt and, now and then, of a griddle at a bar that has already lit up.' },
+        { t: 'p', html: 'This village carries the fish in its surname, and not for decoration. More than four centuries ago Miguel de Cervantes sent one of his characters here to finish his career as a rogue. In <em>La ilustre fregona</em>, Carriazo works his way through every rank of the trade «until he graduated as a master at the tuna traps of Zahara, which is the <strong>finibusterrae of roguery</strong>». The end of the world for chancers was, back then, this beach.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'According to the <strong>Turespaña (spain.info)</strong> listing, the beach at Zahara de los Atunes, in the municipality of <strong>Barbate</strong>, is <strong>1,600 metres long and 70 metres wide</strong>, with golden sand, semi-urban surroundings and <strong>high occupancy</strong>. That is the stretch by the village; to the south the sand carries on through Atlanterra to Cabo de Plata, which is why some guides say five, eight or nine kilometres depending on where they start and stop measuring. The official listing records sunbed and parasol hire, toilets, showers, foot showers and a surf area.' },
+        { t: 'p', html: 'It holds a <strong>Blue Flag for 2026</strong>: Zahara de los Atunes is on this year’s list of awarded beaches in Cádiz, one of 32 in the province according to the count published in the Andalusian press from ADEAC data. On water temperature, nothing made up: the VerPlayas listing puts it at around <strong>23°C in summer</strong> and about 16°C in winter. This is the Atlantic, not the Mediterranean.' },
+        { t: 'p', html: 'The history is still working. Zahara’s is one of the <strong>four almadrabas of Cádiz</strong>, along with Conil, Barbate and Tarifa: fixed net mazes set every spring to intercept bluefin tuna on their way from the Atlantic into the Mediterranean to spawn. The season usually runs <strong>April to June</strong>, and in those weeks the village holds its Ruta del Atún. In the centre stand the ruins of the <strong>Castillo de las Almadrabas</strong>, built between the 15th and 16th centuries to guard and process the catch of the Dukes of Medina Sidonia.' },
+        { t: 'p', html: 'Now the <strong>drawback</strong>. The <strong>levante</strong> rules here, the easterly that dominates the Strait: it comes off the land, warm, strong and gusty. On a west-facing beach like this one it blows from the sand out to sea. That has two effects the brochure leaves out: dry sand flies and stings your legs, and parasols will not stay put. And a third that matters more: an offshore wind pushes anything that floats out to sea, from a lilo to a paddleboard. Add the other side of its reputation: official occupancy is high, and in August this small village fills up.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> In spring, between April and June, when the tuna season coincides with a beach that still has room: that is when the village lives up to its name. And in September, with the water still mild and fewer people. Early in the morning or towards sunset, when the sun drops into the sea straight ahead.' },
+        { t: 'p', html: '<strong>When not to?</strong> On a strong levante day if the plan was to lie under a parasol: you will spend the day re-planting it. And in the middle weeks of August if you want calm, because the stretch by the village draws almost everyone.' },
+        { t: 'p', html: '<strong>The trick</strong>. Check the wind forecast before the sunshine. With a levante blowing, no inflatables in the water: an offshore wind carries them away faster than you can swim. And the length of the beach is on your side: it is the stretch in front of the village that fills, and walking in either direction buys you space.' },
+        { t: 'p', html: '<strong>The alternative</strong>. Within the same stretch of sand, head away from the village south towards Atlanterra, or north towards Barbate. And in the same municipality of Barbate lies <a href="/en/magazine/playa-canos-de-meca-barbate-manantiales-acantilado-marea">Caños de Meca</a>, with its cliff and freshwater springs, best read with a tide table in hand.' },
+        { t: 'ul', items: [
+          'Municipality: Barbate (Cádiz), Costa de la Luz.',
+          'Size (Turespaña): 1,600 m long and 70 m wide by the village; golden sand, semi-urban, high occupancy.',
+          'Blue Flag: yes, for 2026 (ADEAC list as reported in the Andalusian press).',
+          'Water (VerPlayas): around 23°C in summer and about 16°C in winter.',
+          'Almadraba: one of four in Cádiz (Conil, Barbate, Zahara, Tarifa); season usually April to June.',
+          'Wind: the levante, offshore, strong and gusty; flying sand and no inflatables.',
+          'Cervantes, «La ilustre fregona»: the tuna traps of Zahara, «finibusterrae of roguery».',
+        ] },
+        { t: 'quote', text: 'The photos show a white village and sand that never ends. Cervantes chose it for another reason: it was the last place on the map. It still is on levante days, when no parasol will stay where you put it.' },
+        { t: 'p', html: 'As the sun goes down, the shadow of the hills stretches over the village and the light turns orange above the water. The anglers stay at the shoreline, the sand cools again and the levante, if it has been blowing, eases off with the night. Four centuries after Cervantes’s rogue, the beach is still the place where the map seems to run out.' },
+      ],
+      faq: [
+        { q: 'Does Zahara de los Atunes beach have a Blue Flag?', a: 'Yes. Zahara de los Atunes, in Barbate, is on the 2026 list of Blue Flag beaches in Cádiz, according to ADEAC data reported in the Andalusian press.' },
+        { q: 'What happens at Zahara when the levante blows?', a: 'The levante blows offshore, warm, strong and gusty. Dry sand flies, parasols are hard to keep upright and any inflatable can be carried out to sea. Check the wind forecast before you go.' },
+        { q: 'When is the tuna season at Zahara de los Atunes?', a: 'Usually April to June, when bluefin tuna pass the Cádiz coast on their way into the Mediterranean. The village holds its Ruta del Atún in those weeks; exact dates change every year.' },
+      ],
+    },
+  },
   // ───── Diario de playas · Pantín, Valdoviño (Galicia) (voz bicéfala) ─────
   {
     slug: 'praia-de-pantin-valdovino-a-coruna-surf-1988-oleaje-fuerte',
