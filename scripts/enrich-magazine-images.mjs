@@ -213,7 +213,7 @@ async function wikimediaGeo(lat, lon, nombre, alias = []) {
     // palabra y `\bplaya\b` no casa con "Playa_de_La_Concha". El artículo
     // acabó en Flickr con una panorámica de 1021×194.
     const validas = extraerFotosDePages(pages)
-    if (process.env.DEBUG_CASCADA) console.error(`    [wikimediaGeo] ${validas.length} pasan NEGATIVAS/tamaño/ratio: ${validas.map(f => `«${textoFichero(f)}»`).join(', ')}`)
+    if (process.env.DEBUG_CASCADA) console.error(`    [wikimediaGeo] ${validas.length} pasan NEGATIVAS/tamaño/ratio: ${validas.slice(0, 8).map(f => `«${textoFichero(f)}»`).join(', ')}${validas.length > 8 ? ', …' : ''}`)
     let beachish = validas.filter(f => POSITIVAS.test(textoFichero(f)))
     if (nombre && beachish.length > 1) {
       const tokens = tokensDe(nombre, alias)

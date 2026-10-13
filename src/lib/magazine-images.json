@@ -233,7 +233,9 @@
     "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/San_Sebastian_Kontxa_beach_190363.jpg/1280px-San_Sebastian_Kontxa_beach_190363.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/San_Sebastian_Kontxa_beach_190363.jpg/1280px-San_Sebastian_Kontxa_beach_190363.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "Wikimedia Commons",
-    "author": "Ermell"
+    "author": "Ermell",
+    "ancho": 1200,
+    "alto": 900
   },
   "playa-de-laga-ibarrangelu-bizkaia-bandera-roja-ogono": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Laga.jpg",
