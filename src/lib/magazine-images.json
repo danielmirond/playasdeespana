@@ -1,14 +1,19 @@
 {
   "bacteria-carnivora-playa-vibrio-que-hay-de-cierto": {
-    "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4MTA3NTYxOC1pbWFnZS1rd3Z3ZGV0MS5qcGc.jpg",
-    "thumb": "https://api.openverse.org/v1/images/09c72557-9d2e-4c13-adb8-92704b96200d/thumb/",
-    "source": "OpenVerse"
+    "url": "https://live.staticflickr.com/65535/55261816292_50080f2ff4_b.jpg",
+    "thumb": "https://live.staticflickr.com/65535/55261816292_50080f2ff4_m.jpg",
+    "source": "Flickr",
+    "author": "RuudMorijn-NL",
+    "ancho": 1024,
+    "alto": 768
   },
   "banderas-azules-espana-record-2026": {
-    "url": "https://live.staticflickr.com/65535/54666379476_7026782622_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/54666379476_7026782622_m.jpg",
+    "url": "https://live.staticflickr.com/65535/55526260404_be57a3c187_b.jpg",
+    "thumb": "https://live.staticflickr.com/65535/55526260404_be57a3c187_m.jpg",
     "source": "Flickr",
-    "author": "glessew"
+    "author": "txikita69",
+    "ancho": 1024,
+    "alto": 768
   },
   "cala-comte-sant-josep-ibiza-acantilados-cerrados-coche-2017-corriente": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Cala_Conta_17_May_2011.JPG?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=original",
@@ -16,10 +21,12 @@
     "source": "Wikipedia"
   },
   "cala-del-moraig-benitatxell-rio-dulce-cantos": {
-    "url": "https://live.staticflickr.com/65535/51234648123_b499b2bc2e_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/51234648123_b499b2bc2e_m.jpg",
-    "source": "Flickr",
-    "author": "jmpastorg"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Cumbre_del_Sol_-_Playa_del_Moraig.jpg/1280px-Cumbre_del_Sol_-_Playa_del_Moraig.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Cumbre_del_Sol_-_Playa_del_Moraig.jpg/1280px-Cumbre_del_Sol_-_Playa_del_Moraig.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Magallanes7",
+    "ancho": 1200,
+    "alto": 889
   },
   "cala-granadella-xabia-guia-honesta": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Cala_de_la_Granadella%2C_J%C3%A1vea%2C_Espa%C3%B1a%2C_2014-07-01%2C_DD_37.JPG",
@@ -27,10 +34,12 @@
     "source": "Wikipedia"
   },
   "cala-macarelleta-menorca-acceso-verano": {
-    "url": "https://live.staticflickr.com/65535/54568810933_e198487e88_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/54568810933_e198487e88_m.jpg",
-    "source": "Flickr",
-    "author": "Tim&Elisa"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Macarelleta_Beach%2C_Menorca_%287235920294%29.jpg/1280px-Macarelleta_Beach%2C_Menorca_%287235920294%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Macarelleta_Beach%2C_Menorca_%287235920294%29.jpg/1280px-Macarelleta_Beach%2C_Menorca_%287235920294%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Paul Stephenson from London",
+    "ancho": 1200,
+    "alto": 800
   },
   "cala-montjoi-roses-girona-elbulli-cierre-coche-verano": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/ElBulli_Ferran_Adri%C3%A0.jpg",
@@ -59,16 +68,12 @@
     "author": "Marcela Střelcová (CC BY-SA 4.0)"
   },
   "fondear-formentera-barco-ibiza": {
-    "url": "https://live.staticflickr.com/65535/55287908500_b960f78c8f_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/55287908500_b960f78c8f_m.jpg",
-    "source": "Flickr",
-    "author": "richardjack57"
-  },
-  "guia-chiringuitos-comer-en-la-playa": {
-    "url": "https://images.unsplash.com/photo-1596348670607-3e3562b85db3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MjAwMTV8MHwxfHNlYXJjaHwzfHxDb21lciUyMGVuJTIwbGElMjBwbGF5YSUyMCUyMGJlYWNofGVufDF8MHx8fDE3OTEwNTg1NDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    "thumb": "https://images.unsplash.com/photo-1596348670607-3e3562b85db3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MjAwMTV8MHwxfHNlYXJjaHwzfHxDb21lciUyMGVuJTIwbGElMjBwbGF5YSUyMCUyMGJlYWNofGVufDF8MHx8fDE3OTEwNTg1NDF8MA&ixlib=rb-4.1.0&q=80&w=400",
-    "source": "Unsplash",
-    "author": "Andreas Johansson"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Es_Cal%C3%B3_de_Sant_Agust%C3%AD%2C_Formentera%2C_im_Oktober_2021.jpg/1280px-Es_Cal%C3%B3_de_Sant_Agust%C3%AD%2C_Formentera%2C_im_Oktober_2021.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Es_Cal%C3%B3_de_Sant_Agust%C3%AD%2C_Formentera%2C_im_Oktober_2021.jpg/1280px-Es_Cal%C3%B3_de_Sant_Agust%C3%AD%2C_Formentera%2C_im_Oktober_2021.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Einhornzüchter",
+    "ancho": 1200,
+    "alto": 900
   },
   "illa-roja-begur-girona-islote-nudista-cami-ronda": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Platja_de_l%27Illa_Roja_-_001.jpg/1280px-Platja_de_l%27Illa_Roja_-_001.jpg",
@@ -82,10 +87,11 @@
     "source": "Wikipedia"
   },
   "les-rotes-denia-alicante-reserva-marina-sin-arena": {
-    "url": "https://live.staticflickr.com/65535/48655137202_e4ee0da07f_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/48655137202_e4ee0da07f_m.jpg",
-    "source": "Flickr",
-    "author": "paconline"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/D%C3%A9nia%2C_platja_de_l%27Almadrava.JPG/1280px-D%C3%A9nia%2C_platja_de_l%27Almadrava.JPG?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/D%C3%A9nia%2C_platja_de_l%27Almadrava.JPG/1280px-D%C3%A9nia%2C_platja_de_l%27Almadrava.JPG?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "source": "Wikipedia",
+    "ancho": 1200,
+    "alto": 810
   },
   "mejores-playas-snorkel-costa-brava": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Dusky_grouper_%28Epinephelus_marginatus%29%2C_Tasco_Petit%2C_Medes_Islands%2C_Spain.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -100,16 +106,20 @@
     "author": "Joanbanjo"
   },
   "platja-de-pals-girona-radio-liberty-arena-gruesa-levante": {
-    "url": "https://live.staticflickr.com/65535/52836627187_d839815f2e_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/52836627187_d839815f2e_m.jpg",
+    "url": "https://live.staticflickr.com/4360/36656663694_f36f002a14_b.jpg",
+    "thumb": "https://live.staticflickr.com/4360/36656663694_f36f002a14_m.jpg",
     "source": "Flickr",
-    "author": "Xevi V"
+    "author": "Salva Mira",
+    "ancho": 1024,
+    "alto": 683
   },
   "platja-de-son-bou-alaior-menorca-basilica-siglo-v-bandera-roja-viento-sur": {
-    "url": "https://live.staticflickr.com/872/26480256777_0e4c410b0c_b.jpg",
-    "thumb": "https://live.staticflickr.com/872/26480256777_0e4c410b0c_m.jpg",
-    "source": "Flickr",
-    "author": "monikahoehm"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Playa_de_Son_Bou_%28Menorca%2C_5_de_agosto_de_2014%29_02.JPG/1280px-Playa_de_Son_Bou_%28Menorca%2C_5_de_agosto_de_2014%29_02.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Playa_de_Son_Bou_%28Menorca%2C_5_de_agosto_de_2014%29_02.JPG/1280px-Playa_de_Son_Bou_%28Menorca%2C_5_de_agosto_de_2014%29_02.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Menorquino",
+    "ancho": 1200,
+    "alto": 800
   },
   "platja-del-torn-hospitalet-infant-tarragona-naturista-nuclear-vandellos": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Playa_del_Torn.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -118,10 +128,12 @@
     "author": "Jseoanepascual (CC BY-SA 4.0)"
   },
   "platja-gran-tossa-de-mar-girona-ava-gardner-vila-vella-arena-gruesa": {
-    "url": "https://live.staticflickr.com/4137/4875282016_c01d4e8b40_b.jpg",
-    "thumb": "https://live.staticflickr.com/4137/4875282016_c01d4e8b40_m.jpg",
-    "source": "Flickr",
-    "author": "ilcustode78"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Stereo_agl_Tossa_de_Mar%2C_Vila_Vella_-_005.jpg/1280px-Stereo_agl_Tossa_de_Mar%2C_Vila_Vella_-_005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Stereo_agl_Tossa_de_Mar%2C_Vila_Vella_-_005.jpg/1280px-Stereo_agl_Tossa_de_Mar%2C_Vila_Vella_-_005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Shesmax",
+    "ancho": 1200,
+    "alto": 900
   },
   "playa-a-lanzada-o-grove-pontevedra-corrientes-nortada-nueve-olas": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Playa_de_A_Lanzada.jpg",
@@ -134,9 +146,12 @@
     "source": "Wikipedia"
   },
   "playa-benijo-tenerife-arena-negra-corrientes": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Playa_de_Benijo.jpg",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/9/97/Playa_de_Benijo.jpg",
-    "source": "Wikipedia"
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Playa_de_Benijo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/9/97/Playa_de_Benijo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "source": "Wikimedia Commons",
+    "author": "Alumnado Módulo ITG",
+    "ancho": 1200,
+    "alto": 900
   },
   "playa-bolonia-tarifa-duna-viento": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Ensenada_de_Bolonia_2009003.jpg",
@@ -144,10 +159,12 @@
     "source": "Wikipedia"
   },
   "playa-calblanque-murcia-bus-verano": {
-    "url": "https://live.staticflickr.com/65535/50588159842_16982c6b6b_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/50588159842_16982c6b6b_m.jpg",
-    "source": "Flickr",
-    "author": "Juan Garnet"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Playa_de_Calblanque.jpg/1280px-Playa_de_Calblanque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Playa_de_Calblanque.jpg/1280px-Playa_de_Calblanque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "José Miguel Grandal",
+    "ancho": 1200,
+    "alto": 832
   },
   "playa-canos-de-meca-barbate-manantiales-acantilado-marea": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Spain_Cabo_Trafalgar.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=original",
@@ -172,16 +189,19 @@
     "author": "Luis Miguel Bugallo Sánchez (Lmbuga) (CC BY-SA 3.0)"
   },
   "playa-cofete-fuerteventura-pista-corrientes": {
-    "url": "https://live.staticflickr.com/65535/55558954821_b8c1835ea5_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/55558954821_b8c1835ea5_m.jpg",
-    "source": "Flickr",
-    "author": "gerd 17"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Fuerteventura%2C_Canary_Islands%2C_panorama_of_Cofete_beach_on_Jandia_Peninsula.jpg/1280px-Fuerteventura%2C_Canary_Islands%2C_panorama_of_Cofete_beach_on_Jandia_Peninsula.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Fuerteventura%2C_Canary_Islands%2C_panorama_of_Cofete_beach_on_Jandia_Peninsula.jpg/1280px-Fuerteventura%2C_Canary_Islands%2C_panorama_of_Cofete_beach_on_Jandia_Peninsula.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "source": "Wikipedia",
+    "ancho": 1200,
+    "alto": 492
   },
   "playa-cuesta-maneli-donana-huelva-pasarela-acantilado-asperillo": {
-    "url": "https://live.staticflickr.com/65535/52141148915_3f4d3f277f_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/52141148915_3f4d3f277f_m.jpg",
-    "source": "Flickr",
-    "author": "almudenamarquezmerchan"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Chumbera%2C_Acantilado_del_Asperillo%2C_Parque_Natural_de_Do%C3%B1ana.jpg/1280px-Chumbera%2C_Acantilado_del_Asperillo%2C_Parque_Natural_de_Do%C3%B1ana.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Chumbera%2C_Acantilado_del_Asperillo%2C_Parque_Natural_de_Do%C3%B1ana.jpg/1280px-Chumbera%2C_Acantilado_del_Asperillo%2C_Parque_Natural_de_Do%C3%B1ana.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Aaroncm95",
+    "ancho": 1200,
+    "alto": 675
   },
   "playa-de-barayo-navia-valdes-asturias-reserva-rio-800-metros-pie": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/PA120194_-_Desembocadura_de_la_r%C3%ADa_de_Navia.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=original",
@@ -221,10 +241,12 @@
     "source": "Wikipedia"
   },
   "playa-de-las-catedrales-ribadeo-marea-reserva": {
-    "url": "https://live.staticflickr.com/65535/52677225223_b27cd3c72d_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/52677225223_b27cd3c72d_m.jpg",
-    "source": "Flickr",
-    "author": "jojablero"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Praia_de_Augas_Santas_ou_das_Catedrais._Devesa._Ribadeo._Galiza-01.jpg/1280px-Praia_de_Augas_Santas_ou_das_Catedrais._Devesa._Ribadeo._Galiza-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Praia_de_Augas_Santas_ou_das_Catedrais._Devesa._Ribadeo._Galiza-01.jpg/1280px-Praia_de_Augas_Santas_ou_das_Catedrais._Devesa._Ribadeo._Galiza-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Luis Miguel Bugallo Sánchez (Lmbuga)",
+    "ancho": 1200,
+    "alto": 800
   },
   "playa-de-las-teresitas-tenerife-arena-sahara": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/La_playa_de_Las_Teresitas%2C_en_la_isla_de_Tenerife._Espa%C3%B1a._Spain.jpg",
@@ -260,10 +282,12 @@
     "author": "Ingegneriadell´elizia (CC BY 3.0)"
   },
   "playa-de-ribamar-alcossebre-castellon-guijarros-parque-irta": {
-    "url": "https://live.staticflickr.com/1552/25169105275_eb9d336791_b.jpg",
-    "thumb": "https://live.staticflickr.com/1552/25169105275_eb9d336791_m.jpg",
-    "source": "Flickr",
-    "author": "Jaap van 't Ooster"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Costa_de_Ribamar_%28Alcal%C3%A0_de_Xivert-Alcossebre%29.jpg/1280px-Costa_de_Ribamar_%28Alcal%C3%A0_de_Xivert-Alcossebre%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Costa_de_Ribamar_%28Alcal%C3%A0_de_Xivert-Alcossebre%29.jpg/1280px-Costa_de_Ribamar_%28Alcal%C3%A0_de_Xivert-Alcossebre%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Juan Emilio Prades Bel",
+    "ancho": 1200,
+    "alto": 900
   },
   "playa-de-saturraran-mutriku-gipuzkoa-marea-alta-desaparece": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Ondarroa_037.jpg",
@@ -276,15 +300,25 @@
     "source": "Wikipedia"
   },
   "playa-de-torimbia-llanes-asturias-bajada-pie": {
-    "url": "https://live.staticflickr.com/65535/53671999449_dbd0279d37_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/53671999449_dbd0279d37_m.jpg",
-    "source": "Flickr",
-    "author": "maccdc"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Playa_de_Torimbia%2C_Llanes.jpg/1280px-Playa_de_Torimbia%2C_Llanes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Playa_de_Torimbia%2C_Llanes.jpg/1280px-Playa_de_Torimbia%2C_Llanes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Jaime E. Osorio",
+    "ancho": 1200,
+    "alto": 797
   },
   "playa-de-valdevaqueros-tarifa-cadiz-duna-carretera-levante-kitesurf": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Playa_de_Valdevaqueros.JPG?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=original",
     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Playa_de_Valdevaqueros.JPG/1280px-Playa_de_Valdevaqueros.JPG?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "source": "Wikipedia"
+  },
+  "playa-de-zarautz-gipuzkoa-mareas-corrientes-retorno-dunas-inurritza": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Zarauzko_hondartza_Torreoitik_01.jpg/1280px-Zarauzko_hondartza_Torreoitik_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Zarauzko_hondartza_Torreoitik_01.jpg/1280px-Zarauzko_hondartza_Torreoitik_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Theklan",
+    "ancho": 1200,
+    "alto": 800
   },
   "playa-del-silencio-cudillero-escalera-acantilado": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Beach_playa_de_silencio.jpg",
@@ -292,21 +326,28 @@
     "source": "Wikipedia"
   },
   "playa-el-portus-cartagena-murcia-grava-fondo-cala-morena-desprendimientos": {
-    "url": "https://live.staticflickr.com/65535/55116317495_6520f554d4_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/55116317495_6520f554d4_m.jpg",
-    "source": "Flickr",
-    "author": "Rober SP"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Houses_by_the_coast_of_El_Port%C3%BAs%2C_Cartagena%2C_Murcia%2C_Spain%2C_2022_January.jpg/1280px-Houses_by_the_coast_of_El_Port%C3%BAs%2C_Cartagena%2C_Murcia%2C_Spain%2C_2022_January.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Houses_by_the_coast_of_El_Port%C3%BAs%2C_Cartagena%2C_Murcia%2C_Spain%2C_2022_January.jpg/1280px-Houses_by_the_coast_of_El_Port%C3%BAs%2C_Cartagena%2C_Murcia%2C_Spain%2C_2022_January.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Ximonic (Simo Räsänen)",
+    "ancho": 1200,
+    "alto": 800
   },
   "playa-es-trenc-mallorca-sin-urbanizar-embat-aparcamiento": {
-    "url": "https://live.staticflickr.com/65535/51993632340_8296f0d275_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/51993632340_8296f0d275_m.jpg",
-    "source": "Flickr",
-    "author": "dmaldonadodelmoral"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Foto_al_atardecer_en_la_playa_de_Es_Trencs_%282%29.jpg/1280px-Foto_al_atardecer_en_la_playa_de_Es_Trencs_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Foto_al_atardecer_en_la_playa_de_Es_Trencs_%282%29.jpg/1280px-Foto_al_atardecer_en_la_playa_de_Es_Trencs_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "AlbertoDV",
+    "ancho": 1200,
+    "alto": 898
   },
   "playa-gulpiyuri-asturias-marea": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Gulpiyuri.jpg",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Gulpiyuri.jpg",
-    "source": "Wikipedia"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Playa_de_Gulpiyuri.jpg/1280px-Playa_de_Gulpiyuri.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Playa_de_Gulpiyuri.jpg/1280px-Playa_de_Gulpiyuri.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Einaz80",
+    "ancho": 1200,
+    "alto": 900
   },
   "playa-itzurun-zumaia-flysch-marea": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Itzurun_beach_02.jpg",
@@ -314,9 +355,12 @@
     "source": "Wikipedia"
   },
   "playa-la-griega-colunga-asturias-huellas-dinosaurio-bajamar": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/5/59/Griega.png?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=original",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/5/59/Griega.png?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-    "source": "Wikipedia"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Playa_de_la_Griega.jpeg/1280px-Playa_de_la_Griega.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Playa_de_la_Griega.jpeg/1280px-Playa_de_la_Griega.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Robot8A",
+    "ancho": 1200,
+    "alto": 900
   },
   "playa-langre-ribamontan-cantabria-escalera-acantilado-marea": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Cantabria_1_001_playa_de_Langre.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -341,15 +385,20 @@
     "source": "Wikipedia"
   },
   "playa-murcia-esculturas-arena-erosion": {
-    "url": "https://live.staticflickr.com/65535/50513508487_15441c3284_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/50513508487_15441c3284_m.jpg",
+    "url": "https://live.staticflickr.com/2897/32752520934_745e5c8d2b_b.jpg",
+    "thumb": "https://live.staticflickr.com/2897/32752520934_745e5c8d2b_m.jpg",
     "source": "Flickr",
-    "author": "ManuMatas"
+    "author": "potty01926",
+    "ancho": 1024,
+    "alto": 768
   },
   "playa-oyambre-cantabria-avion-1929": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Playadeoyambre.jpg",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Playadeoyambre.jpg",
-    "source": "Wikipedia"
+    "url": "https://live.staticflickr.com/7857/46645541231_bfd77743d6_b.jpg",
+    "thumb": "https://live.staticflickr.com/7857/46645541231_bfd77743d6_m.jpg",
+    "source": "Flickr",
+    "author": "IrreBerenTe Natalia Aguado",
+    "ancho": 1023,
+    "alto": 682
   },
   "playa-papagayo-yaiza-lanzarote-peaje-pista-tierra-120-metros": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Lanzarote_1_Luc_Viatour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -368,20 +417,28 @@
     "source": "Wikipedia"
   },
   "playa-rodiles-villaviciosa-asturias-pinar-sombra-canal-ria": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Rodiles2.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=original",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/6/64/Rodiles2.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-    "source": "Wikipedia"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/PLAYA_DE_RODILES_EN_VILLAVICIOSA.jpg/1280px-PLAYA_DE_RODILES_EN_VILLAVICIOSA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/PLAYA_DE_RODILES_EN_VILLAVICIOSA.jpg/1280px-PLAYA_DE_RODILES_EN_VILLAVICIOSA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Turismovillaviciosa",
+    "ancho": 1200,
+    "alto": 800
   },
   "playa-villananitos-san-pedro-pinatar-mar-menor-agua-somera-lodos": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Playavillananitos2.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=original",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Playavillananitos2.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-    "source": "Wikipedia"
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/SEAT_131_MIRAFIORI_MU_cotxes_Bojos_EN_CLASICOS_DEL_MAR_MENOR%2C_Lo_Pag%C3%A0n%2C_Murcia._Al_fondo_Seat_600.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/a/ab/SEAT_131_MIRAFIORI_MU_cotxes_Bojos_EN_CLASICOS_DEL_MAR_MENOR%2C_Lo_Pag%C3%A0n%2C_Murcia._Al_fondo_Seat_600.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "source": "Wikimedia Commons",
+    "author": "guzman Gusmão from SUIZA, SUISSE Suissa suiza",
+    "ancho": 1200,
+    "alto": 900
   },
   "playa-zahara-de-los-atunes-barbate-cadiz-almadraba-cervantes-levante": {
-    "url": "https://live.staticflickr.com/65535/54523418260_6a0f1c05d4_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/54523418260_6a0f1c05d4_m.jpg",
-    "source": "Flickr",
-    "author": "morilloc0u0"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/PlayaZaharatarde.jpg/1280px-PlayaZaharatarde.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/PlayaZaharatarde.jpg/1280px-PlayaZaharatarde.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Killeando",
+    "ancho": 1200,
+    "alto": 797
   },
   "por-que-arena-blanca-o-negra": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Playa_El_Bollullo_4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -395,10 +452,12 @@
     "source": "Wikipedia"
   },
   "praia-das-furnas-porto-do-son-mar-adentro-corrientes": {
-    "url": "https://live.staticflickr.com/65535/52415868451_cefe1733ff_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/52415868451_cefe1733ff_m.jpg",
-    "source": "Flickr",
-    "author": "Rick Vince"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Praia_das_Furnas_no_devalo._Porto_do_Son._Galiza_001.jpg/1280px-Praia_das_Furnas_no_devalo._Porto_do_Son._Galiza_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Praia_das_Furnas_no_devalo._Porto_do_Son._Galiza_001.jpg/1280px-Praia_das_Furnas_no_devalo._Porto_do_Son._Galiza_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Luis Miguel Bugallo Sánchez (Lmbuga)",
+    "ancho": 1200,
+    "alto": 800
   },
   "praia-de-barra-cangas-pontevedra-naturista-cies-sin-socorrista": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Cangas_playa_de_Barra.jpg/1920px-Cangas_playa_de_Barra.jpg",
@@ -407,22 +466,27 @@
     "author": "Txo (CC BY-SA 4.0)"
   },
   "praia-de-carnota-a-coruna-siete-kilometros-marea-nordes": {
-    "url": "https://live.staticflickr.com/65535/51389817856_f923ff4231_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/51389817856_f923ff4231_m.jpg",
+    "url": "https://live.staticflickr.com/691/22256579473_a7a2278c09_b.jpg",
+    "thumb": "https://live.staticflickr.com/691/22256579473_a7a2278c09_m.jpg",
     "source": "Flickr",
-    "author": "José Antonio Sanahuja"
+    "author": "vleston",
+    "ancho": 1024,
+    "alto": 683
   },
   "praia-de-doninos-ferrol-a-coruna-corrientes-extremos-laguna": {
-    "url": "https://live.staticflickr.com/5707/30601548546_2f6e97dd0a_b.jpg",
-    "thumb": "https://live.staticflickr.com/5707/30601548546_2f6e97dd0a_m.jpg",
-    "source": "Flickr",
-    "author": "Sachada2010"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Playa_de_Doni%C3%B1os_-_panoramio.jpg/1280px-Playa_de_Doni%C3%B1os_-_panoramio.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Playa_de_Doni%C3%B1os_-_panoramio.jpg/1280px-Playa_de_Doni%C3%B1os_-_panoramio.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "source": "Wikipedia",
+    "ancho": 1200,
+    "alto": 900
   },
   "praia-de-pantin-valdovino-a-coruna-surf-1988-oleaje-fuerte": {
-    "url": "https://live.staticflickr.com/8252/29373805036_1bccfa3b0d_b.jpg",
-    "thumb": "https://live.staticflickr.com/8252/29373805036_1bccfa3b0d_m.jpg",
-    "source": "Flickr",
-    "author": "PIK♠DAME"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Praia_de_Pant%C3%ADn%2C_Valdovi%C3%B1o.jpg/1280px-Praia_de_Pant%C3%ADn%2C_Valdovi%C3%B1o.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Praia_de_Pant%C3%ADn%2C_Valdovi%C3%B1o.jpg/1280px-Praia_de_Pant%C3%ADn%2C_Valdovi%C3%B1o.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "el Buho nº30",
+    "ancho": 1200,
+    "alto": 623
   },
   "praia-do-rostro-fisterra-a-coruna-resaca-agua-fria": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Praia_do_Rostro_-_Fisterra_-_01.jpg/1280px-Praia_do_Rostro_-_Fisterra_-_01.jpg",
@@ -441,15 +505,18 @@
     "source": "Wikipedia"
   },
   "ruta-barco-calas-menorca-fondear": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Cala-galdana.jpg",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Cala-galdana.jpg/1280px-Cala-galdana.jpg",
-    "source": "Wikipedia"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Macarella_16.jpg/1280px-Macarella_16.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Macarella_16.jpg/1280px-Macarella_16.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "source": "Wikipedia",
+    "ancho": 1200,
+    "alto": 676
   },
   "ruta-calas-cabo-de-gata-almeria": {
-    "url": "https://live.staticflickr.com/65535/52336853893_aa20f32397_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/52336853893_aa20f32397_m.jpg",
-    "source": "Flickr",
-    "author": "elojeador"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Playa_de_Cabo_de_Gata_2.jpg/1280px-Playa_de_Cabo_de_Gata_2.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Playa_de_Cabo_de_Gata_2.jpg/1280px-Playa_de_Cabo_de_Gata_2.jpg?utm_source=es.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "source": "Wikipedia",
+    "ancho": 1200,
+    "alto": 900
   },
   "ruta-calas-costa-brava-barco": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Costa_Brava_Calas.JPG",
@@ -457,9 +524,11 @@
     "source": "Wikipedia"
   },
   "sa-calobra-escorca-mallorca-tuneles-torrent-de-pareis": {
-    "url": "https://live.staticflickr.com/65535/54329235265_7248c9b01a_b.jpg",
-    "thumb": "https://live.staticflickr.com/65535/54329235265_7248c9b01a_m.jpg",
-    "source": "Flickr",
-    "author": "hermez"
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Mallorca_Sa_Calobra_Torrent_de_Pareis_beach.jpg/1280px-Mallorca_Sa_Calobra_Torrent_de_Pareis_beach.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Mallorca_Sa_Calobra_Torrent_de_Pareis_beach.jpg/1280px-Mallorca_Sa_Calobra_Torrent_de_Pareis_beach.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "Wikimedia Commons",
+    "author": "Isiwal",
+    "ancho": 1200,
+    "alto": 800
   }
 }
