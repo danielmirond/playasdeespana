@@ -469,7 +469,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.main}>
+      {/* El cuerpo que cuenta para el porcentaje leído: el aside y el pie
+          quedan fuera a propósito. */}
+      <div className={styles.main} data-lectura>
         <Reorder order={ordenSecciones} quitar={rojo ? BLOQUES_DUROS : undefined}>
 
         {/* ORDEN ABOVE-THE-FOLD (post critique PR #84):

@@ -63,6 +63,13 @@
    * Va fija y sin ocupar sitio en el flujo: cero CLS, que en estas fichas
    * es 0 y así se queda. Y marca el avance REAL, no el máximo: si subes a
    * releer, la línea retrocede contigo. */
+  /* En la ficha de playa ya hay una barra de progreso dentro de la píldora
+   * inferior, y dos indicadores de lo mismo son ruido. Si la píldora está
+   * visible, aquí no se pinta nada y solo se mide. Se comprueba el display
+   * calculado, no el ancho de pantalla, para que se ajuste solo. */
+  var pildora = document.getElementById('pildora')
+  var pintaLinea = !(pildora && getComputedStyle(pildora).display !== 'none')
+
   var linea = document.createElement('div')
   linea.setAttribute('role', 'progressbar')
   linea.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Reading progress' : 'Progreso de lectura')
@@ -77,7 +84,7 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     linea.style.transition = 'none'
   }
-  document.body.appendChild(linea)
+  if (pintaLinea) document.body.appendChild(linea)
 
   var maximo = 0
   var visibleDesde = document.hidden ? 0 : Date.now()
@@ -108,8 +115,10 @@
 
   function mide() {
     var p = porcentaje()
-    linea.style.transform = 'scaleX(' + (p / 100).toFixed(3) + ')'
-    linea.setAttribute('aria-valuenow', String(p))
+    if (pintaLinea) {
+      linea.style.transform = 'scaleX(' + (p / 100).toFixed(3) + ')'
+      linea.setAttribute('aria-valuenow', String(p))
+    }
     if (p > maximo) maximo = p
     for (var i = 0; i < HITOS.length; i++) {
       var h = HITOS[i]

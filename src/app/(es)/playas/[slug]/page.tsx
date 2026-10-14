@@ -1052,6 +1052,7 @@ export default async function PlayaPage({ params }: Props) {
           móvil (64px) en lugar de nav + secciones + acciones (316px). */}
       <PildoraContextual lat={playa.lat} lng={playa.lng} nombre={playa.nombre} />
       <script src="/pildora.js" defer />
+      <script src="/lectura.js" defer />
     </>
   )
 }

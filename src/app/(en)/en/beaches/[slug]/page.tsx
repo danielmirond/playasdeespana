@@ -405,6 +405,7 @@ export default async function BeachPageEn({ params }: Props) {
         provinciaSlug={provinciaSlug}
         hoyISO={hoyMadridISO}
       />
+      <script src="/lectura.js" defer />
     </>
   )
 }
