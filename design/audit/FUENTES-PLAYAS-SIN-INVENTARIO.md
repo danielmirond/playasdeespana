@@ -23,7 +23,7 @@ Cataluña 73, Comunitat Valenciana 48, Asturias 36, el resto por debajo de 20.
 | Cataluña · `83qv-sib8` | 597 playas: id, municipio y nombre | Como autoridad de nombres. **Sin servicios** |
 | Cataluña · `4baz-cjv2` | Estado y banderas, inmediato | Ya integrado |
 | Baleares · `carac_platges` | 462 playas: nombre y un punto. El CSV tiene **una sola columna** | Para cuadrar nombres. Nada más |
-| Euskadi · `espacios-naturales.geojson` | 47 registros con accesibilidad desglosada: física, visual, auditiva, intelectual y orgánica | **Sí**, y es mejor que nuestro binario `accesible` |
+| Euskadi · `espacios-naturales.geojson` | 41 playas. Trae los campos de accesibilidad —física, visual, auditiva, intelectual, orgánica— pero **los 235 valores son `"0"`**: el esquema está vacío | No. Solo descripción turística y municipio |
 | Gipuzkoa · `gipuzkoairekia` | Visitantes por playa y **por mes** en 15 playas | No sustituye nada, pero **valida el modelo de afluencia** |
 | Galicia · «Rías e praias» | El GeoRSS devuelve una página HTML del portal de turismo | No, hoy está roto |
 | Asturias · `control_point_states.json` | 404 | No |
@@ -45,13 +45,20 @@ Tres consecuencias prácticas:
    deben estar indexadas.** Una ficha sin un solo dato oficial compite con
    4.329 que sí lo tienen, y arrastra la media del sitio. Revisar el umbral de
    `calidad-indexacion` para ellas es más rentable que buscar más fuentes.
-3. **Euskadi sí aporta**: la accesibilidad desglosada en cinco ejes es mejor
-   dato que nuestro sí/no, para las 83 playas vascas.
+3. **Euskadi no aporta, aunque lo pareciera.** Comprobado el 14 de octubre:
+   los cinco ejes de accesibilidad existen como campos y están todos a cero.
+   Mirar los nombres de los campos no es mirar los datos.
 
-Y un apunte que no buscábamos: Gipuzkoa publica cuánta gente pasa por quince
-playas al mes. No sirve para decir cuánta hay ahora, pero sí para comprobar si
-la curva estacional de nuestro modelo se parece a la realidad, que es algo que
-nunca hemos verificado.
+Y un apunte que no buscábamos y acabó siendo lo más útil: Gipuzkoa publica
+cuánta gente pasa por quince playas. Con eso se contrastó por primera vez la
+curva de afluencia el 14 de octubre: acierta la temporada, infla junio (ya
+corregido) y no puede acertar la playa concreta. El detalle, en el apéndice de
+`CALIDAD-POR-TIPO.md`.
+
+Queda una vía sin agotar para los servicios: OpenStreetMap. No sirve para
+rellenar el inventario —acierta el 78 % al ver una ducha y encuentra el 29 %
+de las que hay— pero sí para publicar lo que está mapeado cerca con su
+distancia, que es lo que hace ahora la ficha.
 
 ---
 
