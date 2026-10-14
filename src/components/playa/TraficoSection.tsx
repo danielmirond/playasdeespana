@@ -64,9 +64,29 @@ const ZONA: Record<string, 'med' | 'atl' | 'can' | 'int'> = {
   'La Rioja':'int','Extremadura':'int','Ceuta':'med','Melilla':'med',
 }
 
+/* CONTRASTADO, por fin (14-oct-2026).
+ *
+ * Gipuzkoa publica visitantes por playa y periodo en quince playas, y es lo
+ * único con lo que se puede comprobar esta curva. Sobre 2.040.000 visitas:
+ *
+ *   periodo      real   modelo
+ *   julio         37 %   36 %
+ *   agosto        38 %   37 %
+ *   jun 15-30      9 %   15 %   ← el modelo infla junio
+ *   sep 1-15      15 %   12 %
+ *
+ * Julio y agosto clavados; junio sobrevalorado. Como el dato de junio es
+ * solo la segunda quincena, que es la buena, el junio real es aún más bajo
+ * que lo que sugiere doblarlo: se baja de 0,78 a 0,55 y no más, que es una
+ * provincia y un año.
+ *
+ * LO QUE EL MODELO NO PUEDE HACER, y conviene no olvidarlo: la relación
+ * agosto/julio va de 0,59 en Ondarbeltz a 2,15 en Hondarribia, y aquí hay
+ * un único 1,03 para toda la cornisa. Esta curva acierta la TEMPORADA, no
+ * la playa. Por eso la ficha ofrece la mejor hora y no una cifra. */
 const TEMP_MULT: Record<string, number[]> = {
   med: [0.20,0.22,0.30,0.45,0.65,0.85,1.00,1.00,0.70,0.40,0.22,0.18],
-  atl: [0.18,0.20,0.28,0.40,0.60,0.78,0.95,0.98,0.65,0.35,0.20,0.16],
+  atl: [0.18,0.20,0.28,0.40,0.60,0.55,0.95,0.98,0.65,0.35,0.20,0.16],
   can: [0.75,0.78,0.80,0.72,0.65,0.80,0.95,0.98,0.82,0.70,0.72,0.75],
   int: [0.05,0.05,0.08,0.15,0.30,0.55,0.90,1.00,0.45,0.15,0.06,0.05],
 }

@@ -128,3 +128,35 @@ después (efecto en meses), y no esperar señal antes de febrero de 2027.
 *Medición: `/tmp/auditar2.py` sobre el sitemap de producción, 7 de octubre de
 2026. Fuente del método: Search Central Live Deep Dive Europe, Barcelona,
 30 sep - 2 oct 2026, charla de Duy Nguyen sobre calidad en sitios grandes.*
+
+---
+
+## Apéndice · el modelo de afluencia, contrastado (14-oct-2026)
+
+La ficha estima cuánta gente hay en la playa con una curva horaria por mes y
+zona. Nunca se había comprobado contra nada. Gipuzkoa publica visitantes por
+playa y periodo en quince playas, y es lo único con lo que se puede.
+
+Sobre 2.040.000 visitas:
+
+| periodo | real | modelo |
+|---|---:|---:|
+| julio | 37 % | 36 % |
+| agosto | 38 % | 37 % |
+| junio 15-30 | 9 % | 15 % |
+| sept 1-15 | 15 % | 12 % |
+
+**La temporada la acierta.** Julio y agosto, a un punto. Junio estaba inflado
+y se ha corregido de 0,78 a 0,55 en la zona atlántica; como el dato cubre solo
+la segunda quincena, que es la concurrida, el junio real es todavía más bajo.
+
+**La playa concreta, no.** La relación agosto/julio va de 0,59 en Ondarbeltz
+(Mutriku) a 2,15 en Hondarribia, y el modelo usa un único 1,03 para toda la
+cornisa. Zurriola pierde un 40 % de gente en agosto; Itzurun la dobla. Eso no
+lo puede saber una curva por comunidad, y no hay dato para arreglarlo: quince
+playas de una provincia no dan para calibrar 4.300.
+
+Conclusión: la curva vale para lo que la ficha ofrece —a qué hora hay menos
+gente— y no para lo que la ficha ya dejó de prometer, que era un porcentaje de
+ocupación. Si algún día se quisiera dar la cifra por playa, haría falta un
+contador real, y no existe.
