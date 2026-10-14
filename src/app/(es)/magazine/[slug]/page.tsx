@@ -180,7 +180,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         )}
 
         {/* Cuerpo */}
-        <article>{a.body.map(renderBlock)}</article>
+        <article data-lectura>{a.body.map(renderBlock)}</article>
+        <script src="/lectura.js" defer />
 
         {/* FAQ visible */}
         {a.faq && a.faq.length > 0 && (

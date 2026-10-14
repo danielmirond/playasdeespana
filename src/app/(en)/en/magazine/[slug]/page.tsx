@@ -115,7 +115,8 @@ export default async function ArticlePageEn({ params }: { params: Promise<{ slug
           </figure>
         )}
 
-        <article>{en.body.map(renderBlock)}</article>
+        <article data-lectura>{en.body.map(renderBlock)}</article>
+        <script src="/lectura.js" defer />
 
         {en.faq && en.faq.length > 0 && (
           <section style={{ marginTop: '2.5rem' }}>
