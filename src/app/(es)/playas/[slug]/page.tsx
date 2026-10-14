@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { after } from 'next/server'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
+import { serviciosCerca } from '@/lib/servicios-osm'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import { robotsMeta } from '@/lib/robots-meta'
 import { getPrediccionAemet } from '@/lib/aemet'
@@ -682,6 +683,7 @@ export default async function PlayaPage({ params }: Props) {
   const boyaData = boyaResult?.status === 'fulfilled' ? boyaResult.value : null
 
   // Chiringuitos: sidecar Google Places en memoria, sin red ni deadline.
+  const serviciosOsm = await serviciosCerca(playa.lat, playa.lng)
   const chiringuitos = getChiringuitosPlaya(playa.lat, playa.lng)
 
   const repFlag = reportesData
@@ -991,6 +993,7 @@ export default async function PlayaPage({ params }: Props) {
         usoProhibido={esUsoProhibido(slug)}
         vientoReportado={vientoReportado}
         chiringuitos={chiringuitos}
+        serviciosOsm={serviciosOsm}
         medusas={medusas}
         mareasLunar={mareasLunar}
         mareasOficiales={mareasOficiales}

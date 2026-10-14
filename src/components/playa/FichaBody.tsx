@@ -56,6 +56,7 @@ import { tinte } from '@/lib/tinte'
 import { miles } from '@/lib/miles'
 import { zonaHoraria } from '@/lib/zona-horaria'
 import GygActivities from '@/components/GygActivities'
+import { ETIQUETA as ETIQUETA_OSM, distancia as distanciaOsm } from '@/lib/servicios-osm'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
 const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
@@ -123,6 +124,7 @@ interface Props {
   /** Avisos de viento de bañistas en las últimas 24 h */
   vientoReportado?: { n: number; detalle: string; detalleEn: string } | null
   chiringuitos?:   import('@/lib/chiringuitos-playa').ChiringuitoCerca[]
+  serviciosOsm?:   import('@/lib/servicios-osm').ServicioCerca[]
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
   /**
@@ -346,7 +348,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, serviciosOsm, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -1455,6 +1457,33 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                         return <span key={s.key} className={`${styles.srv} ${clase}`}>{txt} · {s.label}</span>
                       })}
                     </div>
+                    {/* LO QUE HAY MAPEADO CERCA, que no es lo mismo que lo
+                        que tiene la playa. OpenStreetMap acierta el 78 % al
+                        decir que hay una ducha y solo encuentra el 29 % de
+                        las que existen, así que no sirve para rellenar el
+                        inventario. Sí sirve para decir la verdad literal:
+                        que a tantos metros alguien mapeó unos aseos. */}
+                    {serviciosOsm && serviciosOsm.length > 0 && (
+                      <div className={styles.srvOsm}>
+                        <div className={styles.srvOsmCab}>
+                          {locale === 'en' ? 'Mapped nearby' : 'Mapeado cerca'}
+                          <span>OpenStreetMap · 300 m</span>
+                        </div>
+                        <ul className={styles.srvOsmLista}>
+                          {serviciosOsm.map((sv, i) => (
+                            <li key={`${sv.lat}-${sv.lng}-${i}`}>
+                              <a href={`https://www.google.com/maps/search/?api=1&query=${sv.lat},${sv.lng}`} target="_blank" rel="noopener">
+                                {sv.nombre ?? ETIQUETA_OSM[sv.tipo][locale === 'en' ? 'en' : 'es']}
+                              </a>
+                              {sv.nombre && <span className={styles.srvOsmTipo}> · {ETIQUETA_OSM[sv.tipo][locale === 'en' ? 'en' : 'es']}</span>}
+                              <span className={styles.srvOsmDist}> {distanciaOsm(sv.metros, locale === 'en' ? 'en' : 'es')}</span>
+                              {sv.pmr && <span className={styles.srvOsmTipo}> · {locale === 'en' ? 'step-free' : 'accesible'}</span>}
+                              {sv.pago === false && <span className={styles.srvOsmTipo}> · {locale === 'en' ? 'free' : 'gratis'}</span>}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                     {sinDato.length > 0 && (
                       <p className={styles.srvSinDato}>
                         {locale === 'en'

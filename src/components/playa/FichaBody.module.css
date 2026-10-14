@@ -495,3 +495,13 @@
    del hero y el "Cómo llegar" de la barra inferior (auditoría de ficha). */
 .soloDesktop { display: none; }
 @media (min-width: 900px) { .soloDesktop { display: block; } }
+
+/* Mapeado cerca · lo de OpenStreetMap, separado del inventario oficial a
+   propósito: son dos cosas distintas y mezclarlas fue el error que trajo
+   los «No» inventados. */
+.srvOsm { margin: .75rem 0 0; padding: .6rem .8rem; border: 1px dashed var(--line); border-radius: 8px; }
+.srvOsmCab { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: .35rem; }
+.srvOsmCab span { font-weight: 400; text-transform: none; letter-spacing: 0; font-size: .68rem; }
+.srvOsmLista { list-style: none; padding: 0; margin: 0; display: grid; gap: .22rem; font-size: .82rem; }
+.srvOsmLista a { color: var(--ink); font-weight: 600; }
+.srvOsmTipo, .srvOsmDist { color: var(--muted); font-weight: 400; }
