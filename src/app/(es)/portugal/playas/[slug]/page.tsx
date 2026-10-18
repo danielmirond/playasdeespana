@@ -25,6 +25,10 @@ import { getMareas, getSol } from '@/lib/marine'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
 import { calcularHoraIdeal } from '@/lib/hora-ideal'
+// Directo al sidecar OSM en vez de getRestaurantes/getHoteles/…: esas
+// envuelven la cascada con Google Places y KV, que para Portugal no está
+// cosechada. El sidecar es local, instantáneo y no gasta cuota.
+import { osmRestaurantes, osmHoteles, osmCampings, osmBuceo } from '@/lib/osm-pois'
 import { robotsMeta } from '@/lib/robots-meta'
 import type { Playa } from '@/types'
 
@@ -62,6 +66,13 @@ export default async function PraiaPage({ params }: Props) {
     getMeteoForecast(praia.lat, praia.lng).catch(() => []),
     getPraiasCosta(),
     getFotoPraia(slug),
+  ])
+
+  const [restaurantes, hoteles, campings, buceo] = await Promise.all([
+    osmRestaurantes(praia.lat, praia.lng).catch(() => null),
+    osmHoteles(praia.lat, praia.lng).catch(() => null),
+    osmCampings(praia.lat, praia.lng).catch(() => null),
+    osmBuceo(praia.lat, praia.lng).catch(() => null),
   ])
 
   const h = new Date().getUTCHours()
@@ -158,6 +169,10 @@ export default async function PraiaPage({ params }: Props) {
         forecastSurf={mareasData?.forecast ?? null}
         geo={geo}
         horaIdeal={horaIdeal}
+        restaurantes={restaurantes ?? []}
+        hoteles={hoteles ?? []}
+        campings={campings ?? []}
+        centrosBuceo={buceo ?? []}
         playasCercanas={cercanas as never}
         certBandera="estimado"
         hoyISO={new Date().toISOString().slice(0, 10)}

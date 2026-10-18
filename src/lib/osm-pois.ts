@@ -40,6 +40,25 @@ async function getSidecar(): Promise<Sidecar | null> {
   return _sidecar
 }
 
+// Sidecar portugués, fichero aparte (osm-pois-pt.json) generado por el
+// mismo script con --dataset/--out. Son dos ficheros y no uno porque cada
+// uno se regenera con su propio extracto de Geofabrik; el formato es
+// idéntico y los índices del pool son locales a cada sidecar, así que
+// nunca se mezclan: zona() devuelve el sidecar del que salió la clave.
+let _sidecarPt: Sidecar | null | undefined
+async function getSidecarPt(): Promise<Sidecar | null> {
+  if (_sidecarPt !== undefined) return _sidecarPt
+  try {
+    const { default: data } = await import('@/../public/data/osm-pois-pt.json', {
+      assert: { type: 'json' },
+    })
+    _sidecarPt = data as unknown as Sidecar
+  } catch {
+    _sidecarPt = null
+  }
+  return _sidecarPt
+}
+
 const hav = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371000, r = (d: number) => (d * Math.PI) / 180
   const dLat = r(lat2 - lat1), dLon = r(lon2 - lon1)
@@ -48,9 +67,14 @@ const hav = (lat1: number, lon1: number, lat2: number, lon2: number): number => 
 }
 
 async function zona(lat: number, lon: number) {
-  const s = await getSidecar()
-  if (!s) return null
-  return { s, z: s.zonas[`${lat.toFixed(4)}:${lon.toFixed(4)}`] ?? null }
+  const key = `${lat.toFixed(4)}:${lon.toFixed(4)}`
+  // Español primero: es el caso de casi todas las peticiones, y así una
+  // ficha española nunca llega a cargar en memoria el sidecar portugués.
+  const es = await getSidecar()
+  if (es?.zonas[key]) return { s: es, z: es.zonas[key] }
+  const pt = await getSidecarPt()
+  if (pt?.zonas[key]) return { s: pt, z: pt.zonas[key] }
+  return es || pt ? { s: (es ?? pt)!, z: null } : null
 }
 
 export async function osmRestaurantes(lat: number, lon: number): Promise<Restaurante[] | null> {

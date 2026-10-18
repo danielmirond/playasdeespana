@@ -27,8 +27,13 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const IN = process.argv[2]
-if (!IN) { console.error('Uso: node scripts/build-osm-pois.mjs <pois.geojsonl>'); process.exit(1) }
-const OUT = resolve(ROOT, 'public/data/osm-pois.json')
+if (!IN) { console.error('Uso: node scripts/build-osm-pois.mjs <pois.geojsonl> [--dataset=…] [--out=…]'); process.exit(1) }
+// Parametrizado por el mismo motivo que enrich-playas-images.mjs: el
+// cruce POI↔playa no tiene nada de español, solo coordenadas. Portugal:
+//   --dataset=public/data/praias-portugal.json --out=public/data/osm-pois-pt.json
+const arg = (n) => process.argv.find(a => a.startsWith(`--${n}=`))?.slice(n.length + 3)
+const OUT = resolve(ROOT, arg('out') ?? 'public/data/osm-pois.json')
+const DATASET = resolve(ROOT, arg('dataset') ?? 'public/data/playas.json')
 
 // Límites por playa: lo que la ficha renderiza (dieta RSC ya vigente).
 const LIMITES = {
@@ -117,7 +122,7 @@ async function main() {
   console.log(`features leídas: ${leidos} · POIs útiles (con nombre): ${pois.length}`)
 
   // 2) Por playa: candidatos de celdas vecinas → top-N por distancia
-  const playas = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'utf8'))
+  const playas = JSON.parse(readFileSync(DATASET, 'utf8'))
     .filter(p => p?.slug && p.lat && p.lng)
 
   const zonas = {}
