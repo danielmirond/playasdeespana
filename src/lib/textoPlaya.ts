@@ -246,7 +246,7 @@ export function descripcionDeCampos(playa: Playa): string {
   if (longitud) partes.push(`It is roughly ${longitud} metres long.`)
 
   // Servicios: solo con inventario detrás.
-  if (p.servicios_fuente === 'miteco') {
+  if (p.servicios_fuente) {
     const tiene: string[] = []
     if (playa.socorrismo) tiene.push(p.socorrismo_temporada === true ? 'lifeguards in summer' : 'lifeguards')
     if (playa.duchas) tiene.push('showers')

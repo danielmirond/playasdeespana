@@ -160,6 +160,30 @@ interface Props {
   webcams?:        import('@/lib/webcams').Webcam[]
   locale?:         'es' | 'en'
   /** Slug del municipio si la página existe (ver getMunicipioSlugsSet). */
+  /**
+   * GEOGRAFÍA DE OTRO PAÍS.
+   *
+   * La ficha nació para España y lleva cableados el municipio, la provincia
+   * y la comunidad, con sus rutas. Portugal tiene concelho y región
+   * hidrográfica, y su inventario es el de la APA, no el del MITECO.
+   *
+   * Cuando esta prop NO llega —que es el caso de las 4.329 fichas
+   * españolas— no cambia absolutamente nada: cada punto donde se usa tiene
+   * el comportamiento de siempre como alternativa. Es la misma técnica que
+   * ya usan `aemet`, `boya` o `mareasOficiales`: lo que no hay, no se
+   * pinta, en vez de pintarse vacío.
+   */
+  geo?: {
+    paisNombre:     string
+    paisHref:       string
+    municipioHref:  string
+    /** «Región», «Distrito»… lo que toque en ese país. */
+    regionEtiqueta: string
+    region:         string
+    /** Quién publica el inventario: se cita al pie del bloque de datos. */
+    inventario:     string
+    fichaOficial?:  string | null
+  }
   municipioSlug?:  string
   /** Páginas del municipio, ya calculadas en el servidor (lib/enlaces-municipio). */
   delMunicipio?:   EnlaceMunicipio[]
@@ -350,7 +374,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, serviciosOsm, perrosOsm, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, serviciosOsm, perrosOsm, geo, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -1154,8 +1178,8 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             // quiere —hay un San Felipe en Panamá, un Cádiz en Filipinas y
             // un Santiago en medio mundo— y esta rama cubre todas las playas
             // marcadas como de surf.
-            ? `surf ${playa.municipio || playa.provincia}, Spain`
-            : `${playa.municipio || playa.provincia}, Spain`}
+            ? `surf ${playa.municipio || playa.provincia}, ${geo?.paisNombre ?? 'Spain'}`
+            : `${playa.municipio || playa.provincia}, ${geo?.paisNombre ?? 'Spain'}`}
           cmp="ficha_playa"
           id="actividades"
           municipioSlug={municipioSlug}
@@ -1441,7 +1465,10 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 // es el valor con el que nació la variable. En las 1.529
                 // fichas que no cruzan con el inventario, duchas y parking
                 // estaban en false el 100 % de las veces.
-                const conFuente = reg.servicios_fuente === 'miteco'
+                // Hay inventario detrás, sea el del MITECO o el de la APA
+                // portuguesa. Lo que decide si se puede afirmar un servicio
+                // es que exista una fuente, no cuál sea.
+                const conFuente = !!reg.servicios_fuente
                 const estado = (k: string) => {
                   const v = reg[k]
                   if (v === true) return k === 'socorrismo' && reg.socorrismo_temporada === true ? 'temporada' : 'si'
@@ -1536,22 +1563,26 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <DataRow
                 k={i18n.municipio}
                 v={playa.municipio}
-                href={municipioSlug
+                href={geo ? geo.municipioHref : (municipioSlug
                   ? (locale === 'en' ? `/en/towns/${municipioSlug}` : `/municipio/${municipioSlug}`)
-                  : undefined}
+                  : undefined)}
               />
+              {/* En España es la provincia; en Portugal, la región
+                  hidrográfica. La etiqueta la pone quien sabe de qué país
+                  habla, no este componente. */}
               <DataRow
-                k={i18n.provincia}
-                v={playa.provincia}
-                href={provinciaSlug
+                k={geo ? geo.regionEtiqueta : i18n.provincia}
+                v={geo ? geo.region : playa.provincia}
+                href={geo ? undefined : (provinciaSlug
                   ? (locale === 'en' ? `/en/provinces/${provinciaSlug}` : `/provincia/${provinciaSlug}`)
-                  : undefined}
+                  : undefined)}
               />
-              <DataRow
+              {/* La comunidad autónoma no existe fuera de España. */}
+              {!geo && <DataRow
                 k={i18n.comunidad}
                 v={playa.comunidad}
                 href={locale === 'en' ? `/en/communities/${slug(playa.comunidad)}` : `/comunidad/${slug(playa.comunidad)}`}
-              />
+              />}
               {/* El hemisferio se deduce del signo, no se da por hecho.
                   Estaba escrito «N, E» fijo, así que toda la costa
                   atlántica y Canarias mostraban «-13.839299° E»: una
