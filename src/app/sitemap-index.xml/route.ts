@@ -28,6 +28,12 @@ export async function GET() {
     <lastmod>${today}</lastmod>
   </sitemap>`)
 
+  // Portugal: praias, concelhos e índice, en un solo fichero.
+  entries.push(`  <sitemap>
+    <loc>${BASE}/sitemaps/portugal</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>`)
+
   // EN beaches sitemaps
   for (let i = 1; i <= numChunks; i++) {
     entries.push(`  <sitemap>

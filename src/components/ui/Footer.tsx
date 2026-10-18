@@ -102,6 +102,7 @@ export default function Footer({ locale = 'es' }: Props) {
               <Link href="/comunidad/islas-baleares" style={ls}>{es ? 'Playas de Baleares' : 'Beaches of the Balearics'}</Link>
               <Link href="/comunidad/canarias" style={ls}>{es ? 'Playas de Canarias' : 'Beaches of the Canaries'}</Link>
               <Link href="/islas" style={ls}>{es ? 'Playas por isla' : 'Beaches by island'}</Link>
+              {es && <Link href="/portugal" style={ls}>Playas de Portugal</Link>}
             </FootList>
           </div>
 
