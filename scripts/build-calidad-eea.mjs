@@ -72,18 +72,35 @@ const hav = (lat1, lon1, lat2, lon2) => {
 const STOP = new Set(['playa', 'praia', 'platja', 'plaia', 'cala', 'el', 'la', 'los', 'las',
   'de', 'del', 'dels', 'd', 'l', 'es', 'sa', 's', 'do', 'da', 'dos', 'das', 'i', 'y', 'e'])
 const palabras = (s) => (s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '')
-  .toLowerCase().replace(/[^a-z0-9ñ ]+/g, ' ').split(/\s+/).filter(w => w && !STOP.has(w))
+  .toLowerCase().replace(/[^a-z0-9ñ? ]+/g, ' ').split(/\s+/).filter(w => w && !STOP.has(w))
+
+// La `?` se conserva arriba a propósito: 337 de los 2.478 puntos españoles
+// del fichero de la EEA (el 14 %) traen los acentos corruptos —«PLAYA
+// PE?ONCILLO», «ESPI?EIRO», «BARRA?A», «PE?A DEL DICE»— y tratándola como
+// separador se partían en dos trozos que no casaban con nada. Aquí vale
+// por UN carácter cualquiera.
+//
+// Se exige la misma longitud, así que el comodín no puede tragarse una
+// palabra entera ni emparejar nombres de distinta medida.
+const igual = (a, b) => {
+  if (a === b) return true
+  if (a.length !== b.length) return false
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i] && a[i] !== '?' && b[i] !== '?') return false
+  }
+  return true
+}
 
 // Casan si comparten al menos el 60 % de las palabras significativas del
 // más corto. El umbral sale de revisar los pares: deja pasar «Playa de la
 // Torre Derribada» ↔ «PLAYA TORRE DERRIBADA PM1» (los códigos PM1/PM2 son
 // del punto de muestreo) y corta «Casablanca» ↔ «Nagüeles».
 const casa = (a, b) => {
-  const A = new Set(palabras(a)), B = new Set(palabras(b))
-  if (!A.size || !B.size) return false
+  const A = palabras(a), B = palabras(b)
+  if (!A.length || !B.length) return false
   let c = 0
-  for (const w of A) if (B.has(w)) c++
-  return c > 0 && c >= Math.min(A.size, B.size) * 0.6
+  for (const w of A) if (B.some(x => igual(w, x))) c++
+  return c > 0 && c >= Math.min(A.length, B.length) * 0.6
 }
 
 function cruzar(playas, puntos, grid, etiqueta) {
