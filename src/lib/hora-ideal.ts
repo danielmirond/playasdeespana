@@ -12,6 +12,12 @@ export interface HoraIdeal {
   razon:     string   // "UV moderado, marea baja, menos gente"
   razonEn:   string
   score:     number   // 0-100
+  // Si la bajamar entró de verdad en el cálculo. La ficha rotulaba la
+  // sección «UV · luz · mareas» siempre, también en el Mediterráneo
+  // —donde esta función ignora la marea a propósito— y en Portugal, que
+  // no pasa el dato. Anunciar una fuente que no se ha usado es el mismo
+  // error que afirmar un servicio sin inventario detrás.
+  usaMareas: boolean
 }
 
 interface Input {
@@ -99,5 +105,6 @@ export function calcularHoraIdeal({ uv, amanecer, atardecer, mareas, mes }: Inpu
     razon,
     razonEn,
     score,
+    usaMareas: horaBajamar != null,
   }
 }

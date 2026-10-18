@@ -24,6 +24,7 @@ import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { getMareas, getSol } from '@/lib/marine'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
 import { getFrase } from '@/lib/copy'
+import { calcularHoraIdeal } from '@/lib/hora-ideal'
 import { robotsMeta } from '@/lib/robots-meta'
 import type { Playa } from '@/types'
 
@@ -100,6 +101,21 @@ export default async function PraiaPage({ params }: Props) {
     ? mareasData.oleaje_m.map((v, i) => ({ h: i === 0 ? 'Ahora' : `+${i}h`, v: parseFloat(v.toFixed(1)) }))
     : null
 
+  // Mejor hora: puro cálculo sobre UV, amanecer/atardecer y mes, sin nada
+  // español dentro. El mes se saca en Europe/Lisbon, no en Europe/Madrid:
+  // Portugal va una hora por detrás y en el cambio de mes a medianoche la
+  // ficha diría el mes siguiente. Sin `mareas`, que es opcional y aquí no
+  // tenemos el formato lunar que espera.
+  const mesLisboa = Number(new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Lisbon', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date()).slice(5, 7))
+  const horaIdeal = calcularHoraIdeal({
+    uv: meteoData?.uv_max ?? null,
+    amanecer: solData?.amanecer,
+    atardecer: solData?.atardecer,
+    mes: mesLisboa,
+  })
+
   const playa = praiaComoPlaya(praia) as unknown as Playa
 
   // Las praias de al lado, en el formato que espera la ficha.
@@ -141,6 +157,7 @@ export default async function PraiaPage({ params }: Props) {
         meteoForecast={forecast}
         forecastSurf={mareasData?.forecast ?? null}
         geo={geo}
+        horaIdeal={horaIdeal}
         playasCercanas={cercanas as never}
         certBandera="estimado"
         hoyISO={new Date().toISOString().slice(0, 10)}

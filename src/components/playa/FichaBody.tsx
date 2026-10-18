@@ -1199,7 +1199,9 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
           <div key="mejor-hora" className={styles.card} id="s-mejor-hora">
             <div className={styles.cardHead}>
               <h2 className={styles.cardTitle}>{locale === 'en' ? <>Crowds & <em>best time</em> to visit {nombreH}</> : <>Masificación y <em>mejor hora</em> para ir a {nombreH}</>}</h2>
-              <span className={styles.cardSrc}>{locale === 'en' ? 'UV · light · tides' : 'UV · luz · mareas'}</span>
+              <span className={styles.cardSrc}>{horaIdeal.usaMareas
+                ? (locale === 'en' ? 'UV · light · tides' : 'UV · luz · mareas')
+                : (locale === 'en' ? 'UV · light' : 'UV · luz')}</span>
             </div>
             <div className={styles.cardBody}>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '.9rem', flexWrap: 'wrap' }}>
