@@ -285,9 +285,14 @@ export const getPlayasCercaDe = cache(async (
 // Helpers para /playas-perros. Filtro por perros:true + agrupaciones por
 // comunidad / provincia / municipio. Se usan en las páginas hijas.
 
+/* El hub de perros enseñaba 25 playas en toda España, que es lo que marca
+ * el inventario del Ministerio. No es el país: es el campo, que casi nadie
+ * rellena. Se le suman las que OSM tiene etiquetadas como caninas, y cada
+ * ficha dice de dónde sale la suya. */
 export const getPlayasPerros = cache(async (): Promise<Playa[]> => {
-  const playas = await getPlayas()
-  return playas.filter(p => p.perros === true)
+  const [playas, { slugsConPerros }] = await Promise.all([getPlayas(), import('./perros-osm')])
+  const osm = await slugsConPerros()
+  return playas.filter(p => p.perros === true || osm.has(p.slug))
 })
 
 export interface PerrosStats {

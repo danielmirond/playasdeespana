@@ -1,0 +1,383 @@
+{
+ "platja-daiguadoliva": {
+  "d": "yes",
+  "n": "Platja d'Aiguadoliva",
+  "m": 0
+ },
+ "playa-canina-la-bota": {
+  "d": "nombre",
+  "n": "Playa Canina la Bota.",
+  "m": 0
+ },
+ "can-punta-del-riu-sec": {
+  "d": "yes",
+  "n": "\"Can\" Punta del Riu Sec",
+  "m": 0
+ },
+ "playa-de-perros": {
+  "d": "nombre",
+  "n": "Playa de Perros",
+  "m": 0
+ },
+ "kontxa-hondartza": {
+  "d": "no",
+  "n": "Kontxa hondartza",
+  "m": 0
+ },
+ "playa-de-los-molinucos": {
+  "d": "yes",
+  "n": "Playa de los Molinucos",
+  "m": 0
+ },
+ "samarador-santanyi": {
+  "d": "no",
+  "n": "S'Amarador",
+  "m": 0
+ },
+ "la-roqueta-guardamar-del-segura": {
+  "d": "no",
+  "n": "Platja de La Roqueta",
+  "m": 0
+ },
+ "platja-centre": {
+  "d": "no",
+  "n": "Platja Centre",
+  "m": 0
+ },
+ "sa-font-de-nalis-santanyi": {
+  "d": "no",
+  "m": 398
+ },
+ "playa-de-santa-gadea": {
+  "d": "no",
+  "n": "Playa de Santa Gadea",
+  "m": 0
+ },
+ "penarronda-tapia-de-casariego": {
+  "d": "no",
+  "n": "Playa de Peñarronda",
+  "m": 0
+ },
+ "empuriabrava-castello-dempuries": {
+  "d": "no",
+  "n": "Platja d'Empuriabrava",
+  "m": 0
+ },
+ "platja-babilonia": {
+  "d": "no",
+  "n": "Platja Babilònia",
+  "m": 1
+ },
+ "platja-del-montcaio": {
+  "d": "no",
+  "n": "Platja del Montcaio",
+  "m": 0
+ },
+ "platja-de-sarenal-de-sa-rapita": {
+  "d": "no",
+  "n": "Arenal de sa Ràpita",
+  "m": 0
+ },
+ "es-calo-blanc": {
+  "d": "no",
+  "n": "es Calo Blanc",
+  "m": 0
+ },
+ "playa-de-arciseri": {
+  "d": "yes",
+  "n": "Playa de Arciseri",
+  "m": 0
+ },
+ "cala-den-ferrer": {
+  "d": "no",
+  "n": "Cala d'en Ferrer",
+  "m": 0
+ },
+ "rodeira-cangas": {
+  "d": "no",
+  "n": "Praia de Rodeira",
+  "m": 0
+ },
+ "playa-de-la-maza": {
+  "d": "yes",
+  "n": "Playa de la Maza",
+  "m": 0
+ },
+ "platja-de-santa-eularia": {
+  "d": "no",
+  "n": "Platja de Santa Eulària",
+  "m": 0
+ },
+ "cala-de-binissafuller": {
+  "d": "no",
+  "n": "Cala de Binissafúller",
+  "m": 0
+ },
+ "praia-da-area-dos-cans": {
+  "d": "nombre",
+  "n": "Praia da Area dos Cans",
+  "m": 0
+ },
+ "platges-de-comte": {
+  "d": "no",
+  "n": "Platges de Comte",
+  "m": 97
+ },
+ "praia-do-portino-5": {
+  "d": "yes",
+  "n": "Praia do Portiño",
+  "m": 0
+ },
+ "praia-do-espino": {
+  "d": "yes",
+  "n": "Praia do Espiño",
+  "m": 0
+ },
+ "playa-canina": {
+  "d": "nombre",
+  "n": "playa canina",
+  "m": 0
+ },
+ "ondarreta": {
+  "d": "no",
+  "n": "Ondarreta",
+  "m": 0
+ },
+ "playa-de-calahonda-riviera": {
+  "d": "no",
+  "n": "Playa de Calahonda - Riviera",
+  "m": 0
+ },
+ "playa-de-calahonda-calahonda": {
+  "d": "no",
+  "n": "Playa de Calahonda - Calahonda",
+  "m": 0
+ },
+ "platja-de-la-marina": {
+  "d": "no",
+  "n": "Platja de La Marina",
+  "m": 0
+ },
+ "platja-des-penyo": {
+  "d": "yes",
+  "m": 397
+ },
+ "na-patana": {
+  "d": "yes",
+  "n": "Na Patana",
+  "m": 0
+ },
+ "arou-camarinas": {
+  "d": "no",
+  "n": "Praia de Arou",
+  "m": 0
+ },
+ "playa-de-las-moreras-2": {
+  "d": "yes",
+  "n": "Playa de las Moreras",
+  "m": 0
+ },
+ "platja-de-la-punta-dels-gats": {
+  "d": "yes",
+  "n": "platja de la Punta dels Gats",
+  "m": 0
+ },
+ "platja-daigua-amarga": {
+  "d": "yes",
+  "n": "Platja d'Aigua Amarga",
+  "m": 0
+ },
+ "playa-canina-ventura-del-mar": {
+  "d": "designated",
+  "n": "Playa Canina Ventura del Mar",
+  "m": 0
+ },
+ "playa-de-san-lorenzo-2": {
+  "d": "no",
+  "n": "Playa de San Lorenzo",
+  "m": 0
+ },
+ "lespigo-altea": {
+  "d": "no",
+  "n": "Platja de l'Espigó",
+  "m": 0
+ },
+ "zurriola": {
+  "d": "no",
+  "n": "Zurriola",
+  "m": 0
+ },
+ "platja-des-freu": {
+  "d": "no",
+  "n": "Platja des Freu",
+  "m": 0
+ },
+ "playa-del-fortin": {
+  "d": "yes",
+  "n": "Playa del Fortín",
+  "m": 0
+ },
+ "cala-blanca-4": {
+  "d": "yes",
+  "n": "Cala Blanca",
+  "m": 0
+ },
+ "platja-de-ses-covetes": {
+  "d": "no",
+  "n": "Platja de Ses Covetes",
+  "m": 0
+ },
+ "playa-canina-de-torrox": {
+  "d": "yes",
+  "n": "Playa Canina de Torrox",
+  "m": 0
+ },
+ "playa-canina-arroyo-totalan": {
+  "d": "nombre",
+  "n": "Playa Canina Arroyo Totalán",
+  "m": 0
+ },
+ "playon-de-bayas-el-sablon": {
+  "d": "nombre",
+  "n": "Playa de Bayas - Zona para perros",
+  "m": 64
+ },
+ "playa-can": {
+  "d": "designated",
+  "n": "Playa Can",
+  "m": 17
+ },
+ "la-veintiuna": {
+  "d": "yes",
+  "n": "La Veintiuna",
+  "m": 0
+ },
+ "platja-del-cagarritar": {
+  "d": "designated",
+  "m": 139
+ },
+ "cala-de-les-llanetes": {
+  "d": "yes",
+  "n": "Cala de les Llanetes",
+  "m": 0
+ },
+ "la-playuca-2": {
+  "d": "yes",
+  "n": "La Playuca",
+  "m": 0
+ },
+ "sant-esteve-de-la-fosca": {
+  "d": "yes",
+  "m": 296
+ },
+ "platja-gossos": {
+  "d": "designated",
+  "n": "Platja gossos",
+  "m": 0
+ },
+ "el-gachero": {
+  "d": "yes",
+  "n": "El Gachero",
+  "m": 0
+ },
+ "platja-del-barranquet": {
+  "d": "designated",
+  "n": "Platja del Barranquet",
+  "m": 0
+ },
+ "platja-dels-riells": {
+  "d": "no",
+  "n": "Platja dels Riells",
+  "m": 0
+ },
+ "platja-del-grau-2": {
+  "d": "no",
+  "n": "Platja del Grau",
+  "m": 0
+ },
+ "platja-de-la-ribera": {
+  "d": "no",
+  "n": "Platja de la Ribera",
+  "m": 0
+ },
+ "platja-del-serradal-2": {
+  "d": "yes",
+  "n": "Platja del Serradal",
+  "m": 0
+ },
+ "platja-des-pujols-2": {
+  "d": "no",
+  "n": "Platja d'es Pujols",
+  "m": 0
+ },
+ "platja-de-les-barques-3": {
+  "d": "no",
+  "n": "Platja de les Barques",
+  "m": 0
+ },
+ "larrabassada-tarragona": {
+  "d": "no",
+  "n": "Platja de l'Arrabassada",
+  "m": 0
+ },
+ "sarenal-de-san-antonio": {
+  "d": "no",
+  "n": "s'Arenal de San Antonio",
+  "m": 0
+ },
+ "platja-del-raco-2": {
+  "d": "no",
+  "n": "Platja del Racó",
+  "m": 8
+ },
+ "platja-de-garbet": {
+  "d": "no",
+  "n": "Platja de Garbet",
+  "m": 0
+ },
+ "el-port-llanca": {
+  "d": "yes",
+  "n": "Platja del Port",
+  "m": 0
+ },
+ "playa-del-guadalhorce": {
+  "d": "yes",
+  "n": "Playa del Guadalhorce",
+  "m": 0
+ },
+ "platja-del-poblenou": {
+  "d": "yes",
+  "n": "Platja del Poblenou",
+  "m": 0
+ },
+ "mas-mel-calafell": {
+  "d": "leashed",
+  "n": "Platja de l'Estany-Mas Mel",
+  "m": 0
+ },
+ "platja-de-segur-de-calafell": {
+  "d": "leashed",
+  "n": "Platja de Segur de Calafell",
+  "m": 0
+ },
+ "calafell-calafell": {
+  "d": "leashed",
+  "n": "Platja de Calafell",
+  "m": 0
+ },
+ "platja-canina-punta-del-riu": {
+  "d": "nombre",
+  "n": "Platja Canina Punta del Riu",
+  "m": 0
+ },
+ "platja-de-bon-caponet": {
+  "d": "yes",
+  "n": "Platja de Bon Caponet",
+  "m": 0
+ },
+ "aguilar-muros-de-nalon": {
+  "d": "no",
+  "n": "Playa de Aguilar",
+  "m": 0
+ }
+}

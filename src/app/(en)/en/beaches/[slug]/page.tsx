@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPlayaBySlug, getPlayas, getMunicipioSlugsSet, toSlug } from '@/lib/playas'
 import { serviciosCerca } from '@/lib/servicios-osm'
+import { perrosOsm as getPerrosOsm } from '@/lib/perros-osm'
 import { getCalidad } from '@/lib/calidad'
 import { getVotos } from '@/lib/votos'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
@@ -162,6 +163,7 @@ export default async function BeachPageEn({ params }: Props) {
   const solData           = sol.status             === 'fulfilled' ? sol.value             : null
   const meteoPlayaData    = meteoPlayaResult.status === 'fulfilled' ? meteoPlayaResult.value : null
   const serviciosOsm = await serviciosCerca(playa.lat, playa.lng)
+  const perrosOsm = await getPerrosOsm(playa.slug)
   const restaurantesData  = restaurantes.status    === 'fulfilled' ? restaurantes.value    : []
   const fotosData         = fotos.status           === 'fulfilled' ? fotos.value           : []
   const hotelesData       = hoteles.status         === 'fulfilled' ? hoteles.value         : []
@@ -377,6 +379,7 @@ export default async function BeachPageEn({ params }: Props) {
       <FichaNav locale="en" />
       <FichaBody locale="en"
         serviciosOsm={serviciosOsm}
+        perrosOsm={perrosOsm}
         playa={playa}
         meteo={meteo}
         solData={solData}

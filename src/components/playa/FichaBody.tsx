@@ -57,6 +57,7 @@ import { miles } from '@/lib/miles'
 import { zonaHoraria } from '@/lib/zona-horaria'
 import GygActivities from '@/components/GygActivities'
 import { ETIQUETA as ETIQUETA_OSM, distancia as distanciaOsm } from '@/lib/servicios-osm'
+import { TEXTO as TEXTO_PERROS } from '@/lib/perros-osm'
 
 const BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID ?? ''
 const PARCLICK_AFF = process.env.NEXT_PUBLIC_PARCLICK_AFF ?? ''
@@ -125,6 +126,7 @@ interface Props {
   vientoReportado?: { n: number; detalle: string; detalleEn: string } | null
   chiringuitos?:   import('@/lib/chiringuitos-playa').ChiringuitoCerca[]
   serviciosOsm?:   import('@/lib/servicios-osm').ServicioCerca[]
+  perrosOsm?:      import('@/lib/perros-osm').PerrosOsm | null
   medusas?:        MedusasRiesgo
   mareasLunar?:    MareasDia
   /**
@@ -348,7 +350,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, serviciosOsm, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, serviciosOsm, perrosOsm, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -1465,6 +1467,17 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                         las que existen, así que no sirve para rellenar el
                         inventario. Sí sirve para decir la verdad literal:
                         que a tantos metros alguien mapeó unos aseos. */}
+                    {/* Perros. El inventario marca 28 playas caninas en toda
+                        España; OSM aporta las que faltan y, sobre todo, la
+                        condición: con correa, zona delimitada. No convierte en
+                        legal lo que decida el ayuntamiento, y se dice. */}
+                    {perrosOsm && perrosOsm.estado !== 'no' && (
+                      <p className={styles.srvSinDato}>
+                        {locale === 'en'
+                          ? `OpenStreetMap says this beach ${TEXTO_PERROS[perrosOsm.estado].en}. The by-law is the town hall's and changes by season.`
+                          : `Según OpenStreetMap, esta playa ${TEXTO_PERROS[perrosOsm.estado].es}. La ordenanza la pone el ayuntamiento y cambia por temporada.`}
+                      </p>
+                    )}
                     {serviciosOsm && serviciosOsm.length > 0 && (
                       <div className={styles.srvOsm}>
                         <div className={styles.srvOsmCab}>
