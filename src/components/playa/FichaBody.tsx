@@ -401,10 +401,16 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   const tiposGuia       = getTiposParaPlaya(playa)
   const horasLuz = solData?.horas_luz ?? '–'
 
+  // Sin dato de calidad NO se dibuja la tarjeta. Antes caía a
+  // «Excelente · 99 % · 2024» por defecto y lo rotulaba «EEA ·
+  // 2006/7/CE»: una cifra oficial inventada, en cualquier playa cuya
+  // consulta de calidad fallara o no tuviera clasificación. Es el mismo
+  // error que los servicios sin inventario, y se arregla igual: no
+  // afirmar nada.
   const nivelCalidad          = calidad?.nivel ?? 'Excelente'
   const [dotColor, textColor] = COLORES_CALIDAD[nivelCalidad] ?? ['var(--ink-soft)', 'var(--ink-soft)']
-  const pctCalidad            = calidad?.porcentaje ?? 99
-  const temporadaCalidad      = calidad?.temporada ?? 2024
+  const pctCalidad            = calidad?.porcentaje ?? null
+  const temporadaCalidad      = calidad?.temporada ?? null
 
   // Hoteles + restaurantes: si el server no los pudo traer (Overpass lento
   // o Vercel timeout), reintentamos client-side contra /api/*. Así la ficha
@@ -755,6 +761,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
 
         {/* 5. CALIDAD AGUA — movido aquí (PR #86). Junto a seguridad
             porque pertenece al mismo bucket "¿puedo bañarme?". */}
+        {calidad && (
         <div key="calidad" className={styles.card} id="s-calidad">
           <div className={styles.cardHead}>
             <h2 className={styles.cardTitle}>{i18n.calidad(nombreH)}</h2>
@@ -765,14 +772,20 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               <div className={styles.cqDot} style={{ background: dotColor }}/>
               <span className={styles.cqLabel} style={{ color: textColor }}>{nivelCalidad}</span>
             </div>
-            <div className={styles.cqBar}>
-              <div className={styles.cqBarIn} style={{ width:`${pctCalidad}%`, background:`linear-gradient(90deg,${textColor},${dotColor})` }}/>
-            </div>
-            <DataRow k={i18n.muestras}     v={`${pctCalidad}%`} />
-            <DataRow k={i18n.temporada}    v={String(temporadaCalidad)} />
+            {/* La barra ES el porcentaje de muestras conformes: sin ese
+                dato no hay nada que dibujar, y una barra al 100 % sería
+                la misma cifra inventada por otra vía. */}
+            {pctCalidad != null && (
+              <div className={styles.cqBar}>
+                <div className={styles.cqBarIn} style={{ width:`${pctCalidad}%`, background:`linear-gradient(90deg,${textColor},${dotColor})` }}/>
+              </div>
+            )}
+            {pctCalidad != null && <DataRow k={i18n.muestras} v={`${pctCalidad}%`} />}
+            {temporadaCalidad != null && <DataRow k={i18n.temporada} v={String(temporadaCalidad)} />}
             <DataRow k={i18n.clasificacion} v={`${nivelCalidad} (Directiva 2006/7/CE)`} />
           </div>
         </div>
+        )}
 
         {/* 6. OPINIONES DESTACADAS — 3 opiniones inline (PR #86)
             Prueba social inline en Fase 1 (decisión).

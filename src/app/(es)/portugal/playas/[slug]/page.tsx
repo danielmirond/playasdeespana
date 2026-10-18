@@ -29,6 +29,10 @@ import { calcularHoraIdeal } from '@/lib/hora-ideal'
 // envuelven la cascada con Google Places y KV, que para Portugal no está
 // cosechada. El sidecar es local, instantáneo y no gasta cuota.
 import { osmRestaurantes, osmHoteles, osmCampings, osmBuceo } from '@/lib/osm-pois'
+// Windy cubre Portugal igual que España: es una consulta por coordenadas.
+// La webcam que trae el inventario de la APA NO entra aquí —es una URL
+// suelta, no un player embebible— y se queda como enlace en el aside.
+import { getWebcams } from '@/lib/webcams'
 import { robotsMeta } from '@/lib/robots-meta'
 import type { Playa } from '@/types'
 
@@ -74,6 +78,8 @@ export default async function PraiaPage({ params }: Props) {
     osmCampings(praia.lat, praia.lng).catch(() => null),
     osmBuceo(praia.lat, praia.lng).catch(() => null),
   ])
+
+  const webcams = await getWebcams(praia.lat, praia.lng).catch(() => [])
 
   const h = new Date().getUTCHours()
   const olas = mareasData?.oleaje_m?.[h] ?? mareasData?.oleaje_m?.[0] ?? null
@@ -173,6 +179,7 @@ export default async function PraiaPage({ params }: Props) {
         hoteles={hoteles ?? []}
         campings={campings ?? []}
         centrosBuceo={buceo ?? []}
+        webcams={webcams}
         playasCercanas={cercanas as never}
         certBandera="estimado"
         hoyISO={new Date().toISOString().slice(0, 10)}
