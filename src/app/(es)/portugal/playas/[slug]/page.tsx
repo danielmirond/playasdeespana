@@ -19,7 +19,7 @@ import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
 import Nav from '@/components/ui/Nav'
-import { getPraia, getPraiasCosta, praiaComoPlaya, regionLegible, concelhoSlug } from '@/lib/praias'
+import { getPraia, getPraiasCosta, praiaComoPlaya, regionLegible, concelhoSlug, getFotoPraia } from '@/lib/praias'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { getMareas, getSol } from '@/lib/marine'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
@@ -54,12 +54,13 @@ export default async function PraiaPage({ params }: Props) {
   const praia = await getPraia(slug)
   if (!praia) notFound()
 
-  const [meteoData, mareasData, solData, forecast, costa] = await Promise.all([
+  const [meteoData, mareasData, solData, forecast, costa, foto] = await Promise.all([
     getMeteoPlaya(praia.lat, praia.lng).catch(() => null),
     getMareas(praia.lat, praia.lng).catch(() => null),
     getSol(praia.lat, praia.lng).catch(() => null),
     getMeteoForecast(praia.lat, praia.lng).catch(() => []),
     getPraiasCosta(),
+    getFotoPraia(slug),
   ])
 
   const h = new Date().getUTCHours()
@@ -126,7 +127,7 @@ export default async function PraiaPage({ params }: Props) {
         meteo={meteo}
         estado={estado}
         frase={frase}
-        foto={null}
+        foto={foto}
         banderaPlaya={null}
         certBandera="estimado"
         hayFuenteOficial={false}

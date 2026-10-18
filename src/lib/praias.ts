@@ -7,6 +7,7 @@
 // una praia del Algarve apareciera en «playas de Málaga».
 import { cache } from 'react'
 import praiasJson from '@/../public/data/praias-portugal.json'
+import type { FotoPlaya } from '@/lib/fotos'
 
 export interface Praia {
   slug: string
@@ -120,4 +121,33 @@ export function praiaComoPlaya(p: Praia) {
     servicios_fuente: 'apa',
     nombres_alt: p.nombreOficial ?? null,
   }
+}
+
+// Sidecar de fotos portuguesas, cosechado por el MISMO script que el
+// español (`enrich-playas-images.mjs --dataset=…/praias-portugal.json`).
+// Se lee aparte porque son dos ficheros distintos, no dos cascadas.
+//
+// No pasa por el veto de `fotos-vetadas.json`: ese fichero lista URLs
+// descartadas a mano revisando playas españolas, y aplicarlo aquí daría
+// a entender que las portuguesas también se han revisado. Cuando haya
+// vetos propios, se añade.
+let _fotosPraia: Record<string, FotoPlaya[]> | null | undefined
+async function getSidecarPraias(): Promise<Record<string, FotoPlaya[]> | null> {
+  if (_fotosPraia !== undefined) return _fotosPraia
+  try {
+    const { default: data } = await import('@/../public/data/praias-images.json', {
+      assert: { type: 'json' },
+    })
+    _fotosPraia = data as unknown as Record<string, FotoPlaya[]>
+  } catch {
+    _fotosPraia = null
+  }
+  return _fotosPraia
+}
+
+/** Primera foto de una praia, o null. Sin red: solo el sidecar. */
+export async function getFotoPraia(slug: string): Promise<FotoPlaya | null> {
+  const s = await getSidecarPraias()
+  const f = s?.[slug]
+  return Array.isArray(f) && f.length > 0 ? f[0] : null
 }
