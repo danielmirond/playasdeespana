@@ -24,8 +24,16 @@ import { dirname, resolve } from 'node:path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
-const OUT = resolve(ROOT, 'public/data/playas-images.json')
-const PLAYAS = resolve(ROOT, 'public/data/playas.json')
+// El dataset y la salida son parámetros desde que hay Portugal. La cascada
+// no tiene nada de española —Wikimedia, Wikipedia, Flickr y el resto son
+// mundiales— así que duplicar el fichero para cambiar dos rutas habría sido
+// crear dos copias que divergen a la primera corrección.
+//   node scripts/enrich-playas-images.mjs \
+//     --dataset=public/data/praias-portugal.json --out=public/data/praias-images.json
+const argDataset = process.argv.find(a => a.startsWith('--dataset='))?.slice(10)
+const argOut = process.argv.find(a => a.startsWith('--out='))?.slice(6)
+const OUT = resolve(ROOT, argOut ?? 'public/data/playas-images.json')
+const PLAYAS = resolve(ROOT, argDataset ?? 'public/data/playas.json')
 
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY ?? ''
 const PEXELS_KEY = process.env.PEXELS_API_KEY ?? ''
@@ -111,7 +119,7 @@ function extraerFotosDePages(pages) {
     if (!ii?.thumburl) return null
     const titulo = (p.title ?? '').toLowerCase()
     if (esNegativa(titulo)) return null
-    const ext = ii.url?.split('.').pop()?.toLowerCase()
+    const ext = ii.url?.split('?')[0]?.split('.').pop()?.toLowerCase()
     if (!['jpg','jpeg','png','webp'].includes(ext ?? '')) return null
     try { const u = new URL(ii.thumburl); if (!u.hostname?.includes('wikimedia.org')) return null; if (!/\.(jpg|jpeg|png|webp)(\?|$)/i.test(ii.thumburl)) return null } catch { return null }
     const w = ii.width ?? 0, h = ii.height ?? 0
