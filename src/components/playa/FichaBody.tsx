@@ -94,7 +94,7 @@ interface Meteo {
 }
 interface OleajeHora { h: string; v: number }
 interface SolData { amanecer: string; atardecer: string; horas_luz: string; pct_dia: number }
-interface Calidad { nivel: string; porcentaje: number; temporada: number }
+interface Calidad { nivel: string; porcentaje?: number; temporada: number; punto?: string; distancia_m?: number }
 interface Props {
   playa:          Playa
   meteo:          Meteo
@@ -783,6 +783,20 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             {pctCalidad != null && <DataRow k={i18n.muestras} v={`${pctCalidad}%`} />}
             {temporadaCalidad != null && <DataRow k={i18n.temporada} v={String(temporadaCalidad)} />}
             <DataRow k={i18n.clasificacion} v={`${nivelCalidad} (Directiva 2006/7/CE)`} />
+            {/* De qué punto de baño sale. La clasificación es de un punto
+                de muestreo con nombre propio, que puede estar a un
+                kilómetro: decirlo es la diferencia entre citar un dato y
+                atribuírselo a esta playa sin más. */}
+            {calidad?.punto && (
+              <p style={{ fontSize: 'var(--fs-xs)', color: 'var(--muted)', lineHeight: 1.5, margin: '.6rem 0 0' }}>
+                {locale === 'en' ? 'Sampling point' : 'Punto de muestreo'}: {calidad.punto}
+                {/* Por debajo de 50 m el punto está en la propia playa y
+                    la cifra no aporta: «a 0 m» solo desconcierta. */}
+                {calidad.distancia_m != null && calidad.distancia_m >= 50 && <>, {locale === 'en' ? 'at' : 'a'} {calidad.distancia_m < 1000
+                  ? `${calidad.distancia_m} m`
+                  : `${(calidad.distancia_m / 1000).toFixed(1)} km`}</>}.
+              </p>
+            )}
           </div>
         </div>
         )}

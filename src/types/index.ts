@@ -95,7 +95,8 @@ export interface DatosMeteo {
 
 export interface DatosCalidad {
   nivel:      'Excelente' | 'Buena' | 'Suficiente' | 'Deficiente' | 'Sin datos'
-  porcentaje: number
+  // Opcional: la EEA clasifica, no publica porcentaje de muestras.
+  porcentaje?: number
   temporada:  number
 }
 

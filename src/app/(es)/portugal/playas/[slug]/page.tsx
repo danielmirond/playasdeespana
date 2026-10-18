@@ -33,6 +33,9 @@ import { osmRestaurantes, osmHoteles, osmCampings, osmBuceo } from '@/lib/osm-po
 // La webcam que trae el inventario de la APA NO entra aquí —es una URL
 // suelta, no un player embebible— y se queda como enlace en el aside.
 import { getWebcams } from '@/lib/webcams'
+// Misma clasificación de la directiva 2006/7/CE que las españolas: el
+// dataset de la EEA cubre toda la UE. 687 de las 755 praias cruzan.
+import { getCalidad } from '@/lib/calidad'
 import { robotsMeta } from '@/lib/robots-meta'
 import type { Playa } from '@/types'
 
@@ -79,7 +82,10 @@ export default async function PraiaPage({ params }: Props) {
     osmBuceo(praia.lat, praia.lng).catch(() => null),
   ])
 
-  const webcams = await getWebcams(praia.lat, praia.lng).catch(() => [])
+  const [webcams, calidad] = await Promise.all([
+    getWebcams(praia.lat, praia.lng).catch(() => []),
+    getCalidad(slug).catch(() => null),
+  ])
 
   const h = new Date().getUTCHours()
   const olas = mareasData?.oleaje_m?.[h] ?? mareasData?.oleaje_m?.[0] ?? null
@@ -180,6 +186,7 @@ export default async function PraiaPage({ params }: Props) {
         campings={campings ?? []}
         centrosBuceo={buceo ?? []}
         webcams={webcams}
+        calidad={calidad}
         playasCercanas={cercanas as never}
         certBandera="estimado"
         hoyISO={new Date().toISOString().slice(0, 10)}
