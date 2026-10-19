@@ -19,7 +19,7 @@ import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
 import FichaBody from '@/components/playa/FichaBody'
 import Nav from '@/components/ui/Nav'
-import { getPraia, getPraiasCosta, praiaComoPlaya, regionLegible, concelhoSlug, getFotoPraia } from '@/lib/praias'
+import { getPraia, getPraiasCosta, praiaComoPlaya, regionLegible, concelhoSlug, getFotoPraia, getConcelhos } from '@/lib/praias'
 import { getMeteoPlaya, getMeteoForecast } from '@/lib/meteo'
 import { getMareas, getSol } from '@/lib/marine'
 import { ESTADOS, calcularEstado } from '@/lib/estados'
@@ -148,10 +148,20 @@ export default async function PraiaPage({ params }: Props) {
     .sort((a, b) => a.d - b.d).slice(0, 6)
     .map(({ p, d }) => ({ ...praiaComoPlaya(p), distancia: d, href: `/portugal/playas/${p.slug}` }))
 
+  // El concelho solo se enlaza si tiene página. getConcelhos exige dos
+  // praias, así que 53 de las 755 —las fluviales y las de concelho con una
+  // sola— apuntaban a un 404: mal para el lector y peor como señal, porque
+  // son enlaces internos rotos repetidos en cada ficha.
+  const cSlug = concelhoSlug(praia.municipio)
+  // Con getConcelhos(2), la MISMA regla que aplica la página de concelho
+  // (notFound si tiene menos de dos). getConcelho() usa mínimo 1 y habría
+  // seguido enlazando a los que devuelven 404.
+  const hayConcelho = (await getConcelhos(2)).some(c => c.slug === cSlug)
+
   const geo = {
     paisNombre: 'Portugal',
     paisHref: '/portugal',
-    municipioHref: `/portugal/municipio/${concelhoSlug(praia.municipio)}`,
+    municipioHref: hayConcelho ? `/portugal/municipio/${cSlug}` : undefined,
     regionEtiqueta: 'Región',
     region: regionLegible(praia.region),
     inventario: 'Agência Portuguesa do Ambiente (SNIRH)',

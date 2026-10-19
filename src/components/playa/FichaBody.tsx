@@ -176,7 +176,10 @@ interface Props {
   geo?: {
     paisNombre:     string
     paisHref:       string
-    municipioHref:  string
+    // Opcional: en Portugal hay 53 praias cuyo concelho no llega al mínimo
+    // de dos y por tanto NO tiene página. Enlazarla igual mandaba al
+    // lector y al rastreador a un 404.
+    municipioHref?: string
     /** «Región», «Distrito»… lo que toque en ese país. */
     regionEtiqueta: string
     region:         string
