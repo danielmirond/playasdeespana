@@ -52,6 +52,19 @@ export default function Sello({ nombre, provincia = '', fecha, size = 108, tono 
 
   // Una pasada del grabado. Se pinta dos veces: la de acento va desplazada
   // 1,5px, que es lo que da el fuera de registro de la tinta real.
+  // Redondeo a 3 decimales antes de escribir la coordenada.
+  //
+  // Math.sin y Math.cos NO están obligados a devolver el mismo último bit
+  // en dos implementaciones distintas, y el V8 del servidor y el del
+  // navegador discrepaban: x2=10.925971146730241 contra ...248. React lo
+  // leía como un desajuste de hidratación y REGENERABA todo el árbol de la
+  // ficha, lo que se llevaba por delante la barra de progreso de lectura
+  // —que lectura.js cuelga del <body>— y los atributos que escribe
+  // pildora.js. Un bit de diferencia tiraba dos scripts.
+  //
+  // Tres decimales sobran para un sello de 92px.
+  const q = (n: number) => Math.round(n * 1000) / 1000
+
   const Pasada = ({ dx = 0, dy = 0, op = 1, c }: { dx?: number; dy?: number; op?: number; c: string }) => (
     <g transform={`translate(${dx},${dy})`} opacity={op}>
       <circle cx={r} cy={r} r={r - 3} fill="none" stroke={c} strokeWidth="var(--sello-stroke, 1.25px)" />
@@ -62,8 +75,8 @@ export default function Sello({ nombre, provincia = '', fecha, size = 108, tono 
         return (
           <line
             key={i}
-            x1={r + (r - 8) * Math.sin(a)} y1={r - (r - 8) * Math.cos(a)}
-            x2={r + (r - 5.5) * Math.sin(a)} y2={r - (r - 5.5) * Math.cos(a)}
+            x1={q(r + (r - 8) * Math.sin(a))} y1={q(r - (r - 8) * Math.cos(a))}
+            x2={q(r + (r - 5.5) * Math.sin(a))} y2={q(r - (r - 5.5) * Math.cos(a))}
             stroke={c} strokeWidth="0.5" opacity="0.4"
           />
         )

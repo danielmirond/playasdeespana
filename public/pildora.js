@@ -18,6 +18,34 @@
  * qué elemento scrollea y siempre pinta un estado inicial correcto.
  */
 (function () {
+  // Arranque reintentable.
+  //
+  // Antes esto era `if (!document.getElementById('pildora')) return;` y
+  // ahí se acababa todo: si el script corría antes de que la píldora
+  // estuviera en el DOM —que es lo que pasa cuando React inserta estos
+  // <script> durante el render de cliente, o con el HTML aún
+  // llegando— el fichero moría en silencio y la píldora se quedaba
+  // muda el resto de la visita: sin índice, sin sección actual, sin
+  // progreso. Medido en Bolonia: el script se descargaba, los 18
+  // enlaces estaban en el DOM, y body no tenía ni un atributo.
+  //
+  // Ahora, si no está, se espera a que aparezca.
+  if (document.getElementById('pildora')) {
+    arranca();
+  } else if (window.MutationObserver) {
+    var espera = new MutationObserver(function () {
+      if (!document.getElementById('pildora')) return;
+      espera.disconnect();
+      arranca();
+    });
+    espera.observe(document.documentElement, { childList: true, subtree: true });
+    // Red de seguridad por si el observador no llega a disparar.
+    document.addEventListener('DOMContentLoaded', function () {
+      if (document.getElementById('pildora')) { espera.disconnect(); arranca(); }
+    }, { once: true });
+  }
+
+  function arranca() {
   var wrap = document.getElementById('pildora');
   if (!wrap) return;
 
@@ -125,6 +153,14 @@
   var hero = document.querySelector('[data-hero]') || document.querySelector('main > :first-child');
   var pendiente = false;
 
+  // Dirección de lectura. Bajando, la píldora se aparta; subiendo, vuelve.
+  // Bajar es leer y entonces estorba; subir es buscar algo y entonces es
+  // justo lo que hace falta. El umbral de 8px evita que el temblor del
+  // dedo la haga parpadear.
+  var yPrevio = 0;
+  var ocultaPorDireccion = false;
+  var UMBRAL_DIR = 8;
+
   function medir() {
     pendiente = false;
     var v = vivo();
@@ -147,7 +183,23 @@
     // La píldora entra cuando el hero deja de mandar: al aterrizar, la
     // respuesta a "¿me baño hoy?" no compite con nada.
     var umbral = hero ? Math.max(240, hero.offsetHeight - 140) : 320;
-    body.setAttribute('data-pildora', y > umbral ? 'on' : 'off');
+
+    var delta = y - yPrevio;
+    if (Math.abs(delta) >= UMBRAL_DIR) {
+      var oculta = delta > 0;
+      yPrevio = y;
+      ocultaPorDireccion = oculta;
+    }
+    // Con el panel de secciones abierto no se esconde: el lector lo ha
+    // abierto a propósito y quitárselo de debajo del dedo sería absurdo.
+    var panel = v.querySelector ? v.querySelector('#pildora-panel') : null;
+    var abierto = panel && panel.open;
+    // Al final del documento tampoco: ahí no queda nada que leer debajo y
+    // es donde más se usa el índice para volver.
+    var alFinal = y + vh >= alturaDoc() - 40;
+
+    var visible = y > umbral && (!ocultaPorDireccion || abierto || alFinal);
+    body.setAttribute('data-pildora', visible ? 'on' : 'off');
 
     // Pasada la mitad de la ficha, lo que hace falta es llegar.
     var recorrido = alturaDoc() - vh;
@@ -294,4 +346,5 @@
   document.addEventListener('visibilitychange', function () {
     if (!document.hidden && body.getAttribute('data-enplaya') !== 'si') comprobarPresencia();
   });
+  }
 })();

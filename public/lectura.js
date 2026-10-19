@@ -30,6 +30,24 @@
  * descarta el evento y aquí no hay ninguna otra vía de salida.
  */
 (function () {
+  // Mismo arranque reintentable que pildora.js, y por el mismo motivo:
+  // si el script corre antes de que [data-lectura] esté en el DOM, se
+  // iba para siempre y el lector se quedaba sin barra de progreso.
+  if (document.querySelector('[data-lectura]')) {
+    arranca()
+  } else if (window.MutationObserver) {
+    var espera = new MutationObserver(function () {
+      if (!document.querySelector('[data-lectura]')) return
+      espera.disconnect()
+      arranca()
+    })
+    espera.observe(document.documentElement, { childList: true, subtree: true })
+    document.addEventListener('DOMContentLoaded', function () {
+      if (document.querySelector('[data-lectura]')) { espera.disconnect(); arranca() }
+    }, { once: true })
+  }
+
+  function arranca() {
   var cuerpo = document.querySelector('[data-lectura]')
   if (!cuerpo) return
 
@@ -68,7 +86,12 @@
    * visible, aquí no se pinta nada y solo se mide. Se comprueba el display
    * calculado, no el ancho de pantalla, para que se ajuste solo. */
   var pildora = document.getElementById('pildora')
-  var pintaLinea = !(pildora && getComputedStyle(pildora).display !== 'none')
+  var conPildora = !!(pildora && getComputedStyle(pildora).display !== 'none')
+  // Con píldora la línea SÍ se crea, pero empieza oculta: desde que la
+  // píldora se aparta al bajar (pildora.js escribe data-pildora en el
+  // body), el progreso tiene que seguir viéndose en alguna parte. Se
+  // turnan, nunca se solapan, que era el motivo original de no pintarla.
+  var pintaLinea = true
 
   var linea = document.createElement('div')
   linea.setAttribute('role', 'progressbar')
@@ -85,6 +108,19 @@
     linea.style.transition = 'none'
   }
   if (pintaLinea) document.body.appendChild(linea)
+
+  if (conPildora) {
+    linea.style.transition += ',opacity 160ms linear'
+    var sincroniza = function () {
+      linea.style.opacity = document.body.getAttribute('data-pildora') === 'on' ? '0' : '1'
+    }
+    sincroniza()
+    // El atributo lo escribe otro script en cada scroll, así que se
+    // observa en vez de recalcularlo aquí: una sola fuente de verdad.
+    new MutationObserver(sincroniza).observe(document.body, {
+      attributes: true, attributeFilter: ['data-pildora'],
+    })
+  }
 
   var maximo = 0
   var visibleDesde = document.hidden ? 0 : Date.now()
@@ -177,4 +213,5 @@
   // pagehide cubre el cierre de pestaña y el bfcache de Safari, donde
   // beforeunload no se dispara.
   window.addEventListener('pagehide', cierra)
+  }
 })()
