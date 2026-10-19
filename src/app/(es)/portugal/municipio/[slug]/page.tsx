@@ -11,6 +11,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getConcelho, getConcelhos, regionLegible } from '@/lib/praias'
+// Clasificación de la directiva 2006/7/CE, del dataset de la EEA.
+import { getCalidadDB } from '@/lib/calidad'
 import { robotsMeta } from '@/lib/robots-meta'
 
 export const revalidate = 86400
@@ -46,6 +48,13 @@ export default async function ConcelhoPage({ params }: Props) {
   const conBandera = praias.filter(p => p.bandera).length
   const conSocorro = praias.filter(p => p.socorrismo).length
   const conSilla = praias.filter(p => p.sillaAnfibia).length
+  const calidad = await getCalidadDB()
+  // Solo «Excelente» se cuenta como titular: es la categoría que la
+  // directiva reserva al máximo, y agrupar «Buena» con ella diluiría la
+  // única cifra que distingue unas praias de otras.
+  const conExcelente = praias.filter(p => calidad[p.slug]?.nivel === 'Excelente').length
+  const conClasificacion = praias.filter(p => calidad[p.slug]).length
+
   const otros = (await getConcelhos(2)).filter(x => x.slug !== slug && x.region === c.region).slice(0, 8)
 
   return (
@@ -69,6 +78,9 @@ export default async function ConcelhoPage({ params }: Props) {
           {conBandera > 0 && <>, <b>{conBandera}</b> con bandera azul</>}
           {conSocorro > 0 && <> y <b>{conSocorro}</b> con socorrismo</>}.
           {conSilla > 0 && <> {conSilla === 1 ? 'Una tiene' : `${conSilla} tienen`} silla anfibia, que es el dato de accesibilidad que el inventario español no recoge.</>}
+          {conExcelente > 0 && <> La Agencia Europea de Medio Ambiente clasifica el agua
+            de <b>{conExcelente}</b> como excelente{conClasificacion > conExcelente
+              && <> de las {conClasificacion} con clasificación</>}.</>}
         </p>
 
         <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.6rem' }}>
@@ -77,6 +89,7 @@ export default async function ConcelhoPage({ params }: Props) {
               p.bandera && 'Bandera Azul', p.socorrismo && 'socorrismo', p.duchas && 'duchas',
               p.aseos && 'aseos', p.parking && 'aparcamiento', p.accesible && 'accesible',
               p.sillaAnfibia && 'silla anfibia',
+              calidad[p.slug] && `agua ${calidad[p.slug].nivel.toLowerCase()}`,
             ].filter(Boolean)
             return (
               <li key={p.slug} style={{ border: '1px solid var(--line)', borderRadius: 10, padding: '.8rem 1rem', background: 'var(--card-bg)' }}>
