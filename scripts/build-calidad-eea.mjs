@@ -149,6 +149,11 @@ const es = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'ut
 const pt = JSON.parse(readFileSync(resolve(ROOT, 'public/data/praias-portugal.json'), 'utf8'))
   .filter(p => p?.slug && p.lat && p.lng)
 
+// Portugal va EL ÚLTIMO a propósito. playas.json arrastra 115 slugs que
+// también están en el inventario portugués —praias que entraron en el
+// dataset español y que getPlayas() descarta por extranjeras— y en esos
+// casos gana la clasificación portuguesa, que es la correcta. Ninguno
+// tiene URL en el sitio: /playas/praia-da-marinha devuelve 404.
 const mapa = { ...cruzar(es, puntos, grid, 'España'), ...cruzar(pt, puntos, grid, 'Portugal') }
 const ordenado = Object.fromEntries(Object.keys(mapa).sort().map(k => [k, mapa[k]]))
 writeFileSync(OUT, JSON.stringify(ordenado) + '\n')
