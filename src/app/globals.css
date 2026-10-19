@@ -136,3 +136,23 @@
 .cert-badge[data-cert="reportado"] .cert-glyph { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
 .cert-badge[data-cert="estimado"]  .cert-glyph { background: transparent; box-shadow: inset 0 0 0 1px currentColor; opacity: .6; }
 .cert-badge[data-cert="sindato"]   .cert-glyph { background: transparent; box-shadow: inset 0 0 0 1px currentColor; opacity: .4; }
+
+/* ── Huecos de anuncio NO servidos ────────────────────────────────
+   AdSense marca el bloque con data-ad-status="unfilled" cuando no hay
+   demanda, pero antes ya le ha fijado una altura en línea. Medido en la
+   ficha de Bolonia a 320px: el Multiplex se quedaba en 1.490px de blanco
+   y el rectángulo en 320px más. Casi dos pantallas de nada.
+
+   AdSlot.tsx reserva altura por formato a propósito, para que el anuncio
+   no empuje el contenido al llegar y el CLS siga en cero. Esa reserva
+   vale mientras se espera; cuando ya se sabe que NO va a venir nada,
+   sobra. Y con ella sobra la etiqueta «PUBLICIDAD», por lo que dice el
+   propio componente: un espacio vacío rotulado como publicidad ocupa
+   como un anuncio y no es ninguno.
+
+   Colapsar es lo que recomienda Google para los bloques sin rellenar. */
+ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+aside:has(> ins.adsbygoogle[data-ad-status="unfilled"]) {
+  min-height: 0 !important;
+  display: none;
+}

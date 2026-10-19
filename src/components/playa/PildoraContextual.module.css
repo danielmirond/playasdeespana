@@ -216,3 +216,13 @@
   }
   .avisoCta:active { background: rgba(255,255,255,.14); }
 }
+
+/* ── Hueco reservado ──────────────────────────────────────────────
+   La píldora es `position: fixed`, así que no ocupa sitio en el flujo
+   y tapaba una franja de 64px de contenido en toda la ficha. Este
+   bloque la devuelve al cálculo de altura de la página. Mismo valor
+   que el `bottom` + `height` del .wrap: si uno cambia, cambia el otro. */
+.hueco { display: none; }
+@media (max-width: 800px) {
+  .hueco { display: block; height: calc(72px + env(safe-area-inset-bottom, 0px)); }
+}

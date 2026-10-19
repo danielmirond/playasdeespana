@@ -91,6 +91,15 @@ export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es'
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
 
   return (
+    <>
+    {/* Hueco al final del flujo con la altura que ocupa la píldora.
+        Sin él, la barra fija (52px + 12px de separación + safe-area) se
+        come esa franja de contenido en TODA la ficha: medido en Bolonia,
+        tapaba «Sí · Oficina turismo» y las etiquetas de horas del gráfico
+        de oleaje. Ni body ni main reservaban un solo píxel.
+        Va en el flujo, no como padding del body, para no depender de
+        :has() ni tocar un elemento que comparten todas las páginas. */}
+    <div className={styles.hueco} aria-hidden="true" />
     <div className={styles.wrap} id="pildora" data-lat={lat} data-lng={lng}>
       {/* Cuánto llevas de ficha. Dos píxeles en el borde de arriba: la
           sensación de avance sin gastar ancho. */}
@@ -178,5 +187,6 @@ export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es'
         {es ? 'Reportar cómo está' : 'Report conditions'}
       </button>
     </div>
+    </>
   )
 }

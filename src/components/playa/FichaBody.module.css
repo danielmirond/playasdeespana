@@ -136,7 +136,13 @@
 }
 
 /* ── OLEAJE ─────────────────────────────────────────────────────── */
-.oleajeWrap { display: flex; align-items: flex-end; gap: 6px; height: 80px; padding: .6rem 0 .2rem; margin-top: 1rem; }
+/* `min-height` y no `height`: la columna más alta mide ~111px (barra de
+   70 + el valor + la hora) y con una altura fija de 80px se salía 31px
+   por arriba, con overflow visible, metiéndose en el espacio de la
+   cabecera. Quedaban 11px entre las barras y «Open-Meteo Marine», por
+   accidente y no por diseño. Con min-height el bloque crece hasta su
+   contenido y las barras siguen alineadas abajo por el flex-end. */
+.oleajeWrap { display: flex; align-items: flex-end; gap: 6px; min-height: 80px; padding: .6rem 0 .2rem; margin-top: 1rem; }
 .ocCol { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .ocBar { width: 100%; border-radius: 5px; min-height: 6px; }
 .ocVal  { font-size: .72rem; color: var(--muted); }
