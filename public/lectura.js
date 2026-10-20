@@ -107,7 +107,24 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     linea.style.transition = 'none'
   }
-  if (pintaLinea) document.body.appendChild(linea)
+  // Se cuelga, y se vuelve a colgar si se la llevan.
+  //
+  // La línea es un hijo del <body> que React no conoce: al hidratar —que
+  // ocurre DESPUÉS de este script, porque va con defer— la descartaba y
+  // el lector se quedaba sin barra el resto de la visita. Comprobado: el
+  // fichero se descarga, y evaluado a mano en la misma página crea la
+  // barra sin problema; lo que desaparecía era el nodo.
+  //
+  // pildora.js no sufría esto porque solo toca atributos de nodos que ya
+  // existen y los reescribe en cada scroll. Aquí hay un único
+  // appendChild, así que hay que vigilarlo.
+  function cuelga() {
+    if (pintaLinea && !linea.isConnected) document.body.appendChild(linea)
+  }
+  cuelga()
+  if (window.MutationObserver) {
+    new MutationObserver(cuelga).observe(document.body, { childList: true })
+  }
 
   if (conPildora) {
     linea.style.transition += ',opacity 160ms linear'
@@ -140,7 +157,18 @@
    * scrollY da cero en la mitad de las páginas. El rectángulo del propio
    * elemento es cierto gobierne quien gobierne el scroll. */
   function porcentaje() {
-    var r = cuerpo.getBoundingClientRect()
+    // Se vuelve a buscar el nodo en CADA medición, no se usa el que se
+    // guardó al arrancar.
+    //
+    // React reemplaza el árbol de la ficha al hidratar, y el nodo viejo
+    // queda huérfano: su getBoundingClientRect devuelve todo ceros, la
+    // altura sale 0 y esta función respondía 0 para siempre. La barra
+    // existía, estaba enganchada y no se movía nunca. Es el mismo fallo
+    // que pildora.js ya documenta y resuelve con su vivo(): un
+    // querySelector por medición, y a cambio sobrevive a que React
+    // reconstruya lo que quiera.
+    var vivoCuerpo = document.querySelector('[data-lectura]') || cuerpo
+    var r = vivoCuerpo.getBoundingClientRect()
     var alto = r.height
     if (alto <= 0) return 0
     // Cuánto del cuerpo ha pasado ya por encima del borde inferior de la
