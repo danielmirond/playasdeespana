@@ -59,7 +59,7 @@ export default async function ConcelhoPage({ params }: Props) {
 
   return (
     <>
-      <Nav />
+      <Nav bajadaLogo="DE ESPAÑA Y PORTUGAL" />
       <main style={{ maxWidth: 820, margin: '0 auto', padding: '1.5rem 1.25rem 4rem' }}>
         <nav style={{ fontSize: '.75rem', color: 'var(--muted)', display: 'flex', gap: '.4rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
           <Link href="/">Inicio</Link><span aria-hidden="true">›</span>

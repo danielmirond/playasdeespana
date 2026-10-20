@@ -170,7 +170,7 @@ export default async function PraiaPage({ params }: Props) {
 
   return (
     <>
-      <Nav />
+      <Nav bajadaLogo="DE ESPAÑA Y PORTUGAL" />
       <FichaHero
         playa={playa}
         meteo={meteo}

@@ -29,7 +29,12 @@ function getLangUrl(pathname: string, targetLocale: 'es' | 'en'): string {
   }
 }
 
-export default function Nav() {
+interface NavProps {
+  /** Bajada alternativa del logo. Lo usan las páginas de /portugal. */
+  bajadaLogo?: string
+}
+
+export default function Nav({ bajadaLogo }: NavProps = {}) {
   const pathname = usePathname()
   const isEn = pathname.startsWith('/en')
   const esUrl = getLangUrl(pathname, 'es')
@@ -62,7 +67,7 @@ export default function Nav() {
         <Link href={isEn ? '/en' : '/'} className={styles.logo} aria-label={isEn ? 'Playas de España. Home' : 'Playas de España. Inicio'}>
           {/* SVG en línea, no <img>: así el lockup hereda --font-serif y
               --accent y cambia con el sistema. Ver components/ui/Logo. */}
-          <Logo size={36} titulo={null} />
+          <Logo size={36} titulo={null} bajada={bajadaLogo} />
         </Link>
         <div className={styles.right}>
           <Link href="/buscar" className={styles.iconBtn} aria-label={isEn ? 'Search' : 'Buscar'}>

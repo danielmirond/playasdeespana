@@ -33,7 +33,7 @@ export default async function PortugalPage() {
 
   return (
     <>
-      <Nav />
+      <Nav bajadaLogo="DE ESPAÑA Y PORTUGAL" />
       <main style={{ maxWidth: 880, margin: '0 auto', padding: '1.5rem 1.25rem 4rem' }}>
         <nav style={{ fontSize: '.75rem', color: 'var(--muted)', display: 'flex', gap: '.4rem', marginBottom: '1rem' }}>
           <Link href="/">Inicio</Link><span aria-hidden="true">›</span><span aria-current="page">Portugal</span>

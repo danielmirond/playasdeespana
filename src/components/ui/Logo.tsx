@@ -19,9 +19,15 @@ interface Props {
   size?: number
   /** Texto accesible. Se omite cuando el enlace que lo envuelve ya lo dice. */
   titulo?: string | null
+  /** Bajada del lockup. Por defecto «DE ESPAÑA»; las páginas de Portugal
+   *  pasan «DE ESPAÑA Y PORTUGAL», que es lo que el sitio cubre ahí.
+   *  Va como prop y no como condicional interno porque el Nav lo monta
+   *  cada página: la que sabe en qué país está es ella, y así el layout
+   *  sigue sin tener que saberlo (y sin volverse dinámico). */
+  bajada?: string
 }
 
-export default function Logo({ size = 36, titulo = 'Playas de España' }: Props) {
+export default function Logo({ size = 36, titulo = 'Playas de España', bajada = 'DE ESPAÑA' }: Props) {
   return (
     <svg
       viewBox="0 0 280 72"
@@ -57,12 +63,14 @@ export default function Logo({ size = 36, titulo = 'Playas de España' }: Props)
 
       <path d="M55 50 Q95 52 155 50" fill="none" stroke="var(--accent)" strokeWidth="1.2" strokeLinecap="round" opacity="0.7"/>
 
+      {/* El interletrado se afloja cuando la bajada es larga: con el 3 de
+          «DE ESPAÑA», «DE ESPAÑA Y PORTUGAL» se salía del viewBox. */}
       <text
         x="50" y="63"
         fontFamily="var(--font-sans)"
-        fontSize="9" fontWeight="500" letterSpacing="3"
+        fontSize="9" fontWeight="500" letterSpacing={bajada.length > 12 ? 1.6 : 3}
         fill="var(--ink-mute)"
-      >DE ESPAÑA</text>
+      >{bajada}</text>
     </svg>
   )
 }
