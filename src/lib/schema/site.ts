@@ -6,6 +6,7 @@
 // buscador vive en una URL castellana.
 import { AUTOR_PLAYAS_ESPANA } from '@/lib/autoria'
 import { TOTAL_PUBLICADAS_TXT, TOTAL_PUBLICADAS_TXT_EN } from '@/lib/playas'
+import { TOTAL_PRAIAS_COSTA_TXT } from '@/lib/praias'
 
 export type Idioma = 'es' | 'en'
 
@@ -34,9 +35,13 @@ export function websiteSchema(locale: Idioma) {
     url: es ? BASE_URL : `${BASE_URL}/en`,
     name: es ? 'Playas de España' : 'Beaches of Spain',
     alternateName: ['playas-espana.com', 'Playas España'],
+    // La descripción del sitio va en el JSON-LD de TODAS las páginas,
+    // también las de /portugal, así que nombra los dos países por el
+    // mismo motivo que el pie: describir el sitio como guía de playas
+    // españolas era falso en 755 de ellas.
     description: es
-      ? `Estado del mar y guía de ${TOTAL_PUBLICADAS_TXT} playas españolas. Oleaje y viento cada hora (Open-Meteo); inventario del MITECO y calidad del agua de la EEA, de actualización anual.`
-      : `Sea conditions and guide for ${TOTAL_PUBLICADAS_TXT_EN} Spanish beaches. Waves and wind update hourly (Open-Meteo); the MITECO inventory and EEA water quality are updated yearly.`,
+      ? `Estado del mar y guía de ${TOTAL_PUBLICADAS_TXT} playas de España y ${TOTAL_PRAIAS_COSTA_TXT} praias de Portugal. Oleaje y viento cada hora (Open-Meteo); inventarios del MITECO y la APA, y calidad del agua de la EEA, de actualización anual.`
+      : `Sea conditions and guide for ${TOTAL_PUBLICADAS_TXT_EN} beaches in Spain and ${TOTAL_PRAIAS_COSTA_TXT} in Portugal. Waves and wind update hourly (Open-Meteo); the MITECO and APA inventories and EEA water quality are updated yearly.`,
     inLanguage: es ? 'es-ES' : 'en-GB',
     publisher: { '@id': AUTOR_PLAYAS_ESPANA['@id'] },
     potentialAction: {

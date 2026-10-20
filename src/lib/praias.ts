@@ -151,3 +151,10 @@ export async function getFotoPraia(slug: string): Promise<FotoPlaya | null> {
   const f = s?.[slug]
   return Array.isArray(f) && f.length > 0 ? f[0] : null
 }
+
+/** Praias de costa publicadas, con el punto de millar puesto a mano por
+ *  el mismo motivo que TOTAL_PLAYAS_TXT: toLocaleString depende del ICU
+ *  con el que se haya compilado Node. Se cuentan solo las de costa, que
+ *  son las que el índice de /portugal anuncia. */
+export const TOTAL_PRAIAS_COSTA = TODAS.filter(p => !p.fluvial).length
+export const TOTAL_PRAIAS_COSTA_TXT = String(TOTAL_PRAIAS_COSTA).replace(/\B(?=(\d{3})+(?!\d))/g, '.')

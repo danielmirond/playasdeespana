@@ -1767,7 +1767,14 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         )}
 
         {/* Hubs temáticos relevantes (cross-linking semántico) */}
-        <HubsRelacionados key="hubs" playa={playa} locale={locale} />
+        <HubsRelacionados
+          key="hubs"
+          playa={playa}
+          locale={locale}
+          portugal={geo && geo.paisNombre === 'Portugal'
+            ? { indiceHref: geo.paisHref, municipioHref: geo.municipioHref, municipio: playa.municipio }
+            : undefined}
+        />
 
         {/* FAQS */}
         <FaqSection key="faqs" playa={playa} meteo={meteo} banderaPlaya={banderaPlaya} medusas={medusas} mareasLunar={mareasLunar} locale={locale} />

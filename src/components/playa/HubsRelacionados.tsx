@@ -13,6 +13,11 @@ import type { Playa } from '@/types'
 interface Props {
   playa:   Playa
   locale?: 'es' | 'en'
+  /** Hubs de Portugal en vez de los españoles. La ficha portuguesa usa
+   *  el mismo componente, y sin esto construía enlaces con la región
+   *  portuguesa metida en rutas españolas: /comunidad/portugal y
+   *  /playas-accesibles/provincia/algarve, los dos 404 comprobados. */
+  portugal?: { indiceHref: string; municipioHref?: string; municipio: string }
 }
 
 interface Hub {
@@ -91,8 +96,21 @@ function buildHubs(playa: Playa, locale: 'es' | 'en'): Hub[] {
   return hubs
 }
 
-export default function HubsRelacionados({ playa, locale = 'es' }: Props) {
-  const hubs = buildHubs(playa, locale)
+function hubsPortugal(playa: Playa, pt: NonNullable<Props['portugal']>): Hub[] {
+  // Solo lo que existe de verdad: el concelho (si tiene página; los de
+  // una sola praia no la tienen) y el índice. Nada de banderas azules
+  // ni accesibles, que son hubs del inventario español.
+  const hubs: Hub[] = []
+  if (pt.municipioHref) {
+    hubs.push({ href: pt.municipioHref, label: `Todas las praias de ${pt.municipio}` })
+  }
+  hubs.push({ href: pt.indiceHref, label: 'Playas de Portugal' })
+  hubs.push({ href: '/comparar', label: `Comparar ${playa.nombre} con otras playas` })
+  return hubs
+}
+
+export default function HubsRelacionados({ playa, locale = 'es', portugal }: Props) {
+  const hubs = portugal ? hubsPortugal(playa, portugal) : buildHubs(playa, locale)
   if (hubs.length === 0) return null
   const es = locale === 'es'
 

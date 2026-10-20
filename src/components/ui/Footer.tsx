@@ -1,4 +1,5 @@
 import { TOTAL_PUBLICADAS_TXT, TOTAL_PUBLICADAS_TXT_EN } from '@/lib/playas'
+import { TOTAL_PRAIAS_COSTA_TXT } from '@/lib/praias'
 // src/components/ui/Footer.tsx
 // Footer común desplegado en layout.tsx. Cumple 4 funciones:
 //   1. Internal linking SEO: anchors coinciden con H1 destino para evitar
@@ -50,9 +51,15 @@ export default function Footer({ locale = 'es' }: Props) {
               lineHeight: 1.55,
               margin: 0,
             }}>
+              {/* Se nombran los dos países porque el pie va también en
+                  las praias portuguesas, y ahí decir «guía de 4.329
+                  playas españolas» era falso delante del lector. Así la
+                  frase es cierta en todas las páginas sin tener que
+                  saber en cuál está, que es lo que obligaría a volver
+                  dinámico un layout hoy estático. */}
               {es
-                ? `Estado del mar y guía de ${TOTAL_PUBLICADAS_TXT} playas españolas. El oleaje y el viento se actualizan cada hora (Open-Meteo); el inventario de playas (MITECO) y la calidad del agua (EEA) son de actualización anual.`
-                : `Sea conditions and guide for ${TOTAL_PUBLICADAS_TXT_EN} Spanish beaches. Waves and wind update hourly (Open-Meteo); the beach inventory (MITECO) and water quality (EEA) are updated yearly.`}
+                ? `Estado del mar y guía de ${TOTAL_PUBLICADAS_TXT} playas de España y ${TOTAL_PRAIAS_COSTA_TXT} praias de Portugal. El oleaje y el viento se actualizan cada hora (Open-Meteo); los inventarios de playas (MITECO y APA) y la calidad del agua (EEA) son de actualización anual.`
+                : `Sea conditions and guide for ${TOTAL_PUBLICADAS_TXT_EN} beaches in Spain and ${TOTAL_PRAIAS_COSTA_TXT} in Portugal. Waves and wind update hourly (Open-Meteo); the beach inventories (MITECO, APA) and water quality (EEA) are updated yearly.`}
             </p>
           </div>
 
