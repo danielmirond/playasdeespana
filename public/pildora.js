@@ -98,13 +98,12 @@
       if (el) out.push({ el: el, a: a, id: id, label: a.textContent.replace(/^\s*\d+\s*/, '').trim() });
       else a.style.display = 'none';   // el índice no ofrece lo que no hay
     });
-    // Renumerar lo que queda visible: si la playa no tiene chiringuitos,
-    // el índice no debe saltar del 07 al 09 ni desmentir al contador.
-    out.forEach(function (s, i) {
-      var num = s.a.querySelector('span');
-      var txt = String(i + 1).padStart(2, '0');
-      if (num && num.textContent !== txt) num.textContent = txt;
-    });
+    // Aquí ya NO se renumera. El número lo pone un contador CSS sobre
+    // .itemNum, así que ocultar una sección lo recalcula solo. Mientras
+    // esto reescribía el texto, el servidor decía «08» y el cliente
+    // «09», React lo tomaba por un fallo de hidratación y regeneraba el
+    // árbol entero de la ficha: con él se iba la barra de lectura y los
+    // atributos de este mismo script.
     return out;
   }
 

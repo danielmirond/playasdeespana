@@ -103,7 +103,7 @@ export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es'
     <div className={styles.wrap} id="pildora" data-lat={lat} data-lng={lng}>
       {/* Cuánto llevas de ficha. Dos píxeles en el borde de arriba: la
           sensación de avance sin gastar ancho. */}
-      <span className={styles.progreso} data-pildora-progreso aria-hidden="true" />
+      <span className={styles.progreso} data-pildora-progreso aria-hidden="true" suppressHydrationWarning />
 
       <details className={styles.panel} id="pildora-panel">
         <summary className={styles.pillLeft} aria-label={es ? 'Índice de secciones' : 'Section index'}>
@@ -117,9 +117,16 @@ export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es'
           <div className={styles.hojaHead}>
             <span className={styles.hojaTitulo}>{es ? 'Secciones de la ficha' : 'Page sections'}</span>
           </div>
-          {secciones.map((s, i) => (
-            <a key={s.id} href={`#${s.id}`} className={styles.item} data-pildora-item={s.id}>
-              <span className={styles.itemNum}>{String(i + 1).padStart(2, '0')}</span>
+          {secciones.map((s) => (
+            <a key={s.id} href={`#${s.id}`} className={styles.item} data-pildora-item={s.id} suppressHydrationWarning>
+              {/* El número lo pone un contador CSS, no este texto.
+                  Renderizarlo aquí obligaba a pildora.js a renumerar en
+                  cliente cuando la playa no tiene alguna sección, y ese
+                  cambio de texto era un desajuste de hidratación: React
+                  regeneraba el árbol entero de la ficha. Con `counter`
+                  la numeración se recalcula sola y las ocultas no
+                  cuentan. */}
+              <span className={styles.itemNum} aria-hidden="true" />
               <span style={{ flex: 1 }}>{s.t}</span>
             </a>
           ))}
@@ -130,13 +137,26 @@ export default function PildoraContextual({ lat, lng, nombre = '', locale = 'es'
           las dos etiquetas y el destino en cada frame de scroll. */}
       <a className={styles.avance} href={`#${secciones[1]?.id ?? secciones[0].id}`} data-pildora-siguiente-href>
         <span className={styles.contador}>
-          <span data-pildora-contador>01 / {secciones.length}</span>
+          {/* suppressHydrationWarning en los nodos que gobierna
+              pildora.js. El script va con defer y se ejecuta ANTES de que
+              React hidrate: escribía «01 / 16» —solo cuenta las secciones
+              que esta playa tiene— donde el servidor había puesto «01 /
+              18», React lo tomaba por fallo de hidratación y regeneraba
+              el árbol entero de la ficha. Con él se iba la barra de
+              progreso de lectura y los atributos de este mismo script.
+              Es el caso para el que existe esta prop, y el <body> del
+              proyecto ya la usa por lo mismo. */}
+          {/* Un SOLO nodo de texto, con plantilla. Escrito como
+              «01 / {secciones.length}» el servidor emite dos hijos y el
+              script lo deja en uno: eso es una diferencia de estructura,
+              no de texto, y suppressHydrationWarning no la cubre. */}
+          <span data-pildora-contador suppressHydrationWarning>{`01 / ${secciones.length}`}</span>
           {' · '}
-          <span data-pildora-seccion>{secciones[0].t}</span>
+          <span data-pildora-seccion suppressHydrationWarning>{secciones[0].t}</span>
         </span>
         <span className={styles.siguiente}>
           <span className={styles.flecha} aria-hidden="true">↓</span>
-          <span className={styles.siguienteTxt} data-pildora-siguiente>{secciones[1]?.t ?? ''}</span>
+          <span className={styles.siguienteTxt} data-pildora-siguiente suppressHydrationWarning>{secciones[1]?.t ?? ''}</span>
         </span>
       </a>
 

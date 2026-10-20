@@ -124,6 +124,7 @@
     background: color-mix(in srgb, var(--ink) 42%, transparent);
   }
   .hoja {
+    counter-reset: pildoraSec;
     position: fixed;
     left: 0; right: 0; bottom: 0;
     z-index: 111;
@@ -152,6 +153,7 @@
     color: var(--muted);
   }
   .item {
+    counter-increment: pildoraSec;
     display: flex; align-items: center; gap: .65rem;
     width: 100%; min-height: 44px;
     padding: 0 1rem;
@@ -162,11 +164,16 @@
   }
   .item:active { background: var(--surface-2, var(--card-bg2)); }
   .itemActivo { color: var(--ink); font-weight: 600; background: var(--surface-2, var(--card-bg2)); }
+  /* Numeración por contador: las secciones que esta playa no tiene se
+     ocultan con display:none y no incrementan, así que el índice nunca
+     salta del 07 al 09. Antes lo arreglaba el script reescribiendo el
+     texto, y eso rompía la hidratación. */
   .itemNum {
     font-family: var(--font-mono);
     font-size: .58rem; color: var(--muted);
     width: 1.1rem; flex-shrink: 0;
   }
+  .itemNum::before { content: counter(pildoraSec, decimal-leading-zero); }
 }
 
 /* ── Presencia en la playa (jul-2026) ─────────────────────────────────
