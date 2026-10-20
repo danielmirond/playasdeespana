@@ -506,7 +506,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
     <div className={styles.wrap}>
       {/* El cuerpo que cuenta para el porcentaje leído: el aside y el pie
           quedan fuera a propósito. */}
-      <div className={styles.main} data-lectura>
+      <main className={styles.main} data-lectura>
         <Reorder order={ordenSecciones} quitar={rojo ? BLOQUES_DUROS : undefined}>
 
         {/* ORDEN ABOVE-THE-FOLD (post critique PR #84):
@@ -1776,7 +1776,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
         <CrossLinks key="crosslinks" playa={playa} locale={locale} />
 
         </Reorder>
-      </div>
+      </main>
 
       {/* ASIDE */}
       <aside className={styles.aside}>
