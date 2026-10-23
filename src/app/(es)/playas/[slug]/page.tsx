@@ -1056,6 +1056,7 @@ export default async function PlayaPage({ params }: Props) {
       <PildoraContextual lat={playa.lat} lng={playa.lng} nombre={playa.nombre} />
       <script src="/pildora.js" defer />
       <script src="/lectura.js" defer />
+      <script src="/destacado.js" defer />
     </>
   )
 }

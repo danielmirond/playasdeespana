@@ -14,6 +14,8 @@ import Medusa from '@/components/ui/Medusa'
 import { nombrarViento } from '@/lib/vientos'
 import { gradosADireccion } from '@/lib/geo'
 import ListaPOI from './ListaPOI'
+import Destacado from './Destacado'
+import { getDestacado } from '@/lib/destacados'
 import CuadernoCTA from './CuadernoCTA'
 import type { ForecastDay, TurbidezData } from '@/lib/marine'
 import type { MeteoForecast } from '@/lib/meteo'
@@ -501,6 +503,11 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
   // cada ficha tiene 1-2 frases concretas: tipo + dimensiones +
   // servicios + actividades.
   const introTxt = locale === 'es' ? introBrevePlaya(playa, nombreConPlaya(nombreH)) : null
+
+  // Patrocinado de la sección de restaurantes, si hay contrato vigente
+  // para esta playa o su municipio. Se resuelve en servidor: no añade
+  // red ni retrasa nada, es una búsqueda en un JSON de unas pocas filas.
+  const destacadoComer = getDestacado('comer', playa.slug, municipioSlug ?? '', hoyISO)
 
   return (
     <div className={styles.wrap}>
@@ -1258,6 +1265,7 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
             </span>
           </div>
           <div className={styles.cardBody}>
+            {destacadoComer && <Destacado dato={destacadoComer} locale={locale} />}
             {restList ? (
               <Collapsible maxHeight={200} labelMore={locale === 'en' ? 'Show all' : 'Ver todos'} labelLess={locale === 'en' ? 'Show less' : 'Ver menos'}>
                 <ListaPOI
