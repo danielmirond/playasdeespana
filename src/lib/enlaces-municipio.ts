@@ -11,6 +11,7 @@
 // que usa cada página para publicarse o no: si aquí sale, allí hay página.
 // Quien pinta el bloque (DelMunicipio) solo quita la página en la que está.
 import { getMunicipioSlugsSet, getPlayasByMunicipio } from './playas'
+import { tieneVidaMarina } from './vida-marina'
 import { campingsDelMunicipio, MINIMO_CAMPINGS } from './campings-municipio'
 import { tieneAparcamiento } from './aparcamiento-municipio'
 import { tieneAlojamientos } from './alojamiento-municipio'
@@ -20,7 +21,7 @@ import { tienePois } from './municipio-pois'
 import { tieneBarcos } from './barcos-municipio'
 import { tieneMareas, ubicacionMareas } from './mareas-portus'
 
-export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar' | 'dormir' | 'chiringuitos' | 'autocaravana'
+export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar' | 'dormir' | 'chiringuitos' | 'autocaravana' | 'snorkel'
 
 /** La etiqueta corta de cada página, en un solo sitio.
  *
@@ -44,6 +45,7 @@ export const ETIQUETA_MUNICIPIO: Record<ClaveMunicipio, string> = {
   dormir: 'Dormir',
   chiringuitos: 'Chiringuitos',
   autocaravana: 'Autocaravana',
+  snorkel: 'Snorkel',
 }
 
 export interface EnlaceMunicipio {
@@ -100,6 +102,12 @@ export async function enlacesMunicipio(slug: string, nombre: string): Promise<En
   if (hayAutocaravana) out.push({
     clave: 'autocaravana', href: `/municipio/${slug}/autocaravana`,
     texto: `Autocaravana en ${nombre}`, nota: 'áreas de pernocta y a qué playa cabe el vehículo',
+  })
+  // Solo donde OBIS da bastante: 118 municipios de 584. El resto no
+  // tiene página, así que tampoco enlace — misma regla que los campings.
+  if (await tieneVidaMarina(slug)) out.push({
+    clave: 'snorkel', href: `/municipio/${slug}/snorkel-buceo`,
+    texto: `Snorkel y buceo en ${nombre}`, nota: 'qué especies se han registrado en su litoral',
   })
   if (tieneBarcos(slug)) out.push({
     clave: 'barcos', href: `/municipio/${slug}/alquiler-de-barcos`,

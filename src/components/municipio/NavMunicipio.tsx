@@ -14,6 +14,7 @@ const ICONO: Record<ClaveMunicipio, string> = {
   queHacer: 'M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5',
   elTiempo: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1',
   mareas:   'M3 14c3-6 6-6 9 0s6 6 9 0M3 20h18',
+  snorkel:  'M5 7h10a2 2 0 0 1 2 2v3a3 3 0 0 1-3 3h-1a3 3 0 0 1-3-3H9a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V9a2 2 0 0 1 2-2M19 7V4h2v9a4 4 0 0 1-4 4',
   campings: 'M3 20L12 4l9 16H3zM12 4v16M8 20l4-7 4 7',
   barcos:   'M3 17h18l-2 4H5zM12 3v10M12 3l6 8H6z',
   aparcar:  'M7 20V4h5a4 4 0 0 1 0 8H7M17 14v6',
