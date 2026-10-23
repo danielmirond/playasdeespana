@@ -79,6 +79,94 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · El Palmar, Vejer de la Frontera (Cádiz, Andalucía) (voz bicéfala) ─────
+  {
+    slug: 'playa-de-el-palmar-vejer-cadiz-temporada-olas-octubre-marzo-sin-socorrista',
+    category: 'guias',
+    title: 'El Palmar (Vejer) de octubre a marzo: temporada de olas, 3,3 km de arena y sin socorrista',
+    excerpt:
+      'El Palmar, en Vejer de la Frontera, tiene Bandera Azul 2026, agua de baño «excelente» según la Agencia Europea de Medio Ambiente y la ola más buscada del sur de España, que entra en temporada en octubre. La letra pequeña: la vigilancia y las duchas son cosa del verano, y con mar de fondo el tramo central es un beach break con corrientes fuertes.',
+    heroAlt:
+      'Playa de El Palmar en Vejer de la Frontera, Cádiz: un arenal largo y recto de arena dorada frente al Atlántico',
+    heroQuery: 'el palmar,vejer de la frontera,cadiz,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-10-23T19:45:04Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/andalucia', label: 'Playas de Andalucía' },
+      { href: '/banderas-azules', label: 'Playas con Bandera Azul' },
+      { href: '/magazine/playa-zahara-de-los-atunes-barbate-cadiz-almadraba-cervantes-levante', label: 'Zahara de los Atunes: la almadraba de Cervantes y un levante racheado' },
+    ],
+    body: [
+      { t: 'p', html: 'A finales de octubre, a las nueve de la mañana, El Palmar no se parece a la foto de agosto. No hay coches aparcados en doble fila junto a la carretera ni sombrillas hasta donde alcanza la vista. Hay neopreno. Una fila de tablas sobre las pasarelas de madera que cruzan la duna, gente sentada en la arena mirando las series antes de meterse, y la torre de piedra del siglo XVI recortada contra un cielo que todavía duda entre el verano y otra cosa.' },
+      { t: 'p', html: 'Es el momento en que la playa cambia de dueño. Durante julio y agosto pertenece a las familias, a los bañistas y a las terrazas que se multiplican a lo largo del camino. Desde octubre vuelve a quien vino aquí primero: el que llega por la ola. Las dos versiones de El Palmar son verdad, pero piden cosas distintas, y conviene saber en cuál se va a entrar antes de bajar del coche.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'El Palmar es una pedanía de <strong>Vejer de la Frontera (Cádiz)</strong>, a 11 kilómetros del pueblo, entre Conil y Zahora. La Guía de Playas del Ministerio para la Transición Ecológica (MITECO) le da <strong>3.300 metros de largo y 50 de ancho</strong>, arena dorada, ocupación media y una condición de baño que resume en dos palabras: «oleaje moderado» y «ventosa». La entrada de Wikipedia sobre la pedanía la estira hasta <strong>4.200 metros</strong>, porque cuenta el arenal continuo hasta Castilnovo y El Baba. Las dos cifras miden cosas distintas; ninguna es pequeña.' },
+      { t: 'p', html: 'Los sellos están en regla. El Palmar figura en la relación oficial de playas galardonadas de <strong>ADEAC para 2026</strong> con <strong>Bandera Azul</strong>, que este año se concede por dos temporadas con verificación en 2027; la prensa local (Tuya Noticias, 5 de mayo de 2026) añade la <strong>Q de Calidad Turística</strong> y la certificación ISO 14001. Y el dato que más pesa: el punto de muestreo PLAYA EL PALMAR PM1 sale con calidad de agua <strong>«excelente»</strong> en la evaluación de la Agencia Europea de Medio Ambiente (EEA) de la temporada 2025.' },
+      { t: 'p', html: 'Lo que el folleto calla es que esos servicios son <strong>de temporada</strong>. Las guías de la zona coinciden en que la vigilancia, los socorristas y las duchas solo funcionan en temporada alta. En otoño, que es precisamente cuando llega la mejor ola, la playa se queda sin nadie en la silla. Y el mar de aquí no perdona descuidos: la ola de El Palmar se considera la referencia del surf en el sur de España, y su tramo central, el de <strong>Alférez</strong>, se describe como un beach break con <strong>corrientes fuertes</strong> cuando el mar de fondo aprieta. En junio de 2012, un policía sevillano de 33 años de vacaciones se ahogó aquí al lanzarse a ayudar a dos surfistas irlandeses en apuros (The Olive Press). El entonces alcalde, José Ortiz, admitió que los únicos carteles de la playa prohibían jugar a la pelota y llevar perros, y que nadie avisaba de las corrientes.' },
+      { t: 'p', html: 'El otro contra es de verano y es logístico. El MITECO anota un aparcamiento vigilado de más de 100 plazas y autobús interurbano, pero en julio y agosto encontrar sitio gratis y cerca es complicado; la opción habitual es pagar un parking privado o dejar el coche antes y caminar. Y el viento, que la ficha oficial ya avisa, es dominante de componente este: el levante.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> De octubre a marzo, si se viene a surfear: es la temporada alta de olas, con la mejor mar de fondo del oeste-suroeste y el viento del este-nordeste peinándola. Para pasear o bañarse con calma, <strong>septiembre</strong>: el agua aún templada, la playa con la mitad de gente que en agosto y, según el año, los últimos días de servicio.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Un día de mar grande sin socorrista, si no se sabe leer una corriente: los dos son frecuentes aquí en otoño y juntos son la combinación peligrosa. Tampoco con el levante fuerte, si el plan era tumbarse: la arena vuela y el agua se pica. Y en agosto a mediodía, si se viene en coche sin plan para aparcar.' },
+      { t: 'p', html: '<strong>El truco</strong>. En verano el surf se concentra en la zona de <strong>La Torre</strong>, al norte, y el resto del arenal queda para el baño, así que el bañista con niños elige justo el otro lado. En otoño, la regla se invierte: bañarse cerca de las escuelas, que se agrupan junto al acceso principal y tienen gente en el agua mirando, es más sensato que hacerlo solo en un tramo vacío. Antes de ir, el parte de playas de AEMET tiene una predicción específica para El Palmar.' },
+      { t: 'p', html: '<strong>La alternativa</strong>. Si lo que se busca es agua mansa, el tramo norte hacia <strong>Castilnovo</strong>, ya en Conil, suele estar más tranquilo y lo frecuentan familias. Con levante fuerte, antes de elegir otro arenal de la zona conviene mirar las <a href="/playas-sin-viento">playas resguardadas del viento</a>; y quien siga hacia el sur, a <a href="/magazine/playa-zahara-de-los-atunes-barbate-cadiz-almadraba-cervantes-levante">Zahara de los Atunes</a>, debe saber que allí el levante también manda.' },
+      { t: 'ul', items: [
+        'Municipio: Vejer de la Frontera (Cádiz), pedanía de El Palmar, a 11 km del pueblo, entre Conil y Zahora.',
+        'Dimensiones: 3.300 m por 50 m según la Guía de Playas del MITECO; unos 4.200 m contando el arenal continuo, según Wikipedia.',
+        'Bandera Azul 2026 (ADEAC), concedida por dos temporadas; Q de Calidad Turística e ISO 14001.',
+        'Calidad del agua: «excelente» en la evaluación de la EEA, temporada 2025 (punto PLAYA EL PALMAR PM1).',
+        'Socorrismo, vigilancia y duchas: solo en temporada alta.',
+        'Surf: temporada de octubre a marzo; picos de La Torre, Alférez y El Dorado. En verano, el surf se limita a la zona de La Torre.',
+        'Torre Nueva: torre almenara del siglo XVI, en desuso desde el XIX y restaurada.',
+      ] },
+      { t: 'quote', text: 'La llaman «la playa de moda» de la Costa de la Luz, como si fuera un sitio para dejarse ver. Lo que la define no es la gente que viene en agosto, sino la ola que llega en octubre y el hecho, mucho menos fotogénico, de que entonces ya no hay nadie vigilando.' },
+      { t: 'p', html: 'A media tarde el viento cambia de humor, las series se ordenan y la luz baja oblicua sobre la arena mojada. Los surfistas salen del agua de uno en uno y suben por las pasarelas con la tabla bajo el brazo, dejando huellas que la marea borrará antes de la noche. La torre sigue donde la pusieron hace cinco siglos, vigilando un mar del que ahora ya no se espera piratas, solo la próxima serie.' },
+    ],
+    faq: [
+      { q: '¿Hay socorristas en El Palmar en otoño?', a: 'Según las guías de la zona, el socorrismo, la vigilancia y las duchas solo funcionan en temporada alta. En otoño e invierno, que es cuando hay más olas, no hay que contar con vigilancia: conviene bañarse cerca de otras personas, evitar los días de mar grande y mirar antes la predicción de AEMET para la playa.' },
+      { q: '¿Tiene Bandera Azul la playa de El Palmar?', a: 'Sí. El Palmar (Vejer de la Frontera) aparece en la relación oficial de ADEAC de playas galardonadas en 2026, con un distintivo que este año se concede por dos temporadas. Además, la calidad de su agua figura como «excelente» en la evaluación de la Agencia Europea de Medio Ambiente de 2025.' },
+      { q: '¿Cuándo es la mejor época para hacer surf en El Palmar?', a: 'De octubre a marzo, que es la temporada alta de olas, con mar de fondo del oeste-suroeste y viento del este-nordeste como condiciones ideales. En verano el surf se limita a la zona de La Torre, en el norte de la playa, y el resto queda para los bañistas.' },
+    ],
+    en: {
+      title: 'El Palmar (Vejer), October to March: surf season, 3.3 km of sand and no lifeguard on duty',
+      excerpt:
+        'El Palmar, in Vejer de la Frontera, holds a 2026 Blue Flag, has bathing water rated “excellent” by the European Environment Agency and the most sought-after wave in southern Spain, which comes into season in October. The small print: lifeguards and showers are a summer arrangement, and in a big swell the middle of the beach is a beach break with strong currents.',
+      related: [
+        { href: '/en/magazine/playa-zahara-de-los-atunes-barbate-cadiz-almadraba-cervantes-levante', label: 'Zahara de los Atunes: Cervantes’ tuna traps and a gusty easterly' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'At nine in the morning in late October, El Palmar looks nothing like the August photo. No cars double-parked along the road, no parasols as far as the eye can see. There is neoprene instead. A row of boards on the wooden boardwalks that cross the dune, people sitting on the sand watching the sets before paddling out, and the 16th-century stone tower standing against a sky still undecided between summer and something else.' },
+        { t: 'p', html: 'This is when the beach changes hands. Through July and August it belongs to families, swimmers and the terraces that multiply along the track. From October it goes back to whoever came here first: the people who come for the wave. Both versions of El Palmar are real, but they ask different things of you, and it is worth knowing which one you are walking into before you get out of the car.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'El Palmar is an outlying settlement of <strong>Vejer de la Frontera (Cádiz)</strong>, 11 kilometres from the town, between Conil and Zahora. The beach guide published by Spain’s Ministry for the Ecological Transition (MITECO) gives it <strong>3,300 metres in length and 50 in width</strong>, golden sand, medium occupancy and bathing conditions summed up in two words: “moderate swell” and “windy”. Wikipedia’s entry on the village stretches it to <strong>4,200 metres</strong>, because it counts the continuous sand up to Castilnovo and El Baba. The two figures measure different things; neither is small.' },
+        { t: 'p', html: 'The badges are in order. El Palmar appears on <strong>ADEAC’s official 2026 list</strong> with a <strong>Blue Flag</strong>, awarded this year for two seasons with checks in 2027; the local press (Tuya Noticias, 5 May 2026) adds Spain’s <strong>Q for Tourism Quality</strong> and ISO 14001 certification. And the figure that matters most: the PLAYA EL PALMAR PM1 sampling point is rated <strong>“excellent”</strong> for water quality in the European Environment Agency’s assessment of the 2025 season.' },
+        { t: 'p', html: 'What the brochure leaves out is that those services are <strong>seasonal</strong>. Local guides agree that lifeguards, patrols and showers run only in high season. In autumn, which is exactly when the best waves arrive, the lifeguard chair is empty. And this is not a sea that forgives carelessness: El Palmar’s wave is regarded as the benchmark for surfing in southern Spain, and its central stretch, <strong>Alférez</strong>, is described as a beach break with <strong>strong currents</strong> when the swell builds. In June 2012 a 33-year-old off-duty policeman from Seville, on holiday, drowned here after going in to help two Irish surfers in difficulty (The Olive Press). The mayor at the time, José Ortiz, conceded that the only signs on the beach banned ball games and dogs, and nothing warned about currents.' },
+        { t: 'p', html: 'The other drawback belongs to summer and it is logistical. MITECO lists a supervised car park with more than 100 spaces and an intercity bus, but in July and August finding a free space anywhere near is hard; the usual answer is to pay for a private car park or leave the car further back and walk. And the wind, which the official listing already flags, comes mainly from the east: the levante.' },
+        { t: 'h2', text: 'The local’s take', id: 'local' },
+        { t: 'p', html: '<strong>When to go?</strong> October to March, if you are here to surf: it is the high season for waves, with the best swell from the west-south-west and an east-north-easterly wind grooming it. For a walk or an easy swim, <strong>September</strong>: the water still warm, half the August crowd and, depending on the year, the last days of service.' },
+        { t: 'p', html: '<strong>When not to?</strong> A big-swell day with no lifeguard, if you can’t read a rip: both are common here in autumn, and together they are the dangerous combination. Nor in a strong levante, if the plan was to lie down: the sand flies and the water chops up. And at midday in August, if you arrive by car with no plan for parking.' },
+        { t: 'p', html: '<strong>The trick</strong>. In summer surfing is concentrated in the <strong>La Torre</strong> zone to the north and the rest of the beach is left to swimmers, so anyone with children picks the other end. In autumn the logic flips: swimming near the surf schools, clustered by the main access with people in the water keeping an eye out, makes more sense than going in alone on an empty stretch. Before you go, the Spanish met office, AEMET, publishes a beach forecast specifically for El Palmar.' },
+        { t: 'p', html: '<strong>The alternative</strong>. For calmer water, the northern stretch towards <strong>Castilnovo</strong>, already in Conil, tends to be quieter and draws families. In a strong levante, don’t assume the next beach along will be better: anyone heading south to <a href="/en/magazine/playa-zahara-de-los-atunes-barbate-cadiz-almadraba-cervantes-levante">Zahara de los Atunes</a> should know the levante rules there too.' },
+        { t: 'ul', items: [
+          'Municipality: Vejer de la Frontera (Cádiz), village of El Palmar, 11 km from the town, between Conil and Zahora.',
+          'Size: 3,300 m by 50 m according to MITECO’s beach guide; about 4,200 m counting the continuous sand, according to Wikipedia.',
+          'Blue Flag 2026 (ADEAC), awarded for two seasons; Q for Tourism Quality and ISO 14001.',
+          'Water quality: “excellent” in the EEA assessment, 2025 season (PLAYA EL PALMAR PM1 sampling point).',
+          'Lifeguards, patrols and showers: high season only.',
+          'Surf: season from October to March; La Torre, Alférez and El Dorado peaks. In summer, surfing is limited to the La Torre zone.',
+          'Torre Nueva: 16th-century watchtower, disused since the 19th century and restored.',
+        ] },
+        { t: 'quote', text: 'It gets called the Costa de la Luz’s “fashionable beach”, as if it were a place to be seen. What defines it is not the August crowd but the wave that turns up in October, and the far less photogenic fact that by then nobody is on watch.' },
+        { t: 'p', html: 'By mid-afternoon the wind changes mood, the sets line up and the light falls low across the wet sand. The surfers come out one by one and climb the boardwalks with boards under their arms, leaving footprints the tide will wipe before nightfall. The tower stands where it was put five centuries ago, watching a sea from which nobody expects pirates any more, only the next set.' },
+      ],
+      faq: [
+        { q: 'Are there lifeguards at El Palmar in autumn?', a: 'According to local guides, lifeguards, patrols and showers operate only in high season. In autumn and winter, when the waves are biggest, don’t count on anyone watching: swim near other people, avoid big-swell days and check AEMET’s forecast for the beach beforehand.' },
+        { q: 'Does El Palmar beach have a Blue Flag?', a: 'Yes. El Palmar (Vejer de la Frontera) appears on ADEAC’s official list of 2026 award-winning beaches, with a flag granted this year for two seasons. Its water quality is also rated “excellent” in the European Environment Agency’s 2025 assessment.' },
+        { q: 'When is the best time to surf at El Palmar?', a: 'October to March, the high season for waves, with a west-south-west swell and an east-north-east wind as the ideal conditions. In summer surfing is restricted to the La Torre zone at the northern end of the beach, and the rest is kept for swimmers.' },
+      ],
+    },
+  },
   // ───── Diario de playas · El Médano, Granadilla de Abona (Tenerife, Canarias) (voz bicéfala) ─────
   {
     slug: 'playa-de-el-medano-granadilla-tenerife-alisio-27-kmh-julio-cierre-enterococos',
