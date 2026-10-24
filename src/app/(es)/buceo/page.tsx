@@ -4,8 +4,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayas } from '@/lib/playas'
+import { getVidaMarina } from '@/lib/vida-marina'
+import { getCentrosBuceo } from '@/lib/buceo-places'
+import vidaMarinaJson from '@/../public/data/vida-marina.json'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
-import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import GygActivities from '@/components/GygActivities'
 import { getEditorialModified } from '@/lib/dateModified'
@@ -56,7 +58,43 @@ const TOP_SPOTS: Spot[] = [
 
 export default async function BuceoPage() {
   const playas = await getPlayas()
-  const conBuceo = playas.filter(p => p.actividades?.buceo || p.actividades?.snorkel)
+
+  // Índice por provincia de las páginas de municipio.
+  //
+  // Esta página llevaba un top 10 escrito a mano, certificaciones y
+  // equipo básico —contenido que tiene cualquiera— y CERO enlaces a las
+  // 345 páginas de municipio que sí son nuestras. Era un hub huérfano
+  // justo encima del dato. El índice es lo que convierte un artículo
+  // genérico en la puerta de entrada a algo que no tiene nadie.
+  const slugMuni = (x: string) => x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  const vidaTodos = vidaMarinaJson as unknown as Record<string, { nombre: string; total: number }>
+  const provinciaDe = new Map<string, string>()
+  for (const p of playas) {
+    const k = slugMuni(p.municipio ?? '')
+    if (k && p.provincia && !provinciaDe.has(k)) provinciaDe.set(k, p.provincia)
+  }
+  const porProvincia = new Map<string, Array<{ slug: string; nombre: string; esp: number; cen: number }>>()
+  for (const [slug, v] of Object.entries(vidaTodos)) {
+    const prov = provinciaDe.get(slug)
+    if (!prov) continue
+    const cen = (await getCentrosBuceo(slug)).length
+    if (!porProvincia.has(prov)) porProvincia.set(prov, [])
+    porProvincia.get(prov)!.push({ slug, nombre: v.nombre, esp: v.total, cen })
+  }
+  const provincias = [...porProvincia.entries()]
+    .map(([prov, lista]) => [prov, lista.sort((a, b) => b.cen - a.cen || b.esp - a.esp)] as const)
+    .sort((a, b) => b[1].length - a[1].length)
+  const totalMunis = provincias.reduce((n, [, l]) => n + l.length, 0)
+  const totalCentros = provincias.reduce((n, [, l]) => n + l.reduce((m, x) => m + x.cen, 0), 0)
+  // Especies DISTINTAS, no la suma de las listas: la misma salpa está en
+  // trescientos municipios y sumarla trescientas veces sería inflar.
+  const totalEspecies = new Set(
+    Object.values(vidaMarinaJson as unknown as Record<string, { especies: Array<{ n: string }> }>)
+      .flatMap(v => v.especies.map(e => e.n)),
+  ).size
+  // Punto de millar a mano: toLocaleString depende del ICU de Node.
+  const mil = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
   return (
     <>
@@ -81,37 +119,24 @@ export default async function BuceoPage() {
           En cada ficha de playa mostramos los centros de buceo más cercanos con contacto directo.
         </p>
 
-        {/* Top 6 con hero foto */}
-        {conBuceo.length >= 6 && (
-          <section aria-labelledby="top-buceo" style={{ marginBottom: '2.5rem' }}>
-            <h2 id="top-buceo" style={{
-              fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
-              color: 'var(--ink)', marginBottom: '1rem',
-            }}>
-              Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>spots de buceo</em>
-            </h2>
-            <TopBeachCardsConHero
-              playas={conBuceo
-                .filter(p => p.lat && p.lng)
-                .sort((a, b) => (b.bandera ? 1 : 0) - (a.bandera ? 1 : 0))
-                .slice(0, 6)
-                .map(p => ({
-                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
-                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
-                }))}
-              limit={6}
-              eyebrow={`Top 6 · ${conBuceo.length} playas con buceo/snorkel`}
-            />
-          </section>
-        )}
+        {/* El «Top 6 con hero foto» que había aquí estaba gateado por
+            conBuceo.length >= 6 y conBuceo siempre vale 0, así que no se
+            ha pintado nunca. Se retira en vez de dejar código muerto: el
+            top editorial de 10 spots cumple esa función, y el índice por
+            municipio que hay debajo lo hace con datos. */}
 
         {/* Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '.5rem', marginBottom: '2rem' }}>
           {[
-            { val: conBuceo.length.toLocaleString('es'), label: 'Playas con buceo/snorkel' },
+            // Decía «0 playas con buceo/snorkel» en producción, y era
+            // cierto: `actividades.buceo` existe en el tipo y no lo
+            // rellena ni una de las 5.098 playas. Una cabecera que
+            // empieza anunciando un cero no la salva ningún texto.
+            // Ahora van las cifras que sí tenemos cosechadas.
+            { val: mil(totalMunis), label: 'Municipios con ficha de buceo' },
+            { val: mil(totalCentros), label: 'Centros de buceo' },
+            { val: mil(totalEspecies), label: 'Especies registradas' },
             { val: '10', label: 'Reservas marinas' },
-            { val: '14-24°C', label: 'Temperatura agua' },
-            { val: '5-30m', label: 'Visibilidad media' },
           ].map(s => (
             <div key={s.label} style={{
               background: 'var(--card-bg)', border: '1px solid var(--line)',
@@ -160,6 +185,45 @@ export default async function BuceoPage() {
             </Link>
           ))}
         </div>
+
+        {/* Índice de municipios: lo que esta página no tenía. */}
+        <section aria-labelledby="h2-munis" style={{ marginBottom: '2.5rem' }}>
+          <h2 id="h2-munis" style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.3rem' }}>
+            Buceo y snorkel por municipio
+          </h2>
+          <p style={{ fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '1rem', maxWidth: '62ch' }}>
+            {totalMunis} municipios con página propia: qué especies se han registrado en su litoral,
+            qué centros de buceo hay y a qué playa le queda cerca cada uno, los puntos de inmersión
+            cartografiados y el litoral visto desde el aire.
+          </p>
+          {provincias.map(([prov, lista]) => (
+            <div key={prov} style={{ marginBottom: '1.1rem' }}>
+              <h3 style={{
+                fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.68rem',
+                letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '.45rem',
+              }}>{prov} · {lista.length}</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '.35rem' }}>
+                {lista.map(m => (
+                  <li key={m.slug}>
+                    <Link
+                      href={`/municipio/${m.slug}/snorkel-buceo`}
+                      style={{
+                        display: 'inline-block', padding: '.3rem .7rem', borderRadius: 100,
+                        border: '1px solid var(--line)', background: 'var(--card-bg)',
+                        fontSize: '.82rem', color: 'var(--ink)', textDecoration: 'none',
+                      }}
+                    >
+                      {m.nombre}{' '}
+                      <span style={{ color: 'var(--muted)', fontSize: '.74rem' }}>
+                        {m.cen > 0 ? `${m.cen} centros` : `${m.esp} esp.`}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
 
         {/* Certificaciones */}
         <section aria-labelledby="h2-cert" style={{
