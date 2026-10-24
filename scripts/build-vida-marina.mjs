@@ -54,9 +54,17 @@ const slugify = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 const playas = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'utf8'))
-const praiasPt = new Set(JSON.parse(readFileSync(resolve(ROOT, 'public/data/praias-portugal.json'), 'utf8')).map(p => p.slug))
+// Mismo filtro que usa el sitio (lib/playas.ts): el dataset arrastra
+// playas extranjeras, duplicadas y retiradas. Con solo los slugs del
+// inventario portugués se colaban 56 municipios franceses y portugueses
+// —Albufeira, Aljezur, Argelès-sur-Mer— con página publicada.
+const EXCLUIDAS = new Set([
+  ...JSON.parse(readFileSync(resolve(ROOT, 'src/data/slugs-extranjeras.json'), 'utf8')),
+  ...Object.keys(JSON.parse(readFileSync(resolve(ROOT, 'src/data/duplicados.json'), 'utf8'))),
+  ...Object.keys(JSON.parse(readFileSync(resolve(ROOT, 'src/data/playas-retiradas.json'), 'utf8'))),
+])
 const arr = (Array.isArray(playas) ? playas : Object.values(playas))
-  .filter(p => p?.slug && p.lat && p.lng && p.municipio && !praiasPt.has(p.slug))
+  .filter(p => p?.slug && p.lat && p.lng && p.municipio && !EXCLUIDAS.has(p.slug))
 
 const porMuni = new Map()
 for (const p of arr) {

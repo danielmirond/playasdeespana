@@ -50,9 +50,17 @@ const hav = (lat1, lon1, lat2, lon2) => {
 }
 
 const vida = JSON.parse(readFileSync(resolve(ROOT, 'public/data/vida-marina.json'), 'utf8'))
-const praiasPt = new Set(JSON.parse(readFileSync(resolve(ROOT, 'public/data/praias-portugal.json'), 'utf8')).map(p => p.slug))
+// Mismo filtro que usa el sitio (lib/playas.ts): el dataset arrastra
+// playas extranjeras, duplicadas y retiradas. Sin esto se colaba
+// Albufeira, que es portuguesa, entre los municipios españoles.
+const EXCLUIDAS = new Set([
+  ...JSON.parse(readFileSync(resolve(ROOT, 'src/data/slugs-extranjeras.json'), 'utf8')),
+  ...Object.keys(JSON.parse(readFileSync(resolve(ROOT, 'src/data/duplicados.json'), 'utf8'))),
+  ...Object.keys(JSON.parse(readFileSync(resolve(ROOT, 'src/data/playas-retiradas.json'), 'utf8'))),
+])
+
 const playas = JSON.parse(readFileSync(resolve(ROOT, 'public/data/playas.json'), 'utf8'))
-  .filter(p => p?.slug && p.lat && p.lng && p.municipio && !praiasPt.has(p.slug))
+  .filter(p => p?.slug && p.lat && p.lng && p.municipio && !EXCLUIDAS.has(p.slug))
 
 // Centro del litoral de cada municipio y sus playas, para dar contexto.
 const muni = new Map()
