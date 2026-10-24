@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!v) return {}
   return {
     title: `Snorkel y buceo en ${v.nombre}: especies y vida marina`,
-    description: `Las ${v.total} especies registradas en el litoral de ${v.nombre} hasta 30 metros: peces, pulpos, estrellas y corales, con cuántas veces se ha documentado cada una. Datos de OBIS.`,
+    description: `Las ${v.total} especies registradas en el litoral de ${v.nombre}: peces, pulpos, estrellas y corales, con cuántas veces se ha documentado cada una. Datos de OBIS.`,
     alternates: { canonical: `/municipio/${slug}/snorkel-buceo` },
   }
 }
@@ -77,11 +77,11 @@ export default async function SnorkelBuceoPage({ params }: Props) {
   const faq = [
     {
       q: `¿Qué peces se ven haciendo snorkel en ${municipio.nombre}?`,
-      a: `En su litoral se han registrado ${peces.length} especies de peces por encima de los 30 metros de profundidad. Las más documentadas son ${peces.slice(0, 4).map(e => nombrar(e.n) ?? e.n).join(', ')}. Son registros de presencia recogidos en OBIS: dicen que la especie se ha documentado ahí, no que vaya a aparecer el día que te metas.`,
+      a: `En su litoral se han registrado ${peces.length} especies de peces. Las más documentadas son ${peces.slice(0, 4).map(e => nombrar(e.n) ?? e.n).join(', ')}. Son registros de presencia recogidos en OBIS: dicen que la especie se ha documentado ahí, no que vaya a aparecer el día que te metas.`,
     },
     {
       q: `¿Cuántas especies marinas hay registradas en ${municipio.nombre}?`,
-      a: `${vida.total} en total hasta 30 metros de profundidad, que es el límite del buceo recreativo. Se cuentan solo las que alguien reconoce bajo el agua: peces, tiburones y rayas, pulpos y sepias, estrellas y erizos, corales y anémonas. El plancton y las algas quedan fuera.`,
+      a: `${vida.total} en total. Se cuentan solo las que alguien reconoce bajo el agua: peces, tiburones y rayas, pulpos y sepias, estrellas y erizos, corales y anémonas. El plancton y las algas quedan fuera.`,
     },
     {
       q: `¿De dónde salen estos datos?`,
@@ -115,11 +115,11 @@ export default async function SnorkelBuceoPage({ params }: Props) {
         </>}
       >
         <div style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', opacity: .9 }}>
-          {municipio.provincia} · {vida.total} especies · hasta 30 m
+          {municipio.provincia} · {vida.total} especies · litoral
         </div>
         <h1 className={mun.heroTitulo}>Snorkel y buceo en {municipio.nombre}</h1>
         <p data-speakable className={mun.heroLede} style={{ margin: 0 }}>
-          En su litoral se han registrado <b>{vida.total} especies</b> por encima de los 30 metros,
+          En su litoral se han registrado <b>{vida.total} especies</b>,
           {peces.length > 0 && <> {peces.length} de ellas peces</>}. Son registros documentados, no una lista
           de lo que verás: dicen dónde se ha visto cada especie y cuántas veces.
         </p>
@@ -172,8 +172,9 @@ export default async function SnorkelBuceoPage({ params }: Props) {
 
         <p style={{ fontSize: '.75rem', color: 'var(--muted)', lineHeight: 1.6 }}>
           Datos de <a href="https://obis.org" target="_blank" rel="noopener">OBIS</a> (Ocean Biodiversity
-          Information System), consultados hasta 30 metros de profundidad en una caja que cubre el litoral
-          de {municipio.nombre} y tres kilómetros mar adentro. Los nombres comunes vienen
+          Information System), consultados en una caja que cubre el litoral de {municipio.nombre} y tres
+          kilómetros mar adentro. No se filtra por profundidad: OBIS descarta en ese filtro los registros
+          que no la traen anotada, y eso dejaba a Galicia entera sin especies. Los nombres comunes vienen
           de <a href="https://www.marinespecies.org" target="_blank" rel="noopener">WoRMS</a>; donde no
           publican uno en español, la especie aparece solo con su nombre científico.
           {vida.total > vida.especies.length && <> Se listan las {vida.especies.length} con más registros de las {vida.total} encontradas.</>}

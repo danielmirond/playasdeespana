@@ -29,9 +29,19 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT = resolve(ROOT, 'public/data/vida-marina.json')
 const MINIMO = Number((process.argv.find(a => a.startsWith('--minimo=')) ?? '').split('=')[1] ?? '15') || 15
 
-// Hasta 30 m: el límite recreativo del buceo con botella. Más abajo no lo
-// ve ni un buceador titulado, así que no pinta nada en esta página.
-const PROF_MAX = 30
+// SIN filtro de profundidad, y no por descuido.
+//
+// La primera versión pedía enddepth=30 pensando en el límite del buceo
+// recreativo. El resultado fue que Galicia salía a cero, lo cual es
+// absurdo en una de las costas más ricas de Europa. Medido en A Coruña:
+// con el filtro, 4 especies; sin él, 68 —caballa, jurel, anémona,
+// estrella de mar—. OBIS descarta en ese filtro los registros que no
+// traen profundidad anotada, y en el Atlántico casi ninguno la trae.
+//
+// Lo que acota la consulta es la GEOGRAFÍA: la caja llega a tres
+// kilómetros de la costa. Y la página dice «registradas en su litoral»,
+// que es lo que el dato sostiene, en vez de prometer profundidad de
+// snorkel que la fuente no sabe.
 
 // Clases que alguien reconoce bajo el agua. Sin plancton, sin bacterias y
 // sin aves: un charrán no es vida que veas buceando.
@@ -67,7 +77,7 @@ for (const [slug, { nombre, playas: ps }] of munis) {
   const wkt = `POLYGON((${Math.min(...lons) - d} ${Math.min(...lats) - d},${Math.max(...lons) + d} ${Math.min(...lats) - d},${Math.max(...lons) + d} ${Math.max(...lats) + d},${Math.min(...lons) - d} ${Math.max(...lats) + d},${Math.min(...lons) - d} ${Math.min(...lats) - d}))`
   try {
     const r = await fetch(
-      `https://api.obis.org/v3/checklist?size=1000&enddepth=${PROF_MAX}&geometry=${encodeURIComponent(wkt)}`,
+      `https://api.obis.org/v3/checklist?size=1000&geometry=${encodeURIComponent(wkt)}`,
       { headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' }, signal: AbortSignal.timeout(70000) },
     )
     const d2 = await r.json()
