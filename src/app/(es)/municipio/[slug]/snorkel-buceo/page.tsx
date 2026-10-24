@@ -24,6 +24,8 @@ import Nav from '@/components/ui/Nav'
 import { getMunicipios, getPlayasByMunicipio, MIN_PLAYAS_MUNICIPIO } from '@/lib/playas'
 import { getVidaMarina, porGrupo, GRUPOS } from '@/lib/vida-marina'
 import { getBuceo } from '@/lib/buceo-osm'
+import { ortofoto } from '@/lib/ortofoto'
+import Image from 'next/image'
 import GygActivities from '@/components/GygActivities'
 import NOMBRES from '@/data/nombres-especies.json'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
@@ -68,12 +70,19 @@ export default async function SnorkelBuceoPage({ params }: Props) {
   const enlaces = await enlacesMunicipio(slug, municipio.nombre)
   const grupos = porGrupo(vida.especies)
   const buceo = await getBuceo(slug)
+
   const peces = vida.especies.filter(e => e.clase === 'Teleostei')
 
   const playaHero = playas[0]
   const fotoHero = playaHero
     ? (await getFotos(playaHero.nombre, playaHero.municipio, playaHero.lat, playaHero.lng, playaHero.provincia, playaHero.slug)).find(f => f.fuente !== 'generica')
     : null
+
+  // Ortofoto centrada en la PLAYA, no en el punto de inmersión. Probado:
+  // el PNOA se acaba mar adentro y un encuadre sobre las Illes Medes sale
+  // con un cuarto de la imagen en blanco. Sobre la costa siempre hay
+  // cobertura, y el color del agua en los bajos se ve igual.
+  const orto = playaHero ? ortofoto(playaHero.lat, playaHero.lng, 2.4, 900) : null
 
   const nombrar = (n: string) => comun(n) ?? null
 
@@ -131,6 +140,25 @@ export default async function SnorkelBuceoPage({ params }: Props) {
       <NavMunicipio enlaces={enlaces} actual="snorkel" />
 
       <main className={mun.cuerpo}>
+        {orto && (
+          <section id="aerea" style={{ marginBottom: '2rem' }}>
+            <div className={mun.seccionCab}>
+              <h2 className={mun.h2}>El litoral desde <em>arriba</em></h2>
+              <span className={mun.meta}>ortofoto del PNOA · IGN</span>
+            </div>
+            <Image
+              src={orto.url} alt={`Vista aérea del litoral de ${municipio.nombre}`}
+              width={orto.lado} height={orto.lado} unoptimized={false}
+              style={{ width: '100%', height: 'auto', borderRadius: 8, border: '1px solid var(--line)' }}
+            />
+            <p style={{ fontSize: '.74rem', color: 'var(--muted)', marginTop: '.5rem', lineHeight: 1.55 }}>
+              Unos 2,4 km de costa alrededor de {playaHero?.nombre}. El color del agua delata el fondo:
+              turquesa donde hay arena o roca somera, azul oscuro donde cae. Ortofoto del Plan Nacional
+              de Ortofotografía Aérea, <a href="https://www.ign.es" target="_blank" rel="noopener">IGN</a>.
+            </p>
+          </section>
+        )}
+
         {/* ESCUELAS. Solo donde OSM las tiene: son 87 en toda España, así
             que la mayoría de municipios no verá esta sección. Mejor eso
             que una lista de una entrada o un «no hay datos». */}

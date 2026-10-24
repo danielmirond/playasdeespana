@@ -54,6 +54,11 @@ const nextConfig = {
       // Pexels
       { protocol: 'https', hostname: 'images.pexels.com' },
 
+      // Ortofoto del PNOA (Instituto Geográfico Nacional). Va por el
+      // optimizador de Next para que se cachee: si no, cada visita a una
+      // página de buceo sería una petición al WMS de un servicio público.
+      { protocol: 'https', hostname: 'www.ign.es' },
+
       // OpenVerse (agregador que puede servir de múltiples fuentes)
       { protocol: 'https', hostname: 'images.openverse.org' },
 
