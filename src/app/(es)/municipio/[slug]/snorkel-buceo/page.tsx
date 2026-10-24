@@ -24,6 +24,7 @@ import Nav from '@/components/ui/Nav'
 import { getMunicipios, getPlayasByMunicipio, MIN_PLAYAS_MUNICIPIO } from '@/lib/playas'
 import { getVidaMarina, porGrupo, GRUPOS } from '@/lib/vida-marina'
 import { getBuceo } from '@/lib/buceo-osm'
+import { getCentrosBuceo } from '@/lib/buceo-places'
 import { ortofoto } from '@/lib/ortofoto'
 import Image from 'next/image'
 import GygActivities from '@/components/GygActivities'
@@ -70,6 +71,7 @@ export default async function SnorkelBuceoPage({ params }: Props) {
   const enlaces = await enlacesMunicipio(slug, municipio.nombre)
   const grupos = porGrupo(vida.especies)
   const buceo = await getBuceo(slug)
+  const centros = await getCentrosBuceo(slug)
 
   const peces = vida.especies.filter(e => e.clase === 'Teleostei')
 
@@ -159,33 +161,49 @@ export default async function SnorkelBuceoPage({ params }: Props) {
           </section>
         )}
 
-        {/* ESCUELAS. Solo donde OSM las tiene: son 87 en toda España, así
-            que la mayoría de municipios no verá esta sección. Mejor eso
-            que una lista de una entrada o un «no hay datos». */}
-        {buceo?.escuelas.length ? (
-          <section id="escuelas" style={{ marginBottom: '2rem' }}>
+        {/* CENTROS. De Google Places, no de OSM: OpenStreetMap tiene 87
+            escuelas en toda España y Google 802 en 316 municipios, con
+            nota y reseñas. Para una sección que se usa para decidir dónde
+            reservar, esa diferencia es la sección entera. Los puntos de
+            inmersión siguen viniendo de OSM, que es quien los tiene. */}
+        {centros.length ? (
+          <section id="centros" style={{ marginBottom: '2rem' }}>
             <div className={mun.seccionCab}>
               <h2 className={mun.h2}>Centros de <em>buceo</em></h2>
-              <span className={mun.meta}>OpenStreetMap</span>
+              <span className={mun.meta}>{centros.length} · Google</span>
             </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.5rem' }}>
-              {buceo.escuelas.map(e => (
-                <li key={e.n} style={{ borderBottom: '1px solid var(--line)', padding: '.55rem 0' }}>
-                  <div style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                    {e.web
-                      ? <a href={e.web} target="_blank" rel="noopener nofollow" style={{ color: 'inherit' }}>{e.n}</a>
-                      : e.n}
-                  </div>
-                  {e.tel && <a href={`tel:${e.tel.replace(/\s+/g, '')}`} style={{ fontSize: '.82rem', color: 'var(--accent)' }}>{e.tel}</a>}
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '.55rem' }}>
+              {centros.map(c => (
+                <li key={c.id} style={{ borderBottom: '1px solid var(--line)', padding: '.6rem 0', display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline' }}>
+                  <span style={{ minWidth: 0 }}>
+                    <span style={{ fontWeight: 600, color: 'var(--ink)' }}>
+                      {c.web
+                        ? <a href={c.web} target="_blank" rel="noopener nofollow" style={{ color: 'inherit' }}>{c.n}</a>
+                        : c.n}
+                    </span>
+                    {/* La certificación solo se marca cuando el propio
+                        centro la pone en su nombre. Google no publica un
+                        campo de titulación y deducirla sería ponerle un
+                        sello a quien no lo ha dicho. */}
+                    {c.padi && <span style={{ marginLeft: '.4rem', fontSize: '.64rem', letterSpacing: '.1em', color: 'var(--muted)', border: '1px solid var(--line)', borderRadius: 4, padding: '.1rem .3rem' }}>PADI</span>}
+                    <span style={{ display: 'block', fontSize: '.8rem', color: 'var(--muted)', marginTop: '.15rem' }}>
+                      {c.playa && c.m != null && <>a {c.m < 1000 ? `${c.m} m` : `${(c.m / 1000).toFixed(1)} km`} de {c.playa}</>}
+                      {c.tel && <> · <a href={`tel:${c.tel.replace(/\s+/g, '')}`} style={{ color: 'var(--accent)' }}>{c.tel}</a></>}
+                    </span>
+                  </span>
+                  {c.nota != null && (
+                    <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '.78rem', color: 'var(--muted)', flexShrink: 0, textAlign: 'right' }}>
+                      {String(c.nota).replace('.', ',')}
+                      <span style={{ display: 'block', fontSize: '.66rem' }}>({c.resenas.toLocaleString('es-ES')})</span>
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
-            {/* La titulación no la sabemos: OSM no guarda si es PADI, SSI o
-                ninguna, y PADI no publica API. Decirlo es más útil que
-                callarlo. */}
             <p style={{ fontSize: '.74rem', color: 'var(--muted)', marginTop: '.6rem', lineHeight: 1.55 }}>
-              Nombre y contacto según OpenStreetMap. No consta la titulación de cada centro
-              (PADI, SSI u otra): conviene confirmarla antes de reservar.
+              Nombre, nota y contacto según Google. La nota es de terceros, no una medición nuestra.
+              La titulación (PADI, SSI u otra) solo se indica cuando el propio centro la declara en su
+              nombre: no hay un campo público que la certifique.
             </p>
           </section>
         ) : null}
