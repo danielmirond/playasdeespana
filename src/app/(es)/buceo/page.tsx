@@ -1,11 +1,10 @@
 // src/app/buceo/page.tsx
-// Hub SEO: "Buceo en España. Mejores playas y centros de inmersión"
+// Hub SEO: "Buceo en España". Centros y puntos por municipio, y las reservas marinas del Estado
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import { getPlayas } from '@/lib/playas'
+import { getMunicipiosBuceo, MAX_CENTROS_POR_MUNICIPIO, RESERVAS_MARINAS_ESTADO, RESERVAS_MARINAS_MAPA_URL } from '@/lib/buceo-resumen'
 import EnlacesRelacionados from '@/components/seo/EnlacesRelacionados'
-import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import UpdatedBadge from '@/components/seo/UpdatedBadge'
 import GygActivities from '@/components/GygActivities'
 import { getEditorialModified } from '@/lib/dateModified'
@@ -18,45 +17,44 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 import { AMAZON_TAG } from '@/lib/amazon-productos'
 const CIVITATIS_AFF = process.env.NEXT_PUBLIC_CIVITATIS_AFF ?? ''
 
-const MODIFIED = getEditorialModified('src/app/buceo/page.tsx', ['public/data/playas.json'])
+const MODIFIED = getEditorialModified('src/app/buceo/page.tsx', ['public/data/buceo-places.json', 'public/data/buceo-osm.json'])
 export const metadata: Metadata = {
-  title: 'Buceo en España | Mejores playas, centros y reservas marinas',
-  description: 'Guía completa de buceo en España: mejores spots por comunidad, reservas marinas, centros PADI/SSI, bautismos, equipo y certificaciones. De Cabo de Palos a Canarias.',
+  title: 'Buceo en España | Centros, puntos de inmersión y reservas marinas',
+  description: 'Dónde bucear en España: centros de buceo por municipio, puntos de inmersión y las reservas marinas del Estado, de Cabo de Palos a La Restinga.',
   alternates: { canonical: '/buceo' },
   openGraph: {
     title: 'Buceo en España',
-    description: 'Mejores spots, centros PADI/SSI, reservas marinas y equipo.',
+    description: 'Centros de buceo por municipio, puntos de inmersión y reservas marinas.',
     url: `${BASE}/buceo`,
     type: 'article',
     images: [{ url: '/api/og?playa=Buceo%20en%20Espa%C3%B1a', width: 1200, height: 630 }],
   },
 }
 
-interface Spot {
-  nombre:    string
-  zona:      string
-  comSlug:   string
-  profMax:   string
-  destaca:   string
-  reserva?:  boolean
-}
-
-const TOP_SPOTS: Spot[] = [
-  { nombre: 'Islas Medas',          zona: 'Costa Brava',           comSlug: 'cataluna',              profMax: '25m',  destaca: 'Meros gigantes, posidonia',                 reserva: true },
-  { nombre: 'Cabo de Palos',        zona: 'Murcia',                comSlug: 'murcia',                profMax: '50m',  destaca: 'Reserva marina, barracudas',                reserva: true },
-  { nombre: 'Isla de El Hierro',    zona: 'Canarias',              comSlug: 'canarias',              profMax: '40m',  destaca: 'Mar de las Calmas, rayas, mantas',          reserva: true },
-  { nombre: 'Columbretes',          zona: 'Castellón',             comSlug: 'comunitat-valenciana',  profMax: '40m',  destaca: 'Archipiélago volcánico, langostas',          reserva: true },
-  { nombre: 'Cabo de Gata',         zona: 'Almería',               comSlug: 'andalucia',             profMax: '30m',  destaca: 'Parque natural, paredes volcánicas' },
-  { nombre: 'Islas Cíes',           zona: 'Galicia',               comSlug: 'galicia',               profMax: '25m',  destaca: 'Parque Nacional, bosques de kelp',           reserva: true },
-  { nombre: 'Menorca Norte',        zona: 'Menorca',               comSlug: 'islas-baleares',        profMax: '35m',  destaca: 'Cuevas submarinas, estrellas de mar' },
-  { nombre: 'La Restinga',          zona: 'El Hierro',             comSlug: 'canarias',              profMax: '40m',  destaca: 'Aguas vulcanismo, peces tropicales' },
-  { nombre: 'Illes Medes-Tossa',    zona: 'Costa Brava',           comSlug: 'cataluna',              profMax: '20m',  destaca: 'Coral rojo, nudibranquios' },
-  { nombre: 'Dragonera',            zona: 'Mallorca',              comSlug: 'islas-baleares',        profMax: '35m',  destaca: 'Reserva, pecios, morenas' },
-]
-
 export default async function BuceoPage() {
-  const playas = await getPlayas()
-  const conBuceo = playas.filter(p => p.actividades?.buceo || p.actividades?.snorkel)
+  const municipios = await getMunicipiosBuceo()
+  const totalCentros = municipios.reduce((n, m) => n + m.centros, 0)
+  const totalPuntos = municipios.reduce((n, m) => n + m.puntos, 0)
+  const conPagina = municipios.filter(m => m.conPagina)
+  const top = [...conPagina].sort((a, b) => b.puntos - a.puntos || b.centros - a.centros).slice(0, 12)
+
+  // Las respuestas salen de nuestros datos o de la lista del Ministerio. Antes
+  // daban precios, temperaturas y porcentajes sin fuente; el JSON-LD repetía
+  // el texto a mano y ahora se genera de aquí.
+  const faq = [
+    {
+      q: '¿Dónde encuentro centros de buceo en España?',
+      a: `Tenemos localizados ${totalCentros.toLocaleString('es')} centros de buceo en ${municipios.length} municipios costeros, con datos de Google Maps y un máximo de ${MAX_CENTROS_POR_MUNICIPIO} por municipio. En la página de snorkel y buceo de cada municipio están sus centros, con la playa que les queda más cerca.`,
+    },
+    {
+      q: '¿Cuántas reservas marinas hay en España?',
+      a: `El Ministerio de Agricultura, Pesca y Alimentación gestiona ${RESERVAS_MARINAS_ESTADO.length}: ${RESERVAS_MARINAS_ESTADO.map(r => r.nombre).join(', ')}. Las comunidades autónomas tienen además las suyas. El buceo dentro de cada reserva está regulado: la normativa está en la ficha de cada una en la web del Ministerio.`,
+    },
+    {
+      q: '¿Dónde se puede bucear desde la playa?',
+      a: `Hay ${totalPuntos} puntos de inmersión señalados en OpenStreetMap junto a la costa. En la página de cada municipio aparecen con la distancia a la playa más cercana.`,
+    },
+  ]
 
   return (
     <>
@@ -76,42 +74,49 @@ export default async function BuceoPage() {
           Dónde <em style={{ fontWeight: 500, color: 'var(--accent)' }}>bucear</em> en España
         </h1>
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 700, marginBottom: '2rem', lineHeight: 1.65 }}>
-          España tiene 10 reservas marinas, aguas entre 14°C y 24°C y visibilidad de 5 a 30 metros.
-          Desde bautismos en calas de Baleares hasta inmersiones profundas en Cabo de Palos o El Hierro.
-          En cada ficha de playa mostramos los centros de buceo más cercanos con contacto directo.
+          Tenemos localizados {totalCentros.toLocaleString('es')} centros de buceo en {municipios.length} municipios
+          costeros (hasta {MAX_CENTROS_POR_MUNICIPIO} por municipio) y {totalPuntos} puntos de inmersión señalados en OpenStreetMap. Los municipios con página de
+          snorkel y buceo tienen los centros, los puntos y la vida marina registrada en su litoral.
         </p>
 
-        {/* Top 6 con hero foto */}
-        {conBuceo.length >= 6 && (
+        {/* Municipios con más centros: antes era un «Top 6» de playas filtrado
+            por un campo que el dataset no trae, y no salía nunca. */}
+        {top.length > 0 && (
           <section aria-labelledby="top-buceo" style={{ marginBottom: '2.5rem' }}>
             <h2 id="top-buceo" style={{
               fontFamily: 'var(--font-serif)', fontSize: '1.45rem', fontWeight: 700,
               color: 'var(--ink)', marginBottom: '1rem',
             }}>
-              Top 6 <em style={{ fontWeight: 500, color: 'var(--accent)' }}>spots de buceo</em>
+              Municipios con <em style={{ fontWeight: 500, color: 'var(--accent)' }}>buceo</em>
             </h2>
-            <TopBeachCardsConHero
-              playas={conBuceo
-                .filter(p => p.lat && p.lng)
-                .sort((a, b) => (b.bandera ? 1 : 0) - (a.bandera ? 1 : 0))
-                .slice(0, 6)
-                .map(p => ({
-                  slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia,
-                  comunidad: p.comunidad, lat: p.lat, lng: p.lng, bandera: p.bandera,
-                }))}
-              limit={6}
-              eyebrow={`Top 6 · ${conBuceo.length} playas con buceo/snorkel`}
-            />
+            <p style={{ fontSize: '.8rem', color: 'var(--muted)', lineHeight: 1.6, margin: '-.5rem 0 1rem' }}>
+              Primero los que tienen puntos de inmersión señalados. De cada municipio contamos hasta{' '}
+              {MAX_CENTROS_POR_MUNICIPIO} centros, así que la cifra no sirve para comparar los más grandes.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.5rem' }}>
+              {top.map(m => (
+                <Link key={m.slug} href={`/municipio/${m.slug}/snorkel-buceo`} prefetch={false} style={{
+                  display: 'flex', flexDirection: 'column', gap: '.15rem', padding: '.8rem 1rem', borderRadius: 6,
+                  background: 'var(--card-bg)', border: '1px solid var(--line)', textDecoration: 'none', color: 'inherit',
+                }}>
+                  <span style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)' }}>{m.nombre}</span>
+                  <span style={{ fontSize: '.74rem', color: 'var(--muted)' }}>
+                    {m.provincia} · {m.centros} {m.centros === 1 ? 'centro' : 'centros'}
+                    {m.puntos > 0 && <> · {m.puntos} {m.puntos === 1 ? 'punto' : 'puntos'} de inmersión</>}
+                  </span>
+                </Link>
+              ))}
+            </div>
           </section>
         )}
 
         {/* Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '.5rem', marginBottom: '2rem' }}>
           {[
-            { val: conBuceo.length.toLocaleString('es'), label: 'Playas con buceo/snorkel' },
-            { val: '10', label: 'Reservas marinas' },
-            { val: '14-24°C', label: 'Temperatura agua' },
-            { val: '5-30m', label: 'Visibilidad media' },
+            { val: totalCentros.toLocaleString('es'), label: 'Centros de buceo' },
+            { val: municipios.length.toLocaleString('es'), label: 'Municipios con centros' },
+            { val: totalPuntos.toLocaleString('es'), label: 'Puntos de inmersión' },
+            { val: String(RESERVAS_MARINAS_ESTADO.length), label: 'Reservas marinas del Estado' },
           ].map(s => (
             <div key={s.label} style={{
               background: 'var(--card-bg)', border: '1px solid var(--line)',
@@ -123,40 +128,25 @@ export default async function BuceoPage() {
           ))}
         </div>
 
-        {/* Top spots */}
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '1rem' }}>
-          Los 10 mejores spots de buceo
+        {/* Reservas marinas del Estado, con la lista del Ministerio. Sustituye a
+            un «top 10» sin fuente que repetía sitios (El Hierro y La Restinga;
+            Medas y Medes-Tossa) y marcaba como reserva las Cíes. */}
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '.4rem' }}>
+          Reservas marinas del Estado
         </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '.6rem', marginBottom: '2.5rem' }}>
-          {TOP_SPOTS.map((s, i) => (
-            <Link
-              key={s.nombre}
-              href={`/comunidad/${s.comSlug}`}
-              style={{
-                display: 'flex', alignItems: 'center', gap: '.85rem',
-                padding: '.85rem 1.1rem', borderRadius: 6,
-                background: 'var(--card-bg)', border: '1px solid var(--line)',
-                textDecoration: 'none', color: 'inherit',
-              }}
-            >
-              <span style={{
-                flexShrink: 0, width: 30, height: 30, borderRadius: '50%',
-                background: i < 3 ? 'linear-gradient(135deg, #3d93b0, var(--mar-500))' : 'rgba(8,145,178,.12)',
-                color: i < 3 ? '#fff' : '#0e7490',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '.78rem', fontWeight: 800,
-              }}>
-                {i + 1}
-              </span>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '.45rem', flexWrap: 'wrap' }}>
-                  <span style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)' }}>{s.nombre}</span>
-                  {s.reserva && <span style={{ fontSize: '.58rem', fontWeight: 700, padding: '.1rem .4rem', borderRadius: 100, background: '#3d6b1f22', color: '#2a5a1a', border: '1px solid #3d6b1f44' }}>Reserva Marina</span>}
-                </div>
-                <div style={{ fontSize: '.75rem', color: 'var(--muted)', marginTop: '.1rem' }}>
-                  {s.zona} · Prof. máx {s.profMax} · {s.destaca}
-                </div>
-              </div>
+        <p style={{ fontSize: '.85rem', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '1rem' }}>
+          Las {RESERVAS_MARINAS_ESTADO.length} que gestiona el{' '}
+          <a href={RESERVAS_MARINAS_MAPA_URL} target="_blank" rel="noopener">Ministerio de Agricultura, Pesca y Alimentación</a>.
+          Cada una tiene su normativa de buceo: consúltala en su ficha del Ministerio antes de ir.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.5rem', marginBottom: '2.5rem' }}>
+          {RESERVAS_MARINAS_ESTADO.map(r => (
+            <Link key={r.nombre} href={`/comunidad/${r.comSlug}`} prefetch={false} style={{
+              display: 'flex', flexDirection: 'column', gap: '.1rem', padding: '.75rem 1rem', borderRadius: 6,
+              background: 'var(--card-bg)', border: '1px solid var(--line)', textDecoration: 'none', color: 'inherit',
+            }}>
+              <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink)' }}>{r.nombre}</span>
+              <span style={{ fontSize: '.74rem', color: 'var(--muted)' }}>{r.zona}</span>
             </Link>
           ))}
         </div>
@@ -171,10 +161,10 @@ export default async function BuceoPage() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '.5rem' }}>
             {[
-              { sigla: 'PADI',  nombre: 'Professional Association of Diving Instructors',  desc: 'La más extendida (80% de centros en España). Open Water desde 350€.' },
-              { sigla: 'SSI',   nombre: 'Scuba Schools International',                     desc: 'Muy popular, material digital gratuito. Open Water desde 300€.' },
-              { sigla: 'CMAS',  nombre: 'Confédération Mondiale des Activités Subaquatiques', desc: 'Federativa, más habitual en clubes vs centros comerciales.' },
-              { sigla: 'FEDAS', nombre: 'Federación Española de Actividades Subacuáticas', desc: 'Título oficial español equivalente. Válido en toda España.' },
+              { sigla: 'PADI',  nombre: 'Professional Association of Diving Instructors',  desc: 'Agencia de formación con su propia escala de títulos, de Open Water en adelante.' },
+              { sigla: 'SSI',   nombre: 'Scuba Schools International',                     desc: 'Agencia de formación con títulos propios; muchos centros trabajan con ella o con PADI.' },
+              { sigla: 'CMAS',  nombre: 'Confédération Mondiale des Activités Subaquatiques', desc: 'Confederación internacional de federaciones; sus títulos se imparten a través de clubes federados.' },
+              { sigla: 'FEDAS', nombre: 'Federación Española de Actividades Subacuáticas', desc: 'La federación española, miembro de CMAS.' },
             ].map(c => (
               <div key={c.sigla} style={{
                 border: '1px solid var(--line)', borderRadius: 4,
@@ -198,11 +188,11 @@ export default async function BuceoPage() {
           </h2>
           <ul style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.75, paddingLeft: '1.2rem' }}>
             <li><strong>Máscara.</strong> silicona transparente, cristal templado. Probar en cara sin apretar correa (debe hacer vacío).</li>
-            <li><strong>Neopreno.</strong> 3mm en Mediterráneo verano, 5mm en Atlántico o invierno, 7mm en inmersiones profundas.</li>
+            <li><strong>Neopreno.</strong> el grosor depende de la temperatura del agua: pregunta al centro qué usan en esa época.</li>
             <li><strong>Aletas.</strong> de talón abierto con escarpines para roca; cerradas para snorkel.</li>
             <li><strong>Regulador + BCD + botella.</strong> mejor alquilar hasta que bucees regularmente.</li>
             <li><strong>Linterna submarina.</strong> imprescindible en cuevas y nocturnas.</li>
-            <li><strong>Ordenador de buceo.</strong> desde 150€, compensa si vas a bucear más de 10 veces.</li>
+            <li><strong>Ordenador de buceo.</strong> los centros suelen alquilarlo; comprarlo tiene sentido si buceas con frecuencia.</li>
           </ul>
           {AMAZON_TAG && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem', marginTop: '.75rem' }}>
@@ -242,7 +232,7 @@ export default async function BuceoPage() {
                 Bautismos y excursiones de snorkel
               </div>
               <div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.85)' }}>
-                Primera inmersión desde 40€. Cancelación gratis hasta 24h antes.
+                Bautismos y salidas con centros de la zona.
               </div>
             </div>
             <a
@@ -283,24 +273,7 @@ export default async function BuceoPage() {
             Preguntas frecuentes
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem' }}>
-            {[
-              {
-                q: '¿Cuánto cuesta un bautismo de buceo en España?',
-                a: 'Entre 40€ y 80€ por persona, dependiendo de la zona y el centro. Incluye equipo, briefing, inmersión guiada (30-45 min) y seguro. En reservas marinas puede costar 10-20€ más.',
-              },
-              {
-                q: '¿Cuál es la mejor época para bucear en España?',
-                a: 'Junio a octubre para el Mediterráneo (agua 20-26°C, visibilidad 15-25m). Canarias todo el año (18-24°C). El Atlántico Norte (Galicia, Cantábrico) es mejor en julio-septiembre. Evitar días de temporal.',
-              },
-              {
-                q: '¿Necesito certificación para hacer bautismo?',
-                a: 'No. El bautismo (Discover Scuba Diving en PADI, Try Scuba en SSI) es para personas sin experiencia. Un instructor te acompaña a 6-12m de profundidad. Para bucear solo necesitas Open Water Diver (2-4 días, 300-450€).',
-              },
-              {
-                q: '¿Qué reservas marinas permiten buceo en España?',
-                a: 'Las 10 reservas marinas españolas permiten buceo con permiso previo. Las más populares: Islas Medas (Cataluña), Cabo de Palos-Islas Hormigas (Murcia), Isla de El Hierro (Canarias), Columbretes (Castellón) e Islas Cíes (Galicia).',
-              },
-            ].map((f, i) => (
+            {faq.map((f, i) => (
               <details key={i} style={{ background: 'var(--card-bg)', border: '1px solid var(--line)', borderRadius: 6, padding: '.85rem 1rem' }}>
                 <summary style={{ fontWeight: 700, fontSize: '.92rem', color: 'var(--ink)', cursor: 'pointer' }}>{f.q}</summary>
                 <p style={{ fontSize: '.88rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: '.55rem' }}>{f.a}</p>
@@ -319,12 +292,7 @@ export default async function BuceoPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
-          mainEntity: [
-            { '@type': 'Question', name: '¿Cuánto cuesta un bautismo de buceo en España?', acceptedAnswer: { '@type': 'Answer', text: 'Entre 40€ y 80€ por persona. Incluye equipo, briefing, inmersión guiada (30-45 min) y seguro.' } },
-            { '@type': 'Question', name: '¿Cuál es la mejor época para bucear en España?', acceptedAnswer: { '@type': 'Answer', text: 'Junio a octubre para Mediterráneo (20-26°C). Canarias todo el año (18-24°C). Atlántico Norte en julio-septiembre.' } },
-            { '@type': 'Question', name: '¿Necesito certificación para hacer bautismo?', acceptedAnswer: { '@type': 'Answer', text: 'No. El bautismo es para personas sin experiencia. Para bucear solo necesitas Open Water Diver (2-4 días, 300-450€).' } },
-            { '@type': 'Question', name: '¿Qué reservas marinas permiten buceo en España?', acceptedAnswer: { '@type': 'Answer', text: 'Las 10 reservas españolas permiten buceo con permiso. Las más populares: Medas, Cabo de Palos, El Hierro, Columbretes, Cíes.' } },
-          ],
+          mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
         })}}
       />
     </>

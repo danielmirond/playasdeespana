@@ -39,6 +39,10 @@ export interface TopicConfig {
   /** Si se define (ej. "submarinismo", "surf"), muestra el widget de
    *  actividades de GetYourGuide de "{gygActivity} {provincia}". */
   gygActivity?: string
+  /** Oculta el «Top 6» y «Playas recomendadas». Para topics en los que
+   *  `score` no tiene datos detrás y la lista acabaría siendo el ranking
+   *  genérico de playas presentado como si fuera del topic (buceo). */
+  ocultarPlayas?: boolean
 }
 
 interface Props {
@@ -62,13 +66,13 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
 
   return (
     <>
-      <SchemaItemList
+      {!config.ocultarPlayas && <SchemaItemList
         name={`${config.tituloTopic} cerca de playas en ${provincia.nombre}`}
         description={`Playas con ${config.tituloTopic.toLowerCase()} cercanos en ${provincia.nombre}.`}
         url={url}
         beaches={destacadas.map(p => ({ slug: p.slug, nombre: p.nombre, municipio: p.municipio, provincia: p.provincia }))}
         locale="es"
-      />
+      />}
       <Nav />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
         <nav aria-label="Ruta de navegación" style={{ fontSize: '.75rem', color: 'var(--muted)', marginBottom: '1rem' }}>
@@ -92,7 +96,7 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
         </p>
 
         {/* Top 6 con hero foto — playas más relevantes para este topic */}
-        {(() => {
+        {!config.ocultarPlayas && (() => {
           const top6 = destacadas.filter(p => p.lat && p.lng).slice(0, 6)
           if (top6.length < 6) return null
           return (
@@ -113,7 +117,7 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
         })()}
 
         {/* Highlights */}
-        <div style={{
+        {config.highlights.length > 0 && <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
           gap: '.65rem', marginBottom: '2.5rem',
         }}>
@@ -127,10 +131,10 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
               <div style={{ fontSize: '.74rem', color: 'var(--muted)', marginTop: '.2rem', lineHeight: 1.5 }}>{h.desc}</div>
             </div>
           ))}
-        </div>
+        </div>}
 
         {/* Playas recomendadas */}
-        {destacadas.length > 0 && (
+        {!config.ocultarPlayas && destacadas.length > 0 && (
           <>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '1rem' }}>
               Playas recomendadas en {provincia.nombre}

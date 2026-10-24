@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import TopicProvinciaPage, { type TopicConfig } from '@/components/seo/TopicProvinciaPage'
+import Link from 'next/link'
 import { getProvinciasCosteras, getPlayasByProvinciaSlug } from '@/lib/provinciaTopicHelpers'
+import { getMunicipiosBuceo, MAX_CENTROS_POR_MUNICIPIO, type MunicipioBuceo } from '@/lib/buceo-resumen'
 
 export const maxDuration = 60
 export const revalidate = 86400
@@ -16,45 +18,84 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   const { provincia } = await params
   const data = await getPlayasByProvinciaSlug(provincia)
   if (!data) return {}
-  const title = `Buceo y centros de inmersión en ${data.provincia.nombre}`
+  const title = `Buceo en ${data.provincia.nombre}: centros y puntos de inmersión por municipio`
   return {
-    title: `${title} | Guía completa`,
-    description: `Mejores playas para bucear en ${data.provincia.nombre}, centros PADI/SSI, bautismos y reservas marinas. ${data.provincia.count} playas con datos actualizados.`,
+    title,
+    description: `Centros de buceo y puntos de inmersión en ${data.provincia.nombre}, municipio a municipio, con la playa que queda más cerca de cada uno.`,
     alternates: { canonical: `/buceo/${provincia}` },
     openGraph: { title, url: `${BASE}/buceo/${provincia}`, type: 'article' },
   }
 }
 
-const CONFIG: TopicConfig = {
-  slug: 'buceo',
-  gygActivity: 'submarinismo',
-  emoji: '🤿',
-  color: '#3d93b0',
-  tituloTopic: 'Centros de buceo',
-  intro: 'Centros de buceo y spots de inmersión cerca de las playas de {provincia}. Certificaciones PADI y SSI, bautismos desde 40€ y acceso a reservas marinas. En cada ficha de playa mostramos los centros más cercanos con contacto directo.',
-  score: p => (p.actividades?.buceo ? 3 : 0) + (p.actividades?.snorkel ? 1 : 0),
-  highlights: [
-    { icon: '🐠', label: 'Bautismos', desc: 'Primera inmersión desde 40€, sin experiencia' },
-    { icon: '📜', label: 'Certificación PADI/SSI', desc: 'Open Water desde 300€, 2-4 días' },
-    { icon: '🌊', label: 'Reservas marinas', desc: 'Inmersiones con permiso previo' },
-    { icon: '🔦', label: 'Nocturnas', desc: 'Especialidades y fototurismo submarino' },
-  ],
-  faqs: [
-    { q: '¿Dónde se puede bucear en {provincia}?', aProvincia: (p) => `En ${p} hay múltiples puntos de buceo conocidos. Los centros cercanos a las playas ofrecen tanto bautismos como inmersiones avanzadas. En cada ficha de playa mostramos los centros a 15 km o menos.` },
-    { q: '¿Cuánto cuesta un bautismo de buceo?', aGeneric: 'Entre 40€ y 80€ por persona. Incluye equipo completo, briefing e inmersión guiada de 30-45 min. En reservas marinas puede costar 10-20€ más.' },
-    { q: '¿Qué certificación es mejor, PADI o SSI?', aGeneric: 'Ambas son equivalentes y reconocidas internacionalmente. PADI tiene más centros en España (80%). SSI es un poco más barata y con material digital gratuito. Elige la del centro más cercano.' },
-    { q: '¿Cuándo es mejor bucear en {provincia}?', aGeneric: 'De junio a octubre para Mediterráneo (agua 20-26°C, visibilidad 15-25m). Canarias todo el año. Atlántico Norte (Galicia, Cantábrico) mejor en julio-septiembre.' },
-  ],
-  relacionados: [
-    { href: '/buceo', label: 'Buceo en España' },
-    { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas' },
-    { href: '/seguros-viaje', label: 'Seguros (deportes acuáticos)' },
-  ],
+// La config se monta con los datos de la provincia. Antes era fija y
+// prometía «bautismos desde 40 €», «Open Water desde 300 €», «PADI tiene
+// el 80 % de los centros» y «acceso a reservas marinas», todo sin fuente, y
+// ordenaba las playas por un campo que el dataset no trae.
+function config(provincia: string, municipios: MunicipioBuceo[]): TopicConfig {
+  const centros = municipios.reduce((n, m) => n + m.centros, 0)
+  const puntos = municipios.reduce((n, m) => n + m.puntos, 0)
+  return {
+    slug: 'buceo',
+    gygActivity: 'submarinismo',
+    emoji: '🤿',
+    color: '#3d93b0',
+    tituloTopic: 'Centros de buceo',
+    ocultarPlayas: true,
+    intro: municipios.length
+      ? `En ${provincia} tenemos localizados ${centros} ${centros === 1 ? 'centro' : 'centros'} de buceo en ${municipios.length} ${municipios.length === 1 ? 'municipio' : 'municipios'} (contamos hasta ${MAX_CENTROS_POR_MUNICIPIO} por municipio)${puntos ? ` y ${puntos} ${puntos === 1 ? 'punto' : 'puntos'} de inmersión señalados en OpenStreetMap` : ''}. Los municipios enlazados tienen su página de snorkel y buceo, con los centros, la playa que les queda más cerca y la vida marina registrada en su litoral.`
+      : `Todavía no tenemos centros de buceo localizados en ${provincia}.`,
+    highlights: [],
+    faqs: [
+      {
+        q: '¿Dónde se puede bucear en {provincia}?',
+        aProvincia: (p) => municipios.length
+          ? `Tenemos centros localizados en ${municipios.length} ${municipios.length === 1 ? 'municipio' : 'municipios'} de ${p}, entre ellos ${municipios.slice(0, 3).map(m => m.nombre).join(', ')}. En la página de snorkel y buceo de cada municipio están los centros y, cuando OpenStreetMap los tiene, los puntos de inmersión.`
+          : `En ${p} todavía no tenemos centros de buceo localizados.`,
+      },
+      {
+        q: '¿De dónde salen los centros de buceo?',
+        aGeneric: `De Google Maps, consultado una vez por municipio costero y con un máximo de ${MAX_CENTROS_POR_MUNICIPIO} por municipio. Los puntos de inmersión salen de OpenStreetMap. No pagamos ni cobramos por aparecer en la lista.`,
+      },
+    ],
+    relacionados: [
+      { href: '/buceo', label: 'Buceo en España' },
+      { href: '/playas-aguas-cristalinas', label: 'Aguas cristalinas' },
+      { href: '/seguros-viaje', label: 'Seguros (deportes acuáticos)' },
+    ],
+    extraSections: () => municipios.length ? (
+      <section aria-labelledby="h2-muni-buceo" style={{ marginBottom: '2.5rem' }}>
+        <h2 id="h2-muni-buceo" style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--ink)', marginBottom: '1rem' }}>
+          Buceo por municipio en {provincia}
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '.5rem' }}>
+          {municipios.map(m => {
+            const texto = (
+              <>
+                <span style={{ fontWeight: 700, fontSize: '.9rem', color: 'var(--ink)' }}>{m.nombre}</span>
+                <span style={{ fontSize: '.74rem', color: 'var(--muted)' }}>
+                  {m.centros > 0 && <>{m.centros} {m.centros === 1 ? 'centro' : 'centros'}</>}
+                  {m.centros > 0 && m.puntos > 0 && ' · '}
+                  {m.puntos > 0 && <>{m.puntos} {m.puntos === 1 ? 'punto' : 'puntos'} de inmersión</>}
+                </span>
+              </>
+            )
+            const caja = { display: 'flex', flexDirection: 'column' as const, gap: '.15rem', padding: '.8rem 1rem', borderRadius: 6, background: 'var(--card-bg)', border: '1px solid var(--line)', textDecoration: 'none', color: 'inherit' }
+            return m.conPagina
+              ? <Link key={m.slug} href={`/municipio/${m.slug}/snorkel-buceo`} prefetch={false} style={caja}>{texto}</Link>
+              : <div key={m.slug} style={caja}>{texto}</div>
+          })}
+        </div>
+      </section>
+    ) : null,
+  }
 }
 
 export default async function Page({ params }: { params: Promise<{ provincia: string }> }) {
   const { provincia } = await params
   const data = await getPlayasByProvinciaSlug(provincia)
   if (!data) notFound()
-  return <TopicProvinciaPage config={CONFIG} provincia={data.provincia} playas={data.playas} />
+  const municipios = (await getMunicipiosBuceo())
+    .filter(m => m.provinciaSlug === data.provincia.slug)
+    .sort((a, b) => b.puntos - a.puntos || b.centros - a.centros || a.nombre.localeCompare(b.nombre, 'es'))
+  return <TopicProvinciaPage config={config(data.provincia.nombre, municipios)} provincia={data.provincia} playas={data.playas} />
 }
