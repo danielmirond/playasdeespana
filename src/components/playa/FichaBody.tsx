@@ -190,6 +190,8 @@ interface Props {
     fichaOficial?:  string | null
   }
   municipioSlug?:  string
+  /** Href a /municipio/x/snorkel-buceo, solo si esa página existe. */
+  vidaMarinaHref?: string | null
   /** Páginas del municipio, ya calculadas en el servidor (lib/enlaces-municipio). */
   delMunicipio?:   EnlaceMunicipio[]
   /** Slug de la provincia si la página existe. */
@@ -379,7 +381,7 @@ function Reorder({ order, quitar, children }: { order: string[]; quitar?: Readon
   return <>{sorted}</>
 }
 
-export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, serviciosOsm, perrosOsm, geo, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio }: Props) {
+export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad, restaurantes, fotos, hoteles, campings, centrosBuceo, escuelas, turbidez, forecastSurf, meteoForecast, dateModified, banderaPlaya, aemet, boya, certBandera = 'estimado', usoProhibido = false, vientoReportado, chiringuitos, serviciosOsm, perrosOsm, geo, medusas, mareasLunar, mareasOficiales, pesca, mareasSlug, horaIdeal, playasCercanas, opinionesIniciales, necesidades, videoData, webcams, locale = 'es', municipioSlug, provinciaSlug, hoyISO, delMunicipio, vidaMarinaHref }: Props) {
   const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   // Nombre para titulares: usa el alias castellano cuando exista
   // (Kontxa Hondartza \u2192 La Concha de San Sebasti\u00e1n, As Catedrais \u2192
@@ -1461,6 +1463,24 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
               />
             </div>
           </div>
+        )}
+
+        {/* Enlace a la página de buceo del municipio: ahí vive lo que en
+            la ficha no cabe —los puntos de inmersión, las especies
+            registradas y la vista aérea del litoral—.
+            Va FUERA de la tarjeta de centros de buceo. Estuvo dentro y se
+            perdía justo donde más falta hace: esa tarjeta solo se pinta si
+            hay centro cerca, así que Bolonia, con Tarifa y sus 146
+            especies a un clic, no enlazaba nada.
+            Solo aparece si la página existe (401 municipios de 584). */}
+        {vidaMarinaHref && (
+          <p key="vida-marina" style={{ margin: '0 0 1.2rem', fontSize: 'var(--fs-sm)' }}>
+            <a href={vidaMarinaHref} style={{ color: 'var(--accent)', fontWeight: 600 }}>
+              {locale === 'en'
+                ? `Diving, snorkelling and marine life in ${playa.municipio} →`
+                : `Snorkel, buceo y vida marina en ${playa.municipio} →`}
+            </a>
+          </p>
         )}
 
         {/* AD. entre hoteles y servicios */}

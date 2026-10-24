@@ -25,6 +25,7 @@ import { toSlug as slugMuni } from '@/lib/playas'
 import { getBoyaCercana } from '@/lib/boyas'
 import { getChiringuitosPlaya } from '@/lib/chiringuitos-playa'
 import { getCalidad } from '@/lib/calidad'
+import { tieneVidaMarina } from '@/lib/vida-marina'
 import { esIndexable, esExtranjera } from '@/lib/calidad-indexacion'
 import { getVotos } from '@/lib/votos'
 import { getReportes } from '@/lib/reportes'
@@ -439,6 +440,14 @@ export default async function PlayaPage({ params }: Props) {
   const provinciaSlug = playa.provincia ? toSlug(playa.provincia) : undefined
   const municipioSlugsSet = municipioSlugsSetRaw
   const municipioSlugProp = municipioSlugsSet.has(municipioSlug) ? municipioSlug : undefined
+
+  // La página de buceo del municipio existe en 401 de 584. Se comprueba
+  // con la misma función que decide si hay página, así que la ficha no
+  // enlaza a un 404. Con el slug CRUDO: esa página no depende de que el
+  // municipio tenga página propia de playas.
+  const vidaMarinaHref = (await tieneVidaMarina(municipioSlug))
+    ? `/municipio/${municipioSlug}/snorkel-buceo`
+    : null
   // Las páginas del municipio (qué hacer, el tiempo, mareas, barcos) con la
   // misma lista que ellas usan entre sí. Fuera de la carrera de plazos: solo
   // lee JSON ya cargado. Con el slug crudo, no con municipioSlugProp: la
@@ -1006,6 +1015,7 @@ export default async function PlayaPage({ params }: Props) {
         playasCercanas={playasCercanas}
         opinionesIniciales={opinionesData}
         municipioSlug={municipioSlugProp}
+        vidaMarinaHref={vidaMarinaHref}
         delMunicipio={delMunicipio}
         provinciaSlug={provinciaSlug}
         necesidades={necesidadesAsistente}
