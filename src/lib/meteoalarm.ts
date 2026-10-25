@@ -10,11 +10,27 @@
 // una petición por área). Meteoalarm ya centraliza; usar dos fuentes
 // para el mismo dato duplica esfuerzo y crea inconsistencias.
 //
-// COBERTURA. El feed indexa por región NUTS 2 (comunidad autónoma). No
-// hay resolución por municipio: si Málaga capital tiene aviso amarillo
-// por viento, el aviso aplica a toda «Andalucía» (ES61). En la página lo
-// mostramos con el nombre de la comunidad para que se entienda que es
-// regional.
+// ⚠ ESTO NO DEVUELVE NADA, Y NUNCA LO HA DEVUELTO. Comprobado contra el
+// feed en vivo el 25-10-2026, al intentar llevar los avisos a la ficha
+// de playa (todoplayas.com sí los muestra ahí). Dos motivos:
+//
+//  1. LA FORMA. El parser de abajo busca `awarenessLevel` en la raíz o en
+//     `properties`. El feed real es CAP: warnings[].alert.info[], y el
+//     nivel vive en info.parameter[] como
+//     {valueName:'awareness_level', value:'2; yellow; Moderate'}.
+//     `nivelDeCadena` recibe undefined y descarta TODOS los avisos.
+//
+//  2. LA REGIÓN. No indexa por NUTS 2 como dice el comentario original,
+//     sino por EMMA_ID: 233 zonas de aviso de AEMET («Estrecho»,
+//     «Litoral gaditano», «Ibiza y Formentera»), que no son comunidades
+//     ni provincias. El mapa NUTS de abajo no casa con ninguna.
+//     El área tampoco trae polígono, así que no se puede resolver por
+//     coordenadas.
+//
+// QUÉ HARÍA FALTA. Una tabla EMMA_ID → zona de nuestras playas, 233
+// entradas. Mientras no exista, esto se queda sin tocar y los avisos NO
+// se llevan a la ficha: enseñar el aviso de otra comarca es peor que no
+// enseñar ninguno, y aquí hablamos de temporales y de 38 grados.
 
 import { cache } from 'react'
 import { fetchWithTimeout } from './fetch-timeout'
@@ -41,6 +57,12 @@ const NUTS_COMUNIDAD: Record<string, string> = {
   'Aragón':             'ES24',
   'Asturias':           'ES12',
   'Baleares':           'ES53',
+  // El dataset de playas escribe «Islas Baleares», no «Baleares». Sin
+  // esta línea, las 1.100 playas baleares se quedaban sin avisos: con
+  // el feed devolviendo una alerta de precipitación en Ibiza y
+  // Formentera, la ficha no mostraba nada. Afectaba también a
+  // /municipio/x/el-tiempo.
+  'Islas Baleares':     'ES53',
   'Illes Balears':      'ES53',
   'Canarias':           'ES70',
   'Cantabria':          'ES13',
@@ -105,7 +127,17 @@ async function traer(comunidad: string): Promise<AvisoMeteo[]> {
         'User-Agent': 'playas-espana.com/1.0 avisos (contact: hola@playas-espana.com)',
         'Accept': 'application/json',
       },
-      next: { revalidate: 1800 },        // 30 min: sin la agilidad de un radar, pero suficiente para el uso
+      // 3.600 y no 1.800, desde que esto también alimenta la ficha de
+      // playa. Next fija el revalidate de la RUTA al menor de sus fetch,
+      // y con 1.800 la ficha entera volvía a caducar cada media hora:
+      // justo lo que se arregló al ver que casi toda visita pagaba un
+      // render en frío.
+      //
+      // No se pierde nada que importe. Un aviso de Meteoalarm se emite
+      // con horas de antelación y vale para una ventana de 12-24 h, que
+      // además se muestra entera en pantalla: el lector ve «de las 13:00
+      // a las 21:00», no una promesa de tiempo real.
+      next: { revalidate: 3600 },
     })
     if (!res.ok) return []
     const data = await res.json() as any
