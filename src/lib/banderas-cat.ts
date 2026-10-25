@@ -109,7 +109,16 @@ async function cargar(hoy: string): Promise<Record<string, FilaDia>> {
       })
     const res = await fetch(url, {
       signal: AbortSignal.timeout(4000),
-      next: { revalidate: 900 },
+      // 3.600 y no 900, y no es una preferencia de frescura.
+      //
+      // Next fija el revalidate de la RUTA al menor de todos sus fetch, y
+      // esta llamada arrastraba la ficha entera a 15 minutos. Con 4.337
+      // fichas eso significa que casi toda visita cae en una página
+      // caducada y paga el render: medido en producción, 2,3-3,0 s en las
+      // de cola larga contra 0,31 s del competidor, que sirve estático.
+      // La bandera no cambia cuatro veces por hora; la ficha ya promete
+      // actualización horaria y eso es lo que ahora cuesta.
+      next: { revalidate: 3600 },
     })
     if (!res.ok) return {}
     const rows: Array<Record<string, string>> = await res.json()

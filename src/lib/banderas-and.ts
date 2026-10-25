@@ -108,7 +108,7 @@ async function cargar(hoy: string): Promise<Record<number, FilaAnd>> {
         item_number: -1, page_size: -1,
         filters: { 'resource_type.code': ['TIPRECPLAYA'] },
       }),
-      next: { revalidate: 900 },
+      next: { revalidate: 3600 },
     })
     if (!res.ok) return {}
     const { list } = await res.json() as { list?: Array<Record<string, { code?: string } | number>> }

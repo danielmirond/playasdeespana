@@ -146,9 +146,15 @@ async function cargarMareas(ubi: UbicacionMarea, lat: number, lng: number): Prom
     // Ver `meteo.ts`: KV se reserva para POST y snapshots compartidos.
     return await (async () => {
       const cab = { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' }
+      // Una hora, no media. Next fija el revalidate de la RUTA al menor de
+      // sus fetch, y estos dos mantenían la ficha entera en 30 minutos:
+      // con 4.337 fichas, casi toda visita cae en una caducada y paga el
+      // render (2,3-3,0 s medidos en producción). La pleamar y la bajamar
+      // son predicción astronómica —no cambian en media hora— y el nivel
+      // observado va con la frescura que la ficha promete, que es horaria.
       const [r1, r2] = await Promise.all([
-        fetch(`${API}/SEA_LEVEL_PLEABAJA/${ubi.id}?locale=es&cero=0`, { headers: cab, signal: AbortSignal.timeout(6000), next: { revalidate: 1800 } }),
-        fetch(`${API}/SEA_LEVEL/${ubi.id}?locale=es`, { headers: cab, signal: AbortSignal.timeout(6000), next: { revalidate: 1800 } }),
+        fetch(`${API}/SEA_LEVEL_PLEABAJA/${ubi.id}?locale=es&cero=0`, { headers: cab, signal: AbortSignal.timeout(6000), next: { revalidate: 3600 } }),
+        fetch(`${API}/SEA_LEVEL/${ubi.id}?locale=es`, { headers: cab, signal: AbortSignal.timeout(6000), next: { revalidate: 3600 } }),
       ])
       if (!r1.ok) return null
       type Fila = { fecha: string; datos: Array<{ nombreParametro: string; valor: string }> }

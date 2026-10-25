@@ -72,7 +72,7 @@ async function cargar(hoy: string) {
         'Accept': 'application/json',   // obligatorio: sin esto devuelve HTML
         'User-Agent': 'playas-espana.com (+https://playas-espana.com)',
       },
-      next: { revalidate: 900 },
+      next: { revalidate: 3600 },
     })
     if (!res.ok) return {}
     const filas = await res.json() as Array<Record<string, unknown>>

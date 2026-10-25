@@ -87,7 +87,7 @@ async function cargar(muni: string, hoy: string): Promise<Record<string, FilaSb>
     const res = await fetch(`https://info.safebeach.es/${muni}`, {
       signal: AbortSignal.timeout(4000),
       headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' },
-      next: { revalidate: 900 },
+      next: { revalidate: 3600 },
     })
     if (!res.ok) return {}
     const html = await res.text()

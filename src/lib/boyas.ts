@@ -70,7 +70,7 @@ async function medicion(id: number): Promise<{ hm0: number | null; hmax: number 
           headers: { 'Content-Type': 'application/json' },
           body: '[13,17,34,38]',
           signal: AbortSignal.timeout(4000),
-          next: { revalidate: 900 },
+          next: { revalidate: 3600 },
         })
       if (!res.ok) return null
       const rows: FilaRT[] = await res.json()

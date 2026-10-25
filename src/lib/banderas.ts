@@ -98,8 +98,8 @@ export async function meteoBatch(coords: { lat: number; lng: number }[]): Promis
       // 8s: la página es ISR — la regeneración corre en background, así que
       // un timeout generoso no penaliza TTFB y evita caer a fallback en frío.
       const [rM, rF] = await Promise.all([
-        fetchWithTimeout(`https://marine-api.open-meteo.com/v1/marine?latitude=${lats}&longitude=${lngs}&hourly=wave_height,sea_surface_temperature&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 1800 } }, 8000),
-        fetchWithTimeout(`https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 1800 } }, 8000),
+        fetchWithTimeout(`https://marine-api.open-meteo.com/v1/marine?latitude=${lats}&longitude=${lngs}&hourly=wave_height,sea_surface_temperature&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 3600 } }, 8000),
+        fetchWithTimeout(`https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=kmh&forecast_days=1&timezone=Europe%2FMadrid`, { next: { revalidate: 3600 } }, 8000),
       ])
       const marine = rM.ok ? await rM.json() : null
       const meteo  = rF.ok ? await rF.json() : null

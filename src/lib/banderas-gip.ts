@@ -92,7 +92,7 @@ async function cargar(hoy: string): Promise<Record<string, FilaGip>> {
     const res = await fetch(URL_FEED, {
       signal: AbortSignal.timeout(4000),
       headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' },
-      next: { revalidate: 900 },
+      next: { revalidate: 3600 },
     })
     if (!res.ok) return {}
     const filas = await res.json() as Array<Record<string, unknown>>

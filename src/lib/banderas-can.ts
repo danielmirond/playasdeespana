@@ -97,7 +97,7 @@ async function cargar(hoy: string): Promise<Record<number, FilaFlag>> {
     const res = await fetch(`${API}/flags`, {
       signal: AbortSignal.timeout(4000),
       headers: { 'User-Agent': 'playas-espana.com (+https://playas-espana.com)' },
-      next: { revalidate: 900 },
+      next: { revalidate: 3600 },
     })
     if (!res.ok) return {}
     const { data } = await res.json() as { data?: Array<Record<string, unknown>> }
