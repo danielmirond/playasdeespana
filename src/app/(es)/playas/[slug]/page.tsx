@@ -288,7 +288,7 @@ export default async function PlayaPage({ params }: Props) {
     A(getRestaurantes(playa.lat, playa.lng)),
     A(getHoteles(playa.lat, playa.lng)),
     A(getCampings(playa.lat, playa.lng)),
-    A(getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })),
+    A(getCentrosBuceo(playa.lat, playa.lng, { municipioSlug: toSlug(playa.municipio), google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })),
     A(getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true })),
     // Video YouTube — cache KV 30d, llamada API solo en miss
     A(getVideoYouTube(playa.nombre, playa.municipio, slug)),
@@ -400,7 +400,7 @@ export default async function PlayaPage({ params }: Props) {
   if (needsWarmLista(restaurantes))   failed.push(['rest',   () => getRestaurantes(playa.lat, playa.lng)])
   if (needsWarmLista(hoteles))        failed.push(['hot',    () => getHoteles(playa.lat, playa.lng)])
   if (needsWarmLista(campingsResult)) failed.push(['camp',   () => getCampings(playa.lat, playa.lng)])
-  if (needsWarmLista(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng, { google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })])
+  if (needsWarmLista(buceoResult))    failed.push(['buc',    () => getCentrosBuceo(playa.lat, playa.lng, { municipioSlug: toSlug(playa.municipio), google: playa.actividades?.buceo === true || playa.actividades?.snorkel === true })])
   if (needsWarmLista(escuelasResult)) failed.push(['esc',    () => getEscuelas(playa.lat, playa.lng, 5000, { google: playa.actividades?.surf === true || playa.actividades?.windsurf === true || playa.actividades?.kite === true })])
   if (needsWarmLista(webcamResult))   failed.push(['webcam', () => getWebcams(playa.lat, playa.lng)])
   // Banderas oficiales: SOLO si esta playa está mapeada a la fuente.

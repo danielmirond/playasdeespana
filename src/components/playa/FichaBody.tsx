@@ -1443,7 +1443,15 @@ export default function FichaBody({ playa, meteo, solData, oleajeHoras, calidad,
                 <Fish size={16} weight="bold" style={{marginRight:'.35rem',verticalAlign:'middle',color:'#3d93b0'}}/>
                 {locale === 'en' ? <>Dive <em>centers</em></> : <>Centros de <em>buceo</em></>}
               </h2>
-              <span className={styles.cardSrc}>OpenStreetMap</span>
+              {/* La fuente la dice el dato, no una constante. Desde que
+                  esto lee el sidecar cosechado, la mayoría de centros
+                  vienen de Google y la tarjeta seguía rotulando
+                  OpenStreetMap, que es de donde salían los que había que
+                  quitar: calas y puntos de inmersión listados como si
+                  fueran escuelas. */}
+              <span className={styles.cardSrc}>
+                {clientBuceo[0]?.source === 'google' ? 'Google' : 'OpenStreetMap'}
+              </span>
             </div>
             <div className={styles.cardBody}>
               {/* variante plain: aquí solo hay nombre, tipo y distancia —

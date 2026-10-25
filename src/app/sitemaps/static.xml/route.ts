@@ -7,6 +7,7 @@
 
 import MAPA_MAREAS from '@/data/mareas-map.json'
 import { MUNICIPIOS_CON_BARCOS } from '@/lib/barcos-municipio'
+import vidaMarinaJson from '@/../public/data/vida-marina.json'
 import { NextResponse } from 'next/server'
 import {
   getComunidades, getProvincias, getMunicipios,
@@ -178,6 +179,14 @@ export async function GET() {
   // barcos, no la costa, y el refresco lo manda el script de cosecha.
   for (const m of MUNICIPIOS_CON_BARCOS) {
     urls.push(u(`/municipio/${m.municipio}/alquiler-de-barcos`, '0.6', 'weekly', today))
+  }
+
+  // Snorkel y buceo: los municipios donde OBIS da bastante vida marina
+  // para sostener la página (345 de 584). La lista sale del MISMO sidecar
+  // que decide si la página existe, así que el sitemap no puede anunciar
+  // un 404. `monthly`: la cosecha de especies no cambia a diario.
+  for (const slug of Object.keys(vidaMarinaJson as Record<string, unknown>)) {
+    urls.push(u(`/municipio/${slug}/snorkel-buceo`, '0.6', 'monthly', today))
   }
 
   // El tiempo en cada municipio con playa. Cambia cada hora (revalidate

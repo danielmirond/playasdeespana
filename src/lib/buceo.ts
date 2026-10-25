@@ -6,6 +6,7 @@ import { queryOverpass } from './overpass'
 import { kvCached } from './kv-cache'
 import { IS_BUILD } from './buildGuard'
 import { osmBuceo } from './osm-pois'
+import { getCentrosBuceo as sidecarCentros } from './buceo-places'
 import { placesText } from './google-places'
 
 const RADIUS_M = 15000 // 15 km: centros de buceo están más dispersos
@@ -69,8 +70,40 @@ function extraerServicios(tags: Record<string, string>): string[] {
 // TTL: centros de buceo abren/cierran lentamente. 7 días.
 const KV_TTL_BUCEO = 7 * 24 * 3600
 
-export async function getCentrosBuceo(lat: number, lon: number, opts: { google?: boolean } = {}): Promise<CentroBuceo[]> {
+export async function getCentrosBuceo(
+  lat: number,
+  lon: number,
+  opts: { google?: boolean; municipioSlug?: string } = {},
+): Promise<CentroBuceo[]> {
   if (IS_BUILD) return []
+
+  // PRIMERO el sidecar cosechado de Google Places: 915 centros en 306
+  // municipios, con nota, reseñas, teléfono y web, y sin pagar una
+  // llamada por visita.
+  //
+  // Antes esto caía al bucket de buceo de osm-pois, donde OSM mezcla la
+  // tienda con el sitio de inmersión: medido, 67 de sus 125 POIs no son
+  // escuelas. La ficha llegó a listar «Arco de Formentera», «Cala
+  // Galiota» y «Sites de plongée de Chicharvel» como centros de buceo.
+  if (opts.municipioSlug) {
+    const pre = await sidecarCentros(opts.municipioSlug)
+    if (pre.length) {
+      // Tope de distancia: el sidecar es POR MUNICIPIO y hay municipios
+      // enormes. Cala s'Espalmador cuelga de Palma y le salían centros a
+      // 41 km, que no es «cerca de esta playa» de ninguna manera.
+      const CERCA_M = 25000
+      return pre
+        .map((c): CentroBuceo => ({
+          id: c.id, nombre: c.n, tipo: 'Centro de buceo',
+          distancia_m: Math.round(haversine(lat, lon, c.la, c.lo)),
+          servicios: [], website: c.web, telefono: c.tel, email: null,
+          lat: c.la, lon: c.lo, source: 'google',
+          rating: c.nota ?? undefined, reseñas: c.resenas, googleId: c.id,
+        }))
+        .filter(c => c.distancia_m <= CERCA_M)
+        .sort((a, b) => a.distancia_m - b.distancia_m)
+    }
+  }
   // Google solo donde el dataset marca buceo/snorkel: ahí los centros y
   // salidas de inmersión son contenido; en el resto, ruido y presupuesto.
   const g = opts.google ? await placesText('centro de buceo inmersiones', lat, lon, RADIUS_M, 6) : null
