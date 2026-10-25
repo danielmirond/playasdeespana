@@ -250,6 +250,18 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
 }
 .heroPainted .verdictSub { color: var(--muted); }
 
+/* El porqué del número: un escalón por debajo de la frase del veredicto,
+   en la misma familia de las etiquetas de dato. */
+.verdictPor {
+  display: block;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  color: rgba(255, 255, 255, .78);
+  margin-top: .3rem;
+}
+.heroPainted .verdictPor { color: var(--muted); }
+
 /* ── Meta line ──────────────────────────────────────────────────── */
 .metaLine {
   display: flex; align-items: center; gap: 1rem;
@@ -549,3 +561,15 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
   .respuestas { margin-left: 0; width: 100%; }
   .respuestaBtn { flex: 1 1 0; justify-content: center; min-height: 40px; }
 }
+
+
+/* Sello de hora del dato. Discreto: es procedencia, no contenido. */
+.sello {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .7);
+  margin: .55rem 0 0;
+}
+.heroPainted .sello { color: var(--ink-mute, #8aa0ad); }

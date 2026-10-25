@@ -372,6 +372,16 @@ export default function FichaHero({
                     ? (locale === 'en' ? playaScore.labelEn : playaScore.label)
                     : (locale === 'en' ? estado.labelEn : estado.label)}
                   <span className={styles.verdictSub}>{frase}</span>
+                  {/* De qué sale el número. `reasons` ya se calculaba y no
+                      se enseñaba en ningún sitio salvo el comparador: el
+                      lector veía un 84 sin saber de dónde salía. Dos, no
+                      las cuatro: aquí manda el veredicto, el desglose
+                      completo está en la ficha. */}
+                  {playaScore && (
+                    <span className={styles.verdictPor}>
+                      {(locale === 'en' ? playaScore.reasonsEn : playaScore.reasons).slice(0, 2).join(' · ')}
+                    </span>
+                  )}
                 </span>
               </div>
             )}
@@ -441,6 +451,24 @@ export default function FichaHero({
                   { etiqueta: i18n.uv,     valor: meteo.uv ?? null,     unidad: '',     cert: certMeteo },
                 ]}
               />
+            )}
+
+            {/* La HORA del dato, no «hace X minutos».
+                La rejilla ya marca la antigüedad, pero solo cuando el dato
+                no es fresco AL RENDERIZAR, y la página se cachea una hora:
+                justo cuando envejece deja de avisar. Y un «hace 11 min»
+                congelado en el HTML miente según pasa el rato.
+                La hora absoluta es cierta se sirva cuando se sirva: el
+                valor que se enseña ES el de esa hora, porque así se indexa
+                la serie horaria de Open-Meteo (ver marine.ts). */}
+            {variante === 'litoral' && (meteo.agua != null || meteo.olas != null) && (
+              <p className={styles.sello}>
+                {locale === 'en' ? 'Sea and wind at' : 'Mar y viento de las'}{' '}
+                {new Intl.DateTimeFormat(locale === 'en' ? 'en-GB' : 'es-ES', {
+                  hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Madrid',
+                }).format(new Date(new Date().setMinutes(0, 0, 0)))}
+                {' · Open-Meteo'}
+              </p>
             )}
 
             <div className={styles.actions}>
