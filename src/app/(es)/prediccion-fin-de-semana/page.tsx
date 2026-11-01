@@ -162,7 +162,7 @@ export default async function PrediccionFinDeSemanaPage() {
                   {bestDay && (
                     <div style={{ textAlign: 'right', flexShrink: 0, marginLeft: '.5rem' }}>
                       <div style={{
-                        fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+                        fontFamily: 'var(--font-serif)', fontStyle: 'normal',
                         fontWeight: 400, fontSize: '.85rem',
                         color: bestScore >= 80 ? 'var(--excelente)' : bestScore >= 60 ? 'var(--muybueno)' : 'var(--aceptable)',
                       }}>

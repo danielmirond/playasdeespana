@@ -155,7 +155,7 @@ export default async function TopBeachCardsConHero({
                   <span style={{
                     position: 'absolute', top: 10, left: 10, zIndex: 2,
                     fontFamily: 'var(--font-serif)',
-                    fontSize: '1.35rem', fontStyle: 'italic',
+                    fontSize: '1.35rem', fontStyle: 'normal', fontWeight: 600,
                     color: 'var(--arena-50)',
                     textShadow: '0 1px 8px rgba(0,0,0,.5)',
                     lineHeight: 1, letterSpacing: '-.02em',

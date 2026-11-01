@@ -6,21 +6,27 @@
 // --font-playfair quedarían declarados en wrappers diferentes y la ficha
 // caería al fallback sin avisar. Eso es FOUT y CLS en la página que más
 // tráfico tiene, y el CLS de la ficha hoy es 0.
-import { Playfair_Display, DM_Sans, JetBrains_Mono, Literata, Schibsted_Grotesk } from 'next/font/google'
+import { Libre_Franklin, JetBrains_Mono, Literata, Schibsted_Grotesk } from 'next/font/google'
 
-const playfair = Playfair_Display({
+// ——— Sistema E3 (oct-2026) ———————————————————————————————————
+// Libre Franklin sustituye al par Playfair + DM Sans. Es un revival de
+// Franklin Gothic: grotesca institucional, de rótulo de organismo
+// público, que es la voz que pide un sitio que publica dato oficial.
+//
+// Sustituye a LAS DOS, no solo a la display: el sistema no tiene
+// segunda familia de texto, así que --font-serif y --font-sans apuntan
+// las dos aquí (ver CRITICAL_CSS en RootShell). Eso quita dos familias
+// del bundle en un sitio 90 % móvil.
+//
+// Lo que se pierde, y conviene saberlo: las cifras de score y medición
+// iban en serif a propósito —«voz de medio»— y ahora van en grotesca.
+// Y la cursiva deja de ser una segunda voz: donde antes había <em>, el
+// énfasis lo lleva el peso 600.
+const franklin = Libre_Franklin({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-franklin',
   display: 'swap',
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  display: 'swap',
-  weight: ['400', '500'],
+  weight: ['200', '400', '500', '600', '700'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -57,5 +63,5 @@ const schibsted = Schibsted_Grotesk({
 export function clasesDeFuente(tipoLitoral: boolean): string {
   return tipoLitoral
     ? `${literata.variable} ${schibsted.variable} ${jetbrainsMono.variable}`
-    : `${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`
+    : `${franklin.variable} ${jetbrainsMono.variable}`
 }

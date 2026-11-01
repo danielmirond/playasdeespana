@@ -176,7 +176,7 @@ export default function QuickChips({ slug, locale = 'es', inlineMode = false }: 
         marginTop: '.6rem',
         fontSize: '.7rem',
         color: 'var(--muted)',
-        fontStyle: 'italic',
+        fontStyle: 'normal', fontWeight: 600,
       }}>
         {es
           ? 'Sin registro · ayuda a quien venga después · activo 24 h'

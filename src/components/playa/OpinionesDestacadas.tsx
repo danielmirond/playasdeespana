@@ -63,7 +63,7 @@ export default function OpinionesDestacadas({ opiniones, locale = 'es' }: Props)
                     color: 'var(--muted)',
                     margin: 0,
                     lineHeight: 1.5,
-                    fontStyle: 'italic',
+                    fontStyle: 'normal', fontWeight: 600,
                   }}
                 >
                   "{op.texto}"

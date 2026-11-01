@@ -37,15 +37,20 @@
   letter-spacing: -.015em;
   display: flex; align-items: center; gap: .35rem;
 }
+/* De dónde sale el dato. Iba en cursiva serif para decir «esto es
+   apostilla»; con la grotesca eso ya no se lee, así que pasa al mono en
+   versalita, que es como el sistema marca etiqueta y procedencia. */
 .cardSrc {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: .72rem; color: var(--muted); opacity: .8;
+  font-family: var(--font-mono);
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
 }
 
-/* Accent italic emphasis inside section titles */
+/* Énfasis dentro del titular de sección. Con la grotesca la cursiva es
+   una inclinación, no otra voz: pesaba menos que el texto al que quería
+   dar relieve. El relieve lo lleva ahora el peso. */
 .cardTitle em {
-  font-style: italic; font-weight: 500;
+  font-style: normal; font-weight: 600;
   color: var(--accent);
 }
 .cardBody { padding: .2rem 1rem 1rem; }
@@ -290,7 +295,8 @@
 }
 .ftRow:last-child { border: none; }
 .ftK {
-  font-family: var(--font-serif); font-style: italic;
+  /* Clave de la tabla: redonda. La distingue el color, no la inclinación. */
+  font-family: var(--font-serif); font-style: normal;
   color: var(--muted); flex-shrink: 0;
 }
 .ftV { font-weight: 500; color: var(--ink); text-align: right; word-break: break-word; }
@@ -325,7 +331,7 @@
 }
 .aeFrase {
   position: relative; z-index: 1;
-  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-family: var(--font-serif); font-style: normal; font-weight: 400;
   font-size: .82rem; color: var(--muted);
   display: block; margin-bottom: .65rem; padding: 0 .75rem;
 }

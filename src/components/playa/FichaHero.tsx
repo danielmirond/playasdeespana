@@ -283,7 +283,7 @@ export default function FichaHero({
             {nombreOficial && locale === 'es' && (
               <p style={{
                 fontSize:     '.85rem',
-                fontStyle:    'italic',
+                fontStyle:    'normal', fontWeight: 600,
                 color:        'rgba(255,255,255,.85)',
                 marginTop:    '.15rem',
                 marginBottom: '.5rem',

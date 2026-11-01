@@ -83,7 +83,7 @@ export default function AuthorByline({
           margin:     '.25rem 0 1.25rem',
           flexWrap:   'wrap',
         }}>
-          <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
+          <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'normal', fontWeight: 600 }}>
             {locale === 'es' ? 'Por' : 'By'}
           </span>
           <Link

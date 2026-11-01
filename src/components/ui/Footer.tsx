@@ -37,7 +37,7 @@ export default function Footer({ locale = 'es' }: Props) {
           <div>
             <div style={{
               fontFamily: 'var(--font-serif)',
-              fontStyle: 'italic',
+              fontStyle: 'normal',
               fontSize: '1.15rem',
               fontWeight: 500,
               color: 'var(--ink)',

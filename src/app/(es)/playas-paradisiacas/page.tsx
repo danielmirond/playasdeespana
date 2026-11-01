@@ -203,7 +203,7 @@ export default async function PlayasParadisiacasPage() {
                       textDecoration: 'none', color: 'inherit',
                     }}>
                       <span style={{
-                        fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+                        fontFamily: 'var(--font-serif)', fontStyle: 'normal',
                         fontWeight: 400, fontSize: '1rem', color: 'var(--ink)',
                         letterSpacing: '-.01em', flexShrink: 0, width: 30,
                       }}>

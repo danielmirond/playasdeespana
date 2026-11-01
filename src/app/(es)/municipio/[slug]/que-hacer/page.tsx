@@ -297,7 +297,7 @@ export default async function QueHacerPage({ params }: Props) {
               {gTresDias.map((g, i) => (
                 <div key={i}>
                   <h3 style={{ margin: '0 0 .5rem', fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 700 }}>
-                    {g.titulo}{g.subtitulo && <span style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--muted)' }}> · {g.subtitulo}</span>}
+                    {g.titulo}{g.subtitulo && <span style={{ fontWeight: 400, fontStyle: 'normal', color: 'var(--muted)' }}> · {g.subtitulo}</span>}
                   </h3>
                   <ol className={mun.plan} style={{ listStyle: 'none', margin: 0 }}>
                     {g.paradas.map(p => <ParadaTarjeta key={`${p.hora}-${p.nombre}`} p={p} foto={fotoDeParada(p)} />)}

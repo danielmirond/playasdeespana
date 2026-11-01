@@ -189,7 +189,7 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es', var
         margin: '1rem 0 0',
         fontSize: '.7rem',
         color: 'var(--muted)',
-        fontStyle: 'italic',
+        fontStyle: 'normal', fontWeight: 600,
         lineHeight: 1.4,
       }}>
         {es

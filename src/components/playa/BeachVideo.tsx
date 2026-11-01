@@ -43,7 +43,7 @@ export default function BeachVideo({ video, nombre }: Props) {
           borderBottom: '1px solid var(--line)',
         }}
       >
-        Vídeo de <em style={{ fontStyle: 'italic', fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em>
+        Vídeo de <em style={{ fontStyle: 'normal', fontWeight: 500, color: 'var(--accent)' }}>{nombre}</em>
       </h2>
 
       <div
@@ -80,7 +80,7 @@ export default function BeachVideo({ video, nombre }: Props) {
           padding: '.55rem 1rem',
           fontSize: '.72rem',
           color: 'var(--muted)',
-          fontStyle: 'italic',
+          fontStyle: 'normal', fontWeight: 600,
         }}
       >
         Imágenes aéreas vía {video.channelTitle || 'YouTube'}

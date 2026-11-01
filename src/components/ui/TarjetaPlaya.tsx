@@ -76,7 +76,7 @@ export default function TarjetaPlaya({
         {rank !== undefined && (
           <span style={{
             position: 'absolute', top: 10, left: 10, zIndex: 2,
-            fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+            fontFamily: 'var(--font-serif)', fontStyle: 'normal', fontWeight: 600,
             fontSize: '1.35rem', color: 'var(--arena-50)',
             textShadow: '0 1px 8px rgba(0,0,0,.6)',
             lineHeight: 1, letterSpacing: '-.02em',
@@ -126,7 +126,7 @@ export default function TarjetaPlaya({
 
         {veredicto && (
           <div style={{
-            fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+            fontFamily: 'var(--font-serif)', fontStyle: 'normal', fontWeight: 600,
             fontSize: '.88rem', color: scoreColor, marginTop: '.35rem',
           }}>{veredicto}</div>
         )}

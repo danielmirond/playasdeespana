@@ -35,9 +35,9 @@ const CRITICAL_CSS = `
 /* Arena · superficies. Piel «Blanco y mar» (sep-2026): blanco y gris azulado; los nombres se conservan para no tocar los componentes. */
 --arena-50:#ffffff;--arena-100:#f8fbfc;--arena-200:#ffffff;--arena-300:#eef4f7;--arena-400:#d9eaf0;--arena-500:#a9cbd8;
 /* Tinta · texto */
---tinta-900:#081a29;--tinta-800:#0f2a3d;--tinta-700:#1c3a4f;--tinta-600:#2f4d62;--tinta-500:#4d6675;--tinta-400:#8aa0ad;
+--tinta-900:#081a29;--tinta-800:#0e3a56;--tinta-700:#1c3a4f;--tinta-600:#2f4d62;--tinta-500:#4d6675;--tinta-400:#8aa0ad;
 /* Acentos · marca */
---terra-900:#0f4b60;--terra-800:#1f6f8b;--terra-700:#2b7f9c;--terra-600:#3d93b0;--ocre-500:#c2711a;--ocre-400:#5fb0c8;--ocre-300:#8fcbdc;
+--terra-900:#0f4b60;--terra-800:#16628f;--terra-700:#2b7f9c;--terra-600:#3d93b0;--ocre-500:#c2711a;--ocre-400:#5fb0c8;--ocre-300:#8fcbdc;
 /* Mar. solo contexto marino */
 --mar-700:#1f6f8b;--mar-500:#3d93b0;--mar-300:#8fcbdc;
 /* Semánticos (puntuación) */
@@ -48,7 +48,7 @@ const CRITICAL_CSS = `
 --bg:var(--arena-200);--surface:var(--arena-50);--surface-2:var(--arena-100);
 --ink:var(--tinta-800);--ink-soft:var(--tinta-600);--muted:var(--tinta-500);
 --accent:var(--terra-800);--accent2:var(--ocre-400);
---line:rgba(15,42,61,.14);--line-strong:rgba(15,42,61,.28);
+--line:rgba(15,42,61,.20);--line-strong:rgba(15,42,61,.34);
 --card-bg:var(--surface);--metric-bg:var(--surface);--ring:var(--terra-700);
 /* Cuatro tokens que solo existían como fallback dentro de los componentes.
    Declararlos aquí es lo que permite quitarles el hex: sin esto, al
@@ -57,9 +57,14 @@ const CRITICAL_CSS = `
 /* Compat */
 --calma:var(--sea-calma);--buena:var(--sea-buena);--aviso:var(--sea-aviso);--peligro:var(--sea-peligro);--surf:var(--sea-surf);--viento:var(--sea-viento);
 /* Fonts */
---font-serif:var(--font-playfair,'Playfair Display',Georgia,serif);--font-sans:var(--font-dm-sans,'DM Sans',system-ui,sans-serif);--font-mono:var(--font-jetbrains,'JetBrains Mono',ui-monospace,monospace);
-/* Radii. editorial discreto */
---r-xs:2px;--r-sm:4px;--r-md:6px;--r-lg:10px;--r-xl:16px;--r-pill:999px;--r-sello:3px;
+--font-serif:var(--font-franklin,'Libre Franklin','Helvetica Neue',Arial,sans-serif);--font-sans:var(--font-franklin,'Libre Franklin','Helvetica Neue',Arial,sans-serif);--font-mono:var(--font-jetbrains,'JetBrains Mono',ui-monospace,monospace);
+/* Radii. Esquina viva (E3, oct-2026): el sistema no redondea nada.
+   Lo que separa un bloque de otro es la regla, el cambio de fondo a
+   sangre y el espacio, no el radio. Se conservan los nombres y la
+   escala para no tocar los componentes: volver atrás es devolver los
+   valores a esta línea. El pill pasa a 0 igual que el resto; una
+   cápsula es un radio como cualquier otro. */
+--r-xs:0;--r-sm:0;--r-md:0;--r-lg:0;--r-xl:0;--r-pill:0;--r-sello:0;
 /* Certeza del dato (propuesta de diseño 2026, §5.4). Cuatro grados de
    confianza y una ausencia. El color solo matiza: el peso lo lleva el
    TRAZO del subrayado, para que se lea en monocromo y sobre fotografía. */
@@ -92,6 +97,27 @@ const CRITICAL_CSS = `
 }
 /* Dark mode */
 [data-theme="dark"]{--arena-200:#0b1a26;--arena-300:#12283a;--bg:#081521;--surface:#0f2130;--surface-2:#15303f;--ink:#e8f1f5;--ink-soft:#c3d6e0;--muted:#8aa0ad;--accent:#5fb0c8;--accent2:#8fcbdc;--line:rgba(232,241,245,.14);--line-strong:rgba(232,241,245,.28);--card-bg:var(--surface);--metric-bg:var(--surface);--shadow-sm:0 1px 0 rgba(0,0,0,.4);--shadow-md:0 4px 12px rgba(0,0,0,.45);--shadow-lg:0 12px 32px rgba(0,0,0,.55)}
+/* Esquina viva · la regla que hace de verdad el cambio.
+   Medido antes de escribirla: de los ~786 radios del sitio, solo 15 usan
+   var(--r-*). 164 son literales en CSS y 607 van inline en TSX, así que
+   poner los tokens a cero no habría cambiado casi nada. Esto sí, en una
+   línea y reversible borrándola.
+   La excepción es para lo que debe ser redondo por función, no por
+   decoración: avatares, puntos de carga y cualquier cosa marcada a mano
+   con data-redondo.
+   Lleva !important porque 607 de esos radios van inline en el atributo
+   style, y un estilo inline gana a cualquier regla de hoja sin él: sin
+   !important quedaban 128 vivos solo en la ficha. En data-redondo la
+   regla no entra, así que ahí el inline sigue mandando. */
+*:not([data-redondo]):not([data-redondo] *){border-radius:0 !important}
+/* El <em> nace en cursiva por la hoja del navegador, así que los que no
+   declaran estilo propio seguían inclinados aunque los módulos ya no lo
+   pidan. En la grotesca eso no es una segunda voz, es una inclinación
+   que pesa menos que el texto al que quiere dar relieve: el relieve lo
+   lleva el peso. La cursiva se conserva donde SÍ significa algo —el
+   nombre científico de una especie, el título de una obra— marcándolo
+   con <i> o con lang, que es para lo que están. */
+em{font-style:normal;font-weight:600}
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;text-rendering:optimizeLegibility;font-feature-settings:"ss01","cv11"}
 a{text-decoration:none;color:inherit}

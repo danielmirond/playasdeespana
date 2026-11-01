@@ -54,7 +54,7 @@ export default function AsideAfiliacionCTA({ nombre, count, locale = 'es' }: Pro
         <span style={{
           display: 'block',
           fontFamily: 'var(--font-serif, Georgia, serif)',
-          fontStyle: 'italic',
+          fontStyle: 'normal',
           fontSize: '1rem',
           fontWeight: 400,
           color: 'var(--ink)',

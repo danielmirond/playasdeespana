@@ -232,9 +232,17 @@ html[data-flags~="media_foto_duotone"] .photoVineta {
 .heroPainted .scoreNum { color: var(--ink); }
 
 .verdictTxt {
-  font-family: var(--font-serif); font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.55rem, 3vw, 2.4rem);
+  /* Era cursiva serif: la frase del veredicto es la segunda voz del
+     hero. En grotesca esa voz la da el peso, no la inclinación. */
+  font-family: var(--font-serif); font-style: normal;
+  font-weight: 600;
+  /* Medio escalón menos que en cursiva: la redonda de 600 ocupa más
+     ancho que la cursiva de 400 que había antes. (El salto de línea
+     respecto al score no lo causa esto: el bloque es flex column y lo
+     mide su hijo más ancho, que es la línea de mono con el agua y el
+     UV. Cae debajo del número igual, y así se lee bien.) */
+  font-size: clamp(1.45rem, 2.8vw, 2.15rem);
+  letter-spacing: -.015em;
   line-height: 1.18;
   display: flex; flex-direction: column;
   color: var(--on-media);

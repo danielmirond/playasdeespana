@@ -148,7 +148,7 @@ export default function AfiliacionDrawer({ nombre, productos, slug: _slug, tipos
                   color: 'var(--accent)',
                   textDecoration: 'none',
                   fontFamily: 'var(--font-serif, Georgia, serif)',
-                  fontStyle: 'italic',
+                  fontStyle: 'normal', fontWeight: 600,
                   fontSize: '.95rem',
                 }}
               >

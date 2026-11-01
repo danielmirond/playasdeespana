@@ -71,7 +71,7 @@ export default function TextoSEO({ playa, locale = 'es' }: Props) {
         paddingTop: '1rem',
       }}>
         {ficha && (
-          <p style={{ margin: '0 0 .9rem', fontStyle: 'italic', color: 'var(--muted)', borderLeft: '3px solid var(--accent)', paddingLeft: '.85rem' }}>
+          <p style={{ margin: '0 0 .9rem', fontStyle: 'normal', fontWeight: 600, color: 'var(--muted)', borderLeft: '3px solid var(--accent)', paddingLeft: '.85rem' }}>
             {ficha}
             {playa.nombres_alt && (
               <span style={{ display: 'block', marginTop: '.35rem', fontSize: '.75rem', color: 'var(--muted)' }}>

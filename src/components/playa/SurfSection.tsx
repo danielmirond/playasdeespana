@@ -213,7 +213,7 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
                   <span>Clorofila: {turbidez.clorofila.toFixed(2)} mg/m³</span>
                 </div>
               </div>
-              <div style={{ fontSize:'.72rem', color: 'var(--muted)', fontStyle: 'italic' }}>Est.</div>
+              <div style={{ fontSize:'.72rem', color: 'var(--muted)', fontStyle: 'normal', fontWeight: 600 }}>Est.</div>
             </div>
           </div>
         )}
