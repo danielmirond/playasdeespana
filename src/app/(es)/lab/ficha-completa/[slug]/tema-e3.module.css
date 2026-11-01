@@ -1,0 +1,189 @@
+/*
+ * E3 aplicado a la ficha REAL, por encima y sin tocarla.
+ *
+ * La ficha son ~3.800 líneas y unos cuarenta bloques. Rehacerla desde el
+ * lienzo sería perderlos. Este fichero demuestra lo contrario: el sistema
+ * E3 son cuatro decisiones (color, esquina, letra, diagonal) y las cuatro
+ * caben en CSS, así que la ficha se REPINTA entera sin que se caiga un
+ * solo bloque ni una sola fuente de datos.
+ *
+ * Nada de lo que hay aquí vive en producción: es la prueba previa a
+ * cambiar los tokens de verdad en globals.css.
+ */
+
+.tema {
+  /* ── 1. Blanco y azul ───────────────────────────────────────────── */
+  --ink:       #0e3a56;
+  --muted:     #41708f;
+  --line:      rgba(20, 70, 100, .22);
+  --card-bg:   #ffffff;
+  --card-bg2:  #fbfdfe;
+  --metric-bg: #f5fafd;
+  --accent:    #16628f;
+  --accent2:   #2d5f7f;
+  --bg:        #ffffff;
+
+  /* ── 3. La grotesca sustituye a las dos familias de la hoja ─────── */
+  --font-serif: var(--font-franklin), 'Helvetica Neue', Arial, sans-serif;
+  --font-sans:  var(--font-franklin), 'Helvetica Neue', Arial, sans-serif;
+
+  background: #fff;
+  color: var(--ink);
+}
+
+/* ── 2. Sin esquina redonda ───────────────────────────────────────────
+   47 border-radius repartidos en seis módulos, más los inline. Aquí van
+   a cero de una vez para ver el resultado; en producción se borran en el
+   fichero de cada componente, que es donde deben desaparecer. */
+.tema :global(*) { border-radius: 0 !important; }
+
+/* Los títulos de tarjeta llevaban la cursiva de Playfair como énfasis.
+   En una grotesca la cursiva es una inclinación, no otra voz: pesa. */
+.tema :global(h1 em),
+.tema :global(h2 em),
+.tema :global(h3 em) { font-style: normal; font-weight: 600; }
+
+/* El h1 global fuerza Playfair por encima de la herencia. */
+.tema :global(h1),
+.tema :global(h2),
+.tema :global(h3) { font-family: var(--font-franklin), 'Helvetica Neue', Arial, sans-serif; }
+
+/* Cifras en columna: tabulares, que es para lo que están. */
+.tema :global(table),
+.tema :global([class*="metric"]),
+.tema :global([class*="dato"]) { font-variant-numeric: tabular-nums lining-nums; }
+
+/* ── 4. La diagonal, SOLO donde significa algo ─────────────────────────
+   Tres sitios, no cuarenta: la lámina del hero, la banda del índice y el
+   pie. Repartida por toda la página el recurso deja de decir nada y la
+   lectura marea. */
+.tema :global([class*="hero"]) > :global(figure),
+.tema :global([class*="Hero"]) > :global(figure) {
+  clip-path: polygon(0 26px, 100% 0, 100% calc(100% - 30px), 0 100%);
+}
+
+/* Filete inclinado entre secciones: el grabado del sistema. */
+.tema :global(hr) {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  transform: rotate(-.6deg);
+  transform-origin: left center;
+}
+
+.aviso {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: #0e3a56;
+  color: #fff;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  text-align: center;
+}
+
+/* ── 5. Una sola pauta para los 33 bloques ────────────────────────────
+ *
+ * Medido en esta misma página: 33 bloques con NUEVE firmas distintas de
+ * relleno (16/16, 16,8/20, 17,6/17,6, 18,4/20, 24/24…) y títulos a 14,4 /
+ * 16,8 / 17,6 / 18,4 / 22,4 px. Cada bloque se construyó en su momento y
+ * nadie volvió a mirarlos juntos. Eso es lo que se lee como desorden: no
+ * son los colores ni la diagonal, es que la caja cambia de medida al
+ * bajar.
+ *
+ * Aquí se iguala por fuera para verlo. En producción esto va en el módulo
+ * de cada componente, no en un override.
+ */
+
+/* La caja: mismo relleno, mismo fondo, misma regla arriba y abajo.
+ * SOLO hijos directos: [class*="card"] casa también con cardHead y
+ * cardTitle, y aplicarlo a todos dibujaba tres reglas seguidas por
+ * bloque. 58 coincidencias, 44 de ellas anidadas. */
+.tema :global(main) > :global([class*="card"]),
+.tema :global(main) > :global(section),
+.tema :global(main) > :global(article) {
+  padding: 18px 20px !important;
+  background: #fff !important;
+  border: 0 !important;
+  border-block: 1px solid var(--line) !important;
+  margin: 0 0 -1px 0 !important;  /* -1px: las reglas contiguas no se doblan */
+}
+
+/* La cabecera del bloque no es otra caja: no lleva ni regla ni relleno. */
+.tema :global([class*="cardHead"]) {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* El título: una sola medida, un solo peso, en una sola línea de bloque.
+ * Varios h2 llevan flex en su módulo y partían la frase en columnas. */
+.tema :global(main h2) {
+  display: block !important;
+  font-size: 17.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -.005em !important;
+  margin: 0 0 12px !important;
+  padding: 0 !important;
+  text-wrap: balance;
+}
+.tema :global(main h2) :global(em),
+.tema :global(main h2) :global(span) { display: inline !important; }
+
+/* El antetítulo en mono, que ya existía en algunos bloques, se iguala. */
+.tema :global(main) [class*="eyebrow"],
+.tema :global(main) [class*="kicker"] {
+  font-family: var(--font-jetbrains), ui-monospace, monospace !important;
+  font-size: 9px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+}
+
+/* ── 6. Los envoltorios sin caja propia ───────────────────────────────
+ *
+ * Siete bloques de primer nivel no son tarjetas: son <section>, <div>,
+ * <nav> o <a> sueltos que nunca declararon caja (descripción, webcam,
+ * aparcar, actividades acuáticas, valorar, "para el día", "más de…").
+ * No tenían relleno ni regla, así que se pegaban al bloque anterior y
+ * el ritmo se rompía justo donde el lector baja. Entran en la pauta
+ * como cualquier otro. */
+.tema :global(main) > :global(div),
+.tema :global(main) > :global(nav),
+.tema :global(main) > :global(p),
+.tema :global(main) > :global(details),
+.tema :global(main) > :global(a) {
+  padding: 18px 20px !important;
+  background: #fff !important;
+  border: 0 !important;
+  border-block: 1px solid var(--line) !important;
+  margin: 0 0 -1px 0 !important;
+  display: block !important;
+}
+
+/* ── 7. Lo comercial se ve, pero no grita ─────────────────────────────
+ *
+ * Tres bloques vienen de fuera con su propia maquetación: GetYourGuide,
+ * alquiler de barco y el bloque de explorar. Traían fondo azul corporativo
+ * a sangre, que en una hoja blanca y azul se lee como "aquí pasa algo
+ * importante" cuando lo que pasa es que es un anuncio.
+ *
+ * El criterio: MISMA caja que el resto —nada de destacarlos con color—
+ * y una pauta vertical de 3 px en el margen que dice que son otra cosa.
+ * Honesto en las dos direcciones: ni disfrazado de contenido propio ni
+ * gritando por encima del dato. */
+.tema :global(main) > :global(a) {
+  border-inline-start: 3px solid var(--accent) !important;
+  padding-left: 17px !important;
+  background: #fff !important;
+  color: var(--ink) !important;
+  text-decoration: none;
+}
+.tema :global(main) > :global(a) :global(*) {
+  background: transparent !important;
+  color: inherit !important;
+}

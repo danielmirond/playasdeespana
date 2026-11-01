@@ -1,0 +1,192 @@
+/*
+ * E3 · "todo en diagonal". Maqueta de laboratorio de la ficha.
+ *
+ * La costa no es horizontal: toda la hoja se construye sobre una
+ * inclinación de 4°, y el texto se contrarresta para quedar recto. Se
+ * inclina la caja, nunca la lectura. Ni un border-radius en todo el
+ * fichero: lo que separa es la regla, el corte y el cambio de fondo.
+ */
+
+.hoja {
+  --tinta:      #0e3a56;
+  --tinta-2:    #2d5f7f;
+  --rotulo:     #41708f;
+  --acento:     #16628f;
+  --banda:      #f5fafd;
+  --filete:     rgba(20, 70, 100, .24);
+  --filete-fino:rgba(20, 70, 100, .20);
+
+  background: #fff;
+  color: var(--tinta);
+  font-family: var(--font-franklin), 'Helvetica Neue', Arial, sans-serif;
+  max-width: 560px;
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+.cartela { padding: 64px 20px 10px; }  /* 64 arriba: despeja el botón flotante del nav */
+.hoja-num {
+  margin: 0;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--rotulo);
+}
+.titulo {
+  /* El h1 lleva Playfair desde la hoja global; aquí manda la grotesca. */
+  font-family: var(--font-franklin), 'Helvetica Neue', Arial, sans-serif;
+  margin: 8px 0 0;
+  font-size: clamp(27px, 7.6vw, 33px);
+  font-weight: 200;
+  line-height: 1.05;
+  letter-spacing: -.005em;
+  text-wrap: balance;
+}
+.titulo em { font-style: normal; font-weight: 600; }
+
+/* ── La lámina: la foto recortada en el rumbo de la costa ─────────── */
+.lamina {
+  margin: 12px 0 0;
+  position: relative;
+  aspect-ratio: 390 / 196;
+  clip-path: polygon(0 26px, 100% 0, 100% calc(100% - 30px), 0 100%);
+  background: #dbe8f0;
+}
+.lamina img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.trazo { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pieLamina {
+  position: absolute;
+  left: 0; right: 0; bottom: 30px;
+  margin: 0;
+  padding: 28px 20px 8px;
+  font-size: 11.5px;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(8, 34, 52, .72));
+}
+.credito { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; opacity: .85; }
+
+/* ── La banda inclinada: la caja se tuerce, la cifra no ───────────── */
+.banda { transform: skewY(-4deg); transform-origin: left top; }
+.banda > * { transform: skewY(4deg); }
+
+.indice {
+  background: var(--banda);
+  margin-top: -14px;
+  padding: 24px 20px 20px;
+}
+.indiceFila { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: end; }
+.indiceCifra {
+  font-size: 70px;
+  line-height: .78;
+  font-weight: 200;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.rotulo {
+  display: block;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--rotulo);
+}
+.indiceTexto { padding-bottom: 5px; }
+.indiceNivel { display: block; font-size: 15px; font-weight: 500; margin-top: 4px; }
+
+/* ── El agua entra en cuña bajo el texto ──────────────────────────── */
+.observaciones { padding: 22px 20px 0; }
+.cuna {
+  float: right;
+  width: 128px;
+  height: 150px;
+  shape-outside: polygon(100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  background:
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, .3) 0 1px, transparent 1px 9px),
+    linear-gradient(200deg, #22536a, #37809b);
+  margin: 0 0 8px 12px;
+}
+.entrada {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--tinta-2);
+  hanging-punctuation: first last;
+  text-wrap: pretty;
+}
+.entrada::first-letter {
+  float: left;
+  font-size: 44px;
+  line-height: .8;
+  padding: 4px 8px 0 0;
+  font-weight: 200;
+  color: var(--acento);
+}
+.limpia { clear: both; }
+
+.fileteDiag {
+  height: 1px;
+  background: var(--filete);
+  transform: rotate(-4deg);
+  transform-origin: left center;
+  margin: 22px 20px 0;
+}
+
+/* ── Las marcas: lo medido, numerado en romanos ───────────────────── */
+.marcasBloque { padding: 20px 20px 0; }
+.marcas { counter-reset: marca; list-style: none; margin: 10px 0 0; padding: 0; }
+.marcas li {
+  counter-increment: marca;
+  display: grid;
+  grid-template-columns: 26px 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  padding: 7px 0;
+}
+.marcas li::before {
+  content: counter(marca, upper-roman);
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  color: rgba(20, 70, 100, .55);
+  text-align: right;
+}
+.marcaTexto { font-size: 13.5px; line-height: 1.5; }
+.marcaDato {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 10.5px;
+  color: var(--acento);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ── El pie, inclinado al revés: cierra el corte que abre la lámina ─ */
+.pie {
+  margin-top: 28px;
+  background: var(--banda);
+  padding: 22px 20px 24px;
+  transform: skewY(4deg);
+}
+.pieDentro {
+  transform: skewY(-4deg);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.escala { width: 104px; height: 7px; border: 1px solid var(--tinta); background: repeating-linear-gradient(90deg, var(--tinta) 0 26px, transparent 26px 52px); }
+.escalaPie, .fuentes {
+  margin: 0;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 8.5px;
+  letter-spacing: .12em;
+  line-height: 1.8;
+  color: var(--rotulo);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.escalaPie { display: block; margin-top: 6px; }
+.fuentes { text-align: right; }
+
+@media (prefers-reduced-motion: reduce) { .hoja * { animation: none !important; transition: none !important; } }
