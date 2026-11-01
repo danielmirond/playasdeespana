@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // Configurar en .env: NEXT_PUBLIC_ADSENSE_ID=ca-pub-XXXXXXXXXX
 import { ADSENSE_ID, type FormatoAd } from '@/lib/adsense'
@@ -39,6 +39,13 @@ interface Props {
 export default function AdSlot({ slot, format = 'auto', responsive = true, style, etiqueta = 'Publicidad', alto }: Props) {
   const adRef = useRef<HTMLModElement>(null)
   const pushed = useRef(false)
+  // AdSense marca el <ins> con data-ad-status="unfilled" cuando no tiene
+  // anuncio que servir —sin consentimiento, sin inventario, o en local—.
+  // Hasta ahora el hueco seguía ahí: 250 a 600 px de blanco con la palabra
+  // «Publicidad» encima. Con fondo gris y esquina redonda pasaba por
+  // marcador; en una hoja blanca y sin radio se lee como un fallo de
+  // maquetación. Si no hay anuncio, no hay hueco.
+  const [vacio, setVacio] = useState(false)
 
   // El Multiplex (`autorelaxed`) NO lleva `full-width-responsive`: es una
   // rejilla que se dimensiona sola y el atributo sobra.
@@ -55,6 +62,24 @@ export default function AdSlot({ slot, format = 'auto', responsive = true, style
     } catch { /* el script no ha cargado o el consentimiento lo bloquea */ }
   }, [])
 
+  // El estado llega DESPUÉS del push, así que hay que observarlo en vez de
+  // leerlo una vez. Y si a los cinco segundos no ha llegado ninguno, es que
+  // el script no corrió: también se colapsa.
+  useEffect(() => {
+    const ins = adRef.current
+    if (!ins) return
+    const mira = () => {
+      if (ins.getAttribute('data-ad-status') === 'unfilled') setVacio(true)
+    }
+    mira()
+    const obs = new MutationObserver(mira)
+    obs.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] })
+    const t = setTimeout(() => {
+      if (!ins.getAttribute('data-ad-status')) setVacio(true)
+    }, 5000)
+    return () => { obs.disconnect(); clearTimeout(t) }
+  }, [])
+
   // Sin ID no se pinta NADA: ni caja, ni hueco reservado, ni la palabra
   // «Publicidad». Un espacio vacío rotulado como publicidad es la peor
   // versión de las dos cosas — ocupa como un anuncio y no es ninguno. Es la
@@ -65,7 +90,19 @@ export default function AdSlot({ slot, format = 'auto', responsive = true, style
   return (
     <aside
       aria-label={etiqueta}
-      style={{ textAlign: 'center', minHeight: alto ?? ALTURA[format] ?? 250, ...style }}
+      hidden={vacio}
+      style={{
+        textAlign: 'center',
+        // La altura se reserva mientras el anuncio puede llegar; en cuanto
+        // se sabe que no llega, el bloque desaparece entero. Reservar sigue
+        // siendo lo correcto para el CLS: el salto que importa es el que ve
+        // quien está leyendo, y colapsar un hueco que nunca se llenó ocurre
+        // antes de que nadie haya bajado hasta él.
+        minHeight: vacio ? 0 : (alto ?? ALTURA[format] ?? 250),
+        background: 'var(--metric-bg)',
+        padding: '12px 0',
+        ...style,
+      }}
     >
       {/* La etiqueta va SIEMPRE y va arriba. No es una formalidad legal: es
           la misma regla que el resto del sitio, cada dato dice de dónde

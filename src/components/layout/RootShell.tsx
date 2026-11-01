@@ -71,8 +71,14 @@ const CRITICAL_CSS = `
 --cert-medido:#1f6f8b;--cert-oficial:#2e7d4f;--cert-reportado:#9a5a12;--cert-estimado:#5a6f7c;--cert-sindato:#6b7a83;
 --cert-rule-medido:2px solid var(--cert-medido);--cert-rule-oficial:1.5px solid var(--cert-oficial);
 --cert-rule-reportado:1.5px dotted var(--cert-reportado);--cert-rule-estimado:1px dashed var(--cert-estimado);
---cert-bg-medido:rgba(31,111,139,.08);--cert-bg-oficial:rgba(46,125,79,.08);
---cert-bg-reportado:rgba(194,113,26,.10);--cert-bg-estimado:rgba(90,111,124,.07);
+/* Los fondos de certeza, a un solo tono neutro. El grado lo llevan el
+   TRAZO del subrayado y el color del texto, que es lo que el manual dice
+   y lo que funciona en monocromo; el fondo solo decía «aquí hay algo».
+   En ocre al 10 % ese «algo» era además el único color cálido de una
+   hoja blanca y azul, y se llevaba la mirada a lo estimado antes que a
+   lo medido. */
+--cert-bg-medido:rgba(20,70,100,.05);--cert-bg-oficial:rgba(20,70,100,.05);
+--cert-bg-reportado:rgba(20,70,100,.05);--cert-bg-estimado:rgba(20,70,100,.05);
 /* Cifra destacada: score y mediciones son voz de medio → serif */
 /* Escala de texto. Existía solo en Litoral, así que los componentes
    escribían el tamaño a mano y cambiar uno cambiaba los dos sistemas.
