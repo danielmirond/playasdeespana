@@ -6,7 +6,7 @@
 // --font-playfair quedarían declarados en wrappers diferentes y la ficha
 // caería al fallback sin avisar. Eso es FOUT y CLS en la página que más
 // tráfico tiene, y el CLS de la ficha hoy es 0.
-import { Libre_Franklin, JetBrains_Mono, Literata, Schibsted_Grotesk } from 'next/font/google'
+import { Libre_Franklin, JetBrains_Mono } from 'next/font/google'
 
 // ——— Sistema E3 (oct-2026) ———————————————————————————————————
 // Libre Franklin sustituye al par Playfair + DM Sans. Es un revival de
@@ -40,28 +40,26 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ['400'],
 })
 
-// ——— Sistema Litoral ———————————————————————————————————————
-// Literata es VARIABLE (200–900) con itálica real y cifras tabulares: se
-// sirve el archivo variable, no instancias estáticas, porque el sistema usa
-// 400 de cuerpo, 500 de display y 700 de énfasis. Sin rango variable harían
-// falta tres ficheros y la negrita sintética que el handoff prohíbe.
-const literata = Literata({
-  subsets: ['latin'],
-  variable: '--font-literata',
-  display: 'swap',
-  style: ['normal', 'italic'],
-  axes: ['opsz'],
-})
-const schibsted = Schibsted_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-schibsted',
-  display: 'swap',
-})
+// Literata y Schibsted Grotesk vivían aquí para el A/B tipográfico del
+// sistema Litoral. Cerrado el A/B a favor de Franklin, instanciarlas
+// seguiría emitiendo su @font-face en el build para una familia que no
+// pide nadie. Para reabrirlo: volver a declararlas con sus variables
+// --font-literata y --font-schibsted, devolver las dos familias a
+// TIPO_LITORAL_CSS en litoral.ts y ramificar de nuevo clasesDeFuente.
+// Literata es VARIABLE (200–900) con itálica real y cifras tabulares, y
+// se servía el archivo variable y no instancias estáticas: el sistema
+// usaba 400 de cuerpo, 500 de display y 700 de énfasis, y sin rango
+// variable hacen falta tres ficheros y la negrita sintética que el
+// handoff prohíbe.
 // JetBrains lo comparten las dos hojas vía --font-jetbrains.
 
 /** Las tres variables CSS que toca servir según el flag tipográfico. */
-export function clasesDeFuente(tipoLitoral: boolean): string {
-  return tipoLitoral
-    ? `${literata.variable} ${schibsted.variable} ${jetbrainsMono.variable}`
-    : `${franklin.variable} ${jetbrainsMono.variable}`
+export function clasesDeFuente(_tipoLitoral: boolean): string {
+  // Una sola familia para los dos sistemas desde que el A/B tipográfico
+  // se cerró a favor de Franklin. El parámetro se conserva —la llamada
+  // sigue existiendo y reabrir el A/B es volver a ramificar aquí— pero
+  // ya no decide nada: con el flag puesto, TIPO_LITORAL_CSS también pide
+  // --font-franklin, y servir Literata sin que nadie la use sería peso
+  // muerto en un sitio 90 % móvil.
+  return `${franklin.variable} ${jetbrainsMono.variable}`
 }

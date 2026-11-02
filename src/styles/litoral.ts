@@ -453,4 +453,15 @@ export const LITORAL_CSS_MIN = LITORAL_CSS
  * Va después de la hoja base sea cual sea, y gana por especificidad: un
  * atributo en <html> pesa más que :root.
  */
-export const TIPO_LITORAL_CSS = `[data-flags~="ds_litoral_type"]{--font-serif:var(--font-literata),Georgia,serif;--font-sans:var(--font-schibsted),system-ui,sans-serif}`
+/* El A/B tipográfico se cierra (nov-2026): el sistema E3 va en Libre
+ * Franklin, y la decisión es que la lleve todo el sitio.
+ *
+ * El bloque se queda apuntando a Franklin en vez de borrarse, y el flag
+ * con él: mientras ds_litoral_type siga puesto en algún entorno, lo que
+ * sirva tiene que ser la familia elegida y no Schibsted por inercia.
+ * Borrar el bloque dejaría al flag encendido sin efecto declarado y a
+ * Literata volviendo por el token base de la hoja.
+ *
+ * Para reabrir el A/B basta devolver aquí las dos familias y volver a
+ * instanciarlas en fonts.ts, de donde ya no se sirven. */
+export const TIPO_LITORAL_CSS = `[data-flags~="ds_litoral_type"]{--font-serif:var(--font-franklin),'Helvetica Neue',Arial,sans-serif;--font-sans:var(--font-franklin),'Helvetica Neue',Arial,sans-serif}`
