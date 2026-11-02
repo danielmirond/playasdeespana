@@ -29,6 +29,36 @@ import MobileNav from '@/components/ui/MobileNav'
 import Footer from '@/components/ui/Footer'
 import '@/app/globals.css'
 
+/* ── Reglas del sistema E3 que NO dependen de los tokens ──────────────
+ * Van aparte porque la página sirve UNA hoja de tokens u otra —Arena o
+ * Litoral, según el flag ds_litoral_tokens— y esto tiene que aplicarse
+ * con las dos. Escrito dentro de CRITICAL_CSS, producción no lo veía:
+ * sirve Litoral, y el cambio se quedó en la hoja que nadie usa.
+ */
+const E3_CSS = `
+/* Esquina viva · la regla que hace de verdad el cambio.
+   Medido antes de escribirla: de los ~786 radios del sitio, solo 15 usan
+   var(--r-*). 164 son literales en CSS y 607 van inline en TSX, así que
+   poner los tokens a cero no habría cambiado casi nada. Esto sí, en una
+   línea y reversible borrándola.
+   La excepción es para lo que debe ser redondo por función, no por
+   decoración: avatares, puntos de carga y cualquier cosa marcada a mano
+   con data-redondo.
+   Lleva !important porque 607 de esos radios van inline en el atributo
+   style, y un estilo inline gana a cualquier regla de hoja sin él: sin
+   !important quedaban 128 vivos solo en la ficha. En data-redondo la
+   regla no entra, así que ahí el inline sigue mandando. */
+*:not([data-redondo]):not([data-redondo] *){border-radius:0 !important}
+/* El <em> nace en cursiva por la hoja del navegador, así que los que no
+   declaran estilo propio seguían inclinados aunque los módulos ya no lo
+   pidan. En la grotesca eso no es una segunda voz, es una inclinación
+   que pesa menos que el texto al que quiere dar relieve: el relieve lo
+   lleva el peso. La cursiva se conserva donde SÍ significa algo —el
+   nombre científico de una especie, el título de una obra— marcándolo
+   con <i> o con lang, que es para lo que están. */
+em{font-style:normal;font-weight:600}
+`
+
 const CRITICAL_CSS = `
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -103,27 +133,7 @@ const CRITICAL_CSS = `
 }
 /* Dark mode */
 [data-theme="dark"]{--arena-200:#0b1a26;--arena-300:#12283a;--bg:#081521;--surface:#0f2130;--surface-2:#15303f;--ink:#e8f1f5;--ink-soft:#c3d6e0;--muted:#8aa0ad;--accent:#5fb0c8;--accent2:#8fcbdc;--line:rgba(232,241,245,.14);--line-strong:rgba(232,241,245,.28);--card-bg:var(--surface);--metric-bg:var(--surface);--shadow-sm:0 1px 0 rgba(0,0,0,.4);--shadow-md:0 4px 12px rgba(0,0,0,.45);--shadow-lg:0 12px 32px rgba(0,0,0,.55)}
-/* Esquina viva · la regla que hace de verdad el cambio.
-   Medido antes de escribirla: de los ~786 radios del sitio, solo 15 usan
-   var(--r-*). 164 son literales en CSS y 607 van inline en TSX, así que
-   poner los tokens a cero no habría cambiado casi nada. Esto sí, en una
-   línea y reversible borrándola.
-   La excepción es para lo que debe ser redondo por función, no por
-   decoración: avatares, puntos de carga y cualquier cosa marcada a mano
-   con data-redondo.
-   Lleva !important porque 607 de esos radios van inline en el atributo
-   style, y un estilo inline gana a cualquier regla de hoja sin él: sin
-   !important quedaban 128 vivos solo en la ficha. En data-redondo la
-   regla no entra, así que ahí el inline sigue mandando. */
-*:not([data-redondo]):not([data-redondo] *){border-radius:0 !important}
-/* El <em> nace en cursiva por la hoja del navegador, así que los que no
-   declaran estilo propio seguían inclinados aunque los módulos ya no lo
-   pidan. En la grotesca eso no es una segunda voz, es una inclinación
-   que pesa menos que el texto al que quiere dar relieve: el relieve lo
-   lleva el peso. La cursiva se conserva donde SÍ significa algo —el
-   nombre científico de una especie, el título de una obra— marcándolo
-   con <i> o con lang, que es para lo que están. */
-em{font-style:normal;font-weight:600}
+
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;text-rendering:optimizeLegibility;font-feature-settings:"ss01","cv11"}
 a{text-decoration:none;color:inherit}
@@ -188,6 +198,9 @@ export default function RootShell({ locale, children }: { locale: Idioma; childr
             Una hoja U OTRA, nunca las dos: Litoral sustituye a Arena, no se
             apila sobre ella. Solo existe un juego de tokens a la vez. */}
         <style dangerouslySetInnerHTML={{ __html: litoral ? LITORAL_CSS_MIN : CRITICAL_CSS }} />
+        {/* Detrás de la hoja de tokens, sea cual sea: el radio y la
+            cursiva no son tokens y valen para los dos sistemas. */}
+        <style dangerouslySetInnerHTML={{ __html: E3_CSS }} />
         {/* C2 va detrás de la hoja base, sea cual sea: así Literata puede
             medirse sola sobre Arena. Gana por especificidad: un atributo
             en <html> pesa más que :root. */}

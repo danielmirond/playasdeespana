@@ -28,7 +28,7 @@ export const LITORAL_CSS = `
      no por gusto: si --paper-1 se hunde y los demás no, la «hundida»
      acaba siendo más clara que el fondo y la escala se invierte. */
 
-  --ink-900: #0f2a3d;   /* casi negra y aún cálida.
+  --ink-900: #0e3a56;   /* casi negra y aún cálida.
        DESVIACIÓN DECLARADA: el manual dice 17,3:1 y esa cifra era cierta
        sobre el papel original (#f7f5f1). Sobre el fondo actual (#ede9e0,
        dos puntos más hundido por decisión de producto) da 15,6:1, medido.
@@ -62,7 +62,7 @@ export const LITORAL_CSS = `
      «interacción con color» contra «interacción en tinta» y no mete de
      paso un tono nuevo que nadie ha decidido. Ver el bloque
      [data-flags~="ds_sin_acento"] al final de la hoja. */
-  --accent:   #1f6f8b;
+  --accent:   #16628f;
   --accent-2: #2b7f9c;
 
   /* ——— El único material de color ———————————————————————
@@ -75,8 +75,8 @@ export const LITORAL_CSS = `
 
   /* ——— Filetes de un cabello ————————————————————————————
      La separación entre bloques debe intuirse, no verse. */
-  --rule:        rgba(15,42,61,.10);
-  --rule-strong: rgba(15,42,61,.22);
+  --rule:        rgba(15,42,61,.20);
+  --rule-strong: rgba(15,42,61,.34);
   --rule-hair:   rgba(15,42,61,.06);
 
   /* ——— Certeza del dato —————————————————————————————————
@@ -129,8 +129,11 @@ export const LITORAL_CSS = `
      El respaldo son las familias de Arena, por el mismo motivo que el
      acento: con los tokens encendidos y el tipo apagado hay que enseñar
      algo, y ese algo debe ser el sistema anterior: no una a medias. */
-  --font-serif: var(--font-playfair), Georgia, serif;
-  --font-sans:  var(--font-dm-sans), system-ui, sans-serif;
+  /* E3 (nov-2026): una sola familia, la grotesca. Playfair y DM Sans ya
+     no se instancian en fonts.ts, así que el respaldo de esta hoja sería
+     el fallback del sistema; aquí apunta a Franklin igual que Arena. */
+  --font-serif: var(--font-franklin), 'Helvetica Neue', Arial, sans-serif;
+  --font-sans:  var(--font-franklin), 'Helvetica Neue', Arial, sans-serif;
   --font-mono:  var(--font-jetbrains), ui-monospace, monospace;
 
   /* Literata en 400 tiene voz de cuerpo, no de titular. */
@@ -159,7 +162,8 @@ export const LITORAL_CSS = `
 
   /* ——— Geometría ————————————————————————————————————————
      La esquina blanda lee «app»; la casi recta lee «impreso». */
-  --r-xs: 2px; --r-sm: 3px; --r-md: 5px; --r-lg: 7px; --r-xl: 10px; --r-pill: 999px;
+  /* Esquina viva: ver la regla global de RootShell. */
+  --r-xs: 0; --r-sm: 0; --r-md: 0; --r-lg: 0; --r-xl: 0; --r-pill: 0;
   --r-sello: 3px;
 
   /* ——— Relieve de papel, no de plástico ——————————————————— */
