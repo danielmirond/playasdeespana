@@ -21,6 +21,7 @@ import { enlacesConversion } from '@/lib/enlaces-conversion'
 export type Vertical =
   | 'campings' | 'hoteles-playa' | 'buceo' | 'clases-surf'
   | 'chiringuitos' | 'alquiler-barco' | 'alquiler-autocaravana'
+  | 'yoga-playa'
 
 interface Props {
   vertical:  Vertical

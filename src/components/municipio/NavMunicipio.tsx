@@ -21,6 +21,8 @@ const ICONO: Record<ClaveMunicipio, string> = {
   dormir:   'M3 18v-6h18v6M3 18v2M21 18v2M3 12V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4M13 12V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4',
   chiringuitos: 'M12 3v18M4 11h16L12 3 4 11M7 21h10',
   autocaravana: 'M3 16V7a1 1 0 0 1 1-1h10l5 5v5M3 16h2m14 0h2M3 16h18M8 11h4V8H8zM7 16a2 2 0 1 0 4 0 2 2 0 0 0-4 0M15 16a2 2 0 1 0 4 0 2 2 0 0 0-4 0',
+  // Figura sentada: las piernas cruzadas y los brazos sobre las rodillas.
+  yoga:     'M12 4a1.6 1.6 0 1 0 0 3.2A1.6 1.6 0 0 0 12 4M12 8v5M12 13l-5 5h10l-5-5M7 13l5 2 5-2',
 }
 
 export default function NavMunicipio({ enlaces, actual }: { enlaces: EnlaceMunicipio[]; actual: ClaveMunicipio }) {

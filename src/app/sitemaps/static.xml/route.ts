@@ -23,6 +23,7 @@ import { boatRentalSlug } from '@/lib/boat-rental-helpers'
 import { getAllArticles, CATEGORIES } from '@/lib/magazine'
 import { TIPOS } from '@/lib/tiposQueLlevar'
 import { ZONAS } from '@/lib/banderas'
+import { getYogaPorMunicipio } from '@/lib/yoga-municipios'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -187,6 +188,13 @@ export async function GET() {
   // un 404. `monthly`: la cosecha de especies no cambia a diario.
   for (const slug of Object.keys(vidaMarinaJson as Record<string, unknown>)) {
     urls.push(u(`/municipio/${slug}/snorkel-buceo`, '0.6', 'monthly', today))
+  }
+
+  // Yoga y pilates por municipio: los 52 que llegan al umbral de tres
+  // estudios. Misma fuente que decide si la página existe, así que el
+  // sitemap no puede anunciar un 404.
+  for (const slug of (await getYogaPorMunicipio()).keys()) {
+    urls.push(u(`/municipio/${slug}/yoga`, '0.6', 'monthly', today))
   }
 
   // El tiempo en cada municipio con playa. Cambia cada hora (revalidate

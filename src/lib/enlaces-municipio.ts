@@ -17,11 +17,12 @@ import { tieneAparcamiento } from './aparcamiento-municipio'
 import { tieneAlojamientos } from './alojamiento-municipio'
 import { tieneAutocaravana } from './autocaravana-municipio'
 import { tieneChiringuitos } from './chiringuitos-municipio'
+import { getYogaMunicipio } from './yoga-municipios'
 import { tienePois } from './municipio-pois'
 import { tieneBarcos } from './barcos-municipio'
 import { tieneMareas, ubicacionMareas } from './mareas-portus'
 
-export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar' | 'dormir' | 'chiringuitos' | 'autocaravana' | 'snorkel'
+export type ClaveMunicipio = 'playas' | 'queHacer' | 'elTiempo' | 'mareas' | 'campings' | 'barcos' | 'aparcar' | 'dormir' | 'chiringuitos' | 'autocaravana' | 'snorkel' | 'yoga'
 
 /** La etiqueta corta de cada página, en un solo sitio.
  *
@@ -46,6 +47,7 @@ export const ETIQUETA_MUNICIPIO: Record<ClaveMunicipio, string> = {
   chiringuitos: 'Chiringuitos',
   autocaravana: 'Autocaravana',
   snorkel: 'Snorkel',
+  yoga: 'Yoga',
 }
 
 export interface EnlaceMunicipio {
@@ -105,6 +107,14 @@ export async function enlacesMunicipio(slug: string, nombre: string): Promise<En
   })
   // Solo donde OBIS da bastante: 118 municipios de 584. El resto no
   // tiene página, así que tampoco enlace — misma regla que los campings.
+  // Yoga y pilates: solo los 52 municipios que llegan al umbral de tres
+  // estudios. Misma regla que campings y snorkel — si no hay página, no
+  // hay enlace.
+  const yoga = await getYogaMunicipio(slug)
+  if (yoga) out.push({
+    clave: 'yoga', href: `/municipio/${slug}/yoga`,
+    texto: `Yoga y pilates en ${nombre}`, nota: `${yoga.estudios.length} estudios y la playa que les queda al lado`,
+  })
   if (await tieneVidaMarina(slug)) out.push({
     clave: 'snorkel', href: `/municipio/${slug}/snorkel-buceo`,
     texto: `Snorkel y buceo en ${nombre}`, nota: 'qué especies se han registrado en su litoral',
