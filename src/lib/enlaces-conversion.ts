@@ -18,6 +18,7 @@
 // generateStaticParams, así que un enlace roto aquí sería un fallo de
 // build, no un 404 en vivo.
 import chiringuitosData from '@/data/chiringuitos.json'
+import yogaData from '@/data/yoga-estudios.json'
 import { getProvinciasCosteras } from '@/lib/provinciaTopicHelpers'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { getCamperCities } from '@/lib/autocaravana-localities'
@@ -67,6 +68,13 @@ export async function enlacesConversion(
   out.push(slug && chiringuitos[slug] && provincia
     ? { href: `/chiringuitos/${slug}`, label: `Chiringuitos en ${provincia}`, local: true }
     : { href: '/chiringuitos', label: 'Chiringuitos de playa', local: false })
+
+  // Yoga y pilates: mismo patrón que chiringuitos —sidecar por provincia
+  // con locales reales—, así que mismo criterio. 24 provincias con datos.
+  const yoga = yogaData as Record<string, unknown>
+  out.push(slug && yoga[slug] && provincia
+    ? { href: `/yoga-playa/${slug}`, label: `Yoga y pilates en ${provincia}`, local: true }
+    : { href: '/yoga-playa', label: 'Yoga y pilates en la playa', local: false })
 
   // Barcos: la URL canónica es la jerárquica /costas/…/provincias/…, y
   // /alquiler-barco/[provincia] redirige a ella con un 308. Se enlaza la
