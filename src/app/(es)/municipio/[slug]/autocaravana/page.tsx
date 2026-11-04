@@ -37,6 +37,7 @@ import NavMunicipio from '@/components/municipio/NavMunicipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import mun from '@/components/municipio/Municipio.module.css'
 import SubirAProvincia from '@/components/seo/SubirAProvincia'
+import { camperCercana, anclaCamper } from '@/lib/camper-cercana'
 
 export const revalidate = 604800
 export const maxDuration = 30
@@ -272,7 +273,22 @@ export default async function AutocaravanaMunicipioPage({ params }: Props) {
         </p>
 
         <Hueco zona="cierre" bloque={SLOTS.cierre} />
-        <SubirAProvincia vertical="alquiler-autocaravana" provincia={municipio.provincia} municipio={municipio.nombre} />
+        {/* Dónde alquilar el vehículo. SubirAProvincia solo acierta
+            cuando el nombre coincide con una de las trece ciudades, que
+            es casi nunca: aquí va la más cercana de verdad, con los km
+            delante para que el lector decida. */}
+        {(() => {
+          const cc = playas.length ? camperCercana(playas[0].lat, playas[0].lng, municipio.nombre, municipio.provincia) : null
+          if (!cc) return <SubirAProvincia vertical="alquiler-autocaravana" provincia={municipio.provincia} municipio={municipio.nombre} />
+          return (
+            <p style={{ margin: '20px 0 0', padding: '14px 0', borderBlock: '1px solid var(--line)' }}>
+              <Link href={`/alquiler-autocaravana/${cc.slug}`} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 10, alignItems: 'baseline', minHeight: 44, fontSize: 15, textDecoration: 'none', color: 'var(--ink)' }}>
+                <span>{anclaCamper(cc, municipio.nombre)}</span>
+                <span aria-hidden style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent)' }}>→</span>
+              </Link>
+            </p>
+          )
+        })()}
         <DelMunicipio nombre={municipio.nombre} enlaces={enlaces} actual="autocaravana" />
       </main>
     </>
