@@ -36,6 +36,7 @@ import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import mun from '@/components/municipio/Municipio.module.css'
+import SubirAProvincia from '@/components/seo/SubirAProvincia'
 
 export const revalidate = 604800
 export const maxDuration = 30
@@ -271,6 +272,7 @@ export default async function AutocaravanaMunicipioPage({ params }: Props) {
         </p>
 
         <Hueco zona="cierre" bloque={SLOTS.cierre} />
+        <SubirAProvincia vertical="alquiler-autocaravana" provincia={municipio.provincia} municipio={municipio.nombre} />
         <DelMunicipio nombre={municipio.nombre} enlaces={enlaces} actual="autocaravana" />
       </main>
     </>

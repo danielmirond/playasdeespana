@@ -29,6 +29,7 @@ import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import mun from '@/components/municipio/Municipio.module.css'
+import SubirAProvincia from '@/components/seo/SubirAProvincia'
 
 export const revalidate = 604800
 export const maxDuration = 30
@@ -204,6 +205,7 @@ export default async function DondeDormirPage({ params }: Props) {
         </p>
 
         <Hueco zona="cierre" bloque={SLOTS.cierre} />
+        <SubirAProvincia vertical="hoteles-playa" provincia={municipio.provincia} municipio={municipio.nombre} />
         <DelMunicipio nombre={municipio.nombre} enlaces={enlaces} actual="dormir" />
       </main>
     </>

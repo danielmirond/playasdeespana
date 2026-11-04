@@ -36,6 +36,7 @@ import { getFotos } from '@/lib/fotos'
 import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
 import mun from '@/components/municipio/Municipio.module.css'
+import SubirAProvincia from '@/components/seo/SubirAProvincia'
 
 export const revalidate = 604800     // OBIS se cosecha, no cambia a diario
 export const maxDuration = 30
@@ -294,6 +295,7 @@ export default async function SnorkelBuceoPage({ params }: Props) {
           publican uno en español, la especie aparece solo con su nombre científico.
           {vida.total > vida.especies.length && <> Se listan las {vida.especies.length} con más registros de las {vida.total} encontradas.</>}
         </p>
+        <SubirAProvincia vertical="buceo" provincia={municipio.provincia} municipio={municipio.nombre} />
       </main>
     </>
   )

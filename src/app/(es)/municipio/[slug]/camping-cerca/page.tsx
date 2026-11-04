@@ -33,6 +33,7 @@ import NavMunicipio from '@/components/municipio/NavMunicipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import Pictograma from '@/components/municipio/Pictograma'
 import mun from '@/components/municipio/Municipio.module.css'
+import SubirAProvincia from '@/components/seo/SubirAProvincia'
 
 export const revalidate = 604800     // los campings cambian poco
 export const maxDuration = 30
@@ -197,6 +198,7 @@ export default async function CampingCercaPage({ params }: Props) {
         </section>
 
         <Hueco zona="cierre" bloque={SLOTS.cierre} />
+        <SubirAProvincia vertical="campings" provincia={municipio.provincia} municipio={municipio.nombre} />
         <DelMunicipio nombre={municipio.nombre} enlaces={enlaces} actual="campings" />
       </main>
     </>
