@@ -60,6 +60,7 @@ import Nav from '@/components/ui/Nav'
 import FichaHero from '@/components/playa/FichaHero'
 import FichaNav from '@/components/playa/FichaNav'
 import PildoraContextual from '@/components/playa/PildoraContextual'
+import ServiciosGeo from '@/components/seo/ServiciosGeo'
 import FichaBody from '@/components/playa/FichaBody'
 import SchemaPlaya from '@/components/playa/SchemaPlaya'
 import { generarFaqsPlaya } from '@/lib/faqsPlaya'
@@ -1061,6 +1062,10 @@ export default async function PlayaPage({ params }: Props) {
           el orden, detrás de «cómo llegar» y parking. Aquí quedaba al
           final del documento, tras las FAQ, y además fuera del sistema
           de orden, así que ninguna reordenación lo alcanzaba. */}
+      {/* Servicios de la PROVINCIA de esta playa, no del país. Las 221
+          landings provinciales no recibían ni un enlace interno y las
+          4.329 fichas apuntaban todas al mismo hub nacional. */}
+      <ServiciosGeo provincia={playa.provincia} municipio={playa.municipio} />
       {/* Arquitectura C de la propuesta 2026: un solo elemento fijo en
           móvil (64px) en lugar de nav + secciones + acciones (316px). */}
       <PildoraContextual lat={playa.lat} lng={playa.lng} nombre={playa.nombre} />

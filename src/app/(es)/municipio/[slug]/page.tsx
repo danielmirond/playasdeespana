@@ -22,6 +22,7 @@ import { tieneBarcos } from '@/lib/barcos-municipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
+import ServiciosGeo from '@/components/seo/ServiciosGeo'
 
 export const maxDuration = 60
 export const revalidate = 3600
@@ -289,6 +290,8 @@ export default async function MunicipioPage({ params }: Props) {
         <EnlacesGeoHubs nombre={municipio.nombre} />
       </div>
       <GygActivities query={`${municipio.nombre}, Spain`} cmp="municipio" />
+      {/* Servicios de la provincia de este municipio. */}
+      <ServiciosGeo provincia={municipio.provincia} municipio={municipio.nombre} />
     </>
   )
 }

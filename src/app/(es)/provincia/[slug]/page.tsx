@@ -19,6 +19,7 @@ import { canonicalDeProvincia } from '@/lib/geo-duplicadas'
 import GygActivities from '@/components/GygActivities'
 import { tinte } from '@/lib/tinte'
 import SeaIcon from '@/components/ui/SeaIcon'
+import ServiciosGeo from '@/components/seo/ServiciosGeo'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -334,6 +335,9 @@ export default async function ProvinciaPage({ params }: Props) {
       </div>
       <div style={{ padding: '0 1.5rem' }}>
         <EnlacesGeoHubs nombre={provincia.nombre} />
+        {/* Las landings de servicio DE esta provincia, que hasta ahora no
+            recibían ningún enlace interno desde ninguna parte. */}
+        <ServiciosGeo provincia={provincia.nombre} />
       </div>
       <GygActivities query={`${provincia.nombre}, Spain`} cmp="provincia" />
     </>
