@@ -219,7 +219,7 @@ export default function ProtectoresSolaresPage() {
                     style={{
                       display: 'inline-flex', alignItems: 'center', gap: '.4rem',
                       marginTop: '.6rem', padding: '.4rem .85rem',
-                      background: '#ff9900', color: '#111', borderRadius: 4,
+                      background: 'var(--comercial)', color: 'var(--on-comercial)',
                       fontSize: '.78rem', fontWeight: 700, textDecoration: 'none',
                     }}
                   >

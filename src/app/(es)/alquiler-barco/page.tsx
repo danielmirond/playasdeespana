@@ -87,7 +87,7 @@ export default function BoatRentalHubPage() {
         <NearContext />
         {/* Pilar "sin licencia": la intención transaccional más buscada del
             clúster; merece hueco arriba del listado de costas. */}
-        <Link href="/alquiler-barco/sin-licencia" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0f4b60,#2b7f9c)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none', marginBottom: '2rem' }}>
+        <Link href="/alquiler-barco/sin-licencia" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'var(--comercial)', color: 'var(--on-comercial)', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none', marginBottom: '2rem' }}>
           <span style={{ minWidth: 0 }}>
             <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontWeight: 800, fontSize: '1.05rem' }}>¿Sin título náutico? Puedes alquilar igualmente</span>
             <span style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.85)' }}>Qué barcos puedes llevar sin licencia, dónde y desde cuánto.</span>

@@ -71,7 +71,12 @@ const CRITICAL_CSS = `
 /* Mar. solo contexto marino */
 --mar-700:#1f6f8b;--mar-500:#3d93b0;--mar-300:#8fcbdc;
 /* Semánticos (puntuación) */
---excelente:#2e7d4f;--muybueno:#6a8f3a;--aceptable:#c2711a;--limitado:#b0522a;--noapto:#a63a2c;
+/* --aceptable estaba en #c2711a: 3,70 de contraste sobre papel, por
+   debajo del 4,5 que pide AA para texto. Sale en el kayak, en la
+   visibilidad subacuática y en la previsión, siempre como texto.
+   #9a5a12 es el mismo ocre un paso más oscuro —ya estaba declarado como
+   --cert-reportado— y sube a 5,1. */
+--excelente:#2e7d4f;--muybueno:#6a8f3a;--aceptable:#9a5a12;--limitado:#b0522a;--noapto:#a63a2c;
 /* Estados del mar */
 --sea-calma:#4f9a8a;--sea-buena:#2e7d4f;--sea-aviso:#c2711a;--sea-surf:#1f6f8b;--sea-viento:#6b7a83;--sea-peligro:#a63a2c;
 /* Aliases funcionales */
@@ -83,6 +88,18 @@ const CRITICAL_CSS = `
 /* Cuatro tokens que solo existían como fallback dentro de los componentes.
    Declararlos aquí es lo que permite quitarles el hex: sin esto, al
    limpiarlo la propiedad quedaría inválida y el navegador la ignoraría. */
+/* Lo COMERCIAL tiene relleno, no color propio.
+   Medido en la ficha: el botón de Amazon usaba var(--muybueno) y el de
+   GetYourGuide var(--excelente) —el verde de la clasificación de aguas
+   de la EEA—. Enseñamos al lector que ese verde significa «el agua está
+   excelente» y luego lo usábamos para venderle una excursión: eso no
+   hace el anuncio más visible, hace el dato menos creíble, que es lo
+   único que tenemos.
+   La regla: el COLOR dice qué es el dato, el RELLENO dice qué es
+   accionable. Verde, ocre y rojo son del dato y de nadie más; lo
+   comercial usa el azul del sistema en sólido, que es lo que ningún
+   dato hace nunca. Blanco sobre este azul da 6,61 de contraste. */
+--comercial:var(--terra-800);--on-comercial:#fff;
 --card-bg2:#f8fbfc;--accent-soft:#eef4f7;--on-accent:#fff;--on-media:#8fcbdc;--sello-accent:var(--terra-800);--sello-ink:var(--tinta-800);
 /* Compat */
 --calma:var(--sea-calma);--buena:var(--sea-buena);--aviso:var(--sea-aviso);--peligro:var(--sea-peligro);--surf:var(--sea-surf);--viento:var(--sea-viento);

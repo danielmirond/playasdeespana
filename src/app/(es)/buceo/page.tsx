@@ -209,7 +209,7 @@ export default async function BuceoPage() {
                   target="_blank" rel="noopener noreferrer sponsored"
                   style={{
                     display: 'inline-flex', padding: '.35rem .7rem',
-                    background: '#ff9900', color: '#111', borderRadius: 100,
+                    background: 'var(--comercial)', color: 'var(--on-comercial)',
                     fontSize: '.72rem', fontWeight: 700, textDecoration: 'none',
                   }}
                 >

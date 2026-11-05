@@ -285,10 +285,10 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
           <div style={{ padding: '0 1.1rem 1rem', display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
             {process.env.NEXT_PUBLIC_AMAZON_TAG && (
               <>
-                <AffPill href={`https://www.amazon.es/s?k=crema+solar+50+playa&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Crema solar SPF50" bg="#ff9900" />
-                <AffPill href={`https://www.amazon.es/s?k=neopreno+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Neoprenos" bg="var(--mar-500)" />
-                <AffPill href={`https://www.amazon.es/s?k=tabla+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Tablas de surf" bg="var(--mar-500)" />
-                <AffPill href={`https://www.amazon.es/s?k=kayak+hinchable&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Kayaks" bg="var(--excelente)" />
+                <AffPill href={`https://www.amazon.es/s?k=crema+solar+50+playa&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Crema solar SPF50" bg="var(--comercial)" />
+                <AffPill href={`https://www.amazon.es/s?k=neopreno+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Neoprenos" bg="var(--comercial)" />
+                <AffPill href={`https://www.amazon.es/s?k=tabla+surf&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Tablas de surf" bg="var(--comercial)" />
+                <AffPill href={`https://www.amazon.es/s?k=kayak+hinchable&tag=${process.env.NEXT_PUBLIC_AMAZON_TAG}`} label="Kayaks" bg="var(--comercial)" />
               </>
             )}
           </div>
@@ -298,14 +298,17 @@ export default function SurfSection({ playa, olas, viento, vientoDir, agua, peri
   )
 }
 
+/* Todas las píldoras en el mismo azul comercial. Llevaban el naranja de
+   Amazon, el azul del mar y hasta el verde de «agua excelente»: tres
+   colores para lo mismo, y uno de ellos robado al dato. */
 function AffPill({ href, label, bg }: { href: string; label: string; bg: string }) {
   return (
     <a
       href={href} target="_blank" rel="noopener noreferrer sponsored"
       style={{
         display: 'inline-flex', alignItems: 'center', gap: '.35rem',
-        padding: '.35rem .7rem', borderRadius: 100,
-        background: bg, color: '#fff',
+        padding: '.4rem .8rem',
+        background: bg, color: 'var(--on-comercial)',
         fontSize:'.75rem', fontWeight: 600, textDecoration: 'none',
       }}
     >

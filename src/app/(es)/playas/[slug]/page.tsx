@@ -1031,7 +1031,7 @@ export default async function PlayaPage({ params }: Props) {
           repetirse en cada superficie de monetización que quede fuera. */}
       {boatLink && !hayBanderaRoja(banderaPlaya) && (
         <aside aria-label="Alquiler de barcos" style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1.5rem 1.25rem' }}>
-          <Link href={boatLink.href} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg,#0f4b60,#2b7f9c)', color: '#fff', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none' }}>
+          <Link href={boatLink.href} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'var(--comercial)', color: 'var(--on-comercial)', borderRadius: 10, padding: '1rem 1.25rem', textDecoration: 'none' }}>
             <span style={{ minWidth: 0 }}>
               <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontWeight: 800, fontSize: '1.05rem' }}>Ver esta costa desde el mar <span aria-hidden="true">⚓</span></span>
               <span style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.85)' }}>Alquiler de barcos en {boatLink.label}: sin licencia, con licencia o con patrón.</span>
