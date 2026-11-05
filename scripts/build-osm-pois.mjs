@@ -26,8 +26,15 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const IN = process.argv[2]
-if (!IN) { console.error('Uso: node scripts/build-osm-pois.mjs <pois.geojsonl> [--dataset=…] [--out=…]'); process.exit(1) }
+// VARIOS extractos, no uno. Geofabrik publica Canarias bajo África y no
+// dentro de europe/spain-latest, así que generar este sidecar con un solo
+// fichero dejaba el archipiélago entero fuera: medido, 118.542 POIs y
+// CERO con coordenadas canarias. Las fichas de las playas de Canarias se
+// quedaban sin restaurantes, sin hoteles y sin campings, y nadie lo veía
+// porque el total seguía siendo enorme.
+//   node scripts/build-osm-pois.mjs /tmp/pois.geojsonl /tmp/can-pois.geojsonl
+const ENTRADAS = process.argv.slice(2).filter(a => !a.startsWith('--'))
+if (!ENTRADAS.length) { console.error('Uso: node scripts/build-osm-pois.mjs <pois.geojsonl> [mas.geojsonl …] [--dataset=…] [--out=…]'); process.exit(1) }
 // Parametrizado por el mismo motivo que enrich-playas-images.mjs: el
 // cruce POI↔playa no tiene nada de español, solo coordenadas. Portugal:
 //   --dataset=public/data/praias-portugal.json --out=public/data/osm-pois-pt.json
@@ -89,8 +96,10 @@ async function main() {
   const grid = new Map() // celda 0.05° → índices del pool
   const cell = (lat, lon) => `${Math.floor(lat / 0.05)}:${Math.floor(lon / 0.05)}`
 
-  const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity })
   let leidos = 0
+  for (const ENTRADA of ENTRADAS) {
+  const antes = pois.length
+  const rl = createInterface({ input: createReadStream(ENTRADA), crlfDelay: Infinity })
   for await (const line of rl) {
     if (!line.trim()) continue
     leidos++
@@ -118,6 +127,10 @@ async function main() {
     // registrar en su celda y las 8 vecinas no: solo la suya (buscamos con expansión)
     const key = cell(poi.la, poi.lo)
     ;(grid.get(key) ?? grid.set(key, []).get(key)).push(idx)
+  }
+  // Por fichero: un extracto que aporta cero es la señal de que falta un
+  // archipiélago, y en el total agregado no se ve.
+  console.log(`  ${ENTRADA.split('/').pop()}: ${pois.length - antes} POIs`)
   }
   console.log(`features leídas: ${leidos} · POIs útiles (con nombre): ${pois.length}`)
 
