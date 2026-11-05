@@ -20,7 +20,22 @@
 //   osmium export parkings.osm.pbf -f geojsonseq -o parkings.geojsonl \
 //     --geometry-types=point,polygon
 //
-//   node scripts/build-aparcamientos.mjs /tmp/parkings.geojsonl
+// CANARIAS VA APARTE, y por eso el script acepta VARIOS ficheros.
+// Geofabrik publica el archipiélago bajo África, no dentro de España, así
+// que `europe/spain-latest` no lo contiene. Medido en el sidecar que se
+// generó sin él: 22.173 aparcamientos en el pool, CERO con coordenadas
+// canarias, y la longitud mínima era -9,27 (Finisterre) cuando Canarias
+// empieza en -13,3. No era un filtro ni un radio: esos nodos nunca
+// llegaron al fichero, y 134 municipios con playa se quedaron sin página
+// de aparcamiento.
+//
+//   curl -L -o canarias.osm.pbf \
+//     https://download.geofabrik.de/africa/canary-islands-latest.osm.pbf
+//   osmium tags-filter canarias.osm.pbf nwr/amenity=parking -o can-park.osm.pbf
+//   osmium export can-park.osm.pbf -f geojsonseq -o canarias.geojsonl \
+//     --geometry-types=point,polygon
+//
+//   node scripts/build-aparcamientos.mjs /tmp/parkings.geojsonl /tmp/canarias.geojsonl
 //
 // Salida: public/data/aparcamientos.json
 //   { pool: [ap…], playas: { "lat:lng": [idx…] }, municipios: { slug: [idx…] } }
@@ -30,8 +45,14 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const IN = process.argv[2]
-if (!IN) { console.error('Uso: node scripts/build-aparcamientos.mjs <parkings.geojsonl>'); process.exit(1) }
+// Varios extractos, no uno: la Península y Canarias son dos ficheros
+// distintos en el origen. Se recorren en serie contra la MISMA rejilla,
+// así que el resultado es idéntico a haberlos concatenado.
+const ENTRADAS = process.argv.slice(2)
+if (!ENTRADAS.length) {
+  console.error('Uso: node scripts/build-aparcamientos.mjs <parkings.geojsonl> [canarias.geojsonl …]')
+  process.exit(1)
+}
 const OUT = resolve(ROOT, 'public/data/aparcamientos.json')
 
 const RADIO_PLAYA_M = 1200       // lo que se anda con la nevera a cuestas
@@ -119,7 +140,9 @@ const dePlaya = new Map()      // clave de playa → [{i, d}]
 const deMuni = new Map()       // slug del municipio → [{i, d}]
 let leidas = 0, utiles = 0
 
-const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity })
+for (const ENTRADA of ENTRADAS) {
+const antes = utiles
+const rl = createInterface({ input: createReadStream(ENTRADA), crlfDelay: Infinity })
 for await (const linea of rl) {
   if (!linea.trim()) continue
   leidas++
@@ -147,7 +170,10 @@ for await (const linea of rl) {
   }
   if (leidas % 200000 === 0) process.stderr.write(`\r  ${leidas} leídas · ${utiles} en zona`)
 }
-process.stderr.write('\n')
+// Por extracto, no solo el total: un fichero que aporta CERO es la señal
+// de que falta un archipiélago, y en el total agregado no se ve.
+process.stderr.write(`\r  ${ENTRADA.split('/').pop()}: ${utiles - antes} aparcamientos en zona\n`)
+}
 
 // ——— 3. Quedarse con los más cercanos y escribir ————————————————
 const recorta = (mapa, n) => Object.fromEntries([...mapa]
