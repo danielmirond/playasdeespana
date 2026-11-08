@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import { getProvinciasCosteras, getPlayasByProvinciaSlug } from '@/lib/provinciaTopicHelpers'
+import { getPlayasByProvinciaSlug } from '@/lib/provinciaTopicHelpers'
 import { getCampingsEnBbox, type CampingConPlaya } from '@/lib/campings'
 import PieLanding from '@/components/seo/PieLanding'
 import { toSlug } from '@/lib/playas'
@@ -34,9 +34,23 @@ export const maxDuration = 60
 export const revalidate = 3600
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
+// NO se prerenderiza ninguna en build, y es deliberado.
+//
+// Los campings salen de Overpass en runtime y el buildGuard corta la red
+// durante `next build`, así que una página prerenderizada aquí nace
+// VACÍA —«No se han encontrado campings»— y sigue vacía hasta que el
+// revalidate la caduque. Con el revalidate a una hora eso ya es mucho
+// mejor que los siete días que había, pero sigue significando que cada
+// despliegue deja estas páginas sin contenido durante la hora siguiente,
+// y se despliega varias veces al día.
+//
+// Devolviendo la lista vacía, la ruta se genera BAJO DEMANDA en la
+// primera visita —con red disponible y datos de verdad— y a partir de
+// ahí cachea una hora como cualquier otra. Son 24 páginas: el coste es
+// una primera carga más lenta por provincia y hora, a cambio de que
+// nunca se sirva una lista vacía. dynamicParams es true por defecto.
 export async function generateStaticParams() {
-  const provs = await getProvinciasCosteras()
-  return provs.slice(0, 5).map(p => ({ provincia: p.slug }))
+  return []
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ provincia: string }> }): Promise<Metadata> {
