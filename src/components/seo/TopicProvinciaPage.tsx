@@ -13,6 +13,8 @@ import SchemaItemList from '@/components/seo/SchemaItemList'
 import TopBeachCardsConHero from '@/components/seo/TopBeachCardsConHero'
 import GygActivities from '@/components/GygActivities'
 import type { Playa } from '@/types'
+import PieLanding from '@/components/seo/PieLanding'
+import { toSlug } from '@/lib/playas'
 
 export interface TopicConfig {
   /** Slug base del topic (campings, buceo, kitesurf, etc.) */
@@ -53,7 +55,7 @@ interface Props {
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
-export default function TopicProvinciaPage({ config, provincia, playas }: Props) {
+export default async function TopicProvinciaPage({ config, provincia, playas }: Props) {
   const url = `${BASE}/${config.slug}/${provincia.slug}`
 
   // Aplicar scoring si existe, priorizar bandera+parking+accesible
@@ -209,6 +211,17 @@ export default function TopicProvinciaPage({ config, provincia, playas }: Props)
             ))}
           </div>
         </section>
+
+        {/* El pie que convierte la landing en nodo de un clúster: sus
+            municipios, sus otras verticales y el breadcrumb. Hasta ahora
+            era un callejón sin salida. */}
+        <PieLanding
+          provincia={provincia.nombre}
+          provinciaSlug={provincia.slug}
+          vertical={config.slug}
+          etiqueta={config.tituloTopic}
+          municipios={[...new Map(playas.filter(p => p.municipio).map(p => [toSlug(p.municipio), { slug: toSlug(p.municipio), nombre: p.municipio }])).values()]}
+        />
       </main>
       {config.gygActivity && (
         <GygActivities query={`${config.gygActivity} ${provincia.nombre}`} cmp={`${config.slug}_provincia`} />

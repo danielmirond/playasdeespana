@@ -8,6 +8,8 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getProvinciasCosteras, getPlayasByProvinciaSlug } from '@/lib/provinciaTopicHelpers'
 import { getCampingsEnBbox, type CampingConPlaya } from '@/lib/campings'
+import PieLanding from '@/components/seo/PieLanding'
+import { toSlug } from '@/lib/playas'
 
 // Semanal: campings cambian poco (604800 = 86400 * 7).
 // Next.js requiere literal numérico estáticamente analizable, no una expresión.
@@ -180,6 +182,15 @@ export default async function Page({ params }: { params: Promise<{ provincia: st
             <Link href="/rutas" style={chipStyle}>Rutas por la costa</Link>
           </div>
         </section>
+        {/* Mismo pie que las demás landings: municipios, otras
+            verticales de la provincia y breadcrumb en JSON-LD. */}
+        <PieLanding
+          provincia={data.provincia.nombre}
+          provinciaSlug={provincia}
+          vertical="campings"
+          etiqueta="Campings"
+          municipios={[...new Map(data.playas.filter(p => p.municipio).map(p => [toSlug(p.municipio), { slug: toSlug(p.municipio), nombre: p.municipio }])).values()]}
+        />
       </main>
     </>
   )

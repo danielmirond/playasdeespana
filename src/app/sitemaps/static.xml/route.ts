@@ -24,6 +24,7 @@ import { getAllArticles, CATEGORIES } from '@/lib/magazine'
 import { TIPOS } from '@/lib/tiposQueLlevar'
 import { ZONAS } from '@/lib/banderas'
 import { getYogaPorMunicipio } from '@/lib/yoga-municipios'
+import { getProvinciasAparca } from '@/lib/aparcar-provincia'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -188,6 +189,13 @@ export async function GET() {
   // un 404. `monthly`: la cosecha de especies no cambia a diario.
   for (const slug of Object.keys(vidaMarinaJson as Record<string, unknown>)) {
     urls.push(u(`/municipio/${slug}/snorkel-buceo`, '0.6', 'monthly', today))
+  }
+
+  // Aparcar en la playa: el hub y las 22 provincias que pasan el umbral.
+  // Misma fuente que decide si la página existe.
+  urls.push(u('/aparcar-playa', '0.7', 'monthly', today))
+  for (const slug of (await getProvinciasAparca()).keys()) {
+    urls.push(u(`/aparcar-playa/${slug}`, '0.6', 'monthly', today))
   }
 
   // Yoga y pilates por municipio: los 52 que llegan al umbral de tres

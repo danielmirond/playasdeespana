@@ -20,6 +20,7 @@
 import chiringuitosData from '@/data/chiringuitos.json'
 import yogaData from '@/data/yoga-estudios.json'
 import { getProvinciasCosteras } from '@/lib/provinciaTopicHelpers'
+import { getProvinciasAparca } from '@/lib/aparcar-provincia'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { getCamperCities } from '@/lib/autocaravana-localities'
 import { toSlug } from '@/lib/playas'
@@ -68,6 +69,13 @@ export async function enlacesConversion(
   out.push(slug && chiringuitos[slug] && provincia
     ? { href: `/chiringuitos/${slug}`, label: `Chiringuitos en ${provincia}`, local: true }
     : { href: '/chiringuitos', label: 'Chiringuitos de playa', local: false })
+
+  // Aparcar: la vertical con más páginas de municipio y, hasta ahora, sin
+  // cabeza. Solo las 22 provincias que pasan el umbral.
+  const aparca = await getProvinciasAparca()
+  out.push(slug && aparca.has(slug) && provincia
+    ? { href: `/aparcar-playa/${slug}`, label: `Dónde aparcar en las playas de ${provincia}`, local: true }
+    : { href: '/aparcar-playa', label: 'Dónde aparcar en la playa', local: false })
 
   // Yoga y pilates: mismo patrón que chiringuitos —sidecar por provincia
   // con locales reales—, así que mismo criterio. 24 provincias con datos.

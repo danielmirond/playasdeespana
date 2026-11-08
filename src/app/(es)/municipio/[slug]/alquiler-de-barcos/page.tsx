@@ -37,6 +37,7 @@ import DelMunicipio from '@/components/ui/DelMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
 import styles from '../MunicipioPage.module.css'
+import SubirAProvincia from '@/components/seo/SubirAProvincia'
 
 export const revalidate = 86400
 export const maxDuration = 30
@@ -283,6 +284,13 @@ export default async function AlquilerBarcosMunicipio({ params }: Props) {
         </dl>
 
         <div style={{ marginBottom: '3rem' }}>
+          {/* La provincia no estaba a mano aquí —esta página trabaja con un
+              objeto de localidad propio— y por eso se quedó fuera cuando las
+              otras cinco subpáginas subieron a su landing. Sale de la primera
+              playa del municipio, que es la misma fuente que usa el resto. */}
+          {playas[0]?.provincia && (
+            <SubirAProvincia vertical="alquiler-barco" provincia={playas[0].provincia} municipio={sb.nombre} />
+          )}
           <DelMunicipio nombre={sb.nombre} enlaces={enlacesMuni} actual="barcos" />
         </div>
       </div>
