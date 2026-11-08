@@ -25,6 +25,7 @@ import { TIPOS } from '@/lib/tiposQueLlevar'
 import { ZONAS } from '@/lib/banderas'
 import { getYogaPorMunicipio } from '@/lib/yoga-municipios'
 import { getProvinciasAparca } from '@/lib/aparcar-provincia'
+import { getProvinciasPerros } from '@/lib/perros-provincia'
 
 export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
@@ -189,6 +190,12 @@ export async function GET() {
   // un 404. `monthly`: la cosecha de especies no cambia a diario.
   for (const slug of Object.keys(vidaMarinaJson as Record<string, unknown>)) {
     urls.push(u(`/municipio/${slug}/snorkel-buceo`, '0.6', 'monthly', today))
+  }
+
+  // Playas para perros por provincia: las 17 con dos o más. Las
+  // consultas son provinciales y solo había página nacional.
+  for (const slug of (await getProvinciasPerros()).keys()) {
+    urls.push(u(`/playas-perros/${slug}`, '0.6', 'monthly', today))
   }
 
   // Aparcar en la playa: el hub y las 22 provincias que pasan el umbral.

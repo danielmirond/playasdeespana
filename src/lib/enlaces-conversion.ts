@@ -21,6 +21,7 @@ import chiringuitosData from '@/data/chiringuitos.json'
 import yogaData from '@/data/yoga-estudios.json'
 import { getProvinciasCosteras } from '@/lib/provinciaTopicHelpers'
 import { getProvinciasAparca } from '@/lib/aparcar-provincia'
+import { getProvinciasPerros } from '@/lib/perros-provincia'
 import { getBoatLinkForPlaya } from '@/lib/boat-rental-helpers'
 import { getCamperCities } from '@/lib/autocaravana-localities'
 import { toSlug } from '@/lib/playas'
@@ -69,6 +70,12 @@ export async function enlacesConversion(
   out.push(slug && chiringuitos[slug] && provincia
     ? { href: `/chiringuitos/${slug}`, label: `Chiringuitos en ${provincia}`, local: true }
     : { href: '/chiringuitos', label: 'Chiringuitos de playa', local: false })
+
+  // Playas para perros: 17 provincias con dos o más.
+  const perros = await getProvinciasPerros()
+  out.push(slug && perros.has(slug) && provincia
+    ? { href: `/playas-perros/${slug}`, label: `Playas para perros en ${provincia}`, local: true }
+    : { href: '/playas-perros', label: 'Playas para perros', local: false })
 
   // Aparcar: la vertical con más páginas de municipio y, hasta ahora, sin
   // cabeza. Solo las 22 provincias que pasan el umbral.
