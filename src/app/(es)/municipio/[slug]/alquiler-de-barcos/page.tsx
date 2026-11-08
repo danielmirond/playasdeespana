@@ -55,11 +55,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const sb = datosSamboat(slug)
   if (!sb) return {}
+  const sinTitulacion = sb.licencia === 'opcional'
   return {
     // El título no lleva la cifra de barcos ni el precio: son lo que se va a
-    // comprobar dentro, y cambian cada vez que se refresca el JSON.
-    title: `Alquiler de barcos en ${sb.nombre}: dónde amarrar y a qué calas ir`,
-    description: `Puertos y clubes náuticos de ${sb.nombre}, calas con fondeo, playas a las que solo se llega por mar y el viento que hay que mirar antes de salir.`,
+    // comprobar dentro, y cambian cada vez que se refresca el JSON. Pero sí
+    // lleva «con o sin licencia», que es la primera duda de quien alquila
+    // por primera vez y no aparecía por ninguna parte: cero menciones en
+    // toda la página, con la posición 11-13 y ni un clic en 90 días.
+    title: `Alquiler de barcos en ${sb.nombre}${sinTitulacion ? ', con o sin licencia' : ' con patrón o con título'}`,
+    description: `${sb.barcos} barcos en ${sb.nombre}${sb.precioMin != null ? `, desde ${sb.precioMin} € al día` : ''}: ${sinTitulacion ? 'los hay sin titulación' : 'hace falta título'}${sb.conPatron > 0 ? ` y ${sb.conPatron} con patrón` : ''}. Dónde se amarra y a qué calas se llega solo por mar.`,
     alternates: { canonical: `https://playas-espana.com/municipio/${slug}/alquiler-de-barcos` },
   }
 }
@@ -173,6 +177,47 @@ export default async function AlquilerBarcosMunicipio({ params }: Props) {
             ? <>Hay barcos con y sin titulación</>
             : <>Toda la oferta de la zona pide titulación</>}
           {sb.conPatron > 0 && <>, y {sb.conPatron === 1 ? 'uno se alquila' : `${sb.conPatron} se alquilan`} con patrón</>}.
+        </p>
+
+        {/* QUÉ SE ALQUILA AQUÍ — lo primero, porque es lo que se busca.
+            Medido en Search Console a 90 días: estas páginas salen en
+            posición 11-13 para «alquiler barco nerja» y no reciben un
+            solo clic. El contenido no era flojo —1.500 palabras— pero
+            respondía a otra pregunta: los encabezados eran «de dónde se
+            sale», «a dónde ir», «el viento que decide el día». Una guía
+            náutica excelente para quien ya tiene barco.
+            Quien teclea «alquiler barco X» quiere saber cuánto cuesta,
+            qué puede llevar y si necesita título. Dos menciones de
+            precio y CERO de «sin licencia» en toda la página, teniendo
+            /alquiler-barco/sin-licencia publicada y sin enlace desde
+            aquí. El dato ya estaba en el sidecar: solo había que
+            ponerlo donde se lee primero. */}
+        <H2 id="que-se-alquila">Cuánto cuesta y qué hace falta</H2>
+        <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '.45rem 1rem', margin: '0 0 1rem', fontSize: '.95rem', maxWidth: 560 }}>
+          <dt style={{ color: 'var(--muted)' }}>Barcos en la zona</dt>
+          <dd style={{ margin: 0, fontVariantNumeric: 'tabular-nums' }}>{sb.barcos}</dd>
+          {sb.precioMin != null && <>
+            <dt style={{ color: 'var(--muted)' }}>Desde</dt>
+            <dd style={{ margin: 0, fontVariantNumeric: 'tabular-nums' }}>{sb.precioMin} € al día</dd>
+          </>}
+          <dt style={{ color: 'var(--muted)' }}>Sin licencia</dt>
+          <dd style={{ margin: 0 }}>
+            {sinLicencia
+              ? <>Sí, hay barcos que se alquilan sin titulación. <Link href="/alquiler-barco/sin-licencia" style={{ color: 'var(--accent)' }}>Qué se puede llevar sin título</Link></>
+              : <>No: en {sb.nombre} toda la oferta pide titulación. <Link href="/alquiler-barco/sin-licencia" style={{ color: 'var(--accent)' }}>Dónde sí se alquila sin título</Link></>}
+          </dd>
+          {sb.conPatron > 0 && <>
+            <dt style={{ color: 'var(--muted)' }}>Con patrón</dt>
+            <dd style={{ margin: 0 }}>{sb.conPatron} {sb.conPatron === 1 ? 'barco' : 'barcos'}, sin necesidad de título</dd>
+          </>}
+          {sb.tipos.length > 0 && <>
+            <dt style={{ color: 'var(--muted)' }}>Qué hay</dt>
+            <dd style={{ margin: 0 }}>{sb.tipos.join(' · ')}</dd>
+          </>}
+        </dl>
+        <p style={{ fontSize: '.8rem', color: 'var(--muted)', margin: '0 0 1.5rem' }}>
+          Oferta de SamBoat en la zona de {sb.nombre}, actualizada el {ACTUALIZADO_SAMBOAT}. Los precios
+          son el mínimo publicado y suben en temporada alta.
         </p>
 
         {costa.puertos.length > 1 && (
