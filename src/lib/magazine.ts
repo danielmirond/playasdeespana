@@ -79,6 +79,93 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  {
+    slug: 'playa-de-laida-ibarrangelu-bizkaia-marea-ria-urdaibai-sin-bandera-azul',
+    category: 'guias',
+    title: 'Lo que hay que saber antes de ir a Laida (Urdaibai): la marea se come el arenal y no tiene Bandera Azul',
+    excerpt:
+      'Laida, en Ibarrangelu, tiene 700 metros de arena en plena Reserva de la Biosfera de Urdaibai y socorrismo en temporada. La letra pequeña: su agua de baño figura como «buena», no «excelente», en la evaluación europea de 2025, no luce Bandera Azul y con la marea llena el arenal se encoge hasta casi desaparecer.',
+    heroAlt:
+      'Playa de Laida en Ibarrangelu, Bizkaia: un arenal ancho en la bocana de la ría de Mundaka, con el monte verde detrás y la marea baja dejando bancos de arena',
+    heroQuery: 'laida,ibarrangelu,urdaibai,bizkaia,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-11-08T12:38:18Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/pais-vasco', label: 'Playas del País Vasco' },
+      { href: '/banderas-azules', label: 'Playas con Bandera Azul' },
+      { href: '/calidad-agua', label: 'Calidad del agua de baño' },
+    ],
+    body: [
+      { t: 'p', html: 'A las ocho de la mañana de un día de agosto, Laida no es una playa: son dos. La de arriba, pegada al aparcamiento y al chiringuito, con la gente que ha madrugado colocando la sombrilla donde sabe que la arena no se moja. Y la de abajo, una llanura de arena firme y brillante que la bajamar ha dejado al descubierto hacia la bocana, tan ancha que hay que caminar un buen rato para llegar al agua y donde los perros corren sin que nadie los llame.' },
+      { t: 'p', html: 'Seis horas después, esa segunda playa ya no existe. El Cantábrico la ha recuperado sin avisar, y quien dejó la toalla donde le pareció lógico a primera hora la está recogiendo a toda prisa. No es una tormenta ni una marea excepcional: es lo que pasa aquí todos los días, dos veces al día, y es lo primero que conviene saber antes de bajar el coche hasta Ibarrangelu.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'Laida está en <strong>Ibarrangelu (Bizkaia)</strong>, en la margen derecha de la desembocadura de la ría de Mundaka, dentro de la <strong>Reserva de la Biosfera de Urdaibai</strong>, declarada por la Unesco en 1984. La ficha de la Guía de Playas del Ministerio para la Transición Ecológica (MITECO) le da <strong>700 metros de longitud</strong>, arena, aparcamiento y socorrismo, y no admite perros. El paisaje que la rodea —marisma, encinar cantábrico, el caserío subiendo por la ladera— es exactamente el que justificó la figura de protección.' },
+      { t: 'p', html: 'Y aquí viene el contraste que nadie pone en el folleto. Estar dentro de una Reserva de la Biosfera no dice nada sobre el agua en la que te metes. El punto de muestreo <strong>PLAYA DE LAIDA PM2</strong> figura con calidad de baño <strong>«buena»</strong> —no «excelente»— en la evaluación de la <strong>Agencia Europea de Medio Ambiente</strong> correspondiente a la temporada 2025. «Buena» es apta y es la segunda de cuatro categorías, pero no es la de arriba, y en una playa de ría conviene saber por qué: lo que baja por el estuario después de una tromba de agua tarda en irse.' },
+      { t: 'p', html: 'Tampoco tiene <strong>Bandera Azul</strong>. La ficha oficial no le reconoce ese distintivo, que premia una combinación de calidad de agua, servicios y gestión ambiental. No es un demérito grave —muchas playas excelentes no se presentan al galardón o no cumplen algún requisito de equipamiento—, pero sí desmonta la idea de que una playa protegida es automáticamente una playa certificada.' },
+      { t: 'p', html: 'El tercer dato es el que más condiciona el día, y es geografía pura: Laida está <strong>en la bocana de una ría</strong>. Con la marea baja aparece un arenal enorme que enlaza visualmente con Laidatxu, ya en Mundaka; con la marea alta ese arenal desaparece y el agua llega casi hasta el borde del aparcamiento. El canal por el que entra y sale la ría genera, además, <strong>corrientes</strong> que no se ven desde la orilla y que se notan precisamente en la zona más tentadora, la que mira al centro de la bocana. Enfrente, en la otra margen, rompe la izquierda de Mundaka, una de las olas más conocidas de Europa: el mismo accidente geográfico que la produce es el que mueve el agua aquí.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> Con la marea bajando, que es cuando la playa crece en lugar de encogerse y se puede caminar por la arena firme sin vigilar el reloj. Junio y septiembre, por el mismo motivo por el que funcionan en toda la cornisa: agua todavía razonable, aparcamiento con sitio y el arenal sin la cola de coches de agosto.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Con marea llena y un plan largo de playa: no hay sitio donde ponerse y lo poco que queda está lleno. Después de varios días de lluvia fuerte, si lo que se quiere es nadar: en una playa de estuario es cuando más sentido tiene esperar. Y en agosto a partir de media mañana, si se llega en coche sin alternativa: el aparcamiento de Laida es finito y la carretera que baja desde Ibarrangelu no da para improvisar.' },
+      { t: 'p', html: '<strong>El truco</strong>. Mirar la tabla de mareas antes de salir de casa, no al llegar. La diferencia entre pleamar y bajamar decide aquí cuánta playa hay, dónde está el agua y a qué distancia va a quedar la toalla dentro de tres horas; es el dato que convierte un día bueno en uno incómodo. Y si se viaja con niños, instalarse hacia el extremo contrario a la bocana, donde la corriente del canal no llega.' },
+      { t: 'p', html: '<strong>La alternativa</strong>. Al otro lado de la ría, <strong>Laidatxu</strong> (Mundaka) es mucho más pequeña —apenas unas decenas de metros— pero está más resguardada y comparte la misma calidad de agua «buena» de 2025. Si lo que se busca es un arenal abierto que no dependa de la marea, hay que salir de Urdaibai hacia el oeste. Y antes de elegir, merece la pena comparar la <a href="/calidad-agua">calidad del agua de baño</a> de las playas de la zona o repasar las que sí tienen <a href="/banderas-azules">Bandera Azul</a>.' },
+      { t: 'ul', items: [
+        'Municipio: Ibarrangelu (Bizkaia), en la margen derecha de la desembocadura de la ría de Mundaka.',
+        'Dimensiones: 700 metros de longitud, arena, según la Guía de Playas del MITECO.',
+        'Reserva de la Biosfera de Urdaibai, declarada por la Unesco en 1984.',
+        'Calidad del agua: «buena» —segunda de cuatro categorías— en la evaluación de la Agencia Europea de Medio Ambiente, temporada 2025 (punto PLAYA DE LAIDA PM2).',
+        'Sin Bandera Azul en la ficha oficial.',
+        'Servicios: socorrismo y aparcamiento. No se admiten perros.',
+        'Mareas: con bajamar el arenal se extiende hacia la bocana; con pleamar se reduce drásticamente.',
+      ] },
+      { t: 'quote', text: 'Se vende Urdaibai como un santuario, y lo es: Reserva de la Biosfera desde 1984. Pero el sello protege la marisma, no certifica el agua del baño. Esa la evalúa Europa cada temporada, y en 2025 a Laida le puso «buena», no «excelente».' },
+      { t: 'p', html: 'A última hora de la tarde la marea vuelve a vaciarse y la playa de abajo reaparece, esta vez con la luz rasante que deja cada ondulación de la arena marcada como una costilla. Un par de personas caminan hacia la bocana por donde hace seis horas había dos metros de agua. Enfrente, en Mundaka, alguien rema hacia la ola de siempre. La ría sigue haciendo lo mismo que lleva haciendo desde antes de que a nadie se le ocurriera ponerle un nombre a esto: subir, bajar, y decidir cada día dónde está la playa.' },
+    ],
+    faq: [
+      { q: '¿Qué calidad tiene el agua de la playa de Laida?', a: 'El punto de muestreo PLAYA DE LAIDA PM2 figura con calidad de baño «buena» en la evaluación de la Agencia Europea de Medio Ambiente de la temporada 2025. «Buena» es apta para el baño y es la segunda de las cuatro categorías de la directiva europea, por debajo de «excelente». Al ser una playa situada en la desembocadura de una ría, conviene esperar unos días tras episodios de lluvia fuerte.' },
+      { q: '¿Tiene Bandera Azul la playa de Laida?', a: 'No. La ficha oficial de la playa no le reconoce ese distintivo. Estar dentro de la Reserva de la Biosfera de Urdaibai protege el entorno natural, pero no equivale a una certificación de la playa: la Bandera Azul valora además servicios, seguridad y gestión ambiental.' },
+      { q: '¿Cómo afecta la marea a la playa de Laida?', a: 'Mucho, porque está en la bocana de la ría de Mundaka. Con la marea baja queda al descubierto un arenal muy amplio hacia el canal; con la marea alta el agua sube casi hasta el borde del aparcamiento y la superficie de playa se reduce drásticamente. Conviene consultar la tabla de mareas antes de ir y tener en cuenta que el canal de la ría genera corrientes en la zona que mira a la bocana.' },
+    ],
+    en: {
+      title: 'What to know before swimming at Laida (Urdaibai): the tide eats the beach and there is no Blue Flag',
+      excerpt:
+        'Laida, in Ibarrangelu, has 700 metres of sand inside the Urdaibai Biosphere Reserve and lifeguards in season. The small print: its bathing water is rated “good”, not “excellent”, in the 2025 European assessment, it holds no Blue Flag, and at high tide the beach shrinks to almost nothing.',
+      related: [
+        { href: '/en/crystal-clear-water-beaches', label: 'Beaches with clear water' },
+        { href: '/en/magazine', label: 'More from the Magazine' },
+      ],
+      body: [
+        { t: 'p', html: 'At eight in the morning on a day in August, Laida is not one beach but two. The upper one, up against the car park and the beach bar, where the early risers set their parasols on sand they know will stay dry. And the lower one, a plain of firm, glistening sand that the ebb has uncovered towards the river mouth, so wide that it takes a good walk to reach the water, where dogs run without anyone calling them back.' },
+        { t: 'p', html: 'Six hours later that second beach is gone. The Bay of Biscay has taken it back without warning, and whoever laid a towel where it seemed sensible first thing is now gathering it up in a hurry. This is not a storm or a freak tide: it happens here every day, twice a day, and it is the first thing worth knowing before driving down to Ibarrangelu.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'Laida sits in <strong>Ibarrangelu (Bizkaia)</strong>, on the right bank of the mouth of the Mundaka estuary, inside the <strong>Urdaibai Biosphere Reserve</strong>, designated by Unesco in 1984. The beach guide published by Spain’s Ministry for the Ecological Transition (MITECO) gives it <strong>700 metres in length</strong>, sand, parking and lifeguards, and it does not allow dogs. The landscape around it — saltmarsh, Cantabrian holm oak, farmhouses climbing the hillside — is precisely what justified the protected status.' },
+        { t: 'p', html: 'And here is the contrast nobody prints on the leaflet. Being inside a Biosphere Reserve says nothing about the water you swim in. The <strong>PLAYA DE LAIDA PM2</strong> sampling point is rated <strong>“good”</strong> — not “excellent” — for bathing water in the <strong>European Environment Agency</strong> assessment for the 2025 season. “Good” is safe to swim in and is the second of four categories, but it is not the top one, and on an estuary beach it is worth knowing why: what comes down the river after heavy rain takes time to clear.' },
+        { t: 'p', html: 'Nor does it hold a <strong>Blue Flag</strong>. The official record does not award it that distinction, which rewards a combination of water quality, facilities and environmental management. That is not a serious failing — plenty of excellent beaches never apply, or fall short on some piece of equipment — but it does dismantle the idea that a protected beach is automatically a certified one.' },
+        { t: 'p', html: 'The third fact is the one that shapes the day, and it is pure geography: Laida is <strong>in the mouth of an estuary</strong>. At low tide an enormous sandbank appears, running visually into Laidatxu on the Mundaka side; at high tide it disappears and the water reaches almost to the edge of the car park. The channel through which the estuary fills and empties also generates <strong>currents</strong> you cannot see from the shore, and they are strongest in the most tempting spot: the one facing the middle of the mouth. Across the water breaks the Mundaka left, one of the best-known waves in Europe. The same piece of geography that produces it is what moves the water here.' },
+        { t: 'h2', text: 'What a local would tell you', id: 'local' },
+        { t: 'p', html: '<strong>When to go.</strong> On a falling tide, when the beach grows instead of shrinking and you can walk the firm sand without watching the clock. June and September work for the same reason they work all along this coast: the water is still reasonable, there is space in the car park, and the sand is free of the August queue.' },
+        { t: 'p', html: '<strong>When not to.</strong> At high tide, if the plan is a long day on the beach: there is nowhere to settle and what remains is crowded. After several days of heavy rain, if you mean to swim: on an estuary beach that is exactly when waiting makes sense. And in August from mid-morning onwards if you arrive by car with no plan B: the Laida car park is finite and the road down from Ibarrangelu does not reward improvisation.' },
+        { t: 'p', html: '<strong>The trick.</strong> Check the tide table before leaving home, not on arrival. The difference between high and low water decides how much beach there is, where the sea will be, and how far away your towel will sit in three hours’ time. With children, settle at the end furthest from the river mouth, where the channel current does not reach.' },
+        { t: 'p', html: '<strong>The alternative.</strong> Across the estuary, <strong>Laidatxu</strong> (Mundaka) is far smaller — a few dozen metres — but more sheltered, and it shares the same “good” 2025 water rating. For an open beach that does not depend on the tide, you have to leave Urdaibai and head west.' },
+        { t: 'ul', items: [
+          'Municipality: Ibarrangelu (Bizkaia), on the right bank of the Mundaka estuary mouth.',
+          'Size: 700 metres long, sand, according to the MITECO beach guide.',
+          'Inside the Urdaibai Biosphere Reserve, designated by Unesco in 1984.',
+          'Water quality: “good” — second of four categories — in the European Environment Agency assessment, 2025 season (PLAYA DE LAIDA PM2 sampling point).',
+          'No Blue Flag on the official record.',
+          'Facilities: lifeguards and parking. Dogs are not allowed.',
+          'Tides: at low water the sand extends towards the river mouth; at high water it shrinks sharply.',
+        ] },
+        { t: 'quote', text: 'Urdaibai is sold as a sanctuary, and it is one: a Biosphere Reserve since 1984. But the designation protects the saltmarsh; it does not certify the water you swim in. Europe assesses that every season, and in 2025 it gave Laida “good”, not “excellent”.' },
+        { t: 'p', html: 'Late in the afternoon the tide empties again and the lower beach returns, this time under a raking light that picks out every ripple in the sand like a rib. A couple of people walk towards the mouth across ground that six hours ago lay under two metres of water. Opposite, at Mundaka, someone paddles out to the usual wave. The estuary carries on doing what it has done since long before anyone thought to give this place a name: rise, fall, and decide each day where the beach is.' },
+      ],
+      faq: [
+        { q: 'How clean is the water at Laida beach?', a: 'The PLAYA DE LAIDA PM2 sampling point is rated “good” for bathing water in the European Environment Agency assessment for the 2025 season. “Good” is safe to swim in and is the second of the four categories in the European directive, below “excellent”. As the beach sits at the mouth of an estuary, it is sensible to wait a few days after heavy rainfall.' },
+        { q: 'Does Laida beach have a Blue Flag?', a: 'No. The official record does not award it that distinction. Being inside the Urdaibai Biosphere Reserve protects the surrounding environment, but it is not the same as a beach certification: the Blue Flag also assesses facilities, safety and environmental management.' },
+        { q: 'How do the tides affect Laida beach?', a: 'Considerably, because it lies in the mouth of the Mundaka estuary. At low tide a very wide sandbank is exposed towards the channel; at high tide the water comes up almost to the edge of the car park and the usable beach shrinks sharply. Check the tide table before you go, and bear in mind that the estuary channel generates currents in the area facing the mouth.' },
+      ],
+    },
+  },
   // ───── Diario de playas · El Palmar, Vejer de la Frontera (Cádiz, Andalucía) (voz bicéfala) ─────
   {
     slug: 'playa-de-el-palmar-vejer-cadiz-temporada-olas-octubre-marzo-sin-socorrista',
