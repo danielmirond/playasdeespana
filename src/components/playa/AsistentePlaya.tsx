@@ -179,7 +179,10 @@ export default function AsistentePlaya({ necesidades, nombre, locale = 'es', var
                 alignSelf: 'flex-start',
               }}
             >
-              {es ? 'Ver opciones en Amazon' : 'See options on Amazon'}
+              {/* Decía «Ver opciones en Amazon»: nombraba el canal, y a
+                  nadie le ilusiona ir a Amazon. La promesa de este bloque
+                  es no olvidarse de nada, y eso es lo que dice ahora. */}
+              {es ? 'Ver cuál llevar' : 'See which one to take'}
             </a>
           </li>
         ))}

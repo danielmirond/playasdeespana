@@ -53,10 +53,18 @@ export function pickContextualCTA(
     sub: es ? `Escuelas y spots cerca de ${nombre}` : `Schools and spots near ${nombre}`,
   }
   // 4. Default → actividades de la zona (salta al widget GYG de la ficha)
+  //
+  // El título decía «Cosas que hacer cerca de X» y el subtítulo «Tours,
+  // excursiones y actividades de la zona»: la misma frase dos veces, una
+  // en castellano y otra en catálogo. Las tres ramas de arriba funcionan
+  // porque dan un MOTIVO —«hoy es día de cala», «hoy entra mar»—, y esta
+  // era la única que no daba ninguno. El motivo aquí no puede salir del
+  // mar, porque esta rama es justo la que se usa cuando el mar no dice
+  // nada: sale del municipio, que es lo que el lector tiene alrededor.
   return {
     intent: 'actividad', tone: 'accent',
     href: '#actividades',
-    title: es ? `Cosas que hacer cerca de ${nombre}` : `Things to do near ${nombre}`,
-    sub: es ? 'Tours, excursiones y actividades de la zona' : 'Tours and activities in the area',
+    title: es ? `Qué hacer en ${playa.municipio} cuando te cansas de la arena` : `Things to do in ${playa.municipio} when you have had enough sand`,
+    sub: es ? 'Excursiones y visitas cerca, sin coger el coche para todo' : 'Trips and sights nearby, without driving everywhere',
   }
 }
