@@ -48,7 +48,12 @@ export async function queryOverpass(
   opts: OverpassOptions = {},
 ): Promise<any[] | null> {
   const {
-    timeoutPerAttempt = 6000, // Default reducido para SSG
+    // 15 s, no 6. El default de 6 s venía del SSG, donde la consulta es
+    // el radio de UNA playa. Las landings de provincia piden una bbox
+    // entera —Girona son 0,8° x 0,6°— con cuatro subconsultas, y eso no
+    // cabe en seis segundos ni en el presupuesto de cinco que llevaba la
+    // propia query. Quien necesite el valor bajo lo pasa por opts.
+    timeoutPerAttempt = 15000,
     revalidate = 86400,
     label = 'overpass',
   } = opts
@@ -68,7 +73,15 @@ export async function queryOverpass(
           // Accept explícito: el Apache de overpass-api.de devuelve 406
           // (content negotiation) a peticiones sin Accept compatible.
           'Accept': 'application/json',
-          'User-Agent': 'PlayasEspana/1.0 (playas-espana.com; hola@playas-espana.com)',
+          // User-Agent SIMPLE, sin paréntesis ni correo.
+          //
+          // El que había —'PlayasEspana/1.0 (playas-espana.com;
+          // hola@playas-espana.com)'— recibe 406 de overpass-api.de de
+          // forma constante y en 0,2 s: no es rate limit (sería 429) ni
+          // timeout, es el nginx rechazando la petición. Comprobado
+          // contra el mirror principal repitiendo la MISMA consulta con
+          // varios UA: con este formato responde, con aquel no.
+          'User-Agent': 'playas-espana.com',
         },
         next: { revalidate },
       } as RequestInit & { next: { revalidate: number } })

@@ -53,12 +53,35 @@ export async function generateStaticParams() {
   return []
 }
 
+// Una landing vacía NO se indexa.
+//
+// Mientras las 24 estuvieron sin datos, Google siguió rastreándolas e
+// indexándolas: 6.702 impresiones en 90 días para páginas que decían
+// «No se han encontrado campings». Eso no es tráfico perdido, es
+// confianza gastada. Si por lo que sea Overpass no responde, la página
+// se sirve igual —el usuario que llega ve el aviso y los enlaces del
+// pie— pero se marca noindex y deja de competir consigo misma.
 export async function generateMetadata({ params }: { params: Promise<{ provincia: string }> }): Promise<Metadata> {
   const { provincia } = await params
   const data = await getPlayasByProvinciaSlug(provincia)
   if (!data) return {}
   const title = `Campings cerca de la playa en ${data.provincia.nombre}`
+
+  // La misma llamada que hará la página: comparten la caché de fetch de
+  // Next, así que no son dos peticiones a Overpass sino una.
+  const campings = await getCampingsEnBbox(
+    data.playas.map(p => ({ slug: p.slug, nombre: p.nombre, municipio: p.municipio, lat: p.lat, lng: p.lng })),
+    { max: 80 },
+  )
+
   return {
+    // Una landing vacía NO se indexa. Mientras las 24 estuvieron sin
+    // datos, Google siguió rastreándolas: 6.702 impresiones en 90 días
+    // para páginas que decían «No se han encontrado campings». Eso no es
+    // tráfico perdido, es confianza gastada. Si Overpass no responde, la
+    // página se sirve igual —quien llegue ve el aviso y los enlaces—
+    // pero se marca noindex y deja de competir consigo misma.
+    ...(campings.length === 0 ? { robots: { index: false, follow: true } } : {}),
     // «a pie de playa» y «bungalows» son las dos segundas intenciones
     // medidas, y el título no decía ninguna. Caben las dos en 60
     // caracteres para una provincia de nombre corto; en las largas se

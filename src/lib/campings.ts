@@ -93,7 +93,11 @@ async function fetchCampingsFromOverpass(lat: number, lon: number): Promise<Camp
   // Nodes + ways (camping grandes suelen estar mapeados como área). `out center`
   // nos da lat/lon del centro para los ways. Limitamos a 40 resultados para
   // evitar JSON enorme de Overpass.
-  const query = `[out:json][timeout:5];
+  // timeout 20, no 5: es el presupuesto que Overpass se da a sí mismo
+  // para resolver, y una bbox provincial con cuatro subconsultas no lo
+  // hace en cinco segundos. Si lo excede, devuelve error y la landing
+  // sale vacía, que es justo lo que llevaban meses haciendo las 24.
+  const query = `[out:json][timeout:20];
 (
   node["tourism"="camp_site"](around:${RADIUS_M},${lat},${lon});
   node["tourism"="caravan_site"](around:${RADIUS_M},${lat},${lon});
@@ -209,6 +213,7 @@ out center body 200;`
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const elements = await queryOverpass(query, {
     revalidate: options.revalidate ?? 7 * 86400,
+    timeoutPerAttempt: 25000,
     label: 'campings-bbox',
   })
   if (!elements) return []
