@@ -7,7 +7,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import { getPlayasByProvinciaSlug } from '@/lib/provinciaTopicHelpers'
-import { getCampingsEnBbox, type CampingConPlaya } from '@/lib/campings'
+import { type CampingConPlaya } from '@/lib/campings'
+import { campingsDeProvincia, provinciasConCampings, ACTUALIZADO_CAMPINGS } from '@/lib/campings-sidecar'
 import PieLanding from '@/components/seo/PieLanding'
 import { toSlug } from '@/lib/playas'
 
@@ -31,26 +32,20 @@ export const maxDuration = 60
 // Una hora significa, como mucho, una consulta a Overpass por provincia
 // y hora —y solo si alguien la pide—, que es lo que ya hacen las otras
 // tres verticales con el mismo patrón sin problema.
-export const revalidate = 3600
+// Una semana: el sidecar solo cambia cuando se vuelve a cosechar, y
+// entonces entra con el despliegue. No hay nada que revalidar.
+export const revalidate = 604800
 const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://playas-espana.com'
 
-// NO se prerenderiza ninguna en build, y es deliberado.
+// Vuelven a prerenderizarse TODAS, y ahora sí tiene sentido.
 //
-// Los campings salen de Overpass en runtime y el buildGuard corta la red
-// durante `next build`, así que una página prerenderizada aquí nace
-// VACÍA —«No se han encontrado campings»— y sigue vacía hasta que el
-// revalidate la caduque. Con el revalidate a una hora eso ya es mucho
-// mejor que los siete días que había, pero sigue significando que cada
-// despliegue deja estas páginas sin contenido durante la hora siguiente,
-// y se despliega varias veces al día.
-//
-// Devolviendo la lista vacía, la ruta se genera BAJO DEMANDA en la
-// primera visita —con red disponible y datos de verdad— y a partir de
-// ahí cachea una hora como cualquier otra. Son 24 páginas: el coste es
-// una primera carga más lenta por provincia y hora, a cambio de que
-// nunca se sirva una lista vacía. dynamicParams es true por defecto.
+// Mientras los campings se pedían a Overpass en runtime, prerenderizar
+// aquí producía páginas vacías —el buildGuard corta la red en el build—
+// y por eso se desactivó. Con el sidecar el dato está en disco: el
+// build lo lee sin pedir nada a nadie y cada provincia sale completa y
+// estática.
 export async function generateStaticParams() {
-  return []
+  return provinciasConCampings().map(provincia => ({ provincia }))
 }
 
 // Una landing vacía NO se indexa.
@@ -67,12 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
   if (!data) return {}
   const title = `Campings cerca de la playa en ${data.provincia.nombre}`
 
-  // La misma llamada que hará la página: comparten la caché de fetch de
-  // Next, así que no son dos peticiones a Overpass sino una.
-  const campings = await getCampingsEnBbox(
-    data.playas.map(p => ({ slug: p.slug, nombre: p.nombre, municipio: p.municipio, lat: p.lat, lng: p.lng })),
-    { max: 80 },
-  )
+  const campings = campingsDeProvincia(provincia)
 
   return {
     // Una landing vacía NO se indexa. Mientras las 24 estuvieron sin
@@ -109,10 +99,7 @@ export default async function Page({ params }: { params: Promise<{ provincia: st
   if (!data) notFound()
 
   // Una sola query Overpass para todo el bbox de la provincia
-  const campings = await getCampingsEnBbox(
-    data.playas.map(p => ({ slug: p.slug, nombre: p.nombre, municipio: p.municipio, lat: p.lat, lng: p.lng })),
-    { max: 80 }
-  )
+  const campings = campingsDeProvincia(provincia)
 
   // DOS SEGUNDAS INTENCIONES, medidas en Search Console a 180 días sobre
   // 10.667 consultas de alojamiento:
@@ -182,7 +169,7 @@ export default async function Page({ params }: { params: Promise<{ provincia: st
         </h1>
         <p style={{ fontSize: '1.05rem', color: 'var(--muted)', maxWidth: 720, lineHeight: 1.6, marginBottom: '2rem' }}>
           Listado completo de campings, glamping y áreas de autocaravanas en {data.provincia.nombre}, con la playa
-          más cercana a cada uno. Datos extraídos de OpenStreetMap, actualizados semanalmente.
+          más cercana a cada uno. Datos de OpenStreetMap, cosechados el {ACTUALIZADO_CAMPINGS}.
         </p>
 
         {campings.length === 0 ? (
