@@ -41,6 +41,7 @@ import styles from '../MunicipioPage.module.css'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
+import ServiciosGeo from '@/components/seo/ServiciosGeo'
 
 export const revalidate = 1800
 export const maxDuration = 30
@@ -408,6 +409,24 @@ export default async function TablaMareasPage({ params }: Props) {
                 </ul>
               </section>
             )}
+
+            {/* Servicios de la provincia. Estas cuatro subpáginas se
+
+                quedaron fuera del enlazado geográfico porque no tienen
+
+                una vertical comercial gemela a la que subir, y son
+
+                justamente las de más tráfico: mareas saca 2.507 clics a
+
+                la semana —más que en septiembre— y era la única página
+
+                del sitio que crece en temporada baja sin repartir nada.
+
+                Quien mira la tabla de mareas de un sitio concreto está
+
+                planificando un día concreto allí. */}
+
+            <ServiciosGeo provincia={municipio.provincia} municipio={municipio.nombre} />
 
             <DelMunicipio nombre={municipio.nombre} enlaces={enlacesMuni} actual="mareas" />
 

@@ -50,6 +50,7 @@ import { getFotos } from '@/lib/fotos'
 import Hueco from '@/components/ui/Hueco'
 import { SLOTS } from '@/lib/adsense'
 import { enlacesMunicipio } from '@/lib/enlaces-municipio'
+import ServiciosGeo from '@/components/seo/ServiciosGeo'
 
 export const maxDuration = 30
 export const revalidate = 3600      // el forecast cambia cada hora
@@ -595,6 +596,24 @@ export default async function ElTiempoPage({ params }: Props) {
         )}
 
         <Hueco zona="cierre" bloque={SLOTS.cierre} />
+
+        {/* Servicios de la provincia. Estas cuatro subpáginas se
+
+            quedaron fuera del enlazado geográfico porque no tienen
+
+            una vertical comercial gemela a la que subir, y son
+
+            justamente las de más tráfico: mareas saca 2.507 clics a
+
+            la semana —más que en septiembre— y era la única página
+
+            del sitio que crece en temporada baja sin repartir nada.
+
+            Quien mira la tabla de mareas de un sitio concreto está
+
+            planificando un día concreto allí. */}
+
+        <ServiciosGeo provincia={municipio.provincia} municipio={municipio.nombre} />
 
         <DelMunicipio nombre={municipio.nombre} enlaces={enlaces} actual="elTiempo" />
 

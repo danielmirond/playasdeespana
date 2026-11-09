@@ -31,6 +31,7 @@ import HeroMunicipio from '@/components/municipio/HeroMunicipio'
 import NavMunicipio from '@/components/municipio/NavMunicipio'
 import DelMunicipio from '@/components/ui/DelMunicipio'
 import mun from '@/components/municipio/Municipio.module.css'
+import ServiciosGeo from '@/components/seo/ServiciosGeo'
 
 export const revalidate = 604800     // los aparcamientos cambian poco
 export const maxDuration = 30
@@ -261,6 +262,15 @@ export default async function DondeAparcarPage({ params }: Props) {
         </p>
 
         <Hueco zona="cierre" bloque={SLOTS.cierre} />
+        {/* Servicios de la provincia. Estas cuatro subpáginas se
+            quedaron fuera del enlazado geográfico porque no tienen
+            una vertical comercial gemela a la que subir, y son
+            justamente las de más tráfico: mareas saca 2.507 clics a
+            la semana —más que en septiembre— y era la única página
+            del sitio que crece en temporada baja sin repartir nada.
+            Quien mira la tabla de mareas de un sitio concreto está
+            planificando un día concreto allí. */}
+        <ServiciosGeo provincia={municipio.provincia} municipio={municipio.nombre} />
         <DelMunicipio nombre={municipio.nombre} enlaces={enlaces} actual="aparcar" />
       </main>
     </>
