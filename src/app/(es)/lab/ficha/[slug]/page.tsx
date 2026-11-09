@@ -9,7 +9,6 @@
  */
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Libre_Franklin } from 'next/font/google'
 import { getPlayaBySlug } from '@/lib/playas'
 import { getFotos } from '@/lib/fotos'
 import { getMareas } from '@/lib/marine'
@@ -19,15 +18,11 @@ import { calcularBandera } from '@/lib/seguridad'
 import { nombreConPlaya } from '@/lib/geo'
 import styles from './ficha-e3.module.css'
 
-// Instanciada aquí y no en src/app/fonts.ts: es una prueba, y meterla en el
-// layout compartido la serviría en las 4.329 fichas buenas para nada.
-const franklin = Libre_Franklin({
-  subsets: ['latin'],
-  variable: '--font-franklin',
-  display: 'swap',
-  weight: ['200', '400', '500', '600'],
-})
-
+// La fuente NO se instancia aquí. Lo hacía —Libre_Franklin con cinco
+// pesos— y el build de Vercel caía con «next/font/google queries have
+// exactly one entry» en Turbopack, aunque `next build` en local pasara.
+// Ya no hace falta: desde que Franklin es la familia del sitio,
+// --font-franklin se sirve en todas las páginas desde src/app/fonts.ts.
 export const dynamic = 'force-static'
 export const revalidate = 3600
 
@@ -82,7 +77,7 @@ export default async function FichaLab({ params }: { params: Promise<{ slug: str
   })
 
   return (
-    <main className={`${styles.hoja} ${franklin.variable}`}>
+    <main className={styles.hoja}>
 
       {/* Cartela recta: el único bloque sin inclinar, para anclar la vista */}
       <header className={styles.cartela}>

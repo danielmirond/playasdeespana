@@ -9,16 +9,12 @@
  * solo componente.
  */
 import type { Metadata } from 'next'
-import { Libre_Franklin } from 'next/font/google'
 import PlayaPage from '../../../playas/[slug]/page'
 import tema from './tema-e3.module.css'
 
-const franklin = Libre_Franklin({
-  subsets: ['latin'],
-  variable: '--font-franklin',
-  display: 'swap',
-  weight: ['200', '400', '500', '600', '700'],
-})
+// Sin instancia propia de fuente: rompía el build de Vercel y es
+// redundante, porque --font-franklin ya viene del layout.
+
 
 export const metadata: Metadata = {
   title: 'Laboratorio · ficha completa en E3',
@@ -27,7 +23,7 @@ export const metadata: Metadata = {
 
 export default async function FichaCompletaLab({ params }: { params: Promise<{ slug: string }> }) {
   return (
-    <div className={`${tema.tema} ${franklin.variable}`}>
+    <div className={tema.tema}>
       <p className={tema.aviso}>Laboratorio · la ficha real repintada en E3 · no indexable</p>
       <PlayaPage params={params} />
     </div>
