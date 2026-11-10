@@ -79,6 +79,94 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · L'Arenal-Bol, Calp (Alicante, Comunitat Valenciana) (voz bicéfala) ─────
+  {
+    slug: 'playa-arenal-bol-calp-alicante-salinas-flamencos-penon-ifach-cupo-300',
+    category: 'curiosidades',
+    title: 'Arenal-Bol (Calp): flamencos en la salina de detrás y 1,2 km de arena de las más concurridas',
+    excerpt:
+      'L\'Arenal-Bol, en Calp, tiene 1,2 km de arena fina, Bandera Azul y agua «excelente» en la evaluación europea de 2025, con una laguna salobre de flamencos a la espalda y el Penyal d\'Ifac al lado. La pega: es una playa urbana de las más concurridas del pueblo, los flamencos abundan sobre todo de mayo a agosto y subir a la cima del Peñón exige reserva, con cupo de 300 personas al día.',
+    heroAlt:
+      'Playa de l\'Arenal-Bol en Calp, Alicante: un arco de arena dorada frente a un paseo con palmeras y edificios, con la mole caliza del Peñón de Ifach al fondo sobre el mar',
+    heroQuery: 'arenal bol,calp,calpe,ifach,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-11-10T17:47:20Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/comunitat-valenciana', label: 'Playas de la Comunitat Valenciana' },
+      { href: '/banderas-azules', label: 'Playas con Bandera Azul' },
+      { href: '/familias', label: 'Playas para ir con niños' },
+    ],
+    body: [
+      { t: 'p', html: 'Hay pocas playas en España en las que uno pueda darse la vuelta sobre la toalla y ver un flamenco. En l\'Arenal-Bol basta con cruzar el paseo y un par de calles: detrás de los bloques de apartamentos, en pleno casco urbano de Calp, hay una lámina de agua salobre donde las aves rosadas caminan despacio con la cabeza bajo el agua, sin inmutarse por el tráfico de la avenida. Delante, el mar. Al lado, la mole caliza del Penyal d\'Ifac, 332 metros de roca que parecen puestos ahí para que nadie olvide dónde está.' },
+      { t: 'p', html: 'Esa combinación —playa de paseo marítimo, humedal con flamencos y un peñón que es parque natural— es lo que convierte esta franja de arena en algo más que la playa urbana de un pueblo turístico de la Marina Alta. También es lo que la llena. Conviene saber las dos cosas antes de ir.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: 'La web de turismo de la Comunitat Valenciana le da a l\'Arenal-Bol <strong>1,2 km de longitud y unos 40 metros de anchura</strong>, de arena fina y dorada, con <strong>Bandera Azul</strong>, socorristas, pasarelas, lavapiés, alquiler de hamacas y una <strong>zona adaptada con sillas anfibias</strong> para personas con movilidad reducida. Otras guías estiran la longitud hasta 1,4 km; la cifra oficial es la de 1,2. El agua sale bien parada: el punto de muestreo <strong>PLAYA DE L\'ARENAL-BOL PM1</strong> figura con calidad <strong>«excelente»</strong>, la categoría más alta, en la evaluación de la Agencia Europea de Medio Ambiente de la temporada 2025.' },
+      { t: 'p', html: 'Ahora, el contra. La misma ficha oficial la describe como una de las playas urbanas <strong>«más concurridas»</strong> de Calp. No es un arenal salvaje con un peñón al fondo: es una playa de paseo, con palmeras, bares y hoteles a pie de arena, que en verano recibe a buena parte de la población flotante del municipio. Quien busque silencio o espacio entre toallas en julio y agosto se ha equivocado de playa.' },
+      { t: 'p', html: 'Las <strong>Salinas de Calp</strong> son la otra mitad de la historia. Según el Ayuntamiento, ocupan una depresión rellena de depósitos aluviales: una antigua bahía que una barrera de dunas cerró hasta unir el Peñón con tierra firme. Restos de esa barrera fósil asoman entre l\'Arenal y el Cantal Roig. En la laguna se ven flamencos, fochas, garzas reales, cigüeñuelas o chorlitejos patinegros. Pero la letra pequeña importa: los flamencos se concentran sobre todo <strong>entre mayo y agosto</strong>; el resto del año hay aves, pero en menor número, y en una visita de noviembre puede no haber ninguno a la vista.' },
+      { t: 'p', html: 'En el extremo sur de la playa quedan los <strong>Baños de la Reina</strong>, estanques excavados en la roca de época romana. La tradición los llama termas; otras fuentes los vinculan a la producción de salazones de pescado. Sea cual sea su función exacta, están a ras del mar y se visitan andando por la orilla.' },
+      { t: 'p', html: 'Y el Peñón, que sale en todas las fotos de la playa, tiene condiciones. Es <strong>Parque Natural desde 1987</strong> y la ruta a la cima, la llamada ruta roja, exige <strong>reserva previa gratuita</strong> en la web de parques naturales de la Generalitat, con un <strong>cupo de 300 personas al día</strong>, según la regulación que difunde la Federación de Montaña valenciana. El último tramo tiene roca pulida y resbaladiza, y la propia gestión del parque lo desaconseja a menores.' },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>¿Cuándo sí?</strong> En mayo, junio y septiembre: el agua ya es buena, la playa tiene sitio y, al menos en los dos primeros, la salina coincide con la mejor época de flamencos. A primera hora de la mañana en verano, antes de que el paseo se llene y el sol caiga de lleno sobre la arena.' },
+      { t: 'p', html: '<strong>¿Cuándo no?</strong> Un sábado de agosto a mediodía, si se llega en coche esperando aparcar junto al paseo. Y si el plan es subir al Peñón sin reserva: con el cupo lleno no hay acceso a la cima, aunque se llegue a la puerta del sendero.' },
+      { t: 'p', html: '<strong>El truco</strong>. Reservar el Peñón antes de reservar el hotel, sobre todo en fines de semana y puentes, y subir temprano, con calzado de suela que agarre. Bajar después a la playa y dejar la salina para la tarde, con la luz baja y las aves más activas en la orilla de la laguna.' },
+      { t: 'p', html: '<strong>La alternativa</strong>. Al otro lado del Peñón, la <strong>playa de la Fossa</strong> (también llamada de Levante) ofrece más arena abierta y el mismo telón de fondo desde el norte. Entre ambas, el pequeño <strong>Cantal Roig</strong> sirve para un baño corto. Para comparar, las <a href="/banderas-azules">playas con Bandera Azul</a> de la Costa Blanca o las de la <a href="/comunidad/comunitat-valenciana">Comunitat Valenciana</a>.' },
+      { t: 'ul', items: [
+        'Municipio: Calp (Alicante), playa urbana junto al casco antiguo.',
+        'Dimensiones: 1,2 km de longitud y unos 40 m de anchura, arena fina (Turisme Comunitat Valenciana).',
+        'Calidad del agua: «excelente» en la evaluación de la Agencia Europea de Medio Ambiente, temporada 2025 (punto PLAYA DE L\'ARENAL-BOL PM1).',
+        'Bandera Azul, socorrismo, zona adaptada con sillas anfibias.',
+        'Salinas de Calp a la espalda: flamencos sobre todo de mayo a agosto.',
+        'Penyal d\'Ifac: 332 m, Parque Natural desde 1987; subida a la cima con reserva previa y cupo de 300 personas al día.',
+      ] },
+      { t: 'quote', text: 'Se vende por la foto del peñón. La foto no enseña lo que hay detrás de los edificios: una laguna salada con flamencos a un par de calles de la arena. Ni lo que hay delante: una de las orillas más llenas del pueblo.' },
+      { t: 'p', html: 'Al caer la tarde el Peñón proyecta su sombra sobre el puerto y la playa se vacía por tramos, empezando por el extremo de los Baños de la Reina. En la salina, con suerte, un grupo de flamencos levanta el vuelo y cruza por encima de los tejados hacia el mar. Es un trayecto corto, unos cientos de metros, pero resume Calp mejor que cualquier vista desde la cima: una bahía que el mar cerró hace miles de años, una ciudad construida encima y unas aves que siguen volviendo como si nada hubiera cambiado.' },
+    ],
+    faq: [
+      { q: '¿Se ven flamencos en las Salinas de Calp todo el año?', a: 'No siempre. La laguna tiene aves durante todo el año —fochas, garzas, cigüeñuelas—, pero los flamencos se concentran sobre todo entre mayo y agosto. Fuera de esa época su presencia es menor y puede que no haya ninguno a la vista.' },
+      { q: '¿Hace falta reserva para subir al Peñón de Ifach?', a: 'Sí, para la ruta que llega a la cima. La reserva es gratuita y se hace online en la web de parques naturales de la Generalitat Valenciana, con un cupo de 300 personas al día. El tramo final tiene roca pulida y la gestión del parque lo desaconseja a menores. Conviene consultar las condiciones vigentes antes de ir.' },
+      { q: '¿Qué calidad tiene el agua de la playa del Arenal-Bol?', a: 'El punto de muestreo PLAYA DE L\'ARENAL-BOL PM1 figura con calidad «excelente», la categoría más alta, en la evaluación de la Agencia Europea de Medio Ambiente de la temporada 2025. La playa luce además Bandera Azul.' },
+    ],
+    en: {
+      title: 'Arenal-Bol, Calp: flamingos on the salt lagoon behind, 1.2 km of sand and some of the town’s busiest',
+      excerpt:
+        'L’Arenal-Bol in Calp has 1.2 km of fine sand, a Blue Flag and “excellent” water in the 2025 European assessment, with a flamingo lagoon at its back and the Penyal d’Ifac next door. The catch: it is one of the town’s busiest urban beaches, the flamingos are mostly a May-to-August affair, and the climb to the top of the rock needs a booking, capped at 300 people a day.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Beaches with clear water' },
+      ],
+      body: [
+        { t: 'p', html: 'There are few beaches in Spain where you can roll over on your towel and see a flamingo. At l’Arenal-Bol it is enough to cross the promenade and a couple of streets: behind the apartment blocks, right in the middle of Calp, lies a sheet of brackish water where pink birds wade slowly with their heads under the surface, unbothered by the traffic on the avenue. In front, the sea. Alongside, the limestone bulk of the Penyal d’Ifac, 332 metres of rock that seem to have been put there so nobody forgets where they are.' },
+        { t: 'p', html: 'That combination — a promenade beach, a wetland with flamingos and a rock that is a natural park — is what turns this strip of sand into more than the town beach of a Marina Alta resort. It is also what fills it. Both things are worth knowing before you go.' },
+        { t: 'h2', text: 'The facts (and what they don’t tell you)', id: 'facts' },
+        { t: 'p', html: 'The Comunitat Valenciana tourist board gives l’Arenal-Bol <strong>1.2 km in length and about 40 metres in width</strong>, fine golden sand, a <strong>Blue Flag</strong>, lifeguards, boardwalks, foot showers, sunbed hire and an <strong>accessible area with amphibious chairs</strong>. Some guides stretch it to 1.4 km; the official figure is 1.2. The water does well: the <strong>PLAYA DE L’ARENAL-BOL PM1</strong> sampling point is rated <strong>“excellent”</strong>, the top category, in the European Environment Agency assessment for the 2025 season.' },
+        { t: 'p', html: 'Now the downside. The same official listing calls it one of Calp’s <strong>busiest</strong> urban beaches. This is not wild sand with a rock in the background: it is a promenade beach, with palms, bars and hotels at the edge of the sand, and in summer it takes a large share of the town’s visitors. Anyone after quiet, or space between towels, in July and August has picked the wrong beach.' },
+        { t: 'p', html: 'The <strong>Salinas de Calp</strong> are the other half of the story. According to the town council they fill a hollow of alluvial deposits: an old bay closed off by a dune barrier that eventually tied the rock to the mainland. Remains of that fossil barrier show between l’Arenal and Cantal Roig. On the lagoon you can see flamingos, coots, grey herons, black-winged stilts and Kentish plovers. But the small print matters: flamingos gather mainly <strong>between May and August</strong>. There are birds the rest of the year, in smaller numbers, and on a November visit there may be none in sight.' },
+        { t: 'p', html: 'At the southern end of the beach are the <strong>Baños de la Reina</strong>, Roman-era pools cut into the rock. Tradition calls them baths; other sources link them to fish-salting. Whatever their exact purpose, they sit at sea level and you can walk to them along the shore.' },
+        { t: 'p', html: 'And the rock, which is in every photo of the beach, comes with conditions. It has been a <strong>Natural Park since 1987</strong>, and the route to the summit, the so-called red route, requires a <strong>free advance booking</strong> on the Generalitat’s natural parks website, with a <strong>cap of 300 people a day</strong>, according to the rules circulated by the Valencian mountaineering federation. The final stretch is polished, slippery rock, and the park itself advises against it for minors.' },
+        { t: 'h2', text: 'What a local would tell you', id: 'local' },
+        { t: 'p', html: '<strong>When to go.</strong> May, June and September: the water is already pleasant, there is room on the sand and, in the first two at least, the lagoon coincides with the best flamingo season. Early in the morning in summer, before the promenade fills and the sun lands full on the sand.' },
+        { t: 'p', html: '<strong>When not to.</strong> A Saturday in August at midday, if you arrive by car expecting to park by the promenade. And if the plan is to climb the rock without a booking: once the quota is full there is no way to the top, even if you reach the start of the path.' },
+        { t: 'p', html: '<strong>The trick.</strong> Book the rock before you book the hotel, especially for weekends and bank holidays, and go up early in shoes with grip. Come down to the beach afterwards and save the lagoon for the evening, when the light is low and the birds are busier at the water’s edge.' },
+        { t: 'p', html: '<strong>The alternative.</strong> On the other side of the rock, <strong>playa de la Fossa</strong> (also known as Levante) has more open sand and the same backdrop seen from the north. Between the two, little <strong>Cantal Roig</strong> does for a short swim.' },
+        { t: 'ul', items: [
+          'Municipality: Calp (Alicante), town beach next to the old quarter.',
+          'Size: 1.2 km long and about 40 m wide, fine sand (Comunitat Valenciana tourist board).',
+          'Water quality: “excellent” in the European Environment Agency assessment, 2025 season (PLAYA DE L’ARENAL-BOL PM1 sampling point).',
+          'Blue Flag, lifeguards, accessible area with amphibious chairs.',
+          'Salinas de Calp behind the beach: flamingos mainly from May to August.',
+          'Penyal d’Ifac: 332 m, Natural Park since 1987; summit route by advance booking, capped at 300 people a day.',
+        ] },
+        { t: 'quote', text: 'It is sold on the photo of the rock. The photo does not show what lies behind the buildings: a salt lagoon with flamingos a couple of streets from the sand. Nor what lies in front: one of the most crowded shorelines in town.' },
+        { t: 'p', html: 'As evening falls the rock throws its shadow over the harbour and the beach empties in stretches, starting at the Baños de la Reina end. On the lagoon, with luck, a group of flamingos lifts off and crosses the rooftops towards the sea. It is a short flight, a few hundred metres, but it sums up Calp better than any view from the summit: a bay the sea closed thousands of years ago, a town built on top, and birds that keep coming back as if nothing had changed.' },
+      ],
+      faq: [
+        { q: 'Can you see flamingos at the Salinas de Calp all year?', a: 'Not always. The lagoon has birds all year round — coots, herons, stilts — but flamingos gather mainly between May and August. Outside that period there are fewer, and there may be none in sight.' },
+        { q: 'Do you need to book to climb the Peñón de Ifach?', a: 'Yes, for the route to the summit. Booking is free and done online through the Generalitat Valenciana’s natural parks website, with a cap of 300 people a day. The final stretch is polished rock and the park advises against it for minors. Check the current conditions before you go.' },
+        { q: 'How clean is the water at Arenal-Bol beach?', a: 'The PLAYA DE L’ARENAL-BOL PM1 sampling point is rated “excellent”, the top category, in the European Environment Agency assessment for the 2025 season. The beach also flies a Blue Flag.' },
+      ],
+    },
+  },
   {
     slug: 'playa-de-laida-ibarrangelu-bizkaia-marea-ria-urdaibai-sin-bandera-azul',
     category: 'guias',
