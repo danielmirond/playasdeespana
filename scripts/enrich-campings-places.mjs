@@ -123,7 +123,7 @@ async function buscar(lat, lng) {
 
 const DRY = process.argv.includes('--dry-run')
 const informe = []
-let llamadas = 0, enriquecidos = 0, anadidos = 0
+let llamadas = 0, enriquecidos = 0, anadidos = 0, ambiguos = 0
 const descartes = { tipo: 0, fuera: 0, lejos: 0 }
 
 for (const [provSlug, { nombre, playas: ps }] of [...porProv].sort()) {
@@ -173,6 +173,20 @@ for (const [provSlug, { nombre, playas: ps }] of [...porProv].sort()) {
       const sim = parecido(gName, m.nombre)
       const mismo = (d < 150) || (d < 250 && sim >= 0.34) || sim >= 0.6
       if (mismo && d < hitD) { hit = m; hitD = d; hitSim = sim }
+    }
+    // DESEMPATE. La regla de «a menos de 150 m es el mismo» falla donde
+    // hay dos cámpings pared con pared (Tamarit, El Saler): la ficha de
+    // Google casa con el vecino y la valoración acaba en la ficha
+    // equivocada sin que se note. Si el nombre no dice nada (sim < 0,34)
+    // y hay más de un candidato nuestro en 250 m, no se decide: se deja
+    // la ficha sin valoración, que es el error que no miente.
+    if (hit && hitSim < 0.34) {
+      const vecinos = mios.filter(m => hav(la, lo, m.la, m.lo) < 250).length
+      if (vecinos > 1) {
+        informe.push({ prov: nombre, tipo: 'ambiguo', places: gName, osm: hit.nombre, d: Math.round(hitD), sim: hitSim.toFixed(2), rating: g.rating })
+        ambiguos++
+        continue
+      }
     }
     if (hit) {
       informe.push({ prov: nombre, tipo: 'casa', places: gName, osm: hit.nombre, d: Math.round(hitD), sim: hitSim.toFixed(2), rating: g.rating })
@@ -237,5 +251,6 @@ if (!DRY) {
 console.log(`\nllamadas Places: ${llamadas}`)
 console.log(`campings enriquecidos con valoración: ${enriquecidos}`)
 console.log(`campings añadidos: ${anadidos}`)
+console.log(`emparejamientos ambiguos no fusionados: ${ambiguos}`)
 console.log(`descartados → no es campground: ${descartes.tipo} · fuera de la provincia: ${descartes.fuera} · a más de ${RADIO_PLAYA_M/1000} km de playa: ${descartes.lejos}`)
 console.log(`pool final: ${sidecar.pool.length}`)
