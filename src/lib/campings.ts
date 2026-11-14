@@ -30,6 +30,15 @@ export interface Camping {
   bungalows:   boolean
   /** true si acepta perros (puede ser undefined si OSM no lo dice) */
   perros?:     boolean
+  /**
+   * Valoración de Google Places, 1-5. Solo la tienen los cámpings que
+   * la cosecha pudo emparejar sin ambigüedad: cuando hay dos recintos
+   * pared con pared y el nombre no desempata, se deja vacía antes que
+   * arriesgarse a colgar la nota del vecino.
+   */
+  rating?:     number
+  /** número de reseñas que sostienen esa valoración */
+  reseñas?:    number
   website?:    string | null
   telefono?:   string | null
   email?:      string | null

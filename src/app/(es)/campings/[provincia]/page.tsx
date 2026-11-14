@@ -84,6 +84,22 @@ export async function generateMetadata({ params }: { params: Promise<{ provincia
 }
 
 
+/**
+ * La nota de Google con su número de reseñas. Las dos cifras van juntas
+ * siempre: un 5,0 con tres reseñas no dice lo mismo que un 4,2 con
+ * seiscientas, y mostrar la primera sin la segunda engaña. Los cámpings
+ * sin valoración no muestran nada en lugar de un hueco o un cero.
+ */
+function Nota({ c }: { c: CampingConPlaya }) {
+  if (!c.rating) return null
+  return (
+    <span style={{ fontSize: '.78rem', color: 'var(--muted)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}>
+      <strong style={{ color: 'var(--ink)', fontWeight: 700 }}>{c.rating.toFixed(1)}</strong>
+      {c.reseñas ? ` · ${c.reseñas.toLocaleString('es-ES')} reseñas` : ''}
+    </span>
+  )
+}
+
 function tipoLabel(tipo: CampingConPlaya['tipo']) {
   return tipo === 'Glamping' ? 'Glamping' : tipo === 'Autocaravanas' ? 'Áreas de autocaravanas' : 'Camping'
 }
@@ -169,7 +185,7 @@ export default async function Page({ params }: { params: Promise<{ provincia: st
         </h1>
         <p style={{ fontSize: '1.05rem', color: 'var(--muted)', maxWidth: 720, lineHeight: 1.6, marginBottom: '2rem' }}>
           Listado completo de campings, glamping y áreas de autocaravanas en {data.provincia.nombre}, con la playa
-          más cercana a cada uno. Datos de OpenStreetMap, cosechados el {ACTUALIZADO_CAMPINGS}.
+          más cercana a cada uno. Datos de OpenStreetMap y Google, cosechados el {ACTUALIZADO_CAMPINGS}.
         </p>
 
         {campings.length === 0 ? (
@@ -201,8 +217,11 @@ export default async function Page({ params }: { params: Promise<{ provincia: st
                             {' · '}<Link href={`/playas/${c.playa.slug}`} style={{ color: 'var(--accent)' }}>{c.playa.nombre}</Link>
                           </span>}
                         </span>
-                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.78rem', color: 'var(--muted)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}>
-                          {c.distancia_m} m
+                        <span style={{ display: 'flex', gap: 10, alignItems: 'baseline', whiteSpace: 'nowrap' }}>
+                          <Nota c={c} />
+                          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.78rem', color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
+                            {c.distancia_m} m
+                          </span>
                         </span>
                       </div>
                     </li>
@@ -225,8 +244,11 @@ export default async function Page({ params }: { params: Promise<{ provincia: st
                     <li key={c.id} style={{ borderBottom: '1px solid var(--line)' }}>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 12, alignItems: 'baseline', padding: '11px 0' }}>
                         <span style={{ fontSize: '.95rem' }}>{c.nombre}</span>
-                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.78rem', color: 'var(--muted)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}>
-                          {c.distancia_m} m
+                        <span style={{ display: 'flex', gap: 10, alignItems: 'baseline', whiteSpace: 'nowrap' }}>
+                          <Nota c={c} />
+                          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.78rem', color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
+                            {c.distancia_m} m
+                          </span>
                         </span>
                       </div>
                     </li>
@@ -335,8 +357,11 @@ function CampingCard({ c }: { c: CampingConPlaya }) {
           <span style={{ marginRight: '.4rem' }} aria-hidden="true">{tipoEmoji(c.tipo)}</span>
           {c.nombre}
         </h3>
-        <span style={{ fontSize: '.72rem', color: 'var(--muted)', fontFamily: 'var(--font-mono, monospace)', letterSpacing: '.04em' }}>
-          {tipoLabel(c.tipo)} · {c.categoria}★
+        <span style={{ display: 'flex', gap: '.6rem', alignItems: 'baseline' }}>
+          <Nota c={c} />
+          <span style={{ fontSize: '.72rem', color: 'var(--muted)', fontFamily: 'var(--font-mono, monospace)', letterSpacing: '.04em' }}>
+            {tipoLabel(c.tipo)} · {c.categoria}★
+          </span>
         </span>
       </div>
 
