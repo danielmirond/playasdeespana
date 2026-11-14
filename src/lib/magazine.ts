@@ -79,6 +79,92 @@ export const CATEGORIES_EN: Record<MagazineCategory, { label: string; descriptio
 }
 
 export const ARTICLES: Article[] = [
+  // ───── Diario de playas · Mónsul, Níjar (Almería, Andalucía) (voz bicéfala) ─────
+  {
+    slug: 'playa-de-monsul-nijar-almeria-cabo-de-gata-indiana-jones-acceso-regulado-verano',
+    category: 'guias',
+    title: 'Mónsul (Níjar): 300-400 m de arena sin servicios y acceso en coche regulado en verano',
+    excerpt:
+      'Mónsul, en el Parque Natural Cabo de Gata-Níjar, mide entre 300 y 400 metros según la fuente, es de origen volcánico y sirvió de escenario a Indiana Jones y la última cruzada. La pega: se llega por una pista de tierra desde San José, no hay servicios en la arena y en verano el acceso en coche se regula con lanzadera.',
+    heroAlt:
+      'Playa de Mónsul en Cabo de Gata, Almería: una duna de arena clara junto a una gran roca volcánica con forma de ola, frente a un mar abierto de color azul intenso',
+    heroQuery: 'monsul,nijar,cabo de gata,almeria,beach',
+    author: 'Equipo Playas de España',
+    datePublished: '2026-11-14T13:40:23Z',
+    readingMin: 5,
+    related: [
+      { href: '/comunidad/andalucia', label: 'Playas de Andalucía' },
+      { href: '/playas-secretas', label: 'Playas y calas poco conocidas' },
+      { href: '/calas-con-encanto', label: 'Calas con encanto' },
+    ],
+    body: [
+      { t: 'p', html: 'A primera hora, antes de que baje la lanzadera, Mónsul es una duna clara apoyada en una roca de lava que el viento y el mar han ido tallando hasta darle la forma de una ola detenida. Al otro lado, el Mediterráneo abierto; detrás, un paisaje seco de cerros volcánicos sin una sola casa. No extraña que el cine la haya buscado: aquí se rodó una escena de <em>Indiana Jones y la última cruzada</em>.' },
+      { t: 'p', html: 'Esa fama es la mitad de la historia. La otra mitad la cuenta el camino: cuatro o cinco kilómetros de pista de tierra desde San José, una zona de aparcamiento limitada y una playa a la que no se baja con la sombrilla bajo el brazo y la cabeza en otra parte.' },
+      { t: 'h2', text: 'Los datos (y lo que no te cuentan)', id: 'datos' },
+      { t: 'p', html: '<strong>Tamaño.</strong> Las guías no se ponen de acuerdo: unas le dan unos 300 metros de largo y 50 de ancho, otras hasta 400. Lo seguro es que es una cala pequeña para la fama que tiene, y eso pesa más que cualquier cifra exacta cuando llega el verano.' },
+      { t: 'p', html: '<strong>Acceso.</strong> Se llega por una pista de tierra desde San José, dentro del Parque Natural Cabo de Gata-Níjar. En julio y agosto, y cuando se completa el aforo del aparcamiento, el acceso en coche se restringe y se recomienda la lanzadera desde San José. Los precios y los horarios del autobús y del aparcamiento cambian de un año a otro y las fuentes difieren, así que conviene confirmarlos en la web del parque o en el ayuntamiento antes de salir. En temporada baja el aparcamiento de tierra es más sencillo, pero sigue siendo pequeño.' },
+      { t: 'p', html: '<strong>Servicios.</strong> No hay chiringuito, ni duchas, ni tienda en la propia playa. Cualquier cosa que necesites, agua incluida, la tienes que haber traído y te la tienes que volver a llevar. Tampoco hay sombra natural: la que hay es la de la roca, y se mueve con el sol.' },
+      { t: 'p', html: '<strong>El contra.</strong> Mónsul se vende como playa de cine y se vive como playa de logística. Si llegas a mediodía en agosto, lo más probable es que pases más tiempo esperando transporte o buscando sitio que bañándote. Y el mar es abierto: en días de levante, frecuentes en esta costa almeriense, entrar al agua puede ser incómodo, y al no haber servicios en la arena nadie te va a decir si la bandera de ese día es la que crees.' },
+      { t: 'ul', items: [
+        'Municipio: Níjar (Almería), junto a San José, dentro del Parque Natural Cabo de Gata-Níjar.',
+        'Tamaño: entre 300 y 400 metros de arena clara, según la fuente consultada.',
+        'Origen: costa volcánica, con una gran duna y una roca de lava con forma de ola.',
+        'Acceso: pista de tierra desde San José; en verano, regulado con aparcamiento limitado y lanzadera.',
+        'Servicios: ninguno en la playa. Agua, sombra y comida, por tu cuenta.',
+        'Cine: escenario de una secuencia de Indiana Jones y la última cruzada.',
+      ] },
+      { t: 'h2', text: 'El criterio del local', id: 'criterio' },
+      { t: 'p', html: '<strong>Cuándo sí.</strong> Temprano y fuera de julio y agosto: a primera hora de la mañana, en junio o en septiembre, la cala se disfruta con calma, con la luz baja sobre la roca y el mar sin viento. Es también cuando mejor se aparca.' },
+      { t: 'p', html: '<strong>Cuándo no.</strong> Un sábado de agosto a las doce, o cualquier día de levante fuerte si buscas un baño tranquilo. Con el aforo completo no te servirá de nada haber venido: la regulación está pensada para proteger el parque, no para que te quepa la toalla.' },
+      { t: 'p', html: '<strong>El truco.</strong> Mira cómo funciona la lanzadera antes de decidir si vas en coche y llévate lo que necesites para toda la jornada: agua de sobra, sombra portátil, escarpines si te molestan las piedras de la orilla y una bolsa para volver con tu basura. Sin servicios, el parque confía en que cada visitante se haga cargo de lo suyo.' },
+      { t: 'p', html: '<strong>La alternativa.</strong> Pegada a Mónsul está Los Genoveses, una bahía más abierta y con más arena donde cabe más gente sin agobio. Y si lo que buscas es solo un baño, las calas de Cabo de Gata se pueden combinar en un recorrido, siempre con el mismo criterio: llegar pronto y no depender de nada que no hayas traído.' },
+      { t: 'quote', text: 'Se vende como una playa con sello de Hollywood. Lo que la define es lo contrario: una pista, un aparcamiento pequeño y la obligación de organizarse.' },
+      { t: 'p', html: 'Cuando el último autobús baja y la luz se pone rojiza sobre la roca, la duna vuelve a ser lo que era antes del cine: arena, lava y mar abierto. No hay nada que comprar al salir, ni un cartel que explique la película. Solo queda subir por la pista con la nevera ligera y la certeza de que la playa te ha pedido más que otras, y de que, por eso mismo, se ha quedado como está.' },
+    ],
+    faq: [
+      { q: '¿Se puede llegar en coche a la playa de Mónsul?', a: 'Sí, por una pista de tierra desde San José, pero en verano el acceso está regulado: cuando se completa el aforo del aparcamiento se restringe la entrada de vehículos y se recomienda la lanzadera desde San José. Confirma horarios y precios en el parque o el ayuntamiento, porque las fuentes difieren.' },
+      { q: '¿Tiene servicios la playa de Mónsul?', a: 'No. Las guías coinciden en que no hay chiringuito ni tiendas en la propia playa, así que hay que llevar agua, comida y sombra, y retirar la basura.' },
+      { q: '¿Dónde se rodó la escena de la playa de Indiana Jones?', a: 'En la playa de Mónsul, en el Parque Natural Cabo de Gata-Níjar (Almería), donde se rodó una secuencia de Indiana Jones y la última cruzada. Su duna y su gran roca volcánica son reconocibles.' },
+    ],
+    en: {
+      title: 'Mónsul (Níjar): 300–400 m of sand, no facilities and summer car access restricted',
+      excerpt:
+        'Mónsul, in the Cabo de Gata-Níjar Natural Park, runs to between 300 and 400 metres depending on the source, is volcanic in origin and was a location for Indiana Jones and the Last Crusade. The catch: a dirt track from San José, no facilities on the sand and car access that is regulated in summer.',
+      related: [
+        { href: '/en/magazine', label: 'More from the Magazine' },
+        { href: '/en/crystal-clear-water-beaches', label: 'Beaches with clear water' },
+      ],
+      body: [
+        { t: 'p', html: 'At first light, before the shuttle comes down, Mónsul is a pale dune leaning on a rock of lava that wind and sea have carved into the shape of a wave caught mid-break. On one side the open Mediterranean; behind it, a dry landscape of volcanic hills without a single house. Small wonder the cinema went looking: a scene from <em>Indiana Jones and the Last Crusade</em> was filmed here.' },
+        { t: 'p', html: 'That fame is half the story. The other half is the road in: four or five kilometres of dirt track from San José, limited parking, and a beach you do not wander down to with a parasol under one arm and your mind elsewhere.' },
+        { t: 'h2', text: 'The facts (and what nobody tells you)', id: 'datos' },
+        { t: 'p', html: '<strong>Size.</strong> Guides disagree: some give about 300 metres long and 50 wide, others up to 400. What is certain is that it is a small cove for its reputation, and that matters more than any exact figure once summer arrives.' },
+        { t: 'p', html: '<strong>Access.</strong> You arrive by a dirt track from San José, inside the Cabo de Gata-Níjar Natural Park. In July and August, and whenever the car park fills, car access is restricted and the shuttle from San José is recommended. Prices and timetables for the bus and parking change from year to year and sources differ, so check the park or council website before setting out. Out of season the dirt car park is easier, but still small.' },
+        { t: 'p', html: '<strong>Facilities.</strong> No beach bar, no showers, no shop on the beach itself. Whatever you need, water included, you have to bring and take back out. There is no natural shade either: what there is comes from the rock, and it moves with the sun.' },
+        { t: 'p', html: '<strong>The catch.</strong> Mónsul is sold as a film-set beach and lived as a logistics exercise. Arrive at midday in August and you will probably spend more time waiting for transport or looking for space than swimming. And the sea is open: on levante days, common on this stretch of the Almería coast, getting in can be uncomfortable, and with no services on the sand nobody will tell you what that day’s flag is.' },
+        { t: 'ul', items: [
+          'Municipality: Níjar (Almería), next to San José, inside the Cabo de Gata-Níjar Natural Park.',
+          'Size: between 300 and 400 metres of pale sand, depending on the source consulted.',
+          'Origin: volcanic coast, with a large dune and a lava rock shaped like a wave.',
+          'Access: dirt track from San José; in summer, regulated, with limited parking and a shuttle.',
+          'Facilities: none on the beach. Water, shade and food are your own business.',
+          'Film: location for a sequence of Indiana Jones and the Last Crusade.',
+        ] },
+        { t: 'h2', text: 'The local view', id: 'criterio' },
+        { t: 'p', html: '<strong>When to go.</strong> Early and outside July and August: first thing in the morning, in June or in September, the cove can be enjoyed calmly, with low light on the rock and no wind on the sea. It is also when parking is easiest.' },
+        { t: 'p', html: '<strong>When not to.</strong> A Saturday in August at noon, or any day of strong levante if you want a quiet swim. With the car park full, having come is no help: the restrictions are there to protect the park, not to make room for your towel.' },
+        { t: 'p', html: '<strong>The trick.</strong> Check how the shuttle works before deciding whether to drive, and carry what you need for the whole day: plenty of water, portable shade, water shoes if stones at the shoreline bother you, and a bag to take your rubbish back. With no services, the park relies on each visitor looking after their own.' },
+        { t: 'p', html: '<strong>The alternative.</strong> Next door is Los Genoveses, a wider bay with more sand where more people fit without feeling crowded. And if all you want is a swim, the coves of Cabo de Gata can be strung into one outing, always on the same terms: arrive early and depend on nothing you have not brought.' },
+        { t: 'quote', text: 'It is sold as a beach with a Hollywood stamp. What defines it is the opposite: a track, a small car park and the obligation to plan ahead.' },
+        { t: 'p', html: 'When the last bus pulls out and the light turns red on the rock, the dune goes back to what it was before the film: sand, lava and open sea. There is nothing to buy on the way out, and no sign to explain the movie. All that is left is the climb up the track with a lighter cool box and the sense that the beach asked more of you than most, and that this is exactly why it has stayed as it is.' },
+      ],
+      faq: [
+        { q: 'Can you drive to Mónsul beach?', a: 'Yes, along a dirt track from San José, but in summer access is regulated: when the car park fills, vehicles are turned back and the shuttle from San José is recommended. Check times and prices with the park or the council, as sources differ.' },
+        { q: 'Are there facilities at Mónsul beach?', a: 'No. Guides agree there is no beach bar or shop on the beach itself, so bring water, food and shade, and take your rubbish with you.' },
+        { q: 'Where was the Indiana Jones beach scene filmed?', a: 'At Mónsul, in the Cabo de Gata-Níjar Natural Park (Almería), where a sequence of Indiana Jones and the Last Crusade was shot. Its dune and large volcanic rock are recognisable.' },
+      ],
+    },
+  },
   // ───── Diario de playas · L'Arenal-Bol, Calp (Alicante, Comunitat Valenciana) (voz bicéfala) ─────
   {
     slug: 'playa-arenal-bol-calp-alicante-salinas-flamencos-penon-ifach-cupo-300',
